@@ -57,6 +57,10 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.TableView {
+    var isEmpty: Bool {
+        step.isReady && profiles.isEmpty
+    }
+
     var messageSection: some View {
         Section {
             Text(Strings.Views.Migrate.Sections.Main.header)
@@ -95,6 +99,7 @@ private extension MigrateContentView.TableView {
             }
         }
         .disabled(!step.canSelect)
+        .themeEmpty(if: isEmpty, message: Strings.Views.Migrate.noProfiles)
     }
 
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {

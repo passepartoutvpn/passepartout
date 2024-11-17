@@ -45,6 +45,12 @@ extension MigrateView {
     }
 }
 
+extension MigrateViewStep {
+    var isReady: Bool {
+        ![.initial, .fetching].contains(self)
+    }
+}
+
 extension MigrateView.Model {
     var visibleProfiles: [MigratableProfile] {
         profiles

@@ -74,11 +74,7 @@ struct MigrateView: View {
             onDelete: onDelete,
             performButton: performButton
         )
-        .themeProgress(
-            if: [.initial, .fetching].contains(model.step),
-            isEmpty: model.profiles.isEmpty,
-            emptyMessage: Strings.Views.Migrate.noProfiles
-        )
+        .themeProgress(if: !model.step.isReady)
         .themeAnimation(on: model, category: .profiles)
         .themeConfirmation(
             isPresented: $isDeleting,
