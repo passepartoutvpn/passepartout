@@ -744,8 +744,8 @@ public enum Strings {
       }
       public enum Sections {
         public enum Main {
-          /// Select below the profiles from old versions of Passepartout that you want to import. They will disappear from this list once imported successfully.
-          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. They will disappear from this list once imported successfully.")
+          /// Select below the profiles from old versions of Passepartout that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.
+          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.")
         }
       }
     }

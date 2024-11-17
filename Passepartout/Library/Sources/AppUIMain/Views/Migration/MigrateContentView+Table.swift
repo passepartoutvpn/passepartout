@@ -44,11 +44,10 @@ extension MigrateContentView {
         let performButton: () -> PerformButton
 
         var body: some View {
-            Form {
-                messageSection
-                profilesSection
+            VStack(spacing: .zero) {
+                messageView
+                profilesForm
             }
-            .themeForm()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction, content: performButton)
             }
@@ -57,14 +56,17 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.TableView {
-    var messageSection: some View {
-        Section {
-            Text(Strings.Views.Migrate.Sections.Main.header)
-        }
+    var isEmpty: Bool {
+        step.isReady && profiles.isEmpty
     }
 
-    var profilesSection: some View {
-        Section {
+    var messageView: some View {
+        Text(Strings.Views.Migrate.Sections.Main.header)
+            .padding([.top, .leading, .trailing])
+    }
+
+    var profilesForm: some View {
+        Form {
             Table(profiles) {
                 TableColumn(Strings.Global.name) {
                     Text($0.name)
@@ -95,6 +97,8 @@ private extension MigrateContentView.TableView {
             }
         }
         .disabled(!step.canSelect)
+        .themeForm()
+        .themeEmpty(if: isEmpty, message: Strings.Views.Migrate.noProfiles)
     }
 
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {

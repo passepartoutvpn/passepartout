@@ -46,8 +46,9 @@ extension MigrateContentView {
         private var selection: Set<UUID> = []
 
         var body: some View {
-            List {
-                profilesSection
+            VStack {
+                messageView
+                profilesList
             }
             .themeNavigationDetail()
             .toolbar {
@@ -61,38 +62,43 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.ListView {
-    var actionsHeader: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text(Strings.Views.Migrate.Sections.Main.header)
-            EditProfilesButton(isEditing: $isEditing, selection: $selection) {
-                onDelete(profiles.filter {
-                    selection.contains($0.id)
-                })
-                // disable isEditing after confirmation
-            }
-        }
-        .textCase(.none)
-        .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+    var isEmpty: Bool {
+        step.isReady && profiles.isEmpty
     }
 
-    var profilesSection: some View {
-        Section {
-            ForEach(profiles, id: \.id) {
-                if isEditing {
-                    EditableRowView(profile: $0, selection: $selection)
-                } else {
-                    ControlView(
-                        step: step,
-                        profile: $0,
-                        isIncluded: isIncludedBinding(for: $0.id),
-                        status: statusBinding(for: $0.id)
-                    )
+    var messageView: some View {
+        Text(Strings.Views.Migrate.Sections.Main.header)
+            .padding([.top, .leading, .trailing])
+    }
+
+    var profilesList: some View {
+        List {
+            Section {
+                ForEach(profiles, id: \.id) {
+                    if isEditing {
+                        EditableRowView(profile: $0, selection: $selection)
+                    } else {
+                        ControlView(
+                            step: step,
+                            profile: $0,
+                            isIncluded: isIncludedBinding(for: $0.id),
+                            status: statusBinding(for: $0.id)
+                        )
+                    }
                 }
+            } header: {
+                EditProfilesButton(isEditing: $isEditing, selection: $selection) {
+                    onDelete(profiles.filter {
+                        selection.contains($0.id)
+                    })
+                    // disable isEditing after confirmation
+                }
+                .textCase(.none)
             }
-        } header: {
-            actionsHeader
         }
+        .listStyle(.plain)
         .disabled(!step.canSelect)
+        .themeEmpty(if: isEmpty, message: Strings.Views.Migrate.noProfiles)
     }
 
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
