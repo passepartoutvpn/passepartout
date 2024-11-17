@@ -261,7 +261,6 @@ extension IAPManager {
                         }
                     }
                     .store(in: &subscriptions)
-
             } catch {
                 pp_log(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             }
