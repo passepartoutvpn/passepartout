@@ -190,6 +190,12 @@ private extension MigrateView {
                 model.statuses[$0.id] == .done
             }
             pp_log(.App.migration, .notice, "Migrated \(migrated.count) profiles")
+            do {
+                try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
+                pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
+            } catch {
+                pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
+            }
             model.step = .migrated(migrated)
         } catch {
             pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
