@@ -145,7 +145,7 @@ private extension InstalledProfileView {
             }
     }
 
-    func providerSelectorLabel(with provider: ModuleMetadata.Provider) -> some View {
+    func providerSelectorLabel(with provider: SerializedProvider) -> some View {
         ProviderCountryFlag(provider: provider)
     }
 }
@@ -215,7 +215,7 @@ private struct ToggleButton: View {
 }
 
 private struct ProviderCountryFlag: View {
-    let provider: ModuleMetadata.Provider
+    let provider: SerializedProvider
 
     var body: some View {
         ThemeCountryFlag(

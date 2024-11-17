@@ -37,17 +37,25 @@ extension ProfileEditor {
 
     public func binding(forProviderOf moduleId: UUID) -> Binding<ProviderID?> {
         Binding { [weak self] in
-            self?.profile.providerId(forModuleWithId: moduleId)
+            self?.providerModule(withId: moduleId)?.providerId
         } set: { [weak self] in
-            self?.profile.setProviderId($0, forModuleWithId: moduleId)
+            guard var builder = self?.providerModule(withId: moduleId) else {
+                return
+            }
+            builder.providerId = $0
+            self?.saveModule(builder, activating: false)
         }
     }
 
     public func binding<E>(forProviderEntityOf moduleId: UUID) -> Binding<E?> where E: ProviderEntity & Codable {
         Binding { [weak self] in
-            try? self?.profile.providerEntity(E.self, forModuleWithId: moduleId)
+            try? self?.providerModule(withId: moduleId)?.providerEntity(E.self)
         } set: { [weak self] in
-            try? self?.profile.setProviderEntity($0, forModuleWithId: moduleId)
+            guard var builder = self?.providerModule(withId: moduleId) else {
+                return
+            }
+            try? builder.setProviderEntity($0)
+            self?.saveModule(builder, activating: false)
         }
     }
 

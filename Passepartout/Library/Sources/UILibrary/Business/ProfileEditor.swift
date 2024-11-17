@@ -123,6 +123,10 @@ extension ProfileEditor {
         } ?? removedModules[moduleId]
     }
 
+    public func providerModule(withId moduleId: UUID) -> (any ProviderModuleBuilder)? {
+        module(withId: moduleId) as? any ProviderModuleBuilder
+    }
+
     public func isActiveModule(withId moduleId: UUID) -> Bool {
         editableProfile.isActiveModule(withId: moduleId)
     }

@@ -40,7 +40,7 @@ struct ProviderEntitySelector: View {
 
     let module: Module
 
-    let provider: ModuleMetadata.Provider
+    let provider: SerializedProvider
 
     let errorHandler: ErrorHandler
 
@@ -61,10 +61,18 @@ private extension ProviderEntitySelector {
     func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
         pp_log(.app, .info, "Select new provider entity: \(entity)")
 
-        var builder = profile.builder()
         do {
-            try builder.setProviderEntity(entity, forModuleWithId: module.id)
+            guard var moduleBuilder = module.asProviderModuleBuilder else {
+                assertionFailure("Module is not a ProviderModuleBuilder?")
+                return
+            }
+            try moduleBuilder.setProviderEntity(entity)
+            let newModule = try moduleBuilder.tryBuild()
+
+            var builder = profile.builder()
+            builder.saveModule(newModule)
             let newProfile = try builder.tryBuild()
+
             try await profileManager.save(newProfile)
 
             // will reconnect via AppContext observation
