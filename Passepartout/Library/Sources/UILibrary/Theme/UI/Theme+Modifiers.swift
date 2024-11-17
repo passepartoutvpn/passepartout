@@ -179,6 +179,16 @@ extension View {
         modifier(ThemeAnimationModifier(value: value, category: category))
     }
 
+    @ViewBuilder
+    public func themeEmpty(if isEmpty: Bool, message: String) -> some View {
+        if !isEmpty {
+            self
+        } else {
+            Text(message)
+                .themeEmptyMessage()
+        }
+    }
+
     public func themeProgress(if isProgressing: Bool) -> some View {
         modifier(ThemeProgressViewModifier(isProgressing: isProgressing) {
             EmptyView()
