@@ -87,10 +87,7 @@ extension AppContext {
                 cloudKitIdentifier: nil,
                 author: nil
             )
-            let repository = AppData.cdProviderRepositoryV3(
-                context: store.context,
-                backgroundContext: store.backgroundContext
-            )
+            let repository = AppData.cdProviderRepositoryV3(context: store.backgroundContext)
             return ProviderManager(repository: repository)
         }()
 
@@ -119,7 +116,8 @@ extension AppContext {
             profileManager: profileManager,
             providerManager: providerManager,
             registry: .shared,
-            tunnel: tunnel
+            tunnel: tunnel,
+            tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
         )
     }()
 }

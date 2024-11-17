@@ -31,18 +31,13 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
-    public static func cdProviderRepositoryV3(
-        context: NSManagedObjectContext,
-        backgroundContext: NSManagedObjectContext
-    ) -> ProviderRepository {
-        CDProviderRepositoryV3(context: context, backgroundContext: backgroundContext)
+    public static func cdProviderRepositoryV3(context: NSManagedObjectContext) -> ProviderRepository {
+        CDProviderRepositoryV3(context: context)
     }
 }
 
 actor CDProviderRepositoryV3: NSObject, ProviderRepository {
     private nonisolated let context: NSManagedObjectContext
-
-    private nonisolated let backgroundContext: NSManagedObjectContext
 
     private nonisolated let providersSubject: CurrentValueSubject<[ProviderMetadata], Never>
 
@@ -50,9 +45,8 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
 
     private nonisolated let providersController: NSFetchedResultsController<CDProviderV3>
 
-    init(context: NSManagedObjectContext, backgroundContext: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext) {
         self.context = context
-        self.backgroundContext = backgroundContext
         providersSubject = CurrentValueSubject([])
         lastUpdateSubject = CurrentValueSubject([:])
 
@@ -90,7 +84,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
     }
 
     func store(_ index: [ProviderMetadata]) async throws {
-        try await backgroundContext.perform { [weak self] in
+        try await context.perform { [weak self] in
             guard let self else {
                 return
             }
@@ -101,25 +95,25 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
                 let lastUpdatesByProvider = results.reduce(into: [:]) {
                     $0[$1.providerId] = $1.lastUpdate
                 }
-                results.forEach(backgroundContext.delete)
+                results.forEach(context.delete)
 
                 // replace but retain last update
-                let mapper = CoreDataMapper(context: backgroundContext)
+                let mapper = CoreDataMapper(context: context)
                 index.forEach {
                     let lastUpdate = lastUpdatesByProvider[$0.id.rawValue]
                     mapper.cdProvider(from: $0, lastUpdate: lastUpdate)
                 }
 
-                try backgroundContext.save()
+                try context.save()
             } catch {
-                backgroundContext.rollback()
+                context.rollback()
                 throw error
             }
         }
     }
 
     func store(_ infrastructure: VPNInfrastructure, for providerId: ProviderID) async throws {
-        try await backgroundContext.perform { [weak self] in
+        try await context.perform { [weak self] in
             guard let self else {
                 return
             }
@@ -138,15 +132,15 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
                 let serverRequest = CDVPNServerV3.fetchRequest()
                 serverRequest.predicate = predicate
                 let servers = try serverRequest.execute()
-                servers.forEach(backgroundContext.delete)
+                servers.forEach(context.delete)
 
                 let presetRequest = CDVPNPresetV3.fetchRequest()
                 presetRequest.predicate = predicate
                 let presets = try presetRequest.execute()
-                presets.forEach(backgroundContext.delete)
+                presets.forEach(context.delete)
 
                 // create new entities
-                let mapper = CoreDataMapper(context: backgroundContext)
+                let mapper = CoreDataMapper(context: context)
                 try infrastructure.servers.forEach {
                     try mapper.cdServer(from: $0)
                 }
@@ -154,9 +148,9 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
                     try mapper.cdPreset(from: $0)
                 }
 
-                try backgroundContext.save()
+                try context.save()
             } catch {
-                backgroundContext.rollback()
+                context.rollback()
                 throw error
             }
         }
