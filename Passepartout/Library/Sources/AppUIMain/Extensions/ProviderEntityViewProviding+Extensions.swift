@@ -27,9 +27,9 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-extension ProviderEntityViewProviding where Self: ProviderCompatibleModule, EntityType.Configuration: ProviderConfigurationIdentifiable & Codable {
+extension ProviderEntityViewProviding where Self: ProviderTransformable, EntityType.Configuration: ProviderConfigurationIdentifiable & Codable {
     func vpnProviderEntityView(
-        with provider: ModuleMetadata.Provider,
+        with provider: SerializedProvider,
         errorHandler: ErrorHandler,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> some View {

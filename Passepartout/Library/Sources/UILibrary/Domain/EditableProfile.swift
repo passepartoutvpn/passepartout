@@ -97,12 +97,22 @@ extension Profile {
 
     public var modulesBuilders: [any ModuleBuilder] {
         modules.compactMap {
-            guard let buildableModule = $0 as? any BuildableType else {
-                return nil
-            }
-            let builder = buildableModule.builder() as any BuilderType
-            return builder as? any ModuleBuilder
+            $0.asModuleBuilder
         }
+    }
+}
+
+extension Module {
+    public var asModuleBuilder: (any ModuleBuilder)? {
+        guard let buildableModule = self as? any BuildableType else {
+            return nil
+        }
+        let builder = buildableModule.builder() as any BuilderType
+        return builder as? any ModuleBuilder
+    }
+
+    public var asProviderModuleBuilder: (any ProviderModuleBuilder)? {
+        asModuleBuilder as? any ProviderModuleBuilder
     }
 }
 

@@ -35,7 +35,7 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
 
 extension OpenVPNModule: ProviderEntityViewProviding {
     func providerEntityView(
-        with provider: ModuleMetadata.Provider,
+        with provider: SerializedProvider,
         errorHandler: ErrorHandler,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> some View {

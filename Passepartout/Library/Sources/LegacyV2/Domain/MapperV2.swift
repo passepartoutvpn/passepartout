@@ -36,9 +36,7 @@ struct MapperV2 {
 
         if let provider = v2.provider {
             if let module = try toProviderModule(provider) {
-                let providerId = ProviderID(rawValue: provider.name)
                 modules.append(module)
-                builder.setProviderId(providerId, forModuleWithId: module.id)
             }
         } else if let ovpn = v2.host?.ovpnSettings {
             modules.append(try toOpenVPNModule(ovpn))
@@ -113,6 +111,7 @@ extension MapperV2 {
         let settings = entry.value
 
         var builder = OpenVPNModule.Builder()
+        builder.provider = SerializedProvider(id: ProviderID(rawValue: v2.name))
         builder.credentials = settings.account.map(toOpenVPNCredentials)
         return try builder.tryBuild()
     }

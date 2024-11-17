@@ -89,7 +89,7 @@ extension AppCoordinator {
     enum ModalRoute: Identifiable {
         case editProfile
 
-        case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
+        case editProviderEntity(Profile, Module, SerializedProvider)
 
         case migrateProfiles
 
