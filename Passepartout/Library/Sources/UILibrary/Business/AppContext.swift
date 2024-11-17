@@ -43,6 +43,8 @@ public final class AppContext: ObservableObject {
 
     public let tunnel: ExtendedTunnel
 
+    private let tunnelReceiptURL: URL
+
     private var launchTask: Task<Void, Error>?
 
     private var pendingTask: Task<Void, Never>?
@@ -55,7 +57,8 @@ public final class AppContext: ObservableObject {
         profileManager: ProfileManager,
         providerManager: ProviderManager,
         registry: Registry,
-        tunnel: ExtendedTunnel
+        tunnel: ExtendedTunnel,
+        tunnelReceiptURL: URL
     ) {
         self.iapManager = iapManager
         self.migrationManager = migrationManager
@@ -63,6 +66,7 @@ public final class AppContext: ObservableObject {
         self.providerManager = providerManager
         self.registry = registry
         self.tunnel = tunnel
+        self.tunnelReceiptURL = tunnelReceiptURL
         subscriptions = []
     }
 }
@@ -84,12 +88,14 @@ private extension AppContext {
     func onLaunch() async throws {
         pp_log(.app, .notice, "Application did launch")
 
-        pp_log(.App.profiles, .info, "Read and observe local profiles...")
+        pp_log(.App.profiles, .info, "\tRead and observe local profiles...")
         try await profileManager.observeLocal()
 
+        pp_log(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects()
         await iapManager.reloadReceipt()
 
+        pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
             .$eligibleFeatures
             .removeDuplicates()
@@ -100,6 +106,7 @@ private extension AppContext {
             }
             .store(in: &subscriptions)
 
+        pp_log(.App.profiles, .info, "\tObserve changes in ProfileManager...")
         profileManager
             .didChange
             .sink { [weak self] event in
@@ -117,21 +124,20 @@ private extension AppContext {
 
         // copy release receipt to tunnel for TestFlight eligibility (once is enough, it won't change)
         if let appReceiptURL = Bundle.main.appStoreProductionReceiptURL {
-            let tunnelReceiptURL = BundleConfiguration.urlForBetaReceipt
             do {
-                pp_log(.App.iap, .info, "Copy release receipt to tunnel...")
+                pp_log(.App.iap, .info, "\tCopy release receipt to tunnel...")
                 try? FileManager.default.removeItem(at: tunnelReceiptURL)
                 try FileManager.default.copyItem(at: appReceiptURL, to: tunnelReceiptURL)
             } catch {
-                pp_log(.App.iap, .error, "Unable to copy release receipt to tunnel: \(error)")
+                pp_log(.App.iap, .error, "\tUnable to copy release receipt to tunnel: \(error)")
             }
         }
 
         do {
-            pp_log(.app, .notice, "Fetch providers index...")
+            pp_log(.app, .info, "\tFetch providers index...")
             try await providerManager.fetchIndex(from: API.shared)
         } catch {
-            pp_log(.app, .error, "Unable to fetch providers index: \(error)")
+            pp_log(.app, .error, "\tUnable to fetch providers index: \(error)")
         }
     }
 
@@ -144,10 +150,10 @@ private extension AppContext {
         pp_log(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
             do {
-                pp_log(.App.profiles, .info, "Refresh local profiles observers...")
+                pp_log(.App.profiles, .info, "\tRefresh local profiles observers...")
                 try await profileManager.observeLocal()
             } catch {
-                pp_log(.App.profiles, .error, "Unable to re-observe local profiles: \(error)")
+                pp_log(.App.profiles, .error, "\tUnable to re-observe local profiles: \(error)")
             }
 
             await iapManager.reloadReceipt()
@@ -165,10 +171,10 @@ private extension AppContext {
             // toggle sync based on .sharing eligibility
             let isEligibleForSharing = features.contains(.sharing)
             do {
-                pp_log(.App.profiles, .info, "Refresh remote profiles observers (eligible=\(isEligibleForSharing), CloudKit=\(isCloudKitEnabled))...")
+                pp_log(.App.profiles, .info, "\tRefresh remote profiles observers (eligible=\(isEligibleForSharing), CloudKit=\(isCloudKitEnabled))...")
                 try await profileManager.observeRemote(isEligibleForSharing && isCloudKitEnabled)
             } catch {
-                pp_log(.App.profiles, .error, "Unable to re-observe remote profiles: \(error)")
+                pp_log(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
             }
         }
         await pendingTask?.value
@@ -180,29 +186,29 @@ private extension AppContext {
 
         pp_log(.app, .notice, "Application did save profile (\(profile.id))")
         guard profile.id == tunnel.currentProfile?.id else {
-            pp_log(.app, .debug, "Profile \(profile.id) is not current, do nothing")
+            pp_log(.app, .debug, "\tProfile \(profile.id) is not current, do nothing")
             return
         }
         guard [.active, .activating].contains(tunnel.status) else {
-            pp_log(.app, .debug, "Connection is not active (\(tunnel.status)), do nothing")
+            pp_log(.app, .debug, "\tConnection is not active (\(tunnel.status)), do nothing")
             return
         }
         pendingTask = Task {
             do {
                 if profile.isInteractive {
-                    pp_log(.app, .info, "Profile \(profile.id) is interactive, disconnect")
+                    pp_log(.app, .info, "\tProfile \(profile.id) is interactive, disconnect")
                     try await tunnel.disconnect()
                     return
                 }
                 do {
-                    pp_log(.app, .info, "Reconnect profile \(profile.id)")
+                    pp_log(.app, .info, "\tReconnect profile \(profile.id)")
                     try await tunnel.connect(with: profile)
                 } catch {
-                    pp_log(.app, .error, "Unable to reconnect profile \(profile.id), disconnect: \(error)")
+                    pp_log(.app, .error, "\tUnable to reconnect profile \(profile.id), disconnect: \(error)")
                     try await tunnel.disconnect()
                 }
             } catch {
-                pp_log(.app, .error, "Unable to reinstate connection on save profile \(profile.id): \(error)")
+                pp_log(.app, .error, "\tUnable to reinstate connection on save profile \(profile.id): \(error)")
             }
         }
         await pendingTask?.value

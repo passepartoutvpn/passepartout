@@ -116,7 +116,8 @@ extension AppContext {
             profileManager: profileManager,
             providerManager: providerManager,
             registry: .shared,
-            tunnel: tunnel
+            tunnel: tunnel,
+            tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
         )
     }()
 }
