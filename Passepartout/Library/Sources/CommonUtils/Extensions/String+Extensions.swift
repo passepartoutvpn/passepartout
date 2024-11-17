@@ -29,6 +29,10 @@ extension String {
     public var nilIfEmpty: String? {
         !isEmpty ? self : nil
     }
+
+    public var withTrailingDots: String {
+        "\(self)..."
+    }
 }
 
 extension String {

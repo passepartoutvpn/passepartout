@@ -109,7 +109,7 @@ private extension AppMenu {
     }
 
     var aboutButton: some View {
-        Button("\(Strings.Global.about)...") {
+        Button(Strings.Global.about.withTrailingDots) {
             NSApp.activate(ignoringOtherApps: true)
             NSApp.orderFrontStandardAboutPanel(self)
         }

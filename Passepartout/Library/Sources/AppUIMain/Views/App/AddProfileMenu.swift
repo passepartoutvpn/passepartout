@@ -41,6 +41,7 @@ struct AddProfileMenu: View {
         Menu {
             newProfileButton
             importProfileButton
+            Divider()
             migrateProfilesButton
         } label: {
             ThemeImage(.add)
@@ -62,13 +63,13 @@ private extension AddProfileMenu {
         Button {
             isImporting = true
         } label: {
-            ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile, .profileImport)
+            ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile.withTrailingDots, .profileImport)
         }
     }
 
     var migrateProfilesButton: some View {
         Button(action: onMigrateProfiles) {
-            ThemeImageLabel(Strings.Views.Profiles.Toolbar.migrateProfiles, .profileMigrate)
+            ThemeImageLabel(Strings.Views.Profiles.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
         }
     }
 }

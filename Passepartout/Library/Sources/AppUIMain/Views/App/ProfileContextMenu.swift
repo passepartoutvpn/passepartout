@@ -102,7 +102,7 @@ private extension ProfileContextMenu {
         Button {
             flow?.onEditProfile(header)
         } label: {
-            ThemeImageLabel("\(Strings.Global.edit)...", .profileEdit)
+            ThemeImageLabel(Strings.Global.edit.withTrailingDots, .profileEdit)
         }
     }
 
