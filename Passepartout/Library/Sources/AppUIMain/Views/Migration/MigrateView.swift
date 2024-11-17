@@ -149,8 +149,9 @@ private extension MigrateView {
             model.step = .fetched(model.profiles)
         } catch {
             pp_log(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
-            errorHandler.handle(error, title: title)
-            model.step = .initial
+            errorHandler.handle(error, title: title) {
+                dismiss()
+            }
         }
     }
 

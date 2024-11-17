@@ -67,7 +67,7 @@ extension ProfileV2MigrationStrategy {
             }
             return try mapper.toProfileV3(profile)
         } catch {
-            pp_log(.App.migration, .error, "Unable to migrate profile \(profileId): \(error)")
+            pp_log(.App.migration, .error, "Unable to fetch and map migratable profile \(profileId): \(error)")
             return nil
         }
     }

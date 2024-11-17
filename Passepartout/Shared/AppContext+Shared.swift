@@ -136,7 +136,7 @@ private extension Configuration {
 @MainActor
 private extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
-        coreDataProfileRepository
+        coreDataProfileRepository(observingResults: true)
     }
 
     static var backupProfileRepository: ProfileRepository? {
@@ -161,7 +161,7 @@ private extension Configuration.ProfileManager {
     }
 
     static var backupProfileRepository: ProfileRepository? {
-        coreDataProfileRepository
+        coreDataProfileRepository(observingResults: false)
     }
 }
 
@@ -192,7 +192,7 @@ private extension Configuration.ProfileManager {
         )
     }()
 
-    static let coreDataProfileRepository: ProfileRepository = {
+    static func coreDataProfileRepository(observingResults: Bool) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: .default,
             containerName: Constants.shared.containers.local,
@@ -204,12 +204,12 @@ private extension Configuration.ProfileManager {
             registry: .shared,
             coder: CodableProfileCoder(),
             context: store.context,
-            observingResults: false
+            observingResults: observingResults
         ) { error in
             pp_log(.app, .error, "Unable to decode local result: \(error)")
             return .ignore
         }
-    }()
+    }
 }
 
 // MARK: - Logging

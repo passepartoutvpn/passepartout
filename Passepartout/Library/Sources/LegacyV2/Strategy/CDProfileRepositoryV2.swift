@@ -50,7 +50,7 @@ final class CDProfileRepositoryV2: Sendable {
             map: {
                 $0.compactMap {
                     guard $0.value.encryptedJSON ?? $0.value.json != nil else {
-                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): missing JSON")
+                        pp_log(.App.migration, .error, "ProfileV2 \($0.key) is not migratable: missing JSON")
                         return nil
                     }
                     return MigratableProfile(
@@ -78,13 +78,13 @@ final class CDProfileRepositoryV2: Sendable {
             map: {
                 $0.compactMap {
                     guard let json = $0.value.encryptedJSON ?? $0.value.json else {
-                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): missing JSON")
+                        pp_log(.App.migration, .error, "ProfileV2 \($0.key) is not migratable: missing JSON")
                         return nil
                     }
                     do {
                         return try decoder.decode(ProfileV2.self, from: json)
                     } catch {
-                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): \(error)")
+                        pp_log(.App.migration, .error, "Unable to decode ProfileV2 \($0.key): \(error)")
                         return nil
                     }
                 }
@@ -99,7 +99,7 @@ final class CDProfileRepositoryV2: Sendable {
                 return
             }
             let request = CDProfile.fetchRequest()
-            request.predicate = NSPredicate(format: "any uuid in %@", profileIds.map(\.uuidString))
+            request.predicate = NSPredicate(format: "any uuid in %@", profileIds)
             let existing = try context.fetch(request)
             existing.forEach(context.delete)
             try context.save()
@@ -130,7 +130,7 @@ extension CDProfileRepositoryV2 {
                     return
                 }
                 guard !deduped.keys.contains(uuid) else {
-                    pp_log(.App.migration, .info, "Skip older duplicate of profile \(uuid)")
+                    pp_log(.App.migration, .info, "Skip older duplicate of ProfileV2 \(uuid)")
                     return
                 }
                 deduped[uuid] = $0
