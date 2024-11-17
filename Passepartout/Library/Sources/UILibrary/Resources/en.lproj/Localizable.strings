@@ -163,7 +163,7 @@
 "views.migrate.no_profiles" = "Nothing to migrate";
 "views.migrate.items.discard" = "Discard";
 "views.migrate.items.migrate" = "Proceed";
-"views.migrate.sections.main.header" = "Select below the profiles from old versions of Passepartout that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.";
+"views.migrate.sections.main.header" = "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.";
 "views.migrate.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.donate.title" = "Make a donation";
@@ -258,7 +258,7 @@
 "theme.confirmation.ok" = "Confirm";
 "theme.confirmation.cancel" = "Cancel";
 "theme.confirmation.message" = "Are you sure you want to proceed with this operation?";
-"theme.lock_screen.reason" = "Passepartout is locked";
+"theme.lock_screen.reason" = "%@ is locked";
 
 // MARK: - Components
 

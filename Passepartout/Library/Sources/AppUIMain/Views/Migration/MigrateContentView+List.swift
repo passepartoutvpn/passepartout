@@ -67,7 +67,7 @@ private extension MigrateContentView.ListView {
     }
 
     var messageView: some View {
-        Text(Strings.Views.Migrate.Sections.Main.header)
+        Text(Strings.Views.Migrate.Sections.Main.header(Strings.Unlocalized.appName))
             .padding([.top, .leading, .trailing])
     }
 

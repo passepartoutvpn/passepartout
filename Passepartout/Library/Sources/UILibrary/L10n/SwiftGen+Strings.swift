@@ -612,8 +612,10 @@ public enum Strings {
       public static let ok = Strings.tr("Localizable", "theme.confirmation.ok", fallback: "Confirm")
     }
     public enum LockScreen {
-      /// Passepartout is locked
-      public static let reason = Strings.tr("Localizable", "theme.lock_screen.reason", fallback: "Passepartout is locked")
+      /// %@ is locked
+      public static func reason(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "theme.lock_screen.reason", String(describing: p1), fallback: "%@ is locked")
+      }
     }
   }
   public enum Ui {
@@ -744,8 +746,10 @@ public enum Strings {
       }
       public enum Sections {
         public enum Main {
-          /// Select below the profiles from old versions of Passepartout that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.
-          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.")
+          /// Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.
+          public static func header(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "views.migrate.sections.main.header", String(describing: p1), fallback: "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.")
+          }
         }
       }
     }

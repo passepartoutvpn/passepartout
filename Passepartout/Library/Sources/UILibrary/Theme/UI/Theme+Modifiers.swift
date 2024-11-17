@@ -586,7 +586,7 @@ struct ThemeLockScreenModifier<LockedContent>: ViewModifier where LockedContent:
         do {
             let isAuthorized = try await context.evaluatePolicy(
                 policy,
-                localizedReason: Strings.Theme.LockScreen.reason
+                localizedReason: Strings.Theme.LockScreen.reason(Strings.Unlocalized.appName)
             )
             return isAuthorized
         } catch {
