@@ -40,6 +40,9 @@ struct MigrateView: View {
     @EnvironmentObject
     private var migrationManager: MigrationManager
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     @Environment(\.dismiss)
     private var dismiss
 
@@ -187,12 +190,18 @@ private extension MigrateView {
                 model.statuses[$0.id] == .done
             }
             pp_log(.App.migration, .notice, "Migrated \(migrated.count) profiles")
-            do {
-                try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
-                pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
-            } catch {
-                pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
+
+            if !iapManager.isRestricted {
+                do {
+                    try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
+                    pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
+                } catch {
+                    pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
+                }
+            } else {
+                pp_log(.App.migration, .notice, "Restricted build, do not discard migrated profiles")
             }
+
             model.step = .migrated(migrated)
         } catch {
             pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
