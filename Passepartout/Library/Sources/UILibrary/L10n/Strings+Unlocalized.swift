@@ -118,6 +118,8 @@ extension Strings {
 
         public static let ipv6 = "IPv6"
 
+        public static let longDash = "—"
+
         public static let mtu = "MTU"
 
         public static let openVPN = "OpenVPN"

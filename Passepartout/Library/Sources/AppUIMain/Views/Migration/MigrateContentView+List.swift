@@ -278,7 +278,7 @@ private extension MigrateContentView.ListView {
         func icon(forStatus status: MigrationStatus) -> some View {
             switch status {
             case .excluded:
-                Text("--")
+                Text(Strings.Unlocalized.longDash)
 
             case .pending:
                 ProgressView()

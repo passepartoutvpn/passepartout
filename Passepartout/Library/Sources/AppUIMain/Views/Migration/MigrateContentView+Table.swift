@@ -146,7 +146,7 @@ private extension MigrateContentView.TableView {
         var statusView: some View {
             switch status {
             case .excluded:
-                Text("--")
+                Text(Strings.Unlocalized.longDash)
 
             case .pending:
                 ThemeImage(.progress)
