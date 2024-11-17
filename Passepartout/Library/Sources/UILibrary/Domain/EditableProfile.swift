@@ -88,22 +88,22 @@ extension Profile {
         EditableProfile(
             id: id,
             name: name,
-            modules: modulesBuilders,
+            modules: modulesBuilders(),
             activeModulesIds: activeModulesIds,
             modulesMetadata: modulesMetadata,
             userInfo: userInfo
         )
     }
 
-    public var modulesBuilders: [any ModuleBuilder] {
+    public func modulesBuilders() -> [any ModuleBuilder] {
         modules.compactMap {
-            $0.asModuleBuilder
+            $0.moduleBuilder()
         }
     }
 }
 
 extension Module {
-    public var asModuleBuilder: (any ModuleBuilder)? {
+    public func moduleBuilder() -> (any ModuleBuilder)? {
         guard let buildableModule = self as? any BuildableType else {
             return nil
         }
@@ -111,8 +111,8 @@ extension Module {
         return builder as? any ModuleBuilder
     }
 
-    public var asProviderModuleBuilder: (any ProviderModuleBuilder)? {
-        asModuleBuilder as? any ProviderModuleBuilder
+    public func providerModuleBuilder() -> (any ProviderModuleBuilder)? {
+        moduleBuilder() as? any ProviderModuleBuilder
     }
 }
 

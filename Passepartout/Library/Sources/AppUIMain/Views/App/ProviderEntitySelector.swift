@@ -62,7 +62,7 @@ private extension ProviderEntitySelector {
         pp_log(.app, .info, "Select new provider entity: \(entity)")
 
         do {
-            guard var moduleBuilder = module.asProviderModuleBuilder else {
+            guard var moduleBuilder = module.providerModuleBuilder() else {
                 assertionFailure("Module is not a ProviderModuleBuilder?")
                 return
             }

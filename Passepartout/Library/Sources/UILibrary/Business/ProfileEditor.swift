@@ -189,7 +189,7 @@ extension ProfileEditor {
         let profile = try builder.tryBuild()
 
         // update local view
-        editableProfile.modules = profile.modulesBuilders
+        editableProfile.modules = profile.modulesBuilders()
         removedModules.removeAll()
 
         return profile
