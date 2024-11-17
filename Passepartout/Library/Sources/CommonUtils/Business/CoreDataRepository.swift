@@ -50,6 +50,8 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private let observingResults: Bool
 
+    private let beforeFetch: ((NSFetchRequest<CD>) -> Void)?
+
     private nonisolated let fromMapper: (CD) throws -> T?
 
     private nonisolated let toMapper: (T, NSManagedObjectContext) throws -> CD
@@ -58,8 +60,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private nonisolated let entitiesSubject: CurrentValueSubject<EntitiesResult<T>, Never>
 
-    // cannot easily use CD as generic
-    private var resultsController: NSFetchedResultsController<CD>
+    private var resultsController: NSFetchedResultsController<CD>?
 
     public init(
         context: NSManagedObjectContext,
@@ -76,19 +77,11 @@ public actor CoreDataRepository<CD, T>: NSObject,
         self.entityName = entityName
         self.context = context
         self.observingResults = observingResults
+        self.beforeFetch = beforeFetch
         self.fromMapper = fromMapper
         self.toMapper = toMapper
         self.onResultError = onResultError
         entitiesSubject = CurrentValueSubject(EntitiesResult())
-
-        let request = NSFetchRequest<CD>(entityName: entityName)
-        beforeFetch?(request)
-        resultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
     }
 
     public nonisolated var entitiesPublisher: AnyPublisher<EntitiesResult<T>, Never> {
@@ -183,17 +176,24 @@ private extension CoreDataRepository {
 
     @discardableResult
     func filter(byPredicate predicate: NSPredicate?) async throws -> [T] {
-        let request = resultsController.fetchRequest
+        let request = newFetchRequest()
         request.predicate = predicate
-        resultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        resultsController.delegate = self
-        try resultsController.performFetch()
-        return await sendResults(from: resultsController)
+        beforeFetch?(request)
+
+        let newController = try await context.perform {
+            let newController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: self.context,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            newController.delegate = self
+            try newController.performFetch()
+            return newController
+        }
+
+        resultsController = newController
+        return await sendResults(from: newController)
     }
 
     @discardableResult
