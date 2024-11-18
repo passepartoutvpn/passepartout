@@ -48,7 +48,9 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
 
     private let errorHandler: ErrorHandler
 
-    private let onProviderEntityRequired: ((Profile) -> Void)?
+    private let onProviderEntityRequired: (Profile) -> Void
+
+    private let onPurchaseRequired: (Set<AppFeature>) -> Void
 
     private let label: (Bool) -> Label
 
@@ -58,7 +60,8 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
         nextProfileId: Binding<Profile.ID?>,
         interactiveManager: InteractiveManager,
         errorHandler: ErrorHandler,
-        onProviderEntityRequired: ((Profile) -> Void)? = nil,
+        onProviderEntityRequired: @escaping (Profile) -> Void,
+        onPurchaseRequired: @escaping (Set<AppFeature>) -> Void,
         label: @escaping (Bool) -> Label
     ) {
         self.tunnel = tunnel
@@ -67,6 +70,7 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
         self.interactiveManager = interactiveManager
         self.errorHandler = errorHandler
         self.onProviderEntityRequired = onProviderEntityRequired
+        self.onPurchaseRequired = onPurchaseRequired
         self.label = label
     }
 
@@ -134,12 +138,14 @@ private extension TunnelToggleButton {
             } else {
                 try await tunnel.connect(with: profile)
             }
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            onPurchaseRequired(requiredFeatures)
         } catch is CancellationError {
             //
         } catch {
             switch (error as? PassepartoutError)?.code {
             case .missingProviderEntity:
-                onProviderEntityRequired?(profile)
+                onProviderEntityRequired(profile)
                 return
 
             case .providerRequired:

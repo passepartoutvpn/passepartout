@@ -117,6 +117,12 @@ extension ProfileEditor {
         editableProfile.modules
     }
 
+    public var activeModules: [any ModuleBuilder] {
+        editableProfile.modules.filter {
+            isActiveModule(withId: $0.id)
+        }
+    }
+
     public func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
         editableProfile.modules.first {
             $0.id == moduleId
@@ -199,10 +205,13 @@ extension ProfileEditor {
 // MARK: - Saving
 
 extension ProfileEditor {
-    public func save(to profileManager: ProfileManager) async throws {
+
+    @discardableResult
+    public func save(to profileManager: ProfileManager) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, force: true, remotelyShared: isShared)
+            return newProfile
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error

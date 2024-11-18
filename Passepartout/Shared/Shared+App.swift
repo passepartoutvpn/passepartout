@@ -44,27 +44,13 @@ extension IAPManager {
         isIncluded: {
             Configuration.ProfileManager.isIncluded($0, $1)
         },
-        willSave: {
-            $1
+        willSave: { _, builder in
+            builder
         },
         willConnect: { iap, profile in
-            var builder = profile.builder()
-
-            // ineligible, suppress on-demand rules
-            if !iap.isEligible(for: .onDemand) {
-                pp_log(.App.iap, .notice, "Ineligible, suppress on-demand rules")
-
-                if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
-                   let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
-
-                    var onDemandBuilder = onDemandModule.builder()
-                    onDemandBuilder.policy = .any
-                    builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
-                }
-            }
+            try iap.verify(profile.activeModules)
 
             // validate provider modules
-            let profile = try builder.tryBuild()
             do {
                 _ = try profile.withProviderModules()
                 return profile

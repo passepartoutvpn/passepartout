@@ -69,13 +69,20 @@ private extension ProfileContextMenu {
             profile: profile,
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
-        ) {
-            ThemeImageLabel(
-                $0 ? Strings.Global.enable : Strings.Global.disable,
-                $0 ? .tunnelEnable : .tunnelDisable
-            )
-        }
+            errorHandler: errorHandler,
+            onProviderEntityRequired: {
+                flow?.onEditProviderEntity($0)
+            },
+            onPurchaseRequired: {
+                flow?.onPurchaseRequired($0)
+            },
+            label: {
+                ThemeImageLabel(
+                    $0 ? Strings.Global.enable : Strings.Global.disable,
+                    $0 ? .tunnelEnable : .tunnelDisable
+                )
+            }
+        )
     }
 
     var providerConnectToButton: some View {
@@ -92,10 +99,14 @@ private extension ProfileContextMenu {
         TunnelRestartButton(
             tunnel: tunnel,
             profile: profile,
-            errorHandler: errorHandler
-        ) {
-            ThemeImageLabel(Strings.Global.restart, .tunnelRestart)
-        }
+            errorHandler: errorHandler,
+            onPurchaseRequired: {
+                flow?.onPurchaseRequired($0)
+            },
+            label: {
+                ThemeImageLabel(Strings.Global.restart, .tunnelRestart)
+            }
+        )
     }
 
     var profileEditButton: some View {

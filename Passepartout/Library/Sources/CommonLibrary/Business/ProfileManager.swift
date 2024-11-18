@@ -449,7 +449,7 @@ private extension ProfileManager {
             }
             for remoteProfile in profiles {
                 do {
-                    guard processor?.isIncluded(remoteProfile) ?? true else {
+                    guard await processor?.isIncluded(remoteProfile) ?? true else {
                         pp_log(.App.profiles, .info, "Will delete non-included remote profile \(remoteProfile.id)")
                         idsToRemove.append(remoteProfile.id)
                         continue

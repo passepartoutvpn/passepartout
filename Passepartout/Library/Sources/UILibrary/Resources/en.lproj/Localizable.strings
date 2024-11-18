@@ -132,6 +132,9 @@
 
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
+"views.profile.alerts.purchase.title" = "Purchase required";
+"views.profile.alerts.purchase.buttons.ok" = "Save anyway";
+"views.profile.alerts.purchase.message" = "This profile requires paid features to work.";
 
 "views.settings.launches_on_login" = "Launch on login";
 "views.settings.launches_on_login.footer" = "Open the app in background after login.";
@@ -264,33 +267,33 @@
 
 "ui.connection_status.on_demand_suffix" = " (on-demand)";
 "ui.profile_context.connect_to" = "Connect to...";
+"ui.purchase_required.purchase.help" = "Purchase required";
+"ui.purchase_required.restricted.help" = "Feature is restricted";
 
 // MARK: - Paywall
 
-"paywall.sections.one_time.header" = "One-time purchase";
 "paywall.sections.recurring.header" = "All features";
-"paywall.sections.features.header" = "Subscribe for";
+"paywall.sections.one_time.header" = "One-time purchase";
+"paywall.sections.features.required.header" = "Required features";
+"paywall.sections.features.other.header" = "Also included";
 "paywall.sections.restore.header" = "Restore";
 "paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
 "paywall.rows.restore_purchases" = "Restore purchases";
 "paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
 
 "features.appleTV" = "%@";
-"features.dns" = "%@";
-"features.httpProxy" = "%@";
+"features.dns" = "%@ Settings";
+"features.httpProxy" = "%@ Settings";
 "features.interactiveLogin" = "Interactive Login";
-"features.onDemand" = "%@";
+"features.onDemand" = "On-Demand Rules";
 "features.providers" = "All Providers";
-"features.routing" = "%@";
+"features.routing" = "Custom %@";
 "features.sharing" = "%@";
 
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
 "modules.general.rows.shared.purchase" = "Share on iCloud";
 "modules.general.rows.apple_tv.purchase" = "Drop TV restriction";
-"modules.on_demand.purchase" = "Add on-demand rules";
-"modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
-"providers.picker.purchase" = "Add more providers";
 
 // MARK: - Alerts
 
@@ -298,13 +301,12 @@
 "alerts.import.passphrase.ok" = "Decrypt";
 
 "alerts.iap.restricted.title" = "Restricted";
-"alerts.iap.restricted.message" = "The requested feature is unavailable in this build.";
+"alerts.iap.restricted.message" = "Some features are unavailable in this build.";
 
 // MARK: - Errors
 
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
-"errors.app.ineligible_profile" = "A purchase is required for this profile to work.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
 "errors.app.default" = "Unable to complete operation.";

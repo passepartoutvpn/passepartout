@@ -73,15 +73,9 @@ public struct OpenVPNCredentialsView: View {
 
     public var body: some View {
         Group {
-            restrictedArea
-                .modifier(PurchaseButtonModifier(
-                    Strings.Modules.Openvpn.Credentials.Interactive.purchase,
-                    feature: .interactiveLogin,
-                    suggesting: nil,
-                    showsIfRestricted: false,
-                    paywallReason: $paywallReason
-                ))
-
+            if !isAuthenticating {
+                interactiveSection
+            }
             inputSection
         }
         .themeManualInput()
@@ -117,21 +111,23 @@ private extension OpenVPNCredentialsView {
         iapManager.isEligible(for: .interactiveLogin)
     }
 
+    var requiredFeatures: Set<AppFeature>? {
+        isInteractive ? [.interactiveLogin] : nil
+    }
+
     var otpMethods: [OpenVPN.Credentials.OTPMethod] {
         [.none, .append, .encode]
     }
 
-    @ViewBuilder
-    var restrictedArea: some View {
-        if !isAuthenticating {
-            interactiveSection
-        }
-    }
-
     var interactiveSection: some View {
         Group {
-            Toggle(Strings.Modules.Openvpn.Credentials.interactive, isOn: $isInteractive)
-                .themeRow(footer: interactiveFooter)
+            Toggle(isOn: $isInteractive) {
+                HStack {
+                    Text(Strings.Modules.Openvpn.Credentials.interactive)
+                    PurchaseRequiredButton(features: requiredFeatures, paywallReason: $paywallReason)
+                }
+            }
+            .themeRow(footer: interactiveFooter)
 
             if isInteractive {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {

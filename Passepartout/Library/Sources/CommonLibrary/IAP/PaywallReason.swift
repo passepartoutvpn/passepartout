@@ -26,7 +26,5 @@
 import Foundation
 
 public enum PaywallReason: Hashable {
-    case restricted
-
-    case purchase(AppFeature, AppProduct?)
+    case purchase(Set<AppFeature>, AppProduct? = nil)
 }

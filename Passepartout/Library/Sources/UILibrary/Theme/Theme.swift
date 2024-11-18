@@ -62,6 +62,8 @@ public final class Theme: ObservableObject {
 
     public internal(set) var errorColor: Color = .red
 
+    public internal(set) var upgradeColor: Color = .orange
+
     public internal(set) var logoImage = "Logo"
 
     public internal(set) var modalSize: (ThemeModalSize) -> CGSize = {

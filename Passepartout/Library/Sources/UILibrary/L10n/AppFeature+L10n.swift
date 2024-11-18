@@ -44,7 +44,7 @@ extension AppFeature: LocalizableEntity {
             return V.interactiveLogin
 
         case .onDemand:
-            return V.onDemand(Strings.Global.onDemand)
+            return V.onDemand
 
         case .providers:
             return V.providers
@@ -55,5 +55,11 @@ extension AppFeature: LocalizableEntity {
         case .sharing:
             return V.sharing(Strings.Unlocalized.iCloud)
         }
+    }
+}
+
+extension AppFeature: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.localizedDescription.lowercased() < rhs.localizedDescription.lowercased()
     }
 }

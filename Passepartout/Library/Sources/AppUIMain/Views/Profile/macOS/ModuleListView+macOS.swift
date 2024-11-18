@@ -25,6 +25,7 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
@@ -39,7 +40,10 @@ struct ModuleListView: View, Routable {
     var selectedModuleId: UUID?
 
     @Binding
-    var malformedModuleIds: [UUID]
+    var errorModuleIds: Set<UUID>
+
+    @Binding
+    var paywallReason: PaywallReason?
 
     var flow: ProfileCoordinator.Flow?
 
@@ -69,7 +73,14 @@ private extension ModuleListView {
     func moduleRow(for module: any ModuleBuilder) -> some View {
         HStack {
             Text(module.description(inEditor: profileEditor))
-                .themeError(malformedModuleIds.contains(module.id))
+            if errorModuleIds.contains(module.id) {
+                ThemeImage(.warning)
+            } else if profileEditor.isActiveModule(withId: module.id) {
+                PurchaseRequiredButton(
+                    for: module as? AppFeatureRequiring,
+                    paywallReason: $paywallReason
+                )
+            }
             Spacer()
             EditorModuleToggle(profileEditor: profileEditor, module: module) {
                 EmptyView()
@@ -138,7 +149,8 @@ private extension ModuleListView {
     ModuleListView(
         profileEditor: ProfileEditor(profile: .mock),
         selectedModuleId: .constant(nil),
-        malformedModuleIds: .constant([])
+        errorModuleIds: .constant([]),
+        paywallReason: .constant(nil)
     )
     .withMockEnvironment()
 }

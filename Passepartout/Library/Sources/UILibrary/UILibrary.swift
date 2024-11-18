@@ -46,6 +46,34 @@ public final class UILibrary: UILibraryConfiguring {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        assertMissingImplementations(with: context.registry)
         uiConfiguring?.configure(with: context)
+    }
+}
+
+private extension UILibrary {
+    func assertMissingImplementations(with registry: Registry) {
+        ModuleType.allCases.forEach { moduleType in
+            let builder = moduleType.newModule(with: registry)
+            do {
+                // ModuleBuilder -> Module
+                let module = try builder.tryBuild()
+
+                // Module -> ModuleBuilder
+                guard let moduleBuilder = module.moduleBuilder() else {
+                    fatalError("\(moduleType): does not produce a ModuleBuilder")
+                }
+
+                // AppFeatureRequiring
+                guard builder is any AppFeatureRequiring else {
+                    fatalError("\(moduleType): #1 is not AppFeatureRequiring")
+                }
+                guard moduleBuilder is any AppFeatureRequiring else {
+                    fatalError("\(moduleType): #2 is not AppFeatureRequiring")
+                }
+            } catch {
+                fatalError("\(moduleType): empty module is not buildable: \(error)")
+            }
+        }
     }
 }

@@ -69,6 +69,12 @@ private extension ProfileListView {
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
+            onProviderEntityRequired: { _ in
+                // FIXME: #788, TV missing provider entity
+            },
+            onPurchaseRequired: { _ in
+                // FIXME: #788, TV purchase required
+            },
             label: { _ in
                 toggleView(for: header)
             }

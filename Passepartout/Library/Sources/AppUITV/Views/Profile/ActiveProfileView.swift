@@ -83,6 +83,12 @@ private extension ActiveProfileView {
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
+            onProviderEntityRequired: { _ in
+                // FIXME: #788, TV missing provider entity
+            },
+            onPurchaseRequired: { _ in
+                // FIXME: #788, TV purchase required
+            },
             label: {
                 Text($0 ? Strings.Global.connect : Strings.Global.disconnect)
                     .frame(maxWidth: .infinity)

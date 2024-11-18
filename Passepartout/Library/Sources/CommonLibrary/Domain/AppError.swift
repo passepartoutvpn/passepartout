@@ -33,6 +33,8 @@ public enum AppError: Error {
 
     case emptyProfileName
 
+    case ineligibleProfile(Set<AppFeature>)
+
     case malformedModule(any ModuleBuilder, error: Error)
 
     case permissionDenied

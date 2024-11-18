@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
@@ -33,6 +34,9 @@ public struct InteractiveCoordinator: View {
 
         case inline(withCancel: Bool)
     }
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
 
     private let style: Style
 

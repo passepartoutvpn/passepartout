@@ -31,9 +31,6 @@ import SwiftUI
 struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 
     @EnvironmentObject
-    private var iapManager: IAPManager
-
-    @EnvironmentObject
     private var providerManager: ProviderManager
 
     let apis: [APIMapper]
@@ -77,13 +74,11 @@ private extension ProviderContentModifier {
 #if os(iOS)
     @ViewBuilder
     var providerView: some View {
-        Group {
-            providerPicker
-            purchaseButton
-        }
-        .themeSection()
-        Group {
-            if providerId != nil {
+        providerPicker
+            .themeSection()
+
+        if providerId != nil {
+            Group {
                 providerRows
                 refreshButton {
                     HStack {
@@ -95,18 +90,17 @@ private extension ProviderContentModifier {
                     }
                 }
             }
+            .themeSection(footer: lastUpdatedString)
         }
-        .themeSection(footer: lastUpdatedString)
     }
 #else
     @ViewBuilder
     var providerView: some View {
         Section {
             providerPicker
-            purchaseButton
         }
-        Section {
-            if providerId != nil {
+        if providerId != nil {
+            Section {
                 providerRows
                 HStack {
                     lastUpdatedString.map {
@@ -128,19 +122,9 @@ private extension ProviderContentModifier {
             providers: supportedProviders,
             providerId: $providerId,
             isRequired: true,
-            isLoading: providerManager.isLoading
+            isLoading: providerManager.isLoading,
+            paywallReason: $paywallReason
         )
-    }
-
-    var purchaseButton: some View {
-        EmptyView()
-            .modifier(PurchaseButtonModifier(
-                Strings.Providers.Picker.purchase,
-                feature: .providers,
-                suggesting: nil,
-                showsIfRestricted: true,
-                paywallReason: $paywallReason
-            ))
     }
 
     func refreshButton<Label>(label: () -> Label) -> some View where Label: View {
@@ -151,7 +135,7 @@ private extension ProviderContentModifier {
         providerManager
             .providers
             .filter {
-                iapManager.isEligible(forProvider: $0.id) && $0.supports(Entity.Configuration.self)
+                $0.supports(Entity.Configuration.self)
             }
     }
 

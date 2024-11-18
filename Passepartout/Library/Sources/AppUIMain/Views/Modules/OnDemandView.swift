@@ -33,9 +33,6 @@ struct OnDemandView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var theme: Theme
 
-    @EnvironmentObject
-    private var iapManager: IAPManager
-
     @ObservedObject
     var editor: ProfileEditor
 
@@ -59,14 +56,7 @@ struct OnDemandView: View, ModuleDraftEditing {
     var body: some View {
         Group {
             enabledSection
-            restrictedArea
-                .modifier(PurchaseButtonModifier(
-                    Strings.Modules.OnDemand.purchase,
-                    feature: .onDemand,
-                    suggesting: nil,
-                    showsIfRestricted: false,
-                    paywallReason: $paywallReason
-                ))
+            rulesArea
         }
         .moduleView(editor: editor, draft: draft.wrappedValue)
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -87,7 +77,7 @@ private extension OnDemandView {
     }
 
     @ViewBuilder
-    var restrictedArea: some View {
+    var rulesArea: some View {
         if draft.wrappedValue.isEnabled {
             policySection
             if draft.wrappedValue.policy != .any {
@@ -98,9 +88,14 @@ private extension OnDemandView {
     }
 
     var policySection: some View {
-        Picker(Strings.Modules.OnDemand.policy, selection: draft.policy) {
+        Picker(selection: draft.policy) {
             ForEach(Self.allPolicies, id: \.self) {
                 Text($0.localizedDescription)
+            }
+        } label: {
+            HStack {
+                Text(Strings.Modules.OnDemand.policy)
+                PurchaseRequiredButton(for: module, paywallReason: $paywallReason)
             }
         }
         .themeSectionWithSingleRow(footer: policyFooterDescription)

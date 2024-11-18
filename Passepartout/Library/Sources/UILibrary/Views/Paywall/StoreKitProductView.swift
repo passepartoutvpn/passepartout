@@ -27,7 +27,7 @@ import CommonUtils
 import StoreKit
 import SwiftUI
 
-@available(iOS 17, macOS 14, *)
+@available(iOS 17, macOS 14, tvOS 17, *)
 struct StoreKitProductView: View {
     let style: PaywallProductViewStyle
 
@@ -42,7 +42,7 @@ struct StoreKitProductView: View {
 
     var body: some View {
         ProductView(id: product.productIdentifier)
-            .productViewStyle(style.toStoreKitStyle)
+            .withPaywallStyle(style)
             .onInAppPurchaseStart { _ in
                 purchasingIdentifier = product.productIdentifier
             }
@@ -58,13 +58,22 @@ struct StoreKitProductView: View {
     }
 }
 
-@available(iOS 17, macOS 14, *)
-private extension PaywallProductViewStyle {
-    var toStoreKitStyle: some ProductViewStyle {
-        switch self {
-        case .oneTime, .recurring, .donation:
-            return .compact
+@available(iOS 17, macOS 14, tvOS 17, *)
+private extension ProductView {
+
+    @ViewBuilder
+    func withPaywallStyle(_ paywallStyle: PaywallProductViewStyle) -> some View {
+#if !os(tvOS)
+        switch paywallStyle {
+        case .recurring:
+            productViewStyle(.compact)
+
+        case .oneTime, .donation:
+            productViewStyle(.compact)
         }
+#else
+        productViewStyle(.compact)
+#endif
     }
 }
 

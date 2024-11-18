@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 @_exported import UILibrary
@@ -42,19 +43,23 @@ private extension AppUIMain {
             .openVPN
         ]
         ModuleType.allCases.forEach { moduleType in
-            let builder = moduleType.newModule(with: registry)
-            guard builder is any ModuleViewProviding else {
-                fatalError("\(moduleType): is not ModuleViewProviding")
-            }
-            if providerModuleTypes.contains(moduleType) {
-                do {
-                    let module = try builder.tryBuild()
+            do {
+                let builder = moduleType.newModule(with: registry)
+                let module = try builder.tryBuild()
+
+                // ModuleViewProviding
+                guard builder is any ModuleViewProviding else {
+                    fatalError("\(moduleType): is not ModuleViewProviding")
+                }
+
+                // ProviderEntityViewProviding
+                if providerModuleTypes.contains(moduleType) {
                     guard module is any ProviderEntityViewProviding else {
                         fatalError("\(moduleType): is not ProviderEntityViewProviding")
                     }
-                } catch {
-                    fatalError("\(moduleType): empty module is not buildable")
                 }
+            } catch {
+                fatalError("\(moduleType): empty module is not buildable: \(error)")
             }
         }
     }

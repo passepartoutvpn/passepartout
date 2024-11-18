@@ -122,7 +122,12 @@ private extension ProfileRowView {
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: flow?.onEditProviderEntity,
+            onProviderEntityRequired: {
+                flow?.onEditProviderEntity($0)
+            },
+            onPurchaseRequired: {
+                flow?.onPurchaseRequired($0)
+            },
             label: { _ in
                 ProfileCardView(
                     style: style,

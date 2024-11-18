@@ -37,6 +37,8 @@ struct TunnelRestartButton<Label>: View where Label: View {
 
     let errorHandler: ErrorHandler
 
+    let onPurchaseRequired: (Set<AppFeature>) -> Void
+
     let label: () -> Label
 
     var body: some View {
@@ -50,6 +52,8 @@ struct TunnelRestartButton<Label>: View where Label: View {
             Task {
                 do {
                     try await tunnel.connect(with: profile)
+                } catch AppError.ineligibleProfile(let requiredFeatures) {
+                    onPurchaseRequired(requiredFeatures)
                 } catch is CancellationError {
                     //
                 } catch {

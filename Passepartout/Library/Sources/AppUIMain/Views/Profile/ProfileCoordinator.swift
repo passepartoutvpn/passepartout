@@ -59,6 +59,12 @@ struct ProfileCoordinator: View {
     let onDismiss: () -> Void
 
     @State
+    private var requiresPurchase = false
+
+    @State
+    private var requiredFeatures: Set<AppFeature> = []
+
+    @State
     private var paywallReason: PaywallReason?
 
     @StateObject
@@ -67,6 +73,15 @@ struct ProfileCoordinator: View {
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
+            .alert(Strings.Views.Profile.Alerts.Purchase.title, isPresented: $requiresPurchase) {
+                Button(Strings.Global.purchase) {
+                    paywallReason = .purchase(requiredFeatures, nil)
+                }
+                Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
+                Button(Strings.Global.cancel, role: .cancel, action: {})
+            } message: {
+                Text(purchaseMessage)
+            }
             .withErrorHandler(errorHandler)
     }
 }
@@ -80,6 +95,7 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,
             path: $path,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -92,6 +108,7 @@ private extension ProfileCoordinator {
         ProfileSplitView(
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -100,33 +117,17 @@ private extension ProfileCoordinator {
         )
 #endif
     }
+
+    var purchaseMessage: String {
+        let msg = Strings.Views.Profile.Alerts.Purchase.message
+        return msg + "\n\n" + requiredFeatures
+            .map(\.localizedDescription)
+            .joined(separator: "\n")
+    }
 }
 
 private extension ProfileCoordinator {
     func onNewModule(_ moduleType: ModuleType) {
-        switch moduleType {
-        case .dns:
-            paywallReason = iapManager.paywallReason(forFeature: .dns, suggesting: nil)
-
-        case .httpProxy:
-            paywallReason = iapManager.paywallReason(forFeature: .httpProxy, suggesting: nil)
-
-        case .ip:
-            paywallReason = iapManager.paywallReason(forFeature: .routing, suggesting: nil)
-
-        case .openVPN, .wireGuard:
-            break
-
-        case .onDemand:
-            break
-
-        default:
-            fatalError("Unhandled module type: \(moduleType)")
-        }
-        guard paywallReason == nil else {
-            return
-        }
-
         let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
             profileEditor.saveModule(module, activating: true)
@@ -135,12 +136,40 @@ private extension ProfileCoordinator {
 
     func onCommitEditing() async throws {
         do {
-            try await profileEditor.save(to: profileManager)
-            onDismiss()
+            if !iapManager.isRestricted {
+                try await onCommitEditingStandard()
+            } else {
+                try await onCommitEditingRestricted()
+            }
         } catch {
             errorHandler.handle(error, title: Strings.Global.save)
             throw error
         }
+    }
+
+    // standard: always save, warn if purchase required
+    func onCommitEditingStandard() async throws {
+        let savedProfile = try await profileEditor.save(to: profileManager)
+        do {
+            try iapManager.verify(savedProfile.activeModules)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            self.requiredFeatures = requiredFeatures
+            requiresPurchase = true
+            return
+        }
+        onDismiss()
+    }
+
+    // restricted: verify before saving
+    func onCommitEditingRestricted() async throws {
+        do {
+            try iapManager.verify(profileEditor.activeModules)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            paywallReason = .purchase(requiredFeatures)
+            return
+        }
+        try await profileEditor.save(to: profileManager)
+        onDismiss()
     }
 
     func onCancelEditing() {
