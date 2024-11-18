@@ -411,6 +411,13 @@ private extension ProfileManager {
             return
         }
 
+        if let previousTask = remoteImportTask {
+            pp_log(.App.profiles, .info, "Cancel ongoing remote import...")
+            previousTask.cancel()
+            await previousTask.value
+            remoteImportTask = nil
+        }
+
         pp_log(.App.profiles, .info, "Start importing remote profiles: \(profiles.map(\.id)))")
         assert(profiles.count == Set(profiles.map(\.id)).count, "Remote repository must not have duplicates")
 
@@ -427,12 +434,6 @@ private extension ProfileManager {
 
         let remotelyDeletedIds = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
         let mirrorsRemoteRepository = mirrorsRemoteRepository
-
-        if let previousTask = remoteImportTask {
-            pp_log(.App.profiles, .info, "Cancel ongoing remote import...")
-            previousTask.cancel()
-            await previousTask.value
-        }
 
         remoteImportTask = Task.detached { [weak self] in
             guard let self else {
