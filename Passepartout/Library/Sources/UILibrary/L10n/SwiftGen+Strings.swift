@@ -13,11 +13,8 @@ public enum Strings {
   public enum Alerts {
     public enum Iap {
       public enum Restricted {
-        /// The following features are unavailable in this build:
-        /// %@
-        public static func message(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "alerts.iap.restricted.message", String(describing: p1), fallback: "The following features are unavailable in this build:\n%@")
-        }
+        /// Some features are unavailable in this build.
+        public static let message = Strings.tr("Localizable", "alerts.iap.restricted.message", fallback: "Some features are unavailable in this build.")
         /// Restricted
         public static let title = Strings.tr("Localizable", "alerts.iap.restricted.title", fallback: "Restricted")
       }
@@ -763,8 +760,8 @@ public enum Strings {
     public enum Profile {
       public enum Alerts {
         public enum Purchase {
-          /// This profile requires paid features to work. Disable or edit the flagged modules.
-          public static let message = Strings.tr("Localizable", "views.profile.alerts.purchase.message", fallback: "This profile requires paid features to work. Disable or edit the flagged modules.")
+          /// This profile requires paid features to work.
+          public static let message = Strings.tr("Localizable", "views.profile.alerts.purchase.message", fallback: "This profile requires paid features to work.")
           /// Purchase required
           public static let title = Strings.tr("Localizable", "views.profile.alerts.purchase.title", fallback: "Purchase required")
           public enum Buttons {

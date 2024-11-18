@@ -74,13 +74,13 @@ struct ProfileCoordinator: View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
             .alert(Strings.Views.Profile.Alerts.Purchase.title, isPresented: $requiresPurchase) {
-                Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
                 Button(Strings.Global.purchase) {
                     paywallReason = .purchase(requiredFeatures, nil)
                 }
+                Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
                 Button(Strings.Global.cancel, role: .cancel, action: {})
             } message: {
-                Text(Strings.Views.Profile.Alerts.Purchase.message)
+                Text(purchaseMessage)
             }
             .withErrorHandler(errorHandler)
     }
@@ -116,6 +116,13 @@ private extension ProfileCoordinator {
             )
         )
 #endif
+    }
+
+    var purchaseMessage: String {
+        let msg = Strings.Views.Profile.Alerts.Purchase.message
+        return msg + "\n\n" + requiredFeatures
+            .map(\.localizedDescription)
+            .joined(separator: "\n")
     }
 }
 

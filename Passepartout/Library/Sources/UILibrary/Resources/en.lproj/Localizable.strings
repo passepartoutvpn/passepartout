@@ -134,7 +134,7 @@
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 "views.profile.alerts.purchase.title" = "Purchase required";
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";
-"views.profile.alerts.purchase.message" = "This profile requires paid features to work. Disable or edit the flagged modules.";
+"views.profile.alerts.purchase.message" = "This profile requires paid features to work.";
 
 "views.settings.launches_on_login" = "Launch on login";
 "views.settings.launches_on_login.footer" = "Open the app in background after login.";
@@ -301,7 +301,7 @@
 "alerts.import.passphrase.ok" = "Decrypt";
 
 "alerts.iap.restricted.title" = "Restricted";
-"alerts.iap.restricted.message" = "The following features are unavailable in this build:\n%@";
+"alerts.iap.restricted.message" = "Some features are unavailable in this build.";
 
 // MARK: - Errors
 

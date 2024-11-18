@@ -56,7 +56,7 @@ public struct PaywallModifier: ViewModifier {
                     }
                 },
                 message: {
-                    Text(Strings.Alerts.Iap.Restricted.message(featuresDescription))
+                    Text(restrictedMessage)
                 }
             )
             .themeModal(item: $paywallArguments) { args in
@@ -98,11 +98,12 @@ private extension PaywallModifier {
         }
     }
 
-    var featuresDescription: String {
+    var restrictedMessage: String {
         guard case .purchase(let features, _) = reason else {
             return ""
         }
-        return "\n" + iapManager
+        let msg = Strings.Alerts.Iap.Restricted.message
+        return msg + "\n\n" + iapManager
             .excludingEligible(from: features)
             .map(\.localizedDescription)
             .sorted()
