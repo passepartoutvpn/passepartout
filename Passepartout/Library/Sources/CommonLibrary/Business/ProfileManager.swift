@@ -380,7 +380,9 @@ private extension ProfileManager {
         if waitingObservers.contains(.remote) {
             waitingObservers.remove(.remote) // @Published
         }
-        importRemoteProfiles(result)
+        Task { [weak self] in
+            await self?.importRemoteProfiles(result)
+        }
 
         objectWillChange.send()
     }
@@ -404,7 +406,7 @@ private extension ProfileManager {
         }
     }
 
-    func importRemoteProfiles(_ profiles: [Profile]) {
+    func importRemoteProfiles(_ profiles: [Profile]) async {
         guard !profiles.isEmpty else {
             return
         }
@@ -426,16 +428,15 @@ private extension ProfileManager {
         let remotelyDeletedIds = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
         let mirrorsRemoteRepository = mirrorsRemoteRepository
 
-        let previousTask = remoteImportTask
+        if let previousTask = remoteImportTask {
+            pp_log(.App.profiles, .info, "Cancel ongoing remote import...")
+            previousTask.cancel()
+            await previousTask.value
+        }
+
         remoteImportTask = Task.detached { [weak self] in
             guard let self else {
                 return
-            }
-
-            if let previousTask {
-                pp_log(.App.profiles, .info, "Cancel ongoing remote import...")
-                previousTask.cancel()
-                await previousTask.value
             }
 
             var idsToRemove: [Profile.ID] = []
@@ -480,6 +481,8 @@ private extension ProfileManager {
             // yield a little bit
             try? await Task.sleep(for: .milliseconds(100))
         }
+        await remoteImportTask?.value
+        remoteImportTask = nil
     }
 
     func reloadFilteredProfiles(with search: String) {
