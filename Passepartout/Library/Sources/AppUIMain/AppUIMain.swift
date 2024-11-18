@@ -43,28 +43,13 @@ private extension AppUIMain {
             .openVPN
         ]
         ModuleType.allCases.forEach { moduleType in
-            let builder = moduleType.newModule(with: registry)
-
-            // ModuleViewProviding
-            guard builder is any ModuleViewProviding else {
-                fatalError("\(moduleType): is not ModuleViewProviding")
-            }
-
             do {
-                // ModuleBuilder -> Module
+                let builder = moduleType.newModule(with: registry)
                 let module = try builder.tryBuild()
 
-                // Module -> ModuleBuilder
-                guard let moduleBuilder = module.moduleBuilder() else {
-                    fatalError("\(moduleType): does not produce a ModuleBuilder")
-                }
-
-                // AppFeatureRequiring
-                guard builder is any AppFeatureRequiring else {
-                    fatalError("\(moduleType): #1 is not AppFeatureRequiring")
-                }
-                guard moduleBuilder is any AppFeatureRequiring else {
-                    fatalError("\(moduleType): #2 is not AppFeatureRequiring")
+                // ModuleViewProviding
+                guard builder is any ModuleViewProviding else {
+                    fatalError("\(moduleType): is not ModuleViewProviding")
                 }
 
                 // ProviderEntityViewProviding
