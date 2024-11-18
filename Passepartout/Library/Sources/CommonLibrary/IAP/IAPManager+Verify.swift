@@ -28,8 +28,11 @@ import PassepartoutKit
 
 extension IAPManager {
     public func verify(_ modules: [Module]) throws {
-        let builders = modules.compactMap {
-            $0.moduleBuilder()
+        let builders = modules.map {
+            guard let builder = $0.moduleBuilder() else {
+                fatalError("Cannot produce ModuleBuilder from Module for IAPManager.verify(): \($0)")
+            }
+            return builder
         }
         try verify(builders)
     }
