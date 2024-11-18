@@ -55,13 +55,16 @@ private extension AppUIMain {
                 let module = try builder.tryBuild()
 
                 // Module -> ModuleBuilder
-                guard module.moduleBuilder() != nil else {
+                guard let moduleBuilder = module.moduleBuilder() else {
                     fatalError("\(moduleType): does not produce a ModuleBuilder")
                 }
 
                 // AppFeatureRequiring
                 guard builder is any AppFeatureRequiring else {
-                    fatalError("\(moduleType): is not AppFeatureRequiring")
+                    fatalError("\(moduleType): #1 is not AppFeatureRequiring")
+                }
+                guard moduleBuilder is any AppFeatureRequiring else {
+                    fatalError("\(moduleType): #2 is not AppFeatureRequiring")
                 }
 
                 // ProviderEntityViewProviding
