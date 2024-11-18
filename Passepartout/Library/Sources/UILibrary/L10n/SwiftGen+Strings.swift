@@ -539,8 +539,8 @@ public enum Strings {
         public static let header = Strings.tr("Localizable", "paywall.sections.one_time.header", fallback: "One-time purchase")
       }
       public enum Recurring {
-        /// Get all features
-        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "Get all features")
+        /// All features
+        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "All features")
       }
       public enum Restore {
         /// If you bought this app or feature in the past, you can restore your purchases.

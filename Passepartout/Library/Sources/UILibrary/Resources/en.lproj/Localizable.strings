@@ -272,7 +272,7 @@
 
 // MARK: - Paywall
 
-"paywall.sections.recurring.header" = "Get all features";
+"paywall.sections.recurring.header" = "All features";
 "paywall.sections.one_time.header" = "One-time purchase";
 "paywall.sections.features.required.header" = "Required features";
 "paywall.sections.features.other.header" = "Also included";
