@@ -38,6 +38,9 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
     @Binding
     var selectedEntity: VPNEntity<Configuration>?
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     let entityDestination: any Hashable
 
     @ViewBuilder
@@ -50,6 +53,7 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
                 apis: apis,
                 providerId: $providerId,
                 entityType: VPNEntity<Configuration>.self,
+                paywallReason: $paywallReason,
                 providerRows: {
                     providerEntityRow
                     providerRows
@@ -92,6 +96,7 @@ private extension VPNProviderContentModifier {
                     apis: [API.bundled],
                     providerId: .constant(.hideme),
                     selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
+                    paywallReason: .constant(nil),
                     entityDestination: "Destination",
                     providerRows: {
                         Text("Other")

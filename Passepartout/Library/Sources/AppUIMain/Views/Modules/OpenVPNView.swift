@@ -54,6 +54,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @State
     private var requiresPassphrase = false
 
+    @State
+    private var paywallReason: PaywallReason?
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -83,6 +86,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 allowedContentTypes: [.item],
                 onCompletion: importConfiguration
             )
+            .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: providerId.wrappedValue, category: .modules)
             .withErrorHandler(errorHandler)
@@ -140,6 +144,7 @@ private extension OpenVPNView {
         VPNProviderContentModifier(
             providerId: providerId,
             selectedEntity: providerEntity,
+            paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
             providerRows: {
                 moduleGroup(for: providerAccountRows)

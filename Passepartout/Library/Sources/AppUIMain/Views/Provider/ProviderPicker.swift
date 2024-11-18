@@ -37,8 +37,8 @@ struct ProviderPicker: View {
 
     let isLoading: Bool
 
-    @State
-    private var paywallReason: PaywallReason?
+    @Binding
+    var paywallReason: PaywallReason?
 
     var body: some View {
         Picker(selection: $providerId) {
@@ -59,8 +59,6 @@ struct ProviderPicker: View {
                 PurchaseRequiredButton(for: providerId, paywallReason: $paywallReason)
             }
         }
-        // FIXME: #849, this modifier could be unstable here, move to parent?
-        .modifier(PaywallModifier(reason: $paywallReason))
         .disabled(isLoading || providers.isEmpty)
     }
 }
