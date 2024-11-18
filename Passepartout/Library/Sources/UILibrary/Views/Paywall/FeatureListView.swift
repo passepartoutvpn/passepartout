@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Description.swift
+//  FeatureListView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 11/18/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,13 +24,39 @@
 //
 
 import CommonLibrary
-import Foundation
-import PassepartoutKit
+import SwiftUI
 
-extension ModuleBuilder {
+enum FeatureListViewStyle {
+    case list
 
-    @MainActor
-    public func description(inEditor editor: ProfileEditor) -> String {
-        editor.profile.displayName(forModuleWithId: id) ?? moduleType.localizedDescription
+#if !os(tvOS)
+    case table
+#endif
+}
+
+struct FeatureListView<Content>: View where Content: View {
+    let style: FeatureListViewStyle
+
+    let header: String
+
+    let features: [AppFeature]
+
+    let content: (AppFeature) -> Content
+
+    var body: some View {
+        switch style {
+        case .list:
+            ForEach(features.sorted(), id: \.id, content: content)
+                .themeSection(header: header)
+
+#if !os(tvOS)
+        case .table:
+            Table(features.sorted()) {
+                TableColumn("", content: content)
+            }
+            .withoutColumnHeaders()
+            .themeSection(header: header)
+#endif
+        }
     }
 }

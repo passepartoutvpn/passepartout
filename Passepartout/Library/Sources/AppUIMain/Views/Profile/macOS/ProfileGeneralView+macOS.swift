@@ -33,8 +33,8 @@ struct ProfileGeneralView: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
-    @State
-    private var paywallReason: PaywallReason?
+    @Binding
+    var paywallReason: PaywallReason?
 
     var body: some View {
         Form {
@@ -48,14 +48,14 @@ struct ProfileGeneralView: View {
             )
             UUIDSection(uuid: profileEditor.profile.id)
         }
-        .modifier(PaywallModifier(reason: $paywallReason))
         .themeForm()
     }
 }
 
 #Preview {
     ProfileGeneralView(
-        profileEditor: ProfileEditor()
+        profileEditor: ProfileEditor(),
+        paywallReason: .constant(nil)
     )
     .withMockEnvironment()
 }

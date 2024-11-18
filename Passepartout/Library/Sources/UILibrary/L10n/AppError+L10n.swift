@@ -41,6 +41,9 @@ extension AppError: LocalizedError {
         case .emptyProfileName:
             return V.emptyProfileName
 
+        case .ineligibleProfile:
+            return nil
+
         case .malformedModule(let module, let error):
             return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 
@@ -58,9 +61,6 @@ extension AppError: LocalizedError {
 extension PassepartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         switch code {
-        case .App.ineligibleProfile:
-            return Strings.Errors.App.ineligibleProfile
-
         case .connectionModuleRequired:
             return Strings.Errors.App.Passepartout.connectionModuleRequired
 

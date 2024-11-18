@@ -28,6 +28,9 @@ import SwiftUI
 
 public struct PaywallModifier: ViewModifier {
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     @Binding
     private var reason: PaywallReason?
 
@@ -53,26 +56,26 @@ public struct PaywallModifier: ViewModifier {
                     }
                 },
                 message: {
-                    Text(Strings.Alerts.Iap.Restricted.message)
+                    Text(Strings.Alerts.Iap.Restricted.message(restrictedFeaturesDescription))
                 }
             )
             .themeModal(item: $paywallArguments) { args in
                 NavigationStack {
                     PaywallView(
                         isPresented: isPresentingPurchase,
-                        feature: args.feature,
+                        features: iapManager.excludingEligible(from: args.features),
                         suggestedProduct: args.product
                     )
                 }
-                .frame(idealHeight: 400)
+                .frame(idealHeight: 500)
             }
             .onChange(of: reason) {
                 switch $0 {
                 case .restricted:
                     isPresentingRestricted = true
 
-                case .purchase(let feature, let product):
-                    paywallArguments = PaywallArguments(feature: feature, product: product)
+                case .purchase(let features, let product):
+                    paywallArguments = PaywallArguments(features: features, product: product)
 
                 default:
                     break
@@ -93,14 +96,33 @@ private extension PaywallModifier {
             }
         }
     }
+
+    var restrictedFeaturesDescription: String {
+        guard case .restricted(let features) = reason else {
+            return ""
+        }
+        return "\n" + iapManager
+            .excludingEligible(from: features)
+            .map(\.localizedDescription)
+            .sorted()
+            .joined(separator: "\n")
+    }
 }
 
 private struct PaywallArguments: Identifiable {
-    let feature: AppFeature
+    let features: Set<AppFeature>
 
     let product: AppProduct?
 
-    var id: String {
-        feature.id
+    var id: [String] {
+        features.map(\.id)
+    }
+}
+
+private extension IAPManager {
+    func excludingEligible(from features: Set<AppFeature>) -> Set<AppFeature> {
+        features.filter {
+            !isEligible(for: $0)
+        }
     }
 }

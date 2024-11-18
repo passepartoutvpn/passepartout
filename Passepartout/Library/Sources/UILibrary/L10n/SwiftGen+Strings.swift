@@ -13,8 +13,11 @@ public enum Strings {
   public enum Alerts {
     public enum Iap {
       public enum Restricted {
-        /// The requested feature is unavailable in this build.
-        public static let message = Strings.tr("Localizable", "alerts.iap.restricted.message", fallback: "The requested feature is unavailable in this build.")
+        /// The following features are unavailable in this build:
+        /// %@
+        public static func message(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "alerts.iap.restricted.message", String(describing: p1), fallback: "The following features are unavailable in this build:\n%@")
+        }
         /// Restricted
         public static let title = Strings.tr("Localizable", "alerts.iap.restricted.title", fallback: "Restricted")
       }
@@ -116,8 +119,6 @@ public enum Strings {
       public static let emptyProducts = Strings.tr("Localizable", "errors.app.empty_products", fallback: "Unable to fetch products, please retry later.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
-      /// A purchase is required for this profile to work.
-      public static let ineligibleProfile = Strings.tr("Localizable", "errors.app.ineligible_profile", fallback: "A purchase is required for this profile to work.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
@@ -145,6 +146,10 @@ public enum Strings {
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
         /// No provider selected.
         public static let providerRequired = Strings.tr("Localizable", "errors.app.passepartout.provider_required", fallback: "No provider selected.")
+        public enum App {
+          /// The highlighted modules require a purchase to be enabled. Please disable them to save the profile.
+          public static let ineligibleProfile = Strings.tr("Localizable", "errors.app.passepartout.app.ineligible_profile", fallback: "The highlighted modules require a purchase to be enabled. Please disable them to save the profile.")
+        }
       }
       public enum Provider {
         /// No provider selected.
@@ -179,25 +184,23 @@ public enum Strings {
     public static func appleTV(_ p1: Any) -> String {
       return Strings.tr("Localizable", "features.appleTV", String(describing: p1), fallback: "%@")
     }
-    /// %@
+    /// %@ Settings
     public static func dns(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.dns", String(describing: p1), fallback: "%@")
+      return Strings.tr("Localizable", "features.dns", String(describing: p1), fallback: "%@ Settings")
     }
-    /// %@
+    /// %@ Settings
     public static func httpProxy(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.httpProxy", String(describing: p1), fallback: "%@")
+      return Strings.tr("Localizable", "features.httpProxy", String(describing: p1), fallback: "%@ Settings")
     }
     /// Interactive Login
     public static let interactiveLogin = Strings.tr("Localizable", "features.interactiveLogin", fallback: "Interactive Login")
-    /// %@
-    public static func onDemand(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.onDemand", String(describing: p1), fallback: "%@")
-    }
+    /// On-Demand Rules
+    public static let onDemand = Strings.tr("Localizable", "features.onDemand", fallback: "On-Demand Rules")
     /// All Providers
     public static let providers = Strings.tr("Localizable", "features.providers", fallback: "All Providers")
-    /// %@
+    /// Custom %@
     public static func routing(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.routing", String(describing: p1), fallback: "%@")
+      return Strings.tr("Localizable", "features.routing", String(describing: p1), fallback: "Custom %@")
     }
     /// %@
     public static func sharing(_ p1: Any) -> String {
@@ -436,8 +439,6 @@ public enum Strings {
       public static let mobile = Strings.tr("Localizable", "modules.on_demand.mobile", fallback: "Mobile")
       /// Policy
       public static let policy = Strings.tr("Localizable", "modules.on_demand.policy", fallback: "Policy")
-      /// Add on-demand rules
-      public static let purchase = Strings.tr("Localizable", "modules.on_demand.purchase", fallback: "Add on-demand rules")
       public enum Policy {
         /// Activate the VPN %@.
         public static func footer(_ p1: Any) -> String {
@@ -494,8 +495,6 @@ public enum Strings {
         public enum Interactive {
           /// On-demand will be disabled.
           public static let footer = Strings.tr("Localizable", "modules.openvpn.credentials.interactive.footer", fallback: "On-demand will be disabled.")
-          /// Log in interactively
-          public static let purchase = Strings.tr("Localizable", "modules.openvpn.credentials.interactive.purchase", fallback: "Log in interactively")
         }
         public enum OtpMethod {
           public enum Approach {
@@ -533,16 +532,22 @@ public enum Strings {
     }
     public enum Sections {
       public enum Features {
-        /// Subscribe for
-        public static let header = Strings.tr("Localizable", "paywall.sections.features.header", fallback: "Subscribe for")
+        public enum Other {
+          /// Also included
+          public static let header = Strings.tr("Localizable", "paywall.sections.features.other.header", fallback: "Also included")
+        }
+        public enum Required {
+          /// Required features
+          public static let header = Strings.tr("Localizable", "paywall.sections.features.required.header", fallback: "Required features")
+        }
       }
       public enum OneTime {
         /// One-time purchase
         public static let header = Strings.tr("Localizable", "paywall.sections.one_time.header", fallback: "One-time purchase")
       }
       public enum Recurring {
-        /// All features
-        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "All features")
+        /// Get all features
+        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "Get all features")
       }
       public enum Restore {
         /// If you bought this app or feature in the past, you can restore your purchases.
@@ -587,10 +592,6 @@ public enum Strings {
       /// Loading...
       public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
     }
-    public enum Picker {
-      /// Add more providers
-      public static let purchase = Strings.tr("Localizable", "providers.picker.purchase", fallback: "Add more providers")
-    }
     public enum Vpn {
       /// No servers
       public static let noServers = Strings.tr("Localizable", "providers.vpn.no_servers", fallback: "No servers")
@@ -626,6 +627,16 @@ public enum Strings {
     public enum ProfileContext {
       /// Connect to...
       public static let connectTo = Strings.tr("Localizable", "ui.profile_context.connect_to", fallback: "Connect to...")
+    }
+    public enum PurchaseRequired {
+      public enum Purchase {
+        /// Purchase required
+        public static let help = Strings.tr("Localizable", "ui.purchase_required.purchase.help", fallback: "Purchase required")
+      }
+      public enum Restricted {
+        /// Feature is restricted
+        public static let help = Strings.tr("Localizable", "ui.purchase_required.restricted.help", fallback: "Feature is restricted")
+      }
     }
   }
   public enum Views {

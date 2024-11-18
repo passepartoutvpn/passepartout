@@ -36,7 +36,7 @@ struct PaywallView: View {
     @Binding
     var isPresented: Bool
 
-    let feature: AppFeature
+    let features: Set<AppFeature>
 
     let suggestedProduct: AppProduct?
 
@@ -68,7 +68,7 @@ struct PaywallView: View {
                 actions: pendingActions,
                 message: pendingMessage
             )
-            .task(id: feature) {
+            .task(id: features) {
                 await fetchAvailableProducts()
             }
             .withErrorHandler(errorHandler)
@@ -82,17 +82,18 @@ private extension PaywallView {
 
     var paywallView: some View {
         Form {
+            requiredFeaturesView
             productsView
-            subscriptionFeaturesView
+            otherFeaturesView
             restoreView
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
     }
 
-    var subscriptionFeatures: [AppFeature] {
-        AppFeature.allCases.sorted {
-            $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
+    var otherFeatures: [AppFeature] {
+        AppFeature.allCases.filter {
+            !features.contains($0)
         }
     }
 
@@ -122,20 +123,34 @@ private extension PaywallView {
         .themeSection(header: Strings.Paywall.Sections.Recurring.header)
     }
 
+    var requiredFeaturesView: some View {
+        FeatureListView(
+            style: .list,
+            header: Strings.Paywall.Sections.Features.Required.header,
+            features: Array(features)
+        ) {
+            Text($0.localizedDescription)
+                .fontWeight(.bold)
+        }
+    }
+
+    var otherFeaturesView: some View {
+        FeatureListView(
+            style: otherFeaturesStyle,
+            header: Strings.Paywall.Sections.Features.Other.header,
+            features: otherFeatures
+        ) {
+            Text($0.localizedDescription)
+        }
+    }
+
+    var otherFeaturesStyle: FeatureListViewStyle {
 #if os(iOS) || os(tvOS)
-    var subscriptionFeaturesView: some View {
-        ForEach(subscriptionFeatures, id: \.id) { feature in
-            Text(feature.localizedDescription)
-        }
-        .themeSection(header: Strings.Paywall.Sections.Features.header)
-    }
+        .list
 #else
-    var subscriptionFeaturesView: some View {
-        Table(subscriptionFeatures) {
-            TableColumn(Strings.Paywall.Sections.Features.header, value: \.localizedDescription)
-        }
-    }
+        .table
 #endif
+    }
 
     var restoreView: some View {
         RestorePurchasesButton(errorHandler: errorHandler)
@@ -240,7 +255,7 @@ private extension PaywallView {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        feature: .appleTV,
+        features: [.appleTV],
         suggestedProduct: .Features.appleTV
     )
     .withMockEnvironment()

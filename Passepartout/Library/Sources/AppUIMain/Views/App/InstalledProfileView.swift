@@ -201,7 +201,12 @@ private struct ToggleButton: View {
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: flow?.onEditProviderEntity,
+            onProviderEntityRequired: {
+                flow?.onEditProviderEntity($0)
+            },
+            onPurchaseRequired: {
+                flow?.onPurchaseRequired($0)
+            },
             label: { _ in
                 ThemeImage(.tunnelToggle)
                     .scaleEffect(1.5, anchor: .trailing)

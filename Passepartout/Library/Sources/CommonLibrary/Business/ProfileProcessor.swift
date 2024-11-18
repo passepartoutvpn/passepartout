@@ -26,6 +26,7 @@
 import Foundation
 import PassepartoutKit
 
+@MainActor
 public final class ProfileProcessor: ObservableObject, Sendable {
     private let iapManager: IAPManager
 

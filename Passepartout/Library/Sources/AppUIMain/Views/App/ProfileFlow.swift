@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
@@ -32,4 +33,6 @@ struct ProfileFlow {
     let onEditProviderEntity: (Profile) -> Void
 
     let onMigrateProfiles: () -> Void
+
+    let onPurchaseRequired: (Set<AppFeature>) -> Void
 }

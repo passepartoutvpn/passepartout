@@ -40,13 +40,13 @@ struct ProfileEditView: View, Routable {
     @Binding
     var path: NavigationPath
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     var flow: ProfileCoordinator.Flow?
 
     @State
-    private var malformedModuleIds: [UUID] = []
-
-    @State
-    private var paywallReason: PaywallReason?
+    private var errorModuleIds: Set<UUID> = []
 
     var body: some View {
         debugChanges()
@@ -62,7 +62,6 @@ struct ProfileEditView: View, Routable {
             )
             UUIDSection(uuid: profileEditor.profile.id)
         }
-        .modifier(PaywallModifier(reason: $paywallReason))
         .toolbar(content: toolbarContent)
         .navigationTitle(Strings.Global.profile)
         .navigationBarBackButtonHidden(true)
@@ -79,7 +78,7 @@ private extension ProfileEditView {
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
                 title: Strings.Global.save,
-                errorModuleIds: $malformedModuleIds
+                errorModuleIds: $errorModuleIds
             ) {
                 try await flow?.onCommitEditing()
             }
@@ -112,11 +111,19 @@ private extension ProfileEditView {
             } label: {
                 HStack {
                     Text(module.description(inEditor: profileEditor))
-                        .themeError(malformedModuleIds.contains(module.id))
+                    if errorModuleIds.contains(module.id) {
+                        ThemeImage(.warning)
+                    } else if profileEditor.isActiveModule(withId: module.id) {
+                        PurchaseRequiredButton(
+                            for: module as? AppFeatureRequiring,
+                            paywallReason: $paywallReason
+                        )
+                    }
                     Spacer()
                 }
                 .contentShape(.rect)
             }
+            .buttonStyle(.plain)
         }
     }
 
@@ -132,7 +139,6 @@ private extension ProfileEditView {
             }
         } label: {
             Text(Strings.Views.Profile.Rows.addModule)
-//                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .disabled(moduleTypes.isEmpty)
     }
@@ -178,7 +184,8 @@ private extension ProfileEditView {
         ProfileEditView(
             profileEditor: ProfileEditor(profile: .newMockProfile()),
             moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
-            path: .constant(NavigationPath())
+            path: .constant(NavigationPath()),
+            paywallReason: .constant(nil)
         )
     }
     .withMockEnvironment()

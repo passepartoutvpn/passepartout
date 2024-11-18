@@ -28,7 +28,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: #878, show CloudKit progress
+// TODO: #878, show CloudKit progress
 
 struct MigrateView: View {
     enum Style {

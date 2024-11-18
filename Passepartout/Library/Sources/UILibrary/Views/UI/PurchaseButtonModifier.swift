@@ -89,7 +89,7 @@ private extension PurchaseButtonModifier {
 
     var purchaseButton: some View {
         Button(title) {
-            paywallReason = .purchase(feature, suggestedProduct)
+            paywallReason = .purchase([feature], suggestedProduct)
         }
     }
 }

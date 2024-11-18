@@ -124,7 +124,7 @@ extension IAPManager {
         eligibleFeatures.contains(feature)
     }
 
-    public func isEligible(for features: [AppFeature]) -> Bool {
+    public func isEligible<C>(for features: C) -> Bool where C: Collection, C.Element == AppFeature {
         features.allSatisfy(eligibleFeatures.contains)
     }
 
@@ -147,7 +147,7 @@ extension IAPManager {
         if isEligible(for: feature) {
             return nil
         }
-        return isRestricted ? .restricted : .purchase(feature, product)
+        return isRestricted ? .restricted([feature]) : .purchase([feature], product)
     }
 
     public func isPayingUser() -> Bool {

@@ -59,14 +59,30 @@ struct ProfileCoordinator: View {
     let onDismiss: () -> Void
 
     @State
+    private var requiresPurchase = false
+
+    @State
+    private var requiredFeatures: Set<AppFeature> = []
+
+    @State
     private var paywallReason: PaywallReason?
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
+    // FIXME: #849, warn about required features
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
+            .alert("Purchase required", isPresented: $requiresPurchase) {
+                Button("OK", action: onDismiss)
+                Button("Upgrade") {
+                    paywallReason = .purchase(requiredFeatures, nil)
+                }
+                Button("Review", role: .cancel, action: {})
+            } message: {
+                Text("This profile requires paid features to work. Disable or edit the flagged modules.")
+            }
             .withErrorHandler(errorHandler)
     }
 }
@@ -80,6 +96,7 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,
             path: $path,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -92,6 +109,7 @@ private extension ProfileCoordinator {
         ProfileSplitView(
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -104,29 +122,6 @@ private extension ProfileCoordinator {
 
 private extension ProfileCoordinator {
     func onNewModule(_ moduleType: ModuleType) {
-        switch moduleType {
-        case .dns:
-            paywallReason = iapManager.paywallReason(forFeature: .dns, suggesting: nil)
-
-        case .httpProxy:
-            paywallReason = iapManager.paywallReason(forFeature: .httpProxy, suggesting: nil)
-
-        case .ip:
-            paywallReason = iapManager.paywallReason(forFeature: .routing, suggesting: nil)
-
-        case .openVPN, .wireGuard:
-            break
-
-        case .onDemand:
-            break
-
-        default:
-            fatalError("Unhandled module type: \(moduleType)")
-        }
-        guard paywallReason == nil else {
-            return
-        }
-
         let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
             profileEditor.saveModule(module, activating: true)
@@ -135,12 +130,40 @@ private extension ProfileCoordinator {
 
     func onCommitEditing() async throws {
         do {
-            try await profileEditor.save(to: profileManager)
-            onDismiss()
+            if !iapManager.isRestricted {
+                try await onCommitEditingStandard()
+            } else {
+                try await onCommitEditingRestricted()
+            }
         } catch {
             errorHandler.handle(error, title: Strings.Global.save)
             throw error
         }
+    }
+
+    // standard: always save, warn if purchase required
+    func onCommitEditingStandard() async throws {
+        let savedProfile = try await profileEditor.save(to: profileManager)
+        do {
+            try iapManager.verify(savedProfile.activeModules)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            self.requiredFeatures = requiredFeatures
+            requiresPurchase = true
+            return
+        }
+        onDismiss()
+    }
+
+    // restricted: verify before saving
+    func onCommitEditingRestricted() async throws {
+        do {
+            try iapManager.verify(profileEditor.activeModules)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            paywallReason = .restricted(requiredFeatures)
+            return
+        }
+        try await profileEditor.save(to: profileManager)
+        onDismiss()
     }
 
     func onCancelEditing() {

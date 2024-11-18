@@ -41,8 +41,9 @@ struct StorageSection: View {
         debugChanges()
         return Group {
             sharingToggle
+                .themeRow(footer: sharingDescription)
             tvToggle
-                .themeRow(footer: footer)
+                .themeRow(footer: tvDescription)
             purchaseButton
         }
         .themeSection(
@@ -102,17 +103,27 @@ private extension StorageSection {
         var desc = [
             Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
         ]
-        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
-        case .purchase:
-            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease)
-
-        case .restricted:
-            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta)
-
-        default:
-            break
+        if let tvDescription {
+            desc.append(tvDescription)
         }
         return desc.joined(separator: " ")
+    }
+
+    var sharingDescription: String {
+        Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
+    }
+
+    var tvDescription: String? {
+        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
+        case .purchase:
+            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease
+
+        case .restricted:
+            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta
+
+        default:
+            return nil
+        }
     }
 }
 

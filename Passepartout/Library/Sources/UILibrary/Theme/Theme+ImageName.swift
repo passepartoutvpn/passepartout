@@ -69,6 +69,8 @@ extension Theme {
         case tunnelUninstall
         case tvOff
         case tvOn
+        case upgrade
+        case warning
     }
 }
 
@@ -118,6 +120,8 @@ extension Theme.ImageName {
             case .tunnelUninstall: return "arrow.uturn.down"
             case .tvOff: return "tv.slash"
             case .tvOn: return "tv"
+            case .upgrade: return "arrow.up.circle"
+            case .warning: return "exclamationmark.triangle"
             }
         }
     }

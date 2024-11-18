@@ -49,6 +49,14 @@ extension View {
             $0.animation = nil
         }
     }
+
+    public func setLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
+        Task {
+            block(nil)
+            try await Task.sleep(for: .milliseconds(millis))
+            block(value)
+        }
+    }
 }
 
 extension ViewModifier {
@@ -58,3 +66,17 @@ extension ViewModifier {
         }
     }
 }
+
+#if !os(tvOS)
+extension Table {
+
+    @ViewBuilder
+    public func withoutColumnHeaders() -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            tableColumnHeaders(.hidden)
+        } else {
+            self
+        }
+    }
+}
+#endif

@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -36,8 +37,11 @@ struct ProviderPicker: View {
 
     let isLoading: Bool
 
+    @State
+    private var paywallReason: PaywallReason?
+
     var body: some View {
-        Picker(Strings.Global.provider, selection: $providerId) {
+        Picker(selection: $providerId) {
             if !providers.isEmpty {
                 Text(isRequired ? Strings.Providers.selectProvider : Strings.Providers.noProvider)
                     .tag(nil as ProviderID?)
@@ -49,7 +53,14 @@ struct ProviderPicker: View {
                 Text(isLoading ? Strings.Global.loading : Strings.Global.none)
                     .tag(providerId) // tag always exists
             }
+        } label: {
+            HStack {
+                Text(Strings.Global.provider)
+                PurchaseRequiredButton(for: providerId, paywallReason: $paywallReason)
+            }
         }
+        // FIXME: #849, this modifier could be unstable here, move to parent?
+        .modifier(PaywallModifier(reason: $paywallReason))
         .disabled(isLoading || providers.isEmpty)
     }
 }

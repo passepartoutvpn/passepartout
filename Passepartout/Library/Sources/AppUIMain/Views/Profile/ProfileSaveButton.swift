@@ -31,7 +31,7 @@ struct ProfileSaveButton: View {
     let title: String
 
     @Binding
-    var errorModuleIds: [UUID]
+    var errorModuleIds: Set<UUID>
 
     let action: () async throws -> Void
 
@@ -43,9 +43,6 @@ struct ProfileSaveButton: View {
                     errorModuleIds = []
                 } catch {
                     switch AppError(error) {
-                    case .malformedModule(let module, _):
-                        errorModuleIds = [module.id]
-
                     case .generic(let ppError):
                         switch ppError.code {
                         case .connectionModuleRequired:
@@ -60,11 +57,14 @@ struct ProfileSaveButton: View {
                                 errorModuleIds = []
                                 return
                             }
-                            errorModuleIds = modules.map(\.id)
+                            errorModuleIds = Set(modules.map(\.id))
 
                         default:
                             errorModuleIds = []
                         }
+
+                    case .malformedModule(let module, _):
+                        errorModuleIds = [module.id]
 
                     default:
                         errorModuleIds = []

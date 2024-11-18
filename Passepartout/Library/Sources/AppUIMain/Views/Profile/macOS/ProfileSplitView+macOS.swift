@@ -25,6 +25,7 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
@@ -33,6 +34,9 @@ struct ProfileSplitView: View, Routable {
     let profileEditor: ProfileEditor
 
     let moduleViewFactory: any ModuleViewFactory
+
+    @Binding
+    var paywallReason: PaywallReason?
 
     var flow: ProfileCoordinator.Flow?
 
@@ -43,7 +47,7 @@ struct ProfileSplitView: View, Routable {
     private var selectedModuleId: UUID? = ModuleListView.generalModuleId
 
     @State
-    private var malformedModuleIds: [UUID] = []
+    private var errorModuleIds: Set<UUID> = []
 
     var body: some View {
         debugChanges()
@@ -51,9 +55,11 @@ struct ProfileSplitView: View, Routable {
             ModuleListView(
                 profileEditor: profileEditor,
                 selectedModuleId: $selectedModuleId,
-                malformedModuleIds: $malformedModuleIds,
+                errorModuleIds: $errorModuleIds,
+                paywallReason: $paywallReason,
                 flow: flow
             )
+            .navigationSplitViewColumnWidth(200)
         } detail: {
             Group {
                 switch selectedModuleId {
@@ -85,7 +91,7 @@ extension ProfileSplitView {
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
                 title: Strings.Global.save,
-                errorModuleIds: $malformedModuleIds
+                errorModuleIds: $errorModuleIds
             ) {
                 try await flow?.onCommitEditing()
             }
@@ -109,7 +115,10 @@ private extension ProfileSplitView {
     func detailView(for detail: Detail) -> some View {
         switch detail {
         case .general:
-            ProfileGeneralView(profileEditor: profileEditor)
+            ProfileGeneralView(
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
+            )
 
         case .module(let id):
             ModuleDetailView(
@@ -124,7 +133,8 @@ private extension ProfileSplitView {
 #Preview {
     ProfileSplitView(
         profileEditor: ProfileEditor(profile: .newMockProfile()),
-        moduleViewFactory: DefaultModuleViewFactory(registry: Registry())
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
+        paywallReason: .constant(nil)
     )
     .withMockEnvironment()
 }

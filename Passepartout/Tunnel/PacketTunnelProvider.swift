@@ -84,30 +84,14 @@ private extension PacketTunnelProvider {
         .sharedForTunnel
     }
 
-    var isEligibleForPlatform: Bool {
-#if os(tvOS)
-        iapManager.isEligible(for: .appleTV)
-#else
-        true
-#endif
-    }
-
-    func isEligibleForProviders(_ profile: Profile) -> Bool {
-        profile.firstProviderModuleWithMetadata == nil || iapManager.isEligible(for: .providers)
-    }
-
     func checkEligibility(of profile: Profile, environment: TunnelEnvironment) async throws {
         await iapManager.reloadReceipt()
-        guard isEligibleForPlatform else {
+        do {
+            try iapManager.verify(profile.activeModules)
+        } catch {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-            pp_log(.app, .fault, "Profile is ineligible for this platform")
-            throw error
-        }
-        guard isEligibleForProviders(profile) else {
-            let error = PassepartoutError(.App.ineligibleProfile)
-            environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-            pp_log(.app, .fault, "Profile is ineligible for providers")
+            pp_log(.app, .fault, "Profile \(profile.id) requires a purchase to work, shutting down")
             throw error
         }
     }

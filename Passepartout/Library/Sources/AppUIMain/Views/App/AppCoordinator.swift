@@ -54,6 +54,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @State
     private var migrationPath = NavigationPath()
 
+    @State
+    private var paywallReason: PaywallReason?
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -72,6 +75,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             contentView
                 .toolbar(content: toolbarContent)
         }
+        .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,
             size: modalRoute?.size ?? .large,
@@ -87,6 +91,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
 extension AppCoordinator {
     enum ModalRoute: Identifiable {
+        case about
+
         case editProfile
 
         case editProviderEntity(Profile, Module, SerializedProvider)
@@ -95,15 +101,13 @@ extension AppCoordinator {
 
         case settings
 
-        case about
-
         var id: Int {
             switch self {
-            case .editProfile: return 1
-            case .editProviderEntity: return 2
-            case .migrateProfiles: return 3
-            case .settings: return 4
-            case .about: return 5
+            case .about: return 1
+            case .editProfile: return 2
+            case .editProviderEntity: return 3
+            case .migrateProfiles: return 4
+            case .settings: return 5
             }
         }
 
@@ -171,6 +175,11 @@ extension AppCoordinator {
                 },
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
+                },
+                onPurchaseRequired: { features in
+                    setLater(.purchase(features)) {
+                        paywallReason = $0
+                    }
                 }
             )
         )
@@ -197,6 +206,12 @@ extension AppCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
+        case .about:
+            AboutRouterView(
+                profileManager: profileManager,
+                tunnel: tunnel
+            )
+
         case .editProfile:
             ProfileCoordinator(
                 profileManager: profileManager,
@@ -205,9 +220,7 @@ extension AppCoordinator {
                 moduleViewFactory: DefaultModuleViewFactory(registry: registry),
                 modally: true,
                 path: $profilePath,
-                onDismiss: {
-                    present(nil)
-                }
+                onDismiss: onDismiss
             )
 
         case .editProviderEntity(let profile, let module, let provider):
@@ -230,12 +243,6 @@ extension AppCoordinator {
         case .settings:
             SettingsView(profileManager: profileManager)
 
-        case .about:
-            AboutRouterView(
-                profileManager: profileManager,
-                tunnel: tunnel
-            )
-
         default:
             EmptyView()
         }
@@ -256,11 +263,15 @@ extension AppCoordinator {
         present(.editProfile)
     }
 
+    func onDismiss() {
+        present(nil)
+    }
+
     func present(_ route: ModalRoute?) {
+
         // XXX: this is a workaround for #791 on iOS 16
-        Task {
-            try await Task.sleep(for: .milliseconds(50))
-            modalRoute = route
+        setLater(route) {
+            modalRoute = $0
         }
     }
 }
