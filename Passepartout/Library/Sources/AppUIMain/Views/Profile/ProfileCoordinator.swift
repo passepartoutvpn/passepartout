@@ -70,18 +70,17 @@ struct ProfileCoordinator: View {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    // FIXME: #849, warn about required features
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
-            .alert("Purchase required", isPresented: $requiresPurchase) {
-                Button("OK", action: onDismiss)
-                Button("Upgrade") {
+            .alert(Strings.Views.Profile.Alerts.Purchase.title, isPresented: $requiresPurchase) {
+                Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
+                Button(Strings.Global.purchase) {
                     paywallReason = .purchase(requiredFeatures, nil)
                 }
-                Button("Review", role: .cancel, action: {})
+                Button(Strings.Global.cancel, role: .cancel, action: {})
             } message: {
-                Text("This profile requires paid features to work. Disable or edit the flagged modules.")
+                Text(Strings.Views.Profile.Alerts.Purchase.message)
             }
             .withErrorHandler(errorHandler)
     }

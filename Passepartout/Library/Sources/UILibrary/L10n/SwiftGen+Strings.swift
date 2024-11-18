@@ -146,10 +146,6 @@ public enum Strings {
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
         /// No provider selected.
         public static let providerRequired = Strings.tr("Localizable", "errors.app.passepartout.provider_required", fallback: "No provider selected.")
-        public enum App {
-          /// The highlighted modules require a purchase to be enabled. Please disable them to save the profile.
-          public static let ineligibleProfile = Strings.tr("Localizable", "errors.app.passepartout.app.ineligible_profile", fallback: "The highlighted modules require a purchase to be enabled. Please disable them to save the profile.")
-        }
       }
       public enum Provider {
         /// No provider selected.
@@ -765,6 +761,18 @@ public enum Strings {
       }
     }
     public enum Profile {
+      public enum Alerts {
+        public enum Purchase {
+          /// This profile requires paid features to work. Disable or edit the flagged modules.
+          public static let message = Strings.tr("Localizable", "views.profile.alerts.purchase.message", fallback: "This profile requires paid features to work. Disable or edit the flagged modules.")
+          /// Purchase required
+          public static let title = Strings.tr("Localizable", "views.profile.alerts.purchase.title", fallback: "Purchase required")
+          public enum Buttons {
+            /// Save anyway
+            public static let ok = Strings.tr("Localizable", "views.profile.alerts.purchase.buttons.ok", fallback: "Save anyway")
+          }
+        }
+      }
       public enum ModuleList {
         public enum Section {
           /// Drag modules to rearrange them, as their order determines priority.
