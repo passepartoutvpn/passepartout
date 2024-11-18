@@ -61,16 +61,11 @@ public struct PurchaseButtonModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        switch iapManager.paywallReason(forFeature: feature, suggesting: suggestedProduct) {
-        case .purchase:
+        if iapManager.isEligible(for: feature) {
+            content
+        } else if !iapManager.isRestricted {
             purchaseView
-
-        case .restricted:
-            if showsIfRestricted {
-                content
-            }
-
-        default:
+        } else if showsIfRestricted {
             content
         }
     }

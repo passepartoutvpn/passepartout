@@ -55,14 +55,8 @@ public struct PurchaseRequiredButton: View {
             guard let features, !isEligible else {
                 return
             }
-            if iapManager.isRestricted {
-                setLater(.restricted(features)) {
-                    paywallReason = $0
-                }
-            } else {
-                setLater(.purchase(features)) {
-                    paywallReason = $0
-                }
+            setLater(.purchase(features)) {
+                paywallReason = $0
             }
         } label: {
             ThemeImage(iapManager.isRestricted ? .warning : .upgrade)

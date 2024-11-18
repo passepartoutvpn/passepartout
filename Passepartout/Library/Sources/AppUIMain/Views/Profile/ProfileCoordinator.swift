@@ -159,7 +159,7 @@ private extension ProfileCoordinator {
         do {
             try iapManager.verify(profileEditor.activeModules)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
-            paywallReason = .restricted(requiredFeatures)
+            paywallReason = .purchase(requiredFeatures)
             return
         }
         try await profileEditor.save(to: profileManager)

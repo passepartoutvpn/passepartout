@@ -56,7 +56,7 @@ public struct PaywallModifier: ViewModifier {
                     }
                 },
                 message: {
-                    Text(Strings.Alerts.Iap.Restricted.message(restrictedFeaturesDescription))
+                    Text(Strings.Alerts.Iap.Restricted.message(featuresDescription))
                 }
             )
             .themeModal(item: $paywallArguments) { args in
@@ -71,10 +71,11 @@ public struct PaywallModifier: ViewModifier {
             }
             .onChange(of: reason) {
                 switch $0 {
-                case .restricted:
-                    isPresentingRestricted = true
-
                 case .purchase(let features, let product):
+                    guard !iapManager.isRestricted else {
+                        isPresentingRestricted = true
+                        return
+                    }
                     paywallArguments = PaywallArguments(features: features, product: product)
 
                 default:
@@ -97,8 +98,8 @@ private extension PaywallModifier {
         }
     }
 
-    var restrictedFeaturesDescription: String {
-        guard case .restricted(let features) = reason else {
+    var featuresDescription: String {
+        guard case .purchase(let features, _) = reason else {
             return ""
         }
         return "\n" + iapManager

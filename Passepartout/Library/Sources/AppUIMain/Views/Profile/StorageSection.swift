@@ -114,15 +114,13 @@ private extension StorageSection {
     }
 
     var tvDescription: String? {
-        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
-        case .purchase:
-            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease
-
-        case .restricted:
-            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta
-
-        default:
+        if iapManager.isEligible(for: .appleTV) {
             return nil
+        }
+        if !iapManager.isRestricted {
+            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease
+        } else {
+            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta
         }
     }
 }

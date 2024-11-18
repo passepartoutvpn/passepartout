@@ -143,13 +143,6 @@ extension IAPManager {
 #endif
     }
 
-    public func paywallReason(forFeature feature: AppFeature, suggesting product: AppProduct?) -> PaywallReason? {
-        if isEligible(for: feature) {
-            return nil
-        }
-        return isRestricted ? .restricted([feature]) : .purchase([feature], product)
-    }
-
     public func isPayingUser() -> Bool {
         !purchasedProducts.isEmpty
     }
