@@ -74,7 +74,7 @@ private extension AppUIMain {
                     }
                 }
             } catch {
-                fatalError("\(moduleType): empty module is not buildable")
+                fatalError("\(moduleType): empty module is not buildable: \(error)")
             }
         }
     }
