@@ -40,7 +40,8 @@ public final class AppUIMain: UILibraryConfiguring {
 private extension AppUIMain {
     func assertMissingImplementations(with registry: Registry) {
         let providerModuleTypes: Set<ModuleType> = [
-            .openVPN
+            .openVPN,
+            .wireGuard
         ]
         ModuleType.allCases.forEach { moduleType in
             do {

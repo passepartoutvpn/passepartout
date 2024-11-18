@@ -24,10 +24,14 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
 struct WireGuardView: View, ModuleDraftEditing {
+
+    @Environment(\.navigationPath)
+    private var path
 
     @ObservedObject
     var editor: ProfileEditor
@@ -36,110 +40,100 @@ struct WireGuardView: View, ModuleDraftEditing {
 
     let impl: WireGuardModule.Implementation?
 
+    @State
+    private var paywallReason: PaywallReason?
+
+    @State
+    private var errorHandler: ErrorHandler = .default()
+
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue)
+            .modifier(PaywallModifier(reason: $paywallReason))
+            .navigationDestination(for: Subroute.self, destination: destination)
+            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .withErrorHandler(errorHandler)
     }
 }
 
 // MARK: - Content
 
 private extension WireGuardView {
-    var configuration: WireGuard.Configuration.Builder {
-        guard let impl else {
-            fatalError("Requires WireGuardModule implementation")
-        }
-        return draft.wrappedValue.configurationBuilder ?? .init(keyGenerator: impl.keyGenerator)
-    }
 
     @ViewBuilder
     var contentView: some View {
-        moduleSection(for: interfaceRows, header: Strings.Modules.Wireguard.interface)
-        moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
-        ForEach(Array(zip(configuration.peers.indices, configuration.peers)), id: \.1.publicKey) { index, peer in
-            moduleSection(for: peersRows(for: peer), header: Strings.Modules.Wireguard.peer(index + 1))
+        if let configuration = draft.wrappedValue.configurationBuilder {
+            ConfigurationView(configuration: configuration)
+        } else {
+            EmptyView()
+                .modifier(providerModifier)
         }
     }
-}
 
-// MARK: - Subviews
-
-private extension WireGuardView {
-    var interfaceRows: [ModuleRow]? {
-        var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.privateKey, value: configuration.interface.privateKey))
-        configuration.interface.addresses
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Global.addresses,
-                    values: $0
-                ))
+    var providerModifier: some ViewModifier {
+        VPNProviderContentModifier(
+            providerId: providerId,
+            selectedEntity: providerEntity,
+            paywallReason: $paywallReason,
+            entityDestination: Subroute.providerServer,
+            providerRows: {
+                moduleGroup(for: providerKeyRows)
             }
-        configuration.interface.mtu.map {
-            rows.append(.text(caption: Strings.Unlocalized.mtu, value: $0.description))
-        }
-        return rows.nilIfEmpty
+        )
     }
 
-    var dnsRows: [ModuleRow]? {
-        var rows: [ModuleRow] = []
-
-        configuration.interface.dns.servers
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Global.servers,
-                    values: $0
-                ))
-            }
-
-        configuration.interface.dns.domainName.map {
-            rows.append(.text(
-                caption: Strings.Global.domain,
-                value: $0
-            ))
-        }
-
-        configuration.interface.dns.searchDomains?
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Entities.Dns.searchDomains,
-                    values: $0
-                ))
-            }
-
-        return rows.nilIfEmpty
+    var providerId: Binding<ProviderID?> {
+        editor.binding(forProviderOf: module.id)
     }
 
-    func peersRows(for peer: WireGuard.RemoteInterface.Builder) -> [ModuleRow]? {
-        var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.publicKey, value: peer.publicKey))
-        peer.preSharedKey.map {
-            rows.append(.longContent(caption: Strings.Modules.Wireguard.presharedKey, value: $0))
-        }
-        peer.endpoint.map {
-            rows.append(.copiableText(caption: Strings.Global.endpoint, value: $0))
-        }
-        peer.allowedIPs
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Modules.Wireguard.allowedIps,
-                    values: $0
-                ))
-            }
-        peer.keepAlive.map {
-            rows.append(.text(caption: Strings.Global.keepAlive, value: TimeInterval($0).localizedDescription(style: .timeString)))
-        }
-        return rows.nilIfEmpty
+    var providerEntity: Binding<VPNEntity<WireGuard.Configuration>?> {
+        editor.binding(forProviderEntityOf: module.id)
+    }
+
+    var providerKeyRows: [ModuleRow]? {
+        [.push(caption: Strings.Modules.Wireguard.providerKey, route: HashableRoute(Subroute.providerKey))]
     }
 }
 
 private extension WireGuardView {
+    func onSelectServer(server: VPNServer, preset: VPNPreset<WireGuard.Configuration>) {
+        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+        path.wrappedValue.removeLast()
+    }
+
     func importConfiguration(from url: URL) {
         // TODO: #657, import draft from external URL
+    }
+}
+
+// MARK: - Destinations
+
+private extension WireGuardView {
+    enum Subroute: Hashable {
+        case providerServer
+
+        case providerKey
+    }
+
+    @ViewBuilder
+    func destination(for route: Subroute) -> some View {
+        switch route {
+        case .providerServer:
+            providerId.wrappedValue.map {
+                VPNProviderServerView(
+                    moduleId: module.id,
+                    providerId: $0,
+                    configurationType: WireGuard.Configuration.self,
+                    selectedEntity: providerEntity.wrappedValue,
+                    filtersWithSelection: true,
+                    onSelect: onSelectServer
+                )
+            }
+
+        case .providerKey:
+            // TODO: #339, WireGuard upload public key to provider
+            EmptyView()
+        }
     }
 }
 

@@ -233,6 +233,7 @@
 "modules.openvpn.credentials.otp_method.approach.append" = "The OTP will be appended to the password.";
 "modules.openvpn.credentials.otp_method.approach.encode" = "The OTP will be encoded in Base64 with the password.";
 
+"modules.wireguard.provider_key" = "Private key";
 "modules.wireguard.interface" = "Interface";
 "modules.wireguard.peer" = "Peer #%d";
 "modules.wireguard.preshared_key" = "Pre-shared key";
