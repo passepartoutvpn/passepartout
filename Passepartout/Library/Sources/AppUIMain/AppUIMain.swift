@@ -51,7 +51,13 @@ private extension AppUIMain {
             }
 
             do {
+                // ModuleBuilder -> Module
                 let module = try builder.tryBuild()
+
+                // Module -> ModuleBuilder
+                guard module.moduleBuilder() != nil else {
+                    fatalError("\(moduleType): does not produce a ModuleBuilder")
+                }
 
                 // AppFeatureRequiring
                 guard builder is any AppFeatureRequiring else {
