@@ -224,6 +224,9 @@ private extension PaywallView {
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
         switch result {
         case .done:
+            Task {
+                await iapManager.reloadReceipt()
+            }
             isPresented = false
 
         case .pending:

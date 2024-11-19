@@ -109,7 +109,7 @@ private struct ContainerModifier: ViewModifier {
     @ObservedObject
     var profileManager: ProfileManager
 
-    let flow: ProfileContainerView.Flow?
+    let flow: ProfileFlow?
 
     @State
     private var search = ""

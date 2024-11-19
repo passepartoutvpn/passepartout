@@ -43,7 +43,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     let errorHandler: ErrorHandler
 
-    var flow: ProfileContainerView.Flow?
+    var flow: ProfileFlow?
 
     @State
     private var nextProfileId: Profile.ID?
