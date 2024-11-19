@@ -83,6 +83,9 @@ extension PassepartoutError: @retroactive LocalizedError {
                 .compactMap { $0 }
                 .joined(separator: " ")
 
+        case .missingProviderEntity:
+            return Strings.Errors.App.Passepartout.missingProviderEntity
+
         case .noActiveModules:
             return Strings.Errors.App.Passepartout.noActiveModules
 

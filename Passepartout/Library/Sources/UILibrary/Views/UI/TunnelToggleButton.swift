@@ -110,16 +110,40 @@ private extension TunnelToggleButton {
                     nextProfileId = nil
                 }
             }
-            if canConnect && profile.isInteractive {
-                do {
-                    try iapManager.verify(profile)
-                    pp_log(.app, .notice, "Present interactive login")
-                    interactiveManager.present(with: profile) {
-                        await perform(with: $0)
+            if canConnect {
+
+                // provider module -> check requirements
+                if let providerModule = profile.firstProviderModule,
+                   providerModule.isProviderRequired {
+
+                    // missing required provider -> show error
+                    guard let provider = providerModule.provider else {
+                        errorHandler.handle(
+                            PassepartoutError(.providerRequired),
+                            title: Strings.Global.connection
+                        )
+                        return
                     }
-                    return
-                } catch {
-                    pp_log(.app, .error, "Verification failed for profile \(profile.id), suppress interactive login: \(error)")
+
+                    // missing provider entity -> show selector
+                    guard provider.entity != nil else {
+                        onProviderEntityRequired(profile)
+                        return
+                    }
+                }
+
+                // interactive login -> show interactive view
+                if profile.isInteractive {
+                    do {
+                        try iapManager.verify(profile)
+                        pp_log(.app, .notice, "Present interactive login")
+                        interactiveManager.present(with: profile) {
+                            await perform(with: $0)
+                        }
+                        return
+                    } catch {
+                        pp_log(.app, .error, "Verification failed for profile \(profile.id), suppress interactive login: \(error)")
+                    }
                 }
             }
             await perform(with: profile)
@@ -142,21 +166,6 @@ private extension TunnelToggleButton {
         } catch is CancellationError {
             //
         } catch {
-            switch (error as? PassepartoutError)?.code {
-            case .missingProviderEntity:
-                onProviderEntityRequired(profile)
-                return
-
-            case .providerRequired:
-                errorHandler.handle(
-                    error,
-                    title: Strings.Global.connection
-                )
-                return
-
-            default:
-                break
-            }
             errorHandler.handle(
                 error,
                 title: Strings.Global.connection,
