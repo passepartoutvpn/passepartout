@@ -178,7 +178,7 @@ private extension AppContext {
             }
 
             // refresh required profile features
-            pp_log(.App.profiles, .info, "\tReload required profiles features...")
+            pp_log(.App.profiles, .info, "\tReload profiles required features...")
             profileManager.reloadRequiredFeatures()
         }
         await pendingTask?.value
