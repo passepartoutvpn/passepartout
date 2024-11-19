@@ -48,7 +48,7 @@ struct InstalledProfileView: View, Routable {
     @Binding
     var nextProfileId: Profile.ID?
 
-    var flow: ProfileContainerView.Flow?
+    var flow: ProfileFlow?
 
     var body: some View {
         debugChanges()
