@@ -34,14 +34,12 @@ public protocol AppFeatureRequiring {
 
 extension Profile: AppFeatureRequiring {
     public var features: Set<AppFeature> {
-        let builders = activeModules
-            .compactMap { module in
-                guard let builder = module.moduleBuilder() else {
-                    fatalError("Cannot produce ModuleBuilder from Module: \(module)")
-                }
-                return builder
+        let builders = activeModules.compactMap { module in
+            guard let builder = module.moduleBuilder() else {
+                fatalError("Cannot produce ModuleBuilder from Module: \(module)")
             }
-
+            return builder
+        }
         return builders.features
     }
 }
@@ -54,7 +52,6 @@ extension Array: AppFeatureRequiring where Element == any ModuleBuilder {
             }
             return requiring
         }
-
         return Set(requirements.flatMap(\.features))
     }
 }
