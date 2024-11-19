@@ -91,7 +91,7 @@ private extension PacketTunnelProvider {
         } catch {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-            pp_log(.app, .fault, "Profile \(profile.id) requires a purchase to work, shutting down")
+            pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
             throw error
         }
     }
