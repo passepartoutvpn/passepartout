@@ -34,18 +34,15 @@ public protocol AppFeatureRequiring {
 
 extension Profile: AppFeatureRequiring {
     public var features: Set<AppFeature> {
-        let modulesFeatures: [Set<AppFeature>] = activeModules
+        let requirements = activeModules
             .compactMap { module in
                 guard let builder = module.moduleBuilder() else {
                     fatalError("Cannot produce ModuleBuilder from Module \(module.id)")
                 }
-                guard let requiring = builder as? AppFeatureRequiring else {
-                    return nil
-                }
-                return requiring.features
+                return builder as? AppFeatureRequiring
             }
 
-        return Set(modulesFeatures.flatMap(\.self))
+        return Set(requirements.flatMap(\.features))
     }
 }
 
