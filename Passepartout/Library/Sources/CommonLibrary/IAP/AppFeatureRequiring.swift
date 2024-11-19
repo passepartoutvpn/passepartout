@@ -30,6 +30,25 @@ public protocol AppFeatureRequiring {
     var features: Set<AppFeature> { get }
 }
 
+// MARK: - Profile
+
+extension Profile: AppFeatureRequiring {
+    public var features: Set<AppFeature> {
+        let modulesFeatures: [Set<AppFeature>] = activeModules
+            .compactMap { module in
+                guard let builder = module.moduleBuilder() else {
+                    fatalError("Cannot produce ModuleBuilder from Module \(module.id)")
+                }
+                guard let requiring = builder as? AppFeatureRequiring else {
+                    return nil
+                }
+                return requiring.features
+            }
+
+        return Set(modulesFeatures.flatMap(\.self))
+    }
+}
+
 // MARK: - Modules
 
 extension DNSModule.Builder: AppFeatureRequiring {
