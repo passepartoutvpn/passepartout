@@ -176,6 +176,10 @@ private extension AppContext {
             } catch {
                 pp_log(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
             }
+
+            // refresh required profile features
+            pp_log(.App.profiles, .info, "\tReload required profiles features...")
+            profileManager.reloadRequiredFeatures()
         }
         await pendingTask?.value
         pendingTask = nil
