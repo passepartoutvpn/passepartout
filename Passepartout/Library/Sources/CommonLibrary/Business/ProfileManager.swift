@@ -60,11 +60,7 @@ public final class ProfileManager: ObservableObject {
     private var allProfiles: [Profile.ID: Profile] {
         didSet {
             reloadFilteredProfiles(with: searchSubject.value)
-            if let processor {
-                requiredFeatures = allProfiles.reduce(into: [:]) {
-                    $0[$1.key] = processor.verify($1.value)
-                }
-            }
+            reloadRequiredFeatures()
         }
     }
 
@@ -184,6 +180,19 @@ extension ProfileManager {
 
     public func search(byName name: String) {
         searchSubject.send(name)
+    }
+
+    public func reloadRequiredFeatures() {
+        guard let processor else {
+            return
+        }
+        requiredFeatures = allProfiles.reduce(into: [:]) {
+            guard let ineligible = processor.verify($1.value), !ineligible.isEmpty else {
+                return
+            }
+            $0[$1.key] = ineligible
+        }
+        pp_log(.App.profiles, .info, "Required features: \(requiredFeatures)")
     }
 }
 
