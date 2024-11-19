@@ -60,12 +60,12 @@ public struct PurchaseRequiredButton: View {
             }
         } label: {
             ThemeImage(iapManager.isRestricted ? .warning : .upgrade)
-                .imageScale(.large)
                 .help(helpMessage)
         }
 #if os(iOS)
         .buttonStyle(.plain)
 #else
+        .imageScale(.large)
         .buttonStyle(.borderless)
 #endif
         .foregroundStyle(theme.upgradeColor)
