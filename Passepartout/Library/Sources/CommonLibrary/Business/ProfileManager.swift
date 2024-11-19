@@ -60,12 +60,20 @@ public final class ProfileManager: ObservableObject {
     private var allProfiles: [Profile.ID: Profile] {
         didSet {
             reloadFilteredProfiles(with: searchSubject.value)
+            if let processor {
+                requiredFeatures = allProfiles.reduce(into: [:]) {
+                    $0[$1.key] = processor.verify($1.value)
+                }
+            }
         }
     }
 
     private var allRemoteProfiles: [Profile.ID: Profile]
 
     private var filteredProfiles: [Profile]
+
+    @Published
+    private var requiredFeatures: [Profile.ID: Set<AppFeature>]
 
     @Published
     public private(set) var isRemoteImportingEnabled: Bool
@@ -101,6 +109,7 @@ public final class ProfileManager: ObservableObject {
         }
         allRemoteProfiles = [:]
         filteredProfiles = []
+        requiredFeatures = [:]
         isRemoteImportingEnabled = false
         waitingObservers = []
 
@@ -127,6 +136,7 @@ public final class ProfileManager: ObservableObject {
         allProfiles = [:]
         allRemoteProfiles = [:]
         filteredProfiles = []
+        requiredFeatures = [:]
         isRemoteImportingEnabled = false
         if remoteRepositoryBlock != nil {
             waitingObservers = [.local, .remote]
@@ -166,6 +176,10 @@ extension ProfileManager {
         filteredProfiles.first {
             $0.id == profileId
         }
+    }
+
+    public func requiredFeatures(forProfileWithId profileId: Profile.ID) -> Set<AppFeature>? {
+        requiredFeatures[profileId]
     }
 
     public func search(byName name: String) {

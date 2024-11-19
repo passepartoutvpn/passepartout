@@ -33,9 +33,6 @@ struct ProfileRowView: View, Routable {
     @EnvironmentObject
     private var theme: Theme
 
-    @EnvironmentObject
-    private var iapManager: IAPManager
-
     let style: ProfileCardView.Style
 
     @ObservedObject
@@ -162,17 +159,7 @@ private extension ProfileRowView {
     }
 
     var requiredFeatures: Set<AppFeature>? {
-        guard let profile = profileManager.profile(withId: header.id) else {
-            return nil
-        }
-        do {
-            try iapManager.verify(profile)
-            return nil
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
-            return requiredFeatures
-        } catch {
-            return nil
-        }
+        profileManager.requiredFeatures(forProfileWithId: header.id)
     }
 
     var isShared: Bool {

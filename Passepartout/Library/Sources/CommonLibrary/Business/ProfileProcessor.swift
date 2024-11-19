@@ -38,18 +38,22 @@ public final class ProfileProcessor: ObservableObject, Sendable {
 
     private nonisolated let _willConnect: (IAPManager, Profile) throws -> Profile
 
+    private nonisolated let _verify: (IAPManager, Profile) -> Set<AppFeature>?
+
     public init(
         iapManager: IAPManager,
         title: @escaping (Profile) -> String,
         isIncluded: @escaping (IAPManager, Profile) -> Bool,
         willSave: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
-        willConnect: @escaping (IAPManager, Profile) throws -> Profile
+        willConnect: @escaping (IAPManager, Profile) throws -> Profile,
+        verify: @escaping (IAPManager, Profile) -> Set<AppFeature>?
     ) {
         self.iapManager = iapManager
         self.title = title
         _isIncluded = isIncluded
         _willSave = willSave
         _willConnect = willConnect
+        _verify = verify
     }
 
     public func isIncluded(_ profile: Profile) -> Bool {
@@ -62,5 +66,9 @@ public final class ProfileProcessor: ObservableObject, Sendable {
 
     public func willConnect(_ profile: Profile) throws -> Profile {
         try _willConnect(iapManager, profile)
+    }
+
+    public func verify(_ profile: Profile) -> Set<AppFeature>? {
+        _verify(iapManager, profile)
     }
 }
