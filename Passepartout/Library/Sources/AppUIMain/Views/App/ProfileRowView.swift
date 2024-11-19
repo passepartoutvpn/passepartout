@@ -33,6 +33,9 @@ struct ProfileRowView: View, Routable {
     @EnvironmentObject
     private var theme: Theme
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     let style: ProfileCardView.Style
 
     @ObservedObject
@@ -86,10 +89,18 @@ private struct MarkerView: View {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
+    let requiredFeatures: Set<AppFeature>?
+
     var body: some View {
-        ThemeImage(headerId == nextProfileId ? .pending : statusImage)
-            .opaque(headerId == nextProfileId || headerId == tunnel.currentProfile?.id)
-            .frame(width: 24.0)
+        ZStack {
+            ThemeImage(headerId == nextProfileId ? .pending : statusImage)
+                .opaque(requiredFeatures == nil && (headerId == nextProfileId || headerId == tunnel.currentProfile?.id))
+
+            if let requiredFeatures {
+                PurchaseRequiredButton(features: requiredFeatures, paywallReason: .constant(nil))
+            }
+        }
+        .frame(width: 24.0)
     }
 
     var statusImage: Theme.ImageName {
@@ -111,7 +122,8 @@ private extension ProfileRowView {
         MarkerView(
             headerId: header.id,
             nextProfileId: nextProfileId,
-            tunnel: tunnel
+            tunnel: tunnel,
+            requiredFeatures: requiredFeatures
         )
     }
 
@@ -147,6 +159,20 @@ private extension ProfileRowView {
             return [.shared]
         }
         return []
+    }
+
+    var requiredFeatures: Set<AppFeature>? {
+        guard let profile = profileManager.profile(withId: header.id) else {
+            return nil
+        }
+        do {
+            try iapManager.verify(profile)
+            return nil
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            return requiredFeatures
+        } catch {
+            return nil
+        }
     }
 
     var isShared: Bool {
