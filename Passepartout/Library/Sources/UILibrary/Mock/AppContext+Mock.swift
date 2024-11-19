@@ -57,6 +57,9 @@ extension AppContext {
             },
             willConnect: { _, profile in
                 try profile.withProviderModules()
+            },
+            verify: { _, _ in
+                nil
             }
         )
         let profileManager = {

@@ -151,7 +151,7 @@ private extension ProfileCoordinator {
     func onCommitEditingStandard() async throws {
         let savedProfile = try await profileEditor.save(to: profileManager)
         do {
-            try iapManager.verify(savedProfile.activeModules)
+            try iapManager.verify(savedProfile)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             self.requiredFeatures = requiredFeatures
             requiresPurchase = true

@@ -48,7 +48,7 @@ extension IAPManager {
             builder
         },
         willConnect: { iap, profile in
-            try iap.verify(profile.activeModules)
+            try iap.verify(profile)
 
             // validate provider modules
             do {
@@ -57,6 +57,16 @@ extension IAPManager {
             } catch {
                 pp_log(.app, .error, "Unable to inject provider modules: \(error)")
                 throw error
+            }
+        },
+        verify: { iap, profile in
+            do {
+                try iap.verify(profile)
+                return nil
+            } catch AppError.ineligibleProfile(let requiredFeatures) {
+                return requiredFeatures
+            } catch {
+                return nil
             }
         }
     )

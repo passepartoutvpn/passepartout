@@ -27,36 +27,23 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func verify(_ modules: [Module]) throws {
-        let builders = modules.map {
-            guard let builder = $0.moduleBuilder() else {
-                fatalError("Cannot produce ModuleBuilder from Module for IAPManager.verify(): \($0)")
-            }
-            return builder
-        }
-        try verify(builders)
+    public func verify(_ profile: Profile) throws {
+        try verify(profile.features)
     }
 
     public func verify(_ modulesBuilders: [any ModuleBuilder]) throws {
+        try verify(modulesBuilders.features)
+    }
+
+    public func verify(_ features: Set<AppFeature>) throws {
 #if os(tvOS)
         guard isEligible(for: .appleTV) else {
             throw AppError.ineligibleProfile([.appleTV])
         }
 #endif
-        let requirements: [(UUID, Set<AppFeature>)] = modulesBuilders
-            .compactMap { builder in
-                guard let requiring = builder as? AppFeatureRequiring else {
-                    return nil
-                }
-                return (builder.id, requiring.features)
-            }
-
-        let requiredFeatures = Set(requirements
-            .flatMap(\.1)
-            .filter {
-                !isEligible(for: $0)
-            })
-
+        let requiredFeatures = features.filter {
+            !isEligible(for: $0)
+        }
         guard requiredFeatures.isEmpty else {
             throw AppError.ineligibleProfile(requiredFeatures)
         }
