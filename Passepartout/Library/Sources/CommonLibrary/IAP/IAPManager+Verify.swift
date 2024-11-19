@@ -32,13 +32,7 @@ extension IAPManager {
     }
 
     public func verify(_ modulesBuilders: [any ModuleBuilder]) throws {
-        let requirements = modulesBuilders
-            .compactMap { builder in
-                builder as? AppFeatureRequiring
-            }
-
-        let requiredFeatures = Set(requirements.flatMap(\.features))
-        try verify(requiredFeatures)
+        try verify(modulesBuilders.features)
     }
 
     public func verify(_ features: Set<AppFeature>) throws {
