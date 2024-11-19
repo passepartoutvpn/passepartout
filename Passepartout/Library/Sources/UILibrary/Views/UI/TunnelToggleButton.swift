@@ -119,7 +119,7 @@ private extension TunnelToggleButton {
                     }
                     return
                 } catch {
-                    pp_log(.app, .notice, "Ineligible, suppress interactive login")
+                    pp_log(.app, .error, "Verification failed for profile \(profile.id), suppress interactive login: \(error)")
                 }
             }
             await perform(with: profile)
