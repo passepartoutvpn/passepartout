@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Previews.swift
+//  ProfileManager+Editing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 9/3/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,25 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-extension ModuleBuilder where Self: ModuleViewProviding {
+@MainActor
+extension ProfileManager {
+    public func removeProfiles(at offsets: IndexSet) async {
+        let idsToRemove = headers
+            .enumerated()
+            .filter {
+                offsets.contains($0.offset)
+            }
+            .map(\.element.id)
 
-    @MainActor
-    func preview(title: String = "") -> some View {
-        NavigationStack {
-            moduleView(with: ProfileEditor(modules: [self]), impl: nil)
-                .navigationTitle(title)
-        }
-        .withMockEnvironment()
-    }
-
-    @MainActor
-    func preview<C: View>(with content: (ProfileEditor, Self) -> C) -> some View {
-        NavigationStack {
-            content(ProfileEditor(modules: [self]), self)
-        }
-        .withMockEnvironment()
+        await remove(withIds: idsToRemove)
     }
 }
