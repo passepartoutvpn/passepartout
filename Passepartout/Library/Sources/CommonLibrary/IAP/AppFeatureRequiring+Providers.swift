@@ -1,8 +1,8 @@
 //
-//  AppFeatureProviding.swift
+//  AppFeatureRequiring+Providers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/11/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,7 +24,10 @@
 //
 
 import Foundation
+import PassepartoutKit
 
-protocol AppFeatureProviding {
-    var features: [AppFeature] { get }
+extension ProviderID: AppFeatureRequiring {
+    public var features: Set<AppFeature> {
+        self != .oeck ? [.providers] : []
+    }
 }
