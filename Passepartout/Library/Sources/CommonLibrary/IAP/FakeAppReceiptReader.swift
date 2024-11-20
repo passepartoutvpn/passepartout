@@ -1,5 +1,5 @@
 //
-//  MockAppReceiptReader.swift
+//  FakeAppReceiptReader.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/19/23.
@@ -26,7 +26,7 @@
 import CommonUtils
 import Foundation
 
-public actor MockAppReceiptReader: AppReceiptReader {
+public actor FakeAppReceiptReader: AppReceiptReader {
     private var localReceipt: InAppReceipt?
 
     public init(receipt localReceipt: InAppReceipt? = nil) {
