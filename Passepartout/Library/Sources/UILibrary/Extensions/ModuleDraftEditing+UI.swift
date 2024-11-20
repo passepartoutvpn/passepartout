@@ -1,8 +1,8 @@
 //
-//  TunnelInstallationProviding.swift
+//  ModuleDraftEditing+UI.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/3/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import Foundation
+import SwiftUI
 
-public protocol TunnelInstallationProviding {
-    var profileManager: ProfileManager { get }
+extension ModuleDraftEditing {
 
-    var tunnel: ExtendedTunnel { get }
+    @MainActor
+    public var draft: Binding<Draft> {
+        editor[module]
+    }
 }

@@ -33,11 +33,3 @@ public protocol ModuleDraftEditing {
 
     var module: Draft { get }
 }
-
-extension ModuleDraftEditing {
-
-    @MainActor
-    public var draft: Binding<Draft> {
-        editor[module]
-    }
-}
