@@ -1,8 +1,8 @@
 //
-//  HTTPProxyModule+Extensions.swift
+//  AppFeatureRequiring.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 11/17/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 
-extension HTTPProxyModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        HTTPProxyView(editor: editor, module: self)
-    }
+public protocol AppFeatureRequiring {
+    var features: Set<AppFeature> { get }
 }

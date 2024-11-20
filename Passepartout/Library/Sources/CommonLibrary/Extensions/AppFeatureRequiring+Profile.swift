@@ -1,8 +1,8 @@
 //
-//  AppFeatureRequiring.swift
+//  AppFeatureRequiring+Profile.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/17/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,12 +26,6 @@
 import Foundation
 import PassepartoutKit
 
-public protocol AppFeatureRequiring {
-    var features: Set<AppFeature> { get }
-}
-
-// MARK: - Profile
-
 extension Profile: AppFeatureRequiring {
     public var features: Set<AppFeature> {
         let builders = activeModules.compactMap { module in
@@ -53,61 +47,5 @@ extension Array: AppFeatureRequiring where Element == any ModuleBuilder {
             return requiring
         }
         return Set(requirements.flatMap(\.features))
-    }
-}
-
-// MARK: - Modules
-
-extension DNSModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        [.dns]
-    }
-}
-
-extension HTTPProxyModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        [.httpProxy]
-    }
-}
-
-extension IPModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        [.routing]
-    }
-}
-
-extension OnDemandModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        guard isEnabled else {
-            return []
-        }
-        return policy != .any ? [.onDemand] : []
-    }
-}
-
-extension OpenVPNModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        var list: Set<AppFeature> = []
-        providerId?.features.forEach {
-            list.insert($0)
-        }
-        if isInteractive {
-            list.insert(.interactiveLogin)
-        }
-        return list
-    }
-}
-
-extension WireGuardModule.Builder: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        providerId?.features ?? []
-    }
-}
-
-// MARK: - Providers
-
-extension ProviderID: AppFeatureRequiring {
-    public var features: Set<AppFeature> {
-        self != .oeck ? [.providers] : []
     }
 }

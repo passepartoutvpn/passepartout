@@ -1,8 +1,8 @@
 //
-//  Bundle+Extensions.swift
+//  ModuleViewFactory.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 2/24/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,17 +24,11 @@
 //
 
 import Foundation
+import SwiftUI
 
-extension Bundle {
-    public func unsafeDecode<T: Decodable>(_ type: T.Type, filename: String) -> T {
-        guard let jsonURL = url(forResource: filename, withExtension: "json") else {
-            fatalError("Unable to find \(filename).json in bundle")
-        }
-        do {
-            let data = try Data(contentsOf: jsonURL)
-            return try JSONDecoder().decode(type, from: data)
-        } catch {
-            fatalError("Unable to decode \(filename).json: \(error)")
-        }
-    }
+public protocol ModuleViewFactory: AnyObject {
+    associatedtype Content: View
+
+    @MainActor
+    func view(with editor: ProfileEditor, moduleId: UUID) -> Content
 }

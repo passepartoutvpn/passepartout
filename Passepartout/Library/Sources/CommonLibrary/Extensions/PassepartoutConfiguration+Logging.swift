@@ -1,5 +1,5 @@
 //
-//  PassepartoutConfiguration+Extensions.swift
+//  PassepartoutConfiguration+Logging.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/4/24.

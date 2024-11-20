@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  TunnelInstallationProviding+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
-import SwiftUI
+import PassepartoutKit
 
-protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+@MainActor
+extension TunnelInstallationProviding {
+    public var installation: TunnelInstallation? {
+        guard let currentProfile = tunnel.currentProfile else {
+            return nil
+        }
+        guard let header = profileManager.headers.first(where: {
+            $0.id == currentProfile.id
+        }) else {
+            return nil
+        }
+        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
+    }
 
-    @MainActor
-    func view(with editor: ProfileEditor, moduleId: UUID) -> Content
+    public var currentProfile: Profile? {
+        guard let id = tunnel.currentProfile?.id else {
+            return nil
+        }
+        return profileManager.profile(withId: id)
+    }
 }

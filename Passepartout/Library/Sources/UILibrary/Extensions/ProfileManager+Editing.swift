@@ -1,8 +1,8 @@
 //
-//  HTTPProxyModule+Extensions.swift
+//  ProfileManager+Editing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 9/3/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import Foundation
 import PassepartoutKit
-import SwiftUI
-import UILibrary
 
-extension HTTPProxyModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        HTTPProxyView(editor: editor, module: self)
+@MainActor
+extension ProfileManager {
+    public func removeProfiles(at offsets: IndexSet) async {
+        let idsToRemove = headers
+            .enumerated()
+            .filter {
+                offsets.contains($0.offset)
+            }
+            .map(\.element.id)
+
+        await remove(withIds: idsToRemove)
     }
 }

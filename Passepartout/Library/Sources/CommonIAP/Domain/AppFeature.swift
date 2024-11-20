@@ -1,8 +1,8 @@
 //
-//  AppUserLevel.swift
+//  AppFeature.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/19/23.
+//  Created by Davide De Rosa on 9/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,34 +25,32 @@
 
 import Foundation
 
-public enum AppUserLevel: Int, Sendable {
-    case undefined = -1
+public enum AppFeature: String, CaseIterable {
+    case appleTV
 
-    case freemium = 0
+    case dns
 
-    case beta = 1
+    case httpProxy
 
-    case fullV2 = 2
+    case interactiveLogin
 
-    case subscriber = 3
+    case onDemand
 
-    var isFullVersion: Bool {
-        switch self {
-        case .fullV2, .subscriber:
-            return true
+    case providers
 
-        default:
-            return false
-        }
+    case routing
+
+    case sharing
+}
+
+extension AppFeature: Identifiable {
+    public var id: String {
+        rawValue
     }
+}
 
-    var isRestricted: Bool {
-        switch self {
-        case .undefined, .beta:
-            return true
-
-        default:
-            return false
-        }
+extension AppFeature: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        rawValue
     }
 }

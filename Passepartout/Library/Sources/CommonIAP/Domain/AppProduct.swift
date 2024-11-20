@@ -23,9 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
 import Foundation
-import PassepartoutKit
 
 public struct AppProduct: RawRepresentable, Hashable, Sendable {
     public let rawValue: String

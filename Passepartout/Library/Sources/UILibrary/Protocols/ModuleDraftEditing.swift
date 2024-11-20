@@ -1,8 +1,8 @@
 //
-//  HTTPProxyModule+Extensions.swift
+//  ModuleDraftEditing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 10/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,10 +25,11 @@
 
 import PassepartoutKit
 import SwiftUI
-import UILibrary
 
-extension HTTPProxyModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        HTTPProxyView(editor: editor, module: self)
-    }
+public protocol ModuleDraftEditing {
+    associatedtype Draft: ModuleBuilder
+
+    var editor: ProfileEditor { get }
+
+    var module: Draft { get }
 }

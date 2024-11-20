@@ -1,5 +1,5 @@
 //
-//  MockAppProductHelper.swift
+//  FakeAppProductHelper.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/19/23.
@@ -27,12 +27,12 @@ import Combine
 import CommonUtils
 import Foundation
 
-public actor MockAppProductHelper: AppProductHelper {
+public actor FakeAppProductHelper: AppProductHelper {
     private let build: Int
 
     public private(set) var products: [AppProduct: InAppProduct]
 
-    public nonisolated let receiptReader: MockAppReceiptReader
+    public nonisolated let receiptReader: FakeAppReceiptReader
 
     private nonisolated let didUpdateSubject: PassthroughSubject<Void, Never>
 
@@ -40,7 +40,7 @@ public actor MockAppProductHelper: AppProductHelper {
     public init(build: Int = .max) {
         self.build = build
         products = [:]
-        receiptReader = MockAppReceiptReader()
+        receiptReader = FakeAppReceiptReader()
         didUpdateSubject = PassthroughSubject()
     }
 

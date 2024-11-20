@@ -26,15 +26,16 @@
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 extension WireGuardModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
+    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
         WireGuardView(editor: editor, module: self, impl: impl as? WireGuardModule.Implementation)
     }
 }
 
 extension WireGuardModule: ProviderEntityViewProviding {
-    func providerEntityView(
+    public func providerEntityView(
         with provider: SerializedProvider,
         errorHandler: ErrorHandler,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void

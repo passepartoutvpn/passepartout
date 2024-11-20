@@ -25,32 +25,9 @@
 
 import CommonLibrary
 import Foundation
-import PassepartoutKit
 
 public protocol TunnelInstallationProviding {
     var profileManager: ProfileManager { get }
 
     var tunnel: ExtendedTunnel { get }
-}
-
-@MainActor
-extension TunnelInstallationProviding {
-    public var installation: TunnelInstallation? {
-        guard let currentProfile = tunnel.currentProfile else {
-            return nil
-        }
-        guard let header = profileManager.headers.first(where: {
-            $0.id == currentProfile.id
-        }) else {
-            return nil
-        }
-        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
-    }
-
-    public var currentProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
-            return nil
-        }
-        return profileManager.profile(withId: id)
-    }
 }

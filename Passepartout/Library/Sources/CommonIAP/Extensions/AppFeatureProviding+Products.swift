@@ -1,8 +1,8 @@
 //
-//  AppFeatureProviding.swift
+//  AppFeatureProviding+Products.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/11/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,30 +25,8 @@
 
 import Foundation
 
-protocol AppFeatureProviding {
-    var features: [AppFeature] { get }
-}
-
-extension AppUserLevel: AppFeatureProviding {
-    var features: [AppFeature] {
-        switch self {
-        case .beta:
-            return [.interactiveLogin, .sharing]
-
-        case .fullV2:
-            return AppFeature.fullV2Features
-
-        case .subscriber:
-            return AppFeature.allCases
-
-        default:
-            return []
-        }
-    }
-}
-
 extension AppProduct: AppFeatureProviding {
-    var features: [AppFeature] {
+    public var features: [AppFeature] {
         switch self {
 
         // MARK: Current

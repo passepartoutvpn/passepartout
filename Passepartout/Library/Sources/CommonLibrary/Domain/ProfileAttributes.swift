@@ -68,7 +68,6 @@ extension ProfileAttributes: CustomDebugStringConvertible {
 
 // MARK: - ProfileUserInfoTransformable
 
-// FIXME: #570, test user info encoding/decoding with JSONSerialization
 extension ProfileAttributes: ProfileUserInfoTransformable {
     public var userInfo: [String: AnyHashable]? {
         do {

@@ -1,8 +1,8 @@
 //
-//  ModuleDraftEditing.swift
+//  AppUserLevel.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,21 +23,38 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import Foundation
 
-protocol ModuleDraftEditing {
-    associatedtype Draft: ModuleBuilder
+public enum AppUserLevel: Int, Sendable {
+    case undefined = -1
 
-    var editor: ProfileEditor { get }
+    case freemium = 0
 
-    var module: Draft { get }
+    case beta = 1
+
+    case fullV2 = 2
+
+    case subscriber = 3
 }
 
-extension ModuleDraftEditing {
+extension AppUserLevel {
+    public var isFullVersion: Bool {
+        switch self {
+        case .fullV2, .subscriber:
+            return true
 
-    @MainActor
-    var draft: Binding<Draft> {
-        editor[module]
+        default:
+            return false
+        }
+    }
+
+    public var isRestricted: Bool {
+        switch self {
+        case .undefined, .beta:
+            return true
+
+        default:
+            return false
+        }
     }
 }

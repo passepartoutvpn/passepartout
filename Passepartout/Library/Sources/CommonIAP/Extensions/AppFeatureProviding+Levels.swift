@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Previews.swift
+//  AppFeatureProviding+Levels.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,25 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import Foundation
 
-extension ModuleBuilder where Self: ModuleViewProviding {
+extension AppUserLevel: AppFeatureProviding {
+    public var features: [AppFeature] {
+        switch self {
+        case .beta:
+            return [.interactiveLogin, .sharing]
 
-    @MainActor
-    func preview(title: String = "") -> some View {
-        NavigationStack {
-            moduleView(with: ProfileEditor(modules: [self]), impl: nil)
-                .navigationTitle(title)
+        case .fullV2:
+            return AppFeature.fullV2Features
+
+        case .subscriber:
+            return AppFeature.allCases
+
+        default:
+            return []
         }
-        .withMockEnvironment()
-    }
-
-    @MainActor
-    func preview<C: View>(with content: (ProfileEditor, Self) -> C) -> some View {
-        NavigationStack {
-            content(ProfileEditor(modules: [self]), self)
-        }
-        .withMockEnvironment()
     }
 }

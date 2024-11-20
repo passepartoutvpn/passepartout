@@ -1,8 +1,8 @@
 //
-//  ProviderEntityViewProviding.swift
+//  AppFeatureRequiring+Providers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/16/24.
+//  Created by Davide De Rosa on 11/20/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,17 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-protocol ProviderEntityViewProviding {
-    associatedtype EntityContent: View
-
-    @MainActor
-    func providerEntityView(
-        with provider: SerializedProvider,
-        errorHandler: ErrorHandler,
-        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
-    ) -> EntityContent
+extension ProviderID: AppFeatureRequiring {
+    public var features: Set<AppFeature> {
+        self != .oeck ? [.providers] : []
+    }
 }

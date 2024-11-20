@@ -15,11 +15,15 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppUIMain",
-            targets: ["AppUIMain"]
+            targets: ["AppUIMainWrapper"]
         ),
         .library(
             name: "AppUITV",
-            targets: ["AppUITV"]
+            targets: ["AppUITVWrapper"]
+        ),
+        .library(
+            name: "CommonIAP",
+            targets: ["CommonIAP"]
         ),
         .library(
             name: "CommonLibrary",
@@ -96,8 +100,20 @@ let package = Package(
             ]
         ),
         .target(
+            name: "AppUIMainWrapper",
+            dependencies: [
+                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
+            ]
+        ),
+        .target(
             name: "AppUITV",
             dependencies: ["UILibrary"]
+        ),
+        .target(
+            name: "AppUITVWrapper",
+            dependencies: [
+                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
+            ]
         ),
         .target(
             name: "CommonAPI",
@@ -107,8 +123,13 @@ let package = Package(
             ]
         ),
         .target(
+            name: "CommonIAP",
+            dependencies: ["CommonUtils"]
+        ),
+        .target(
             name: "CommonLibrary",
             dependencies: [
+                "CommonIAP",
                 "CommonUtils",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
