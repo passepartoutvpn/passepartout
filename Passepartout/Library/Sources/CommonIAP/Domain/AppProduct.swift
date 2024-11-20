@@ -1,8 +1,8 @@
 //
-//  AppUserLevel.swift
+//  AppProduct.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/19/23.
+//  Created by Davide De Rosa on 10/11/19.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,34 +25,36 @@
 
 import Foundation
 
-public enum AppUserLevel: Int, Sendable {
-    case undefined = -1
+public struct AppProduct: RawRepresentable, Hashable, Sendable {
+    public let rawValue: String
 
-    case freemium = 0
+    public init?(rawValue: String) {
+        if let range = rawValue.range(of: Self.featurePrefix) ?? rawValue.range(of: Self.providerPrefix) ?? rawValue.range(of: Self.donationPrefix) {
+            self.rawValue = String(rawValue[range.lowerBound..<rawValue.endIndex])
+        } else {
+            self.rawValue = rawValue
+        }
+    }
+}
 
-    case beta = 1
+extension AppProduct {
+    public static var all: [Self] {
+        Features.all + Full.all + Donations.all
+    }
 
-    case fullV2 = 2
-
-    case subscriber = 3
-
-    var isFullVersion: Bool {
+    var isLegacyPlatformVersion: Bool {
         switch self {
-        case .fullV2, .subscriber:
+        case .Full.iOS, .Full.macOS:
             return true
 
         default:
             return false
         }
     }
+}
 
-    var isRestricted: Bool {
-        switch self {
-        case .undefined, .beta:
-            return true
-
-        default:
-            return false
-        }
+extension AppProduct: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        rawValue
     }
 }

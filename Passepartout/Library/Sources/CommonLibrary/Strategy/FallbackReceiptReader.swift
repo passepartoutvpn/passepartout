@@ -25,7 +25,6 @@
 
 import CommonUtils
 import Foundation
-import Kvitto
 import PassepartoutKit
 
 public actor FallbackReceiptReader: AppReceiptReader {

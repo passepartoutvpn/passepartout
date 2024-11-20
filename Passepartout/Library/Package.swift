@@ -22,6 +22,10 @@ let package = Package(
             targets: ["AppUITVWrapper"]
         ),
         .library(
+            name: "CommonIAP",
+            targets: ["CommonIAP"]
+        ),
+        .library(
             name: "CommonLibrary",
             targets: ["CommonLibrary"]
         ),
@@ -119,8 +123,13 @@ let package = Package(
             ]
         ),
         .target(
+            name: "CommonIAP",
+            dependencies: ["CommonUtils"]
+        ),
+        .target(
             name: "CommonLibrary",
             dependencies: [
+                "CommonIAP",
                 "CommonUtils",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],

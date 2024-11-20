@@ -1,5 +1,5 @@
 //
-//  AppFeatureProviding+Products.swift
+//  AppFeatureProviding+Levels.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/20/24.
@@ -25,45 +25,17 @@
 
 import Foundation
 
-extension AppProduct: AppFeatureProviding {
-    var features: [AppFeature] {
+extension AppUserLevel: AppFeatureProviding {
+    public var features: [AppFeature] {
         switch self {
+        case .beta:
+            return [.interactiveLogin, .sharing]
 
-        // MARK: Current
+        case .fullV2:
+            return AppFeature.fullV2Features
 
-        case .Features.appleTV:
-            return [.appleTV, .sharing]
-
-        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .subscriber:
             return AppFeature.allCases
-
-        // MARK: Discontinued
-
-        case .Features.allProviders:
-            return [.providers]
-
-        case .Features.networkSettings:
-            return [.dns, .httpProxy, .routing]
-
-        case .Features.trustedNetworks:
-            return [.onDemand]
-
-        case .Full.allPlatforms:
-            return AppFeature.fullV2Features
-
-        case .Full.iOS:
-#if os(iOS)
-            return AppFeature.fullV2Features
-#else
-            return []
-#endif
-
-        case .Full.macOS:
-#if os(macOS)
-            return AppFeature.fullV2Features
-#else
-            return []
-#endif
 
         default:
             return []
