@@ -27,6 +27,7 @@
 
 import AppKit
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import ServiceManagement
 
