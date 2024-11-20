@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import CommonIAP
 @testable import CommonLibrary
 import CommonUtils
 import Foundation
