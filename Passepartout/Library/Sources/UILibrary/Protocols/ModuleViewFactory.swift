@@ -26,7 +26,7 @@
 import Foundation
 import SwiftUI
 
-protocol ModuleViewFactory: AnyObject {
+public protocol ModuleViewFactory: AnyObject {
     associatedtype Content: View
 
     @MainActor

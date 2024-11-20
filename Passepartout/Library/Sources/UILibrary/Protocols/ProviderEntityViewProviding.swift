@@ -1,8 +1,8 @@
 //
-//  ModuleViewProviding.swift
+//  ProviderEntityViewProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 10/16/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-protocol ModuleViewProviding {
-    associatedtype Content: View
+public protocol ProviderEntityViewProviding {
+    associatedtype EntityContent: View
 
     @MainActor
-    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> Content
+    func providerEntityView(
+        with provider: SerializedProvider,
+        errorHandler: ErrorHandler,
+        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
+    ) -> EntityContent
 }

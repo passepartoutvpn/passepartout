@@ -1,8 +1,8 @@
 //
-//  ProviderEntityViewProviding.swift
+//  ModuleDraftEditing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/16/24.
+//  Created by Davide De Rosa on 10/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,17 +23,21 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-protocol ProviderEntityViewProviding {
-    associatedtype EntityContent: View
+public protocol ModuleDraftEditing {
+    associatedtype Draft: ModuleBuilder
+
+    var editor: ProfileEditor { get }
+
+    var module: Draft { get }
+}
+
+extension ModuleDraftEditing {
 
     @MainActor
-    func providerEntityView(
-        with provider: SerializedProvider,
-        errorHandler: ErrorHandler,
-        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
-    ) -> EntityContent
+    public var draft: Binding<Draft> {
+        editor[module]
+    }
 }

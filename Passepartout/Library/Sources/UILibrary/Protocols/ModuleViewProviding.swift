@@ -1,8 +1,8 @@
 //
-//  ModuleDraftEditing.swift
+//  ModuleViewProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 2/24/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,18 +26,9 @@
 import PassepartoutKit
 import SwiftUI
 
-protocol ModuleDraftEditing {
-    associatedtype Draft: ModuleBuilder
-
-    var editor: ProfileEditor { get }
-
-    var module: Draft { get }
-}
-
-extension ModuleDraftEditing {
+public protocol ModuleViewProviding {
+    associatedtype Content: View
 
     @MainActor
-    var draft: Binding<Draft> {
-        editor[module]
-    }
+    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> Content
 }
