@@ -1,5 +1,5 @@
 //
-//  ProfileManager+Extensions.swift
+//  ProfileManager+Editing.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/3/24.

@@ -1,5 +1,5 @@
 //
-//  ProviderEntityViewProviding+Extensions.swift
+//  ProviderEntityViewProviding+VPN.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/29/24.
