@@ -26,6 +26,10 @@
 import Foundation
 import PassepartoutKit
 
+public protocol MigrationManagerImporter {
+    func importProfile(_ profile: Profile) async throws
+}
+
 @MainActor
 public final class MigrationManager: ObservableObject {
     public struct Simulation {
@@ -103,7 +107,7 @@ extension MigrationManager {
 
     public func importProfiles(
         _ profiles: [Profile],
-        into manager: ProfileManager,
+        into importer: MigrationManagerImporter,
         onUpdate: @escaping @MainActor (UUID, MigrationStatus) -> Void
     ) async {
         profiles.forEach {
@@ -114,7 +118,7 @@ extension MigrationManager {
                 group.addTask {
                     do {
                         try await self.simulateBehavior()
-                        try await self.simulateSaveProfile(profile, manager: manager)
+                        try await self.simulateSaveProfile(profile, to: importer)
                         await onUpdate(profile.id, .done)
                     } catch {
                         await onUpdate(profile.id, .failed)
@@ -151,11 +155,11 @@ private extension MigrationManager {
         return try await profileStrategy.fetchProfile(withId: profileId)
     }
 
-    func simulateSaveProfile(_ profile: Profile, manager: ProfileManager) async throws {
+    func simulateSaveProfile(_ profile: Profile, to importer: MigrationManagerImporter) async throws {
         if simulation?.fakeProfiles ?? false {
             return
         }
-        try await manager.save(profile, force: true)
+        try await importer.importProfile(profile)
     }
 
     func simulateDeleteProfiles(withIds profileIds: Set<UUID>) async throws {
