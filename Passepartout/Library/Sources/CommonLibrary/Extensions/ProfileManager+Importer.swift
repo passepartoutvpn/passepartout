@@ -28,6 +28,6 @@ import PassepartoutKit
 
 extension ProfileManager: MigrationManagerImporter {
     public func importProfile(_ profile: Profile) async throws {
-        try await save(profile, force: true)
+        try await save(profile, isLocal: true)
     }
 }

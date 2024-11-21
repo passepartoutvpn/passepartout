@@ -192,7 +192,7 @@ private extension ProfileRowView {
     .task {
         do {
             try await profileManager.observeRemote(true)
-            try await profileManager.save(profile, force: true, remotelyShared: true)
+            try await profileManager.save(profile, isLocal: true, remotelyShared: true)
         } catch {
             fatalError(error.localizedDescription)
         }

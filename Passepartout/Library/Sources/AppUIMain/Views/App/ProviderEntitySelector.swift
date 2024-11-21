@@ -73,7 +73,7 @@ private extension ProviderEntitySelector {
             builder.saveModule(newModule)
             let newProfile = try builder.tryBuild()
 
-            try await profileManager.save(newProfile)
+            try await profileManager.save(newProfile, isLocal: true)
 
             // will reconnect via AppContext observation
         } catch {

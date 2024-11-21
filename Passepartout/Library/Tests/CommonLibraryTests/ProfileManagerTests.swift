@@ -206,11 +206,11 @@ extension ProfileManagerTests {
         let profile = newProfile()
         try await sut.save(profile)
         XCTAssertEqual(processor.willRebuildCount, 0)
-        try await sut.save(profile, force: false)
+        try await sut.save(profile, isLocal: false)
         XCTAssertEqual(processor.willRebuildCount, 0)
     }
 
-    func test_givenRepositoryAndProcessor_whenSaveForce_thenProcessorIsInvoked() async throws {
+    func test_givenRepositoryAndProcessor_whenSaveLocal_thenProcessorIsInvoked() async throws {
         let repository = InMemoryProfileRepository(profiles: [])
         let processor = MockProfileProcessor()
         let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
@@ -220,7 +220,7 @@ extension ProfileManagerTests {
         XCTAssertFalse(sut.hasProfiles)
 
         let profile = newProfile()
-        try await sut.save(profile, force: true)
+        try await sut.save(profile, isLocal: true)
         XCTAssertEqual(processor.willRebuildCount, 1)
     }
 
