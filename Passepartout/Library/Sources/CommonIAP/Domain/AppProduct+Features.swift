@@ -73,17 +73,17 @@ extension AppProduct.Full {
 // MARK: - Discontinued
 
 extension AppProduct.Features {
-    static let allProviders = AppProduct(featureId: "all_providers")
+    public static let allProviders = AppProduct(featureId: "all_providers")
 
     public static let networkSettings = AppProduct(featureId: "network_settings")
 
-    static let trustedNetworks = AppProduct(featureId: "trusted_networks")
+    public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
 }
 
 extension AppProduct.Full {
-    static let allPlatforms = AppProduct(featureId: "full_multi_version")
+    public static let allPlatforms = AppProduct(featureId: "full_multi_version")
 
     public static let iOS = AppProduct(featureId: "full_version")
 
-    static let macOS = AppProduct(featureId: "full_mac_version")
+    public static let macOS = AppProduct(featureId: "full_mac_version")
 }

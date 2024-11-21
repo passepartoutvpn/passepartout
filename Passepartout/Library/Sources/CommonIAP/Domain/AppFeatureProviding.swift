@@ -25,6 +25,6 @@
 
 import Foundation
 
-protocol AppFeatureProviding {
+public protocol AppFeatureProviding {
     var features: [AppFeature] { get }
 }
