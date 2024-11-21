@@ -35,8 +35,6 @@ public final class StoreKitHelper<ProductType>: InAppHelper where ProductType: R
 
     private let inAppIdentifier: (ProductType) -> String
 
-    private var nativeProducts: [ProductType: InAppProduct]
-
     private var activeTransactions: Set<Transaction>
 
     private nonisolated let didUpdateSubject: PassthroughSubject<Void, Never>
@@ -46,7 +44,6 @@ public final class StoreKitHelper<ProductType>: InAppHelper where ProductType: R
     public init(products: [ProductType], inAppIdentifier: @escaping (ProductType) -> String) {
         self.products = products
         self.inAppIdentifier = inAppIdentifier
-        nativeProducts = [:]
         activeTransactions = []
         didUpdateSubject = PassthroughSubject()
 
@@ -68,11 +65,8 @@ extension StoreKitHelper {
     }
 
     public func fetchProducts() async throws -> [ProductType: InAppProduct] {
-        if !nativeProducts.isEmpty {
-            return nativeProducts
-        }
         let skProducts = try await Product.products(for: products.map(inAppIdentifier))
-        nativeProducts = skProducts.reduce(into: [:]) {
+        return skProducts.reduce(into: [:]) {
             guard let pid = ProductType(rawValue: $1.id) else {
                 return
             }
@@ -83,7 +77,6 @@ extension StoreKitHelper {
                 native: $1
             )
         }
-        return nativeProducts
     }
 
     public func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult {
