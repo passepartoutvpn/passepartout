@@ -103,7 +103,69 @@ extension ExtendedTunnelTests {
         try await sut.install(profile)
 
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
-//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
+        //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
+    }
+
+    func test_givenTunnel_whenStatusChanges_thenConnectionStatusIsExpected() async throws {
+        let env = InMemoryEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
+        let processor = MockTunnelProcessor()
+        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, processor: processor, interval: 0.1)
+
+        let module = try DNSModule.Builder().tryBuild()
+        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        try await sut.install(profile)
+
+        XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
+        //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
+        XCTAssertEqual(processor.willInstallCount, 1)
+    }
+
+    func test_givenTunnelStatus_thenConnectionStatusIsExpected() async throws {
+        let allTunnelStatuses: [TunnelStatus] = [
+            .inactive,
+            .activating,
+            .active,
+            .deactivating
+        ]
+        let allConnectionStatuses: [ConnectionStatus] = [
+            .disconnected,
+            .connecting,
+            .connected,
+            .disconnecting
+        ]
+
+        let env = InMemoryEnvironment()
+        let key = TunnelEnvironmentKeys.connectionStatus
+
+        // no connection status, tunnel status unaffected
+        allTunnelStatuses.forEach {
+            XCTAssertEqual($0.withEnvironment(env), $0)
+        }
+
+        // has connection status
+
+        // affected if .active
+        let tunnelActive: TunnelStatus = .active
+        env.setEnvironmentValue(ConnectionStatus.connected, forKey: key)
+        XCTAssertEqual(tunnelActive.withEnvironment(env), .active)
+        allConnectionStatuses
+            .filter {
+                $0 != .connected
+            }
+            .forEach {
+                env.setEnvironmentValue($0, forKey: key)
+                XCTAssertEqual(tunnelActive.withEnvironment(env), .activating)
+            }
+
+        // unaffected otherwise
+        allTunnelStatuses
+            .filter {
+                $0 != .active
+            }
+            .forEach {
+                XCTAssertEqual($0.withEnvironment(env), $0)
+            }
     }
 }
