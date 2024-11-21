@@ -196,7 +196,7 @@ private extension ExtendedTunnel {
 
     func processedProfile(_ profile: Profile) throws -> Profile {
         if let processor {
-            return try processor.willConnect(to: profile)
+            return try processor.willInstall(profile)
         }
         return profile
     }

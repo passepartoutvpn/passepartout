@@ -30,15 +30,15 @@ import PassepartoutKit
 final class MockTunnelProcessor: TunnelProcessor {
     var titleCount = 0
 
-    var willConnectCount = 0
+    var willInstallCount = 0
 
     func title(for profile: Profile) -> String {
         titleCount += 1
         return ""
     }
 
-    func willConnect(to profile: Profile) throws -> Profile {
-        willConnectCount += 1
+    func willInstall(_ profile: Profile) throws -> Profile {
+        willInstallCount += 1
         return profile
     }
 }

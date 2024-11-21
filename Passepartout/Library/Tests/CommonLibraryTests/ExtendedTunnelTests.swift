@@ -104,6 +104,6 @@ extension ExtendedTunnelTests {
 
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
-        XCTAssertEqual(processor.willConnectCount, 1)
+        XCTAssertEqual(processor.willInstallCount, 1)
     }
 }

@@ -29,5 +29,5 @@ import PassepartoutKit
 public protocol TunnelProcessor {
     func title(for profile: Profile) -> String
 
-    func willConnect(to profile: Profile) throws -> Profile
+    func willInstall(_ profile: Profile) throws -> Profile
 }
