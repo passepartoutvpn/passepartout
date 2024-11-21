@@ -152,6 +152,10 @@ extension Configuration.IAPManager {
         )
     }()
 
+    static var betaChecker: BetaChecker {
+        TestFlightChecker()
+    }
+
     static let productsAtBuild: BuildProducts<AppProduct> = {
 #if os(iOS)
         if $0 <= 2016 {

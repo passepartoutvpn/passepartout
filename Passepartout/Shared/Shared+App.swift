@@ -33,6 +33,7 @@ extension IAPManager {
         customUserLevel: Configuration.Environment.userLevel,
         inAppHelper: Configuration.IAPManager.inAppHelper,
         receiptReader: Configuration.IAPManager.appReceiptReader,
+        betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
 

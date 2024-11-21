@@ -32,6 +32,7 @@ extension IAPManager {
     static let sharedForTunnel = IAPManager(
         inAppHelper: Configuration.IAPManager.inAppHelper,
         receiptReader: Configuration.IAPManager.tunnelReceiptReader,
+        betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
 }
