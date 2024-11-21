@@ -218,12 +218,14 @@ extension ProfileManager {
             pp_log(.App.profiles, .fault, "\tUnable to save profile \(profile.id): \(error)")
             throw error
         }
-        if let remotelyShared, let remoteRepository {
+        if let remoteRepository {
+            let enableSharing = remotelyShared == true || (force && isRemotelyShared(profileWithId: profile.id))
+            let disableSharing = remotelyShared == false
             do {
-                if remotelyShared {
+                if enableSharing {
                     pp_log(.App.profiles, .notice, "\tEnable remote sharing of profile \(profile.id)...")
                     try await remoteRepository.saveProfile(profile)
-                } else {
+                } else if disableSharing {
                     pp_log(.App.profiles, .notice, "\tDisable remote sharing of profile \(profile.id)...")
                     try await remoteRepository.removeProfiles(withIds: [profile.id])
                 }
