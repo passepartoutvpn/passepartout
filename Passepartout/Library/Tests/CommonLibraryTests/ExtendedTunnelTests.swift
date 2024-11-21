@@ -23,12 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 @testable import CommonLibrary
 import Foundation
 import PassepartoutKit
 import XCTest
 
 final class ExtendedTunnelTests: XCTestCase {
+    private var subscriptions: Set<AnyCancellable> = []
 }
 
 @MainActor
@@ -43,8 +45,20 @@ extension ExtendedTunnelTests {
         try await tunnel.install(profile, connect: true, title: \.name)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
+        let exp = expectation(description: "Last error code")
+        var didCall = false
+        sut
+            .$lastErrorCode
+            .sink {
+                if !didCall, $0 != nil {
+                    didCall = true
+                    exp.fulfill()
+                }
+            }
+            .store(in: &subscriptions)
+
         try await tunnel.disconnect()
-        try await Task.sleep(for: .milliseconds(200))
+        await fulfillment(of: [exp], timeout: 0.5)
         XCTAssertEqual(sut.lastErrorCode, .crypto)
     }
 
@@ -61,8 +75,20 @@ extension ExtendedTunnelTests {
         env.setEnvironmentValue(dataCount, forKey: TunnelEnvironmentKeys.dataCount)
         XCTAssertEqual(sut.dataCount, nil)
 
+        let exp = expectation(description: "Data count")
+        var didCall = false
+        sut
+            .$dataCount
+            .sink {
+                if !didCall, $0 != nil {
+                    didCall = true
+                    exp.fulfill()
+                }
+            }
+            .store(in: &subscriptions)
+
         try await tunnel.install(profile, connect: true, title: \.name)
-        try await Task.sleep(for: .milliseconds(300))
+        await fulfillment(of: [exp], timeout: 0.5)
         XCTAssertEqual(sut.dataCount, dataCount)
     }
 }
