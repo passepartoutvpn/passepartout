@@ -91,4 +91,19 @@ extension ExtendedTunnelTests {
         await fulfillment(of: [exp], timeout: 0.5)
         XCTAssertEqual(sut.dataCount, dataCount)
     }
+
+    func test_givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
+        let env = InMemoryEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
+        let processor = MockTunnelProcessor()
+        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, processor: processor, interval: 0.1)
+
+        let module = try DNSModule.Builder().tryBuild()
+        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        try await sut.install(profile)
+
+        XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
+//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
+        XCTAssertEqual(processor.willConnectCount, 1)
+    }
 }
