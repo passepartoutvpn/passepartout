@@ -455,7 +455,7 @@ extension ProfileManagerTests {
                 XCTAssertEqual($0.name, "remote3")
                 XCTAssertTrue(sut.isRemotelyShared(profileWithId: $0.id))
             default:
-                XCTFail()
+                XCTFail("Unknown profile: \($0.id)")
             }
         }
     }
@@ -544,7 +544,7 @@ extension ProfileManagerTests {
                 XCTAssertEqual(profile.name, "remote2")
                 XCTAssertEqual(profile.attributes.fingerprint, remoteProfiles[1].attributes.fingerprint)
             default:
-                XCTFail()
+                XCTFail("Unknown profile: \($0.id)")
             }
         }
     }
@@ -604,7 +604,7 @@ extension ProfileManagerTests {
             case r3:
                 XCTAssertEqual($0.attributes.fingerprint, fp3)
             default:
-                XCTFail()
+                XCTFail("Unknown profile: \($0.id)")
             }
         }
     }
