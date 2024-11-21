@@ -186,9 +186,9 @@ extension ProfileManager {
 // MARK: - Edit
 
 extension ProfileManager {
-    public func save(_ originalProfile: Profile, force: Bool = false, remotelyShared: Bool? = nil) async throws {
+    public func save(_ originalProfile: Profile, isLocal: Bool = false, remotelyShared: Bool? = nil) async throws {
         let profile: Profile
-        if force {
+        if isLocal {
             var builder = originalProfile.builder()
             if let processor {
                 builder = try processor.willRebuild(builder)
@@ -219,7 +219,7 @@ extension ProfileManager {
             throw error
         }
         if let remoteRepository {
-            let enableSharing = remotelyShared == true || (force && isRemotelyShared(profileWithId: profile.id))
+            let enableSharing = remotelyShared == true || (isLocal && isRemotelyShared(profileWithId: profile.id))
             let disableSharing = remotelyShared == false
             do {
                 if enableSharing {
