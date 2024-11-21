@@ -1,5 +1,5 @@
 //
-//  SandboxChecker.swift
+//  TestFlightChecker.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/18/22.
@@ -28,7 +28,7 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-public final class SandboxChecker {
+public final class TestFlightChecker: BetaChecker {
     public init() {
     }
 
@@ -41,7 +41,7 @@ public final class SandboxChecker {
 
 // MARK: Shared
 
-private extension SandboxChecker {
+private extension TestFlightChecker {
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
     func verifyBetaBuild() -> Bool {
@@ -62,7 +62,7 @@ private extension SandboxChecker {
 // MARK: iOS
 
 #if os(iOS)
-private extension SandboxChecker {
+private extension TestFlightChecker {
     var isiOSSandboxBuild: Bool {
         bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
@@ -72,7 +72,7 @@ private extension SandboxChecker {
 // MARK: macOS
 
 #if os(macOS) || targetEnvironment(macCatalyst)
-private extension SandboxChecker {
+private extension TestFlightChecker {
     var isMacTestFlightBuild: Bool {
         var status = noErr
 

@@ -1,8 +1,8 @@
 //
-//  AppReceiptReader.swift
+//  BetaChecker.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/6/24.
+//  Created by Davide De Rosa on 11/21/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
 import Foundation
 
-public protocol AppReceiptReader {
-    func receipt(at userLevel: AppUserLevel) async -> InAppReceipt?
-
-    func addPurchase(with identifier: String) async
+public protocol BetaChecker {
+    func isBeta() async -> Bool
 }

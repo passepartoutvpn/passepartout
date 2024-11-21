@@ -56,15 +56,37 @@ public actor FakeAppReceiptReader: AppReceiptReader {
         localReceipt
     }
 
-    public func addPurchase(with identifier: String) {
+    public func addPurchase(with identifier: String) async {
+        await addPurchase(with: identifier, expirationDate: nil, cancellationDate: nil)
+    }
+}
+
+extension FakeAppReceiptReader {
+    public func addPurchase(
+        with product: AppProduct,
+        expirationDate: Date? = nil,
+        cancellationDate: Date? = nil
+    ) async {
+        await addPurchase(
+            with: product.rawValue,
+            expirationDate: expirationDate,
+            cancellationDate: cancellationDate
+        )
+    }
+
+    public func addPurchase(
+        with identifier: String,
+        expirationDate: Date? = nil,
+        cancellationDate: Date? = nil
+    ) async {
         guard let localReceipt else {
             fatalError("Call setReceipt() first")
         }
         var purchaseReceipts = localReceipt.purchaseReceipts ?? []
         purchaseReceipts.append(.init(
             productIdentifier: identifier,
-            expirationDate: nil,
-            cancellationDate: nil,
+            expirationDate: expirationDate,
+            cancellationDate: cancellationDate,
             originalPurchaseDate: nil
         ))
         let newReceipt = InAppReceipt(

@@ -23,27 +23,66 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 @testable import CommonIAP
 @testable import CommonLibrary
 import CommonUtils
 import Foundation
 import XCTest
 
+@MainActor
 final class IAPManagerTests: XCTestCase {
-//    private let inApp = FakeAppProductHelper()
-
     private let olderBuildNumber = 500
 
     private let defaultBuildNumber = 1000
 
     private let newerBuildNumber = 1500
+
+    private var subscriptions: Set<AnyCancellable> = []
 }
 
-@MainActor
+// MARK: - Actions
+
 extension IAPManagerTests {
+    func test_givenProducts_whenFetchAppProducts_thenReturnsCorrespondingInAppProducts() async throws {
+        let reader = FakeAppReceiptReader()
+        let sut = IAPManager(receiptReader: reader)
 
-    // MARK: Build products
+        let appProducts: [AppProduct] = [
+            .Full.iOS,
+            .Donations.huge
+        ]
+        let inAppProducts = try await sut.purchasableProducts(for: appProducts)
+        inAppProducts.enumerated().forEach {
+            XCTAssertEqual($0.element.productIdentifier, appProducts[$0.offset].rawValue)
+        }
+    }
 
+    func test_givenProducts_whenPurchase_thenIsAddedToPurchasedProducts() async throws {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: [])
+        let sut = IAPManager(receiptReader: reader)
+
+        let appleTV: AppProduct = .Features.appleTV
+        XCTAssertFalse(sut.purchasedProducts.contains(appleTV))
+        do {
+            let purchasable = try await sut.purchasableProducts(for: [appleTV])
+            let purchasableAppleTV = try XCTUnwrap(purchasable.first)
+            let result = try await sut.purchase(purchasableAppleTV)
+            if result == .done {
+                XCTAssertTrue(sut.purchasedProducts.contains(appleTV))
+            } else {
+                XCTFail("Unexpected purchase() result: \(result)")
+            }
+        } catch {
+            XCTFail("Unexpected purchase() failure: \(error)")
+        }
+    }
+}
+
+// MARK: - Build products
+
+extension IAPManagerTests {
     func test_givenBuildProducts_whenOlder_thenFullVersion() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
@@ -69,9 +108,11 @@ extension IAPManagerTests {
         await sut.reloadReceipt()
         XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
     }
+}
 
-    // MARK: Eligibility
+// MARK: - Eligibility
 
+extension IAPManagerTests {
     func test_givenPurchasedFeature_whenReloadReceipt_thenIsEligible() async {
         let reader = FakeAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
@@ -155,13 +196,14 @@ extension IAPManagerTests {
         }
     }
 
-    func test_givenAppleTV_thenIsEligibleForAppleTV() async {
+    func test_givenAppleTV_thenIsEligibleForAppleTVAndSharing() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Features.appleTV])
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
         XCTAssertTrue(sut.isEligible(for: .appleTV))
+        XCTAssertTrue(sut.isEligible(for: .sharing))
     }
 
     func test_givenPlatformVersion_thenIsFullVersionForPlatform() async {
@@ -194,13 +236,38 @@ extension IAPManagerTests {
 #endif
     }
 
-    // MARK: App level
+    func test_givenUser_thenIsNotEligibleForFeedback() async {
+        let reader = FakeAppReceiptReader()
+        let sut = IAPManager(receiptReader: reader)
+        XCTAssertFalse(sut.isEligibleForFeedback())
+    }
 
+    func test_givenBeta_thenIsEligibleForFeedback() async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, identifiers: [])
+        let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
+        await sut.reloadReceipt()
+        XCTAssertTrue(sut.isEligibleForFeedback())
+    }
+
+    func test_givenPayingUser_thenIsEligibleForFeedback() async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: [.Full.iOS])
+        let sut = IAPManager(receiptReader: reader)
+        await sut.reloadReceipt()
+        XCTAssertTrue(sut.isEligibleForFeedback())
+    }
+}
+
+// MARK: - App level
+
+extension IAPManagerTests {
     func test_givenBetaApp_thenIsRestricted() async {
         let reader = FakeAppReceiptReader()
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
 
         await sut.reloadReceipt()
+        XCTAssertTrue(sut.isRestricted)
         XCTAssertTrue(sut.userLevel.isRestricted)
     }
 
@@ -280,17 +347,115 @@ extension IAPManagerTests {
     }
 }
 
+// MARK: - Beta
+
+extension IAPManagerTests {
+    func test_givenChecker_whenReloadReceipt_thenIsBeta() async {
+        let betaChecker = MockBetaChecker()
+        betaChecker.isBeta = true
+        let sut = IAPManager(receiptReader: FakeAppReceiptReader(), betaChecker: betaChecker)
+        XCTAssertEqual(sut.userLevel, .undefined)
+        await sut.reloadReceipt()
+        XCTAssertEqual(sut.userLevel, .beta)
+    }
+}
+
+// MARK: - Receipts
+
+extension IAPManagerTests {
+    func test_givenReceipts_whenReloadReceipt_thenPublishesEligibleFeatures() async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: [
+            .Features.appleTV,
+            .Features.trustedNetworks
+        ])
+        let sut = IAPManager(receiptReader: reader)
+
+        let exp = expectation(description: "Eligible features")
+        sut
+            .$eligibleFeatures
+            .dropFirst()
+            .sink { _ in
+                exp.fulfill()
+            }
+            .store(in: &subscriptions)
+
+        await sut.reloadReceipt()
+        await fulfillment(of: [exp], timeout: 0.1)
+
+        XCTAssertEqual(sut.eligibleFeatures, [
+            .appleTV,
+            .onDemand,
+            .sharing // implied by Apple TV purchase
+        ])
+    }
+
+    func test_givenInvalidReceipts_whenReloadReceipt_thenSkipsInvalid() async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: [])
+        await reader.addPurchase(with: "foobar")
+        await reader.addPurchase(with: .Features.allProviders, expirationDate: Date().addingTimeInterval(-10))
+        await reader.addPurchase(with: .Features.appleTV)
+        await reader.addPurchase(with: .Features.networkSettings, expirationDate: Date().addingTimeInterval(10))
+        await reader.addPurchase(with: .Full.iOS, cancellationDate: Date().addingTimeInterval(-60))
+
+        let sut = IAPManager(receiptReader: reader)
+        await sut.reloadReceipt()
+
+        XCTAssertEqual(sut.eligibleFeatures, [
+            .appleTV,
+            .dns,
+            .httpProxy,
+            .routing,
+            .sharing
+        ])
+    }
+}
+
+// MARK: - Observation
+
+extension IAPManagerTests {
+    func test_givenManager_whenObserveObjects_thenReloadsReceipt() async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: [.Full.allPlatforms])
+        let sut = IAPManager(receiptReader: reader)
+
+        XCTAssertEqual(sut.userLevel, .undefined)
+        XCTAssertTrue(sut.eligibleFeatures.isEmpty)
+
+        let exp = expectation(description: "Reload receipt")
+        sut
+            .$eligibleFeatures
+            .dropFirst()
+            .sink { _ in
+                exp.fulfill()
+            }
+            .store(in: &subscriptions)
+
+        sut.observeObjects()
+        await fulfillment(of: [exp], timeout: 0.1)
+
+        XCTAssertNotEqual(sut.userLevel, .undefined)
+        XCTAssertFalse(sut.eligibleFeatures.isEmpty)
+    }
+}
+
+// MARK: -
+
 private extension IAPManager {
     convenience init(
         customUserLevel: AppUserLevel? = nil,
+        inAppHelper: (any AppProductHelper)? = nil,
         receiptReader: AppReceiptReader,
+        betaChecker: BetaChecker? = nil,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.init(
             customUserLevel: customUserLevel,
-            inAppHelper: FakeAppProductHelper(),
+            inAppHelper: inAppHelper ?? FakeAppProductHelper(),
             receiptReader: receiptReader,
+            betaChecker: betaChecker ?? TestFlightChecker(),
             unrestrictedFeatures: unrestrictedFeatures,
             productsAtBuild: productsAtBuild
         )
