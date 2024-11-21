@@ -42,7 +42,7 @@ extension ExtendedTunnelTests {
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
-        try await tunnel.install(profile, connect: true, title: \.name)
+        try await sut.connect(with: profile)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
         let exp = expectation(description: "Last error code")
@@ -69,7 +69,7 @@ extension ExtendedTunnelTests {
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
-        try await tunnel.install(profile, connect: false, title: \.name)
+        try await sut.install(profile)
 
         let dataCount = DataCount(500, 700)
         env.setEnvironmentValue(dataCount, forKey: TunnelEnvironmentKeys.dataCount)
