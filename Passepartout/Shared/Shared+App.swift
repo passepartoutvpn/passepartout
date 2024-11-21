@@ -36,7 +36,7 @@ extension IAPManager {
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
 
-    static let sharedProcessor = ProfileProcessor(
+    static let sharedProcessor = InAppProcessor(
         iapManager: sharedForApp,
         title: {
             Configuration.ProfileManager.sharedTitle($0)
@@ -44,7 +44,7 @@ extension IAPManager {
         isIncluded: {
             Configuration.ProfileManager.isIncluded($0, $1)
         },
-        willSave: { _, builder in
+        willRebuild: { _, builder in
             builder
         },
         willConnect: { iap, profile in

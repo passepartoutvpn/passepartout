@@ -1,5 +1,5 @@
 //
-//  ProfileProcessor.swift
+//  InAppProcessor.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/6/24.
@@ -26,15 +26,14 @@
 import Foundation
 import PassepartoutKit
 
-@MainActor
-public final class ProfileProcessor: ObservableObject, Sendable {
+public final class InAppProcessor: ObservableObject, Sendable {
     private let iapManager: IAPManager
 
-    public nonisolated let title: (Profile) -> String
+    public nonisolated let _title: (Profile) -> String
 
     private nonisolated let _isIncluded: (IAPManager, Profile) -> Bool
 
-    private nonisolated let _willSave: (IAPManager, Profile.Builder) throws -> Profile.Builder
+    private nonisolated let _willRebuild: (IAPManager, Profile.Builder) throws -> Profile.Builder
 
     private nonisolated let _willConnect: (IAPManager, Profile) throws -> Profile
 
@@ -44,31 +43,43 @@ public final class ProfileProcessor: ObservableObject, Sendable {
         iapManager: IAPManager,
         title: @escaping (Profile) -> String,
         isIncluded: @escaping (IAPManager, Profile) -> Bool,
-        willSave: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
+        willRebuild: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
         willConnect: @escaping (IAPManager, Profile) throws -> Profile,
         verify: @escaping (IAPManager, Profile) -> Set<AppFeature>?
     ) {
         self.iapManager = iapManager
-        self.title = title
+        _title = title
         _isIncluded = isIncluded
-        _willSave = willSave
+        _willRebuild = willRebuild
         _willConnect = willConnect
         _verify = verify
+    }
+}
+
+// MARK: - ProfileProcessor
+
+extension InAppProcessor: ProfileProcessor {
+    public func title(for profile: Profile) -> String {
+        _title(profile)
     }
 
     public func isIncluded(_ profile: Profile) -> Bool {
         _isIncluded(iapManager, profile)
     }
 
-    public func willSave(_ builder: Profile.Builder) throws -> Profile.Builder {
-        try _willSave(iapManager, builder)
-    }
-
-    public func willConnect(_ profile: Profile) throws -> Profile {
-        try _willConnect(iapManager, profile)
+    public func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
+        try _willRebuild(iapManager, builder)
     }
 
     public func verify(_ profile: Profile) -> Set<AppFeature>? {
         _verify(iapManager, profile)
+    }
+}
+
+// MARK: - TunnelProcessor
+
+extension InAppProcessor: TunnelProcessor {
+    public func willConnect(to profile: Profile) throws -> Profile {
+        try _willConnect(iapManager, profile)
     }
 }
