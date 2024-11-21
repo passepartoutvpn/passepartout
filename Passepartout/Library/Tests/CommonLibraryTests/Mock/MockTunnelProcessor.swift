@@ -1,8 +1,8 @@
 //
-//  TunnelProcessor.swift
+//  MockTunnelProcessor.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/20/24.
+//  Created by Davide De Rosa on 11/21/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-public protocol TunnelProcessor {
-    func title(for profile: Profile) -> String
+final class MockTunnelProcessor: TunnelProcessor {
+    var titleCount = 0
 
-    func willInstall(_ profile: Profile) throws -> Profile
+    var willInstallCount = 0
+
+    func title(for profile: Profile) -> String {
+        titleCount += 1
+        return ""
+    }
+
+    func willInstall(_ profile: Profile) throws -> Profile {
+        willInstallCount += 1
+        return profile
+    }
 }

@@ -77,19 +77,7 @@ extension ExtendedTunnel {
     }
 
     public var connectionStatus: TunnelStatus {
-        var status = tunnel.status
-        if status == .active, let environmentConnectionStatus {
-            if environmentConnectionStatus == .connected {
-                status = .active
-            } else {
-                status = .activating
-            }
-        }
-        return status
-    }
-
-    private var environmentConnectionStatus: ConnectionStatus? {
-        value(forKey: TunnelEnvironmentKeys.connectionStatus)
+        tunnel.status.withEnvironment(environment)
     }
 }
 
@@ -196,8 +184,24 @@ private extension ExtendedTunnel {
 
     func processedProfile(_ profile: Profile) throws -> Profile {
         if let processor {
-            return try processor.willConnect(to: profile)
+            return try processor.willInstall(profile)
         }
         return profile
+    }
+}
+
+// MARK: - Helpers
+
+extension TunnelStatus {
+    public func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
+        var status = self
+        if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
+            if connectionStatus == .connected {
+                status = .active
+            } else {
+                status = .activating
+            }
+        }
+        return status
     }
 }

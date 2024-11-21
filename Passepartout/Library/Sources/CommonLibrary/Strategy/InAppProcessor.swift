@@ -35,7 +35,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
 
     private nonisolated let _willRebuild: (IAPManager, Profile.Builder) throws -> Profile.Builder
 
-    private nonisolated let _willConnect: (IAPManager, Profile) throws -> Profile
+    private nonisolated let _willInstall: (IAPManager, Profile) throws -> Profile
 
     private nonisolated let _verify: (IAPManager, Profile) -> Set<AppFeature>?
 
@@ -44,14 +44,14 @@ public final class InAppProcessor: ObservableObject, Sendable {
         title: @escaping (Profile) -> String,
         isIncluded: @escaping (IAPManager, Profile) -> Bool,
         willRebuild: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
-        willConnect: @escaping (IAPManager, Profile) throws -> Profile,
+        willInstall: @escaping (IAPManager, Profile) throws -> Profile,
         verify: @escaping (IAPManager, Profile) -> Set<AppFeature>?
     ) {
         self.iapManager = iapManager
         _title = title
         _isIncluded = isIncluded
         _willRebuild = willRebuild
-        _willConnect = willConnect
+        _willInstall = willInstall
         _verify = verify
     }
 }
@@ -79,7 +79,7 @@ extension InAppProcessor: ProfileProcessor {
 // MARK: - TunnelProcessor
 
 extension InAppProcessor: TunnelProcessor {
-    public func willConnect(to profile: Profile) throws -> Profile {
-        try _willConnect(iapManager, profile)
+    public func willInstall(_ profile: Profile) throws -> Profile {
+        try _willInstall(iapManager, profile)
     }
 }

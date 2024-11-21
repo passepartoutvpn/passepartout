@@ -47,7 +47,7 @@ extension IAPManager {
         willRebuild: { _, builder in
             builder
         },
-        willConnect: { iap, profile in
+        willInstall: { iap, profile in
             try iap.verify(profile)
 
             // validate provider modules

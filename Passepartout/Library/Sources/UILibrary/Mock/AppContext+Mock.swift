@@ -55,7 +55,7 @@ extension AppContext {
             willRebuild: { _, builder in
                 builder
             },
-            willConnect: { _, profile in
+            willInstall: { _, profile in
                 try profile.withProviderModules()
             },
             verify: { _, _ in
