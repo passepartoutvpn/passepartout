@@ -53,6 +53,10 @@ public actor FallbackReceiptReader: AppReceiptReader {
         pendingTask = nil
         return receipt
     }
+
+    public func addPurchase(with identifier: String) async {
+        //
+    }
 }
 
 private extension FallbackReceiptReader {

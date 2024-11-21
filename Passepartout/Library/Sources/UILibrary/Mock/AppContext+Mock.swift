@@ -36,6 +36,7 @@ extension AppContext {
         let iapManager = IAPManager(
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
+            betaChecker: TestFlightChecker(),
             unrestrictedFeatures: [
                 .interactiveLogin,
                 .onDemand

@@ -1,8 +1,8 @@
 //
-//  AppReceiptReader.swift
+//  MockBetaChecker.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/6/24.
+//  Created by Davide De Rosa on 11/21/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,8 +26,10 @@
 import CommonUtils
 import Foundation
 
-public protocol AppReceiptReader {
-    func receipt(at userLevel: AppUserLevel) async -> InAppReceipt?
+final class MockBetaChecker: BetaChecker {
+    var isBeta = false
 
-    func addPurchase(with identifier: String) async
+    func isBeta() async -> Bool {
+        isBeta
+    }
 }

@@ -36,6 +36,8 @@ public final class IAPManager: ObservableObject {
 
     private let receiptReader: AppReceiptReader
 
+    private let betaChecker: BetaChecker
+
     private let unrestrictedFeatures: Set<AppFeature>
 
     private let productsAtBuild: BuildProducts<AppProduct>?
@@ -57,12 +59,14 @@ public final class IAPManager: ObservableObject {
         customUserLevel: AppUserLevel? = nil,
         inAppHelper: any AppProductHelper,
         receiptReader: AppReceiptReader,
+        betaChecker: BetaChecker,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.customUserLevel = customUserLevel
         self.inAppHelper = inAppHelper
         self.receiptReader = receiptReader
+        self.betaChecker = betaChecker
         self.unrestrictedFeatures = unrestrictedFeatures
         self.productsAtBuild = productsAtBuild
         userLevel = .undefined
@@ -90,6 +94,7 @@ extension IAPManager {
     public func purchase(_ purchasableProduct: InAppProduct) async throws -> InAppPurchaseResult {
         let result = try await inAppHelper.purchase(purchasableProduct)
         if result == .done {
+            await receiptReader.addPurchase(with: purchasableProduct.productIdentifier)
             await reloadReceipt()
         }
         return result
@@ -235,9 +240,6 @@ extension IAPManager {
         Task {
             await fetchLevelIfNeeded()
             do {
-                let products = try await inAppHelper.fetchProducts()
-                pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
-
                 inAppHelper
                     .didUpdate
                     .receive(on: DispatchQueue.main)
@@ -247,6 +249,9 @@ extension IAPManager {
                         }
                     }
                     .store(in: &subscriptions)
+
+                let products = try await inAppHelper.fetchProducts()
+                pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
             } catch {
                 pp_log(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             }
@@ -262,14 +267,10 @@ private extension IAPManager {
         if let customUserLevel {
             userLevel = customUserLevel
             pp_log(.App.iap, .info, "App level (custom): \(userLevel)")
-        } else {
-            let checker = SandboxChecker()
-            let isBeta = await checker.isBeta()
-            guard userLevel == .undefined else {
-                return
-            }
-            userLevel = isBeta ? .beta : .freemium
-            pp_log(.App.iap, .info, "App level: \(userLevel)")
+            return
         }
+        let isBeta = await betaChecker.isBeta()
+        userLevel = isBeta ? .beta : .freemium
+        pp_log(.App.iap, .info, "App level: \(userLevel)")
     }
 }
