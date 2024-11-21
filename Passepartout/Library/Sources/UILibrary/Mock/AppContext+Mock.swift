@@ -44,7 +44,7 @@ extension AppContext {
                 []
             }
         )
-        let processor = ProfileProcessor(
+        let processor = InAppProcessor(
             iapManager: iapManager,
             title: {
                 "Passepartout.Mock: \($0.name)"
@@ -52,7 +52,7 @@ extension AppContext {
             isIncluded: { _, _ in
                 true
             },
-            willSave: { _, builder in
+            willRebuild: { _, builder in
                 builder
             },
             willConnect: { _, profile in

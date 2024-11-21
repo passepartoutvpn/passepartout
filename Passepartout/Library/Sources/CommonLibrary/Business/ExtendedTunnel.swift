@@ -33,7 +33,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let environment: TunnelEnvironment
 
-    private let processor: ProfileProcessor?
+    private let processor: TunnelProcessor?
 
     private let interval: TimeInterval
 
@@ -56,7 +56,7 @@ public final class ExtendedTunnel: ObservableObject {
     public init(
         tunnel: Tunnel,
         environment: TunnelEnvironment,
-        processor: ProfileProcessor? = nil,
+        processor: TunnelProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
@@ -196,7 +196,7 @@ private extension ExtendedTunnel {
 
     func processedProfile(_ profile: Profile) throws -> Profile {
         if let processor {
-            return try processor.willConnect(profile)
+            return try processor.willConnect(to: profile)
         }
         return profile
     }

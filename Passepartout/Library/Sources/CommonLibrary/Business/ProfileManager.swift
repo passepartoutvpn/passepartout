@@ -39,6 +39,10 @@ public final class ProfileManager: ObservableObject {
         case save(Profile)
 
         case remove([Profile.ID])
+
+        case startRemoteImport
+
+        case stopRemoteImport
     }
 
     // MARK: Dependencies
@@ -91,28 +95,13 @@ public final class ProfileManager: ObservableObject {
     private var remoteImportTask: Task<Void, Never>?
 
     // for testing/previews
-    public init(profiles: [Profile]) {
-        repository = InMemoryProfileRepository(profiles: profiles)
-        backupRepository = nil
-        remoteRepositoryBlock = { _ in
-            InMemoryProfileRepository()
-        }
-        mirrorsRemoteRepository = false
-        processor = nil
-
-        allProfiles = profiles.reduce(into: [:]) {
-            $0[$1.id] = $1
-        }
-        allRemoteProfiles = [:]
-        filteredProfiles = []
-        requiredFeatures = [:]
-        isRemoteImportingEnabled = false
-        waitingObservers = []
-
-        didChange = PassthroughSubject()
-        searchSubject = CurrentValueSubject("")
-
-        observeSearch()
+    public convenience init(profiles: [Profile]) {
+        self.init(
+            repository: InMemoryProfileRepository(profiles: profiles),
+            remoteRepositoryBlock: { _ in
+                InMemoryProfileRepository()
+            }
+        )
     }
 
     public init(
@@ -158,10 +147,6 @@ extension ProfileManager {
         !filteredProfiles.isEmpty
     }
 
-    public var isSearching: Bool {
-        !searchSubject.value.isEmpty
-    }
-
     public var headers: [ProfileHeader] {
         filteredProfiles.map {
             $0.header()
@@ -169,17 +154,19 @@ extension ProfileManager {
     }
 
     public func profile(withId profileId: Profile.ID) -> Profile? {
-        filteredProfiles.first {
-            $0.id == profileId
-        }
+        allProfiles[profileId]
     }
 
-    public func requiredFeatures(forProfileWithId profileId: Profile.ID) -> Set<AppFeature>? {
-        requiredFeatures[profileId]
+    public var isSearching: Bool {
+        !searchSubject.value.isEmpty
     }
 
     public func search(byName name: String) {
         searchSubject.send(name)
+    }
+
+    public func requiredFeatures(forProfileWithId profileId: Profile.ID) -> Set<AppFeature>? {
+        requiredFeatures[profileId]
     }
 
     public func reloadRequiredFeatures() {
@@ -196,7 +183,7 @@ extension ProfileManager {
     }
 }
 
-// MARK: - CRUD
+// MARK: - Edit
 
 extension ProfileManager {
     public func save(_ originalProfile: Profile, force: Bool = false, remotelyShared: Bool? = nil) async throws {
@@ -204,7 +191,7 @@ extension ProfileManager {
         if force {
             var builder = originalProfile.builder()
             if let processor {
-                builder = try processor.willSave(builder)
+                builder = try processor.willRebuild(builder)
             }
             builder.attributes.lastUpdate = Date()
             builder.attributes.fingerprint = UUID()
@@ -261,10 +248,6 @@ extension ProfileManager {
         } catch {
             pp_log(.App.profiles, .fault, "Unable to remove profiles \(profileIds): \(error)")
         }
-    }
-
-    public func exists(withId profileId: Profile.ID) -> Bool {
-        allProfiles.keys.contains(profileId)
     }
 }
 
@@ -384,15 +367,36 @@ private extension ProfileManager {
 private extension ProfileManager {
     func reloadLocalProfiles(_ result: [Profile]) {
         pp_log(.App.profiles, .info, "Reload local profiles: \(result.map(\.id))")
-        allProfiles = result.reduce(into: [:]) {
-            $0[$1.id] = $1
-        }
+
+        let excludedIds = Set(result
+            .filter {
+                !(processor?.isIncluded($0) ?? true)
+            }
+            .map(\.id))
+
+        allProfiles = result
+            .filter {
+                !excludedIds.contains($0.id)
+            }
+            .reduce(into: [:]) {
+                $0[$1.id] = $1
+            }
+
+        pp_log(.App.profiles, .info, "Local profiles after exclusions: \(allProfiles.keys)")
+
         if waitingObservers.contains(.local) {
-            waitingObservers.remove(.local) // @Published
+            waitingObservers.remove(.local)
         }
-        deleteExcludedProfiles()
 
         objectWillChange.send()
+
+        if !excludedIds.isEmpty {
+            pp_log(.App.profiles, .info, "Delete excluded profiles from repository: \(excludedIds)")
+            Task {
+                // FIXME: ###, ignore this published value
+                try await repository.removeProfiles(withIds: Array(excludedIds))
+            }
+        }
     }
 
     func reloadRemoteProfiles(_ result: [Profile]) {
@@ -401,39 +405,18 @@ private extension ProfileManager {
             $0[$1.id] = $1
         }
         if waitingObservers.contains(.remote) {
-            waitingObservers.remove(.remote) // @Published
+            waitingObservers.remove(.remote)
         }
         Task { [weak self] in
+            self?.didChange.send(.startRemoteImport)
             await self?.importRemoteProfiles(result)
+            self?.didChange.send(.stopRemoteImport)
         }
 
         objectWillChange.send()
     }
 
-    // should not be imported at all, but you never know
-    func deleteExcludedProfiles() {
-        guard let processor else {
-            return
-        }
-        let idsToRemove: [Profile.ID] = allProfiles
-            .filter {
-                !processor.isIncluded($0.value)
-            }
-            .map(\.key)
-
-        if !idsToRemove.isEmpty {
-            pp_log(.App.profiles, .info, "Delete non-included local profiles: \(idsToRemove)")
-            Task.detached {
-                try await self.repository.removeProfiles(withIds: idsToRemove)
-            }
-        }
-    }
-
     func importRemoteProfiles(_ profiles: [Profile]) async {
-        guard !profiles.isEmpty else {
-            return
-        }
-
         if let previousTask = remoteImportTask {
             pp_log(.App.profiles, .info, "Cancel ongoing remote import...")
             previousTask.cancel()
@@ -496,10 +479,12 @@ private extension ProfileManager {
             }
 
             pp_log(.App.profiles, .notice, "Finished importing remote profiles, delete stale profiles: \(idsToRemove)")
-            do {
-                try await repository.removeProfiles(withIds: idsToRemove)
-            } catch {
-                pp_log(.App.profiles, .error, "Unable to delete stale profiles: \(error)")
+            if !idsToRemove.isEmpty {
+                do {
+                    try await repository.removeProfiles(withIds: idsToRemove)
+                } catch {
+                    pp_log(.App.profiles, .error, "Unable to delete stale profiles: \(error)")
+                }
             }
 
             // yield a little bit

@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 
 public final class InMemoryProfileRepository: ProfileRepository {
-    private var profiles: [Profile] {
+    var profiles: [Profile] {
         didSet {
             profilesSubject.send(profiles)
         }
@@ -50,7 +50,7 @@ public final class InMemoryProfileRepository: ProfileRepository {
     }
 
     public func saveProfile(_ profile: Profile) {
-        pp_log(.App.profiles, .info, "Save profile: \(profile.id))")
+        pp_log(.App.profiles, .info, "Save profile: \(profile.id)")
         if let index = profiles.firstIndex(where: { $0.id == profile.id }) {
             profiles[index] = profile
         } else {
@@ -60,9 +60,13 @@ public final class InMemoryProfileRepository: ProfileRepository {
 
     public func removeProfiles(withIds ids: [Profile.ID]) {
         pp_log(.App.profiles, .info, "Remove profiles: \(ids)")
-        profiles = profiles.filter {
+        let newProfiles = profiles.filter {
             !ids.contains($0.id)
         }
+        guard newProfiles.count < profiles.count else {
+            return
+        }
+        profiles = newProfiles
     }
 
     public func removeAllProfiles() async throws {
