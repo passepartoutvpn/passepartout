@@ -96,7 +96,7 @@ private extension Configuration.IAPManager {
     @MainActor
     static var appReceiptReader: AppReceiptReader {
         guard !Configuration.Environment.isFakeIAP else {
-            guard let mockHelper = inAppHelper as? MockAppProductHelper else {
+            guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
             }
             return mockHelper.receiptReader
