@@ -58,7 +58,7 @@ struct ReportIssueButton {
     }
 
     var currentProvider: (ProviderID, Date?)? {
-        guard let id = installedProfile?.firstProviderModuleWithMetadata?.1.id else {
+        guard let id = installedProfile?.selectedProvider?.selection.id else {
             return nil
         }
         let lastUpdate = providerManager.lastUpdate(for: id)

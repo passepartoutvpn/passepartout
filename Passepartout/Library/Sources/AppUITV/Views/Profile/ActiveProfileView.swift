@@ -54,27 +54,31 @@ struct ActiveProfileView: View {
     var errorHandler: ErrorHandler
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
+            Spacer()
+
             VStack {
-                currentProfileView
-                statusView
-            }
-            .padding(.bottom)
+                VStack {
+                    currentProfileView
+                    statusView
+                }
+                .padding(.bottom)
 
-            profile.map {
-                detailView(for: $0)
-            }
-            .padding(.bottom)
+                profile.map {
+                    detailView(for: $0)
+                }
+                .padding(.bottom)
 
-            Group {
-                toggleConnectionButton
-                switchProfileButton
+                Group {
+                    toggleConnectionButton
+                    switchProfileButton
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 50))
             }
-            .clipShape(RoundedRectangle(cornerRadius: 50))
+            .padding(.horizontal, 100)
+
+            Spacer()
         }
-        .padding([.top, .horizontal], 100)
-
-        Spacer()
     }
 }
 
@@ -96,28 +100,19 @@ private extension ActiveProfileView {
 
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
-            if let connectionModule = profile.modules.first(where: { $0 is ConnectionModule }) {
-                HStack {
-                    Text(Strings.Global.protocol)
-                        .fontWeight(.light)
-                    Spacer()
+            if let connectionModule = profile.firstConnectionModule(ifActive: true) {
+                DetailRowView(title: Strings.Global.protocol) {
                     Text(connectionModule.moduleHandler.id.name)
                 }
             }
-            if let providerPair = profile.firstProviderModuleWithMetadata {
-                if let provider = providerManager.provider(withId: providerPair.1.id) {
-                    HStack {
-                        Text(Strings.Global.provider)
-                            .fontWeight(.light)
-                        Spacer()
-                        Text(provider.description)
+            if let pair = profile.selectedProvider {
+                if let metadata = providerManager.provider(withId: pair.selection.id) {
+                    DetailRowView(title: Strings.Global.provider) {
+                        Text(metadata.description)
                     }
                 }
-                if let entity = providerPair.1.entity {
-                    HStack {
-                        Text(Strings.Global.country)
-                            .fontWeight(.light)
-                        Spacer()
+                if let entity = pair.selection.entity {
+                    DetailRowView(title: Strings.Global.country) {
                         ThemeCountryText(entity.header.countryCode)
                     }
                 }
@@ -133,12 +128,8 @@ private extension ActiveProfileView {
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: { _ in
-                // FIXME: #788, TV missing provider entity
-            },
-            onPurchaseRequired: { _ in
-                // FIXME: #788, TV purchase required
-            },
+            onProviderEntityRequired: onProviderEntityRequired,
+            onPurchaseRequired: onPurchaseRequired,
             label: {
                 Text($0 ? Strings.Global.connect : Strings.Global.disconnect)
                     .frame(maxWidth: .infinity)
@@ -173,6 +164,36 @@ private extension ActiveProfileView {
 }
 
 // MARK: -
+
+private extension ActiveProfileView {
+    func onProviderEntityRequired(_ profile: Profile) {
+        // FIXME: #788, TV missing provider entity
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        // FIXME: #788, TV purchase required
+    }
+}
+
+// MARK: - Subviews
+
+private struct DetailRowView<Content>: View where Content: View {
+    let title: String
+
+    @ViewBuilder
+    let content: Content
+
+    var body: some View {
+        HStack {
+            Text(title)
+                .fontWeight(.light)
+            Spacer()
+            content
+        }
+    }
+}
+
+// MARK: - Previews
 
 #Preview("Host") {
     let profile: Profile = {

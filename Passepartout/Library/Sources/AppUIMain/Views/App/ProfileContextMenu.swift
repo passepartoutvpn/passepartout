@@ -87,7 +87,7 @@ private extension ProfileContextMenu {
 
     var providerConnectToButton: some View {
         profile?
-            .firstProviderModuleWithMetadata
+            .selectedProvider
             .map { _ in
                 Button(Strings.Ui.ProfileContext.connectTo) {
                     flow?.onEditProviderEntity(profile!)

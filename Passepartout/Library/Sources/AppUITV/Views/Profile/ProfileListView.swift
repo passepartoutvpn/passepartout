@@ -81,12 +81,8 @@ private extension ProfileListView {
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: { _ in
-                // FIXME: #788, TV missing provider entity
-            },
-            onPurchaseRequired: { _ in
-                // FIXME: #788, TV purchase required
-            },
+            onProviderEntityRequired: onProviderEntityRequired,
+            onPurchaseRequired: onPurchaseRequired,
             label: { _ in
                 toggleView(for: header)
             }
@@ -106,6 +102,18 @@ private extension ProfileListView {
 }
 
 // MARK: -
+
+private extension ProfileListView {
+    func onProviderEntityRequired(_ profile: Profile) {
+        // FIXME: #788, TV missing provider entity
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        // FIXME: #788, TV purchase required
+    }
+}
+
+// MARK: - Previews
 
 #Preview("List") {
     ContentPreview(profileManager: .mock)

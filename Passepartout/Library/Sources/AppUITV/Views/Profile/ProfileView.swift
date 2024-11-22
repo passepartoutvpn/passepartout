@@ -48,7 +48,7 @@ struct ProfileView: View, TunnelInstallationProviding {
     var tunnel: ExtendedTunnel
 
     @State
-    private var showsSidePanel = false
+    var showsSidePanel = false
 
     @FocusState
     private var focusedField: Field?
@@ -185,10 +185,20 @@ private extension ProfileView {
 
 // MARK: -
 
-#Preview {
+#Preview("List") {
     ProfileView(
         profileManager: .mock,
-        tunnel: .mock
+        tunnel: .mock,
+        showsSidePanel: true
+    )
+    .withMockEnvironment()
+}
+
+#Preview("Empty") {
+    ProfileView(
+        profileManager: ProfileManager(profiles: []),
+        tunnel: .mock,
+        showsSidePanel: true
     )
     .withMockEnvironment()
 }

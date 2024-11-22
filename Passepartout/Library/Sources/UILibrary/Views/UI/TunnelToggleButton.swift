@@ -113,7 +113,7 @@ private extension TunnelToggleButton {
             if canConnect {
 
                 // provider module -> check requirements
-                if let providerModule = profile.firstProviderModule,
+                if let providerModule = profile.activeProviderModule,
                    providerModule.isProviderRequired {
 
                     // missing required provider -> show error
