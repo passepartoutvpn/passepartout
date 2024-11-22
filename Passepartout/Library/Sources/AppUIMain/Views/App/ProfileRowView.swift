@@ -28,10 +28,16 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct ProfileRowView: View, Routable {
+struct ProfileRowView: View, Routable, SizeClassProviding {
 
     @EnvironmentObject
     private var theme: Theme
+
+    @Environment(\.horizontalSizeClass)
+    var hsClass
+
+    @Environment(\.verticalSizeClass)
+    var vsClass
 
     let style: ProfileCardView.Style
 
@@ -64,16 +70,18 @@ struct ProfileRowView: View, Routable {
                     cardView
                 }
                 Spacer()
-                HStack(spacing: 10.0) {
+                HStack(spacing: 8) {
                     ProfileAttributesView(
                         attributes: attributes,
                         isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
                     )
+                    .imageScale(isBigDevice ? .large : .medium)
+
                     ProfileInfoButton(preview: preview) {
                         flow?.onEditProfile($0)
                     }
+                    .imageScale(.large)
                 }
-                .imageScale(.large)
             }
             Spacer(minLength: .zero)
         }
@@ -101,7 +109,7 @@ private struct MarkerView: View {
                 PurchaseRequiredButton(features: requiredFeatures, paywallReason: .constant(nil))
             }
         }
-        .frame(width: 24.0)
+        .frame(width: 20)
     }
 }
 
