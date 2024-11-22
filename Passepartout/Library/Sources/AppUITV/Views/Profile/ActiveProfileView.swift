@@ -128,12 +128,8 @@ private extension ActiveProfileView {
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: { _ in
-                // FIXME: #788, TV missing provider entity
-            },
-            onPurchaseRequired: { _ in
-                // FIXME: #788, TV purchase required
-            },
+            onProviderEntityRequired: onProviderEntityRequired,
+            onPurchaseRequired: onPurchaseRequired,
             label: {
                 Text($0 ? Strings.Global.connect : Strings.Global.disconnect)
                     .frame(maxWidth: .infinity)
@@ -167,6 +163,18 @@ private extension ActiveProfileView {
     }
 }
 
+// MARK: -
+
+private extension ActiveProfileView {
+    func onProviderEntityRequired(_ profile: Profile) {
+        // FIXME: #788, TV missing provider entity
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        // FIXME: #788, TV purchase required
+    }
+}
+
 // MARK: - Subviews
 
 private struct DetailRowView<Content>: View where Content: View {
@@ -185,7 +193,7 @@ private struct DetailRowView<Content>: View where Content: View {
     }
 }
 
-// MARK: -
+// MARK: - Previews
 
 #Preview("Host") {
     let profile: Profile = {
