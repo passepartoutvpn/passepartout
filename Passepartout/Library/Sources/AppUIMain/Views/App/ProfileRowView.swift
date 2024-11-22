@@ -40,7 +40,7 @@ struct ProfileRowView: View, Routable {
 
     let tunnel: ExtendedTunnel
 
-    let header: ProfileHeader
+    let header: ProfilePreview
 
     let interactiveManager: InteractiveManager
 
@@ -102,6 +102,10 @@ private struct MarkerView: View {
 }
 
 private extension ProfileRowView {
+    var profile: Profile? {
+        profileManager.profile(withId: header.id)
+    }
+
     var markerView: some View {
         MarkerView(
             headerId: header.id,
@@ -114,7 +118,7 @@ private extension ProfileRowView {
     var cardView: some View {
         TunnelToggleButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
@@ -169,7 +173,7 @@ private extension ProfileRowView {
             style: .compact,
             profileManager: profileManager,
             tunnel: .mock,
-            header: profile.header(),
+            header: .init(profile),
             interactiveManager: InteractiveManager(),
             errorHandler: .default(),
             nextProfileId: .constant(nil),

@@ -78,7 +78,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 }
 
 private extension ProfileListView {
-    var allHeaders: [ProfileHeader] {
+    var allHeaders: [ProfilePreview] {
         profileManager.headers
     }
 
@@ -98,7 +98,7 @@ private extension ProfileListView {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    header: $0.header(),
+                    header: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
@@ -108,7 +108,7 @@ private extension ProfileListView {
         }
     }
 
-    func profileView(for header: ProfileHeader) -> some View {
+    func profileView(for header: ProfilePreview) -> some View {
         ProfileRowView(
             style: cardStyle,
             profileManager: profileManager,

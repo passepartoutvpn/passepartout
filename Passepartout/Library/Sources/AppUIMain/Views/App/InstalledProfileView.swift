@@ -124,7 +124,7 @@ private extension InstalledProfileView {
         ProfileContextMenu(
             profileManager: profileManager,
             tunnel: tunnel,
-            header: (profile ?? .mock).header(),
+            header: .init(profile ?? .mock),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             isInstalledProfile: true,
@@ -324,7 +324,7 @@ private struct ContentView: View {
                 style: .full,
                 profileManager: .mock,
                 tunnel: .mock,
-                header: Profile.mock.header(),
+                header: .init(.mock),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),

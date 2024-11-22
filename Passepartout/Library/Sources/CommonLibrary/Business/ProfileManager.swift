@@ -147,9 +147,9 @@ extension ProfileManager {
         !filteredProfiles.isEmpty
     }
 
-    public var headers: [ProfileHeader] {
+    public var headers: [ProfilePreview] {
         filteredProfiles.map {
-            $0.header()
+            processor?.preview(from: $0) ?? ProfilePreview($0)
         }
     }
 

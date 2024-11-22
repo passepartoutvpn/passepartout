@@ -88,7 +88,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 // MARK: - Subviews
 
 private extension ProfileGridView {
-    var allHeaders: [ProfileHeader] {
+    var allHeaders: [ProfilePreview] {
         profileManager.headers
     }
 
@@ -108,7 +108,7 @@ private extension ProfileGridView {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    header: $0.header(),
+                    header: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
@@ -118,7 +118,7 @@ private extension ProfileGridView {
         }
     }
 
-    func profileView(for header: ProfileHeader) -> some View {
+    func profileView(for header: ProfilePreview) -> some View {
         ProfileRowView(
             style: .full,
             profileManager: profileManager,

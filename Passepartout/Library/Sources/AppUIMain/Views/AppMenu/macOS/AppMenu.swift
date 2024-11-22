@@ -83,11 +83,11 @@ private extension AppMenu {
         ForEach(profileManager.headers, id: \.id, content: profileToggle)
     }
 
-    func profileToggle(for header: ProfileHeader) -> some View {
+    func profileToggle(for header: ProfilePreview) -> some View {
         Toggle(header.name, isOn: profileToggleBinding(for: header))
     }
 
-    func profileToggleBinding(for header: ProfileHeader) -> Binding<Bool> {
+    func profileToggleBinding(for header: ProfilePreview) -> Binding<Bool> {
         Binding {
             header.id == tunnel.currentProfile?.id && tunnel.status != .inactive
         } set: { isOn in

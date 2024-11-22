@@ -809,10 +809,6 @@ public enum Strings {
         }
       }
       public enum Rows {
-        /// %d modules
-        public static func modules(_ p1: Int) -> String {
-          return Strings.tr("Localizable", "views.profiles.rows.modules", p1, fallback: "%d modules")
-        }
         /// Select a profile
         public static let notInstalled = Strings.tr("Localizable", "views.profiles.rows.not_installed", fallback: "Select a profile")
       }

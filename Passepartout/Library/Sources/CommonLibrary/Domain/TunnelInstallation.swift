@@ -27,11 +27,11 @@ import Foundation
 import PassepartoutKit
 
 public struct TunnelInstallation {
-    public let header: ProfileHeader
+    public let header: ProfilePreview
 
     public let onDemand: Bool
 
-    public init(header: ProfileHeader, onDemand: Bool) {
+    public init(header: ProfilePreview, onDemand: Bool) {
         self.header = header
         self.onDemand = onDemand
     }

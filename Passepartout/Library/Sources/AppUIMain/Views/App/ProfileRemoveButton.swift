@@ -30,7 +30,7 @@ import SwiftUI
 struct ProfileRemoveButton<Label>: View where Label: View {
     let profileManager: ProfileManager
 
-    let header: ProfileHeader
+    let header: ProfilePreview
 
     let label: () -> Label
 

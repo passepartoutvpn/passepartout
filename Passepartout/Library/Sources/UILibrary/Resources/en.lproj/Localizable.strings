@@ -117,7 +117,6 @@
 // MARK: - Views
 
 "views.profiles.rows.not_installed" = "Select a profile";
-"views.profiles.rows.modules" = "%d modules";
 "views.profiles.folders.active_profile" = "Installed profile";
 "views.profiles.folders.default" = "My profiles";
 "views.profiles.folders.add_profile" = "Add profile";

@@ -33,7 +33,7 @@ struct ProfileContextMenu: View, Routable {
 
     let tunnel: ExtendedTunnel
 
-    let header: ProfileHeader
+    let header: ProfilePreview
 
     let interactiveManager: InteractiveManager
 
@@ -143,7 +143,7 @@ private extension ProfileContextMenu {
             ProfileContextMenu(
                 profileManager: .mock,
                 tunnel: .mock,
-                header: Profile.mock.header(),
+                header: .init(.mock),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 isInstalledProfile: true

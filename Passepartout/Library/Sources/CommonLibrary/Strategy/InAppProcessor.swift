@@ -33,6 +33,8 @@ public final class InAppProcessor: ObservableObject, Sendable {
 
     private nonisolated let _isIncluded: (IAPManager, Profile) -> Bool
 
+    private nonisolated let _preview: (Profile) -> ProfilePreview
+
     private nonisolated let _willRebuild: (IAPManager, Profile.Builder) throws -> Profile.Builder
 
     private nonisolated let _willInstall: (IAPManager, Profile) throws -> Profile
@@ -43,6 +45,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
         iapManager: IAPManager,
         title: @escaping (Profile) -> String,
         isIncluded: @escaping (IAPManager, Profile) -> Bool,
+        preview: @escaping (Profile) -> ProfilePreview,
         willRebuild: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
         willInstall: @escaping (IAPManager, Profile) throws -> Profile,
         verify: @escaping (IAPManager, Profile) -> Set<AppFeature>?
@@ -50,6 +53,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
         self.iapManager = iapManager
         _title = title
         _isIncluded = isIncluded
+        _preview = preview
         _willRebuild = willRebuild
         _willInstall = willInstall
         _verify = verify
@@ -65,6 +69,10 @@ extension InAppProcessor: ProfileProcessor {
 
     public func isIncluded(_ profile: Profile) -> Bool {
         _isIncluded(iapManager, profile)
+    }
+
+    public func preview(from profile: Profile) -> ProfilePreview {
+        _preview(profile)
     }
 
     public func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {

@@ -29,6 +29,8 @@ import PassepartoutKit
 public protocol ProfileProcessor {
     func isIncluded(_ profile: Profile) -> Bool
 
+    func preview(from profile: Profile) -> ProfilePreview
+
     func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder
 
     func verify(_ profile: Profile) -> Set<AppFeature>?

@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
 struct ProfileCardView: View {
@@ -36,7 +35,7 @@ struct ProfileCardView: View {
 
     let style: Style
 
-    let header: ProfileHeader
+    let header: ProfilePreview
 
     var body: some View {
         switch style {
@@ -50,7 +49,7 @@ struct ProfileCardView: View {
                 Text(header.name)
                     .font(.headline)
                     .themeTruncating()
-                Text(Strings.Views.Profiles.Rows.modules(header.modules.count))
+                Text(header.subtitle ?? "")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -66,13 +65,13 @@ struct ProfileCardView: View {
         Section {
             ProfileCardView(
                 style: .compact,
-                header: Profile.mock.header()
+                header: .init(.mock)
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                header: Profile.mock.header()
+                header: .init(.mock)
             )
         }
     }

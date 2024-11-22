@@ -1,8 +1,8 @@
 //
-//  ProfileFlow.swift
+//  ProfilePreview.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 11/22/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,31 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-struct ProfileFlow {
-    let onEditProfile: (ProfilePreview) -> Void
+public struct ProfilePreview: Identifiable {
+    public let id: Profile.ID
 
-    let onEditProviderEntity: (Profile) -> Void
+    public let name: String
 
-    let onMigrateProfiles: () -> Void
+    public let subtitle: String?
 
-    let onPurchaseRequired: (Set<AppFeature>) -> Void
+    public init(id: Profile.ID, name: String, subtitle: String? = nil) {
+        self.id = id
+        self.name = name
+        self.subtitle = subtitle
+    }
+
+    public init(_ profile: Profile) {
+        id = profile.id
+        name = profile.name
+        subtitle = nil
+    }
+}
+
+extension ProfilePreview: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 }

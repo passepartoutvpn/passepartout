@@ -53,6 +53,9 @@ extension AppContext {
             isIncluded: { _, _ in
                 true
             },
+            preview: {
+                ProfilePreview($0)
+            },
             willRebuild: { _, builder in
                 builder
             },

@@ -31,7 +31,7 @@ import SwiftUI
 struct ProfileDuplicateButton<Label>: View where Label: View {
     let profileManager: ProfileManager
 
-    let header: ProfileHeader
+    let header: ProfilePreview
 
     let errorHandler: ErrorHandler
 
