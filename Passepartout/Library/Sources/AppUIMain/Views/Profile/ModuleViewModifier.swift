@@ -33,16 +33,8 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 
     let draft: T
 
-    let withName: Bool
-
     func body(content: Content) -> some View {
         Form {
-            if withName {
-                NameSection(
-                    name: editor.binding(forNameOf: draft.id),
-                    placeholder: draft.moduleType.localizedDescription
-                )
-            }
             content
         }
         .themeForm()
@@ -52,7 +44,7 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 }
 
 extension View {
-    func moduleView<T>(editor: ProfileEditor, draft: T, withName: Bool = true) -> some View where T: ModuleBuilder & Equatable {
-        modifier(ModuleViewModifier(editor: editor, draft: draft, withName: withName))
+    func moduleView<T>(editor: ProfileEditor, draft: T) -> some View where T: ModuleBuilder & Equatable {
+        modifier(ModuleViewModifier(editor: editor, draft: draft))
     }
 }
