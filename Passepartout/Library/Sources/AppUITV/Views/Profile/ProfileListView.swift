@@ -46,15 +46,19 @@ struct ProfileListView: View {
     var errorHandler: ErrorHandler
 
     var body: some View {
-        List {
-            Section {
+        VStack {
+            headerView
+                .frame(maxWidth: .infinity, alignment: .leading)
+            List {
                 ForEach(headers, id: \.id, content: toggleButton(for:))
-            } header: {
-                headerView
+            }
+            .listStyle(.grouped)
+            .scrollClipDisabled()
+            .themeProgress(if: false, isEmpty: !profileManager.hasProfiles) {
+                Text(Strings.Views.Profiles.Folders.noProfiles)
+                    .themeEmptyMessage()
             }
         }
-        .listStyle(.grouped)
-        .scrollClipDisabled()
     }
 }
 
@@ -68,7 +72,6 @@ private extension ProfileListView {
             .textCase(.none)
             .foregroundStyle(.primary)
             .font(.body)
-            .padding(.bottom)
     }
 
     func toggleButton(for header: ProfileHeader) -> some View {
@@ -102,23 +105,30 @@ private extension ProfileListView {
     }
 }
 
-#Preview {
-    struct ContentPreview: View {
+// MARK: -
 
-        @FocusState
-        var focusedField: ProfileView.Field?
+#Preview("List") {
+    ContentPreview(profileManager: .mock)
+}
 
-        var body: some View {
-            ProfileListView(
-                profileManager: .mock,
-                tunnel: .mock,
-                focusedField: $focusedField,
-                interactiveManager: InteractiveManager(),
-                errorHandler: .default()
-            )
-            .withMockEnvironment()
-        }
+#Preview("Empty") {
+    ContentPreview(profileManager: ProfileManager(profiles: []))
+}
+
+private struct ContentPreview: View {
+    let profileManager: ProfileManager
+
+    @FocusState
+    var focusedField: ProfileView.Field?
+
+    var body: some View {
+        ProfileListView(
+            profileManager: profileManager,
+            tunnel: .mock,
+            focusedField: $focusedField,
+            interactiveManager: InteractiveManager(),
+            errorHandler: .default()
+        )
+        .withMockEnvironment()
     }
-
-    return ContentPreview()
 }
