@@ -96,7 +96,7 @@ private extension ActiveProfileView {
 
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
-            if let connectionModule = profile.modules.first(where: { $0 is ConnectionModule }) {
+            if let connectionModule = profile.firstConnectionModule(ifActive: true) {
                 HStack {
                     Text(Strings.Global.protocol)
                         .fontWeight(.light)
@@ -104,16 +104,16 @@ private extension ActiveProfileView {
                     Text(connectionModule.moduleHandler.id.name)
                 }
             }
-            if let providerPair = profile.firstProviderModuleWithMetadata {
-                if let provider = providerManager.provider(withId: providerPair.1.id) {
+            if let pair = profile.selectedProvider {
+                if let metadata = providerManager.provider(withId: pair.selection.id) {
                     HStack {
                         Text(Strings.Global.provider)
                             .fontWeight(.light)
                         Spacer()
-                        Text(provider.description)
+                        Text(metadata.description)
                     }
                 }
-                if let entity = providerPair.1.entity {
+                if let entity = pair.selection.entity {
                     HStack {
                         Text(Strings.Global.country)
                             .fontWeight(.light)

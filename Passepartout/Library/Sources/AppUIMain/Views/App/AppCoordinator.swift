@@ -168,10 +168,10 @@ extension AppCoordinator {
                     enterDetail(of: profile)
                 },
                 onEditProviderEntity: {
-                    guard let pair = $0.firstProviderModuleWithMetadata else {
+                    guard let pair = $0.selectedProvider else {
                         return
                     }
-                    present(.editProviderEntity($0, pair.0, pair.1))
+                    present(.editProviderEntity($0, pair.module, pair.selection))
                 },
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
