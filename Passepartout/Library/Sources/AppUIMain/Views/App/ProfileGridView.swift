@@ -64,7 +64,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                             .unanimated()
                     }
                     LazyVGrid(columns: columns) {
-                        ForEach(allHeaders, content: profileView)
+                        ForEach(allPreviews, content: profileView)
                             .onDelete { offsets in
                                 Task {
                                     await profileManager.removeProfiles(at: offsets)
@@ -88,8 +88,8 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 // MARK: - Subviews
 
 private extension ProfileGridView {
-    var allHeaders: [ProfilePreview] {
-        profileManager.headers
+    var allPreviews: [ProfilePreview] {
+        profileManager.previews
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {

@@ -63,7 +63,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                         .unanimated()
                 }
                 Group {
-                    ForEach(allHeaders, content: profileView)
+                    ForEach(allPreviews, content: profileView)
                         .onDelete { offsets in
                             Task {
                                 await profileManager.removeProfiles(at: offsets)
@@ -78,8 +78,8 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 }
 
 private extension ProfileListView {
-    var allHeaders: [ProfilePreview] {
-        profileManager.headers
+    var allPreviews: [ProfilePreview] {
+        profileManager.previews
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {

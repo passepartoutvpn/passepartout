@@ -33,7 +33,7 @@ extension TunnelInstallationProviding {
         guard let currentProfile = tunnel.currentProfile else {
             return nil
         }
-        guard let header = profileManager.headers.first(where: {
+        guard let header = profileManager.previews.first(where: {
             $0.id == currentProfile.id
         }) else {
             return nil

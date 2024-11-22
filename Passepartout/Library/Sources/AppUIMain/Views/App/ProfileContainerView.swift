@@ -136,7 +136,7 @@ private struct ContainerModifier: ViewModifier {
                 profileManager.search(byName: $0)
             }
             .themeAnimation(on: profileManager.isReady, category: .profiles)
-            .themeAnimation(on: profileManager.headers, category: .profiles)
+            .themeAnimation(on: profileManager.previews, category: .profiles)
     }
 }
 

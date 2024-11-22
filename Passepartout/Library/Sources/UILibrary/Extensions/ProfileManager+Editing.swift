@@ -30,7 +30,7 @@ import PassepartoutKit
 @MainActor
 extension ProfileManager {
     public func removeProfiles(at offsets: IndexSet) async {
-        let idsToRemove = headers
+        let idsToRemove = previews
             .enumerated()
             .filter {
                 offsets.contains($0.offset)
