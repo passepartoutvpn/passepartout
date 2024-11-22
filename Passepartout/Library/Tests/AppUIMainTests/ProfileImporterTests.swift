@@ -47,7 +47,7 @@ extension ProfileImporterTests {
 
         try await sut.tryImport(urls: [], profileManager: profileManager, registry: registry)
         XCTAssertEqual(sut.nextURL, nil)
-        XCTAssertTrue(profileManager.headers.isEmpty)
+        XCTAssertTrue(profileManager.previews.isEmpty)
     }
 
     func test_givenURL_whenImport_thenOneProfileIsImported() async throws {

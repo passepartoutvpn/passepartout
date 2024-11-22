@@ -63,7 +63,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                         .unanimated()
                 }
                 Group {
-                    ForEach(allHeaders, content: profileView)
+                    ForEach(allPreviews, content: profileView)
                         .onDelete { offsets in
                             Task {
                                 await profileManager.removeProfiles(at: offsets)
@@ -78,8 +78,8 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 }
 
 private extension ProfileListView {
-    var allHeaders: [ProfileHeader] {
-        profileManager.headers
+    var allPreviews: [ProfilePreview] {
+        profileManager.previews
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {
@@ -98,7 +98,7 @@ private extension ProfileListView {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    header: $0.header(),
+                    preview: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
@@ -108,12 +108,12 @@ private extension ProfileListView {
         }
     }
 
-    func profileView(for header: ProfileHeader) -> some View {
+    func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(
             style: cardStyle,
             profileManager: profileManager,
             tunnel: tunnel,
-            header: header,
+            preview: preview,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
@@ -124,14 +124,14 @@ private extension ProfileListView {
             ProfileContextMenu(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                header: header,
+                preview: preview,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
                 flow: flow
             )
         }
-        .id(header.id)
+        .id(preview.id)
     }
 }
 

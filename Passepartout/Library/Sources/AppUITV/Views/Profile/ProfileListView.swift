@@ -50,7 +50,7 @@ struct ProfileListView: View {
             headerView
                 .frame(maxWidth: .infinity, alignment: .leading)
             List {
-                ForEach(headers, id: \.id, content: toggleButton(for:))
+                ForEach(previews, id: \.id, content: toggleButton(for:))
             }
             .listStyle(.grouped)
             .scrollClipDisabled()
@@ -63,8 +63,8 @@ struct ProfileListView: View {
 }
 
 private extension ProfileListView {
-    var headers: [ProfileHeader] {
-        profileManager.headers
+    var previews: [ProfilePreview] {
+        profileManager.previews
     }
 
     var headerView: some View {
@@ -74,28 +74,28 @@ private extension ProfileListView {
             .font(.body)
     }
 
-    func toggleButton(for header: ProfileHeader) -> some View {
+    func toggleButton(for preview: ProfilePreview) -> some View {
         TunnelToggleButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profileManager.profile(withId: preview.id),
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             onProviderEntityRequired: onProviderEntityRequired,
             onPurchaseRequired: onPurchaseRequired,
             label: { _ in
-                toggleView(for: header)
+                toggleView(for: preview)
             }
         )
-        .focused($focusedField, equals: .profile(header.id))
+        .focused($focusedField, equals: .profile(preview.id))
     }
 
-    func toggleView(for header: ProfileHeader) -> some View {
+    func toggleView(for preview: ProfilePreview) -> some View {
         HStack {
-            Text(header.name)
+            Text(preview.name)
             Spacer()
             ThemeImage(tunnel.statusImageName)
-                .opaque(header.id == tunnel.currentProfile?.id)
+                .opaque(preview.id == tunnel.currentProfile?.id)
         }
         .font(.headline)
     }

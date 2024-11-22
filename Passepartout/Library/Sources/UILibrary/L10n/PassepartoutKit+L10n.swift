@@ -27,6 +27,42 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
+extension Profile: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case moduleTypes
+
+        case connectionType
+
+        case nonConnectionTypes
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .moduleTypes:
+            return activeModules
+                .nilIfEmpty?
+                .map(\.moduleType.localizedDescription)
+                .sorted()
+                .joined(separator: ", ")
+
+        case .connectionType:
+            return firstConnectionModule(ifActive: true)?
+                .moduleType
+                .localizedDescription
+
+        case .nonConnectionTypes:
+            return activeModules
+                .filter {
+                    !($0 is ConnectionModule)
+                }
+                .nilIfEmpty?
+                .map(\.moduleType.localizedDescription)
+                .sorted()
+                .joined(separator: ", ")
+        }
+    }
+}
+
 extension TunnelStatus: LocalizableEntity {
     public var localizedDescription: String {
         let V = Strings.Entities.TunnelStatus.self

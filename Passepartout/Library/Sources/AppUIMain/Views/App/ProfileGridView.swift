@@ -64,7 +64,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                             .unanimated()
                     }
                     LazyVGrid(columns: columns) {
-                        ForEach(allHeaders, content: profileView)
+                        ForEach(allPreviews, content: profileView)
                             .onDelete { offsets in
                                 Task {
                                     await profileManager.removeProfiles(at: offsets)
@@ -88,8 +88,8 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 // MARK: - Subviews
 
 private extension ProfileGridView {
-    var allHeaders: [ProfileHeader] {
-        profileManager.headers
+    var allPreviews: [ProfilePreview] {
+        profileManager.previews
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {
@@ -108,7 +108,7 @@ private extension ProfileGridView {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    header: $0.header(),
+                    preview: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
@@ -118,31 +118,31 @@ private extension ProfileGridView {
         }
     }
 
-    func profileView(for header: ProfileHeader) -> some View {
+    func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(
             style: .full,
             profileManager: profileManager,
             tunnel: tunnel,
-            header: header,
+            preview: preview,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
             flow: flow
         )
-        .themeGridCell(isSelected: header.id == nextProfileId ?? currentProfile?.id)
+        .themeGridCell(isSelected: preview.id == nextProfileId ?? currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                header: header,
+                preview: preview,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
                 flow: flow
             )
         }
-        .id(header.id)
+        .id(preview.id)
     }
 }
 

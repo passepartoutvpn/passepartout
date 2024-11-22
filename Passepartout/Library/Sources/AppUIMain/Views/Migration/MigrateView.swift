@@ -145,7 +145,7 @@ private extension MigrateView {
             model.step = .fetching
             pp_log(.App.migration, .notice, "Fetch migratable profiles...")
             let migratable = try await migrationManager.fetchMigratableProfiles()
-            let knownIDs = Set(profileManager.headers.map(\.id))
+            let knownIDs = Set(profileManager.previews.map(\.id))
             model.profiles = migratable.filter {
                 !knownIDs.contains($0.id)
             }

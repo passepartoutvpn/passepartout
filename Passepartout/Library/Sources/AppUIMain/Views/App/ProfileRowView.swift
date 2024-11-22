@@ -40,7 +40,7 @@ struct ProfileRowView: View, Routable {
 
     let tunnel: ExtendedTunnel
 
-    let header: ProfileHeader
+    let preview: ProfilePreview
 
     let interactiveManager: InteractiveManager
 
@@ -67,7 +67,7 @@ struct ProfileRowView: View, Routable {
                     attributes: attributes,
                     isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
                 )
-                ProfileInfoButton(header: header) {
+                ProfileInfoButton(preview: preview) {
                     flow?.onEditProfile($0)
                 }
             }
@@ -79,7 +79,7 @@ struct ProfileRowView: View, Routable {
 // MARK: - Subviews (observing)
 
 private struct MarkerView: View {
-    let headerId: Profile.ID
+    let profileId: Profile.ID
 
     let nextProfileId: Profile.ID?
 
@@ -90,8 +90,8 @@ private struct MarkerView: View {
 
     var body: some View {
         ZStack {
-            ThemeImage(headerId == nextProfileId ? .pending : tunnel.statusImageName)
-                .opaque(requiredFeatures == nil && (headerId == nextProfileId || headerId == tunnel.currentProfile?.id))
+            ThemeImage(profileId == nextProfileId ? .pending : tunnel.statusImageName)
+                .opaque(requiredFeatures == nil && (profileId == nextProfileId || profileId == tunnel.currentProfile?.id))
 
             if let requiredFeatures {
                 PurchaseRequiredButton(features: requiredFeatures, paywallReason: .constant(nil))
@@ -102,9 +102,13 @@ private struct MarkerView: View {
 }
 
 private extension ProfileRowView {
+    var profile: Profile? {
+        profileManager.profile(withId: preview.id)
+    }
+
     var markerView: some View {
         MarkerView(
-            headerId: header.id,
+            profileId: preview.id,
             nextProfileId: nextProfileId,
             tunnel: tunnel,
             requiredFeatures: requiredFeatures
@@ -114,7 +118,7 @@ private extension ProfileRowView {
     var cardView: some View {
         TunnelToggleButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
@@ -127,7 +131,7 @@ private extension ProfileRowView {
             label: { _ in
                 ProfileCardView(
                     style: style,
-                    header: header
+                    preview: preview
                 )
                 .frame(maxWidth: .infinity)
                 .contentShape(.rect)
@@ -146,15 +150,15 @@ private extension ProfileRowView {
     }
 
     var requiredFeatures: Set<AppFeature>? {
-        profileManager.requiredFeatures(forProfileWithId: header.id)
+        profileManager.requiredFeatures(forProfileWithId: preview.id)
     }
 
     var isShared: Bool {
-        profileManager.isRemotelyShared(profileWithId: header.id)
+        profileManager.isRemotelyShared(profileWithId: preview.id)
     }
 
     var isTV: Bool {
-        isShared && profileManager.isAvailableForTV(profileWithId: header.id)
+        isShared && profileManager.isAvailableForTV(profileWithId: preview.id)
     }
 }
 
@@ -169,7 +173,7 @@ private extension ProfileRowView {
             style: .compact,
             profileManager: profileManager,
             tunnel: .mock,
-            header: profile.header(),
+            preview: .init(profile),
             interactiveManager: InteractiveManager(),
             errorHandler: .default(),
             nextProfileId: .constant(nil),

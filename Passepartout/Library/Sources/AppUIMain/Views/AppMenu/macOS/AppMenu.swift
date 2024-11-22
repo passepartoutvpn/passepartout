@@ -80,19 +80,19 @@ private extension AppMenu {
     }
 
     var profilesList: some View {
-        ForEach(profileManager.headers, id: \.id, content: profileToggle)
+        ForEach(profileManager.previews, id: \.id, content: profileToggle)
     }
 
-    func profileToggle(for header: ProfileHeader) -> some View {
-        Toggle(header.name, isOn: profileToggleBinding(for: header))
+    func profileToggle(for preview: ProfilePreview) -> some View {
+        Toggle(preview.name, isOn: profileToggleBinding(for: preview))
     }
 
-    func profileToggleBinding(for header: ProfileHeader) -> Binding<Bool> {
+    func profileToggleBinding(for preview: ProfilePreview) -> Binding<Bool> {
         Binding {
-            header.id == tunnel.currentProfile?.id && tunnel.status != .inactive
+            preview.id == tunnel.currentProfile?.id && tunnel.status != .inactive
         } set: { isOn in
             Task {
-                guard let profile = profileManager.profile(withId: header.id) else {
+                guard let profile = profileManager.profile(withId: preview.id) else {
                     return
                 }
                 do {
@@ -102,7 +102,7 @@ private extension AppMenu {
                         try await tunnel.disconnect()
                     }
                 } catch {
-                    pp_log(.app, .error, "Unable to toggle profile \(header.id) from menu: \(error)")
+                    pp_log(.app, .error, "Unable to toggle profile \(preview.id) from menu: \(error)")
                 }
             }
         }

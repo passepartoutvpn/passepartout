@@ -23,17 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
+import CommonLibrary
 import SwiftUI
 
 struct ProfileInfoButton: View {
-    let header: ProfileHeader
+    let preview: ProfilePreview
 
-    let onEdit: (ProfileHeader) -> Void
+    let onEdit: (ProfilePreview) -> Void
 
     var body: some View {
         Button {
-            onEdit(header)
+            onEdit(preview)
         } label: {
             ThemeImage(.info)
         }

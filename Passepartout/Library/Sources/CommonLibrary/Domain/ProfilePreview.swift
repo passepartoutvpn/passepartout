@@ -1,8 +1,8 @@
 //
-//  ProfileDuplicateButton.swift
+//  ProfilePreview.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 11/22/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import CommonUtils
-import SwiftUI
+import Foundation
+import PassepartoutKit
 
-struct ProfileDuplicateButton<Label>: View where Label: View {
-    let profileManager: ProfileManager
+public struct ProfilePreview: Identifiable, Hashable {
+    public let id: Profile.ID
 
-    let preview: ProfilePreview
+    public let name: String
 
-    let errorHandler: ErrorHandler
+    public let subtitle: String?
 
-    let label: () -> Label
+    public init(id: Profile.ID, name: String, subtitle: String? = nil) {
+        self.id = id
+        self.name = name
+        self.subtitle = subtitle
+    }
 
-    var body: some View {
-        Button {
-            Task {
-                do {
-                    try await profileManager.duplicate(profileWithId: preview.id)
-                } catch {
-                    errorHandler.handle(
-                        error,
-                        title: Strings.Global.duplicate,
-                        message: Strings.Views.Profiles.Errors.duplicate(preview.name)
-                    )
-                }
-            }
-        } label: {
-            label()
-        }
+    public init(_ profile: Profile) {
+        id = profile.id
+        name = profile.name
+        subtitle = nil
     }
 }

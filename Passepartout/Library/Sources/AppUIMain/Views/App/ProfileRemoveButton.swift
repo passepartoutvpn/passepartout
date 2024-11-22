@@ -24,20 +24,19 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
 struct ProfileRemoveButton<Label>: View where Label: View {
     let profileManager: ProfileManager
 
-    let header: ProfileHeader
+    let preview: ProfilePreview
 
     let label: () -> Label
 
     var body: some View {
         Button(role: .destructive) {
             Task {
-                await profileManager.remove(withId: header.id)
+                await profileManager.remove(withId: preview.id)
             }
         } label: {
             label()

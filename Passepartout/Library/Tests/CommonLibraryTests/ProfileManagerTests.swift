@@ -47,7 +47,7 @@ extension ProfileManagerTests {
         let sut = ProfileManager(profiles: [profile])
         XCTAssertFalse(sut.isReady)
         XCTAssertFalse(sut.hasProfiles)
-        XCTAssertTrue(sut.headers.isEmpty)
+        XCTAssertTrue(sut.previews.isEmpty)
     }
 
     func test_givenRepository_whenNotReady_thenHasNoProfiles() {
@@ -55,7 +55,7 @@ extension ProfileManagerTests {
         let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
         XCTAssertFalse(sut.isReady)
         XCTAssertFalse(sut.hasProfiles)
-        XCTAssertTrue(sut.headers.isEmpty)
+        XCTAssertTrue(sut.previews.isEmpty)
     }
 
     func test_givenRepository_whenReady_thenHasProfiles() async throws {
@@ -66,7 +66,7 @@ extension ProfileManagerTests {
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
         XCTAssertTrue(sut.hasProfiles)
-        XCTAssertEqual(sut.headers.count, 1)
+        XCTAssertEqual(sut.previews.count, 1)
         XCTAssertEqual(sut.profile(withId: profile.id), profile)
     }
 
@@ -79,15 +79,15 @@ extension ProfileManagerTests {
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
         XCTAssertTrue(sut.hasProfiles)
-        XCTAssertEqual(sut.headers.count, 2)
+        XCTAssertEqual(sut.previews.count, 2)
 
         try await wait(sut) {
             $0.search(byName: "ar")
         } until: {
-            $0.headers.count == 1
+            $0.previews.count == 1
         }
         XCTAssertTrue(sut.isSearching)
-        let found = try XCTUnwrap(sut.headers.last)
+        let found = try XCTUnwrap(sut.previews.last)
         XCTAssertEqual(found.id, profile2.id)
     }
 
@@ -123,8 +123,8 @@ extension ProfileManagerTests {
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
 
-        XCTAssertEqual(sut.headers.count, 1)
-        XCTAssertEqual(sut.headers.first?.name, "local2")
+        XCTAssertEqual(sut.previews.count, 1)
+        XCTAssertEqual(sut.previews.first?.name, "local2")
     }
 
     func test_givenRepositoryAndProcessor_whenRequiredFeaturesChange_thenMustReload() async throws {
@@ -170,7 +170,7 @@ extension ProfileManagerTests {
         } until: {
             $0.hasProfiles
         }
-        XCTAssertEqual(sut.headers.count, 1)
+        XCTAssertEqual(sut.previews.count, 1)
         XCTAssertEqual(sut.profile(withId: profile.id), profile)
     }
 
@@ -181,7 +181,7 @@ extension ProfileManagerTests {
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
-        XCTAssertEqual(sut.headers.first?.id, profile.id)
+        XCTAssertEqual(sut.previews.first?.id, profile.id)
 
         var builder = profile.builder()
         builder.name = "newName"
@@ -190,7 +190,7 @@ extension ProfileManagerTests {
         try await wait(sut) {
             try await $0.save(renamedProfile)
         } until: {
-            $0.headers.first?.name == renamedProfile.name
+            $0.previews.first?.name == renamedProfile.name
         }
     }
 
@@ -264,7 +264,7 @@ extension ProfileManagerTests {
         } until: {
             !$0.hasProfiles
         }
-        XCTAssertTrue(sut.headers.isEmpty)
+        XCTAssertTrue(sut.previews.isEmpty)
     }
 }
 
@@ -336,7 +336,7 @@ extension ProfileManagerTests {
         let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
 
         try await waitForReady(sut)
-        XCTAssertEqual(sut.headers.count, 1)
+        XCTAssertEqual(sut.previews.count, 1)
 
         let newProfile = sut.new(withName: profile.name)
         XCTAssertEqual(newProfile.name, "example.1")
@@ -352,22 +352,22 @@ extension ProfileManagerTests {
         try await wait(sut) {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
-            $0.headers.count == 2
+            $0.previews.count == 2
         }
 
         try await wait(sut) {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
-            $0.headers.count == 3
+            $0.previews.count == 3
         }
 
         try await wait(sut) {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
-            $0.headers.count == 4
+            $0.previews.count == 4
         }
 
-        XCTAssertEqual(sut.headers.map(\.name), [
+        XCTAssertEqual(sut.previews.map(\.name), [
             "example",
             "example.1",
             "example.2",
@@ -400,10 +400,10 @@ extension ProfileManagerTests {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
-            $0.headers.count == allProfiles.count
+            $0.previews.count == allProfiles.count
         }
 
-        XCTAssertEqual(Set(sut.headers), Set(allProfiles.map { $0.header() }))
+        XCTAssertEqual(Set(sut.previews), Set(allProfiles.map { ProfilePreview($0) }))
         localProfiles.forEach {
             XCTAssertFalse(sut.isRemotelyShared(profileWithId: $0.id))
         }
@@ -437,10 +437,10 @@ extension ProfileManagerTests {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
-            $0.headers.count == 4 // unique IDs
+            $0.previews.count == 4 // unique IDs
         }
 
-        sut.headers.forEach {
+        sut.previews.forEach {
             switch $0.id {
             case l1:
                 XCTAssertEqual($0.name, "remote1")
@@ -493,7 +493,7 @@ extension ProfileManagerTests {
         }
 
         XCTAssertEqual(processor.isIncludedCount, allProfiles.count)
-        XCTAssertEqual(Set(sut.headers), Set(localProfiles.map { $0.header() }))
+        XCTAssertEqual(Set(sut.previews), Set(localProfiles.map { ProfilePreview($0) }))
         localProfiles.forEach {
             XCTAssertFalse(sut.isRemotelyShared(profileWithId: $0.id))
         }
@@ -533,7 +533,7 @@ extension ProfileManagerTests {
             didImport
         }
 
-        try sut.headers.forEach {
+        try sut.previews.forEach {
             let profile = try XCTUnwrap(sut.profile(withId: $0.id))
             XCTAssertTrue(sut.isRemotelyShared(profileWithId: $0.id))
             switch $0.id {
@@ -564,7 +564,7 @@ extension ProfileManagerTests {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
-            $0.headers.count == localProfiles.count
+            $0.previews.count == localProfiles.count
         }
 
         let r1 = UUID()
@@ -588,7 +588,7 @@ extension ProfileManagerTests {
                 newProfile("remote3", id: r3, fingerprint: fp3)
             ]
         } until: {
-            $0.headers.count == 5
+            $0.previews.count == 5
         }
 
         localProfiles.forEach {
@@ -627,7 +627,7 @@ extension ProfileManagerTests {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
-            $0.headers.count == 1
+            $0.previews.count == 1
         }
         try await wait(sut) { _ in
             remoteRepository.profiles = []
@@ -635,8 +635,8 @@ extension ProfileManagerTests {
             didImport
         }
 
-        XCTAssertEqual(sut.headers.count, 1)
-        XCTAssertEqual(sut.headers.first, profile.header())
+        XCTAssertEqual(sut.previews.count, 1)
+        XCTAssertEqual(sut.previews.first, ProfilePreview(profile))
     }
 
     func test_givenRemoteRepositoryAndMirroring_whenRemoteIsDeleted_thenLocalIsDeleted() async throws {
@@ -656,7 +656,7 @@ extension ProfileManagerTests {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
-            $0.headers.count == 1
+            $0.previews.count == 1
         }
         try await wait(sut) { _ in
             remoteRepository.profiles = []

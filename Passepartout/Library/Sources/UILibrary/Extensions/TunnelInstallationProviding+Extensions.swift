@@ -33,12 +33,12 @@ extension TunnelInstallationProviding {
         guard let currentProfile = tunnel.currentProfile else {
             return nil
         }
-        guard let header = profileManager.headers.first(where: {
+        guard let preview = profileManager.previews.first(where: {
             $0.id == currentProfile.id
         }) else {
             return nil
         }
-        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
+        return TunnelInstallation(preview: preview, onDemand: currentProfile.onDemand)
     }
 
     public var currentProfile: Profile? {
