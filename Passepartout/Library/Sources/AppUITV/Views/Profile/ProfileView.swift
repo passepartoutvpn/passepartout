@@ -65,7 +65,7 @@ struct ProfileView: View, TunnelInstallationProviding {
                 VStack {
                     activeView
                         .padding(.horizontal)
-                        .frame(width: geo.size.width * 0.5)
+                        .frame(width: geo.size.width * 0.6)
                         .focusSection()
                 }
                 .frame(maxWidth: .infinity)
