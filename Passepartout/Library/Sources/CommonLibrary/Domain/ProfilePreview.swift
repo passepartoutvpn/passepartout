@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-public struct ProfilePreview: Identifiable {
+public struct ProfilePreview: Identifiable, Hashable {
     public let id: Profile.ID
 
     public let name: String
@@ -43,11 +43,5 @@ public struct ProfilePreview: Identifiable {
         id = profile.id
         name = profile.name
         subtitle = nil
-    }
-}
-
-extension ProfilePreview: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
     }
 }
