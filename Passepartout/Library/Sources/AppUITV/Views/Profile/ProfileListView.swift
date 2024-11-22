@@ -46,20 +46,32 @@ struct ProfileListView: View {
     var errorHandler: ErrorHandler
 
     var body: some View {
-        List {
-            Group {
+        VStack {
+            headerView
+                .frame(maxWidth: .infinity, alignment: .leading)
+            List {
                 ForEach(headers, id: \.id, content: toggleButton(for:))
             }
-            .themeSection(header: Strings.Views.Profiles.Folders.default)
+            .listStyle(.grouped)
+            .scrollClipDisabled()
+            .themeProgress(if: false, isEmpty: !profileManager.hasProfiles) {
+                Text(Strings.Views.Profiles.Folders.noProfiles)
+                    .themeEmptyMessage()
+            }
         }
-        .listStyle(.grouped)
-        .scrollClipDisabled()
     }
 }
 
 private extension ProfileListView {
     var headers: [ProfileHeader] {
         profileManager.headers
+    }
+
+    var headerView: some View {
+        Text(Strings.Views.Profiles.Tv.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
+            .textCase(.none)
+            .foregroundStyle(.primary)
+            .font(.body)
     }
 
     func toggleButton(for header: ProfileHeader) -> some View {
@@ -86,10 +98,37 @@ private extension ProfileListView {
         HStack {
             Text(header.name)
             Spacer()
-            if header.id == tunnel.currentProfile?.id {
-                ThemeImage(.marked)
-            }
+            ThemeImage(tunnel.statusImageName)
+                .opaque(header.id == tunnel.currentProfile?.id)
         }
         .font(.headline)
+    }
+}
+
+// MARK: -
+
+#Preview("List") {
+    ContentPreview(profileManager: .mock)
+}
+
+#Preview("Empty") {
+    ContentPreview(profileManager: ProfileManager(profiles: []))
+}
+
+private struct ContentPreview: View {
+    let profileManager: ProfileManager
+
+    @FocusState
+    var focusedField: ProfileView.Field?
+
+    var body: some View {
+        ProfileListView(
+            profileManager: profileManager,
+            tunnel: .mock,
+            focusedField: $focusedField,
+            interactiveManager: InteractiveManager(),
+            errorHandler: .default()
+        )
+        .withMockEnvironment()
     }
 }

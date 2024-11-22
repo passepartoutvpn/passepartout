@@ -90,7 +90,7 @@ private struct MarkerView: View {
 
     var body: some View {
         ZStack {
-            ThemeImage(headerId == nextProfileId ? .pending : statusImage)
+            ThemeImage(headerId == nextProfileId ? .pending : tunnel.statusImageName)
                 .opaque(requiredFeatures == nil && (headerId == nextProfileId || headerId == tunnel.currentProfile?.id))
 
             if let requiredFeatures {
@@ -98,19 +98,6 @@ private struct MarkerView: View {
             }
         }
         .frame(width: 24.0)
-    }
-
-    var statusImage: Theme.ImageName {
-        switch tunnel.connectionStatus {
-        case .active:
-            return .marked
-
-        case .activating, .deactivating:
-            return .pending
-
-        case .inactive:
-            return .sleeping
-        }
     }
 }
 

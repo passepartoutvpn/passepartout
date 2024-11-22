@@ -395,7 +395,7 @@ private extension ProfileManager {
         if !excludedIds.isEmpty {
             pp_log(.App.profiles, .info, "Delete excluded profiles from repository: \(excludedIds)")
             Task {
-                // FIXME: ###, ignore this published value
+                // TODO: ###, ignore this published value
                 try await repository.removeProfiles(withIds: Array(excludedIds))
             }
         }

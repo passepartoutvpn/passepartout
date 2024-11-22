@@ -824,6 +824,12 @@ public enum Strings {
         /// New profile
         public static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
       }
+      public enum Tv {
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
+        public static func header(_ p1: Any, _ p2: Any) -> String {
+          return Strings.tr("Localizable", "views.profiles.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+        }
+      }
     }
     public enum Settings {
       /// Erase iCloud store

@@ -29,6 +29,13 @@ import PassepartoutKit
 import SwiftUI
 
 struct ActiveProfileView: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
     let profile: Profile?
 
     @ObservedObject
@@ -51,16 +58,23 @@ struct ActiveProfileView: View {
             VStack {
                 currentProfileView
                 statusView
-                Group {
-                    toggleConnectionButton
-                    switchProfileButton
-                }
-                .padding(.horizontal, 100)
             }
-            .padding(.top, 100)
+            .padding(.bottom)
 
-            Spacer()
+            profile.map {
+                detailView(for: $0)
+            }
+            .padding(.bottom)
+
+            Group {
+                toggleConnectionButton
+                switchProfileButton
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 50))
         }
+        .padding([.top, .horizontal], 100)
+
+        Spacer()
     }
 }
 
@@ -69,11 +83,47 @@ private extension ActiveProfileView {
         Text(profile?.name ?? Strings.Views.Profiles.Rows.notInstalled)
             .font(.title)
             .fontWeight(.bold)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var statusView: some View {
         ConnectionStatusText(tunnel: tunnel)
             .font(.title2)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(tunnel.statusColor(theme))
+            .brightness(0.2)
+    }
+
+    func detailView(for profile: Profile) -> some View {
+        VStack(spacing: 10) {
+            if let connectionModule = profile.modules.first(where: { $0 is ConnectionModule }) {
+                HStack {
+                    Text(Strings.Global.protocol)
+                        .fontWeight(.light)
+                    Spacer()
+                    Text(connectionModule.moduleHandler.id.name)
+                }
+            }
+            if let providerPair = profile.firstProviderModuleWithMetadata {
+                if let provider = providerManager.provider(withId: providerPair.1.id) {
+                    HStack {
+                        Text(Strings.Global.provider)
+                            .fontWeight(.light)
+                        Spacer()
+                        Text(provider.description)
+                    }
+                }
+                if let entity = providerPair.1.entity {
+                    HStack {
+                        Text(Strings.Global.country)
+                            .fontWeight(.light)
+                        Spacer()
+                        ThemeCountryText(entity.header.countryCode)
+                    }
+                }
+            }
+        }
+        .font(.title3)
     }
 
     var toggleConnectionButton: some View {
@@ -92,9 +142,22 @@ private extension ActiveProfileView {
             label: {
                 Text($0 ? Strings.Global.connect : Strings.Global.disconnect)
                     .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
             }
         )
+        .background(toggleConnectionColor)
+        .fontWeight(.bold)
         .focused($focusedField, equals: .connect)
+    }
+
+    var toggleConnectionColor: Color {
+        switch tunnel.status {
+        case .inactive:
+            return theme.activeColor
+
+        default:
+            return theme.errorColor
+        }
     }
 
     var switchProfileButton: some View {
@@ -103,7 +166,86 @@ private extension ActiveProfileView {
         } label: {
             Text(Strings.Global.select)
                 .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
         }
         .focused($focusedField, equals: .switchProfile)
+    }
+}
+
+// MARK: -
+
+#Preview("Host") {
+    let profile: Profile = {
+        do {
+            let moduleBuilder = OpenVPNModule.Builder()
+            let module = try moduleBuilder.tryBuild()
+
+            let builder = Profile.Builder(
+                name: "Host",
+                modules: [module],
+                activatingModules: true
+            )
+            return try builder.tryBuild()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }()
+
+    HStack {
+        ContentPreview(profile: profile)
+            .frame(maxWidth: .infinity)
+        VStack {}
+            .frame(maxWidth: .infinity)
+    }
+}
+
+#Preview("Provider") {
+    let profile: Profile = {
+        do {
+            var moduleBuilder = OpenVPNModule.Builder()
+            moduleBuilder.providerId = .mullvad
+            let module = try moduleBuilder.tryBuild()
+
+            let builder = Profile.Builder(
+                name: "Provider",
+                modules: [module],
+                activatingModules: true
+            )
+            return try builder.tryBuild()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }()
+
+    HStack {
+        ContentPreview(profile: profile)
+            .frame(maxWidth: .infinity)
+        VStack {}
+            .frame(maxWidth: .infinity)
+    }
+    .task {
+        try? await ProviderManager.mock.fetchIndex(from: [API.bundled])
+    }
+}
+
+private struct ContentPreview: View {
+    let profile: Profile
+
+    @State
+    private var isSwitching = false
+
+    @FocusState
+    private var focusedField: ProfileView.Field?
+
+    var body: some View {
+        ActiveProfileView(
+            profile: profile,
+            tunnel: .mock,
+            isSwitching: $isSwitching,
+            focusedField: $focusedField,
+            interactiveManager: InteractiveManager(),
+            errorHandler: .default()
+        )
+        .withMockEnvironment()
     }
 }

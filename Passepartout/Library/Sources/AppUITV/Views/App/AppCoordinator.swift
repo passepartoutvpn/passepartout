@@ -72,10 +72,16 @@ private extension AppCoordinator {
 //        }
 //    }
 
-    // FIXME: #788, UI for TV
     var settingsView: some View {
-        VStack {
-            Text("Settings")
-        }
+        SettingsView()
     }
+}
+
+#Preview {
+    AppCoordinator(
+        profileManager: .mock,
+        tunnel: .mock,
+        registry: Registry()
+    )
+    .withMockEnvironment()
 }
