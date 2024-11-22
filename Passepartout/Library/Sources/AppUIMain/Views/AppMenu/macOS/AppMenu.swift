@@ -80,7 +80,10 @@ private extension AppMenu {
     }
 
     var profilesList: some View {
-        ForEach(profileManager.previews, id: \.id, content: profileToggle)
+        Group {
+            ForEach(profileManager.previews, id: \.id, content: profileToggle)
+        }
+        .themeSection(header: Strings.Views.Profiles.Folders.default)
     }
 
     func profileToggle(for preview: ProfilePreview) -> some View {
