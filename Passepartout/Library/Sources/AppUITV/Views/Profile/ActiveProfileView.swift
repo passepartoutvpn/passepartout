@@ -101,27 +101,18 @@ private extension ActiveProfileView {
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
             if let connectionModule = profile.firstConnectionModule(ifActive: true) {
-                HStack {
-                    Text(Strings.Global.protocol)
-                        .fontWeight(.light)
-                    Spacer()
+                DetailRowView(title: Strings.Global.protocol) {
                     Text(connectionModule.moduleHandler.id.name)
                 }
             }
             if let pair = profile.selectedProvider {
                 if let metadata = providerManager.provider(withId: pair.selection.id) {
-                    HStack {
-                        Text(Strings.Global.provider)
-                            .fontWeight(.light)
-                        Spacer()
+                    DetailRowView(title: Strings.Global.provider) {
                         Text(metadata.description)
                     }
                 }
                 if let entity = pair.selection.entity {
-                    HStack {
-                        Text(Strings.Global.country)
-                            .fontWeight(.light)
-                        Spacer()
+                    DetailRowView(title: Strings.Global.country) {
                         ThemeCountryText(entity.header.countryCode)
                     }
                 }
@@ -173,6 +164,24 @@ private extension ActiveProfileView {
                 .padding(.vertical, 10)
         }
         .focused($focusedField, equals: .switchProfile)
+    }
+}
+
+// MARK: - Subviews
+
+private struct DetailRowView<Content>: View where Content: View {
+    let title: String
+
+    @ViewBuilder
+    let content: Content
+
+    var body: some View {
+        HStack {
+            Text(title)
+                .fontWeight(.light)
+            Spacer()
+            content
+        }
     }
 }
 
