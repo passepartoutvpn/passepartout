@@ -54,27 +54,31 @@ struct ActiveProfileView: View {
     var errorHandler: ErrorHandler
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
+            Spacer()
+
             VStack {
-                currentProfileView
-                statusView
-            }
-            .padding(.bottom)
+                VStack {
+                    currentProfileView
+                    statusView
+                }
+                .padding(.bottom)
 
-            profile.map {
-                detailView(for: $0)
-            }
-            .padding(.bottom)
+                profile.map {
+                    detailView(for: $0)
+                }
+                .padding(.bottom)
 
-            Group {
-                toggleConnectionButton
-                switchProfileButton
+                Group {
+                    toggleConnectionButton
+                    switchProfileButton
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 50))
             }
-            .clipShape(RoundedRectangle(cornerRadius: 50))
+            .padding(.horizontal, 100)
+
+            Spacer()
         }
-        .padding([.top, .horizontal], 100)
-
-        Spacer()
     }
 }
 
