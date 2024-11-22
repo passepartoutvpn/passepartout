@@ -70,7 +70,7 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
                     cardView
                 }
                 Spacer()
-                HStack(spacing: 10.0) {
+                HStack(spacing: 8) {
                     ProfileAttributesView(
                         attributes: attributes,
                         isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
