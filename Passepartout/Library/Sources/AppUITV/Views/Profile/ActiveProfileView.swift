@@ -55,8 +55,6 @@ struct ActiveProfileView: View {
 
     var body: some View {
         VStack(spacing: .zero) {
-            Spacer()
-
             VStack {
                 VStack {
                     currentProfileView
@@ -76,6 +74,7 @@ struct ActiveProfileView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             }
             .padding(.horizontal, 100)
+            .padding(.top, 50)
 
             Spacer()
         }
