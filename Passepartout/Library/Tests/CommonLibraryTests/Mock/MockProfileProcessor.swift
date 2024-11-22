@@ -47,6 +47,10 @@ final class MockProfileProcessor: ProfileProcessor {
         return isIncludedBlock(profile)
     }
 
+    func preview(from profile: Profile) -> ProfilePreview {
+        ProfilePreview(profile)
+    }
+
     func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
         willRebuildCount += 1
         return builder
