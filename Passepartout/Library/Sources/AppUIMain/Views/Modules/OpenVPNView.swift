@@ -80,7 +80,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     var body: some View {
         contentView
-            .moduleView(editor: editor, draft: draft.wrappedValue, withName: !isServerPushed)
+            .moduleView(editor: editor, draft: draft.wrappedValue)
             .fileImporter(
                 isPresented: $isImporting,
                 allowedContentTypes: [.item],
