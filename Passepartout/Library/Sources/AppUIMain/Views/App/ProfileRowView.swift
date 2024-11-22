@@ -54,24 +54,28 @@ struct ProfileRowView: View, Routable {
     var flow: ProfileFlow?
 
     var body: some View {
-        HStack {
-            Group {
-                if withMarker {
-                    markerView
+        VStack(spacing: .zero) {
+            Spacer(minLength: .zero)
+            HStack {
+                Group {
+                    if withMarker {
+                        markerView
+                    }
+                    cardView
                 }
-                cardView
-            }
-            Spacer()
-            HStack(spacing: 10.0) {
-                ProfileAttributesView(
-                    attributes: attributes,
-                    isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
-                )
-                ProfileInfoButton(preview: preview) {
-                    flow?.onEditProfile($0)
+                Spacer()
+                HStack(spacing: 10.0) {
+                    ProfileAttributesView(
+                        attributes: attributes,
+                        isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+                    )
+                    ProfileInfoButton(preview: preview) {
+                        flow?.onEditProfile($0)
+                    }
                 }
+                .imageScale(.large)
             }
-            .imageScale(.large)
+            Spacer(minLength: .zero)
         }
     }
 }
