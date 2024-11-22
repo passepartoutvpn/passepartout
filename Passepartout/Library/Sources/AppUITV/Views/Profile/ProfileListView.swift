@@ -47,10 +47,11 @@ struct ProfileListView: View {
 
     var body: some View {
         List {
-            Group {
+            Section {
                 ForEach(headers, id: \.id, content: toggleButton(for:))
+            } header: {
+                headerView
             }
-            .themeSection(header: Strings.Views.Profiles.Folders.default)
         }
         .listStyle(.grouped)
         .scrollClipDisabled()
@@ -60,6 +61,14 @@ struct ProfileListView: View {
 private extension ProfileListView {
     var headers: [ProfileHeader] {
         profileManager.headers
+    }
+
+    var headerView: some View {
+        Text(Strings.Views.Profiles.Tv.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
+            .textCase(.none)
+            .foregroundStyle(.primary)
+            .font(.body)
+            .padding(.bottom)
     }
 
     func toggleButton(for header: ProfileHeader) -> some View {
@@ -86,10 +95,30 @@ private extension ProfileListView {
         HStack {
             Text(header.name)
             Spacer()
-            if header.id == tunnel.currentProfile?.id {
-                ThemeImage(.marked)
-            }
+            ThemeImage(tunnel.statusImageName)
+                .opaque(header.id == tunnel.currentProfile?.id)
         }
         .font(.headline)
     }
+}
+
+#Preview {
+    struct ContentPreview: View {
+
+        @FocusState
+        var focusedField: ProfileView.Field?
+
+        var body: some View {
+            ProfileListView(
+                profileManager: .mock,
+                tunnel: .mock,
+                focusedField: $focusedField,
+                interactiveManager: InteractiveManager(),
+                errorHandler: .default()
+            )
+            .withMockEnvironment()
+        }
+    }
+
+    return ContentPreview()
 }

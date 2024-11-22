@@ -126,6 +126,7 @@
 "views.profiles.toolbar.new_profile" = "New profile";
 "views.profiles.toolbar.import_profile" = "Import profile";
 "views.profiles.toolbar.migrate_profiles" = "Migrate profiles";
+"views.profiles.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
 "views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
 "views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
 "views.profiles.errors.import" = "Unable to import profiles.";

@@ -51,4 +51,17 @@ extension ExtendedTunnel {
             return theme.inactiveColor
         }
     }
+
+    public var statusImageName: Theme.ImageName {
+        switch connectionStatus {
+        case .active:
+            return .marked
+
+        case .activating, .deactivating:
+            return .pending
+
+        case .inactive:
+            return .sleeping
+        }
+    }
 }

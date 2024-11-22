@@ -29,8 +29,6 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-// FIXME: #788, UI for TV
-
 struct ProfileView: View, TunnelInstallationProviding {
     enum Field: Hashable {
         case connect
@@ -74,54 +72,20 @@ struct ProfileView: View, TunnelInstallationProviding {
                 .disabled(interactiveManager.isPresented)
 
                 if showsSidePanel {
-                    ZStack {
-                        listView
-                            .padding(.horizontal)
-                            .opaque(!interactiveManager.isPresented)
-
-                        if interactiveManager.isPresented {
-                            interactiveView
-                                .padding(.horizontal, 100)
-                        }
-                    }
-//                    .frame(width: geo.size.width * 0.5) // seems redundant
-                    .focusSection()
+                    sidePanelView
+                        .focusSection()
                 }
             }
         }
         .ignoresSafeArea(edges: .horizontal)
-        .background(theme.primaryColor.gradient)
+        .background(theme.primaryColor.opacity(0.6).gradient)
         .themeAnimation(on: showsSidePanel, category: .profiles)
         .withErrorHandler(errorHandler)
         .defaultFocus($focusedField, .switchProfile)
-        .onChange(of: tunnel.status) { _, new in
-            if new == .activating {
-                showsSidePanel = false
-                focusedField = .connect
-            }
-        }
-        .onChange(of: tunnel.currentProfile) { _, new in
-            if focusedField == .connect && new == nil {
-                focusedField = .switchProfile
-            }
-        }
-        .onChange(of: interactiveManager.isPresented) { _, new in
-            if new {
-                showsSidePanel = true
-            }
-        }
-        .onChange(of: focusedField) { _, new in
-            switch new {
-            case .connect:
-                showsSidePanel = false
-
-            case .switchProfile:
-                showsSidePanel = true
-
-            default:
-                break
-            }
-        }
+        .onChange(of: tunnel.status, onTunnelStatus)
+        .onChange(of: tunnel.currentProfile, onTunnelCurrentProfile)
+        .onChange(of: interactiveManager.isPresented, onInteractivePresented)
+        .onChange(of: focusedField, onFocus)
     }
 }
 
@@ -142,6 +106,20 @@ private extension ProfileView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
         )
+    }
+
+    var sidePanelView: some View {
+        ZStack {
+            listView
+                .padding(.horizontal)
+                .opaque(!interactiveManager.isPresented)
+
+            if interactiveManager.isPresented {
+                interactiveView
+                    .padding(.horizontal, 100)
+            }
+        }
+//        .frame(width: geo.size.width * 0.5) // seems redundant
     }
 
     var interactiveView: some View {
@@ -171,9 +149,46 @@ private extension ProfileView {
     }
 }
 
+private extension ProfileView {
+    func onTunnelStatus(old: TunnelStatus, new: TunnelStatus) {
+        if new == .activating {
+            showsSidePanel = false
+            focusedField = .connect
+        }
+    }
+
+    func onTunnelCurrentProfile(old: TunnelCurrentProfile?, new: TunnelCurrentProfile?) {
+        if focusedField == .connect && new == nil {
+            focusedField = .switchProfile
+        }
+    }
+
+    func onInteractivePresented(old: Bool, new: Bool) {
+        if new {
+            showsSidePanel = true
+        }
+    }
+
+    func onFocus(old: Field?, new: Field?) {
+        switch new {
+        case .connect:
+            showsSidePanel = false
+
+        case .switchProfile:
+            showsSidePanel = true
+
+        default:
+            break
+        }
+    }
+}
+
+// MARK: -
+
 #Preview {
     ProfileView(
         profileManager: .mock,
         tunnel: .mock
     )
+    .withMockEnvironment()
 }
