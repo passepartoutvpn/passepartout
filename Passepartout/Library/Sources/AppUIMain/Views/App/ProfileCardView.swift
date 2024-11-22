@@ -49,7 +49,8 @@ struct ProfileCardView: View {
                 Text(preview.name)
                     .font(.headline)
                     .themeTruncating()
-                Text(preview.subtitle ?? "")
+
+                Text(preview.subtitle ?? Strings.Views.Profiles.Rows.noModules)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

@@ -809,6 +809,8 @@ public enum Strings {
         }
       }
       public enum Rows {
+        /// No active modules
+        public static let noModules = Strings.tr("Localizable", "views.profiles.rows.no_modules", fallback: "No active modules")
         /// Select a profile
         public static let notInstalled = Strings.tr("Localizable", "views.profiles.rows.not_installed", fallback: "Select a profile")
       }
