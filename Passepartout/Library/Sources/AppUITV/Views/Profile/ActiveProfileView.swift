@@ -99,7 +99,7 @@ private extension ActiveProfileView {
 
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
-            if let connectionModule = profile.firstConnectionModule(ifActive: true) {
+            if let connectionModule {
                 DetailRowView(title: Strings.Global.protocol) {
                     Text(connectionModule.moduleHandler.id.name)
                 }
@@ -114,6 +114,11 @@ private extension ActiveProfileView {
                     DetailRowView(title: Strings.Global.country) {
                         ThemeCountryText(entity.header.countryCode)
                     }
+                }
+            }
+            if let otherModulesList {
+                DetailRowView(title: otherModulesList) {
+                    EmptyView()
                 }
             }
         }
@@ -159,6 +164,28 @@ private extension ActiveProfileView {
                 .padding(.vertical, 10)
         }
         .focused($focusedField, equals: .switchProfile)
+    }
+}
+
+private extension ActiveProfileView {
+    var connectionModule: ConnectionModule? {
+        profile?.firstConnectionModule(ifActive: true)
+    }
+
+    var otherModules: [Module]? {
+        profile?
+            .activeModules
+            .filter {
+                !($0 is ConnectionModule)
+            }
+            .nilIfEmpty
+    }
+
+    var otherModulesList: String? {
+        otherModules?
+            .map(\.moduleType.localizedDescription)
+            .sorted()
+            .joined(separator: ", ")
     }
 }
 
