@@ -99,9 +99,9 @@ private extension ActiveProfileView {
 
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
-            if let connectionModule {
+            if let connectionType = profile.localizedDescription(optionalStyle: .connectionType) {
                 DetailRowView(title: Strings.Global.protocol) {
-                    Text(connectionModule.moduleHandler.id.name)
+                    Text(connectionType)
                 }
             }
             if let pair = profile.selectedProvider {
@@ -116,8 +116,8 @@ private extension ActiveProfileView {
                     }
                 }
             }
-            if let otherModulesList {
-                DetailRowView(title: otherModulesList) {
+            if let otherList = profile.localizedDescription(optionalStyle: .nonConnectionTypes) {
+                DetailRowView(title: otherList) {
                     EmptyView()
                 }
             }
@@ -164,28 +164,6 @@ private extension ActiveProfileView {
                 .padding(.vertical, 10)
         }
         .focused($focusedField, equals: .switchProfile)
-    }
-}
-
-private extension ActiveProfileView {
-    var connectionModule: ConnectionModule? {
-        profile?.firstConnectionModule(ifActive: true)
-    }
-
-    var otherModules: [Module]? {
-        profile?
-            .activeModules
-            .filter {
-                !($0 is ConnectionModule)
-            }
-            .nilIfEmpty
-    }
-
-    var otherModulesList: String? {
-        otherModules?
-            .map(\.moduleType.localizedDescription)
-            .sorted()
-            .joined(separator: ", ")
     }
 }
 
