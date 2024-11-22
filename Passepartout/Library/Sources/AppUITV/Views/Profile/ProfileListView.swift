@@ -74,7 +74,7 @@ private extension ProfileListView {
             .font(.body)
     }
 
-    func toggleButton(for header: ProfilePreview) -> some View {
+    func toggleButton(for preview: ProfilePreview) -> some View {
         TunnelToggleButton(
             tunnel: tunnel,
             profile: profileManager.profile(withId: header.id),
@@ -90,7 +90,7 @@ private extension ProfileListView {
         .focused($focusedField, equals: .profile(header.id))
     }
 
-    func toggleView(for header: ProfilePreview) -> some View {
+    func toggleView(for preview: ProfilePreview) -> some View {
         HStack {
             Text(header.name)
             Spacer()

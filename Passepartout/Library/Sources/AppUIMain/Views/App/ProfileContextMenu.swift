@@ -33,7 +33,7 @@ struct ProfileContextMenu: View, Routable {
 
     let tunnel: ExtendedTunnel
 
-    let header: ProfilePreview
+    let preview: ProfilePreview
 
     let interactiveManager: InteractiveManager
 
@@ -60,7 +60,7 @@ struct ProfileContextMenu: View, Routable {
 @MainActor
 private extension ProfileContextMenu {
     var profile: Profile? {
-        profileManager.profile(withId: header.id)
+        profileManager.profile(withId: preview.id)
     }
 
     var tunnelToggleButton: some View {
@@ -111,7 +111,7 @@ private extension ProfileContextMenu {
 
     var profileEditButton: some View {
         Button {
-            flow?.onEditProfile(header)
+            flow?.onEditProfile(preview)
         } label: {
             ThemeImageLabel(Strings.Global.edit.withTrailingDots, .profileEdit)
         }
@@ -120,7 +120,7 @@ private extension ProfileContextMenu {
     var profileDuplicateButton: some View {
         ProfileDuplicateButton(
             profileManager: profileManager,
-            header: header,
+            preview: preview,
             errorHandler: errorHandler
         ) {
             ThemeImageLabel(Strings.Global.duplicate, .contextDuplicate)
@@ -130,7 +130,7 @@ private extension ProfileContextMenu {
     var profileRemoveButton: some View {
         ProfileRemoveButton(
             profileManager: profileManager,
-            header: header
+            preview: preview
         ) {
             ThemeImageLabel(Strings.Global.remove, .contextRemove)
         }
@@ -143,7 +143,7 @@ private extension ProfileContextMenu {
             ProfileContextMenu(
                 profileManager: .mock,
                 tunnel: .mock,
-                header: .init(.mock),
+                preview: .init(.mock),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 isInstalledProfile: true

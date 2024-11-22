@@ -24,17 +24,16 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
 struct ProfileInfoButton: View {
-    let header: ProfilePreview
+    let preview: ProfilePreview
 
     let onEdit: (ProfilePreview) -> Void
 
     var body: some View {
         Button {
-            onEdit(header)
+            onEdit(preview)
         } label: {
             ThemeImage(.info)
         }

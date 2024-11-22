@@ -35,21 +35,21 @@ struct ProfileCardView: View {
 
     let style: Style
 
-    let header: ProfilePreview
+    let preview: ProfilePreview
 
     var body: some View {
         switch style {
         case .compact:
-            Text(header.name)
+            Text(preview.name)
                 .themeTruncating()
                 .frame(maxWidth: .infinity, alignment: .leading)
 
         case .full:
             VStack(alignment: .leading) {
-                Text(header.name)
+                Text(preview.name)
                     .font(.headline)
                     .themeTruncating()
-                Text(header.subtitle ?? "")
+                Text(preview.subtitle ?? "")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -65,13 +65,13 @@ struct ProfileCardView: View {
         Section {
             ProfileCardView(
                 style: .compact,
-                header: .init(.mock)
+                preview: .init(.mock)
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                header: .init(.mock)
+                preview: .init(.mock)
             )
         }
     }

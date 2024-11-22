@@ -108,7 +108,7 @@ private extension ProfileGridView {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    header: .init($0),
+                    preview: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
@@ -118,31 +118,31 @@ private extension ProfileGridView {
         }
     }
 
-    func profileView(for header: ProfilePreview) -> some View {
+    func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(
             style: .full,
             profileManager: profileManager,
             tunnel: tunnel,
-            header: header,
+            preview: preview,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
             flow: flow
         )
-        .themeGridCell(isSelected: header.id == nextProfileId ?? currentProfile?.id)
+        .themeGridCell(isSelected: preview.id == nextProfileId ?? currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                header: header,
+                preview: preview,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
                 flow: flow
             )
         }
-        .id(header.id)
+        .id(preview.id)
     }
 }
 

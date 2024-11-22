@@ -24,15 +24,14 @@
 //
 
 import Foundation
-import PassepartoutKit
 
 public struct TunnelInstallation {
-    public let header: ProfilePreview
+    public let preview: ProfilePreview
 
     public let onDemand: Bool
 
-    public init(header: ProfilePreview, onDemand: Bool) {
-        self.header = header
+    public init(preview: ProfilePreview, onDemand: Bool) {
+        self.preview = preview
         self.onDemand = onDemand
     }
 }

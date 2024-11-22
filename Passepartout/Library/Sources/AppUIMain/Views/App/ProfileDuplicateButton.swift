@@ -25,13 +25,12 @@
 
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
 import SwiftUI
 
 struct ProfileDuplicateButton<Label>: View where Label: View {
     let profileManager: ProfileManager
 
-    let header: ProfilePreview
+    let preview: ProfilePreview
 
     let errorHandler: ErrorHandler
 
@@ -41,12 +40,12 @@ struct ProfileDuplicateButton<Label>: View where Label: View {
         Button {
             Task {
                 do {
-                    try await profileManager.duplicate(profileWithId: header.id)
+                    try await profileManager.duplicate(profileWithId: preview.id)
                 } catch {
                     errorHandler.handle(
                         error,
                         title: Strings.Global.duplicate,
-                        message: Strings.Views.Profiles.Errors.duplicate(header.name)
+                        message: Strings.Views.Profiles.Errors.duplicate(preview.name)
                     )
                 }
             }
