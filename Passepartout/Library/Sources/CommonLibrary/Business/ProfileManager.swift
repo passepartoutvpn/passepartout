@@ -219,7 +219,7 @@ extension ProfileManager {
             throw error
         }
         if let remoteRepository {
-            let enableSharing = remotelyShared == true || (isLocal && isRemotelyShared(profileWithId: profile.id))
+            let enableSharing = remotelyShared == true || (remotelyShared == nil && isLocal && isRemotelyShared(profileWithId: profile.id))
             let disableSharing = remotelyShared == false
             do {
                 if enableSharing {
