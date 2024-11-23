@@ -27,12 +27,13 @@ import Foundation
 import PassepartoutKit
 
 struct MapperV2 {
-    func toProfileV3(_ v2: ProfileV2) throws -> Profile {
+    func toProfileV3(_ v2: ProfileV2, isTV: Bool) throws -> Profile {
         var builder = Profile.Builder(id: v2.id)
         var modules: [Module] = []
 
         builder.name = v2.header.name
         builder.attributes.lastUpdate = v2.header.lastUpdate
+        builder.attributes.isAvailableForTV = isTV
 
         if let provider = v2.provider {
             if let module = try toProviderModule(provider) {

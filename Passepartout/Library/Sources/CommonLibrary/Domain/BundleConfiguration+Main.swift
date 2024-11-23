@@ -49,6 +49,8 @@ extension BundleConfiguration {
         // legacy v2
 
         case legacyV2CloudKitId
+
+        case legacyV2TVCloudKitId
     }
 
     public static var mainDisplayName: String {

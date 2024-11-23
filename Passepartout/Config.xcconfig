@@ -45,6 +45,7 @@ CFG_TEAM_ID = DTDYD63ZX9
 CFG_TUNNEL_ID = $(CFG_APP_ID).Tunnel
 
 CFG_LEGACY_V2_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout
+CFG_LEGACY_V2_TV_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout.Shared
 
 PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
 CUSTOM_SCRIPT_PATH = $(PATH)

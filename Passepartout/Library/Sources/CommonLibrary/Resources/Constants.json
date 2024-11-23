@@ -4,7 +4,8 @@
         "local": "Profiles-v3",
         "remote": "Profiles-v3.remote",
         "providers": "Providers-v3",
-        "legacyV2": "Profiles"
+        "legacyV2": "Profiles",
+        "legacyV2TV": "SharedProfiles"
     },
     "websites": {
         "home": "https://passepartoutvpn.app",
