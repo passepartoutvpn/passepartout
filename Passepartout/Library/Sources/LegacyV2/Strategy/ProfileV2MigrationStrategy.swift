@@ -32,9 +32,9 @@ public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendabl
     public struct Container {
         public let name: String
 
-        public let cloudKitIdentifier: String
+        public let cloudKitIdentifier: String?
 
-        public init(_ name: String, _ cloudKitIdentifier: String) {
+        public init(_ name: String, _ cloudKitIdentifier: String?) {
             self.name = name
             self.cloudKitIdentifier = cloudKitIdentifier
         }

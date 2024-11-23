@@ -37,7 +37,7 @@ actor MockMigrationManagerImporter: MigrationManagerImporter {
         imported = []
     }
 
-    func importProfile(_ profile: Profile) async throws {
+    func importProfile(_ profile: Profile, remotelyShared: Bool) async throws {
         guard !failing.contains(profile.id) else {
             throw AppError.permissionDenied
         }
