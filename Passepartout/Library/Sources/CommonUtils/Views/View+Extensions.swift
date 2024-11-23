@@ -50,6 +50,20 @@ extension View {
         }
     }
 
+    public func resized(width: CGFloat? = nil, height: CGFloat? = nil) -> some View {
+        GeometryReader { geo in
+            self
+                .frame(
+                    width: width.map {
+                        $0 * geo.size.width
+                    },
+                    height: height.map {
+                        $0 * geo.size.height
+                    }
+                )
+        }
+    }
+
     public func setLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
         Task {
             block(nil)

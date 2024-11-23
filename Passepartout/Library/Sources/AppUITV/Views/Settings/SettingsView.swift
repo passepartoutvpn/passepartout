@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 import UILibrary
@@ -32,10 +33,8 @@ struct SettingsView: View {
     let tunnel: ExtendedTunnel
 
     var body: some View {
-        GeometryReader { geo in
-            listView
-                .frame(width: geo.size.width / 2)
-        }
+        listView
+            .resized(width: 0.5)
     }
 }
 
