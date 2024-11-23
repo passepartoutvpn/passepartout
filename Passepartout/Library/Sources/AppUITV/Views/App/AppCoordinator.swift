@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
     private let profileManager: ProfileManager
@@ -34,6 +35,15 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     private let tunnel: ExtendedTunnel
 
     private let registry: Registry
+
+    @State
+    private var requiresPurchase = false
+
+    @State
+    private var requiredFeatures: Set<AppFeature> = []
+
+    @State
+    private var paywallReason: PaywallReason?
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -65,6 +75,12 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
             .withErrorHandler(errorHandler)
+            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(PurchaseAlertModifier(
+                isPresented: $requiresPurchase,
+                paywallReason: $paywallReason,
+                requiredFeatures: requiredFeatures
+            ))
         }
     }
 }
@@ -131,7 +147,8 @@ private extension AppCoordinator {
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        // FIXME: #913
+        requiredFeatures = features
+        requiresPurchase = true
     }
 }
 
