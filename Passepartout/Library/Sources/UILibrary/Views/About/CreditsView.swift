@@ -42,7 +42,6 @@ public struct CreditsView: View {
                     .localizedDescription
             }
         )
-        .navigationTitle(Strings.Views.About.Credits.title)
         .themeForm()
     }
 }

@@ -52,8 +52,7 @@ struct ProfileListView: View {
             List {
                 ForEach(previews, id: \.id, content: toggleButton(for:))
             }
-            .listStyle(.grouped)
-            .scrollClipDisabled()
+            .themeList()
             .themeProgress(if: false, isEmpty: !profileManager.hasProfiles) {
                 Text(Strings.Views.App.Folders.noProfiles)
                     .themeEmptyMessage()
@@ -105,11 +104,11 @@ private extension ProfileListView {
 
 private extension ProfileListView {
     func onProviderEntityRequired(_ profile: Profile) {
-        // FIXME: #788, TV missing provider entity
+        // FIXME: #913, TV missing provider entity
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        // FIXME: #788, TV purchase required
+        // FIXME: #913, TV purchase required
     }
 }
 

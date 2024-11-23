@@ -38,6 +38,7 @@ public struct DebugLogView<Content>: View where Content: View {
 
     public var body: some View {
         content(currentLines)
+            .monospaced()
             .themeEmpty(if: currentLines.isEmpty, message: Strings.Global.Nouns.noContent)
             .toolbar(content: toolbarContent)
             .task {
@@ -50,7 +51,9 @@ private extension DebugLogView {
 
     @ViewBuilder
     func toolbarContent() -> some View {
+#if !os(tvOS)
         copyButton
+#endif
 //        if !currentLines.isEmpty {
 //            shareButton
 //        }

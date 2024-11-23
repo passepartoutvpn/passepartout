@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  LogsPrivateDataToggle.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,23 +26,20 @@
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
-import UILibrary
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+public struct LogsPrivateDataToggle: View {
 
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
+    @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
+    private var logsPrivateData = false
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+    public init() {
+    }
+
+    public var body: some View {
+        Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
+            .onChange(of: logsPrivateData) {
+                PassepartoutConfiguration.shared.logsAddresses = $0
+                PassepartoutConfiguration.shared.logsModules = $0
+            }
     }
 }

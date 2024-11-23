@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  DonateViewModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
 import SwiftUI
-import UILibrary
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+struct DonateViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        VStack {
+            Text(Strings.Views.Donate.Sections.Main.footer)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom)
 
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    content
+                }
+            }
+        }
+        .padding(.top, 150)
+    }
+}
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+private extension DonateViewModifier {
+    var columns: [GridItem] {
+        [GridItem(.adaptive(minimum: 500))]
     }
 }

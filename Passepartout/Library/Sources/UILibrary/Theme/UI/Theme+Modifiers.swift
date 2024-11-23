@@ -115,6 +115,15 @@ extension View {
         }
     }
 
+    public func themeList() -> some View {
+#if os(tvOS)
+        listStyle(.grouped)
+            .scrollClipDisabled()
+#else
+        self
+#endif
+    }
+
     public func themeForm() -> some View {
         formStyle(.grouped)
     }
