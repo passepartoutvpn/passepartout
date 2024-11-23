@@ -1,5 +1,5 @@
 //
-//  AboutView+iOS.swift
+//  AboutContentView+iOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/27/24.
@@ -25,23 +25,55 @@
 
 #if os(iOS)
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
-extension AboutView {
+struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View where LinkContent: View, AboutDestination: View, LogDestination: View {
+
+    @Environment(\.dismiss)
+    private var dismiss
+
+    let profileManager: ProfileManager
+
+    let isRestricted: Bool
+
+    @Binding
+    var path: NavigationPath
+
+    @Binding
+    var navigationRoute: AboutCoordinatorRoute?
+
+    let linkContent: (AboutCoordinatorRoute) -> LinkContent
+
+    let aboutDestination: (AboutCoordinatorRoute?) -> AboutDestination
+
+    let logDestination: (DebugLogRoute?) -> LogDestination
+
+    var body: some View {
+        listView
+            .navigationDestination(for: AboutCoordinatorRoute.self, destination: aboutDestination)
+            .navigationDestination(for: DebugLogRoute.self, destination: logDestination)
+            .themeNavigationDetail()
+            .themeNavigationStack(closable: true, path: $path)
+    }
+}
+
+private extension AboutContentView {
     var listView: some View {
         List {
-            SettingsSectionGroup(profileManager: profileManager)
+            PreferencesGroup(profileManager: profileManager)
             Group {
-                linksLink
-                creditsLink
-                if !iapManager.isRestricted {
-                    donateLink
+                linkContent(.links)
+                linkContent(.credits)
+                if !isRestricted {
+                    linkContent(.donate)
                 }
             }
             .themeSection(header: Strings.Views.About.Sections.resources)
             Section {
-                diagnosticsLink
+                linkContent(.diagnostics)
                 Text(Strings.Global.version)
                     .themeTrailingValue(BundleConfiguration.mainVersionString)
             }

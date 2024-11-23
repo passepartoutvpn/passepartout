@@ -1,8 +1,8 @@
 //
-//  SettingsView.swift
+//  CreditsView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/28/24.
+//  Created by Davide De Rosa on 8/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,27 +24,29 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import SwiftUI
 
-public struct SettingsView: View {
-    let profileManager: ProfileManager
-
-    @State
-    private var path = NavigationPath()
-
-    public init(profileManager: ProfileManager) {
-        self.profileManager = profileManager
+public struct CreditsView: View {
+    public init() {
     }
 
     public var body: some View {
-        Form {
-            SettingsSectionGroup(profileManager: profileManager)
-        }
+        GenericCreditsView(
+            credits: Self.credits,
+            licensesHeader: Strings.Views.About.Credits.licenses,
+            noticesHeader: Strings.Views.About.Credits.notices,
+            translationsHeader: Strings.Views.About.Credits.translations,
+            errorDescription: {
+                AppError($0)
+                    .localizedDescription
+            }
+        )
+        .navigationTitle(Strings.Views.About.Credits.title)
         .themeForm()
-        .navigationTitle(Strings.Global.settings)
-#if os(iOS)
-        .themeNavigationDetail()
-        .themeNavigationStack(closable: true, path: $path)
-#endif
     }
+}
+
+private extension CreditsView {
+    static let credits = Bundle.module.unsafeDecode(Credits.self, filename: "Credits")
 }

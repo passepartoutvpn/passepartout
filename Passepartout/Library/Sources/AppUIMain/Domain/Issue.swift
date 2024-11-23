@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 
 import CommonLibrary
 import Foundation

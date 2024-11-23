@@ -1,5 +1,5 @@
 //
-//  SettingsSectionGroup.swift
+//  PreferencesGroup.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/3/24.
@@ -28,16 +28,17 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct SettingsSectionGroup: View {
-    let profileManager: ProfileManager
+public struct PreferencesGroup: View {
 
 #if os(iOS)
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
-#else
+#elseif os(macOS)
     @EnvironmentObject
     private var settings: MacSettingsModel
 #endif
+
+    private let profileManager: ProfileManager
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -45,10 +46,14 @@ struct SettingsSectionGroup: View {
     @State
     private var isErasingiCloud = false
 
-    var body: some View {
+    public init(profileManager: ProfileManager) {
+        self.profileManager = profileManager
+    }
+
+    public var body: some View {
 #if os(iOS)
         lockInBackgroundToggle
-#else
+#elseif os(macOS)
         launchesOnLoginToggle
         keepsInMenuToggle
 #endif
@@ -56,13 +61,13 @@ struct SettingsSectionGroup: View {
     }
 }
 
-private extension SettingsSectionGroup {
+private extension PreferencesGroup {
 #if os(iOS)
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
     }
-#else
+#elseif os(macOS)
     var launchesOnLoginToggle: some View {
         Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)

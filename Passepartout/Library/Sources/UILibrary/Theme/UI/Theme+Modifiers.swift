@@ -214,6 +214,10 @@ extension View {
         modifier(ThemeProgressViewModifier(isProgressing: isProgressing, isEmpty: isEmpty, emptyContent: emptyContent))
     }
 
+    public func themeTrailingValue(_ value: CustomStringConvertible?, truncationMode: Text.TruncationMode = .tail) -> some View {
+        modifier(ThemeTrailingValueModifier(value: value, truncationMode: truncationMode))
+    }
+
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
@@ -221,10 +225,6 @@ extension View {
 
     public func themePlainButton(action: @escaping () -> Void) -> some View {
         modifier(ThemePlainButtonModifier(action: action))
-    }
-
-    public func themeTrailingValue(_ value: CustomStringConvertible?, truncationMode: Text.TruncationMode = .tail) -> some View {
-        modifier(ThemeTrailingValueModifier(value: value, truncationMode: truncationMode))
     }
 
     public func themeGridHeader(title: String?) -> some View {
@@ -479,16 +479,6 @@ struct ThemeProgressViewModifier<EmptyContent>: ViewModifier where EmptyContent:
     }
 }
 
-#if !os(tvOS)
-
-struct ThemeWindowModifier: ViewModifier {
-    let size: CGSize
-}
-
-struct ThemePlainButtonModifier: ViewModifier {
-    let action: () -> Void
-}
-
 struct ThemeTrailingValueModifier: ViewModifier {
     let value: CustomStringConvertible?
 
@@ -497,7 +487,6 @@ struct ThemeTrailingValueModifier: ViewModifier {
     func body(content: Content) -> some View {
         LabeledContent {
             if let value {
-                Spacer()
                 Text(value.description)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -507,6 +496,16 @@ struct ThemeTrailingValueModifier: ViewModifier {
             content
         }
     }
+}
+
+#if !os(tvOS)
+
+struct ThemeWindowModifier: ViewModifier {
+    let size: CGSize
+}
+
+struct ThemePlainButtonModifier: ViewModifier {
+    let action: () -> Void
 }
 
 struct ThemeGridSectionModifier: ViewModifier {

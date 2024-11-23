@@ -1,8 +1,8 @@
 //
-//  DebugLogView+macOS.swift
+//  DebugLogRoute.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/31/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
+import Foundation
 
-import SwiftUI
+enum DebugLogRoute: Hashable {
+    case app(title: String)
 
-extension DebugLogView {
-    var contentView: some View {
-        List {
-            ForEach(Array(currentLines.enumerated()), id: \.offset) {
-                Text($0.element)
-                    .monospaced()
-            }
-        }
-    }
+    case tunnel(title: String, url: URL?)
 }
-
-#endif

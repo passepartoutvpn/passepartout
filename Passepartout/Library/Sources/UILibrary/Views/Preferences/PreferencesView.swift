@@ -1,8 +1,8 @@
 //
-//  DebugLogView+iOS.swift
+//  PreferencesView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/31/24.
+//  Created by Davide De Rosa on 9/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
-
+import CommonLibrary
 import SwiftUI
 
-extension DebugLogView {
-    var contentView: some View {
-        TextEditor(text: .constant(content))
-            .font(.caption)
-            .monospaced()
+public struct PreferencesView: View {
+    private let profileManager: ProfileManager
+
+    @State
+    private var path = NavigationPath()
+
+    public init(profileManager: ProfileManager) {
+        self.profileManager = profileManager
+    }
+
+    public var body: some View {
+        Form {
+            PreferencesGroup(profileManager: profileManager)
+        }
+        .themeForm()
+        .navigationTitle(Strings.Global.settings)
+#if os(iOS)
+        .themeNavigationDetail()
+        .themeNavigationStack(closable: true, path: $path)
+#endif
     }
 }
-
-#endif

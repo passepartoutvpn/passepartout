@@ -65,7 +65,7 @@ extension PassepartoutApp {
         .defaultSize(width: 600, height: 400)
 
         Settings {
-            SettingsView(profileManager: context.profileManager)
+            PreferencesView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
                 .environmentObject(settings)

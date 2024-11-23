@@ -73,7 +73,7 @@ private extension AppCoordinator {
 //    }
 
     var settingsView: some View {
-        SettingsView()
+        SettingsView(profileManager: profileManager, tunnel: tunnel)
     }
 }
 

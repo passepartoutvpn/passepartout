@@ -32,7 +32,7 @@ import SwiftUI
 import UIKit
 
 extension ReportIssueButton: View {
-    var body: some View {
+    public var body: some View {
         HStack {
             Button(title, action: sendEmail)
             if isPending {

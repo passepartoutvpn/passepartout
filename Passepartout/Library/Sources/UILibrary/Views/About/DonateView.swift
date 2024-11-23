@@ -27,7 +27,7 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-struct DonateView: View {
+public struct DonateView: View {
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -50,7 +50,10 @@ struct DonateView: View {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    var body: some View {
+    public init() {
+    }
+
+    public var body: some View {
         donationsView
             .themeProgress(if: isFetchingProducts)
             .navigationTitle(title)
