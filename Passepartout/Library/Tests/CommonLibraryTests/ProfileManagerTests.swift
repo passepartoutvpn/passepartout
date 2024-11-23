@@ -81,7 +81,7 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.hasProfiles)
         XCTAssertEqual(sut.previews.count, 2)
 
-        try await wait(sut) {
+        try await wait(sut, "Search") {
             $0.search(byName: "ar")
         } until: {
             $0.previews.count == 1
@@ -165,7 +165,7 @@ extension ProfileManagerTests {
         XCTAssertFalse(sut.hasProfiles)
 
         let profile = newProfile()
-        try await wait(sut) {
+        try await wait(sut, "Save") {
             try await $0.save(profile)
         } until: {
             $0.hasProfiles
@@ -187,7 +187,7 @@ extension ProfileManagerTests {
         builder.name = "newName"
         let renamedProfile = try builder.tryBuild()
 
-        try await wait(sut) {
+        try await wait(sut, "Save") {
             try await $0.save(renamedProfile)
         } until: {
             $0.previews.first?.name == renamedProfile.name
@@ -259,7 +259,7 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isReady)
         XCTAssertTrue(sut.hasProfiles)
 
-        try await wait(sut) {
+        try await wait(sut, "Remove") {
             await $0.remove(withId: profile.id)
         } until: {
             !$0.hasProfiles
@@ -349,19 +349,19 @@ extension ProfileManagerTests {
 
         try await waitForReady(sut)
 
-        try await wait(sut) {
+        try await wait(sut, "Duplicate 1") {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
             $0.previews.count == 2
         }
 
-        try await wait(sut) {
+        try await wait(sut, "Duplicate 2") {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
             $0.previews.count == 3
         }
 
-        try await wait(sut) {
+        try await wait(sut, "Duplicate 3") {
             try await $0.duplicate(profileWithId: profile.id)
         } until: {
             $0.previews.count == 4
@@ -396,7 +396,7 @@ extension ProfileManagerTests {
             remoteRepository
         })
 
-        try await wait(sut) {
+        try await wait(sut, "Remote import") {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
@@ -433,7 +433,7 @@ extension ProfileManagerTests {
             remoteRepository
         })
 
-        try await wait(sut) {
+        try await wait(sut, "Remote import") {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
@@ -486,7 +486,7 @@ extension ProfileManagerTests {
             didImport = true
         }
         try await waitForReady(sut)
-        try await wait(sut) { _ in
+        try await wait(sut, "Remote import") { _ in
             //
         } until: { _ in
             didImport
@@ -527,7 +527,7 @@ extension ProfileManagerTests {
             didImport = true
         }
         try await waitForReady(sut)
-        try await wait(sut) { _ in
+        try await wait(sut, "Remote import") { _ in
             //
         } until: { _ in
             didImport
@@ -560,7 +560,7 @@ extension ProfileManagerTests {
             remoteRepository
         })
 
-        try await wait(sut) {
+        try await wait(sut, "Remote import") {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
@@ -574,7 +574,7 @@ extension ProfileManagerTests {
         let fp2 = UUID()
         let fp3 = UUID()
 
-        try await wait(sut) { _ in
+        try await wait(sut, "Multiple imports") { _ in
             remoteRepository.profiles = [
                 newProfile("remote1", id: r1)
             ]
@@ -623,13 +623,13 @@ extension ProfileManagerTests {
         observeRemoteImport(sut) {
             didImport = true
         }
-        try await wait(sut) {
+        try await wait(sut, "Remote import") {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
             $0.previews.count == 1
         }
-        try await wait(sut) { _ in
+        try await wait(sut, "Remote reset") { _ in
             remoteRepository.profiles = []
         } until: { _ in
             didImport
@@ -652,13 +652,13 @@ extension ProfileManagerTests {
         observeRemoteImport(sut) {
             didImport = true
         }
-        try await wait(sut) {
+        try await wait(sut, "Remote import") {
             try await $0.observeLocal()
             try await $0.observeRemote(true)
         } until: {
             $0.previews.count == 1
         }
-        try await wait(sut) { _ in
+        try await wait(sut, "Remote reset") { _ in
             remoteRepository.profiles = []
         } until: { _ in
             didImport
@@ -684,7 +684,7 @@ private extension ProfileManagerTests {
     }
 
     func waitForReady(_ sut: ProfileManager, importingRemote: Bool = true) async throws {
-        try await wait(sut) {
+        try await wait(sut, "Ready") {
             try await $0.observeLocal()
             try await $0.observeRemote(importingRemote)
         } until: {
@@ -705,10 +705,11 @@ private extension ProfileManagerTests {
 
     func wait(
         _ sut: ProfileManager,
+        _ description: String,
         after action: (ProfileManager) async throws -> Void,
         until condition: @escaping (ProfileManager) -> Bool
     ) async throws {
-        let exp = expectation(description: "Wait")
+        let exp = expectation(description: description)
         var wasMet = false
         sut.objectWillChange
             .sink {
