@@ -711,17 +711,21 @@ private extension ProfileManagerTests {
     ) async throws {
         let exp = expectation(description: description)
         var wasMet = false
-        sut.objectWillChange
-            .sink {
-                guard !wasMet else {
-                    return
-                }
-                if condition(sut) {
-                    wasMet = true
-                    exp.fulfill()
-                }
+
+        Publishers.Merge(
+            sut.objectWillChange,
+            sut.didChange.map { _ in }
+        )
+        .sink {
+            guard !wasMet else {
+                return
             }
-            .store(in: &subscriptions)
+            if condition(sut) {
+                wasMet = true
+                exp.fulfill()
+            }
+        }
+        .store(in: &subscriptions)
 
         try await action(sut)
         await fulfillment(of: [exp], timeout: timeout)
