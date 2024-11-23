@@ -31,7 +31,7 @@ extension OpenVPN.PullMask: LocalizableEntity {
     public var localizedDescription: String {
         switch self {
         case .routes:
-            return Strings.Global.routes
+            return Strings.Global.Nouns.routes
 
         case .dns:
             return Strings.Unlocalized.dns
@@ -58,7 +58,7 @@ extension OpenVPN.CompressionFraming: LocalizableEntity {
     public var localizedDescription: String {
         switch self {
         case .disabled:
-            return Strings.Global.disabled
+            return Strings.Global.Nouns.disabled
 
         case .compLZO:
             return Strings.Unlocalized.OpenVPN.compLZO
@@ -67,7 +67,7 @@ extension OpenVPN.CompressionFraming: LocalizableEntity {
             return Strings.Unlocalized.OpenVPN.compress
 
         default:
-            return Strings.Global.unknown
+            return Strings.Global.Nouns.unknown
         }
     }
 }
@@ -76,7 +76,7 @@ extension OpenVPN.CompressionAlgorithm: LocalizableEntity {
     public var localizedDescription: String {
         switch self {
         case .disabled:
-            return Strings.Global.disabled
+            return Strings.Global.Nouns.disabled
 
         case .LZO:
             return Strings.Unlocalized.OpenVPN.lzo
@@ -85,7 +85,7 @@ extension OpenVPN.CompressionAlgorithm: LocalizableEntity {
             return Strings.Entities.Openvpn.CompressionAlgorithm.other
 
         default:
-            return Strings.Global.unknown
+            return Strings.Global.Nouns.unknown
         }
     }
 }
@@ -189,7 +189,7 @@ extension OpenVPN.Configuration.Builder: StyledOptionalLocalizableEntity {
 private extension Optional where Wrapped == OpenVPN.TLSWrap {
     var tlsWrapDescription: String {
         guard let strategy = self?.strategy else {
-            return Strings.Global.disabled
+            return Strings.Global.Nouns.disabled
         }
         switch strategy {
         case .auth:
@@ -203,19 +203,19 @@ private extension Optional where Wrapped == OpenVPN.TLSWrap {
 
 private extension Optional where Wrapped == Bool {
     var ekuDescription: String {
-        let V = Strings.Global.self
+        let V = Strings.Global.Nouns.self
         return (self ?? false) ? V.enabled : V.disabled
     }
 }
 
 private extension Bool {
     var randomizeEndpointDescription: String {
-        let V = Strings.Global.self
+        let V = Strings.Global.Nouns.self
         return self ? V.enabled : V.disabled
     }
 
     var randomizeHostnamesDescription: String {
-        let V = Strings.Global.self
+        let V = Strings.Global.Nouns.self
         return self ? V.enabled : V.disabled
     }
 }

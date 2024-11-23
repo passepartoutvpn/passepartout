@@ -44,10 +44,10 @@ extension ModuleType: LocalizableEntity {
             return Strings.Unlocalized.httpProxy
 
         case .ip:
-            return Strings.Global.routing
+            return Strings.Global.Nouns.routing
 
         case .onDemand:
-            return Strings.Global.onDemand
+            return Strings.Global.Nouns.onDemand
 
         default:
             assertionFailure("Missing localization for ModuleType: \(rawValue)")

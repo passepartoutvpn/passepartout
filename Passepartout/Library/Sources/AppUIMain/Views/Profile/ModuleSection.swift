@@ -109,7 +109,7 @@ private extension View {
                 }
             } else {
                 Text(caption)
-                    .themeTrailingValue(Strings.Global.empty)
+                    .themeTrailingValue(Strings.Global.Nouns.empty)
             }
 
         case .copiableText(let caption, let value, let multiline):

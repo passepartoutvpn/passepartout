@@ -78,7 +78,7 @@ private extension ProfileContextMenu {
             },
             label: {
                 ThemeImageLabel(
-                    $0 ? Strings.Global.enable : Strings.Global.disable,
+                    $0 ? Strings.Global.Actions.enable : Strings.Global.Actions.disable,
                     $0 ? .tunnelEnable : .tunnelDisable
                 )
             }
@@ -89,7 +89,7 @@ private extension ProfileContextMenu {
         profile?
             .selectedProvider
             .map { _ in
-                Button(Strings.Ui.ProfileContext.connectTo) {
+                Button(Strings.Views.App.ProfileContext.connectTo) {
                     flow?.onEditProviderEntity(profile!)
                 }
             }
@@ -104,7 +104,7 @@ private extension ProfileContextMenu {
                 flow?.onPurchaseRequired($0)
             },
             label: {
-                ThemeImageLabel(Strings.Global.restart, .tunnelRestart)
+                ThemeImageLabel(Strings.Global.Actions.restart, .tunnelRestart)
             }
         )
     }
@@ -113,7 +113,7 @@ private extension ProfileContextMenu {
         Button {
             flow?.onEditProfile(preview)
         } label: {
-            ThemeImageLabel(Strings.Global.edit.withTrailingDots, .profileEdit)
+            ThemeImageLabel(Strings.Global.Actions.edit.withTrailingDots, .profileEdit)
         }
     }
 
@@ -123,7 +123,7 @@ private extension ProfileContextMenu {
             preview: preview,
             errorHandler: errorHandler
         ) {
-            ThemeImageLabel(Strings.Global.duplicate, .contextDuplicate)
+            ThemeImageLabel(Strings.Global.Actions.duplicate, .contextDuplicate)
         }
     }
 
@@ -132,7 +132,7 @@ private extension ProfileContextMenu {
             profileManager: profileManager,
             preview: preview
         ) {
-            ThemeImageLabel(Strings.Global.remove, .contextRemove)
+            ThemeImageLabel(Strings.Global.Actions.remove, .contextRemove)
         }
     }
 }

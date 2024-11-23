@@ -11,14 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum Alerts {
-    public enum Iap {
-      public enum Restricted {
-        /// Some features are unavailable in this build.
-        public static let message = Strings.tr("Localizable", "alerts.iap.restricted.message", fallback: "Some features are unavailable in this build.")
-        /// Restricted
-        public static let title = Strings.tr("Localizable", "alerts.iap.restricted.title", fallback: "Restricted")
-      }
-    }
     public enum Import {
       public enum Passphrase {
         /// Enter passphrase for '%@'.
@@ -30,25 +22,7 @@ public enum Strings {
       }
     }
   }
-  public enum AppMenu {
-    public enum Items {
-      /// Quit %@
-      public static func quit(_ p1: Any) -> String {
-        return Strings.tr("Localizable", "app_menu.items.quit", String(describing: p1), fallback: "Quit %@")
-      }
-    }
-  }
   public enum Entities {
-    public enum ConnectionStatus {
-      /// Connected
-      public static let connected = Strings.tr("Localizable", "entities.connection_status.connected", fallback: "Connected")
-      /// Connecting
-      public static let connecting = Strings.tr("Localizable", "entities.connection_status.connecting", fallback: "Connecting")
-      /// Disconnected
-      public static let disconnected = Strings.tr("Localizable", "entities.connection_status.disconnected", fallback: "Disconnected")
-      /// Disconnecting
-      public static let disconnecting = Strings.tr("Localizable", "entities.connection_status.disconnecting", fallback: "Disconnecting")
-    }
     public enum Dns {
       /// Search domains
       public static let searchDomains = Strings.tr("Localizable", "entities.dns.search_domains", fallback: "Search domains")
@@ -89,12 +63,6 @@ public enum Strings {
         public static let encode = Strings.tr("Localizable", "entities.openvpn.otp_method.encode", fallback: "Encode")
         /// None
         public static let `none` = Strings.tr("Localizable", "entities.openvpn.otp_method.none", fallback: "None")
-      }
-    }
-    public enum Profile {
-      public enum Name {
-        /// New profile
-        public static let new = Strings.tr("Localizable", "entities.profile.name.new", fallback: "New profile")
       }
     }
     public enum TunnelStatus {
@@ -174,8 +142,8 @@ public enum Strings {
   }
   public enum Features {
     /// %@
-    public static func appleTV(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.appleTV", String(describing: p1), fallback: "%@")
+    public static func appletv(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.appletv", String(describing: p1), fallback: "%@")
     }
     /// %@ Settings
     public static func dns(_ p1: Any) -> String {
@@ -183,12 +151,12 @@ public enum Strings {
     }
     /// %@ Settings
     public static func httpProxy(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "features.httpProxy", String(describing: p1), fallback: "%@ Settings")
+      return Strings.tr("Localizable", "features.http_proxy", String(describing: p1), fallback: "%@ Settings")
     }
     /// Interactive Login
     public static let interactiveLogin = Strings.tr("Localizable", "features.interactiveLogin", fallback: "Interactive Login")
     /// On-Demand Rules
-    public static let onDemand = Strings.tr("Localizable", "features.onDemand", fallback: "On-Demand Rules")
+    public static let onDemand = Strings.tr("Localizable", "features.on_demand", fallback: "On-Demand Rules")
     /// All Providers
     public static let providers = Strings.tr("Localizable", "features.providers", fallback: "All Providers")
     /// Custom %@
@@ -201,156 +169,160 @@ public enum Strings {
     }
   }
   public enum Global {
-    /// About
-    public static let about = Strings.tr("Localizable", "global.about", fallback: "About")
-    /// Account
-    public static let account = Strings.tr("Localizable", "global.account", fallback: "Account")
-    /// Address
-    public static let address = Strings.tr("Localizable", "global.address", fallback: "Address")
-    /// Addresses
-    public static let addresses = Strings.tr("Localizable", "global.addresses", fallback: "Addresses")
-    /// Any
-    public static let any = Strings.tr("Localizable", "global.any", fallback: "Any")
-    /// Cancel
-    public static let cancel = Strings.tr("Localizable", "global.cancel", fallback: "Cancel")
-    /// Category
-    public static let category = Strings.tr("Localizable", "global.category", fallback: "Category")
-    /// Certificate
-    public static let certificate = Strings.tr("Localizable", "global.certificate", fallback: "Certificate")
-    /// Compression
-    public static let compression = Strings.tr("Localizable", "global.compression", fallback: "Compression")
-    /// Connect
-    public static let connect = Strings.tr("Localizable", "global.connect", fallback: "Connect")
-    /// Connection
-    public static let connection = Strings.tr("Localizable", "global.connection", fallback: "Connection")
-    /// Country
-    public static let country = Strings.tr("Localizable", "global.country", fallback: "Country")
-    /// Default
-    public static let `default` = Strings.tr("Localizable", "global.default", fallback: "Default")
-    /// Delete
-    public static let delete = Strings.tr("Localizable", "global.delete", fallback: "Delete")
-    /// Destination
-    public static let destination = Strings.tr("Localizable", "global.destination", fallback: "Destination")
-    /// Disable
-    public static let disable = Strings.tr("Localizable", "global.disable", fallback: "Disable")
-    /// Disabled
-    public static let disabled = Strings.tr("Localizable", "global.disabled", fallback: "Disabled")
-    /// Disconnect
-    public static let disconnect = Strings.tr("Localizable", "global.disconnect", fallback: "Disconnect")
-    /// Don't ask again
-    public static let doNotAskAgain = Strings.tr("Localizable", "global.do_not_ask_again", fallback: "Don't ask again")
-    /// Domain
-    public static let domain = Strings.tr("Localizable", "global.domain", fallback: "Domain")
-    /// Done
-    public static let done = Strings.tr("Localizable", "global.done", fallback: "Done")
-    /// Duplicate
-    public static let duplicate = Strings.tr("Localizable", "global.duplicate", fallback: "Duplicate")
-    /// Edit
-    public static let edit = Strings.tr("Localizable", "global.edit", fallback: "Edit")
-    /// Empty
-    public static let empty = Strings.tr("Localizable", "global.empty", fallback: "Empty")
-    /// Enable
-    public static let enable = Strings.tr("Localizable", "global.enable", fallback: "Enable")
-    /// Enabled
-    public static let enabled = Strings.tr("Localizable", "global.enabled", fallback: "Enabled")
-    /// Endpoint
-    public static let endpoint = Strings.tr("Localizable", "global.endpoint", fallback: "Endpoint")
-    /// Filters
-    public static let filters = Strings.tr("Localizable", "global.filters", fallback: "Filters")
-    /// Folder
-    public static let folder = Strings.tr("Localizable", "global.folder", fallback: "Folder")
-    /// Gateway
-    public static let gateway = Strings.tr("Localizable", "global.gateway", fallback: "Gateway")
-    /// General
-    public static let general = Strings.tr("Localizable", "global.general", fallback: "General")
-    /// Hide
-    public static let hide = Strings.tr("Localizable", "global.hide", fallback: "Hide")
-    /// Hostname
-    public static let hostname = Strings.tr("Localizable", "global.hostname", fallback: "Hostname")
-    /// Interface
-    public static let interface = Strings.tr("Localizable", "global.interface", fallback: "Interface")
-    /// Keep-alive
-    public static let keepAlive = Strings.tr("Localizable", "global.keep_alive", fallback: "Keep-alive")
-    /// Key
-    public static let key = Strings.tr("Localizable", "global.key", fallback: "Key")
-    /// Last update
-    public static let lastUpdate = Strings.tr("Localizable", "global.last_update", fallback: "Last update")
-    /// Loading
-    public static let loading = Strings.tr("Localizable", "global.loading", fallback: "Loading")
-    /// Method
-    public static let method = Strings.tr("Localizable", "global.method", fallback: "Method")
-    /// Modules
-    public static let modules = Strings.tr("Localizable", "global.modules", fallback: "Modules")
-    /// %d seconds
-    public static func nSeconds(_ p1: Int) -> String {
-      return Strings.tr("Localizable", "global.n_seconds", p1, fallback: "%d seconds")
+    public enum Actions {
+      /// Cancel
+      public static let cancel = Strings.tr("Localizable", "global.actions.cancel", fallback: "Cancel")
+      /// Connect
+      public static let connect = Strings.tr("Localizable", "global.actions.connect", fallback: "Connect")
+      /// Delete
+      public static let delete = Strings.tr("Localizable", "global.actions.delete", fallback: "Delete")
+      /// Disable
+      public static let disable = Strings.tr("Localizable", "global.actions.disable", fallback: "Disable")
+      /// Disconnect
+      public static let disconnect = Strings.tr("Localizable", "global.actions.disconnect", fallback: "Disconnect")
+      /// Duplicate
+      public static let duplicate = Strings.tr("Localizable", "global.actions.duplicate", fallback: "Duplicate")
+      /// Edit
+      public static let edit = Strings.tr("Localizable", "global.actions.edit", fallback: "Edit")
+      /// Enable
+      public static let enable = Strings.tr("Localizable", "global.actions.enable", fallback: "Enable")
+      /// Hide
+      public static let hide = Strings.tr("Localizable", "global.actions.hide", fallback: "Hide")
+      /// Purchase
+      public static let purchase = Strings.tr("Localizable", "global.actions.purchase", fallback: "Purchase")
+      /// Delete
+      public static let remove = Strings.tr("Localizable", "global.actions.remove", fallback: "Delete")
+      /// Restart
+      public static let restart = Strings.tr("Localizable", "global.actions.restart", fallback: "Restart")
+      /// Save
+      public static let save = Strings.tr("Localizable", "global.actions.save", fallback: "Save")
+      /// Select
+      public static let select = Strings.tr("Localizable", "global.actions.select", fallback: "Select")
+      /// Show
+      public static let show = Strings.tr("Localizable", "global.actions.show", fallback: "Show")
     }
-    /// Name
-    public static let name = Strings.tr("Localizable", "global.name", fallback: "Name")
-    /// Networks
-    public static let networks = Strings.tr("Localizable", "global.networks", fallback: "Networks")
-    /// No content
-    public static let noContent = Strings.tr("Localizable", "global.no_content", fallback: "No content")
-    /// No selection
-    public static let noSelection = Strings.tr("Localizable", "global.no_selection", fallback: "No selection")
-    /// None
-    public static let `none` = Strings.tr("Localizable", "global.none", fallback: "None")
-    /// OK
-    public static let ok = Strings.tr("Localizable", "global.ok", fallback: "OK")
-    /// On-demand
-    public static let onDemand = Strings.tr("Localizable", "global.on_demand", fallback: "On-demand")
-    /// Other
-    public static let other = Strings.tr("Localizable", "global.other", fallback: "Other")
-    /// Password
-    public static let password = Strings.tr("Localizable", "global.password", fallback: "Password")
-    /// Port
-    public static let port = Strings.tr("Localizable", "global.port", fallback: "Port")
-    /// Private key
-    public static let privateKey = Strings.tr("Localizable", "global.private_key", fallback: "Private key")
-    /// Profile
-    public static let profile = Strings.tr("Localizable", "global.profile", fallback: "Profile")
-    /// Protocol
-    public static let `protocol` = Strings.tr("Localizable", "global.protocol", fallback: "Protocol")
-    /// Provider
-    public static let provider = Strings.tr("Localizable", "global.provider", fallback: "Provider")
-    /// Public key
-    public static let publicKey = Strings.tr("Localizable", "global.public_key", fallback: "Public key")
-    /// Purchase
-    public static let purchase = Strings.tr("Localizable", "global.purchase", fallback: "Purchase")
-    /// Region
-    public static let region = Strings.tr("Localizable", "global.region", fallback: "Region")
-    /// Delete
-    public static let remove = Strings.tr("Localizable", "global.remove", fallback: "Delete")
-    /// Restart
-    public static let restart = Strings.tr("Localizable", "global.restart", fallback: "Restart")
-    /// Route
-    public static let route = Strings.tr("Localizable", "global.route", fallback: "Route")
-    /// Routes
-    public static let routes = Strings.tr("Localizable", "global.routes", fallback: "Routes")
-    /// Routing
-    public static let routing = Strings.tr("Localizable", "global.routing", fallback: "Routing")
-    /// Save
-    public static let save = Strings.tr("Localizable", "global.save", fallback: "Save")
-    /// Select
-    public static let select = Strings.tr("Localizable", "global.select", fallback: "Select")
-    /// Server
-    public static let server = Strings.tr("Localizable", "global.server", fallback: "Server")
-    /// Servers
-    public static let servers = Strings.tr("Localizable", "global.servers", fallback: "Servers")
-    /// Settings
-    public static let settings = Strings.tr("Localizable", "global.settings", fallback: "Settings")
-    /// Show
-    public static let show = Strings.tr("Localizable", "global.show", fallback: "Show")
-    /// Status
-    public static let status = Strings.tr("Localizable", "global.status", fallback: "Status")
-    /// Subnet
-    public static let subnet = Strings.tr("Localizable", "global.subnet", fallback: "Subnet")
-    /// Unknown
-    public static let unknown = Strings.tr("Localizable", "global.unknown", fallback: "Unknown")
-    /// Username
-    public static let username = Strings.tr("Localizable", "global.username", fallback: "Username")
-    /// Version
-    public static let version = Strings.tr("Localizable", "global.version", fallback: "Version")
+    public enum Nouns {
+      /// About
+      public static let about = Strings.tr("Localizable", "global.nouns.about", fallback: "About")
+      /// Account
+      public static let account = Strings.tr("Localizable", "global.nouns.account", fallback: "Account")
+      /// Address
+      public static let address = Strings.tr("Localizable", "global.nouns.address", fallback: "Address")
+      /// Addresses
+      public static let addresses = Strings.tr("Localizable", "global.nouns.addresses", fallback: "Addresses")
+      /// Any
+      public static let any = Strings.tr("Localizable", "global.nouns.any", fallback: "Any")
+      /// Category
+      public static let category = Strings.tr("Localizable", "global.nouns.category", fallback: "Category")
+      /// Certificate
+      public static let certificate = Strings.tr("Localizable", "global.nouns.certificate", fallback: "Certificate")
+      /// Compression
+      public static let compression = Strings.tr("Localizable", "global.nouns.compression", fallback: "Compression")
+      /// Connection
+      public static let connection = Strings.tr("Localizable", "global.nouns.connection", fallback: "Connection")
+      /// Country
+      public static let country = Strings.tr("Localizable", "global.nouns.country", fallback: "Country")
+      /// Default
+      public static let `default` = Strings.tr("Localizable", "global.nouns.default", fallback: "Default")
+      /// Destination
+      public static let destination = Strings.tr("Localizable", "global.nouns.destination", fallback: "Destination")
+      /// Disabled
+      public static let disabled = Strings.tr("Localizable", "global.nouns.disabled", fallback: "Disabled")
+      /// Don't ask again
+      public static let doNotAskAgain = Strings.tr("Localizable", "global.nouns.do_not_ask_again", fallback: "Don't ask again")
+      /// Domain
+      public static let domain = Strings.tr("Localizable", "global.nouns.domain", fallback: "Domain")
+      /// Done
+      public static let done = Strings.tr("Localizable", "global.nouns.done", fallback: "Done")
+      /// Empty
+      public static let empty = Strings.tr("Localizable", "global.nouns.empty", fallback: "Empty")
+      /// Enabled
+      public static let enabled = Strings.tr("Localizable", "global.nouns.enabled", fallback: "Enabled")
+      /// Endpoint
+      public static let endpoint = Strings.tr("Localizable", "global.nouns.endpoint", fallback: "Endpoint")
+      /// Filters
+      public static let filters = Strings.tr("Localizable", "global.nouns.filters", fallback: "Filters")
+      /// Folder
+      public static let folder = Strings.tr("Localizable", "global.nouns.folder", fallback: "Folder")
+      /// Gateway
+      public static let gateway = Strings.tr("Localizable", "global.nouns.gateway", fallback: "Gateway")
+      /// General
+      public static let general = Strings.tr("Localizable", "global.nouns.general", fallback: "General")
+      /// Hostname
+      public static let hostname = Strings.tr("Localizable", "global.nouns.hostname", fallback: "Hostname")
+      /// Interface
+      public static let interface = Strings.tr("Localizable", "global.nouns.interface", fallback: "Interface")
+      /// Keep-alive
+      public static let keepAlive = Strings.tr("Localizable", "global.nouns.keep_alive", fallback: "Keep-alive")
+      /// Key
+      public static let key = Strings.tr("Localizable", "global.nouns.key", fallback: "Key")
+      /// Last update
+      public static let lastUpdate = Strings.tr("Localizable", "global.nouns.last_update", fallback: "Last update")
+      /// Loading
+      public static let loading = Strings.tr("Localizable", "global.nouns.loading", fallback: "Loading")
+      /// Method
+      public static let method = Strings.tr("Localizable", "global.nouns.method", fallback: "Method")
+      /// Modules
+      public static let modules = Strings.tr("Localizable", "global.nouns.modules", fallback: "Modules")
+      /// %d seconds
+      public static func nSeconds(_ p1: Int) -> String {
+        return Strings.tr("Localizable", "global.nouns.n_seconds", p1, fallback: "%d seconds")
+      }
+      /// Name
+      public static let name = Strings.tr("Localizable", "global.nouns.name", fallback: "Name")
+      /// Networks
+      public static let networks = Strings.tr("Localizable", "global.nouns.networks", fallback: "Networks")
+      /// No content
+      public static let noContent = Strings.tr("Localizable", "global.nouns.no_content", fallback: "No content")
+      /// No selection
+      public static let noSelection = Strings.tr("Localizable", "global.nouns.no_selection", fallback: "No selection")
+      /// None
+      public static let `none` = Strings.tr("Localizable", "global.nouns.none", fallback: "None")
+      /// OK
+      public static let ok = Strings.tr("Localizable", "global.nouns.ok", fallback: "OK")
+      /// On-demand
+      public static let onDemand = Strings.tr("Localizable", "global.nouns.on_demand", fallback: "On-demand")
+      /// Other
+      public static let other = Strings.tr("Localizable", "global.nouns.other", fallback: "Other")
+      /// Password
+      public static let password = Strings.tr("Localizable", "global.nouns.password", fallback: "Password")
+      /// Port
+      public static let port = Strings.tr("Localizable", "global.nouns.port", fallback: "Port")
+      /// Private key
+      public static let privateKey = Strings.tr("Localizable", "global.nouns.private_key", fallback: "Private key")
+      /// Profile
+      public static let profile = Strings.tr("Localizable", "global.nouns.profile", fallback: "Profile")
+      /// Protocol
+      public static let `protocol` = Strings.tr("Localizable", "global.nouns.protocol", fallback: "Protocol")
+      /// Provider
+      public static let provider = Strings.tr("Localizable", "global.nouns.provider", fallback: "Provider")
+      /// Public key
+      public static let publicKey = Strings.tr("Localizable", "global.nouns.public_key", fallback: "Public key")
+      /// Region
+      public static let region = Strings.tr("Localizable", "global.nouns.region", fallback: "Region")
+      /// Route
+      public static let route = Strings.tr("Localizable", "global.nouns.route", fallback: "Route")
+      /// Routes
+      public static let routes = Strings.tr("Localizable", "global.nouns.routes", fallback: "Routes")
+      /// Routing
+      public static let routing = Strings.tr("Localizable", "global.nouns.routing", fallback: "Routing")
+      /// Server
+      public static let server = Strings.tr("Localizable", "global.nouns.server", fallback: "Server")
+      /// Servers
+      public static let servers = Strings.tr("Localizable", "global.nouns.servers", fallback: "Servers")
+      /// Settings
+      public static let settings = Strings.tr("Localizable", "global.nouns.settings", fallback: "Settings")
+      /// Status
+      public static let status = Strings.tr("Localizable", "global.nouns.status", fallback: "Status")
+      /// Subnet
+      public static let subnet = Strings.tr("Localizable", "global.nouns.subnet", fallback: "Subnet")
+      /// Unknown
+      public static let unknown = Strings.tr("Localizable", "global.nouns.unknown", fallback: "Unknown")
+      /// Username
+      public static let username = Strings.tr("Localizable", "global.nouns.username", fallback: "Username")
+      /// Version
+      public static let version = Strings.tr("Localizable", "global.nouns.version", fallback: "Version")
+    }
   }
   public enum Modules {
     public enum Dns {
@@ -366,16 +338,16 @@ public enum Strings {
     public enum General {
       public enum Rows {
         /// %@
-        public static func appleTv(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "modules.general.rows.apple_tv", String(describing: p1), fallback: "%@")
+        public static func appletv(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "modules.general.rows.appletv", String(describing: p1), fallback: "%@")
         }
         /// Import from file...
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
         /// Enabled
         public static let shared = Strings.tr("Localizable", "modules.general.rows.shared", fallback: "Enabled")
-        public enum AppleTv {
+        public enum Appletv {
           /// Drop TV restriction
-          public static let purchase = Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", fallback: "Drop TV restriction")
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.appletv.purchase", fallback: "Drop TV restriction")
         }
         public enum Shared {
           /// Share on iCloud
@@ -514,44 +486,6 @@ public enum Strings {
       public static let providerKey = Strings.tr("Localizable", "modules.wireguard.provider_key", fallback: "Private key")
     }
   }
-  public enum Paywall {
-    public enum Alerts {
-      public enum Pending {
-        /// The purchase is pending external confirmation. The feature will be credited upon approval.
-        public static let message = Strings.tr("Localizable", "paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
-      }
-    }
-    public enum Rows {
-      /// Restore purchases
-      public static let restorePurchases = Strings.tr("Localizable", "paywall.rows.restore_purchases", fallback: "Restore purchases")
-    }
-    public enum Sections {
-      public enum Features {
-        public enum Other {
-          /// Also included
-          public static let header = Strings.tr("Localizable", "paywall.sections.features.other.header", fallback: "Also included")
-        }
-        public enum Required {
-          /// Required features
-          public static let header = Strings.tr("Localizable", "paywall.sections.features.required.header", fallback: "Required features")
-        }
-      }
-      public enum OneTime {
-        /// One-time purchase
-        public static let header = Strings.tr("Localizable", "paywall.sections.one_time.header", fallback: "One-time purchase")
-      }
-      public enum Recurring {
-        /// All features
-        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "All features")
-      }
-      public enum Restore {
-        /// If you bought this app or feature in the past, you can restore your purchases.
-        public static let footer = Strings.tr("Localizable", "paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
-        /// Restore
-        public static let header = Strings.tr("Localizable", "paywall.sections.restore.header", fallback: "Restore")
-      }
-    }
-  }
   public enum Placeholders {
     /// secret
     public static let secret = Strings.tr("Localizable", "placeholders.secret", fallback: "secret")
@@ -564,38 +498,6 @@ public enum Strings {
     public enum Profile {
       /// My profile
       public static let name = Strings.tr("Localizable", "placeholders.profile.name", fallback: "My profile")
-    }
-  }
-  public enum Providers {
-    /// Clear filters
-    public static let clearFilters = Strings.tr("Localizable", "providers.clear_filters", fallback: "Clear filters")
-    /// Last updated on %@
-    public static func lastUpdated(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "providers.last_updated", String(describing: p1), fallback: "Last updated on %@")
-    }
-    /// None
-    public static let noProvider = Strings.tr("Localizable", "providers.no_provider", fallback: "None")
-    /// Only favorites
-    public static let onlyFavorites = Strings.tr("Localizable", "providers.only_favorites", fallback: "Only favorites")
-    /// Refresh infrastructure
-    public static let refreshInfrastructure = Strings.tr("Localizable", "providers.refresh_infrastructure", fallback: "Refresh infrastructure")
-    /// Select
-    public static let selectEntity = Strings.tr("Localizable", "providers.select_entity", fallback: "Select")
-    /// Select a provider
-    public static let selectProvider = Strings.tr("Localizable", "providers.select_provider", fallback: "Select a provider")
-    public enum LastUpdated {
-      /// Loading...
-      public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
-    }
-    public enum Vpn {
-      /// No servers
-      public static let noServers = Strings.tr("Localizable", "providers.vpn.no_servers", fallback: "No servers")
-      /// Preset
-      public static let preset = Strings.tr("Localizable", "providers.vpn.preset", fallback: "Preset")
-      public enum Category {
-        /// All categories
-        public static let any = Strings.tr("Localizable", "providers.vpn.category.any", fallback: "All categories")
-      }
     }
   }
   public enum Theme {
@@ -611,26 +513,6 @@ public enum Strings {
       /// %@ is locked
       public static func reason(_ p1: Any) -> String {
         return Strings.tr("Localizable", "theme.lock_screen.reason", String(describing: p1), fallback: "%@ is locked")
-      }
-    }
-  }
-  public enum Ui {
-    public enum ConnectionStatus {
-      ///  (on-demand)
-      public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
-    }
-    public enum ProfileContext {
-      /// Connect to...
-      public static let connectTo = Strings.tr("Localizable", "ui.profile_context.connect_to", fallback: "Connect to...")
-    }
-    public enum PurchaseRequired {
-      public enum Purchase {
-        /// Purchase required
-        public static let help = Strings.tr("Localizable", "ui.purchase_required.purchase.help", fallback: "Purchase required")
-      }
-      public enum Restricted {
-        /// Feature is restricted
-        public static let help = Strings.tr("Localizable", "ui.purchase_required.restricted.help", fallback: "Feature is restricted")
       }
     }
   }
@@ -673,6 +555,64 @@ public enum Strings {
       public enum Sections {
         /// Resources
         public static let resources = Strings.tr("Localizable", "views.about.sections.resources", fallback: "Resources")
+      }
+    }
+    public enum App {
+      public enum Errors {
+        /// Unable to duplicate profile '%@'.
+        public static func duplicate(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.app.errors.duplicate", String(describing: p1), fallback: "Unable to duplicate profile '%@'.")
+        }
+        /// Unable to import profiles.
+        public static let `import` = Strings.tr("Localizable", "views.app.errors.import", fallback: "Unable to import profiles.")
+        /// Unable to execute tunnel operation.
+        public static let tunnel = Strings.tr("Localizable", "views.app.errors.tunnel", fallback: "Unable to execute tunnel operation.")
+      }
+      public enum Folders {
+        /// Installed profile
+        public static let activeProfile = Strings.tr("Localizable", "views.app.folders.active_profile", fallback: "Installed profile")
+        /// Add profile
+        public static let addProfile = Strings.tr("Localizable", "views.app.folders.add_profile", fallback: "Add profile")
+        /// My profiles
+        public static let `default` = Strings.tr("Localizable", "views.app.folders.default", fallback: "My profiles")
+        /// No profiles
+        public static let noProfiles = Strings.tr("Localizable", "views.app.folders.no_profiles", fallback: "No profiles")
+        public enum NoProfiles {
+          /// Migrate old profiles...
+          public static let migrate = Strings.tr("Localizable", "views.app.folders.no_profiles.migrate", fallback: "Migrate old profiles...")
+        }
+      }
+      public enum ProfileContext {
+        /// Connect to...
+        public static let connectTo = Strings.tr("Localizable", "views.app.profile_context.connect_to", fallback: "Connect to...")
+      }
+      public enum Rows {
+        /// No active modules
+        public static let noModules = Strings.tr("Localizable", "views.app.rows.no_modules", fallback: "No active modules")
+        /// Select a profile
+        public static let notInstalled = Strings.tr("Localizable", "views.app.rows.not_installed", fallback: "Select a profile")
+      }
+      public enum Toolbar {
+        /// Import profile
+        public static let importProfile = Strings.tr("Localizable", "views.app.toolbar.import_profile", fallback: "Import profile")
+        /// Migrate profiles
+        public static let migrateProfiles = Strings.tr("Localizable", "views.app.toolbar.migrate_profiles", fallback: "Migrate profiles")
+        /// New profile
+        public static let newProfile = Strings.tr("Localizable", "views.app.toolbar.new_profile", fallback: "New profile")
+      }
+      public enum Tv {
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
+        public static func header(_ p1: Any, _ p2: Any) -> String {
+          return Strings.tr("Localizable", "views.app.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+        }
+      }
+    }
+    public enum AppMenu {
+      public enum Items {
+        /// Quit %@
+        public static func quit(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.app_menu.items.quit", String(describing: p1), fallback: "Quit %@")
+        }
       }
     }
     public enum Diagnostics {
@@ -729,34 +669,104 @@ public enum Strings {
         }
       }
     }
-    public enum Migrate {
+    public enum Migration {
       /// Nothing to migrate
-      public static let noProfiles = Strings.tr("Localizable", "views.migrate.no_profiles", fallback: "Nothing to migrate")
+      public static let noProfiles = Strings.tr("Localizable", "views.migration.no_profiles", fallback: "Nothing to migrate")
       /// Migrate
-      public static let title = Strings.tr("Localizable", "views.migrate.title", fallback: "Migrate")
+      public static let title = Strings.tr("Localizable", "views.migration.title", fallback: "Migrate")
       public enum Alerts {
         public enum Delete {
           /// Do you want to discard these profiles? You will not be able to recover them later.
           /// 
           /// %@
           public static func message(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "views.migrate.alerts.delete.message", String(describing: p1), fallback: "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@")
+            return Strings.tr("Localizable", "views.migration.alerts.delete.message", String(describing: p1), fallback: "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@")
           }
         }
       }
       public enum Items {
         /// Discard
-        public static let discard = Strings.tr("Localizable", "views.migrate.items.discard", fallback: "Discard")
+        public static let discard = Strings.tr("Localizable", "views.migration.items.discard", fallback: "Discard")
         /// Proceed
-        public static let migrate = Strings.tr("Localizable", "views.migrate.items.migrate", fallback: "Proceed")
+        public static let migrate = Strings.tr("Localizable", "views.migration.items.migrate", fallback: "Proceed")
       }
       public enum Sections {
         public enum Main {
           /// Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.
           public static func header(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "views.migrate.sections.main.header", String(describing: p1), fallback: "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.")
+            return Strings.tr("Localizable", "views.migration.sections.main.header", String(describing: p1), fallback: "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.")
           }
         }
+      }
+    }
+    public enum Paywall {
+      public enum Alerts {
+        public enum Pending {
+          /// The purchase is pending external confirmation. The feature will be credited upon approval.
+          public static let message = Strings.tr("Localizable", "views.paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
+        }
+        public enum Restricted {
+          /// Some features are unavailable in this build.
+          public static let message = Strings.tr("Localizable", "views.paywall.alerts.restricted.message", fallback: "Some features are unavailable in this build.")
+          /// Restricted
+          public static let title = Strings.tr("Localizable", "views.paywall.alerts.restricted.title", fallback: "Restricted")
+        }
+      }
+      public enum Rows {
+        /// Restore purchases
+        public static let restorePurchases = Strings.tr("Localizable", "views.paywall.rows.restore_purchases", fallback: "Restore purchases")
+      }
+      public enum Sections {
+        public enum Features {
+          public enum Other {
+            /// Also included
+            public static let header = Strings.tr("Localizable", "views.paywall.sections.features.other.header", fallback: "Also included")
+          }
+          public enum Required {
+            /// Required features
+            public static let header = Strings.tr("Localizable", "views.paywall.sections.features.required.header", fallback: "Required features")
+          }
+        }
+        public enum OneTime {
+          /// One-time purchase
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.one_time.header", fallback: "One-time purchase")
+        }
+        public enum Recurring {
+          /// All features
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.recurring.header", fallback: "All features")
+        }
+        public enum Restore {
+          /// If you bought this app or feature in the past, you can restore your purchases.
+          public static let footer = Strings.tr("Localizable", "views.paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
+          /// Restore
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.restore.header", fallback: "Restore")
+        }
+      }
+    }
+    public enum Preferences {
+      /// Erase iCloud store
+      public static let eraseIcloud = Strings.tr("Localizable", "views.preferences.erase_icloud", fallback: "Erase iCloud store")
+      /// Keep in menu bar
+      public static let keepsInMenu = Strings.tr("Localizable", "views.preferences.keeps_in_menu", fallback: "Keep in menu bar")
+      /// Launch on login
+      public static let launchesOnLogin = Strings.tr("Localizable", "views.preferences.launches_on_login", fallback: "Launch on login")
+      /// Lock in background
+      public static let locksInBackground = Strings.tr("Localizable", "views.preferences.locks_in_background", fallback: "Lock in background")
+      public enum EraseIcloud {
+        /// To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
+        public static let footer = Strings.tr("Localizable", "views.preferences.erase_icloud.footer", fallback: "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
+      }
+      public enum KeepsInMenu {
+        /// Enable this to keep the app in the menu bar after closing it.
+        public static let footer = Strings.tr("Localizable", "views.preferences.keeps_in_menu.footer", fallback: "Enable this to keep the app in the menu bar after closing it.")
+      }
+      public enum LaunchesOnLogin {
+        /// Open the app in background after login.
+        public static let footer = Strings.tr("Localizable", "views.preferences.launches_on_login.footer", fallback: "Open the app in background after login.")
+      }
+      public enum LocksInBackground {
+        /// Lock the app with FaceID when sent to the background.
+        public static let footer = Strings.tr("Localizable", "views.preferences.locks_in_background.footer", fallback: "Lock the app with FaceID when sent to the background.")
       }
     }
     public enum Profile {
@@ -783,76 +793,52 @@ public enum Strings {
         public static let addModule = Strings.tr("Localizable", "views.profile.rows.add_module", fallback: "Add module")
       }
     }
-    public enum Profiles {
-      public enum Errors {
-        /// Unable to duplicate profile '%@'.
-        public static func duplicate(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "views.profiles.errors.duplicate", String(describing: p1), fallback: "Unable to duplicate profile '%@'.")
-        }
-        /// Unable to import profiles.
-        public static let `import` = Strings.tr("Localizable", "views.profiles.errors.import", fallback: "Unable to import profiles.")
-        /// Unable to execute tunnel operation.
-        public static let tunnel = Strings.tr("Localizable", "views.profiles.errors.tunnel", fallback: "Unable to execute tunnel operation.")
+    public enum Providers {
+      /// Clear filters
+      public static let clearFilters = Strings.tr("Localizable", "views.providers.clear_filters", fallback: "Clear filters")
+      /// Last updated on %@
+      public static func lastUpdated(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "views.providers.last_updated", String(describing: p1), fallback: "Last updated on %@")
       }
-      public enum Folders {
-        /// Installed profile
-        public static let activeProfile = Strings.tr("Localizable", "views.profiles.folders.active_profile", fallback: "Installed profile")
-        /// Add profile
-        public static let addProfile = Strings.tr("Localizable", "views.profiles.folders.add_profile", fallback: "Add profile")
-        /// My profiles
-        public static let `default` = Strings.tr("Localizable", "views.profiles.folders.default", fallback: "My profiles")
-        /// No profiles
-        public static let noProfiles = Strings.tr("Localizable", "views.profiles.folders.no_profiles", fallback: "No profiles")
-        public enum NoProfiles {
-          /// Migrate old profiles...
-          public static let migrate = Strings.tr("Localizable", "views.profiles.folders.no_profiles.migrate", fallback: "Migrate old profiles...")
-        }
+      /// None
+      public static let noProvider = Strings.tr("Localizable", "views.providers.no_provider", fallback: "None")
+      /// Only favorites
+      public static let onlyFavorites = Strings.tr("Localizable", "views.providers.only_favorites", fallback: "Only favorites")
+      /// Refresh infrastructure
+      public static let refreshInfrastructure = Strings.tr("Localizable", "views.providers.refresh_infrastructure", fallback: "Refresh infrastructure")
+      /// Select
+      public static let selectEntity = Strings.tr("Localizable", "views.providers.select_entity", fallback: "Select")
+      /// Select a provider
+      public static let selectProvider = Strings.tr("Localizable", "views.providers.select_provider", fallback: "Select a provider")
+      public enum LastUpdated {
+        /// Loading...
+        public static let loading = Strings.tr("Localizable", "views.providers.last_updated.loading", fallback: "Loading...")
       }
-      public enum Rows {
-        /// No active modules
-        public static let noModules = Strings.tr("Localizable", "views.profiles.rows.no_modules", fallback: "No active modules")
-        /// Select a profile
-        public static let notInstalled = Strings.tr("Localizable", "views.profiles.rows.not_installed", fallback: "Select a profile")
-      }
-      public enum Toolbar {
-        /// Import profile
-        public static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
-        /// Migrate profiles
-        public static let migrateProfiles = Strings.tr("Localizable", "views.profiles.toolbar.migrate_profiles", fallback: "Migrate profiles")
-        /// New profile
-        public static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
-      }
-      public enum Tv {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
-        public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.profiles.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+      public enum Vpn {
+        /// No servers
+        public static let noServers = Strings.tr("Localizable", "views.providers.vpn.no_servers", fallback: "No servers")
+        /// Preset
+        public static let preset = Strings.tr("Localizable", "views.providers.vpn.preset", fallback: "Preset")
+        public enum Category {
+          /// All categories
+          public static let any = Strings.tr("Localizable", "views.providers.vpn.category.any", fallback: "All categories")
         }
       }
     }
-    public enum Settings {
-      /// Erase iCloud store
-      public static let eraseIcloud = Strings.tr("Localizable", "views.settings.erase_icloud", fallback: "Erase iCloud store")
-      /// Keep in menu bar
-      public static let keepsInMenu = Strings.tr("Localizable", "views.settings.keeps_in_menu", fallback: "Keep in menu bar")
-      /// Launch on login
-      public static let launchesOnLogin = Strings.tr("Localizable", "views.settings.launches_on_login", fallback: "Launch on login")
-      /// Lock in background
-      public static let locksInBackground = Strings.tr("Localizable", "views.settings.locks_in_background", fallback: "Lock in background")
-      public enum EraseIcloud {
-        /// To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
-        public static let footer = Strings.tr("Localizable", "views.settings.erase_icloud.footer", fallback: "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
+    public enum Ui {
+      public enum ConnectionStatus {
+        ///  (on-demand)
+        public static let onDemandSuffix = Strings.tr("Localizable", "views.ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
       }
-      public enum KeepsInMenu {
-        /// Enable this to keep the app in the menu bar after closing it.
-        public static let footer = Strings.tr("Localizable", "views.settings.keeps_in_menu.footer", fallback: "Enable this to keep the app in the menu bar after closing it.")
-      }
-      public enum LaunchesOnLogin {
-        /// Open the app in background after login.
-        public static let footer = Strings.tr("Localizable", "views.settings.launches_on_login.footer", fallback: "Open the app in background after login.")
-      }
-      public enum LocksInBackground {
-        /// Lock the app with FaceID when sent to the background.
-        public static let footer = Strings.tr("Localizable", "views.settings.locks_in_background.footer", fallback: "Lock the app with FaceID when sent to the background.")
+      public enum PurchaseRequired {
+        public enum Purchase {
+          /// Purchase required
+          public static let help = Strings.tr("Localizable", "views.ui.purchase_required.purchase.help", fallback: "Purchase required")
+        }
+        public enum Restricted {
+          /// Feature is restricted
+          public static let help = Strings.tr("Localizable", "views.ui.purchase_required.restricted.help", fallback: "Feature is restricted")
+        }
       }
     }
   }

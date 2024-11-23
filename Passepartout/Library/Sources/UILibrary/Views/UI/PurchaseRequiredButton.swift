@@ -82,6 +82,6 @@ private extension PurchaseRequiredButton {
     }
 
     var helpMessage: String {
-        iapManager.isRestricted ? Strings.Ui.PurchaseRequired.Restricted.help : Strings.Ui.PurchaseRequired.Purchase.help
+        iapManager.isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help
     }
 }

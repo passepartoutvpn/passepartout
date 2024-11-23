@@ -43,12 +43,12 @@ extension WireGuardView {
 private extension WireGuardView.ConfigurationView {
     var interfaceRows: [ModuleRow]? {
         var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.privateKey, value: configuration.interface.privateKey))
+        rows.append(.longContent(caption: Strings.Global.Nouns.privateKey, value: configuration.interface.privateKey))
         configuration.interface.addresses
             .nilIfEmpty
             .map {
                 rows.append(.textList(
-                    caption: Strings.Global.addresses,
+                    caption: Strings.Global.Nouns.addresses,
                     values: $0
                 ))
             }
@@ -65,14 +65,14 @@ private extension WireGuardView.ConfigurationView {
             .nilIfEmpty
             .map {
                 rows.append(.textList(
-                    caption: Strings.Global.servers,
+                    caption: Strings.Global.Nouns.servers,
                     values: $0
                 ))
             }
 
         configuration.interface.dns.domainName.map {
             rows.append(.text(
-                caption: Strings.Global.domain,
+                caption: Strings.Global.Nouns.domain,
                 value: $0
             ))
         }
@@ -91,12 +91,12 @@ private extension WireGuardView.ConfigurationView {
 
     func peersRows(for peer: WireGuard.RemoteInterface.Builder) -> [ModuleRow]? {
         var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.publicKey, value: peer.publicKey))
+        rows.append(.longContent(caption: Strings.Global.Nouns.publicKey, value: peer.publicKey))
         peer.preSharedKey.map {
             rows.append(.longContent(caption: Strings.Modules.Wireguard.presharedKey, value: $0))
         }
         peer.endpoint.map {
-            rows.append(.copiableText(caption: Strings.Global.endpoint, value: $0))
+            rows.append(.copiableText(caption: Strings.Global.Nouns.endpoint, value: $0))
         }
         peer.allowedIPs
             .nilIfEmpty
@@ -107,7 +107,7 @@ private extension WireGuardView.ConfigurationView {
                 ))
             }
         peer.keepAlive.map {
-            rows.append(.text(caption: Strings.Global.keepAlive, value: TimeInterval($0).localizedDescription(style: .timeString)))
+            rows.append(.text(caption: Strings.Global.Nouns.keepAlive, value: TimeInterval($0).localizedDescription(style: .timeString)))
         }
         return rows.nilIfEmpty
     }

@@ -60,7 +60,7 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                 .themeNavigationStack(closable: false, path: $path)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button(Strings.Global.ok) {
+                        Button(Strings.Global.Nouns.ok) {
                             dismiss()
                         }
                     }

@@ -63,7 +63,7 @@ private extension DNSView {
 
     var protocolSection: some View {
         Section {
-            Picker(Strings.Global.protocol, selection: draft.protocolType) {
+            Picker(Strings.Global.Nouns.protocol, selection: draft.protocolType) {
                 ForEach(Self.allProtocols, id: \.self) {
                     Text($0.localizedDescription)
                 }
@@ -77,7 +77,7 @@ private extension DNSView {
                     .labelsHidden()
 
             case .tls:
-                ThemeTextField(Strings.Global.hostname, text: draft.dotHostname, placeholder: Strings.Unlocalized.Placeholders.dotHostname)
+                ThemeTextField(Strings.Global.Nouns.hostname, text: draft.dotHostname, placeholder: Strings.Unlocalized.Placeholders.dotHostname)
                     .labelsHidden()
             }
         }
@@ -85,9 +85,9 @@ private extension DNSView {
 
     var domainSection: some View {
         Group {
-            ThemeTextField(Strings.Global.domain, text: draft.domainName ?? "", placeholder: Strings.Unlocalized.Placeholders.hostname)
+            ThemeTextField(Strings.Global.Nouns.domain, text: draft.domainName ?? "", placeholder: Strings.Unlocalized.Placeholders.hostname)
         }
-        .themeSection(header: Strings.Global.domain)
+        .themeSection(header: Strings.Global.Nouns.domain)
     }
 
     var serversSection: some View {

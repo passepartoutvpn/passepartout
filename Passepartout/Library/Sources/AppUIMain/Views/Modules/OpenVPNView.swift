@@ -129,7 +129,7 @@ private extension OpenVPNView {
                     Button(Strings.Alerts.Import.Passphrase.ok) {
                         importConfiguration(from: .success(url))
                     }
-                    Button(Strings.Global.cancel, role: .cancel) {
+                    Button(Strings.Global.Actions.cancel, role: .cancel) {
                         isImporting = false
                     }
                 },

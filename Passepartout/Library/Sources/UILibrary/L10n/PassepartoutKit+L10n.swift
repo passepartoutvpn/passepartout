@@ -82,25 +82,6 @@ extension TunnelStatus: LocalizableEntity {
     }
 }
 
-extension ConnectionStatus: LocalizableEntity {
-    public var localizedDescription: String {
-        let V = Strings.Entities.ConnectionStatus.self
-        switch self {
-        case .disconnected:
-            return V.disconnected
-
-        case .connecting:
-            return V.connecting
-
-        case .connected:
-            return V.connected
-
-        case .disconnecting:
-            return V.disconnecting
-        }
-    }
-}
-
 extension DataCount: LocalizableEntity {
     public var localizedDescription: String {
         let down = received.descriptionAsDataUnit

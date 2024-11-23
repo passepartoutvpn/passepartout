@@ -47,10 +47,10 @@ public struct PaywallModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .alert(
-                Strings.Alerts.Iap.Restricted.title,
+                Strings.Views.Paywall.Alerts.Restricted.title,
                 isPresented: $isPresentingRestricted,
                 actions: {
-                    Button(Strings.Global.ok) {
+                    Button(Strings.Global.Nouns.ok) {
                         reason = nil
                         isPresentingRestricted = false
                     }
@@ -102,7 +102,7 @@ private extension PaywallModifier {
         guard case .purchase(let features, _) = reason else {
             return ""
         }
-        let msg = Strings.Alerts.Iap.Restricted.message
+        let msg = Strings.Views.Paywall.Alerts.Restricted.message
         return msg + "\n\n" + iapManager
             .excludingEligible(from: features)
             .map(\.localizedDescription)

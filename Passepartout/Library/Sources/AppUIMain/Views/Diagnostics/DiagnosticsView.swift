@@ -90,7 +90,7 @@ struct DiagnosticsView: View {
         .themeForm()
         .navigationTitle(Strings.Views.Diagnostics.title)
         .alert(Strings.Views.Diagnostics.ReportIssue.title, isPresented: $isPresentingUnableToEmail) {
-            Button(Strings.Global.ok, role: .cancel) {
+            Button(Strings.Global.Nouns.ok, role: .cancel) {
                 isPresentingUnableToEmail = false
             }
         } message: {

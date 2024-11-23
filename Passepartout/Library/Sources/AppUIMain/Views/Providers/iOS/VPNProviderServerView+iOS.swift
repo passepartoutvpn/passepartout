@@ -75,7 +75,7 @@ private extension VPNProviderServerView {
         func body(content: Content) -> some View {
             NavigationStack {
                 content
-                    .navigationTitle(Strings.Global.filters)
+                    .navigationTitle(Strings.Global.Nouns.filters)
                     .themeNavigationDetail()
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
@@ -127,7 +127,7 @@ private extension VPNProviderServerView.ServersSubview {
     var listView: some View {
         List {
             Section {
-                Toggle(Strings.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
+                Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
             }
             Group {
                 if isFiltering || !servers.isEmpty {
@@ -142,7 +142,7 @@ private extension VPNProviderServerView.ServersSubview {
                 }
             }
             .themeSection(
-                header: filtersViewModel.filters.categoryName ?? Strings.Providers.Vpn.Category.any
+                header: filtersViewModel.filters.categoryName ?? Strings.Views.Providers.Vpn.Category.any
             )
             .onLoad {
                 if let selectedServer {
@@ -153,7 +153,7 @@ private extension VPNProviderServerView.ServersSubview {
     }
 
     var emptyView: some View {
-        Text(Strings.Providers.Vpn.noServers)
+        Text(Strings.Views.Providers.Vpn.noServers)
     }
 }
 

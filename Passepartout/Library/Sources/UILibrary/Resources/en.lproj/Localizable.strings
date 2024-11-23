@@ -1,154 +1,7 @@
-// MARK: Global
-
-"global.about" = "About";
-"global.account" = "Account";
-"global.address" = "Address";
-"global.addresses" = "Addresses";
-"global.any" = "Any";
-"global.cancel" = "Cancel";
-"global.category" = "Category";
-"global.certificate" = "Certificate";
-"global.compression" = "Compression";
-"global.connect" = "Connect";
-"global.connection" = "Connection";
-"global.country" = "Country";
-"global.default" = "Default";
-"global.delete" = "Delete";
-"global.destination" = "Destination";
-"global.disable" = "Disable";
-"global.disabled" = "Disabled";
-"global.disconnect" = "Disconnect";
-"global.domain" = "Domain";
-"global.done" = "Done";
-"global.do_not_ask_again" = "Don't ask again";
-"global.duplicate" = "Duplicate";
-"global.edit" = "Edit";
-"global.empty" = "Empty";
-"global.enable" = "Enable";
-"global.enabled" = "Enabled";
-"global.endpoint" = "Endpoint";
-"global.filters" = "Filters";
-"global.folder" = "Folder";
-"global.gateway" = "Gateway";
-"global.general" = "General";
-"global.hide" = "Hide";
-"global.hostname" = "Hostname";
-"global.interface" = "Interface";
-"global.keep_alive" = "Keep-alive";
-"global.key" = "Key";
-"global.last_update" = "Last update";
-"global.loading" = "Loading";
-"global.method" = "Method";
-"global.modules" = "Modules";
-"global.n_seconds" = "%d seconds";
-"global.name" = "Name";
-"global.networks" = "Networks";
-"global.no_content" = "No content";
-"global.no_selection" = "No selection";
-"global.none" = "None";
-"global.ok" = "OK";
-"global.on_demand" = "On-demand";
-"global.other" = "Other";
-"global.password" = "Password";
-"global.port" = "Port";
-"global.private_key" = "Private key";
-"global.profile" = "Profile";
-"global.protocol" = "Protocol";
-"global.provider" = "Provider";
-"global.public_key" = "Public key";
-"global.purchase" = "Purchase";
-"global.region" = "Region";
-"global.remove" = "Delete";
-"global.restart" = "Restart";
-"global.route" = "Route";
-"global.routes" = "Routes";
-"global.routing" = "Routing";
-"global.save" = "Save";
-"global.select" = "Select";
-"global.server" = "Server";
-"global.servers" = "Servers";
-"global.settings" = "Settings";
-"global.show" = "Show";
-"global.status" = "Status";
-"global.subnet" = "Subnet";
-"global.unknown" = "Unknown";
-"global.username" = "Username";
-"global.version" = "Version";
-
-// MARK: - Entities
-
-"entities.dns.servers" = "Servers";
-"entities.dns.search_domains" = "Search domains";
-
-"entities.dns_protocol.cleartext" = "Cleartext";
-"entities.dns_protocol.https" = "Over HTTPS";
-"entities.dns_protocol.tls" = "Over TLS";
-
-"entities.http_proxy.bypass_domains" = "Bypass domains";
-
-"entities.on_demand.policy.any" = "All networks";
-"entities.on_demand.policy.excluding" = "Excluding";
-"entities.on_demand.policy.including" = "Including";
-
-"entities.openvpn.compression_algorithm.other" = "Unsupported";
-"entities.openvpn.otp_method.none" = "None";
-"entities.openvpn.otp_method.append" = "Append";
-"entities.openvpn.otp_method.encode" = "Encode";
-
-"entities.profile.name.new" = "New profile";
-
-"entities.tunnel_status.inactive" = "Inactive";
-"entities.tunnel_status.activating" = "Activating";
-"entities.tunnel_status.active" = "Active";
-"entities.tunnel_status.deactivating" = "Deactivating";
-
-"entities.connection_status.disconnected" = "Disconnected";
-"entities.connection_status.connecting" = "Connecting";
-"entities.connection_status.connected" = "Connected";
-"entities.connection_status.disconnecting" = "Disconnecting";
-
-// MARK: - Entity placeholders
-
-"placeholders.profile.name" = "My profile";
-"placeholders.on_demand.ssid" = "My SSID";
-"placeholders.username" = "username";
-"placeholders.secret" = "secret";
-
-// MARK: - Views
-
-"views.profiles.rows.not_installed" = "Select a profile";
-"views.profiles.rows.no_modules" = "No active modules";
-"views.profiles.folders.active_profile" = "Installed profile";
-"views.profiles.folders.default" = "My profiles";
-"views.profiles.folders.add_profile" = "Add profile";
-"views.profiles.folders.no_profiles" = "No profiles";
-"views.profiles.folders.no_profiles.migrate" = "Migrate old profiles...";
-"views.profiles.toolbar.new_profile" = "New profile";
-"views.profiles.toolbar.import_profile" = "Import profile";
-"views.profiles.toolbar.migrate_profiles" = "Migrate profiles";
-"views.profiles.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
-"views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
-"views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
-"views.profiles.errors.import" = "Unable to import profiles.";
-
-"views.profile.rows.add_module" = "Add module";
-"views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
-"views.profile.alerts.purchase.title" = "Purchase required";
-"views.profile.alerts.purchase.buttons.ok" = "Save anyway";
-"views.profile.alerts.purchase.message" = "This profile requires paid features to work.";
-
-"views.settings.launches_on_login" = "Launch on login";
-"views.settings.launches_on_login.footer" = "Open the app in background after login.";
-"views.settings.keeps_in_menu" = "Keep in menu bar";
-"views.settings.keeps_in_menu.footer" = "Enable this to keep the app in the menu bar after closing it.";
-"views.settings.locks_in_background" = "Lock in background";
-"views.settings.locks_in_background.footer" = "Lock the app with FaceID when sent to the background.";
-"views.settings.erase_icloud" = "Erase iCloud store";
-"views.settings.erase_icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
+// MARK: Views
 
 "views.about.title" = "About";
 "views.about.sections.resources" = "Resources";
-
 "views.about.links.title" = "Links";
 "views.about.links.sections.support" = "Support";
 "views.about.links.sections.web" = "Web";
@@ -157,22 +10,29 @@
 "views.about.links.rows.home_page" = "Home page";
 "views.about.links.rows.disclaimer" = "Disclaimer";
 "views.about.links.rows.privacy_policy" = "Privacy policy";
-
 "views.about.credits.title" = "Credits";
 "views.about.credits.licenses" = "Licenses";
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
-"views.migrate.title" = "Migrate";
-"views.migrate.no_profiles" = "Nothing to migrate";
-"views.migrate.items.discard" = "Discard";
-"views.migrate.items.migrate" = "Proceed";
-"views.migrate.sections.main.header" = "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.";
-"views.migrate.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
+"views.app.rows.not_installed" = "Select a profile";
+"views.app.rows.no_modules" = "No active modules";
+"views.app.folders.active_profile" = "Installed profile";
+"views.app.folders.default" = "My profiles";
+"views.app.folders.add_profile" = "Add profile";
+"views.app.folders.no_profiles" = "No profiles";
+"views.app.folders.no_profiles.migrate" = "Migrate old profiles...";
+"views.app.toolbar.new_profile" = "New profile";
+"views.app.toolbar.import_profile" = "Import profile";
+"views.app.toolbar.migrate_profiles" = "Migrate profiles";
+"views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
+"views.app.errors.tunnel" = "Unable to execute tunnel operation.";
+"views.app.errors.duplicate" = "Unable to duplicate profile '%@'.";
+"views.app.errors.import" = "Unable to import profiles.";
 
-"views.donate.title" = "Make a donation";
-"views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
-"views.donate.alerts.thank_you.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
+"views.app.profile_context.connect_to" = "Connect to...";
+
+"views.app_menu.items.quit" = "Quit %@";
 
 "views.diagnostics.title" = "Diagnostics";
 "views.diagnostics.sections.live" = "Live log";
@@ -181,18 +41,73 @@
 "views.diagnostics.rows.tunnel" = "Tunnel";
 "views.diagnostics.rows.include_private_data" = "Include private data";
 "views.diagnostics.rows.remove_tunnel_logs" = "Delete all logs";
-
 "views.diagnostics.openvpn.rows.server_configuration" = "Server configuration";
-
 "views.diagnostics.report_issue.title" = "Report issue";
 "views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
 
-// MARK: - Module views
+"views.donate.title" = "Make a donation";
+"views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
+"views.donate.alerts.thank_you.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
+
+"views.migration.title" = "Migrate";
+"views.migration.no_profiles" = "Nothing to migrate";
+"views.migration.items.discard" = "Discard";
+"views.migration.items.migrate" = "Proceed";
+"views.migration.sections.main.header" = "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.";
+"views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
+
+"views.paywall.sections.recurring.header" = "All features";
+"views.paywall.sections.one_time.header" = "One-time purchase";
+"views.paywall.sections.features.required.header" = "Required features";
+"views.paywall.sections.features.other.header" = "Also included";
+"views.paywall.sections.restore.header" = "Restore";
+"views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
+"views.paywall.rows.restore_purchases" = "Restore purchases";
+"views.paywall.alerts.restricted.title" = "Restricted";
+"views.paywall.alerts.restricted.message" = "Some features are unavailable in this build.";
+"views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
+
+"views.preferences.launches_on_login" = "Launch on login";
+"views.preferences.launches_on_login.footer" = "Open the app in background after login.";
+"views.preferences.keeps_in_menu" = "Keep in menu bar";
+"views.preferences.keeps_in_menu.footer" = "Enable this to keep the app in the menu bar after closing it.";
+"views.preferences.locks_in_background" = "Lock in background";
+"views.preferences.locks_in_background.footer" = "Lock the app with FaceID when sent to the background.";
+"views.preferences.erase_icloud" = "Erase iCloud store";
+"views.preferences.erase_icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
+
+"views.profile.rows.add_module" = "Add module";
+"views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
+"views.profile.alerts.purchase.title" = "Purchase required";
+"views.profile.alerts.purchase.buttons.ok" = "Save anyway";
+"views.profile.alerts.purchase.message" = "This profile requires paid features to work.";
+
+"views.providers.no_provider" = "None";
+"views.providers.select_provider" = "Select a provider";
+"views.providers.select_entity" = "Select";
+"views.providers.only_favorites" = "Only favorites";
+"views.providers.clear_filters" = "Clear filters";
+"views.providers.refresh_infrastructure" = "Refresh infrastructure";
+"views.providers.last_updated" = "Last updated on %@";
+"views.providers.last_updated.loading" = "Loading...";
+"views.providers.vpn.category.any" = "All categories";
+"views.providers.vpn.preset" = "Preset";
+"views.providers.vpn.no_servers" = "No servers";
+
+"views.ui.connection_status.on_demand_suffix" = " (on-demand)";
+"views.ui.purchase_required.purchase.help" = "Purchase required";
+"views.ui.purchase_required.restricted.help" = "Feature is restricted";
+
+// MARK: Views (Modules)
 
 "modules.general.sections.storage.header" = "%@";
 "modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
+"modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
+"modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
 "modules.general.rows.shared" = "Enabled";
-"modules.general.rows.apple_tv" = "%@";
+"modules.general.rows.shared.purchase" = "Share on iCloud";
+"modules.general.rows.appletv" = "%@";
+"modules.general.rows.appletv.purchase" = "Drop TV restriction";
 "modules.general.rows.import_from_file" = "Import from file...";
 
 "modules.dns.servers.add" = "Add address";
@@ -240,78 +155,148 @@
 "modules.wireguard.preshared_key" = "Pre-shared key";
 "modules.wireguard.allowed_ips" = "Allowed IPs";
 
-// MARK: - Providers
+// MARK: - Entities
 
-"providers.no_provider" = "None";
-"providers.select_provider" = "Select a provider";
-"providers.select_entity" = "Select";
-"providers.only_favorites" = "Only favorites";
-"providers.clear_filters" = "Clear filters";
-"providers.refresh_infrastructure" = "Refresh infrastructure";
-"providers.last_updated" = "Last updated on %@";
-"providers.last_updated.loading" = "Loading...";
-"providers.vpn.category.any" = "All categories";
-"providers.vpn.preset" = "Preset";
-"providers.vpn.no_servers" = "No servers";
+"entities.tunnel_status.inactive" = "Inactive";
+"entities.tunnel_status.activating" = "Activating";
+"entities.tunnel_status.active" = "Active";
+"entities.tunnel_status.deactivating" = "Deactivating";
 
-// MARK: - App menu
+// MARK: Entities (Modules)
 
-"app_menu.items.quit" = "Quit %@";
+"entities.dns.servers" = "Servers";
+"entities.dns.search_domains" = "Search domains";
 
-// MARK: - Theme
+"entities.dns_protocol.cleartext" = "Cleartext";
+"entities.dns_protocol.https" = "Over HTTPS";
+"entities.dns_protocol.tls" = "Over TLS";
 
-"theme.confirmation.ok" = "Confirm";
-"theme.confirmation.cancel" = "Cancel";
-"theme.confirmation.message" = "Are you sure you want to proceed with this operation?";
-"theme.lock_screen.reason" = "%@ is locked";
+"entities.http_proxy.bypass_domains" = "Bypass domains";
 
-// MARK: - Components
+"entities.on_demand.policy.any" = "All networks";
+"entities.on_demand.policy.excluding" = "Excluding";
+"entities.on_demand.policy.including" = "Including";
 
-"ui.connection_status.on_demand_suffix" = " (on-demand)";
-"ui.profile_context.connect_to" = "Connect to...";
-"ui.purchase_required.purchase.help" = "Purchase required";
-"ui.purchase_required.restricted.help" = "Feature is restricted";
+"entities.openvpn.compression_algorithm.other" = "Unsupported";
+"entities.openvpn.otp_method.none" = "None";
+"entities.openvpn.otp_method.append" = "Append";
+"entities.openvpn.otp_method.encode" = "Encode";
 
-// MARK: - Paywall
+// MARK: - Features
 
-"paywall.sections.recurring.header" = "All features";
-"paywall.sections.one_time.header" = "One-time purchase";
-"paywall.sections.features.required.header" = "Required features";
-"paywall.sections.features.other.header" = "Also included";
-"paywall.sections.restore.header" = "Restore";
-"paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
-"paywall.rows.restore_purchases" = "Restore purchases";
-"paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
-
-"features.appleTV" = "%@";
+"features.appletv" = "%@";
 "features.dns" = "%@ Settings";
-"features.httpProxy" = "%@ Settings";
+"features.http_proxy" = "%@ Settings";
 "features.interactiveLogin" = "Interactive Login";
-"features.onDemand" = "On-Demand Rules";
+"features.on_demand" = "On-Demand Rules";
 "features.providers" = "All Providers";
 "features.routing" = "Custom %@";
 "features.sharing" = "%@";
 
-"modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
-"modules.general.rows.shared.purchase" = "Share on iCloud";
-"modules.general.rows.apple_tv.purchase" = "Drop TV restriction";
+// MARK: - Global
 
-// MARK: - Alerts
+// MARK: Global (Actions)
+
+"global.actions.cancel" = "Cancel";
+"global.actions.connect" = "Connect";
+"global.actions.delete" = "Delete";
+"global.actions.disable" = "Disable";
+"global.actions.disconnect" = "Disconnect";
+"global.actions.duplicate" = "Duplicate";
+"global.actions.edit" = "Edit";
+"global.actions.enable" = "Enable";
+"global.actions.hide" = "Hide";
+"global.actions.purchase" = "Purchase";
+"global.actions.remove" = "Delete";
+"global.actions.restart" = "Restart";
+"global.actions.save" = "Save";
+"global.actions.select" = "Select";
+"global.actions.show" = "Show";
+
+// MARK: Global (Nouns)
+
+"global.nouns.about" = "About";
+"global.nouns.account" = "Account";
+"global.nouns.address" = "Address";
+"global.nouns.addresses" = "Addresses";
+"global.nouns.any" = "Any";
+"global.nouns.category" = "Category";
+"global.nouns.certificate" = "Certificate";
+"global.nouns.compression" = "Compression";
+"global.nouns.connection" = "Connection";
+"global.nouns.country" = "Country";
+"global.nouns.default" = "Default";
+"global.nouns.destination" = "Destination";
+"global.nouns.disabled" = "Disabled";
+"global.nouns.domain" = "Domain";
+"global.nouns.done" = "Done";
+"global.nouns.do_not_ask_again" = "Don't ask again";
+"global.nouns.empty" = "Empty";
+"global.nouns.enabled" = "Enabled";
+"global.nouns.endpoint" = "Endpoint";
+"global.nouns.filters" = "Filters";
+"global.nouns.folder" = "Folder";
+"global.nouns.gateway" = "Gateway";
+"global.nouns.general" = "General";
+"global.nouns.hostname" = "Hostname";
+"global.nouns.interface" = "Interface";
+"global.nouns.keep_alive" = "Keep-alive";
+"global.nouns.key" = "Key";
+"global.nouns.last_update" = "Last update";
+"global.nouns.loading" = "Loading";
+"global.nouns.method" = "Method";
+"global.nouns.modules" = "Modules";
+"global.nouns.n_seconds" = "%d seconds";
+"global.nouns.name" = "Name";
+"global.nouns.networks" = "Networks";
+"global.nouns.no_content" = "No content";
+"global.nouns.no_selection" = "No selection";
+"global.nouns.none" = "None";
+"global.nouns.ok" = "OK";
+"global.nouns.on_demand" = "On-demand";
+"global.nouns.other" = "Other";
+"global.nouns.password" = "Password";
+"global.nouns.port" = "Port";
+"global.nouns.private_key" = "Private key";
+"global.nouns.profile" = "Profile";
+"global.nouns.protocol" = "Protocol";
+"global.nouns.provider" = "Provider";
+"global.nouns.public_key" = "Public key";
+"global.nouns.region" = "Region";
+"global.nouns.route" = "Route";
+"global.nouns.routes" = "Routes";
+"global.nouns.routing" = "Routing";
+"global.nouns.server" = "Server";
+"global.nouns.servers" = "Servers";
+"global.nouns.settings" = "Settings";
+"global.nouns.status" = "Status";
+"global.nouns.subnet" = "Subnet";
+"global.nouns.unknown" = "Unknown";
+"global.nouns.username" = "Username";
+"global.nouns.version" = "Version";
+
+// MARK: Global (Placeholders)
+
+"placeholders.profile.name" = "My profile";
+"placeholders.on_demand.ssid" = "My SSID";
+"placeholders.username" = "username";
+"placeholders.secret" = "secret";
+
+// MARK: Global (Alerts)
 
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
 "alerts.import.passphrase.ok" = "Decrypt";
 
-"alerts.iap.restricted.title" = "Restricted";
-"alerts.iap.restricted.message" = "Some features are unavailable in this build.";
+// MARK: Global (App errors)
 
-// MARK: - Errors
-
+"errors.app.default" = "Unable to complete operation.";
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
-"errors.app.default" = "Unable to complete operation.";
+
+// MARK: Global (PassepartoutKit errors)
+
 "errors.app.passepartout.connection_module_required" = "Routing module can only be enabled together with a connection.";
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
 "errors.app.passepartout.incompatible_modules" = "Some active modules are incompatible, try to only activate one of them.";
@@ -332,3 +317,10 @@
 "errors.tunnel.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS failed";
 "errors.tunnel.generic" = "Failed";
+
+// MARK: Global (Theme)
+
+"theme.confirmation.ok" = "Confirm";
+"theme.confirmation.cancel" = "Cancel";
+"theme.confirmation.message" = "Are you sure you want to proceed with this operation?";
+"theme.lock_screen.reason" = "%@ is locked";

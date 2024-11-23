@@ -26,5 +26,5 @@
 import Foundation
 
 extension AppProduct {
-    static let providerPrefix = "providers."
+    static let providerPrefix = "views.providers."
 }

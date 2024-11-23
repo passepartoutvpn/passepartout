@@ -82,7 +82,7 @@ private extension ProviderContentModifier {
                 providerRows
                 refreshButton {
                     HStack {
-                        Text(Strings.Providers.refreshInfrastructure)
+                        Text(Strings.Views.Providers.refreshInfrastructure)
                         if providerManager.isLoading {
                             Spacer()
                             ProgressView()
@@ -109,7 +109,7 @@ private extension ProviderContentModifier {
                     }
                     Spacer()
                     refreshButton {
-                        Text(Strings.Providers.refreshInfrastructure)
+                        Text(Strings.Views.Providers.refreshInfrastructure)
                     }
                 }
             }
@@ -148,9 +148,9 @@ private extension ProviderContentModifier {
 
     var lastUpdatedString: String? {
         guard let lastUpdate else {
-            return providerManager.isLoading ? Strings.Providers.LastUpdated.loading : nil
+            return providerManager.isLoading ? Strings.Views.Providers.LastUpdated.loading : nil
         }
-        return Strings.Providers.lastUpdated(lastUpdate.localizedDescription(style: .timestamp))
+        return Strings.Views.Providers.lastUpdated(lastUpdate.localizedDescription(style: .timestamp))
     }
 }
 

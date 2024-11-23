@@ -83,7 +83,7 @@ struct ActiveProfileView: View {
 
 private extension ActiveProfileView {
     var currentProfileView: some View {
-        Text(profile?.name ?? Strings.Views.Profiles.Rows.notInstalled)
+        Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
             .font(.title)
             .fontWeight(.bold)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -100,18 +100,18 @@ private extension ActiveProfileView {
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
             if let connectionType = profile.localizedDescription(optionalStyle: .connectionType) {
-                DetailRowView(title: Strings.Global.protocol) {
+                DetailRowView(title: Strings.Global.Nouns.protocol) {
                     Text(connectionType)
                 }
             }
             if let pair = profile.selectedProvider {
                 if let metadata = providerManager.provider(withId: pair.selection.id) {
-                    DetailRowView(title: Strings.Global.provider) {
+                    DetailRowView(title: Strings.Global.Nouns.provider) {
                         Text(metadata.description)
                     }
                 }
                 if let entity = pair.selection.entity {
-                    DetailRowView(title: Strings.Global.country) {
+                    DetailRowView(title: Strings.Global.Nouns.country) {
                         ThemeCountryText(entity.header.countryCode)
                     }
                 }
@@ -135,7 +135,7 @@ private extension ActiveProfileView {
             onProviderEntityRequired: onProviderEntityRequired,
             onPurchaseRequired: onPurchaseRequired,
             label: {
-                Text($0 ? Strings.Global.connect : Strings.Global.disconnect)
+                Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
             }
@@ -159,7 +159,7 @@ private extension ActiveProfileView {
         Button {
             isSwitching.toggle()
         } label: {
-            Text(Strings.Global.select)
+            Text(Strings.Global.Actions.select)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
         }

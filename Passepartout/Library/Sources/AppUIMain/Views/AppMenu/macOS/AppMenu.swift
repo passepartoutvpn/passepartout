@@ -66,24 +66,24 @@ private extension AppMenu {
     }
 
     var showToggle: some View {
-        Button(Strings.Global.show) {
+        Button(Strings.Global.Actions.show) {
             settings.isVisible = true
         }
     }
 
     var loginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
+        Toggle(Strings.Views.Preferences.launchesOnLogin, isOn: $settings.launchesOnLogin)
     }
 
     var keepToggle: some View {
-        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $settings.keepsInMenu)
+        Toggle(Strings.Views.Preferences.keepsInMenu, isOn: $settings.keepsInMenu)
     }
 
     var profilesList: some View {
         Group {
             ForEach(profileManager.previews, id: \.id, content: profileToggle)
         }
-        .themeSection(header: Strings.Views.Profiles.Folders.default)
+        .themeSection(header: Strings.Views.App.Folders.default)
     }
 
     func profileToggle(for preview: ProfilePreview) -> some View {
@@ -112,14 +112,14 @@ private extension AppMenu {
     }
 
     var aboutButton: some View {
-        Button(Strings.Global.about.withTrailingDots) {
+        Button(Strings.Global.Nouns.about.withTrailingDots) {
             NSApp.activate(ignoringOtherApps: true)
             NSApp.orderFrontStandardAboutPanel(self)
         }
     }
 
     var quitButton: some View {
-        Button(Strings.AppMenu.Items.quit(BundleConfiguration.mainDisplayName)) {
+        Button(Strings.Views.AppMenu.Items.quit(BundleConfiguration.mainDisplayName)) {
             NSApp.terminate(self)
         }
     }

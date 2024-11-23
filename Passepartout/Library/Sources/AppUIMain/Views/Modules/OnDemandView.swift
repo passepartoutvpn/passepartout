@@ -72,7 +72,7 @@ private extension OnDemandView {
 
     var enabledSection: some View {
         Section {
-            Toggle(Strings.Global.enabled, isOn: draft.isEnabled)
+            Toggle(Strings.Global.Nouns.enabled, isOn: draft.isEnabled)
         }
     }
 
@@ -128,7 +128,7 @@ private extension OnDemandView {
                 Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
             }
         }
-        .themeSection(header: Strings.Global.networks)
+        .themeSection(header: Strings.Global.Nouns.networks)
     }
 
     var wifiSection: some View {

@@ -53,7 +53,7 @@ private extension ModuleDetailView {
     }
 
     var emptyView: some View {
-        Text(Strings.Global.noSelection)
+        Text(Strings.Global.Nouns.noSelection)
             .themeEmptyMessage()
     }
 }

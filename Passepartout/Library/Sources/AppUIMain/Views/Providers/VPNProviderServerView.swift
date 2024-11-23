@@ -42,7 +42,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let filtersWithSelection: Bool
 
-    var selectTitle = Strings.Providers.selectEntity
+    var selectTitle = Strings.Views.Providers.selectEntity
 
     let onSelect: (VPNServer, VPNPreset<Configuration>) -> Void
 
@@ -163,7 +163,7 @@ extension VPNProviderServerView {
                     await reloadServers(filters: filtersViewModel.filters)
                 } catch {
                     pp_log(.app, .error, "Unable to load VPN repository: \(error)")
-                    errorHandler.handle(error, title: Strings.Global.servers)
+                    errorHandler.handle(error, title: Strings.Global.Nouns.servers)
                 }
             }
             .onReceive(filtersViewModel.$filters.dropFirst()) { newValue in
@@ -184,7 +184,7 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView.ServersView {
     var title: String {
-        providerManager.provider(withId: providerId)?.description ?? Strings.Global.servers
+        providerManager.provider(withId: providerId)?.description ?? Strings.Global.Nouns.servers
     }
 
     var filteredServers: [VPNServer] {

@@ -77,13 +77,13 @@ extension VPNProviderServerView {
                 }
                 .width(10.0)
 
-                TableColumn(Strings.Global.region) { server in
+                TableColumn(Strings.Global.Nouns.region) { server in
                     ThemeCountryText(server.provider.countryCode, title: server.region)
                         .help(server.region)
                         .environmentObject(theme) // TODO: #873, Table loses environment
                 }
 
-                TableColumn(Strings.Global.address, value: \.address)
+                TableColumn(Strings.Global.Nouns.address, value: \.address)
 
                 TableColumn("􀋂") { server in
                     FavoriteToggle(

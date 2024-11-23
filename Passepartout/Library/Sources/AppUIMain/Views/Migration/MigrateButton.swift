@@ -40,10 +40,10 @@ private extension MigrateButton {
     var title: String {
         switch step {
         case .initial, .fetching, .fetched:
-            return Strings.Views.Migrate.Items.migrate
+            return Strings.Views.Migration.Items.migrate
 
         case .migrating, .migrated:
-            return Strings.Global.done
+            return Strings.Global.Nouns.done
         }
     }
 

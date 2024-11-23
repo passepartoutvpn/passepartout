@@ -53,16 +53,16 @@ struct HTTPProxyView: View, ModuleDraftEditing {
 private extension HTTPProxyView {
     var httpSection: some View {
         Group {
-            ThemeTextField(Strings.Global.address, text: draft.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-            ThemeTextField(Strings.Global.port, text: draft.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
+            ThemeTextField(Strings.Global.Nouns.address, text: draft.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
+            ThemeTextField(Strings.Global.Nouns.port, text: draft.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
         }
         .themeSection(header: Strings.Unlocalized.http)
     }
 
     var httpsSection: some View {
         Group {
-            ThemeTextField(Strings.Global.address, text: draft.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-            ThemeTextField(Strings.Global.port, text: draft.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
+            ThemeTextField(Strings.Global.Nouns.address, text: draft.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
+            ThemeTextField(Strings.Global.Nouns.port, text: draft.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
         }
         .themeSection(header: Strings.Unlocalized.https)
     }

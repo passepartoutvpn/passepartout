@@ -63,7 +63,7 @@ struct PaywallView: View {
             .themeProgress(if: isFetchingProducts)
             .toolbar(content: toolbarContent)
             .alert(
-                Strings.Global.purchase,
+                Strings.Global.Actions.purchase,
                 isPresented: $isPurchasePendingConfirmation,
                 actions: pendingActions,
                 message: pendingMessage
@@ -77,7 +77,7 @@ struct PaywallView: View {
 
 private extension PaywallView {
     var title: String {
-        Strings.Global.purchase
+        Strings.Global.Actions.purchase
     }
 
     var paywallView: some View {
@@ -108,7 +108,7 @@ private extension PaywallView {
                 onComplete: onComplete,
                 onError: onError
             )
-            .themeSection(header: Strings.Paywall.Sections.OneTime.header)
+            .themeSection(header: Strings.Views.Paywall.Sections.OneTime.header)
         }
         ForEach(recurringProducts, id: \.productIdentifier) {
             PaywallProductView(
@@ -120,13 +120,13 @@ private extension PaywallView {
                 onError: onError
             )
         }
-        .themeSection(header: Strings.Paywall.Sections.Recurring.header)
+        .themeSection(header: Strings.Views.Paywall.Sections.Recurring.header)
     }
 
     var requiredFeaturesView: some View {
         FeatureListView(
             style: .list,
-            header: Strings.Paywall.Sections.Features.Required.header,
+            header: Strings.Views.Paywall.Sections.Features.Required.header,
             features: Array(features)
         ) {
             Text($0.localizedDescription)
@@ -137,7 +137,7 @@ private extension PaywallView {
     var otherFeaturesView: some View {
         FeatureListView(
             style: otherFeaturesStyle,
-            header: Strings.Paywall.Sections.Features.Other.header,
+            header: Strings.Views.Paywall.Sections.Features.Other.header,
             features: otherFeatures
         ) {
             Text($0.localizedDescription)
@@ -155,8 +155,8 @@ private extension PaywallView {
     var restoreView: some View {
         RestorePurchasesButton(errorHandler: errorHandler)
             .themeSectionWithSingleRow(
-                header: Strings.Paywall.Sections.Restore.header,
-                footer: Strings.Paywall.Sections.Restore.footer,
+                header: Strings.Views.Paywall.Sections.Restore.header,
+                footer: Strings.Views.Paywall.Sections.Restore.footer,
                 above: true
             )
     }
@@ -176,13 +176,13 @@ private extension PaywallView {
     }
 
     func pendingActions() -> some View {
-        Button(Strings.Global.ok) {
+        Button(Strings.Global.Nouns.ok) {
             isPresented = false
         }
     }
 
     func pendingMessage() -> some View {
-        Text(Strings.Paywall.Alerts.Pending.message)
+        Text(Strings.Views.Paywall.Alerts.Pending.message)
     }
 }
 
@@ -245,7 +245,7 @@ private extension PaywallView {
     }
 
     func onError(_ error: Error, dismissing: Bool) {
-        errorHandler.handle(error, title: Strings.Global.purchase) {
+        errorHandler.handle(error, title: Strings.Global.Actions.purchase) {
             if dismissing {
                 isPresented = false
             }

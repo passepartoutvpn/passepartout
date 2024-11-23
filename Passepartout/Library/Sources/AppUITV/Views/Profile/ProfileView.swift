@@ -126,8 +126,8 @@ private extension ProfileView {
         InteractiveCoordinator(style: .inline(withCancel: false), manager: interactiveManager) {
             errorHandler.handle(
                 $0,
-                title: Strings.Global.connection,
-                message: Strings.Views.Profiles.Errors.tunnel
+                title: Strings.Global.Nouns.connection,
+                message: Strings.Views.App.Errors.tunnel
             )
         }
         .font(.body)

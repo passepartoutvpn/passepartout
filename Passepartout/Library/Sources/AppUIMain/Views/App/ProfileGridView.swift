@@ -71,7 +71,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                                 }
                             }
                     }
-                    .themeGridHeader(title: Strings.Views.Profiles.Folders.default)
+                    .themeGridHeader(title: Strings.Views.App.Folders.default)
                 }
                 .padding(.horizontal)
             }

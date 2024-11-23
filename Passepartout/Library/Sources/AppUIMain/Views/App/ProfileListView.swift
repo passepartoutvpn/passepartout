@@ -70,7 +70,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                             }
                         }
                 }
-                .themeSection(header: Strings.Views.Profiles.Folders.default)
+                .themeSection(header: Strings.Views.App.Folders.default)
             }
             .themeForm()
         }

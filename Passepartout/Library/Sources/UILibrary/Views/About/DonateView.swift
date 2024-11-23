@@ -99,7 +99,7 @@ private extension DonateView {
     }
 
     func thankYouActions() -> some View {
-        Button(Strings.Global.ok) {
+        Button(Strings.Global.Nouns.ok) {
             dismiss()
         }
     }
