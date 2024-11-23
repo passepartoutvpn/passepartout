@@ -286,6 +286,7 @@
 
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
 "alerts.import.passphrase.ok" = "Decrypt";
+"alerts.providers.missing_server.message" = "No provider server selected. Please select a destination server on your iOS/macOS device.";
 
 // MARK: Global (App errors)
 

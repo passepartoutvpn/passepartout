@@ -45,6 +45,8 @@ struct ProfileListView: View {
     @ObservedObject
     var errorHandler: ErrorHandler
 
+    var flow: AppFlow?
+
     var body: some View {
         VStack {
             headerView
@@ -100,15 +102,13 @@ private extension ProfileListView {
     }
 }
 
-// MARK: -
-
 private extension ProfileListView {
     func onProviderEntityRequired(_ profile: Profile) {
-        // FIXME: #913, TV missing provider entity
+        flow?.onProviderEntityRequired(profile)
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        // FIXME: #913, TV purchase required
+        flow?.onPurchaseRequired(features)
     }
 }
 

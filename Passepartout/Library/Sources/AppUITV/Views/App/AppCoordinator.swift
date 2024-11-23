@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -33,6 +34,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     private let tunnel: ExtendedTunnel
 
     private let registry: Registry
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
 
     public init(profileManager: ProfileManager, tunnel: ExtendedTunnel, registry: Registry) {
         self.profileManager = profileManager
@@ -60,13 +64,22 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
+            .withErrorHandler(errorHandler)
         }
     }
 }
 
 private extension AppCoordinator {
     var profileView: some View {
-        ProfileView(profileManager: profileManager, tunnel: tunnel)
+        ProfileView(
+            profileManager: profileManager,
+            tunnel: tunnel,
+            errorHandler: errorHandler,
+            flow: .init(
+                onProviderEntityRequired: onProviderEntityRequired,
+                onPurchaseRequired: onPurchaseRequired
+            )
+        )
     }
 
 //    var searchView: some View {
@@ -106,6 +119,19 @@ private extension AppCoordinator {
         default:
             EmptyView()
         }
+    }
+}
+
+private extension AppCoordinator {
+    func onProviderEntityRequired(_ profile: Profile) {
+        errorHandler.handle(
+            title: profile.name,
+            message: Strings.Alerts.Providers.MissingServer.message
+        )
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        // FIXME: #913
     }
 }
 

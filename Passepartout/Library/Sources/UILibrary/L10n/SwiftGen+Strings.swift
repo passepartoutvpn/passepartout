@@ -21,6 +21,12 @@ public enum Strings {
         public static let ok = Strings.tr("Localizable", "alerts.import.passphrase.ok", fallback: "Decrypt")
       }
     }
+    public enum Providers {
+      public enum MissingServer {
+        /// No provider server selected. Please select a destination server on your iOS/macOS device.
+        public static let message = Strings.tr("Localizable", "alerts.providers.missing_server.message", fallback: "No provider server selected. Please select a destination server on your iOS/macOS device.")
+      }
+    }
   }
   public enum Entities {
     public enum Dns {
