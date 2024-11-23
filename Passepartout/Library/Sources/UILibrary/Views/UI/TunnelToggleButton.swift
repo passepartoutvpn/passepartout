@@ -120,7 +120,7 @@ private extension TunnelToggleButton {
                     guard let provider = providerModule.provider else {
                         errorHandler.handle(
                             PassepartoutError(.providerRequired),
-                            title: Strings.Global.Nouns.connection
+                            title: profile.name
                         )
                         return
                     }
@@ -168,7 +168,7 @@ private extension TunnelToggleButton {
         } catch {
             errorHandler.handle(
                 error,
-                title: Strings.Global.Nouns.connection,
+                title: profile.name,
                 message: Strings.Views.App.Errors.tunnel
             )
         }

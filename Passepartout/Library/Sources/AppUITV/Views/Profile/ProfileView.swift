@@ -128,7 +128,7 @@ private extension ProfileView {
         InteractiveCoordinator(style: .inline(withCancel: false), manager: interactiveManager) {
             errorHandler.handle(
                 $0,
-                title: Strings.Global.Nouns.connection,
+                title: interactiveManager.editor.profile.name,
                 message: Strings.Views.App.Errors.tunnel
             )
         }

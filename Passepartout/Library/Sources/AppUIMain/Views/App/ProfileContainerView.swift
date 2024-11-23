@@ -96,7 +96,7 @@ private extension ProfileContainerView {
         InteractiveCoordinator(style: .modal, manager: interactiveManager) {
             errorHandler.handle(
                 $0,
-                title: Strings.Global.Nouns.connection,
+                title: interactiveManager.editor.profile.name,
                 message: Strings.Views.App.Errors.tunnel
             )
         }
