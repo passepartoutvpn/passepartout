@@ -23,29 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import SwiftUI
-import UILibrary
 
 // FIXME: #788, UI for TV
 
 struct SettingsView: View {
-    let profileManager: ProfileManager
-
-    let tunnel: ExtendedTunnel
-
     var body: some View {
-        EmptyView()
-//        GeometryReader { geo in
-//            AboutCoordinator(profileManager: profileManager, tunnel: tunnel) {
-//                EmptyView()
-//            }
-//            .frame(width: geo.size.width / 2)
-//        }
+        VStack {
+            Text("Settings")
+        }
     }
 }
 
 #Preview {
-    SettingsView(profileManager: .mock, tunnel: .mock)
-        .withMockEnvironment()
+    SettingsView()
 }
