@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 extension ProfileManager: MigrationManagerImporter {
-    public func importProfile(_ profile: Profile) async throws {
-        try await save(profile, isLocal: true)
+    public func importProfile(_ profile: Profile, remotelyShared: Bool) async throws {
+        try await save(profile, isLocal: true, remotelyShared: remotelyShared)
     }
 }

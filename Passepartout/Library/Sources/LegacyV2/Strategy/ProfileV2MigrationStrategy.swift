@@ -29,26 +29,45 @@ import Foundation
 import PassepartoutKit
 
 public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendable {
+    public struct Container {
+        public let name: String
+
+        public let cloudKitIdentifier: String?
+
+        public init(_ name: String, _ cloudKitIdentifier: String?) {
+            self.name = name
+            self.cloudKitIdentifier = cloudKitIdentifier
+        }
+    }
+
     private let profilesRepository: CDProfileRepositoryV2
 
-    private let cloudKitIdentifier: String?
+    private let tvProfilesRepository: CDProfileRepositoryV2
 
     public init(
         coreDataLogger: CoreDataPersistentStoreLogger?,
-        profilesContainerName: String,
         baseURL: URL? = nil,
-        cloudKitIdentifier: String?
+        profilesContainer: Container,
+        tvProfilesContainer: Container
     ) {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger,
-            containerName: profilesContainerName,
+            containerName: profilesContainer.name,
             baseURL: baseURL,
             model: CDProfileRepositoryV2.model,
-            cloudKitIdentifier: cloudKitIdentifier,
+            cloudKitIdentifier: profilesContainer.cloudKitIdentifier,
             author: nil
         )
-        profilesRepository = CDProfileRepositoryV2(context: store.context)
-        self.cloudKitIdentifier = cloudKitIdentifier
+        let tvStore = CoreDataPersistentStore(
+            logger: coreDataLogger,
+            containerName: tvProfilesContainer.name,
+            baseURL: baseURL,
+            model: CDProfileRepositoryV2.model,
+            cloudKitIdentifier: tvProfilesContainer.cloudKitIdentifier,
+            author: nil
+        )
+        profilesRepository = CDProfileRepositoryV2(context: store.backgroundContext)
+        tvProfilesRepository = CDProfileRepositoryV2(context: tvStore.backgroundContext)
     }
 }
 
@@ -65,7 +84,8 @@ extension ProfileV2MigrationStrategy {
             guard let profile = try await profilesRepository.profile(withId: profileId) else {
                 return nil
             }
-            return try mapper.toProfileV3(profile)
+            let tvProfile = try? await tvProfilesRepository.profile(withId: profileId)
+            return try mapper.toProfileV3(profile, isTV: tvProfile != nil)
         } catch {
             pp_log(.App.migration, .error, "Unable to fetch and map migratable profile \(profileId): \(error)")
             return nil

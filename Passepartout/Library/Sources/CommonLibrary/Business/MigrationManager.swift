@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 public protocol MigrationManagerImporter {
-    func importProfile(_ profile: Profile) async throws
+    func importProfile(_ profile: Profile, remotelyShared: Bool) async throws
 }
 
 @MainActor
@@ -159,7 +159,7 @@ private extension MigrationManager {
         if simulation?.fakeProfiles ?? false {
             return
         }
-        try await importer.importProfile(profile)
+        try await importer.importProfile(profile, remotelyShared: profile.attributes.isAvailableForTV == true)
     }
 
     func simulateDeleteProfiles(withIds profileIds: Set<UUID>) async throws {

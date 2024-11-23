@@ -213,9 +213,9 @@ private extension MigrationManagerTests {
         }
         return ProfileV2MigrationStrategy(
             coreDataLogger: nil,
-            profilesContainerName: "Profiles",
             baseURL: baseURL,
-            cloudKitIdentifier: nil
+            profilesContainer: .init("Profiles", nil),
+            tvProfilesContainer: .init("Profiles", nil)
         )
     }
 

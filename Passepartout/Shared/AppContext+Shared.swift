@@ -95,8 +95,14 @@ extension AppContext {
 
         let profileStrategy = ProfileV2MigrationStrategy(
             coreDataLogger: .default,
-            profilesContainerName: Constants.shared.containers.legacyV2,
-            cloudKitIdentifier: BundleConfiguration.mainString(for: .legacyV2CloudKitId)
+            profilesContainer: .init(
+                Constants.shared.containers.legacyV2,
+                BundleConfiguration.mainString(for: .legacyV2CloudKitId)
+            ),
+            tvProfilesContainer: .init(
+                Constants.shared.containers.legacyV2TV,
+                BundleConfiguration.mainString(for: .legacyV2TVCloudKitId)
+            )
         )
         let migrationSimulation: MigrationManager.Simulation?
         if Configuration.Environment.isFakeMigration {
