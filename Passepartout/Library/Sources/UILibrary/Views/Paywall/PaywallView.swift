@@ -61,7 +61,9 @@ struct PaywallView: View {
     var body: some View {
         paywallView
             .themeProgress(if: isFetchingProducts)
+#if !os(tvOS)
             .toolbar(content: toolbarContent)
+#endif
             .alert(
                 Strings.Global.Actions.purchase,
                 isPresented: $isPurchasePendingConfirmation,
