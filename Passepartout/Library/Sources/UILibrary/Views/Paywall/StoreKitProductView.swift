@@ -67,6 +67,8 @@ private extension ProductView {
         switch paywallStyle {
         case .oneTime, .recurring:
             productViewStyle(.regular)
+                .listRowBackground(Color.clear)
+                .listRowInsets(.init())
 
         case .donation:
             productViewStyle(.compact)
