@@ -73,15 +73,13 @@ struct ProfileCoordinator: View {
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
-            .alert(Strings.Views.Profile.Alerts.Purchase.title, isPresented: $requiresPurchase) {
-                Button(Strings.Global.Actions.purchase) {
-                    paywallReason = .purchase(requiredFeatures, nil)
-                }
-                Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
-                Button(Strings.Global.Actions.cancel, role: .cancel, action: {})
-            } message: {
-                Text(purchaseMessage)
-            }
+            .modifier(PurchaseAlertModifier(
+                isPresented: $requiresPurchase,
+                paywallReason: $paywallReason,
+                requiredFeatures: requiredFeatures,
+                okTitle: Strings.Views.Profile.Alerts.Purchase.Buttons.ok,
+                okAction: onDismiss
+            ))
             .withErrorHandler(errorHandler)
     }
 }
@@ -116,13 +114,6 @@ private extension ProfileCoordinator {
             )
         )
 #endif
-    }
-
-    var purchaseMessage: String {
-        let msg = Strings.Views.Profile.Alerts.Purchase.message
-        return msg + "\n\n" + requiredFeatures
-            .map(\.localizedDescription)
-            .joined(separator: "\n")
     }
 }
 

@@ -78,9 +78,7 @@
 
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
-"views.profile.alerts.purchase.title" = "Purchase required";
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";
-"views.profile.alerts.purchase.message" = "This profile requires paid features to work.";
 
 "views.providers.no_provider" = "None";
 "views.providers.select_provider" = "Select a provider";
@@ -95,6 +93,8 @@
 "views.providers.vpn.no_servers" = "No servers";
 
 "views.ui.connection_status.on_demand_suffix" = " (on-demand)";
+"views.ui.purchase_alert.title" = "Purchase required";
+"views.ui.purchase_alert.message" = "This profile requires paid features to work.";
 "views.ui.purchase_required.purchase.help" = "Purchase required";
 "views.ui.purchase_required.restricted.help" = "Feature is restricted";
 

@@ -776,10 +776,6 @@ public enum Strings {
     public enum Profile {
       public enum Alerts {
         public enum Purchase {
-          /// This profile requires paid features to work.
-          public static let message = Strings.tr("Localizable", "views.profile.alerts.purchase.message", fallback: "This profile requires paid features to work.")
-          /// Purchase required
-          public static let title = Strings.tr("Localizable", "views.profile.alerts.purchase.title", fallback: "Purchase required")
           public enum Buttons {
             /// Save anyway
             public static let ok = Strings.tr("Localizable", "views.profile.alerts.purchase.buttons.ok", fallback: "Save anyway")
@@ -833,6 +829,12 @@ public enum Strings {
       public enum ConnectionStatus {
         ///  (on-demand)
         public static let onDemandSuffix = Strings.tr("Localizable", "views.ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
+      }
+      public enum PurchaseAlert {
+        /// This profile requires paid features to work.
+        public static let message = Strings.tr("Localizable", "views.ui.purchase_alert.message", fallback: "This profile requires paid features to work.")
+        /// Purchase required
+        public static let title = Strings.tr("Localizable", "views.ui.purchase_alert.title", fallback: "Purchase required")
       }
       public enum PurchaseRequired {
         public enum Purchase {
