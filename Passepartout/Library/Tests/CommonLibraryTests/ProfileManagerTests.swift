@@ -485,9 +485,9 @@ extension ProfileManagerTests {
         observeRemoteImport(sut) {
             didImport = true
         }
-        try await waitForReady(sut)
-        try await wait(sut, "Remote import") { _ in
-            //
+        try await wait(sut, "Remote import") {
+            try await $0.observeLocal()
+            try await $0.observeRemote(true)
         } until: { _ in
             didImport
         }
@@ -526,9 +526,9 @@ extension ProfileManagerTests {
         observeRemoteImport(sut) {
             didImport = true
         }
-        try await waitForReady(sut)
-        try await wait(sut, "Remote import") { _ in
-            //
+        try await wait(sut, "Remote import") {
+            try await $0.observeLocal()
+            try await $0.observeRemote(true)
         } until: { _ in
             didImport
         }
@@ -580,7 +580,7 @@ extension ProfileManagerTests {
             ]
             remoteRepository.profiles = [
                 newProfile("remote1", id: r1),
-                newProfile("remote2", id: r2),
+                newProfile("remote2", id: r2)
             ]
             remoteRepository.profiles = [
                 newProfile("remote1", id: r1, fingerprint: fp1),
