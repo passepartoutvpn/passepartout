@@ -66,7 +66,7 @@ private extension AppMenu {
     }
 
     var showToggle: some View {
-        Button(Strings.Global.Nouns.show) {
+        Button(Strings.Global.Actions.show) {
             settings.isVisible = true
         }
     }

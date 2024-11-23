@@ -135,7 +135,7 @@ private extension ActiveProfileView {
             onProviderEntityRequired: onProviderEntityRequired,
             onPurchaseRequired: onPurchaseRequired,
             label: {
-                Text($0 ? Strings.Global.Nouns.connect : Strings.Global.Nouns.disconnect)
+                Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
             }
@@ -159,7 +159,7 @@ private extension ActiveProfileView {
         Button {
             isSwitching.toggle()
         } label: {
-            Text(Strings.Global.Nouns.select)
+            Text(Strings.Global.Actions.select)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
         }

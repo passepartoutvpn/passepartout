@@ -90,7 +90,7 @@ extension ProfileSplitView {
         }
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
-                title: Strings.Global.Nouns.save,
+                title: Strings.Global.Actions.save,
                 errorModuleIds: $errorModuleIds
             ) {
                 try await flow?.onCommitEditing()
