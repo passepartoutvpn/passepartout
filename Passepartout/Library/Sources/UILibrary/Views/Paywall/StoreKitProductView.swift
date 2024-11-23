@@ -64,16 +64,16 @@ private extension ProductView {
     @ViewBuilder
     func withPaywallStyle(_ paywallStyle: PaywallProductViewStyle) -> some View {
 #if os(tvOS)
-        productViewStyle(.compact)
-            .padding()
-#else
         switch paywallStyle {
-        case .recurring:
-            productViewStyle(.compact)
+        case .oneTime, .recurring:
+            productViewStyle(.regular)
 
-        case .oneTime, .donation:
+        case .donation:
             productViewStyle(.compact)
+                .padding()
         }
+#else
+        productViewStyle(.compact)
 #endif
     }
 }

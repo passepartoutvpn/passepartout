@@ -80,6 +80,12 @@ private extension PaywallView {
         Strings.Global.Actions.purchase
     }
 
+    var otherFeatures: [AppFeature] {
+        AppFeature.allCases.filter {
+            !features.contains($0)
+        }
+    }
+
     var paywallView: some View {
         Form {
             requiredFeaturesView
@@ -89,12 +95,6 @@ private extension PaywallView {
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
-    }
-
-    var otherFeatures: [AppFeature] {
-        AppFeature.allCases.filter {
-            !features.contains($0)
-        }
     }
 
     @ViewBuilder
@@ -127,21 +127,21 @@ private extension PaywallView {
         FeatureListView(
             style: .list,
             header: Strings.Views.Paywall.Sections.Features.Required.header,
-            features: Array(features)
-        ) {
-            Text($0.localizedDescription)
-                .fontWeight(.bold)
-        }
+            features: Array(features),
+            content: {
+                featureView(for: $0)
+                    .fontWeight(.bold)
+            }
+        )
     }
 
     var otherFeaturesView: some View {
         FeatureListView(
             style: otherFeaturesStyle,
             header: Strings.Views.Paywall.Sections.Features.Other.header,
-            features: otherFeatures
-        ) {
-            Text($0.localizedDescription)
-        }
+            features: otherFeatures,
+            content: featureView(for:)
+        )
     }
 
     var otherFeaturesStyle: FeatureListViewStyle {
@@ -149,6 +149,16 @@ private extension PaywallView {
         .list
 #else
         .table
+#endif
+    }
+
+    func featureView(for feature: AppFeature) -> some View {
+#if os(tvOS)
+        Button(feature.localizedDescription) {
+            //
+        }
+#else
+        Text(feature.localizedDescription)
 #endif
     }
 
