@@ -31,6 +31,7 @@ extension ModuleBuilder {
 
     @MainActor
     public func description(inEditor editor: ProfileEditor) -> String {
-        editor.profile.displayName(forModuleWithId: id) ?? moduleType.localizedDescription
+//        editor.profile.displayName(forModuleWithId: id) ?? moduleType.localizedDescription
+        moduleType.localizedDescription
     }
 }
