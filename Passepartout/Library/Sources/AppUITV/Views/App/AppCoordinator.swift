@@ -92,6 +92,8 @@ private extension AppCoordinator {
 
         case .credits:
             CreditsView()
+                .resized(width: 0.5)
+                .themeList()
 
         case .donate:
             DonateView(modifier: DonateViewModifier())
