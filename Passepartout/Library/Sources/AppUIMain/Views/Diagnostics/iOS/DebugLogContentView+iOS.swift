@@ -33,7 +33,6 @@ struct DebugLogContentView: View {
     var body: some View {
         TextEditor(text: .constant(lines.joined(separator: "\n")))
             .font(.caption)
-            .monospaced()
     }
 }
 

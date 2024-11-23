@@ -36,7 +36,6 @@ public struct LinksView: View {
             supportSection
             webSection
         }
-        .navigationTitle(Strings.Views.About.Links.title)
         .themeForm()
     }
 }

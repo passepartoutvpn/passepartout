@@ -60,7 +60,7 @@ public struct PaywallProductView: View {
     }
 
     public var body: some View {
-        if #available(iOS 17, macOS 14, *) {
+        if #available(iOS 17, macOS 14, tvOS 17, *) {
             StoreKitProductView(
                 style: style,
                 product: product,

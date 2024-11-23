@@ -88,7 +88,6 @@ struct DiagnosticsView: View {
             tunnelLogs = await availableTunnelLogs()
         }
         .themeForm()
-        .navigationTitle(Strings.Views.Diagnostics.title)
         .alert(Strings.Views.Diagnostics.ReportIssue.title, isPresented: $isPresentingUnableToEmail) {
             Button(Strings.Global.Nouns.ok, role: .cancel) {
                 isPresentingUnableToEmail = false
@@ -105,11 +104,7 @@ private extension DiagnosticsView {
             navLink(Strings.Views.Diagnostics.Rows.app, to: .app(title: Strings.Views.Diagnostics.Rows.app))
             navLink(Strings.Views.Diagnostics.Rows.tunnel, to: .tunnel(title: Strings.Views.Diagnostics.Rows.tunnel, url: nil))
 
-            Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
-                .onChange(of: logsPrivateData) {
-                    PassepartoutConfiguration.shared.logsAddresses = $0
-                    PassepartoutConfiguration.shared.logsModules = $0
-                }
+            LogsPrivateDataToggle()
         }
         .themeSection(header: Strings.Views.Diagnostics.Sections.live)
     }

@@ -63,7 +63,10 @@ private extension ProductView {
 
     @ViewBuilder
     func withPaywallStyle(_ paywallStyle: PaywallProductViewStyle) -> some View {
-#if !os(tvOS)
+#if os(tvOS)
+        productViewStyle(.compact)
+            .padding()
+#else
         switch paywallStyle {
         case .recurring:
             productViewStyle(.compact)
@@ -71,8 +74,6 @@ private extension ProductView {
         case .oneTime, .donation:
             productViewStyle(.compact)
         }
-#else
-        productViewStyle(.compact)
 #endif
     }
 }

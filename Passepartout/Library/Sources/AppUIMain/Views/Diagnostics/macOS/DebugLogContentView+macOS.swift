@@ -34,7 +34,6 @@ struct DebugLogContentView: View {
         List {
             ForEach(Array(lines.enumerated()), id: \.offset) {
                 Text($0.element)
-                    .monospaced()
             }
         }
     }

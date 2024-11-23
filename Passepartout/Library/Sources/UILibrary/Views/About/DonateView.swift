@@ -27,13 +27,15 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-public struct DonateView: View {
+public struct DonateView<Modifier>: View where Modifier: ViewModifier {
 
     @EnvironmentObject
     private var iapManager: IAPManager
 
     @Environment(\.dismiss)
     private var dismiss
+
+    private let modifier: Modifier
 
     @State
     private var availableProducts: [InAppProduct] = []
@@ -50,13 +52,15 @@ public struct DonateView: View {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    public init() {
+    public init(modifier: Modifier) {
+        self.modifier = modifier
     }
 
     public var body: some View {
-        donationsView
+        productsRows
+            .modifier(modifier)
             .themeProgress(if: isFetchingProducts)
-            .navigationTitle(title)
+            .disabled(purchasingIdentifier != nil)
             .alert(
                 title,
                 isPresented: $isThankYouPresented,
@@ -75,27 +79,17 @@ private extension DonateView {
         Strings.Views.Donate.title
     }
 
-    var donationsView: some View {
-        Form {
-#if os(macOS)
-            Section {
-                Text(Strings.Views.Donate.Sections.Main.footer)
-            }
-#endif
-            ForEach(availableProducts, id: \.productIdentifier) {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .donation,
-                    product: $0,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
-                )
-            }
-            .themeSection(footer: Strings.Views.Donate.Sections.Main.footer)
+    var productsRows: some View {
+        ForEach(availableProducts, id: \.productIdentifier) {
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .donation,
+                product: $0,
+                purchasingIdentifier: $purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
         }
-        .themeForm()
-        .disabled(purchasingIdentifier != nil)
     }
 
     func thankYouActions() -> some View {
@@ -159,6 +153,6 @@ private extension DonateView {
 // MARK: - Previews
 
 #Preview {
-    DonateView()
+    DonateView(modifier: EmptyModifier())
         .withMockEnvironment()
 }

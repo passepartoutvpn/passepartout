@@ -100,24 +100,24 @@ private extension ActiveProfileView {
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
             if let connectionType = profile.localizedDescription(optionalStyle: .connectionType) {
-                DetailRowView(title: Strings.Global.Nouns.protocol) {
+                ListRowView(title: Strings.Global.Nouns.protocol) {
                     Text(connectionType)
                 }
             }
             if let pair = profile.selectedProvider {
                 if let metadata = providerManager.provider(withId: pair.selection.id) {
-                    DetailRowView(title: Strings.Global.Nouns.provider) {
+                    ListRowView(title: Strings.Global.Nouns.provider) {
                         Text(metadata.description)
                     }
                 }
                 if let entity = pair.selection.entity {
-                    DetailRowView(title: Strings.Global.Nouns.country) {
+                    ListRowView(title: Strings.Global.Nouns.country) {
                         ThemeCountryText(entity.header.countryCode)
                     }
                 }
             }
             if let otherList = profile.localizedDescription(optionalStyle: .nonConnectionTypes) {
-                DetailRowView(title: otherList) {
+                ListRowView(title: otherList) {
                     EmptyView()
                 }
             }
@@ -171,29 +171,11 @@ private extension ActiveProfileView {
 
 private extension ActiveProfileView {
     func onProviderEntityRequired(_ profile: Profile) {
-        // FIXME: #788, TV missing provider entity
+        // FIXME: #913, TV missing provider entity
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        // FIXME: #788, TV purchase required
-    }
-}
-
-// MARK: - Subviews
-
-private struct DetailRowView<Content>: View where Content: View {
-    let title: String
-
-    @ViewBuilder
-    let content: Content
-
-    var body: some View {
-        HStack {
-            Text(title)
-                .fontWeight(.light)
-            Spacer()
-            content
-        }
+        // FIXME: #913, TV purchase required
     }
 }
 

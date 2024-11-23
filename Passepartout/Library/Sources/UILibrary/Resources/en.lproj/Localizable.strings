@@ -46,7 +46,7 @@
 "views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
 
 "views.donate.title" = "Make a donation";
-"views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
+"views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple of amounts you can donate instantly. You will only be charged once per donation, and you can donate multiple times.";
 "views.donate.alerts.thank_you.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 
 "views.migration.title" = "Migrate";

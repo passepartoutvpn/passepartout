@@ -42,21 +42,24 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     public var body: some View {
         debugChanges()
-        return TabView {
-            profileView
-                .tabItem {
-                    Text(Strings.Global.Nouns.profile)
-                }
+        return NavigationStack {
+            TabView {
+                profileView
+                    .tabItem {
+                        Text(Strings.Global.Nouns.profile)
+                    }
 
-//            searchView
-//                .tabItem {
-//                    ThemeImage(.search)
-//                }
+//                searchView
+//                    .tabItem {
+//                        ThemeImage(.search)
+//                    }
 
-            settingsView
-                .tabItem {
-                    ThemeImage(.settings)
-                }
+                settingsView
+                    .tabItem {
+                        ThemeImage(.settings)
+                    }
+            }
+            .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
         }
     }
 }
@@ -73,9 +76,40 @@ private extension AppCoordinator {
 //    }
 
     var settingsView: some View {
-        SettingsView()
+        SettingsView(tunnel: tunnel)
     }
 }
+
+private extension AppCoordinator {
+
+    @ViewBuilder
+    func pushDestination(_ item: AppCoordinatorRoute?) -> some View {
+        switch item {
+        case .appLog:
+            DebugLogView(withAppParameters: Constants.shared.log) {
+                DebugLogContentView(lines: $0)
+            }
+
+        case .credits:
+            CreditsView()
+                .resized(width: 0.5)
+                .themeList()
+
+        case .donate:
+            DonateView(modifier: DonateViewModifier())
+
+        case .tunnelLog:
+            DebugLogView(withTunnel: tunnel, parameters: Constants.shared.log) {
+                DebugLogContentView(lines: $0)
+            }
+
+        default:
+            EmptyView()
+        }
+    }
+}
+
+// MARK: -
 
 #Preview {
     AppCoordinator(

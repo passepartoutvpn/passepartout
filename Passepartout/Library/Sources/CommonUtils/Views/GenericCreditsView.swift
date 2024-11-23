@@ -178,18 +178,15 @@ private extension GenericCreditsView {
     var translationsSection: some View {
         Section {
             ForEach(sortedLanguages, id: \.self) { code in
-                HStack {
-                    Text(code.localizedAsLanguageCode ?? code)
-                    Spacer()
-                    credits.translations[code].map { authors in
-                        VStack(spacing: 4) {
-                            ForEach(authors, id: \.self) {
-                                Text($0)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                        }
-                    }
+#if os(tvOS)
+                Button {
+                    //
+                } label: {
+                    translationLabel(code)
                 }
+#else
+                translationLabel(code)
+#endif
             }
         } header: {
             translationsHeader.map(Text.init)
@@ -203,6 +200,21 @@ private extension GenericCreditsView {
                 .padding()
         }
         .navigationTitle(content.name)
+    }
+
+    func translationLabel(_ code: String) -> some View {
+        HStack {
+            Text(code.localizedAsLanguageCode ?? code)
+            Spacer()
+            credits.translations[code].map { authors in
+                VStack(spacing: 4) {
+                    ForEach(authors, id: \.self) {
+                        Text($0)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -85,15 +85,19 @@ extension AboutCoordinator {
         switch item {
         case .credits:
             CreditsView()
+                .navigationTitle(Strings.Views.About.Credits.title)
 
         case .diagnostics:
             DiagnosticsView(profileManager: profileManager, tunnel: tunnel)
+                .navigationTitle(Strings.Views.Diagnostics.title)
 
         case .donate:
-            DonateView()
+            DonateView(modifier: DonateViewModifier())
+                .navigationTitle(Strings.Views.Donate.title)
 
         case .links:
             LinksView()
+                .navigationTitle(Strings.Views.About.Links.title)
 
         default:
             Text(Strings.Global.Nouns.noSelection)
