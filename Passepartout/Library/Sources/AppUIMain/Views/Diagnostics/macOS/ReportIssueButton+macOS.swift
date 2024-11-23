@@ -30,7 +30,7 @@ import PassepartoutKit
 import SwiftUI
 
 extension ReportIssueButton: View {
-    public var body: some View {
+    var body: some View {
         Button(title, action: sendEmail)
             .disabled(isPending)
     }
