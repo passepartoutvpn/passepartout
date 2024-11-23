@@ -24,6 +24,7 @@
 //
 
 import CommonIAP
+import CommonUtils
 import SwiftUI
 
 public struct PurchaseAlertModifier: ViewModifier {
@@ -58,7 +59,9 @@ public struct PurchaseAlertModifier: ViewModifier {
         content
             .alert(Strings.Views.Ui.PurchaseAlert.title, isPresented: $isPresented) {
                 Button(Strings.Global.Actions.purchase) {
-                    paywallReason = .purchase(requiredFeatures, nil)
+                    setLater(.purchase(requiredFeatures, nil)) {
+                        paywallReason = $0
+                    }
                 }
                 if let okTitle {
                     Button(okTitle) {
