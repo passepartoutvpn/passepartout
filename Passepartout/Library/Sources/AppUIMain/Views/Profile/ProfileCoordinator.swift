@@ -104,7 +104,7 @@ private extension ProfileCoordinator {
         )
         .themeNavigationDetail()
         .themeNavigationStack(if: modally, path: $path)
-#elseif os(macOS)
+#else
         ProfileSplitView(
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,

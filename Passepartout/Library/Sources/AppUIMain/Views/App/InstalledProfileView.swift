@@ -265,7 +265,7 @@ private struct CardModifier: ViewModifier {
 #if os(iOS)
             content
                 .padding(.vertical)
-#elseif os(macOS)
+#else
             content
 #endif
 
