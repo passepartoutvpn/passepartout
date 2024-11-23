@@ -109,7 +109,7 @@ private struct MarkerView: View {
                 PurchaseRequiredButton(features: requiredFeatures, paywallReason: .constant(nil))
             }
         }
-        .frame(width: 20)
+        .frame(width: 24)
     }
 }
 
