@@ -32,7 +32,7 @@ extension ErrorHandler {
     public static func `default`() -> ErrorHandler {
         ErrorHandler(
             defaultTitle: Strings.Unlocalized.appName,
-            dismissTitle: Strings.Global.ok,
+            dismissTitle: Strings.Global.Nouns.ok,
             errorDescription: {
                 AppError($0).localizedDescription
             },

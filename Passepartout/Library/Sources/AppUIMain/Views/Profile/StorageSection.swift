@@ -60,7 +60,7 @@ private extension StorageSection {
     }
 
     var tvToggle: some View {
-        Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
+        Toggle(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
             .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
     }
 
@@ -87,7 +87,7 @@ private extension StorageSection {
     var purchaseTVButton: some View {
         EmptyView()
             .modifier(PurchaseButtonModifier(
-                Strings.Modules.General.Rows.AppleTv.purchase,
+                Strings.Modules.General.Rows.Appletv.purchase,
                 feature: .appleTV,
                 suggesting: .Features.appleTV,
                 showsIfRestricted: false,

@@ -53,7 +53,7 @@ struct ProfileImporterModifier: ViewModifier {
                 handleResult(.success($0))
             }
             .alert(
-                Strings.Views.Profiles.Toolbar.importProfile,
+                Strings.Views.App.Toolbar.importProfile,
                 isPresented: $importer.isPresentingPassphrase,
                 presenting: importer.nextURL,
                 actions: actions,
@@ -79,7 +79,7 @@ private extension ProfileImporterModifier {
                 )
             }
         }
-        Button(Strings.Global.cancel, role: .cancel) {
+        Button(Strings.Global.Actions.cancel, role: .cancel) {
             importer.cancelImport()
         }
     }
@@ -100,8 +100,8 @@ private extension ProfileImporterModifier {
             } catch {
                 await errorHandler.handle(
                     error,
-                    title: Strings.Views.Profiles.Toolbar.importProfile,
-                    message: Strings.Views.Profiles.Errors.import
+                    title: Strings.Views.App.Toolbar.importProfile,
+                    message: Strings.Views.App.Errors.import
                 )
             }
         }

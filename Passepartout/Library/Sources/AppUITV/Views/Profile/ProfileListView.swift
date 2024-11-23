@@ -55,7 +55,7 @@ struct ProfileListView: View {
             .listStyle(.grouped)
             .scrollClipDisabled()
             .themeProgress(if: false, isEmpty: !profileManager.hasProfiles) {
-                Text(Strings.Views.Profiles.Folders.noProfiles)
+                Text(Strings.Views.App.Folders.noProfiles)
                     .themeEmptyMessage()
             }
         }
@@ -68,7 +68,7 @@ private extension ProfileListView {
     }
 
     var headerView: some View {
-        Text(Strings.Views.Profiles.Tv.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
+        Text(Strings.Views.App.Tv.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
             .textCase(.none)
             .foregroundStyle(.primary)
             .font(.body)

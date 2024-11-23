@@ -35,11 +35,11 @@ struct NameSection: View {
     var body: some View {
         debugChanges()
         return Group {
-            ThemeTextField(Strings.Global.name, text: $name, placeholder: placeholder)
+            ThemeTextField(Strings.Global.Nouns.name, text: $name, placeholder: placeholder)
                 .labelsHidden()
                 .themeManualInput()
         }
-        .themeSection(header: Strings.Global.name)
+        .themeSection(header: Strings.Global.Nouns.name)
     }
 }
 

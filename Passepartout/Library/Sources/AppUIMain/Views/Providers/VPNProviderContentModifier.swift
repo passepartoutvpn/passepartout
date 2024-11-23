@@ -67,7 +67,7 @@ private extension VPNProviderContentModifier {
     var providerEntityRow: some View {
         NavigationLink(value: entityDestination) {
             HStack {
-                Text(Strings.Global.server)
+                Text(Strings.Global.Nouns.server)
                 if let selectedEntity {
                     Spacer()
                     Text(selectedEntity.server.hostname ?? selectedEntity.server.serverId)

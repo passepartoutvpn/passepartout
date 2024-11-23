@@ -96,7 +96,7 @@ extension AboutCoordinator {
             LinksView()
 
         default:
-            Text(Strings.Global.noSelection)
+            Text(Strings.Global.Nouns.noSelection)
                 .themeEmptyMessage()
         }
     }
@@ -124,7 +124,7 @@ extension AboutCoordinator {
             }
 
         default:
-            Text(Strings.Global.noSelection)
+            Text(Strings.Global.Nouns.noSelection)
                 .themeEmptyMessage()
         }
     }

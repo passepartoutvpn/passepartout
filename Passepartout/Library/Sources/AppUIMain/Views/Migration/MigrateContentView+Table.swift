@@ -61,18 +61,18 @@ private extension MigrateContentView.TableView {
     }
 
     var messageView: some View {
-        Text(Strings.Views.Migrate.Sections.Main.header(Strings.Unlocalized.appName))
+        Text(Strings.Views.Migration.Sections.Main.header(Strings.Unlocalized.appName))
             .padding([.top, .leading, .trailing])
     }
 
     var profilesForm: some View {
         Form {
             Table(profiles) {
-                TableColumn(Strings.Global.name) {
+                TableColumn(Strings.Global.Nouns.name) {
                     Text($0.name)
                         .foregroundStyle(statuses.style(for: $0.id))
                 }
-                TableColumn(Strings.Global.lastUpdate) {
+                TableColumn(Strings.Global.Nouns.lastUpdate) {
                     Text($0.timestamp)
                         .foregroundStyle(statuses.style(for: $0.id))
                 }
@@ -98,7 +98,7 @@ private extension MigrateContentView.TableView {
         }
         .disabled(!step.canSelect)
         .themeForm()
-        .themeEmpty(if: isEmpty, message: Strings.Views.Migrate.noProfiles)
+        .themeEmpty(if: isEmpty, message: Strings.Views.Migration.noProfiles)
     }
 
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {

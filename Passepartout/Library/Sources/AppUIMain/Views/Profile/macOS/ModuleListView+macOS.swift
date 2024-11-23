@@ -50,7 +50,7 @@ struct ModuleListView: View, Routable {
     var body: some View {
         List(selection: $selectedModuleId) {
             Section {
-                NavigationLink(Strings.Global.general, value: ProfileSplitView.Detail.general)
+                NavigationLink(Strings.Global.Nouns.general, value: ProfileSplitView.Detail.general)
                     .tag(Self.generalModuleId)
             }
             Group {
@@ -61,7 +61,7 @@ struct ModuleListView: View, Routable {
                 }
                 .onMove(perform: moveModules)
             }
-            .themeSection(header: !profileEditor.modules.isEmpty ? Strings.Global.modules : nil)
+            .themeSection(header: !profileEditor.modules.isEmpty ? Strings.Global.Nouns.modules : nil)
         }
         .onDeleteCommand(perform: removeSelectedModule)
         .toolbar(content: toolbarContent)

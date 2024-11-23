@@ -66,8 +66,8 @@ private extension VPNFiltersView {
     }
 
     var categoryPicker: some View {
-        Picker(Strings.Global.category, selection: categoryNameBinding) {
-            Text(Strings.Global.any)
+        Picker(Strings.Global.Nouns.category, selection: categoryNameBinding) {
+            Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.categories, id: \.self) {
                 Text($0.capitalized)
@@ -77,8 +77,8 @@ private extension VPNFiltersView {
     }
 
     var countryPicker: some View {
-        Picker(Strings.Global.country, selection: $model.filters.countryCode) {
-            Text(Strings.Global.any)
+        Picker(Strings.Global.Nouns.country, selection: $model.filters.countryCode) {
+            Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.countries, id: \.code) {
                 ThemeCountryText($0.code, title: $0.description)
@@ -88,8 +88,8 @@ private extension VPNFiltersView {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Providers.Vpn.preset, selection: $model.filters.presetId) {
-            Text(Strings.Global.any)
+        Picker(Strings.Views.Providers.Vpn.preset, selection: $model.filters.presetId) {
+            Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.presets, id: \.presetId) {
                 Text($0.description)
@@ -99,11 +99,11 @@ private extension VPNFiltersView {
     }
 
     var favoritesToggle: some View {
-        Toggle(Strings.Providers.onlyFavorites, isOn: $model.onlyShowsFavorites)
+        Toggle(Strings.Views.Providers.onlyFavorites, isOn: $model.onlyShowsFavorites)
     }
 
     var clearFiltersButton: some View {
-        Button(Strings.Providers.clearFilters, role: .destructive) {
+        Button(Strings.Views.Providers.clearFilters, role: .destructive) {
             model.filters = VPNFilters()
         }
     }

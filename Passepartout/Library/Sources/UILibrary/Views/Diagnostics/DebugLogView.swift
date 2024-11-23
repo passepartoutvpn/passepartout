@@ -38,7 +38,7 @@ public struct DebugLogView<Content>: View where Content: View {
 
     public var body: some View {
         content(currentLines)
-            .themeEmpty(if: currentLines.isEmpty, message: Strings.Global.noContent)
+            .themeEmpty(if: currentLines.isEmpty, message: Strings.Global.Nouns.noContent)
             .toolbar(content: toolbarContent)
             .task {
                 currentLines = await fetchLines()

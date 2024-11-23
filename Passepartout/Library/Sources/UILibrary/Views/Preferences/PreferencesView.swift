@@ -41,7 +41,7 @@ public struct PreferencesView: View {
             PreferencesGroup(profileManager: profileManager)
         }
         .themeForm()
-        .navigationTitle(Strings.Global.settings)
+        .navigationTitle(Strings.Global.Nouns.settings)
 #if os(iOS)
         .themeNavigationDetail()
         .themeNavigationStack(closable: true, path: $path)

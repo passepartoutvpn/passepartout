@@ -35,7 +35,7 @@ extension OpenVPNView {
         let credentialsRoute: any Hashable
 
         var body: some View {
-            moduleSection(for: accountRows, header: Strings.Global.account)
+            moduleSection(for: accountRows, header: Strings.Global.Nouns.account)
             moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
             if !isServerPushed {
                 moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
@@ -56,7 +56,7 @@ extension OpenVPNView {
             if !isServerPushed {
                 moduleSection(for: tlsRows, header: Strings.Unlocalized.tls)
             }
-            moduleSection(for: otherRows, header: Strings.Global.other)
+            moduleSection(for: otherRows, header: Strings.Global.Nouns.other)
         }
     }
 }
@@ -92,10 +92,10 @@ private extension OpenVPNView.ConfigurationView {
         var rows: [ModuleRow] = []
         if let ip {
             ip.localizedDescription(optionalStyle: .address).map {
-                rows.append(.copiableText(caption: Strings.Global.address, value: $0))
+                rows.append(.copiableText(caption: Strings.Global.Nouns.address, value: $0))
             }
             ip.localizedDescription(optionalStyle: .defaultGateway).map {
-                rows.append(.copiableText(caption: Strings.Global.gateway, value: $0))
+                rows.append(.copiableText(caption: Strings.Global.Nouns.gateway, value: $0))
             }
 
             ip.includedRoutes
@@ -118,7 +118,7 @@ private extension OpenVPNView.ConfigurationView {
                 }
         }
         routes?.forEach {
-            rows.append(.longContent(caption: Strings.Global.route, value: $0.localizedDescription))
+            rows.append(.longContent(caption: Strings.Global.Nouns.route, value: $0.localizedDescription))
         }
         return rows.nilIfEmpty
     }
@@ -147,14 +147,14 @@ private extension OpenVPNView.ConfigurationView {
             .nilIfEmpty
             .map {
                 rows.append(.textList(
-                    caption: Strings.Global.servers,
+                    caption: Strings.Global.Nouns.servers,
                     values: $0
                 ))
             }
 
         configuration.dnsDomain.map {
             rows.append(.copiableText(
-                caption: Strings.Global.domain,
+                caption: Strings.Global.Nouns.domain,
                 value: $0
             ))
         }
@@ -237,10 +237,10 @@ private extension OpenVPNView.ConfigurationView {
             rows.append(.longContentPreview(caption: Strings.Unlocalized.ca, value: $0.pem, preview: nil))
         }
         configuration.clientCertificate.map {
-            rows.append(.longContentPreview(caption: Strings.Global.certificate, value: $0.pem, preview: nil))
+            rows.append(.longContentPreview(caption: Strings.Global.Nouns.certificate, value: $0.pem, preview: nil))
         }
         configuration.clientKey.map {
-            rows.append(.longContentPreview(caption: Strings.Global.key, value: $0.pem, preview: nil))
+            rows.append(.longContentPreview(caption: Strings.Global.Nouns.key, value: $0.pem, preview: nil))
         }
         configuration.tlsWrap.map {
             rows.append(.longContentPreview(
@@ -256,7 +256,7 @@ private extension OpenVPNView.ConfigurationView {
     var otherRows: [ModuleRow]? {
         var rows: [ModuleRow] = []
         configuration.localizedDescription(optionalStyle: .keepAlive).map {
-            rows.append(.text(caption: Strings.Global.keepAlive, value: $0))
+            rows.append(.text(caption: Strings.Global.Nouns.keepAlive, value: $0))
         }
         configuration.localizedDescription(optionalStyle: .renegotiatesAfter).map {
             rows.append(.text(caption: Strings.Modules.Openvpn.renegotiation, value: $0))

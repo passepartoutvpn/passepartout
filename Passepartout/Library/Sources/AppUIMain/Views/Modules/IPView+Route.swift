@@ -48,24 +48,24 @@ extension IPView {
         var body: some View {
             Form {
                 Section {
-                    Toggle(Strings.Global.default, isOn: $isDefault.animation(theme.animation(for: .modules)))
+                    Toggle(Strings.Global.Nouns.default, isOn: $isDefault.animation(theme.animation(for: .modules)))
                 }
                 if !isDefault {
                     Section {
-                        ThemeTextField(Strings.Global.destination, text: $destinationString, placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family))
-                        ThemeTextField(Strings.Global.gateway, text: $gatewayString, placeholder: Strings.Unlocalized.Placeholders.ipGateway(forFamily: family))
+                        ThemeTextField(Strings.Global.Nouns.destination, text: $destinationString, placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family))
+                        ThemeTextField(Strings.Global.Nouns.gateway, text: $gatewayString, placeholder: Strings.Unlocalized.Placeholders.ipGateway(forFamily: family))
                     }
                 }
             }
             .themeForm()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(Strings.Global.cancel, role: .cancel) {
+                    Button(Strings.Global.Actions.cancel, role: .cancel) {
                         onSubmit(nil)
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(Strings.Global.ok, action: parseAndSubmit)
+                    Button(Strings.Global.Nouns.ok, action: parseAndSubmit)
                 }
             }
             .themeNavigationDetail()

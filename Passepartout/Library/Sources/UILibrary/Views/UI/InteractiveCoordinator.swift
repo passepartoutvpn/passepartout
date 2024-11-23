@@ -99,7 +99,7 @@ private extension InteractiveCoordinator {
         func modalToolbar() -> some ToolbarContent {
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: confirm) {
-                    Text(Strings.Global.connect)
+                    Text(Strings.Global.Actions.connect)
                 }
             }
             ToolbarItem(placement: .cancellationAction) {
@@ -140,12 +140,12 @@ private extension InteractiveCoordinator {
         var toolbar: some View {
             VStack {
                 Button(action: confirm) {
-                    Text(Strings.Global.connect)
+                    Text(Strings.Global.Actions.connect)
                         .frame(maxWidth: .infinity)
                 }
                 if withCancel {
                     Button(role: .cancel, action: cancel) {
-                        Text(Strings.Global.cancel)
+                        Text(Strings.Global.Actions.cancel)
                             .frame(maxWidth: .infinity)
                     }
                 }

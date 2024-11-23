@@ -54,6 +54,6 @@ public struct RestorePurchasesButton: View {
 
 private extension RestorePurchasesButton {
     var title: String {
-        Strings.Paywall.Rows.restorePurchases
+        Strings.Views.Paywall.Rows.restorePurchases
     }
 }

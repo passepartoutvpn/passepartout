@@ -63,7 +63,7 @@ private extension ConnectionStatusText {
             var desc = status.localizedDescription
             if let profile = tunnel.currentProfile {
                 if profile.onDemand {
-                    desc += Strings.Ui.ConnectionStatus.onDemandSuffix
+                    desc += Strings.Views.Ui.ConnectionStatus.onDemandSuffix
                 }
             }
             return desc

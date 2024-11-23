@@ -52,10 +52,10 @@ struct AddProfileMenu: View {
 private extension AddProfileMenu {
     var newProfileButton: some View {
         Button {
-            let profile = profileManager.new(withName: Strings.Entities.Profile.Name.new)
+            let profile = profileManager.new(withName: Strings.Placeholders.Profile.name)
             onNewProfile(profile)
         } label: {
-            ThemeImageLabel(Strings.Views.Profiles.Toolbar.newProfile, .profileEdit)
+            ThemeImageLabel(Strings.Views.App.Toolbar.newProfile, .profileEdit)
         }
     }
 
@@ -63,13 +63,13 @@ private extension AddProfileMenu {
         Button {
             isImporting = true
         } label: {
-            ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile.withTrailingDots, .profileImport)
+            ThemeImageLabel(Strings.Views.App.Toolbar.importProfile.withTrailingDots, .profileImport)
         }
     }
 
     var migrateProfilesButton: some View {
         Button(action: onMigrateProfiles) {
-            ThemeImageLabel(Strings.Views.Profiles.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
+            ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
         }
     }
 }

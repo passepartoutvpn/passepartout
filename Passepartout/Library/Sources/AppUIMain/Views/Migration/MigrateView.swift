@@ -81,7 +81,7 @@ struct MigrateView: View {
         .themeAnimation(on: model, category: .profiles)
         .themeConfirmation(
             isPresented: $isDeleting,
-            title: Strings.Views.Migrate.Items.discard,
+            title: Strings.Views.Migration.Items.discard,
             message: messageForDeletion,
             isDestructive: true,
             action: confirmPendingDeletion
@@ -96,7 +96,7 @@ struct MigrateView: View {
 
 private extension MigrateView {
     var title: String {
-        Strings.Views.Migrate.title
+        Strings.Views.Migration.title
     }
 
     var messageForDeletion: String? {
@@ -105,7 +105,7 @@ private extension MigrateView {
                 .map(\.name)
                 .joined(separator: "\n")
 
-            return Strings.Views.Migrate.Alerts.Delete.message(nameList)
+            return Strings.Views.Migration.Alerts.Delete.message(nameList)
         }
     }
 

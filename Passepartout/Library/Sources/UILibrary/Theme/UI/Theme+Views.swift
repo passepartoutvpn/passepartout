@@ -99,7 +99,7 @@ public struct ThemeCloseLabel: View {
 #if os(iOS) || os(tvOS)
         ThemeImage(.close)
 #else
-        Text(Strings.Global.cancel)
+        Text(Strings.Global.Actions.cancel)
 #endif
     }
 }

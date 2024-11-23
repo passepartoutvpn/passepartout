@@ -74,11 +74,11 @@ private extension AboutContentView {
             .themeSection(header: Strings.Views.About.Sections.resources)
             Section {
                 linkContent(.diagnostics)
-                Text(Strings.Global.version)
+                Text(Strings.Global.Nouns.version)
                     .themeTrailingValue(BundleConfiguration.mainVersionString)
             }
         }
-        .navigationTitle(Strings.Global.settings)
+        .navigationTitle(Strings.Global.Nouns.settings)
     }
 }
 

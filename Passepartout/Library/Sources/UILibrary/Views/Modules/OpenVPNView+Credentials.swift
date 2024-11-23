@@ -172,13 +172,13 @@ private extension OpenVPNCredentialsView {
     }
 
     var usernameField: some View {
-        ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
+        ThemeTextField(Strings.Global.Nouns.username, text: $builder.username, placeholder: Strings.Placeholders.username)
             .textContentType(.username)
             .focused($focusedField, equals: .username)
     }
 
     var passwordField: some View {
-        ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
+        ThemeSecureField(title: Strings.Global.Nouns.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
             .textContentType(.password)
             .focused($focusedField, equals: .password)
             .onSubmit {

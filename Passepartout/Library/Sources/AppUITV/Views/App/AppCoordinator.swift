@@ -45,7 +45,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
         return TabView {
             profileView
                 .tabItem {
-                    Text(Strings.Global.profile)
+                    Text(Strings.Global.Nouns.profile)
                 }
 
 //            searchView

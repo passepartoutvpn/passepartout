@@ -84,13 +84,13 @@ extension ProfileSplitView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
-            Button(Strings.Global.cancel, role: .cancel) {
+            Button(Strings.Global.Actions.cancel, role: .cancel) {
                 flow?.onCancelEditing()
             }
         }
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
-                title: Strings.Global.save,
+                title: Strings.Global.Nouns.save,
                 errorModuleIds: $errorModuleIds
             ) {
                 try await flow?.onCommitEditing()

@@ -43,19 +43,19 @@ struct ProviderPicker: View {
     var body: some View {
         Picker(selection: $providerId) {
             if !providers.isEmpty {
-                Text(isRequired ? Strings.Providers.selectProvider : Strings.Providers.noProvider)
+                Text(isRequired ? Strings.Views.Providers.selectProvider : Strings.Views.Providers.noProvider)
                     .tag(nil as ProviderID?)
                 ForEach(providers, id: \.id) {
                     Text($0.description)
                         .tag($0.id as ProviderID?)
                 }
             } else {
-                Text(isLoading ? Strings.Global.loading : Strings.Global.none)
+                Text(isLoading ? Strings.Global.Nouns.loading : Strings.Global.Nouns.none)
                     .tag(providerId) // tag always exists
             }
         } label: {
             HStack {
-                Text(Strings.Global.provider)
+                Text(Strings.Global.Nouns.provider)
                 PurchaseRequiredButton(for: providerId, paywallReason: $paywallReason)
             }
         }

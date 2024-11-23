@@ -32,7 +32,7 @@ extension AppFeature: LocalizableEntity {
         let V = Strings.Features.self
         switch self {
         case .appleTV:
-            return V.appleTV(Strings.Unlocalized.appleTV)
+            return V.appletv(Strings.Unlocalized.appleTV)
 
         case .dns:
             return V.dns(Strings.Unlocalized.dns)
@@ -50,7 +50,7 @@ extension AppFeature: LocalizableEntity {
             return V.providers
 
         case .routing:
-            return V.routing(Strings.Global.routing)
+            return V.routing(Strings.Global.Nouns.routing)
 
         case .sharing:
             return V.sharing(Strings.Unlocalized.iCloud)

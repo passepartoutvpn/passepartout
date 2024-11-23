@@ -59,8 +59,8 @@ struct TunnelRestartButton<Label>: View where Label: View {
                 } catch {
                     errorHandler.handle(
                         error,
-                        title: Strings.Global.connection,
-                        message: Strings.Views.Profiles.Errors.tunnel
+                        title: Strings.Global.Nouns.connection,
+                        message: Strings.Views.App.Errors.tunnel
                     )
                 }
             }

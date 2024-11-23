@@ -37,7 +37,7 @@ extension TimeInterval: StyledLocalizableEntity {
             if self > 0 {
                 return asTimeString
             } else {
-                return Strings.Global.disabled
+                return Strings.Global.Nouns.disabled
             }
         }
     }

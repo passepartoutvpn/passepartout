@@ -67,7 +67,7 @@ private extension MigrateContentView.ListView {
     }
 
     var messageView: some View {
-        Text(Strings.Views.Migrate.Sections.Main.header(Strings.Unlocalized.appName))
+        Text(Strings.Views.Migration.Sections.Main.header(Strings.Unlocalized.appName))
             .padding([.top, .leading, .trailing])
     }
 
@@ -98,7 +98,7 @@ private extension MigrateContentView.ListView {
         }
         .listStyle(.plain)
         .disabled(!step.canSelect)
-        .themeEmpty(if: isEmpty, message: Strings.Views.Migrate.noProfiles)
+        .themeEmpty(if: isEmpty, message: Strings.Views.Migration.noProfiles)
     }
 
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
@@ -142,7 +142,7 @@ private extension MigrateContentView.ListView {
         var body: some View {
             HStack {
                 if isEditing {
-                    Button(Strings.Global.cancel) {
+                    Button(Strings.Global.Actions.cancel) {
                         isEditing = false
                     }
                 }
@@ -165,7 +165,7 @@ private extension MigrateContentView.ListView {
         }
 
         var title: String {
-            isEditing ? Strings.Views.Migrate.Items.discard : Strings.Global.edit
+            isEditing ? Strings.Views.Migration.Items.discard : Strings.Global.Actions.edit
         }
 
         var role: ButtonRole? {

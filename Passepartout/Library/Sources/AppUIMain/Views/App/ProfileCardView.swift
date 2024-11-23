@@ -50,7 +50,7 @@ struct ProfileCardView: View {
                     .font(.headline)
                     .themeTruncating()
 
-                Text(preview.subtitle ?? Strings.Views.Profiles.Rows.noModules)
+                Text(preview.subtitle ?? Strings.Views.App.Rows.noModules)
                     .multilineTextAlignment(.leading)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)

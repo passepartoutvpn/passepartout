@@ -90,7 +90,7 @@ private extension InstalledProfileView {
     }
 
     var nameView: some View {
-        Text(profile?.name ?? Strings.Views.Profiles.Rows.notInstalled)
+        Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
             .font(.title2)
             .fontWeight(theme.relevantWeight)
             .themeTruncating(.tail)

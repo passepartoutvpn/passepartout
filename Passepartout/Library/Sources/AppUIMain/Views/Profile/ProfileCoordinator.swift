@@ -74,11 +74,11 @@ struct ProfileCoordinator: View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
             .alert(Strings.Views.Profile.Alerts.Purchase.title, isPresented: $requiresPurchase) {
-                Button(Strings.Global.purchase) {
+                Button(Strings.Global.Actions.purchase) {
                     paywallReason = .purchase(requiredFeatures, nil)
                 }
                 Button(Strings.Views.Profile.Alerts.Purchase.Buttons.ok, action: onDismiss)
-                Button(Strings.Global.cancel, role: .cancel, action: {})
+                Button(Strings.Global.Actions.cancel, role: .cancel, action: {})
             } message: {
                 Text(purchaseMessage)
             }
@@ -142,7 +142,7 @@ private extension ProfileCoordinator {
                 try await onCommitEditingRestricted()
             }
         } catch {
-            errorHandler.handle(error, title: Strings.Global.save)
+            errorHandler.handle(error, title: Strings.Global.Actions.save)
             throw error
         }
     }

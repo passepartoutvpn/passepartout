@@ -70,7 +70,7 @@ struct ProfileAttributesView: View {
             case .tv:
                 return (
                     isRemoteImportingEnabled ? .tvOn : .tvOff,
-                    Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV)
+                    Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV)
                 )
             }
         }

@@ -63,7 +63,7 @@ struct ProfileEditView: View, Routable {
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .toolbar(content: toolbarContent)
-        .navigationTitle(Strings.Global.profile)
+        .navigationTitle(Strings.Global.Nouns.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
     }
@@ -77,14 +77,14 @@ private extension ProfileEditView {
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
-                title: Strings.Global.save,
+                title: Strings.Global.Actions.save,
                 errorModuleIds: $errorModuleIds
             ) {
                 try await flow?.onCommitEditing()
             }
         }
         ToolbarItem(placement: .cancellationAction) {
-            Button(Strings.Global.cancel, role: .cancel) {
+            Button(Strings.Global.Actions.cancel, role: .cancel) {
                 flow?.onCancelEditing()
             }
         }
@@ -99,7 +99,7 @@ private extension ProfileEditView {
             addModuleButton
         }
         .themeSection(
-            header: Strings.Global.modules,
+            header: Strings.Global.Nouns.modules,
             footer: Strings.Views.Profile.ModuleList.Section.footer
         )
     }

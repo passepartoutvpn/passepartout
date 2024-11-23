@@ -96,8 +96,8 @@ private extension ProfileContainerView {
         InteractiveCoordinator(style: .modal, manager: interactiveManager) {
             errorHandler.handle(
                 $0,
-                title: Strings.Global.connection,
-                message: Strings.Views.Profiles.Errors.tunnel
+                title: Strings.Global.Nouns.connection,
+                message: Strings.Views.App.Errors.tunnel
             )
         }
         .presentationDetents([.medium])
@@ -122,10 +122,10 @@ private struct ContainerModifier: ViewModifier {
                 isEmpty: !profileManager.hasProfiles,
                 emptyContent: {
                     VStack(spacing: 16) {
-                        Text(Strings.Views.Profiles.Folders.noProfiles)
+                        Text(Strings.Views.App.Folders.noProfiles)
                             .themeEmptyMessage(fullScreen: false)
 
-                        Button(Strings.Views.Profiles.Folders.NoProfiles.migrate) {
+                        Button(Strings.Views.App.Folders.NoProfiles.migrate) {
                             flow?.onMigrateProfiles()
                         }
                     }

@@ -138,7 +138,7 @@ private extension IPView {
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
         }
-        .themeSection(header: Strings.Global.interface)
+        .themeSection(header: Strings.Global.Nouns.interface)
     }
 }
 

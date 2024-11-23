@@ -64,27 +64,27 @@ public struct PreferencesGroup: View {
 private extension PreferencesGroup {
 #if os(iOS)
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
+        Toggle(Strings.Views.Preferences.locksInBackground, isOn: $locksInBackground)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.LocksInBackground.footer)
     }
 #elseif os(macOS)
     var launchesOnLoginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
+        Toggle(Strings.Views.Preferences.launchesOnLogin, isOn: $settings.launchesOnLogin)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.LaunchesOnLogin.footer)
     }
 
     var keepsInMenuToggle: some View {
-        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $settings.keepsInMenu)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
+        Toggle(Strings.Views.Preferences.keepsInMenu, isOn: $settings.keepsInMenu)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.KeepsInMenu.footer)
     }
 #endif
     var eraseCloudKitButton: some View {
-        Button(Strings.Views.Settings.eraseIcloud, role: .destructive) {
+        Button(Strings.Views.Preferences.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
         }
         .themeConfirmation(
             isPresented: $isConfirmingEraseiCloud,
-            title: Strings.Views.Settings.eraseIcloud,
+            title: Strings.Views.Preferences.eraseIcloud,
             isDestructive: true
         ) {
             isErasingiCloud = true
@@ -100,7 +100,7 @@ private extension PreferencesGroup {
         }
         .themeSectionWithSingleRow(
             header: Strings.Unlocalized.iCloud,
-            footer: Strings.Views.Settings.EraseIcloud.footer,
+            footer: Strings.Views.Preferences.EraseIcloud.footer,
             above: true
         )
         .disabled(isErasingiCloud)
