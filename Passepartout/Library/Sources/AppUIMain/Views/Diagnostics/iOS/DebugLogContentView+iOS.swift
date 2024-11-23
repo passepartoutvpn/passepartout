@@ -1,8 +1,8 @@
 //
-//  CreditsView.swift
+//  DebugLogContentView+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 8/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,27 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import CommonUtils
+#if os(iOS)
+
 import SwiftUI
 
-struct CreditsView: View {
+struct DebugLogContentView: View {
+    let lines: [String]
+
     var body: some View {
-        GenericCreditsView(
-            credits: Self.credits,
-            licensesHeader: Strings.Views.About.Credits.licenses,
-            noticesHeader: Strings.Views.About.Credits.notices,
-            translationsHeader: Strings.Views.About.Credits.translations,
-            errorDescription: {
-                AppError($0)
-                    .localizedDescription
-            }
-        )
-        .navigationTitle(Strings.Views.About.Credits.title)
-        .themeForm()
+        TextEditor(text: .constant(lines.joined(separator: "\n")))
+            .font(.caption)
+            .monospaced()
     }
 }
 
-private extension CreditsView {
-    static let credits = Bundle.module.unsafeDecode(Credits.self, filename: "Credits")
-}
+#endif

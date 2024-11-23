@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
 
@@ -99,7 +100,7 @@ extension AppCoordinator {
 
         case migrateProfiles
 
-        case settings
+        case preferences
 
         var id: Int {
             switch self {
@@ -107,7 +108,7 @@ extension AppCoordinator {
             case .editProfile: return 2
             case .editProviderEntity: return 3
             case .migrateProfiles: return 4
-            case .settings: return 5
+            case .preferences: return 5
             }
         }
 
@@ -190,8 +191,8 @@ extension AppCoordinator {
             profileManager: profileManager,
             layout: $layout,
             isImporting: $isImporting,
-            onSettings: {
-                present(.settings)
+            onPreferences: {
+                present(.preferences)
             },
             onAbout: {
                 present(.about)
@@ -207,7 +208,7 @@ extension AppCoordinator {
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
         case .about:
-            AboutRouterView(
+            AboutCoordinator(
                 profileManager: profileManager,
                 tunnel: tunnel
             )
@@ -240,8 +241,8 @@ extension AppCoordinator {
             )
             .themeNavigationStack(closable: true, path: $migrationPath)
 
-        case .settings:
-            SettingsView(profileManager: profileManager)
+        case .preferences:
+            PreferencesView(profileManager: profileManager)
 
         default:
             EmptyView()

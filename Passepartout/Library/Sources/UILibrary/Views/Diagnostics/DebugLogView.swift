@@ -28,55 +28,21 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-extension DebugLogView {
-    static func withApp(parameters: Constants.Log) -> DebugLogView {
-        DebugLogView {
-            PassepartoutConfiguration.shared.currentLog(parameters: parameters)
-        }
-    }
+public struct DebugLogView<Content>: View where Content: View {
+    private let fetchLines: () async -> [String]
 
-    static func withTunnel(_ tunnel: ExtendedTunnel, parameters: Constants.Log) -> DebugLogView {
-        DebugLogView {
-            await tunnel.currentLog(parameters: parameters)
-        }
-    }
-
-    static func withURL(_ url: URL) -> DebugLogView {
-        DebugLogView {
-            do {
-                return try String(contentsOf: url)
-                    .split(separator: "\n")
-                    .map(String.init)
-            } catch {
-                return []
-            }
-        }
-    }
-}
-
-struct DebugLogView: View {
-    let fetchLines: () async -> [String]
+    private let content: ([String]) -> Content
 
     @State
     private(set) var currentLines: [String] = []
 
-    var body: some View {
-        ZStack {
-            if !currentLines.isEmpty {
-                contentView
-            } else {
-                Text(Strings.Global.noContent)
-                    .themeEmptyMessage()
+    public var body: some View {
+        content(currentLines)
+            .themeEmpty(if: currentLines.isEmpty, message: Strings.Global.noContent)
+            .toolbar(content: toolbarContent)
+            .task {
+                currentLines = await fetchLines()
             }
-        }
-        .toolbar(content: toolbarContent)
-        .task {
-            currentLines = await fetchLines()
-        }
-    }
-
-    var content: String {
-        currentLines.joined(separator: "\n")
     }
 }
 
@@ -92,7 +58,7 @@ private extension DebugLogView {
 
     var copyButton: some View {
         Button {
-            Utils.copyToPasteboard(content)
+            Utils.copyToPasteboard(currentLines.joined(separator: "\n"))
         } label: {
             ThemeImage(.copy)
         }
@@ -103,4 +69,48 @@ private extension DebugLogView {
 //    var shareButton: some View {
 //        ShareLink(item: content)
 //    }
+}
+
+// MARK: - Shortcuts
+
+extension DebugLogView {
+    public init(
+        withAppParameters parameters: Constants.Log,
+        content: @escaping ([String]) -> Content
+    ) {
+        self.init {
+            PassepartoutConfiguration.shared.currentLog(parameters: parameters)
+        } content: {
+            content($0)
+        }
+    }
+
+    public init(
+        withTunnel tunnel: ExtendedTunnel,
+        parameters: Constants.Log,
+        content: @escaping ([String]) -> Content
+    ) {
+        self.init {
+            await tunnel.currentLog(parameters: parameters)
+        } content: {
+            content($0)
+        }
+    }
+
+    public init(
+        withURL url: URL,
+        content: @escaping ([String]) -> Content
+    ) {
+        self.init {
+            do {
+                return try String(contentsOf: url)
+                    .split(separator: "\n")
+                    .map(String.init)
+            } catch {
+                return []
+            }
+        } content: {
+            content($0)
+        }
+    }
 }

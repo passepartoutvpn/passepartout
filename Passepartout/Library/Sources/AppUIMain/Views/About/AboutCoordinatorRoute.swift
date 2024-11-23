@@ -1,8 +1,8 @@
 //
-//  AboutView+macOS.swift
+//  AboutCoordinatorRoute.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,29 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
+import Foundation
 
-import PassepartoutKit
-import SwiftUI
+enum AboutCoordinatorRoute: Hashable {
+    case credits
 
-extension AboutView {
-    var listView: some View {
-        List(selection: $navigationRoute) {
-            Section {
-                linksLink
-                creditsLink
-                if !iapManager.isRestricted {
-                    donateLink
-                }
-                diagnosticsLink
-            }
-        }
-        .safeAreaInset(edge: .bottom) {
-            Text(BundleConfiguration.mainVersionString)
-                .padding(.bottom)
-        }
-        .navigationTitle(Strings.Views.About.title)
-    }
+    case diagnostics
+
+    case donate
+
+    case links
 }
-
-#endif

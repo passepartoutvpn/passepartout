@@ -102,8 +102,8 @@ struct DiagnosticsView: View {
 private extension DiagnosticsView {
     var liveLogSection: some View {
         Group {
-            navLink(Strings.Views.Diagnostics.Rows.app, to: .appDebugLog(title: Strings.Views.Diagnostics.Rows.app))
-            navLink(Strings.Views.Diagnostics.Rows.tunnel, to: .tunnelDebugLog(title: Strings.Views.Diagnostics.Rows.tunnel, url: nil))
+            navLink(Strings.Views.Diagnostics.Rows.app, to: .app(title: Strings.Views.Diagnostics.Rows.app))
+            navLink(Strings.Views.Diagnostics.Rows.tunnel, to: .tunnel(title: Strings.Views.Diagnostics.Rows.tunnel, url: nil))
 
             Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
                 .onChange(of: logsPrivateData) {
@@ -156,13 +156,13 @@ private extension DiagnosticsView {
     func logView(for item: LogEntry) -> some View {
         ThemeRemovableItemRow(isEditing: true) {
             let dateString = dateFormatter.string(from: item.date)
-            navLink(dateString, to: .tunnelDebugLog(title: dateString, url: item.url))
+            navLink(dateString, to: .tunnel(title: dateString, url: item.url))
         } removeAction: {
             removeTunnelLog(at: item.url)
         }
     }
 
-    func navLink(_ title: String, to value: AboutRouterView.NavigationRoute) -> some View {
+    func navLink(_ title: String, to value: DebugLogRoute) -> some View {
         NavigationLink(title, value: value)
     }
 }

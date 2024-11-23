@@ -27,8 +27,11 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct LinksView: View {
-    var body: some View {
+public struct LinksView: View {
+    public init() {
+    }
+
+    public var body: some View {
         Form {
             supportSection
             webSection

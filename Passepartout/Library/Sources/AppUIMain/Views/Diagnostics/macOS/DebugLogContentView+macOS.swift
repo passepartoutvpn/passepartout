@@ -1,8 +1,8 @@
 //
-//  AboutRouterView+iOS.swift
+//  DebugLogContentView+macOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/26/24.
+//  Created by Davide De Rosa on 8/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
+#if os(macOS)
 
-import CommonLibrary
 import SwiftUI
 
-extension AboutRouterView {
+struct DebugLogContentView: View {
+    let lines: [String]
+
     var body: some View {
-        AboutView(
-            profileManager: profileManager,
-            navigationRoute: $navigationRoute
-        )
-        .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-        .themeNavigationDetail()
-        .themeNavigationStack(closable: true, path: $path)
+        List {
+            ForEach(Array(lines.enumerated()), id: \.offset) {
+                Text($0.element)
+                    .monospaced()
+            }
+        }
     }
 }
 
