@@ -137,7 +137,7 @@ private extension InstalledProfileView {
             .selectedProvider
             .map { _, selection in
                 Button {
-                    flow?.onEditProviderEntity(profile!)
+                    flow?.onProviderEntityRequired(profile!)
                 } label: {
                     providerSelectorLabel(with: selection)
                 }
@@ -202,7 +202,7 @@ private struct ToggleButton: View {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             onProviderEntityRequired: {
-                flow?.onEditProviderEntity($0)
+                flow?.onProviderEntityRequired($0)
             },
             onPurchaseRequired: {
                 flow?.onPurchaseRequired($0)

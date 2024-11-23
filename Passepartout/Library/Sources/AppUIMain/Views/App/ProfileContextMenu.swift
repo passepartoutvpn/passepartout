@@ -71,7 +71,7 @@ private extension ProfileContextMenu {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             onProviderEntityRequired: {
-                flow?.onEditProviderEntity($0)
+                flow?.onProviderEntityRequired($0)
             },
             onPurchaseRequired: {
                 flow?.onPurchaseRequired($0)
@@ -90,7 +90,7 @@ private extension ProfileContextMenu {
             .selectedProvider
             .map { _ in
                 Button(Strings.Views.App.ProfileContext.connectTo) {
-                    flow?.onEditProviderEntity(profile!)
+                    flow?.onProviderEntityRequired(profile!)
                 }
             }
     }

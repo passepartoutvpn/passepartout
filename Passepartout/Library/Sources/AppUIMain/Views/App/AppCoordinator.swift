@@ -168,14 +168,14 @@ extension AppCoordinator {
                     }
                     enterDetail(of: profile)
                 },
-                onEditProviderEntity: {
+                onMigrateProfiles: {
+                    modalRoute = .migrateProfiles
+                },
+                onProviderEntityRequired: {
                     guard let pair = $0.selectedProvider else {
                         return
                     }
                     present(.editProviderEntity($0, pair.module, pair.selection))
-                },
-                onMigrateProfiles: {
-                    modalRoute = .migrateProfiles
                 },
                 onPurchaseRequired: { features in
                     setLater(.purchase(features)) {

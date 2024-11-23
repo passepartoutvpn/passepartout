@@ -30,9 +30,9 @@ import PassepartoutKit
 struct ProfileFlow {
     let onEditProfile: (ProfilePreview) -> Void
 
-    let onEditProviderEntity: (Profile) -> Void
-
     let onMigrateProfiles: () -> Void
+
+    let onProviderEntityRequired: (Profile) -> Void
 
     let onPurchaseRequired: (Set<AppFeature>) -> Void
 }
