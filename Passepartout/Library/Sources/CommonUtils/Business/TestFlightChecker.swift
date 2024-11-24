@@ -47,8 +47,8 @@ private extension TestFlightChecker {
     func verifyBetaBuild() -> Bool {
 #if os(macOS) || targetEnvironment(macCatalyst)
         isMacTestFlightBuild
-#elseif os(iOS)
-        isiOSSandboxBuild
+#elseif os(iOS) || os(tvOS)
+        isSandboxBuild
 #else
         false
 #endif
@@ -59,12 +59,17 @@ private extension TestFlightChecker {
     }
 }
 
-// MARK: iOS
+// MARK: iOS/tvOS
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 private extension TestFlightChecker {
-    var isiOSSandboxBuild: Bool {
-        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    var isSandboxBuild: Bool {
+        guard let url = bundle.appStoreReceiptURL else {
+            NSLog("No Bundle.main.appStoreReceiptURL")
+            return false
+        }
+        NSLog("Bundle.main.appStoreReceiptURL = \(url)")
+        return bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
 }
 #endif

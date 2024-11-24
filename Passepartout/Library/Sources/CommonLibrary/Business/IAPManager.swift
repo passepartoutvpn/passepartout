@@ -270,6 +270,9 @@ private extension IAPManager {
             return
         }
         let isBeta = await betaChecker.isBeta()
+        guard userLevel == .undefined else {
+            return
+        }
         userLevel = isBeta ? .beta : .freemium
         pp_log(.App.iap, .info, "App level: \(userLevel)")
     }
