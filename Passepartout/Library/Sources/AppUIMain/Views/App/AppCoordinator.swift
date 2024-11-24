@@ -40,14 +40,14 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     private let registry: Registry
 
-    @StateObject
-    private var profileEditor = ProfileEditor()
+    @State
+    private var isImporting = false
+
+    @State
+    private var paywallReason: PaywallReason?
 
     @State
     private var modalRoute: ModalRoute?
-
-    @State
-    private var isImporting = false
 
     @State
     private var profilePath = NavigationPath()
@@ -55,8 +55,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @State
     private var migrationPath = NavigationPath()
 
-    @State
-    private var paywallReason: PaywallReason?
+    @StateObject
+    private var profileEditor = ProfileEditor()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -79,10 +79,14 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
         .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,
-            size: modalRoute?.size ?? .large,
-            isFixedWidth: modalRoute?.isFixedWidth ?? false,
-            isFixedHeight: modalRoute?.isFixedHeight ?? false,
-            isInteractive: modalRoute?.isInteractive ?? true,
+            options: {
+                var options = ThemeModalOptions()
+                options.size = modalRoute?.size ?? .large
+                options.isFixedWidth = modalRoute?.isFixedWidth ?? false
+                options.isFixedHeight = modalRoute?.isFixedHeight ?? false
+                options.isInteractive = modalRoute?.isInteractive ?? true
+                return options
+            }(),
             content: modalDestination
         )
     }
@@ -177,10 +181,8 @@ extension AppCoordinator {
                     }
                     present(.editProviderEntity($0, pair.module, pair.selection))
                 },
-                onPurchaseRequired: { features in
-                    setLater(.purchase(features)) {
-                        paywallReason = $0
-                    }
+                onPurchaseRequired: {
+                    paywallReason = .init($0, needsConfirmation: true)
                 }
             )
         )

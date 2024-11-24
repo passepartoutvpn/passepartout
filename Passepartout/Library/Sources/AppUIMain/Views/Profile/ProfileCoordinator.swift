@@ -59,12 +59,6 @@ struct ProfileCoordinator: View {
     let onDismiss: () -> Void
 
     @State
-    private var requiresPurchase = false
-
-    @State
-    private var requiredFeatures: Set<AppFeature> = []
-
-    @State
     private var paywallReason: PaywallReason?
 
     @StateObject
@@ -72,11 +66,8 @@ struct ProfileCoordinator: View {
 
     var body: some View {
         contentView
-            .modifier(PaywallModifier(reason: $paywallReason))
-            .modifier(PurchaseAlertModifier(
-                isPresented: $requiresPurchase,
-                paywallReason: $paywallReason,
-                requiredFeatures: requiredFeatures,
+            .modifier(PaywallModifier(
+                reason: $paywallReason,
                 okTitle: Strings.Views.Profile.Alerts.Purchase.Buttons.ok,
                 okAction: onDismiss
             ))
@@ -144,8 +135,7 @@ private extension ProfileCoordinator {
         do {
             try iapManager.verify(savedProfile)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
-            self.requiredFeatures = requiredFeatures
-            requiresPurchase = true
+            paywallReason = .init(requiredFeatures, needsConfirmation: true)
             return
         }
         onDismiss()
@@ -156,7 +146,7 @@ private extension ProfileCoordinator {
         do {
             try iapManager.verify(profileEditor.activeModules)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
-            paywallReason = .purchase(requiredFeatures)
+            paywallReason = .init(requiredFeatures)
             return
         }
         try await profileEditor.save(to: profileManager)

@@ -28,40 +28,104 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct PurchaseRequiredButton: View {
-
-    @EnvironmentObject
-    private var theme: Theme
+public struct PurchaseRequiredButton<Content>: View where Content: View {
 
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    private let features: Set<AppFeature>?
+    let features: Set<AppFeature>?
+
+    let suggestedProduct: AppProduct?
 
     @Binding
-    private var paywallReason: PaywallReason?
+    var paywallReason: PaywallReason?
 
-    public init(for requiring: AppFeatureRequiring?, paywallReason: Binding<PaywallReason?>) {
-        features = requiring?.features
-        _paywallReason = paywallReason
-    }
-
-    public init(features: Set<AppFeature>?, paywallReason: Binding<PaywallReason?>) {
-        self.features = features
-        _paywallReason = paywallReason
-    }
+    @ViewBuilder
+    let content: (_ isRestricted: Bool, _ action: @escaping () -> Void) -> Content
 
     public var body: some View {
-        Button {
-            guard let features, !isEligible else {
-                return
-            }
-            setLater(.purchase(features)) {
-                paywallReason = $0
-            }
-        } label: {
-            ThemeImage(iapManager.isRestricted ? .warning : .upgrade)
-                .help(helpMessage)
+        content(iapManager.isRestricted, onTap)
+            .opaque(!isEligible)
+    }
+}
+
+private extension PurchaseRequiredButton {
+    func onTap() {
+        guard let features, !isEligible else {
+            return
+        }
+        setLater(.init(features, suggestedProduct: suggestedProduct)) {
+            paywallReason = $0
+        }
+    }
+
+    var isEligible: Bool {
+        if let features {
+            return iapManager.isEligible(for: features)
+        }
+        return true
+    }
+}
+
+// MARK: - Initializers
+
+extension PurchaseRequiredButton where Content == Button<Text> {
+    public init(
+        _ title: String,
+        features: Set<AppFeature>?,
+        suggestedProduct: AppProduct? = nil,
+        paywallReason: Binding<PaywallReason?>
+    ) {
+        self.features = features
+        self.suggestedProduct = suggestedProduct
+        _paywallReason = paywallReason
+        content = { _, action in
+            Button(title, action: action)
+        }
+    }
+}
+
+extension PurchaseRequiredButton where Content == PurchaseRequiredImageButtonContent {
+    public init(
+        for requiring: AppFeatureRequiring?,
+        suggestedProduct: AppProduct? = nil,
+        paywallReason: Binding<PaywallReason?>
+    ) {
+        self.init(
+            features: requiring?.features,
+            suggestedProduct: suggestedProduct,
+            paywallReason: paywallReason
+        )
+    }
+
+    public init(
+        features: Set<AppFeature>?,
+        suggestedProduct: AppProduct? = nil,
+        paywallReason: Binding<PaywallReason?>
+    ) {
+        self.features = features
+        self.suggestedProduct = suggestedProduct
+        _paywallReason = paywallReason
+        content = {
+            PurchaseRequiredImageButtonContent(isRestricted: $0, action: $1)
+        }
+    }
+}
+
+public struct PurchaseRequiredImageButtonContent: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    let isRestricted: Bool
+
+    let action: () -> Void
+
+    public var body: some View {
+        Button(action: action) {
+            ThemeImage(isRestricted ? .warning : .upgrade)
+                .foregroundStyle(theme.upgradeColor)
+                .help(isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help)
         }
 #if os(iOS)
         .buttonStyle(.plain)
@@ -69,20 +133,5 @@ public struct PurchaseRequiredButton: View {
         .imageScale(.large)
         .buttonStyle(.borderless)
 #endif
-        .foregroundStyle(theme.upgradeColor)
-        .opaque(!isEligible)
-    }
-}
-
-private extension PurchaseRequiredButton {
-    var isEligible: Bool {
-        if let features {
-            return iapManager.isEligible(for: features)
-        }
-        return true
-    }
-
-    var helpMessage: String {
-        iapManager.isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help
     }
 }

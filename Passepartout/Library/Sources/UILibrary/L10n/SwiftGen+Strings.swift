@@ -705,6 +705,12 @@ public enum Strings {
     }
     public enum Paywall {
       public enum Alerts {
+        public enum Confirmation {
+          /// This profile requires paid features to work.
+          public static let message = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message", fallback: "This profile requires paid features to work.")
+          /// Purchase required
+          public static let title = Strings.tr("Localizable", "views.paywall.alerts.confirmation.title", fallback: "Purchase required")
+        }
         public enum Pending {
           /// The purchase is pending external confirmation. The feature will be credited upon approval.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
@@ -829,12 +835,6 @@ public enum Strings {
       public enum ConnectionStatus {
         ///  (on-demand)
         public static let onDemandSuffix = Strings.tr("Localizable", "views.ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
-      }
-      public enum PurchaseAlert {
-        /// This profile requires paid features to work.
-        public static let message = Strings.tr("Localizable", "views.ui.purchase_alert.message", fallback: "This profile requires paid features to work.")
-        /// Purchase required
-        public static let title = Strings.tr("Localizable", "views.ui.purchase_alert.title", fallback: "Purchase required")
       }
       public enum PurchaseRequired {
         public enum Purchase {

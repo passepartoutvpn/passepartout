@@ -63,6 +63,8 @@
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
 "views.paywall.rows.restore_purchases" = "Restore purchases";
+"views.paywall.alerts.confirmation.title" = "Purchase required";
+"views.paywall.alerts.confirmation.message" = "This profile requires paid features to work.";
 "views.paywall.alerts.restricted.title" = "Restricted";
 "views.paywall.alerts.restricted.message" = "Some features are unavailable in this build.";
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
@@ -93,8 +95,6 @@
 "views.providers.vpn.no_servers" = "No servers";
 
 "views.ui.connection_status.on_demand_suffix" = " (on-demand)";
-"views.ui.purchase_alert.title" = "Purchase required";
-"views.ui.purchase_alert.message" = "This profile requires paid features to work.";
 "views.ui.purchase_required.purchase.help" = "Purchase required";
 "views.ui.purchase_required.restricted.help" = "Feature is restricted";
 

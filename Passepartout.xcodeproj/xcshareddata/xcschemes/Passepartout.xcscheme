@@ -103,7 +103,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "PP_USER_LEVEL"
-            value = "2"
+            value = "1"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable

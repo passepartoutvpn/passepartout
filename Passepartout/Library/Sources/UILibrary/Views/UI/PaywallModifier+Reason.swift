@@ -1,5 +1,5 @@
 //
-//  PaywallReason.swift
+//  PaywallModifier+Reason.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/14/24.
@@ -23,8 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonIAP
 import Foundation
 
-public enum PaywallReason: Hashable {
-    case purchase(Set<AppFeature>, AppProduct? = nil)
+public typealias PaywallReason = PaywallModifier.Reason
+
+extension PaywallModifier {
+    public struct Reason: Hashable {
+        public let requiredFeatures: Set<AppFeature>
+
+        public let suggestedProduct: AppProduct?
+
+        public let needsConfirmation: Bool
+
+        public init(
+            _ requiredFeatures: Set<AppFeature>,
+            suggestedProduct: AppProduct? = nil,
+            needsConfirmation: Bool = false
+        ) {
+            self.requiredFeatures = requiredFeatures
+            self.suggestedProduct = suggestedProduct
+            self.needsConfirmation = needsConfirmation
+        }
+    }
 }

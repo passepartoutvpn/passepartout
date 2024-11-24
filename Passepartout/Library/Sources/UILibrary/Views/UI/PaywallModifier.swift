@@ -34,90 +34,85 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    @State
-    private var isPresentingRestricted = false
+    private let okTitle: String?
+
+    private let okAction: (() -> Void)?
 
     @State
-    private var paywallArguments: PaywallArguments?
+    private var isConfirming = false
 
-    public init(reason: Binding<PaywallReason?>) {
+    @State
+    private var isRestricted = false
+
+    @State
+    private var isPurchasing = false
+
+    public init(
+        reason: Binding<PaywallReason?>,
+        okTitle: String? = nil,
+        okAction: (() -> Void)? = nil
+    ) {
         _reason = reason
+        self.okTitle = okTitle
+        self.okAction = okAction
     }
 
     public func body(content: Content) -> some View {
         content
             .alert(
-                Strings.Views.Paywall.Alerts.Restricted.title,
-                isPresented: $isPresentingRestricted,
-                actions: {
-                    Button(Strings.Global.Nouns.ok) {
-                        reason = nil
-                        isPresentingRestricted = false
-                    }
-                },
-                message: {
-                    Text(restrictedMessage)
-                }
+                Strings.Views.Paywall.Alerts.Confirmation.title,
+                isPresented: $isConfirming,
+                actions: confirmationActions,
+                message: confirmationMessage
             )
-            .themeModal(item: $paywallArguments) { args in
-                NavigationStack {
-                    PaywallView(
-                        isPresented: isPresentingPurchase,
-                        features: iapManager.excludingEligible(from: args.features),
-                        suggestedProduct: args.product
-                    )
+            .alert(
+                Strings.Views.Paywall.Alerts.Restricted.title,
+                isPresented: $isRestricted,
+                actions: restrictedActions,
+                message: restrictedMessage
+            )
+            .themeModal(isPresented: $isPurchasing, content: modalDestination)
+            .onChange(of: isRestricted) {
+                if !$0 {
+                    reason = nil
                 }
-                .frame(idealHeight: 500)
+            }
+            .onChange(of: isPurchasing) {
+                if !$0 {
+                    reason = nil
+                }
             }
             .onChange(of: reason) {
-                switch $0 {
-                case .purchase(let features, let product):
-                    guard !iapManager.isRestricted else {
-                        isPresentingRestricted = true
-                        return
+                guard let reason = $0 else {
+                    return
+                }
+                if !iapManager.isRestricted {
+                    if reason.needsConfirmation {
+                        isConfirming = true
+                    } else {
+                        isPurchasing = true
                     }
-                    paywallArguments = PaywallArguments(features: features, product: product)
-
-                default:
-                    break
+                } else {
+                    isRestricted = true
                 }
             }
     }
 }
 
 private extension PaywallModifier {
-    var isPresentingPurchase: Binding<Bool> {
-        Binding {
-            paywallArguments != nil
-        } set: {
-            if !$0 {
-                // make sure to reset this to allow paywall to appear again
-                reason = nil
-                paywallArguments = nil
-            }
+    var ineligibleFeatures: [String] {
+        guard let reason else {
+            return []
         }
-    }
-
-    var restrictedMessage: String {
-        guard case .purchase(let features, _) = reason else {
-            return ""
-        }
-        let msg = Strings.Views.Paywall.Alerts.Restricted.message
-        return msg + "\n\n" + iapManager
-            .excludingEligible(from: features)
+        return iapManager
+            .excludingEligible(from: reason.requiredFeatures)
             .map(\.localizedDescription)
             .sorted()
-            .joined(separator: "\n")
     }
-}
 
-private struct PaywallArguments: Identifiable {
-    let features: Set<AppFeature>
-
-    let product: AppProduct?
-
-    var id: [String] {
-        features.map(\.id)
+    func alertMessage(startingWith header: String, features: [String]) -> String {
+        header + "\n\n" + features
+            .joined(separator: "\n")
     }
 }
 
@@ -125,6 +120,75 @@ private extension IAPManager {
     func excludingEligible(from features: Set<AppFeature>) -> Set<AppFeature> {
         features.filter {
             !isEligible(for: $0)
+        }
+    }
+}
+
+// MARK: - Confirmation alert
+
+private extension PaywallModifier {
+
+    @ViewBuilder
+    func confirmationActions() -> some View {
+        Button(Strings.Global.Actions.purchase) {
+            // IMPORTANT: retain reason because it serves paywall content
+            isPurchasing = true
+        }
+        if let okTitle {
+            Button(okTitle) {
+                reason = nil
+                okAction?()
+            }
+        }
+        Button(Strings.Global.Actions.cancel, role: .cancel) {
+            reason = nil
+        }
+    }
+
+    func confirmationMessage() -> some View {
+        Text(confirmationMessageString)
+    }
+
+    var confirmationMessageString: String {
+        alertMessage(
+            startingWith: Strings.Views.Paywall.Alerts.Confirmation.message,
+            features: ineligibleFeatures
+        )
+    }
+}
+
+// MARK: - Restricted alert
+
+private extension PaywallModifier {
+    func restrictedActions() -> some View {
+        Button(Strings.Global.Nouns.ok) {
+            //
+        }
+    }
+
+    func restrictedMessage() -> some View {
+        Text(restrictedMessageString)
+    }
+
+    var restrictedMessageString: String {
+        alertMessage(
+            startingWith: Strings.Views.Paywall.Alerts.Restricted.message,
+            features: ineligibleFeatures
+        )
+    }
+}
+
+// MARK: - Paywall
+
+private extension PaywallModifier {
+    func modalDestination() -> some View {
+        reason.map {
+            PaywallView(
+                isPresented: $isPurchasing,
+                features: iapManager.excludingEligible(from: $0.requiredFeatures),
+                suggestedProduct: $0.suggestedProduct
+            )
+            .themeNavigationStack()
         }
     }
 }
