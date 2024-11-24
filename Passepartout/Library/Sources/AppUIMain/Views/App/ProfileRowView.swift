@@ -135,7 +135,7 @@ private extension ProfileRowView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             onProviderEntityRequired: {
-                flow?.onEditProviderEntity($0)
+                flow?.onProviderEntityRequired($0)
             },
             onPurchaseRequired: {
                 flow?.onPurchaseRequired($0)

@@ -29,7 +29,7 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-struct ProfileView: View, TunnelInstallationProviding {
+struct ProfileView: View, Routable, TunnelInstallationProviding {
     enum Field: Hashable {
         case connect
 
@@ -47,6 +47,11 @@ struct ProfileView: View, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
+    @ObservedObject
+    var errorHandler: ErrorHandler
+
+    var flow: AppFlow?
+
     @State
     var showsSidePanel = false
 
@@ -55,9 +60,6 @@ struct ProfileView: View, TunnelInstallationProviding {
 
     @StateObject
     private var interactiveManager = InteractiveManager()
-
-    @StateObject
-    private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         GeometryReader { geo in
@@ -80,7 +82,6 @@ struct ProfileView: View, TunnelInstallationProviding {
         .ignoresSafeArea(edges: .horizontal)
         .background(theme.primaryColor.opacity(0.6).gradient)
         .themeAnimation(on: showsSidePanel, category: .profiles)
-        .withErrorHandler(errorHandler)
         .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.status, onTunnelStatus)
         .onChange(of: tunnel.currentProfile, onTunnelCurrentProfile)
@@ -104,7 +105,8 @@ private extension ProfileView {
             isSwitching: $showsSidePanel,
             focusedField: $focusedField,
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
+            errorHandler: errorHandler,
+            flow: flow
         )
     }
 
@@ -126,7 +128,7 @@ private extension ProfileView {
         InteractiveCoordinator(style: .inline(withCancel: false), manager: interactiveManager) {
             errorHandler.handle(
                 $0,
-                title: Strings.Global.Nouns.connection,
+                title: interactiveManager.editor.profile.name,
                 message: Strings.Views.App.Errors.tunnel
             )
         }
@@ -144,7 +146,8 @@ private extension ProfileView {
             tunnel: tunnel,
             focusedField: $focusedField,
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
+            errorHandler: errorHandler,
+            flow: flow
         )
     }
 }
@@ -189,6 +192,7 @@ private extension ProfileView {
     ProfileView(
         profileManager: .mock,
         tunnel: .mock,
+        errorHandler: .default(),
         showsSidePanel: true
     )
     .withMockEnvironment()
@@ -198,6 +202,7 @@ private extension ProfileView {
     ProfileView(
         profileManager: ProfileManager(profiles: []),
         tunnel: .mock,
+        errorHandler: .default(),
         showsSidePanel: true
     )
     .withMockEnvironment()

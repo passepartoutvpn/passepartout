@@ -24,8 +24,10 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
     private let profileManager: ProfileManager
@@ -33,6 +35,18 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     private let tunnel: ExtendedTunnel
 
     private let registry: Registry
+
+    @State
+    private var requiresPurchase = false
+
+    @State
+    private var requiredFeatures: Set<AppFeature> = []
+
+    @State
+    private var paywallReason: PaywallReason?
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
 
     public init(profileManager: ProfileManager, tunnel: ExtendedTunnel, registry: Registry) {
         self.profileManager = profileManager
@@ -60,13 +74,28 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
+            .withErrorHandler(errorHandler)
+            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(PurchaseAlertModifier(
+                isPresented: $requiresPurchase,
+                paywallReason: $paywallReason,
+                requiredFeatures: requiredFeatures
+            ))
         }
     }
 }
 
 private extension AppCoordinator {
     var profileView: some View {
-        ProfileView(profileManager: profileManager, tunnel: tunnel)
+        ProfileView(
+            profileManager: profileManager,
+            tunnel: tunnel,
+            errorHandler: errorHandler,
+            flow: .init(
+                onProviderEntityRequired: onProviderEntityRequired,
+                onPurchaseRequired: onPurchaseRequired
+            )
+        )
     }
 
 //    var searchView: some View {
@@ -106,6 +135,20 @@ private extension AppCoordinator {
         default:
             EmptyView()
         }
+    }
+}
+
+private extension AppCoordinator {
+    func onProviderEntityRequired(_ profile: Profile) {
+        errorHandler.handle(
+            title: profile.name,
+            message: Strings.Alerts.Providers.MissingServer.message
+        )
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        requiredFeatures = features
+        requiresPurchase = true
     }
 }
 

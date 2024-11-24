@@ -1,8 +1,8 @@
 //
-//  ProfileFlow.swift
+//  AppFlow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,11 +27,7 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-struct ProfileFlow {
-    let onEditProfile: (ProfilePreview) -> Void
-
-    let onMigrateProfiles: () -> Void
-
+struct AppFlow {
     let onProviderEntityRequired: (Profile) -> Void
 
     let onPurchaseRequired: (Set<AppFeature>) -> Void

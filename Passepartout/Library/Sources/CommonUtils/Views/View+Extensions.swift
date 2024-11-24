@@ -32,6 +32,10 @@ extension View {
         }
     }
 
+    public func setLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
+        globalSetLater(value, millis: millis, block: block)
+    }
+
     @ViewBuilder
     public func `if`(_ condition: Bool) -> some View {
         if condition {
@@ -63,14 +67,6 @@ extension View {
                 )
         }
     }
-
-    public func setLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
-        Task {
-            block(nil)
-            try await Task.sleep(for: .milliseconds(millis))
-            block(value)
-        }
-    }
 }
 
 extension ViewModifier {
@@ -78,6 +74,18 @@ extension ViewModifier {
         if condition {
             Self._printChanges()
         }
+    }
+
+    public func setLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
+        globalSetLater(value, millis: millis, block: block)
+    }
+}
+
+private func globalSetLater<T>(_ value: T?, millis: Int = 50, block: @escaping (T?) -> Void) {
+    Task {
+        block(nil)
+        try await Task.sleep(for: .milliseconds(millis))
+        block(value)
     }
 }
 
