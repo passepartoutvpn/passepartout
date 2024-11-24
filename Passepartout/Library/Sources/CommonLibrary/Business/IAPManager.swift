@@ -261,6 +261,9 @@ extension IAPManager {
 
 private extension IAPManager {
     func fetchLevelIfNeeded() async {
+        guard userLevel == .undefined else {
+            return
+        }
         if let customUserLevel {
             userLevel = customUserLevel
             pp_log(.App.iap, .info, "App level (custom): \(userLevel)")
