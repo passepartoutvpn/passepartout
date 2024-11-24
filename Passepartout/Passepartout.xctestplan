@@ -13,6 +13,7 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Passepartout\/Library",
         "identifier" : "AppUIMainTests",
@@ -20,6 +21,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Passepartout\/Library",
         "identifier" : "UILibraryTests",
@@ -27,6 +29,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Passepartout\/Library",
         "identifier" : "CommonLibraryTests",
@@ -34,6 +37,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Passepartout\/Library",
         "identifier" : "LegacyV2Tests",
@@ -41,6 +45,7 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Passepartout.xcodeproj",
         "identifier" : "0E3FF4AD2CE3AF6F00BFF640",
