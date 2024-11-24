@@ -261,15 +261,15 @@ extension IAPManager {
 
 private extension IAPManager {
     func fetchLevelIfNeeded() async {
-        guard userLevel == .undefined else {
-            return
-        }
         if let customUserLevel {
             userLevel = customUserLevel
             pp_log(.App.iap, .info, "App level (custom): \(userLevel)")
             return
         }
         let isBeta = await betaChecker.isBeta()
+        guard userLevel == .undefined else {
+            return
+        }
         userLevel = isBeta ? .beta : .freemium
         pp_log(.App.iap, .info, "App level: \(userLevel)")
     }
