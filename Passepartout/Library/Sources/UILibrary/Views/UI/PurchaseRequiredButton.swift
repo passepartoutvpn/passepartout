@@ -127,11 +127,9 @@ public struct PurchaseRequiredImageButtonContent: View {
                 .foregroundStyle(theme.upgradeColor)
                 .help(isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help)
         }
-#if os(iOS)
         .buttonStyle(.plain)
-#else
+#if os(macOS)
         .imageScale(.large)
-        .buttonStyle(.borderless)
 #endif
     }
 }
