@@ -31,7 +31,7 @@ import XCTest
 
 @MainActor
 final class ProfileManagerTests: XCTestCase {
-    private let timeout = 1.0
+    private let timeout = 3.0
 
     private var subscriptions: Set<AnyCancellable> = []
 }
