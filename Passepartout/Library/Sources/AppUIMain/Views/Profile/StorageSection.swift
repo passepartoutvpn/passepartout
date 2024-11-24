@@ -74,25 +74,20 @@ private extension StorageSection {
     }
 
     var purchaseSharingButton: some View {
-        EmptyView()
-            .modifier(PurchaseButtonModifier(
-                Strings.Modules.General.Rows.Shared.purchase,
-                feature: .sharing,
-                suggesting: nil,
-                showsIfRestricted: false,
-                paywallReason: $paywallReason
-            ))
+        PurchaseRequiredButton(
+            Strings.Modules.General.Rows.Shared.purchase,
+            features: [.sharing],
+            paywallReason: $paywallReason
+        )
     }
 
     var purchaseTVButton: some View {
-        EmptyView()
-            .modifier(PurchaseButtonModifier(
-                Strings.Modules.General.Rows.Appletv.purchase,
-                feature: .appleTV,
-                suggesting: .Features.appleTV,
-                showsIfRestricted: false,
-                paywallReason: $paywallReason
-            ))
+        PurchaseRequiredButton(
+            Strings.Modules.General.Rows.Appletv.purchase,
+            features: [.appleTV],
+            suggestedProduct: .Features.appleTV,
+            paywallReason: $paywallReason
+        )
     }
 
     var header: String {

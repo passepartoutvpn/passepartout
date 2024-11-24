@@ -37,12 +37,6 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     private let registry: Registry
 
     @State
-    private var requiresPurchase = false
-
-    @State
-    private var requiredFeatures: Set<AppFeature> = []
-
-    @State
     private var paywallReason: PaywallReason?
 
     @StateObject
@@ -74,13 +68,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
-            .withErrorHandler(errorHandler)
             .modifier(PaywallModifier(reason: $paywallReason))
-            .modifier(PurchaseAlertModifier(
-                isPresented: $requiresPurchase,
-                paywallReason: $paywallReason,
-                requiredFeatures: requiredFeatures
-            ))
+            .withErrorHandler(errorHandler)
         }
     }
 }
@@ -147,8 +136,7 @@ private extension AppCoordinator {
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        requiredFeatures = features
-        requiresPurchase = true
+        paywallReason = .init(features, needsConfirmation: true)
     }
 }
 
