@@ -1,3 +1,8 @@
-* Do not discard migrated profiles in TestFlight (#886)
-* Add the option to migrate old profiles (#879)
-* Sort provider servers on iOS
+* Handle TV requirements on connection (#922)
+* Add TV settings tab (#921)
+* Improve profiles layout on small devices (#917)
+* Replace active modules count with a description (#915)
+* Drop "Name" field from modules (#909)
+* Polish TV profile view (#908)
+* Do not disconnect active profile on remote import (#907)
+* Fix shared profile not updated on provider server selection (#906)
