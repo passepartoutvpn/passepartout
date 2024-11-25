@@ -11,6 +11,16 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum Alerts {
+    public enum Community {
+      /// No, thanks
+      public static let dismiss = Strings.tr("Localizable", "alerts.community.dismiss", fallback: "No, thanks")
+      /// Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.
+      /// 
+      /// It's also a great way to show you care about this project.
+      public static let message = Strings.tr("Localizable", "alerts.community.message", fallback: "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.")
+      /// Subscribe now
+      public static let subscribe = Strings.tr("Localizable", "alerts.community.subscribe", fallback: "Subscribe now")
+    }
     public enum Import {
       public enum Passphrase {
         /// Enter passphrase for '%@'.

@@ -130,6 +130,8 @@ extension Strings {
 
         public static let proxy = "Proxy"
 
+        public static let reddit = "Reddit"
+
         public static let tls = "TLS"
 
         public static let url = "URL"

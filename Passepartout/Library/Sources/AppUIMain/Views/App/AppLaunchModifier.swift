@@ -40,6 +40,22 @@ struct AppLaunchModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .alert(
+                Strings.Unlocalized.reddit,
+                isPresented: $isPresentingCommunity,
+                actions: {
+                    Link(Strings.Alerts.Community.subscribe, destination: Constants.shared.websites.subreddit)
+                        .environment(\.openURL, OpenURLAction { _ in
+                            advance()
+                            return .systemAction
+                        })
+
+                    Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
+                },
+                message: {
+                    Text(Strings.Alerts.Community.message)
+                }
+            )
             .onLoad(perform: advance)
             .onChange(of: modalRoute) {
                 if $0 == nil {
@@ -58,6 +74,8 @@ private extension AppLaunchModifier {
         switch appStep {
         case .migrateV3:
             modalRoute = .migrateProfiles
+        case .community:
+            isPresentingCommunity = true
         default:
             break
         }
