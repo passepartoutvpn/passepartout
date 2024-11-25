@@ -77,6 +77,9 @@ extension AboutCoordinator {
 
         case .links:
             return Strings.Views.About.Links.title
+
+        case .purchased:
+            return Strings.Views.Purchased.title
         }
     }
 
@@ -98,6 +101,10 @@ extension AboutCoordinator {
         case .links:
             LinksView()
                 .navigationTitle(title(for: .links))
+
+        case .purchased:
+            PurchasedView()
+                .navigationTitle(title(for: .purchased))
 
         default:
             Text(Strings.Global.Nouns.noSelection)

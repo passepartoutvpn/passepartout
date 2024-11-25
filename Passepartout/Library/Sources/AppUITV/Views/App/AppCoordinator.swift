@@ -116,6 +116,9 @@ private extension AppCoordinator {
         case .donate:
             DonateView(modifier: DonateViewModifier())
 
+        case .purchased:
+            PurchasedView()
+
         case .tunnelLog:
             DebugLogView(withTunnel: tunnel, parameters: Constants.shared.log) {
                 DebugLogContentView(lines: $0)

@@ -32,5 +32,7 @@ enum AppCoordinatorRoute: Hashable {
 
     case donate
 
+    case purchased
+
     case tunnelLog
 }

@@ -33,4 +33,6 @@ enum AboutCoordinatorRoute: Hashable {
     case donate
 
     case links
+
+    case purchased
 }

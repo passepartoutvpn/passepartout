@@ -73,6 +73,7 @@ private extension AboutContentView {
             }
             .themeSection(header: Strings.Views.About.Sections.resources)
             Section {
+                linkContent(.purchased)
                 linkContent(.diagnostics)
                 Text(Strings.Global.Nouns.version)
                     .themeTrailingValue(BundleConfiguration.mainVersionString)
