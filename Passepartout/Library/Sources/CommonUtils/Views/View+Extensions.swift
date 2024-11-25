@@ -26,7 +26,7 @@
 import SwiftUI
 
 extension View {
-    public func debugChanges(condition: Bool = true) {
+    public func debugChanges(condition: Bool = false) {
         if condition {
             Self._printChanges()
         }
