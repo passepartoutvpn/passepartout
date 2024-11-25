@@ -1,5 +1,5 @@
 //
-//  AppStepTests.swift
+//  OnboardingStepTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/25/24.
@@ -27,19 +27,19 @@ import CommonLibrary
 import Foundation
 import XCTest
 
-final class AppStepTests: XCTestCase {
+final class OnboardingStepTests: XCTestCase {
     func test_givenNil_whenAdvance_thenAdvancesToFirst() {
-        let sut: AppStep? = nil
+        let sut: OnboardingStep? = nil
         XCTAssertEqual(sut.nextStep, .migrateV3)
     }
 
     func test_givenMid_whenAdvance_thenAdvancesToNext() {
-        let sut: AppStep? = .migrateV3
+        let sut: OnboardingStep? = .migrateV3
         XCTAssertEqual(sut.nextStep, .community)
     }
 
     func test_givenLast_whenAdvance_thenDoesNotAdvance() {
-        let sut: AppStep? = .doneV3
+        let sut: OnboardingStep? = .doneV3
         XCTAssertEqual(sut.nextStep, .doneV3)
     }
 }
