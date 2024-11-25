@@ -1,3 +1,9 @@
+---
+name: Test platforms
+about: Manual tests.
+labels: "testing"
+---
+
 - [ ] iOS 16 (simulator)
 - [ ] iOS 17 (device)
 - [ ] iOS 18 (simulator)

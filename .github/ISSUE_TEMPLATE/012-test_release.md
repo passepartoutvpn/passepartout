@@ -1,3 +1,9 @@
+---
+name: Test release
+about: Manual tests.
+labels: "testing"
+---
+
 Test with promo code after approval.
 
 - Build number

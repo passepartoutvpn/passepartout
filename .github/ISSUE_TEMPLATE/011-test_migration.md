@@ -1,3 +1,9 @@
+---
+name: Test migration
+about: Manual tests.
+labels: "testing"
+---
+
 - Migration process from v2
   - Install v2
   - Create host/provider profiles

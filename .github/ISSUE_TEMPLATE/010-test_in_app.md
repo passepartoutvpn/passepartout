@@ -1,3 +1,9 @@
+---
+name: Test in-app purchases
+about: Manual tests.
+labels: "testing"
+---
+
 - TestFlight user level
   - [ ] Clean install from TestFlight
   - [ ] User level is .beta
