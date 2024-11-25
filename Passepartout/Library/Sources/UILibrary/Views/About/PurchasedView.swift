@@ -58,10 +58,9 @@ private extension PurchasedView {
         iapManager.purchasedAppBuild == nil && iapManager.purchasedProducts.isEmpty && iapManager.eligibleFeatures.isEmpty
     }
 
-    var features: [String] {
+    var features: [AppFeature] {
         iapManager
             .eligibleFeatures
-            .map(\.localizedDescription)
             .sorted()
     }
 }
@@ -98,7 +97,7 @@ private extension PurchasedView {
     var featuresSection: some View {
         Group {
             ForEach(features, id: \.self) {
-                Text($0)
+                Text($0.localizedDescription)
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
