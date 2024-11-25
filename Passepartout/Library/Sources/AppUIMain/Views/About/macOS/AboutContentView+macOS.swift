@@ -81,6 +81,7 @@ private extension AboutContentView {
                 if !isRestricted {
                     linkContent(.donate)
                 }
+                linkContent(.purchased)
                 linkContent(.diagnostics)
             }
         }

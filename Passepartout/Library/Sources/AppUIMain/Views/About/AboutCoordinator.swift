@@ -77,6 +77,9 @@ extension AboutCoordinator {
 
         case .links:
             return Strings.Views.About.Links.title
+
+        case .purchased:
+            return Strings.Views.Purchased.title
         }
     }
 
@@ -85,19 +88,23 @@ extension AboutCoordinator {
         switch item {
         case .credits:
             CreditsView()
-                .navigationTitle(Strings.Views.About.Credits.title)
+                .navigationTitle(title(for: .credits))
 
         case .diagnostics:
             DiagnosticsView(profileManager: profileManager, tunnel: tunnel)
-                .navigationTitle(Strings.Views.Diagnostics.title)
+                .navigationTitle(title(for: .diagnostics))
 
         case .donate:
             DonateView(modifier: DonateViewModifier())
-                .navigationTitle(Strings.Views.Donate.title)
+                .navigationTitle(title(for: .donate))
 
         case .links:
             LinksView()
-                .navigationTitle(Strings.Views.About.Links.title)
+                .navigationTitle(title(for: .links))
+
+        case .purchased:
+            PurchasedView()
+                .navigationTitle(title(for: .purchased))
 
         default:
             Text(Strings.Global.Nouns.noSelection)

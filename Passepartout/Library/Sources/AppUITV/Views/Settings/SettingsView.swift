@@ -67,6 +67,7 @@ private extension SettingsView {
 
     var aboutSection: some View {
         Group {
+            NavigationLink(Strings.Views.Purchased.title, value: AppCoordinatorRoute.purchased)
             Text(Strings.Global.Nouns.version)
                 .themeTrailingValue(BundleConfiguration.mainVersionString)
         }

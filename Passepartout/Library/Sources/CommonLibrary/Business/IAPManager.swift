@@ -44,7 +44,7 @@ public final class IAPManager: ObservableObject {
 
     private(set) var userLevel: AppUserLevel
 
-    private var purchasedAppBuild: Int?
+    public private(set) var purchasedAppBuild: Int?
 
     public private(set) var purchasedProducts: Set<AppProduct>
 
