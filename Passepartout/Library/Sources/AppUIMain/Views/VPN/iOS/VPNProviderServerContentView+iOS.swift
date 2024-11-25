@@ -160,7 +160,9 @@ private extension VPNProviderServerView.ContentView {
             list.append($0)
             map[code] = list
         }
-        serversByCountryCode = map
+        withAnimation {
+            serversByCountryCode = map
+        }
     }
 }
 
