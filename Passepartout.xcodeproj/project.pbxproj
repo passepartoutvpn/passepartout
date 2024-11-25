@@ -38,6 +38,8 @@
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
 		0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */; };
 		0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */; };
+		0EF9E1002CF4811000F4A7DA /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */; };
+		0EF9E1032CF487DF00F4A7DA /* UILibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF9E1022CF487DF00F4A7DA /* UILibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +145,7 @@
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
 		0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = PassepartoutIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
+		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF9E1032CF487DF00F4A7DA /* UILibrary in Frameworks */,
 				0EE254912CE67946007A96F2 /* LegacyV2 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +230,7 @@
 			children = (
 				0E3FF4B82CE3AFBC00BFF640 /* Resources */,
 				0E3FF4B92CE3AFBC00BFF640 /* MigrationManagerTests.swift */,
+				0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF9E1002CF4811000F4A7DA /* LocalizationTests.swift in Sources */,
 				0E3FF4BB2CE3AFBC00BFF640 /* MigrationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1158,6 +1164,10 @@
 		0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LegacyV2;
+		};
+		0EF9E1022CF487DF00F4A7DA /* UILibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UILibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
