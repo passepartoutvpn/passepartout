@@ -88,7 +88,7 @@ private extension VPNFiltersView {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Views.Providers.Vpn.preset, selection: $model.filters.presetId) {
+        Picker(Strings.Views.Vpn.preset, selection: $model.filters.presetId) {
             Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.presets, id: \.presetId) {
