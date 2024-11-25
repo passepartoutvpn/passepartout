@@ -113,12 +113,16 @@ extension VPNProviderServerView {
         let onSelect: (VPNServer) -> Void
 
         @State
+        private var serversByCountryCode: [String: [VPNServer]] = [:]
+
+        @State
         private var expandedCodes: Set<String> = []
 
         var body: some View {
             debugChanges()
             return listView
                 .themeAnimation(on: isFiltering, category: .providers)
+                .onChange(of: servers, perform: computeServersByCountry)
         }
     }
 }
@@ -176,16 +180,8 @@ private extension VPNProviderServerView.ServersSubview {
         }
     }
 
-    func countryServers(for code: String) -> [VPNServer]? {
-        servers
-            .filter {
-                $0.provider.countryCode == code
-            }
-            .nilIfEmpty
-    }
-
     func countryView(for code: String) -> some View {
-        countryServers(for: code)
+        serversByCountryCode[code]
             .map { servers in
                 DisclosureGroup(isExpanded: isExpandedCountry(code)) {
                     ForEach(servers, id: \.id, content: serverView)
@@ -218,6 +214,17 @@ private extension VPNProviderServerView.ServersSubview {
                 )
             }
         }
+    }
+
+    func computeServersByCountry(_ servers: [VPNServer]) {
+        var map: [String: [VPNServer]] = [:]
+        servers.forEach {
+            let code = $0.provider.countryCode
+            var list = map[code] ?? []
+            list.append($0)
+            map[code] = list
+        }
+        serversByCountryCode = map
     }
 }
 
