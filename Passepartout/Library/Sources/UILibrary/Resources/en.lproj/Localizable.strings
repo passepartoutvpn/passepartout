@@ -317,6 +317,9 @@
 
 // MARK: Global (Alerts)
 
+"alerts.community.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
+"alerts.community.subscribe" = "Subscribe now";
+"alerts.community.dismiss" = "No, thanks";
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
 "alerts.import.passphrase.ok" = "Decrypt";
 "alerts.providers.missing_server.message" = "No provider server selected. Please select a destination server on your iOS/macOS device.";

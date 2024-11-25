@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  OnboardingStep.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 11/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,22 +25,26 @@
 
 import Foundation
 
-public enum AppPreference: String, CaseIterable {
-    case keepsInMenu
+public enum OnboardingStep: String, RawRepresentable, CaseIterable {
+    case migrateV3
 
-    case locksInBackground
+    case community
 
-    case logsPrivateData
+    case doneV3
+}
 
-    case onboardingStep
-
-    case onlyShowsFavorites
-
-    case profilesLayout
-
-    case providerFavoriteServers
-
-    public var key: String {
-        "App.\(rawValue)"
+extension Optional where Wrapped == OnboardingStep {
+    public var nextStep: OnboardingStep? {
+        let all = OnboardingStep.allCases
+        guard let self else {
+            return all.first
+        }
+        guard let index = all.firstIndex(of: self) else {
+            fatalError("How can self not be part of allCases?")
+        }
+        guard index < all.count - 1 else {
+            return self
+        }
+        return all[index + 1]
     }
 }

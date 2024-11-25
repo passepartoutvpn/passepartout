@@ -76,6 +76,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             contentView
                 .toolbar(content: toolbarContent)
         }
+        .modifier(OnboardingModifier(modalRoute: $modalRoute))
         .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,
@@ -95,7 +96,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 // MARK: - Destinations
 
 extension AppCoordinator {
-    enum ModalRoute: Identifiable {
+    enum ModalRoute: Identifiable, Equatable {
         case about
 
         case editProfile
@@ -114,6 +115,10 @@ extension AppCoordinator {
             case .migrateProfiles: return 4
             case .preferences: return 5
             }
+        }
+
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.id == rhs.id
         }
 
         var size: ThemeModalSize {
