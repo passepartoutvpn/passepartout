@@ -52,7 +52,6 @@ private extension SettingsView {
         Group {
             NavigationLink(Strings.Views.About.Credits.title, value: AppCoordinatorRoute.credits)
             NavigationLink(Strings.Views.Donate.title, value: AppCoordinatorRoute.donate)
-            NavigationLink(Strings.Views.Purchased.title, value: AppCoordinatorRoute.purchased)
         }
         .themeSection(header: Strings.Unlocalized.appName)
     }
@@ -68,6 +67,7 @@ private extension SettingsView {
 
     var aboutSection: some View {
         Group {
+            NavigationLink(Strings.Views.Purchased.title, value: AppCoordinatorRoute.purchased)
             Text(Strings.Global.Nouns.version)
                 .themeTrailingValue(BundleConfiguration.mainVersionString)
         }
