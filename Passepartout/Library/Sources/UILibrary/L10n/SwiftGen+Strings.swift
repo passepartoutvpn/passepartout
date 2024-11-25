@@ -856,7 +856,7 @@ public enum Strings {
 
 extension Strings {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
-    let format = Bundle.main.localizedString(forKey: key, value: value, table: table)
+    let format = Bundle.module.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
