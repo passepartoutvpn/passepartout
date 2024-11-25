@@ -1,5 +1,5 @@
 //
-//  AppStep.swift
+//  OnboardingStep.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/25/24.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum AppStep: String, RawRepresentable, CaseIterable {
+public enum OnboardingStep: String, RawRepresentable, CaseIterable {
     case migrateV3
 
     case community
@@ -33,9 +33,9 @@ public enum AppStep: String, RawRepresentable, CaseIterable {
     case doneV3
 }
 
-extension Optional where Wrapped == AppStep {
-    public var nextStep: AppStep? {
-        let all = AppStep.allCases
+extension Optional where Wrapped == OnboardingStep {
+    public var nextStep: OnboardingStep? {
+        let all = OnboardingStep.allCases
         guard let self else {
             return all.first
         }

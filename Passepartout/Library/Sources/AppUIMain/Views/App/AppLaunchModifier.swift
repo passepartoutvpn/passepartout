@@ -30,7 +30,7 @@ import SwiftUI
 struct AppLaunchModifier: ViewModifier {
 
     @AppStorage(AppPreference.appStep.key)
-    private var appStep: AppStep?
+    private var appStep: OnboardingStep?
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
