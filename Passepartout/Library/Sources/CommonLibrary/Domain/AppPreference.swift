@@ -25,7 +25,9 @@
 
 import Foundation
 
-public enum AppPreference: String {
+public enum AppPreference: String, CaseIterable {
+    case appStep
+
     case keepsInMenu
 
     case locksInBackground
