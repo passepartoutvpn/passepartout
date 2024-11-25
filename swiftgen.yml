@@ -5,6 +5,6 @@ strings:
     - templateName: structured-swift5
       output: Passepartout/Library/Sources/UILibrary/L10n/SwiftGen+Strings.swift
       params:
-        bundle: Bundle.main
+        bundle: Bundle.module
         enumName: Strings
         publicAccess: true
