@@ -84,7 +84,11 @@ extension VPNProviderServerView {
     }
 
     var filtersView: some View {
-        VPNFiltersView(model: filtersViewModel)
+        VPNFiltersView(
+            apis: apis,
+            providerId: providerId,
+            model: filtersViewModel
+        )
     }
 
     var initialFilters: VPNFilters? {
