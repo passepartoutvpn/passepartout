@@ -76,7 +76,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             contentView
                 .toolbar(content: toolbarContent)
         }
-        .modifier(AppLaunchModifier(modalRoute: $modalRoute))
+        .modifier(OnboardingModifier(modalRoute: $modalRoute))
         .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,

@@ -26,13 +26,13 @@
 import Foundation
 
 public enum AppPreference: String, CaseIterable {
-    case appStep
-
     case keepsInMenu
 
     case locksInBackground
 
     case logsPrivateData
+
+    case onboardingStep
 
     case onlyShowsFavorites
 

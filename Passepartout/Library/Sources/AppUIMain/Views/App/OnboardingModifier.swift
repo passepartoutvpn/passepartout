@@ -1,5 +1,5 @@
 //
-//  AppLaunchModifier.swift
+//  OnboardingModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/25/24.
@@ -27,10 +27,10 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct AppLaunchModifier: ViewModifier {
+struct OnboardingModifier: ViewModifier {
 
-    @AppStorage(AppPreference.appStep.key)
-    private var appStep: OnboardingStep?
+    @AppStorage(AppPreference.onboardingStep.key)
+    private var step: OnboardingStep?
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
@@ -65,13 +65,13 @@ struct AppLaunchModifier: ViewModifier {
     }
 }
 
-private extension AppLaunchModifier {
+private extension OnboardingModifier {
     func advance() {
-        pp_log(.app, .info, "Current step: \(appStep.debugDescription)")
-        appStep = appStep.nextStep
-        pp_log(.app, .info, "Next step: \(appStep.debugDescription)")
+        pp_log(.app, .info, "Current step: \(step.debugDescription)")
+        step = step.nextStep
+        pp_log(.app, .info, "Next step: \(step.debugDescription)")
 
-        switch appStep {
+        switch step {
         case .migrateV3:
             modalRoute = .migrateProfiles
         case .community:
