@@ -831,6 +831,16 @@ public enum Strings {
         }
       }
     }
+    public enum Purchased {
+      /// No purchases
+      public static let noPurchases = Strings.tr("Localizable", "views.purchased.no_purchases", fallback: "No purchases")
+      /// Purchased
+      public static let title = Strings.tr("Localizable", "views.purchased.title", fallback: "Purchased")
+      public enum Rows {
+        /// Build
+        public static let build = Strings.tr("Localizable", "views.purchased.rows.build", fallback: "Build")
+      }
+    }
     public enum Ui {
       public enum ConnectionStatus {
         ///  (on-demand)

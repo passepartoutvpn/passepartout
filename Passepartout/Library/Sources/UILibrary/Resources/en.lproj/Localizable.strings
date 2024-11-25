@@ -119,6 +119,10 @@
 "views.providers.vpn.preset" = "Preset";
 "views.providers.vpn.no_servers" = "No servers";
 
+"views.purchased.title" = "Purchased";
+"views.purchased.rows.build" = "Build";
+"views.purchased.no_purchases" = "No purchases";
+
 "views.ui.connection_status.on_demand_suffix" = " (on-demand)";
 "views.ui.purchase_required.purchase.help" = "Purchase required";
 "views.ui.purchase_required.restricted.help" = "Feature is restricted";
