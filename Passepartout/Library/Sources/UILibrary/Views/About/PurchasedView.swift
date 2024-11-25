@@ -55,24 +55,53 @@ public struct PurchasedView: View {
 
 private extension PurchasedView {
     var isEmpty: Bool {
-        iapManager.purchasedAppBuild == nil && iapManager.purchasedProducts.isEmpty
+        iapManager.purchasedAppBuild == nil && iapManager.purchasedProducts.isEmpty && iapManager.eligibleFeatures.isEmpty
     }
 
+    var features: [String] {
+        iapManager
+            .eligibleFeatures
+            .map(\.localizedDescription)
+            .sorted()
+    }
+}
+
+private extension PurchasedView {
     var listView: some View {
         List {
-            iapManager.purchasedAppBuild.map { build in
-                Section {
-                    Text(Strings.Views.Purchased.Rows.build)
-                        .themeTrailingValue(build.description)
-                }
+            downloadSection
+            productsSection
+            featuresSection
+        }
+    }
+
+    var downloadSection: some View {
+        iapManager.purchasedAppBuild.map { build in
+            Group {
+                Text(Strings.Views.Purchased.Rows.buildNumber)
+                    .themeTrailingValue(build.description)
             }
-            Section {
-                ForEach(products, id: \.productIdentifier) {
-                    Text($0.localizedTitle)
-                        .themeTrailingValue($0.localizedPrice)
-                }
+            .themeSection(header: Strings.Views.Purchased.Sections.Download.header)
+        }
+    }
+
+    var productsSection: some View {
+        Group {
+            ForEach(products, id: \.productIdentifier) {
+                Text($0.localizedTitle)
+                    .themeTrailingValue($0.localizedPrice)
             }
         }
+        .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
+    }
+
+    var featuresSection: some View {
+        Group {
+            ForEach(features, id: \.self) {
+                Text($0)
+            }
+        }
+        .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
     }
 }
 

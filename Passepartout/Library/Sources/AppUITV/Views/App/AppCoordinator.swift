@@ -120,7 +120,6 @@ private extension AppCoordinator {
             PurchasedView()
                 .resized(width: 0.5)
                 .themeList()
-                .navigationTitle(Strings.Views.Purchased.title)
 
         case .tunnelLog:
             DebugLogView(withTunnel: tunnel, parameters: Constants.shared.log) {

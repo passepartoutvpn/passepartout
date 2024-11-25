@@ -837,8 +837,24 @@ public enum Strings {
       /// Purchased
       public static let title = Strings.tr("Localizable", "views.purchased.title", fallback: "Purchased")
       public enum Rows {
-        /// Build
-        public static let build = Strings.tr("Localizable", "views.purchased.rows.build", fallback: "Build")
+        /// Build number
+        public static let buildNumber = Strings.tr("Localizable", "views.purchased.rows.build_number", fallback: "Build number")
+        /// Download date
+        public static let downloadDate = Strings.tr("Localizable", "views.purchased.rows.download_date", fallback: "Download date")
+      }
+      public enum Sections {
+        public enum Download {
+          /// First download
+          public static let header = Strings.tr("Localizable", "views.purchased.sections.download.header", fallback: "First download")
+        }
+        public enum Features {
+          /// Eligible features
+          public static let header = Strings.tr("Localizable", "views.purchased.sections.features.header", fallback: "Eligible features")
+        }
+        public enum Products {
+          /// Purchases
+          public static let header = Strings.tr("Localizable", "views.purchased.sections.products.header", fallback: "Purchases")
+        }
       }
     }
     public enum Ui {
