@@ -2,7 +2,7 @@
 //  VPNProviderServerView+macOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/9/24.
+//  Created by Davide De Rosa on 11/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,9 +25,6 @@
 
 #if os(macOS)
 
-import CommonAPI
-import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
 extension VPNProviderServerView {
@@ -35,95 +32,9 @@ extension VPNProviderServerView {
         VStack {
             filtersView
                 .padding()
-            serversView
+            containerView
         }
     }
-}
-
-// MARK: - Subviews
-
-extension VPNProviderServerView {
-    struct ServersSubview: View {
-
-        @EnvironmentObject
-        private var theme: Theme
-
-        let servers: [VPNServer]
-
-        let selectedServer: VPNServer?
-
-        let isFiltering: Bool
-
-        @ObservedObject
-        var filtersViewModel: VPNFiltersView.Model
-
-        @ObservedObject
-        var favoritesManager: ProviderFavoritesManager
-
-        let selectTitle: String
-
-        let onSelect: (VPNServer) -> Void
-
-        @State
-        private var hoveringServerId: String?
-
-        var body: some View {
-            debugChanges()
-            return Table(servers) {
-                TableColumn("") { server in
-                    ThemeImage(.marked)
-                        .opaque(server.id == selectedServer?.id)
-                        .environmentObject(theme) // TODO: #873, Table loses environment
-                }
-                .width(10.0)
-
-                TableColumn(Strings.Global.Nouns.region) { server in
-                    ThemeCountryText(server.provider.countryCode, title: server.region)
-                        .help(server.region)
-                        .environmentObject(theme) // TODO: #873, Table loses environment
-                }
-
-                TableColumn(Strings.Global.Nouns.address, value: \.address)
-
-                TableColumn("􀋂") { server in
-                    FavoriteToggle(
-                        value: server.serverId,
-                        selection: $favoritesManager.serverIds
-                    )
-                    .environmentObject(theme) // TODO: #873, Table loses environment
-                }
-                .width(15.0)
-
-                TableColumn("") { server in
-                    Button {
-                        onSelect(server)
-                    } label: {
-                        Text(selectTitle)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                    }
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Preview
-
-#Preview {
-    NavigationStack {
-        VPNProviderServerView(
-            apis: [API.bundled],
-            moduleId: UUID(),
-            providerId: .tunnelbear,
-            configurationType: OpenVPN.Configuration.self,
-            selectedEntity: nil,
-            filtersWithSelection: false,
-            selectTitle: "Select",
-            onSelect: { _, _ in }
-        )
-    }
-    .withMockEnvironment()
 }
 
 #endif

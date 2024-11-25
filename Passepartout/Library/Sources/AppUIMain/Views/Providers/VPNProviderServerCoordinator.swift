@@ -36,12 +36,12 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
 
     let providerId: ProviderID
 
-    @ObservedObject
-    var errorHandler: ErrorHandler
-
     let selectedEntity: VPNEntity<Configuration>?
 
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
+
+    @ObservedObject
+    var errorHandler: ErrorHandler
 
     var body: some View {
         VPNProviderServerView(

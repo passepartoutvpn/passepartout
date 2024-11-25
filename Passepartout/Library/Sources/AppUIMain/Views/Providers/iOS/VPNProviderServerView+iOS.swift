@@ -2,7 +2,7 @@
 //  VPNProviderServerView+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/9/24.
+//  Created by Davide De Rosa on 11/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,225 +25,50 @@
 
 #if os(iOS)
 
-import CommonAPI
-import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
 extension VPNProviderServerView {
     var contentView: some View {
-        serversView
+        containerView
             .modifier(FiltersItemModifier {
                 filtersView
             })
     }
 }
 
-private extension VPNProviderServerView {
-    struct FiltersItemModifier<FiltersContent>: ViewModifier where FiltersContent: View {
+private struct FiltersItemModifier<FiltersContent>: ViewModifier where FiltersContent: View {
 
-        @ViewBuilder
-        let filtersContent: FiltersContent
+    @ViewBuilder
+    let filtersContent: FiltersContent
 
-        @State
-        private var isPresented = false
+    @State
+    private var isPresented = false
 
-        func body(content: Content) -> some View {
-            content
-                .toolbar {
-                    Button {
-                        isPresented = true
-                    } label: {
-                        ThemeImage(.filters)
-                    }
-                    .themePopover(
-                        isPresented: $isPresented,
-                        size: .custom(width: 400, height: 400)
-                    ) {
-                        filtersContent
-                            .modifier(FiltersViewModifier(isPresented: $isPresented))
-                    }
-                }
-        }
-    }
-
-    struct FiltersViewModifier: ViewModifier {
-
-        @Binding
-        var isPresented: Bool
-
-        func body(content: Content) -> some View {
-            NavigationStack {
-                content
-                    .navigationTitle(Strings.Global.Nouns.filters)
-                    .themeNavigationDetail()
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button {
-                                isPresented = false
-                            } label: {
-                                ThemeCloseLabel()
-                            }
-                        }
-                    }
-            }
-            .presentationDetents([.medium])
-        }
-    }
-}
-
-// MARK: - Subviews
-
-extension VPNProviderServerView {
-    struct ServersSubview: View {
-        let servers: [VPNServer]
-
-        let selectedServer: VPNServer?
-
-        let isFiltering: Bool
-
-        @ObservedObject
-        var filtersViewModel: VPNFiltersView.Model
-
-        @ObservedObject
-        var favoritesManager: ProviderFavoritesManager
-
-        let selectTitle: String
-
-        let onSelect: (VPNServer) -> Void
-
-        @State
-        private var serversByCountryCode: [String: [VPNServer]] = [:]
-
-        @State
-        private var expandedCodes: Set<String> = []
-
-        var body: some View {
-            debugChanges()
-            return listView
-                .themeAnimation(on: isFiltering, category: .providers)
-                .onChange(of: servers, perform: computeServersByCountry)
-        }
-    }
-}
-
-private extension VPNProviderServerView.ServersSubview {
-    var listView: some View {
-        List {
-            Section {
-                Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
-            }
-            Group {
-                if isFiltering || !servers.isEmpty {
-                    if isFiltering {
-                        ProgressView()
-                            .id(UUID())
-                    } else {
-                        ForEach(countryCodes, id: \.self, content: countryView)
-                    }
-                } else {
-                    emptyView
-                }
-            }
-            .themeSection(
-                header: filtersViewModel.filters.categoryName ?? Strings.Views.Providers.Vpn.Category.any
-            )
-            .onLoad {
-                if let selectedServer {
-                    expandedCodes.insert(selectedServer.provider.countryCode)
-                }
-            }
-        }
-    }
-
-    var emptyView: some View {
-        Text(Strings.Views.Providers.Vpn.noServers)
-    }
-}
-
-private extension VPNProviderServerView.ServersSubview {
-    var countryCodes: [String] {
-        filtersViewModel
-            .countries
-            .map(\.code)
-    }
-
-    func isExpandedCountry(_ code: String) -> Binding<Bool> {
-        Binding {
-            expandedCodes.contains(code)
-        } set: {
-            if $0 {
-                expandedCodes.insert(code)
-            } else {
-                expandedCodes.remove(code)
-            }
-        }
-    }
-
-    func countryView(for code: String) -> some View {
-        serversByCountryCode[code]
-            .map { servers in
-                DisclosureGroup(isExpanded: isExpandedCountry(code)) {
-                    ForEach(servers, id: \.id, content: serverView)
+    func body(content: Content) -> some View {
+        content
+            .toolbar {
+                Button {
+                    isPresented = true
                 } label: {
-                    ThemeCountryText(code)
+                    ThemeImage(.filters)
                 }
-            }
-    }
-
-    func serverView(for server: VPNServer) -> some View {
-        Button {
-            onSelect(server)
-        } label: {
-            HStack {
-                ThemeImage(.marked)
-                    .opaque(server.id == selectedServer?.id)
-                VStack(alignment: .leading) {
-                    if let area = server.provider.area {
-                        Text(area)
-                            .font(.headline)
-                    }
-                    Text(server.hostname ?? server.serverId)
-                        .font(.subheadline)
-                        .truncationMode(.middle)
-                }
-                Spacer()
-                FavoriteToggle(
-                    value: server.serverId,
-                    selection: $favoritesManager.serverIds
+                .themePopover(
+                    isPresented: $isPresented,
+                    size: .custom(width: 400, height: 400),
+                    content: filtersPopover
                 )
             }
-        }
     }
 
-    func computeServersByCountry(_ servers: [VPNServer]) {
-        var map: [String: [VPNServer]] = [:]
-        servers.forEach {
-            let code = $0.provider.countryCode
-            var list = map[code] ?? []
-            list.append($0)
-            map[code] = list
-        }
-        serversByCountryCode = map
+    func filtersPopover() -> some View {
+        filtersContent
+            .navigationTitle(Strings.Global.Nouns.filters)
+            .themeNavigationDetail()
+            .themeNavigationStack(closable: true) {
+                isPresented = false
+            }
+            .presentationDetents([.medium])
     }
-}
-
-// MARK: - Preview
-
-#Preview {
-    NavigationStack {
-        VPNProviderServerView(
-            apis: [API.bundled],
-            moduleId: UUID(),
-            providerId: .tunnelbear,
-            configurationType: OpenVPN.Configuration.self,
-            selectedEntity: nil,
-            filtersWithSelection: false,
-            selectTitle: "Select",
-            onSelect: { _, _ in }
-        )
-    }
-    .withMockEnvironment()
 }
 
 #endif

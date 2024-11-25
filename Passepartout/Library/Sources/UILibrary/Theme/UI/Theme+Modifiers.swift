@@ -98,19 +98,21 @@ extension View {
 
     public func themeNavigationStack(
         closable: Bool = false,
+        onClose: (() -> Void)? = nil,
         path: Binding<NavigationPath> = .constant(NavigationPath())
     ) -> some View {
-        modifier(ThemeNavigationStackModifier(closable: closable, path: path))
+        modifier(ThemeNavigationStackModifier(closable: closable, onClose: onClose, path: path))
     }
 
     @ViewBuilder
     public func themeNavigationStack(
         if condition: Bool,
         closable: Bool = false,
+        onClose: (() -> Void)? = nil,
         path: Binding<NavigationPath> = .constant(NavigationPath())
     ) -> some View {
         if condition {
-            modifier(ThemeNavigationStackModifier(closable: closable, path: path))
+            modifier(ThemeNavigationStackModifier(closable: closable, onClose: onClose, path: path))
         } else {
             self
         }
@@ -370,6 +372,8 @@ struct ThemeNavigationStackModifier: ViewModifier {
 
     let closable: Bool
 
+    let onClose: (() -> Void)?
+
     @Binding
     var path: NavigationPath
 
@@ -380,7 +384,11 @@ struct ThemeNavigationStackModifier: ViewModifier {
                     if closable {
                         ToolbarItem(placement: .cancellationAction) {
                             Button {
-                                dismiss()
+                                if let onClose {
+                                    onClose()
+                                } else {
+                                    dismiss()
+                                }
                             } label: {
                                 ThemeCloseLabel()
                             }

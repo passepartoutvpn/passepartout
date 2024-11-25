@@ -42,9 +42,9 @@ extension ProviderEntityViewProviding where Self: ProviderTransformable, EntityT
         return VPNProviderServerCoordinator(
             moduleId: id,
             providerId: provider.id,
-            errorHandler: errorHandler,
             selectedEntity: selectedEntity,
-            onSelect: onSelect
+            onSelect: onSelect,
+            errorHandler: errorHandler
         )
     }
 }
