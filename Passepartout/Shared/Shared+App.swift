@@ -52,6 +52,16 @@ extension IAPManager {
                 subtitle: $0.localizedDescription(optionalStyle: .moduleTypes)
             )
         },
+        verify: { iap, profile in
+            do {
+                try iap.verify(profile)
+                return nil
+            } catch AppError.ineligibleProfile(let requiredFeatures) {
+                return requiredFeatures
+            } catch {
+                return nil
+            }
+        },
         willRebuild: { _, builder in
             builder
         },
@@ -65,16 +75,6 @@ extension IAPManager {
             } catch {
                 pp_log(.app, .error, "Unable to inject provider modules: \(error)")
                 throw error
-            }
-        },
-        verify: { iap, profile in
-            do {
-                try iap.verify(profile)
-                return nil
-            } catch AppError.ineligibleProfile(let requiredFeatures) {
-                return requiredFeatures
-            } catch {
-                return nil
             }
         }
     )

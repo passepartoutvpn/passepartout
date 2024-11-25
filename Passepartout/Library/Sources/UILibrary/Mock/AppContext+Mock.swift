@@ -56,14 +56,14 @@ extension AppContext {
             preview: {
                 ProfilePreview($0)
             },
+            verify: { _, _ in
+                nil
+            },
             willRebuild: { _, builder in
                 builder
             },
             willInstall: { _, profile in
                 try profile.withProviderModules()
-            },
-            verify: { _, _ in
-                nil
             }
         )
         let profileManager = {
