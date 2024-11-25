@@ -30,9 +30,21 @@ import SwiftUI
 extension VPNProviderServerView {
     var contentView: some View {
         VStack {
-            filtersView
-                .padding()
+            VStack {
+                filtersView
+                refreshButton
+            }
+            .padding()
             containerView
+        }
+    }
+}
+
+private extension VPNProviderServerView {
+    var refreshButton: some View {
+        HStack {
+            Spacer()
+            RefreshInfrastructureButton(apis: apis, providerId: providerId)
         }
     }
 }

@@ -32,6 +32,10 @@ import SwiftUI
 
 extension VPNProviderServerView {
     struct ContentView: View {
+        let apis: [APIMapper]
+
+        let providerId: ProviderID
+
         let servers: [VPNServer]
 
         let selectedServer: VPNServer?
@@ -68,6 +72,7 @@ private extension VPNProviderServerView.ContentView {
         List {
             Section {
                 Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
+                RefreshInfrastructureButton(apis: apis, providerId: providerId)
             }
             Group {
                 if isFiltering || !servers.isEmpty {

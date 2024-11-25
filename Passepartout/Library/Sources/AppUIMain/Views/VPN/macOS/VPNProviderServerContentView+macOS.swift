@@ -36,6 +36,10 @@ extension VPNProviderServerView {
         @EnvironmentObject
         private var theme: Theme
 
+        let apis: [APIMapper]
+
+        let providerId: ProviderID
+
         let servers: [VPNServer]
 
         let selectedServer: VPNServer?
