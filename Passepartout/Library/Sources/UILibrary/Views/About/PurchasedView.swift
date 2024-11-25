@@ -58,10 +58,8 @@ private extension PurchasedView {
         iapManager.purchasedAppBuild == nil && iapManager.purchasedProducts.isEmpty && iapManager.eligibleFeatures.isEmpty
     }
 
-    var features: [AppFeature] {
-        iapManager
-            .eligibleFeatures
-            .sorted()
+    var allFeatures: [AppFeature] {
+        AppFeature.allCases.sorted()
     }
 }
 
@@ -96,8 +94,13 @@ private extension PurchasedView {
 
     var featuresSection: some View {
         Group {
-            ForEach(features, id: \.self) {
-                Text($0.localizedDescription)
+            ForEach(allFeatures, id: \.self) { feature in
+                HStack {
+                    Text(feature.localizedDescription)
+                    Spacer()
+                    ThemeImage(.marked)
+                        .opaque(iapManager.isEligible(for: feature))
+                }
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
