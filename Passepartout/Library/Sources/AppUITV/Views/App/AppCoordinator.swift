@@ -118,6 +118,8 @@ private extension AppCoordinator {
 
         case .purchased:
             PurchasedView()
+                .resized(width: 0.5)
+                .themeList()
 
         case .tunnelLog:
             DebugLogView(withTunnel: tunnel, parameters: Constants.shared.log) {
