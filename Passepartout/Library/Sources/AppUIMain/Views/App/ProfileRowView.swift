@@ -176,10 +176,27 @@ private extension ProfileRowView {
     }
 
     var infoButton: some View {
-        ProfileInfoButton(preview: preview) {
-            flow?.onEditProfile($0)
+        Menu {
+            ProfileContextMenu(
+                profileManager: profileManager,
+                tunnel: tunnel,
+                preview: preview,
+                interactiveManager: interactiveManager,
+                errorHandler: errorHandler,
+                isInstalledProfile: false,
+                flow: flow
+            )
+        } label: {
+            ThemeImage(.moreDetails)
+                .imageScale(.large)
         }
-        .imageScale(.large)
+        // TODO: #584, necessary to avoid cell selection
+#if os(iOS)
+        .menuStyle(.borderlessButton)
+#else
+        .foregroundStyle(.secondary)
+        .buttonStyle(.plain)
+#endif
     }
 }
 
