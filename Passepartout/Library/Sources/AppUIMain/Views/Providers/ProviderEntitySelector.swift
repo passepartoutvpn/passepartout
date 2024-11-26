@@ -60,7 +60,6 @@ struct ProviderEntitySelector: View {
 private extension ProviderEntitySelector {
     func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
         pp_log(.app, .info, "Select new provider entity: \(entity)")
-
         do {
             guard var moduleBuilder = module.providerModuleBuilder() else {
                 assertionFailure("Module is not a ProviderModuleBuilder?")
@@ -73,9 +72,14 @@ private extension ProviderEntitySelector {
             builder.saveModule(newModule)
             let newProfile = try builder.tryBuild()
 
+            let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
             try await profileManager.save(newProfile, isLocal: true)
-
-            // will reconnect via AppContext observation
+            if !wasConnected {
+                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
+                try await tunnel.connect(with: newProfile)
+            } else {
+                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
+            }
         } catch {
             pp_log(.app, .error, "Unable to save new provider entity: \(error)")
             throw error
