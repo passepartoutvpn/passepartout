@@ -235,6 +235,7 @@ extension ProfileManagerTests {
         let exp = expectation(description: "Backup")
         backupRepository
             .profilesPublisher
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 guard !$0.isEmpty else {
                     return
@@ -282,6 +283,7 @@ extension ProfileManagerTests {
         let exp = expectation(description: "Remote")
         remoteRepository
             .profilesPublisher
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 guard !$0.isEmpty else {
                     return
@@ -310,6 +312,7 @@ extension ProfileManagerTests {
         let exp = expectation(description: "Remote")
         remoteRepository
             .profilesPublisher
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 guard $0.isEmpty else {
                     return
@@ -693,6 +696,7 @@ private extension ProfileManagerTests {
     func observeRemoteImport(_ sut: ProfileManager, block: @escaping () -> Void) {
         sut
             .didChange
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 if case .stopRemoteImport = $0 {
                     block()
@@ -717,6 +721,7 @@ private extension ProfileManagerTests {
             sut.objectWillChange,
             sut.didChange.map { _ in }
         )
+        .receive(on: ImmediateScheduler.shared)
         .sink {
             guard !wasMet else {
                 return

@@ -58,6 +58,7 @@ extension ProfileImporterTests {
         let exp = expectation(description: "Save")
         profileManager
             .didChange
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 switch $0 {
                 case .save(let profile):
@@ -90,6 +91,7 @@ extension ProfileImporterTests {
         let exp = expectation(description: "Save")
         profileManager
             .didChange
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 switch $0 {
                 case .save(let profile):

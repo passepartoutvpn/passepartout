@@ -233,6 +233,7 @@ extension ProfileEditorTests {
         let exp = expectation(description: "Save")
         manager
             .didChange
+            .receive(on: ImmediateScheduler.shared)
             .sink {
                 switch $0 {
                 case .save(let savedProfile):

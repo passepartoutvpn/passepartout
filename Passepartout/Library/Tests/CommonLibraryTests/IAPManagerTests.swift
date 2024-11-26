@@ -375,6 +375,7 @@ extension IAPManagerTests {
         sut
             .$eligibleFeatures
             .dropFirst()
+            .receive(on: ImmediateScheduler.shared)
             .sink { _ in
                 exp.fulfill()
             }
@@ -427,6 +428,7 @@ extension IAPManagerTests {
         sut
             .$eligibleFeatures
             .dropFirst()
+            .receive(on: ImmediateScheduler.shared)
             .sink { _ in
                 exp.fulfill()
             }
