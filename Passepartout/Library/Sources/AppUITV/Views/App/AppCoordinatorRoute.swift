@@ -28,11 +28,5 @@ import Foundation
 enum AppCoordinatorRoute: Hashable {
     case appLog
 
-    case credits
-
-    case donate
-
-    case purchased
-
     case tunnelLog
 }

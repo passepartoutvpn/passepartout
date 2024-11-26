@@ -77,19 +77,23 @@ private extension PurchasedView {
             Group {
                 Text(Strings.Views.Purchased.Rows.buildNumber)
                     .themeTrailingValue(build.description)
+                    .scrollableOnTV()
             }
             .themeSection(header: Strings.Views.Purchased.Sections.Download.header)
         }
     }
 
     var productsSection: some View {
-        Group {
-            ForEach(products, id: \.productIdentifier) {
-                Text($0.localizedTitle)
-                    .themeTrailingValue($0.localizedPrice)
+        products.nilIfEmpty.map { products in
+            Group {
+                ForEach(products, id: \.productIdentifier) {
+                    Text($0.localizedTitle)
+                        .themeTrailingValue($0.localizedPrice)
+                        .scrollableOnTV()
+                }
             }
+            .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
         }
-        .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
     }
 
     var featuresSection: some View {
@@ -101,6 +105,7 @@ private extension PurchasedView {
                     ThemeImage(.marked)
                         .opaque(iapManager.isEligible(for: feature))
                 }
+                .scrollableOnTV()
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)

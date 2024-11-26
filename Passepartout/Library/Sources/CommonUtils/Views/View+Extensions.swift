@@ -67,6 +67,15 @@ extension View {
                 )
         }
     }
+
+    public func scrollableOnTV() -> some View {
+//        focusable()
+        Button {
+            //
+        } label: {
+            self
+        }
+    }
 }
 
 extension ViewModifier {

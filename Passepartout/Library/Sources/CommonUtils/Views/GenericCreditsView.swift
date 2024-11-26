@@ -178,15 +178,7 @@ private extension GenericCreditsView {
     var translationsSection: some View {
         Section {
             ForEach(sortedLanguages, id: \.self) { code in
-#if os(tvOS)
-                Button {
-                    //
-                } label: {
-                    translationLabel(code)
-                }
-#else
                 translationLabel(code)
-#endif
             }
         } header: {
             translationsHeader.map(Text.init)
@@ -215,6 +207,7 @@ private extension GenericCreditsView {
                 }
             }
         }
+        .scrollableOnTV()
     }
 }
 
