@@ -72,21 +72,22 @@ private extension AddProfileMenu {
 
     var providerProfileMenu: some View {
         Menu {
-            ForEach(supportedProviders, content: providerProfileButton(for:))
+            ForEach(supportedModuleTypes, content: providerSubmenu(for:))
         } label: {
             ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.provider, .profileProvider)
         }
     }
 
-    func providerProfileButton(for moduleType: ModuleType) -> some View {
-        Button(ModuleType.openVPN.localizedDescription) {
-            var editable = EditableProfile(name: newName)
-            let newModule = moduleType.newModule(with: registry)
-            editable.modules.append(newModule)
-            editable.modules.append(OnDemandModule.Builder())
-            editable.activeModulesIds = Set(editable.modules.map(\.id))
-            onNewProfile(editable)
-        }
+    func providerSubmenu(for moduleType: ModuleType) -> some View {
+        ProvidersSubmenu(
+            moduleType: moduleType,
+            registry: registry,
+            onSelect: {
+                var copy = $0
+                copy.name = newName
+                onNewProfile(copy)
+            }
+        )
     }
 
     var migrateProfilesButton: some View {
@@ -101,7 +102,43 @@ private extension AddProfileMenu {
         profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
     }
 
-    var supportedProviders: [ModuleType] {
+    // FIXME: #899, this should be global and reused by #657
+    var supportedModuleTypes: [ModuleType] {
         [.openVPN]
+    }
+}
+
+// MARK: - Providers
+
+private struct ProvidersSubmenu: View {
+
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
+    let moduleType: ModuleType
+
+    let registry: Registry
+
+    let onSelect: (EditableProfile) -> Void
+
+    var body: some View {
+        Menu {
+            ForEach(providerManager.providers, content: profileButton(for:))
+        } label: {
+            Text(moduleType.localizedDescription)
+        }
+    }
+
+    func profileButton(for provider: ProviderMetadata) -> some View {
+        Button(provider.description) {
+            var editable = EditableProfile()
+            if var newModule = moduleType.newModule(with: registry) as? any ProviderModuleBuilder {
+                newModule.providerId = .protonvpn
+                editable.modules.append(newModule)
+            }
+            editable.modules.append(OnDemandModule.Builder())
+            editable.activeModulesIds = Set(editable.modules.map(\.id))
+            onSelect(editable)
+        }
     }
 }
