@@ -117,7 +117,7 @@ private extension DonateView {
                 throw AppError.emptyProducts
             }
         } catch {
-            onError(error, dismissing: true)
+            onError(error, dismissing: false)
         }
     }
 
