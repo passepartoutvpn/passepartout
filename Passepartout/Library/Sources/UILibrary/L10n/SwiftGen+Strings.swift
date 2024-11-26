@@ -613,8 +613,12 @@ public enum Strings {
         public static let importProfile = Strings.tr("Localizable", "views.app.toolbar.import_profile", fallback: "Import profile")
         /// Migrate profiles
         public static let migrateProfiles = Strings.tr("Localizable", "views.app.toolbar.migrate_profiles", fallback: "Migrate profiles")
-        /// New profile
-        public static let newProfile = Strings.tr("Localizable", "views.app.toolbar.new_profile", fallback: "New profile")
+        public enum NewProfile {
+          /// Empty profile
+          public static let empty = Strings.tr("Localizable", "views.app.toolbar.new_profile.empty", fallback: "Empty profile")
+          /// Provider
+          public static let provider = Strings.tr("Localizable", "views.app.toolbar.new_profile.provider", fallback: "Provider")
+        }
       }
       public enum Tv {
         /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.

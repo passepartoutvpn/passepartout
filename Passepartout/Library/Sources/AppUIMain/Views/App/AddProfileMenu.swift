@@ -30,16 +30,18 @@ import SwiftUI
 struct AddProfileMenu: View {
     let profileManager: ProfileManager
 
+    let registry: Registry
+
     @Binding
     var isImporting: Bool
 
     let onMigrateProfiles: () -> Void
 
-    let onNewProfile: (Profile) -> Void
+    let onNewProfile: (EditableProfile) -> Void
 
     var body: some View {
         Menu {
-            newProfileButton
+            emptyProfileButton
             importProfileButton
             Divider()
             migrateProfilesButton
@@ -50,12 +52,12 @@ struct AddProfileMenu: View {
 }
 
 private extension AddProfileMenu {
-    var newProfileButton: some View {
+    var emptyProfileButton: some View {
         Button {
-            let profile = profileManager.new(withName: Strings.Placeholders.Profile.name)
-            onNewProfile(profile)
+            let editable = EditableProfile(name: newName)
+            onNewProfile(editable)
         } label: {
-            ThemeImageLabel(Strings.Views.App.Toolbar.newProfile.withTrailingDots, .profileEdit)
+            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.empty.withTrailingDots, .profileEdit)
         }
     }
 
@@ -71,5 +73,11 @@ private extension AddProfileMenu {
         Button(action: onMigrateProfiles) {
             ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
         }
+    }
+}
+
+private extension AddProfileMenu {
+    var newName: String {
+        profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
     }
 }

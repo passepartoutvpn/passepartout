@@ -58,8 +58,8 @@ public final class ProfileEditor: ObservableObject {
         removedModules = [:]
     }
 
-    public func editProfile(_ profile: Profile, isShared: Bool) {
-        editableProfile = profile.editable()
+    public func editProfile(_ profile: EditableProfile, isShared: Bool) {
+        editableProfile = profile
         self.isShared = isShared
         removedModules = [:]
     }
