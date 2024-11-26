@@ -47,6 +47,8 @@ struct ProfileCoordinator: View {
 
     let profileEditor: ProfileEditor
 
+    let initialModuleId: UUID?
+
     let registry: Registry
 
     let moduleViewFactory: any ModuleViewFactory
@@ -82,6 +84,7 @@ private extension ProfileCoordinator {
 #if os(iOS)
         ProfileEditView(
             profileEditor: profileEditor,
+            initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
             path: $path,
             paywallReason: $paywallReason,
@@ -96,6 +99,7 @@ private extension ProfileCoordinator {
 #else
         ProfileSplitView(
             profileEditor: profileEditor,
+            initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
             paywallReason: $paywallReason,
             flow: .init(
@@ -164,6 +168,7 @@ private extension ProfileCoordinator {
     ProfileCoordinator(
         profileManager: .mock,
         profileEditor: ProfileEditor(profile: .newMockProfile()),
+        initialModuleId: nil,
         registry: Registry(),
         moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
         modally: false,

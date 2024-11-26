@@ -30,17 +30,20 @@ import SwiftUI
 struct AddProfileMenu: View {
     let profileManager: ProfileManager
 
+    let registry: Registry
+
     @Binding
     var isImporting: Bool
 
     let onMigrateProfiles: () -> Void
 
-    let onNewProfile: (Profile) -> Void
+    let onNewProfile: (EditableProfile, UUID?) -> Void
 
     var body: some View {
         Menu {
-            newProfileButton
+            emptyProfileButton
             importProfileButton
+            providerProfileMenu
             Divider()
             migrateProfilesButton
         } label: {
@@ -50,12 +53,12 @@ struct AddProfileMenu: View {
 }
 
 private extension AddProfileMenu {
-    var newProfileButton: some View {
+    var emptyProfileButton: some View {
         Button {
-            let profile = profileManager.new(withName: Strings.Placeholders.Profile.name)
-            onNewProfile(profile)
+            let editable = EditableProfile(name: newName)
+            onNewProfile(editable, nil)
         } label: {
-            ThemeImageLabel(Strings.Views.App.Toolbar.newProfile, .profileEdit)
+            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.empty.withTrailingDots, .profileEdit)
         }
     }
 
@@ -67,9 +70,75 @@ private extension AddProfileMenu {
         }
     }
 
+    var providerProfileMenu: some View {
+        Menu {
+            ForEach(supportedModuleTypes, content: providerSubmenu(for:))
+        } label: {
+            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.provider, .profileProvider)
+        }
+    }
+
+    func providerSubmenu(for moduleType: ModuleType) -> some View {
+        ProvidersSubmenu(
+            moduleType: moduleType,
+            registry: registry,
+            onSelect: {
+                var copy = $0
+                copy.name = newName
+                onNewProfile(copy, copy.modules.first?.id)
+            }
+        )
+    }
+
     var migrateProfilesButton: some View {
         Button(action: onMigrateProfiles) {
             ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
+        }
+    }
+}
+
+private extension AddProfileMenu {
+    var newName: String {
+        profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
+    }
+
+    // TODO: #657, define this list in a single global place
+    var supportedModuleTypes: [ModuleType] {
+        [.openVPN]
+    }
+}
+
+// MARK: - Providers
+
+private struct ProvidersSubmenu: View {
+
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
+    let moduleType: ModuleType
+
+    let registry: Registry
+
+    let onSelect: (EditableProfile) -> Void
+
+    var body: some View {
+        Menu {
+            ForEach(providerManager.providers, content: profileButton(for:))
+        } label: {
+            Text(moduleType.localizedDescription)
+        }
+    }
+
+    func profileButton(for provider: ProviderMetadata) -> some View {
+        Button(provider.description) {
+            var editable = EditableProfile()
+            if var newModule = moduleType.newModule(with: registry) as? any ProviderModuleBuilder {
+                newModule.providerId = provider.id
+                editable.modules.append(newModule)
+            }
+            editable.modules.append(OnDemandModule.Builder())
+            editable.activeModulesIds = Set(editable.modules.map(\.id))
+            onSelect(editable)
         }
     }
 }

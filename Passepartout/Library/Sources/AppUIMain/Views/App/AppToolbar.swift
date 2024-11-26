@@ -38,6 +38,8 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
 
     let profileManager: ProfileManager
 
+    let registry: Registry
+
     @Binding
     var layout: ProfilesLayout
 
@@ -50,7 +52,7 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
 
     let onMigrateProfiles: () -> Void
 
-    let onNewProfile: (Profile) -> Void
+    let onNewProfile: (EditableProfile, UUID?) -> Void
 
     var body: some ToolbarContent {
         if isBigDevice {
@@ -75,6 +77,7 @@ private extension AppToolbar {
     var addProfileMenu: some View {
         AddProfileMenu(
             profileManager: profileManager,
+            registry: registry,
             isImporting: $isImporting,
             onMigrateProfiles: onMigrateProfiles,
             onNewProfile: onNewProfile
@@ -108,12 +111,13 @@ private extension AppToolbar {
             .toolbar {
                 AppToolbar(
                     profileManager: .mock,
+                    registry: Registry(),
                     layout: .constant(.list),
                     isImporting: .constant(false),
                     onPreferences: {},
                     onAbout: {},
                     onMigrateProfiles: {},
-                    onNewProfile: { _ in }
+                    onNewProfile: { _, _ in }
                 )
             }
             .frame(width: 600, height: 400)

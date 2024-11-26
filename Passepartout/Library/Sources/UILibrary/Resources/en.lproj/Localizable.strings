@@ -47,7 +47,8 @@
 "views.app.folders.add_profile" = "Add profile";
 "views.app.folders.no_profiles" = "No profiles";
 "views.app.folders.no_profiles.migrate" = "Migrate old profiles...";
-"views.app.toolbar.new_profile" = "New profile";
+"views.app.toolbar.new_profile.empty" = "Empty profile";
+"views.app.toolbar.new_profile.provider" = "Provider";
 "views.app.toolbar.import_profile" = "Import profile";
 "views.app.toolbar.migrate_profiles" = "Migrate profiles";
 "views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";

@@ -273,13 +273,16 @@ extension ProfileManager {
 // MARK: - Shortcuts
 
 extension ProfileManager {
-    public func new(withName name: String) -> Profile {
-        var builder = Profile.Builder()
-        builder.name = firstUniqueName(from: name)
-        do {
-            return try builder.tryBuild()
-        } catch {
-            fatalError("Unable to build new empty profile: \(error)")
+    public func firstUniqueName(from name: String) -> String {
+        let allNames = Set(allProfiles.values.map(\.name))
+        var newName = name
+        var index = 1
+        while true {
+            if !allNames.contains(newName) {
+                return newName
+            }
+            newName = [name, index.description].joined(separator: ".")
+            index += 1
         }
     }
 
@@ -294,21 +297,6 @@ extension ProfileManager {
         let copy = try builder.tryBuild()
 
         try await save(copy)
-    }
-}
-
-private extension ProfileManager {
-    func firstUniqueName(from name: String) -> String {
-        let allNames = Set(allProfiles.values.map(\.name))
-        var newName = name
-        var index = 1
-        while true {
-            if !allNames.contains(newName) {
-                return newName
-            }
-            newName = [name, index.description].joined(separator: ".")
-            index += 1
-        }
     }
 }
 

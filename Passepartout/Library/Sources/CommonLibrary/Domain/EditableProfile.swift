@@ -43,7 +43,7 @@ public struct EditableProfile: MutableProfileType {
         id: UUID = UUID(),
         name: String = "",
         modules: [any ModuleBuilder] = [],
-        activeModulesIds: Set<UUID>,
+        activeModulesIds: Set<UUID> = [],
         modulesMetadata: [UUID: ModuleMetadata]? = nil,
         userInfo: [String: AnyHashable]? = nil
     ) {

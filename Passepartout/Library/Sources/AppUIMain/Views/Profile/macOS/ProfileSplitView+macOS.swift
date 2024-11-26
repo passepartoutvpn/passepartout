@@ -33,6 +33,8 @@ import SwiftUI
 struct ProfileSplitView: View, Routable {
     let profileEditor: ProfileEditor
 
+    let initialModuleId: UUID?
+
     let moduleViewFactory: any ModuleViewFactory
 
     @Binding
@@ -73,6 +75,11 @@ struct ProfileSplitView: View, Routable {
             .themeNavigationStack(path: $detailPath)
             .toolbar(content: toolbarContent)
             .environment(\.navigationPath, $detailPath)
+        }
+        .onLoad {
+            if let initialModuleId {
+                selectedModuleId = initialModuleId
+            }
         }
     }
 }
@@ -133,6 +140,7 @@ private extension ProfileSplitView {
 #Preview {
     ProfileSplitView(
         profileEditor: ProfileEditor(profile: .newMockProfile()),
+        initialModuleId: nil,
         moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
         paywallReason: .constant(nil)
     )

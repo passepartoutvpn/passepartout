@@ -99,7 +99,7 @@ extension AppCoordinator {
     enum ModalRoute: Identifiable, Equatable {
         case about
 
-        case editProfile
+        case editProfile(UUID?)
 
         case editProviderEntity(Profile, Module, SerializedProvider)
 
@@ -175,7 +175,7 @@ extension AppCoordinator {
                     guard let profile = profileManager.profile(withId: $0.id) else {
                         return
                     }
-                    enterDetail(of: profile)
+                    enterDetail(of: profile.editable(), initialModuleId: nil)
                 },
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
@@ -196,6 +196,7 @@ extension AppCoordinator {
     func toolbarContent() -> some ToolbarContent {
         AppToolbar(
             profileManager: profileManager,
+            registry: registry,
             layout: $layout,
             isImporting: $isImporting,
             onPreferences: {
@@ -220,10 +221,11 @@ extension AppCoordinator {
                 tunnel: tunnel
             )
 
-        case .editProfile:
+        case .editProfile(let initialModuleId):
             ProfileCoordinator(
                 profileManager: profileManager,
                 profileEditor: profileEditor,
+                initialModuleId: initialModuleId,
                 registry: registry,
                 moduleViewFactory: DefaultModuleViewFactory(registry: registry),
                 modally: true,
@@ -264,11 +266,11 @@ extension AppCoordinator {
 #endif
     }
 
-    func enterDetail(of profile: Profile) {
+    func enterDetail(of profile: EditableProfile, initialModuleId: UUID?) {
         profilePath = NavigationPath()
         let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
         profileEditor.editProfile(profile, isShared: isShared)
-        present(.editProfile)
+        present(.editProfile(initialModuleId))
     }
 
     func onDismiss() {

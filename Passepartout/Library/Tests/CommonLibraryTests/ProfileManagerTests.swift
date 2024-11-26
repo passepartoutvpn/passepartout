@@ -339,8 +339,8 @@ extension ProfileManagerTests {
         try await waitForReady(sut)
         XCTAssertEqual(sut.previews.count, 1)
 
-        let newProfile = sut.new(withName: profile.name)
-        XCTAssertEqual(newProfile.name, "example.1")
+        let newName = sut.firstUniqueName(from: profile.name)
+        XCTAssertEqual(newName, "example.1")
     }
 
     func test_givenRepository_whenDuplicate_thenSavesProfileWithNewName() async throws {

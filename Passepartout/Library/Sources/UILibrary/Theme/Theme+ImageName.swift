@@ -50,6 +50,7 @@ extension Theme {
         case profileEdit
         case profileImport
         case profileMigrate
+        case profileProvider
         case profilesGrid
         case profilesList
         case progress
@@ -101,6 +102,7 @@ extension Theme.ImageName {
             case .profileEdit: return "square.and.pencil"
             case .profileImport: return "square.and.arrow.down"
             case .profileMigrate: return "arrow.up.square"
+            case .profileProvider: return "network"
             case .profilesGrid: return "square.grid.2x2"
             case .profilesList: return "rectangle.grid.1x2"
             case .progress: return "clock"
