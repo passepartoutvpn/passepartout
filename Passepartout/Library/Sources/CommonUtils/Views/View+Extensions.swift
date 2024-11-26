@@ -69,12 +69,16 @@ extension View {
     }
 
     public func scrollableOnTV() -> some View {
+#if os(tvOS)
 //        focusable()
         Button {
             //
         } label: {
             self
         }
+#else
+        self
+#endif
     }
 }
 
