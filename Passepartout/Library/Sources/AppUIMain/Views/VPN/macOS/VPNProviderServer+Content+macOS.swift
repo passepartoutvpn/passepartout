@@ -1,5 +1,5 @@
 //
-//  VPNProviderServerContentView+macOS.swift
+//  VPNProviderServer+Content+macOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/9/24.
