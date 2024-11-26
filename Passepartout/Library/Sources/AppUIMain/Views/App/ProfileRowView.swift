@@ -178,12 +178,12 @@ private extension ProfileRowView {
     var infoButton: some View {
         Menu {
             ProfileContextMenu(
+                style: .infoButton,
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
-                isInstalledProfile: false,
                 flow: flow
             )
         } label: {
