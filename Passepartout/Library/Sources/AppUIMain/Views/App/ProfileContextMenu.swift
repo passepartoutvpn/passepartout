@@ -30,9 +30,9 @@ import SwiftUI
 
 struct ProfileContextMenu: View, Routable {
     enum Style {
-        case installed
+        case installedProfile
 
-        case container
+        case containerContext
 
         case infoButton
     }
@@ -54,11 +54,11 @@ struct ProfileContextMenu: View, Routable {
     var body: some View {
         tunnelToggleButton
         providerConnectToButton
-        if style == .installed {
+        if style == .installedProfile {
             tunnelRestartButton
         }
         profileEditButton
-        if [.installed, .container].contains(style) {
+        if [.installedProfile, .containerContext].contains(style) {
             Divider()
             profileDuplicateButton
             profileRemoveButton
@@ -150,7 +150,7 @@ private extension ProfileContextMenu {
     List {
         Menu("Menu") {
             ProfileContextMenu(
-                style: .installed,
+                style: .installedProfile,
                 profileManager: .mock,
                 tunnel: .mock,
                 preview: .init(.mock),

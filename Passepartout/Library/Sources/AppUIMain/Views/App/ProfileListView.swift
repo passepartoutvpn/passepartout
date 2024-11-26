@@ -96,7 +96,7 @@ private extension ProfileListView {
         .contextMenu {
             currentProfile.map {
                 ProfileContextMenu(
-                    style: .installed,
+                    style: .installedProfile,
                     profileManager: profileManager,
                     tunnel: tunnel,
                     preview: .init($0),
@@ -122,7 +122,7 @@ private extension ProfileListView {
         )
         .contextMenu {
             ProfileContextMenu(
-                style: .container,
+                style: .containerContext,
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
