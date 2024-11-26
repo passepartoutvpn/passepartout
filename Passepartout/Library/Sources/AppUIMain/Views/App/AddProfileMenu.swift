@@ -133,7 +133,7 @@ private struct ProvidersSubmenu: View {
         Button(provider.description) {
             var editable = EditableProfile()
             if var newModule = moduleType.newModule(with: registry) as? any ProviderModuleBuilder {
-                newModule.providerId = .protonvpn
+                newModule.providerId = provider.id
                 editable.modules.append(newModule)
             }
             editable.modules.append(OnDemandModule.Builder())
