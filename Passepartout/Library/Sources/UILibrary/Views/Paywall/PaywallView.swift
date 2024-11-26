@@ -155,13 +155,8 @@ private extension PaywallView {
     }
 
     func featureView(for feature: AppFeature) -> some View {
-#if os(tvOS)
-        Button(feature.localizedDescription) {
-            //
-        }
-#else
         Text(feature.localizedDescription)
-#endif
+            .scrollableOnTV()
     }
 
     var restoreView: some View {

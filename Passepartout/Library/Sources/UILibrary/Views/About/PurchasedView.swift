@@ -77,6 +77,7 @@ private extension PurchasedView {
             Group {
                 Text(Strings.Views.Purchased.Rows.buildNumber)
                     .themeTrailingValue(build.description)
+                    .scrollableOnTV()
             }
             .themeSection(header: Strings.Views.Purchased.Sections.Download.header)
         }
@@ -87,6 +88,7 @@ private extension PurchasedView {
             ForEach(products, id: \.productIdentifier) {
                 Text($0.localizedTitle)
                     .themeTrailingValue($0.localizedPrice)
+                    .scrollableOnTV()
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
@@ -101,6 +103,7 @@ private extension PurchasedView {
                     ThemeImage(.marked)
                         .opaque(iapManager.isEligible(for: feature))
                 }
+                .scrollableOnTV()
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
