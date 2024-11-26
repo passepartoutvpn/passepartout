@@ -29,17 +29,51 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
+enum Detail {
+    case credits
+
+    case donate
+
+    case other
+
+    case purchased
+}
+
 struct SettingsView: View {
     let tunnel: ExtendedTunnel
 
+    @Namespace
+    private var masterScope
+
+    @Namespace
+    private var detailScope
+
+    @FocusState
+    private var focus: Detail?
+
+    @State
+    private var detail: Detail?
+
     var body: some View {
-        listView
-            .resized(width: 0.5)
+        HStack {
+            masterView
+                .frame(maxWidth: .infinity)
+                .focused($focus, equals: .other)
+
+            DetailView(detail: detail)
+                .frame(maxWidth: .infinity)
+        }
+        .onChange(of: focus) {
+            guard focus != nil else {
+                return
+            }
+            detail = focus
+        }
     }
 }
 
 private extension SettingsView {
-    var listView: some View {
+    var masterView: some View {
         List {
             creditsSection
             diagnosticsSection
@@ -50,8 +84,10 @@ private extension SettingsView {
 
     var creditsSection: some View {
         Group {
-            NavigationLink(Strings.Views.About.Credits.title, value: AppCoordinatorRoute.credits)
-            NavigationLink(Strings.Views.Donate.title, value: AppCoordinatorRoute.donate)
+            Button(Strings.Views.About.Credits.title) {}
+                .focused($focus, equals: .credits)
+            Button(Strings.Views.Donate.title) {}
+                .focused($focus, equals: .donate)
         }
         .themeSection(header: Strings.Unlocalized.appName)
     }
@@ -67,11 +103,34 @@ private extension SettingsView {
 
     var aboutSection: some View {
         Group {
-            NavigationLink(Strings.Views.Purchased.title, value: AppCoordinatorRoute.purchased)
+            Button(Strings.Views.Purchased.title) {}
+                .focused($focus, equals: .purchased)
             Text(Strings.Global.Nouns.version)
                 .themeTrailingValue(BundleConfiguration.mainVersionString)
         }
         .themeSection(header: Strings.Views.About.title)
+    }
+}
+
+private struct DetailView: View {
+    let detail: Detail?
+
+    var body: some View {
+        switch detail {
+        case .credits:
+            CreditsView()
+                .themeList()
+
+        case .donate:
+            DonateView(modifier: DonateViewModifier())
+
+        case .purchased:
+            PurchasedView()
+                .themeList()
+
+        default:
+            VStack {}
+        }
     }
 }
 

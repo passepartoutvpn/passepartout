@@ -38,12 +38,11 @@ struct DonateViewModifier: ViewModifier {
                 }
             }
         }
-        .padding(.top, 150)
     }
 }
 
 private extension DonateViewModifier {
     var columns: [GridItem] {
-        [GridItem(.adaptive(minimum: 500))]
+        [GridItem(.adaptive(minimum: 300))]
     }
 }

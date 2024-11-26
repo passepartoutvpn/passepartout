@@ -108,19 +108,6 @@ private extension AppCoordinator {
                 DebugLogContentView(lines: $0)
             }
 
-        case .credits:
-            CreditsView()
-                .resized(width: 0.5)
-                .themeList()
-
-        case .donate:
-            DonateView(modifier: DonateViewModifier())
-
-        case .purchased:
-            PurchasedView()
-                .resized(width: 0.5)
-                .themeList()
-
         case .tunnelLog:
             DebugLogView(withTunnel: tunnel, parameters: Constants.shared.log) {
                 DebugLogContentView(lines: $0)
