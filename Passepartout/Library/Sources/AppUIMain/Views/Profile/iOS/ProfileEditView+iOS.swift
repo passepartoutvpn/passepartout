@@ -35,6 +35,8 @@ struct ProfileEditView: View, Routable {
     @ObservedObject
     var profileEditor: ProfileEditor
 
+    let initialModuleId: UUID?
+
     let moduleViewFactory: any ModuleViewFactory
 
     @Binding
@@ -66,6 +68,11 @@ struct ProfileEditView: View, Routable {
         .navigationTitle(Strings.Global.Nouns.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+        .onLoad {
+            if let initialModuleId {
+                push(.moduleDetail(moduleId: initialModuleId))
+            }
+        }
     }
 }
 
@@ -183,6 +190,7 @@ private extension ProfileEditView {
     NavigationStack {
         ProfileEditView(
             profileEditor: ProfileEditor(profile: .newMockProfile()),
+            initialModuleId: nil,
             moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
             path: .constant(NavigationPath()),
             paywallReason: .constant(nil)
