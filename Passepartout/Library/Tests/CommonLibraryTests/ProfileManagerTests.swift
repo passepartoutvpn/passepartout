@@ -31,8 +31,6 @@ import XCTest
 
 @MainActor
 final class ProfileManagerTests: XCTestCase {
-    private let timeout = 3.0
-
     private var subscriptions: Set<AnyCancellable> = []
 }
 
@@ -247,7 +245,7 @@ extension ProfileManagerTests {
             .store(in: &subscriptions)
 
         try await sut.save(profile)
-        await fulfillment(of: [exp], timeout: timeout)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
     }
 
     func test_givenRepository_whenRemove_thenIsRemoved() async throws {
@@ -294,7 +292,7 @@ extension ProfileManagerTests {
             .store(in: &subscriptions)
 
         try await sut.save(profile, remotelyShared: true)
-        await fulfillment(of: [exp], timeout: timeout)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
 
         XCTAssertTrue(sut.isRemotelyShared(profileWithId: profile.id))
     }
@@ -321,7 +319,7 @@ extension ProfileManagerTests {
             .store(in: &subscriptions)
 
         try await sut.save(profile, remotelyShared: false)
-        await fulfillment(of: [exp], timeout: timeout)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
 
         XCTAssertFalse(sut.isRemotelyShared(profileWithId: profile.id))
     }
@@ -731,6 +729,6 @@ private extension ProfileManagerTests {
         .store(in: &subscriptions)
 
         try await action(sut)
-        await fulfillment(of: [exp], timeout: timeout)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
     }
 }

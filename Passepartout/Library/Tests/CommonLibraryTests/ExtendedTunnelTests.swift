@@ -58,7 +58,7 @@ extension ExtendedTunnelTests {
             .store(in: &subscriptions)
 
         try await tunnel.disconnect()
-        await fulfillment(of: [exp], timeout: 1.0)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
         XCTAssertEqual(sut.lastErrorCode, .crypto)
     }
 
@@ -88,7 +88,7 @@ extension ExtendedTunnelTests {
             .store(in: &subscriptions)
 
         try await tunnel.install(profile, connect: true, title: \.name)
-        await fulfillment(of: [exp], timeout: 1.0)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
         XCTAssertEqual(sut.dataCount, dataCount)
     }
 

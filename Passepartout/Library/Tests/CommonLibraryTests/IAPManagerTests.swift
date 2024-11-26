@@ -381,7 +381,7 @@ extension IAPManagerTests {
             .store(in: &subscriptions)
 
         await sut.reloadReceipt()
-        await fulfillment(of: [exp], timeout: 1.0)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
 
         XCTAssertEqual(sut.eligibleFeatures, [
             .appleTV,
@@ -433,7 +433,7 @@ extension IAPManagerTests {
             .store(in: &subscriptions)
 
         sut.observeObjects()
-        await fulfillment(of: [exp], timeout: 1.0)
+        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
 
         XCTAssertNotEqual(sut.userLevel, .undefined)
         XCTAssertFalse(sut.eligibleFeatures.isEmpty)
