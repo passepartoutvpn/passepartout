@@ -53,13 +53,13 @@ struct ProfileContextMenu: View, Routable {
 
     var body: some View {
         tunnelToggleButton
-        providerConnectToButton
         if style == .installedProfile {
             tunnelRestartButton
         }
+        providerConnectToButton
+        Divider()
         profileEditButton
-        if [.installedProfile, .containerContext].contains(style) {
-            Divider()
+        if style == .containerContext {
             profileDuplicateButton
             profileRemoveButton
         }
@@ -95,15 +95,17 @@ private extension ProfileContextMenu {
     }
 
     var providerConnectToButton: some View {
-        profile?
-            .selectedProvider
-            .map { _ in
-                Button {
-                    flow?.onProviderEntityRequired(profile!)
-                } label: {
+        profile.map {
+            ProviderConnectToButton(
+                profile: $0,
+                onTap: {
+                    flow?.onProviderEntityRequired($0)
+                },
+                label: {
                     ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
                 }
-            }
+            )
+        }
     }
 
     var tunnelRestartButton: some View {
@@ -124,7 +126,7 @@ private extension ProfileContextMenu {
         Button {
             flow?.onEditProfile(preview)
         } label: {
-            ThemeImageLabel(Strings.Global.Actions.edit.withTrailingDots, .profileEdit)
+            ThemeImageLabel(Strings.Global.Actions.edit, .profileEdit)
         }
     }
 

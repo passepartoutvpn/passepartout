@@ -31,7 +31,11 @@ extension String {
     }
 
     public var withTrailingDots: String {
+#if os(macOS)
         "\(self)..."
+#else
+        self
+#endif
     }
 }
 

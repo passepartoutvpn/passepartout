@@ -43,6 +43,7 @@ struct AddProfileMenu: View {
         Menu {
             emptyProfileButton
             importProfileButton
+            Divider()
             providerProfileMenu
             Divider()
             migrateProfilesButton
@@ -58,7 +59,7 @@ private extension AddProfileMenu {
             let editable = EditableProfile(name: newName)
             onNewProfile(editable, nil)
         } label: {
-            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.empty.withTrailingDots, .profileEdit)
+            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.empty, .profileEdit)
         }
     }
 

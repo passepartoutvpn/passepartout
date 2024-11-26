@@ -178,7 +178,7 @@ private extension ProfileRowView {
     var infoButton: some View {
         Menu {
             ProfileContextMenu(
-                style: .infoButton,
+                style: preview.id == tunnel.currentProfile?.id ? .installedProfile : .infoButton,
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
