@@ -148,10 +148,10 @@ private extension VPNFiltersView.Model {
 private extension UserDefaults {
     var onlyShowsFavorites: Bool {
         get {
-            bool(forKey: AppPreference.onlyShowsFavorites.key)
+            bool(forKey: UIPreference.onlyShowsFavorites.key)
         }
         set {
-            set(newValue, forKey: AppPreference.onlyShowsFavorites.key)
+            set(newValue, forKey: UIPreference.onlyShowsFavorites.key)
         }
     }
 }

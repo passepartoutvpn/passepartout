@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  UIPreference.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 11/26/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,23 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 
-public enum AppPreference: String {
-    case logsPrivateData
+public enum UIPreference: String {
+    case keepsInMenu
+
+    case locksInBackground
+
+    case onboardingStep
+
+    case onlyShowsFavorites
+
+    case profilesLayout
+
+    case providerFavoriteServers
 
     public var key: String {
-        "App.\(rawValue)"
+        "UI.\(rawValue)"
     }
 }

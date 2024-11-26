@@ -1,8 +1,8 @@
 //
-//  ProfilesLayout.swift
+//  OnboardingStep.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/5/24.
+//  Created by Davide De Rosa on 11/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,8 +25,27 @@
 
 import Foundation
 
-enum ProfilesLayout: String, RawRepresentable, CaseIterable, Codable {
-    case list
+// order matters
+public enum OnboardingStep: String, RawRepresentable, CaseIterable {
+    case migrateV3
 
-    case grid
+    case community
+
+    case doneV3
+}
+
+extension Optional where Wrapped == OnboardingStep {
+    public var nextStep: OnboardingStep? {
+        let all = OnboardingStep.allCases
+        guard let self else {
+            return all.first
+        }
+        guard let index = all.firstIndex(of: self) else {
+            fatalError("How can self not be part of allCases?")
+        }
+        guard index < all.count - 1 else {
+            return self
+        }
+        return all[index + 1]
+    }
 }

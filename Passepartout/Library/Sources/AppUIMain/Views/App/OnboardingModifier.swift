@@ -29,7 +29,7 @@ import SwiftUI
 
 struct OnboardingModifier: ViewModifier {
 
-    @AppStorage(AppPreference.onboardingStep.key)
+    @AppStorage(UIPreference.onboardingStep.key)
     private var step: OnboardingStep?
 
     @Binding

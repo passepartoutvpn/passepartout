@@ -73,10 +73,10 @@ public final class MacSettingsModel: ObservableObject {
 
     public var keepsInMenu: Bool {
         get {
-            defaults.bool(forKey: AppPreference.keepsInMenu.key)
+            defaults.bool(forKey: UIPreference.keepsInMenu.key)
         }
         set {
-            defaults.set(newValue, forKey: AppPreference.keepsInMenu.key)
+            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
             objectWillChange.send()
         }
     }

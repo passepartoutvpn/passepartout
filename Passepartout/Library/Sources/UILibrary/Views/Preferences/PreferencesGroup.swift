@@ -31,7 +31,7 @@ import SwiftUI
 public struct PreferencesGroup: View {
 
 #if os(iOS)
-    @AppStorage(AppPreference.locksInBackground.key)
+    @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
 #elseif os(macOS)
     @EnvironmentObject

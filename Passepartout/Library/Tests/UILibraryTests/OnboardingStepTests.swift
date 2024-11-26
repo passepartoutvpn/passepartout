@@ -1,8 +1,8 @@
 //
-//  ProviderFavoriteServers.swift
+//  OnboardingStepTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/25/24.
+//  Created by Davide De Rosa on 11/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,33 +23,23 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
+import UILibrary
+import XCTest
 
-public struct ProviderFavoriteServers {
-    private var map: [UUID: Set<String>]
-
-    public init() {
-        map = [:]
+final class OnboardingStepTests: XCTestCase {
+    func test_givenNil_whenAdvance_thenAdvancesToFirst() {
+        let sut: OnboardingStep? = nil
+        XCTAssertEqual(sut.nextStep, .migrateV3)
     }
 
-    public func servers(forModuleWithId moduleId: UUID) -> Set<String> {
-        map[moduleId] ?? []
+    func test_givenMid_whenAdvance_thenAdvancesToNext() {
+        let sut: OnboardingStep? = .migrateV3
+        XCTAssertEqual(sut.nextStep, .community)
     }
 
-    public mutating func setServers(_ servers: Set<String>, forModuleWithId moduleId: UUID) {
-        map[moduleId] = servers
-    }
-}
-
-extension ProviderFavoriteServers: RawRepresentable {
-    public var rawValue: String {
-        (try? JSONEncoder().encode(map))?.base64EncodedString() ?? ""
-    }
-
-    public init?(rawValue: String) {
-        guard let data = Data(base64Encoded: rawValue) else {
-            return nil
-        }
-        map = (try? JSONDecoder().decode([UUID: Set<String>].self, from: data)) ?? [:]
+    func test_givenLast_whenAdvance_thenDoesNotAdvance() {
+        let sut: OnboardingStep? = .doneV3
+        XCTAssertEqual(sut.nextStep, .doneV3)
     }
 }
