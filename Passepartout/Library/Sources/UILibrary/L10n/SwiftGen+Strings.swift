@@ -357,8 +357,8 @@ public enum Strings {
         public static func appletv(_ p1: Any) -> String {
           return Strings.tr("Localizable", "modules.general.rows.appletv", String(describing: p1), fallback: "%@")
         }
-        /// Import from file...
-        public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
+        /// Import from file
+        public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file")
         /// Enabled
         public static let shared = Strings.tr("Localizable", "modules.general.rows.shared", fallback: "Enabled")
         public enum Appletv {
@@ -599,8 +599,8 @@ public enum Strings {
         }
       }
       public enum ProfileContext {
-        /// Connect to...
-        public static let connectTo = Strings.tr("Localizable", "views.app.profile_context.connect_to", fallback: "Connect to...")
+        /// Connect to
+        public static let connectTo = Strings.tr("Localizable", "views.app.profile_context.connect_to", fallback: "Connect to")
       }
       public enum Rows {
         /// No active modules

@@ -98,7 +98,7 @@ private extension ProfileContextMenu {
         profile?
             .selectedProvider
             .map { _ in
-                Button(Strings.Views.App.ProfileContext.connectTo) {
+                Button(Strings.Views.App.ProfileContext.connectTo.withTrailingDots) {
                     flow?.onProviderEntityRequired(profile!)
                 }
             }
