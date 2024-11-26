@@ -31,7 +31,7 @@ import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
 
-    @AppStorage(AppPreference.profilesLayout.key)
+    @AppStorage(UIPreference.profilesLayout.key)
     private var layout: ProfilesLayout = .list
 
     private let profileManager: ProfileManager

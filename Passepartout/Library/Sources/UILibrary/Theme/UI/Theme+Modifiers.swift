@@ -561,7 +561,7 @@ struct ThemeHoverListRowModifier: ViewModifier {
 
 struct ThemeLockScreenModifier<LockedContent>: ViewModifier where LockedContent: View {
 
-    @AppStorage(AppPreference.locksInBackground.key)
+    @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
 
     @EnvironmentObject
