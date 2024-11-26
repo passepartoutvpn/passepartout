@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
+import UILibrary
 import XCTest
 
 final class OnboardingStepTests: XCTestCase {
