@@ -71,6 +71,8 @@ extension VPNProviderServerView {
         var body: some View {
             debugChanges()
             return ContentView(
+                apis: apis,
+                providerId: providerId,
                 servers: filteredServers,
                 selectedServer: selectedServer,
                 isFiltering: isFiltering,

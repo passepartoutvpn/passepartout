@@ -830,16 +830,6 @@ public enum Strings {
         /// Loading...
         public static let loading = Strings.tr("Localizable", "views.providers.last_updated.loading", fallback: "Loading...")
       }
-      public enum Vpn {
-        /// No servers
-        public static let noServers = Strings.tr("Localizable", "views.providers.vpn.no_servers", fallback: "No servers")
-        /// Preset
-        public static let preset = Strings.tr("Localizable", "views.providers.vpn.preset", fallback: "Preset")
-        public enum Category {
-          /// All categories
-          public static let any = Strings.tr("Localizable", "views.providers.vpn.category.any", fallback: "All categories")
-        }
-      }
     }
     public enum Purchased {
       /// No purchases
@@ -881,6 +871,16 @@ public enum Strings {
           /// Feature is restricted
           public static let help = Strings.tr("Localizable", "views.ui.purchase_required.restricted.help", fallback: "Feature is restricted")
         }
+      }
+    }
+    public enum Vpn {
+      /// No servers
+      public static let noServers = Strings.tr("Localizable", "views.vpn.no_servers", fallback: "No servers")
+      /// Preset
+      public static let preset = Strings.tr("Localizable", "views.vpn.preset", fallback: "Preset")
+      public enum Category {
+        /// All categories
+        public static let any = Strings.tr("Localizable", "views.vpn.category.any", fallback: "All categories")
       }
     }
   }

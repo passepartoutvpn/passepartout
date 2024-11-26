@@ -27,6 +27,7 @@ import CommonAPI
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 
@@ -77,18 +78,10 @@ private extension ProviderContentModifier {
         providerPicker
             .themeSection()
 
-        if providerId != nil {
+        if let providerId {
             Group {
                 providerRows
-                refreshButton {
-                    HStack {
-                        Text(Strings.Views.Providers.refreshInfrastructure)
-                        if providerManager.isLoading {
-                            Spacer()
-                            ProgressView()
-                        }
-                    }
-                }
+                RefreshInfrastructureButton(apis: apis, providerId: providerId)
             }
             .themeSection(footer: lastUpdatedString)
         }
@@ -99,7 +92,7 @@ private extension ProviderContentModifier {
         Section {
             providerPicker
         }
-        if providerId != nil {
+        if let providerId {
             Section {
                 providerRows
                 HStack {
@@ -108,9 +101,7 @@ private extension ProviderContentModifier {
                             .foregroundStyle(.secondary)
                     }
                     Spacer()
-                    refreshButton {
-                        Text(Strings.Views.Providers.refreshInfrastructure)
-                    }
+                    RefreshInfrastructureButton(apis: apis, providerId: providerId)
                 }
             }
         }
@@ -125,10 +116,6 @@ private extension ProviderContentModifier {
             isLoading: providerManager.isLoading,
             paywallReason: $paywallReason
         )
-    }
-
-    func refreshButton<Label>(label: () -> Label) -> some View where Label: View {
-        Button(action: onRefreshInfrastructure, label: label)
     }
 
     var supportedProviders: [ProviderMetadata] {
@@ -183,15 +170,6 @@ private extension ProviderContentModifier {
         } catch {
             pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
             return false
-        }
-    }
-
-    func onRefreshInfrastructure() {
-        guard let providerId else {
-            return
-        }
-        Task {
-            await refreshInfrastructure(for: providerId)
         }
     }
 }

@@ -29,6 +29,9 @@ import PassepartoutKit
 import SwiftUI
 
 struct VPNFiltersView: View {
+    let apis: [APIMapper]
+
+    let providerId: ProviderID
 
     @ObservedObject
     var model: Model
@@ -47,6 +50,7 @@ struct VPNFiltersView: View {
                 HStack {
                     favoritesToggle
                     Spacer()
+                    RefreshInfrastructureButton(apis: apis, providerId: providerId)
                     clearFiltersButton
                 }
 #endif
@@ -88,7 +92,7 @@ private extension VPNFiltersView {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Views.Providers.Vpn.preset, selection: $model.filters.presetId) {
+        Picker(Strings.Views.Vpn.preset, selection: $model.filters.presetId) {
             Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.presets, id: \.presetId) {
@@ -111,6 +115,10 @@ private extension VPNFiltersView {
 
 #Preview {
     NavigationStack {
-        VPNFiltersView(model: .init())
+        VPNFiltersView(
+            apis: [API.bundled],
+            providerId: .mullvad,
+            model: .init()
+        )
     }
 }

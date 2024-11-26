@@ -32,6 +32,10 @@ import SwiftUI
 
 extension VPNProviderServerView {
     struct ContentView: View {
+        let apis: [APIMapper]
+
+        let providerId: ProviderID
+
         let servers: [VPNServer]
 
         let selectedServer: VPNServer?
@@ -68,6 +72,7 @@ private extension VPNProviderServerView.ContentView {
         List {
             Section {
                 Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
+                RefreshInfrastructureButton(apis: apis, providerId: providerId)
             }
             Group {
                 if isFiltering || !servers.isEmpty {
@@ -82,7 +87,7 @@ private extension VPNProviderServerView.ContentView {
                 }
             }
             .themeSection(
-                header: filtersViewModel.filters.categoryName ?? Strings.Views.Providers.Vpn.Category.any
+                header: filtersViewModel.filters.categoryName ?? Strings.Views.Vpn.Category.any
             )
             .onLoad {
                 if let selectedServer = selectedServer {
@@ -93,7 +98,7 @@ private extension VPNProviderServerView.ContentView {
     }
 
     var emptyView: some View {
-        Text(Strings.Views.Providers.Vpn.noServers)
+        Text(Strings.Views.Vpn.noServers)
     }
 }
 
@@ -160,7 +165,9 @@ private extension VPNProviderServerView.ContentView {
             list.append($0)
             map[code] = list
         }
-        serversByCountryCode = map
+        withAnimation {
+            serversByCountryCode = map
+        }
     }
 }
 
