@@ -67,6 +67,13 @@ struct OnboardingModifier: ViewModifier {
 
 private extension OnboardingModifier {
     func advance() {
+        Task {
+            try await Task.sleep(for: .milliseconds(300))
+            doAdvance()
+        }
+    }
+
+    func doAdvance() {
         pp_log(.app, .info, "Current step: \(step.debugDescription)")
         step = step.nextStep
         pp_log(.app, .info, "Next step: \(step.debugDescription)")
