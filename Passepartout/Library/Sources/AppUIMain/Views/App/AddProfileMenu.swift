@@ -55,7 +55,7 @@ private extension AddProfileMenu {
             let profile = profileManager.new(withName: Strings.Placeholders.Profile.name)
             onNewProfile(profile)
         } label: {
-            ThemeImageLabel(Strings.Views.App.Toolbar.newProfile, .profileEdit)
+            ThemeImageLabel(Strings.Views.App.Toolbar.newProfile.withTrailingDots, .profileEdit)
         }
     }
 
