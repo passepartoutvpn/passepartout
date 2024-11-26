@@ -98,8 +98,10 @@ private extension ProfileContextMenu {
         profile?
             .selectedProvider
             .map { _ in
-                Button(Strings.Views.App.ProfileContext.connectTo.withTrailingDots) {
+                Button {
                     flow?.onProviderEntityRequired(profile!)
+                } label: {
+                    ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
                 }
             }
     }
