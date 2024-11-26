@@ -111,6 +111,13 @@ private extension TunnelToggleButton {
                 }
             }
             if canConnect {
+                do {
+                    try iapManager.verify(profile)
+                } catch {
+                    pp_log(.app, .error, "Verification failed for profile \(profile.id), cancel preliminary connection checks: \(error)")
+                    await perform(with: profile)
+                    return
+                }
 
                 // provider module -> check requirements
                 if let providerModule = profile.activeProviderModule,
@@ -134,16 +141,11 @@ private extension TunnelToggleButton {
 
                 // interactive login -> show interactive view
                 if profile.isInteractive {
-                    do {
-                        try iapManager.verify(profile)
-                        pp_log(.app, .notice, "Present interactive login")
-                        interactiveManager.present(with: profile) {
-                            await perform(with: $0)
-                        }
-                        return
-                    } catch {
-                        pp_log(.app, .error, "Verification failed for profile \(profile.id), suppress interactive login: \(error)")
+                    pp_log(.app, .notice, "Present interactive login")
+                    interactiveManager.present(with: profile) {
+                        await perform(with: $0)
                     }
+                    return
                 }
             }
             await perform(with: profile)
