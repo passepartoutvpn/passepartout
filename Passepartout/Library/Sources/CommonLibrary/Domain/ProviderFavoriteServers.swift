@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
 public struct ProviderFavoriteServers {
     private var map: [UUID: Set<String>]
