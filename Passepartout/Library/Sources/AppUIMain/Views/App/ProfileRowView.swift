@@ -190,7 +190,7 @@ private extension ProfileRowView {
             ThemeImage(.moreDetails)
                 .imageScale(.large)
         }
-        // TODO: #584, necessary to avoid cell selection
+        // XXX: #584, necessary to avoid cell selection
 #if os(iOS)
         .menuStyle(.borderlessButton)
 #else

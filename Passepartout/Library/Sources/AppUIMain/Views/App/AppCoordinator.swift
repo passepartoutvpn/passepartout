@@ -187,7 +187,10 @@ extension AppCoordinator {
                     present(.editProviderEntity($0, pair.module, pair.selection))
                 },
                 onPurchaseRequired: {
-                    paywallReason = .init($0, needsConfirmation: true)
+                    // FIXME: #951, use of setLater/enableLater
+                    setLater(.init($0, needsConfirmation: true)) {
+                        paywallReason = $0
+                    }
                 }
             )
         )
@@ -279,7 +282,7 @@ extension AppCoordinator {
 
     func present(_ route: ModalRoute?) {
 
-        // XXX: this is a workaround for #791 on iOS 16
+        // FIXME: #951, use of setLater/enableLater
         setLater(route) {
             modalRoute = $0
         }

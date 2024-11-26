@@ -51,7 +51,10 @@ public final class ErrorHandler: ObservableObject {
             message: composedMessage,
             dismissAction: onDismiss
         )
-        isPresented = true
+        // FIXME: #951, use of setLater/enableLater
+        enableLater {
+            self.isPresented = $0
+        }
     }
 
     public func handle(title: String, message: String, onDismiss: (() -> Void)? = nil) {
@@ -60,7 +63,10 @@ public final class ErrorHandler: ObservableObject {
             message: message,
             dismissAction: onDismiss
         )
-        isPresented = true
+        // FIXME: #951, use of setLater/enableLater
+        enableLater {
+            self.isPresented = $0
+        }
     }
 }
 

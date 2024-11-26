@@ -208,7 +208,7 @@ private struct ToggleButton: View {
                     .scaleEffect(1.5, anchor: .trailing)
             }
         )
-        // TODO: #584, necessary to avoid cell selection
+        // XXX: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .foregroundStyle(tunnel.statusColor(theme))
         .opaque(isOpaque)

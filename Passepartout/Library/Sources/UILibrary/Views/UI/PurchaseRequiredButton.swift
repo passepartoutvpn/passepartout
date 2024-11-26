@@ -54,6 +54,7 @@ private extension PurchaseRequiredButton {
         guard let features, !isEligible else {
             return
         }
+        // FIXME: #951, use of setLater/enableLater
         setLater(.init(features, suggestedProduct: suggestedProduct)) {
             paywallReason = $0
         }
