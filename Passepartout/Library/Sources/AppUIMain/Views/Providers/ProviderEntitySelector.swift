@@ -75,10 +75,10 @@ private extension ProviderEntitySelector {
             let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
             try await profileManager.save(newProfile, isLocal: true)
             if !wasConnected {
-                pp_log(.app, .info, "Not connected, will connect to new provider entity")
+                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
                 try await tunnel.connect(with: newProfile)
             } else {
-                pp_log(.app, .info, "Connected, will reconnect via AppContext observation")
+                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
             }
         } catch {
             pp_log(.app, .error, "Unable to save new provider entity: \(error)")
