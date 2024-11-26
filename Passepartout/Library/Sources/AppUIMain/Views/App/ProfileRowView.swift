@@ -71,20 +71,39 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
                 }
                 Spacer()
                 HStack(spacing: 8) {
-                    ProfileAttributesView(
-                        attributes: attributes,
-                        isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
-                    )
-                    .imageScale(isBigDevice ? .large : .medium)
-
-                    ProfileInfoButton(preview: preview) {
-                        flow?.onEditProfile($0)
-                    }
-                    .imageScale(.large)
+                    attributesView
+                    infoButton
                 }
             }
             Spacer(minLength: .zero)
         }
+    }
+}
+
+private extension ProfileRowView {
+    var profile: Profile? {
+        profileManager.profile(withId: preview.id)
+    }
+
+    var attributes: [ProfileAttributesView.Attribute] {
+        if isTV {
+            return [.tv]
+        } else if isShared {
+            return [.shared]
+        }
+        return []
+    }
+
+    var requiredFeatures: Set<AppFeature>? {
+        profileManager.requiredFeatures(forProfileWithId: preview.id)
+    }
+
+    var isShared: Bool {
+        profileManager.isRemotelyShared(profileWithId: preview.id)
+    }
+
+    var isTV: Bool {
+        isShared && profileManager.isAvailableForTV(profileWithId: preview.id)
     }
 }
 
@@ -114,10 +133,6 @@ private struct MarkerView: View {
 }
 
 private extension ProfileRowView {
-    var profile: Profile? {
-        profileManager.profile(withId: preview.id)
-    }
-
     var markerView: some View {
         MarkerView(
             profileId: preview.id,
@@ -152,25 +167,36 @@ private extension ProfileRowView {
         .foregroundStyle(.primary)
     }
 
-    var attributes: [ProfileAttributesView.Attribute] {
-        if isTV {
-            return [.tv]
-        } else if isShared {
-            return [.shared]
+    var attributesView: some View {
+        ProfileAttributesView(
+            attributes: attributes,
+            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+        )
+        .imageScale(isBigDevice ? .large : .medium)
+    }
+
+    var infoButton: some View {
+        Menu {
+            ProfileContextMenu(
+                profileManager: profileManager,
+                tunnel: tunnel,
+                preview: preview,
+                interactiveManager: interactiveManager,
+                errorHandler: errorHandler,
+                isInstalledProfile: false,
+                flow: flow
+            )
+        } label: {
+            ThemeImage(.moreDetails)
+                .imageScale(.large)
         }
-        return []
-    }
-
-    var requiredFeatures: Set<AppFeature>? {
-        profileManager.requiredFeatures(forProfileWithId: preview.id)
-    }
-
-    var isShared: Bool {
-        profileManager.isRemotelyShared(profileWithId: preview.id)
-    }
-
-    var isTV: Bool {
-        isShared && profileManager.isAvailableForTV(profileWithId: preview.id)
+        // TODO: #584, necessary to avoid cell selection
+#if os(iOS)
+        .menuStyle(.borderlessButton)
+#else
+        .foregroundStyle(.secondary)
+        .buttonStyle(.plain)
+#endif
     }
 }
 

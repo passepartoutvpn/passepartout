@@ -73,7 +73,7 @@ private extension InstalledProfileView {
                     actionableNameView
                     Spacer(minLength: 10.0)
                 } else {
-                    nameView
+                    nameView()
                 }
             }
             statusView
@@ -82,14 +82,10 @@ private extension InstalledProfileView {
     }
 
     var actionableNameView: some View {
-        ThemeDisclosableMenu {
-            menuContent
-        } label: {
-            nameView
-        }
+        ThemeDisclosableMenu(content: menuContent, label: nameView)
     }
 
-    var nameView: some View {
+    func nameView() -> some View {
         Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
             .font(.title2)
             .fontWeight(theme.relevantWeight)
@@ -120,7 +116,7 @@ private extension InstalledProfileView {
         )
     }
 
-    var menuContent: some View {
+    func menuContent() -> some View {
         ProfileContextMenu(
             profileManager: profileManager,
             tunnel: tunnel,
