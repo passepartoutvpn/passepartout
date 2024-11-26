@@ -1,5 +1,5 @@
 //
-//  VPNProviderServerView+macOS.swift
+//  VPNProviderServer+Container+macOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/25/24.
@@ -28,11 +28,20 @@
 import SwiftUI
 
 extension VPNProviderServerView {
-    var contentView: some View {
-        VStack {
-            filtersView
-                .padding()
-            containerView
+    struct ContainerView<Content, Filters>: View where Content: View, Filters: View {
+
+        @ViewBuilder
+        let content: Content
+
+        @ViewBuilder
+        let filters: Filters
+
+        var body: some View {
+            VStack {
+                filters
+                    .padding()
+                content
+            }
         }
     }
 }

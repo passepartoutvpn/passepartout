@@ -30,6 +30,10 @@ import PassepartoutKit
 import SwiftUI
 
 struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
+
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
     var apis: [APIMapper] = API.shared
 
     let moduleId: UUID
@@ -53,42 +57,78 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
         .serverId
     ])
 
+    @State
+    private var servers: [VPNServer] = []
+
+    @State
+    private var isFiltering = false
+
+    @State
+    private var onlyShowsFavorites = false
+
     @StateObject
     private var filtersViewModel = VPNFiltersView.Model()
+
+    @StateObject
+    private var favoritesManager = ProviderFavoritesManager()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         debugChanges()
-        return contentView
-            .themeNavigationDetail()
-            .withErrorHandler(errorHandler)
+        return ContainerView(
+            content: contentView,
+            filters: filtersView
+        )
+        .navigationTitle(title)
+        .themeNavigationDetail()
+        .withErrorHandler(errorHandler)
     }
 }
 
 extension VPNProviderServerView {
-    var containerView: some View {
-        ContainerView(
-            vpnManager: vpnManager,
+    func contentView() -> some View {
+        ContentView(
             apis: apis,
-            moduleId: moduleId,
             providerId: providerId,
+            servers: filteredServers,
             selectedServer: selectedEntity?.server,
+            isFiltering: isFiltering,
             filtersViewModel: filtersViewModel,
-            initialFilters: initialFilters,
+            favoritesManager: favoritesManager,
             selectTitle: selectTitle,
-            onSelect: onSelect,
-            errorHandler: errorHandler
+            onSelect: onSelectServer
         )
+        .task {
+            await loadInitialServers()
+        }
+        .onReceive(filtersViewModel.$filters.dropFirst(), perform: onNewFilters)
+        .onReceive(filtersViewModel.$onlyShowsFavorites, perform: onToggleFavorites)
+        .onDisappear(perform: onDisappear)
     }
 
-    var filtersView: some View {
+    func filtersView() -> some View {
         VPNFiltersView(
             apis: apis,
             providerId: providerId,
             model: filtersViewModel
         )
+    }
+}
+
+private extension VPNProviderServerView {
+    var title: String {
+        providerManager.provider(withId: providerId)?.description ?? Strings.Global.Nouns.servers
+    }
+
+    var filteredServers: [VPNServer] {
+        if onlyShowsFavorites {
+            return servers.filter {
+                favoritesManager.serverIds.contains($0.serverId)
+            }
+        }
+        return servers
     }
 
     var initialFilters: VPNFilters? {
@@ -101,6 +141,71 @@ extension VPNProviderServerView {
         filters.countryCode = selectedEntity.server.provider.countryCode
 #endif
         return filters
+    }
+
+    func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
+        vpnManager
+            .presets
+            .first {
+                if let supportedIds = server.provider.supportedPresetIds {
+                    return supportedIds.contains($0.presetId)
+                }
+                return true
+            }
+    }
+}
+
+private extension VPNProviderServerView {
+    func loadInitialServers() async {
+        do {
+            favoritesManager.moduleId = moduleId
+            let repository = try await providerManager.vpnServerRepository(
+                from: apis,
+                for: providerId
+            )
+            try await vpnManager.setRepository(repository)
+            filtersViewModel.load(options: vpnManager.options, initialFilters: initialFilters)
+            await reloadServers(filters: filtersViewModel.filters)
+        } catch {
+            pp_log(.app, .error, "Unable to load VPN repository: \(error)")
+            errorHandler.handle(error, title: Strings.Global.Nouns.servers)
+        }
+    }
+
+    func reloadServers(filters: VPNFilters) async {
+        isFiltering = true
+        do {
+            try await Task {
+                servers = try await vpnManager.filteredServers(with: filters)
+                filtersViewModel.update(with: servers)
+                isFiltering = false
+            }.value
+        } catch {
+            pp_log(.app, .error, "Unable to fetch filtered servers: \(error)")
+        }
+    }
+
+    func onNewFilters(_ filters: VPNFilters) {
+        Task {
+            await reloadServers(filters: filters)
+        }
+    }
+
+    func onToggleFavorites(_ only: Bool) {
+        onlyShowsFavorites = only
+    }
+
+    func onDisappear() {
+        favoritesManager.save()
+    }
+
+    func onSelectServer(_ server: VPNServer) {
+        guard let preset = compatiblePreset(with: server) else {
+            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
+            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.providerConfigurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
+            return
+        }
+        onSelect(server, preset)
     }
 }
 
