@@ -33,21 +33,35 @@ public struct PurchasedView: View {
     private var iapManager: IAPManager
 
     @State
+    private var isLoading = true
+
+    @State
     private var products: [InAppProduct] = []
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
 
     public init() {
     }
 
     public var body: some View {
         contentView
-            .themeEmpty(if: isEmpty, message: Strings.Views.Purchased.noPurchases)
+            .withErrorHandler(errorHandler)
+            .themeProgress(if: isLoading)
+            .themeAnimation(on: isLoading, category: .diagnostics)
             .onLoad {
                 Task {
-                    products = try await iapManager
-                        .purchasableProducts(for: Array(iapManager.purchasedProducts))
-                        .sorted {
-                            $0.localizedTitle < $1.localizedTitle
-                        }
+                    do {
+                        products = try await iapManager
+                            .purchasableProducts(for: Array(iapManager.purchasedProducts))
+                            .sorted {
+                                $0.localizedTitle < $1.localizedTitle
+                            }
+                        isLoading = false
+                    } catch {
+                        errorHandler.handle(error)
+                        isLoading = false
+                    }
                 }
             }
     }
@@ -93,16 +107,18 @@ private extension PurchasedView {
     }
 
     var productsSection: some View {
-        products.nilIfEmpty.map { products in
-            Group {
+        Group {
+            if !products.isEmpty {
                 ForEach(products, id: \.productIdentifier) {
                     Text($0.localizedTitle)
                         .themeTrailingValue($0.localizedPrice)
                         .scrollableOnTV()
                 }
+            } else {
+                Text(Strings.Views.Purchased.noPurchases)
             }
-            .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
         }
+        .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
     }
 
     var featuresSection: some View {
