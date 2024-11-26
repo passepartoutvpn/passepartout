@@ -25,6 +25,7 @@
 
 import Foundation
 
+// order matters
 public enum OnboardingStep: String, RawRepresentable, CaseIterable {
     case migrateV3
 
