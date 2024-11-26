@@ -85,7 +85,7 @@ private extension AddProfileMenu {
             onSelect: {
                 var copy = $0
                 copy.name = newName
-                onNewProfile(copy, nil)
+                onNewProfile(copy, copy.modules.first?.id)
             }
         )
     }
