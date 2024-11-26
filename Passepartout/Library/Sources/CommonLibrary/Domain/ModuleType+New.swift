@@ -45,9 +45,7 @@ extension ModuleType {
             return IPModule.Builder()
 
         case .onDemand:
-            var builder = OnDemandModule.Builder()
-            builder.policy = .any
-            return builder
+            return OnDemandModule.Builder()
 
         default:
             fatalError("Unknown module type: \(rawValue)")

@@ -123,10 +123,7 @@ private extension ProfileImporter {
         }
 
         let module = try registry.module(fromURL: url, object: passphrase)
-        var onDemandModuleBuilder = OnDemandModule.Builder()
-        onDemandModuleBuilder.isEnabled = false
-        onDemandModuleBuilder.policy = .any
-        let onDemandModule = onDemandModuleBuilder.tryBuild()
+        let onDemandModule = OnDemandModule.Builder().tryBuild()
 
         var builder = Profile.Builder()
         builder.name = url.lastPathComponent
