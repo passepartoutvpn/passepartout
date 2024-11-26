@@ -1,3 +1,6 @@
+* Different styles for profile menu based on context (#947)
+* Add provider profile from toolbar (#946)
+* Do not present server selector if ineligible (#945)
 * Retain on-demand flag on save profile (#942)
 * Connect on provider server selection (#941)
 * Show quick profile menu rather than just edit (#940)
