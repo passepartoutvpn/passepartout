@@ -29,6 +29,16 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProfileContextMenu: View, Routable {
+    enum Style {
+        case installedProfile
+
+        case containerContext
+
+        case infoButton
+    }
+
+    let style: Style
+
     let profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
@@ -39,21 +49,20 @@ struct ProfileContextMenu: View, Routable {
 
     let errorHandler: ErrorHandler
 
-    let isInstalledProfile: Bool
-
     var flow: ProfileFlow?
 
     var body: some View {
         tunnelToggleButton
         providerConnectToButton
-        if isInstalledProfile {
+        if style == .installedProfile {
             tunnelRestartButton
         }
-        Divider()
         profileEditButton
-        profileDuplicateButton
-        Divider()
-        profileRemoveButton
+        if [.installedProfile, .containerContext].contains(style) {
+            Divider()
+            profileDuplicateButton
+            profileRemoveButton
+        }
     }
 }
 
@@ -89,8 +98,10 @@ private extension ProfileContextMenu {
         profile?
             .selectedProvider
             .map { _ in
-                Button(Strings.Views.App.ProfileContext.connectTo) {
+                Button {
                     flow?.onProviderEntityRequired(profile!)
+                } label: {
+                    ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
                 }
             }
     }
@@ -141,12 +152,12 @@ private extension ProfileContextMenu {
     List {
         Menu("Menu") {
             ProfileContextMenu(
+                style: .installedProfile,
                 profileManager: .mock,
                 tunnel: .mock,
                 preview: .init(.mock),
                 interactiveManager: InteractiveManager(),
-                errorHandler: .default(),
-                isInstalledProfile: true
+                errorHandler: .default()
             )
         }
     }

@@ -114,7 +114,7 @@ private extension OpenVPNView {
     @ViewBuilder
     var importView: some View {
         if providerId.wrappedValue == nil {
-            Button(Strings.Modules.General.Rows.importFromFile) {
+            Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
                 isImporting = true
             }
             .alert(

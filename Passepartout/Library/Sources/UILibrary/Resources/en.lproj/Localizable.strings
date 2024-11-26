@@ -56,7 +56,7 @@
 "views.app.errors.duplicate" = "Unable to duplicate profile '%@'.";
 "views.app.errors.import" = "Unable to import profiles.";
 
-"views.app.profile_context.connect_to" = "Connect to...";
+"views.app.profile_context.connect_to" = "Connect to";
 
 "views.app_menu.items.quit" = "Quit %@";
 
@@ -143,7 +143,7 @@
 "modules.general.rows.shared.purchase" = "Share on iCloud";
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Drop TV restriction";
-"modules.general.rows.import_from_file" = "Import from file...";
+"modules.general.rows.import_from_file" = "Import from file";
 
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";

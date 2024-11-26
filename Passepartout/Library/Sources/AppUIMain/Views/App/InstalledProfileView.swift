@@ -118,12 +118,12 @@ private extension InstalledProfileView {
 
     func menuContent() -> some View {
         ProfileContextMenu(
+            style: .installedProfile,
             profileManager: profileManager,
             tunnel: tunnel,
             preview: .init(profile ?? .mock),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            isInstalledProfile: true,
             flow: flow
         )
     }

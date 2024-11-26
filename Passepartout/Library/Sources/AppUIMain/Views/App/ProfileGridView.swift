@@ -106,12 +106,12 @@ private extension ProfileGridView {
         .contextMenu {
             currentProfile.map {
                 ProfileContextMenu(
+                    style: .installedProfile,
                     profileManager: profileManager,
                     tunnel: tunnel,
                     preview: .init($0),
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
-                    isInstalledProfile: true,
                     flow: flow
                 )
             }
@@ -133,12 +133,12 @@ private extension ProfileGridView {
         .themeGridCell(isSelected: preview.id == nextProfileId ?? currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
+                style: .containerContext,
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
-                isInstalledProfile: false,
                 flow: flow
             )
         }
