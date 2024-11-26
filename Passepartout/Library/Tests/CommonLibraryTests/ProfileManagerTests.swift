@@ -709,6 +709,9 @@ private extension ProfileManagerTests {
         after action: (ProfileManager) async throws -> Void,
         until condition: @escaping (ProfileManager) -> Bool
     ) async throws {
+        guard !condition(sut) else {
+            return
+        }
         let exp = expectation(description: description)
         var wasMet = false
 
