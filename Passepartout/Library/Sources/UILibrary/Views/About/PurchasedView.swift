@@ -39,7 +39,7 @@ public struct PurchasedView: View {
     }
 
     public var body: some View {
-        listView
+        contentView
             .themeEmpty(if: isEmpty, message: Strings.Views.Purchased.noPurchases)
             .onLoad {
                 Task {
@@ -64,8 +64,17 @@ private extension PurchasedView {
 }
 
 private extension PurchasedView {
-    var listView: some View {
-        List {
+    var contentView: some View {
+#if os(macOS)
+        Form(content: sectionsGroup)
+            .themeForm()
+#else
+        List(content: sectionsGroup)
+#endif
+    }
+
+    func sectionsGroup() -> some View {
+        Group {
             downloadSection
             productsSection
             featuresSection
@@ -102,8 +111,7 @@ private extension PurchasedView {
                 HStack {
                     Text(feature.localizedDescription)
                     Spacer()
-                    ThemeImage(.marked)
-                        .opaque(iapManager.isEligible(for: feature))
+                    ThemeImage(iapManager.isEligible(for: feature) ? .marked : .close)
                 }
                 .scrollableOnTV()
             }
