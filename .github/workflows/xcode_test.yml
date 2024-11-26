@@ -1,0 +1,26 @@
+name: Xcode Tests
+
+on:
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
+  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_tests:
+    name: Run Xcode tests
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+      - run: |
+          bundle exec fastlane test
