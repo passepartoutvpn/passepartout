@@ -90,7 +90,7 @@ private extension VPNProviderServerView.ContentView {
                 header: filtersViewModel.filters.categoryName ?? Strings.Views.Vpn.Category.any
             )
             .onLoad {
-                if let selectedServer = selectedServer {
+                if let selectedServer {
                     expandedCodes.insert(selectedServer.provider.countryCode)
                 }
             }
@@ -165,9 +165,7 @@ private extension VPNProviderServerView.ContentView {
             list.append($0)
             map[code] = list
         }
-        withAnimation {
-            serversByCountryCode = map
-        }
+        serversByCountryCode = map
     }
 }
 
