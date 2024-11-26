@@ -43,6 +43,7 @@ struct AddProfileMenu: View {
         Menu {
             emptyProfileButton
             importProfileButton
+            providerProfileMenu
             Divider()
             migrateProfilesButton
         } label: {
@@ -69,6 +70,25 @@ private extension AddProfileMenu {
         }
     }
 
+    var providerProfileMenu: some View {
+        Menu {
+            ForEach(supportedProviders, content: providerProfileButton(for:))
+        } label: {
+            ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.provider, .profileProvider)
+        }
+    }
+
+    func providerProfileButton(for moduleType: ModuleType) -> some View {
+        Button(ModuleType.openVPN.localizedDescription) {
+            var editable = EditableProfile(name: newName)
+            let newModule = moduleType.newModule(with: registry)
+            editable.modules.append(newModule)
+            editable.modules.append(OnDemandModule.Builder())
+            editable.activeModulesIds = Set(editable.modules.map(\.id))
+            onNewProfile(editable)
+        }
+    }
+
     var migrateProfilesButton: some View {
         Button(action: onMigrateProfiles) {
             ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
@@ -79,5 +99,9 @@ private extension AddProfileMenu {
 private extension AddProfileMenu {
     var newName: String {
         profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
+    }
+
+    var supportedProviders: [ModuleType] {
+        [.openVPN]
     }
 }
