@@ -111,8 +111,7 @@ private extension PurchasedView {
                 HStack {
                     Text(feature.localizedDescription)
                     Spacer()
-                    ThemeImage(.marked)
-                        .opaque(iapManager.isEligible(for: feature))
+                    ThemeImage(iapManager.isEligible(for: feature) ? .marked : .close)
                 }
                 .scrollableOnTV()
             }
