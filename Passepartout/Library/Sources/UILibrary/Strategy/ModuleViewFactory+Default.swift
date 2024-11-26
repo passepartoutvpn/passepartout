@@ -1,5 +1,5 @@
 //
-//  DefaultModuleViewFactory.swift
+//  ModuleViewFactory+Default.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/24/24.
@@ -27,15 +27,15 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-final class DefaultModuleViewFactory: ModuleViewFactory {
+public final class DefaultModuleViewFactory: ModuleViewFactory {
     private let registry: Registry
 
-    init(registry: Registry) {
+    public init(registry: Registry) {
         self.registry = registry
     }
 
     @ViewBuilder
-    func view(with editor: ProfileEditor, moduleId: UUID) -> some View {
+    public func view(with editor: ProfileEditor, moduleId: UUID) -> some View {
         let result = editor.moduleViewProvider(withId: moduleId, registry: registry)
         if let result {
             AnyView(result.provider.moduleView(with: editor, impl: result.impl))
