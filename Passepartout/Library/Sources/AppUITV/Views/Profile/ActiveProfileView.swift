@@ -87,7 +87,7 @@ private extension ActiveProfileView {
     var currentProfileView: some View {
         Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
             .font(.title)
-            .fontWeight(.bold)
+            .fontWeight(theme.relevantWeight)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
@@ -143,7 +143,7 @@ private extension ActiveProfileView {
             }
         )
         .background(toggleConnectionColor)
-        .fontWeight(.bold)
+        .fontWeight(theme.relevantWeight)
         .focused($focusedField, equals: .connect)
     }
 
