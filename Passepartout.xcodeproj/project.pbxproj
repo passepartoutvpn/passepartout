@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		0E483E812CE64D6B00584B32 /* Shared+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */; };
 		0E483E842CE6501100584B32 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E822CE6501100584B32 /* Shared+App.swift */; };
 		0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */; };
+		0E61126A2CF7BF0700AC5E0B /* UIAccessibility in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6112692CF7BF0700AC5E0B /* UIAccessibility */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
 		0E757F202CD0D22B006E13E1 /* PassepartoutLoginItem.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E757F232CD0D2BD006E13E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */; };
@@ -56,6 +57,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0E757F0F2CD0CFFC006E13E1;
 			remoteInfo = PassepartoutLoginItem;
+		};
+		0E78FE522CF799F400B0C5BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E06D18E2B87629100176E1D;
+			remoteInfo = Passepartout;
 		};
 		0EC332D02B8A1808000B9C2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -121,6 +129,7 @@
 		0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutLoginItemApp.swift; sourceTree = "<group>"; };
 		0E757F182CD0CFFD006E13E1 /* LoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoginItem.entitlements; sourceTree = "<group>"; };
 		0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.xctestplan; sourceTree = "<group>"; };
 		0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -148,6 +157,10 @@
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PassepartoutUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		0E3FF4AB2CE3AF6F00BFF640 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -162,6 +175,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78FE492CF799F400B0C5BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E61126A2CF7BF0700AC5E0B /* UIAccessibility in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				0E7E3D592B9345FD002BBDB4 /* Passepartout */,
+				0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */,
 				0E06D1902B87629100176E1D /* Products */,
 				0E06D1A32B8762AD00176E1D /* Frameworks */,
 			);
@@ -213,6 +235,7 @@
 				0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */,
 				0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */,
 				0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */,
+				0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -395,6 +418,30 @@
 			productReference = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0E78FE4B2CF799F400B0C5BF /* PassepartoutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E78FE562CF799F400B0C5BF /* Build configuration list for PBXNativeTarget "PassepartoutUITests" */;
+			buildPhases = (
+				0E78FE482CF799F400B0C5BF /* Sources */,
+				0E78FE492CF799F400B0C5BF /* Frameworks */,
+				0E78FE4A2CF799F400B0C5BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E78FE532CF799F400B0C5BF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */,
+			);
+			name = PassepartoutUITests;
+			packageProductDependencies = (
+				0E6112692CF7BF0700AC5E0B /* UIAccessibility */,
+			);
+			productName = PassepartoutUITests;
+			productReference = 0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		0EC332C72B8A1808000B9C2F /* PassepartoutTunnel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EC332D32B8A1808000B9C2F /* Build configuration list for PBXNativeTarget "PassepartoutTunnel" */;
@@ -441,7 +488,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					0E06D18E2B87629100176E1D = {
@@ -452,6 +499,10 @@
 					};
 					0E757F0F2CD0CFFC006E13E1 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					0E78FE4B2CF799F400B0C5BF = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 0E06D18E2B87629100176E1D;
 					};
 					0EC332C72B8A1808000B9C2F = {
 						CreatedOnToolsVersion = 15.2;
@@ -479,6 +530,7 @@
 				0E757F0F2CD0CFFC006E13E1 /* PassepartoutLoginItem */,
 				0E3FF4AD2CE3AF6F00BFF640 /* PassepartoutTests */,
 				0EC332C72B8A1808000B9C2F /* PassepartoutTunnel */,
+				0E78FE4B2CF799F400B0C5BF /* PassepartoutUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -504,6 +556,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0E757F0E2CD0CFFC006E13E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E78FE4A2CF799F400B0C5BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -581,6 +640,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E78FE482CF799F400B0C5BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EC332C42B8A1808000B9C2F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +688,11 @@
 			);
 			target = 0E757F0F2CD0CFFC006E13E1 /* PassepartoutLoginItem */;
 			targetProxy = 0E757F242CD0D812006E13E1 /* PBXContainerItemProxy */;
+		};
+		0E78FE532CF799F400B0C5BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E06D18E2B87629100176E1D /* Passepartout */;
+			targetProxy = 0E78FE522CF799F400B0C5BF /* PBXContainerItemProxy */;
 		};
 		0EC332D12B8A1808000B9C2F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -962,6 +1033,36 @@
 			};
 			name = Release;
 		};
+		0E78FE542CF799F400B0C5BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Passepartout;
+			};
+			name = Debug;
+		};
+		0E78FE552CF799F400B0C5BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Passepartout;
+			};
+			name = Release;
+		};
 		0EC332D42B8A1808000B9C2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1108,6 +1209,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		0E78FE562CF799F400B0C5BF /* Build configuration list for PBXNativeTarget "PassepartoutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E78FE542CF799F400B0C5BF /* Debug */,
+				0E78FE552CF799F400B0C5BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0EC332D32B8A1808000B9C2F /* Build configuration list for PBXNativeTarget "PassepartoutTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1140,6 +1250,10 @@
 		0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PassepartoutImplementations;
+		};
+		0E6112692CF7BF0700AC5E0B /* UIAccessibility */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UIAccessibility;
 		};
 		0E6C0A022BF4047100450362 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

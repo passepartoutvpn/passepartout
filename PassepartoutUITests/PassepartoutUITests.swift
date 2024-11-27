@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  PassepartoutUITests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -23,10 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIAccessibility
+import XCTest
 
-extension UIAccessibility.ID {
-    public enum App {
-        public static let installedProfile = UIAccessibility.ID("installedProfile", .isStaticText)
+@MainActor
+final class PassepartoutUITests: XCTestCase {
+    override func setUp() async throws {
+        continueAfterFailure = false
+    }
+
+    func testMainScreen() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let container = app.get(.App.installedProfile)
+        XCTAssertTrue(container.waitForExistence(timeout: 1.0))
+
+        let attachment = XCTAttachment(screenshot: app.windows.firstMatch.screenshot())
+        attachment.name = "Main Screen"
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 }

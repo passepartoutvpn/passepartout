@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 
 struct InstalledProfileView: View, Routable {
 
@@ -54,6 +55,7 @@ struct InstalledProfileView: View, Routable {
         debugChanges()
         return HStack(alignment: .center) {
             cardView
+                .uiAccessibility(.App.installedProfile)
             Spacer()
             toggleButton
         }

@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  XCUIApplication+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -24,9 +24,16 @@
 //
 
 import Foundation
+import UIAccessibility
+import XCTest
 
-extension UIAccessibility.ID {
-    public enum App {
-        public static let installedProfile = UIAccessibility.ID("installedProfile", .isStaticText)
+extension XCUIApplication {
+    func get(_ identifier: UIAccessibility.ID) -> XCUIElement {
+        switch identifier.traits {
+        case .isStaticText:
+            return staticTexts[identifier.value]
+        default:
+            fatalError()
+        }
     }
 }
