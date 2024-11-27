@@ -49,6 +49,7 @@ extension PassepartoutApp {
                 }
                 .themeLockScreen()
                 .withEnvironment(from: context, theme: theme)
+                .environment(\.isUITesting, AppEnvironment.isUITesting)
         }
     }
 }

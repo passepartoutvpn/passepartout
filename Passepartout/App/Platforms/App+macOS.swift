@@ -57,10 +57,11 @@ extension PassepartoutApp {
     var body: some Scene {
         Window(appName, id: appName) {
             contentView()
-                .withEnvironment(from: context, theme: theme)
                 .onReceive(didActivateNotificationPublisher) {
                     context.onApplicationActive()
                 }
+                .withEnvironment(from: context, theme: theme)
+                .environment(\.isUITesting, AppEnvironment.isUITesting)
         }
         .defaultSize(width: 600, height: 400)
 
@@ -69,6 +70,7 @@ extension PassepartoutApp {
                 .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
                 .environmentObject(settings)
+                .environment(\.isUITesting, AppEnvironment.isUITesting)
         }
         MenuBarExtra {
             AppMenu(
@@ -77,6 +79,7 @@ extension PassepartoutApp {
             )
             .withEnvironment(from: context, theme: theme)
             .environmentObject(settings)
+            .environment(\.isUITesting, AppEnvironment.isUITesting)
         } label: {
             AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)

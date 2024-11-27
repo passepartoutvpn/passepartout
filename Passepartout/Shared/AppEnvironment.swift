@@ -28,6 +28,10 @@ import Foundation
 import PassepartoutKit
 
 enum AppEnvironment {
+    static var isUITesting: Bool {
+        ProcessInfo.processInfo.environment["PP_UI_TESTS"] == "1"
+    }
+
     static var isFakeIAP: Bool {
         ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
     }
