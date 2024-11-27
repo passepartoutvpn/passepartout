@@ -28,10 +28,10 @@ import UITesting
 import XCTest
 
 extension XCUIApplication {
-    func get(_ identifier: UITesting.ID) -> XCUIElement {
-        switch identifier.traits {
+    func get(_ info: AccessibilityInfo) -> XCUIElement {
+        switch info.traits {
         case .isStaticText:
-            return staticTexts[identifier.value]
+            return staticTexts[info.id]
         default:
             fatalError()
         }

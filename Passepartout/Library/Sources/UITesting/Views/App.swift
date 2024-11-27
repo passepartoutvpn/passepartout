@@ -25,8 +25,8 @@
 
 import Foundation
 
-extension UITesting.ID {
+extension AccessibilityInfo {
     public enum App {
-        public static let installedProfile = UITesting.ID("installedProfile", .isStaticText)
+        public static let installedProfile = AccessibilityInfo("installedProfile", .isStaticText)
     }
 }

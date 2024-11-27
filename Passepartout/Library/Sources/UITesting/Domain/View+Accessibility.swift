@@ -1,5 +1,5 @@
 //
-//  UITesting.swift
+//  View+Accessibility.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -25,22 +25,9 @@
 
 import SwiftUI
 
-public enum UITesting {
-}
-
-extension UITesting {
-    public struct ID: Equatable {
-        public let value: String
-
-        public let traits: AccessibilityTraits
-
-        public init(_ value: String, _ traits: AccessibilityTraits) {
-            self.value = value
-            self.traits = traits
-        }
-
-        public static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.value == rhs.value
-        }
+extension View {
+    public func uiAccessibility(_ info: AccessibilityInfo) -> some View {
+        accessibilityIdentifier(info.id)
+            .accessibility(addTraits: info.traits)
     }
 }
