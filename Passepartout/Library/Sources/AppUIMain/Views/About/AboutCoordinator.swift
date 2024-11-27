@@ -126,9 +126,7 @@ extension AboutCoordinator {
                 .navigationTitle(title(for: .purchased))
 
         case .version:
-            VersionView {
-                LogoImage()
-            }
+            VersionView()
 
         default:
             Text(Strings.Global.Nouns.noSelection)

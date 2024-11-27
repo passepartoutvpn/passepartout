@@ -59,6 +59,14 @@ public struct VersionView<Icon>: View where Icon: View {
     }
 }
 
+extension VersionView where Icon == LogoImage {
+    public init() {
+        icon = {
+            LogoImage()
+        }
+    }
+}
+
 private extension VersionView {
     var title: String {
         Strings.Unlocalized.appName
