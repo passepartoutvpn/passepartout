@@ -18,13 +18,14 @@ fastlane_require "fileutils"
 Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
+api = "Passepartout/Library/Sources/CommonAPI/API"
 logname = "CHANGELOG.txt"
 build_path = "build"
 derived_data_path = "build/derived_data"
 
 desc "Bump version"
 lane :bump do |options|
-    unless options[:only]
+    unless options[:no_log]
         if options[:since]
             between = [options[:since], "HEAD"]
         else
@@ -55,7 +56,7 @@ lane :bump do |options|
     end
     commit_version_bump(
         message: "Bump version",
-        include: [logname]
+        include: [api, logname]
     )
     add_git_tag(
         includes_lane: false,
