@@ -2,12 +2,12 @@
 *.swp
 *.pbxuser
 **/xcuserdata
-fastlane/**/*.html
 fastlane/README.md
 fastlane/report.xml
-fastlane/test_output
-fastlane/metadata/**/review_information
-fastlane/metadata/**/trade_representative_contact_information
+fastlane/**/*.html
+fastlane/**/test_output
+fastlane/**/review_information
+fastlane/**/trade_representative_contact_information
 build/
 dist/
 /iap
