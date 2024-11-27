@@ -49,11 +49,11 @@ CMD_API=$(dirname "$0")/update-bundled-api.sh
 CMD_FASTLANE="bundle exec fastlane bump $OPT_VERSION $OPT_BUILD $OPT_SINCE $OPT_NO_LOG"
 
 if [[ -n $OPT_DRY_RUN ]]; then
-    echo "VERSION = ${OPT_VERSION}"
-    echo "BUILD   = ${OPT_BUILD}"
-    echo "SINCE   = ${OPT_SINCE}"
-    echo "NO_API  = ${OPT_NO_API}"
-    echo "NO_LOG  = ${OPT_NO_LOG}"
+    echo "VERSION = $OPT_VERSION"
+    echo "BUILD   = $OPT_BUILD"
+    echo "SINCE   = $OPT_SINCE"
+    echo "NO_API  = $OPT_NO_API"
+    echo "NO_LOG  = $OPT_NO_LOG"
     if [[ -z $OPT_NO_API ]]; then
         echo "$CMD_API"
     fi
@@ -62,6 +62,6 @@ if [[ -n $OPT_DRY_RUN ]]; then
 fi
 
 if [[ -z $OPT_NO_API ]]; then
-    $(CMD_API)
+    "$CMD_API"
 fi
-"${CMD_FASTLANE}"
+"$CMD_FASTLANE"
