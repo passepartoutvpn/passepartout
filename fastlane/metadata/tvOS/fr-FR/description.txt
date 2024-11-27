@@ -1,0 +1,3 @@
+Passepartout est un client VPN parfaitement intégré avec les plateformes Apple. Vous pouvez à présent partager vos profils VPN depuis les applications iOS et macOS avec votre Apple TV en toute sécurité grâce au chiffrement de bout en bout  CloudKit.
+
+Passepartout est open source: https://github.com/passepartoutvpn

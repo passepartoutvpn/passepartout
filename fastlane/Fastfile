@@ -19,6 +19,7 @@ Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
 api = "Passepartout/Library/Sources/CommonAPI/API"
+metadata = "fastlane/metadata"
 logname = "CHANGELOG.txt"
 build_path = "build"
 derived_data_path = "build/derived_data"
