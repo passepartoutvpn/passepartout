@@ -30,8 +30,12 @@ import UILibrary
 
 @MainActor
 final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+    let context: AppContext = {
+        guard !AppEnvironment.isUITesting else {
+            return .mock(withRegistry: .shared)
+        }
+        return .shared
+    }()
 
 #if os(macOS)
     let settings = MacSettingsModel(

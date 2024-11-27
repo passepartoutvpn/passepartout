@@ -28,14 +28,17 @@ import XCTest
 
 @MainActor
 final class PassepartoutUITests: XCTestCase {
+    private var app: XCUIApplication!
+
     override func setUp() async throws {
         continueAfterFailure = false
+
+        app = XCUIApplication()
+        app.launchEnvironment = ["PP_UI_TESTS": "1"]
+        app.launch()
     }
 
     func testMainScreen() throws {
-        let app = XCUIApplication()
-        app.launch()
-
         let container = app.get(.App.installedProfile)
         XCTAssertTrue(container.waitForExistence(timeout: 1.0))
 
