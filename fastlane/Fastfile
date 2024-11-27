@@ -19,6 +19,7 @@ Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
 api = "Passepartout/Library/Sources/CommonAPI/API"
+metadata = "fastlane/metadata"
 logname = "CHANGELOG.txt"
 build_path = "build"
 derived_data_path = "build/derived_data"
@@ -96,5 +97,48 @@ lane :public_beta do
         distribute_only: true,
         distribute_external: true,
         notify_external_testers: true
+    )
+end
+
+desc "Update App Store metadata"
+lane :asc_metadata do
+    deliver(
+        skip_metadata: false,
+        skip_screenshots: true
+    )
+end
+
+desc "Update App Store screenshots"
+lane :asc_screenshots do
+    deliver(
+        skip_metadata: true,
+        skip_screenshots: false
+    )
+end
+
+desc "Submit a build to App Review"
+lane :asc_review do |options|
+    deliver(
+        submit_for_review: true,
+        skip_binary_upload: true,
+        skip_metadata: false,
+        skip_screenshots: false,
+        submission_information: {
+            add_id_info_uses_idfa: false,
+            export_compliance_uses_encryption: false
+        }
+    )
+end
+
+desc "Tag release"
+lane :tag_release do |options|
+    version = options[:version]
+    tag = "v#{version}"
+    add_git_tag(
+        tag: tag,
+        sign: true
+    )
+    push_git_tags(
+        tag: tag
     )
 end

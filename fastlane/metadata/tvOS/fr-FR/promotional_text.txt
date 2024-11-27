@@ -1,0 +1,1 @@
+../../iOS/fr-FR/promotional_text.txt
