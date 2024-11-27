@@ -40,8 +40,6 @@ public struct Credits: Decodable {
         public let message: String
     }
 
-    public let author: String
-
     public let licenses: [License]
 
     public let notices: [Notice]

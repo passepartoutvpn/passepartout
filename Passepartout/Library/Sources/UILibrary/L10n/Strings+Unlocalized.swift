@@ -98,6 +98,8 @@ extension Strings {
 
         public static let appleTV = "Apple TV"
 
+        public static let authorName = "Davide De Rosa (keeshux)"
+
         public static let ca = "CA"
 
         public static let dns = "DNS"

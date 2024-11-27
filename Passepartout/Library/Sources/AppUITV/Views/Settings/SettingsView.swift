@@ -37,16 +37,16 @@ enum Detail {
     case other
 
     case purchased
+
+    case version
 }
 
 struct SettingsView: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
     let tunnel: ExtendedTunnel
-
-    @Namespace
-    private var masterScope
-
-    @Namespace
-    private var detailScope
 
     @FocusState
     private var focus: Detail?
@@ -63,6 +63,7 @@ struct SettingsView: View {
             DetailView(detail: detail)
                 .frame(maxWidth: .infinity)
         }
+        .background(theme.primaryColor)
         .onChange(of: focus) {
             guard focus != nil else {
                 return
@@ -84,12 +85,18 @@ private extension SettingsView {
 
     var creditsSection: some View {
         Group {
+            Button {
+            } label: {
+                Text(Strings.Global.Nouns.version)
+                    .themeTrailingValue(BundleConfiguration.mainVersionString)
+            }
+            .focused($focus, equals: .version)
             Button(Strings.Views.About.Credits.title) {}
                 .focused($focus, equals: .credits)
             Button(Strings.Views.Donate.title) {}
                 .focused($focus, equals: .donate)
         }
-        .themeSection(header: Strings.Unlocalized.appName)
+        .themeSection(header: Strings.Views.About.title)
     }
 
     var diagnosticsSection: some View {
@@ -105,10 +112,8 @@ private extension SettingsView {
         Group {
             Button(Strings.Views.Purchased.title) {}
                 .focused($focus, equals: .purchased)
-            Text(Strings.Global.Nouns.version)
-                .themeTrailingValue(BundleConfiguration.mainVersionString)
         }
-        .themeSection(header: Strings.Views.About.title)
+        .themeSection()
     }
 }
 
@@ -127,6 +132,9 @@ private struct DetailView: View {
         case .purchased:
             PurchasedView()
                 .themeList()
+
+        case .version:
+            VersionView()
 
         default:
             VStack {}

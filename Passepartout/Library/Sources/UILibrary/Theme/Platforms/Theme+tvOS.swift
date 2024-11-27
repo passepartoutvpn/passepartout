@@ -31,6 +31,12 @@ extension Theme {
     public convenience init() {
         self.init(dummy: Void())
     }
+
+//    public var primaryGradient: AnyGradient {
+//        primaryColor
+//            .opacity(0.6)
+//            .gradient
+//    }
 }
 
 // MARK: - Shortcuts

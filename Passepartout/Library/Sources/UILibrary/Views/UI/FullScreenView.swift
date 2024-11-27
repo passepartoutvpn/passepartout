@@ -1,5 +1,5 @@
 //
-//  LogoView.swift
+//  FullScreenView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/23.
@@ -25,22 +25,32 @@
 
 import SwiftUI
 
-struct LogoView: View {
+public struct FullScreenView<Icon>: View where Icon: View {
 
     @EnvironmentObject
     private var theme: Theme
 
-    var body: some View {
+    @ViewBuilder
+    private let icon: () -> Icon
+
+    public init(icon: @escaping () -> Icon) {
+        self.icon = icon
+    }
+
+    public var body: some View {
         ZStack {
             theme.primaryColor
                 .ignoresSafeArea()
-            Image(theme.logoImage)
+            icon()
         }
         .ignoresSafeArea()
     }
 }
 
 #Preview {
-    LogoView()
-        .withMockEnvironment()
+    FullScreenView {
+        ThemeImage(.cloudOn)
+            .foregroundStyle(.white)
+    }
+    .withMockEnvironment()
 }

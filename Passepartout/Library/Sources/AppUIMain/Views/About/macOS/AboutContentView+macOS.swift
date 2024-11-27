@@ -31,6 +31,9 @@ import SwiftUI
 
 struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View where LinkContent: View, AboutDestination: View, LogDestination: View {
 
+    @EnvironmentObject
+    private var theme: Theme
+
     @Environment(\.dismiss)
     private var dismiss
 
@@ -66,8 +69,9 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                     }
                 }
         }
+        .background(navigationRoute == .version ? theme.primaryColor : nil)
         .onLoad {
-            navigationRoute = .links
+            navigationRoute = .version
         }
     }
 }
@@ -76,6 +80,7 @@ private extension AboutContentView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
+                linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
                 if !isRestricted {

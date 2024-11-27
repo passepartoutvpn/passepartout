@@ -568,10 +568,6 @@ public enum Strings {
           public static let web = Strings.tr("Localizable", "views.about.links.sections.web", fallback: "Web")
         }
       }
-      public enum Sections {
-        /// Resources
-        public static let resources = Strings.tr("Localizable", "views.about.sections.resources", fallback: "Resources")
-      }
     }
     public enum App {
       public enum Errors {
@@ -875,6 +871,14 @@ public enum Strings {
           /// Feature is restricted
           public static let help = Strings.tr("Localizable", "views.ui.purchase_required.restricted.help", fallback: "Feature is restricted")
         }
+      }
+    }
+    public enum Version {
+      /// %@ is a project maintained by %@.
+      /// 
+      /// Source code is publicly available on GitHub under the GPLv3, you can find links in the home page.
+      public static func extra(_ p1: Any, _ p2: Any) -> String {
+        return Strings.tr("Localizable", "views.version.extra", String(describing: p1), String(describing: p2), fallback: "%@ is a project maintained by %@.\n\nSource code is publicly available on GitHub under the GPLv3, you can find links in the home page.")
       }
     }
     public enum Vpn {

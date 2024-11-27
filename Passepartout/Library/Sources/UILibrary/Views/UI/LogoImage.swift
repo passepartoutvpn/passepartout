@@ -1,8 +1,8 @@
 //
-//  AboutCoordinatorRoute.swift
+//  LogoImage.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-enum AboutCoordinatorRoute: Hashable {
-    case credits
+public struct LogoImage: View {
 
-    case diagnostics
+    @EnvironmentObject
+    private var theme: Theme
 
-    case donate
+    public init() {
+    }
 
-    case links
-
-    case purchased
-
-    case version
+    public var body: some View {
+        Image(theme.logoImage)
+    }
 }

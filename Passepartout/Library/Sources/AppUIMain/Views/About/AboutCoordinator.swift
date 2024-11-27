@@ -61,25 +61,44 @@ struct AboutCoordinator: View {
 
 extension AboutCoordinator {
     func linkView(to route: AboutCoordinatorRoute) -> some View {
-        NavigationLink(title(for: route), value: route)
+        NavigationLink(value: route) {
+            linkLabel(for: route)
+        }
     }
 
     func title(for route: AboutCoordinatorRoute) -> String {
         switch route {
         case .credits:
-            return Strings.Views.About.Credits.title
+            Strings.Views.About.Credits.title
 
         case .diagnostics:
-            return Strings.Views.Diagnostics.title
+            Strings.Views.Diagnostics.title
 
         case .donate:
-            return Strings.Views.Donate.title
+            Strings.Views.Donate.title
 
         case .links:
-            return Strings.Views.About.Links.title
+            Strings.Views.About.Links.title
 
         case .purchased:
-            return Strings.Views.Purchased.title
+            Strings.Views.Purchased.title
+
+        case .version:
+            Strings.Views.About.title
+        }
+    }
+
+    @ViewBuilder
+    func linkLabel(for route: AboutCoordinatorRoute) -> some View {
+        switch route {
+        case .version:
+            Text(Strings.Global.Nouns.version)
+#if os(iOS)
+                .themeTrailingValue(BundleConfiguration.mainVersionString)
+#endif
+
+        default:
+            Text(title(for: route))
         }
     }
 
@@ -105,6 +124,9 @@ extension AboutCoordinator {
         case .purchased:
             PurchasedView()
                 .navigationTitle(title(for: .purchased))
+
+        case .version:
+            VersionView()
 
         default:
             Text(Strings.Global.Nouns.noSelection)

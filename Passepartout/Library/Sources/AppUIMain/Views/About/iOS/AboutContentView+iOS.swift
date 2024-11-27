@@ -65,18 +65,17 @@ private extension AboutContentView {
         List {
             PreferencesGroup(profileManager: profileManager)
             Group {
+                linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
                 if !isRestricted {
                     linkContent(.donate)
                 }
             }
-            .themeSection(header: Strings.Views.About.Sections.resources)
+            .themeSection(header: Strings.Views.About.title)
             Section {
                 linkContent(.purchased)
                 linkContent(.diagnostics)
-                Text(Strings.Global.Nouns.version)
-                    .themeTrailingValue(BundleConfiguration.mainVersionString)
             }
         }
         .navigationTitle(Strings.Global.Nouns.settings)

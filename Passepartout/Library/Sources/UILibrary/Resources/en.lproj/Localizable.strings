@@ -26,7 +26,6 @@
 // MARK: Views
 
 "views.about.title" = "About";
-"views.about.sections.resources" = "Resources";
 "views.about.links.title" = "Links";
 "views.about.links.sections.support" = "Support";
 "views.about.links.sections.web" = "Web";
@@ -128,6 +127,8 @@
 "views.ui.connection_status.on_demand_suffix" = " (on-demand)";
 "views.ui.purchase_required.purchase.help" = "Purchase required";
 "views.ui.purchase_required.restricted.help" = "Feature is restricted";
+
+"views.version.extra" = "%@ is a project maintained by %@.\n\nSource code is publicly available on GitHub under the GPLv3, you can find links in the home page.";
 
 "views.vpn.category.any" = "All categories";
 "views.vpn.preset" = "Preset";
