@@ -85,14 +85,18 @@ private extension SettingsView {
 
     var creditsSection: some View {
         Group {
-            Button(Strings.Global.Nouns.version) {}
-                .focused($focus, equals: .version)
+            Button {
+            } label: {
+                Text(Strings.Global.Nouns.version)
+                    .themeTrailingValue(BundleConfiguration.mainVersionString)
+            }
+            .focused($focus, equals: .version)
             Button(Strings.Views.About.Credits.title) {}
                 .focused($focus, equals: .credits)
             Button(Strings.Views.Donate.title) {}
                 .focused($focus, equals: .donate)
         }
-        .themeSection(header: Strings.Unlocalized.appName)
+        .themeSection(header: Strings.Views.About.title)
     }
 
     var diagnosticsSection: some View {
@@ -108,10 +112,8 @@ private extension SettingsView {
         Group {
             Button(Strings.Views.Purchased.title) {}
                 .focused($focus, equals: .purchased)
-            Text(Strings.Global.Nouns.version)
-                .themeTrailingValue(BundleConfiguration.mainVersionString)
         }
-        .themeSection(header: Strings.Views.About.title)
+        .themeSection()
     }
 }
 
