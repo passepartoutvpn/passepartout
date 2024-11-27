@@ -32,14 +32,23 @@ struct NameSection: View {
 
     let placeholder: String
 
+    var footer: String?
+
     var body: some View {
         debugChanges()
         return Group {
             ThemeTextField(Strings.Global.Nouns.name, text: $name, placeholder: placeholder)
                 .labelsHidden()
                 .themeManualInput()
+
+#if os(macOS)
+            footer.map {
+                Text($0)
+                    .themeFooter()
+            }
+#endif
         }
-        .themeSection(header: Strings.Global.Nouns.name)
+        .themeSection(header: Strings.Global.Nouns.name, footer: footer)
     }
 }
 
