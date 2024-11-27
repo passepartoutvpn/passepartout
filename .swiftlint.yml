@@ -19,3 +19,4 @@ disabled_rules:
   - inclusive_language
   - nesting
   - todo
+  - type_name
