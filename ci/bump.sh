@@ -20,7 +20,11 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
       ;;
-    -n)
+    -na)
+      OPT_NO_API=1
+      shift # past argument
+      ;;
+    -nl)
       OPT_NO_LOG="no_log:true"
       shift # past argument
       ;;
@@ -41,15 +45,23 @@ done
 
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
-CMD="bundle exec fastlane bump $OPT_VERSION $OPT_BUILD $OPT_SINCE $OPT_NO_LOG"
+CMD_API=$(dirname "$0")/update-bundled-api.sh
+CMD_FASTLANE="bundle exec fastlane bump $OPT_VERSION $OPT_BUILD $OPT_SINCE $OPT_NO_LOG"
 
 if [[ -n $OPT_DRY_RUN ]]; then
     echo "VERSION = ${OPT_VERSION}"
     echo "BUILD   = ${OPT_BUILD}"
     echo "SINCE   = ${OPT_SINCE}"
+    echo "NO_API  = ${OPT_NO_API}"
     echo "NO_LOG  = ${OPT_NO_LOG}"
-    echo "$CMD"
+    if [[ -z $OPT_NO_API ]]; then
+        echo "$CMD_API"
+    fi
+    echo "$CMD_FASTLANE"
     exit 0
 fi
 
-"${CMD}"
+if [[ -z $OPT_NO_API ]]; then
+    $(CMD_API)
+fi
+"${CMD_FASTLANE}"
