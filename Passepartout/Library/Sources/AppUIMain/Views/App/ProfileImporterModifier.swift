@@ -101,7 +101,7 @@ private extension ProfileImporterModifier {
                 await errorHandler.handle(
                     error,
                     title: Strings.Views.App.Toolbar.importProfile,
-                    message: Strings.Views.App.Errors.import
+                    message: Strings.Errors.App.import
                 )
             }
         }

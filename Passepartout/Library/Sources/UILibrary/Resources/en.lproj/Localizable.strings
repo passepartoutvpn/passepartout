@@ -50,9 +50,6 @@
 "views.app.toolbar.import_profile" = "Import profile";
 "views.app.toolbar.migrate_profiles" = "Migrate profiles";
 "views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
-"views.app.errors.tunnel" = "Unable to execute tunnel operation.";
-"views.app.errors.duplicate" = "Unable to duplicate profile '%@'.";
-"views.app.errors.import" = "Unable to import profiles.";
 
 "views.app.profile_context.connect_to" = "Connect to";
 
@@ -329,10 +326,12 @@
 // MARK: Global (App errors)
 
 "errors.app.default" = "Unable to complete operation.";
+"errors.app.duplicate" = "Unable to duplicate profile '%@'.";
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
+"errors.app.import" = "Unable to import profiles.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
-"errors.app.provider.required" = "No provider selected.";
+"errors.app.tunnel" = "Unable to execute tunnel operation.";
 
 // MARK: Global (PassepartoutKit errors)
 

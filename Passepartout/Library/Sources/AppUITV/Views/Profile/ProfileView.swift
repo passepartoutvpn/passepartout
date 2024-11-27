@@ -129,7 +129,7 @@ private extension ProfileView {
             errorHandler.handle(
                 $0,
                 title: interactiveManager.editor.profile.name,
-                message: Strings.Views.App.Errors.tunnel
+                message: Strings.Errors.App.tunnel
             )
         }
         .font(.body)

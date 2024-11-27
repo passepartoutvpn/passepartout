@@ -60,7 +60,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
                     errorHandler.handle(
                         error,
                         title: profile.name,
-                        message: Strings.Views.App.Errors.tunnel
+                        message: Strings.Errors.App.tunnel
                     )
                 }
             }

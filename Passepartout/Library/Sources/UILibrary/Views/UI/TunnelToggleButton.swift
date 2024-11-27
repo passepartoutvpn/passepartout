@@ -171,7 +171,7 @@ private extension TunnelToggleButton {
             errorHandler.handle(
                 error,
                 title: profile.name,
-                message: Strings.Views.App.Errors.tunnel
+                message: Strings.Errors.App.tunnel
             )
         }
     }
