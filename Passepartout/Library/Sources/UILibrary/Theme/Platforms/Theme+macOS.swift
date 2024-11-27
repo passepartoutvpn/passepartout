@@ -91,8 +91,7 @@ extension ThemeRowWithFooterModifier {
 
             footer.map {
                 Text($0)
-                    .foregroundStyle(.secondary)
-                    .font(.subheadline)
+                    .themeFooter()
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }

@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  ProfileNameSection.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,40 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
-import CommonLibrary
 import SwiftUI
+import UILibrary
 
-struct ProfileGeneralView: View {
-
-    @ObservedObject
-    var profileEditor: ProfileEditor
+struct ProfileNameSection: View {
 
     @Binding
-    var paywallReason: PaywallReason?
+    var name: String
 
     var body: some View {
-        Form {
-            ProfileNameSection(
-                name: $profileEditor.profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
-            UUIDSection(uuid: profileEditor.profile.id)
-        }
-        .themeForm()
+        NameSection(
+            name: $name,
+            placeholder: Strings.Placeholders.Profile.name,
+            footer: Strings.Views.Profile.Sections.Name.footer
+        )
     }
 }
-
-#Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor(),
-        paywallReason: .constant(nil)
-    )
-    .withMockEnvironment()
-}
-
-#endif

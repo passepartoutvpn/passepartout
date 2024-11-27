@@ -99,6 +99,7 @@
 "views.preferences.erase_icloud" = "Erase iCloud store";
 "views.preferences.erase_icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 
+"views.profile.sections.name.footer" = "Use this name to create your VPN automations from the Shortcuts app.";
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";

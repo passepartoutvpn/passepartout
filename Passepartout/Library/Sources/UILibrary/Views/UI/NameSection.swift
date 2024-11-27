@@ -25,21 +25,36 @@
 
 import SwiftUI
 
-struct NameSection: View {
+public struct NameSection: View {
 
     @Binding
-    var name: String
+    private var name: String
 
-    let placeholder: String
+    private let placeholder: String
 
-    var body: some View {
+    private let footer: String?
+
+    public init(name: Binding<String>, placeholder: String, footer: String? = nil) {
+        _name = name
+        self.placeholder = placeholder
+        self.footer = footer
+    }
+
+    public var body: some View {
         debugChanges()
         return Group {
             ThemeTextField(Strings.Global.Nouns.name, text: $name, placeholder: placeholder)
                 .labelsHidden()
                 .themeManualInput()
+
+#if os(macOS)
+            footer.map {
+                Text($0)
+                    .themeFooter()
+            }
+#endif
         }
-        .themeSection(header: Strings.Global.Nouns.name)
+        .themeSection(header: Strings.Global.Nouns.name, footer: footer)
     }
 }
 

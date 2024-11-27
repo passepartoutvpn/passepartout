@@ -804,6 +804,12 @@ public enum Strings {
         /// Add module
         public static let addModule = Strings.tr("Localizable", "views.profile.rows.add_module", fallback: "Add module")
       }
+      public enum Sections {
+        public enum Name {
+          /// Use this name to create your VPN automations from the Shortcuts app.
+          public static let footer = Strings.tr("Localizable", "views.profile.sections.name.footer", fallback: "Use this name to create your VPN automations from the Shortcuts app.")
+        }
+      }
     }
     public enum Providers {
       /// Clear filters
