@@ -120,6 +120,7 @@ lane :asc_review do |options|
     deliver(
         submit_for_review: true,
         automatic_release: false,
+        run_precheck_before_submit: false,
         skip_binary_upload: true,
         skip_metadata: false,
         skip_screenshots: true,
