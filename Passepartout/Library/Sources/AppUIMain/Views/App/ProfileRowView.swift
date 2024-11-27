@@ -165,6 +165,7 @@ private extension ProfileRowView {
             }
         )
         .foregroundStyle(.primary)
+        .uiAccessibility(.App.profileToggle)
     }
 
     var attributesView: some View {
@@ -197,6 +198,7 @@ private extension ProfileRowView {
         .foregroundStyle(.secondary)
         .buttonStyle(.plain)
 #endif
+        .uiAccessibility(.App.profileInfo)
     }
 }
 

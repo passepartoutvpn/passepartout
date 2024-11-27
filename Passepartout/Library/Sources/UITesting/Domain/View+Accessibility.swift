@@ -28,6 +28,5 @@ import SwiftUI
 extension View {
     public func uiAccessibility(_ info: AccessibilityInfo) -> some View {
         accessibilityIdentifier(info.id)
-            .accessibility(addTraits: info.traits)
     }
 }

@@ -36,13 +36,19 @@ extension XCUIApplication {
             launchArguments = newValue.map(\.rawValue)
         }
     }
+}
 
+extension XCUIElement {
     func get(_ info: AccessibilityInfo) -> XCUIElement {
-        switch info.traits {
-        case .isStaticText:
+        switch info.elementType {
+        case .button:
+            return buttons[info.id]
+        case .menu:
+            return menuButtons[info.id]
+        case .menuItem:
+            return menuItems[info.id]
+        case .text:
             return staticTexts[info.id]
-        default:
-            fatalError()
         }
     }
 }

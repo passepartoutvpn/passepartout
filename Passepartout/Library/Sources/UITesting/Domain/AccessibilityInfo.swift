@@ -23,16 +23,26 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
 public struct AccessibilityInfo: Equatable {
+    public enum ElementType {
+        case button
+
+        case menu
+
+        case menuItem
+
+        case text
+    }
+
     public let id: String
 
-    public let traits: AccessibilityTraits
+    public let elementType: ElementType
 
-    public init(_ id: String, _ traits: AccessibilityTraits) {
+    public init(_ id: String, _ elementType: ElementType) {
         self.id = id
-        self.traits = traits
+        self.elementType = elementType
     }
 
     public static func == (lhs: Self, rhs: Self) -> Bool {

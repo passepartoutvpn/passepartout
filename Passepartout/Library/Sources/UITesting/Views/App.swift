@@ -27,6 +27,10 @@ import Foundation
 
 extension AccessibilityInfo {
     public enum App {
-        public static let installedProfile = AccessibilityInfo("installedProfile", .isStaticText)
+        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
+
+        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
+
+        public static let profileInfo = AccessibilityInfo("app.profileInfo", .menu)
     }
 }
