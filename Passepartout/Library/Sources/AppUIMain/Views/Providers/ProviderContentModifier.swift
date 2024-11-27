@@ -98,7 +98,7 @@ private extension ProviderContentModifier {
                 HStack {
                     lastUpdatedString.map {
                         Text($0)
-                            .foregroundStyle(.secondary)
+                            .themeFooter()
                     }
                     Spacer()
                     RefreshInfrastructureButton(apis: apis, providerId: providerId)

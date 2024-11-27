@@ -143,6 +143,11 @@ extension View {
         modifier(ThemeRowWithFooterModifier(footer: footer))
     }
 
+    public func themeFooter() -> some View {
+        foregroundStyle(.secondary)
+            .font(.subheadline)
+    }
+
     public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
         Group {
             if above {
