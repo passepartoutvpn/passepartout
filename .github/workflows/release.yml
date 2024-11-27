@@ -26,8 +26,19 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - run: |
+      - name: Save app version
+        id: app_version
+        run: |
+          VERSION=`ci/version-number.sh $XCODEPROJ`
+          BUILD=`ci/build-number.sh $XCODEPROJ`
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "build=$BUILD" >> $GITHUB_OUTPUT
+      - name: Run Xcode tests
+        run: |
           bundle exec fastlane test
+	outputs:
+      version: ${{ steps.app_version.outputs.version }}
+      build: ${{ steps.app_version.outputs.build }}
   build_upload:
     name: Upload to ASC
     runs-on: macos-15
