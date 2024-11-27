@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  PreferenceProtocol.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,10 +25,6 @@
 
 import Foundation
 
-public enum AppPreference: String, PreferenceProtocol {
-    case logsPrivateData
-
-    public var key: String {
-        "App.\(rawValue)"
-    }
+public protocol PreferenceProtocol {
+    var key: String { get }
 }

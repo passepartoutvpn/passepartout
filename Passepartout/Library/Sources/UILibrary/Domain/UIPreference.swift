@@ -26,7 +26,7 @@
 import CommonLibrary
 import Foundation
 
-public enum UIPreference: String {
+public enum UIPreference: String, PreferenceProtocol {
     case keepsInMenu
 
     case locksInBackground
