@@ -98,3 +98,34 @@ lane :public_beta do
         notify_external_testers: true
     )
 end
+
+desc "Update App Store metadata"
+lane :asc_metadata do
+    deliver(
+        skip_metadata: false,
+        skip_screenshots: true
+    )
+end
+
+desc "Update App Store screenshots"
+lane :asc_screenshots do
+    deliver(
+        skip_metadata: true,
+        skip_screenshots: false
+    )
+end
+
+desc "Submit a build to App Review"
+lane :asc_review do |options|
+    deliver(
+        submit_for_review: true,
+        automatic_release: false,
+        skip_binary_upload: true,
+        skip_metadata: false,
+        skip_screenshots: true,
+        submission_information: {
+            add_id_info_uses_idfa: false,
+            export_compliance_uses_encryption: false
+        }
+    )
+end
