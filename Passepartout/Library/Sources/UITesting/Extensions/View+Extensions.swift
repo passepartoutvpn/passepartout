@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  View+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -23,10 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension UIAccessibility.ID {
-    public enum App {
-        public static let installedProfile = UIAccessibility.ID("installedProfile", .isStaticText)
+extension View {
+    public func uiAccessibility(_ id: UITesting.ID) -> some View {
+        accessibilityIdentifier(id.value)
+            .accessibility(addTraits: id.traits)
     }
 }

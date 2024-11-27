@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2D68DC2CF7CF7500DC95BC /* UITesting in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2D68DB2CF7CF7500DC95BC /* UITesting */; };
 		0E3E22962CE53510005135DF /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E3E22952CE53510005135DF /* AppUIMain */; };
 		0E3E22982CE53510005135DF /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E3E22972CE53510005135DF /* AppUITV */; };
 		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
@@ -14,7 +15,6 @@
 		0E483E812CE64D6B00584B32 /* Shared+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */; };
 		0E483E842CE6501100584B32 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E822CE6501100584B32 /* Shared+App.swift */; };
 		0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */; };
-		0E61126A2CF7BF0700AC5E0B /* UIAccessibility in Frameworks */ = {isa = PBXBuildFile; productRef = 0E6112692CF7BF0700AC5E0B /* UIAccessibility */; };
 		0E61126E2CF7C4A800AC5E0B /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61126D2CF7C4A800AC5E0B /* AppEnvironment.swift */; };
 		0E61126F2CF7C4F000AC5E0B /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E61126D2CF7C4A800AC5E0B /* AppEnvironment.swift */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
@@ -185,7 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E61126A2CF7BF0700AC5E0B /* UIAccessibility in Frameworks */,
+				0E2D68DC2CF7CF7500DC95BC /* UITesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +440,7 @@
 			);
 			name = PassepartoutUITests;
 			packageProductDependencies = (
-				0E6112692CF7BF0700AC5E0B /* UIAccessibility */,
+				0E2D68DB2CF7CF7500DC95BC /* UITesting */,
 			);
 			productName = PassepartoutUITests;
 			productReference = 0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */;
@@ -1245,6 +1245,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E2D68DB2CF7CF7500DC95BC /* UITesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UITesting;
+		};
 		0E3E22952CE53510005135DF /* AppUIMain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppUIMain;
@@ -1256,10 +1260,6 @@
 		0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PassepartoutImplementations;
-		};
-		0E6112692CF7BF0700AC5E0B /* UIAccessibility */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UIAccessibility;
 		};
 		0E6C0A022BF4047100450362 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

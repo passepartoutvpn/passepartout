@@ -24,11 +24,11 @@
 //
 
 import Foundation
-import UIAccessibility
+import UITesting
 import XCTest
 
 extension XCUIApplication {
-    func get(_ identifier: UIAccessibility.ID) -> XCUIElement {
+    func get(_ identifier: UITesting.ID) -> XCUIElement {
         switch identifier.traits {
         case .isStaticText:
             return staticTexts[identifier.value]

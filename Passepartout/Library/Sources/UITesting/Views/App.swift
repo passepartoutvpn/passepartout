@@ -1,5 +1,5 @@
 //
-//  UIAccessibility.swift
+//  App.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -23,24 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
-public enum UIAccessibility {
-}
-
-extension UIAccessibility {
-    public struct ID: Equatable {
-        public let value: String
-
-        public let traits: AccessibilityTraits
-
-        public init(_ value: String, _ traits: AccessibilityTraits) {
-            self.value = value
-            self.traits = traits
-        }
-
-        public static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.value == rhs.value
-        }
+extension UITesting.ID {
+    public enum App {
+        public static let installedProfile = UITesting.ID("installedProfile", .isStaticText)
     }
 }
