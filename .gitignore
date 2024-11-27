@@ -15,9 +15,9 @@ templates/
 vendor/
 Preview.html
 default.profraw
+.api
 .build
 .bundle
 .env.secret*
 *.storekit
-tmp
 *.sqlite-*
