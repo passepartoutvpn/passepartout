@@ -24,7 +24,7 @@ derived_data_path = "build/derived_data"
 
 desc "Bump version"
 lane :bump do |options|
-    unless options[:only]
+    unless options[:no_log]
         if options[:since]
             between = [options[:since], "HEAD"]
         else
