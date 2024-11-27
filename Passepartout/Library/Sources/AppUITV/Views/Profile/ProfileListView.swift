@@ -52,7 +52,7 @@ struct ProfileListView: View {
             headerView
                 .frame(maxWidth: .infinity, alignment: .leading)
             List {
-                ForEach(previews, id: \.id, content: toggleButton(for:))
+                ForEach(allPreviews, id: \.id, content: toggleButton(for:))
             }
             .themeList()
             .themeProgress(if: false, isEmpty: !profileManager.hasProfiles) {
@@ -64,7 +64,7 @@ struct ProfileListView: View {
 }
 
 private extension ProfileListView {
-    var previews: [ProfilePreview] {
+    var allPreviews: [ProfilePreview] {
         profileManager.previews
     }
 
