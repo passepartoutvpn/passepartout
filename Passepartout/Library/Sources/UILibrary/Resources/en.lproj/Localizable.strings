@@ -26,7 +26,6 @@
 // MARK: Views
 
 "views.about.title" = "About";
-"views.about.sections.resources" = "Resources";
 "views.about.links.title" = "Links";
 "views.about.links.sections.support" = "Support";
 "views.about.links.sections.web" = "Web";

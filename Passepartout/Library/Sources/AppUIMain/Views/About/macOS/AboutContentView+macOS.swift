@@ -67,7 +67,7 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                 }
         }
         .onLoad {
-            navigationRoute = .links
+            navigationRoute = .version
         }
     }
 }
@@ -76,6 +76,7 @@ private extension AboutContentView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
+                linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
                 if !isRestricted {

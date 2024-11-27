@@ -568,10 +568,6 @@ public enum Strings {
           public static let web = Strings.tr("Localizable", "views.about.links.sections.web", fallback: "Web")
         }
       }
-      public enum Sections {
-        /// Resources
-        public static let resources = Strings.tr("Localizable", "views.about.sections.resources", fallback: "Resources")
-      }
     }
     public enum App {
       public enum Errors {
