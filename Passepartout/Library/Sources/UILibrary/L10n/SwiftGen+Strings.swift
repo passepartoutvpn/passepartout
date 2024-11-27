@@ -586,10 +586,10 @@ public enum Strings {
       }
       public enum InstalledProfile {
         public enum None {
-          /// Select a profile
-          public static let name = Strings.tr("Localizable", "views.app.installed_profile.none.name", fallback: "Select a profile")
-          /// FIXME
-          public static let status = Strings.tr("Localizable", "views.app.installed_profile.none.status", fallback: "FIXME")
+          /// No profile
+          public static let name = Strings.tr("Localizable", "views.app.installed_profile.none.name", fallback: "No profile")
+          /// Tap list to connect
+          public static let status = Strings.tr("Localizable", "views.app.installed_profile.none.status", fallback: "Tap list to connect")
         }
       }
       public enum Profile {

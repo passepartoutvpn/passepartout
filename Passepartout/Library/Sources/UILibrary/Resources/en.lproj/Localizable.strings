@@ -39,8 +39,8 @@
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
-"views.app.installed_profile.none.name" = "Select a profile";
-"views.app.installed_profile.none.status" = "FIXME";
+"views.app.installed_profile.none.name" = "No profile";
+"views.app.installed_profile.none.status" = "Tap list to connect";
 "views.app.profile.no_modules" = "No active modules";
 "views.app.folders.default" = "My profiles";
 "views.app.folders.no_profiles" = "No profiles";
