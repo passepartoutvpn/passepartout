@@ -877,6 +877,14 @@ public enum Strings {
         }
       }
     }
+    public enum Version {
+      /// %@ is a project maintained by %@.
+      /// 
+      /// Source code is publicly available on GitHub under the GPLv3, you can find links in the home page.
+      public static func extra(_ p1: Any, _ p2: Any) -> String {
+        return Strings.tr("Localizable", "views.version.extra", String(describing: p1), String(describing: p2), fallback: "%@ is a project maintained by %@.\n\nSource code is publicly available on GitHub under the GPLv3, you can find links in the home page.")
+      }
+    }
     public enum Vpn {
       /// No servers
       public static let noServers = Strings.tr("Localizable", "views.vpn.no_servers", fallback: "No servers")
