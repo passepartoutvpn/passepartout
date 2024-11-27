@@ -134,8 +134,12 @@ end
 desc "Tag release"
 lane :tag_release do |options|
     version = options[:version]
+    tag = "v#{version}"
     add_git_tag(
-        tag: "v#{version}",
+        tag: tag,
         sign: true
+    )
+    push_git_tags(
+        tag: tag
     )
 end
