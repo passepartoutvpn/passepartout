@@ -130,3 +130,12 @@ lane :asc_review do |options|
         }
     )
 end
+
+desc "Tag release"
+lane :tag_release do |options|
+    version = options[:version]
+    add_git_tag(
+        tag: "v#{version}",
+        sign: true
+    )
+end
