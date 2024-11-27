@@ -63,6 +63,7 @@ struct SettingsView: View {
             DetailView(detail: detail)
                 .frame(maxWidth: .infinity)
         }
+        .background(theme.primaryColor)
         .onChange(of: focus) {
             guard focus != nil else {
                 return
@@ -80,7 +81,6 @@ private extension SettingsView {
             aboutSection
         }
         .themeList()
-        .background(theme.primaryColor)
     }
 
     var creditsSection: some View {
