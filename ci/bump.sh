@@ -62,6 +62,6 @@ if [[ -n $OPT_DRY_RUN ]]; then
 fi
 
 if [[ -z $OPT_NO_API ]]; then
-    "$CMD_API"
+    eval "$CMD_API"
 fi
-"$CMD_FASTLANE"
+eval "$CMD_FASTLANE"
