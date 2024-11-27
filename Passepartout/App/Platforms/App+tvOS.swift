@@ -27,6 +27,7 @@
 
 import AppUITV
 import SwiftUI
+import UITesting
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -45,7 +46,7 @@ extension PassepartoutApp {
                     }
                 }
                 .withEnvironment(from: context, theme: theme)
-                .environment(\.isUITesting, AppEnvironment.isUITesting)
+                .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
         }
     }
 }

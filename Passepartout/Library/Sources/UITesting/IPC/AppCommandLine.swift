@@ -1,5 +1,5 @@
 //
-//  AppEnvironment.swift
+//  AppCommandLine.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -23,35 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonIAP
 import Foundation
-import PassepartoutKit
 
-enum AppEnvironment {
-    static var isUITesting: Bool {
-        ProcessInfo.processInfo.environment["PP_UI_TESTS"] == "1"
+public enum AppCommandLine {
+    public enum Value: String {
+        case fakeIAP = "-pp_fake_iap"
+
+        case fakeMigration = "-pp_fake_migration"
+
+        case uiTesting = "-pp_ui_tests"
     }
 
-    static var isFakeIAP: Bool {
-        ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
-    }
-
-    static var isFakeMigration: Bool {
-        ProcessInfo.processInfo.environment["PP_FAKE_MIGRATION"] == "1"
-    }
-
-    static var userLevel: AppUserLevel? {
-        if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
-           let envValue = Int(envString),
-           let testAppType = AppUserLevel(rawValue: envValue) {
-
-            return testAppType
-        }
-        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-           let testAppType = AppUserLevel(rawValue: infoValue) {
-
-            return testAppType
-        }
-        return nil
+    public static func contains(_ argument: Value) -> Bool {
+        CommandLine.arguments.contains(argument.rawValue)
     }
 }

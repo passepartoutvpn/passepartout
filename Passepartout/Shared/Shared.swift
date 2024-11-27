@@ -127,9 +127,6 @@ extension Configuration.IAPManager {
 
     @MainActor
     static let inAppHelper: any AppProductHelper = {
-        guard !AppEnvironment.isFakeIAP else {
-            return FakeAppProductHelper()
-        }
         return StoreKitHelper(
             products: AppProduct.all,
             inAppIdentifier: {

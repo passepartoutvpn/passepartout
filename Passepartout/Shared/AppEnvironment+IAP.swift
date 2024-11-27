@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  AppEnvironment+IAP.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import CommonIAP
+import Foundation
 import PassepartoutKit
-import SwiftUI
-import UILibrary
 import UITesting
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = {
-        guard !AppCommandLine.contains(.uiTesting) else {
-            return .mock(withRegistry: .shared)
+extension AppEnvironment {
+    public static var userLevel: AppUserLevel? {
+        if let envString = string(for: .userLevel),
+           let envValue = Int(envString),
+           let testAppType = AppUserLevel(rawValue: envValue) {
+
+            return testAppType
         }
-        return .shared
-    }()
+        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
+           let testAppType = AppUserLevel(rawValue: infoValue) {
 
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
-
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+            return testAppType
+        }
+        return nil
     }
 }

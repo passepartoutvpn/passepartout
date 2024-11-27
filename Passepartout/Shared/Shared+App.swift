@@ -27,12 +27,13 @@ import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+import UITesting
 
 extension IAPManager {
     static let sharedForApp = IAPManager(
         customUserLevel: AppEnvironment.userLevel,
-        inAppHelper: Configuration.IAPManager.inAppHelper,
-        receiptReader: Configuration.IAPManager.appReceiptReader,
+        inAppHelper: Configuration.IAPManager.simulatedInAppHelper,
+        receiptReader: Configuration.IAPManager.simulatedAppReceiptReader,
         betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
@@ -85,8 +86,16 @@ extension IAPManager {
 private extension Configuration.IAPManager {
 
     @MainActor
-    static var appReceiptReader: AppReceiptReader {
-        guard !AppEnvironment.isFakeIAP else {
+    static let simulatedInAppHelper: any AppProductHelper = {
+        guard !AppCommandLine.contains(.fakeIAP) else {
+            return FakeAppProductHelper()
+        }
+        return inAppHelper
+    }()
+
+    @MainActor
+    static var simulatedAppReceiptReader: AppReceiptReader {
+        guard !AppCommandLine.contains(.fakeIAP) else {
             guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
             }
