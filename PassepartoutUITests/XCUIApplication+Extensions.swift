@@ -28,6 +28,15 @@ import UITesting
 import XCTest
 
 extension XCUIApplication {
+    var appArguments: [AppCommandLine.Value] {
+        get {
+            launchArguments.compactMap(AppCommandLine.Value.init(rawValue:))
+        }
+        set {
+            launchArguments = newValue.map(\.rawValue)
+        }
+    }
+
     func get(_ info: AccessibilityInfo) -> XCUIElement {
         switch info.traits {
         case .isStaticText:

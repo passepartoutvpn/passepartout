@@ -34,7 +34,7 @@ final class PassepartoutUITests: XCTestCase {
         continueAfterFailure = false
 
         app = XCUIApplication()
-        app.launchArguments = ["-pp_ui_tests"]
+        app.appArguments = [.uiTesting]
         app.launch()
     }
 
