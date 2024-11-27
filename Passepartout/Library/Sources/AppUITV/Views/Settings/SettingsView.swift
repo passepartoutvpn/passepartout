@@ -37,16 +37,16 @@ enum Detail {
     case other
 
     case purchased
+
+    case version
 }
 
 struct SettingsView: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
     let tunnel: ExtendedTunnel
-
-    @Namespace
-    private var masterScope
-
-    @Namespace
-    private var detailScope
 
     @FocusState
     private var focus: Detail?
@@ -80,10 +80,13 @@ private extension SettingsView {
             aboutSection
         }
         .themeList()
+        .background(theme.primaryColor)
     }
 
     var creditsSection: some View {
         Group {
+            Button(Strings.Global.Nouns.version) {}
+                .focused($focus, equals: .version)
             Button(Strings.Views.About.Credits.title) {}
                 .focused($focus, equals: .credits)
             Button(Strings.Views.Donate.title) {}
@@ -127,6 +130,9 @@ private struct DetailView: View {
         case .purchased:
             PurchasedView()
                 .themeList()
+
+        case .version:
+            VersionView()
 
         default:
             VStack {}
