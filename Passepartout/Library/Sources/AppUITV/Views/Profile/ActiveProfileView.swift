@@ -85,7 +85,7 @@ struct ActiveProfileView: View {
 
 private extension ActiveProfileView {
     var currentProfileView: some View {
-        Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
+        Text(profile?.name ?? Strings.Views.App.InstalledProfile.None.name)
             .font(.title)
             .fontWeight(theme.relevantWeight)
             .frame(maxWidth: .infinity, alignment: .leading)

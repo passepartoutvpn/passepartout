@@ -581,10 +581,6 @@ public enum Strings {
         public static let tunnel = Strings.tr("Localizable", "views.app.errors.tunnel", fallback: "Unable to execute tunnel operation.")
       }
       public enum Folders {
-        /// Installed profile
-        public static let activeProfile = Strings.tr("Localizable", "views.app.folders.active_profile", fallback: "Installed profile")
-        /// Add profile
-        public static let addProfile = Strings.tr("Localizable", "views.app.folders.add_profile", fallback: "Add profile")
         /// My profiles
         public static let `default` = Strings.tr("Localizable", "views.app.folders.default", fallback: "My profiles")
         /// No profiles
@@ -594,15 +590,21 @@ public enum Strings {
           public static let migrate = Strings.tr("Localizable", "views.app.folders.no_profiles.migrate", fallback: "Migrate old profiles...")
         }
       }
+      public enum InstalledProfile {
+        public enum None {
+          /// Select a profile
+          public static let name = Strings.tr("Localizable", "views.app.installed_profile.none.name", fallback: "Select a profile")
+          /// FIXME
+          public static let status = Strings.tr("Localizable", "views.app.installed_profile.none.status", fallback: "FIXME")
+        }
+      }
+      public enum Profile {
+        /// No active modules
+        public static let noModules = Strings.tr("Localizable", "views.app.profile.no_modules", fallback: "No active modules")
+      }
       public enum ProfileContext {
         /// Connect to
         public static let connectTo = Strings.tr("Localizable", "views.app.profile_context.connect_to", fallback: "Connect to")
-      }
-      public enum Rows {
-        /// No active modules
-        public static let noModules = Strings.tr("Localizable", "views.app.rows.no_modules", fallback: "No active modules")
-        /// Select a profile
-        public static let notInstalled = Strings.tr("Localizable", "views.app.rows.not_installed", fallback: "Select a profile")
       }
       public enum Toolbar {
         /// Import profile

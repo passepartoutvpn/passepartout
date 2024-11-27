@@ -76,7 +76,7 @@ private extension InstalledProfileView {
                 if profile != nil {
                     statusView
                 } else {
-                    Text("FIXME")
+                    Text(Strings.Views.App.InstalledProfile.None.status)
                         .foregroundStyle(.secondary)
                 }
             }
@@ -90,7 +90,7 @@ private extension InstalledProfileView {
     }
 
     func nameView() -> some View {
-        Text(profile?.name ?? Strings.Views.App.Rows.notInstalled)
+        Text(profile?.name ?? Strings.Views.App.InstalledProfile.None.name)
             .font(.title2)
             .fontWeight(theme.relevantWeight)
             .themeTruncating(.tail)

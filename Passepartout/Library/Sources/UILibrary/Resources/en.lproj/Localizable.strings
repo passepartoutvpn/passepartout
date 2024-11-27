@@ -39,11 +39,10 @@
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
-"views.app.rows.not_installed" = "Select a profile";
-"views.app.rows.no_modules" = "No active modules";
-"views.app.folders.active_profile" = "Installed profile";
+"views.app.installed_profile.none.name" = "Select a profile";
+"views.app.installed_profile.none.status" = "FIXME";
+"views.app.profile.no_modules" = "No active modules";
 "views.app.folders.default" = "My profiles";
-"views.app.folders.add_profile" = "Add profile";
 "views.app.folders.no_profiles" = "No profiles";
 "views.app.folders.no_profiles.migrate" = "Migrate old profiles...";
 "views.app.toolbar.new_profile.empty" = "Empty profile";
