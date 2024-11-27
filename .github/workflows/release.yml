@@ -36,7 +36,7 @@ jobs:
       - name: Run Xcode tests
         run: |
           bundle exec fastlane test
-	outputs:
+    outputs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}
   build_upload:
