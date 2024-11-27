@@ -62,21 +62,25 @@ struct InstalledProfileView: View, Routable {
 }
 
 private extension InstalledProfileView {
-    var isOpaque: Bool {
-        profile != nil
-    }
-
     var cardView: some View {
-        VStack(alignment: .leading, spacing: 20.0) {
+        VStack(alignment: .leading, spacing: 20) {
             HStack(alignment: .center) {
                 if profile != nil {
                     actionableNameView
-                    Spacer(minLength: 10.0)
+                    Spacer(minLength: 10)
                 } else {
                     nameView()
                 }
             }
-            statusView
+            Group {
+                if profile != nil {
+                    statusView
+                } else {
+                    Text("FIXME")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .font(.body)
         }
         .modifier(CardModifier(layout: layout))
     }
@@ -95,11 +99,7 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerSelectorButton
-            StatusText(
-                theme: theme,
-                tunnel: tunnel,
-                isOpaque: isOpaque
-            )
+            StatusText(theme: theme, tunnel: tunnel)
         }
     }
 
@@ -111,9 +111,9 @@ private extension InstalledProfileView {
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            isOpaque: isOpaque,
             flow: flow
         )
+        .opaque(profile != nil)
     }
 
     func menuContent() -> some View {
@@ -156,14 +156,10 @@ private struct StatusText: View {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
-    let isOpaque: Bool
-
     var body: some View {
         debugChanges()
         return ConnectionStatusText(tunnel: tunnel)
-            .font(.body)
             .foregroundStyle(tunnel.statusColor(theme))
-            .opaque(isOpaque)
     }
 }
 
@@ -185,8 +181,6 @@ private struct ToggleButton: View {
 
     @ObservedObject
     var errorHandler: ErrorHandler
-
-    let isOpaque: Bool
 
     let flow: ProfileFlow?
 
@@ -211,7 +205,6 @@ private struct ToggleButton: View {
         // XXX: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .foregroundStyle(tunnel.statusColor(theme))
-        .opaque(isOpaque)
     }
 }
 
