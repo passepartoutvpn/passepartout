@@ -31,6 +31,9 @@ import SwiftUI
 
 struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View where LinkContent: View, AboutDestination: View, LogDestination: View {
 
+    @EnvironmentObject
+    private var theme: Theme
+
     @Environment(\.dismiss)
     private var dismiss
 
@@ -66,6 +69,7 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                     }
                 }
         }
+        .background(navigationRoute == .version ? theme.primaryColor : nil)
         .onLoad {
             navigationRoute = .version
         }
