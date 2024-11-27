@@ -30,7 +30,7 @@ import PassepartoutKit
 
 extension IAPManager {
     static let sharedForApp = IAPManager(
-        customUserLevel: Configuration.Environment.userLevel,
+        customUserLevel: AppEnvironment.userLevel,
         inAppHelper: Configuration.IAPManager.inAppHelper,
         receiptReader: Configuration.IAPManager.appReceiptReader,
         betaChecker: Configuration.IAPManager.betaChecker,
@@ -82,28 +82,11 @@ extension IAPManager {
 
 // MARK: - Configuration
 
-private extension Configuration.Environment {
-    static var userLevel: AppUserLevel? {
-        if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
-           let envValue = Int(envString),
-           let testAppType = AppUserLevel(rawValue: envValue) {
-
-            return testAppType
-        }
-        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-           let testAppType = AppUserLevel(rawValue: infoValue) {
-
-            return testAppType
-        }
-        return nil
-    }
-}
-
 private extension Configuration.IAPManager {
 
     @MainActor
     static var appReceiptReader: AppReceiptReader {
-        guard !Configuration.Environment.isFakeIAP else {
+        guard !AppEnvironment.isFakeIAP else {
             guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
             }

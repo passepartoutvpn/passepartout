@@ -105,7 +105,7 @@ extension AppContext {
             )
         )
         let migrationSimulation: MigrationManager.Simulation?
-        if Configuration.Environment.isFakeMigration {
+        if AppEnvironment.isFakeMigration {
             migrationSimulation = MigrationManager.Simulation(
                 fakeProfiles: true,
                 maxMigrationTime: 3.0,
