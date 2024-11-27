@@ -38,12 +38,52 @@ final class PassepartoutUITests: XCTestCase {
         app.launch()
     }
 
-    func testMainScreen() throws {
+    func testMain() {
         let container = app.get(.App.installedProfile)
         XCTAssertTrue(container.waitForExistence(timeout: 1.0))
 
-        let attachment = XCTAttachment(screenshot: app.windows.firstMatch.screenshot())
-        attachment.name = "Main Screen"
+//        snapshot("Main")
+    }
+
+    func testConnected() async throws {
+        let container = app.get(.App.installedProfile)
+        XCTAssertTrue(container.waitForExistence(timeout: 1.0))
+
+        let profileToggle = app.get(.App.profileToggle).firstMatch
+        XCTAssertTrue(profileToggle.waitForExistence(timeout: 1.0))
+        profileToggle.tap()
+
+        try await Task.sleep(for: .seconds(3))
+
+//        snapshot("Connected")
+    }
+
+    func testProfile() async throws {
+        let container = app.get(.App.installedProfile)
+        XCTAssertTrue(container.waitForExistence(timeout: 1.0))
+
+        let profileMenu = app.get(.App.profileMenu).firstMatch
+        XCTAssertTrue(profileMenu.waitForExistence(timeout: 1.0))
+        profileMenu.tap()
+
+        let editButton = app.get(.ProfileMenu.edit)
+        XCTAssertTrue(editButton.waitForExistence(timeout: 1.0))
+        editButton.tap()
+
+        try await Task.sleep(for: .seconds(2))
+
+//        snapshot("Profile")
+    }
+}
+
+private extension PassepartoutUITests {
+    var window: XCUIElement {
+        app.windows.firstMatch
+    }
+
+    func snapshot(_ name: String) {
+        let attachment = XCTAttachment(screenshot: window.screenshot())
+        attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
     }

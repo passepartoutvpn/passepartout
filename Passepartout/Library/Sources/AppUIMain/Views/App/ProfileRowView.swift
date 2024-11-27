@@ -198,7 +198,7 @@ private extension ProfileRowView {
         .foregroundStyle(.secondary)
         .buttonStyle(.plain)
 #endif
-        .uiAccessibility(.App.profileInfo)
+        .uiAccessibility(.App.profileMenu)
     }
 }
 
