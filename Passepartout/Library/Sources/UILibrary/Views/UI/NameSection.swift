@@ -25,16 +25,22 @@
 
 import SwiftUI
 
-struct NameSection: View {
+public struct NameSection: View {
 
     @Binding
-    var name: String
+    private var name: String
 
-    let placeholder: String
+    private let placeholder: String
 
-    var footer: String?
+    private let footer: String?
 
-    var body: some View {
+    public init(name: Binding<String>, placeholder: String, footer: String? = nil) {
+        _name = name
+        self.placeholder = placeholder
+        self.footer = footer
+    }
+
+    public var body: some View {
         debugChanges()
         return Group {
             ThemeTextField(Strings.Global.Nouns.name, text: $name, placeholder: placeholder)
