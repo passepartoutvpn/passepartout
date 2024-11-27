@@ -97,7 +97,7 @@ private extension ProfileContainerView {
             errorHandler.handle(
                 $0,
                 title: interactiveManager.editor.profile.name,
-                message: Strings.Views.App.Errors.tunnel
+                message: Strings.Errors.App.tunnel
             )
         }
         .presentationDetents([.medium])

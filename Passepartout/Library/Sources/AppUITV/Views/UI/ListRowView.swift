@@ -26,6 +26,10 @@
 import SwiftUI
 
 struct ListRowView<Content>: View where Content: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
     let title: String
 
     @ViewBuilder
@@ -34,7 +38,7 @@ struct ListRowView<Content>: View where Content: View {
     var body: some View {
         HStack {
             Text(title)
-                .fontWeight(.light)
+                .fontWeight(theme.secondaryWeight)
             Spacer()
             content
         }

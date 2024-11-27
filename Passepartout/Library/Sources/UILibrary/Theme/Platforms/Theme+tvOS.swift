@@ -30,6 +30,8 @@ import SwiftUI
 extension Theme {
     public convenience init() {
         self.init(dummy: Void())
+        relevantWeight = .bold
+        secondaryWeight = .light
     }
 
 //    public var primaryGradient: AnyGradient {

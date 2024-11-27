@@ -96,14 +96,22 @@ public enum Strings {
     public enum App {
       /// Unable to complete operation.
       public static let `default` = Strings.tr("Localizable", "errors.app.default", fallback: "Unable to complete operation.")
+      /// Unable to duplicate profile '%@'.
+      public static func duplicate(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "errors.app.duplicate", String(describing: p1), fallback: "Unable to duplicate profile '%@'.")
+      }
       /// Unable to fetch products, please retry later.
       public static let emptyProducts = Strings.tr("Localizable", "errors.app.empty_products", fallback: "Unable to fetch products, please retry later.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
+      /// Unable to import profiles.
+      public static let `import` = Strings.tr("Localizable", "errors.app.import", fallback: "Unable to import profiles.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
       }
+      /// Unable to execute tunnel operation.
+      public static let tunnel = Strings.tr("Localizable", "errors.app.tunnel", fallback: "Unable to execute tunnel operation.")
       public enum Passepartout {
         /// Routing module can only be enabled together with a connection.
         public static let connectionModuleRequired = Strings.tr("Localizable", "errors.app.passepartout.connection_module_required", fallback: "Routing module can only be enabled together with a connection.")
@@ -127,10 +135,6 @@ public enum Strings {
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
         /// No provider selected.
         public static let providerRequired = Strings.tr("Localizable", "errors.app.passepartout.provider_required", fallback: "No provider selected.")
-      }
-      public enum Provider {
-        /// No provider selected.
-        public static let `required` = Strings.tr("Localizable", "errors.app.provider.required", fallback: "No provider selected.")
       }
     }
     public enum Tunnel {
@@ -570,21 +574,7 @@ public enum Strings {
       }
     }
     public enum App {
-      public enum Errors {
-        /// Unable to duplicate profile '%@'.
-        public static func duplicate(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "views.app.errors.duplicate", String(describing: p1), fallback: "Unable to duplicate profile '%@'.")
-        }
-        /// Unable to import profiles.
-        public static let `import` = Strings.tr("Localizable", "views.app.errors.import", fallback: "Unable to import profiles.")
-        /// Unable to execute tunnel operation.
-        public static let tunnel = Strings.tr("Localizable", "views.app.errors.tunnel", fallback: "Unable to execute tunnel operation.")
-      }
       public enum Folders {
-        /// Installed profile
-        public static let activeProfile = Strings.tr("Localizable", "views.app.folders.active_profile", fallback: "Installed profile")
-        /// Add profile
-        public static let addProfile = Strings.tr("Localizable", "views.app.folders.add_profile", fallback: "Add profile")
         /// My profiles
         public static let `default` = Strings.tr("Localizable", "views.app.folders.default", fallback: "My profiles")
         /// No profiles
@@ -594,15 +584,21 @@ public enum Strings {
           public static let migrate = Strings.tr("Localizable", "views.app.folders.no_profiles.migrate", fallback: "Migrate old profiles...")
         }
       }
+      public enum InstalledProfile {
+        public enum None {
+          /// No profile
+          public static let name = Strings.tr("Localizable", "views.app.installed_profile.none.name", fallback: "No profile")
+          /// Tap list to connect
+          public static let status = Strings.tr("Localizable", "views.app.installed_profile.none.status", fallback: "Tap list to connect")
+        }
+      }
+      public enum Profile {
+        /// No active modules
+        public static let noModules = Strings.tr("Localizable", "views.app.profile.no_modules", fallback: "No active modules")
+      }
       public enum ProfileContext {
         /// Connect to
         public static let connectTo = Strings.tr("Localizable", "views.app.profile_context.connect_to", fallback: "Connect to")
-      }
-      public enum Rows {
-        /// No active modules
-        public static let noModules = Strings.tr("Localizable", "views.app.rows.no_modules", fallback: "No active modules")
-        /// Select a profile
-        public static let notInstalled = Strings.tr("Localizable", "views.app.rows.not_installed", fallback: "Select a profile")
       }
       public enum Toolbar {
         /// Import profile

@@ -45,7 +45,7 @@ struct ProfileDuplicateButton<Label>: View where Label: View {
                     errorHandler.handle(
                         error,
                         title: Strings.Global.Actions.duplicate,
-                        message: Strings.Views.App.Errors.duplicate(preview.name)
+                        message: Strings.Errors.App.duplicate(preview.name)
                     )
                 }
             }

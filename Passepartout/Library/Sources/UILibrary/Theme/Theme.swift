@@ -34,6 +34,8 @@ public final class Theme: ObservableObject {
 
     public internal(set) var relevantWeight: Font.Weight = .semibold
 
+    public internal(set) var secondaryWeight: Font.Weight = .light
+
     public internal(set) var titleColor: Color = .primary
 
     public internal(set) var valueColor: Color = .secondary

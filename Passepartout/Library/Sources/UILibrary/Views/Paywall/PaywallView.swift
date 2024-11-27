@@ -31,6 +31,9 @@ import SwiftUI
 struct PaywallView: View {
 
     @EnvironmentObject
+    private var theme: Theme
+
+    @EnvironmentObject
     private var iapManager: IAPManager
 
     @Binding
@@ -132,7 +135,7 @@ private extension PaywallView {
             features: Array(features),
             content: {
                 featureView(for: $0)
-                    .fontWeight(.bold)
+                    .fontWeight(theme.relevantWeight)
             }
         )
     }

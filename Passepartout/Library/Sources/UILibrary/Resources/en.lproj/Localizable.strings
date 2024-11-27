@@ -39,11 +39,10 @@
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
-"views.app.rows.not_installed" = "Select a profile";
-"views.app.rows.no_modules" = "No active modules";
-"views.app.folders.active_profile" = "Installed profile";
+"views.app.installed_profile.none.name" = "No profile";
+"views.app.installed_profile.none.status" = "Tap list to connect";
+"views.app.profile.no_modules" = "No active modules";
 "views.app.folders.default" = "My profiles";
-"views.app.folders.add_profile" = "Add profile";
 "views.app.folders.no_profiles" = "No profiles";
 "views.app.folders.no_profiles.migrate" = "Migrate old profiles...";
 "views.app.toolbar.new_profile.empty" = "Empty profile";
@@ -51,9 +50,6 @@
 "views.app.toolbar.import_profile" = "Import profile";
 "views.app.toolbar.migrate_profiles" = "Migrate profiles";
 "views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
-"views.app.errors.tunnel" = "Unable to execute tunnel operation.";
-"views.app.errors.duplicate" = "Unable to duplicate profile '%@'.";
-"views.app.errors.import" = "Unable to import profiles.";
 
 "views.app.profile_context.connect_to" = "Connect to";
 
@@ -330,33 +326,35 @@
 // MARK: Global (App errors)
 
 "errors.app.default" = "Unable to complete operation.";
+"errors.app.duplicate" = "Unable to duplicate profile '%@'.";
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
+"errors.app.import" = "Unable to import profiles.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
-"errors.app.provider.required" = "No provider selected.";
+"errors.app.tunnel" = "Unable to execute tunnel operation.";
 
 // MARK: Global (PassepartoutKit errors)
 
 "errors.app.passepartout.connection_module_required" = "Routing module can only be enabled together with a connection.";
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
+"errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Some active modules are incompatible, try to only activate one of them.";
 "errors.app.passepartout.invalid_fields" = "Invalid fields.";
 "errors.app.passepartout.missing_provider_entity" = "No provider server selected.";
 "errors.app.passepartout.no_active_modules" = "The profile has no active modules.";
 "errors.app.passepartout.parsing" = "Unable to parse file.";
 "errors.app.passepartout.provider_required" = "No provider selected.";
-"errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
 
 "errors.tunnel.auth" = "Auth failed";
 "errors.tunnel.compression" = "Compression unsupported";
 "errors.tunnel.dns" = "DNS failed";
 "errors.tunnel.encryption" = "Encryption failed";
+"errors.tunnel.generic" = "Failed";
 "errors.tunnel.ineligible" = "Purchase required";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
 "errors.tunnel.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS failed";
-"errors.tunnel.generic" = "Failed";
 
 // MARK: Global (Theme)
 
