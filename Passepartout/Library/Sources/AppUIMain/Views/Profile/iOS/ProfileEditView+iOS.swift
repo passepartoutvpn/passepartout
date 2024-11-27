@@ -55,7 +55,8 @@ struct ProfileEditView: View, Routable {
         return List {
             NameSection(
                 name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
+                placeholder: Strings.Placeholders.Profile.name,
+                footer: Strings.Views.Profile.Sections.Name.footer
             )
             modulesSection
             StorageSection(

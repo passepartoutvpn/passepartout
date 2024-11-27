@@ -40,7 +40,8 @@ struct ProfileGeneralView: View {
         Form {
             NameSection(
                 name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
+                placeholder: Strings.Placeholders.Profile.name,
+                footer: Strings.Views.Profile.Sections.Name.footer
             )
             StorageSection(
                 profileEditor: profileEditor,
