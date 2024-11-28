@@ -67,6 +67,6 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
         try await Task.sleep(for: .seconds(2))
         try snapshot("3_ProviderServers", target: .sheet)
 
-        print("Saved to: \(Self.temporaryScreenshotDestination)")
+        print("Saved to: \(ScreenshotDestination.temporary.url)")
     }
 }

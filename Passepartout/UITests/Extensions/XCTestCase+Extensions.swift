@@ -39,8 +39,17 @@ extension XCTestCase {
 
         case window
     }
+}
 
-    static let temporaryScreenshotDestination = URL(fileURLWithPath: NSTemporaryDirectory())
+extension XCTestCase.ScreenshotDestination {
+    var url: URL {
+        switch self {
+        case .attachment:
+            fatalError("Can this be found?")
+        case .temporary:
+            return URL(fileURLWithPath: NSTemporaryDirectory())
+        }
+    }
 }
 
 @MainActor
@@ -62,7 +71,7 @@ extension XCUIApplicationProviding where Self: XCTestCase {
 
         case .temporary:
             let filename = deviceFilename(for: name)
-            let url = URL(fileURLWithPath: filename, relativeTo: Self.temporaryScreenshotDestination)
+            let url = URL(fileURLWithPath: filename, relativeTo: destination.url)
             try screenshot.pngRepresentation.write(to: url)
         }
     }
