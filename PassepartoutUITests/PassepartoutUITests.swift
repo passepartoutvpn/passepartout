@@ -48,7 +48,7 @@ final class PassepartoutUITests: XCTestCase {
 
         try await Task.sleep(for: .seconds(3))
 
-//        snapshot("Main")
+        snapshot("Main")
     }
 
     func testProfile() async throws {
@@ -65,7 +65,7 @@ final class PassepartoutUITests: XCTestCase {
 
         try await Task.sleep(for: .seconds(2))
 
-//        snapshot("Profile")
+        snapshot("Profile")
     }
 }
 
@@ -75,9 +75,9 @@ private extension PassepartoutUITests {
     }
 
     func snapshot(_ name: String) {
-        let attachment = XCTAttachment(screenshot: window.screenshot())
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
+//        let attachment = XCTAttachment(screenshot: window.screenshot())
+//        attachment.name = name
+//        attachment.lifetime = .keepAlways
+//        add(attachment)
     }
 }
