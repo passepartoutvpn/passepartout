@@ -237,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				0E7E3D592B9345FD002BBDB4 /* Passepartout */,
+				0EBE80DD2BF55C9100E36A20 /* Library */,
 				0E06D1902B87629100176E1D /* Products */,
 				0E06D1A32B8762AD00176E1D /* Frameworks */,
 			);
@@ -313,7 +314,6 @@
 				0E3FF4A92CE3AF4700BFF640 /* Tests */,
 				0E7E3D652B9345FD002BBDB4 /* Tunnel */,
 				0E7F460D2CF7F01600B1C53A /* UITests */,
-				0EBE80DD2BF55C9100E36A20 /* Library */,
 			);
 			path = Passepartout;
 			sourceTree = "<group>";
