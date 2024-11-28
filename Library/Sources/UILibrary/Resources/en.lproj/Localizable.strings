@@ -77,10 +77,10 @@
 "views.migration.sections.main.header" = "Select below the profiles from old versions of %@ that you want to import. In case your profiles are stored on iCloud, they may take a while to synchronize. If you do not see them now, please come back later.";
 "views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
-"views.paywall.sections.recurring.header" = "All features";
-"views.paywall.sections.one_time.header" = "One-time purchase";
-"views.paywall.sections.features.required.header" = "Required features";
-"views.paywall.sections.features.other.header" = "Also included";
+"views.paywall.sections.required_features.header" = "Required features";
+"views.paywall.sections.suggested_product.header" = "One-time purchase";
+"views.paywall.sections.full_products.header" = "Full version";
+"views.paywall.sections.all_features.header" = "Full version includes";
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
 "views.paywall.rows.restore_purchases" = "Restore purchases";

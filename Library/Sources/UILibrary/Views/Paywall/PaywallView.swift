@@ -25,6 +25,7 @@
 
 import CommonLibrary
 import CommonUtils
+import PassepartoutKit
 import StoreKit
 import SwiftUI
 
@@ -44,13 +45,13 @@ struct PaywallView: View {
     let suggestedProduct: AppProduct?
 
     @State
-    private var oneTimeProduct: InAppProduct?
-
-    @State
-    private var recurringProducts: [InAppProduct] = []
-
-    @State
     private var isFetchingProducts = true
+
+    @State
+    private var suggestedIAP: InAppProduct?
+
+    @State
+    private var fullIAPs: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -62,7 +63,7 @@ struct PaywallView: View {
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        paywallView
+        contentView
             .themeProgress(if: isFetchingProducts)
 #if !os(tvOS)
             .toolbar(content: toolbarContent)
@@ -85,37 +86,36 @@ private extension PaywallView {
         Strings.Global.Actions.purchase
     }
 
-    var otherFeatures: [AppFeature] {
-        AppFeature.allCases.filter {
-            !features.contains($0)
-        }
-    }
-
-    var paywallView: some View {
+    var contentView: some View {
         Form {
             requiredFeaturesView
-            productsView
-            otherFeaturesView
+            suggestedProductView
+            if !fullIAPs.isEmpty {
+                fullProductsView
+                allFeaturesView
+            }
             restoreView
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
     }
 
-    @ViewBuilder
-    var productsView: some View {
-        oneTimeProduct.map {
+    var suggestedProductView: some View {
+        suggestedIAP.map { iap in
             PaywallProductView(
                 iapManager: iapManager,
                 style: .oneTime,
-                product: $0,
+                product: iap,
                 purchasingIdentifier: $purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
             )
-            .themeSection(header: Strings.Views.Paywall.Sections.OneTime.header)
+            .themeSection(header: Strings.Views.Paywall.Sections.SuggestedProduct.header)
         }
-        ForEach(recurringProducts, id: \.productIdentifier) {
+    }
+
+    var fullProductsView: some View {
+        ForEach(fullIAPs, id: \.productIdentifier) {
             PaywallProductView(
                 iapManager: iapManager,
                 style: .recurring,
@@ -125,13 +125,13 @@ private extension PaywallView {
                 onError: onError
             )
         }
-        .themeSection(header: Strings.Views.Paywall.Sections.Recurring.header)
+        .themeSection(header: Strings.Views.Paywall.Sections.FullProducts.header)
     }
 
     var requiredFeaturesView: some View {
         FeatureListView(
             style: .list,
-            header: Strings.Views.Paywall.Sections.Features.Required.header,
+            header: Strings.Views.Paywall.Sections.RequiredFeatures.header,
             features: Array(features),
             content: {
                 featureView(for: $0)
@@ -140,16 +140,16 @@ private extension PaywallView {
         )
     }
 
-    var otherFeaturesView: some View {
+    var allFeaturesView: some View {
         FeatureListView(
-            style: otherFeaturesStyle,
-            header: Strings.Views.Paywall.Sections.Features.Other.header,
-            features: otherFeatures,
+            style: allFeaturesStyle,
+            header: Strings.Views.Paywall.Sections.AllFeatures.header,
+            features: allFeatures,
             content: featureView(for:)
         )
     }
 
-    var otherFeaturesStyle: FeatureListViewStyle {
+    var allFeaturesStyle: FeatureListViewStyle {
 #if os(iOS) || os(tvOS)
         .list
 #else
@@ -170,11 +170,7 @@ private extension PaywallView {
                 above: true
             )
     }
-}
 
-private extension PaywallView {
-
-    @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
             Button {
@@ -199,6 +195,18 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
+    var allFeatures: [AppFeature] {
+        AppFeature.allCases
+    }
+
+    var yearlyProduct: AppProduct {
+        .Full.Recurring.yearly
+    }
+
+    var monthlyProduct: AppProduct {
+        .Full.Recurring.monthly
+    }
+
     func fetchAvailableProducts() async {
         isFetchingProducts = true
         defer {
@@ -209,23 +217,35 @@ private extension PaywallView {
         if let suggestedProduct {
             list.append(suggestedProduct)
         }
-        list.append(.Full.Recurring.yearly)
-        list.append(.Full.Recurring.monthly)
+        list.append(yearlyProduct)
+        list.append(monthlyProduct)
 
         do {
             let availableProducts = try await iapManager.purchasableProducts(for: list)
             guard !availableProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
-            oneTimeProduct = availableProducts.first {
-                guard let suggestedProduct else {
-                    return false
+
+            var suggestedIAP: InAppProduct?
+            var fullIAPs: [InAppProduct] = []
+            availableProducts.forEach {
+                if let suggestedProduct, $0.productIdentifier.hasSuffix(suggestedProduct.rawValue) {
+                    suggestedIAP = $0
+                } else {
+                    fullIAPs.append($0)
                 }
-                return $0.productIdentifier.hasSuffix(suggestedProduct.rawValue)
             }
-            recurringProducts = availableProducts.filter {
-                $0.productIdentifier != oneTimeProduct?.productIdentifier
+
+            pp_log(.App.iap, .info, "Available products: \(availableProducts)")
+            pp_log(.App.iap, .info, "\tSuggested: \(suggestedIAP.debugDescription)")
+            pp_log(.App.iap, .info, "\tFull: \(fullIAPs)")
+
+            guard suggestedIAP != nil || !fullIAPs.isEmpty else {
+                throw AppError.emptyProducts
             }
+
+            self.suggestedIAP = suggestedIAP
+            self.fullIAPs = fullIAPs
         } catch {
             onError(error, dismissing: true)
         }
