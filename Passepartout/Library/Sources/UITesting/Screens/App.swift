@@ -27,17 +27,17 @@ import Foundation
 
 extension AccessibilityInfo {
     public enum App {
+        public enum ProfileMenu {
+            public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
+
+            public static let connectTo = AccessibilityInfo("app.profileMenu.connectTo", .menuItem)
+        }
+
         public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
 
         public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
 
         public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
-    }
-
-    public enum ProfileMenu {
-        public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
-
-        public static let connectTo = AccessibilityInfo("app.profileMenu.connectTo", .menuItem)
     }
 
     public enum Profile {

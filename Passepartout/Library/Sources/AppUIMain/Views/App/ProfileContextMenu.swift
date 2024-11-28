@@ -106,7 +106,7 @@ private extension ProfileContextMenu {
                     ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
                 }
             )
-            .uiAccessibility(.ProfileMenu.connectTo)
+            .uiAccessibility(.App.ProfileMenu.connectTo)
         }
     }
 
@@ -130,7 +130,7 @@ private extension ProfileContextMenu {
         } label: {
             ThemeImageLabel(Strings.Global.Actions.edit, .profileEdit)
         }
-        .uiAccessibility(.ProfileMenu.edit)
+        .uiAccessibility(.App.ProfileMenu.edit)
     }
 
     var profileDuplicateButton: some View {

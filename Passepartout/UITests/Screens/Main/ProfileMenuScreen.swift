@@ -33,14 +33,14 @@ struct ProfileMenuScreen {
 
     @discardableResult
     func editProfile() -> ProfileEditorScreen {
-        let editButton = app.get(.ProfileMenu.edit)
+        let editButton = app.get(.App.ProfileMenu.edit)
         editButton.tap()
         return ProfileEditorScreen(app: app)
     }
 
     @discardableResult
     func connectToProfile() -> AppScreen {
-        let connectToButton = app.get(.ProfileMenu.connectTo)
+        let connectToButton = app.get(.App.ProfileMenu.connectTo)
         connectToButton.tap()
         return AppScreen(app: app)
     }
