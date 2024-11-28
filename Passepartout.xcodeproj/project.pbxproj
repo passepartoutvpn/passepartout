@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,8 @@
 		0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */; };
 		0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */; };
 		0E7F46022CF7D5E300B1C53A /* AppEnvironment+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F46012CF7D5E300B1C53A /* AppEnvironment+IAP.swift */; };
+		0E7F460E2CF7F01600B1C53A /* PassepartoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F460B2CF7F01600B1C53A /* PassepartoutUITests.swift */; };
+		0E7F460F2CF7F01600B1C53A /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F460C2CF7F01600B1C53A /* XCUIApplication+Extensions.swift */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
 		0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EB08B962CA46F4900A02591 /* AppPlist.strings */; };
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
@@ -139,6 +141,8 @@
 		0E7E3D662B9345FD002BBDB4 /* Tunnel.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0E7F46012CF7D5E300B1C53A /* AppEnvironment+IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppEnvironment+IAP.swift"; sourceTree = "<group>"; };
+		0E7F460B2CF7F01600B1C53A /* PassepartoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutUITests.swift; sourceTree = "<group>"; };
+		0E7F460C2CF7F01600B1C53A /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		0E8D852F2C328CA1005493DE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E94EE5C2B93570600588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
 		0EB08B972CA46F4900A02591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppPlist.strings; sourceTree = "<group>"; };
@@ -158,10 +162,6 @@
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PassepartoutUITests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0E3FF4AB2CE3AF6F00BFF640 /* Frameworks */ = {
@@ -223,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				0E7E3D592B9345FD002BBDB4 /* Passepartout */,
-				0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */,
 				0E06D1902B87629100176E1D /* Products */,
 				0E06D1A32B8762AD00176E1D /* Frameworks */,
 			);
@@ -290,6 +289,7 @@
 				0E7E3D612B9345FD002BBDB4 /* Shared */,
 				0E3FF4A92CE3AF4700BFF640 /* Tests */,
 				0E7E3D652B9345FD002BBDB4 /* Tunnel */,
+				0E7F460D2CF7F01600B1C53A /* UITests */,
 				0EBE80DD2BF55C9100E36A20 /* Library */,
 			);
 			path = Passepartout;
@@ -330,6 +330,15 @@
 				0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */,
 			);
 			path = Tunnel;
+			sourceTree = "<group>";
+		};
+		0E7F460D2CF7F01600B1C53A /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				0E7F460B2CF7F01600B1C53A /* PassepartoutUITests.swift */,
+				0E7F460C2CF7F01600B1C53A /* XCUIApplication+Extensions.swift */,
+			);
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		0ED61CF62CD04174008FE259 /* Platforms */ = {
@@ -433,9 +442,6 @@
 			);
 			dependencies = (
 				0E78FE532CF799F400B0C5BF /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0E78FE4D2CF799F400B0C5BF /* PassepartoutUITests */,
 			);
 			name = PassepartoutUITests;
 			packageProductDependencies = (
@@ -648,6 +654,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7F460E2CF7F01600B1C53A /* PassepartoutUITests.swift in Sources */,
+				0E7F460F2CF7F01600B1C53A /* XCUIApplication+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
