@@ -380,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				0EC418C92CF81C6A00AC6F2F /* Main */,
-				0EC418CA2CF81C6F00AC6F2F /* TV */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -393,13 +392,6 @@
 				0EC418D12CF86B7400AC6F2F /* ProfileMenuScreen.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		0EC418CA2CF81C6F00AC6F2F /* TV */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TV;
 			sourceTree = "<group>";
 		};
 		0ED61CF62CD04174008FE259 /* Platforms */ = {
