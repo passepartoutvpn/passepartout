@@ -174,7 +174,7 @@ extension ProfileManager {
             return
         }
         requiredFeatures = allProfiles.reduce(into: [:]) {
-            guard let ineligible = processor.verify($1.value), !ineligible.isEmpty else {
+            guard let ineligible = processor.requiredFeatures($1.value), !ineligible.isEmpty else {
                 return
             }
             $0[$1.key] = ineligible

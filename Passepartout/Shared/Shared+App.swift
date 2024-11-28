@@ -37,44 +37,6 @@ extension IAPManager {
         betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
-
-    static let sharedProcessor = InAppProcessor(
-        iapManager: sharedForApp,
-        title: {
-            Configuration.ProfileManager.sharedTitle($0)
-        },
-        isIncluded: {
-            Configuration.ProfileManager.isIncluded($0, $1)
-        },
-        preview: {
-            $0.localizedPreview
-        },
-        verify: { iap, profile in
-            do {
-                try iap.verify(profile)
-                return nil
-            } catch AppError.ineligibleProfile(let requiredFeatures) {
-                return requiredFeatures
-            } catch {
-                return nil
-            }
-        },
-        willRebuild: { _, builder in
-            builder
-        },
-        willInstall: { iap, profile in
-            try iap.verify(profile)
-
-            // validate provider modules
-            do {
-                _ = try profile.withProviderModules()
-                return profile
-            } catch {
-                pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-                throw error
-            }
-        }
-    )
 }
 
 // MARK: - Configuration

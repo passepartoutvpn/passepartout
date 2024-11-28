@@ -35,7 +35,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
 
     private nonisolated let _preview: (Profile) -> ProfilePreview
 
-    private nonisolated let _verify: (IAPManager, Profile) -> Set<AppFeature>?
+    private nonisolated let _requiredFeatures: (IAPManager, Profile) -> Set<AppFeature>?
 
     private nonisolated let _willRebuild: (IAPManager, Profile.Builder) throws -> Profile.Builder
 
@@ -46,7 +46,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
         title: @escaping (Profile) -> String,
         isIncluded: @escaping (IAPManager, Profile) -> Bool,
         preview: @escaping (Profile) -> ProfilePreview,
-        verify: @escaping (IAPManager, Profile) -> Set<AppFeature>?,
+        requiredFeatures: @escaping (IAPManager, Profile) -> Set<AppFeature>?,
         willRebuild: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
         willInstall: @escaping (IAPManager, Profile) throws -> Profile
     ) {
@@ -54,7 +54,7 @@ public final class InAppProcessor: ObservableObject, Sendable {
         _title = title
         _isIncluded = isIncluded
         _preview = preview
-        _verify = verify
+        _requiredFeatures = requiredFeatures
         _willRebuild = willRebuild
         _willInstall = willInstall
     }
@@ -75,8 +75,8 @@ extension InAppProcessor: ProfileProcessor {
         _preview(profile)
     }
 
-    public func verify(_ profile: Profile) -> Set<AppFeature>? {
-        _verify(iapManager, profile)
+    public func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
+        _requiredFeatures(iapManager, profile)
     }
 
     public func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {

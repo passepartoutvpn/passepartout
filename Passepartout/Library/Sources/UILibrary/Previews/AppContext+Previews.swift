@@ -59,16 +59,14 @@ extension AppContext {
             preview: {
                 $0.localizedPreview
             },
-            verify: { _, _ in
+            requiredFeatures: { _, _ in
                 nil
             },
             willRebuild: { _, builder in
                 builder
             },
-            willInstall: { iap, profile in
-                try iap.verify(profile)
-                _ = try profile.withProviderModules()
-                return profile
+            willInstall: { _, profile in
+                profile
             }
         )
         let profileManager = {

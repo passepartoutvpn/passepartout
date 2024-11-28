@@ -38,6 +38,9 @@ import UITesting
 
 extension AppContext {
     static let shared: AppContext = {
+        let processor = InAppProcessor.shared(.sharedForApp) {
+            $0.localizedPreview
+        }
 
         // MARK: ProfileManager
 
@@ -65,7 +68,7 @@ extension AppContext {
                 backupRepository: Configuration.ProfileManager.backupProfileRepository,
                 remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: Configuration.ProfileManager.mirrorsRemoteRepository,
-                processor: IAPManager.sharedProcessor
+                processor: processor
             )
         }()
 
@@ -74,7 +77,7 @@ extension AppContext {
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: Configuration.ExtendedTunnel.strategy),
             environment: .shared,
-            processor: IAPManager.sharedProcessor,
+            processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
 

@@ -31,7 +31,7 @@ public protocol ProfileProcessor {
 
     func preview(from profile: Profile) -> ProfilePreview
 
-    func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder
+    func requiredFeatures(_ profile: Profile) -> Set<AppFeature>?
 
-    func verify(_ profile: Profile) -> Set<AppFeature>?
+    func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder
 }
