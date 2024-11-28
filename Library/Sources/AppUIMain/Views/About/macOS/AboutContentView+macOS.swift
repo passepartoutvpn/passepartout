@@ -69,7 +69,6 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                     }
                 }
         }
-        .background(navigationRoute == .version ? theme.primaryColor : nil)
         .onLoad {
             navigationRoute = .version
         }

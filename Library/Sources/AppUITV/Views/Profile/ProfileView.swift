@@ -80,7 +80,7 @@ struct ProfileView: View, Routable, TunnelInstallationProviding {
             }
         }
         .ignoresSafeArea(edges: .horizontal)
-        .background(theme.primaryColor)
+        .background(theme.primaryGradient)
         .themeAnimation(on: showsSidePanel, category: .profiles)
         .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.status, onTunnelStatus)

@@ -40,6 +40,26 @@ public struct VersionView<Icon>: View where Icon: View {
 
     public var body: some View {
         ScrollView {
+            contentView
+        }
+#if os(iOS)
+        .background(theme.primaryColor)
+        .foregroundStyle(.white)
+#endif
+    }
+}
+
+extension VersionView where Icon == LogoImage {
+    public init() {
+        icon = {
+            LogoImage()
+        }
+    }
+}
+
+private extension VersionView {
+    var contentView: some View {
+        Group {
             icon()
                 .padding(.top)
             Spacer()
@@ -53,16 +73,6 @@ public struct VersionView<Icon>: View where Icon: View {
                     .multilineTextAlignment(.center)
                     .padding()
             }
-        }
-        .background(theme.primaryColor)
-        .foregroundStyle(.white)
-    }
-}
-
-extension VersionView where Icon == LogoImage {
-    public init() {
-        icon = {
-            LogoImage()
         }
     }
 }
