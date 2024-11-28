@@ -34,11 +34,11 @@ extension Theme {
         secondaryWeight = .light
     }
 
-//    public var primaryGradient: AnyGradient {
-//        primaryColor
-//            .opacity(0.6)
-//            .gradient
-//    }
+    public var primaryGradient: AnyGradient {
+        primaryColor
+            .opacity(0.6)
+            .gradient
+    }
 }
 
 // MARK: - Shortcuts

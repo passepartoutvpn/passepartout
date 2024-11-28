@@ -63,7 +63,7 @@ struct SettingsView: View {
             DetailView(detail: detail)
                 .frame(maxWidth: .infinity)
         }
-        .background(theme.primaryColor)
+        .background(theme.primaryGradient)
         .onChange(of: focus) {
             guard focus != nil else {
                 return
