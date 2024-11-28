@@ -54,6 +54,10 @@ public struct VersionView<Icon>: View where Icon: View {
                     .padding()
             }
         }
+#if os(iOS)
+        .background(theme.primaryColor)
+        .foregroundStyle(.white)
+#endif
     }
 }
 
