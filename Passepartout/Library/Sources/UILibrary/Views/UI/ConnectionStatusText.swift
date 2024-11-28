@@ -76,9 +76,9 @@ private extension ConnectionStatusText {
 }
 
 #Preview("Connected") {
-    ConnectionStatusText(tunnel: .mock)
+    ConnectionStatusText(tunnel: .forPreviews)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: .mock)
+            try? await ExtendedTunnel.forPreviews.connect(with: .forPreviews)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -95,9 +95,9 @@ private extension ConnectionStatusText {
     } catch {
         fatalError()
     }
-    return ConnectionStatusText(tunnel: .mock)
+    return ConnectionStatusText(tunnel: .forPreviews)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: profile)
+            try? await ExtendedTunnel.forPreviews.connect(with: profile)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

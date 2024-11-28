@@ -1,5 +1,5 @@
 //
-//  AppContext+Mock.swift
+//  AppContext+Previews.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/22/24.
@@ -23,25 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Combine
 import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
 
 extension AppContext {
-    public static let mock: AppContext = .mock(withRegistry: Registry())
-
-    public static func mock(withRegistry registry: Registry) -> AppContext {
+    public static let forPreviews: AppContext = {
         let iapManager = IAPManager(
             customUserLevel: .subscriber,
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
-            unrestrictedFeatures: [
-                .interactiveLogin,
-                .onDemand
-            ],
             productsAtBuild: { _ in
                 []
             }
@@ -57,17 +50,23 @@ extension AppContext {
             preview: {
                 $0.localizedPreview
             },
-            verify: { _, _ in
+            requiredFeatures: { _, _ in
                 nil
             },
             willRebuild: { _, builder in
                 builder
             },
             willInstall: { _, profile in
-                try profile.withProviderModules()
+                profile
             }
         )
-        let profileManager: ProfileManager = .mock(withRegistry: registry, processor: processor)
+        let profileManager = {
+            let profiles: [Profile] = (0..<20)
+                .reduce(into: []) { list, _ in
+                    list.append(.newMockProfile())
+                }
+            return ProfileManager(profiles: profiles)
+        }()
         let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: tunnelEnvironment)),
@@ -84,35 +83,35 @@ extension AppContext {
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
-            registry: registry,
+            registry: Registry(),
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
         )
-    }
+    }()
 }
 
 // MARK: - Shortcuts
 
 extension IAPManager {
-    public static var mock: IAPManager {
-        AppContext.mock.iapManager
+    public static var forPreviews: IAPManager {
+        AppContext.forPreviews.iapManager
     }
 }
 
 extension ProfileManager {
-    public static var mock: ProfileManager {
-        AppContext.mock.profileManager
+    public static var forPreviews: ProfileManager {
+        AppContext.forPreviews.profileManager
     }
 }
 
 extension ExtendedTunnel {
-    public static var mock: ExtendedTunnel {
-        AppContext.mock.tunnel
+    public static var forPreviews: ExtendedTunnel {
+        AppContext.forPreviews.tunnel
     }
 }
 
 extension ProviderManager {
-    public static var mock: ProviderManager {
-        AppContext.mock.providerManager
+    public static var forPreviews: ProviderManager {
+        AppContext.forPreviews.providerManager
     }
 }

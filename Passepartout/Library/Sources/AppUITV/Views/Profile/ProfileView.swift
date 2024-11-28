@@ -190,8 +190,8 @@ private extension ProfileView {
 
 #Preview("List") {
     ProfileView(
-        profileManager: .mock,
-        tunnel: .mock,
+        profileManager: .forPreviews,
+        tunnel: .forPreviews,
         errorHandler: .default(),
         showsSidePanel: true
     )
@@ -201,7 +201,7 @@ private extension ProfileView {
 #Preview("Empty") {
     ProfileView(
         profileManager: ProfileManager(profiles: []),
-        tunnel: .mock,
+        tunnel: .forPreviews,
         errorHandler: .default(),
         showsSidePanel: true
     )

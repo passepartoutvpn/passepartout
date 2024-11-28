@@ -270,7 +270,7 @@ extension AppCoordinator {
     }
 
     var overriddenLayout: ProfilesLayout {
-        guard !isUITesting else {
+        if isUITesting {
             return isBigDevice ? .grid : .list
         }
         return layout
@@ -306,8 +306,8 @@ extension AppCoordinator {
 
 #Preview {
     AppCoordinator(
-        profileManager: .mock,
-        tunnel: .mock,
+        profileManager: .forPreviews,
+        tunnel: .forPreviews,
         registry: Registry()
     )
     .withMockEnvironment()

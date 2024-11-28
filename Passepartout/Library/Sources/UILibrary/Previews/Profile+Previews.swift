@@ -1,5 +1,5 @@
 //
-//  Profile+Mock.swift
+//  Profile+Previews.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/4/24.
@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 extension Profile {
-    public static let mock: Profile = {
+    public static let forPreviews: Profile = {
         var profile = Profile.Builder()
         profile.name = "Mock profile"
         do {
@@ -63,7 +63,7 @@ extension Profile {
 
     public static func newMockProfile(withName name: String? = nil) -> Profile {
         do {
-            var copy = mock.builder(withNewId: true)
+            var copy = forPreviews.builder(withNewId: true)
             copy.name = name ?? String(copy.id.uuidString.prefix(8))
             return try copy.tryBuild()
         } catch {

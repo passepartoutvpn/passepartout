@@ -60,8 +60,8 @@ private extension ModuleDetailView {
 
 #Preview {
     ModuleDetailView(
-        profileEditor: ProfileEditor(profile: .mock),
-        moduleId: Profile.mock.modules.first?.id,
+        profileEditor: ProfileEditor(profile: .forPreviews),
+        moduleId: Profile.forPreviews.modules.first?.id,
         moduleViewFactory: DefaultModuleViewFactory(registry: Registry())
     )
     .withMockEnvironment()

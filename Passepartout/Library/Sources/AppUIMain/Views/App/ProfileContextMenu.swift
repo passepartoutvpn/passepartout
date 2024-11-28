@@ -158,9 +158,9 @@ private extension ProfileContextMenu {
         Menu("Menu") {
             ProfileContextMenu(
                 style: .installedProfile,
-                profileManager: .mock,
-                tunnel: .mock,
-                preview: .init(.mock),
+                profileManager: .forPreviews,
+                tunnel: .forPreviews,
+                preview: .init(.forPreviews),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default()
             )

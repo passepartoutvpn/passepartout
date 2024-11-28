@@ -187,7 +187,7 @@ private extension DiagnosticsView {
 }
 
 #Preview {
-    DiagnosticsView(profileManager: .mock, tunnel: .mock) {
+    DiagnosticsView(profileManager: .forPreviews, tunnel: .forPreviews) {
         [
             .init(date: Date(), url: URL(string: "http://one.com")!),
             .init(date: Date().addingTimeInterval(-60), url: URL(string: "http://two.com")!),

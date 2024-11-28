@@ -37,44 +37,6 @@ extension IAPManager {
         betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
-
-    static let sharedProcessor = InAppProcessor(
-        iapManager: sharedForApp,
-        title: {
-            Configuration.ProfileManager.sharedTitle($0)
-        },
-        isIncluded: {
-            Configuration.ProfileManager.isIncluded($0, $1)
-        },
-        preview: {
-            $0.localizedPreview
-        },
-        verify: { iap, profile in
-            do {
-                try iap.verify(profile)
-                return nil
-            } catch AppError.ineligibleProfile(let requiredFeatures) {
-                return requiredFeatures
-            } catch {
-                return nil
-            }
-        },
-        willRebuild: { _, builder in
-            builder
-        },
-        willInstall: { iap, profile in
-            try iap.verify(profile)
-
-            // validate provider modules
-            do {
-                _ = try profile.withProviderModules()
-                return profile
-            } catch {
-                pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-                throw error
-            }
-        }
-    )
 }
 
 // MARK: - Configuration
@@ -90,7 +52,7 @@ private extension Configuration.IAPManager {
 
     @MainActor
     static let simulatedInAppHelper: any AppProductHelper = {
-        guard !AppCommandLine.contains(.fakeIAP) else {
+        if AppCommandLine.contains(.fakeIAP) {
             return FakeAppProductHelper()
         }
         return inAppHelper
@@ -98,7 +60,7 @@ private extension Configuration.IAPManager {
 
     @MainActor
     static var simulatedAppReceiptReader: AppReceiptReader {
-        guard !AppCommandLine.contains(.fakeIAP) else {
+        if AppCommandLine.contains(.fakeIAP) {
             guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
             }

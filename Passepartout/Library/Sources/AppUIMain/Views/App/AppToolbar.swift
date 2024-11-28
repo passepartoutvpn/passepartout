@@ -110,7 +110,7 @@ private extension AppToolbar {
         Text("AppToolbar")
             .toolbar {
                 AppToolbar(
-                    profileManager: .mock,
+                    profileManager: .forPreviews,
                     registry: Registry(),
                     layout: .constant(.list),
                     isImporting: .constant(false),

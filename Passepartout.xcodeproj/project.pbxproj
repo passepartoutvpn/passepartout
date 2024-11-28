@@ -16,6 +16,8 @@
 		0E483E812CE64D6B00584B32 /* Shared+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */; };
 		0E483E842CE6501100584B32 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E822CE6501100584B32 /* Shared+App.swift */; };
 		0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */; };
+		0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EEEE12CF8CABA0076E2B0 /* AppContext+Testing.swift */; };
+		0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EEEE22CF8CABA0076E2B0 /* ProfileManager+Testing.swift */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
 		0E757F202CD0D22B006E13E1 /* PassepartoutLoginItem.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E757F232CD0D2BD006E13E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */; };
@@ -134,6 +136,8 @@
 		0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+Tunnel.swift"; sourceTree = "<group>"; };
 		0E483E822CE6501100584B32 /* Shared+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+App.swift"; sourceTree = "<group>"; };
 		0E5DFDDC2CDB8F9100F2DE70 /* Passepartout.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.storekit; sourceTree = "<group>"; };
+		0E6EEEE12CF8CABA0076E2B0 /* AppContext+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppContext+Testing.swift"; sourceTree = "<group>"; };
+		0E6EEEE22CF8CABA0076E2B0 /* ProfileManager+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileManager+Testing.swift"; sourceTree = "<group>"; };
 		0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLoginItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutLoginItemApp.swift; sourceTree = "<group>"; };
 		0E757F182CD0CFFD006E13E1 /* LoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoginItem.entitlements; sourceTree = "<group>"; };
@@ -277,6 +281,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0E6EEEE62CF8CB090076E2B0 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				0E6EEEE12CF8CABA0076E2B0 /* AppContext+Testing.swift */,
+				0E6EEEE22CF8CABA0076E2B0 /* ProfileManager+Testing.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
 		0E757F112CD0CFFC006E13E1 /* LoginItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +336,7 @@
 		0E7E3D612B9345FD002BBDB4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0E6EEEE62CF8CB090076E2B0 /* Testing */,
 				0EC797402B9378E000C093B7 /* AppContext+Shared.swift */,
 				0EC797412B9378E000C093B7 /* Shared.swift */,
 				0E483E822CE6501100584B32 /* Shared+App.swift */,
@@ -673,6 +687,8 @@
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
 				0EC797422B9378E000C093B7 /* AppContext+Shared.swift in Sources */,
 				0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */,
+				0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */,
+				0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */,
 				0E483E842CE6501100584B32 /* Shared+App.swift in Sources */,
 				0EC797432B9378E000C093B7 /* Shared.swift in Sources */,
 			);

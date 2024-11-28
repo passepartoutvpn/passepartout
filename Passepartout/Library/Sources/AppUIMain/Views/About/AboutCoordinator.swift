@@ -165,8 +165,8 @@ extension AboutCoordinator {
 
 #Preview {
     AboutCoordinator(
-        profileManager: .mock,
-        tunnel: .mock
+        profileManager: .forPreviews,
+        tunnel: .forPreviews
     )
     .withMockEnvironment()
 }

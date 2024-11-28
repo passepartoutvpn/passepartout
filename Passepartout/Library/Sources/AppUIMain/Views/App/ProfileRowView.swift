@@ -205,14 +205,14 @@ private extension ProfileRowView {
 // MARK: - Previews
 
 #Preview {
-    let profile: Profile = .mock
-    let profileManager: ProfileManager = .mock
+    let profile: Profile = .forPreviews
+    let profileManager: ProfileManager = .forPreviews
 
     return Form {
         ProfileRowView(
             style: .compact,
             profileManager: profileManager,
-            tunnel: .mock,
+            tunnel: .forPreviews,
             preview: .init(profile),
             interactiveManager: InteractiveManager(),
             errorHandler: .default(),
