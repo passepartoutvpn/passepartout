@@ -31,10 +31,6 @@ import XCTest
 struct ProfileEditorScreen {
     let app: XCUIApplication
 
-    init(app: XCUIApplication) {
-        self.app = app
-    }
-
     @discardableResult
     func closeProfile() -> AppScreen {
         let cancelButton = app.get(.Profile.cancel)

@@ -1,9 +1,13 @@
 included:
   - Passepartout/App
-  - Passepartout/Library/Sources
-  - Passepartout/Library/Tests
+  - Passepartout/Intents
+  - Passepartout/LoginItem
   - Passepartout/Shared
+  - Passepartout/Tests
   - Passepartout/Tunnel
+  - Passepartout/UITests
+  - Library/Sources
+  - Library/Tests
 analyzer_rules:
   - unused_declaration
   - unused_import

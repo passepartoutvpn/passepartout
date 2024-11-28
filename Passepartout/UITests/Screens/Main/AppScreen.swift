@@ -31,10 +31,6 @@ import XCTest
 struct AppScreen {
     let app: XCUIApplication
 
-    init(app: XCUIApplication) {
-        self.app = app
-    }
-
     @discardableResult
     func waitForProfiles() -> Self {
         app.get(.App.installedProfile)
