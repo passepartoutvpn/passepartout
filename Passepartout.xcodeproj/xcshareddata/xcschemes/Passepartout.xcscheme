@@ -85,7 +85,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pp_ui_tests"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pp_fake_migration"
@@ -121,11 +121,6 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SQLITE_AUTO_TRACE"
-            value = "1"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "PP_USER_LEVEL"
             value = "1"
             isEnabled = "NO">
          </EnvironmentVariable>

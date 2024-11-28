@@ -314,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				0EC797402B9378E000C093B7 /* AppContext+Shared.swift */,
-				0E7F46012CF7D5E300B1C53A /* AppEnvironment+IAP.swift */,
 				0EC797412B9378E000C093B7 /* Shared.swift */,
 				0E483E822CE6501100584B32 /* Shared+App.swift */,
 				0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */,
@@ -628,7 +627,6 @@
 				0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */,
 				0E483E842CE6501100584B32 /* Shared+App.swift in Sources */,
 				0EC797432B9378E000C093B7 /* Shared.swift in Sources */,
-				0E7F46022CF7D5E300B1C53A /* AppEnvironment+IAP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

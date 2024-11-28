@@ -31,7 +31,7 @@ import UITesting
 
 extension IAPManager {
     static let sharedForApp = IAPManager(
-        customUserLevel: AppEnvironment.userLevel,
+        customUserLevel: Configuration.IAPManager.customUserLevel,
         inAppHelper: Configuration.IAPManager.simulatedInAppHelper,
         receiptReader: Configuration.IAPManager.simulatedAppReceiptReader,
         betaChecker: Configuration.IAPManager.betaChecker,
@@ -84,6 +84,13 @@ extension IAPManager {
 // MARK: - Configuration
 
 private extension Configuration.IAPManager {
+    static var customUserLevel: AppUserLevel? {
+        guard let userLevelString = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
+              let userLevel = AppUserLevel(rawValue: userLevelString) else {
+            return nil
+        }
+        return userLevel
+    }
 
     @MainActor
     static let simulatedInAppHelper: any AppProductHelper = {
