@@ -70,7 +70,7 @@ struct OnboardingModifier: ViewModifier {
 
 private extension OnboardingModifier {
     func advance() {
-        guard !isUITesting else {
+        if isUITesting {
             pp_log(.app, .info, "UI tests: skip onboarding")
             return
         }

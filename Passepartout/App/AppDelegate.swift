@@ -32,7 +32,7 @@ import UITesting
 @MainActor
 final class AppDelegate: NSObject {
     let context: AppContext = {
-        guard !AppCommandLine.contains(.uiTesting) else {
+        if AppCommandLine.contains(.uiTesting) {
             pp_log(.app, .info, "UI tests: mock AppContext")
             return .forUITesting(withRegistry: .shared)
         }

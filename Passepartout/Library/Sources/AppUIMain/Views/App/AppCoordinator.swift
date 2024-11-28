@@ -270,7 +270,7 @@ extension AppCoordinator {
     }
 
     var overriddenLayout: ProfilesLayout {
-        guard !isUITesting else {
+        if isUITesting {
             return isBigDevice ? .grid : .list
         }
         return layout
