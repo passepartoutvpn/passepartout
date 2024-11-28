@@ -1,1 +1,11 @@
-../sv//release_notes.txt
+* Different styles for profile menu based on context (#947)
+* Add provider profile from toolbar (#946)
+* Do not present server selector if ineligible (#945)
+* Retain on-demand flag on save profile (#942)
+* Connect on provider server selection (#941)
+* Show quick profile menu rather than just edit (#940)
+* Add "Refresh infrastructure" in server lists (#938)
+* Perform onboarding steps on upgrade (#936)
+* Add view in "About" about purchased products (#935)
+* Localize WireGuard errors (#934)
+* Improve provider servers responsiveness on iOS (#927)
