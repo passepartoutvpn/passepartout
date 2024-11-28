@@ -38,14 +38,7 @@ final class PassepartoutUITests: XCTestCase {
         app.launch()
     }
 
-    func testMain() {
-        let container = app.get(.App.installedProfile)
-        XCTAssertTrue(container.waitForExistence(timeout: 1.0))
-
-//        snapshot("Main")
-    }
-
-    func testConnected() async throws {
+    func testMain() async throws {
         let container = app.get(.App.installedProfile)
         XCTAssertTrue(container.waitForExistence(timeout: 1.0))
 
@@ -55,7 +48,7 @@ final class PassepartoutUITests: XCTestCase {
 
         try await Task.sleep(for: .seconds(3))
 
-//        snapshot("Connected")
+//        snapshot("Main")
     }
 
     func testProfile() async throws {
