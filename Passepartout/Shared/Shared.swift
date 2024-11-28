@@ -170,15 +170,13 @@ extension Configuration.ProfileManager {
 extension Configuration.IAPManager {
 
     @MainActor
-    static let inAppHelper: any AppProductHelper = {
-        return StoreKitHelper(
-            products: AppProduct.all,
-            inAppIdentifier: {
-                let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
-                return "\(prefix).\($0.rawValue)"
-            }
-        )
-    }()
+    static let inAppHelper = StoreKitHelper(
+        products: AppProduct.all,
+        inAppIdentifier: {
+            let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
+            return "\(prefix).\($0.rawValue)"
+        }
+    )
 
     static var betaChecker: BetaChecker {
         TestFlightChecker()

@@ -61,8 +61,8 @@ private extension Configuration.IAPManager {
     @MainActor
     static var simulatedAppReceiptReader: AppReceiptReader {
         if AppCommandLine.contains(.fakeIAP) {
-            guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
-                fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
+            guard let mockHelper = simulatedInAppHelper as? FakeAppProductHelper else {
+                fatalError("When .isFakeIAP, simulatedInAppHelper is expected to be MockAppProductHelper")
             }
             return mockHelper.receiptReader
         }
