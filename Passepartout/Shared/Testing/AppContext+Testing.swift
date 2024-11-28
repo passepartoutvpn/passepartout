@@ -1,8 +1,8 @@
 //
-//  AppContext+Previews.swift
+//  AppContext+Testing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/22/24.
+//  Created by Davide De Rosa on 11/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,14 +27,22 @@ import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+import UILibrary
 
+// FIXME: ###, refine for UI testing
 extension AppContext {
-    public static let forPreviews: AppContext = {
+    static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let iapManager = IAPManager(
-            customUserLevel: .subscriber,
+//            customUserLevel: .beta,
+//            customUserLevel: .subscriber,
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
+            unrestrictedFeatures: [
+                .interactiveLogin,
+                .onDemand
+//                .sharing
+            ],
             productsAtBuild: { _ in
                 []
             }
@@ -83,35 +91,9 @@ extension AppContext {
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
-            registry: Registry(),
+            registry: registry,
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
         )
-    }()
-}
-
-// MARK: - Shortcuts
-
-extension IAPManager {
-    public static var forPreviews: IAPManager {
-        AppContext.forPreviews.iapManager
-    }
-}
-
-extension ProfileManager {
-    public static var forPreviews: ProfileManager {
-        AppContext.forPreviews.profileManager
-    }
-}
-
-extension ExtendedTunnel {
-    public static var forPreviews: ExtendedTunnel {
-        AppContext.forPreviews.tunnel
-    }
-}
-
-extension ProviderManager {
-    public static var forPreviews: ProviderManager {
-        AppContext.forPreviews.providerManager
     }
 }
