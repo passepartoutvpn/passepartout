@@ -106,6 +106,7 @@ private extension ProfileContextMenu {
                     ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
                 }
             )
+            .uiAccessibility(.ProfileMenu.connectTo)
         }
     }
 

@@ -130,7 +130,10 @@ extension IAPManager {
     }
 
     public func isEligible<C>(for features: C) -> Bool where C: Collection, C.Element == AppFeature {
-        features.allSatisfy(eligibleFeatures.contains)
+        if features.isEmpty {
+            return true
+        }
+        return features.allSatisfy(eligibleFeatures.contains)
     }
 
     public func isEligibleForFeedback() -> Bool {

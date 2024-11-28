@@ -94,6 +94,7 @@ extension ProfileSplitView {
             Button(Strings.Global.Actions.cancel, role: .cancel) {
                 flow?.onCancelEditing()
             }
+            .uiAccessibility(.Profile.cancel)
         }
         ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(

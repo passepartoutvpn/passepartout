@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  XCUIApplication+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -24,17 +24,20 @@
 //
 
 import Foundation
+import UITesting
+import XCTest
 
-extension AccessibilityInfo {
-    public enum App {
-        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
+protocol XCUIApplicationProviding {
+    var app: XCUIApplication { get }
+}
 
-        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
-
-        public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
-    }
-
-    public enum ProfileMenu {
-        public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
+extension XCUIApplication {
+    var appArguments: [AppCommandLine.Value] {
+        get {
+            launchArguments.compactMap(AppCommandLine.Value.init(rawValue:))
+        }
+        set {
+            launchArguments = newValue.map(\.rawValue)
+        }
     }
 }

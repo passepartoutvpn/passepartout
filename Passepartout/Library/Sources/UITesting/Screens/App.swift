@@ -1,5 +1,5 @@
 //
-//  AccessibilityInfo.swift
+//  App.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -25,27 +25,22 @@
 
 import Foundation
 
-public struct AccessibilityInfo: Equatable, Sendable {
-    public enum ElementType: Sendable {
-        case button
+extension AccessibilityInfo {
+    public enum App {
+        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
 
-        case menu
+        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
 
-        case menuItem
-
-        case text
+        public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
     }
 
-    public let id: String
+    public enum ProfileMenu {
+        public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
 
-    public let elementType: ElementType
-
-    public init(_ id: String, _ elementType: ElementType) {
-        self.id = id
-        self.elementType = elementType
+        public static let connectTo = AccessibilityInfo("app.profileMenu.connectTo", .menuItem)
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+    public enum Profile {
+        public static let cancel = AccessibilityInfo("profile.cancel", .button)
     }
 }

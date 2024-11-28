@@ -1,5 +1,5 @@
 //
-//  XCUIApplication+Extensions.swift
+//  AppScreen.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -27,28 +27,31 @@ import Foundation
 import UITesting
 import XCTest
 
-extension XCUIApplication {
-    var appArguments: [AppCommandLine.Value] {
-        get {
-            launchArguments.compactMap(AppCommandLine.Value.init(rawValue:))
-        }
-        set {
-            launchArguments = newValue.map(\.rawValue)
-        }
-    }
-}
+@MainActor
+struct AppScreen {
+    let app: XCUIApplication
 
-extension XCUIElement {
-    func get(_ info: AccessibilityInfo) -> XCUIElement {
-        switch info.elementType {
-        case .button:
-            return buttons[info.id]
-        case .menu:
-            return menuButtons[info.id]
-        case .menuItem:
-            return menuItems[info.id]
-        case .text:
-            return staticTexts[info.id]
-        }
+    init(app: XCUIApplication) {
+        self.app = app
+    }
+
+    @discardableResult
+    func waitForProfiles() -> Self {
+        app.get(.App.installedProfile)
+        return self
+    }
+
+    @discardableResult
+    func enableProfile(at index: Int) -> Self {
+        let profileToggle = app.get(.App.profileToggle, at: index)
+        profileToggle.tap()
+        return self
+    }
+
+    @discardableResult
+    func openProfileMenu(at index: Int) -> ProfileMenuScreen {
+        let profileMenu = app.get(.App.profileMenu, at: index)
+        profileMenu.tap()
+        return ProfileMenuScreen(app: app)
     }
 }

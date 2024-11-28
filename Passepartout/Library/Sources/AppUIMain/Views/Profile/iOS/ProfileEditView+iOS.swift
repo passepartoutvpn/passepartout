@@ -93,6 +93,7 @@ private extension ProfileEditView {
             Button(Strings.Global.Actions.cancel, role: .cancel) {
                 flow?.onCancelEditing()
             }
+            .uiAccessibility(.Profile.cancel)
         }
     }
 

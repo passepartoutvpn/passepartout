@@ -85,7 +85,7 @@ private extension AddProfileMenu {
             registry: registry,
             onSelect: {
                 var copy = $0
-                copy.name = profileManager.firstUniqueName(from: copy.name)
+                copy.name = newName
                 onNewProfile(copy, copy.modules.first?.id)
             }
         )
@@ -133,7 +133,6 @@ private struct ProvidersSubmenu: View {
     func profileButton(for provider: ProviderMetadata) -> some View {
         Button(provider.description) {
             var editable = EditableProfile()
-            editable.name = provider.description
             if var newModule = moduleType.newModule(with: registry) as? any ProviderModuleBuilder {
                 newModule.providerId = provider.id
                 editable.modules.append(newModule)
