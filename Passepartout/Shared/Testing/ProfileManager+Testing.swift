@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 
 extension ProfileManager {
-    public static func mock(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {
+    public static func forTesting(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {
         let repository = InMemoryProfileRepository()
         let remoteRepository = InMemoryProfileRepository()
         let manager = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in

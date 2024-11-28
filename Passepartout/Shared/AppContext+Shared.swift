@@ -38,7 +38,8 @@ import UITesting
 
 extension AppContext {
     static let shared: AppContext = {
-        let processor = InAppProcessor.shared(.sharedForApp) {
+        let iapManager: IAPManager = .sharedForApp
+        let processor = InAppProcessor.shared(iapManager) {
             $0.localizedPreview
         }
 
@@ -121,7 +122,7 @@ extension AppContext {
         let migrationManager = MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
 
         return AppContext(
-            iapManager: .sharedForApp,
+            iapManager: iapManager,
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,

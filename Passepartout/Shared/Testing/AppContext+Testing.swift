@@ -29,52 +29,25 @@ import Foundation
 import PassepartoutKit
 import UILibrary
 
-// FIXME: ###, refine for UI testing
 extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let iapManager = IAPManager(
-//            customUserLevel: .beta,
-//            customUserLevel: .subscriber,
+            customUserLevel: .subscriber,
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
-            unrestrictedFeatures: [
-                .interactiveLogin,
-                .onDemand
-//                .sharing
-            ],
             productsAtBuild: { _ in
                 []
             }
         )
-        let processor = InAppProcessor(
-            iapManager: iapManager,
-            title: {
-                "Passepartout.Mock: \($0.name)"
-            },
-            isIncluded: { _, _ in
-                true
-            },
-            preview: {
-                $0.localizedPreview
-            },
-            requiredFeatures: { _, _ in
-                nil
-            },
-            willRebuild: { _, builder in
-                builder
-            },
-            willInstall: { _, profile in
-                profile
-            }
+        let processor = InAppProcessor.shared(iapManager) {
+            $0.localizedPreview
+        }
+
+        let profileManager: ProfileManager = .forTesting(
+            withRegistry: .shared,
+            processor: processor
         )
-        let profileManager = {
-            let profiles: [Profile] = (0..<20)
-                .reduce(into: []) { list, _ in
-                    list.append(.newMockProfile())
-                }
-            return ProfileManager(profiles: profiles)
-        }()
         let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: tunnelEnvironment)),
@@ -86,6 +59,7 @@ extension AppContext {
             repository: InMemoryProviderRepository()
         )
         let migrationManager = MigrationManager()
+
         return AppContext(
             iapManager: iapManager,
             migrationManager: migrationManager,
