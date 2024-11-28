@@ -51,7 +51,6 @@ public final class ErrorHandler: ObservableObject {
             message: composedMessage,
             dismissAction: onDismiss
         )
-        // FIXME: #951, use of setLater/enableLater
         enableLater {
             self.isPresented = $0
         }
@@ -63,7 +62,6 @@ public final class ErrorHandler: ObservableObject {
             message: message,
             dismissAction: onDismiss
         )
-        // FIXME: #951, use of setLater/enableLater
         enableLater {
             self.isPresented = $0
         }

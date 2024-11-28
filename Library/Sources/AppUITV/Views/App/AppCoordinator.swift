@@ -128,7 +128,9 @@ private extension AppCoordinator {
     }
 
     func onPurchaseRequired(_ features: Set<AppFeature>) {
-        paywallReason = .init(features, needsConfirmation: true)
+        setLater(.init(features, needsConfirmation: true)) {
+            paywallReason = $0
+        }
     }
 }
 

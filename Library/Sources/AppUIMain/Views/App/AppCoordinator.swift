@@ -196,7 +196,6 @@ extension AppCoordinator {
                     present(.editProviderEntity($0, pair.module, pair.selection))
                 },
                 onPurchaseRequired: {
-                    // FIXME: #951, use of setLater/enableLater
                     setLater(.init($0, needsConfirmation: true)) {
                         paywallReason = $0
                     }
@@ -296,8 +295,6 @@ extension AppCoordinator {
     }
 
     func present(_ route: ModalRoute?) {
-
-        // FIXME: #951, use of setLater/enableLater
         setLater(route) {
             modalRoute = $0
         }
