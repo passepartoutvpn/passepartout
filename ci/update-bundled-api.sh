@@ -1,6 +1,6 @@
 #!/bin/bash
 SOURCE=".api"
-DESTINATION="Passepartout/Library/Sources/CommonAPI/API"
+DESTINATION="Library/Sources/CommonAPI/API"
 API_VERSION="v5"
 
 rm -rf $SOURCE

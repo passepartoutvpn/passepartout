@@ -18,7 +18,7 @@ fastlane_require "fileutils"
 Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
-api = "Passepartout/Library/Sources/CommonAPI/API"
+api = "Library/Sources/CommonAPI/API"
 metadata = "fastlane/metadata"
 logname = "CHANGELOG.txt"
 build_path = "build"
@@ -55,9 +55,12 @@ lane :bump do |options|
     unless version.nil? || version.empty?
         increment_version_number_in_xcodeproj(version_number: version)
     end
+    git_add(
+        path: [api, metadata, logname]
+    )
     commit_version_bump(
         message: "Bump version",
-        include: [api, logname]
+        force: true
     )
     add_git_tag(
         includes_lane: false,
