@@ -49,7 +49,6 @@ extension ExtendedTunnelTests {
         var didCall = false
         sut
             .$lastErrorCode
-            .receive(on: ImmediateScheduler.shared)
             .sink {
                 if !didCall, $0 != nil {
                     didCall = true
@@ -80,7 +79,6 @@ extension ExtendedTunnelTests {
         var didCall = false
         sut
             .$dataCount
-            .receive(on: ImmediateScheduler.shared)
             .sink {
                 if !didCall, $0 != nil {
                     didCall = true
