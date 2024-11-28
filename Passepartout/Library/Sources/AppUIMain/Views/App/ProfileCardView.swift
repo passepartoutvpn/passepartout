@@ -67,13 +67,13 @@ struct ProfileCardView: View {
         Section {
             ProfileCardView(
                 style: .compact,
-                preview: .init(.mock)
+                preview: .init(.forPreviews)
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                preview: .init(.mock)
+                preview: .init(.forPreviews)
             )
         }
     }

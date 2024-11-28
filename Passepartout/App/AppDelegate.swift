@@ -34,7 +34,8 @@ final class AppDelegate: NSObject {
     let context: AppContext = {
         guard !AppCommandLine.contains(.uiTesting) else {
             pp_log(.app, .info, "UI tests: mock AppContext")
-            return .mock(withRegistry: .shared)
+            // FIXME: ###, use .testing context
+            return .forPreviews(withRegistry: .shared)
         }
         return .shared
     }()

@@ -306,8 +306,8 @@ extension AppCoordinator {
 
 #Preview {
     AppCoordinator(
-        profileManager: .mock,
-        tunnel: .mock,
+        profileManager: .forPreviews,
+        tunnel: .forPreviews,
         registry: Registry()
     )
     .withMockEnvironment()

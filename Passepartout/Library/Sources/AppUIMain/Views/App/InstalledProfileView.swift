@@ -123,7 +123,7 @@ private extension InstalledProfileView {
             style: .installedProfile,
             profileManager: profileManager,
             tunnel: tunnel,
-            preview: .init(profile ?? .mock),
+            preview: .init(profile ?? .forPreviews),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: flow
@@ -298,9 +298,9 @@ private struct HeaderView: View {
     var body: some View {
         InstalledProfileView(
             layout: layout,
-            profileManager: .mock,
-            profile: .mock,
-            tunnel: .mock,
+            profileManager: .forPreviews,
+            profile: .forPreviews,
+            tunnel: .forPreviews,
             interactiveManager: InteractiveManager(),
             errorHandler: .default(),
             nextProfileId: .constant(nil)
@@ -313,9 +313,9 @@ private struct ContentView: View {
         ForEach(0..<3) { _ in
             ProfileRowView(
                 style: .full,
-                profileManager: .mock,
-                tunnel: .mock,
-                preview: .init(.mock),
+                profileManager: .forPreviews,
+                tunnel: .forPreviews,
+                preview: .init(.forPreviews),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),

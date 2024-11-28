@@ -145,7 +145,7 @@ private struct DetailView: View {
 // MARK: -
 
 #Preview {
-    SettingsView(tunnel: .mock)
+    SettingsView(tunnel: .forPreviews)
         .themeNavigationStack()
         .withMockEnvironment()
 }

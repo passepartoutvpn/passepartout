@@ -147,7 +147,7 @@ private extension ModuleListView {
 
 #Preview {
     ModuleListView(
-        profileEditor: ProfileEditor(profile: .mock),
+        profileEditor: ProfileEditor(profile: .forPreviews),
         selectedModuleId: .constant(nil),
         errorModuleIds: .constant([]),
         paywallReason: .constant(nil)

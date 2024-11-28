@@ -150,8 +150,8 @@ private extension ProfileGridView {
 
 #Preview {
     ProfileGridView(
-        profileManager: .mock,
-        tunnel: .mock,
+        profileManager: .forPreviews,
+        tunnel: .forPreviews,
         interactiveManager: InteractiveManager(),
         errorHandler: .default()
     )

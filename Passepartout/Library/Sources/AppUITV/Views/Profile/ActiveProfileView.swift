@@ -231,7 +231,7 @@ private extension ActiveProfileView {
             .frame(maxWidth: .infinity)
     }
     .task {
-        try? await ProviderManager.mock.fetchIndex(from: [API.bundled])
+        try? await ProviderManager.forPreviews.fetchIndex(from: [API.bundled])
     }
 }
 
@@ -247,7 +247,7 @@ private struct ContentPreview: View {
     var body: some View {
         ActiveProfileView(
             profile: profile,
-            tunnel: .mock,
+            tunnel: .forPreviews,
             isSwitching: $isSwitching,
             focusedField: $focusedField,
             interactiveManager: InteractiveManager(),

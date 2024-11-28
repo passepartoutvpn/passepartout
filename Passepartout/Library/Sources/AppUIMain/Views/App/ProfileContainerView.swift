@@ -157,8 +157,8 @@ private struct PreviewView: View {
         NavigationStack {
             ProfileContainerView(
                 layout: layout,
-                profileManager: .mock,
-                tunnel: .mock,
+                profileManager: .forPreviews,
+                tunnel: .forPreviews,
                 registry: Registry(),
                 isImporting: .constant(false),
                 errorHandler: .default()

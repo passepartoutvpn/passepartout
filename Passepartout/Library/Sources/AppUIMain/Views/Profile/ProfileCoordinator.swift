@@ -164,7 +164,7 @@ private extension ProfileCoordinator {
 
 #Preview {
     ProfileCoordinator(
-        profileManager: .mock,
+        profileManager: .forPreviews,
         profileEditor: ProfileEditor(profile: .newMockProfile()),
         initialModuleId: nil,
         registry: Registry(),

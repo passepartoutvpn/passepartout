@@ -115,7 +115,7 @@ private extension ProfileListView {
 // MARK: - Previews
 
 #Preview("List") {
-    ContentPreview(profileManager: .mock)
+    ContentPreview(profileManager: .forPreviews)
 }
 
 #Preview("Empty") {
@@ -131,7 +131,7 @@ private struct ContentPreview: View {
     var body: some View {
         ProfileListView(
             profileManager: profileManager,
-            tunnel: .mock,
+            tunnel: .forPreviews,
             focusedField: $focusedField,
             interactiveManager: InteractiveManager(),
             errorHandler: .default()

@@ -149,8 +149,8 @@ private extension ProfileListView {
 
 #Preview {
     ProfileListView(
-        profileManager: .mock,
-        tunnel: .mock,
+        profileManager: .forPreviews,
+        tunnel: .forPreviews,
         interactiveManager: InteractiveManager(),
         errorHandler: .default()
     )
