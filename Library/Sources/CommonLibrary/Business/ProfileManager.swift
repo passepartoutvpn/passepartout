@@ -36,9 +36,17 @@ public final class ProfileManager: ObservableObject {
     }
 
     public enum Event {
+        case ready
+
         case save(Profile)
 
         case remove([Profile.ID])
+
+        case localProfiles
+
+        case filteredProfiles
+
+        case remoteProfiles
 
         case startRemoteImport
 
@@ -63,14 +71,24 @@ public final class ProfileManager: ObservableObject {
 
     private var allProfiles: [Profile.ID: Profile] {
         didSet {
+            didChange.send(.localProfiles)
+
             reloadFilteredProfiles(with: searchSubject.value)
             reloadRequiredFeatures()
         }
     }
 
-    private var allRemoteProfiles: [Profile.ID: Profile]
+    private var allRemoteProfiles: [Profile.ID: Profile] {
+        didSet {
+            didChange.send(.remoteProfiles)
+        }
+    }
 
-    private var filteredProfiles: [Profile]
+    private var filteredProfiles: [Profile] {
+        didSet {
+            didChange.send(.filteredProfiles)
+        }
+    }
 
     @Published
     private var requiredFeatures: [Profile.ID: Set<AppFeature>]
@@ -78,7 +96,13 @@ public final class ProfileManager: ObservableObject {
     @Published
     public private(set) var isRemoteImportingEnabled: Bool
 
-    private var waitingObservers: Set<Observer>
+    private var waitingObservers: Set<Observer> {
+        didSet {
+            if isReady {
+                didChange.send(.ready)
+            }
+        }
+    }
 
     // MARK: Publishers
 
