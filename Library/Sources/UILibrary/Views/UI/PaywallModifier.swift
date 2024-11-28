@@ -71,7 +71,11 @@ public struct PaywallModifier: ViewModifier {
                 actions: restrictedActions,
                 message: restrictedMessage
             )
-            .themeModal(isPresented: $isPurchasing, content: modalDestination)
+            .themeModal(
+                isPresented: $isPurchasing,
+                options: .init(size: .custom(width: 400, height: 400)),
+                content: modalDestination
+            )
             .onChange(of: isRestricted) {
                 if !$0 {
                     reason = nil
