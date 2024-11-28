@@ -53,8 +53,6 @@ struct ProfileCoordinator: View {
 
     let moduleViewFactory: any ModuleViewFactory
 
-    let modally: Bool
-
     @Binding
     var path: NavigationPath
 
@@ -95,7 +93,7 @@ private extension ProfileCoordinator {
             )
         )
         .themeNavigationDetail()
-        .themeNavigationStack(if: modally, path: $path)
+        .themeNavigationStack(path: $path)
 #else
         ProfileSplitView(
             profileEditor: profileEditor,
@@ -171,7 +169,6 @@ private extension ProfileCoordinator {
         initialModuleId: nil,
         registry: Registry(),
         moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
-        modally: false,
         path: .constant(NavigationPath()),
         onDismiss: {}
     )

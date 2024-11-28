@@ -29,7 +29,16 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-public struct AppCoordinator: View, AppCoordinatorConforming {
+public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding {
+
+    @Environment(\.isUITesting)
+    private var isUITesting
+
+    @Environment(\.horizontalSizeClass)
+    public var hsClass
+
+    @Environment(\.verticalSizeClass)
+    public var vsClass
 
     @AppStorage(UIPreference.profilesLayout.key)
     private var layout: ProfilesLayout = .list
@@ -164,7 +173,7 @@ extension AppCoordinator {
 
     var contentView: some View {
         ProfileContainerView(
-            layout: layout,
+            layout: overriddenLayout,
             profileManager: profileManager,
             tunnel: tunnel,
             registry: registry,
@@ -231,7 +240,6 @@ extension AppCoordinator {
                 initialModuleId: initialModuleId,
                 registry: registry,
                 moduleViewFactory: DefaultModuleViewFactory(registry: registry),
-                modally: true,
                 path: $profilePath,
                 onDismiss: onDismiss
             )
@@ -259,6 +267,13 @@ extension AppCoordinator {
         default:
             EmptyView()
         }
+    }
+
+    var overriddenLayout: ProfilesLayout {
+        guard !isUITesting else {
+            return isBigDevice ? .grid : .list
+        }
+        return layout
     }
 
     var migrateViewStyle: MigrateView.Style {

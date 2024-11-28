@@ -23,9 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+
+extension Profile {
+    public var localizedPreview: ProfilePreview {
+        ProfilePreview(
+            id: id,
+            name: name,
+            subtitle: localizedDescription(optionalStyle: .moduleTypes)
+        )
+    }
+}
 
 extension Profile: StyledOptionalLocalizableEntity {
     public enum OptionalStyle {

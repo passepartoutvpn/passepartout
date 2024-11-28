@@ -1,5 +1,5 @@
 //
-//  AccessibilityInfo.swift
+//  FlowTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -23,29 +23,41 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UITesting
+import XCTest
 
-public struct AccessibilityInfo: Equatable, Sendable {
-    public enum ElementType: Sendable {
-        case button
+@MainActor
+final class FlowTests: XCTestCase {
+    private var app: XCUIApplication!
 
-        case menu
-
-        case menuItem
-
-        case text
+    override func setUp() async throws {
+        continueAfterFailure = false
+        app = XCUIApplication()
+        app.appArguments = [.uiTesting]
+        app.launch()
     }
 
-    public let id: String
-
-    public let elementType: ElementType
-
-    public init(_ id: String, _ elementType: ElementType) {
-        self.id = id
-        self.elementType = elementType
+    override func tearDown() async throws {
+        try await Task.sleep(for: .seconds(2))
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+    func testMainConnected() async throws {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .enableProfile(at: 2)
+    }
+
+    func testEditProfile() async throws {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .openProfileMenu(at: 2)
+            .editProfile()
+    }
+
+    func testConnectToProviderServer() async throws {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .openProfileMenu(at: 2)
+            .connectToProfile()
     }
 }

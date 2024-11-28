@@ -27,6 +27,10 @@ import Foundation
 import UITesting
 import XCTest
 
+protocol XCUIApplicationProviding {
+    var app: XCUIApplication { get }
+}
+
 extension XCUIApplication {
     var appArguments: [AppCommandLine.Value] {
         get {
@@ -34,21 +38,6 @@ extension XCUIApplication {
         }
         set {
             launchArguments = newValue.map(\.rawValue)
-        }
-    }
-}
-
-extension XCUIElement {
-    func get(_ info: AccessibilityInfo) -> XCUIElement {
-        switch info.elementType {
-        case .button:
-            return buttons[info.id]
-        case .menu:
-            return menuButtons[info.id]
-        case .menuItem:
-            return menuItems[info.id]
-        case .text:
-            return staticTexts[info.id]
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AccessibilityInfo.swift
+//  AppScreen.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/27/24.
@@ -24,28 +24,34 @@
 //
 
 import Foundation
+import UITesting
+import XCTest
 
-public struct AccessibilityInfo: Equatable, Sendable {
-    public enum ElementType: Sendable {
-        case button
+@MainActor
+struct AppScreen {
+    let app: XCUIApplication
 
-        case menu
-
-        case menuItem
-
-        case text
+    init(app: XCUIApplication) {
+        self.app = app
     }
 
-    public let id: String
-
-    public let elementType: ElementType
-
-    public init(_ id: String, _ elementType: ElementType) {
-        self.id = id
-        self.elementType = elementType
+    @discardableResult
+    func waitForProfiles() -> Self {
+        app.get(.App.installedProfile)
+        return self
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+    @discardableResult
+    func enableProfile(at index: Int) -> Self {
+        let profileToggle = app.get(.App.profileToggle, at: index)
+        profileToggle.tap()
+        return self
+    }
+
+    @discardableResult
+    func openProfileMenu(at index: Int) -> ProfileMenuScreen {
+        let profileMenu = app.get(.App.profileMenu, at: index)
+        profileMenu.tap()
+        return ProfileMenuScreen(app: app)
     }
 }

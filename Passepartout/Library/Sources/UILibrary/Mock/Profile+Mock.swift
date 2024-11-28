@@ -30,7 +30,6 @@ extension Profile {
     public static let mock: Profile = {
         var profile = Profile.Builder()
         profile.name = "Mock profile"
-
         do {
             var ovpn = OpenVPNModule.Builder()
             ovpn.configurationBuilder = OpenVPN.Configuration.Builder(withFallbacks: true)
@@ -62,10 +61,10 @@ extension Profile {
         }
     }()
 
-    public static func newMockProfile() -> Profile {
+    public static func newMockProfile(withName name: String? = nil) -> Profile {
         do {
             var copy = mock.builder(withNewId: true)
-            copy.name = String(copy.id.uuidString.prefix(8))
+            copy.name = name ?? String(copy.id.uuidString.prefix(8))
             return try copy.tryBuild()
         } catch {
             fatalError("Unable to build: \(error)")

@@ -34,6 +34,7 @@ extension AppContext {
 
     public static func mock(withRegistry registry: Registry) -> AppContext {
         let iapManager = IAPManager(
+            customUserLevel: .subscriber,
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
@@ -54,7 +55,7 @@ extension AppContext {
                 true
             },
             preview: {
-                ProfilePreview($0)
+                $0.localizedPreview
             },
             verify: { _, _ in
                 nil
@@ -66,13 +67,7 @@ extension AppContext {
                 try profile.withProviderModules()
             }
         )
-        let profileManager = {
-            let profiles: [Profile] = (0..<20)
-                .reduce(into: []) { list, _ in
-                    list.append(.newMockProfile())
-                }
-            return ProfileManager(profiles: profiles)
-        }()
+        let profileManager: ProfileManager = .mock(withRegistry: registry, processor: processor)
         let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: tunnelEnvironment)),

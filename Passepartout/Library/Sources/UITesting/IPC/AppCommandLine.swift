@@ -31,7 +31,7 @@ public enum AppCommandLine {
 
         case fakeMigration = "-pp_fake_migration"
 
-        case uiTesting = "-pp_ui_tests"
+        case uiTesting = "-pp_ui_testing"
     }
 
     public static func contains(_ argument: Value) -> Bool {

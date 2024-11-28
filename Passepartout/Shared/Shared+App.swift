@@ -47,11 +47,7 @@ extension IAPManager {
             Configuration.ProfileManager.isIncluded($0, $1)
         },
         preview: {
-            ProfilePreview(
-                id: $0.id,
-                name: $0.name,
-                subtitle: $0.localizedDescription(optionalStyle: .moduleTypes)
-            )
+            $0.localizedPreview
         },
         verify: { iap, profile in
             do {
