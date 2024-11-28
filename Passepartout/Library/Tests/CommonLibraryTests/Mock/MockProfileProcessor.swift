@@ -30,13 +30,13 @@ import PassepartoutKit
 final class MockProfileProcessor: ProfileProcessor {
     var isIncludedCount = 0
 
-    var willRebuildCount = 0
-
-    var verifyCount = 0
-
     var isIncludedBlock: (Profile) -> Bool = { _ in true }
 
+    var requiredFeaturesCount = 0
+
     var requiredFeatures: Set<AppFeature>?
+
+    var willRebuildCount = 0
 
     func title(for profile: Profile) -> String {
         profile.name
@@ -51,13 +51,13 @@ final class MockProfileProcessor: ProfileProcessor {
         ProfilePreview(profile)
     }
 
+    func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
+        requiredFeaturesCount += 1
+        return requiredFeatures
+    }
+
     func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
         willRebuildCount += 1
         return builder
-    }
-
-    func verify(_ profile: Profile) -> Set<AppFeature>? {
-        verifyCount += 1
-        return requiredFeatures
     }
 }

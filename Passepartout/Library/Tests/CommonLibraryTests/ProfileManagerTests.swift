@@ -100,8 +100,8 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isReady)
 
         XCTAssertEqual(processor.isIncludedCount, 1)
+        XCTAssertEqual(processor.requiredFeaturesCount, 1)
         XCTAssertEqual(processor.willRebuildCount, 0)
-        XCTAssertEqual(processor.verifyCount, 1)
         XCTAssertEqual(sut.requiredFeatures(forProfileWithId: profile.id), processor.requiredFeatures)
     }
 
