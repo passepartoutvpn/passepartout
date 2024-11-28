@@ -35,7 +35,7 @@ public final class ProfileManager: ObservableObject {
         case remote
     }
 
-    public enum Event {
+    public enum Event: Equatable {
         case ready
 
         case save(Profile)
@@ -437,7 +437,7 @@ private extension ProfileManager {
             remoteImportTask = nil
         }
 
-        pp_log(.App.profiles, .info, "Start importing remote profiles: \(profiles.map(\.id)))")
+        pp_log(.App.profiles, .info, "Start importing remote profiles: \(profiles.map(\.id))")
         assert(profiles.count == Set(profiles.map(\.id)).count, "Remote repository must not have duplicates")
 
         pp_log(.App.profiles, .debug, "Local attributes:")
