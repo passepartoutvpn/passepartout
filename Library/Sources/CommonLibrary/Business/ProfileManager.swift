@@ -356,6 +356,7 @@ private extension ProfileManager {
 
 private extension ProfileManager {
     func reloadLocalProfiles(_ result: [Profile]) {
+        objectWillChange.send()
         pp_log(.App.profiles, .info, "Reload local profiles: \(result.map(\.id))")
 
         let excludedIds = Set(result
@@ -378,8 +379,6 @@ private extension ProfileManager {
             waitingObservers.remove(.local)
         }
 
-        objectWillChange.send()
-
         if !excludedIds.isEmpty {
             pp_log(.App.profiles, .info, "Delete excluded profiles from repository: \(excludedIds)")
             Task {
@@ -390,7 +389,9 @@ private extension ProfileManager {
     }
 
     func reloadRemoteProfiles(_ result: [Profile]) {
+        objectWillChange.send()
         pp_log(.App.profiles, .info, "Reload remote profiles: \(result.map(\.id))")
+
         allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
@@ -402,8 +403,6 @@ private extension ProfileManager {
             await self?.importRemoteProfiles(result)
             self?.didChange.send(.stopRemoteImport)
         }
-
-        objectWillChange.send()
     }
 
     func importRemoteProfiles(_ profiles: [Profile]) async {
@@ -485,6 +484,7 @@ private extension ProfileManager {
     }
 
     func reloadFilteredProfiles(with search: String) {
+        objectWillChange.send()
         filteredProfiles = allProfiles
             .values
             .filter {
@@ -498,7 +498,5 @@ private extension ProfileManager {
             }
 
         pp_log(.App.profiles, .notice, "Filter profiles with '\(search)' (\(filteredProfiles.count) results)")
-
-        objectWillChange.send()
     }
 }
