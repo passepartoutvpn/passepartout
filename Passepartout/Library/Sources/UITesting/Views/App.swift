@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  App.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
-import UITesting
+import Foundation
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = {
-        guard !AppCommandLine.contains(.uiTesting) else {
-            return .mock(withRegistry: .shared)
-        }
-        return .shared
-    }()
+extension AccessibilityInfo {
+    public enum App {
+        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
 
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
+        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+        public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
+    }
+
+    public enum ProfileMenu {
+        public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
     }
 }

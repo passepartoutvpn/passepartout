@@ -44,6 +44,10 @@ let package = Package(
         .library(
             name: "UILibrary",
             targets: ["UILibrary"]
+        ),
+        .library(
+            name: "UITesting",
+            targets: ["UITesting"]
         )
     ],
     dependencies: [
@@ -165,11 +169,15 @@ let package = Package(
                 "AppDataProfiles",
                 "AppDataProviders",
                 "CommonAPI",
-                "CommonLibrary"
+                "CommonLibrary",
+                "UITesting"
             ],
             resources: [
                 .process("Resources")
             ]
+        ),
+        .target(
+            name: "UITesting"
         ),
         .testTarget(
             name: "AppUIMainTests",

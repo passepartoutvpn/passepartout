@@ -27,12 +27,13 @@ import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+import UITesting
 
 extension IAPManager {
     static let sharedForApp = IAPManager(
-        customUserLevel: Configuration.Environment.userLevel,
-        inAppHelper: Configuration.IAPManager.inAppHelper,
-        receiptReader: Configuration.IAPManager.appReceiptReader,
+        customUserLevel: AppEnvironment.userLevel,
+        inAppHelper: Configuration.IAPManager.simulatedInAppHelper,
+        receiptReader: Configuration.IAPManager.simulatedAppReceiptReader,
         betaChecker: Configuration.IAPManager.betaChecker,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
@@ -82,28 +83,19 @@ extension IAPManager {
 
 // MARK: - Configuration
 
-private extension Configuration.Environment {
-    static var userLevel: AppUserLevel? {
-        if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
-           let envValue = Int(envString),
-           let testAppType = AppUserLevel(rawValue: envValue) {
-
-            return testAppType
-        }
-        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-           let testAppType = AppUserLevel(rawValue: infoValue) {
-
-            return testAppType
-        }
-        return nil
-    }
-}
-
 private extension Configuration.IAPManager {
 
     @MainActor
-    static var appReceiptReader: AppReceiptReader {
-        guard !Configuration.Environment.isFakeIAP else {
+    static let simulatedInAppHelper: any AppProductHelper = {
+        guard !AppCommandLine.contains(.fakeIAP) else {
+            return FakeAppProductHelper()
+        }
+        return inAppHelper
+    }()
+
+    @MainActor
+    static var simulatedAppReceiptReader: AppReceiptReader {
+        guard !AppCommandLine.contains(.fakeIAP) else {
             guard let mockHelper = inAppHelper as? FakeAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
             }

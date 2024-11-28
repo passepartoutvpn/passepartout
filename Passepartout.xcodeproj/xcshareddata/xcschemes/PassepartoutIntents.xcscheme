@@ -56,6 +56,17 @@
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0E78FE4B2CF799F400B0C5BF"
+               BuildableName = "PassepartoutUITests.xctest"
+               BlueprintName = "PassepartoutUITests"
+               ReferencedContainer = "container:Passepartout.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

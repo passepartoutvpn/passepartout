@@ -31,6 +31,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UITesting
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -57,10 +58,11 @@ extension PassepartoutApp {
     var body: some Scene {
         Window(appName, id: appName) {
             contentView()
-                .withEnvironment(from: context, theme: theme)
                 .onReceive(didActivateNotificationPublisher) {
                     context.onApplicationActive()
                 }
+                .withEnvironment(from: context, theme: theme)
+                .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
         }
         .defaultSize(width: 600, height: 400)
 
@@ -69,6 +71,7 @@ extension PassepartoutApp {
                 .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
                 .environmentObject(settings)
+                .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
         }
         MenuBarExtra {
             AppMenu(
@@ -77,6 +80,7 @@ extension PassepartoutApp {
             )
             .withEnvironment(from: context, theme: theme)
             .environmentObject(settings)
+            .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
         } label: {
             AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)

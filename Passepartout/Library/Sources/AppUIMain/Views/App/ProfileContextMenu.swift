@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UITesting
 
 struct ProfileContextMenu: View, Routable {
     enum Style {
@@ -128,6 +129,7 @@ private extension ProfileContextMenu {
         } label: {
             ThemeImageLabel(Strings.Global.Actions.edit, .profileEdit)
         }
+        .uiAccessibility(.ProfileMenu.edit)
     }
 
     var profileDuplicateButton: some View {

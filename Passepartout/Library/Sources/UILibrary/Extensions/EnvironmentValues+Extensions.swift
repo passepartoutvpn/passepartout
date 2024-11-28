@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  EnvironmentValues+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
 import SwiftUI
-import UILibrary
-import UITesting
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = {
-        guard !AppCommandLine.contains(.uiTesting) else {
-            return .mock(withRegistry: .shared)
+extension EnvironmentValues {
+    public var isUITesting: Bool {
+        get {
+            self[IsUITestingKey.self]
         }
-        return .shared
-    }()
-
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
-
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+        set {
+            self[IsUITestingKey.self] = newValue
+        }
     }
+}
+
+private struct IsUITestingKey: EnvironmentKey {
+    static let defaultValue = false
 }

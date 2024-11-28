@@ -29,6 +29,9 @@ import SwiftUI
 
 struct OnboardingModifier: ViewModifier {
 
+    @Environment(\.isUITesting)
+    private var isUITesting
+
     @AppStorage(UIPreference.onboardingStep.key)
     private var step: OnboardingStep?
 
@@ -67,6 +70,10 @@ struct OnboardingModifier: ViewModifier {
 
 private extension OnboardingModifier {
     func advance() {
+        guard !isUITesting else {
+            pp_log(.app, .info, "UI tests, skip onboarding")
+            return
+        }
         Task {
             try await Task.sleep(for: .milliseconds(300))
             doAdvance()

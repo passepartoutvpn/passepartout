@@ -92,23 +92,10 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
 // MARK: - Configuration
 
 enum Configuration {
-    enum Environment {
-    }
-
     enum ProfileManager {
     }
 
     enum IAPManager {
-    }
-}
-
-extension Configuration.Environment {
-    static var isFakeIAP: Bool {
-        ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
-    }
-
-    static var isFakeMigration: Bool {
-        ProcessInfo.processInfo.environment["PP_FAKE_MIGRATION"] == "1"
     }
 }
 
@@ -140,9 +127,6 @@ extension Configuration.IAPManager {
 
     @MainActor
     static let inAppHelper: any AppProductHelper = {
-        guard !Configuration.Environment.isFakeIAP else {
-            return FakeAppProductHelper()
-        }
         return StoreKitHelper(
             products: AppProduct.all,
             inAppIdentifier: {

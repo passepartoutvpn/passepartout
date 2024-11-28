@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  XCUIApplication+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 import UITesting
+import XCTest
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = {
-        guard !AppCommandLine.contains(.uiTesting) else {
-            return .mock(withRegistry: .shared)
+extension XCUIApplication {
+    var appArguments: [AppCommandLine.Value] {
+        get {
+            launchArguments.compactMap(AppCommandLine.Value.init(rawValue:))
         }
-        return .shared
-    }()
+        set {
+            launchArguments = newValue.map(\.rawValue)
+        }
+    }
+}
 
-#if os(macOS)
-    let settings = MacSettingsModel(
-        defaults: .standard,
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
-#endif
-
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+extension XCUIElement {
+    func get(_ info: AccessibilityInfo) -> XCUIElement {
+        switch info.elementType {
+        case .button:
+            return buttons[info.id]
+        case .menu:
+            return menuButtons[info.id]
+        case .menuItem:
+            return menuItems[info.id]
+        case .text:
+            return staticTexts[info.id]
+        }
     }
 }

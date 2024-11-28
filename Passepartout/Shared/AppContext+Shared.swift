@@ -32,6 +32,7 @@ import Foundation
 import LegacyV2
 import PassepartoutKit
 import UILibrary
+import UITesting
 
 // shared registry and environment are picked from Shared.swift
 
@@ -105,7 +106,7 @@ extension AppContext {
             )
         )
         let migrationSimulation: MigrationManager.Simulation?
-        if Configuration.Environment.isFakeMigration {
+        if AppCommandLine.contains(.fakeMigration) {
             migrationSimulation = MigrationManager.Simulation(
                 fakeProfiles: true,
                 maxMigrationTime: 3.0,
