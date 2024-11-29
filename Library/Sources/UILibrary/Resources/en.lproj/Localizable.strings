@@ -165,6 +165,9 @@
 "modules.openvpn.pull" = "Pull";
 "modules.openvpn.redirect_gateway" = "Redirect gateway";
 "modules.openvpn.credentials" = "Credentials";
+"modules.openvpn.credentials.guidance.web" = "Use your website credentials.";
+"modules.openvpn.credentials.guidance.specific" = "Use your service credentials, which may differ from website credentials.";
+"modules.openvpn.credentials.guidance.link" = "See your credentials";
 "modules.openvpn.remotes" = "Remotes";
 "modules.openvpn.communication" = "Communication";
 "modules.openvpn.cipher" = "Cipher";

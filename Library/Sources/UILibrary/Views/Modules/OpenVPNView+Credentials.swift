@@ -40,6 +40,11 @@ public struct OpenVPNCredentialsView: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
+    private let providerId: ProviderID?
+
     @Binding
     private var isInteractive: Bool
 
@@ -60,11 +65,13 @@ public struct OpenVPNCredentialsView: View {
     private var focusedField: Field?
 
     public init(
+        providerId: ProviderID?,
         isInteractive: Binding<Bool>,
         credentials: Binding<OpenVPN.Credentials?>,
         isAuthenticating: Bool = false,
         onSubmit: (() -> Void)? = nil
     ) {
+        self.providerId = providerId
         _isInteractive = isInteractive
         _credentials = credentials
         self.isAuthenticating = isAuthenticating
@@ -77,6 +84,7 @@ public struct OpenVPNCredentialsView: View {
                 interactiveSection
             }
             inputSection
+            guidanceSection
         }
         .themeManualInput()
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -107,18 +115,6 @@ public struct OpenVPNCredentialsView: View {
 }
 
 private extension OpenVPNCredentialsView {
-    var isEligibleForInteractiveLogin: Bool {
-        iapManager.isEligible(for: .interactiveLogin)
-    }
-
-    var requiredFeatures: Set<AppFeature>? {
-        isInteractive ? [.interactiveLogin] : nil
-    }
-
-    var otpMethods: [OpenVPN.Credentials.OTPMethod] {
-        [.none, .append, .encode]
-    }
-
     var interactiveSection: some View {
         Group {
             Toggle(isOn: $isInteractive) {
@@ -159,14 +155,35 @@ private extension OpenVPNCredentialsView {
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 otpField
             }
+#if os(macOS)
+            inputFooter.map {
+                Text($0)
+                    .themeFooter()
+            }
+#endif
         }
         .themeSection(footer: inputFooter)
+    }
+
+    @ViewBuilder
+    var guidanceSection: some View {
+        if case .specific(let url) = providerPurpose, let url {
+            Link(Strings.Modules.Openvpn.Credentials.Guidance.link, destination: url)
+        }
     }
 
     var inputFooter: String? {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
+        } else if builder.otpMethod == .none, let providerPurpose {
+            switch providerPurpose {
+            case .web:
+                return Strings.Modules.Openvpn.Credentials.Guidance.web
+
+            case .specific:
+                return Strings.Modules.Openvpn.Credentials.Guidance.specific
+            }
         }
         return nil
     }
@@ -204,6 +221,29 @@ private extension OpenVPNCredentialsView {
     }
 }
 
+private extension OpenVPNCredentialsView {
+    var isEligibleForInteractiveLogin: Bool {
+        iapManager.isEligible(for: .interactiveLogin)
+    }
+
+    var requiredFeatures: Set<AppFeature>? {
+        isInteractive ? [.interactiveLogin] : nil
+    }
+
+    var otpMethods: [OpenVPN.Credentials.OTPMethod] {
+        [.none, .append, .encode]
+    }
+
+    var providerPurpose: OpenVPN.Credentials.ProviderPurpose? {
+        guard let providerId, let metadata = providerManager.provider(withId: providerId) else {
+            return nil
+        }
+        return OpenVPN.Credentials.purpose(forProvider: metadata)
+    }
+}
+
+// MARK: - Previews
+
 #Preview {
     struct ContentView: View {
 
@@ -216,6 +256,7 @@ private extension OpenVPNCredentialsView {
         var body: some View {
             NavigationStack {
                 OpenVPNCredentialsView(
+                    providerId: nil,
                     isInteractive: $isInteractive,
                     credentials: $credentials
                 )
