@@ -480,8 +480,8 @@ public enum Strings {
         public enum Guidance {
           /// See your OpenVPN credentials
           public static let link = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.link", fallback: "See your OpenVPN credentials")
-          /// Use your specific OpenVPN credentials, which differ from your account.
-          public static let specific = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.specific", fallback: "Use your specific OpenVPN credentials, which differ from your account.")
+          /// Use your specific OpenVPN credentials, which are not the same credentials you log in with.
+          public static let specific = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.specific", fallback: "Use your specific OpenVPN credentials, which are not the same credentials you log in with.")
           /// Use your account credentials.
           public static let web = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.web", fallback: "Use your account credentials.")
         }
