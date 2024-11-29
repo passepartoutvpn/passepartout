@@ -99,9 +99,9 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
 
                 // replace but retain last update
                 let mapper = CoreDataMapper(context: context)
-                index.forEach {
+                try index.forEach {
                     let lastUpdate = lastUpdatesByProvider[$0.id.rawValue]
-                    mapper.cdProvider(from: $0, lastUpdate: lastUpdate)
+                    try mapper.cdProvider(from: $0, lastUpdate: lastUpdate)
                 }
 
                 try context.save()
