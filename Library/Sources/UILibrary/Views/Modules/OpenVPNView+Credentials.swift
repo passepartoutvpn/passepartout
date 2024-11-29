@@ -79,7 +79,8 @@ public struct OpenVPNCredentialsView: View {
     }
 
     public var body: some View {
-        Group {
+        debugChanges()
+        return Group {
             if !isAuthenticating {
                 interactiveSection
             }
@@ -176,7 +177,7 @@ private extension OpenVPNCredentialsView {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if builder.otpMethod == .none, let providerPurpose {
+        } else if let providerPurpose {
             switch providerPurpose {
             case .web:
                 return Strings.Modules.Openvpn.Credentials.Guidance.web
