@@ -478,12 +478,12 @@ public enum Strings {
         /// Interactive
         public static let interactive = Strings.tr("Localizable", "modules.openvpn.credentials.interactive", fallback: "Interactive")
         public enum Guidance {
-          /// See your credentials
-          public static let link = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.link", fallback: "See your credentials")
-          /// Use your service credentials, which may differ from website credentials.
-          public static let specific = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.specific", fallback: "Use your service credentials, which may differ from website credentials.")
-          /// Use your website credentials.
-          public static let web = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.web", fallback: "Use your website credentials.")
+          /// See your OpenVPN credentials
+          public static let link = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.link", fallback: "See your OpenVPN credentials")
+          /// Use your specific OpenVPN credentials, which differ from your account.
+          public static let specific = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.specific", fallback: "Use your specific OpenVPN credentials, which differ from your account.")
+          /// Use your account credentials.
+          public static let web = Strings.tr("Localizable", "modules.openvpn.credentials.guidance.web", fallback: "Use your account credentials.")
         }
         public enum Interactive {
           /// On-demand will be disabled.
