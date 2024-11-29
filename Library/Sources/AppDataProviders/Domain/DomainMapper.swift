@@ -1,8 +1,8 @@
 //
-//  Mapper.swift
+//  DomainMapper.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/28/24.
+//  Created by Davide De Rosa on 11/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,64 +27,29 @@ import CoreData
 import Foundation
 import PassepartoutKit
 
-struct CoreDataMapper {
-    let context: NSManagedObjectContext
-
-    @discardableResult
-    func cdProvider(from metadata: ProviderMetadata, lastUpdate: Date?) -> CDProviderV3 {
-        let entity = CDProviderV3(context: context)
-        entity.providerId = metadata.id.rawValue
-        entity.fullName = metadata.description
-        entity.supportedConfigurationIds = metadata.supportedConfigurationIdentifiers.joined(separator: ",")
-        entity.lastUpdate = lastUpdate
-        return entity
-    }
-
-    @discardableResult
-    func cdServer(from server: VPNServer) throws -> CDVPNServerV3 {
-        let entity = CDVPNServerV3(context: context)
-        let encoder = JSONEncoder()
-        entity.serverId = server.serverId
-        entity.hostname = server.hostname
-        entity.ipAddresses = try server.ipAddresses.map {
-            try encoder.encode($0)
-        }
-        entity.providerId = server.provider.id.rawValue
-        entity.countryCode = server.provider.countryCode
-        entity.categoryName = server.provider.categoryName
-        entity.localizedCountry = server.provider.countryCode.localizedAsRegionCode
-        entity.otherCountryCodes = server.provider.otherCountryCodes?.joined(separator: ",")
-        entity.area = server.provider.area
-        entity.supportedConfigurationIds = server.provider.supportedConfigurationIdentifiers?.joined(separator: ",")
-        entity.supportedPresetIds = server.provider.supportedPresetIds?.joined(separator: ",")
-        return entity
-    }
-
-    @discardableResult
-    func cdPreset(from preset: AnyVPNPreset) throws -> CDVPNPresetV3 {
-        let entity = CDVPNPresetV3(context: self.context)
-        let encoder = JSONEncoder()
-        entity.presetId = preset.presetId
-        entity.providerId = preset.providerId.rawValue
-        entity.presetDescription = preset.description
-        entity.endpoints = try encoder.encode(preset.endpoints)
-        entity.configurationId = preset.configurationIdentifier
-        entity.configuration = preset.configuration
-        return entity
-    }
-}
-
 struct DomainMapper {
     func provider(from entity: CDProviderV3) -> ProviderMetadata? {
-        guard let id = entity.providerId,
-              let fullName = entity.fullName,
-              let supportedConfigurationIds = entity.supportedConfigurationIds else {
+        guard let id = entity.providerId, let fullName = entity.fullName else {
             return nil
+        }
+        let configurations: [String: ProviderMetadata.Configuration]
+        if let encodedConfigurations = entity.encodedConfigurations {
+            do {
+                configurations = try JSONDecoder().decode([String: ProviderMetadata.Configuration].self, from: encodedConfigurations)
+            } catch {
+                return nil
+            }
+        } else if let supportedConfigurationIds = entity.supportedConfigurationIds?.components(separatedBy: ",") {
+            configurations = supportedConfigurationIds.reduce(into: [:]) {
+                $0[$1] = .init()
+            }
+        } else {
+            configurations = [:]
         }
         return ProviderMetadata(
             id,
             description: fullName,
-            supportedConfigurationIdentifiers: Set(supportedConfigurationIds.components(separatedBy: ","))
+            configurations: configurations
         )
     }
 
