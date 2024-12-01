@@ -27,10 +27,17 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
+@MainActor
 public protocol AppCoordinatorConforming {
-    init(
-        profileManager: ProfileManager,
-        tunnel: ExtendedTunnel,
-        registry: Registry
-    )
+    var iapManager: IAPManager { get }
+
+    var tunnel: ExtendedTunnel { get }
+
+    func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock)
+
+    func onProviderEntityRequired(_ profile: Profile, force: Bool)
+
+    func onPurchaseRequired(_ features: Set<AppFeature>)
+
+    func onError(_ error: Error, profile: Profile)
 }

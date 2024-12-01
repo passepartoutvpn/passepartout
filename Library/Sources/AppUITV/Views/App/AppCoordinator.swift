@@ -32,11 +32,11 @@ import UILibrary
 public struct AppCoordinator: View, AppCoordinatorConforming {
 
     @EnvironmentObject
-    private var iapManager: IAPManager
+    public var iapManager: IAPManager
 
     private let profileManager: ProfileManager
 
-    private let tunnel: ExtendedTunnel
+    public let tunnel: ExtendedTunnel
 
     private let registry: Registry
 
@@ -92,7 +92,9 @@ private extension AppCoordinator {
                 onConnect: {
                     await onConnect($0, force: false)
                 },
-                onProviderEntityRequired: onProviderEntityRequired
+                onProviderEntityRequired: {
+                    onProviderEntityRequired($0, force: false)
+                }
             )
         )
     }
@@ -131,55 +133,30 @@ private extension AppCoordinator {
 
 // MARK: - Handlers
 
-// FIXME: ### duplicated from AppUIMain.AppCordinator
-private extension AppCoordinator {
-    func onConnect(_ profile: Profile, force: Bool) async {
-        do {
-            try iapManager.verify(profile)
-            try await tunnel.connect(with: profile, force: force)
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
-            onPurchaseRequired(requiredFeatures)
-        } catch AppError.interactiveLogin {
-            onInteractiveLogin(profile) {
-                await onConnect($0, force: true)
-            }
-        } catch let ppError as PassepartoutError {
-            switch ppError.code {
-            case .missingProviderEntity:
-                onProviderEntityRequired(profile)
-            default:
-                onError(ppError, profile: profile)
-            }
-        } catch {
-            onError(error, profile: profile)
-        }
-    }
-
-    func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
+extension AppCoordinator {
+    public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
         pp_log(.app, .notice, "Present interactive login")
         interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
-    func onPurchaseRequired(_ features: Set<AppFeature>) {
+    public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
+        errorHandler.handle(
+            title: profile.name,
+            message: Strings.Alerts.Providers.MissingServer.message
+        )
+    }
+
+    public func onPurchaseRequired(_ features: Set<AppFeature>) {
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0
         }
     }
 
-    func onError(_ error: Error, profile: Profile) {
+    public func onError(_ error: Error, profile: Profile) {
         errorHandler.handle(
             error,
             title: profile.name,
             message: Strings.Errors.App.tunnel
-        )
-    }
-}
-
-private extension AppCoordinator {
-    func onProviderEntityRequired(_ profile: Profile) {
-        errorHandler.handle(
-            title: profile.name,
-            message: Strings.Alerts.Providers.MissingServer.message
         )
     }
 }
