@@ -59,6 +59,9 @@ public struct OpenVPNCredentialsView: View {
     private var builder = OpenVPN.Credentials.Builder()
 
     @State
+    private var providerConfiguration: OpenVPN.Credentials.ProviderConfiguration?
+
+    @State
     private var paywallReason: PaywallReason?
 
     @FocusState
@@ -89,29 +92,8 @@ public struct OpenVPNCredentialsView: View {
         }
         .themeManualInput()
         .modifier(PaywallModifier(reason: $paywallReason))
-        .onLoad {
-            builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
-            builder.otp = nil
-            if isAuthenticating {
-                switch builder.otpMethod {
-                case .none:
-                    focusedField = .username
-
-                default:
-                    focusedField = .otp
-                }
-            }
-        }
-        .onChange(of: builder) {
-            var copy = $0
-            if isEligibleForInteractiveLogin {
-                copy.otp = copy.otp ?? ""
-            } else {
-                copy.otpMethod = .none
-                copy.otp = nil
-            }
-            credentials = copy.build()
-        }
+        .onLoad(perform: onLoad)
+        .onChange(of: builder, perform: onChange)
     }
 }
 
@@ -151,7 +133,9 @@ private extension OpenVPNCredentialsView {
         Group {
             if !isAuthenticating || builder.otpMethod == .none {
                 usernameField
-                passwordField
+                if !ignoresPassword {
+                    passwordField
+                }
             }
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 otpField
@@ -162,7 +146,7 @@ private extension OpenVPNCredentialsView {
 
     @ViewBuilder
     var guidanceSection: some View {
-        if case .specific(let url) = providerPurpose, let url {
+        if let url = providerConfiguration?.url {
             Link(Strings.Modules.Openvpn.Credentials.Guidance.link, destination: url)
         }
     }
@@ -171,11 +155,10 @@ private extension OpenVPNCredentialsView {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if let providerPurpose {
-            switch providerPurpose {
+        } else if let providerConfiguration {
+            switch providerConfiguration.purpose {
             case .web:
                 return Strings.Modules.Openvpn.Credentials.Guidance.web
-
             case .specific:
                 return Strings.Modules.Openvpn.Credentials.Guidance.specific
             }
@@ -229,11 +212,39 @@ private extension OpenVPNCredentialsView {
         [.none, .append, .encode]
     }
 
-    var providerPurpose: OpenVPN.Credentials.ProviderPurpose? {
-        guard let providerId, let metadata = providerManager.provider(withId: providerId) else {
-            return nil
+    var ignoresPassword: Bool {
+        providerConfiguration?.options?.contains(.noPassword) ?? false
+    }
+
+    func onLoad() {
+        if let providerId, let metadata = providerManager.provider(withId: providerId) {
+            providerConfiguration = OpenVPN.Credentials.configuration(forProvider: metadata)
         }
-        return OpenVPN.Credentials.purpose(forProvider: metadata)
+        builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
+        if ignoresPassword {
+            builder.password = ""
+        }
+        builder.otp = nil
+        if isAuthenticating {
+            switch builder.otpMethod {
+            case .none:
+                focusedField = .username
+
+            default:
+                focusedField = .otp
+            }
+        }
+    }
+
+    func onChange(_ builder: OpenVPN.Credentials.Builder) {
+        var copy = builder
+        if isEligibleForInteractiveLogin {
+            copy.otp = copy.otp ?? ""
+        } else {
+            copy.otpMethod = .none
+            copy.otp = nil
+        }
+        credentials = copy.build()
     }
 }
 
