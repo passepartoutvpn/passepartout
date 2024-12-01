@@ -46,7 +46,7 @@ final class ProfileImporter: ObservableObject {
     func tryImport(
         urls: [URL],
         profileManager: ProfileManager,
-        registry: Registry
+        importer: ModuleImporter
     ) async throws {
         var withPassphrase: [URL] = []
 
@@ -56,7 +56,7 @@ final class ProfileImporter: ObservableObject {
                     url,
                     withPassphrase: nil,
                     profileManager: profileManager,
-                    registry: registry
+                    importer: importer
                 )
             } catch {
                 if let error = error as? PassepartoutError, error.code == .OpenVPN.passphraseRequired {
@@ -74,13 +74,13 @@ final class ProfileImporter: ObservableObject {
         }
     }
 
-    func reImport(url: URL, profileManager: ProfileManager, registry: Registry) async throws {
+    func reImport(url: URL, profileManager: ProfileManager, importer: ModuleImporter) async throws {
         do {
             try await importURL(
                 url,
                 withPassphrase: currentPassphrase,
                 profileManager: profileManager,
-                registry: registry
+                importer: importer
             )
             urlsRequiringPassphrase.removeFirst()
             scheduleNextImport()
@@ -113,7 +113,7 @@ private extension ProfileImporter {
         _ url: URL,
         withPassphrase passphrase: String?,
         profileManager: ProfileManager,
-        registry: Registry
+        importer: ModuleImporter
     ) async throws {
         guard url.startAccessingSecurityScopedResource() else {
             throw AppError.permissionDenied
@@ -122,7 +122,7 @@ private extension ProfileImporter {
             url.stopAccessingSecurityScopedResource()
         }
 
-        let module = try registry.module(fromURL: url, object: passphrase)
+        let module = try importer.module(fromURL: url, object: passphrase)
         let onDemandModule = OnDemandModule.Builder().tryBuild()
 
         var builder = Profile.Builder()

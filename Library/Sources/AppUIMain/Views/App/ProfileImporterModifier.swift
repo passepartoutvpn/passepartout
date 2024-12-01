@@ -75,7 +75,7 @@ private extension ProfileImporterModifier {
                 try await importer.reImport(
                     url: url,
                     profileManager: profileManager,
-                    registry: registry
+                    importer: registry
                 )
             }
         }
@@ -95,7 +95,7 @@ private extension ProfileImporterModifier {
                 try await importer.tryImport(
                     urls: urls,
                     profileManager: profileManager,
-                    registry: registry
+                    importer: registry
                 )
             } catch {
                 await errorHandler.handle(
