@@ -23,6 +23,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - run: |
+      - name: "Run tests"
+        run: |
           cd Library
           swift test
