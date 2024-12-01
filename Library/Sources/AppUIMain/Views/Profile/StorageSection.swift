@@ -41,9 +41,9 @@ struct StorageSection: View {
         debugChanges()
         return Group {
             sharingToggle
-                .themeRow(footer: sharingDescription)
+                .themeRowWithSubtitle(sharingDescription)
             tvToggle
-                .themeRow(footer: tvDescription)
+                .themeRowWithSubtitle(tvDescription)
             purchaseButton
         }
         .themeSection(

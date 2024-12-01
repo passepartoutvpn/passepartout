@@ -124,7 +124,7 @@ private extension OpenVPNCredentialsView {
                     PurchaseRequiredButton(features: requiredFeatures, paywallReason: $paywallReason)
                 }
             }
-            .themeRow(footer: interactiveFooter)
+            .themeRowWithSubtitle(interactiveFooter)
 
             if isInteractive {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
@@ -159,7 +159,7 @@ private extension OpenVPNCredentialsView {
 #if os(macOS)
             inputFooter.map {
                 Text($0)
-                    .themeFooter()
+                    .themeSubtitle()
             }
 #endif
         }

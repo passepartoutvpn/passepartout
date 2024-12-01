@@ -50,7 +50,7 @@ public struct NameSection: View {
 #if os(macOS)
             footer.map {
                 Text($0)
-                    .themeFooter()
+                    .themeSubtitle()
             }
 #endif
         }

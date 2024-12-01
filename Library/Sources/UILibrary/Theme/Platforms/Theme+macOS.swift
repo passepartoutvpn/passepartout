@@ -83,15 +83,15 @@ extension ThemeSectionWithHeaderFooterModifier {
     }
 }
 
-extension ThemeRowWithFooterModifier {
+extension ThemeRowWithSubtitleModifier {
     func body(content: Content) -> some View {
         VStack {
             content
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            footer.map {
+            subtitle.map {
                 Text($0)
-                    .themeFooter()
+                    .themeSubtitle()
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
