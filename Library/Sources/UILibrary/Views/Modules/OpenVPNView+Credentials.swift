@@ -124,7 +124,7 @@ private extension OpenVPNCredentialsView {
                     PurchaseRequiredButton(features: requiredFeatures, paywallReason: $paywallReason)
                 }
             }
-            .themeRow(footer: interactiveFooter)
+            .themeRowWithSubtitle(interactiveFooter)
 
             if isInteractive {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
@@ -156,14 +156,8 @@ private extension OpenVPNCredentialsView {
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 otpField
             }
-#if os(macOS)
-            inputFooter.map {
-                Text($0)
-                    .themeFooter()
-            }
-#endif
         }
-        .themeSection(footer: inputFooter)
+        .themeSection(footer: inputFooter, forcesFooter: true)
     }
 
     @ViewBuilder

@@ -71,27 +71,30 @@ extension ThemeManualInputModifier {
 }
 
 extension ThemeSectionWithHeaderFooterModifier {
-
-    @ViewBuilder
     func body(content: Content) -> some View {
         Section {
             content
+            if forcesFooter {
+                footer.map {
+                    Text($0)
+                        .themeSubtitle()
+                }
+            }
         } header: {
             header.map(Text.init)
         }
-        // omit footer on macOS, use ThemeRowWithFooterModifier
     }
 }
 
-extension ThemeRowWithFooterModifier {
+extension ThemeRowWithSubtitleModifier {
     func body(content: Content) -> some View {
         VStack {
             content
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            footer.map {
+            subtitle.map {
                 Text($0)
-                    .themeFooter()
+                    .themeSubtitle()
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }

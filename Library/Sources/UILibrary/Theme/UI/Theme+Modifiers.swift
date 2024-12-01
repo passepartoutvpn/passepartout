@@ -135,31 +135,32 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
-    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
-        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
-    }
-
-    public func themeRow(footer: String? = nil) -> some View {
-        modifier(ThemeRowWithFooterModifier(footer: footer))
-    }
-
-    public func themeFooter() -> some View {
-        foregroundStyle(.secondary)
-            .font(.subheadline)
+    public func themeSection(header: String? = nil, footer: String? = nil, forcesFooter: Bool = false) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer, forcesFooter: forcesFooter))
     }
 
     public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
         Group {
             if above {
                 EmptyView()
-                    .themeRow(footer: footer)
+                    .themeRowWithSubtitle(footer) // macOS
 
                 self
             } else {
-                themeRow(footer: footer)
+                themeRowWithSubtitle(footer) // macOS
             }
         }
-        .themeSection(header: header, footer: footer)
+        .themeSection(header: header, footer: footer) // iOS/tvOS
+    }
+
+    // subtitle is hidden on iOS/tvOS
+    public func themeRowWithSubtitle(_ subtitle: String?) -> some View {
+        modifier(ThemeRowWithSubtitleModifier(subtitle: subtitle))
+    }
+
+    public func themeSubtitle() -> some View {
+        foregroundStyle(.secondary)
+            .font(.subheadline)
     }
 
     public func themeNavigationDetail() -> some View {
@@ -413,10 +414,12 @@ struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
     let header: String?
 
     let footer: String?
+
+    let forcesFooter: Bool
 }
 
-struct ThemeRowWithFooterModifier: ViewModifier {
-    let footer: String?
+struct ThemeRowWithSubtitleModifier: ViewModifier {
+    let subtitle: String?
 }
 
 struct ThemeEmptyMessageModifier: ViewModifier {
