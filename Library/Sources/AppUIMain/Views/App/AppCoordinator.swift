@@ -111,7 +111,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     }
 }
 
-// MARK: - Destinations
+// MARK: -
 
 extension AppCoordinator {
     var contentView: some View {
@@ -142,6 +142,21 @@ extension AppCoordinator {
                 )
             )
         )
+    }
+
+    var overriddenLayout: ProfilesLayout {
+        if isUITesting {
+            return isBigDevice ? .grid : .list
+        }
+        return layout
+    }
+
+    var migrateViewStyle: MigrateView.Style {
+#if os(iOS)
+        .list
+#else
+        .table
+#endif
     }
 
     func toolbarContent() -> some ToolbarContent {
@@ -222,21 +237,6 @@ extension AppCoordinator {
             EmptyView()
         }
     }
-
-    var overriddenLayout: ProfilesLayout {
-        if isUITesting {
-            return isBigDevice ? .grid : .list
-        }
-        return layout
-    }
-
-    var migrateViewStyle: MigrateView.Style {
-#if os(iOS)
-        .list
-#else
-        .table
-#endif
-    }
 }
 
 // MARK: - Handlers
@@ -269,17 +269,27 @@ private extension AppCoordinator {
         interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        setLater(.init(features, needsConfirmation: true)) {
+            paywallReason = $0
+        }
+    }
+
+    func onError(_ error: Error, profile: Profile) {
+        errorHandler.handle(
+            error,
+            title: profile.name,
+            message: Strings.Errors.App.tunnel
+        )
+    }
+}
+
+private extension AppCoordinator {
     func onProviderEntityRequired(_ profile: Profile, force: Bool) {
         guard let pair = profile.selectedProvider else {
             return
         }
         present(.editProviderEntity(profile, force, pair.module, pair.selection))
-    }
-
-    func onPurchaseRequired(_ features: Set<AppFeature>) {
-        setLater(.init(features, needsConfirmation: true)) {
-            paywallReason = $0
-        }
     }
 
     func onSelectProviderEntity(
@@ -320,14 +330,6 @@ private extension AppCoordinator {
         }
     }
 
-    func onError(_ error: Error, profile: Profile) {
-        errorHandler.handle(
-            error,
-            title: profile.name,
-            message: Strings.Errors.App.tunnel
-        )
-    }
-
     func enterDetail(of profile: EditableProfile, initialModuleId: UUID?) {
         profilePath = NavigationPath()
         let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
@@ -348,7 +350,7 @@ private extension AppCoordinator {
     }
 }
 
-// MARK: -
+// MARK: - Previews
 
 #Preview {
     AppCoordinator(

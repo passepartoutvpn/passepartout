@@ -131,7 +131,7 @@ private extension AppCoordinator {
 
 // MARK: - Handlers
 
-// FIXME: ### mostly duplicated from AppUIMain.AppCordinator
+// FIXME: ### duplicated from AppUIMain.AppCordinator
 private extension AppCoordinator {
     func onConnect(_ profile: Profile, force: Bool) async {
         do {
@@ -160,13 +160,6 @@ private extension AppCoordinator {
         interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
-    func onProviderEntityRequired(_ profile: Profile) {
-        errorHandler.handle(
-            title: profile.name,
-            message: Strings.Alerts.Providers.MissingServer.message
-        )
-    }
-
     func onPurchaseRequired(_ features: Set<AppFeature>) {
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0
@@ -182,7 +175,16 @@ private extension AppCoordinator {
     }
 }
 
-// MARK: -
+private extension AppCoordinator {
+    func onProviderEntityRequired(_ profile: Profile) {
+        errorHandler.handle(
+            title: profile.name,
+            message: Strings.Alerts.Providers.MissingServer.message
+        )
+    }
+}
+
+// MARK: - Previews
 
 #Preview {
     AppCoordinator(
