@@ -31,10 +31,7 @@ import PassepartoutKit
 import XCTest
 
 final class ProfileImporterTests: XCTestCase {
-    private let registry = Registry(
-        allHandlers: [SomeModule.moduleHandler],
-        allImplementations: [SomeModule.Implementation()]
-    )
+    private let moduleImporter = SomeModule.Implementation()
 
     private var subscriptions: Set<AnyCancellable> = []
 }
@@ -45,7 +42,7 @@ extension ProfileImporterTests {
         let sut = ProfileImporter()
         let profileManager = ProfileManager(profiles: [])
 
-        try await sut.tryImport(urls: [], profileManager: profileManager, registry: registry)
+        try await sut.tryImport(urls: [], profileManager: profileManager, importer: moduleImporter)
         XCTAssertEqual(sut.nextURL, nil)
         XCTAssertTrue(profileManager.previews.isEmpty)
     }
@@ -75,7 +72,7 @@ extension ProfileImporterTests {
         try await sut.tryImport(
             urls: [url],
             profileManager: profileManager,
-            registry: registry
+            importer: moduleImporter
         )
         XCTAssertEqual(sut.nextURL, nil)
 
@@ -107,12 +104,12 @@ extension ProfileImporterTests {
         try await sut.tryImport(
             urls: [url],
             profileManager: profileManager,
-            registry: registry
+            importer: moduleImporter
         )
         XCTAssertEqual(sut.nextURL, url)
 
         sut.currentPassphrase = "passphrase"
-        try await sut.reImport(url: url, profileManager: profileManager, registry: registry)
+        try await sut.reImport(url: url, profileManager: profileManager, importer: moduleImporter)
         XCTAssertEqual(sut.nextURL, nil)
 
         await fulfillment(of: [exp])
@@ -126,29 +123,37 @@ extension ProfileImporterTests {
         try await sut.tryImport(
             urls: [url, url, url],
             profileManager: profileManager,
-            registry: registry
+            importer: moduleImporter
         )
         XCTAssertEqual(sut.nextURL, url)
         XCTAssertEqual(sut.urlsRequiringPassphrase.count, 3)
     }
 }
 
+// MARK: -
+
 private struct SomeModule: Module {
-    struct Implementation: ModuleImplementation, ModuleImporter {
+    struct Implementation: ModuleImplementation {
         var moduleHandlerId: ModuleHandler.ID {
             moduleHandler.id
         }
+    }
+}
 
-        func module(fromURL url: URL, object: Any?) throws -> Module {
-            if url.absoluteString.hasSuffix(".encrypted") {
-                guard let passphrase = object as? String else {
-                    throw PassepartoutError(.OpenVPN.passphraseRequired)
-                }
-                guard passphrase == "passphrase" else {
-                    throw PassepartoutError(.crypto)
-                }
+extension SomeModule.Implementation: ModuleImporter {
+    func module(fromContents contents: String, object: Any?) throws -> Module {
+        fatalError()
+    }
+
+    func module(fromURL url: URL, object: Any?) throws -> Module {
+        if url.absoluteString.hasSuffix(".encrypted") {
+            guard let passphrase = object as? String else {
+                throw PassepartoutError(.OpenVPN.passphraseRequired)
             }
-            return SomeModule()
+            guard passphrase == "passphrase" else {
+                throw PassepartoutError(.crypto)
+            }
         }
+        return SomeModule()
     }
 }
