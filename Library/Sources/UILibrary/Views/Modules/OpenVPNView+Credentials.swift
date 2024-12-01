@@ -91,6 +91,8 @@ public struct OpenVPNCredentialsView: View {
             guidanceSection
         }
         .themeManualInput()
+        .themeAnimation(on: isInteractive, category: .modules)
+        .themeAnimation(on: builder, category: .modules)
         .modifier(PaywallModifier(reason: $paywallReason))
         .onLoad(perform: onLoad)
         .onChange(of: builder, perform: onChange)
