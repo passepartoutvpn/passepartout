@@ -26,13 +26,12 @@
 import CommonLibrary
 import Foundation
 import PassepartoutKit
+import UILibrary
 
 struct ProfileFlow {
     let onEditProfile: (ProfilePreview) -> Void
 
     let onMigrateProfiles: () -> Void
 
-    let onProviderEntityRequired: (Profile) -> Void
-
-    let onPurchaseRequired: (Set<AppFeature>) -> Void
+    let connectionFlow: ConnectionFlow?
 }

@@ -1,8 +1,8 @@
 //
-//  TunnelRestartButton.swift
+//  AppCoordinatorConforming+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/7/24.
+//  Created by Davide De Rosa on 12/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,37 +24,29 @@
 //
 
 import CommonLibrary
-import CommonUtils
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-struct TunnelRestartButton<Label>: View where Label: View {
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let profile: Profile?
-
-    let errorHandler: ErrorHandler
-
-    var flow: ConnectionFlow?
-
-    let label: () -> Label
-
-    var body: some View {
-        Button {
-            guard let profile else {
-                return
+extension AppCoordinatorConforming {
+    public func onConnect(_ profile: Profile, force: Bool) async {
+        do {
+            try iapManager.verify(profile)
+            try await tunnel.connect(with: profile, force: force)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            onPurchaseRequired(requiredFeatures)
+        } catch AppError.interactiveLogin {
+            onInteractiveLogin(profile) {
+                await onConnect($0, force: true)
             }
-            guard tunnel.status == .active else {
-                return
+        } catch let ppError as PassepartoutError {
+            switch ppError.code {
+            case .missingProviderEntity:
+                onProviderEntityRequired(profile, force: force)
+            default:
+                onError(ppError, profile: profile)
             }
-            Task {
-                await flow?.onConnect(profile)
-            }
-        } label: {
-            label()
+        } catch {
+            onError(error, profile: profile)
         }
-        .disabled(profile == nil || tunnel.status != .active)
     }
 }

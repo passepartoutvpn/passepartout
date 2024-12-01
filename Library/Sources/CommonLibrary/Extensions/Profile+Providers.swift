@@ -1,8 +1,8 @@
 //
-//  ProviderEntitySelector.swift
+//  Profile+Providers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/22/24.
+//  Created by Davide De Rosa on 12/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,29 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import CommonUtils
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-struct ProviderEntitySelector: View {
-    let module: Module
-
-    let provider: SerializedProvider
-
-    let errorHandler: ErrorHandler
-
-    let onSelect: (_ entity: any ProviderEntity & Encodable) async throws -> Void
-
-    var body: some View {
-        if let viewProvider = module as? any ProviderEntityViewProviding {
-            AnyView(viewProvider.providerEntityView(
-                with: provider,
-                errorHandler: errorHandler,
-                onSelect: onSelect
-            ))
-        } else {
-            fatalError("Module got too far without being ProviderEntityViewProviding: \(module)")
+extension Profile {
+    public func withEntity(_ entity: any ProviderEntity & Encodable, in module: Module) throws -> Profile {
+        guard var moduleBuilder = module.providerModuleBuilder() else {
+            assertionFailure("Module is not a ProviderModuleBuilder?")
+            return self
         }
+        try moduleBuilder.setProviderEntity(entity)
+        let newModule = try moduleBuilder.tryBuild()
+
+        var builder = builder()
+        builder.saveModule(newModule)
+        return try builder.tryBuild()
     }
 }

@@ -44,6 +44,9 @@ extension AppError: LocalizedError {
         case .ineligibleProfile:
             return nil
 
+        case .interactiveLogin:
+            return nil
+
         case .malformedModule(let module, let error):
             return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 

@@ -46,8 +46,6 @@ struct ProfileContextMenu: View, Routable {
 
     let preview: ProfilePreview
 
-    let interactiveManager: InteractiveManager
-
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -78,14 +76,8 @@ private extension ProfileContextMenu {
             tunnel: tunnel,
             profile: profile,
             nextProfileId: .constant(nil),
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: {
-                flow?.onProviderEntityRequired($0)
-            },
-            onPurchaseRequired: {
-                flow?.onPurchaseRequired($0)
-            },
+            flow: flow?.connectionFlow,
             label: {
                 ThemeImageLabel(
                     $0 ? Strings.Global.Actions.enable : Strings.Global.Actions.disable,
@@ -100,7 +92,7 @@ private extension ProfileContextMenu {
             ProviderConnectToButton(
                 profile: $0,
                 onTap: {
-                    flow?.onProviderEntityRequired($0)
+                    flow?.connectionFlow?.onProviderEntityRequired($0)
                 },
                 label: {
                     ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
@@ -115,9 +107,7 @@ private extension ProfileContextMenu {
             tunnel: tunnel,
             profile: profile,
             errorHandler: errorHandler,
-            onPurchaseRequired: {
-                flow?.onPurchaseRequired($0)
-            },
+            flow: flow?.connectionFlow,
             label: {
                 ThemeImageLabel(Strings.Global.Actions.restart, .tunnelRestart)
             }
@@ -161,7 +151,6 @@ private extension ProfileContextMenu {
                 profileManager: .forPreviews,
                 tunnel: .forPreviews,
                 preview: .init(.forPreviews),
-                interactiveManager: InteractiveManager(),
                 errorHandler: .default()
             )
         }

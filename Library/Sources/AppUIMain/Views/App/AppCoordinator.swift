@@ -31,6 +31,9 @@ import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding {
 
+    @EnvironmentObject
+    public var iapManager: IAPManager
+
     @Environment(\.isUITesting)
     private var isUITesting
 
@@ -45,7 +48,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
 
     private let profileManager: ProfileManager
 
-    private let tunnel: ExtendedTunnel
+    public let tunnel: ExtendedTunnel
 
     private let registry: Registry
 
@@ -66,6 +69,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
 
     @StateObject
     private var profileEditor = ProfileEditor()
+
+    @StateObject
+    private var interactiveManager = InteractiveManager()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -89,88 +95,18 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,
-            options: {
-                var options = ThemeModalOptions()
-                options.size = modalRoute?.size ?? .large
-                options.isFixedWidth = modalRoute?.isFixedWidth ?? false
-                options.isFixedHeight = modalRoute?.isFixedHeight ?? false
-                options.isInteractive = modalRoute?.isInteractive ?? true
-                return options
-            }(),
+            options: modalRoute?.options(),
             content: modalDestination
         )
+        .onChange(of: interactiveManager.isPresented) {
+            modalRoute = $0 ? .interactiveLogin : nil
+        }
     }
 }
 
-// MARK: - Destinations
+// MARK: -
 
 extension AppCoordinator {
-    enum ModalRoute: Identifiable, Equatable {
-        case about
-
-        case editProfile(UUID?)
-
-        case editProviderEntity(Profile, Module, SerializedProvider)
-
-        case migrateProfiles
-
-        case preferences
-
-        var id: Int {
-            switch self {
-            case .about: return 1
-            case .editProfile: return 2
-            case .editProviderEntity: return 3
-            case .migrateProfiles: return 4
-            case .preferences: return 5
-            }
-        }
-
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.id == rhs.id
-        }
-
-        var size: ThemeModalSize {
-            switch self {
-            case .migrateProfiles:
-                return .custom(width: 700, height: 400)
-
-            default:
-                return .large
-            }
-        }
-
-        var isFixedWidth: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-
-            default:
-                return false
-            }
-        }
-
-        var isFixedHeight: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-
-            default:
-                return false
-            }
-        }
-
-        var isInteractive: Bool {
-            switch self {
-            case .editProfile:
-                return false
-
-            default:
-                return true
-            }
-        }
-    }
-
     var contentView: some View {
         ProfileContainerView(
             layout: overriddenLayout,
@@ -189,19 +125,31 @@ extension AppCoordinator {
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
                 },
-                onProviderEntityRequired: {
-                    guard let pair = $0.selectedProvider else {
-                        return
+                connectionFlow: .init(
+                    onConnect: {
+                        await onConnect($0, force: false)
+                    },
+                    onProviderEntityRequired: {
+                        onProviderEntityRequired($0, force: false)
                     }
-                    present(.editProviderEntity($0, pair.module, pair.selection))
-                },
-                onPurchaseRequired: {
-                    setLater(.init($0, needsConfirmation: true)) {
-                        paywallReason = $0
-                    }
-                }
+                )
             )
         )
+    }
+
+    var overriddenLayout: ProfilesLayout {
+        if isUITesting {
+            return isBigDevice ? .grid : .list
+        }
+        return layout
+    }
+
+    var migrateViewStyle: MigrateView.Style {
+#if os(iOS)
+        .list
+#else
+        .table
+#endif
     }
 
     func toolbarContent() -> some ToolbarContent {
@@ -243,15 +191,30 @@ extension AppCoordinator {
                 onDismiss: onDismiss
             )
 
-        case .editProviderEntity(let profile, let module, let provider):
+        case .editProviderEntity(let profile, let force, let module, let provider):
             ProviderEntitySelector(
-                profileManager: profileManager,
-                tunnel: tunnel,
-                profile: profile,
                 module: module,
                 provider: provider,
-                errorHandler: errorHandler
+                errorHandler: errorHandler,
+                onSelect: {
+                    try await onSelectProviderEntity(
+                        $0,
+                        force: force,
+                        module: module,
+                        profile: profile
+                    )
+                }
             )
+
+        case .interactiveLogin:
+            InteractiveCoordinator(style: .modal, manager: interactiveManager) {
+                errorHandler.handle(
+                    $0,
+                    title: interactiveManager.editor.profile.name,
+                    message: Strings.Errors.App.tunnel
+                )
+            }
+            .presentationDetents([.medium])
 
         case .migrateProfiles:
             MigrateView(
@@ -267,20 +230,67 @@ extension AppCoordinator {
             EmptyView()
         }
     }
+}
 
-    var overriddenLayout: ProfilesLayout {
-        if isUITesting {
-            return isBigDevice ? .grid : .list
-        }
-        return layout
+// MARK: - Handlers
+
+extension AppCoordinator {
+    public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
+        pp_log(.app, .info, "Present interactive login")
+        interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
-    var migrateViewStyle: MigrateView.Style {
-#if os(iOS)
-        .list
-#else
-        .table
-#endif
+    public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
+        guard let pair = profile.selectedProvider else {
+            return
+        }
+        pp_log(.app, .info, "Present provider entity selector")
+        present(.editProviderEntity(profile, force, pair.module, pair.selection))
+    }
+
+    public func onPurchaseRequired(_ features: Set<AppFeature>) {
+        pp_log(.app, .info, "Present paywall for features: \(features)")
+        setLater(.init(features, needsConfirmation: true)) {
+            paywallReason = $0
+        }
+    }
+
+    public func onError(_ error: Error, profile: Profile) {
+        errorHandler.handle(
+            error,
+            title: profile.name,
+            message: Strings.Errors.App.tunnel
+        )
+    }
+}
+
+private extension AppCoordinator {
+    func onSelectProviderEntity(
+        _ entity: any ProviderEntity & Encodable,
+        force: Bool,
+        module: Module,
+        profile: Profile
+    ) async throws {
+
+        // XXX: select entity after dismissing
+        try await Task.sleep(for: .milliseconds(500))
+
+        pp_log(.app, .info, "Select new provider entity: \(entity)")
+        do {
+            let newProfile = try profile.withEntity(entity, in: module)
+
+            let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
+            try await profileManager.save(newProfile, isLocal: true)
+            if !wasConnected {
+                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
+                await onConnect(newProfile, force: force)
+            } else {
+                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
+            }
+        } catch {
+            pp_log(.app, .error, "Unable to save new provider entity: \(error)")
+            throw error
+        }
     }
 
     func enterDetail(of profile: EditableProfile, initialModuleId: UUID?) {
@@ -289,17 +299,21 @@ extension AppCoordinator {
         profileEditor.editProfile(profile, isShared: isShared)
         present(.editProfile(initialModuleId))
     }
+}
 
-    func onDismiss() {
-        present(nil)
-    }
-
+private extension AppCoordinator {
     func present(_ route: ModalRoute?) {
         setLater(route) {
             modalRoute = $0
         }
     }
+
+    func onDismiss() {
+        present(nil)
+    }
 }
+
+// MARK: - Previews
 
 #Preview {
     AppCoordinator(

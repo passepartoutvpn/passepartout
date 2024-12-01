@@ -39,8 +39,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
-    let interactiveManager: InteractiveManager
-
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -98,7 +96,6 @@ private extension ProfileGridView {
             profileManager: profileManager,
             profile: currentProfile,
             tunnel: tunnel,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             flow: flow
@@ -110,7 +107,6 @@ private extension ProfileGridView {
                     profileManager: profileManager,
                     tunnel: tunnel,
                     preview: .init($0),
-                    interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     flow: flow
                 )
@@ -124,7 +120,6 @@ private extension ProfileGridView {
             profileManager: profileManager,
             tunnel: tunnel,
             preview: preview,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
@@ -137,7 +132,6 @@ private extension ProfileGridView {
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
-                interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 flow: flow
             )
@@ -152,7 +146,6 @@ private extension ProfileGridView {
     ProfileGridView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        interactiveManager: InteractiveManager(),
         errorHandler: .default()
     )
     .themeWindow(width: 600, height: 300)

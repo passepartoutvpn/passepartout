@@ -40,12 +40,9 @@ struct ProfileListView: View {
     var focusedField: ProfileView.Field?
 
     @ObservedObject
-    var interactiveManager: InteractiveManager
-
-    @ObservedObject
     var errorHandler: ErrorHandler
 
-    var flow: AppFlow?
+    var flow: ConnectionFlow?
 
     var body: some View {
         VStack {
@@ -80,10 +77,8 @@ private extension ProfileListView {
             tunnel: tunnel,
             profile: profileManager.profile(withId: preview.id),
             nextProfileId: .constant(nil),
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: onProviderEntityRequired,
-            onPurchaseRequired: onPurchaseRequired,
+            flow: flow,
             label: { _ in
                 toggleView(for: preview)
             }
@@ -99,16 +94,6 @@ private extension ProfileListView {
                 .opaque(preview.id == tunnel.currentProfile?.id)
         }
         .font(.headline)
-    }
-}
-
-private extension ProfileListView {
-    func onProviderEntityRequired(_ profile: Profile) {
-        flow?.onProviderEntityRequired(profile)
-    }
-
-    func onPurchaseRequired(_ features: Set<AppFeature>) {
-        flow?.onPurchaseRequired(features)
     }
 }
 
@@ -133,7 +118,6 @@ private struct ContentPreview: View {
             profileManager: profileManager,
             tunnel: .forPreviews,
             focusedField: $focusedField,
-            interactiveManager: InteractiveManager(),
             errorHandler: .default()
         )
         .withMockEnvironment()

@@ -98,9 +98,12 @@ extension ExtendedTunnel {
         try await tunnel.install(newProfile, connect: false, title: processedTitle)
     }
 
-    public func connect(with profile: Profile) async throws {
+    public func connect(with profile: Profile, force: Bool = false) async throws {
         pp_log(.app, .notice, "Connect to profile \(profile.id)...")
         let newProfile = try processedProfile(profile)
+        if !force && newProfile.isInteractive {
+            throw AppError.interactiveLogin
+        }
         try await tunnel.install(newProfile, connect: true, title: processedTitle)
     }
 

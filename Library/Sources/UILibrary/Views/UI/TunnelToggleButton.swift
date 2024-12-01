@@ -28,13 +28,10 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View {
+public struct TunnelToggleButton<Label>: View, Routable, ThemeProviding where Label: View {
 
     @EnvironmentObject
     public var theme: Theme
-
-    @EnvironmentObject
-    private var iapManager: IAPManager
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
@@ -44,13 +41,9 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
     @Binding
     private var nextProfileId: Profile.ID?
 
-    private let interactiveManager: InteractiveManager
-
     private let errorHandler: ErrorHandler
 
-    private let onProviderEntityRequired: (Profile) -> Void
-
-    private let onPurchaseRequired: (Set<AppFeature>) -> Void
+    public let flow: ConnectionFlow?
 
     private let label: (Bool) -> Label
 
@@ -58,19 +51,15 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
         tunnel: ExtendedTunnel,
         profile: Profile?,
         nextProfileId: Binding<Profile.ID?>,
-        interactiveManager: InteractiveManager,
         errorHandler: ErrorHandler,
-        onProviderEntityRequired: @escaping (Profile) -> Void,
-        onPurchaseRequired: @escaping (Set<AppFeature>) -> Void,
+        flow: ConnectionFlow?,
         label: @escaping (Bool) -> Label
     ) {
         self.tunnel = tunnel
         self.profile = profile
         _nextProfileId = nextProfileId
-        self.interactiveManager = interactiveManager
         self.errorHandler = errorHandler
-        self.onProviderEntityRequired = onProviderEntityRequired
-        self.onPurchaseRequired = onPurchaseRequired
+        self.flow = flow
         self.label = label
     }
 
@@ -98,54 +87,16 @@ private extension TunnelToggleButton {
 
 private extension TunnelToggleButton {
     func tryPerform() {
+        guard let profile else {
+            return
+        }
         Task {
-            guard let profile else {
-                return
-            }
             if !isInstalled {
                 nextProfileId = profile.id
             }
             defer {
                 if nextProfileId == profile.id {
                     nextProfileId = nil
-                }
-            }
-            if canConnect {
-                do {
-                    try iapManager.verify(profile)
-                } catch {
-                    pp_log(.app, .error, "Verification failed for profile \(profile.id), cancel preliminary connection checks: \(error)")
-                    await perform(with: profile)
-                    return
-                }
-
-                // provider module -> check requirements
-                if let providerModule = profile.activeProviderModule,
-                   providerModule.isProviderRequired {
-
-                    // missing required provider -> show error
-                    guard let provider = providerModule.provider else {
-                        errorHandler.handle(
-                            PassepartoutError(.providerRequired),
-                            title: profile.name
-                        )
-                        return
-                    }
-
-                    // missing provider entity -> show selector
-                    guard provider.entity != nil else {
-                        onProviderEntityRequired(profile)
-                        return
-                    }
-                }
-
-                // interactive login -> show interactive view
-                if profile.isInteractive {
-                    pp_log(.app, .notice, "Present interactive login")
-                    interactiveManager.present(with: profile) {
-                        await perform(with: $0)
-                    }
-                    return
                 }
             }
             await perform(with: profile)
@@ -156,15 +107,13 @@ private extension TunnelToggleButton {
         do {
             if isInstalled {
                 if canConnect {
-                    try await tunnel.connect(with: profile)
+                    await flow?.onConnect(profile)
                 } else {
                     try await tunnel.disconnect()
                 }
             } else {
-                try await tunnel.connect(with: profile)
+                await flow?.onConnect(profile)
             }
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
-            onPurchaseRequired(requiredFeatures)
         } catch is CancellationError {
             //
         } catch {

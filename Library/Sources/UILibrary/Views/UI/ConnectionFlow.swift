@@ -1,8 +1,8 @@
 //
-//  AppFlow.swift
+//  ConnectionFlow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 11/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-struct AppFlow {
-    let onProviderEntityRequired: (Profile) -> Void
+public struct ConnectionFlow {
+    public let onConnect: (Profile) async -> Void
 
-    let onPurchaseRequired: (Set<AppFeature>) -> Void
+    public let onProviderEntityRequired: (Profile) -> Void
+
+    public init(
+        onConnect: @escaping (Profile) async -> Void,
+        onProviderEntityRequired: @escaping (Profile) -> Void
+    ) {
+        self.onConnect = onConnect
+        self.onProviderEntityRequired = onProviderEntityRequired
+    }
 }

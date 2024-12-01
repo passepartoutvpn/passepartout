@@ -51,6 +51,12 @@ extension ProfileManager {
                            var providerBuilder = moduleBuilder as? any ProviderModuleBuilder {
                             providerBuilder.providerId = providerId
                             moduleBuilder = providerBuilder
+
+                            if parameters.name == "Hide.me" {
+                                var ovpnBuilder = moduleBuilder as! OpenVPNModule.Builder
+                                ovpnBuilder.isInteractive = true
+                                moduleBuilder = ovpnBuilder
+                            }
                         }
                         builder.modules.append(try moduleBuilder.tryBuild())
                     }

@@ -30,14 +30,21 @@ import SwiftUI
 import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
+
+    @EnvironmentObject
+    public var iapManager: IAPManager
+
     private let profileManager: ProfileManager
 
-    private let tunnel: ExtendedTunnel
+    public let tunnel: ExtendedTunnel
 
     private let registry: Registry
 
     @State
     private var paywallReason: PaywallReason?
+
+    @StateObject
+    private var interactiveManager = InteractiveManager()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -79,10 +86,15 @@ private extension AppCoordinator {
         ProfileView(
             profileManager: profileManager,
             tunnel: tunnel,
+            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: .init(
-                onProviderEntityRequired: onProviderEntityRequired,
-                onPurchaseRequired: onPurchaseRequired
+                onConnect: {
+                    await onConnect($0, force: false)
+                },
+                onProviderEntityRequired: {
+                    onProviderEntityRequired($0, force: false)
+                }
             )
         )
     }
@@ -119,22 +131,38 @@ private extension AppCoordinator {
     }
 }
 
-private extension AppCoordinator {
-    func onProviderEntityRequired(_ profile: Profile) {
+// MARK: - Handlers
+
+extension AppCoordinator {
+    public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
+        pp_log(.app, .info, "Present interactive login")
+        interactiveManager.present(with: profile, onComplete: onComplete)
+    }
+
+    public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
         errorHandler.handle(
             title: profile.name,
             message: Strings.Alerts.Providers.MissingServer.message
         )
     }
 
-    func onPurchaseRequired(_ features: Set<AppFeature>) {
+    public func onPurchaseRequired(_ features: Set<AppFeature>) {
+        pp_log(.app, .info, "Present paywall for features: \(features)")
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0
         }
     }
+
+    public func onError(_ error: Error, profile: Profile) {
+        errorHandler.handle(
+            error,
+            title: profile.name,
+            message: Strings.Errors.App.tunnel
+        )
+    }
 }
 
-// MARK: -
+// MARK: - Previews
 
 #Preview {
     AppCoordinator(

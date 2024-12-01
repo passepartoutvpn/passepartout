@@ -199,14 +199,12 @@ private extension AppContext {
         }
         pendingTask = Task {
             do {
-                if profile.isInteractive {
-                    pp_log(.app, .info, "\tProfile \(profile.id) is interactive, disconnect")
-                    try await tunnel.disconnect()
-                    return
-                }
                 do {
                     pp_log(.app, .info, "\tReconnect profile \(profile.id)")
                     try await tunnel.connect(with: profile)
+                } catch AppError.interactiveLogin {
+                    pp_log(.app, .info, "\tProfile \(profile.id) is interactive, disconnect")
+                    try await tunnel.disconnect()
                 } catch {
                     pp_log(.app, .error, "\tUnable to reconnect profile \(profile.id), disconnect: \(error)")
                     try await tunnel.disconnect()

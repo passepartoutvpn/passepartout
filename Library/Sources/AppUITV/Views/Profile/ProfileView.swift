@@ -48,18 +48,18 @@ struct ProfileView: View, Routable, TunnelInstallationProviding {
     var tunnel: ExtendedTunnel
 
     @ObservedObject
+    var interactiveManager: InteractiveManager
+
+    @ObservedObject
     var errorHandler: ErrorHandler
 
-    var flow: AppFlow?
+    var flow: ConnectionFlow?
 
     @State
     var showsSidePanel = false
 
     @FocusState
     private var focusedField: Field?
-
-    @StateObject
-    private var interactiveManager = InteractiveManager()
 
     var body: some View {
         GeometryReader { geo in
@@ -104,7 +104,6 @@ private extension ProfileView {
             tunnel: tunnel,
             isSwitching: $showsSidePanel,
             focusedField: $focusedField,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: flow
         )
@@ -145,7 +144,6 @@ private extension ProfileView {
             profileManager: profileManager,
             tunnel: tunnel,
             focusedField: $focusedField,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: flow
         )
@@ -192,6 +190,7 @@ private extension ProfileView {
     ProfileView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
+        interactiveManager: InteractiveManager(),
         errorHandler: .default(),
         showsSidePanel: true
     )
@@ -202,6 +201,7 @@ private extension ProfileView {
     ProfileView(
         profileManager: ProfileManager(profiles: []),
         tunnel: .forPreviews,
+        interactiveManager: InteractiveManager(),
         errorHandler: .default(),
         showsSidePanel: true
     )
