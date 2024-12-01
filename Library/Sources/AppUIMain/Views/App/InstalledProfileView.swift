@@ -42,8 +42,6 @@ struct InstalledProfileView: View, Routable {
 
     let tunnel: ExtendedTunnel
 
-    let interactiveManager: InteractiveManager
-
     let errorHandler: ErrorHandler
 
     @Binding
@@ -111,7 +109,6 @@ private extension InstalledProfileView {
             tunnel: tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: flow
         )
@@ -124,7 +121,6 @@ private extension InstalledProfileView {
             profileManager: profileManager,
             tunnel: tunnel,
             preview: .init(profile ?? .forPreviews),
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: flow
         )
@@ -135,7 +131,7 @@ private extension InstalledProfileView {
             .selectedProvider
             .map { _, selection in
                 Button {
-                    flow?.onProviderEntityRequired(profile!)
+                    flow?.connectionFlow?.onProviderEntityRequired(profile!)
                 } label: {
                     providerSelectorLabel(with: selection)
                 }
@@ -179,9 +175,6 @@ private struct ToggleButton: View {
     var nextProfileId: Profile.ID?
 
     @ObservedObject
-    var interactiveManager: InteractiveManager
-
-    @ObservedObject
     var errorHandler: ErrorHandler
 
     let flow: ProfileFlow?
@@ -191,14 +184,8 @@ private struct ToggleButton: View {
             tunnel: tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: {
-                flow?.onProviderEntityRequired($0)
-            },
-            onPurchaseRequired: {
-                flow?.onPurchaseRequired($0)
-            },
+            flow: flow?.connectionFlow,
             label: { _ in
                 ThemeImage(.tunnelToggle)
                     .scaleEffect(1.5, anchor: .trailing)
@@ -301,7 +288,6 @@ private struct HeaderView: View {
             profileManager: .forPreviews,
             profile: .forPreviews,
             tunnel: .forPreviews,
-            interactiveManager: InteractiveManager(),
             errorHandler: .default(),
             nextProfileId: .constant(nil)
         )
@@ -316,7 +302,6 @@ private struct ContentView: View {
                 profileManager: .forPreviews,
                 tunnel: .forPreviews,
                 preview: .init(.forPreviews),
-                interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),
                 withMarker: true

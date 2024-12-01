@@ -35,6 +35,8 @@ public enum AppError: Error {
 
     case ineligibleProfile(Set<AppFeature>)
 
+    case interactiveLogin
+
     case malformedModule(any ModuleBuilder, error: Error)
 
     case permissionDenied

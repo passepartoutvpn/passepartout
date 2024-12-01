@@ -48,8 +48,6 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
 
     let preview: ProfilePreview
 
-    let interactiveManager: InteractiveManager
-
     let errorHandler: ErrorHandler
 
     @Binding
@@ -147,14 +145,8 @@ private extension ProfileRowView {
             tunnel: tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: {
-                flow?.onProviderEntityRequired($0)
-            },
-            onPurchaseRequired: {
-                flow?.onPurchaseRequired($0)
-            },
+            flow: flow?.connectionFlow,
             label: { _ in
                 ProfileCardView(
                     style: style,
@@ -183,7 +175,6 @@ private extension ProfileRowView {
                 profileManager: profileManager,
                 tunnel: tunnel,
                 preview: preview,
-                interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 flow: flow
             )
@@ -214,7 +205,6 @@ private extension ProfileRowView {
             profileManager: profileManager,
             tunnel: .forPreviews,
             preview: .init(profile),
-            interactiveManager: InteractiveManager(),
             errorHandler: .default(),
             nextProfileId: .constant(nil),
             withMarker: true

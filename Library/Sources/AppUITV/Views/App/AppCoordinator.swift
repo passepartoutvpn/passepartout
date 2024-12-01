@@ -30,6 +30,10 @@ import SwiftUI
 import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming {
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     private let profileManager: ProfileManager
 
     private let tunnel: ExtendedTunnel
@@ -38,6 +42,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     @State
     private var paywallReason: PaywallReason?
+
+    @StateObject
+    private var interactiveManager = InteractiveManager()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -79,10 +86,13 @@ private extension AppCoordinator {
         ProfileView(
             profileManager: profileManager,
             tunnel: tunnel,
+            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             flow: .init(
-                onProviderEntityRequired: onProviderEntityRequired,
-                onPurchaseRequired: onPurchaseRequired
+                onConnect: {
+                    await onConnect($0, force: false)
+                },
+                onProviderEntityRequired: onProviderEntityRequired
             )
         )
     }
@@ -119,7 +129,37 @@ private extension AppCoordinator {
     }
 }
 
+// MARK: - Handlers
+
+// FIXME: ### mostly duplicated from AppUIMain.AppCordinator
 private extension AppCoordinator {
+    func onConnect(_ profile: Profile, force: Bool) async {
+        do {
+            try iapManager.verify(profile)
+            try await tunnel.connect(with: profile, force: force)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            onPurchaseRequired(requiredFeatures)
+        } catch AppError.interactiveLogin {
+            onInteractiveLogin(profile) {
+                await onConnect($0, force: true)
+            }
+        } catch let ppError as PassepartoutError {
+            switch ppError.code {
+            case .missingProviderEntity:
+                onProviderEntityRequired(profile)
+            default:
+                onError(ppError, profile: profile)
+            }
+        } catch {
+            onError(error, profile: profile)
+        }
+    }
+
+    func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
+        pp_log(.app, .notice, "Present interactive login")
+        interactiveManager.present(with: profile, onComplete: onComplete)
+    }
+
     func onProviderEntityRequired(_ profile: Profile) {
         errorHandler.handle(
             title: profile.name,
@@ -131,6 +171,14 @@ private extension AppCoordinator {
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0
         }
+    }
+
+    func onError(_ error: Error, profile: Profile) {
+        errorHandler.handle(
+            error,
+            title: profile.name,
+            message: Strings.Errors.App.tunnel
+        )
     }
 }
 

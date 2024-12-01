@@ -31,6 +31,9 @@ import UILibrary
 
 public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding {
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     @Environment(\.isUITesting)
     private var isUITesting
 
@@ -68,6 +71,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     private var profileEditor = ProfileEditor()
 
     @StateObject
+    private var interactiveManager = InteractiveManager()
+
+    @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     public init(
@@ -99,78 +105,15 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
             }(),
             content: modalDestination
         )
+        .onChange(of: interactiveManager.isPresented) {
+            modalRoute = $0 ? .interactiveLogin : nil
+        }
     }
 }
 
 // MARK: - Destinations
 
 extension AppCoordinator {
-    enum ModalRoute: Identifiable, Equatable {
-        case about
-
-        case editProfile(UUID?)
-
-        case editProviderEntity(Profile, Module, SerializedProvider)
-
-        case migrateProfiles
-
-        case preferences
-
-        var id: Int {
-            switch self {
-            case .about: return 1
-            case .editProfile: return 2
-            case .editProviderEntity: return 3
-            case .migrateProfiles: return 4
-            case .preferences: return 5
-            }
-        }
-
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.id == rhs.id
-        }
-
-        var size: ThemeModalSize {
-            switch self {
-            case .migrateProfiles:
-                return .custom(width: 700, height: 400)
-
-            default:
-                return .large
-            }
-        }
-
-        var isFixedWidth: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-
-            default:
-                return false
-            }
-        }
-
-        var isFixedHeight: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-
-            default:
-                return false
-            }
-        }
-
-        var isInteractive: Bool {
-            switch self {
-            case .editProfile:
-                return false
-
-            default:
-                return true
-            }
-        }
-    }
-
     var contentView: some View {
         ProfileContainerView(
             layout: overriddenLayout,
@@ -189,17 +132,14 @@ extension AppCoordinator {
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
                 },
-                onProviderEntityRequired: {
-                    guard let pair = $0.selectedProvider else {
-                        return
+                connectionFlow: .init(
+                    onConnect: {
+                        await onConnect($0, force: false)
+                    },
+                    onProviderEntityRequired: {
+                        onProviderEntityRequired($0, force: false)
                     }
-                    present(.editProviderEntity($0, pair.module, pair.selection))
-                },
-                onPurchaseRequired: {
-                    setLater(.init($0, needsConfirmation: true)) {
-                        paywallReason = $0
-                    }
-                }
+                )
             )
         )
     }
@@ -243,15 +183,30 @@ extension AppCoordinator {
                 onDismiss: onDismiss
             )
 
-        case .editProviderEntity(let profile, let module, let provider):
+        case .editProviderEntity(let profile, let force, let module, let provider):
             ProviderEntitySelector(
-                profileManager: profileManager,
-                tunnel: tunnel,
-                profile: profile,
                 module: module,
                 provider: provider,
-                errorHandler: errorHandler
+                errorHandler: errorHandler,
+                onSelect: {
+                    try await onSelectProviderEntity(
+                        $0,
+                        force: force,
+                        module: module,
+                        profile: profile
+                    )
+                }
             )
+
+        case .interactiveLogin:
+            InteractiveCoordinator(style: .modal, manager: interactiveManager) {
+                errorHandler.handle(
+                    $0,
+                    title: interactiveManager.editor.profile.name,
+                    message: Strings.Errors.App.tunnel
+                )
+            }
+            .presentationDetents([.medium])
 
         case .migrateProfiles:
             MigrateView(
@@ -282,6 +237,96 @@ extension AppCoordinator {
         .table
 #endif
     }
+}
+
+// MARK: - Handlers
+
+private extension AppCoordinator {
+    func onConnect(_ profile: Profile, force: Bool) async {
+        do {
+            try iapManager.verify(profile)
+            try await tunnel.connect(with: profile, force: force)
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
+            onPurchaseRequired(requiredFeatures)
+        } catch AppError.interactiveLogin {
+            onInteractiveLogin(profile) {
+                await onConnect($0, force: true)
+            }
+        } catch let ppError as PassepartoutError {
+            switch ppError.code {
+            case .missingProviderEntity:
+                onProviderEntityRequired(profile, force: force)
+            default:
+                onError(ppError, profile: profile)
+            }
+        } catch {
+            onError(error, profile: profile)
+        }
+    }
+
+    func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
+        pp_log(.app, .notice, "Present interactive login")
+        interactiveManager.present(with: profile, onComplete: onComplete)
+    }
+
+    func onProviderEntityRequired(_ profile: Profile, force: Bool) {
+        guard let pair = profile.selectedProvider else {
+            return
+        }
+        present(.editProviderEntity(profile, force, pair.module, pair.selection))
+    }
+
+    func onPurchaseRequired(_ features: Set<AppFeature>) {
+        setLater(.init(features, needsConfirmation: true)) {
+            paywallReason = $0
+        }
+    }
+
+    func onSelectProviderEntity(
+        _ entity: any ProviderEntity & Encodable,
+        force: Bool,
+        module: Module,
+        profile: Profile
+    ) async throws {
+
+        // XXX: select entity after dismissing
+        try await Task.sleep(for: .milliseconds(500))
+
+        pp_log(.app, .info, "Select new provider entity: \(entity)")
+        do {
+            // FIXME: ###, move stuff like this to some ProfileFactory
+            guard var moduleBuilder = module.providerModuleBuilder() else {
+                assertionFailure("Module is not a ProviderModuleBuilder?")
+                return
+            }
+            try moduleBuilder.setProviderEntity(entity)
+            let newModule = try moduleBuilder.tryBuild()
+
+            var builder = profile.builder()
+            builder.saveModule(newModule)
+            let newProfile = try builder.tryBuild()
+
+            let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
+            try await profileManager.save(newProfile, isLocal: true)
+            if !wasConnected {
+                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
+                await onConnect(newProfile, force: force)
+            } else {
+                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
+            }
+        } catch {
+            pp_log(.app, .error, "Unable to save new provider entity: \(error)")
+            throw error
+        }
+    }
+
+    func onError(_ error: Error, profile: Profile) {
+        errorHandler.handle(
+            error,
+            title: profile.name,
+            message: Strings.Errors.App.tunnel
+        )
+    }
 
     func enterDetail(of profile: EditableProfile, initialModuleId: UUID?) {
         profilePath = NavigationPath()
@@ -289,17 +334,21 @@ extension AppCoordinator {
         profileEditor.editProfile(profile, isShared: isShared)
         present(.editProfile(initialModuleId))
     }
+}
 
-    func onDismiss() {
-        present(nil)
-    }
-
+private extension AppCoordinator {
     func present(_ route: ModalRoute?) {
         setLater(route) {
             modalRoute = $0
         }
     }
+
+    func onDismiss() {
+        present(nil)
+    }
 }
+
+// MARK: -
 
 #Preview {
     AppCoordinator(

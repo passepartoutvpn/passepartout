@@ -48,12 +48,9 @@ struct ActiveProfileView: View {
     var focusedField: ProfileView.Field?
 
     @ObservedObject
-    var interactiveManager: InteractiveManager
-
-    @ObservedObject
     var errorHandler: ErrorHandler
 
-    var flow: AppFlow?
+    var flow: ConnectionFlow?
 
     var body: some View {
         VStack(spacing: .zero) {
@@ -132,10 +129,8 @@ private extension ActiveProfileView {
             tunnel: tunnel,
             profile: profile,
             nextProfileId: .constant(nil),
-            interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: onProviderEntityRequired,
-            onPurchaseRequired: onPurchaseRequired,
+            flow: flow,
             label: {
                 Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
                     .frame(maxWidth: .infinity)
@@ -166,16 +161,6 @@ private extension ActiveProfileView {
                 .padding(.vertical, 10)
         }
         .focused($focusedField, equals: .switchProfile)
-    }
-}
-
-private extension ActiveProfileView {
-    func onProviderEntityRequired(_ profile: Profile) {
-        flow?.onProviderEntityRequired(profile)
-    }
-
-    func onPurchaseRequired(_ features: Set<AppFeature>) {
-        flow?.onPurchaseRequired(features)
     }
 }
 
@@ -250,7 +235,6 @@ private struct ContentPreview: View {
             tunnel: .forPreviews,
             isSwitching: $isSwitching,
             focusedField: $focusedField,
-            interactiveManager: InteractiveManager(),
             errorHandler: .default()
         )
         .withMockEnvironment()

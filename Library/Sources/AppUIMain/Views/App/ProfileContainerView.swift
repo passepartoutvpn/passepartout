@@ -45,9 +45,6 @@ struct ProfileContainerView: View, Routable {
 
     var flow: ProfileFlow?
 
-    @StateObject
-    private var interactiveManager = InteractiveManager()
-
     var body: some View {
         debugChanges()
         return innerView
@@ -62,7 +59,6 @@ struct ProfileContainerView: View, Routable {
                 errorHandler: errorHandler
             ))
             .navigationTitle(Strings.Unlocalized.appName)
-            .themeModal(isPresented: $interactiveManager.isPresented, content: interactiveDestination)
             .withErrorHandler(errorHandler)
     }
 }
@@ -76,7 +72,6 @@ private extension ProfileContainerView {
             ProfileListView(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 flow: flow
             )
@@ -85,22 +80,10 @@ private extension ProfileContainerView {
             ProfileGridView(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 flow: flow
             )
         }
-    }
-
-    func interactiveDestination() -> some View {
-        InteractiveCoordinator(style: .modal, manager: interactiveManager) {
-            errorHandler.handle(
-                $0,
-                title: interactiveManager.editor.profile.name,
-                message: Strings.Errors.App.tunnel
-            )
-        }
-        .presentationDetents([.medium])
     }
 }
 

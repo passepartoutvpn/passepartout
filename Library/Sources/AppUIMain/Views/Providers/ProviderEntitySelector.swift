@@ -29,20 +29,13 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProviderEntitySelector: View {
-
-    @ObservedObject
-    var profileManager: ProfileManager
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let profile: Profile
-
     let module: Module
 
     let provider: SerializedProvider
 
     let errorHandler: ErrorHandler
+
+    let onSelect: (_ entity: any ProviderEntity & Encodable) async throws -> Void
 
     var body: some View {
         if let viewProvider = module as? any ProviderEntityViewProviding {
@@ -53,36 +46,6 @@ struct ProviderEntitySelector: View {
             ))
         } else {
             fatalError("Module got too far without being ProviderEntityViewProviding: \(module)")
-        }
-    }
-}
-
-private extension ProviderEntitySelector {
-    func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
-        pp_log(.app, .info, "Select new provider entity: \(entity)")
-        do {
-            guard var moduleBuilder = module.providerModuleBuilder() else {
-                assertionFailure("Module is not a ProviderModuleBuilder?")
-                return
-            }
-            try moduleBuilder.setProviderEntity(entity)
-            let newModule = try moduleBuilder.tryBuild()
-
-            var builder = profile.builder()
-            builder.saveModule(newModule)
-            let newProfile = try builder.tryBuild()
-
-            let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
-            try await profileManager.save(newProfile, isLocal: true)
-            if !wasConnected {
-                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
-                try await tunnel.connect(with: newProfile)
-            } else {
-                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
-            }
-        } catch {
-            pp_log(.app, .error, "Unable to save new provider entity: \(error)")
-            throw error
         }
     }
 }
