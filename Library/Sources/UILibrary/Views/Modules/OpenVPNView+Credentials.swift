@@ -156,14 +156,8 @@ private extension OpenVPNCredentialsView {
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 otpField
             }
-#if os(macOS)
-            inputFooter.map {
-                Text($0)
-                    .themeSubtitle()
-            }
-#endif
         }
-        .themeSection(footer: inputFooter)
+        .themeSection(footer: inputFooter, forcesFooter: true)
     }
 
     @ViewBuilder

@@ -135,12 +135,10 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
-    // footer is hidden on macOS
-    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
-        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
+    public func themeSection(header: String? = nil, footer: String? = nil, forcesFooter: Bool = false) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer, forcesFooter: forcesFooter))
     }
 
-    // shortcut
     public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
         Group {
             if above {
@@ -416,6 +414,8 @@ struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
     let header: String?
 
     let footer: String?
+
+    let forcesFooter: Bool
 }
 
 struct ThemeRowWithSubtitleModifier: ViewModifier {
