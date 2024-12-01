@@ -277,17 +277,7 @@ private extension AppCoordinator {
 
         pp_log(.app, .info, "Select new provider entity: \(entity)")
         do {
-            // FIXME: ###, move stuff like this to some ProfileFactory
-            guard var moduleBuilder = module.providerModuleBuilder() else {
-                assertionFailure("Module is not a ProviderModuleBuilder?")
-                return
-            }
-            try moduleBuilder.setProviderEntity(entity)
-            let newModule = try moduleBuilder.tryBuild()
-
-            var builder = profile.builder()
-            builder.saveModule(newModule)
-            let newProfile = try builder.tryBuild()
+            let newProfile = try profile.withEntity(entity, in: module)
 
             let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
             try await profileManager.save(newProfile, isLocal: true)
