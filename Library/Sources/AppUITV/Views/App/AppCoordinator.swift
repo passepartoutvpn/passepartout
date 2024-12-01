@@ -135,7 +135,7 @@ private extension AppCoordinator {
 
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
-        pp_log(.app, .notice, "Present interactive login")
+        pp_log(.app, .info, "Present interactive login")
         interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
@@ -147,6 +147,7 @@ extension AppCoordinator {
     }
 
     public func onPurchaseRequired(_ features: Set<AppFeature>) {
+        pp_log(.app, .info, "Present paywall for features: \(features)")
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0
         }
