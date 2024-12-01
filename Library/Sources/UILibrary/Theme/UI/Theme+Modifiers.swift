@@ -135,6 +135,7 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
+    // footer is hidden on macOS
     public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
         modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }
@@ -148,12 +149,13 @@ extension View {
 
                 self
             } else {
-                themeRowWithSubtitle(footer) // macOS footer
+                themeRowWithSubtitle(footer) // macOS
             }
         }
-        .themeSection(header: header, footer: footer) // iOS/tvOS footer
+        .themeSection(header: header, footer: footer) // iOS/tvOS
     }
 
+    // subtitle is hidden on iOS/tvOS
     public func themeRowWithSubtitle(_ subtitle: String?) -> some View {
         modifier(ThemeRowWithSubtitleModifier(subtitle: subtitle))
     }

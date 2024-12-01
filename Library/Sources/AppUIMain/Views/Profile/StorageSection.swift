@@ -46,10 +46,7 @@ struct StorageSection: View {
                 .themeRowWithSubtitle(tvDescription)
             purchaseButton
         }
-        .themeSection(
-            header: header,
-            footer: footer
-        )
+        .themeSection(header: header, footer: footer)
     }
 }
 

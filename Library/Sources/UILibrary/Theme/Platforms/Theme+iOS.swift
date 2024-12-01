@@ -141,7 +141,7 @@ extension ThemeSectionWithHeaderFooterModifier {
 extension ThemeRowWithSubtitleModifier {
     func body(content: Content) -> some View {
         content
-        // omit footer on iOS/tvOS, use ThemeSectionWithHeaderFooterModifier
+        // omit subtitle on iOS/tvOS, use ThemeSectionWithHeaderFooterModifier
     }
 }
 
