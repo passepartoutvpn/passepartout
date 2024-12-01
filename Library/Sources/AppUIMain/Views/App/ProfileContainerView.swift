@@ -103,16 +103,7 @@ private struct ContainerModifier: ViewModifier {
             .themeProgress(
                 if: !profileManager.isReady,
                 isEmpty: !profileManager.hasProfiles,
-                emptyContent: {
-                    VStack(spacing: 16) {
-                        Text(Strings.Views.App.Folders.noProfiles)
-                            .themeEmptyMessage(fullScreen: false)
-
-                        Button(Strings.Views.App.Folders.NoProfiles.migrate) {
-                            flow?.onMigrateProfiles()
-                        }
-                    }
-                }
+                emptyContent: emptyView
             )
             .searchable(text: $search)
             .onChange(of: search) {
@@ -120,6 +111,17 @@ private struct ContainerModifier: ViewModifier {
             }
             .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.previews, category: .profiles)
+    }
+
+    private func emptyView() -> some View {
+        VStack(spacing: 16) {
+            Text(Strings.Views.App.Folders.noProfiles)
+                .themeEmptyMessage(fullScreen: false)
+
+            Button(Strings.Views.App.Folders.NoProfiles.migrate) {
+                flow?.onMigrateProfiles()
+            }
+        }
     }
 }
 
