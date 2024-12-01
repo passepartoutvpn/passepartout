@@ -41,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
       "state" : {
-        "revision" : "5211efce28b6d96a38747a6004a4bf03e169b27c"
+        "revision" : "e8833c9416503026ba933adcb6c5850a9db2f13b"
       }
     },
     {
