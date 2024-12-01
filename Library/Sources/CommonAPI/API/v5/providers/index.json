@@ -18,7 +18,12 @@
         "fullName": "Mullvad",
         "vpn": ["ovpn"],
         "configurations": {
-            "OpenVPN": {}
+            "OpenVPN": {
+                "credentials": {
+                    "purpose": "web",
+                    "options": ["noPassword"]
+                }
+            }
         }
     }, {
         "name": "nordvpn",
