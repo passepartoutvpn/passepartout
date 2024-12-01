@@ -95,14 +95,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         .modifier(PaywallModifier(reason: $paywallReason))
         .themeModal(
             item: $modalRoute,
-            options: {
-                var options = ThemeModalOptions()
-                options.size = modalRoute?.size ?? .large
-                options.isFixedWidth = modalRoute?.isFixedWidth ?? false
-                options.isFixedHeight = modalRoute?.isFixedHeight ?? false
-                options.isInteractive = modalRoute?.isInteractive ?? true
-                return options
-            }(),
+            options: modalRoute?.options(),
             content: modalDestination
         )
         .onChange(of: interactiveManager.isPresented) {

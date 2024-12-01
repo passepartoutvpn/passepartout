@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 extension AppCoordinator {
-    enum ModalRoute: Identifiable, Equatable {
+    enum ModalRoute: Identifiable {
         case about
 
         case editProfile(UUID?)
@@ -51,46 +51,59 @@ extension AppCoordinator {
             }
         }
 
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            lhs.id == rhs.id
+        func options() -> ThemeModalOptions {
+            var options = ThemeModalOptions()
+            options.size = size
+            options.isFixedWidth = isFixedWidth
+            options.isFixedHeight = isFixedHeight
+            options.isInteractive = isInteractive
+            return options
         }
+    }
+}
 
-        var size: ThemeModalSize {
-            switch self {
-            case .interactiveLogin:
-                return .custom(width: 500, height: 200)
-            case .migrateProfiles:
-                return .custom(width: 700, height: 400)
-            default:
-                return .large
-            }
+extension AppCoordinator.ModalRoute: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+private extension AppCoordinator.ModalRoute {
+    var size: ThemeModalSize {
+        switch self {
+        case .interactiveLogin:
+            return .custom(width: 500, height: 200)
+        case .migrateProfiles:
+            return .custom(width: 700, height: 400)
+        default:
+            return .large
         }
+    }
 
-        var isFixedWidth: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-            default:
-                return false
-            }
+    var isFixedWidth: Bool {
+        switch self {
+        case .migrateProfiles:
+            return true
+        default:
+            return false
         }
+    }
 
-        var isFixedHeight: Bool {
-            switch self {
-            case .migrateProfiles:
-                return true
-            default:
-                return false
-            }
+    var isFixedHeight: Bool {
+        switch self {
+        case .migrateProfiles:
+            return true
+        default:
+            return false
         }
+    }
 
-        var isInteractive: Bool {
-            switch self {
-            case .editProfile:
-                return false
-            default:
-                return true
-            }
+    var isInteractive: Bool {
+        switch self {
+        case .editProfile:
+            return false
+        default:
+            return true
         }
     }
 }
