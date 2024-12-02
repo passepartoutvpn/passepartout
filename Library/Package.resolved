@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/openssl-apple",
       "state" : {
-        "revision" : "0edc07c7a0e4ec2ca0f448dd68314241ccc925b3",
-        "version" : "3.2.107"
+        "revision" : "685680e3adbfccdeef84d37fc5732b0031f188c7",
+        "version" : "3.2.108"
       }
     },
     {
@@ -41,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
       "state" : {
-        "revision" : "cfbcfd7106ee21781cb637eef8e15ed9a1463bce"
+        "revision" : "2a2268bb7c6d49586fb403cb50d19de42b323bbb"
       }
     },
     {
