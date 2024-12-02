@@ -252,7 +252,7 @@ private extension AppContext {
 private extension AppContext {
     var isCloudKitEnabled: Bool {
 #if os(tvOS)
-        return true
+        true
 #else
         if AppCommandLine.contains(.uiTesting) {
             return true
