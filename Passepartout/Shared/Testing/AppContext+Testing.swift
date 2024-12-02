@@ -33,7 +33,7 @@ extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let iapManager = IAPManager(
             customUserLevel: .subscriber,
-            inAppHelper: FakeAppProductHelper(),
+            inAppHelper: Dependencies.IAPManager.inAppHelper,
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
             productsAtBuild: { _ in

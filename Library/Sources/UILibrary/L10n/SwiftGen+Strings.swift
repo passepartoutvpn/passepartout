@@ -741,29 +741,27 @@ public enum Strings {
         public static let restorePurchases = Strings.tr("Localizable", "views.paywall.rows.restore_purchases", fallback: "Restore purchases")
       }
       public enum Sections {
-        public enum Features {
-          public enum Other {
-            /// Also included
-            public static let header = Strings.tr("Localizable", "views.paywall.sections.features.other.header", fallback: "Also included")
-          }
-          public enum Required {
-            /// Required features
-            public static let header = Strings.tr("Localizable", "views.paywall.sections.features.required.header", fallback: "Required features")
-          }
+        public enum AllFeatures {
+          /// Full version includes
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.all_features.header", fallback: "Full version includes")
         }
-        public enum OneTime {
-          /// One-time purchase
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.one_time.header", fallback: "One-time purchase")
+        public enum FullProducts {
+          /// Full version
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "Full version")
         }
-        public enum Recurring {
-          /// All features
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.recurring.header", fallback: "All features")
+        public enum RequiredFeatures {
+          /// Required features
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.required_features.header", fallback: "Required features")
         }
         public enum Restore {
           /// If you bought this app or feature in the past, you can restore your purchases.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
           /// Restore
           public static let header = Strings.tr("Localizable", "views.paywall.sections.restore.header", fallback: "Restore")
+        }
+        public enum SuggestedProduct {
+          /// One-time purchase
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.suggested_product.header", fallback: "One-time purchase")
         }
       }
     }

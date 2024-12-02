@@ -28,6 +28,7 @@ import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+import UITesting
 
 @MainActor
 public final class AppContext: ObservableObject {
@@ -253,7 +254,10 @@ private extension AppContext {
 #if os(tvOS)
         true
 #else
-        FileManager.default.ubiquityIdentityToken != nil
+        if AppCommandLine.contains(.uiTesting) {
+            return true
+        }
+        return FileManager.default.ubiquityIdentityToken != nil
 #endif
     }
 }

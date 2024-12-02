@@ -30,14 +30,16 @@ import PassepartoutKit
 
 extension IAPManager {
     static let sharedForTunnel = IAPManager(
-        inAppHelper: Configuration.IAPManager.inAppHelper,
-        receiptReader: Configuration.IAPManager.tunnelReceiptReader,
-        betaChecker: Configuration.IAPManager.betaChecker,
-        productsAtBuild: Configuration.IAPManager.productsAtBuild
+        inAppHelper: Dependencies.IAPManager.inAppHelper,
+        receiptReader: Dependencies.IAPManager.tunnelReceiptReader,
+        betaChecker: Dependencies.IAPManager.betaChecker,
+        productsAtBuild: Dependencies.IAPManager.productsAtBuild
     )
 }
 
-private extension Configuration.IAPManager {
+// MARK: - Dependencies
+
+private extension Dependencies.IAPManager {
 
     @MainActor
     static var tunnelReceiptReader: AppReceiptReader {

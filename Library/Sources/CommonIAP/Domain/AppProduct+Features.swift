@@ -40,6 +40,7 @@ extension AppProduct {
             .Full.allPlatforms,
             .Full.iOS,
             .Full.macOS,
+            .Full.OneTime.lifetime,
             .Full.Recurring.monthly,
             .Full.Recurring.yearly
         ]
@@ -63,6 +64,10 @@ extension AppProduct.Features {
 }
 
 extension AppProduct.Full {
+    public enum OneTime {
+        public static let lifetime = AppProduct(featureId: "full.lifetime")
+    }
+
     public enum Recurring {
         public static let monthly = AppProduct(featureId: "full.monthly")
 

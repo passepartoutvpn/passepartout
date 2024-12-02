@@ -63,20 +63,18 @@ extension AppContext {
                 return .ignore
             }
         }
-        let profileManager: ProfileManager = {
-            return ProfileManager(
-                repository: Configuration.ProfileManager.mainProfileRepository,
-                backupRepository: Configuration.ProfileManager.backupProfileRepository,
-                remoteRepositoryBlock: remoteRepositoryBlock,
-                mirrorsRemoteRepository: Configuration.ProfileManager.mirrorsRemoteRepository,
-                processor: processor
-            )
-        }()
+        let profileManager = ProfileManager(
+            repository: Dependencies.ProfileManager.mainProfileRepository,
+            backupRepository: Dependencies.ProfileManager.backupProfileRepository,
+            remoteRepositoryBlock: remoteRepositoryBlock,
+            mirrorsRemoteRepository: Dependencies.ProfileManager.mirrorsRemoteRepository,
+            processor: processor
+        )
 
         // MARK: ExtendedTunnel
 
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: Configuration.ExtendedTunnel.strategy),
+            tunnel: Tunnel(strategy: Dependencies.ExtendedTunnel.strategy),
             environment: .shared,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
@@ -133,19 +131,20 @@ extension AppContext {
     }()
 }
 
-// MARK: - Configuration
-
-private extension Configuration {
-    enum ExtendedTunnel {
-    }
-}
+// MARK: - Dependencies
 
 // MARK: Simulator
 
 #if targetEnvironment(simulator)
 
+private extension Dependencies.ExtendedTunnel {
+    static var strategy: TunnelObservableStrategy {
+        FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
+    }
+}
+
 @MainActor
-private extension Configuration.ProfileManager {
+private extension Dependencies.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         coreDataProfileRepository(observingResults: true)
     }
@@ -155,18 +154,19 @@ private extension Configuration.ProfileManager {
     }
 }
 
-private extension Configuration.ExtendedTunnel {
-    static var strategy: TunnelObservableStrategy {
-        FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
-    }
-}
-
 #else
 
 // MARK: Device
 
 @MainActor
-private extension Configuration.ProfileManager {
+private extension Dependencies.ExtendedTunnel {
+    static var strategy: TunnelObservableStrategy {
+        Dependencies.ProfileManager.neStrategy
+    }
+}
+
+@MainActor
+private extension Dependencies.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         neProfileRepository
     }
@@ -176,19 +176,12 @@ private extension Configuration.ProfileManager {
     }
 }
 
-@MainActor
-private extension Configuration.ExtendedTunnel {
-    static var strategy: TunnelObservableStrategy {
-        Configuration.ProfileManager.neStrategy
-    }
-}
-
 #endif
 
 // MARK: Common
 
 @MainActor
-private extension Configuration.ProfileManager {
+private extension Dependencies.ProfileManager {
     static let neProfileRepository: ProfileRepository = {
         NEProfileRepository(repository: neStrategy) {
             sharedTitle($0)

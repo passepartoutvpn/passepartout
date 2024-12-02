@@ -33,15 +33,24 @@ import SwiftUI
 // MARK: Shortcuts
 
 public struct ThemeModalOptions: Hashable {
-    public var size: ThemeModalSize = .medium
+    public var size: ThemeModalSize
 
-    public var isFixedWidth = false
+    public var isFixedWidth: Bool
 
-    public var isFixedHeight = false
+    public var isFixedHeight: Bool
 
-    public var isInteractive = true
+    public var isInteractive: Bool
 
-    public init() {
+    public init(
+        size: ThemeModalSize = .medium,
+        isFixedWidth: Bool = false,
+        isFixedHeight: Bool = false,
+        isInteractive: Bool = true
+    ) {
+        self.size = size
+        self.isFixedWidth = isFixedWidth
+        self.isFixedHeight = isFixedHeight
+        self.isInteractive = isInteractive
     }
 }
 
