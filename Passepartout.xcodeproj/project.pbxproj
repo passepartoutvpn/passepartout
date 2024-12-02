@@ -27,6 +27,8 @@
 		0E7F460E2CF7F01600B1C53A /* FlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F460B2CF7F01600B1C53A /* FlowTests.swift */; };
 		0E7F460F2CF7F01600B1C53A /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F460C2CF7F01600B1C53A /* XCUIApplication+Extensions.swift */; };
 		0E7F46122CF7F44C00B1C53A /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F46102CF7F44C00B1C53A /* AppScreen.swift */; };
+		0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
+		0E81955B2CFDA7BF00CC8FFD /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
 		0E916B782CF80FD60072921A /* ProfileEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */; };
 		0E916B7C2CF811EB0072921A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
@@ -153,6 +155,7 @@
 		0E7F460B2CF7F01600B1C53A /* FlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowTests.swift; sourceTree = "<group>"; };
 		0E7F460C2CF7F01600B1C53A /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		0E7F46102CF7F44C00B1C53A /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
+		0E8195592CFDA75200CC8FFD /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		0E8D852F2C328CA1005493DE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorScreen.swift; sourceTree = "<group>"; };
 		0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -338,6 +341,7 @@
 			children = (
 				0E6EEEE62CF8CB090076E2B0 /* Testing */,
 				0EC797402B9378E000C093B7 /* AppContext+Shared.swift */,
+				0E8195592CFDA75200CC8FFD /* Dependencies.swift */,
 				0EC797412B9378E000C093B7 /* Shared.swift */,
 				0E483E822CE6501100584B32 /* Shared+App.swift */,
 				0E483E7F2CE64D6B00584B32 /* Shared+Tunnel.swift */,
@@ -679,6 +683,7 @@
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
 				0EC797422B9378E000C093B7 /* AppContext+Shared.swift in Sources */,
 				0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */,
+				0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */,
 				0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */,
 				0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */,
 				0E483E842CE6501100584B32 /* Shared+App.swift in Sources */,
@@ -723,6 +728,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E81955B2CFDA7BF00CC8FFD /* Dependencies.swift in Sources */,
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
 				0E483E812CE64D6B00584B32 /* Shared+Tunnel.swift in Sources */,
 				0EC797442B93790600C093B7 /* Shared.swift in Sources */,

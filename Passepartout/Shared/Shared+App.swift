@@ -31,17 +31,17 @@ import UITesting
 
 extension IAPManager {
     static let sharedForApp = IAPManager(
-        customUserLevel: Configuration.IAPManager.customUserLevel,
-        inAppHelper: Configuration.IAPManager.simulatedInAppHelper,
-        receiptReader: Configuration.IAPManager.simulatedAppReceiptReader,
-        betaChecker: Configuration.IAPManager.betaChecker,
-        productsAtBuild: Configuration.IAPManager.productsAtBuild
+        customUserLevel: Dependencies.IAPManager.customUserLevel,
+        inAppHelper: Dependencies.IAPManager.simulatedInAppHelper,
+        receiptReader: Dependencies.IAPManager.simulatedAppReceiptReader,
+        betaChecker: Dependencies.IAPManager.betaChecker,
+        productsAtBuild: Dependencies.IAPManager.productsAtBuild
     )
 }
 
-// MARK: - Configuration
+// MARK: - Dependencies
 
-private extension Configuration.IAPManager {
+private extension Dependencies.IAPManager {
     static var customUserLevel: AppUserLevel? {
         guard let userLevelString = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
               let userLevel = AppUserLevel(rawValue: userLevelString) else {

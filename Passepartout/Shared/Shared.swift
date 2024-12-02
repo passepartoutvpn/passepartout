@@ -78,8 +78,6 @@ extension Registry {
     }
 }
 
-// MARK: TunnelEnvironment
-
 extension TunnelEnvironment where Self == AppGroupEnvironment {
     static var shared: Self {
         AppGroupEnvironment(
@@ -89,8 +87,6 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
     }
 }
 
-// MARK: InAppProcessor
-
 extension InAppProcessor {
 
     @MainActor
@@ -98,10 +94,10 @@ extension InAppProcessor {
         InAppProcessor(
             iapManager: iapManager,
             title: {
-                Configuration.ProfileManager.sharedTitle($0)
+                Dependencies.ProfileManager.sharedTitle($0)
             },
             isIncluded: {
-                Configuration.ProfileManager.isIncluded($0, $1)
+                Dependencies.ProfileManager.isIncluded($0, $1)
             },
             preview: preview,
             requiredFeatures: { iap, profile in
@@ -130,73 +126,5 @@ extension InAppProcessor {
                 }
             }
         )
-    }
-}
-
-// MARK: - Configuration
-
-enum Configuration {
-    enum ProfileManager {
-    }
-
-    enum IAPManager {
-    }
-}
-
-// MARK: ProfileManager
-
-extension Configuration.ProfileManager {
-    static let sharedTitle: @Sendable (Profile) -> String = {
-        String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
-    }
-
-#if os(tvOS)
-    static let mirrorsRemoteRepository = true
-
-    static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = {
-        $1.attributes.isAvailableForTV == true
-    }
-#else
-    static let mirrorsRemoteRepository = false
-
-    static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = { _, _ in
-        true
-    }
-#endif
-}
-
-// MARK: IAPManager
-
-extension Configuration.IAPManager {
-
-    @MainActor
-    static let inAppHelper = StoreKitHelper(
-        products: AppProduct.all,
-        inAppIdentifier: {
-            let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
-            return "\(prefix).\($0.rawValue)"
-        }
-    )
-
-    static var betaChecker: BetaChecker {
-        TestFlightChecker()
-    }
-
-    static let productsAtBuild: BuildProducts<AppProduct> = {
-#if os(iOS)
-        if $0 <= 2016 {
-            return [.Full.iOS]
-        } else if $0 <= 3000 {
-            return [.Features.networkSettings]
-        }
-        return []
-#elseif os(macOS)
-        if $0 <= 3000 {
-            return [.Features.networkSettings]
-        }
-        return []
-#else
-        return []
-#endif
     }
 }
