@@ -38,7 +38,9 @@ extension Registry {
         allImplementations: [
             OpenVPNModule.Implementation(
                 prng: SecureRandom(),
-                dns: CFDNSResolver(),
+                dns: SimpleDNSResolver {
+                    CFDNSStrategy(hostname: $0)
+                },
                 importer: StandardOpenVPNParser(decrypter: OSSLTLSBox()),
                 sessionBlock: { _, module in
                     guard let configuration = module.configuration else {
