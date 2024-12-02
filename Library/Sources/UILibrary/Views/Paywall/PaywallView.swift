@@ -199,6 +199,10 @@ private extension PaywallView {
         AppFeature.allCases
     }
 
+    var lifetimeProduct: AppProduct {
+        .Full.OneTime.lifetime
+    }
+
     var yearlyProduct: AppProduct {
         .Full.Recurring.yearly
     }
@@ -217,6 +221,7 @@ private extension PaywallView {
         if let suggestedProduct {
             list.append(suggestedProduct)
         }
+        list.append(lifetimeProduct)
         list.append(yearlyProduct)
         list.append(monthlyProduct)
 
