@@ -34,7 +34,7 @@ extension AppProduct: AppFeatureProviding {
         case .Features.appleTV:
             return [.appleTV, .sharing]
 
-        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .Full.OneTime.lifetime, .Full.Recurring.monthly, .Full.Recurring.yearly:
             return AppFeature.allCases
 
         // MARK: Discontinued
