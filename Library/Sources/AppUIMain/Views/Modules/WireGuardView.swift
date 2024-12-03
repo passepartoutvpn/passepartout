@@ -51,7 +51,7 @@ struct WireGuardView: View, ModuleDraftEditing {
             .moduleView(editor: editor, draft: draft.wrappedValue)
             .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
-            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
     }
 }
@@ -89,7 +89,7 @@ private extension WireGuardView {
 
 private extension WireGuardView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<WireGuard.Configuration>) {
-        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
     }
 
@@ -111,7 +111,7 @@ private extension WireGuardView {
     func destination(for route: Subroute) -> some View {
         switch route {
         case .providerServer:
-            draft.providerSelection.wrappedValue.map {
+            draft.wrappedValue.providerSelection.map {
                 VPNProviderServerView(
                     moduleId: module.id,
                     providerId: $0.id,
