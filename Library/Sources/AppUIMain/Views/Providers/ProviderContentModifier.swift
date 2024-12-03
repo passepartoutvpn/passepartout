@@ -29,7 +29,7 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
+struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntityType, ProviderRows: View {
 
     @EnvironmentObject
     private var providerManager: ProviderManager
@@ -122,7 +122,7 @@ private extension ProviderContentModifier {
         providerManager
             .providers
             .filter {
-                $0.supports(Entity.Configuration.self)
+                $0.supports(Entity.ConfigurationType.self)
             }
     }
 

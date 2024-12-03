@@ -88,7 +88,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
             )
             .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
-            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
     }
 }
@@ -106,14 +106,14 @@ private extension OpenVPNView {
                 credentialsRoute: Subroute.credentials
             )
         } else {
-            importView
+            importButton
                 .modifier(providerModifier)
         }
     }
 
     @ViewBuilder
-    var importView: some View {
-        if providerId.wrappedValue == nil {
+    var importButton: some View {
+        if draft.wrappedValue.providerId == nil {
             Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
                 isImporting = true
             }
@@ -152,14 +152,6 @@ private extension OpenVPNView {
         )
     }
 
-    var providerId: Binding<ProviderID?> {
-        editor.binding(forProviderOf: module.id)
-    }
-
-    var providerEntity: Binding<VPNEntity<OpenVPN.Configuration>?> {
-        editor.binding(forProviderEntityOf: module.id)
-    }
-
     var providerAccountRows: [ModuleRow]? {
         [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(Subroute.credentials))]
     }
@@ -167,7 +159,7 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
-        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
     }
 
@@ -222,12 +214,12 @@ private extension OpenVPNView {
     func destination(for route: Subroute) -> some View {
         switch route {
         case .providerServer:
-            providerId.wrappedValue.map {
+            draft.wrappedValue.providerSelection.map {
                 VPNProviderServerView(
                     moduleId: module.id,
-                    providerId: $0,
+                    providerId: $0.id,
                     configurationType: OpenVPN.Configuration.self,
-                    selectedEntity: providerEntity.wrappedValue,
+                    selectedEntity: $0.entity,
                     filtersWithSelection: true,
                     onSelect: onSelectServer
                 )
@@ -236,7 +228,7 @@ private extension OpenVPNView {
         case .credentials:
             Form {
                 OpenVPNCredentialsView(
-                    providerId: draft.providerId.wrappedValue,
+                    providerId: draft.wrappedValue.providerId,
                     isInteractive: draft.isInteractive,
                     credentials: draft.credentials
                 )

@@ -131,16 +131,16 @@ private extension InstalledProfileView {
             .selectedProvider
             .map { _, selection in
                 Button {
-                    flow?.connectionFlow?.onProviderEntityRequired(profile!)
+                    flow?.connectionFlow?.onProviderEntityRequired(profile!) // never nil due to .map
                 } label: {
-                    providerSelectorLabel(with: selection)
+                    providerSelectorLabel(with: selection.entity?.header)
                 }
                 .buttonStyle(.plain)
             }
     }
 
-    func providerSelectorLabel(with provider: SerializedProvider) -> some View {
-        ProviderCountryFlag(provider: provider)
+    func providerSelectorLabel(with entity: ProviderEntityHeader?) -> some View {
+        ProviderCountryFlag(entity: entity)
     }
 }
 
@@ -198,11 +198,11 @@ private struct ToggleButton: View {
 }
 
 private struct ProviderCountryFlag: View {
-    let provider: SerializedProvider
+    let entity: ProviderEntityHeader?
 
     var body: some View {
         ThemeCountryFlag(
-            provider.entity?.header.countryCode,
+            entity?.countryCode,
             placeholderTip: Strings.Errors.App.Passepartout.missingProviderEntity,
             countryTip: {
                 $0.localizedAsRegionCode

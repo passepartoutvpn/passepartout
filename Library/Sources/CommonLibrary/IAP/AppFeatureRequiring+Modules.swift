@@ -56,7 +56,7 @@ extension OnDemandModule.Builder: AppFeatureRequiring {
 extension OpenVPNModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {
         var list: Set<AppFeature> = []
-        providerId?.features.forEach {
+        providerSelection?.id.features.forEach {
             list.insert($0)
         }
         if isInteractive {
@@ -68,6 +68,6 @@ extension OpenVPNModule.Builder: AppFeatureRequiring {
 
 extension WireGuardModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {
-        providerId?.features ?? []
+        providerSelection?.id.features ?? []
     }
 }

@@ -27,13 +27,17 @@ import Foundation
 import PassepartoutKit
 
 extension ModuleType {
-    public func newModule(with registry: Registry) -> any ModuleBuilder {
+    public func newModule(with registry: Registry, providerId: ProviderID? = nil) -> any ModuleBuilder {
         switch self {
         case .openVPN:
-            return OpenVPNModule.Builder()
+            return OpenVPNModule.Builder(providerSelection: providerId.map {
+                .init(id: $0)
+            })
 
         case .wireGuard:
-            return WireGuardModule.Builder()
+            return WireGuardModule.Builder(providerSelection: providerId.map {
+                .init(id: $0)
+            })
 
         case .dns:
             return DNSModule.Builder()

@@ -31,16 +31,13 @@ import SwiftUI
 struct ProviderEntitySelector: View {
     let module: Module
 
-    let provider: SerializedProvider
-
     let errorHandler: ErrorHandler
 
-    let onSelect: (_ entity: any ProviderEntity & Encodable) async throws -> Void
+    let onSelect: (Module) async throws -> Void
 
     var body: some View {
         if let viewProvider = module as? any ProviderEntityViewProviding {
             AnyView(viewProvider.providerEntityView(
-                with: provider,
                 errorHandler: errorHandler,
                 onSelect: onSelect
             ))

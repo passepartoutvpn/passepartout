@@ -35,30 +35,6 @@ extension ProfileEditor {
         }
     }
 
-    public func binding(forProviderOf moduleId: UUID) -> Binding<ProviderID?> {
-        Binding { [weak self] in
-            self?.providerModule(withId: moduleId)?.providerId
-        } set: { [weak self] in
-            guard var builder = self?.providerModule(withId: moduleId) else {
-                return
-            }
-            builder.providerId = $0
-            self?.saveModule(builder, activating: false)
-        }
-    }
-
-    public func binding<E>(forProviderEntityOf moduleId: UUID) -> Binding<E?> where E: ProviderEntity & Codable {
-        Binding { [weak self] in
-            try? self?.providerModule(withId: moduleId)?.providerEntity(E.self)
-        } set: { [weak self] in
-            guard var builder = self?.providerModule(withId: moduleId) else {
-                return
-            }
-            try? builder.setProviderEntity($0)
-            self?.saveModule(builder, activating: false)
-        }
-    }
-
     public subscript<T>(module: T) -> Binding<T> where T: ModuleBuilder {
         Binding { [weak self] in
             guard let foundModule = self?.module(withId: module.id) else {

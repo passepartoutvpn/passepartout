@@ -191,18 +191,12 @@ extension AppCoordinator {
                 onDismiss: onDismiss
             )
 
-        case .editProviderEntity(let profile, let force, let module, let provider):
+        case .editProviderEntity(let profile, let force, let module):
             ProviderEntitySelector(
                 module: module,
-                provider: provider,
                 errorHandler: errorHandler,
                 onSelect: {
-                    try await onSelectProviderEntity(
-                        $0,
-                        force: force,
-                        module: module,
-                        profile: profile
-                    )
+                    try await onSelectProviderEntity(with: $0, in: profile, force: force)
                 }
             )
 
@@ -241,11 +235,12 @@ extension AppCoordinator {
     }
 
     public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
-        guard let pair = profile.selectedProvider else {
+        guard let module = profile.selectedProvider?.module else {
+            assertionFailure("Editing provider entity, but profile has no selected provider module")
             return
         }
         pp_log(.app, .info, "Present provider entity selector")
-        present(.editProviderEntity(profile, force, pair.module, pair.selection))
+        present(.editProviderEntity(profile, force, module))
     }
 
     public func onPurchaseRequired(_ features: Set<AppFeature>) {
@@ -265,19 +260,17 @@ extension AppCoordinator {
 }
 
 private extension AppCoordinator {
-    func onSelectProviderEntity(
-        _ entity: any ProviderEntity & Encodable,
-        force: Bool,
-        module: Module,
-        profile: Profile
-    ) async throws {
+    func onSelectProviderEntity(with newModule: Module, in profile: Profile, force: Bool) async throws {
 
         // XXX: select entity after dismissing
         try await Task.sleep(for: .milliseconds(500))
 
-        pp_log(.app, .info, "Select new provider entity: \(entity)")
+        pp_log(.app, .info, "Select new provider entity: (profile=\(profile.id), module=\(newModule.id))")
+
         do {
-            let newProfile = try profile.withEntity(entity, in: module)
+            var builder = profile.builder()
+            builder.saveModule(newModule)
+            let newProfile = try builder.tryBuild()
 
             let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
             try await profileManager.save(newProfile, isLocal: true)

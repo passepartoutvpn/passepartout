@@ -51,7 +51,7 @@ struct WireGuardView: View, ModuleDraftEditing {
             .moduleView(editor: editor, draft: draft.wrappedValue)
             .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
-            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
     }
 }
@@ -82,14 +82,6 @@ private extension WireGuardView {
         )
     }
 
-    var providerId: Binding<ProviderID?> {
-        editor.binding(forProviderOf: module.id)
-    }
-
-    var providerEntity: Binding<VPNEntity<WireGuard.Configuration>?> {
-        editor.binding(forProviderEntityOf: module.id)
-    }
-
     var providerKeyRows: [ModuleRow]? {
         [.push(caption: Strings.Modules.Wireguard.providerKey, route: HashableRoute(Subroute.providerKey))]
     }
@@ -97,7 +89,7 @@ private extension WireGuardView {
 
 private extension WireGuardView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<WireGuard.Configuration>) {
-        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
     }
 
@@ -119,12 +111,12 @@ private extension WireGuardView {
     func destination(for route: Subroute) -> some View {
         switch route {
         case .providerServer:
-            providerId.wrappedValue.map {
+            draft.wrappedValue.providerSelection.map {
                 VPNProviderServerView(
                     moduleId: module.id,
-                    providerId: $0,
+                    providerId: $0.id,
                     configurationType: WireGuard.Configuration.self,
-                    selectedEntity: providerEntity.wrappedValue,
+                    selectedEntity: $0.entity,
                     filtersWithSelection: true,
                     onSelect: onSelectServer
                 )

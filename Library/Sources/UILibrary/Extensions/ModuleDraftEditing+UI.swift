@@ -23,12 +23,39 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import PassepartoutKit
 import SwiftUI
 
+@MainActor
 extension ModuleDraftEditing {
-
-    @MainActor
     public var draft: Binding<Draft> {
         editor[module]
+    }
+}
+
+@MainActor
+extension ModuleDraftEditing where Draft: ProviderBuilder {
+    public var providerId: Binding<ProviderID?> {
+        Binding {
+            draft.providerId.wrappedValue
+        } set: {
+            draft.providerId.wrappedValue = $0
+        }
+    }
+
+    public var providerEntity: Binding<Draft.SelectionType.EntityType?> {
+        Binding {
+            draft.providerEntity.wrappedValue
+        } set: {
+            draft.providerEntity.wrappedValue = $0
+        }
+    }
+
+    public var providerOptions: Binding<Set<Draft.SelectionType.OptionType>?> {
+        Binding {
+            draft.providerOptions.wrappedValue
+        } set: {
+            draft.providerOptions.wrappedValue = $0
+        }
     }
 }
