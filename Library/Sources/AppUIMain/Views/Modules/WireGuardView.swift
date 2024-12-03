@@ -89,10 +89,7 @@ private extension WireGuardView {
 
 private extension WireGuardView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<WireGuard.Configuration>) {
-        guard let providerId = providerId.wrappedValue else {
-            return
-        }
-        providerEntity.wrappedValue = VPNEntity(providerId: providerId, server: server, preset: preset)
+        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
     }
 

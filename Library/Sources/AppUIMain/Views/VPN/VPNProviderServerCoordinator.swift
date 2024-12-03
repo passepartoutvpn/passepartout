@@ -61,7 +61,7 @@ private extension VPNProviderServerCoordinator {
     func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
         Task {
             do {
-                let entity = VPNEntity(providerId: providerId, server: server, preset: preset)
+                let entity = VPNEntity(server: server, preset: preset)
                 dismiss()
                 try await onSelect(entity)
             } catch {
