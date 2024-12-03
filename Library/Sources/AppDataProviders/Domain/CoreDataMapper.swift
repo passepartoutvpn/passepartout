@@ -36,8 +36,8 @@ struct CoreDataMapper {
         entity.providerId = metadata.id.rawValue
         entity.fullName = metadata.description
         entity.lastUpdate = lastUpdate
-        entity.supportedConfigurationIds = metadata.configurations.map(\.key).joined(separator: ",")
-        entity.encodedConfigurations = try JSONEncoder().encode(metadata.configurations)
+        entity.supportedConfigurationIds = metadata.customizations.map(\.key).joined(separator: ",")
+        entity.encodedCustomizations = try JSONEncoder().encode(metadata.customizations)
         return entity
     }
 

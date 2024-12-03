@@ -59,7 +59,7 @@ public struct OpenVPNCredentialsView: View {
     private var builder = OpenVPN.Credentials.Builder()
 
     @State
-    private var providerConfiguration: OpenVPN.Credentials.ProviderConfiguration?
+    private var providerCustomization: OpenVPN.ProviderCustomization?
 
     @State
     private var paywallReason: PaywallReason?
@@ -148,7 +148,7 @@ private extension OpenVPNCredentialsView {
 
     @ViewBuilder
     var guidanceSection: some View {
-        if let url = providerConfiguration?.url {
+        if let url = providerCustomization?.credentials.url {
             Link(Strings.Modules.Openvpn.Credentials.Guidance.link, destination: url)
         }
     }
@@ -157,8 +157,8 @@ private extension OpenVPNCredentialsView {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if let providerConfiguration {
-            switch providerConfiguration.purpose {
+        } else if let providerCustomization {
+            switch providerCustomization.credentials.purpose {
             case .web:
                 return Strings.Modules.Openvpn.Credentials.Guidance.web
             case .specific:
@@ -215,12 +215,12 @@ private extension OpenVPNCredentialsView {
     }
 
     var ignoresPassword: Bool {
-        providerConfiguration?.options?.contains(.noPassword) ?? false
+        providerCustomization?.credentials.options?.contains(.noPassword) ?? false
     }
 
     func onLoad() {
         if let providerId, let metadata = providerManager.provider(withId: providerId) {
-            providerConfiguration = OpenVPN.Credentials.configuration(forProvider: metadata)
+            providerCustomization = metadata.customization(for: OpenVPN.Configuration.self)
         }
         builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
         if ignoresPassword {

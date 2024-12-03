@@ -32,24 +32,24 @@ struct DomainMapper {
         guard let id = entity.providerId, let fullName = entity.fullName else {
             return nil
         }
-        let configurations: [String: ProviderMetadata.Configuration]
-        if let encodedConfigurations = entity.encodedConfigurations {
+        let customizations: [String: ProviderMetadata.Customization]
+        if let encodedCustomizations = entity.encodedCustomizations {
             do {
-                configurations = try JSONDecoder().decode([String: ProviderMetadata.Configuration].self, from: encodedConfigurations)
+                customizations = try JSONDecoder().decode([String: ProviderMetadata.Customization].self, from: encodedCustomizations)
             } catch {
                 return nil
             }
         } else if let supportedConfigurationIds = entity.supportedConfigurationIds?.components(separatedBy: ",") {
-            configurations = supportedConfigurationIds.reduce(into: [:]) {
+            customizations = supportedConfigurationIds.reduce(into: [:]) {
                 $0[$1] = .init()
             }
         } else {
-            configurations = [:]
+            customizations = [:]
         }
         return ProviderMetadata(
             id,
             description: fullName,
-            configurations: configurations
+            customizations: customizations
         )
     }
 

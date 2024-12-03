@@ -66,9 +66,9 @@ extension ProfileAttributes: CustomDebugStringConvertible {
     }
 }
 
-// MARK: - UserInfoTransformable
+// MARK: - UserInfoCodable
 
-extension ProfileAttributes: UserInfoTransformable {
+extension ProfileAttributes: UserInfoCodable {
     public var userInfo: [String: AnyHashable]? {
         do {
             let data = try JSONEncoder().encode(self)
