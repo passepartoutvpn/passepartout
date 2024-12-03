@@ -157,12 +157,12 @@ private extension OpenVPNCredentialsView {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if let providerCustomization {
-            switch providerCustomization.credentials.purpose {
-            case .web:
-                return Strings.Modules.Openvpn.Credentials.Guidance.web
+        } else if providerId != nil {
+            switch providerCustomization?.credentials.purpose {
             case .specific:
                 return Strings.Modules.Openvpn.Credentials.Guidance.specific
+            default:
+                return Strings.Modules.Openvpn.Credentials.Guidance.web
             }
         }
         return nil
