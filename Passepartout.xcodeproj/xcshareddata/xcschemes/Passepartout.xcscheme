@@ -85,7 +85,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pp_ui_testing"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-pp_fake_migration"
