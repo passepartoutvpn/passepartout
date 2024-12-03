@@ -46,19 +46,20 @@ extension ProfileManager {
                     builder.attributes.isAvailableForTV = parameters.isTV
 
                     for moduleType in parameters.moduleTypes {
-                        var moduleBuilder = moduleType.newModule(with: registry)
-                        if let providerId = parameters.providerId,
-                           var providerBuilder = moduleBuilder as? any ProviderModuleBuilder {
-                            providerBuilder.providerId = providerId
-                            moduleBuilder = providerBuilder
+                        var moduleBuilder = moduleType.newModule(with: registry, providerId: parameters.providerId)
 
-                            if parameters.name == "Hide.me" {
-                                var ovpnBuilder = moduleBuilder as! OpenVPNModule.Builder
-                                ovpnBuilder.isInteractive = true
-                                moduleBuilder = ovpnBuilder
-                            }
+                        if moduleBuilder.buildsConnectionModule {
+                            assert((moduleBuilder as? any ProviderBuilder)?.providerId == parameters.providerId)
                         }
-                        builder.modules.append(try moduleBuilder.tryBuild())
+
+                        if parameters.name == "Hide.me",
+                           var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
+                            ovpnBuilder.isInteractive = true
+                            moduleBuilder = ovpnBuilder
+                        }
+
+                        let module = try moduleBuilder.tryBuild()
+                        builder.modules.append(module)
                     }
                     builder.activateAllModules()
 

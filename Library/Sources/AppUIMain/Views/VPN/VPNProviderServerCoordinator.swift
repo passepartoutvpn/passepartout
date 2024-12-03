@@ -27,7 +27,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
+struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
 
     @Environment(\.dismiss)
     private var dismiss
@@ -61,7 +61,7 @@ private extension VPNProviderServerCoordinator {
     func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
         Task {
             do {
-                let entity = VPNEntity(server: server, preset: preset)
+                let entity = VPNEntity(providerId: providerId, server: server, preset: preset)
                 dismiss()
                 try await onSelect(entity)
             } catch {

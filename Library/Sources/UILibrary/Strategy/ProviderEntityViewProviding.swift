@@ -32,8 +32,7 @@ public protocol ProviderEntityViewProviding {
 
     @MainActor
     func providerEntityView(
-        with provider: SerializedProvider,
         errorHandler: ErrorHandler,
-        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
+        onSelect: @escaping (Module) async throws -> Void
     ) -> EntityContent
 }

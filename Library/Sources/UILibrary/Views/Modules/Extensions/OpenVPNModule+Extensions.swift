@@ -31,7 +31,7 @@ extension OpenVPNModule.Builder: InteractiveViewProviding {
         let draft = editor[self]
 
         return OpenVPNCredentialsView(
-            providerId: draft.wrappedValue.providerId,
+            providerId: draft.providerSelection.wrappedValue?.id,
             isInteractive: draft.isInteractive,
             credentials: draft.credentials,
             isAuthenticating: true,

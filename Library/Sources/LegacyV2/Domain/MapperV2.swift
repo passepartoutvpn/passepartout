@@ -112,7 +112,7 @@ extension MapperV2 {
         let settings = entry.value
 
         var builder = OpenVPNModule.Builder()
-        builder.provider = SerializedProvider(id: ProviderID(rawValue: v2.name))
+        builder.providerSelection = ProviderSelection(id: ProviderID(rawValue: v2.name))
         builder.credentials = settings.account.map(toOpenVPNCredentials)
         return try builder.tryBuild()
     }

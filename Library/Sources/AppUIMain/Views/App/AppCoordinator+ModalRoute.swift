@@ -32,7 +32,7 @@ extension AppCoordinator {
 
         case editProfile(UUID?)
 
-        case editProviderEntity(Profile, Bool, Module, SerializedProvider)
+        case editProviderEntity(Profile, Bool, Module)
 
         case interactiveLogin
 

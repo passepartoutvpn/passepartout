@@ -134,10 +134,11 @@ private struct ProvidersSubmenu: View {
         Button(provider.description) {
             var editable = EditableProfile()
             editable.name = provider.description
-            if var newModule = moduleType.newModule(with: registry) as? any ProviderModuleBuilder {
-                newModule.providerId = provider.id
-                editable.modules.append(newModule)
+            let newModule = moduleType.newModule(with: registry, providerId: provider.id)
+            if let providerBuilder = newModule as? any ProviderBuilder {
+                assert(providerBuilder.providerId == provider.id)
             }
+            editable.modules.append(newModule)
             editable.modules.append(OnDemandModule.Builder())
             editable.activeModulesIds = Set(editable.modules.map(\.id))
             onSelect(editable)

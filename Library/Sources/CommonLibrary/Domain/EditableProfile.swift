@@ -125,10 +125,6 @@ extension Module {
         let builder = buildableModule.builder() as any BuilderType
         return builder as? any ModuleBuilder
     }
-
-    public func providerModuleBuilder() -> (any ProviderModuleBuilder)? {
-        moduleBuilder() as? any ProviderModuleBuilder
-    }
 }
 
 private extension EditableProfile {

@@ -29,7 +29,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
+struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
 
     @EnvironmentObject
     private var providerManager: ProviderManager
