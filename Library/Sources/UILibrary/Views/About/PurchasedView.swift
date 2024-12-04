@@ -124,15 +124,26 @@ private extension PurchasedView {
     var featuresSection: some View {
         Group {
             ForEach(allFeatures, id: \.self) { feature in
-                HStack {
-                    Text(feature.localizedDescription)
-                    Spacer()
-                    ThemeImage(iapManager.isEligible(for: feature) ? .marked : .close)
-                }
-                .scrollableOnTV()
+                FeatureView(text: feature.localizedDescription, isEligible: iapManager.isEligible(for: feature))
+                    .scrollableOnTV()
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
+    }
+}
+
+private struct FeatureView: View {
+    let text: String
+
+    let isEligible: Bool
+
+    var body: some View {
+        HStack {
+            Text(text)
+            Spacer()
+            ThemeImage(isEligible ? .marked : .close)
+        }
+        .foregroundStyle(isEligible ? .primary : .secondary)
     }
 }
 
