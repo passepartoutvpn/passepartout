@@ -49,7 +49,7 @@ extension ProfileManager {
                         var moduleBuilder = moduleType.newModule(with: registry, providerId: parameters.providerId)
 
                         if moduleBuilder.buildsConnectionModule {
-                            assert((moduleBuilder as? any ProviderBuilder)?.providerId == parameters.providerId)
+                            assert((moduleBuilder as? any ProviderSelecting)?.providerId == parameters.providerId)
                         }
 
                         if parameters.name == "Hide.me",

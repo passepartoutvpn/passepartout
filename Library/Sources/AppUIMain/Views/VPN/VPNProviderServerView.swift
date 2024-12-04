@@ -29,7 +29,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
+struct VPNProviderServerView<Configuration>: View where Configuration: ConfigurationIdentifiable {
 
     @EnvironmentObject
     private var providerManager: ProviderManager
@@ -202,7 +202,7 @@ private extension VPNProviderServerView {
     func onSelectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
-            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.providerConfigurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
+            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.configurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
             return
         }
         onSelect(server, preset)

@@ -135,7 +135,7 @@ private struct ProvidersSubmenu: View {
             var editable = EditableProfile()
             editable.name = provider.description
             let newModule = moduleType.newModule(with: registry, providerId: provider.id)
-            if let providerBuilder = newModule as? any ProviderBuilder {
+            if let providerBuilder = newModule as? any ProviderSelecting {
                 assert(providerBuilder.providerId == provider.id)
             }
             editable.modules.append(newModule)

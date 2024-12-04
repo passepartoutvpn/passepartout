@@ -27,7 +27,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
+struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ConfigurationIdentifiable {
 
     @Environment(\.dismiss)
     private var dismiss
