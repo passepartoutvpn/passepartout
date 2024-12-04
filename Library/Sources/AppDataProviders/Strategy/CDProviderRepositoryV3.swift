@@ -39,7 +39,7 @@ extension AppData {
 actor CDProviderRepositoryV3: NSObject, ProviderRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    private nonisolated let providersSubject: CurrentValueSubject<[ProviderMetadata], Never>
+    private nonisolated let providersSubject: CurrentValueSubject<[Provider], Never>
 
     private nonisolated let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
 
@@ -71,7 +71,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
         }
     }
 
-    nonisolated var indexPublisher: AnyPublisher<[ProviderMetadata], Never> {
+    nonisolated var indexPublisher: AnyPublisher<[Provider], Never> {
         providersSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -83,7 +83,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
             .eraseToAnyPublisher()
     }
 
-    func store(_ index: [ProviderMetadata]) async throws {
+    func store(_ index: [Provider]) async throws {
         try await context.perform { [weak self] in
             guard let self else {
                 return

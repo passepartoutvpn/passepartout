@@ -219,8 +219,8 @@ private extension OpenVPNCredentialsView {
     }
 
     func onLoad() {
-        if let providerId, let metadata = providerManager.provider(withId: providerId) {
-            providerCustomization = metadata.customization(for: OpenVPN.Configuration.self)
+        if let providerId, let provider = providerManager.provider(withId: providerId) {
+            providerCustomization = provider.customization(for: OpenVPN.Configuration.self)
         }
         builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
         if ignoresPassword {

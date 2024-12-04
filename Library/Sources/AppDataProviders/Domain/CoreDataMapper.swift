@@ -31,13 +31,13 @@ struct CoreDataMapper {
     let context: NSManagedObjectContext
 
     @discardableResult
-    func cdProvider(from metadata: ProviderMetadata, lastUpdate: Date?) throws -> CDProviderV3 {
+    func cdProvider(from provider: Provider, lastUpdate: Date?) throws -> CDProviderV3 {
         let entity = CDProviderV3(context: context)
-        entity.providerId = metadata.id.rawValue
-        entity.fullName = metadata.description
+        entity.providerId = provider.id.rawValue
+        entity.fullName = provider.description
         entity.lastUpdate = lastUpdate
-        entity.supportedConfigurationIds = metadata.customizations.map(\.key).joined(separator: ",")
-        entity.encodedCustomizations = try JSONEncoder().encode(metadata.customizations)
+        entity.supportedConfigurationIds = provider.metadata.map(\.key).joined(separator: ",")
+        entity.encodedMetadata = try JSONEncoder().encode(provider.metadata)
         return entity
     }
 

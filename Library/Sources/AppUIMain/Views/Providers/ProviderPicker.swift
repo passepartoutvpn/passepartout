@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProviderPicker: View {
-    let providers: [ProviderMetadata]
+    let providers: [Provider]
 
     @Binding
     var providerId: ProviderID?

@@ -130,7 +130,7 @@ private struct ProvidersSubmenu: View {
         }
     }
 
-    func profileButton(for provider: ProviderMetadata) -> some View {
+    func profileButton(for provider: Provider) -> some View {
         Button(provider.description) {
             var editable = EditableProfile()
             editable.name = provider.description

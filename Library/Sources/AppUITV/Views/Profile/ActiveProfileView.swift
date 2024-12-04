@@ -104,9 +104,9 @@ private extension ActiveProfileView {
                 }
             }
             if let pair = profile.selectedProvider {
-                if let metadata = providerManager.provider(withId: pair.selection.id) {
+                if let provider = providerManager.provider(withId: pair.selection.id) {
                     ListRowView(title: Strings.Global.Nouns.provider) {
-                        Text(metadata.description)
+                        Text(provider.description)
                     }
                 }
                 if let entity = pair.selection.entity {

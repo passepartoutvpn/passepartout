@@ -28,28 +28,28 @@ import Foundation
 import PassepartoutKit
 
 struct DomainMapper {
-    func provider(from entity: CDProviderV3) -> ProviderMetadata? {
+    func provider(from entity: CDProviderV3) -> Provider? {
         guard let id = entity.providerId, let fullName = entity.fullName else {
             return nil
         }
-        let customizations: [String: ProviderMetadata.Customization]
-        if let encodedCustomizations = entity.encodedCustomizations {
+        let metadata: [String: Provider.Metadata]
+        if let encodedMetadata = entity.encodedMetadata {
             do {
-                customizations = try JSONDecoder().decode([String: ProviderMetadata.Customization].self, from: encodedCustomizations)
+                metadata = try JSONDecoder().decode([String: Provider.Metadata].self, from: encodedMetadata)
             } catch {
                 return nil
             }
         } else if let supportedConfigurationIds = entity.supportedConfigurationIds?.components(separatedBy: ",") {
-            customizations = supportedConfigurationIds.reduce(into: [:]) {
+            metadata = supportedConfigurationIds.reduce(into: [:]) {
                 $0[$1] = .init()
             }
         } else {
-            customizations = [:]
+            metadata = [:]
         }
-        return ProviderMetadata(
+        return Provider(
             id,
             description: fullName,
-            customizations: customizations
+            metadata: metadata
         )
     }
 

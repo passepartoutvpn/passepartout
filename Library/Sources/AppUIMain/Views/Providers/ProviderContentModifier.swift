@@ -118,7 +118,7 @@ private extension ProviderContentModifier {
         )
     }
 
-    var supportedProviders: [ProviderMetadata] {
+    var supportedProviders: [Provider] {
         providerManager
             .providers
             .filter {
