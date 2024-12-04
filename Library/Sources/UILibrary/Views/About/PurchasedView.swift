@@ -73,7 +73,14 @@ private extension PurchasedView {
     }
 
     var allFeatures: [AppFeature] {
-        AppFeature.allCases.sorted()
+        AppFeature.allCases.sorted {
+            let lRank = $0.rank(with: iapManager)
+            let rRank = $1.rank(with: iapManager)
+            if lRank != rRank {
+                return lRank < rRank
+            }
+            return $0 < $1
+        }
     }
 }
 
@@ -146,6 +153,18 @@ private struct FeatureView: View {
         .foregroundStyle(isEligible ? .primary : .secondary)
     }
 }
+
+// MARK: -
+
+private extension AppFeature {
+
+    @MainActor
+    func rank(with iapManager: IAPManager) -> Int {
+        iapManager.isEligible(for: self) ? 0 : 1
+    }
+}
+
+// MARK: - Previews
 
 #Preview {
     PurchasedView()
