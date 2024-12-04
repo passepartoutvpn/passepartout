@@ -39,7 +39,7 @@ final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
         self.providerId = providerId
     }
 
-    func availableOptions<Configuration>(for configurationType: Configuration.Type) async throws -> VPNFilterOptions where Configuration: ConfigurationIdentifiable {
+    func availableOptions<Configuration>(for configurationType: Configuration.Type) async throws -> VPNFilterOptions where Configuration: IdentifiableConfiguration {
         try await context.perform {
             let mapper = DomainMapper()
 

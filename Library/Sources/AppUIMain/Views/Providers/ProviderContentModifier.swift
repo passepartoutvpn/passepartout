@@ -29,7 +29,7 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntityType, ProviderRows: View {
+struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, ProviderRows: View {
 
     @EnvironmentObject
     private var providerManager: ProviderManager
