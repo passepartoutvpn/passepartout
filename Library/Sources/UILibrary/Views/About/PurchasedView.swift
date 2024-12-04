@@ -73,7 +73,14 @@ private extension PurchasedView {
     }
 
     var allFeatures: [AppFeature] {
-        AppFeature.allCases.sorted()
+        AppFeature.allCases.sorted {
+            let lRank = $0.rank(with: iapManager)
+            let rRank = $1.rank(with: iapManager)
+            if lRank != rRank {
+                return lRank < rRank
+            }
+            return $0 < $1
+        }
     }
 }
 
@@ -124,17 +131,40 @@ private extension PurchasedView {
     var featuresSection: some View {
         Group {
             ForEach(allFeatures, id: \.self) { feature in
-                HStack {
-                    Text(feature.localizedDescription)
-                    Spacer()
-                    ThemeImage(iapManager.isEligible(for: feature) ? .marked : .close)
-                }
-                .scrollableOnTV()
+                FeatureView(text: feature.localizedDescription, isEligible: iapManager.isEligible(for: feature))
+                    .scrollableOnTV()
             }
         }
         .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
     }
 }
+
+private struct FeatureView: View {
+    let text: String
+
+    let isEligible: Bool
+
+    var body: some View {
+        HStack {
+            Text(text)
+            Spacer()
+            ThemeImage(isEligible ? .marked : .close)
+        }
+        .foregroundStyle(isEligible ? .primary : .secondary)
+    }
+}
+
+// MARK: -
+
+private extension AppFeature {
+
+    @MainActor
+    func rank(with iapManager: IAPManager) -> Int {
+        iapManager.isEligible(for: self) ? 0 : 1
+    }
+}
+
+// MARK: - Previews
 
 #Preview {
     PurchasedView()
