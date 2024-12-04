@@ -966,7 +966,7 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1005,7 +1005,7 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1066,7 +1066,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/LoginItem/LoginItem.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1091,7 +1091,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/LoginItem/LoginItem.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1145,7 +1145,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
@@ -1171,7 +1171,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
@@ -1194,7 +1194,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Intents/Intents.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
@@ -1225,7 +1225,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Intents/Intents.entitlements;
-				CURRENT_PROJECT_VERSION = 3676;
+				CURRENT_PROJECT_VERSION = 3677;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
