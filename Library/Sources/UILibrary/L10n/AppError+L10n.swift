@@ -93,7 +93,7 @@ extension PassepartoutError: @retroactive LocalizedError {
             return Strings.Errors.App.Passepartout.noActiveModules
 
         case .parsing:
-            let message = userInfo as? String ?? reason?.localizedDescription
+            let message = userInfo as? String ?? (reason as? LocalizedError)?.localizedDescription
 
             return [Strings.Errors.App.Passepartout.parsing, message]
                 .compactMap { $0 }
