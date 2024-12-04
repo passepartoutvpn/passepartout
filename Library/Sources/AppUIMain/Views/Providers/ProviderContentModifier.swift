@@ -117,7 +117,9 @@ private extension ProviderContentModifier {
             paywallReason: $paywallReason
         )
     }
+}
 
+private extension ProviderContentModifier {
     var supportedProviders: [Provider] {
         providerManager
             .providers
@@ -139,9 +141,7 @@ private extension ProviderContentModifier {
         }
         return Strings.Views.Providers.lastUpdated(lastUpdate.localizedDescription(style: .timestamp))
     }
-}
 
-private extension ProviderContentModifier {
     func loadCurrentProvider() {
        Task {
            await refreshIndex()
