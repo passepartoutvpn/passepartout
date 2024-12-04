@@ -241,7 +241,7 @@ private extension OpenVPNView {
                 ConfigurationView(
                     isServerPushed: false,
                     configuration: configuration.builder(),
-                    credentialsRoute: ""
+                    credentialsRoute: nil
                 )
             }
             .themeForm()
