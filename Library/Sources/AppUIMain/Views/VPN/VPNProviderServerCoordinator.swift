@@ -47,7 +47,6 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Co
         VPNProviderServerView(
             moduleId: moduleId,
             providerId: providerId,
-            configurationType: Configuration.self,
             selectedEntity: selectedEntity,
             filtersWithSelection: false,
             selectTitle: Strings.Global.Actions.connect,

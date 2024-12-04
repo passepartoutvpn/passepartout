@@ -40,8 +40,6 @@ struct VPNProviderServerView<Configuration>: View where Configuration: Configura
 
     let providerId: ProviderID
 
-    let configurationType: Configuration.Type
-
     let selectedEntity: VPNEntity<Configuration>?
 
     let filtersWithSelection: Bool
@@ -217,8 +215,7 @@ private extension VPNProviderServerView {
             apis: [API.bundled],
             moduleId: UUID(),
             providerId: .protonvpn,
-            configurationType: OpenVPN.Configuration.self,
-            selectedEntity: nil,
+            selectedEntity: nil as VPNEntity<OpenVPN.Configuration>?,
             filtersWithSelection: false,
             selectTitle: "Select",
             onSelect: { _, _ in }
