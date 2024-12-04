@@ -39,7 +39,7 @@ final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
         self.providerId = providerId
     }
 
-    func availableOptions<Configuration>(for configurationType: Configuration.Type) async throws -> VPNFilterOptions where Configuration: ProviderConfigurationIdentifiable {
+    func availableOptions<Configuration>(for configurationType: Configuration.Type) async throws -> VPNFilterOptions where Configuration: ConfigurationIdentifiable {
         try await context.perform {
             let mapper = DomainMapper()
 
@@ -69,7 +69,7 @@ final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
             let presetsRequest = CDVPNPresetV3.fetchRequest()
             presetsRequest.predicate = NSPredicate(
                 format: "providerId == %@ AND configurationId == %@", self.providerId.rawValue,
-                Configuration.providerConfigurationIdentifier
+                Configuration.configurationIdentifier
             )
             let presetsResults = try presetsRequest.execute()
 

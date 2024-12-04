@@ -218,7 +218,6 @@ private extension OpenVPNView {
                 VPNProviderServerView(
                     moduleId: module.id,
                     providerId: $0.id,
-                    configurationType: OpenVPN.Configuration.self,
                     selectedEntity: $0.entity,
                     filtersWithSelection: true,
                     onSelect: onSelectServer

@@ -29,7 +29,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
+struct VPNProviderServerView<Configuration>: View where Configuration: ConfigurationIdentifiable {
 
     @EnvironmentObject
     private var providerManager: ProviderManager
@@ -39,8 +39,6 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     let moduleId: UUID
 
     let providerId: ProviderID
-
-    let configurationType: Configuration.Type
 
     let selectedEntity: VPNEntity<Configuration>?
 
@@ -202,7 +200,7 @@ private extension VPNProviderServerView {
     func onSelectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
-            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.providerConfigurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
+            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.configurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
             return
         }
         onSelect(server, preset)
@@ -217,8 +215,7 @@ private extension VPNProviderServerView {
             apis: [API.bundled],
             moduleId: UUID(),
             providerId: .protonvpn,
-            configurationType: OpenVPN.Configuration.self,
-            selectedEntity: nil,
+            selectedEntity: nil as VPNEntity<OpenVPN.Configuration>?,
             filtersWithSelection: false,
             selectTitle: "Select",
             onSelect: { _, _ in }

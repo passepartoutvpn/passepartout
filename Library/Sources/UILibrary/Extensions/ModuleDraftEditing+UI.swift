@@ -34,7 +34,7 @@ extension ModuleDraftEditing {
 }
 
 @MainActor
-extension ModuleDraftEditing where Draft: ProviderBuilder {
+extension ModuleDraftEditing where Draft: MutableProviderSelecting {
     public var providerId: Binding<ProviderID?> {
         Binding {
             draft.providerId.wrappedValue
@@ -43,7 +43,7 @@ extension ModuleDraftEditing where Draft: ProviderBuilder {
         }
     }
 
-    public var providerEntity: Binding<Draft.SelectionType.EntityType?> {
+    public var providerEntity: Binding<Draft.CustomSelectionType.EntityType?> {
         Binding {
             draft.providerEntity.wrappedValue
         } set: {
@@ -51,7 +51,7 @@ extension ModuleDraftEditing where Draft: ProviderBuilder {
         }
     }
 
-    public var providerOptions: Binding<Set<Draft.SelectionType.OptionType>?> {
+    public var providerOptions: Binding<Set<Draft.CustomSelectionType.OptionType>?> {
         Binding {
             draft.providerOptions.wrappedValue
         } set: {

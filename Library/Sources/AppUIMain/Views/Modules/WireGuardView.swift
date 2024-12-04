@@ -115,7 +115,6 @@ private extension WireGuardView {
                 VPNProviderServerView(
                     moduleId: module.id,
                     providerId: $0.id,
-                    configurationType: WireGuard.Configuration.self,
                     selectedEntity: $0.entity,
                     filtersWithSelection: true,
                     onSelect: onSelectServer

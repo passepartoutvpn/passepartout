@@ -28,7 +28,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable, ProviderRows: View {
+struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ConfigurationIdentifiable, ProviderRows: View {
     var apis: [APIMapper] = API.shared
 
     @Binding

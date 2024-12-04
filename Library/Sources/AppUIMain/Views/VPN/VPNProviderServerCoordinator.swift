@@ -27,7 +27,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable {
+struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ConfigurationIdentifiable {
 
     @Environment(\.dismiss)
     private var dismiss
@@ -47,7 +47,6 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
         VPNProviderServerView(
             moduleId: moduleId,
             providerId: providerId,
-            configurationType: Configuration.self,
             selectedEntity: selectedEntity,
             filtersWithSelection: false,
             selectTitle: Strings.Global.Actions.connect,

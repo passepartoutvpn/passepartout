@@ -122,7 +122,7 @@ private extension ProviderContentModifier {
         providerManager
             .providers
             .filter {
-                $0.supports(Entity.ConfigurationType.self)
+                $0.supports(Entity.Template.self)
             }
     }
 
