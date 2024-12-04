@@ -32,7 +32,7 @@ extension OpenVPNView {
 
         let configuration: OpenVPN.Configuration.Builder
 
-        let credentialsRoute: any Hashable
+        let credentialsRoute: (any Hashable)?
 
         var body: some View {
             moduleSection(for: accountRows, header: Strings.Global.Nouns.account)
@@ -63,6 +63,9 @@ extension OpenVPNView {
 
 private extension OpenVPNView.ConfigurationView {
     var accountRows: [ModuleRow]? {
+        guard let credentialsRoute else {
+            return nil
+        }
         guard configuration.authUserPass == true else {
             return nil
         }

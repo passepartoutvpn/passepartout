@@ -238,6 +238,8 @@ public enum Strings {
       public static let certificate = Strings.tr("Localizable", "global.nouns.certificate", fallback: "Certificate")
       /// Compression
       public static let compression = Strings.tr("Localizable", "global.nouns.compression", fallback: "Compression")
+      /// Configuration
+      public static let configuration = Strings.tr("Localizable", "global.nouns.configuration", fallback: "Configuration")
       /// Connection
       public static let connection = Strings.tr("Localizable", "global.nouns.connection", fallback: "Connection")
       /// Country

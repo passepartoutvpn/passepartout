@@ -106,38 +106,48 @@ private extension OpenVPNView {
                 credentialsRoute: Subroute.credentials
             )
         } else {
-            importButton
+            emptyConfigurationView
                 .modifier(providerModifier)
         }
     }
 
     @ViewBuilder
-    var importButton: some View {
-        if draft.wrappedValue.providerId == nil {
-            Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
-                isImporting = true
-            }
-            .alert(
-                module.moduleType.localizedDescription,
-                isPresented: $requiresPassphrase,
-                presenting: importURL,
-                actions: { url in
-                    SecureField(
-                        Strings.Placeholders.secret,
-                        text: $importPassphrase ?? ""
-                    )
-                    Button(Strings.Alerts.Import.Passphrase.ok) {
-                        importConfiguration(from: .success(url))
-                    }
-                    Button(Strings.Global.Actions.cancel, role: .cancel) {
-                        isImporting = false
-                    }
-                },
-                message: {
-                    Text(Strings.Alerts.Import.Passphrase.message($0.lastPathComponent))
-                }
-            )
+    var emptyConfigurationView: some View {
+        if draft.wrappedValue.providerSelection == nil {
+            importButton
+        } else if let configuration = try? draft.wrappedValue.providerSelection?.configuration() {
+            providerConfigurationLink(with: configuration)
         }
+    }
+
+    func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {
+        NavigationLink(Strings.Global.Nouns.configuration, value: Subroute.providerConfiguration(configuration))
+    }
+
+    var importButton: some View {
+        Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
+            isImporting = true
+        }
+        .alert(
+            module.moduleType.localizedDescription,
+            isPresented: $requiresPassphrase,
+            presenting: importURL,
+            actions: { url in
+                SecureField(
+                    Strings.Placeholders.secret,
+                    text: $importPassphrase ?? ""
+                )
+                Button(Strings.Alerts.Import.Passphrase.ok) {
+                    importConfiguration(from: .success(url))
+                }
+                Button(Strings.Global.Actions.cancel, role: .cancel) {
+                    isImporting = false
+                }
+            },
+            message: {
+                Text(Strings.Alerts.Import.Passphrase.message($0.lastPathComponent))
+            }
+        )
     }
 
     var providerModifier: some ViewModifier {
@@ -207,6 +217,8 @@ private extension OpenVPNView {
     enum Subroute: Hashable {
         case providerServer
 
+        case providerConfiguration(OpenVPN.Configuration)
+
         case credentials
     }
 
@@ -223,6 +235,17 @@ private extension OpenVPNView {
                     onSelect: onSelectServer
                 )
             }
+
+        case .providerConfiguration(let configuration):
+            Form {
+                ConfigurationView(
+                    isServerPushed: false,
+                    configuration: configuration.builder(),
+                    credentialsRoute: nil
+                )
+            }
+            .themeForm()
+            .navigationTitle(Strings.Global.Nouns.configuration)
 
         case .credentials:
             Form {
