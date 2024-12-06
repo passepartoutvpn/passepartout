@@ -138,7 +138,7 @@ extension PreferencesManager {
             containerName: Constants.shared.containers.preferences,
             baseURL: BundleConfiguration.urlForGroupDocuments,
             model: AppData.cdPreferencesModel,
-            cloudKitIdentifier: nil,
+            cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
             author: nil
         )
         let modulePreferencesRepository = AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context)

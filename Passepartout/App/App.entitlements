@@ -9,6 +9,7 @@
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
 		<string>$(CFG_CLOUDKIT_ID)</string>
+		<string>$(CFG_CLOUDKIT_PREFERENCES_ID)</string>
 		<string>$(CFG_LEGACY_V2_CLOUDKIT_ID)</string>
 		<string>$(CFG_LEGACY_V2_TV_CLOUDKIT_ID)</string>
 	</array>
