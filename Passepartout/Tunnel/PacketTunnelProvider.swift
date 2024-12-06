@@ -41,10 +41,16 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 provider: self,
                 decoder: Registry.sharedProtocolCoder,
                 registry: .shared,
-                environment: .shared
+                environment: .shared,
+                profileBlock: {
+                    $0
+                }
             )
-            try await checkEligibility(of: fwd!.profile, environment: .shared)
-            try await fwd?.startTunnel(options: options)
+            guard let fwd else {
+                fatalError("NEPTPForwarder nil without throwing error?")
+            }
+            try await checkEligibility(of: fwd.profile, environment: .shared)
+            try await fwd.startTunnel(options: options)
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
             PassepartoutConfiguration.shared.flushLog()

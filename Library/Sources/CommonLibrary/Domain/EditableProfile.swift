@@ -37,7 +37,7 @@ public struct EditableProfile: MutableProfileType {
 
     public var modulesMetadata: [UUID: ModuleMetadata]?
 
-    public var userInfo: [String: AnyHashable]?
+    public var userInfo: AnyHashable?
 
     public init(
         id: UUID = UUID(),
@@ -45,7 +45,7 @@ public struct EditableProfile: MutableProfileType {
         modules: [any ModuleBuilder] = [],
         activeModulesIds: Set<UUID> = [],
         modulesMetadata: [UUID: ModuleMetadata]? = nil,
-        userInfo: [String: AnyHashable]? = nil
+        userInfo: AnyHashable? = nil
     ) {
         self.id = id
         self.name = name

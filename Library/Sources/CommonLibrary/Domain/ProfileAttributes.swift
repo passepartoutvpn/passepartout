@@ -69,22 +69,22 @@ extension ProfileAttributes: CustomDebugStringConvertible {
 // MARK: - UserInfoCodable
 
 extension ProfileAttributes: UserInfoCodable {
-    public var userInfo: [String: AnyHashable]? {
-        do {
-            let data = try JSONEncoder().encode(self)
-            return try JSONSerialization.jsonObject(with: data) as? [String: AnyHashable] ?? [:]
-        } catch {
-            pp_log(.App.profiles, .error, "Unable to encode ProfileAttributes to dictionary: \(error)")
-            return [:]
-        }
-    }
-
-    public init?(userInfo: [String: AnyHashable]?) {
+    public init?(userInfo: AnyHashable?) {
         do {
             let data = try JSONSerialization.data(withJSONObject: userInfo ?? [:])
             self = try JSONDecoder().decode(ProfileAttributes.self, from: data)
         } catch {
             pp_log(.App.profiles, .error, "Unable to decode ProfileAttributes from dictionary: \(error)")
+            return nil
+        }
+    }
+
+    public var userInfo: AnyHashable? {
+        do {
+            let data = try JSONEncoder().encode(self)
+            return try JSONSerialization.jsonObject(with: data) as? AnyHashable
+        } catch {
+            pp_log(.App.profiles, .error, "Unable to encode ProfileAttributes to dictionary: \(error)")
             return nil
         }
     }
