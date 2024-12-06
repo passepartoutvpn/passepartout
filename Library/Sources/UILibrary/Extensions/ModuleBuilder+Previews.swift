@@ -31,16 +31,20 @@ extension ModuleBuilder where Self: ModuleViewProviding {
     @MainActor
     public func preview(title: String = "") -> some View {
         NavigationStack {
-            moduleView(with: ProfileEditor(modules: [self]), impl: nil)
-                .navigationTitle(title)
+            moduleView(with: .init(
+                editor: ProfileEditor(modules: [self]),
+                preferences: nil,
+                impl: nil
+            ))
+            .navigationTitle(title)
         }
         .withMockEnvironment()
     }
 
     @MainActor
-    public func preview<C: View>(with content: (ProfileEditor, Self) -> C) -> some View {
+    public func preview<C: View>(with content: (Self, ProfileEditor) -> C) -> some View {
         NavigationStack {
-            content(ProfileEditor(modules: [self]), self)
+            content(self, ProfileEditor(modules: [self]))
         }
         .withMockEnvironment()
     }

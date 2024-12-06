@@ -28,7 +28,7 @@ import SwiftUI
 import UILibrary
 
 extension OnDemandModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        OnDemandView(editor: editor, module: self)
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        OnDemandView(module: self, parameters: parameters)
     }
 }

@@ -23,12 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UILibrary
 
 extension IPModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        IPView(editor: editor, module: self)
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        IPView(module: self, parameters: parameters)
     }
 }

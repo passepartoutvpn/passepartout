@@ -32,10 +32,15 @@ struct HTTPProxyView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var theme: Theme
 
+    let module: HTTPProxyModule.Builder
+
     @ObservedObject
     var editor: ProfileEditor
 
-    let module: HTTPProxyModule.Builder
+    init(module: HTTPProxyModule.Builder, parameters: ModuleViewParameters) {
+        self.module = module
+        editor = parameters.editor
+    }
 
     var body: some View {
         Group {

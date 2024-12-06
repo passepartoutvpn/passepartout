@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  ModulePreferences.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/5/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
-import SwiftUI
+import PassepartoutKit
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+@MainActor
+public final class ModulePreferences: ObservableObject {
+    public var proxy: ModulePreferencesProxy? {
+        didSet {
+            objectWillChange.send()
+        }
+    }
 
-    @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    public init(proxy: ModulePreferencesProxy?) {
+        self.proxy = proxy
+    }
+
+    public func save() throws {
+        try proxy?.save()
+    }
+}
+
+@MainActor
+public protocol ModulePreferencesProxy {
+    func save() throws
 }

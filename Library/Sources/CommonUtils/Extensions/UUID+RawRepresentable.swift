@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  UUID+RawRepresentable.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/4/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
-import SwiftUI
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+extension UUID: @retroactive RawRepresentable {
+    public init?(rawValue: String) {
+        self.init(uuidString: rawValue)
+    }
 
-    @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    public var rawValue: String {
+        uuidString
+    }
 }

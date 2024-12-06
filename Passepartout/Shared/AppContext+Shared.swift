@@ -48,7 +48,7 @@ extension AppContext {
         let remoteRepositoryBlock: (Bool) -> ProfileRepository = {
             let remoteStore = CoreDataPersistentStore(
                 logger: .default,
-                containerName: Constants.shared.containers.remote,
+                containerName: Constants.shared.containers.remoteProfiles,
                 model: AppData.cdProfilesModel,
                 cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
                 author: nil
@@ -124,6 +124,7 @@ extension AppContext {
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
+            preferencesManager: .shared,
             registry: .shared,
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
@@ -199,7 +200,7 @@ private extension Dependencies.ProfileManager {
     static func coreDataProfileRepository(observingResults: Bool) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: .default,
-            containerName: Constants.shared.containers.local,
+            containerName: Constants.shared.containers.localProfiles,
             model: AppData.cdProfilesModel,
             cloudKitIdentifier: nil,
             author: nil
@@ -213,23 +214,5 @@ private extension Dependencies.ProfileManager {
             pp_log(.app, .error, "Unable to decode local result: \(error)")
             return .ignore
         }
-    }
-}
-
-// MARK: - Logging
-
-private extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
-    static var `default`: CoreDataPersistentStoreLogger {
-        DefaultCoreDataPersistentStoreLogger()
-    }
-}
-
-private struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
-    func debug(_ msg: String) {
-        pp_log(.app, .info, msg)
-    }
-
-    func warning(_ msg: String) {
-        pp_log(.app, .error, msg)
     }
 }

@@ -29,6 +29,7 @@
 CFG_APP_ID = com.algoritmico.ios.Passepartout
 CFG_APP_STORE_ID = 1433648537
 CFG_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout.v3
+CFG_CLOUDKIT_PREFERENCES_ID = iCloud.com.algoritmico.Passepartout.v3.Preferences
 CFG_COPYRIGHT = Copyright © 2024 Davide De Rosa. All rights reserved.
 CFG_DISPLAY_NAME = Passepartout
 CFG_GROUP_ID[sdk=appletvos*] = $(CFG_RAW_GROUP_ID)

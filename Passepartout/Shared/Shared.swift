@@ -23,14 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppData
+import AppDataPreferences
 import CommonLibrary
 import CommonUtils
 import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
-
-// MARK: Registry
 
 extension Registry {
     static let shared = Registry(
@@ -128,5 +128,42 @@ extension InAppProcessor {
                 }
             }
         )
+    }
+}
+
+extension PreferencesManager {
+    static let shared: PreferencesManager = {
+        let preferencesStore = CoreDataPersistentStore(
+            logger: .default,
+            containerName: Constants.shared.containers.preferences,
+            baseURL: BundleConfiguration.urlForGroupDocuments,
+            model: AppData.cdPreferencesModel,
+            cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
+            author: nil
+        )
+        let modulePreferencesRepository = AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context)
+        let providerPreferencesRepository = AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context)
+        return PreferencesManager(
+            modulesRepository: modulePreferencesRepository,
+            providersRepository: providerPreferencesRepository
+        )
+    }()
+}
+
+// MARK: - Logging
+
+extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
+    static var `default`: CoreDataPersistentStoreLogger {
+        DefaultCoreDataPersistentStoreLogger()
+    }
+}
+
+struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+    func debug(_ msg: String) {
+        pp_log(.app, .info, msg)
+    }
+
+    func warning(_ msg: String) {
+        pp_log(.app, .error, msg)
     }
 }

@@ -29,8 +29,8 @@ import SwiftUI
 import UILibrary
 
 extension WireGuardModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        WireGuardView(editor: editor, module: self, impl: impl as? WireGuardModule.Implementation)
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        WireGuardView(module: self, parameters: parameters)
     }
 }
 

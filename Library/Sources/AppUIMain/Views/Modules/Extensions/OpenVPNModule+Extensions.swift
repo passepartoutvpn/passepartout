@@ -29,8 +29,8 @@ import SwiftUI
 import UILibrary
 
 extension OpenVPNModule.Builder: ModuleViewProviding {
-    public func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
-        OpenVPNView(editor: editor, module: self, impl: impl as? OpenVPNModule.Implementation)
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        OpenVPNView(module: self, parameters: parameters)
     }
 }
 

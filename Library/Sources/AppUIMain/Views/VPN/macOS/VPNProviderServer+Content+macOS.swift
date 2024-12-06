@@ -50,7 +50,7 @@ extension VPNProviderServerView {
         var filtersViewModel: VPNFiltersView.Model
 
         @ObservedObject
-        var favoritesManager: ProviderFavoritesManager
+        var providerPreferences: ProviderPreferences
 
         let selectTitle: String
 
@@ -87,7 +87,7 @@ private extension VPNProviderServerView.ContentView {
             TableColumn("􀋂") { server in
                 FavoriteToggle(
                     value: server.serverId,
-                    selection: $favoritesManager.serverIds
+                    selection: $providerPreferences.favoriteServers
                 )
                 .environmentObject(theme) // TODO: #873, Table loses environment
             }

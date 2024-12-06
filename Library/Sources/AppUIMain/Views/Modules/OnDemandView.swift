@@ -33,10 +33,10 @@ struct OnDemandView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var theme: Theme
 
+    let module: OnDemandModule.Builder
+
     @ObservedObject
     var editor: ProfileEditor
-
-    let module: OnDemandModule.Builder
 
     private let wifi: Wifi
 
@@ -44,12 +44,12 @@ struct OnDemandView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     init(
-        editor: ProfileEditor,
         module: OnDemandModule.Builder,
+        parameters: ModuleViewParameters,
         observer: WifiObserver? = nil
     ) {
-        self.editor = editor
         self.module = module
+        editor = parameters.editor
         wifi = Wifi(observer: observer ?? CoreLocationWifiObserver())
     }
 
@@ -239,8 +239,12 @@ private extension OnDemandView {
     ]
     return module.preview {
         OnDemandView(
-            editor: $0,
-            module: $1,
+            module: $0,
+            parameters: .init(
+                editor: $1,
+                preferences: nil,
+                impl: nil
+            ),
             observer: MockWifi()
         )
     }

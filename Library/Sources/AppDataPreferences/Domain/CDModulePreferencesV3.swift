@@ -1,8 +1,8 @@
 //
-//  ProviderFavoriteServers.swift
+//  CDModulePreferencesV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/25/24.
+//  Created by Davide De Rosa on 12/5/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,33 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
 
-public struct ProviderFavoriteServers {
-    private var map: [UUID: Set<String>]
-
-    public init() {
-        map = [:]
+@objc(CDModulePreferencesV3)
+final class CDModulePreferencesV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDModulePreferencesV3> {
+        NSFetchRequest<CDModulePreferencesV3>(entityName: "CDModulePreferencesV3")
     }
 
-    public func servers(forModuleWithId moduleId: UUID) -> Set<String> {
-        map[moduleId] ?? []
-    }
-
-    public mutating func setServers(_ servers: Set<String>, forModuleWithId moduleId: UUID) {
-        map[moduleId] = servers
-    }
-}
-
-extension ProviderFavoriteServers: RawRepresentable {
-    public var rawValue: String {
-        (try? JSONEncoder().encode(map))?.base64EncodedString() ?? ""
-    }
-
-    public init?(rawValue: String) {
-        guard let data = Data(base64Encoded: rawValue) else {
-            return nil
-        }
-        map = (try? JSONDecoder().decode([UUID: Set<String>].self, from: data)) ?? [:]
-    }
+    @NSManaged var uuid: UUID?
 }

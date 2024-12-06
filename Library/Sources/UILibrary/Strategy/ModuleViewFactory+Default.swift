@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 import SwiftUI
@@ -35,11 +36,15 @@ public final class DefaultModuleViewFactory: ModuleViewFactory {
     }
 
     @ViewBuilder
-    public func view(with editor: ProfileEditor, moduleId: UUID) -> some View {
+    public func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> some View {
         let result = editor.moduleViewProvider(withId: moduleId, registry: registry)
         if let result {
-            AnyView(result.provider.moduleView(with: editor, impl: result.impl))
-                .navigationTitle(result.title)
+            AnyView(result.provider.moduleView(with: .init(
+                editor: editor,
+                preferences: preferences,
+                impl: result.impl
+            )))
+            .navigationTitle(result.title)
         }
     }
 }

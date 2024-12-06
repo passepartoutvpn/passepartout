@@ -33,10 +33,15 @@ struct DNSView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var theme: Theme
 
+    let module: DNSModule.Builder
+
     @ObservedObject
     var editor: ProfileEditor
 
-    let module: DNSModule.Builder
+    init(module: DNSModule.Builder, parameters: ModuleViewParameters) {
+        self.module = module
+        editor = parameters.editor
+    }
 
     var body: some View {
         debugChanges()

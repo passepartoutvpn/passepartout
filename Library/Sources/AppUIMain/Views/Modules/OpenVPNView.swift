@@ -33,10 +33,10 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @Environment(\.navigationPath)
     private var path
 
+    let module: OpenVPNModule.Builder
+
     @ObservedObject
     var editor: ProfileEditor
-
-    let module: OpenVPNModule.Builder
 
     let impl: OpenVPNModule.Implementation?
 
@@ -61,20 +61,18 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private var errorHandler: ErrorHandler = .default()
 
     init(serverConfiguration: OpenVPN.Configuration) {
-        let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
-        let editor = ProfileEditor(modules: [module])
+        module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
+        editor = ProfileEditor(modules: [module])
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
 
-        self.editor = editor
-        self.module = module
         impl = nil
         isServerPushed = true
     }
 
-    init(editor: ProfileEditor, module: OpenVPNModule.Builder, impl: OpenVPNModule.Implementation?) {
-        self.editor = editor
+    init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {
         self.module = module
-        self.impl = impl
+        editor = parameters.editor
+        impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
     }
 

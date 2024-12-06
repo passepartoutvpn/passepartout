@@ -1,9 +1,10 @@
 {
     "bundleKey": "AppConfig",
     "containers": {
-        "local": "Profiles-v3",
-        "remote": "Profiles-v3.remote",
+        "localProfiles": "Profiles-v3",
+        "remoteProfiles": "Profiles-v3.remote",
         "providers": "Providers-v3",
+        "preferences": "Preferences-v3",
         "legacyV2": "Profiles",
         "legacyV2TV": "SharedProfiles"
     },

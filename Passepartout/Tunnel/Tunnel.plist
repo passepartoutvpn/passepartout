@@ -10,6 +10,8 @@
 		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
 		<key>tunnelId</key>
 		<string>$(CFG_TUNNEL_ID)</string>
+		<key>cloudKitPreferencesId</key>
+		<string>$(CFG_CLOUDKIT_PREFERENCES_ID)</string>
 	</dict>
 	<key>NSExtension</key>
 	<dict>

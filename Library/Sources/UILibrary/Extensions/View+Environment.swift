@@ -31,6 +31,7 @@ extension View {
         environmentObject(theme)
             .environmentObject(context.iapManager)
             .environmentObject(context.migrationManager)
+            .environmentObject(context.preferencesManager)
             .environmentObject(context.providerManager)
     }
 

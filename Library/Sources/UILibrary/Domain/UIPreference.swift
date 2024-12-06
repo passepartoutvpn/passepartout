@@ -37,8 +37,6 @@ public enum UIPreference: String, PreferenceProtocol {
 
     case profilesLayout
 
-    case providerFavoriteServers
-
     public var key: String {
         "UI.\(rawValue)"
     }

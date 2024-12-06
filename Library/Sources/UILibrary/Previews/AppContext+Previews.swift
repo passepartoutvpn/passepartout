@@ -83,6 +83,7 @@ extension AppContext {
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
+            preferencesManager: PreferencesManager(),
             registry: Registry(),
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
