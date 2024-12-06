@@ -34,6 +34,9 @@ struct VPNProviderServerView<Configuration>: View where Configuration: Identifia
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     var apis: [APIMapper] = API.shared
 
     let moduleId: UUID
@@ -65,10 +68,10 @@ struct VPNProviderServerView<Configuration>: View where Configuration: Identifia
     private var onlyShowsFavorites = false
 
     @StateObject
-    private var filtersViewModel = VPNFiltersView.Model()
+    private var providerPreferences = ProviderPreferences(proxy: nil)
 
     @StateObject
-    private var favoritesManager = ProviderFavoritesManager()
+    private var filtersViewModel = VPNFiltersView.Model()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -94,7 +97,7 @@ extension VPNProviderServerView {
             selectedServer: selectedEntity?.server,
             isFiltering: isFiltering,
             filtersViewModel: filtersViewModel,
-            favoritesManager: favoritesManager,
+            providerPreferences: providerPreferences,
             selectTitle: selectTitle,
             onSelect: onSelectServer
         )
@@ -123,7 +126,7 @@ private extension VPNProviderServerView {
     var filteredServers: [VPNServer] {
         if onlyShowsFavorites {
             return servers.filter {
-                favoritesManager.serverIds.contains($0.serverId)
+                providerPreferences.favoriteServers.contains($0.serverId)
             }
         }
         return servers
@@ -156,7 +159,11 @@ private extension VPNProviderServerView {
 private extension VPNProviderServerView {
     func loadInitialServers() async {
         do {
-            favoritesManager.moduleId = moduleId
+            providerPreferences.proxy = try preferencesManager.providerPreferencesProxy(in: providerId)
+        } catch {
+            pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+        }
+        do {
             let repository = try await providerManager.vpnServerRepository(
                 from: apis,
                 for: providerId
@@ -165,7 +172,7 @@ private extension VPNProviderServerView {
             filtersViewModel.load(options: vpnManager.options, initialFilters: initialFilters)
             await reloadServers(filters: filtersViewModel.filters)
         } catch {
-            pp_log(.app, .error, "Unable to load VPN repository: \(error)")
+            pp_log(.app, .error, "Unable to load VPN servers for provider \(providerId): \(error)")
             errorHandler.handle(error, title: Strings.Global.Nouns.servers)
         }
     }
@@ -194,7 +201,11 @@ private extension VPNProviderServerView {
     }
 
     func onDisappear() {
-        favoritesManager.save()
+        do {
+            try providerPreferences.save()
+        } catch {
+            pp_log(.app, .error, "Unable to save preferences: \(error)")
+        }
     }
 
     func onSelectServer(_ server: VPNServer) {

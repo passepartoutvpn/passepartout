@@ -40,6 +40,8 @@ public final class AppContext: ObservableObject {
 
     public let providerManager: ProviderManager
 
+    public let preferencesManager: PreferencesManager
+
     public let registry: Registry
 
     public let tunnel: ExtendedTunnel
@@ -57,6 +59,7 @@ public final class AppContext: ObservableObject {
         migrationManager: MigrationManager,
         profileManager: ProfileManager,
         providerManager: ProviderManager,
+        preferencesManager: PreferencesManager,
         registry: Registry,
         tunnel: ExtendedTunnel,
         tunnelReceiptURL: URL
@@ -65,6 +68,7 @@ public final class AppContext: ObservableObject {
         self.migrationManager = migrationManager
         self.profileManager = profileManager
         self.providerManager = providerManager
+        self.preferencesManager = preferencesManager
         self.registry = registry
         self.tunnel = tunnel
         self.tunnelReceiptURL = tunnelReceiptURL

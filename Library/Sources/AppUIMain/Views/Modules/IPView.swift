@@ -28,14 +28,18 @@ import PassepartoutKit
 import SwiftUI
 
 struct IPView: View, ModuleDraftEditing {
+    let module: IPModule.Builder
 
     @ObservedObject
     var editor: ProfileEditor
 
-    let module: IPModule.Builder
-
     @State
     private var routePresentation: RoutePresentation?
+
+    init(module: IPModule.Builder, parameters: ModuleViewParameters) {
+        self.module = module
+        editor = parameters.editor
+    }
 
     var body: some View {
         Group {

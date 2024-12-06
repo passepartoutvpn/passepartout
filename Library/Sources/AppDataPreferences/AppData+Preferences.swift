@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  AppData+Preferences.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import AppData
+import CoreData
 import Foundation
-import SwiftUI
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+extension AppData {
 
     @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    public static let cdPreferencesModel: NSManagedObjectModel = {
+        guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
+            fatalError("Unable to build Core Data model (Preferences v3)")
+        }
+        return model
+    }()
 }

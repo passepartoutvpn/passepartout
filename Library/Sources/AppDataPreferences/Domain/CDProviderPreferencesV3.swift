@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  CDProviderPreferencesV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/5/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import CoreData
 import Foundation
-import SwiftUI
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+@objc(CDProviderPreferencesV3)
+final class CDProviderPreferencesV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDProviderPreferencesV3> {
+        NSFetchRequest<CDProviderPreferencesV3>(entityName: "CDProviderPreferencesV3")
+    }
 
-    @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    @NSManaged var providerId: String?
+    @NSManaged var favoriteServerIds: Data?
 }

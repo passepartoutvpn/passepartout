@@ -70,6 +70,16 @@ let package = Package(
             dependencies: []
         ),
         .target(
+            name: "AppDataPreferences",
+            dependencies: [
+                "AppData",
+                "CommonLibrary"
+            ],
+            resources: [
+                .process("Preferences.xcdatamodeld")
+            ]
+        ),
+        .target(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
@@ -106,6 +116,9 @@ let package = Package(
         .target(
             name: "AppUIMainWrapper",
             dependencies: [
+                "AppDataPreferences",
+                "AppDataProfiles",
+                "AppDataProviders",
                 .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
             ]
         ),
@@ -116,6 +129,9 @@ let package = Package(
         .target(
             name: "AppUITVWrapper",
             dependencies: [
+                "AppDataPreferences",
+                "AppDataProfiles",
+                "AppDataProviders",
                 .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
@@ -166,8 +182,6 @@ let package = Package(
         .target(
             name: "UILibrary",
             dependencies: [
-                "AppDataProfiles",
-                "AppDataProviders",
                 "CommonAPI",
                 "CommonLibrary",
                 "UITesting"

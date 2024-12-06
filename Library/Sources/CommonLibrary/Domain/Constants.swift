@@ -28,11 +28,13 @@ import PassepartoutKit
 
 public struct Constants: Decodable, Sendable {
     public struct Containers: Decodable, Sendable {
-        public let local: String
+        public let localProfiles: String
 
-        public let remote: String
+        public let remoteProfiles: String
 
         public let providers: String
+
+        public let preferences: String
 
         public let legacyV2: String
 

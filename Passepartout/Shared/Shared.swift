@@ -30,8 +30,6 @@ import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
-// MARK: Registry
-
 extension Registry {
     static let shared = Registry(
         withKnownHandlers: true,

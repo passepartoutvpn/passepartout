@@ -33,10 +33,10 @@ struct WireGuardView: View, ModuleDraftEditing {
     @Environment(\.navigationPath)
     private var path
 
+    let module: WireGuardModule.Builder
+
     @ObservedObject
     var editor: ProfileEditor
-
-    let module: WireGuardModule.Builder
 
     let impl: WireGuardModule.Implementation?
 
@@ -45,6 +45,12 @@ struct WireGuardView: View, ModuleDraftEditing {
 
     @State
     private var errorHandler: ErrorHandler = .default()
+
+    init(module: WireGuardModule.Builder, parameters: ModuleViewParameters) {
+        self.module = module
+        editor = parameters.editor
+        impl = parameters.impl as? WireGuardModule.Implementation
+    }
 
     var body: some View {
         contentView

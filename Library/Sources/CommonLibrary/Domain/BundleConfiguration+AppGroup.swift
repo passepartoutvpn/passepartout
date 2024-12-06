@@ -30,25 +30,35 @@ import PassepartoutKit
 
 extension BundleConfiguration {
     public static var urlForAppLog: URL {
-        cachesURL.appending(path: Constants.shared.log.appPath)
+        urlForGroupCaches.appending(path: Constants.shared.log.appPath)
     }
 
     public static var urlForTunnelLog: URL {
-        cachesURL.appending(path: Constants.shared.log.tunnelPath)
+        urlForGroupCaches.appending(path: Constants.shared.log.tunnelPath)
     }
 
     public static var urlForBetaReceipt: URL {
-        cachesURL.appending(path: Constants.shared.tunnel.betaReceiptPath)
+        urlForGroupCaches.appending(path: Constants.shared.tunnel.betaReceiptPath)
+    }
+}
+
+extension BundleConfiguration {
+    public static var urlForGroupCaches: URL {
+        appGroupURL.appending(components: "Library", "Caches")
+    }
+
+    public static var urlForGroupDocuments: URL {
+        appGroupURL.appending(components: "Library", "Documents")
     }
 }
 
 private extension BundleConfiguration {
-    static var cachesURL: URL {
+    static var appGroupURL: URL {
         let groupId = mainString(for: .groupId)
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
             pp_log(.app, .error, "Unable to access App Group container")
             return FileManager.default.temporaryDirectory
         }
-        return url.appending(components: "Library", "Caches")
+        return url
     }
 }

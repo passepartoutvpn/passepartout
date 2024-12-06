@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -30,5 +31,24 @@ public protocol ModuleViewProviding {
     associatedtype Content: View
 
     @MainActor
-    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> Content
+    func moduleView(with parameters: ModuleViewParameters) -> Content
+}
+
+public struct ModuleViewParameters {
+    public let editor: ProfileEditor
+
+    public let preferences: ModulePreferences
+
+    public let impl: (any ModuleImplementation)?
+
+    @MainActor
+    public init(
+        editor: ProfileEditor,
+        preferences: ModulePreferences?,
+        impl: (any ModuleImplementation)?
+    ) {
+        self.editor = editor
+        self.preferences = preferences ?? ModulePreferences(proxy: nil)
+        self.impl = impl
+    }
 }
