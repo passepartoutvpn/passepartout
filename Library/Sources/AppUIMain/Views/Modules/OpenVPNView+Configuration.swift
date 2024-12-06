@@ -85,10 +85,13 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var pullRows: [ModuleRow]? {
-        configuration.pullMask?.map {
-            .text(caption: $0.localizedDescription, value: nil)
-        }
-        .nilIfEmpty
+        configuration.pullMask?
+            .map(\.localizedDescription)
+            .sorted()
+            .map {
+                .text(caption: $0, value: nil)
+            }
+            .nilIfEmpty
     }
 
     func ipRows(for ip: IPSettings?, routes: [Route]?) -> [ModuleRow]? {
@@ -130,15 +133,14 @@ private extension OpenVPNView.ConfigurationView {
         configuration.routingPolicies?
             .compactMap {
                 switch $0 {
-                case .IPv4:
-                    return .text(caption: Strings.Unlocalized.ipv4)
-
-                case .IPv6:
-                    return .text(caption: Strings.Unlocalized.ipv6)
-
-                default:
-                    return nil
+                case .IPv4: return Strings.Unlocalized.ipv4
+                case .IPv6: return Strings.Unlocalized.ipv6
+                default: return nil
                 }
+            }
+            .sorted()
+            .map {
+                .text(caption: $0)
             }
             .nilIfEmpty
     }
@@ -272,4 +274,23 @@ private extension OpenVPNView.ConfigurationView {
         }
         return rows.nilIfEmpty
     }
+}
+
+// MARK: - Previews
+
+#Preview {
+    struct Preview: View {
+        var body: some View {
+            Form {
+                OpenVPNView.ConfigurationView(
+                    isServerPushed: false,
+                    configuration: .forPreviews,
+                    credentialsRoute: nil
+                )
+            }
+            .withMockEnvironment()
+        }
+    }
+
+    return Preview()
 }
