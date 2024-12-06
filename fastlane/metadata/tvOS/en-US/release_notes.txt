@@ -1,9 +1,4 @@
-* Hide OpenVPN password if provider does not require it (#970)
-* Fix OpenVPN/WireGuard import error messages (#967)
-* Add guidance for OpenVPN provider credentials (#966)
-* Use provider description as profile name
-* Inform about use of profile name in Shortcuts (#954)
-* Improve layout of installed profile (#953)
-* Add version view in About/Settings (#952)
-* Drop animations on reload servers on iOS
-* Fix modals not re-appearing in iOS 16
+WARNING: you must re-configure your providers in this build.
+
+* Fix unfriendly message on import OpenVPN
+* Fix a tunnel crash during DNS resolution
