@@ -15,11 +15,21 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppUIMain",
-            targets: ["AppUIMainWrapper"]
+            targets: [
+                "AppDataPreferences",
+                "AppDataProfiles",
+                "AppDataProviders",
+                "AppUIMainWrapper"
+            ]
         ),
         .library(
             name: "AppUITV",
-            targets: ["AppUITVWrapper"]
+            targets: [
+                "AppDataPreferences",
+                "AppDataProfiles",
+                "AppDataProviders",
+                "AppUITVWrapper"
+            ]
         ),
         .library(
             name: "CommonIAP",
@@ -39,7 +49,10 @@ let package = Package(
         ),
         .library(
             name: "TunnelLibrary",
-            targets: ["CommonLibrary"]
+            targets: [
+                "AppDataPreferences",
+                "CommonLibrary"
+            ]
         ),
         .library(
             name: "UILibrary",
@@ -116,9 +129,6 @@ let package = Package(
         .target(
             name: "AppUIMainWrapper",
             dependencies: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
                 .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
             ]
         ),
@@ -129,9 +139,6 @@ let package = Package(
         .target(
             name: "AppUITVWrapper",
             dependencies: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
                 .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),

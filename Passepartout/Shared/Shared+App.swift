@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
-import AppDataPreferences
 import CommonLibrary
 import CommonUtils
 import Foundation
@@ -39,25 +37,6 @@ extension IAPManager {
         betaChecker: Dependencies.IAPManager.betaChecker,
         productsAtBuild: Dependencies.IAPManager.productsAtBuild
     )
-}
-
-extension PreferencesManager {
-    static let shared: PreferencesManager = {
-        let preferencesStore = CoreDataPersistentStore(
-            logger: .default,
-            containerName: Constants.shared.containers.preferences,
-            baseURL: BundleConfiguration.urlForGroupDocuments,
-            model: AppData.cdPreferencesModel,
-            cloudKitIdentifier: nil,
-            author: nil
-        )
-        let modulePreferencesRepository = AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context)
-        let providerPreferencesRepository = AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context)
-        return PreferencesManager(
-            modulesRepository: modulePreferencesRepository,
-            providersRepository: providerPreferencesRepository
-        )
-    }()
 }
 
 // MARK: - Dependencies
@@ -97,23 +76,5 @@ private extension Dependencies.IAPManager {
 
     static var betaReceiptURL: URL? {
         Bundle.main.appStoreProductionReceiptURL
-    }
-}
-
-// MARK: - Logging
-
-extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
-    static var `default`: CoreDataPersistentStoreLogger {
-        DefaultCoreDataPersistentStoreLogger()
-    }
-}
-
-struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
-    func debug(_ msg: String) {
-        pp_log(.app, .info, msg)
-    }
-
-    func warning(_ msg: String) {
-        pp_log(.app, .error, msg)
     }
 }
