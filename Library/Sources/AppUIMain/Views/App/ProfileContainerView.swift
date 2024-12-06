@@ -59,7 +59,6 @@ struct ProfileContainerView: View, Routable {
                 errorHandler: errorHandler
             ))
             .navigationTitle(Strings.Unlocalized.appName)
-            .withErrorHandler(errorHandler)
     }
 }
 

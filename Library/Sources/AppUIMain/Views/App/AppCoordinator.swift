@@ -98,6 +98,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
             options: modalRoute?.options(),
             content: modalDestination
         )
+        .withErrorHandler(errorHandler)
         .onChange(of: interactiveManager.isPresented) {
             modalRoute = $0 ? .interactiveLogin : nil
         }
