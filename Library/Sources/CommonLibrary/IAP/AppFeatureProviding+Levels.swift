@@ -29,7 +29,11 @@ extension AppUserLevel: AppFeatureProviding {
     public var features: [AppFeature] {
         switch self {
         case .beta:
-            return [.interactiveLogin, .sharing]
+            return [
+                .interactiveLogin,
+                .routing,
+                .sharing
+            ]
 
         case .fullV2:
             return AppFeature.fullV2Features
