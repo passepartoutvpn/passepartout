@@ -13,35 +13,31 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Passepartout\/Library",
-        "identifier" : "AppUIMainTests",
-        "name" : "AppUIMainTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Passepartout\/Library",
+        "containerPath" : "container:Library",
         "identifier" : "UILibraryTests",
         "name" : "UILibraryTests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Passepartout\/Library",
-        "identifier" : "CommonLibraryTests",
-        "name" : "CommonLibraryTests"
+        "containerPath" : "container:Library",
+        "identifier" : "LegacyV2Tests",
+        "name" : "LegacyV2Tests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Passepartout\/Library",
-        "identifier" : "LegacyV2Tests",
-        "name" : "LegacyV2Tests"
+        "containerPath" : "container:Library",
+        "identifier" : "AppUIMainTests",
+        "name" : "AppUIMainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Library",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
       }
     },
     {

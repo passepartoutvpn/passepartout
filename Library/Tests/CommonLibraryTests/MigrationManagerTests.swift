@@ -74,7 +74,7 @@ extension MigrationManagerTests {
         }
         XCTAssertEqual(migrated.id, uuid)
         XCTAssertEqual(migrated.name, "foobar")
-        XCTAssertEqual(migrated.userInfo?["user"], "info")
+        XCTAssertEqual((migrated.userInfo as? [String: String])?["user"], "info")
     }
 
     func test_givenStrategy_whenMigrateProfiles_thenReturnsMigratedWithUpdates() async throws {
