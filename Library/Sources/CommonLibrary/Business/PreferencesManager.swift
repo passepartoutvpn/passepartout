@@ -27,14 +27,14 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-public final class PreferencesManager: ObservableObject {
+public final class PreferencesManager: ObservableObject, Sendable {
     private let modulesRepository: ModulePreferencesRepository
 
-    private let providersFactory: (ProviderID) throws -> ProviderPreferencesRepository
+    private let providersFactory: @Sendable (ProviderID) throws -> ProviderPreferencesRepository
 
     public init(
         modulesRepository: ModulePreferencesRepository? = nil,
-        providersFactory: ((ProviderID) throws -> ProviderPreferencesRepository)? = nil
+        providersFactory: (@Sendable (ProviderID) throws -> ProviderPreferencesRepository)? = nil
     ) {
         self.modulesRepository = modulesRepository ?? DummyModulePreferencesRepository()
         self.providersFactory = providersFactory ?? { _ in

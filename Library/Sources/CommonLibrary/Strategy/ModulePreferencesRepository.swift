@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-public protocol ModulePreferencesRepository {
+public protocol ModulePreferencesRepository: Sendable {
     func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences]
 
     func set(_ preferences: [UUID: ModulePreferences]) throws
