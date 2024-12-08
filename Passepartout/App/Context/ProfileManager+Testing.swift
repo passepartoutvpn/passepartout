@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 
 extension ProfileManager {
-    public static func forTesting(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {
+    public static func forUITesting(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {
         let repository = InMemoryProfileRepository()
         let remoteRepository = InMemoryProfileRepository()
         let manager = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
@@ -67,7 +67,7 @@ extension ProfileManager {
                     try await manager.save(profile, isLocal: true, remotelyShared: parameters.isShared)
                 }
             } catch {
-                pp_log(.App.profiles, .error, "Unable to build mock ProfileManager: \(error)")
+                pp_log(.App.profiles, .error, "Unable to build ProfileManager for UI testing: \(error)")
             }
         }
 

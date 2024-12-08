@@ -1,8 +1,8 @@
 //
-//  Shared+Tunnel.swift
+//  Dependencies+IAPManager.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/14/24.
+//  Created by Davide De Rosa on 12/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -28,32 +28,38 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-extension IAPManager {
-    static let sharedForTunnel = IAPManager(
-        inAppHelper: Dependencies.IAPManager.inAppHelper,
-        receiptReader: Dependencies.IAPManager.tunnelReceiptReader,
-        betaChecker: Dependencies.IAPManager.betaChecker,
-        productsAtBuild: Dependencies.IAPManager.productsAtBuild
-    )
-}
-
-extension PreferencesManager {
-    static let sharedForTunnel = PreferencesManager.sharedImplementation(withCloudKit: false)
-}
-
-// MARK: - Dependencies
-
-private extension Dependencies.IAPManager {
-
-    @MainActor
-    static var tunnelReceiptReader: AppReceiptReader {
-        FallbackReceiptReader(
-            main: StoreKitReceiptReader(),
-            beta: KvittoReceiptReader(url: betaReceiptURL)
+extension Dependencies {
+    func appProductHelper() -> any AppProductHelper {
+        StoreKitHelper(
+            products: AppProduct.all,
+            inAppIdentifier: {
+                let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
+                return "\(prefix).\($0.rawValue)"
+            }
         )
     }
 
-    static var betaReceiptURL: URL {
-        BundleConfiguration.urlForBetaReceipt // copied by AppContext.onLaunch
+    func betaChecker() -> BetaChecker {
+        TestFlightChecker()
+    }
+
+    func productsAtBuild() -> BuildProducts<AppProduct> {
+        {
+#if os(iOS)
+            if $0 <= 2016 {
+                return [.Full.iOS]
+            } else if $0 <= 3000 {
+                return [.Features.networkSettings]
+            }
+            return []
+#elseif os(macOS)
+            if $0 <= 3000 {
+                return [.Features.networkSettings]
+            }
+            return []
+#else
+            return []
+#endif
+        }
     }
 }

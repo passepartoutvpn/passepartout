@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  Dependencies+PassepartoutKit.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/25/24.
+//  Created by Davide De Rosa on 12/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,17 +23,35 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
-import AppDataPreferences
-import CommonLibrary
-import CommonUtils
 import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
-extension Registry {
-    static let shared = Registry(
+extension Dependencies {
+    var registry: Registry {
+        Self.sharedRegistry
+    }
+
+    func neProtocolCoder() -> NEProtocolCoder {
+        KeychainNEProtocolCoder(
+            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            registry: registry,
+            coder: CodableProfileCoder(),
+            keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
+        )
+    }
+
+    func tunnelEnvironment() -> TunnelEnvironment {
+        AppGroupEnvironment(
+            appGroup: BundleConfiguration.mainString(for: .groupId),
+            prefix: "PassepartoutKit."
+        )
+    }
+}
+
+private extension Dependencies {
+    static let sharedRegistry = Registry(
         withKnownHandlers: true,
         allImplementations: [
             OpenVPNModule.Implementation(
@@ -69,59 +87,4 @@ extension Registry {
             )
         ]
     )
-
-    static var sharedProtocolCoder: KeychainNEProtocolCoder {
-        KeychainNEProtocolCoder(
-            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            registry: .shared,
-            coder: CodableProfileCoder(),
-            keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
-        )
-    }
-}
-
-extension TunnelEnvironment where Self == AppGroupEnvironment {
-    static var shared: Self {
-        AppGroupEnvironment(
-            appGroup: BundleConfiguration.mainString(for: .groupId),
-            prefix: "PassepartoutKit."
-        )
-    }
-}
-
-extension PreferencesManager {
-    static func sharedImplementation(withCloudKit: Bool) -> PreferencesManager {
-        let preferencesStore = CoreDataPersistentStore(
-            logger: .default,
-            containerName: Constants.shared.containers.preferences,
-            baseURL: BundleConfiguration.urlForGroupDocuments,
-            model: AppData.cdPreferencesModel,
-            cloudKitIdentifier: withCloudKit ? BundleConfiguration.mainString(for: .cloudKitPreferencesId) : nil,
-            author: nil
-        )
-        return PreferencesManager(
-            modulesRepository: AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context),
-            providersFactory: {
-                try AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context, providerId: $0)
-            }
-        )
-    }
-}
-
-// MARK: - Logging
-
-extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
-    static var `default`: CoreDataPersistentStoreLogger {
-        DefaultCoreDataPersistentStoreLogger()
-    }
-}
-
-struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
-    func debug(_ msg: String) {
-        pp_log(.app, .info, msg)
-    }
-
-    func warning(_ msg: String) {
-        pp_log(.app, .error, msg)
-    }
 }

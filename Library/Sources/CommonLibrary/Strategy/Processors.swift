@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-public protocol ProfileProcessor {
+public protocol ProfileProcessor: Sendable {
     func isIncluded(_ profile: Profile) -> Bool
 
     func preview(from profile: Profile) -> ProfilePreview
@@ -38,12 +38,12 @@ public protocol ProfileProcessor {
 }
 
 @MainActor
-public protocol AppTunnelProcessor {
+public protocol AppTunnelProcessor: Sendable {
     func title(for profile: Profile) -> String
 
     func willInstall(_ profile: Profile) throws -> Profile
 }
 
-public protocol PacketTunnelProcessor {
+public protocol PacketTunnelProcessor: Sendable {
     nonisolated func willStart(_ profile: Profile) throws -> Profile
 }

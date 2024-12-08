@@ -30,21 +30,28 @@ import PassepartoutKit
 final class DefaultAppProcessor: Sendable {
     private let iapManager: IAPManager
 
-    private let preview: @Sendable (Profile) -> ProfilePreview
+    private let title: @Sendable (Profile) -> String
 
-    init(iapManager: IAPManager, preview: @escaping @Sendable (Profile) -> ProfilePreview) {
+    init(
+        iapManager: IAPManager,
+        title: @escaping @Sendable (Profile) -> String
+    ) {
         self.iapManager = iapManager
-        self.preview = preview
+        self.title = title
     }
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
     func isIncluded(_ profile: Profile) -> Bool {
-        Dependencies.ProfileManager.isIncluded(iapManager, profile)
+#if os(tvOS)
+        profile.attributes.isAvailableForTV == true
+#else
+        true
+#endif
     }
 
     func preview(from profile: Profile) -> ProfilePreview {
-        preview(profile)
+        profile.localizedPreview
     }
 
     func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
@@ -65,7 +72,7 @@ extension DefaultAppProcessor: ProfileProcessor {
 
 extension DefaultAppProcessor: AppTunnelProcessor {
     func title(for profile: Profile) -> String {
-        Dependencies.ProfileManager.sharedTitle(profile)
+        title(profile)
     }
 
     func willInstall(_ profile: Profile) throws -> Profile {

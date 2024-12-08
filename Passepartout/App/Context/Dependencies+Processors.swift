@@ -1,5 +1,5 @@
 //
-//  Dependencies.swift
+//  Dependencies+Processors.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/2/24.
@@ -23,9 +23,21 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
+import PassepartoutKit
+import UILibrary
 
-@MainActor
-struct Dependencies {
-    static let shared = Dependencies()
+extension Dependencies {
+    func appProcessor(with iapManager: IAPManager) -> DefaultAppProcessor {
+        DefaultAppProcessor(
+            iapManager: iapManager,
+            title: profileTitle
+        )
+    }
+
+    @Sendable
+    nonisolated func profileTitle(_ profile: Profile) -> String {
+        String(format: Constants.shared.tunnel.profileTitleFormat, profile.name)
+    }
 }

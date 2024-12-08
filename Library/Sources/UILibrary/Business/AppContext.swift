@@ -31,7 +31,7 @@ import PassepartoutKit
 import UITesting
 
 @MainActor
-public final class AppContext: ObservableObject {
+public final class AppContext: ObservableObject, Sendable {
     public let iapManager: IAPManager
 
     public let migrationManager: MigrationManager
