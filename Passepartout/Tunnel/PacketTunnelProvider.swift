@@ -36,12 +36,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        let processor = DefaultTunnelProcessor(preferencesManager: .sharedForTunnel)
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
                 decoder: Registry.sharedProtocolCoder,
                 registry: .shared,
-                environment: .shared
+                environment: .shared,
+                profileBlock: processor.willStart
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")

@@ -33,6 +33,8 @@
 		0E916B7C2CF811EB0072921A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
 		0EAD6A1B2CF7F79A00CC1F02 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6A1A2CF7F79A00CC1F02 /* ScreenshotTests.swift */; };
+		0EAEC8A92D05DB8D001AA50C /* DefaultAppProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */; };
+		0EAEC8AA2D05DB8D001AA50C /* DefaultTunnelProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */; };
 		0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EB08B962CA46F4900A02591 /* AppPlist.strings */; };
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
@@ -161,6 +163,8 @@
 		0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		0E94EE5C2B93570600588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
 		0EAD6A1A2CF7F79A00CC1F02 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
+		0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppProcessor.swift; sourceTree = "<group>"; };
+		0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTunnelProcessor.swift; sourceTree = "<group>"; };
 		0EB08B972CA46F4900A02591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0EBE80DD2BF55C9100E36A20 /* Library */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Library; sourceTree = "<group>"; };
 		0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 			children = (
 				0E6EEEE62CF8CB090076E2B0 /* Testing */,
 				0EC797402B9378E000C093B7 /* AppContext+Shared.swift */,
+				0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */,
+				0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */,
 				0E8195592CFDA75200CC8FFD /* Dependencies.swift */,
 				0EC797412B9378E000C093B7 /* Shared.swift */,
 				0E483E822CE6501100584B32 /* Shared+App.swift */,
@@ -681,6 +687,7 @@
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
 				0ED61CFA2CD04192008FE259 /* App+iOS.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
+				0EAEC8A92D05DB8D001AA50C /* DefaultAppProcessor.swift in Sources */,
 				0EC797422B9378E000C093B7 /* AppContext+Shared.swift in Sources */,
 				0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */,
 				0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */,
@@ -729,6 +736,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E81955B2CFDA7BF00CC8FFD /* Dependencies.swift in Sources */,
+				0EAEC8AA2D05DB8D001AA50C /* DefaultTunnelProcessor.swift in Sources */,
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
 				0E483E812CE64D6B00584B32 /* Shared+Tunnel.swift in Sources */,
 				0EC797442B93790600C093B7 /* Shared.swift in Sources */,

@@ -1,8 +1,8 @@
 //
-//  MockTunnelProcessor.swift
+//  MockAppProcessor.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/21/24.
+//  Created by Davide De Rosa on 12/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,18 +27,38 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-final class MockTunnelProcessor: AppTunnelProcessor {
-    var titleCount = 0
+final class MockAppProcessor {
+    private let iapManager: IAPManager
 
-    var willInstallCount = 0
+    init(iapManager: IAPManager) {
+        self.iapManager = iapManager
+    }
+}
 
+extension MockAppProcessor: ProfileProcessor {
+    func isIncluded(_ profile: Profile) -> Bool {
+        true
+    }
+
+    func preview(from profile: Profile) -> ProfilePreview {
+        profile.localizedPreview
+    }
+
+    func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
+        nil
+    }
+
+    func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
+        builder
+    }
+}
+
+extension MockAppProcessor: AppTunnelProcessor {
     func title(for profile: Profile) -> String {
-        titleCount += 1
-        return ""
+        "Passepartout.Mock: \(profile.name)"
     }
 
     func willInstall(_ profile: Profile) throws -> Profile {
-        willInstallCount += 1
-        return profile
+        profile
     }
 }

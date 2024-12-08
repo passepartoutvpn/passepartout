@@ -39,7 +39,7 @@ import UITesting
 extension AppContext {
     static let shared: AppContext = {
         let iapManager: IAPManager = .sharedForApp
-        let processor = InAppProcessor.sharedImplementation(with: iapManager) {
+        let processor = DefaultAppProcessor(iapManager: iapManager) {
             $0.localizedPreview
         }
 

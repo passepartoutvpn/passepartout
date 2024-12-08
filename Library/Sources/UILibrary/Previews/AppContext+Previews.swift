@@ -39,27 +39,7 @@ extension AppContext {
                 []
             }
         )
-        let processor = InAppProcessor(
-            iapManager: iapManager,
-            title: {
-                "Passepartout.Mock: \($0.name)"
-            },
-            isIncluded: { _, _ in
-                true
-            },
-            preview: {
-                $0.localizedPreview
-            },
-            requiredFeatures: { _, _ in
-                nil
-            },
-            willRebuild: { _, builder in
-                builder
-            },
-            willInstall: { _, profile in
-                profile
-            }
-        )
+        let processor = MockAppProcessor(iapManager: iapManager)
         let profileManager = {
             let profiles: [Profile] = (0..<20)
                 .reduce(into: []) { list, _ in
