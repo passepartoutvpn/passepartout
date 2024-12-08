@@ -147,6 +147,11 @@ private extension VPNProviderServerView {
     func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
         vpnManager
             .presets
+            .filter { preset in
+                filtersViewModel.presets.contains {
+                    preset.presetId == $0.presetId
+                }
+            }
             .first {
                 if let supportedIds = server.provider.supportedPresetIds {
                     return supportedIds.contains($0.presetId)
