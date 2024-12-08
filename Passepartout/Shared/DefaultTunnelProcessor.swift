@@ -1,8 +1,8 @@
 //
-//  TunnelProcessor.swift
+//  DefaultTunnelProcessor.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/20/24.
+//  Created by Davide De Rosa on 12/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-public protocol TunnelProcessor {
-    func title(for profile: Profile) -> String
+public final class DefaultTunnelProcessor: Sendable {
+    private let preferencesManager: PreferencesManager
 
-    func willInstall(_ profile: Profile) throws -> Profile
+    public init(preferencesManager: PreferencesManager) {
+        self.preferencesManager = preferencesManager
+    }
+}
+
+extension DefaultTunnelProcessor: PacketTunnelProcessor {
+    public func willStart(_ profile: Profile) throws -> Profile {
+        profile
+    }
 }

@@ -33,7 +33,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let environment: TunnelEnvironment
 
-    private let processor: TunnelProcessor?
+    private let processor: AppTunnelProcessor?
 
     private let interval: TimeInterval
 
@@ -56,7 +56,7 @@ public final class ExtendedTunnel: ObservableObject {
     public init(
         tunnel: Tunnel,
         environment: TunnelEnvironment,
-        processor: TunnelProcessor? = nil,
+        processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel

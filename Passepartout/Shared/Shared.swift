@@ -89,51 +89,7 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
     }
 }
 
-extension InAppProcessor {
-
-    @MainActor
-    static func sharedImplementation(with iapManager: IAPManager, preview: @escaping (Profile) -> ProfilePreview) -> InAppProcessor {
-        InAppProcessor(
-            iapManager: iapManager,
-            title: {
-                Dependencies.ProfileManager.sharedTitle($0)
-            },
-            isIncluded: {
-                Dependencies.ProfileManager.isIncluded($0, $1)
-            },
-            preview: preview,
-            requiredFeatures: { iap, profile in
-                do {
-                    try iap.verify(profile)
-                    return nil
-                } catch AppError.ineligibleProfile(let requiredFeatures) {
-                    return requiredFeatures
-                } catch {
-                    return nil
-                }
-            },
-            willRebuild: { _, builder in
-                builder
-            },
-            willInstall: { iap, profile in
-                try iap.verify(profile)
-
-                // validate provider modules
-                do {
-                    _ = try profile.withProviderModules()
-                    return profile
-                } catch {
-                    pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-                    throw error
-                }
-            }
-        )
-    }
-}
-
 extension PreferencesManager {
-
-    @MainActor
     static func sharedImplementation(withCloudKit: Bool) -> PreferencesManager {
         let preferencesStore = CoreDataPersistentStore(
             logger: .default,

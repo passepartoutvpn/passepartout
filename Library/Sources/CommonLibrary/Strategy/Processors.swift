@@ -1,5 +1,5 @@
 //
-//  ProfileProcessor.swift
+//  Processors.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/20/24.
@@ -26,6 +26,7 @@
 import Foundation
 import PassepartoutKit
 
+@MainActor
 public protocol ProfileProcessor {
     func isIncluded(_ profile: Profile) -> Bool
 
@@ -34,4 +35,15 @@ public protocol ProfileProcessor {
     func requiredFeatures(_ profile: Profile) -> Set<AppFeature>?
 
     func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder
+}
+
+@MainActor
+public protocol AppTunnelProcessor {
+    func title(for profile: Profile) -> String
+
+    func willInstall(_ profile: Profile) throws -> Profile
+}
+
+public protocol PacketTunnelProcessor {
+    nonisolated func willStart(_ profile: Profile) throws -> Profile
 }
