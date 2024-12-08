@@ -71,6 +71,8 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                 .themeSection(header: Strings.Views.App.Folders.default)
             }
             .themeForm()
+            .themeAnimation(on: profileManager.isReady, category: .profiles)
+            .themeAnimation(on: profileManager.previews, category: .profiles)
         }
     }
 }
