@@ -41,7 +41,11 @@ public final class PreferencesManager: ObservableObject, Sendable {
             DummyProviderPreferencesRepository()
         }
     }
+}
 
+// MARK: - Modules
+
+extension PreferencesManager {
     public func preferences(forProfile profile: Profile) throws -> [UUID: ModulePreferences] {
         try preferences(forModulesWithIds: profile.modules.map(\.id))
     }
@@ -50,18 +54,22 @@ public final class PreferencesManager: ObservableObject, Sendable {
         try preferences(forModulesWithIds: editableProfile.modules.map(\.id))
     }
 
-    public func saveModulesPreferences(_ preferences: [UUID: ModulePreferences]) throws {
+    public func savePreferences(_ preferences: [UUID: ModulePreferences]) throws {
         try modulesRepository.set(preferences)
-    }
-
-    public func preferences(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
-        try providersFactory(providerId)
     }
 }
 
 private extension PreferencesManager {
     func preferences(forModulesWithIds moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
         try modulesRepository.preferences(for: moduleIds)
+    }
+}
+
+// MARK: - Providers
+
+extension PreferencesManager {
+    public func preferencesRepository(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
+        try providersFactory(providerId)
     }
 }
 

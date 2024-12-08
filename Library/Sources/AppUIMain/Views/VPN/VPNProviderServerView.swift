@@ -159,7 +159,7 @@ private extension VPNProviderServerView {
 private extension VPNProviderServerView {
     func loadInitialServers() async {
         do {
-            providerPreferences.repository = try preferencesManager.preferences(forProviderWithId: providerId)
+            providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
         } catch {
             pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
         }

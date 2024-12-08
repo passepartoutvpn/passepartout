@@ -227,7 +227,7 @@ extension ProfileEditor {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
             do {
-                try preferencesManager.saveModulesPreferences(preferences)
+                try preferencesManager.savePreferences(preferences)
             } catch {
                 pp_log(.App.profiles, .error, "Unable to save preferences for profile \(profile.id): \(error)")
             }
