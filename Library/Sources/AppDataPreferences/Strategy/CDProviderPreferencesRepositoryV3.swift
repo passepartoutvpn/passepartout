@@ -82,6 +82,35 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
         }
     }
 
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        context.performAndWait {
+            entity.excludedEndpoints?.contains {
+                $0.endpoint == endpoint.rawValue
+            } ?? false
+        }
+    }
+
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            let mapper = CoreDataMapper(context: context)
+            let cdEndpoint = mapper.cdExcludedEndpoint(from: endpoint)
+            cdEndpoint.providerPreferences = entity
+            entity.excludedEndpoints?.insert(cdEndpoint)
+        }
+    }
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            guard let found = entity.excludedEndpoints?.first(where: {
+                $0.endpoint == endpoint.rawValue
+            }) else {
+                return
+            }
+            entity.excludedEndpoints?.remove(found)
+            context.delete(found)
+        }
+    }
+
     func save() throws {
         guard context.hasChanges else {
             return

@@ -37,8 +37,7 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
-    @Published
-    public var preferences: [UUID: ModulePreferences]
+    private var trackedPreferences: [UUID: ModulePreferences]
 
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
@@ -50,7 +49,7 @@ public final class ProfileEditor: ObservableObject {
     public init(profile: Profile) {
         editableProfile = profile.editable()
         isShared = false
-        preferences = [:]
+        trackedPreferences = [:]
         removedModules = [:]
     }
 
@@ -61,7 +60,7 @@ public final class ProfileEditor: ObservableObject {
             activeModulesIds: Set(modules.map(\.id))
         )
         isShared = false
-        preferences = [:]
+        trackedPreferences = [:]
         removedModules = [:]
     }
 }
@@ -202,20 +201,22 @@ extension ProfileEditor {
 // MARK: - Load/Save
 
 extension ProfileEditor {
-    public func load(
-        _ profile: EditableProfile,
-        isShared: Bool,
-        preferencesManager: PreferencesManager
-    ) {
+    public func load(_ profile: EditableProfile, isShared: Bool) {
         editableProfile = profile
         self.isShared = isShared
-        do {
-            preferences = try preferencesManager.preferences(forProfile: profile)
-        } catch {
-            preferences = [:]
-            pp_log(.App.profiles, .error, "Unable to load preferences for profile \(profile.id): \(error)")
-        }
         removedModules = [:]
+    }
+
+    public func preferences(forModuleWithId moduleId: UUID, manager: PreferencesManager) -> ModulePreferences {
+        do {
+            pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
+            let observable = try trackedPreferences[moduleId] ?? manager.preferences(forModuleWithId: moduleId)
+            trackedPreferences[moduleId] = observable
+            return observable
+        } catch {
+            pp_log(.App.profiles, .error, "Unable to track preferences for module \(moduleId): \(error)")
+            return ModulePreferences()
+        }
     }
 
     @discardableResult
@@ -226,11 +227,15 @@ extension ProfileEditor {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
-            do {
-                try preferencesManager.savePreferences(preferences)
-            } catch {
-                pp_log(.App.profiles, .error, "Unable to save preferences for profile \(profile.id): \(error)")
+            trackedPreferences.forEach {
+                do {
+                    pp_log(.App.profiles, .debug, "Save tracked preferences for module \($0.key)")
+                    try $0.value.save()
+                } catch {
+                    pp_log(.App.profiles, .error, "Unable to save preferences for profile \(profile.id): \(error)")
+                }
             }
+            trackedPreferences.removeAll()
             return newProfile
         } catch {
             pp_log(.App.profiles, .fault, "Unable to save edited profile: \(error)")

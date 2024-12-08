@@ -30,6 +30,9 @@ import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     @Environment(\.navigationPath)
     private var path
 
@@ -47,6 +50,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     @State
     private var paywallReason: PaywallReason?
+
+    @StateObject
+    private var providerPreferences = ProviderPreferences()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -79,6 +85,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
+            .onDisappear(perform: onDisappear)
     }
 }
 
@@ -92,7 +99,8 @@ private extension OpenVPNView {
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
-                credentialsRoute: Subroute.credentials
+                credentialsRoute: Subroute.credentials,
+                allowedEndpoints: allowedEndpoints
             )
         } else {
             emptyConfigurationView
@@ -166,7 +174,8 @@ private extension OpenVPNView {
                 ConfigurationView(
                     isServerPushed: false,
                     configuration: configuration.builder(),
-                    credentialsRoute: nil
+                    credentialsRoute: nil,
+                    allowedEndpoints: allowedEndpoints
                 )
             }
             .themeForm()
@@ -190,9 +199,36 @@ private extension OpenVPNView {
 // MARK: - Logic
 
 private extension OpenVPNView {
+    var preferences: ModulePreferences {
+        editor.preferences(forModuleWithId: module.id, manager: preferencesManager)
+    }
+
+    var allowedEndpoints: Blacklist<ExtendedEndpoint> {
+        if let providerId = draft.wrappedValue.providerId {
+            do {
+                pp_log(.app, .debug, "Load preferences for provider \(providerId)")
+                providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
+            } catch {
+                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+            }
+            return providerPreferences.allowedEndpoints()
+        } else {
+            return preferences.allowedEndpoints()
+        }
+    }
+
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
+    }
+
+    func onDisappear() {
+        do {
+            pp_log(.app, .debug, "Save preferences for provider \(providerId.wrappedValue.debugDescription)")
+            try providerPreferences.save()
+        } catch {
+            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.wrappedValue.debugDescription): \(error)")
+        }
     }
 }
 

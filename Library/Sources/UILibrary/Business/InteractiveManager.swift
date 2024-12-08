@@ -41,9 +41,9 @@ public final class InteractiveManager: ObservableObject {
     public init() {
     }
 
-    public func present(with profile: Profile, preferencesManager: PreferencesManager, onComplete: CompletionBlock?) {
+    public func present(with profile: Profile, onComplete: CompletionBlock?) {
         editor = ProfileEditor()
-        editor.load(profile.editable(), isShared: false, preferencesManager: preferencesManager)
+        editor.load(profile.editable(), isShared: false)
         self.onComplete = onComplete
         isPresented = true
     }

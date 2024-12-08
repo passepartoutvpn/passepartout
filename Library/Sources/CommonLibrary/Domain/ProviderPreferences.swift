@@ -23,16 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 import PassepartoutKit
 
 @MainActor
-public final class ProviderPreferences: ObservableObject, ProviderPreferencesRepository {
-    public var repository: ProviderPreferencesRepository? {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+public final class ProviderPreferences: ObservableObject {
+    public var repository: ProviderPreferencesRepository?
 
     public init() {
     }
@@ -45,6 +42,20 @@ public final class ProviderPreferences: ObservableObject, ProviderPreferencesRep
             objectWillChange.send()
             repository?.favoriteServers = newValue
         }
+    }
+
+    public func allowedEndpoints() -> Blacklist<ExtendedEndpoint> {
+        Blacklist { [weak self] in
+            self?.repository?.isExcludedEndpoint($0) != true
+        } allow: { [weak self] in
+            self?.repository?.removeExcludedEndpoint($0)
+        } deny: { [weak self] in
+            self?.repository?.addExcludedEndpoint($0)
+        }
+    }
+
+    public func refresh() {
+        objectWillChange.send()
     }
 
     public func save() throws {

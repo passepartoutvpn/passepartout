@@ -1,8 +1,8 @@
 //
-//  UUID+RawRepresentable.swift
+//  Blacklist.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/4/24.
+//  Created by Davide De Rosa on 12/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,12 +25,35 @@
 
 import Foundation
 
-extension UUID: @retroactive RawRepresentable {
-    public init?(rawValue: String) {
-        self.init(uuidString: rawValue)
+@MainActor
+public final class Blacklist<T>: ObservableObject where T: Equatable {
+    private let isAllowed: (T) -> Bool
+
+    private let allow: (T) -> Void
+
+    private let deny: (T) -> Void
+
+    public init(
+        isAllowed: @escaping (T) -> Bool,
+        allow: @escaping (T) -> Void,
+        deny: @escaping (T) -> Void
+    ) {
+        self.isAllowed = isAllowed
+        self.allow = allow
+        self.deny = deny
     }
 
-    public var rawValue: String {
-        uuidString
+    public func isAllowed(_ value: T) -> Bool {
+        isAllowed(value)
+    }
+
+    public func allow(_ value: T) {
+        objectWillChange.send()
+        allow(value)
+    }
+
+    public func deny(_ value: T) {
+        objectWillChange.send()
+        deny(value)
     }
 }

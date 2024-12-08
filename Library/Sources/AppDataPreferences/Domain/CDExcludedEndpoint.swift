@@ -1,8 +1,8 @@
 //
-//  CDModulePreferencesV3.swift
+//  CDExcludedEndpoint.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/5/24.
+//  Created by Davide De Rosa on 12/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,12 +26,13 @@
 import CoreData
 import Foundation
 
-@objc(CDModulePreferencesV3)
-final class CDModulePreferencesV3: NSManagedObject {
-    @nonobjc static func fetchRequest() -> NSFetchRequest<CDModulePreferencesV3> {
-        NSFetchRequest<CDModulePreferencesV3>(entityName: "CDModulePreferencesV3")
+@objc(CDExcludedEndpoint)
+final class CDExcludedEndpoint: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDExcludedEndpoint> {
+        NSFetchRequest<CDExcludedEndpoint>(entityName: "CDExcludedEndpoint")
     }
 
-    @NSManaged var uuid: UUID?
-    @NSManaged var excludedEndpoints: Set<CDExcludedEndpoint>?
+    @NSManaged var endpoint: String?
+    @NSManaged var modulePreferences: CDModulePreferencesV3?
+    @NSManaged var providerPreferences: CDProviderPreferencesV3?
 }

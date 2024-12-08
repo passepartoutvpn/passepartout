@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -34,9 +36,12 @@ extension OpenVPNView {
 
         let credentialsRoute: (any Hashable)?
 
+        @ObservedObject
+        var allowedEndpoints: Blacklist<ExtendedEndpoint>
+
         var body: some View {
             moduleSection(for: accountRows, header: Strings.Global.Nouns.account)
-            moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
+            remotesSection
             if !isServerPushed {
                 moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
             }
@@ -61,6 +66,68 @@ extension OpenVPNView {
     }
 }
 
+// MARK: - Editable
+
+private extension OpenVPNView.ConfigurationView {
+    var remotesSection: some View {
+        configuration.remotes.map { remotes in
+            ForEach(remotes, id: \.rawValue) { remote in
+                SelectableRemoteButton(
+                    remote: remote,
+                    all: Set(remotes),
+                    allowedEndpoints: allowedEndpoints
+                )
+            }
+            .themeSection(header: Strings.Modules.Openvpn.remotes)
+        }
+    }
+}
+
+private struct SelectableRemoteButton: View {
+    let remote: ExtendedEndpoint
+
+    let all: Set<ExtendedEndpoint>
+
+    @ObservedObject
+    var allowedEndpoints: Blacklist<ExtendedEndpoint>
+
+    var body: some View {
+        Button {
+            if allowedEndpoints.isAllowed(remote) {
+                if remaining.count > 1 {
+                    allowedEndpoints.deny(remote)
+                }
+            } else {
+                allowedEndpoints.allow(remote)
+            }
+        } label: {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(remote.address.rawValue)
+                        .font(.headline)
+
+                    Text("\(remote.proto.socketType.rawValue):\(remote.proto.port.description)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                ThemeImage(.marked)
+                    .opaque(allowedEndpoints.isAllowed(remote))
+            }
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var remaining: Set<ExtendedEndpoint> {
+        all.filter {
+            allowedEndpoints.isAllowed($0)
+        }
+    }
+}
+
+// MARK: - Constant
+
 private extension OpenVPNView.ConfigurationView {
     var accountRows: [ModuleRow]? {
         guard let credentialsRoute else {
@@ -73,15 +140,6 @@ private extension OpenVPNView.ConfigurationView {
             caption: Strings.Modules.Openvpn.credentials,
             route: HashableRoute(credentialsRoute))
         ]
-    }
-
-    var remotesRows: [ModuleRow]? {
-        configuration.remotes?.map {
-            .copiableText(
-                value: "\($0.address.rawValue) → \($0.proto.socketType.rawValue):\($0.proto.port)"
-            )
-        }
-        .nilIfEmpty
     }
 
     var pullRows: [ModuleRow]? {
@@ -280,12 +338,23 @@ private extension OpenVPNView.ConfigurationView {
 
 #Preview {
     struct Preview: View {
+
+        @StateObject
+        private var allowedEndpoints = Blacklist<ExtendedEndpoint> { _ in
+            true
+        } allow: { _ in
+            //
+        } deny: { _ in
+            //
+        }
+
         var body: some View {
             Form {
                 OpenVPNView.ConfigurationView(
                     isServerPushed: false,
                     configuration: .forPreviews,
-                    credentialsRoute: nil
+                    credentialsRoute: nil,
+                    allowedEndpoints: allowedEndpoints
                 )
             }
             .withMockEnvironment()

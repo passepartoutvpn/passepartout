@@ -34,4 +34,5 @@ final class CDProviderPreferencesV3: NSManagedObject {
 
     @NSManaged var providerId: String?
     @NSManaged var favoriteServerIds: Data?
+    @NSManaged var excludedEndpoints: Set<CDExcludedEndpoint>?
 }

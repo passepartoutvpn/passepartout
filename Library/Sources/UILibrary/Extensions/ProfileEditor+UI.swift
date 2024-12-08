@@ -41,12 +41,4 @@ extension ProfileEditor {
             self?.saveModule($0, activating: false)
         }
     }
-
-    public func binding(forPreferencesOf moduleId: UUID) -> Binding<ModulePreferences> {
-        Binding { [weak self] in
-            self?.preferences[moduleId] ?? ModulePreferences()
-        } set: { [weak self] in
-            self?.preferences[moduleId] = $0
-        }
-    }
 }
