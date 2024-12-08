@@ -27,16 +27,16 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-public final class DefaultTunnelProcessor: Sendable {
+final class DefaultTunnelProcessor: Sendable {
     private let preferencesManager: PreferencesManager
 
-    public init(preferencesManager: PreferencesManager) {
+    init(preferencesManager: PreferencesManager) {
         self.preferencesManager = preferencesManager
     }
 }
 
 extension DefaultTunnelProcessor: PacketTunnelProcessor {
-    public func willStart(_ profile: Profile) throws -> Profile {
+    func willStart(_ profile: Profile) throws -> Profile {
         profile
     }
 }

@@ -27,27 +27,27 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-public final class DefaultAppProcessor: Sendable {
+final class DefaultAppProcessor: Sendable {
     private let iapManager: IAPManager
 
     private let preview: @Sendable (Profile) -> ProfilePreview
 
-    public init(iapManager: IAPManager, preview: @escaping @Sendable (Profile) -> ProfilePreview) {
+    init(iapManager: IAPManager, preview: @escaping @Sendable (Profile) -> ProfilePreview) {
         self.iapManager = iapManager
         self.preview = preview
     }
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
-    public func isIncluded(_ profile: Profile) -> Bool {
+    func isIncluded(_ profile: Profile) -> Bool {
         Dependencies.ProfileManager.isIncluded(iapManager, profile)
     }
 
-    public func preview(from profile: Profile) -> ProfilePreview {
+    func preview(from profile: Profile) -> ProfilePreview {
         preview(profile)
     }
 
-    public func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
+    func requiredFeatures(_ profile: Profile) -> Set<AppFeature>? {
         do {
             try iapManager.verify(profile)
             return nil
@@ -58,17 +58,17 @@ extension DefaultAppProcessor: ProfileProcessor {
         }
     }
 
-    public func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
+    func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder {
         builder
     }
 }
 
 extension DefaultAppProcessor: AppTunnelProcessor {
-    public func title(for profile: Profile) -> String {
+    func title(for profile: Profile) -> String {
         Dependencies.ProfileManager.sharedTitle(profile)
     }
 
-    public func willInstall(_ profile: Profile) throws -> Profile {
+    func willInstall(_ profile: Profile) throws -> Profile {
         try iapManager.verify(profile)
 
         // validate provider modules
