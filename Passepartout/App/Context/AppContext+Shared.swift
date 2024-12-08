@@ -47,6 +47,7 @@ extension AppContext {
         )
 
         let processor = dependencies.appProcessor(with: iapManager)
+        let tunnelEnvironment = dependencies.tunnelEnvironment()
 
         let profileManager: ProfileManager = {
             let remoteRepositoryBlock: (Bool) -> ProfileRepository = {
@@ -69,7 +70,7 @@ extension AppContext {
                 )
             }
             return ProfileManager(
-                repository: dependencies.mainProfileRepository(),
+                repository: dependencies.mainProfileRepository(environment: tunnelEnvironment),
                 backupRepository: dependencies.backupProfileRepository(),
                 remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
@@ -78,8 +79,8 @@ extension AppContext {
         }()
 
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: dependencies.tunnelStrategy()),
-            environment: dependencies.tunnelEnvironment(),
+            tunnel: Tunnel(strategy: dependencies.tunnelStrategy(environment: tunnelEnvironment)),
+            environment: tunnelEnvironment,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
@@ -179,11 +180,11 @@ private extension Dependencies {
 #if targetEnvironment(simulator)
 
 private extension Dependencies {
-    func tunnelStrategy() -> TunnelObservableStrategy {
-        FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
+    func tunnelStrategy(environment: TunnelEnvironment) -> TunnelObservableStrategy {
+        FakeTunnelStrategy(environment: environment, dataCountInterval: 1000)
     }
 
-    func mainProfileRepository() -> ProfileRepository {
+    func mainProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
         coreDataProfileRepository(observingResults: true)
     }
 
@@ -197,12 +198,12 @@ private extension Dependencies {
 // MARK: Device
 
 private extension Dependencies {
-    func tunnelStrategy() -> TunnelObservableStrategy {
-        neStrategy()
+    func tunnelStrategy(environment: TunnelEnvironment) -> TunnelObservableStrategy {
+        neStrategy(environment: environment)
     }
 
-    func mainProfileRepository() -> ProfileRepository {
-        neProfileRepository()
+    func mainProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
+        neProfileRepository(environment: environment)
     }
 
     func backupProfileRepository() -> ProfileRepository? {
@@ -223,17 +224,17 @@ private extension Dependencies {
 #endif
     }
 
-    func neProfileRepository() -> ProfileRepository {
-        NEProfileRepository(repository: neStrategy()) {
+    func neProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
+        NEProfileRepository(repository: neStrategy(environment: environment)) {
             profileTitle($0)
         }
     }
 
-    func neStrategy() -> NETunnelStrategy {
+    func neStrategy(environment: TunnelEnvironment) -> NETunnelStrategy {
         NETunnelStrategy(
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             coder: neProtocolCoder(),
-            environment: tunnelEnvironment()
+            environment: environment
         )
     }
 
