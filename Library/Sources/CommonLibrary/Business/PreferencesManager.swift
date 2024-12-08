@@ -27,51 +27,58 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-@MainActor
 public final class PreferencesManager: ObservableObject {
     private let modulesRepository: ModulePreferencesRepository
 
-    private let providersRepository: ProviderPreferencesRepository
+    private let providersFactory: (ProviderID) throws -> ProviderPreferencesRepository
 
     public init(
         modulesRepository: ModulePreferencesRepository? = nil,
-        providersRepository: ProviderPreferencesRepository? = nil
+        providersFactory: ((ProviderID) throws -> ProviderPreferencesRepository)? = nil
     ) {
         self.modulesRepository = modulesRepository ?? DummyModulePreferencesRepository()
-        self.providersRepository = providersRepository ?? DummyProviderPreferencesRepository()
+        self.providersFactory = providersFactory ?? { _ in
+            DummyProviderPreferencesRepository()
+        }
     }
 
-    public func modulePreferencesProxy(in moduleId: UUID) throws -> ModulePreferencesProxy {
-        try modulesRepository.modulePreferencesProxy(in: moduleId)
+    public func preferences(forProfile profile: Profile) throws -> [UUID: ModulePreferences] {
+        try preferences(forModulesWithIds: profile.modules.map(\.id))
     }
 
-    public func providerPreferencesProxy(in providerId: ProviderID) throws -> ProviderPreferencesProxy {
-        try providersRepository.providerPreferencesProxy(in: providerId)
+    public func preferences(forProfile editableProfile: EditableProfile) throws -> [UUID: ModulePreferences] {
+        try preferences(forModulesWithIds: editableProfile.modules.map(\.id))
+    }
+
+    public func saveModulesPreferences(_ preferences: [UUID: ModulePreferences]) throws {
+        try modulesRepository.set(preferences)
+    }
+
+    public func preferences(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
+        try providersFactory(providerId)
+    }
+}
+
+private extension PreferencesManager {
+    func preferences(forModulesWithIds moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
+        try modulesRepository.preferences(for: moduleIds)
     }
 }
 
 // MARK: - Dummy
 
 private final class DummyModulePreferencesRepository: ModulePreferencesRepository {
-    private final class Proxy: ModulePreferencesProxy {
-        func save() throws {
-        }
+    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
+        [:]
     }
 
-    func modulePreferencesProxy(in moduleId: UUID) throws -> ModulePreferencesProxy {
-        Proxy()
+    func set(_ preferences: [UUID: ModulePreferences]) throws {
     }
 }
 
 private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {
-    private final class Proxy: ProviderPreferencesProxy {
-        var favoriteServers: Set<String> = []
+    var favoriteServers: Set<String> = []
 
-        func save() throws {
-        }
-    }
-
-    func providerPreferencesProxy(in providerId: ProviderID) throws -> ProviderPreferencesProxy {
-        Proxy()
+    func save() throws {
     }
 }

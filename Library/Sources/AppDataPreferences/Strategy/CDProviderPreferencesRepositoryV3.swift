@@ -30,24 +30,20 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
-
-    @MainActor
-    public static func cdProviderPreferencesRepositoryV3(context: NSManagedObjectContext) -> ProviderPreferencesRepository {
-        CDProviderPreferencesRepositoryV3(context: context)
+    public static func cdProviderPreferencesRepositoryV3(context: NSManagedObjectContext, providerId: ProviderID) throws -> ProviderPreferencesRepository {
+        try CDProviderPreferencesRepositoryV3(context: context, providerId: providerId)
     }
 }
-
-// MARK: - Repository
 
 private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    init(context: NSManagedObjectContext) {
-        self.context = context
-    }
+    private let entity: CDProviderPreferencesV3
 
-    func providerPreferencesProxy(in providerId: ProviderID) throws -> ProviderPreferencesProxy {
-        let entity = try context.performAndWait {
+    init(context: NSManagedObjectContext, providerId: ProviderID) throws {
+        self.context = context
+
+        entity = try context.performAndWait {
             let request = CDProviderPreferencesV3.fetchRequest()
             request.predicate = NSPredicate(format: "providerId == %@", providerId.rawValue)
             do {
@@ -59,20 +55,6 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
                 throw error
             }
         }
-        return CDProviderPreferencesProxy(context: context, entity: entity)
-    }
-}
-
-// MARK: - Preference
-
-private final class CDProviderPreferencesProxy: ProviderPreferencesProxy {
-    private let context: NSManagedObjectContext
-
-    private let entity: CDProviderPreferencesV3
-
-    init(context: NSManagedObjectContext, entity: CDProviderPreferencesV3) {
-        self.context = context
-        self.entity = entity
     }
 
     var favoriteServers: Set<String> {

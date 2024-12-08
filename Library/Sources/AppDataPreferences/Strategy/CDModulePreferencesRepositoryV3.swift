@@ -30,14 +30,10 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
-
-    @MainActor
     public static func cdModulePreferencesRepositoryV3(context: NSManagedObjectContext) -> ModulePreferencesRepository {
         CDModulePreferencesRepositoryV3(context: context)
     }
 }
-
-// MARK: - Repository
 
 private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository {
     private nonisolated let context: NSManagedObjectContext
@@ -46,44 +42,62 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
         self.context = context
     }
 
-    func modulePreferencesProxy(in moduleId: UUID) throws -> ModulePreferencesProxy {
-        let entity = try context.performAndWait {
+    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
+        try context.performAndWait {
             let request = CDModulePreferencesV3.fetchRequest()
-            request.predicate = NSPredicate(format: "uuid == %@", moduleId.uuidString)
+            request.predicate = NSPredicate(format: "any uuid in %@", moduleIds.map(\.uuidString))
+
+            let entities = try request.execute()
+            let mapper = DomainMapper()
+            return entities.reduce(into: [:]) {
+                guard let moduleId = $1.uuid else {
+                    return
+                }
+                do {
+                    let preferences = try mapper.preferences(from: $1)
+                    $0[moduleId] = preferences
+                } catch {
+                    pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
+                }
+            }
+        }
+    }
+
+    func set(_ preferences: [UUID: ModulePreferences]) throws {
+        try context.performAndWait {
+            let request = CDModulePreferencesV3.fetchRequest()
+            request.predicate = NSPredicate(format: "any uuid in %@", Array(preferences.keys))
+
+            var entities = try request.execute()
+            let existingIds = entities.compactMap(\.uuid)
+            let newIds = Set(preferences.keys).subtracting(existingIds)
+            newIds.forEach {
+                let newEntity = CDModulePreferencesV3(context: context)
+                newEntity.uuid = $0
+                entities.append(newEntity)
+            }
+
+            let mapper = CoreDataMapper()
+            try entities.forEach {
+                guard let id = $0.uuid, let entityPreferences = preferences[id] else {
+                    return
+                }
+                try mapper.set($0, from: entityPreferences)
+            }
+
+            guard context.hasChanges else {
+                return
+            }
             do {
-                let entity = try request.execute().first ?? CDModulePreferencesV3(context: context)
-                entity.uuid = moduleId
-                return entity
+                try context.save()
             } catch {
-                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
+                context.rollback()
                 throw error
             }
         }
-        return CDModulePreferencesProxy(context: context, entity: entity)
-    }
-}
-
-// MARK: - Preference
-
-private final class CDModulePreferencesProxy: ModulePreferencesProxy {
-    private let context: NSManagedObjectContext
-
-    private let entity: CDModulePreferencesV3
-
-    init(context: NSManagedObjectContext, entity: CDModulePreferencesV3) {
-        self.context = context
-        self.entity = entity
     }
 
-    func save() throws {
-        guard context.hasChanges else {
-            return
-        }
-        do {
-            try context.save()
-        } catch {
-            context.rollback()
-            throw error
-        }
+    func rollback() {
+        context.rollback()
     }
 }

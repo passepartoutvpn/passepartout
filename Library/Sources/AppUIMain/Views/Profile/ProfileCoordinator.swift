@@ -43,6 +43,9 @@ struct ProfileCoordinator: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor
@@ -133,7 +136,10 @@ private extension ProfileCoordinator {
 
     // standard: always save, warn if purchase required
     func onCommitEditingStandard() async throws {
-        let savedProfile = try await profileEditor.save(to: profileManager)
+        let savedProfile = try await profileEditor.save(
+            to: profileManager,
+            preferencesManager: preferencesManager
+        )
         do {
             try iapManager.verify(savedProfile)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
@@ -151,11 +157,15 @@ private extension ProfileCoordinator {
             paywallReason = .init(requiredFeatures)
             return
         }
-        try await profileEditor.save(to: profileManager)
+        try await profileEditor.save(
+            to: profileManager,
+            preferencesManager: preferencesManager
+        )
         onDismiss()
     }
 
     func onCancelEditing() {
+        profileEditor.discard()
         onDismiss()
     }
 }

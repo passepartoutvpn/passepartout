@@ -39,6 +39,10 @@ extension IAPManager {
     )
 }
 
+extension PreferencesManager {
+    static let sharedForApp = PreferencesManager.sharedImplementation(withCloudKit: true)
+}
+
 // MARK: - Dependencies
 
 private extension Dependencies.IAPManager {

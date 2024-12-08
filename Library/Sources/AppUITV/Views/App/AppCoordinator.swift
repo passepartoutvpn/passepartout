@@ -34,6 +34,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @EnvironmentObject
     public var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     private let profileManager: ProfileManager
 
     public let tunnel: ExtendedTunnel
@@ -136,7 +139,11 @@ private extension AppCoordinator {
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
         pp_log(.app, .info, "Present interactive login")
-        interactiveManager.present(with: profile, onComplete: onComplete)
+        interactiveManager.present(
+            with: profile,
+            preferencesManager: preferencesManager,
+            onComplete: onComplete
+        )
     }
 
     public func onProviderEntityRequired(_ profile: Profile, force: Bool) {

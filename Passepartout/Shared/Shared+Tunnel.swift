@@ -37,6 +37,10 @@ extension IAPManager {
     )
 }
 
+extension PreferencesManager {
+    static let sharedForTunnel = PreferencesManager.sharedImplementation(withCloudKit: false)
+}
+
 // MARK: - Dependencies
 
 private extension Dependencies.IAPManager {
