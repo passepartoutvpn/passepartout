@@ -30,10 +30,10 @@ import PassepartoutKit
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     @MainActor
-    let dependencies: Dependencies = .shared
+    private let context: TunnelContext = .shared
 
     @MainActor
-    private let context: TunnelContext = .shared
+    private let dependencies: Dependencies = .shared
 
     private var fwd: NEPTPForwarder?
 
