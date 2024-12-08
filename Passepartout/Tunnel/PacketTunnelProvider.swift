@@ -28,6 +28,13 @@ import CommonLibrary
 import PassepartoutKit
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
+
+    @MainActor
+    private let context: TunnelContext = .shared
+
+    @MainActor
+    private let dependencies: Dependencies = .shared
+
     private var fwd: NEPTPForwarder?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
@@ -36,19 +43,18 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        let processor = DefaultTunnelProcessor(preferencesManager: .sharedForTunnel)
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
-                decoder: Registry.sharedProtocolCoder,
-                registry: .shared,
-                environment: .shared,
-                profileBlock: processor.willStart
+                decoder: dependencies.neProtocolCoder(),
+                registry: dependencies.registry,
+                environment: dependencies.tunnelEnvironment(),
+                profileBlock: context.processor.willStart
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
-            try await checkEligibility(of: fwd.profile, environment: .shared)
+            try await checkEligibility(of: fwd.profile, environment: dependencies.tunnelEnvironment())
             try await fwd.startTunnel(options: options)
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
@@ -85,14 +91,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
 @MainActor
 private extension PacketTunnelProvider {
-    var iapManager: IAPManager {
-        .sharedForTunnel
-    }
-
     func checkEligibility(of profile: Profile, environment: TunnelEnvironment) async throws {
-        await iapManager.reloadReceipt()
+        await context.iapManager.reloadReceipt()
         do {
-            try iapManager.verify(profile)
+            try context.iapManager.verify(profile)
         } catch {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)

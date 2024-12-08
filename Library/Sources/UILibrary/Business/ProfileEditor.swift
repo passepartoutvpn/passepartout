@@ -213,7 +213,7 @@ extension ProfileEditor {
             preferences = try preferencesManager.preferences(forProfile: profile)
         } catch {
             preferences = [:]
-            pp_log(.app, .error, "Unable to load preferences for profile \(profile.id): \(error)")
+            pp_log(.App.profiles, .error, "Unable to load preferences for profile \(profile.id): \(error)")
         }
         removedModules = [:]
     }
@@ -233,7 +233,7 @@ extension ProfileEditor {
             }
             return newProfile
         } catch {
-            pp_log(.app, .fault, "Unable to save edited profile: \(error)")
+            pp_log(.App.profiles, .fault, "Unable to save edited profile: \(error)")
             throw error
         }
     }

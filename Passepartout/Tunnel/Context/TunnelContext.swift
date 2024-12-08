@@ -1,8 +1,8 @@
 //
-//  Dependencies.swift
+//  TunnelContext.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/2/24.
+//  Created by Davide De Rosa on 12/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,9 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 
 @MainActor
-struct Dependencies {
-    static let shared = Dependencies()
+struct TunnelContext {
+    let iapManager: IAPManager
+
+    let processor: PacketTunnelProcessor
 }

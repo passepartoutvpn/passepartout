@@ -31,21 +31,19 @@ import UILibrary
 
 extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
+        let dependencies: Dependencies = .shared
         let iapManager = IAPManager(
             customUserLevel: .subscriber,
-            inAppHelper: Dependencies.IAPManager.inAppHelper,
+            inAppHelper: dependencies.appProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),
             productsAtBuild: { _ in
                 []
             }
         )
-        let processor = DefaultAppProcessor(iapManager: iapManager) {
-            $0.localizedPreview
-        }
-
-        let profileManager: ProfileManager = .forTesting(
-            withRegistry: .shared,
+        let processor = dependencies.appProcessor(with: iapManager)
+        let profileManager: ProfileManager = .forUITesting(
+            withRegistry: dependencies.registry,
             processor: processor
         )
         let tunnelEnvironment = InMemoryEnvironment()
@@ -59,13 +57,14 @@ extension AppContext {
             repository: InMemoryProviderRepository()
         )
         let migrationManager = MigrationManager()
+        let preferencesManager = PreferencesManager()
 
         return AppContext(
             iapManager: iapManager,
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
-            preferencesManager: PreferencesManager(),
+            preferencesManager: preferencesManager,
             registry: registry,
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt

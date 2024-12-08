@@ -1,5 +1,5 @@
 //
-//  Dependencies.swift
+//  Dependencies+CoreData.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/2/24.
@@ -23,9 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
+import PassepartoutKit
 
-@MainActor
-struct Dependencies {
-    static let shared = Dependencies()
+extension Dependencies {
+    func coreDataLogger() -> CoreDataPersistentStoreLogger {
+        DefaultCoreDataPersistentStoreLogger()
+    }
+}
+
+private struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+    func debug(_ msg: String) {
+        pp_log(.app, .info, msg)
+    }
+
+    func warning(_ msg: String) {
+        pp_log(.app, .error, msg)
+    }
 }
