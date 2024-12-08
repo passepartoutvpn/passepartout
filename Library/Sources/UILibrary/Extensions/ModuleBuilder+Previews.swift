@@ -33,7 +33,6 @@ extension ModuleBuilder where Self: ModuleViewProviding {
         NavigationStack {
             moduleView(with: .init(
                 editor: ProfileEditor(modules: [self]),
-                preferences: nil,
                 impl: nil
             ))
             .navigationTitle(title)

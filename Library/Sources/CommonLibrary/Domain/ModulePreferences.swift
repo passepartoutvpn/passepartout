@@ -26,24 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-@MainActor
-public final class ModulePreferences: ObservableObject {
-    public var proxy: ModulePreferencesProxy? {
-        didSet {
-            objectWillChange.send()
-        }
+public struct ModulePreferences: Sendable {
+    public init() {
     }
-
-    public init(proxy: ModulePreferencesProxy?) {
-        self.proxy = proxy
-    }
-
-    public func save() throws {
-        try proxy?.save()
-    }
-}
-
-@MainActor
-public protocol ModulePreferencesProxy {
-    func save() throws
 }

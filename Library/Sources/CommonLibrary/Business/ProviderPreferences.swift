@@ -27,35 +27,27 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-public final class ProviderPreferences: ObservableObject {
-    public var proxy: ProviderPreferencesProxy? {
+public final class ProviderPreferences: ObservableObject, ProviderPreferencesRepository {
+    public var repository: ProviderPreferencesRepository? {
         didSet {
             objectWillChange.send()
         }
     }
 
-    public init(proxy: ProviderPreferencesProxy?) {
-        self.proxy = proxy
+    public init() {
     }
 
     public var favoriteServers: Set<String> {
         get {
-            proxy?.favoriteServers ?? []
+            repository?.favoriteServers ?? []
         }
         set {
             objectWillChange.send()
-            proxy?.favoriteServers = newValue
+            repository?.favoriteServers = newValue
         }
     }
 
     public func save() throws {
-        try proxy?.save()
+        try repository?.save()
     }
-}
-
-@MainActor
-public protocol ProviderPreferencesProxy {
-    var favoriteServers: Set<String> { get set }
-
-    func save() throws
 }

@@ -41,10 +41,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 provider: self,
                 decoder: Registry.sharedProtocolCoder,
                 registry: .shared,
-                environment: .shared,
-                profileBlock: {
-                    $0
-                }
+                environment: .shared
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")

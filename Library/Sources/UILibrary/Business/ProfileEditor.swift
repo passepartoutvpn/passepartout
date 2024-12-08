@@ -37,30 +37,31 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
+    @Published
+    public var preferences: [UUID: ModulePreferences]
+
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
     public convenience init() {
         self.init(modules: [])
     }
 
+    // for testing/previews
+    public init(profile: Profile) {
+        editableProfile = profile.editable()
+        isShared = false
+        preferences = [:]
+        removedModules = [:]
+    }
+
+    // for testing/previews
     public init(modules: [any ModuleBuilder]) {
         editableProfile = EditableProfile(
             modules: modules,
             activeModulesIds: Set(modules.map(\.id))
         )
         isShared = false
-        removedModules = [:]
-    }
-
-    public init(profile: Profile) {
-        editableProfile = profile.editable()
-        isShared = false
-        removedModules = [:]
-    }
-
-    public func editProfile(_ profile: EditableProfile, isShared: Bool) {
-        editableProfile = profile
-        self.isShared = isShared
+        preferences = [:]
         removedModules = [:]
     }
 }
@@ -198,20 +199,46 @@ extension ProfileEditor {
     }
 }
 
-// MARK: - Saving
+// MARK: - Load/Save
 
 extension ProfileEditor {
+    public func load(
+        _ profile: EditableProfile,
+        isShared: Bool,
+        preferencesManager: PreferencesManager
+    ) {
+        editableProfile = profile
+        self.isShared = isShared
+        do {
+            preferences = try preferencesManager.preferences(forProfile: profile)
+        } catch {
+            preferences = [:]
+            pp_log(.app, .error, "Unable to load preferences for profile \(profile.id): \(error)")
+        }
+        removedModules = [:]
+    }
 
     @discardableResult
-    public func save(to profileManager: ProfileManager) async throws -> Profile {
+    public func save(
+        to profileManager: ProfileManager,
+        preferencesManager: PreferencesManager
+    ) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
+            do {
+                try preferencesManager.savePreferences(preferences)
+            } catch {
+                pp_log(.App.profiles, .error, "Unable to save preferences for profile \(profile.id): \(error)")
+            }
             return newProfile
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error
         }
+    }
+
+    public func discard() {
     }
 }
 

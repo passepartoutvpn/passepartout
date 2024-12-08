@@ -34,6 +34,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     @EnvironmentObject
     public var iapManager: IAPManager
 
+    @EnvironmentObject
+    public var preferencesManager: PreferencesManager
+
     @Environment(\.isUITesting)
     private var isUITesting
 
@@ -117,12 +120,7 @@ extension AppCoordinator {
             isImporting: $isImporting,
             errorHandler: errorHandler,
             flow: .init(
-                onEditProfile: {
-                    guard let profile = profileManager.profile(withId: $0.id) else {
-                        return
-                    }
-                    enterDetail(of: profile.editable(), initialModuleId: nil)
-                },
+                onEditProfile: onEditProfile,
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
                 },
@@ -168,7 +166,7 @@ extension AppCoordinator {
             onMigrateProfiles: {
                 present(.migrateProfiles)
             },
-            onNewProfile: enterDetail
+            onNewProfile: onNewProfile
         )
     }
 
@@ -232,7 +230,11 @@ extension AppCoordinator {
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
         pp_log(.app, .info, "Present interactive login")
-        interactiveManager.present(with: profile, onComplete: onComplete)
+        interactiveManager.present(
+            with: profile,
+            preferencesManager: preferencesManager,
+            onComplete: onComplete
+        )
     }
 
     public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
@@ -287,10 +289,21 @@ private extension AppCoordinator {
         }
     }
 
-    func enterDetail(of profile: EditableProfile, initialModuleId: UUID?) {
+    func onNewProfile(_ profile: EditableProfile, initialModuleId: UUID?) {
+        editProfile(profile, initialModuleId: initialModuleId)
+    }
+
+    func onEditProfile(_ preview: ProfilePreview) {
+        guard let profile = profileManager.profile(withId: preview.id) else {
+            return
+        }
+        editProfile(profile.editable(), initialModuleId: nil)
+    }
+
+    func editProfile(_ profile: EditableProfile, initialModuleId: UUID?) {
         profilePath = NavigationPath()
         let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
-        profileEditor.editProfile(profile, isShared: isShared)
+        profileEditor.load(profile, isShared: isShared, preferencesManager: preferencesManager)
         present(.editProfile(initialModuleId))
     }
 }

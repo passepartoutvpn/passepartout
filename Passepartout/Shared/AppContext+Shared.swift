@@ -39,7 +39,7 @@ import UITesting
 extension AppContext {
     static let shared: AppContext = {
         let iapManager: IAPManager = .sharedForApp
-        let processor = InAppProcessor.shared(iapManager) {
+        let processor = InAppProcessor.sharedImplementation(with: iapManager) {
             $0.localizedPreview
         }
 
@@ -124,7 +124,7 @@ extension AppContext {
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
-            preferencesManager: .shared,
+            preferencesManager: .sharedForApp,
             registry: .shared,
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt

@@ -24,8 +24,10 @@
 //
 
 import Foundation
+import PassepartoutKit
 
-@MainActor
-public protocol ModulePreferencesRepository {
-    func modulePreferencesProxy(in moduleId: UUID) throws -> ModulePreferencesProxy
+public protocol ModulePreferencesRepository: Sendable {
+    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences]
+
+    func set(_ preferences: [UUID: ModulePreferences]) throws
 }

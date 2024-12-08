@@ -28,18 +28,11 @@ import PassepartoutKit
 import SwiftUI
 
 struct ModuleDetailView: View {
-
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
     let profileEditor: ProfileEditor
 
     let moduleId: UUID?
 
     let moduleViewFactory: any ModuleViewFactory
-
-    @StateObject
-    private var modulePreferences = ModulePreferences(proxy: nil)
 
     var body: some View {
         debugChanges()
@@ -48,16 +41,6 @@ struct ModuleDetailView: View {
                 editorView(forModuleWithId: moduleId)
             } else {
                 emptyView
-            }
-        }
-        .onLoad {
-            guard let moduleId else {
-                return
-            }
-            do {
-                modulePreferences.proxy = try preferencesManager.modulePreferencesProxy(in: moduleId)
-            } catch {
-                pp_log(.app, .error, "Unable to load module preferences: \(error)")
             }
         }
     }
@@ -69,7 +52,6 @@ private extension ModuleDetailView {
     func editorView(forModuleWithId moduleId: UUID) -> some View {
         AnyView(moduleViewFactory.view(
             with: profileEditor,
-            preferences: modulePreferences,
             moduleId: moduleId
         ))
     }

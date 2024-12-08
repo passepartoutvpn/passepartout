@@ -28,13 +28,13 @@ import Combine
 import CoreData
 import Foundation
 
-public protocol CoreDataPersistentStoreLogger {
+public protocol CoreDataPersistentStoreLogger: Sendable {
     func debug(_ msg: String)
 
     func warning(_ msg: String)
 }
 
-public final class CoreDataPersistentStore {
+public final class CoreDataPersistentStore: Sendable {
     private let logger: CoreDataPersistentStoreLogger?
 
     private let container: NSPersistentContainer

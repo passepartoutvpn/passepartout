@@ -36,7 +36,7 @@ extension AppData {
     }
 }
 
-private actor CDProviderRepositoryV3: NSObject, ProviderRepository {
+private final class CDProviderRepositoryV3: NSObject, ProviderRepository {
     private nonisolated let context: NSManagedObjectContext
 
     private nonisolated let providersSubject: CurrentValueSubject<[Provider], Never>

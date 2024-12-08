@@ -68,7 +68,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: Identifia
     private var onlyShowsFavorites = false
 
     @StateObject
-    private var providerPreferences = ProviderPreferences(proxy: nil)
+    private var providerPreferences = ProviderPreferences()
 
     @StateObject
     private var filtersViewModel = VPNFiltersView.Model()
@@ -159,7 +159,7 @@ private extension VPNProviderServerView {
 private extension VPNProviderServerView {
     func loadInitialServers() async {
         do {
-            providerPreferences.proxy = try preferencesManager.providerPreferencesProxy(in: providerId)
+            providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
         } catch {
             pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
         }

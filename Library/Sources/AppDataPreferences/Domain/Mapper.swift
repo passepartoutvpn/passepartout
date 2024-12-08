@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  Mapper.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/7/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,12 +24,17 @@
 //
 
 import CommonLibrary
+import CoreData
 import Foundation
-import SwiftUI
+import PassepartoutKit
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+struct DomainMapper {
+    func preferences(from entity: CDModulePreferencesV3) throws -> ModulePreferences {
+        ModulePreferences()
+    }
+}
 
-    @MainActor
-    func view(with editor: ProfileEditor, moduleId: UUID) -> Content
+struct CoreDataMapper {
+    func set(_ entity: CDModulePreferencesV3, from preferences: ModulePreferences) throws {
+    }
 }

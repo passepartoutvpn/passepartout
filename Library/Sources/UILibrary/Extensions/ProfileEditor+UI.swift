@@ -23,18 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
 extension ProfileEditor {
-    public func binding(forNameOf moduleId: UUID) -> Binding<String> {
-        Binding { [weak self] in
-            self?.profile.name(forModuleWithId: moduleId) ?? ""
-        } set: { [weak self] in
-            self?.profile.setName($0, forModuleWithId: moduleId)
-        }
-    }
-
     public subscript<T>(module: T) -> Binding<T> where T: ModuleBuilder {
         Binding { [weak self] in
             guard let foundModule = self?.module(withId: module.id) else {
@@ -46,6 +39,14 @@ extension ProfileEditor {
             return matchingModule
         } set: { [weak self] in
             self?.saveModule($0, activating: false)
+        }
+    }
+
+    public func binding(forPreferencesOf moduleId: UUID) -> Binding<ModulePreferences> {
+        Binding { [weak self] in
+            self?.preferences[moduleId] ?? ModulePreferences()
+        } set: { [weak self] in
+            self?.preferences[moduleId] = $0
         }
     }
 }

@@ -40,7 +40,7 @@ extension AppContext {
                 []
             }
         )
-        let processor = InAppProcessor.shared(iapManager) {
+        let processor = InAppProcessor.sharedImplementation(with: iapManager) {
             $0.localizedPreview
         }
 

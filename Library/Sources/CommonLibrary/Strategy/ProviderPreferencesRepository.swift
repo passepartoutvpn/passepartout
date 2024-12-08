@@ -26,7 +26,8 @@
 import Foundation
 import PassepartoutKit
 
-@MainActor
 public protocol ProviderPreferencesRepository {
-    func providerPreferencesProxy(in providerId: ProviderID) throws -> ProviderPreferencesProxy
+    var favoriteServers: Set<String> { get set }
+
+    func save() throws
 }

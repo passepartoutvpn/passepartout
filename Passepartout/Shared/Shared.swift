@@ -92,7 +92,7 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
 extension InAppProcessor {
 
     @MainActor
-    static func shared(_ iapManager: IAPManager, preview: @escaping (Profile) -> ProfilePreview) -> InAppProcessor {
+    static func sharedImplementation(with iapManager: IAPManager, preview: @escaping (Profile) -> ProfilePreview) -> InAppProcessor {
         InAppProcessor(
             iapManager: iapManager,
             title: {
@@ -132,22 +132,24 @@ extension InAppProcessor {
 }
 
 extension PreferencesManager {
-    static let shared: PreferencesManager = {
+
+    @MainActor
+    static func sharedImplementation(withCloudKit: Bool) -> PreferencesManager {
         let preferencesStore = CoreDataPersistentStore(
             logger: .default,
             containerName: Constants.shared.containers.preferences,
             baseURL: BundleConfiguration.urlForGroupDocuments,
             model: AppData.cdPreferencesModel,
-            cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
+            cloudKitIdentifier: withCloudKit ? BundleConfiguration.mainString(for: .cloudKitPreferencesId) : nil,
             author: nil
         )
-        let modulePreferencesRepository = AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context)
-        let providerPreferencesRepository = AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context)
         return PreferencesManager(
-            modulesRepository: modulePreferencesRepository,
-            providersRepository: providerPreferencesRepository
+            modulesRepository: AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context),
+            providersFactory: {
+                try AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context, providerId: $0)
+            }
         )
-    }()
+    }
 }
 
 // MARK: - Logging
