@@ -36,6 +36,9 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
     func body(content: Content) -> some View {
         Form {
             content
+#if DEBUG
+            UUIDSection(uuid: draft.id)
+#endif
         }
         .themeForm()
         .themeManualInput()
