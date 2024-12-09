@@ -1,8 +1,3 @@
-WARNING: favorite servers are lost in this build, but those saved
-from now on will be shared across all devices.
-
-* Allow "Routing" module in beta
-* Fix deadlock regression in DNS resolution (e.g. Mullvad)
-* Store complex preferences to Core Data (#981)
-* Disclose details about selected provider server configuration (#980)
-* Improve "Purchased" view (#979)
+* Exclude OpenVPN endpoints (#987)
+* Fix missing animations in profiles list (#986)
+* Select preset matching current filter (#985)
