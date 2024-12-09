@@ -26,8 +26,12 @@
 import Foundation
 import PassepartoutKit
 
-public protocol ModulePreferencesRepository: Sendable {
-    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences]
+public protocol ModulePreferencesRepository {
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool
 
-    func set(_ preferences: [UUID: ModulePreferences]) throws
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint)
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint)
+
+    func save() throws
 }

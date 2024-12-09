@@ -41,7 +41,9 @@ extension Dependencies {
             author: nil
         )
         return PreferencesManager(
-            modulesRepository: AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context),
+            modulesFactory: {
+                try AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context, moduleId: $0)
+            },
             providersFactory: {
                 try AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context, providerId: $0)
             }

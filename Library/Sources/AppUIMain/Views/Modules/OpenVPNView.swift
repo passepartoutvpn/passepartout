@@ -30,6 +30,9 @@ import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     @Environment(\.navigationPath)
     private var path
 
@@ -46,16 +49,10 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private var isImporting = false
 
     @State
-    private var importURL: URL?
-
-    @State
-    private var importPassphrase: String?
-
-    @State
-    private var requiresPassphrase = false
-
-    @State
     private var paywallReason: PaywallReason?
+
+    @StateObject
+    private var providerPreferences = ProviderPreferences()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -64,7 +61,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
         module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         editor = ProfileEditor(modules: [module])
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
-
         impl = nil
         isServerPushed = true
     }
@@ -79,11 +75,12 @@ struct OpenVPNView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue)
-            .fileImporter(
-                isPresented: $isImporting,
-                allowedContentTypes: [.item],
-                onCompletion: importConfiguration
-            )
+            .modifier(ImportModifier(
+                draft: draft,
+                impl: impl,
+                isImporting: $isImporting,
+                errorHandler: errorHandler
+            ))
             .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
@@ -101,7 +98,8 @@ private extension OpenVPNView {
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
-                credentialsRoute: Subroute.credentials
+                credentialsRoute: Subroute.credentials,
+                allowedEndpoints: allowedEndpoints
             )
         } else {
             emptyConfigurationView
@@ -126,31 +124,12 @@ private extension OpenVPNView {
         Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
             isImporting = true
         }
-        .alert(
-            module.moduleType.localizedDescription,
-            isPresented: $requiresPassphrase,
-            presenting: importURL,
-            actions: { url in
-                SecureField(
-                    Strings.Placeholders.secret,
-                    text: $importPassphrase ?? ""
-                )
-                Button(Strings.Alerts.Import.Passphrase.ok) {
-                    importConfiguration(from: .success(url))
-                }
-                Button(Strings.Global.Actions.cancel, role: .cancel) {
-                    isImporting = false
-                }
-            },
-            message: {
-                Text(Strings.Alerts.Import.Passphrase.message($0.lastPathComponent))
-            }
-        )
     }
 
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
             providerId: providerId,
+            providerPreferences: providerPreferences,
             selectedEntity: providerEntity,
             paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
@@ -162,50 +141,6 @@ private extension OpenVPNView {
 
     var providerAccountRows: [ModuleRow]? {
         [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(Subroute.credentials))]
-    }
-}
-
-private extension OpenVPNView {
-    func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
-        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
-        path.wrappedValue.removeLast()
-    }
-
-    func importConfiguration(from result: Result<URL, Error>) {
-        do {
-            let url = try result.get()
-            guard url.startAccessingSecurityScopedResource() else {
-                throw AppError.permissionDenied
-            }
-            defer {
-                url.stopAccessingSecurityScopedResource()
-            }
-            importURL = url
-
-            guard let impl else {
-                fatalError("Requires OpenVPNModule implementation")
-            }
-            guard let parser = impl.importer as? StandardOpenVPNParser else {
-                fatalError("OpenVPNModule importer should be StandardOpenVPNParser")
-            }
-            let parsed = try parser.parsed(fromURL: url, passphrase: importPassphrase)
-
-            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
-        } catch StandardOpenVPNParserError.encryptionPassphrase,
-                StandardOpenVPNParserError.unableToDecrypt {
-            Task {
-                // XXX: re-present same alert after artificial delay
-                try? await Task.sleep(for: .milliseconds(500))
-                importPassphrase = nil
-                requiresPassphrase = true
-            }
-        } catch {
-            pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
-            errorHandler.handle(
-                (error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error,
-                title: module.moduleType.localizedDescription
-            )
-        }
     }
 }
 
@@ -239,7 +174,8 @@ private extension OpenVPNView {
                 ConfigurationView(
                     isServerPushed: false,
                     configuration: configuration.builder(),
-                    credentialsRoute: nil
+                    credentialsRoute: nil,
+                    allowedEndpoints: allowedEndpoints
                 )
             }
             .themeForm()
@@ -260,66 +196,30 @@ private extension OpenVPNView {
     }
 }
 
+// MARK: - Logic
+
+private extension OpenVPNView {
+    var preferences: ModulePreferences {
+        editor.preferences(forModuleWithId: module.id, manager: preferencesManager)
+    }
+
+    var allowedEndpoints: Blacklist<ExtendedEndpoint> {
+        if draft.wrappedValue.providerSelection != nil {
+            return providerPreferences.allowedEndpoints()
+        } else {
+            return preferences.allowedEndpoints()
+        }
+    }
+
+    func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
+        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
+        path.wrappedValue.removeLast()
+    }
+}
+
 // MARK: - Previews
 
-// swiftlint: disable force_try
 #Preview {
-    var builder = OpenVPN.Configuration.Builder(withFallbacks: true)
-    builder.noPullMask = [.proxy]
-    builder.authUserPass = true
-    builder.remotes = [
-        .init(rawValue: "2.2.2.2:UDP:2222")!,
-        .init(rawValue: "6.6.6.6:UDP:6666")!,
-        .init(rawValue: "12.12.12.12:TCP:21212")!,
-        .init(rawValue: "12:12:12:12:20:20:20:20:TCP6:21212")!
-    ]
-    builder.ipv4 = IPSettings(subnet: try! .init("5.5.5.5", 24))
-        .including(routes: [
-            .init(defaultWithGateway: .ip("120.1.1.1", .v4)),
-            .init(.init(rawValue: "55.10.20.30/32"), nil)
-        ])
-        .excluding(routes: [
-            .init(.init(rawValue: "88.40.30.30/32"), nil),
-            .init(.init(rawValue: "60.60.60.60/32"), .ip("127.0.0.1", .v4))
-        ])
-    builder.ipv6 = IPSettings(subnet: try! .init("::5", 24))
-        .including(routes: [
-            .init(defaultWithGateway: .ip("120::1:1:1", .v6)),
-            .init(.init(rawValue: "55:10:20::30/128"), nil),
-            .init(.init(rawValue: "60:60:60::60/128"), .ip("::2", .v6))
-        ])
-        .excluding(routes: [
-            .init(.init(rawValue: "88:40:30::30/32"), nil)
-        ])
-    builder.routingPolicies = [.IPv4, .IPv6]
-    builder.dnsServers = ["1.2.3.4", "4.5.6.7"]
-    builder.dnsDomain = "domain.com"
-    builder.searchDomains = ["search1.com", "search2.com"]
-    builder.httpProxy = try! .init("10.10.10.10", 1080)
-    builder.httpsProxy = try! .init("10.10.10.10", 8080)
-    builder.proxyAutoConfigurationURL = URL(string: "https://hello.pac")!
-    builder.proxyBypassDomains = ["bypass1.com", "bypass2.com"]
-    builder.xorMethod = .xormask(mask: .init(Data(hex: "1234")))
-    builder.ca = .init(mockPem: "ca-certificate")
-    builder.clientCertificate = .init(mockPem: "client-certificate")
-    builder.clientKey = .init(mockPem: "client-key")
-    builder.tlsWrap = .init(strategy: .auth, key: .init(biData: Data(count: 256)))
-    builder.keepAliveInterval = 10.0
-    builder.renegotiatesAfter = 60.0
-    builder.randomizeEndpoint = true
-    builder.randomizeHostnames = true
-
-    let module = OpenVPNModule.Builder(configurationBuilder: builder)
+    let module = OpenVPNModule.Builder(configurationBuilder: .forPreviews)
     return module.preview(title: "OpenVPN")
-}
-// swiftlint: enable force_try
-
-private extension OpenVPN.CryptoContainer {
-    init(mockPem: String) {
-        self.init(pem: """
------BEGIN CERTIFICATE-----
-\(mockPem)
------END CERTIFICATE-----
-""")
-    }
 }

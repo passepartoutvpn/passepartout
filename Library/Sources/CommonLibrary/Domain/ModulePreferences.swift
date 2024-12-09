@@ -23,10 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 import PassepartoutKit
 
-public struct ModulePreferences: Sendable {
+@MainActor
+public final class ModulePreferences: ObservableObject {
+    public var repository: ModulePreferencesRepository?
+
     public init() {
+    }
+
+    public func allowedEndpoints() -> Blacklist<ExtendedEndpoint> {
+        Blacklist { [weak self] in
+            self?.repository?.isExcludedEndpoint($0) != true
+        } allow: { [weak self] in
+            self?.repository?.removeExcludedEndpoint($0)
+        } deny: { [weak self] in
+            self?.repository?.addExcludedEndpoint($0)
+        }
+    }
+
+    public func save() throws {
+        try repository?.save()
     }
 }

@@ -229,11 +229,7 @@ extension AppCoordinator {
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
         pp_log(.app, .info, "Present interactive login")
-        interactiveManager.present(
-            with: profile,
-            preferencesManager: preferencesManager,
-            onComplete: onComplete
-        )
+        interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
     public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
@@ -302,7 +298,7 @@ private extension AppCoordinator {
     func editProfile(_ profile: EditableProfile, initialModuleId: UUID?) {
         profilePath = NavigationPath()
         let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
-        profileEditor.load(profile, isShared: isShared, preferencesManager: preferencesManager)
+        profileEditor.load(profile, isShared: isShared)
         present(.editProfile(initialModuleId))
     }
 }

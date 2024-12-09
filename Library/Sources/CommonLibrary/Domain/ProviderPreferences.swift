@@ -1,5 +1,5 @@
 //
-//  CDModulePreferencesV3.swift
+//  ProviderPreferences.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/5/24.
@@ -23,15 +23,38 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CoreData
+import CommonUtils
 import Foundation
+import PassepartoutKit
 
-@objc(CDModulePreferencesV3)
-final class CDModulePreferencesV3: NSManagedObject {
-    @nonobjc static func fetchRequest() -> NSFetchRequest<CDModulePreferencesV3> {
-        NSFetchRequest<CDModulePreferencesV3>(entityName: "CDModulePreferencesV3")
+@MainActor
+public final class ProviderPreferences: ObservableObject {
+    public var repository: ProviderPreferencesRepository?
+
+    public init() {
     }
 
-    @NSManaged var uuid: UUID?
-    @NSManaged var excludedEndpoints: Set<CDExcludedEndpoint>?
+    public var favoriteServers: Set<String> {
+        get {
+            repository?.favoriteServers ?? []
+        }
+        set {
+            objectWillChange.send()
+            repository?.favoriteServers = newValue
+        }
+    }
+
+    public func allowedEndpoints() -> Blacklist<ExtendedEndpoint> {
+        Blacklist { [weak self] in
+            self?.repository?.isExcludedEndpoint($0) != true
+        } allow: { [weak self] in
+            self?.repository?.removeExcludedEndpoint($0)
+        } deny: { [weak self] in
+            self?.repository?.addExcludedEndpoint($0)
+        }
+    }
+
+    public func save() throws {
+        try repository?.save()
+    }
 }

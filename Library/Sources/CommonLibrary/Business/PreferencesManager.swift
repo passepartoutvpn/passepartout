@@ -28,64 +28,77 @@ import Foundation
 import PassepartoutKit
 
 public final class PreferencesManager: ObservableObject, Sendable {
-    private let modulesRepository: ModulePreferencesRepository
+    private let modulesFactory: @Sendable (UUID) throws -> ModulePreferencesRepository
 
     private let providersFactory: @Sendable (ProviderID) throws -> ProviderPreferencesRepository
 
     public init(
-        modulesRepository: ModulePreferencesRepository? = nil,
+        modulesFactory: (@Sendable (UUID) throws -> ModulePreferencesRepository)? = nil,
         providersFactory: (@Sendable (ProviderID) throws -> ProviderPreferencesRepository)? = nil
     ) {
-        self.modulesRepository = modulesRepository ?? DummyModulePreferencesRepository()
+        self.modulesFactory = modulesFactory ?? { _ in
+            DummyModulePreferencesRepository()
+        }
         self.providersFactory = providersFactory ?? { _ in
             DummyProviderPreferencesRepository()
         }
     }
 }
 
-// MARK: - Modules
-
 extension PreferencesManager {
-    public func preferences(forProfile profile: Profile) throws -> [UUID: ModulePreferences] {
-        try preferences(forModulesWithIds: profile.modules.map(\.id))
+    public func preferencesRepository(forModuleWithId moduleId: UUID) throws -> ModulePreferencesRepository {
+        try modulesFactory(moduleId)
     }
 
-    public func preferences(forProfile editableProfile: EditableProfile) throws -> [UUID: ModulePreferences] {
-        try preferences(forModulesWithIds: editableProfile.modules.map(\.id))
-    }
-
-    public func savePreferences(_ preferences: [UUID: ModulePreferences]) throws {
-        try modulesRepository.set(preferences)
-    }
-}
-
-private extension PreferencesManager {
-    func preferences(forModulesWithIds moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
-        try modulesRepository.preferences(for: moduleIds)
-    }
-}
-
-// MARK: - Providers
-
-extension PreferencesManager {
     public func preferencesRepository(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
         try providersFactory(providerId)
+    }
+}
+
+@MainActor
+extension PreferencesManager {
+    public func preferences(forModuleWithId moduleId: UUID) throws -> ModulePreferences {
+        let object = ModulePreferences()
+        object.repository = try modulesFactory(moduleId)
+        return object
+    }
+
+    public func preferences(forProviderWithId providerId: ProviderID) throws -> ProviderPreferences {
+        let object = ProviderPreferences()
+        object.repository = try providersFactory(providerId)
+        return object
     }
 }
 
 // MARK: - Dummy
 
 private final class DummyModulePreferencesRepository: ModulePreferencesRepository {
-    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
-        [:]
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        false
     }
 
-    func set(_ preferences: [UUID: ModulePreferences]) throws {
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+    }
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+    }
+
+    func save() throws {
     }
 }
 
 private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {
     var favoriteServers: Set<String> = []
+
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        false
+    }
+
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+    }
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+    }
 
     func save() throws {
     }

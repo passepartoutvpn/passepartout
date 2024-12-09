@@ -79,6 +79,7 @@ private extension WireGuardView {
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
             providerId: providerId,
+            providerPreferences: nil,
             selectedEntity: providerEntity,
             paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,

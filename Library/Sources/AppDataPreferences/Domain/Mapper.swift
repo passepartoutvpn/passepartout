@@ -29,12 +29,27 @@ import Foundation
 import PassepartoutKit
 
 struct DomainMapper {
-    func preferences(from entity: CDModulePreferencesV3) throws -> ModulePreferences {
-        ModulePreferences()
+    func excludedEndpoints(from entities: Set<CDExcludedEndpoint>?) -> Set<ExtendedEndpoint> {
+        entities.map {
+            Set($0.compactMap {
+                $0.endpoint.map {
+                    ExtendedEndpoint(rawValue: $0)
+                } ?? nil
+            })
+        } ?? []
     }
 }
 
 struct CoreDataMapper {
-    func set(_ entity: CDModulePreferencesV3, from preferences: ModulePreferences) throws {
+    let context: NSManagedObjectContext
+
+    func cdExcludedEndpoint(from endpoint: ExtendedEndpoint) -> CDExcludedEndpoint {
+        let cdEndpoint = CDExcludedEndpoint(context: context)
+        cdEndpoint.endpoint = endpoint.rawValue
+        return cdEndpoint
+    }
+
+    func cdExcludedEndpoints(from endpoints: Set<ExtendedEndpoint>) -> Set<CDExcludedEndpoint> {
+        Set(endpoints.map(cdExcludedEndpoint(from:)))
     }
 }

@@ -30,74 +30,71 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
-    public static func cdModulePreferencesRepositoryV3(context: NSManagedObjectContext) -> ModulePreferencesRepository {
-        CDModulePreferencesRepositoryV3(context: context)
+    public static func cdModulePreferencesRepositoryV3(context: NSManagedObjectContext, moduleId: UUID) throws -> ModulePreferencesRepository {
+        try CDModulePreferencesRepositoryV3(context: context, moduleId: moduleId)
     }
 }
 
 private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    init(context: NSManagedObjectContext) {
+    private let entity: CDModulePreferencesV3
+
+    init(context: NSManagedObjectContext, moduleId: UUID) throws {
         self.context = context
-    }
 
-    func preferences(for moduleIds: [UUID]) throws -> [UUID: ModulePreferences] {
-        try context.performAndWait {
+        entity = try context.performAndWait {
             let request = CDModulePreferencesV3.fetchRequest()
-            request.predicate = NSPredicate(format: "any uuid in %@", moduleIds.map(\.uuidString))
-
-            let entities = try request.execute()
-            let mapper = DomainMapper()
-            return entities.reduce(into: [:]) {
-                guard let moduleId = $1.uuid else {
-                    return
-                }
-                do {
-                    let preferences = try mapper.preferences(from: $1)
-                    $0[moduleId] = preferences
-                } catch {
-                    pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
-                }
-            }
-        }
-    }
-
-    func set(_ preferences: [UUID: ModulePreferences]) throws {
-        try context.performAndWait {
-            let request = CDModulePreferencesV3.fetchRequest()
-            request.predicate = NSPredicate(format: "any uuid in %@", Array(preferences.keys))
-
-            var entities = try request.execute()
-            let existingIds = entities.compactMap(\.uuid)
-            let newIds = Set(preferences.keys).subtracting(existingIds)
-            newIds.forEach {
-                let newEntity = CDModulePreferencesV3(context: context)
-                newEntity.uuid = $0
-                entities.append(newEntity)
-            }
-
-            let mapper = CoreDataMapper()
-            try entities.forEach {
-                guard let id = $0.uuid, let entityPreferences = preferences[id] else {
-                    return
-                }
-                try mapper.set($0, from: entityPreferences)
-            }
-
-            guard context.hasChanges else {
-                return
-            }
+            request.predicate = NSPredicate(format: "uuid == %@", moduleId.uuidString)
             do {
-                try context.save()
+                let entity = try request.execute().first ?? CDModulePreferencesV3(context: context)
+                entity.uuid = moduleId
+                return entity
             } catch {
-                context.rollback()
+                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
                 throw error
             }
         }
     }
 
-    func rollback() {
-        context.rollback()
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        context.performAndWait {
+            entity.excludedEndpoints?.contains {
+                $0.endpoint == endpoint.rawValue
+            } ?? false
+        }
+    }
+
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            let mapper = CoreDataMapper(context: context)
+            let cdEndpoint = mapper.cdExcludedEndpoint(from: endpoint)
+            cdEndpoint.modulePreferences = entity
+            entity.excludedEndpoints?.insert(cdEndpoint)
+        }
+    }
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            guard let found = entity.excludedEndpoints?.first(where: {
+                $0.endpoint == endpoint.rawValue
+            }) else {
+                return
+            }
+            entity.excludedEndpoints?.remove(found)
+            context.delete(found)
+        }
+    }
+
+    func save() throws {
+        guard context.hasChanges else {
+            return
+        }
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
+        }
     }
 }
