@@ -70,7 +70,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     @State
     private var migrationPath = NavigationPath()
 
-    private let profileEditor = ProfileEditor()
+    @StateObject
+    private var profileEditor = ProfileEditor()
 
     @StateObject
     private var interactiveManager = InteractiveManager()
