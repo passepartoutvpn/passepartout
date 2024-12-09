@@ -37,7 +37,8 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
-    private var trackedPreferences: [UUID: ModulePreferences]
+    @Published
+    private var trackedPreferences: [UUID: ModulePreferencesRepository]
 
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
@@ -207,23 +208,23 @@ extension ProfileEditor {
         removedModules = [:]
     }
 
-    public func preferences(forModuleWithId moduleId: UUID, manager: PreferencesManager) -> ModulePreferences {
+    public func loadPreferences(
+        _ preferences: ModulePreferences,
+        from manager: PreferencesManager,
+        forModuleWithId moduleId: UUID
+    ) {
         do {
             pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
-            let observable = try trackedPreferences[moduleId] ?? manager.preferences(forModuleWithId: moduleId)
-            trackedPreferences[moduleId] = observable
-            return observable
+            let repository = try trackedPreferences[moduleId] ?? manager.preferencesRepository(forModuleWithId: moduleId)
+            preferences.repository = repository
+            trackedPreferences[moduleId] = repository // @Published
         } catch {
             pp_log(.App.profiles, .error, "Unable to track preferences for module \(moduleId): \(error)")
-            return ModulePreferences()
         }
     }
 
     @discardableResult
-    public func save(
-        to profileManager: ProfileManager,
-        preferencesManager: PreferencesManager
-    ) async throws -> Profile {
+    public func save(to profileManager: ProfileManager) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
@@ -244,6 +245,11 @@ extension ProfileEditor {
     }
 
     public func discard() {
+        trackedPreferences.forEach {
+            pp_log(.App.profiles, .debug, "Discard tracked preferences for module \($0.key)")
+            $0.value.discard()
+        }
+        trackedPreferences.removeAll()
     }
 }
 

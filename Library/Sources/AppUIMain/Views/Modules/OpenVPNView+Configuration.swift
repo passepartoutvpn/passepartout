@@ -37,7 +37,7 @@ extension OpenVPNView {
         let credentialsRoute: (any Hashable)?
 
         @ObservedObject
-        var allowedEndpoints: Blacklist<ExtendedEndpoint>
+        var excludedEndpoints: ObservableList<ExtendedEndpoint>
 
         var body: some View {
             moduleSection(for: accountRows, header: Strings.Global.Nouns.account)
@@ -75,7 +75,7 @@ private extension OpenVPNView.ConfigurationView {
                 SelectableRemoteButton(
                     remote: remote,
                     all: Set(remotes),
-                    allowedEndpoints: allowedEndpoints
+                    excludedEndpoints: excludedEndpoints
                 )
             }
             .themeSection(header: Strings.Modules.Openvpn.remotes)
@@ -89,16 +89,16 @@ private struct SelectableRemoteButton: View {
     let all: Set<ExtendedEndpoint>
 
     @ObservedObject
-    var allowedEndpoints: Blacklist<ExtendedEndpoint>
+    var excludedEndpoints: ObservableList<ExtendedEndpoint>
 
     var body: some View {
         Button {
-            if allowedEndpoints.isAllowed(remote) {
-                if remaining.count > 1 {
-                    allowedEndpoints.deny(remote)
-                }
+            if excludedEndpoints.contains(remote) {
+                excludedEndpoints.remove(remote)
             } else {
-                allowedEndpoints.allow(remote)
+                if remaining.count > 1 {
+                    excludedEndpoints.add(remote)
+                }
             }
         } label: {
             HStack {
@@ -112,7 +112,7 @@ private struct SelectableRemoteButton: View {
                 }
                 Spacer()
                 ThemeImage(.marked)
-                    .opaque(allowedEndpoints.isAllowed(remote))
+                    .opaque(!excludedEndpoints.contains(remote))
             }
             .contentShape(.rect)
         }
@@ -121,7 +121,7 @@ private struct SelectableRemoteButton: View {
 
     private var remaining: Set<ExtendedEndpoint> {
         all.filter {
-            allowedEndpoints.isAllowed($0)
+            !excludedEndpoints.contains($0)
         }
     }
 }
@@ -340,11 +340,11 @@ private extension OpenVPNView.ConfigurationView {
     struct Preview: View {
 
         @StateObject
-        private var allowedEndpoints = Blacklist<ExtendedEndpoint> { _ in
+        private var excludedEndpoints = ObservableList<ExtendedEndpoint> { _ in
             true
-        } allow: { _ in
+        } add: { _ in
             //
-        } deny: { _ in
+        } remove: { _ in
             //
         }
 
@@ -354,7 +354,7 @@ private extension OpenVPNView.ConfigurationView {
                     isServerPushed: false,
                     configuration: .forPreviews,
                     credentialsRoute: nil,
-                    allowedEndpoints: allowedEndpoints
+                    excludedEndpoints: excludedEndpoints
                 )
             }
             .withMockEnvironment()

@@ -85,6 +85,9 @@ private final class DummyModulePreferencesRepository: ModulePreferencesRepositor
 
     func save() throws {
     }
+
+    func discard() {
+    }
 }
 
 private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {

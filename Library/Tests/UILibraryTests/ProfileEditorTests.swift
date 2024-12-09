@@ -251,7 +251,7 @@ extension ProfileEditorTests {
             }
             .store(in: &subscriptions)
 
-        try await sut.save(to: manager, preferencesManager: PreferencesManager())
+        try await sut.save(to: manager)
         await fulfillment(of: [exp])
     }
 }

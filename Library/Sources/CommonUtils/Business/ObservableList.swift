@@ -1,5 +1,5 @@
 //
-//  Blacklist.swift
+//  ObservableList.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/8/24.
@@ -26,34 +26,34 @@
 import Foundation
 
 @MainActor
-public final class Blacklist<T>: ObservableObject where T: Equatable {
-    private let isAllowed: (T) -> Bool
+public final class ObservableList<T>: ObservableObject where T: Equatable {
+    private let contains: (T) -> Bool
 
-    private let allow: (T) -> Void
+    private let add: (T) -> Void
 
-    private let deny: (T) -> Void
+    private let remove: (T) -> Void
 
     public init(
-        isAllowed: @escaping (T) -> Bool,
-        allow: @escaping (T) -> Void,
-        deny: @escaping (T) -> Void
+        contains: @escaping (T) -> Bool,
+        add: @escaping (T) -> Void,
+        remove: @escaping (T) -> Void
     ) {
-        self.isAllowed = isAllowed
-        self.allow = allow
-        self.deny = deny
+        self.contains = contains
+        self.add = add
+        self.remove = remove
     }
 
-    public func isAllowed(_ value: T) -> Bool {
-        isAllowed(value)
+    public func contains(_ value: T) -> Bool {
+        contains(value)
     }
 
-    public func allow(_ value: T) {
+    public func add(_ value: T) {
         objectWillChange.send()
-        allow(value)
+        add(value)
     }
 
-    public func deny(_ value: T) {
+    public func remove(_ value: T) {
         objectWillChange.send()
-        deny(value)
+        remove(value)
     }
 }

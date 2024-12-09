@@ -52,6 +52,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     @StateObject
+    private var preferences = ModulePreferences()
+
+    @StateObject
     private var providerPreferences = ProviderPreferences()
 
     @StateObject
@@ -85,6 +88,13 @@ struct OpenVPNView: View, ModuleDraftEditing {
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
+            .onLoad {
+                editor.loadPreferences(
+                    preferences,
+                    from: preferencesManager,
+                    forModuleWithId: module.id
+                )
+            }
     }
 }
 
@@ -99,7 +109,7 @@ private extension OpenVPNView {
                 isServerPushed: isServerPushed,
                 configuration: configuration,
                 credentialsRoute: Subroute.credentials,
-                allowedEndpoints: allowedEndpoints
+                excludedEndpoints: excludedEndpoints
             )
         } else {
             emptyConfigurationView
@@ -175,7 +185,7 @@ private extension OpenVPNView {
                     isServerPushed: false,
                     configuration: configuration.builder(),
                     credentialsRoute: nil,
-                    allowedEndpoints: allowedEndpoints
+                    excludedEndpoints: excludedEndpoints
                 )
             }
             .themeForm()
@@ -199,15 +209,11 @@ private extension OpenVPNView {
 // MARK: - Logic
 
 private extension OpenVPNView {
-    var preferences: ModulePreferences {
-        editor.preferences(forModuleWithId: module.id, manager: preferencesManager)
-    }
-
-    var allowedEndpoints: Blacklist<ExtendedEndpoint> {
+    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
         if draft.wrappedValue.providerSelection != nil {
-            return providerPreferences.allowedEndpoints()
+            return providerPreferences.excludedEndpoints()
         } else {
-            return preferences.allowedEndpoints()
+            return preferences.excludedEndpoints()
         }
     }
 

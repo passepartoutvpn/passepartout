@@ -66,8 +66,8 @@ public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendabl
             cloudKitIdentifier: tvProfilesContainer.cloudKitIdentifier,
             author: nil
         )
-        profilesRepository = CDProfileRepositoryV2(context: store.backgroundContext)
-        tvProfilesRepository = CDProfileRepositoryV2(context: tvStore.backgroundContext)
+        profilesRepository = CDProfileRepositoryV2(context: store.backgroundContext())
+        tvProfilesRepository = CDProfileRepositoryV2(context: tvStore.backgroundContext())
     }
 }
 
