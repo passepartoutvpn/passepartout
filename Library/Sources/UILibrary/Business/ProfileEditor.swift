@@ -244,6 +244,11 @@ extension ProfileEditor {
     }
 
     public func discard() {
+        trackedPreferences.forEach {
+            pp_log(.App.profiles, .debug, "Discard tracked preferences for module \($0.key)")
+            $0.value.discard()
+        }
+        trackedPreferences.removeAll()
     }
 }
 

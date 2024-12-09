@@ -47,4 +47,8 @@ public final class ModulePreferences: ObservableObject {
     public func save() throws {
         try repository?.save()
     }
+
+    public func discard() {
+        repository?.discard()
+    }
 }
