@@ -46,9 +46,22 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
         entity = try context.performAndWait {
             let request = CDProviderPreferencesV3.fetchRequest()
             request.predicate = NSPredicate(format: "providerId == %@", providerId.rawValue)
+            request.sortDescriptors = [.init(key: "lastUpdate", ascending: false)]
             do {
-                let entity = try request.execute().first ?? CDProviderPreferencesV3(context: context)
+                let entities = try request.execute()
+
+                // dedup by lastUpdate
+                entities.enumerated().forEach {
+                    guard $0.offset > 0 else {
+                        return
+                    }
+                    $0.element.excludedEndpoints?.forEach(context.delete(_:))
+                    context.delete($0.element)
+                }
+
+                let entity = entities.first ?? CDProviderPreferencesV3(context: context)
                 entity.providerId = providerId.rawValue
+                entity.lastUpdate = Date()
                 return entity
             } catch {
                 pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
