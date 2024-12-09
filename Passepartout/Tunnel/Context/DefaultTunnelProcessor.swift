@@ -42,10 +42,19 @@ extension DefaultTunnelProcessor: PacketTunnelProcessor {
             guard var moduleBuilder = $0.moduleBuilder() as? OpenVPNModule.Builder else {
                 return
             }
+
             let modulesPreferences = try preferencesManager.preferencesRepository(forModuleWithId: moduleBuilder.id)
             moduleBuilder.configurationBuilder?.remotes?.removeAll {
                 modulesPreferences.isExcludedEndpoint($0)
             }
+
+            if let providerId = moduleBuilder.providerId {
+                let providerPreferences = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
+                moduleBuilder.configurationBuilder?.remotes?.removeAll {
+                    providerPreferences.isExcludedEndpoint($0)
+                }
+            }
+
             let module = try moduleBuilder.tryBuild()
             builder.saveModule(module)
         }
