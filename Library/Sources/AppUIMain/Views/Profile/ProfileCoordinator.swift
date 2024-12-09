@@ -136,10 +136,7 @@ private extension ProfileCoordinator {
 
     // standard: always save, warn if purchase required
     func onCommitEditingStandard() async throws {
-        let savedProfile = try await profileEditor.save(
-            to: profileManager,
-            preferencesManager: preferencesManager
-        )
+        let savedProfile = try await profileEditor.save(to: profileManager)
         do {
             try iapManager.verify(savedProfile)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
@@ -157,10 +154,7 @@ private extension ProfileCoordinator {
             paywallReason = .init(requiredFeatures)
             return
         }
-        try await profileEditor.save(
-            to: profileManager,
-            preferencesManager: preferencesManager
-        )
+        try await profileEditor.save(to: profileManager)
         onDismiss()
     }
 

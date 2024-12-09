@@ -89,7 +89,11 @@ struct OpenVPNView: View, ModuleDraftEditing {
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
             .onLoad {
-                editor.loadPreferences(preferences, forModuleWithId: module.id, manager: preferencesManager)
+                editor.loadPreferences(
+                    preferences,
+                    from: preferencesManager,
+                    forModuleWithId: module.id
+                )
             }
     }
 }

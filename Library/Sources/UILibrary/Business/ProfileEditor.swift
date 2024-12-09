@@ -208,7 +208,11 @@ extension ProfileEditor {
         removedModules = [:]
     }
 
-    public func loadPreferences(_ preferences: ModulePreferences, forModuleWithId moduleId: UUID, manager: PreferencesManager) {
+    public func loadPreferences(
+        _ preferences: ModulePreferences,
+        from manager: PreferencesManager,
+        forModuleWithId moduleId: UUID
+    ) {
         do {
             pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
             let repository = try trackedPreferences[moduleId] ?? manager.preferencesRepository(forModuleWithId: moduleId)
@@ -220,10 +224,7 @@ extension ProfileEditor {
     }
 
     @discardableResult
-    public func save(
-        to profileManager: ProfileManager,
-        preferencesManager: PreferencesManager
-    ) async throws -> Profile {
+    public func save(to profileManager: ProfileManager) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
