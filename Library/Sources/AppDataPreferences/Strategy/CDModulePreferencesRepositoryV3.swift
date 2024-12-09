@@ -46,9 +46,22 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
         entity = try context.performAndWait {
             let request = CDModulePreferencesV3.fetchRequest()
             request.predicate = NSPredicate(format: "uuid == %@", moduleId.uuidString)
+            request.sortDescriptors = [.init(key: "lastUpdate", ascending: false)]
             do {
-                let entity = try request.execute().first ?? CDModulePreferencesV3(context: context)
+                let entities = try request.execute()
+
+                // dedup by lastUpdate
+                entities.enumerated().forEach {
+                    guard $0.offset > 0 else {
+                        return
+                    }
+                    $0.element.excludedEndpoints?.forEach(context.delete(_:))
+                    context.delete($0.element)
+                }
+
+                let entity = entities.first ?? CDModulePreferencesV3(context: context)
                 entity.uuid = moduleId
+                entity.lastUpdate = Date()
                 return entity
             } catch {
                 pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")

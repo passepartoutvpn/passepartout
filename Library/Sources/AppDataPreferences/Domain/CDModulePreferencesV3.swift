@@ -33,5 +33,6 @@ final class CDModulePreferencesV3: NSManagedObject {
     }
 
     @NSManaged var uuid: UUID?
+    @NSManaged var lastUpdate: Date?
     @NSManaged var excludedEndpoints: Set<CDExcludedEndpoint>?
 }

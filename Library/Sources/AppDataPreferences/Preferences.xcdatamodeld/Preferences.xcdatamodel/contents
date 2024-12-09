@@ -6,11 +6,13 @@
         <relationship name="providerPreferences" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProviderPreferencesV3" inverseName="excludedEndpoints" inverseEntity="CDProviderPreferencesV3"/>
     </entity>
     <entity name="CDModulePreferencesV3" representedClassName="CDModulePreferencesV3" syncable="YES">
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="excludedEndpoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDExcludedEndpoint" inverseName="modulePreferences" inverseEntity="CDExcludedEndpoint"/>
     </entity>
     <entity name="CDProviderPreferencesV3" representedClassName="CDProviderPreferencesV3" syncable="YES">
         <attribute name="favoriteServerIds" optional="YES" attributeType="Binary"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="providerId" optional="YES" attributeType="String"/>
         <relationship name="excludedEndpoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDExcludedEndpoint" inverseName="providerPreferences" inverseEntity="CDExcludedEndpoint"/>
     </entity>
