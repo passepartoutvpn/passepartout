@@ -34,9 +34,6 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @EnvironmentObject
     public var iapManager: IAPManager
 
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
     private let profileManager: ProfileManager
 
     public let tunnel: ExtendedTunnel
@@ -141,7 +138,6 @@ extension AppCoordinator {
         pp_log(.app, .info, "Present interactive login")
         interactiveManager.present(
             with: profile,
-            preferencesManager: preferencesManager,
             onComplete: onComplete
         )
     }
