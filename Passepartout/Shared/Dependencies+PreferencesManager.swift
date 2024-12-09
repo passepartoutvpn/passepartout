@@ -42,10 +42,16 @@ extension Dependencies {
         )
         return PreferencesManager(
             modulesFactory: {
-                try AppData.cdModulePreferencesRepositoryV3(context: preferencesStore.context, moduleId: $0)
+                try AppData.cdModulePreferencesRepositoryV3(
+                    context: preferencesStore.backgroundContext,
+                    moduleId: $0
+                )
             },
             providersFactory: {
-                try AppData.cdProviderPreferencesRepositoryV3(context: preferencesStore.context, providerId: $0)
+                try AppData.cdProviderPreferencesRepositoryV3(
+                    context: preferencesStore.backgroundContext,
+                    providerId: $0
+                )
             }
         )
     }
