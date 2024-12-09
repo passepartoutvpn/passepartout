@@ -99,7 +99,7 @@ private extension OpenVPNView {
                 isServerPushed: isServerPushed,
                 configuration: configuration,
                 credentialsRoute: Subroute.credentials,
-                allowedEndpoints: allowedEndpoints
+                excludedEndpoints: excludedEndpoints
             )
         } else {
             emptyConfigurationView
@@ -175,7 +175,7 @@ private extension OpenVPNView {
                     isServerPushed: false,
                     configuration: configuration.builder(),
                     credentialsRoute: nil,
-                    allowedEndpoints: allowedEndpoints
+                    excludedEndpoints: excludedEndpoints
                 )
             }
             .themeForm()
@@ -203,11 +203,11 @@ private extension OpenVPNView {
         editor.preferences(forModuleWithId: module.id, manager: preferencesManager)
     }
 
-    var allowedEndpoints: Blacklist<ExtendedEndpoint> {
+    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
         if draft.wrappedValue.providerSelection != nil {
-            return providerPreferences.allowedEndpoints()
+            return providerPreferences.excludedEndpoints()
         } else {
-            return preferences.allowedEndpoints()
+            return preferences.excludedEndpoints()
         }
     }
 

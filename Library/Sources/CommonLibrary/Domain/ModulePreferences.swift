@@ -34,13 +34,13 @@ public final class ModulePreferences: ObservableObject {
     public init() {
     }
 
-    public func allowedEndpoints() -> Blacklist<ExtendedEndpoint> {
-        Blacklist { [weak self] in
-            self?.repository?.isExcludedEndpoint($0) != true
-        } allow: { [weak self] in
-            self?.repository?.removeExcludedEndpoint($0)
-        } deny: { [weak self] in
+    public func excludedEndpoints() -> ObservableList<ExtendedEndpoint> {
+        ObservableList { [weak self] in
+            self?.repository?.isExcludedEndpoint($0) == true
+        } add: { [weak self] in
             self?.repository?.addExcludedEndpoint($0)
+        } remove: { [weak self] in
+            self?.repository?.removeExcludedEndpoint($0)
         }
     }
 
