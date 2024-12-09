@@ -37,6 +37,7 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
+    @Published
     private var trackedPreferences: [UUID: ModulePreferencesRepository]
 
     private(set) var removedModules: [UUID: any ModuleBuilder]
@@ -211,8 +212,8 @@ extension ProfileEditor {
         do {
             pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
             let repository = try trackedPreferences[moduleId] ?? manager.preferencesRepository(forModuleWithId: moduleId)
-            trackedPreferences[moduleId] = repository
             preferences.repository = repository
+            trackedPreferences[moduleId] = repository // @Published
         } catch {
             pp_log(.App.profiles, .error, "Unable to track preferences for module \(moduleId): \(error)")
         }
