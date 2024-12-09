@@ -1,4 +1,8 @@
-WARNING: you must re-configure your providers in this build.
+WARNING: favorite servers are lost in this build, but those saved
+from now on will be shared across all devices.
 
-* Fix unfriendly message on import OpenVPN
-* Fix a tunnel crash during DNS resolution
+* Allow "Routing" module in beta
+* Fix deadlock regression in DNS resolution (e.g. Mullvad)
+* Store complex preferences to Core Data (#981)
+* Disclose details about selected provider server configuration (#980)
+* Improve "Purchased" view (#979)
