@@ -34,10 +34,15 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     let apis: [APIMapper]
 
     @Binding
     var providerId: ProviderID?
+
+    let providerPreferences: ProviderPreferences?
 
     let entityType: Entity.Type
 
@@ -57,9 +62,11 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
                     if let newId {
                         await refreshInfrastructure(for: newId)
                     }
+                    loadPreferences(for: newId)
                     onSelectProvider(providerManager, newId, false)
                 }
             }
+            .onDisappear(perform: savePreferences)
             .disabled(providerManager.isLoading)
 
         content
@@ -147,6 +154,7 @@ private extension ProviderContentModifier {
            await refreshIndex()
            if let providerId {
                onSelectProvider(providerManager, providerId, true)
+               loadPreferences(for: providerId)
            }
        }
     }
@@ -172,6 +180,35 @@ private extension ProviderContentModifier {
             return false
         }
     }
+
+    func loadPreferences(for providerId: ProviderID?) {
+        guard let providerPreferences else {
+            return
+        }
+        if let providerId {
+            do {
+                pp_log(.app, .debug, "Load preferences for provider \(providerId)")
+                providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
+            } catch {
+                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+                providerPreferences.repository = nil
+            }
+        } else {
+            providerPreferences.repository = nil
+        }
+    }
+
+    func savePreferences() {
+        guard let providerPreferences else {
+            return
+        }
+        do {
+            pp_log(.app, .debug, "Save preferences for provider \(providerId.debugDescription)")
+            try providerPreferences.save()
+        } catch {
+            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.debugDescription): \(error)")
+        }
+    }
 }
 
 // MARK: - Preview
@@ -182,6 +219,7 @@ private extension ProviderContentModifier {
             .modifier(ProviderContentModifier(
                 apis: [API.bundled],
                 providerId: .constant(.hideme),
+                providerPreferences: nil,
                 entityType: VPNEntity<OpenVPN.Configuration>.self,
                 paywallReason: .constant(nil),
                 providerRows: {},

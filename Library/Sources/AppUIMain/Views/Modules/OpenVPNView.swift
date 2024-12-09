@@ -85,7 +85,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
-            .onDisappear(perform: onDisappear)
     }
 }
 
@@ -130,6 +129,7 @@ private extension OpenVPNView {
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
             providerId: providerId,
+            providerPreferences: providerPreferences,
             selectedEntity: providerEntity,
             paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
@@ -204,13 +204,7 @@ private extension OpenVPNView {
     }
 
     var allowedEndpoints: Blacklist<ExtendedEndpoint> {
-        if let providerId = draft.wrappedValue.providerId {
-            do {
-                pp_log(.app, .debug, "Load preferences for provider \(providerId)")
-                providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
-            } catch {
-                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
-            }
+        if draft.wrappedValue.providerSelection != nil {
             return providerPreferences.allowedEndpoints()
         } else {
             return preferences.allowedEndpoints()
@@ -220,15 +214,6 @@ private extension OpenVPNView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
-    }
-
-    func onDisappear() {
-        do {
-            pp_log(.app, .debug, "Save preferences for provider \(providerId.wrappedValue.debugDescription)")
-            try providerPreferences.save()
-        } catch {
-            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.wrappedValue.debugDescription): \(error)")
-        }
     }
 }
 
