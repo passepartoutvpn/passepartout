@@ -112,14 +112,16 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
     }
 
     func save() throws {
-        guard context.hasChanges else {
-            return
-        }
-        do {
-            try context.save()
-        } catch {
-            context.rollback()
-            throw error
+        try context.performAndWait {
+            guard context.hasChanges else {
+                return
+            }
+            do {
+                try context.save()
+            } catch {
+                context.rollback()
+                throw error
+            }
         }
     }
 }

@@ -87,18 +87,22 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
     }
 
     func save() throws {
-        guard context.hasChanges else {
-            return
-        }
-        do {
-            try context.save()
-        } catch {
-            context.rollback()
-            throw error
+        try context.performAndWait {
+            guard context.hasChanges else {
+                return
+            }
+            do {
+                try context.save()
+            } catch {
+                context.rollback()
+                throw error
+            }
         }
     }
 
     func discard() {
-        context.rollback()
+        context.performAndWait {
+            context.rollback()
+        }
     }
 }
