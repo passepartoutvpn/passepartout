@@ -97,4 +97,8 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
             throw error
         }
     }
+
+    func discard() {
+        context.rollback()
+    }
 }
