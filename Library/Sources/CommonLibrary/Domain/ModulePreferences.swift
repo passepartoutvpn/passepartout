@@ -43,12 +43,4 @@ public final class ModulePreferences: ObservableObject {
             self?.repository?.removeExcludedEndpoint($0)
         }
     }
-
-    public func save() throws {
-        try repository?.save()
-    }
-
-    public func discard() {
-        repository?.discard()
-    }
 }

@@ -37,7 +37,7 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
-    private var trackedPreferences: [UUID: ModulePreferences]
+    private var trackedPreferences: [UUID: ModulePreferencesRepository]
 
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
@@ -207,15 +207,14 @@ extension ProfileEditor {
         removedModules = [:]
     }
 
-    public func preferences(forModuleWithId moduleId: UUID, manager: PreferencesManager) -> ModulePreferences {
+    public func loadPreferences(_ preferences: ModulePreferences, forModuleWithId moduleId: UUID, manager: PreferencesManager) {
         do {
             pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
-            let observable = try trackedPreferences[moduleId] ?? manager.preferences(forModuleWithId: moduleId)
-            trackedPreferences[moduleId] = observable
-            return observable
+            let repository = try trackedPreferences[moduleId] ?? manager.preferencesRepository(forModuleWithId: moduleId)
+            trackedPreferences[moduleId] = repository
+            preferences.repository = repository
         } catch {
             pp_log(.App.profiles, .error, "Unable to track preferences for module \(moduleId): \(error)")
-            return ModulePreferences()
         }
     }
 

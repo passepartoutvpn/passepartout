@@ -52,6 +52,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     @StateObject
+    private var preferences = ModulePreferences()
+
+    @StateObject
     private var providerPreferences = ProviderPreferences()
 
     @StateObject
@@ -85,6 +88,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .withErrorHandler(errorHandler)
+            .onLoad {
+                editor.loadPreferences(preferences, forModuleWithId: module.id, manager: preferencesManager)
+            }
     }
 }
 
@@ -199,10 +205,6 @@ private extension OpenVPNView {
 // MARK: - Logic
 
 private extension OpenVPNView {
-    var preferences: ModulePreferences {
-        editor.preferences(forModuleWithId: module.id, manager: preferencesManager)
-    }
-
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
         if draft.wrappedValue.providerSelection != nil {
             return providerPreferences.excludedEndpoints()
