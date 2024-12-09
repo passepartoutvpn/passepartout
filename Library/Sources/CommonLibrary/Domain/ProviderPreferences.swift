@@ -54,10 +54,6 @@ public final class ProviderPreferences: ObservableObject {
         }
     }
 
-    public func refresh() {
-        objectWillChange.send()
-    }
-
     public func save() throws {
         try repository?.save()
     }
