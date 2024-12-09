@@ -114,7 +114,7 @@ extension CoreDataPersistentStore {
         container.viewContext
     }
 
-    public var backgroundContext: NSManagedObjectContext {
+    public func backgroundContext() -> NSManagedObjectContext {
         container.newBackgroundContext()
     }
 

@@ -43,13 +43,13 @@ extension Dependencies {
         return PreferencesManager(
             modulesFactory: {
                 try AppData.cdModulePreferencesRepositoryV3(
-                    context: preferencesStore.backgroundContext,
+                    context: preferencesStore.backgroundContext(),
                     moduleId: $0
                 )
             },
             providersFactory: {
                 try AppData.cdProviderPreferencesRepositoryV3(
-                    context: preferencesStore.backgroundContext,
+                    context: preferencesStore.backgroundContext(),
                     providerId: $0
                 )
             }
