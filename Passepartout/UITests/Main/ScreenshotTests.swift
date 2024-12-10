@@ -50,32 +50,34 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
             .waitForProfiles()
             .enableProfile(at: 0)
 
-        try await Task.sleep(for: .seconds(2))
-        try snapshot("1_Connected")
-
         let profile = root
             .openProfileMenu(at: 2)
             .editProfile()
 
         try await Task.sleep(for: .seconds(2))
-        try snapshot("2_ProfileEditor", target: .sheet)
+        try snapshot("02_ProfileEditor", target: .sheet)
 
         profile
             .enterModule(at: 1)
 
         try await Task.sleep(for: .seconds(2))
-        try snapshot("3_OnDemand", target: .sheet)
+        try snapshot("03_OnDemand", target: .sheet)
 
         profile
             .leaveModule()
             .enterModule(at: 2)
 
         try await Task.sleep(for: .seconds(2))
-        try snapshot("4_DNS", target: .sheet)
+        try snapshot("04_DNS", target: .sheet)
 
-        profile
+        let app = profile
             .leaveModule()
             .closeProfile()
+
+        try await Task.sleep(for: .seconds(2))
+        try snapshot("01_Connected")
+
+        app
             .openProfileMenu(at: 2)
             .connectToProfile()
 #if os(iOS)
@@ -83,7 +85,7 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
 #endif
 
         try await Task.sleep(for: .seconds(2))
-        try snapshot("5_ProviderServers", target: .sheet)
+        try snapshot("05_ProviderServers", target: .sheet)
 
         print("Saved to: \(ScreenshotDestination.temporary.url)")
     }

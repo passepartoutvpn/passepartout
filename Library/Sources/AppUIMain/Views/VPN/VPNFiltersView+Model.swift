@@ -27,6 +27,7 @@ import Combine
 import CommonLibrary
 import Foundation
 import PassepartoutKit
+import UIAccessibility
 
 extension VPNFiltersView {
 
@@ -65,7 +66,9 @@ extension VPNFiltersView {
             onlyShowsFavorites = false
             subscriptions = []
 
-            observeObjects()
+            if !AppCommandLine.contains(.uiTesting) {
+                observeObjects()
+            }
         }
 
         func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {

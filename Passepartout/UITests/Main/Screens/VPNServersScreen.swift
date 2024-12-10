@@ -31,10 +31,12 @@ import XCTest
 struct VPNServersScreen {
     let app: XCUIApplication
 
+#if os(iOS)
     @discardableResult
     func discloseCountry(at index: Int) -> Self {
         let group = app.get(.VPNServers.countryGroup, at: index)
         group.tap()
         return self
     }
+#endif
 }

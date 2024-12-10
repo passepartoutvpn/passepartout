@@ -84,7 +84,7 @@ extension XCUIApplicationProviding where Self: XCTestCase {
 #elseif os(tvOS)
         let device = "AppleTV"
 #endif
-        return "\(name)_\(device).png"
+        return "\(device)_\(name).png"
     }
 
     private func container(for target: ScreenshotTarget) -> XCUIElement {
