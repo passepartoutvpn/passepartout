@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -39,6 +40,26 @@ extension ProfileEditor {
             return matchingModule
         } set: { [weak self] in
             self?.saveModule($0, activating: false)
+        }
+    }
+}
+
+// MARK: - ModulePreferences
+
+extension ProfileEditor {
+    public func excludedEndpoints(for moduleId: UUID) -> ObservableList<ExtendedEndpoint> {
+        ObservableList { [weak self] endpoint in
+            self?.profile.attributes.preference(inModule: moduleId) {
+                $0.isExcludedEndpoint(endpoint)
+            } ?? false
+        } add: { [weak self] endpoint in
+            self?.profile.attributes.editPreferences(inModule: moduleId) {
+                $0.addExcludedEndpoint(endpoint)
+            }
+        } remove: { [weak self] endpoint in
+            self?.profile.attributes.editPreferences(inModule: moduleId) {
+                $0.removeExcludedEndpoint(endpoint)
+            }
         }
     }
 }

@@ -440,15 +440,15 @@ private extension ProfileManager {
         pp_log(.App.profiles, .info, "Start importing remote profiles: \(profiles.map(\.id))")
         assert(profiles.count == Set(profiles.map(\.id)).count, "Remote repository must not have duplicates")
 
-        pp_log(.App.profiles, .debug, "Local attributes:")
-        let localAttributes: [Profile.ID: ProfileAttributes] = allProfiles.values.reduce(into: [:]) {
-            $0[$1.id] = $1.attributes
-            pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes)")
+        pp_log(.App.profiles, .debug, "Local fingerprints:")
+        let localFingerprints: [Profile.ID: UUID] = allProfiles.values.reduce(into: [:]) {
+            $0[$1.id] = $1.attributes.fingerprint
+            pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes.fingerprint.debugDescription)")
         }
-        pp_log(.App.profiles, .debug, "Remote attributes:")
-        let remoteAttributes: [Profile.ID: ProfileAttributes] = profiles.reduce(into: [:]) {
-            $0[$1.id] = $1.attributes
-            pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes)")
+        pp_log(.App.profiles, .debug, "Remote fingerprints:")
+        let remoteFingerprints: [Profile.ID: UUID] = profiles.reduce(into: [:]) {
+            $0[$1.id] = $1.attributes.fingerprint
+            pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes.fingerprint.debugDescription)")
         }
 
         let remotelyDeletedIds = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
@@ -473,8 +473,8 @@ private extension ProfileManager {
                         idsToRemove.append(remoteProfile.id)
                         continue
                     }
-                    if let localFingerprint = localAttributes[remoteProfile.id]?.fingerprint {
-                        guard let remoteFingerprint = remoteAttributes[remoteProfile.id]?.fingerprint,
+                    if let localFingerprint = localFingerprints[remoteProfile.id] {
+                        guard let remoteFingerprint = remoteFingerprints[remoteProfile.id],
                               remoteFingerprint != localFingerprint else {
                             pp_log(.App.profiles, .info, "Skip re-importing local profile \(remoteProfile.id)")
                             continue
