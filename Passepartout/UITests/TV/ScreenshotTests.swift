@@ -46,19 +46,19 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
             .presentInitialProfiles()
             .enableProfile(up: 1)
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("01_Connected")
 
         root
             .presentProfilesWhileConnected()
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("02_ConnectedWithProfileList")
 
         root
             .enableProfile(up: 0)
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("03_OnDemand")
 
         print("Saved to: \(ScreenshotDestination.temporary.url)")

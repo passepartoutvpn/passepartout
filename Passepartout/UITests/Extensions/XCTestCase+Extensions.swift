@@ -54,6 +54,10 @@ extension XCTestCase.ScreenshotDestination {
 
 @MainActor
 extension XCUIApplicationProviding where Self: XCTestCase {
+    func pause() async {
+        try? await Task.sleep(for: .seconds(2))
+    }
+
     func snapshot(
         _ name: String,
         destination: ScreenshotDestination = .temporary,

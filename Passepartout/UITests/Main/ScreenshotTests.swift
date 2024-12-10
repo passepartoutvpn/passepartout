@@ -54,27 +54,27 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
             .openProfileMenu(at: 2)
             .editProfile()
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("02_ProfileEditor", target: .sheet)
 
         profile
             .enterModule(at: 1)
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("03_OnDemand", target: .sheet)
 
         profile
             .leaveModule()
             .enterModule(at: 2)
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("04_DNS", target: .sheet)
 
         let app = profile
             .leaveModule()
             .closeProfile()
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("01_Connected")
 
         app
@@ -84,7 +84,7 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
             .discloseCountry(at: 2)
 #endif
 
-        try await Task.sleep(for: .seconds(2))
+        await pause()
         try snapshot("05_ProviderServers", target: .sheet)
 
         print("Saved to: \(ScreenshotDestination.temporary.url)")

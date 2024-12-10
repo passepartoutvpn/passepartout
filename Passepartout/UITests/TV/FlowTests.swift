@@ -38,10 +38,6 @@ final class FlowTests: XCTestCase {
         app.launch()
     }
 
-    override func tearDown() async throws {
-        try await Task.sleep(for: .seconds(2))
-    }
-
     func testShow() {
         AppScreen(app: app)
             .waitForProfiles()
