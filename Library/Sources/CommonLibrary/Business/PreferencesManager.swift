@@ -70,6 +70,9 @@ private final class DummyModulePreferencesRepository: ModulePreferencesRepositor
     func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
     }
 
+    func erase() {
+    }
+
     func save() throws {
     }
 }

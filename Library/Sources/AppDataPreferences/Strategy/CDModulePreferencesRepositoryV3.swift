@@ -106,6 +106,13 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
         }
     }
 
+    func erase() {
+        context.performAndWait {
+            entity.excludedEndpoints?.forEach(context.delete)
+            context.delete(entity)
+        }
+    }
+
     func save() throws {
         try context.performAndWait {
             guard context.hasChanges else {
