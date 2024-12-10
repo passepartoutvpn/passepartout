@@ -64,6 +64,14 @@ public final class Theme: ObservableObject {
 
     public internal(set) var errorColor: Color = .red
 
+    public var enableColor: Color {
+        activeColor
+    }
+
+    public var disableColor: Color {
+        errorColor
+    }
+
     public internal(set) var upgradeColor: Color = .orange
 
     public internal(set) var logoImage = "Logo"

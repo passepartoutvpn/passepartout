@@ -145,10 +145,9 @@ private extension ActiveProfileView {
     var toggleConnectionColor: Color {
         switch tunnel.status {
         case .inactive:
-            return theme.activeColor
-
+            return tunnel.currentProfile?.onDemand == true ? theme.disableColor : theme.enableColor
         default:
-            return theme.errorColor
+            return theme.disableColor
         }
     }
 
