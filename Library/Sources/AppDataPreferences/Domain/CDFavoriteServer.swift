@@ -1,8 +1,8 @@
 //
-//  Mapper.swift
+//  CDFavoriteServer.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/7/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import CoreData
 import Foundation
-import PassepartoutKit
 
-struct DomainMapper {
-}
-
-struct CoreDataMapper {
-    let context: NSManagedObjectContext
-
-    func cdExcludedEndpoint(from endpoint: ExtendedEndpoint) -> CDExcludedEndpoint {
-        let cdEndpoint = CDExcludedEndpoint(context: context)
-        cdEndpoint.endpoint = endpoint.rawValue
-        return cdEndpoint
+@objc(CDFavoriteServer)
+final class CDFavoriteServer: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDFavoriteServer> {
+        NSFetchRequest<CDFavoriteServer>(entityName: "CDFavoriteServer")
     }
 
-    func cdFavoriteServer(from serverId: String) -> CDFavoriteServer {
-        let cdFavorite = CDFavoriteServer(context: context)
-        cdFavorite.serverId = serverId
-        return cdFavorite
-    }
+    @NSManaged var serverId: String?
+    @NSManaged var providerPreferences: CDProviderPreferencesV3?
 }
