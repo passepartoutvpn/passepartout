@@ -242,6 +242,7 @@ private extension OnDemandView {
             module: $0,
             parameters: .init(
                 editor: $1,
+                preferences: ModulePreferences(),
                 impl: nil
             ),
             observer: MockWifi()

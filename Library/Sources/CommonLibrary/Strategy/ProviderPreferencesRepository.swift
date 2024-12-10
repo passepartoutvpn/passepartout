@@ -29,11 +29,5 @@ import PassepartoutKit
 public protocol ProviderPreferencesRepository {
     var favoriteServers: Set<String> { get set }
 
-    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool
-
-    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint)
-
-    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint)
-
     func save() throws
 }

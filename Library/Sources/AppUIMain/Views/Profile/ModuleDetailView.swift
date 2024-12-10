@@ -28,11 +28,18 @@ import PassepartoutKit
 import SwiftUI
 
 struct ModuleDetailView: View {
+
+    @EnvironmentObject
+    private var preferencesManager: PreferencesManager
+
     let profileEditor: ProfileEditor
 
     let moduleId: UUID?
 
     let moduleViewFactory: any ModuleViewFactory
+
+    @StateObject
+    private var preferences = ModulePreferences()
 
     var body: some View {
         debugChanges()
@@ -52,8 +59,24 @@ private extension ModuleDetailView {
     func editorView(forModuleWithId moduleId: UUID) -> some View {
         AnyView(moduleViewFactory.view(
             with: profileEditor,
+            preferences: preferences,
             moduleId: moduleId
         ))
+        .onLoad {
+            do {
+                let repository = try preferencesManager.preferencesRepository(forModuleWithId: moduleId)
+                preferences.setRepository(repository)
+            } catch {
+                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
+            }
+        }
+        .onDisappear {
+            do {
+                try preferences.save()
+            } catch {
+                pp_log(.app, .error, "Unable to save preferences for module \(moduleId): \(error)")
+            }
+        }
     }
 
     var emptyView: some View {

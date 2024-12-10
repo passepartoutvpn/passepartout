@@ -28,10 +28,7 @@ import Foundation
 import PassepartoutKit
 
 final class DefaultTunnelProcessor: Sendable {
-    private let preferencesManager: PreferencesManager
-
-    init(preferencesManager: PreferencesManager) {
-        self.preferencesManager = preferencesManager
+    init() {
     }
 }
 
@@ -47,13 +44,6 @@ extension DefaultTunnelProcessor: PacketTunnelProcessor {
                 let preferences = builder.attributes.preferences(inModule: moduleBuilder.id)
                 moduleBuilder.configurationBuilder?.remotes?.removeAll {
                     preferences.isExcludedEndpoint($0)
-                }
-
-                if let providerId = moduleBuilder.providerId {
-                    let providerPreferences = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
-                    moduleBuilder.configurationBuilder?.remotes?.removeAll {
-                        providerPreferences.isExcludedEndpoint($0)
-                    }
                 }
 
                 let module = try moduleBuilder.tryBuild()

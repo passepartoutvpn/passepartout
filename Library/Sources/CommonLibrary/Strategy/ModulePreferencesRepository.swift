@@ -1,8 +1,8 @@
 //
-//  ModuleViewFactory.swift
+//  ModulePreferencesRepository.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
-import SwiftUI
+import PassepartoutKit
 
-public protocol ModuleViewFactory: AnyObject {
-    associatedtype Content: View
+public protocol ModulePreferencesRepository {
+    var excludedEndpoints: Set<ExtendedEndpoint> { get }
 
-    @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool
+
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint)
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint)
+
+    func save() throws
 }

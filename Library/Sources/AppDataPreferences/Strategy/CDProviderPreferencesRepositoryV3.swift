@@ -55,7 +55,6 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
                     guard $0.offset > 0 else {
                         return
                     }
-                    $0.element.excludedEndpoints?.forEach(context.delete(_:))
                     context.delete($0.element)
                 }
 
@@ -92,35 +91,6 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
             } catch {
                 pp_log(.app, .error, "Unable to set favoriteServers: \(error)")
             }
-        }
-    }
-
-    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
-        context.performAndWait {
-            entity.excludedEndpoints?.contains {
-                $0.endpoint == endpoint.rawValue
-            } ?? false
-        }
-    }
-
-    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
-        context.performAndWait {
-            let mapper = CoreDataMapper(context: context)
-            let cdEndpoint = mapper.cdExcludedEndpoint(from: endpoint)
-            cdEndpoint.providerPreferences = entity
-            entity.excludedEndpoints?.insert(cdEndpoint)
-        }
-    }
-
-    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
-        context.performAndWait {
-            guard let found = entity.excludedEndpoints?.first(where: {
-                $0.endpoint == endpoint.rawValue
-            }) else {
-                return
-            }
-            entity.excludedEndpoints?.remove(found)
-            context.delete(found)
         }
     }
 

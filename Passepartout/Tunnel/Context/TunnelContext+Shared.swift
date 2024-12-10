@@ -37,10 +37,7 @@ extension TunnelContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-        let processor: PacketTunnelProcessor = {
-            let preferencesManager = dependencies.preferencesManager(withCloudKit: false)
-            return DefaultTunnelProcessor(preferencesManager: preferencesManager)
-        }()
+        let processor = DefaultTunnelProcessor()
         return TunnelContext(
             iapManager: iapManager,
             processor: processor

@@ -47,7 +47,7 @@ extension ProfileEditor {
 // MARK: - ModulePreferences
 
 extension ProfileEditor {
-    public func excludedEndpoints(for moduleId: UUID) -> ObservableList<ExtendedEndpoint> {
+    public func excludedEndpoints(for moduleId: UUID, modulePreferences: ModulePreferences) -> ObservableList<ExtendedEndpoint> {
         ObservableList { [weak self] endpoint in
             self?.profile.attributes.preference(inModule: moduleId) {
                 $0.isExcludedEndpoint(endpoint)
@@ -56,10 +56,12 @@ extension ProfileEditor {
             self?.profile.attributes.editPreferences(inModule: moduleId) {
                 $0.addExcludedEndpoint(endpoint)
             }
+            modulePreferences.addExcludedEndpoint(endpoint)
         } remove: { [weak self] endpoint in
             self?.profile.attributes.editPreferences(inModule: moduleId) {
                 $0.removeExcludedEndpoint(endpoint)
             }
+            modulePreferences.removeExcludedEndpoint(endpoint)
         }
     }
 }

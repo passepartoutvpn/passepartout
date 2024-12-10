@@ -28,11 +28,17 @@ import Foundation
 import PassepartoutKit
 
 public final class PreferencesManager: ObservableObject, Sendable {
+    private let modulesFactory: @Sendable (UUID) throws -> ModulePreferencesRepository
+
     private let providersFactory: @Sendable (ProviderID) throws -> ProviderPreferencesRepository
 
     public init(
+        modulesFactory: (@Sendable (UUID) throws -> ModulePreferencesRepository)? = nil,
         providersFactory: (@Sendable (ProviderID) throws -> ProviderPreferencesRepository)? = nil
     ) {
+        self.modulesFactory = modulesFactory ?? { _ in
+            DummyModulePreferencesRepository()
+        }
         self.providersFactory = providersFactory ?? { _ in
             DummyProviderPreferencesRepository()
         }
@@ -40,24 +46,19 @@ public final class PreferencesManager: ObservableObject, Sendable {
 }
 
 extension PreferencesManager {
+    public func preferencesRepository(forModuleWithId moduleId: UUID) throws -> ModulePreferencesRepository {
+        try modulesFactory(moduleId)
+    }
+
     public func preferencesRepository(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
         try providersFactory(providerId)
     }
 }
 
-@MainActor
-extension PreferencesManager {
-    public func preferences(forProviderWithId providerId: ProviderID) throws -> ProviderPreferences {
-        let object = ProviderPreferences()
-        object.repository = try providersFactory(providerId)
-        return object
-    }
-}
-
 // MARK: - Dummy
 
-private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {
-    var favoriteServers: Set<String> = []
+private final class DummyModulePreferencesRepository: ModulePreferencesRepository {
+    let excludedEndpoints: Set<ExtendedEndpoint> = []
 
     func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
         false
@@ -68,6 +69,13 @@ private final class DummyProviderPreferencesRepository: ProviderPreferencesRepos
 
     func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
     }
+
+    func save() throws {
+    }
+}
+
+private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {
+    var favoriteServers: Set<String> = []
 
     func save() throws {
     }

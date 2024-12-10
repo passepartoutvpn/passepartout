@@ -33,5 +33,5 @@ final class CDExcludedEndpoint: NSManagedObject {
     }
 
     @NSManaged var endpoint: String?
-    @NSManaged var providerPreferences: CDProviderPreferencesV3?
+    @NSManaged var modulePreferences: CDModulePreferencesV3?
 }

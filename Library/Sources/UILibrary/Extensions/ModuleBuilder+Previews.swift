@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -33,6 +34,7 @@ extension ModuleBuilder where Self: ModuleViewProviding {
         NavigationStack {
             moduleView(with: .init(
                 editor: ProfileEditor(modules: [self]),
+                preferences: ModulePreferences(),
                 impl: nil
             ))
             .navigationTitle(title)

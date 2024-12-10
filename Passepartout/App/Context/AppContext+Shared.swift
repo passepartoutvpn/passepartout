@@ -24,6 +24,7 @@
 //
 
 import AppData
+import AppDataPreferences
 import AppDataProfiles
 import AppDataProviders
 import CommonLibrary
@@ -122,7 +123,30 @@ extension AppContext {
             return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
         }()
 
-        let preferencesManager = dependencies.preferencesManager(withCloudKit: true)
+        let preferencesManager: PreferencesManager = {
+            let preferencesStore = CoreDataPersistentStore(
+                logger: dependencies.coreDataLogger(),
+                containerName: Constants.shared.containers.preferences,
+                baseURL: BundleConfiguration.urlForGroupDocuments,
+                model: AppData.cdPreferencesModel,
+                cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
+                author: nil
+            )
+            return PreferencesManager(
+                modulesFactory: {
+                    try AppData.cdModulePreferencesRepositoryV3(
+                        context: preferencesStore.context,
+                        moduleId: $0
+                    )
+                },
+                providersFactory: {
+                    try AppData.cdProviderPreferencesRepositoryV3(
+                        context: preferencesStore.context,
+                        providerId: $0
+                    )
+                }
+            )
+        }()
 
         return AppContext(
             iapManager: iapManager,

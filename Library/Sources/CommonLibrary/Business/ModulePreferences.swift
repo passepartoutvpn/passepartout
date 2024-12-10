@@ -1,8 +1,8 @@
 //
-//  ProviderPreferences.swift
+//  ModulePreferences.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/5/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -28,30 +28,26 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-public final class ProviderPreferences: ObservableObject {
-    public var repository: ProviderPreferencesRepository?
+public final class ModulePreferences: ObservableObject {
+    private var repository: ModulePreferencesRepository?
 
     public init() {
     }
 
-    public var favoriteServers: Set<String> {
-        get {
-            repository?.favoriteServers ?? []
-        }
-        set {
-            objectWillChange.send()
-            repository?.favoriteServers = newValue
-        }
+    public func setRepository(_ repository: ModulePreferencesRepository?) {
+        self.repository = repository
     }
 
-    public func excludedEndpoints() -> ObservableList<ExtendedEndpoint> {
-        ObservableList { [weak self] in
-            self?.repository?.isExcludedEndpoint($0) == true
-        } add: { [weak self] in
-            self?.repository?.addExcludedEndpoint($0)
-        } remove: { [weak self] in
-            self?.repository?.removeExcludedEndpoint($0)
-        }
+    public var excludedEndpoints: Set<ExtendedEndpoint> {
+        repository?.excludedEndpoints ?? []
+    }
+
+    public func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        repository?.addExcludedEndpoint(endpoint)
+    }
+
+    public func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        repository?.removeExcludedEndpoint(endpoint)
     }
 
     public func save() throws {
