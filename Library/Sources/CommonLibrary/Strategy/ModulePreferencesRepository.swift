@@ -34,5 +34,7 @@ public protocol ModulePreferencesRepository {
 
     func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint)
 
+    func erase()
+
     func save() throws
 }

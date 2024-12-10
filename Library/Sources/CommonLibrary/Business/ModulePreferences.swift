@@ -51,6 +51,10 @@ public final class ModulePreferences: ObservableObject, ModulePreferencesReposit
         repository?.removeExcludedEndpoint(endpoint)
     }
 
+    public func erase() {
+        repository?.erase()
+    }
+
     public func save() throws {
         try repository?.save()
     }
