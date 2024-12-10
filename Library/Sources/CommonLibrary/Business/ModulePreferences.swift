@@ -38,8 +38,8 @@ public final class ModulePreferences: ObservableObject {
         self.repository = repository
     }
 
-    public var excludedEndpoints: Set<ExtendedEndpoint> {
-        repository?.excludedEndpoints ?? []
+    public func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        repository?.isExcludedEndpoint(endpoint) ?? false
     }
 
     public func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {

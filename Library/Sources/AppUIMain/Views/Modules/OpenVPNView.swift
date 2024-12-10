@@ -211,15 +211,15 @@ private extension OpenVPNView {
         path.wrappedValue.removeLast()
     }
 
-    // reset to provider exclusions, filtered by current preset
+    // filter out exclusions unrelated to current server
     func resetExcludedEndpointsWithCurrentProviderEntity() {
         do {
             let cfg = try draft.wrappedValue.providerSelection?.configuration()
             editor.profile.attributes.editPreferences(inModule: module.id) {
                 if let cfg {
-                    $0.excludedEndpoints = modulePreferences.excludedEndpoints.filter {
-                        cfg.remotes?.contains($0) == true
-                    }
+                    $0.excludedEndpoints = Set(cfg.remotes?.filter {
+                        modulePreferences.isExcludedEndpoint($0)
+                    } ?? [])
                 } else {
                     $0.excludedEndpoints = []
                 }

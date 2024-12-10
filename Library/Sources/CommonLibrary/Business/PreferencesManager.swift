@@ -58,8 +58,6 @@ extension PreferencesManager {
 // MARK: - Dummy
 
 private final class DummyModulePreferencesRepository: ModulePreferencesRepository {
-    let excludedEndpoints: Set<ExtendedEndpoint> = []
-
     func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
         false
     }

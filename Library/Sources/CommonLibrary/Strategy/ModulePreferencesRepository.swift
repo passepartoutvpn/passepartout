@@ -27,8 +27,6 @@ import Foundation
 import PassepartoutKit
 
 public protocol ModulePreferencesRepository {
-    var excludedEndpoints: Set<ExtendedEndpoint> { get }
-
     func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool
 
     func addExcludedEndpoint(_ endpoint: ExtendedEndpoint)

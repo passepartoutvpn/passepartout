@@ -70,13 +70,6 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
         }
     }
 
-    var excludedEndpoints: Set<ExtendedEndpoint> {
-        context.performAndWait {
-            let mapper = DomainMapper()
-            return mapper.excludedEndpoints(from: entity.excludedEndpoints)
-        }
-    }
-
     func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
         context.performAndWait {
             entity.excludedEndpoints?.contains {
