@@ -28,7 +28,7 @@ import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
-import UITesting
+import UIAccessibility
 
 @MainActor
 public final class AppContext: ObservableObject, Sendable {

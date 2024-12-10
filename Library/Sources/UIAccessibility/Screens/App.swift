@@ -1,8 +1,8 @@
 //
-//  ModuleViewModifier.swift
+//  App.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/9/24.
+//  Created by Davide De Rosa on 11/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
-import UIAccessibility
+import Foundation
 
-struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
+extension AccessibilityInfo {
+    public enum App {
+        public enum ProfileMenu {
+            public static let edit = AccessibilityInfo("app.profileMenu.edit", .menuItem)
 
-    @Environment(\.isUITesting)
-    private var isUITesting
-
-    @ObservedObject
-    var editor: ProfileEditor
-
-    let draft: T
-
-    func body(content: Content) -> some View {
-        Form {
-            content
-#if DEBUG
-            if !isUITesting {
-                UUIDSection(uuid: draft.id)
-            }
-#endif
+            public static let connectTo = AccessibilityInfo("app.profileMenu.connectTo", .menuItem)
         }
-        .themeForm()
-        .themeManualInput()
-        .themeAnimation(on: draft, category: .modules)
-    }
-}
 
-extension View {
-    func moduleView<T>(editor: ProfileEditor, draft: T) -> some View where T: ModuleBuilder & Equatable {
-        modifier(ModuleViewModifier(editor: editor, draft: draft))
+        public enum ProfileList {
+            public static let profile = AccessibilityInfo("app.profileList.profile", .button)
+        }
+
+        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
+
+        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
+
+        public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
     }
 }

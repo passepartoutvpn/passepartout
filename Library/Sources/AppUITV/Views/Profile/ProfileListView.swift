@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 
 struct ProfileListView: View {
 
@@ -84,6 +85,7 @@ private extension ProfileListView {
             }
         )
         .focused($focusedField, equals: .profile(preview.id))
+        .uiAccessibility(.App.ProfileList.profile)
     }
 
     func toggleView(for preview: ProfilePreview) -> some View {

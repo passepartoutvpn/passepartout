@@ -1,8 +1,8 @@
 //
-//  ProfileEditorScreen.swift
+//  VPNServers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/28/24.
+//  Created by Davide De Rosa on 12/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,17 +24,9 @@
 //
 
 import Foundation
-import UITesting
-import XCTest
 
-@MainActor
-struct ProfileEditorScreen {
-    let app: XCUIApplication
-
-    @discardableResult
-    func closeProfile() -> AppScreen {
-        let cancelButton = app.get(.Profile.cancel)
-        cancelButton.tap()
-        return AppScreen(app: app)
+extension AccessibilityInfo {
+    public enum VPNServers {
+        public static let countryGroup = AccessibilityInfo("vpnServers.countryGroup", .button)
     }
 }

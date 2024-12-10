@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 
 struct ActiveProfileView: View {
 
@@ -73,7 +74,7 @@ struct ActiveProfileView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             }
             .padding(.horizontal, 100)
-            .padding(.top, 50)
+//            .padding(.top, 50)
 
             Spacer()
         }
@@ -86,6 +87,7 @@ private extension ActiveProfileView {
             .font(.title)
             .fontWeight(theme.relevantWeight)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .uiAccessibility(.App.installedProfile)
     }
 
     var statusView: some View {

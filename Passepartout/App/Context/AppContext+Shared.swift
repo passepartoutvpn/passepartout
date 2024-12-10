@@ -32,8 +32,8 @@ import CommonUtils
 import Foundation
 import LegacyV2
 import PassepartoutKit
+import UIAccessibility
 import UILibrary
-import UITesting
 
 extension AppContext {
     static let shared: AppContext = {

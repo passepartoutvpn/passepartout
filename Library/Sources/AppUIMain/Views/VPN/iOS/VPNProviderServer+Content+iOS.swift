@@ -29,6 +29,7 @@ import CommonAPI
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 
 extension VPNProviderServerView {
     struct ContentView: View {
@@ -129,6 +130,7 @@ private extension VPNProviderServerView.ContentView {
                 } label: {
                     ThemeCountryText(code)
                 }
+                .uiAccessibility(.VPNServers.countryGroup)
             }
     }
 

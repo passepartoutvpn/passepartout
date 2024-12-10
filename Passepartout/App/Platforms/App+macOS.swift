@@ -31,7 +31,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UITesting
+import UIAccessibility
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
