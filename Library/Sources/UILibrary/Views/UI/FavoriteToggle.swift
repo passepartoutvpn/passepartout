@@ -23,20 +23,21 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import SwiftUI
 
 public struct FavoriteToggle<ID>: View where ID: Hashable {
     private let value: ID
 
-    @Binding
-    private var selection: Set<ID>
+    @ObservedObject
+    private var selection: ObservableList<ID>
 
     @State
     private var hover: ID?
 
-    public init(value: ID, selection: Binding<Set<ID>>) {
+    public init(value: ID, selection: ObservableList<ID>) {
         self.value = value
-        _selection = selection
+        self.selection = selection
     }
 
     public var body: some View {
@@ -44,7 +45,7 @@ public struct FavoriteToggle<ID>: View where ID: Hashable {
             if selection.contains(value) {
                 selection.remove(value)
             } else {
-                selection.insert(value)
+                selection.add(value)
             }
         } label: {
             ThemeImage(selection.contains(value) ? .favoriteOn : .favoriteOff)

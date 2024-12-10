@@ -119,31 +119,6 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
         }
     }
 
-    var favoriteServers: Set<String> {
-        get {
-            do {
-                return try context.performAndWait {
-                    guard let data = entity.favoriteServerIds else {
-                        return []
-                    }
-                    return try JSONDecoder().decode(Set<String>.self, from: data)
-                }
-            } catch {
-                pp_log(.app, .error, "Unable to get favoriteServers: \(error)")
-                return []
-            }
-        }
-        set {
-            do {
-                try context.performAndWait {
-                    entity.favoriteServerIds = try JSONEncoder().encode(newValue)
-                }
-            } catch {
-                pp_log(.app, .error, "Unable to set favoriteServers: \(error)")
-            }
-        }
-    }
-
     func save() throws {
         try context.performAndWait {
             guard context.hasChanges else {

@@ -37,6 +37,16 @@ public final class ProviderPreferences: ObservableObject, ProviderPreferencesRep
         self.repository = repository
     }
 
+    public func favoriteServers() -> ObservableList<String> {
+        ObservableList { [weak self] in
+            self?.isFavoriteServer($0) ?? false
+        } add: { [weak self] in
+            self?.addFavoriteServer($0)
+        } remove: { [weak self] in
+            self?.removeFavoriteServer($0)
+        }
+    }
+
     public func isFavoriteServer(_ serverId: String) -> Bool {
         repository?.isFavoriteServer(serverId) ?? false
     }
