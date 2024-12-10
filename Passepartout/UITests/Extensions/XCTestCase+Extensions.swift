@@ -88,7 +88,7 @@ extension XCUIApplicationProviding where Self: XCTestCase {
     }
 
     private func container(for target: ScreenshotTarget) -> XCUIElement {
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         app.windows.firstMatch
 #else
         switch target {

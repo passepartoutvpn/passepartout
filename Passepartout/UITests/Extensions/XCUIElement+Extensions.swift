@@ -42,14 +42,14 @@ extension XCUIElement {
 
 private extension XCUIElement {
     func query(for elementType: AccessibilityInfo.ElementType) -> XCUIElementQuery {
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         switch elementType {
         case .button, .link, .menu, .menuItem:
             return buttons
         case .text:
             return staticTexts
         }
-#elseif os(macOS)
+#else
         switch elementType {
         case .button, .link:
             return buttons
@@ -57,13 +57,6 @@ private extension XCUIElement {
             return menuButtons
         case .menuItem:
             return menuItems
-        case .text:
-            return staticTexts
-        }
-#else
-        switch elementType {
-        case .button, .link, .menu, .menuItem:
-            return buttons
         case .text:
             return staticTexts
         }
