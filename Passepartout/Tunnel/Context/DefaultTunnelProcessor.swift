@@ -44,9 +44,9 @@ extension DefaultTunnelProcessor: PacketTunnelProcessor {
                     return
                 }
 
-                let modulesPreferences = try preferencesManager.preferencesRepository(forModuleWithId: moduleBuilder.id)
+                let preferences = builder.attributes.preferences(inModule: moduleBuilder.id)
                 moduleBuilder.configurationBuilder?.remotes?.removeAll {
-                    modulesPreferences.isExcludedEndpoint($0)
+                    preferences.isExcludedEndpoint($0)
                 }
 
                 if let providerId = moduleBuilder.providerId {

@@ -73,17 +73,6 @@ public struct EditableProfile: MutableProfileType {
     }
 }
 
-extension EditableProfile {
-    public var attributes: ProfileAttributes {
-        get {
-            userInfo() ?? ProfileAttributes()
-        }
-        set {
-            setUserInfo(newValue)
-        }
-    }
-}
-
 extension Profile {
     public func editable() -> EditableProfile {
         EditableProfile(
@@ -111,6 +100,8 @@ extension Module {
         return builder as? any ModuleBuilder
     }
 }
+
+// MARK: -
 
 private extension EditableProfile {
     var activeConnectionModule: (any ModuleBuilder)? {

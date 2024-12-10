@@ -37,9 +37,6 @@ public final class ProfileEditor: ObservableObject {
     @Published
     public var isShared: Bool
 
-    @Published
-    private var trackedPreferences: [UUID: ModulePreferencesRepository]
-
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
     public convenience init() {
@@ -50,7 +47,6 @@ public final class ProfileEditor: ObservableObject {
     public init(profile: Profile) {
         editableProfile = profile.editable()
         isShared = false
-        trackedPreferences = [:]
         removedModules = [:]
     }
 
@@ -61,7 +57,6 @@ public final class ProfileEditor: ObservableObject {
             activeModulesIds: Set(modules.map(\.id))
         )
         isShared = false
-        trackedPreferences = [:]
         removedModules = [:]
     }
 }
@@ -208,35 +203,11 @@ extension ProfileEditor {
         removedModules = [:]
     }
 
-    public func loadPreferences(
-        _ preferences: ModulePreferences,
-        from manager: PreferencesManager,
-        forModuleWithId moduleId: UUID
-    ) {
-        do {
-            pp_log(.App.profiles, .debug, "Track preferences for module \(moduleId)")
-            let repository = try trackedPreferences[moduleId] ?? manager.preferencesRepository(forModuleWithId: moduleId)
-            preferences.repository = repository
-            trackedPreferences[moduleId] = repository // @Published
-        } catch {
-            pp_log(.App.profiles, .error, "Unable to track preferences for module \(moduleId): \(error)")
-        }
-    }
-
     @discardableResult
     public func save(to profileManager: ProfileManager) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
-            trackedPreferences.forEach {
-                do {
-                    pp_log(.App.profiles, .debug, "Save tracked preferences for module \($0.key)")
-                    try $0.value.save()
-                } catch {
-                    pp_log(.App.profiles, .error, "Unable to save preferences for profile \(profile.id): \(error)")
-                }
-            }
-            trackedPreferences.removeAll()
             return newProfile
         } catch {
             pp_log(.App.profiles, .fault, "Unable to save edited profile: \(error)")
@@ -245,11 +216,6 @@ extension ProfileEditor {
     }
 
     public func discard() {
-        trackedPreferences.forEach {
-            pp_log(.App.profiles, .debug, "Discard tracked preferences for module \($0.key)")
-            $0.value.discard()
-        }
-        trackedPreferences.removeAll()
     }
 }
 
