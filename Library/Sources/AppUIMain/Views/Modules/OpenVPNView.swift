@@ -207,19 +207,21 @@ private extension OpenVPNView {
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
-        setExcludedEndpointsWithCurrentProviderEntity()
+        resetExcludedEndpointsWithCurrentProviderEntity()
         path.wrappedValue.removeLast()
     }
 
     // reset to provider exclusions, filtered by current preset
-    func setExcludedEndpointsWithCurrentProviderEntity() {
+    func resetExcludedEndpointsWithCurrentProviderEntity() {
         do {
-            guard let cfg = try draft.wrappedValue.providerSelection?.configuration() else {
-                return
-            }
+            let cfg = try draft.wrappedValue.providerSelection?.configuration()
             editor.profile.attributes.editPreferences(inModule: module.id) {
-                $0.excludedEndpoints = modulePreferences.excludedEndpoints.filter {
-                    cfg.remotes?.contains($0) == true
+                if let cfg {
+                    $0.excludedEndpoints = modulePreferences.excludedEndpoints.filter {
+                        cfg.remotes?.contains($0) == true
+                    }
+                } else {
+                    $0.excludedEndpoints = []
                 }
             }
         } catch {
