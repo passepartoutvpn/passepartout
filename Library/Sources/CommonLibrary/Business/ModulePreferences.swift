@@ -27,8 +27,7 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-@MainActor
-public final class ModulePreferences: ObservableObject {
+public final class ModulePreferences: ObservableObject, ModulePreferencesRepository {
     private var repository: ModulePreferencesRepository?
 
     public init() {
@@ -43,10 +42,12 @@ public final class ModulePreferences: ObservableObject {
     }
 
     public func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        objectWillChange.send()
         repository?.addExcludedEndpoint(endpoint)
     }
 
     public func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        objectWillChange.send()
         repository?.removeExcludedEndpoint(endpoint)
     }
 

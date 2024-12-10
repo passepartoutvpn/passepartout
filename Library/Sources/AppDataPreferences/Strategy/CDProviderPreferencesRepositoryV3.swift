@@ -30,6 +30,8 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
+
+    @MainActor
     public static func cdProviderPreferencesRepositoryV3(context: NSManagedObjectContext, providerId: ProviderID) throws -> ProviderPreferencesRepository {
         try CDProviderPreferencesRepositoryV3(context: context, providerId: providerId)
     }

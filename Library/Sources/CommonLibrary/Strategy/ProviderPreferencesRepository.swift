@@ -26,8 +26,13 @@
 import Foundation
 import PassepartoutKit
 
+@MainActor
 public protocol ProviderPreferencesRepository {
-    var favoriteServers: Set<String> { get set }
+    func isFavoriteServer(_ serverId: String) -> Bool
+
+    func addFavoriteServer(_ serverId: String)
+
+    func removeFavoriteServer(_ serverId: String)
 
     func save() throws
 }
