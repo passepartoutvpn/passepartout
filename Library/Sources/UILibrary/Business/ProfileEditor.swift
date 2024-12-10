@@ -204,10 +204,23 @@ extension ProfileEditor {
     }
 
     @discardableResult
-    public func save(to profileManager: ProfileManager) async throws -> Profile {
+    public func save(to profileManager: ProfileManager, preferencesManager: PreferencesManager) async throws -> Profile {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isLocal: true, remotelyShared: isShared)
+
+            removedModules.keys.forEach {
+                do {
+                    pp_log(.App.profiles, .info, "Erase preferences for removed module \($0)")
+                    let repository = try preferencesManager.preferencesRepository(forModuleWithId: $0)
+                    repository.erase()
+                    try repository.save()
+                } catch {
+                    pp_log(.App.profiles, .error, "Unable to erase preferences for removed module \($0): \(error)")
+                }
+            }
+            removedModules.removeAll()
+
             return newProfile
         } catch {
             pp_log(.App.profiles, .fault, "Unable to save edited profile: \(error)")
