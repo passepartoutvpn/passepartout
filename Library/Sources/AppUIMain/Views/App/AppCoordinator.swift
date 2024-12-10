@@ -34,9 +34,6 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     @EnvironmentObject
     public var iapManager: IAPManager
 
-    @EnvironmentObject
-    public var preferencesManager: PreferencesManager
-
     @Environment(\.isUITesting)
     private var isUITesting
 

@@ -30,9 +30,6 @@ import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
     @Environment(\.navigationPath)
     private var path
 
