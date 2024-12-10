@@ -188,7 +188,6 @@ extension ProfileEditor {
 
         // update local view
         editableProfile.modules = profile.modulesBuilders()
-        removedModules.removeAll()
 
         return profile
     }
