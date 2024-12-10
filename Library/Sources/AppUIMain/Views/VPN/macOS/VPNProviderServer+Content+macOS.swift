@@ -87,7 +87,7 @@ private extension VPNProviderServerView.ContentView {
             TableColumn("􀋂") { server in
                 FavoriteToggle(
                     value: server.serverId,
-                    selection: $providerPreferences.favoriteServers
+                    selection: providerPreferences.favoriteServers()
                 )
                 .environmentObject(theme) // TODO: #873, Table loses environment
             }

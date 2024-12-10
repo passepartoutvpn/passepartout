@@ -126,7 +126,7 @@ private extension VPNProviderServerView {
     var filteredServers: [VPNServer] {
         if onlyShowsFavorites {
             return servers.filter {
-                providerPreferences.favoriteServers.contains($0.serverId)
+                providerPreferences.isFavoriteServer($0.serverId)
             }
         }
         return servers

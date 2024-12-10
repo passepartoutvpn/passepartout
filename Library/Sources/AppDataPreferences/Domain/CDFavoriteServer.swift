@@ -1,8 +1,8 @@
 //
-//  ProviderPreferencesRepository.swift
+//  CDFavoriteServer.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/5/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
-import PassepartoutKit
 
-@MainActor
-public protocol ProviderPreferencesRepository {
-    func isFavoriteServer(_ serverId: String) -> Bool
+@objc(CDFavoriteServer)
+final class CDFavoriteServer: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDFavoriteServer> {
+        NSFetchRequest<CDFavoriteServer>(entityName: "CDFavoriteServer")
+    }
 
-    func addFavoriteServer(_ serverId: String)
-
-    func removeFavoriteServer(_ serverId: String)
-
-    func save() throws
+    @NSManaged var serverId: String?
+    @NSManaged var providerPreferences: CDProviderPreferencesV3?
 }

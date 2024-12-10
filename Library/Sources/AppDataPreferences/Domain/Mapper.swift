@@ -29,15 +29,6 @@ import Foundation
 import PassepartoutKit
 
 struct DomainMapper {
-    func excludedEndpoints(from entities: Set<CDExcludedEndpoint>?) -> Set<ExtendedEndpoint> {
-        entities.map {
-            Set($0.compactMap {
-                $0.endpoint.map {
-                    ExtendedEndpoint(rawValue: $0)
-                } ?? nil
-            })
-        } ?? []
-    }
 }
 
 struct CoreDataMapper {
@@ -49,7 +40,9 @@ struct CoreDataMapper {
         return cdEndpoint
     }
 
-    func cdExcludedEndpoints(from endpoints: Set<ExtendedEndpoint>) -> Set<CDExcludedEndpoint> {
-        Set(endpoints.map(cdExcludedEndpoint(from:)))
+    func cdFavoriteServer(from serverId: String) -> CDFavoriteServer {
+        let cdFavorite = CDFavoriteServer(context: context)
+        cdFavorite.serverId = serverId
+        return cdFavorite
     }
 }

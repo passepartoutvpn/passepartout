@@ -27,14 +27,15 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-public final class PreferencesManager: ObservableObject, Sendable {
-    private let modulesFactory: @Sendable (UUID) throws -> ModulePreferencesRepository
+@MainActor
+public final class PreferencesManager: ObservableObject {
+    private let modulesFactory: (UUID) throws -> ModulePreferencesRepository
 
-    private let providersFactory: @Sendable (ProviderID) throws -> ProviderPreferencesRepository
+    private let providersFactory: (ProviderID) throws -> ProviderPreferencesRepository
 
     public init(
-        modulesFactory: (@Sendable (UUID) throws -> ModulePreferencesRepository)? = nil,
-        providersFactory: (@Sendable (ProviderID) throws -> ProviderPreferencesRepository)? = nil
+        modulesFactory: ((UUID) throws -> ModulePreferencesRepository)? = nil,
+        providersFactory: ((ProviderID) throws -> ProviderPreferencesRepository)? = nil
     ) {
         self.modulesFactory = modulesFactory ?? { _ in
             DummyModulePreferencesRepository()
@@ -57,6 +58,7 @@ extension PreferencesManager {
 
 // MARK: - Dummy
 
+@MainActor
 private final class DummyModulePreferencesRepository: ModulePreferencesRepository {
     func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
         false
@@ -72,8 +74,17 @@ private final class DummyModulePreferencesRepository: ModulePreferencesRepositor
     }
 }
 
+@MainActor
 private final class DummyProviderPreferencesRepository: ProviderPreferencesRepository {
-    var favoriteServers: Set<String> = []
+    func isFavoriteServer(_ serverId: String) -> Bool {
+        false
+    }
+
+    func addFavoriteServer(_ serverId: String) {
+    }
+
+    func removeFavoriteServer(_ serverId: String) {
+    }
 
     func save() throws {
     }

@@ -27,8 +27,7 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-@MainActor
-public final class ProviderPreferences: ObservableObject {
+public final class ProviderPreferences: ObservableObject, ProviderPreferencesRepository {
     private var repository: ProviderPreferencesRepository?
 
     public init() {
@@ -38,14 +37,28 @@ public final class ProviderPreferences: ObservableObject {
         self.repository = repository
     }
 
-    public var favoriteServers: Set<String> {
-        get {
-            repository?.favoriteServers ?? []
+    public func favoriteServers() -> ObservableList<String> {
+        ObservableList { [weak self] in
+            self?.isFavoriteServer($0) ?? false
+        } add: { [weak self] in
+            self?.addFavoriteServer($0)
+        } remove: { [weak self] in
+            self?.removeFavoriteServer($0)
         }
-        set {
-            objectWillChange.send()
-            repository?.favoriteServers = newValue
-        }
+    }
+
+    public func isFavoriteServer(_ serverId: String) -> Bool {
+        repository?.isFavoriteServer(serverId) ?? false
+    }
+
+    public func addFavoriteServer(_ serverId: String) {
+        objectWillChange.send()
+        repository?.addFavoriteServer(serverId)
+    }
+
+    public func removeFavoriteServer(_ serverId: String) {
+        objectWillChange.send()
+        repository?.removeFavoriteServer(serverId)
     }
 
     public func save() throws {

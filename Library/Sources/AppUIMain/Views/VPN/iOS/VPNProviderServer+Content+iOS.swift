@@ -151,7 +151,7 @@ private extension VPNProviderServerView.ContentView {
                 Spacer()
                 FavoriteToggle(
                     value: server.serverId,
-                    selection: $providerPreferences.favoriteServers
+                    selection: providerPreferences.favoriteServers()
                 )
             }
         }
