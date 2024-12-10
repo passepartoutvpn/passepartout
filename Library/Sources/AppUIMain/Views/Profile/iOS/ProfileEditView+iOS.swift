@@ -131,6 +131,7 @@ private extension ProfileEditView {
                 .contentShape(.rect)
             }
             .buttonStyle(.plain)
+            .uiAccessibility(.Profile.moduleLink)
         }
     }
 

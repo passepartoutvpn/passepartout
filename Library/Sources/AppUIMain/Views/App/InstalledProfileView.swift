@@ -27,7 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UITesting
+import UIAccessibility
 
 struct InstalledProfileView: View, Routable {
 

@@ -29,9 +29,13 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 
 struct ModuleListView: View, Routable {
     static let generalModuleId = UUID()
+
+    @Environment(\.isUITesting)
+    private var isUITesting
 
     @ObservedObject
     var profileEditor: ProfileEditor
@@ -58,6 +62,7 @@ struct ModuleListView: View, Routable {
                     NavigationLink(value: ProfileSplitView.Detail.module(id: module.id)) {
                         moduleRow(for: module)
                     }
+                    .uiAccessibility(.Profile.moduleLink)
                 }
                 .onMove(perform: moveModules)
             }
@@ -82,8 +87,10 @@ private extension ModuleListView {
                 )
             }
             Spacer()
-            EditorModuleToggle(profileEditor: profileEditor, module: module) {
-                EmptyView()
+            if !isUITesting {
+                EditorModuleToggle(profileEditor: profileEditor, module: module) {
+                    EmptyView()
+                }
             }
         }
     }

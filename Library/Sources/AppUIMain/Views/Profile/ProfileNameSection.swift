@@ -37,5 +37,6 @@ struct ProfileNameSection: View {
             placeholder: Strings.Placeholders.Profile.name,
             footer: Strings.Views.Profile.Sections.Name.footer
         )
+        .uiAccessibility(.Profile.name)
     }
 }

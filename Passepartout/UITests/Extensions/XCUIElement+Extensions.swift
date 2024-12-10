@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UITesting
+import UIAccessibility
 import XCTest
 
 extension XCUIElement {
@@ -44,19 +44,26 @@ private extension XCUIElement {
     func query(for elementType: AccessibilityInfo.ElementType) -> XCUIElementQuery {
 #if os(iOS)
         switch elementType {
-        case .button, .menu, .menuItem:
+        case .button, .link, .menu, .menuItem:
             return buttons
         case .text:
             return staticTexts
         }
-#else
+#elseif os(macOS)
         switch elementType {
-        case .button:
+        case .button, .link:
             return buttons
         case .menu:
             return menuButtons
         case .menuItem:
             return menuItems
+        case .text:
+            return staticTexts
+        }
+#else
+        switch elementType {
+        case .button, .link, .menu, .menuItem:
+            return buttons
         case .text:
             return staticTexts
         }

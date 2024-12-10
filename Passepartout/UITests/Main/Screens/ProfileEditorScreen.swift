@@ -1,8 +1,8 @@
 //
-//  AccessibilityInfo.swift
+//  ProfileEditorScreen.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/27/24.
+//  Created by Davide De Rosa on 11/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,28 +24,34 @@
 //
 
 import Foundation
+import UIAccessibility
+import XCTest
 
-public struct AccessibilityInfo: Equatable, Sendable {
-    public enum ElementType: Sendable {
-        case button
+@MainActor
+struct ProfileEditorScreen {
+    let app: XCUIApplication
 
-        case menu
-
-        case menuItem
-
-        case text
+    @discardableResult
+    func enterModule(at index: Int) -> Self {
+        let moduleLink = app.get(.Profile.moduleLink, at: index)
+        moduleLink.tap()
+        return self
     }
 
-    public let id: String
-
-    public let elementType: ElementType
-
-    public init(_ id: String, _ elementType: ElementType) {
-        self.id = id
-        self.elementType = elementType
+    @discardableResult
+    func leaveModule() -> Self {
+#if os(iOS)
+        let backButton = app.navigationBars.element(boundBy: 1).buttons.element(boundBy: 0)
+        XCTAssertTrue(backButton.waitForExistence(timeout: 1.0))
+        backButton.tap()
+#endif
+        return self
     }
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
+    @discardableResult
+    func closeProfile() -> AppScreen {
+        let cancelButton = app.get(.Profile.cancel)
+        cancelButton.tap()
+        return AppScreen(app: app)
     }
 }

@@ -2,7 +2,7 @@
 //  FlowTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/27/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,7 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UITesting
+import Foundation
+import UIAccessibility
 import XCTest
 
 @MainActor
@@ -41,23 +42,30 @@ final class FlowTests: XCTestCase {
         try await Task.sleep(for: .seconds(2))
     }
 
-    func testMainConnected() async throws {
+    func testShow() {
         AppScreen(app: app)
             .waitForProfiles()
-            .enableProfile(at: 2)
     }
 
-    func testEditProfile() async throws {
+    func testPresentProfiles() {
         AppScreen(app: app)
             .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .presentInitialProfiles()
     }
 
-    func testConnectToProviderServer() async throws {
+    func testConnect() {
         AppScreen(app: app)
             .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .connectToProfile()
+            .presentInitialProfiles()
+            .enableProfile(up: 1)
+    }
+
+    func testReconnectToOtherProfile() {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .presentInitialProfiles()
+            .enableProfile(up: 1)
+            .presentProfilesWhileConnected()
+            .enableProfile(up: 0)
     }
 }

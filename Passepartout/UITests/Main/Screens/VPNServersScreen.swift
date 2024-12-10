@@ -1,8 +1,8 @@
 //
-//  ModuleViewModifier.swift
+//  VPNServersScreen.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/9/24.
+//  Created by Davide De Rosa on 12/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import Foundation
 import UIAccessibility
+import XCTest
 
-struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
+@MainActor
+struct VPNServersScreen {
+    let app: XCUIApplication
 
-    @Environment(\.isUITesting)
-    private var isUITesting
-
-    @ObservedObject
-    var editor: ProfileEditor
-
-    let draft: T
-
-    func body(content: Content) -> some View {
-        Form {
-            content
-#if DEBUG
-            if !isUITesting {
-                UUIDSection(uuid: draft.id)
-            }
-#endif
-        }
-        .themeForm()
-        .themeManualInput()
-        .themeAnimation(on: draft, category: .modules)
-    }
-}
-
-extension View {
-    func moduleView<T>(editor: ProfileEditor, draft: T) -> some View where T: ModuleBuilder & Equatable {
-        modifier(ModuleViewModifier(editor: editor, draft: draft))
+    @discardableResult
+    func discloseCountry(at index: Int) -> Self {
+        let group = app.get(.VPNServers.countryGroup, at: index)
+        group.tap()
+        return self
     }
 }

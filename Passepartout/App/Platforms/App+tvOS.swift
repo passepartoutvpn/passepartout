@@ -27,7 +27,7 @@
 
 import AppUITV
 import SwiftUI
-import UITesting
+import UIAccessibility
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {

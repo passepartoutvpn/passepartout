@@ -55,12 +55,12 @@ let package = Package(
             ]
         ),
         .library(
-            name: "UILibrary",
-            targets: ["UILibrary"]
+            name: "UIAccessibility",
+            targets: ["UIAccessibility"]
         ),
         .library(
-            name: "UITesting",
-            targets: ["UITesting"]
+            name: "UILibrary",
+            targets: ["UILibrary"]
         )
     ],
     dependencies: [
@@ -187,18 +187,18 @@ let package = Package(
             ]
         ),
         .target(
+            name: "UIAccessibility"
+        ),
+        .target(
             name: "UILibrary",
             dependencies: [
                 "CommonAPI",
                 "CommonLibrary",
-                "UITesting"
+                "UIAccessibility"
             ],
             resources: [
                 .process("Resources")
             ]
-        ),
-        .target(
-            name: "UITesting"
         ),
         .testTarget(
             name: "AppUIMainTests",

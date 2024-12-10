@@ -26,8 +26,8 @@
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UIAccessibility
 import UILibrary
-import UITesting
 
 @MainActor
 final class AppDelegate: NSObject {

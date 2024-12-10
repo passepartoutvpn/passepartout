@@ -1,8 +1,8 @@
 //
-//  ProfileMenuScreen.swift
+//  Profile.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/28/24.
+//  Created by Davide De Rosa on 12/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,24 +24,13 @@
 //
 
 import Foundation
-import UITesting
-import XCTest
 
-@MainActor
-struct ProfileMenuScreen {
-    let app: XCUIApplication
+extension AccessibilityInfo {
+    public enum Profile {
+        public static let name = AccessibilityInfo("profile.name", .text)
 
-    @discardableResult
-    func editProfile() -> ProfileEditorScreen {
-        let editButton = app.get(.App.ProfileMenu.edit)
-        editButton.tap()
-        return ProfileEditorScreen(app: app)
-    }
+        public static let moduleLink = AccessibilityInfo("profile.moduleLink", .link)
 
-    @discardableResult
-    func connectToProfile() -> AppScreen {
-        let connectToButton = app.get(.App.ProfileMenu.connectTo)
-        connectToButton.tap()
-        return AppScreen(app: app)
+        public static let cancel = AccessibilityInfo("profile.cancel", .button)
     }
 }

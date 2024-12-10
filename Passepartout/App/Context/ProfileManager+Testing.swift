@@ -52,10 +52,47 @@ extension ProfileManager {
                             assert((moduleBuilder as? any ProviderSelecting)?.providerId == parameters.providerId)
                         }
 
-                        if parameters.name == "Hide.me",
-                           var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
-                            ovpnBuilder.isInteractive = true
-                            moduleBuilder = ovpnBuilder
+                        if parameters.name == "Hide.me" {
+                            if var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
+#if !os(tvOS)
+                                ovpnBuilder.isInteractive = true
+#endif
+                                ovpnBuilder.providerEntity = mockHideMeEntity
+                                moduleBuilder = ovpnBuilder
+                            } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
+#if !os(tvOS)
+                                onDemandBuilder.isEnabled = true
+#endif
+                                onDemandBuilder.policy = .excluding
+                                onDemandBuilder.withSSIDs = [
+                                    "Friend's House": false,
+                                    "My Home Network": true,
+                                    "Safe Wi-Fi": true
+                                ]
+                                moduleBuilder = onDemandBuilder
+                            } else if var dnsBuilder = moduleBuilder as? DNSModule.Builder {
+                                dnsBuilder.protocolType = .https
+                                dnsBuilder.dohURL = "https://cloudflare-dns.com/dns-query"
+                                dnsBuilder.servers = ["1.1.1.1", "1.0.0.1"]
+                                dnsBuilder.domainName = "my-domain.com"
+                                dnsBuilder.searchDomains = ["search-one.com", "search-two.org"]
+                                moduleBuilder = dnsBuilder
+                            }
+                        }
+
+                        if parameters.name == "My VPS" {
+                            if var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
+                                var cfgBuilder = OpenVPN.Configuration.Builder()
+                                cfgBuilder.ca = .init(pem: "...")
+                                cfgBuilder.remotes = [
+                                    ExtendedEndpoint(rawValue: "1.2.3.4:UDP:1234")!
+                                ]
+                                ovpnBuilder.configurationBuilder = cfgBuilder
+                                moduleBuilder = ovpnBuilder
+                            } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
+                                onDemandBuilder.isEnabled = true
+                                moduleBuilder = onDemandBuilder
+                            }
                         }
 
                         let module = try moduleBuilder.tryBuild()
@@ -99,9 +136,47 @@ private extension ProfileManager {
     static let mockParameters: [Parameters] = [
         Parameters("CloudFlare DoT", false, false, [.dns]),
         Parameters("Coffee VPN", true, false, [.wireGuard, .onDemand]),
-        Parameters("Hide.me", true, true, [.openVPN, .onDemand, .ip], .hideme),
-        Parameters("My VPS", true, true, [.openVPN]),
+        Parameters("Hide.me", true, true, [.openVPN, .onDemand, .dns, .ip], .hideme),
+        Parameters("My VPS", true, true, [.openVPN, .onDemand]),
         Parameters("Office", true, false, [.onDemand, .httpProxy]),
         Parameters("Personal DoH", false, false, [.dns, .onDemand])
     ]
+
+    static var mockHideMeEntity: VPNEntity<OpenVPN.Configuration> {
+        do {
+            var cfgBuilder = OpenVPN.Configuration.Builder()
+            cfgBuilder.ca = .init(pem: "...")
+            let cfg = try cfgBuilder.tryBuild(isClient: false)
+            let cfgData = try JSONEncoder().encode(cfg)
+
+            let preset = AnyVPNPreset(
+                providerId: .hideme,
+                presetId: "default",
+                description: "Default",
+                endpoints: [.init(.udp, 1194)],
+                configurationIdentifier: "OpenVPN",
+                configuration: cfgData
+            )
+
+            return VPNEntity(
+                server: .init(
+                    provider: .init(
+                        id: .hideme,
+                        serverId: "be-v4",
+                        supportedConfigurationIdentifiers: ["OpenVPN"],
+                        supportedPresetIds: nil,
+                        categoryName: "",
+                        countryCode: "BE",
+                        otherCountryCodes: nil,
+                        area: nil
+                    ),
+                    hostname: "be-v4.hideservers.net",
+                    ipAddresses: nil
+                ),
+                preset: try preset.ofType(OpenVPN.Configuration.self)
+            )
+        } catch {
+            fatalError("Unable to build Hide.me entity: \(error)")
+        }
+    }
 }
