@@ -30,9 +30,6 @@ import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
     @Environment(\.navigationPath)
     private var path
 
@@ -40,6 +37,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     @ObservedObject
     var editor: ProfileEditor
+
+    @ObservedObject
+    var modulePreferences: ModulePreferences
 
     let impl: OpenVPNModule.Implementation?
 
@@ -52,14 +52,12 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     @StateObject
-    private var providerPreferences = ProviderPreferences()
-
-    @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     init(serverConfiguration: OpenVPN.Configuration) {
         module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         editor = ProfileEditor(modules: [module])
+        modulePreferences = ModulePreferences()
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
         impl = nil
         isServerPushed = true
@@ -68,6 +66,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {
         self.module = module
         editor = parameters.editor
+        modulePreferences = parameters.preferences
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
     }
@@ -129,7 +128,7 @@ private extension OpenVPNView {
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
             providerId: providerId,
-            providerPreferences: providerPreferences,
+            providerPreferences: nil,
             selectedEntity: providerEntity,
             paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
@@ -200,16 +199,31 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        if draft.wrappedValue.providerSelection != nil {
-            return providerPreferences.excludedEndpoints()
-        } else {
-            return editor.excludedEndpoints(for: module.id)
-        }
+        editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
     }
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
+        resetExcludedEndpointsWithCurrentProviderEntity()
         path.wrappedValue.removeLast()
+    }
+
+    // filter out exclusions unrelated to current server
+    func resetExcludedEndpointsWithCurrentProviderEntity() {
+        do {
+            let cfg = try draft.wrappedValue.providerSelection?.configuration()
+            editor.profile.attributes.editPreferences(inModule: module.id) {
+                if let cfg {
+                    $0.excludedEndpoints = Set(cfg.remotes?.filter {
+                        modulePreferences.isExcludedEndpoint($0)
+                    } ?? [])
+                } else {
+                    $0.excludedEndpoints = []
+                }
+            }
+        } catch {
+            pp_log(.app, .error, "Unable to build provider configuration for excluded endpoints: \(error)")
+        }
     }
 }
 

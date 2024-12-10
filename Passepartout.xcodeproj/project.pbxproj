@@ -36,8 +36,6 @@
 		0E8DFD532D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */; };
 		0E8DFD542D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */; };
 		0E8DFD562D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */; };
-		0E8DFD592D05FF0400531CDE /* Dependencies+PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD582D05FF0400531CDE /* Dependencies+PreferencesManager.swift */; };
-		0E8DFD5A2D05FF0400531CDE /* Dependencies+PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD582D05FF0400531CDE /* Dependencies+PreferencesManager.swift */; };
 		0E916B782CF80FD60072921A /* ProfileEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */; };
 		0E916B7C2CF811EB0072921A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
@@ -170,7 +168,6 @@
 		0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+IAPManager.swift"; sourceTree = "<group>"; };
 		0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+PassepartoutKit.swift"; sourceTree = "<group>"; };
 		0E8DFD4D2D05FE5A00531CDE /* Dependencies+Processors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+Processors.swift"; sourceTree = "<group>"; };
-		0E8DFD582D05FF0400531CDE /* Dependencies+PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+PreferencesManager.swift"; sourceTree = "<group>"; };
 		0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorScreen.swift; sourceTree = "<group>"; };
 		0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		0E94EE5C2B93570600588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
@@ -350,7 +347,6 @@
 				0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */,
 				0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */,
 				0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */,
-				0E8DFD582D05FF0400531CDE /* Dependencies+PreferencesManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -720,7 +716,6 @@
 				0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */,
 				0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */,
 				0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */,
-				0E8DFD592D05FF0400531CDE /* Dependencies+PreferencesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +764,6 @@
 				0E8DFD532D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */,
 				0E8DFD542D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */,
 				0E8DFD562D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */,
-				0E8DFD5A2D05FF0400531CDE /* Dependencies+PreferencesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

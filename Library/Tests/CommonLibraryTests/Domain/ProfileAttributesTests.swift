@@ -72,7 +72,7 @@ final class ProfileAttributesTests: XCTestCase {
         let excludedEndpoints: [String] = [
             "1.1.1.1:UDP6:1000",
             "2.2.2.2:TCP4:2000",
-            "3.3.3.3:TCP:3000",
+            "3.3.3.3:TCP:3000"
         ]
         let moduleUserInfo: [String: AnyHashable] = [
             "excludedEndpoints": excludedEndpoints
@@ -89,7 +89,7 @@ final class ProfileAttributesTests: XCTestCase {
         for moduleId in [moduleId1, moduleId2] {
             let module = sut.preferences(inModule: moduleId)
             XCTAssertEqual(module.userInfo, moduleUserInfo)
-            XCTAssertEqual(module.excludedEndpoints, excludedEndpoints)
+            XCTAssertEqual(module.rawExcludedEndpoints, excludedEndpoints)
         }
     }
 
@@ -99,7 +99,7 @@ final class ProfileAttributesTests: XCTestCase {
         let excludedEndpoints: [String] = [
             "1.1.1.1:UDP6:1000",
             "2.2.2.2:TCP4:2000",
-            "3.3.3.3:TCP:3000",
+            "3.3.3.3:TCP:3000"
         ]
         let moduleUserInfo: [String: AnyHashable] = [
             "excludedEndpoints": excludedEndpoints
@@ -114,7 +114,7 @@ final class ProfileAttributesTests: XCTestCase {
         var sut = ProfileAttributes(userInfo: nil)
         for moduleId in [moduleId1, moduleId2] {
             var module = sut.preferences(inModule: moduleId1)
-            module.excludedEndpoints = excludedEndpoints
+            module.rawExcludedEndpoints = excludedEndpoints
             XCTAssertEqual(module.userInfo, moduleUserInfo)
             sut.setPreferences(module, inModule: moduleId)
         }

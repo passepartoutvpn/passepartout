@@ -43,9 +43,6 @@ struct ProfileCoordinator: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor

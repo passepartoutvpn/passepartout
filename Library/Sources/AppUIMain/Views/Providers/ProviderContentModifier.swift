@@ -188,13 +188,14 @@ private extension ProviderContentModifier {
         if let providerId {
             do {
                 pp_log(.app, .debug, "Load preferences for provider \(providerId)")
-                providerPreferences.repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
+                let repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
+                providerPreferences.setRepository(repository)
             } catch {
                 pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
-                providerPreferences.repository = nil
+                providerPreferences.setRepository(nil)
             }
         } else {
-            providerPreferences.repository = nil
+            providerPreferences.setRepository(nil)
         }
     }
 

@@ -40,17 +40,26 @@ extension ProfileAttributes {
             self.userInfo = userInfo ?? [:]
         }
 
+        public var excludedEndpoints: Set<ExtendedEndpoint> {
+            get {
+                Set(rawExcludedEndpoints.compactMap(ExtendedEndpoint.init(rawValue:)))
+            }
+            set {
+                rawExcludedEndpoints = newValue.map(\.rawValue)
+            }
+        }
+
         public func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
-            excludedEndpoints.contains(endpoint.rawValue)
+            rawExcludedEndpoints.contains(endpoint.rawValue)
         }
 
         public mutating func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
-            excludedEndpoints.append(endpoint.rawValue)
+            rawExcludedEndpoints.append(endpoint.rawValue)
         }
 
         public mutating func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
             let rawValue = endpoint.rawValue
-            excludedEndpoints.removeAll {
+            rawExcludedEndpoints.removeAll {
                 $0 == rawValue
             }
         }
@@ -58,7 +67,7 @@ extension ProfileAttributes {
 }
 
 extension ProfileAttributes.ModulePreferences {
-    var excludedEndpoints: [String] {
+    var rawExcludedEndpoints: [String] {
         get {
             userInfo[Key.excludedEndpoints.rawValue] as? [String] ?? []
         }

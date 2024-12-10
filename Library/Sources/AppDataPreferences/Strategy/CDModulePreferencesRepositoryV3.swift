@@ -1,5 +1,5 @@
 //
-//  CDProviderPreferencesRepositoryV3.swift
+//  CDModulePreferencesRepositoryV3.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/5/24.
@@ -30,22 +30,22 @@ import Foundation
 import PassepartoutKit
 
 extension AppData {
-    public static func cdProviderPreferencesRepositoryV3(context: NSManagedObjectContext, providerId: ProviderID) throws -> ProviderPreferencesRepository {
-        try CDProviderPreferencesRepositoryV3(context: context, providerId: providerId)
+    public static func cdModulePreferencesRepositoryV3(context: NSManagedObjectContext, moduleId: UUID) throws -> ModulePreferencesRepository {
+        try CDModulePreferencesRepositoryV3(context: context, moduleId: moduleId)
     }
 }
 
-private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesRepository {
+private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    private let entity: CDProviderPreferencesV3
+    private let entity: CDModulePreferencesV3
 
-    init(context: NSManagedObjectContext, providerId: ProviderID) throws {
+    init(context: NSManagedObjectContext, moduleId: UUID) throws {
         self.context = context
 
         entity = try context.performAndWait {
-            let request = CDProviderPreferencesV3.fetchRequest()
-            request.predicate = NSPredicate(format: "providerId == %@", providerId.rawValue)
+            let request = CDModulePreferencesV3.fetchRequest()
+            request.predicate = NSPredicate(format: "moduleId == %@", moduleId.uuidString)
             request.sortDescriptors = [.init(key: "lastUpdate", ascending: false)]
             do {
                 let entities = try request.execute()
@@ -55,42 +55,52 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
                     guard $0.offset > 0 else {
                         return
                     }
+                    $0.element.excludedEndpoints?.forEach(context.delete(_:))
                     context.delete($0.element)
                 }
 
-                let entity = entities.first ?? CDProviderPreferencesV3(context: context)
-                entity.providerId = providerId.rawValue
+                let entity = entities.first ?? CDModulePreferencesV3(context: context)
+                entity.moduleId = moduleId
                 entity.lastUpdate = Date()
                 return entity
             } catch {
-                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
                 throw error
             }
         }
     }
 
-    var favoriteServers: Set<String> {
-        get {
-            do {
-                return try context.performAndWait {
-                    guard let data = entity.favoriteServerIds else {
-                        return []
-                    }
-                    return try JSONDecoder().decode(Set<String>.self, from: data)
-                }
-            } catch {
-                pp_log(.app, .error, "Unable to get favoriteServers: \(error)")
-                return []
-            }
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
+        context.performAndWait {
+            entity.excludedEndpoints?.contains {
+                $0.endpoint == endpoint.rawValue
+            } ?? false
         }
-        set {
-            do {
-                try context.performAndWait {
-                    entity.favoriteServerIds = try JSONEncoder().encode(newValue)
-                }
-            } catch {
-                pp_log(.app, .error, "Unable to set favoriteServers: \(error)")
+    }
+
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            guard entity.excludedEndpoints?.contains(where: {
+                $0.endpoint == endpoint.rawValue
+            }) != true else {
+                return
             }
+            let mapper = CoreDataMapper(context: context)
+            let cdEndpoint = mapper.cdExcludedEndpoint(from: endpoint)
+            cdEndpoint.modulePreferences = entity
+            entity.excludedEndpoints?.insert(cdEndpoint)
+        }
+    }
+
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
+        context.performAndWait {
+            guard let found = entity.excludedEndpoints?.first(where: {
+                $0.endpoint == endpoint.rawValue
+            }) else {
+                return
+            }
+            entity.excludedEndpoints?.remove(found)
+            context.delete(found)
         }
     }
 
