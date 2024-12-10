@@ -202,7 +202,7 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        editor.excludedEndpoints(for: module.id, modulePreferences: modulePreferences)
+        editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
     }
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
