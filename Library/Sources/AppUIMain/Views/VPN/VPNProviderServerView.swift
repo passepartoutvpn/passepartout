@@ -132,15 +132,21 @@ private extension VPNProviderServerView {
         return servers
     }
 
-    var initialFilters: VPNFilters? {
-        guard let selectedEntity, filtersWithSelection else {
-            return nil
-        }
+    var initialFilters: VPNFilters {
         var filters = VPNFilters()
-        filters.categoryName = selectedEntity.server.provider.categoryName
+
+        // force initial preset filter
+        filters.presetId = vpnManager.options.presets.first?.presetId
+
+        if let selectedEntity {
+            filters.presetId = selectedEntity.preset.presetId
+            if filtersWithSelection {
+                filters.categoryName = selectedEntity.server.provider.categoryName
 #if os(macOS)
-        filters.countryCode = selectedEntity.server.provider.countryCode
+                filters.countryCode = selectedEntity.server.provider.countryCode
 #endif
+            }
+        }
         return filters
     }
 
