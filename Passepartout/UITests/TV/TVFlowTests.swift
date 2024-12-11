@@ -1,8 +1,8 @@
 //
-//  FlowTests.swift
+//  TVFlowTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/27/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -28,7 +28,7 @@ import UIAccessibility
 import XCTest
 
 @MainActor
-final class FlowTests: XCTestCase {
+final class TVFlowTests: XCTestCase {
     private var app: XCUIApplication!
 
     override func setUp() async throws {
@@ -38,42 +38,30 @@ final class FlowTests: XCTestCase {
         app.launch()
     }
 
+    func testShow() {
+        AppScreen(app: app)
+            .waitForProfiles()
+    }
+
+    func testPresentProfiles() {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .presentInitialProfiles()
+    }
+
     func testConnect() {
         AppScreen(app: app)
             .waitForProfiles()
-            .enableProfile(at: 2)
+            .presentInitialProfiles()
+            .enableProfile(up: 1)
     }
 
-    func testEditProfile() {
+    func testReconnectToOtherProfile() {
         AppScreen(app: app)
             .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .presentInitialProfiles()
+            .enableProfile(up: 1)
+            .presentProfilesWhileConnected()
+            .enableProfile(up: 0)
     }
-
-    func testEditProfileModule() {
-        AppScreen(app: app)
-            .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .editProfile()
-            .enterModule(at: 1)
-            .leaveModule()
-    }
-
-    func testConnectToProviderServer() {
-        AppScreen(app: app)
-            .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-    }
-
-#if os(iOS)
-    func testDiscloseProviderCountry() {
-        AppScreen(app: app)
-            .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-            .discloseCountry(at: 2)
-    }
-#endif
 }

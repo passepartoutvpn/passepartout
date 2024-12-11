@@ -1,8 +1,8 @@
 //
-//  ScreenshotTests.swift
+//  TVScreenshotTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/28/24.
+//  Created by Davide De Rosa on 12/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -28,7 +28,7 @@ import UIAccessibility
 import XCTest
 
 @MainActor
-final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
+final class TVScreenshotTests: XCTestCase, XCUIApplicationProviding {
     let app: XCUIApplication = {
         let app = XCUIApplication()
         app.appArguments = [.uiTesting]
@@ -38,54 +38,28 @@ final class ScreenshotTests: XCTestCase, XCUIApplicationProviding {
     override func setUp() async throws {
         continueAfterFailure = false
         app.launch()
-#if os(iOS)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            XCUIDevice.shared.orientation = .landscapeLeft
-        }
-#endif
     }
 
     func testTakeScreenshots() async throws {
         let root = AppScreen(app: app)
             .waitForProfiles()
-            .enableProfile(at: 0)
-
-        let profile = root
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .presentInitialProfiles()
+            .enableProfile(up: 1)
 
         await pause()
-        try snapshot("02_ProfileEditor", target: .sheet)
+        try snapshot("01", "Connected")
 
-        profile
-            .enterModule(at: 1)
-
-        await pause()
-        try snapshot("03_OnDemand", target: .sheet)
-
-        profile
-            .leaveModule()
-            .enterModule(at: 2)
+        root
+            .presentProfilesWhileConnected()
 
         await pause()
-        try snapshot("04_DNS", target: .sheet)
+        try snapshot("02", "ConnectedWithProfileList")
 
-        let app = profile
-            .leaveModule()
-            .closeProfile()
-
-        await pause()
-        try snapshot("01_Connected")
-
-        app
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-#if os(iOS)
-            .discloseCountry(at: 2)
-#endif
+        root
+            .enableProfile(up: 0)
 
         await pause()
-        try snapshot("05_ProviderServers", target: .sheet)
+        try snapshot("03", "OnDemand")
 
         print("Saved to: \(ScreenshotDestination.temporary.url)")
     }

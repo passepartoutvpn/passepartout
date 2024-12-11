@@ -1,0 +1,55 @@
+.appletv #background {
+    width: 3840px;
+    height: 2160px;
+}
+
+.appletv #background header {
+    height: 5em;
+}
+
+.appletv #background .heading {
+    font-size: 1.2em;
+}
+
+.appletv #box {
+    left: 50%;
+    top: 240%;
+}
+
+.appletv #appletv {
+    display: block;
+}
+
+#appletv .screenshot {
+    width: 2376px;
+    top: 100px;
+}
+
+#appletv .frame {
+    width: 2520px;
+    top: 10px;
+}
+
+.screen-01.appletv .heading {
+    padding: 2em;
+}
+
+.screen-02.appletv .heading {
+    padding: 1em;
+}
+
+.screen-03.appletv .heading {
+    padding: 1em;
+}
+
+.screen-01 #appletv :nth-child(1) {
+    display: block;
+}
+
+.screen-02 #appletv :nth-child(2) {
+    display: block;
+}
+
+.screen-03 #appletv :nth-child(3) {
+    display: block;
+}

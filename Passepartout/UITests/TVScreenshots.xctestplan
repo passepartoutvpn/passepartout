@@ -1,0 +1,48 @@
+{
+  "configurations" : [
+    {
+      "id" : "00256A48-9D59-44ED-822A-B35521760457",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "FlowTests",
+        "FlowTests\/testConnect()",
+        "FlowTests\/testConnectToProviderServer()",
+        "FlowTests\/testEditProfile()",
+        "FlowTests\/testEditProfileModule()",
+        "FlowTests\/testPresentProfiles()",
+        "FlowTests\/testReconnectToOtherProfile()",
+        "FlowTests\/testShow()",
+        "MainFlowTests",
+        "MainFlowTests\/testConnect()",
+        "MainFlowTests\/testConnectToProviderServer()",
+        "MainFlowTests\/testDiscloseProviderCountry()",
+        "MainFlowTests\/testEditProfile()",
+        "MainFlowTests\/testEditProfileModule()",
+        "MainScreenshotTests",
+        "MainScreenshotTests\/testTakeScreenshots()",
+        "ScreenshotTests",
+        "TVFlowTests",
+        "TVFlowTests\/testConnect()",
+        "TVFlowTests\/testPresentProfiles()",
+        "TVFlowTests\/testReconnectToOtherProfile()",
+        "TVFlowTests\/testShow()"
+      ],
+      "target" : {
+        "containerPath" : "container:Passepartout.xcodeproj",
+        "identifier" : "0E78FE4B2CF799F400B0C5BF",
+        "name" : "PassepartoutUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

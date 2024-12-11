@@ -1,0 +1,72 @@
+.iphone #background {
+    width: 1242px;
+    height: 2688px;
+}
+
+.iphone #background header {
+    height: 10em;
+}
+
+.iphone #background .heading {
+    font-size: 1.2em;
+}
+
+.iphone #box {
+    left: 15%;
+    bottom: -90%;
+}
+
+.iphone #iphone {
+    display: block;
+}
+
+#iphone .screenshot {
+    width: 900px;
+    top: 100px;
+    border-radius: 100px;
+}
+
+#iphone .frame {
+    width: 1000px;
+    top: 70px;
+}
+
+.screen-01.iphone .heading {
+    padding: 2em;
+}
+
+.screen-02.iphone .heading {
+    padding: 1em;
+}
+
+.screen-03.iphone .heading {
+    padding: 1em;
+}
+
+.screen-04.iphone .heading {
+    padding: 1em;
+}
+
+.screen-05.iphone .heading {
+    padding: 1.5em;
+}
+
+.screen-01 #iphone :nth-child(1) {
+    display: block;
+}
+
+.screen-02 #iphone :nth-child(2) {
+    display: block;
+}
+
+.screen-03 #iphone :nth-child(3) {
+    display: block;
+}
+
+.screen-04 #iphone :nth-child(4) {
+    display: block;
+}
+
+.screen-05 #iphone :nth-child(5) {
+    display: block;
+}

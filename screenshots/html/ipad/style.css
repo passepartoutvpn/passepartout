@@ -1,0 +1,71 @@
+.ipad #background {
+    width: 2048px;
+    height: 2732px;
+}
+
+.ipad #background header {
+    height: 10em;
+}
+
+.ipad #background .heading {
+    font-size: 1.4em;
+}
+
+.ipad #box {
+    left: 60%;
+    bottom: -95%;
+}
+
+.ipad #ipad {
+    display: block;
+}
+
+#ipad .screenshot {
+    width: 1600px;
+    top: 100px;
+}
+
+#ipad .frame {
+    width: 1780px;
+    top: -68px;
+}
+
+.screen-01.ipad .heading {
+    padding: 3.5em;
+}
+
+.screen-02.ipad .heading {
+    padding: 1em;
+}
+
+.screen-03.ipad .heading {
+    padding: 2em;
+}
+
+.screen-04.ipad .heading {
+    padding: 3em;
+}
+
+.screen-05.ipad .heading {
+    padding: 4em;
+}
+
+.screen-01 #ipad :nth-child(1) {
+    display: block;
+}
+
+.screen-02 #ipad :nth-child(2) {
+    display: block;
+}
+
+.screen-03 #ipad :nth-child(3) {
+    display: block;
+}
+
+.screen-04 #ipad :nth-child(4) {
+    display: block;
+}
+
+.screen-05 #ipad :nth-child(5) {
+    display: block;
+}
