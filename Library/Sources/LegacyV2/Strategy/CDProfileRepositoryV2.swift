@@ -42,6 +42,22 @@ final class CDProfileRepositoryV2: Sendable {
         self.context = context
     }
 
+    var hasMigratableProfiles: Bool {
+        do {
+            return try context.performAndWait { [weak self] in
+                guard let self else {
+                    return false
+                }
+                let entities = try CDProfile.fetchRequest().execute()
+                return !entities.compactMap {
+                    ($0.encryptedJSON ?? $0.json) != nil
+                }.isEmpty
+            }
+        } catch {
+            return false
+        }
+    }
+
     func migratableProfiles() async throws -> [MigratableProfile] {
         try await fetchProfiles(
             prefetch: {
@@ -49,7 +65,7 @@ final class CDProfileRepositoryV2: Sendable {
             },
             map: {
                 $0.compactMap {
-                    guard $0.value.encryptedJSON ?? $0.value.json != nil else {
+                    guard ($0.value.encryptedJSON ?? $0.value.json) != nil else {
                         pp_log(.App.migration, .error, "ProfileV2 \($0.key) is not migratable: missing JSON")
                         return nil
                     }

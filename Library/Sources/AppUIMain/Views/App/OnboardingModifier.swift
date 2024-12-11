@@ -29,6 +29,9 @@ import SwiftUI
 
 struct OnboardingModifier: ViewModifier {
 
+    @EnvironmentObject
+    private var migrationManager: MigrationManager
+
     @Environment(\.isUITesting)
     private var isUITesting
 
@@ -87,6 +90,10 @@ private extension OnboardingModifier {
 
         switch step {
         case .migrateV3:
+            guard migrationManager.hasMigratableProfiles else {
+                advance()
+                return
+            }
             modalRoute = .migrateProfiles
         case .community:
             isPresentingCommunity = true

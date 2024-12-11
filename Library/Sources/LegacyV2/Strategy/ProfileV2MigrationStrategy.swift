@@ -74,6 +74,10 @@ public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendabl
 // MARK: - ProfileMigrationStrategy
 
 extension ProfileV2MigrationStrategy {
+    public var hasMigratableProfiles: Bool {
+        profilesRepository.hasMigratableProfiles
+    }
+
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
         try await profilesRepository.migratableProfiles()
     }

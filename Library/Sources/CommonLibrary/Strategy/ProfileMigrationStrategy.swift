@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutKit
 
 public protocol ProfileMigrationStrategy {
+    var hasMigratableProfiles: Bool { get}
+
     func fetchMigratableProfiles() async throws -> [MigratableProfile]
 
     func fetchProfile(withId profileId: UUID) async throws -> Profile?
