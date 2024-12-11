@@ -10,9 +10,10 @@ fastlane/**/review_information
 fastlane/**/trade_representative_contact_information
 build/
 dist/
-/iap
-templates/
-vendor/
+/iap/
+screenshots/html/*/0*.png
+screenshots/results/
+/templates/
 Preview.html
 default.profraw
 .api
