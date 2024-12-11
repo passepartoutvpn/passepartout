@@ -59,8 +59,9 @@ extension XCUIApplicationProviding where Self: XCTestCase {
     }
 
     func snapshot(
-        _ name: String,
-        destination: ScreenshotDestination = .temporary,
+        _ index: String,
+        _ title: String,
+        destination: ScreenshotDestination = .attachment,
         target: ScreenshotTarget = .window
     ) throws {
         let container = container(for: target)
@@ -69,26 +70,26 @@ extension XCUIApplicationProviding where Self: XCTestCase {
         switch destination {
         case .attachment:
             let attachment = XCTAttachment(screenshot: screenshot)
-            attachment.name = name
+            attachment.name = index
             attachment.lifetime = .keepAlways
             add(attachment)
 
         case .temporary:
-            let filename = deviceFilename(for: name)
+            let filename = deviceFilename(for: index)
             let url = URL(fileURLWithPath: filename, relativeTo: destination.url)
             try screenshot.pngRepresentation.write(to: url)
         }
     }
 
-    private func deviceFilename(for name: String) -> String {
+    private func deviceFilename(for index: String) -> String {
 #if os(iOS)
-        let device = UIDevice.current.userInterfaceIdiom == .pad ? "iPad" : "iPhone"
+        let device = UIDevice.current.userInterfaceIdiom == .pad ? "ipad" : "iphone"
 #elseif os(macOS)
-        let device = "Mac"
+        let device = "mac"
 #elseif os(tvOS)
-        let device = "AppleTV"
+        let device = "appletv"
 #endif
-        return "\(device)_\(name).png"
+        return "\(device)_\(index).png"
     }
 
     private func container(for target: ScreenshotTarget) -> XCUIElement {
