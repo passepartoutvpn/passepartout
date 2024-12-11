@@ -1,1 +1,0 @@
-../../iOS/it/support_url.txt
