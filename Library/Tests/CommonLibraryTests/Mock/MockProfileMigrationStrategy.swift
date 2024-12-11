@@ -34,6 +34,10 @@ final class MockProfileMigrationStrategy: ProfileMigrationStrategy {
 
     var failedProfiles: Set<UUID> = []
 
+    var hasMigratableProfiles: Bool {
+        !migratedProfiles.isEmpty
+    }
+
     func fetchMigratableProfiles() async throws -> [MigratableProfile] {
         migratableProfiles
     }
