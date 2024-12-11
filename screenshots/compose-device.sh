@@ -1,7 +1,7 @@
 #!/bin/bash
 cwd=`dirname $0`
 device=$1
-snap_cmd="$cwd/snap.sh"
+compose_cmd="$cwd/compose.sh"
 fastlane_screenshots_root="$cwd/../fastlane/screenshots"
 
 case $device in
@@ -45,5 +45,5 @@ case $device in
 esac
 
 for num in $nums; do
-    $snap_cmd $template $device $num $width $height "$fastlane_screenshots_root/$fastlane/en-US"
+    $compose_cmd $template $device $num $width $height "$fastlane_screenshots_root/$fastlane/en-US"
 done

@@ -2,7 +2,7 @@
 cwd=`dirname $0`
 chrome_app="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
-# ./snap.sh main iphone 01 1242 2688 "fastlane/screenshots/iOS"
+# e.g.: <self> main iphone 01 1242 2688 "fastlane/screenshots/iOS"
 
 template=$1
 device=$2
