@@ -1,0 +1,63 @@
+.mac #background {
+    width: 2880px;
+    height: 1800px;
+}
+
+.mac #background header {
+    height: 6em;
+}
+
+.mac #background .heading {
+    font-size: 1.4em;
+}
+
+.mac #box {
+    left: 45%;
+    top: 140%;
+}
+
+.mac #mac {
+    display: block;
+}
+
+#mac .screenshot {
+    width: 1600px;
+    top: 20px;
+    border-radius: 25px;
+}
+
+.screen-01.mac .heading {
+    padding: 5em;
+}
+
+.screen-02.mac .heading {
+    padding: 3em;
+}
+
+.screen-03.mac .heading {
+    padding: 5em;
+}
+
+.screen-04.mac .heading {
+    padding: 6em;
+}
+
+.screen-01 #mac :nth-child(1) {
+    display: block;
+}
+
+.screen-02 #mac :nth-child(2) {
+    display: block;
+}
+
+.screen-03 #mac :nth-child(3) {
+    display: block;
+}
+
+.screen-04 #mac :nth-child(4) {
+    display: block;
+}
+
+.screen-05 #mac :nth-child(5) {
+    display: block;
+}
