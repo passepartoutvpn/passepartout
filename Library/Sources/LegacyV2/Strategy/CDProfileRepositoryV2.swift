@@ -48,7 +48,10 @@ final class CDProfileRepositoryV2: Sendable {
                 guard let self else {
                     return false
                 }
-                return try context.count(for: CDProfile.fetchRequest()) > 0
+                let entities = try CDProfile.fetchRequest().execute()
+                return !entities.compactMap {
+                    ($0.encryptedJSON ?? $0.json) != nil
+                }.isEmpty
             }
         } catch {
             return false
@@ -62,7 +65,7 @@ final class CDProfileRepositoryV2: Sendable {
             },
             map: {
                 $0.compactMap {
-                    guard $0.value.encryptedJSON ?? $0.value.json != nil else {
+                    guard ($0.value.encryptedJSON ?? $0.value.json) != nil else {
                         pp_log(.App.migration, .error, "ProfileV2 \($0.key) is not migratable: missing JSON")
                         return nil
                     }
