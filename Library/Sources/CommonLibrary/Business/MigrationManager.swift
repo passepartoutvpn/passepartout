@@ -62,6 +62,10 @@ public final class MigrationManager: ObservableObject {
 // MARK: - Public interface
 
 extension MigrationManager {
+    public var hasMigratableProfiles: Bool {
+        profileStrategy.hasMigratableProfiles
+    }
+
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
         try await profileStrategy.fetchMigratableProfiles()
     }
@@ -173,7 +177,8 @@ private extension MigrationManager {
 // MARK: - Dummy
 
 private final class DummyProfileStrategy: ProfileMigrationStrategy {
-    public init() {
+    var hasMigratableProfiles: Bool {
+        false
     }
 
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {

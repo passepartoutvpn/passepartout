@@ -42,6 +42,19 @@ final class CDProfileRepositoryV2: Sendable {
         self.context = context
     }
 
+    var hasMigratableProfiles: Bool {
+        do {
+            return try context.performAndWait { [weak self] in
+                guard let self else {
+                    return false
+                }
+                return try context.count(for: CDProfile.fetchRequest()) > 0
+            }
+        } catch {
+            return false
+        }
+    }
+
     func migratableProfiles() async throws -> [MigratableProfile] {
         try await fetchProfiles(
             prefetch: {
