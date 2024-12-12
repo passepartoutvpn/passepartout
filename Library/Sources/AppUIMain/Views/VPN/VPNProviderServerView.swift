@@ -144,15 +144,16 @@ private extension VPNProviderServerView {
         return filters
     }
 
-    func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
+    func compatiblePresets(with server: VPNServer) -> [VPNPreset<Configuration>] {
         vpnManager
             .presets
-            .filter { preset in
-                filtersViewModel.presets.contains {
-                    preset.presetId == $0.presetId
+            .filter {
+                if let selectedId = filtersViewModel.filters.presetId {
+                    return $0.presetId == selectedId
                 }
+                return true
             }
-            .first {
+            .filter {
                 if let supportedIds = server.provider.supportedPresetIds {
                     return supportedIds.contains($0.presetId)
                 }
@@ -215,7 +216,8 @@ private extension VPNProviderServerView {
     }
 
     func onSelectServer(_ server: VPNServer) {
-        guard let preset = compatiblePreset(with: server) else {
+        let presets = compatiblePresets(with: server)
+        guard let preset = presets.first else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
             assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.configurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
             return
