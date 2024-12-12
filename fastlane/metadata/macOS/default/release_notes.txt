@@ -1,3 +1,4 @@
+* Fix a Core Data crash on Apple TV (#1003)
 * Skip onboarding migration if no migratable profiles (#1002)
 * Fix TV active toggle color when on-demand
 * Fix incorrect selection of VPN preset (#996)
