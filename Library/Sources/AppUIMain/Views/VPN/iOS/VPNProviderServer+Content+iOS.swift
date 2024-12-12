@@ -98,30 +98,6 @@ private extension VPNProviderServerView.ContentView {
         }
     }
 
-    var emptyView: some View {
-        Text(Strings.Views.Vpn.noServers)
-    }
-}
-
-private extension VPNProviderServerView.ContentView {
-    var countryCodes: [String] {
-        filtersViewModel
-            .countries
-            .map(\.code)
-    }
-
-    func isExpandedCountry(_ code: String) -> Binding<Bool> {
-        Binding {
-            expandedCodes.contains(code)
-        } set: {
-            if $0 {
-                expandedCodes.insert(code)
-            } else {
-                expandedCodes.remove(code)
-            }
-        }
-    }
-
     func countryView(for code: String) -> some View {
         serversByCountryCode[code]
             .map { servers in
@@ -155,6 +131,30 @@ private extension VPNProviderServerView.ContentView {
                     value: server.serverId,
                     selection: providerPreferences.favoriteServers()
                 )
+            }
+        }
+    }
+
+    var emptyView: some View {
+        Text(Strings.Views.Vpn.noServers)
+    }
+}
+
+private extension VPNProviderServerView.ContentView {
+    var countryCodes: [String] {
+        filtersViewModel
+            .countries
+            .map(\.code)
+    }
+
+    func isExpandedCountry(_ code: String) -> Binding<Bool> {
+        Binding {
+            expandedCodes.contains(code)
+        } set: {
+            if $0 {
+                expandedCodes.insert(code)
+            } else {
+                expandedCodes.remove(code)
             }
         }
     }

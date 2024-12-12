@@ -147,25 +147,6 @@ private extension VPNProviderServerView {
         return filters
     }
 
-    func compatiblePresets(with server: VPNServer) -> [VPNPreset<Configuration>] {
-        vpnManager
-            .presets
-            .filter {
-                if let selectedId = filtersViewModel.filters.presetId {
-                    return $0.presetId == selectedId
-                }
-                return true
-            }
-            .filter {
-                if let supportedIds = server.provider.supportedPresetIds {
-                    return supportedIds.contains($0.presetId)
-                }
-                return true
-            }
-    }
-}
-
-private extension VPNProviderServerView {
     func loadInitialServers() async {
         do {
             let repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
@@ -198,6 +179,23 @@ private extension VPNProviderServerView {
         } catch {
             pp_log(.app, .error, "Unable to fetch filtered servers: \(error)")
         }
+    }
+
+    func compatiblePresets(with server: VPNServer) -> [VPNPreset<Configuration>] {
+        vpnManager
+            .presets
+            .filter {
+                if let selectedId = filtersViewModel.filters.presetId {
+                    return $0.presetId == selectedId
+                }
+                return true
+            }
+            .filter {
+                if let supportedIds = server.provider.supportedPresetIds {
+                    return supportedIds.contains($0.presetId)
+                }
+                return true
+            }
     }
 
     func onNewFilters(_ filters: VPNFilters) {
