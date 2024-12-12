@@ -59,7 +59,7 @@ struct OnboardingModifier: ViewModifier {
                     Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
                 },
                 message: {
-                    Text(Strings.Alerts.Community.message)
+                    Text(Strings.Alerts.Community.message(Strings.Unlocalized.appName))
                 }
             )
             .onLoad(perform: advance)
