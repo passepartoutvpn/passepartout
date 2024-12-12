@@ -44,11 +44,15 @@ extension BundleConfiguration {
 
 extension BundleConfiguration {
     public static var urlForGroupCaches: URL {
-        appGroupURL.appending(components: "Library", "Caches")
+        let url = appGroupURL.appending(components: "Library", "Caches")
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
     }
 
     public static var urlForGroupDocuments: URL {
-        appGroupURL.appending(components: "Library", "Documents")
+        let url = appGroupURL.appending(components: "Library", "Documents")
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
     }
 }
 
