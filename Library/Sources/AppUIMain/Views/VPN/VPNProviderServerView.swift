@@ -132,31 +132,31 @@ private extension VPNProviderServerView {
         return servers
     }
 
-    var initialFilters: VPNFilters {
+    var initialFilters: VPNFilters? {
+        guard let selectedEntity else {
+            return nil
+        }
         var filters = VPNFilters()
-
-        // force initial preset filter
-        filters.presetId = vpnManager.options.presets.first?.presetId
-
-        if let selectedEntity {
-            filters.presetId = selectedEntity.preset.presetId
-            if filtersWithSelection {
-                filters.categoryName = selectedEntity.server.provider.categoryName
+        filters.presetId = selectedEntity.preset.presetId
+        if filtersWithSelection {
+            filters.categoryName = selectedEntity.server.provider.categoryName
 #if os(macOS)
-                filters.countryCode = selectedEntity.server.provider.countryCode
+            filters.countryCode = selectedEntity.server.provider.countryCode
 #endif
-            }
         }
         return filters
     }
 
-    func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
+    func compatiblePresets(with server: VPNServer) -> [VPNPreset<Configuration>] {
         vpnManager
             .presets
             .filter {
-                $0.presetId == filtersViewModel.filters.presetId
+                if let selectedId = filtersViewModel.filters.presetId {
+                    return $0.presetId == selectedId
+                }
+                return true
             }
-            .first {
+            .filter {
                 if let supportedIds = server.provider.supportedPresetIds {
                     return supportedIds.contains($0.presetId)
                 }
@@ -219,7 +219,8 @@ private extension VPNProviderServerView {
     }
 
     func onSelectServer(_ server: VPNServer) {
-        guard let preset = compatiblePreset(with: server) else {
+        let presets = compatiblePresets(with: server)
+        guard let preset = presets.first else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
             assertionFailure("No compatible presets for server \(server.serverId) (provider=\(vpnManager.providerId), configuration=\(Configuration.configurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
             return
