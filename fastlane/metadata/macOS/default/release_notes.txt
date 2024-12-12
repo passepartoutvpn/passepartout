@@ -1,0 +1,3 @@
+* Exclude OpenVPN endpoints (#987)
+* Fix missing animations in profiles list (#986)
+* Select preset matching current filter (#985)
