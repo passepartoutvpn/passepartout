@@ -1,3 +1,6 @@
+* Skip onboarding migration if no migratable profiles (#1002)
+* Fix TV active toggle color when on-demand
+* Fix incorrect selection of VPN preset (#996)
 * Exclude OpenVPN endpoints (#987)
 * Fix missing animations in profiles list (#986)
 * Select preset matching current filter (#985)
