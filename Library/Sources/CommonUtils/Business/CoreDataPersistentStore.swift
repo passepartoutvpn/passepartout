@@ -117,10 +117,6 @@ extension CoreDataPersistentStore {
     public func backgroundContext() -> NSManagedObjectContext {
         container.newBackgroundContext()
     }
-
-    public var coordinator: NSPersistentStoreCoordinator {
-        container.persistentStoreCoordinator
-    }
 }
 
 // MARK: Development
