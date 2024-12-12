@@ -147,6 +147,18 @@
 		0E08447B2CF86F2A00ECED7C /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		0E2267852D0A059B0000B557 /* MainScreenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MainScreenshots.xctestplan; sourceTree = "<group>"; };
 		0E2267872D0A05D20000B557 /* TVScreenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TVScreenshots.xctestplan; sourceTree = "<group>"; };
+		0E29E7152D0B7A08003294CA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7162D0B7A11003294CA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7172D0B7A40003294CA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7182D0B7A46003294CA /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7192D0B7A4C003294CA /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E71A2D0B7B69003294CA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppPlist.strings"; sourceTree = "<group>"; };
+		0E29E71B2D0B7B73003294CA /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E71C2D0B7B77003294CA /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E71F2D0B7BC3003294CA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7202D0B7D06003294CA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7212D0B7D09003294CA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E29E7262D0B7D75003294CA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Profiles.sqlite; sourceTree = "<group>"; };
 		0E3FF4B92CE3AFBC00BFF640 /* MigrationManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationManagerTests.swift; sourceTree = "<group>"; };
@@ -643,7 +655,18 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				it,
+				de,
+				fr,
+				uk,
+				el,
+				"zh-Hans",
+				nl,
+				pl,
+				pt,
+				es,
+				ru,
+				sv,
 			);
 			mainGroup = 0E06D1862B87629100176E1D;
 			productRefGroup = 0E06D1902B87629100176E1D /* Products */;
@@ -865,6 +888,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				0EB08B972CA46F4900A02591 /* en */,
+				0E29E7152D0B7A08003294CA /* it */,
+				0E29E7162D0B7A11003294CA /* de */,
+				0E29E7172D0B7A40003294CA /* fr */,
+				0E29E7182D0B7A46003294CA /* uk */,
+				0E29E7192D0B7A4C003294CA /* el */,
+				0E29E71A2D0B7B69003294CA /* zh-Hans */,
+				0E29E71B2D0B7B73003294CA /* nl */,
+				0E29E71C2D0B7B77003294CA /* pl */,
+				0E29E71F2D0B7BC3003294CA /* es */,
+				0E29E7202D0B7D06003294CA /* ru */,
+				0E29E7212D0B7D09003294CA /* sv */,
+				0E29E7262D0B7D75003294CA /* pt */,
 			);
 			name = AppPlist.strings;
 			sourceTree = "<group>";
@@ -880,6 +915,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -936,7 +972,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -963,6 +998,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1014,7 +1050,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

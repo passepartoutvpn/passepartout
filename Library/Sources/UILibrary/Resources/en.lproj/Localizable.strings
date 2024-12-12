@@ -96,8 +96,8 @@
 "views.preferences.keeps_in_menu.footer" = "Enable this to keep the app in the menu bar after closing it.";
 "views.preferences.locks_in_background" = "Lock in background";
 "views.preferences.locks_in_background.footer" = "Lock the app with FaceID when sent to the background.";
-"views.preferences.erase_icloud" = "Erase iCloud store";
-"views.preferences.erase_icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
+"views.preferences.erase_icloud" = "Erase profiles from iCloud";
+"views.preferences.erase_icloud.footer" = "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 
 "views.profile.sections.name.footer" = "Use this name to create your VPN automations from the Shortcuts app.";
 "views.profile.rows.add_module" = "Add module";
@@ -116,7 +116,7 @@
 "views.purchased.title" = "Purchased";
 "views.purchased.sections.download.header" = "First download";
 "views.purchased.sections.products.header" = "Purchases";
-"views.purchased.sections.features.header" = "Eligible features";
+"views.purchased.sections.features.header" = "Features";
 "views.purchased.rows.build_number" = "Build number";
 "views.purchased.rows.download_date" = "Download date";
 "views.purchased.no_purchases" = "No purchases";
@@ -165,10 +165,10 @@
 "modules.openvpn.pull" = "Pull";
 "modules.openvpn.redirect_gateway" = "Redirect gateway";
 "modules.openvpn.credentials" = "Credentials";
-"modules.openvpn.credentials.guidance.web" = "Use your account credentials.";
+"modules.openvpn.credentials.guidance.web" = "Use your login credentials.";
 "modules.openvpn.credentials.guidance.specific" = "Use your specific OpenVPN credentials, which are not the same credentials you log in with.";
 "modules.openvpn.credentials.guidance.link" = "See your OpenVPN credentials";
-"modules.openvpn.remotes" = "Remotes";
+"modules.openvpn.remotes" = "Remote endpoints";
 "modules.openvpn.communication" = "Communication";
 "modules.openvpn.cipher" = "Cipher";
 "modules.openvpn.digest" = "Digest";
@@ -221,12 +221,12 @@
 // MARK: - Features
 
 "features.appletv" = "%@";
-"features.dns" = "%@ Settings";
-"features.http_proxy" = "%@ Settings";
+"features.dns" = "DNS Settings";
+"features.http_proxy" = "HTTP Proxy Settings";
 "features.interactiveLogin" = "Interactive Login";
 "features.on_demand" = "On-Demand Rules";
 "features.providers" = "All Providers";
-"features.routing" = "Custom %@";
+"features.routing" = "Custom Routing";
 "features.sharing" = "%@";
 
 // MARK: - Global
@@ -244,7 +244,7 @@
 "global.actions.hide" = "Hide";
 "global.actions.purchase" = "Purchase";
 "global.actions.remove" = "Delete";
-"global.actions.restart" = "Restart";
+"global.actions.reconnect" = "Restart";
 "global.actions.save" = "Save";
 "global.actions.select" = "Select";
 "global.actions.show" = "Show";
@@ -321,7 +321,7 @@
 
 // MARK: Global (Alerts)
 
-"alerts.community.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
+"alerts.community.message" = "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
 "alerts.community.subscribe" = "Subscribe now";
 "alerts.community.dismiss" = "No, thanks";
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
@@ -336,7 +336,7 @@
 "errors.app.empty_profile_name" = "Profile name is empty.";
 "errors.app.import" = "Unable to import profiles.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
-"errors.app.tunnel" = "Unable to execute tunnel operation.";
+"errors.app.tunnel" = "Unable to execute operation.";
 
 // MARK: Global (PassepartoutKit errors)
 
@@ -345,7 +345,7 @@
 "errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Some active modules are incompatible, try to only activate one of them.";
 "errors.app.passepartout.invalid_fields" = "Invalid fields.";
-"errors.app.passepartout.missing_provider_entity" = "No provider server selected.";
+"errors.app.passepartout.missing_provider_entity" = "No server selected in provider.";
 "errors.app.passepartout.no_active_modules" = "The profile has no active modules.";
 "errors.app.passepartout.parsing" = "Unable to parse file.";
 "errors.app.passepartout.provider_required" = "No provider selected.";

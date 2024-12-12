@@ -109,7 +109,7 @@ private extension ProfileContextMenu {
             errorHandler: errorHandler,
             flow: flow?.connectionFlow,
             label: {
-                ThemeImageLabel(Strings.Global.Actions.restart, .tunnelRestart)
+                ThemeImageLabel(Strings.Global.Actions.reconnect, .tunnelRestart)
             }
         )
     }

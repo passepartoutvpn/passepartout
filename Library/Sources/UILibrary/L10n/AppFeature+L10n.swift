@@ -35,10 +35,10 @@ extension AppFeature: LocalizableEntity {
             return V.appletv(Strings.Unlocalized.appleTV)
 
         case .dns:
-            return V.dns(Strings.Unlocalized.dns)
+            return V.dns
 
         case .httpProxy:
-            return V.httpProxy(Strings.Unlocalized.httpProxy)
+            return V.httpProxy
 
         case .interactiveLogin:
             return V.interactiveLogin
@@ -50,7 +50,7 @@ extension AppFeature: LocalizableEntity {
             return V.providers
 
         case .routing:
-            return V.routing(Strings.Global.Nouns.routing)
+            return V.routing
 
         case .sharing:
             return V.sharing(Strings.Unlocalized.iCloud)
