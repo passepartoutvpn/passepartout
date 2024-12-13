@@ -1,6 +1,10 @@
 {
     "licenses": [
         {
+            "name": "fastlane",
+            "licenseName": "MIT",
+            "licenseURL": "https://raw.githubusercontent.com/fastlane/fastlane/master/LICENSE"
+        }, {
             "name": "GenericJSON",
             "licenseName": "MIT",
             "licenseURL": "https://raw.githubusercontent.com/iwill/generic-json-swift/master/LICENSE"
@@ -20,6 +24,10 @@
             "name": "SwiftGen",
             "licenseName": "MIT",
             "licenseURL": "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENCE"
+        }, {
+            "name": "SwiftLint",
+            "licenseName": "MIT",
+            "licenseURL": "https://raw.githubusercontent.com/realm/SwiftLint/master/LICENSE"
         }
     ],
     "notices": [
