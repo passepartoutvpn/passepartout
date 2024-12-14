@@ -29,8 +29,7 @@
 // tweak these for local development
 CFG_APP_ID = com.algoritmico.ios.Passepartout
 CFG_APP_STORE_ID = 1433648537
-CFG_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout.v3
-CFG_CLOUDKIT_PREFERENCES_ID = iCloud.com.algoritmico.Passepartout.v3.Preferences
+CFG_CLOUDKIT_ROOT = iCloud.com.algoritmico.Passepartout
 CFG_IAP_BUNDLE_PREFIX = com.algoritmico.ios.Passepartout
 CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
 CFG_TEAM_ID = DTDYD63ZX9
@@ -47,8 +46,10 @@ CFG_INTENTS_ID = $(CFG_APP_ID).Intents
 CFG_LOGIN_ITEM_ID = $(CFG_APP_ID).LoginItem
 CFG_TUNNEL_ID = $(CFG_APP_ID).Tunnel
 
-CFG_LEGACY_V2_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout
-CFG_LEGACY_V2_TV_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout.Shared
+CFG_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT).v3
+CFG_CLOUDKIT_PREFERENCES_ID = $(CFG_CLOUDKIT_ROOT).v3.Preferences
+CFG_LEGACY_V2_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT)
+CFG_LEGACY_V2_TV_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT).Shared
 
 PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
 CUSTOM_SCRIPT_PATH = $(PATH)
