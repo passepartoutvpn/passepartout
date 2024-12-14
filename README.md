@@ -1,4 +1,4 @@
-<div style="background-color: #515D70; text-align: center; padding: 0em 1em">
+<div style="text-align: center; padding: 0em 1em">
 	<img src="Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png" width="300" height="300" />
 </div>
 
