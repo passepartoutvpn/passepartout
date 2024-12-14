@@ -32,7 +32,7 @@ Tailored for Apple platforms:
 
 ## Installation
 
-**WARNING: This will not work because PassepartoutKit is a private repository, as it's not ready for public use yet.**
+**WARNING: This will not work because PassepartoutKit is a private repository, as it's not ready for public use yet. Follow updates here: #793**
 
 ### Requirements
 
