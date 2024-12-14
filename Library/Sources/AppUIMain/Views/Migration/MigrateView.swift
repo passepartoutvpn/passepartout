@@ -191,16 +191,17 @@ private extension MigrateView {
             }
             pp_log(.App.migration, .notice, "Migrated \(migrated.count) profiles")
 
-            if !iapManager.isRestricted {
-                do {
-                    try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
-                    pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
-                } catch {
-                    pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
-                }
-            } else {
+            // TODO: ### restore auto-deletion after stable 3.0.0, otherwise users could not downgrade
+//            if !iapManager.isRestricted {
+//                do {
+//                    try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
+//                    pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
+//                } catch {
+//                    pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
+//                }
+//            } else {
                 pp_log(.App.migration, .notice, "Restricted build, do not discard migrated profiles")
-            }
+//            }
 
             model.step = .migrated(migrated)
         } catch {
