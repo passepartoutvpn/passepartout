@@ -26,7 +26,7 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-// tweak these for local development
+// tweak these based on app and team
 CFG_APP_ID = com.algoritmico.ios.Passepartout
 CFG_APP_STORE_ID = 1433648537
 CFG_CLOUDKIT_ROOT = iCloud.com.algoritmico.Passepartout
