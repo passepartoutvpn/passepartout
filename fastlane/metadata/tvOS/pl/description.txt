@@ -1,3 +1,16 @@
-Passepartout jest inteligentnym klientem VPN, perfekcyjnie zintegrowanym z platformami systemu iOS. Możesz teraz udostępniać swoje profile VPN z aplikacji iOS i macOS na Apple TV, również bezpiecznie dzięki szyfrowaniu typu end-to-end CloudKit.
+Chroń swoją prywatność online z Passepartout, inteligentnym klientem VPN, który bezproblemowo integruje się z tvOS.
 
-Passepartout jest aplikacją typu open source:  https://github.com/passepartoutvpn
+Używaj aplikacji na iOS lub macOS jako pilota, aby łatwo konfigurować i zarządzać profilami VPN, zapewniając płynne i spójne doświadczenie na wszystkich urządzeniach Apple. Niezależnie od tego, czy korzystasz z popularnych dostawców VPN, czy hostujesz własne serwery, Passepartout to kompleksowe rozwiązanie dla Twojego Apple TV.
+
+PRYWATNOŚĆ, NA KTÓREJ MOŻESZ POLEGAĆ
+
+Passepartout zostało zaprojektowane z myślą o przejrzystości i ochronie prywatności:  
+- Sprawdzaj dokładnie, z którymi serwerami się łączysz.  
+- Korzystaj z wcześniej rozwiązywanych punktów końcowych, aby zapewnić płynne działanie w ograniczonych sieciach.  
+- Bez reklam, śledzenia ani zbędnych procesów w tle – tylko potrzebne połączenie VPN.
+
+OPEN SOURCE I WSPIERANE PRZEZ SPOŁECZNOŚĆ
+
+Passepartout to projekt open source, który stale się rozwija dzięki pomocy społeczności. Sprawdź projekt na GitHub: https://github.com/passepartoutvpn
+
+Przejmij kontrolę nad swoim doświadczeniem VPN. Pobierz Passepartout już dziś i ciesz się bezpiecznym, prywatnym i bezproblemowym połączeniem na swoim Apple TV!
