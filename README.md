@@ -1,4 +1,6 @@
-<p style="text-align: center; padding: 0em 1em; background-color: #515D70"><img src="Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png" width="300" height="300" /></p>
+<div style="background-color: #515D70; text-align: center; padding: 0em 1em">
+	<img src="Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png" width="300" height="300" />
+</div>
 
 ![iOS 16+](https://img.shields.io/badge/iOS-16+-green.svg)
 ![macOS 13+](https://img.shields.io/badge/macOS-13+-green.svg)
