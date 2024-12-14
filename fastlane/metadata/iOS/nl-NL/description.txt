@@ -1,37 +1,56 @@
-Passepartout is een slimme VPN-client die perfect is geïntegreerd in Apple-platformen. Passepartout is de enige app die je nodig hebt voor zowel bekende VPN-providers als je eigen VPN-servers.
+Bescherm je online privacy met Passepartout, een slimme VPN-client die naadloos is geïntegreerd met iOS, macOS, iPadOS en tvOS. Of je nu vertrouwt op grote VPN-providers of je eigen servers host, Passepartout is jouw alles-in-één-oplossing.
 
-Passepartout neemt geen andere ongevraagde achtergrondactiviteit op dan de VPN-tunnel en is hierdoor ook vriendelijker voor firewalls.
+WAAROM KIEZEN VOOR PASSEPARTOUT?
 
-Passepartout is open source: https://github.com/passepartoutvpn
+VERBIND MET MEERDERE PROVIDERS
 
-GEBRUIK MET MEERDERE PROVIDERS
+Passepartout ondersteunt presets voor populaire VPN-providers, zodat je eenvoudig veilig kunt verbinden:  
+- Hide.me  
+- IVPN  
+- Mullvad  
+- NordVPN  
+- Oeck  
+- PIA  
+- ProtonVPN  
+- Surfshark  
+- TorGuard  
+- TunnelBear  
+- VyprVPN  
+- Windscribe  
 
-Passepartout biedt presets voor grote VPN-providers:
+Liever een aangepaste configuratie? Importeer eenvoudig .ovpn- of .conf-bestanden om je persoonlijke VPN-servers in te stellen.
 
-- Hide.me
-- IVPN
-- Mullvad
-- NordVPN
-- Oeck
-- PIA
-- ProtonVPN
-- SurfShark
-- TorGuard
-- TunnelBear
-- VyprVPN
-- Windscribe
+GRATIS FUNCTIES:
 
-GEBRUIKSVRIENDELIJK
+- Ondersteuning voor de protocollen OpenVPN en WireGuard.  
+- Obfuscatie van OpenVPN (met --scramble).  
+- Automatisering met Snelkoppelingen voor eenvoudige workflows.  
+- Uitsluiten van eindpunten voor nauwkeurige controle.
 
-- Ongelooflijk gebruiksgemak, met native look & feel.
-- Beheer je profielen op één plek.
-- Importeer .ovpn / .conf-configuratiebestanden.
-- Gebruik on-demand regels om uw connectiviteit te verfijnen.
-- Verfijn de codering zonder configuratiebestanden te hoeven aanpassen.
-- Overschrijf netwerkinstellingen in een flits (standaard poortadres, DNS, proxy, MTU).
+BETAALDE FUNCTIES:
 
-PRIVACYVRIENDELIJK
+- Ondersteuning voor Apple TV.  
+- On-demand regels voor slimme en automatische verbindingen.  
+- iCloud-deling voor naadloos gebruik op meerdere apparaten.  
+- DoH/DoT voor veilige DNS-queries.  
+- Aangepast routeren voor geavanceerde configuraties.  
+- Interactieve login met ondersteuning voor eenmalige wachtwoorden (OTP).  
+- Niet-VPN-profielen (bijvoorbeeld alleen DNS/Proxy-instellingen).  
+- Volledige presets voor de grootste VPN-providers.
 
-- Volledige transparantie over de servers waarmee je verbinding maakt.
-- Kies vooraf vertaalde eindpunten wanneer DNS problematisch is.
-- Geen web-services, advertenties of overbodige functionaliteit naast VPN zelf.
+GEZINDELING
+
+Passepartout ondersteunt Gezinsharing, zodat je je aankoop kunt delen met gezinsleden.
+
+PRIVACY WAAR JE OP KUNT VERTROUWEN
+
+Passepartout is ontworpen met transparantie en privacy in gedachten:  
+- Bekijk precies met welke servers je verbinding maakt.  
+- Gebruik vooraf opgeloste eindpunten voor soepel gebruik in beperkte netwerken.  
+- Geen advertenties, trackers of onnodige achtergrondactiviteiten: alleen de VPN-verbinding die je nodig hebt.
+
+OPEN SOURCE EN COMMUNITY-GEDREVEN
+
+Passepartout is open source en evolueert voortdurend dankzij de hulp van de community. Bekijk het project op GitHub: https://github.com/passepartoutvpn
+
+Neem de controle over je VPN-ervaring. Download Passepartout vandaag en geniet van veilige, privé en moeiteloze connectiviteit op al je Apple-apparaten.

@@ -1,37 +1,56 @@
-Passepartout jest inteligentnym klientem VPN, perfekcyjnie zintegrowanym z platformami systemu iOS. Passepartout to jedyna aplikacja, jakiej potrzebujesz do łączenia przez renomowanych dostawców VPN i swoje prywatne serwery VPN.
+Chroń swoją prywatność online z Passepartout, inteligentnym klientem VPN, który bezproblemowo integruje się z iOS, macOS, iPadOS i tvOS. Niezależnie od tego, czy korzystasz z popularnych dostawców VPN, czy hostujesz własne serwery, Passepartout to kompleksowe rozwiązanie dla Ciebie.
 
-Passepartout nie wykonuje żadnych niepożądanych działań w tle poza łączeniem z tunelem VPN, dzięki czemu jest również bardziej przyjazna dla firewalli.
+DLACZEGO WARTO WYBRAĆ PASSEPARTOUT?
 
-Passepartout jest aplikacją typu open source:  https://github.com/passepartoutvpn
+ŁĄCZ SIĘ Z WIELOMA DOSTAWCAMI
 
-MOŻESZ W NIEJ KORZYSTAĆ Z USŁUG  WIELU DOSTAWCÓW
+Passepartout obsługuje konfiguracje dla popularnych dostawców VPN, co ułatwia bezpieczne połączenie:  
+- Hide.me  
+- IVPN  
+- Mullvad  
+- NordVPN  
+- Oeck  
+- PIA  
+- ProtonVPN  
+- Surfshark  
+- TorGuard  
+- TunnelBear  
+- VyprVPN  
+- Windscribe  
 
-Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
+Wolisz własną konfigurację? Wystarczy zaimportować pliki .ovpn lub .conf, aby skonfigurować swoje serwery VPN.
 
-- Hide.me
-- IVPN
-- Mullvad
-- NordVPN
-- Oeck
-- PIA
-- ProtonVPN
-- SurfShark
-- TorGuard
-- TunnelBear
-- VyprVPN
-- Windscribe
+FUNKCJE DARMOWE:
 
-ŁATWOŚĆ OBSŁUGI
+- Obsługa protokołów OpenVPN i WireGuard.  
+- Zaciemnianie OpenVPN (za pomocą --scramble).  
+- Automatyzacja za pomocą Skrótów dla uproszczonych operacji.  
+- Wykluczanie punktów końcowych dla precyzyjnej kontroli.
 
-- Niesamowita łatwość użytkowania dzięki natywnej szacie graficznej i funkcjonalnościom.
-- Obsługa wszystkich profili w jednym miejscu.
-- Import plików konfiguracyjnych .ovpn / .conf
-- Użyj reguł na żądanie, aby doprecyzować swoją łączność.
-- Optymalne szyfrowanie bez konieczności modyfikowania pliku konfiguracyjnego.
-- Błyskawiczne zastępowanie ustawień sieciowych (domyślna bramka), DNS, proxy, MTU.
+FUNKCJE PŁATNE:
 
-PRZYJAZNA PRYWATNOŚCI
+- Obsługa Apple TV.  
+- Reguły na żądanie dla inteligentnych, automatycznych połączeń.  
+- Udostępnianie w iCloud dla płynnego korzystania na wielu urządzeniach.  
+- DoH/DoT dla bezpiecznych zapytań DNS.  
+- Niestandardowe trasy dla zaawansowanych konfiguracji.  
+- Interaktywne logowanie z obsługą jednorazowych haseł (OTP).  
+- Profile inne niż VPN (np. ustawienia tylko DNS/Proxy).  
+- Pełne konfiguracje dla głównych dostawców VPN.
 
-- Pełna transparentność informacji o serwerach, z którymi się łączysz.
-- Wybór wstępnie zdefiniowanych punktów końcowych, gdy DNS sprawia problemy.
-- Brak usług internetowych, reklam i innych niepożądanych elementów poza samą siecią VPN.
+UDOSTĘPNIANIE RODZINNE
+
+Passepartout obsługuje Udostępnianie Rodzinne, dzięki czemu możesz dzielić się swoim zakupem z członkami rodziny.
+
+PRYWATNOŚĆ, KTÓREJ MOŻESZ UFAĆ
+
+Passepartout zostało zaprojektowane z myślą o przejrzystości i prywatności:  
+- Sprawdzaj dokładnie, z którymi serwerami się łączysz.  
+- Używaj wstępnie rozwiązanych punktów końcowych dla płynnego działania w ograniczonych sieciach.  
+- Bez reklam, trackerów czy niepotrzebnych procesów w tle – tylko połączenie VPN, którego potrzebujesz.
+
+OPEN SOURCE I WSPARCIE SPOŁECZNOŚCI
+
+Passepartout to projekt open source, który nieustannie się rozwija dzięki pomocy społeczności. Sprawdź projekt na GitHub: https://github.com/passepartoutvpn
+
+Przejmij kontrolę nad swoim doświadczeniem z VPN. Pobierz Passepartout już dziś i ciesz się bezpieczną, prywatną i bezproblemową łącznością na wszystkich swoich urządzeniach Apple.
