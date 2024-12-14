@@ -1,6 +1,4 @@
-<div style="text-align: center; padding: 0em 1em">
-	<img src="Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png" width="300" height="300" />
-</div>
+![Passepartout logo](Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
 
 ![iOS 16+](https://img.shields.io/badge/iOS-16+-green.svg)
 ![macOS 13+](https://img.shields.io/badge/macOS-13+-green.svg)
