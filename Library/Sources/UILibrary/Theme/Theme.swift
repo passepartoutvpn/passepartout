@@ -54,9 +54,17 @@ public final class Theme: ObservableObject {
 
     public internal(set) var emptyMessageColor: Color = .secondary
 
-    public internal(set) var primaryColor = Color(red: 0.318, green: 0.365, blue: 0.443)
+    public internal(set) var primaryColor = Color(
+        red: Double(0x51) / 255.0,
+        green: Double(0x5D) / 255.0,
+        blue: Double(0x70) / 255.0
+    )
 
-    public internal(set) var activeColor = Color(red: .zero, green: Double(0xAA) / 255.0, blue: .zero)
+    public internal(set) var activeColor = Color(
+        red: .zero,
+        green: Double(0xAA) / 255.0,
+        blue: .zero
+    )
 
     public internal(set) var inactiveColor: Color = .gray
 
