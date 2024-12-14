@@ -32,6 +32,8 @@ Tailored for Apple platforms:
 
 ## Installation
 
+**WARNING: This will not work because PassepartoutKit is a private repository, as it's not ready for public use yet.**
+
 ### Requirements
 
 - iOS 16+ / macOS 13+ / tvOS 17+
@@ -42,8 +44,6 @@ Tailored for Apple platforms:
 It's highly recommended that you use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
 ### Testing
-
-**WARNING: This will not work because PassepartoutKit is a private repository, as it's not ready for public use yet.**
 
 Download the app codebase locally:
 
