@@ -1,21 +1,15 @@
 ![Passepartout logo](Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
 
-![iOS 16+](https://img.shields.io/badge/iOS-16+-green.svg)
-![macOS 13+](https://img.shields.io/badge/macOS-13+-green.svg)
-![tvOS 17+](https://img.shields.io/badge/tvOS-17+-green.svg)
-[![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
+# [Passepartout][about-website]
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
 [![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
-
-# [Passepartout][about-website]
+[![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
+[![Join TestFlight](https://img.shields.io/badge/beta-Testflight-blue.svg)][about-testflight]
 
 Passepartout is your go-to app for VPN and privacy.
 
 [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for Apple platforms, the OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
-
-[![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
-[![Join TestFlight](https://img.shields.io/badge/beta-Testflight-blue.svg)][about-testflight]
 
 ## Installation
 
