@@ -9,7 +9,26 @@
 
 Passepartout is your go-to app for VPN and privacy.
 
+Passepartout runs on [iPhone, iPad, Mac, and Apple TV][web-appstore].
+
+## Features
+
 [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for Apple platforms, the OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
+
+Other features:
+
+- On-demand rules
+- Override DNS and HTTP proxy
+- Custom routing
+- Presets for multiple providers (virtually any)
+
+Tailored for Apple platforms:
+
+- Apple TV
+- iCloud
+- Shortcuts
+- No background activities
+- Wise on battery
 
 ## Installation
 
@@ -104,6 +123,8 @@ You are encouraged to read carefully both the [disclaimer][web-disclaimer] and [
 Twitter: [@keeshux][about-twitter]
 
 Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
+
+[web-appstore]: https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 [openvpn-xor-patch]: https://tunnelblick.net/cOpenvpn_xorpatch.html
