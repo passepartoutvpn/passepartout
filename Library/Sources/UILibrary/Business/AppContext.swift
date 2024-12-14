@@ -46,7 +46,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
-    private let tunnelReceiptURL: URL
+    private let tunnelReceiptURL: URL?
 
     private var launchTask: Task<Void, Error>?
 
@@ -62,7 +62,7 @@ public final class AppContext: ObservableObject, Sendable {
         preferencesManager: PreferencesManager,
         registry: Registry,
         tunnel: ExtendedTunnel,
-        tunnelReceiptURL: URL
+        tunnelReceiptURL: URL?
     ) {
         self.iapManager = iapManager
         self.migrationManager = migrationManager
@@ -128,7 +128,8 @@ private extension AppContext {
             .store(in: &subscriptions)
 
         // copy release receipt to tunnel for TestFlight eligibility (once is enough, it won't change)
-        if let appReceiptURL = Bundle.main.appStoreProductionReceiptURL {
+        if let tunnelReceiptURL,
+           let appReceiptURL = Bundle.main.appStoreProductionReceiptURL {
             do {
                 pp_log(.App.iap, .info, "\tCopy release receipt to tunnel...")
                 try? FileManager.default.removeItem(at: tunnelReceiptURL)

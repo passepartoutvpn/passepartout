@@ -51,11 +51,17 @@ private extension Dependencies {
     func tunnelReceiptReader() -> AppReceiptReader {
         FallbackReceiptReader(
             main: StoreKitReceiptReader(),
-            beta: KvittoReceiptReader(url: betaReceiptURL)
+            beta: betaReceiptURL.map {
+                KvittoReceiptReader(url: $0)
+            }
         )
     }
 
-    var betaReceiptURL: URL {
+    var betaReceiptURL: URL? {
+#if !os(tvOS)
         BundleConfiguration.urlForBetaReceipt // copied by AppContext.onLaunch
+#else
+        nil
+#endif
     }
 }
