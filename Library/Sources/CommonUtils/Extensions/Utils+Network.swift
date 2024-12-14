@@ -36,6 +36,7 @@ extension Utils {
         true
     }
 #else
+    // TODO: ###, move this check to kit, and try something similar for Ethernet
     public static func hasCellularData() -> Bool {
         var addrs: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&addrs) == 0 else {
@@ -57,11 +58,7 @@ extension Utils {
 #endif
 
     public static func hasEthernet() -> Bool {
-#if os(macOS)
         true
-#else
-        false
-#endif
     }
 
     public static func currentWifiSSID() async -> String? {

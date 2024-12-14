@@ -124,7 +124,8 @@ private extension OnDemandView {
         Group {
             if Utils.hasCellularData() {
                 Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
-            } else if Utils.hasEthernet() {
+            }
+            if Utils.hasEthernet() {
                 Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
             }
         }
