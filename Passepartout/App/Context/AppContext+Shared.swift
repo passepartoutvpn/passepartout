@@ -52,6 +52,9 @@ extension AppContext {
             fatalError("Unable to load local model")
         }
 
+        // FIXME: ###, drop before release
+        renameCoreDataContainers()
+
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
             inAppHelper: dependencies.simulatedAppProductHelper(),
@@ -67,7 +70,7 @@ extension AppContext {
             let remoteRepositoryBlock: (Bool) -> ProfileRepository = {
                 let remoteStore = CoreDataPersistentStore(
                     logger: dependencies.coreDataLogger(),
-                    containerName: Constants.shared.containers.remoteProfiles,
+                    containerName: Constants.shared.containers.remote,
                     model: cdRemoteModel,
                     cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
                     author: nil
@@ -107,7 +110,7 @@ extension AppContext {
         let providerManager: ProviderManager = {
             let store = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
-                containerName: Constants.shared.containers.providers,
+                containerName: Constants.shared.containers.local,
                 model: cdLocalModel,
                 cloudKitIdentifier: nil,
                 author: nil
@@ -144,7 +147,7 @@ extension AppContext {
         let preferencesManager: PreferencesManager = {
             let preferencesStore = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
-                containerName: Constants.shared.containers.preferences,
+                containerName: Constants.shared.containers.remote,
                 model: cdRemoteModel,
                 cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
                 author: nil
@@ -282,7 +285,7 @@ private extension Dependencies {
     func coreDataProfileRepository(model: NSManagedObjectModel, observingResults: Bool) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger(),
-            containerName: Constants.shared.containers.localProfiles,
+            containerName: Constants.shared.containers.backup,
             model: model,
             cloudKitIdentifier: nil,
             author: nil
@@ -297,5 +300,54 @@ private extension Dependencies {
                 return .ignore
             }
         )
+    }
+}
+
+// MARK: - Migration
+
+private extension AppContext {
+    static func renameCoreDataContainers() {
+        let fm = FileManager.default
+        let cdBaseURL = NSPersistentContainer.defaultDirectoryURL()
+        let cdRenameMappings: [String: String] = [
+            "Profiles-v3.sqlite": "Backup.sqlite",
+            "Profiles-v3.remote.sqlite": "Remote.sqlite",
+            "Providers-v3.sqlite": "Local.sqlite"
+        ]
+        let cdDeleteMappings: [String] = [
+            "Preferences-v3.sqlite"
+        ]
+        do {
+            try cdRenameMappings.forEach {
+                let sqlite = cdBaseURL.appending(component: $0.key)
+                let sqlitePath = sqlite.path(percentEncoded: false)
+                if fm.fileExists(atPath: sqlitePath) {
+                    let main = sqlite
+                    let mainNew = cdBaseURL.appending(component: $0.value)
+                    pp_log(.app, .debug, "Rename \(main) to \(mainNew)")
+                    try fm.moveItem(at: main, to: mainNew)
+
+                    let shm = cdBaseURL.appending(component: "\($0.key)-shm")
+                    let shmNew = cdBaseURL.appending(component: "\($0.value)-shm")
+                    pp_log(.app, .debug, "Rename \(shm) to \(shmNew)")
+                    try fm.moveItem(at: shm, to: shmNew)
+
+                    let wal = cdBaseURL.appending(component: "\($0.key)-wal")
+                    let walNew = cdBaseURL.appending(component: "\($0.value)-wal")
+                    pp_log(.app, .debug, "Rename \(wal) to \(walNew)")
+                    try fm.moveItem(at: wal, to: walNew)
+                }
+            }
+            cdDeleteMappings.forEach {
+                let sqlite = cdBaseURL.appending(component: $0)
+                let shm = cdBaseURL.appending(component: "\($0)-shm")
+                let wal = cdBaseURL.appending(component: "\($0)-wal")
+                try? fm.removeItem(at: sqlite)
+                try? fm.removeItem(at: shm)
+                try? fm.removeItem(at: wal)
+            }
+        } catch {
+            pp_log(.app, .error, "Unable to rename Core Data containers: \(error)")
+        }
     }
 }
