@@ -144,7 +144,7 @@ extension AppContext {
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.preferences,
                 model: cdPreferencesModel,
-                cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
+                cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
                 author: nil
             )
             return PreferencesManager(
