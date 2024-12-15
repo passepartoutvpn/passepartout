@@ -127,7 +127,6 @@ extension AppContext {
             let preferencesStore = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.preferences,
-                baseURL: BundleConfiguration.urlForGroupDocuments,
                 model: AppData.cdPreferencesModel,
                 cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
                 author: nil
