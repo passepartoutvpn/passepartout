@@ -32,8 +32,6 @@ Tailored for Apple platforms:
 
 ## Installation
 
-**WARNING: This will not work because PassepartoutKit is a private repository, as it's not ready for public use yet.** [Follow updates here](https://github.com/passepartoutvpn/passepartout/issues/793).
-
 ### Requirements
 
 - iOS 16+ / macOS 13+ / tvOS 17+
@@ -52,6 +50,8 @@ Download the app codebase locally:
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
 To eventually test the app, open `Passepartout.xcodeproj` in Xcode and run the `Passepartout` target.
+
+**WARNING: SwiftPM package resolution will fail because PassepartoutKit is a private repository, as it's not ready for public use yet.** [Follow updates here](https://github.com/passepartoutvpn/passepartout/issues/793).
 
 ## License
 
