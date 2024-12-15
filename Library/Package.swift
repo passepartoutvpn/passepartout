@@ -49,10 +49,7 @@ let package = Package(
         ),
         .library(
             name: "TunnelLibrary",
-            targets: [
-                "AppDataPreferences",
-                "CommonLibrary"
-            ]
+            targets: ["CommonLibrary"]
         ),
         .library(
             name: "UIAccessibility",
