@@ -162,7 +162,7 @@ extension ProfileManagerTests {
         XCTAssertFalse(sut.hasProfiles)
 
         let profile = newProfile()
-        try await wait(sut, "Save", until: .save(profile)) {
+        try await wait(sut, "Save", until: .localProfiles) {
             try await $0.save(profile)
         }
         XCTAssertEqual(sut.previews.count, 1)
@@ -182,7 +182,7 @@ extension ProfileManagerTests {
         builder.name = "newName"
         let renamedProfile = try builder.tryBuild()
 
-        try await wait(sut, "Save", until: .save(renamedProfile)) {
+        try await wait(sut, "Save", until: .localProfiles) {
             try await $0.save(renamedProfile)
         }
         XCTAssertEqual(sut.previews.first?.name, renamedProfile.name)
@@ -253,7 +253,7 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isReady)
         XCTAssertTrue(sut.hasProfiles)
 
-        try await wait(sut, "Remove", until: .remove([profile.id])) {
+        try await wait(sut, "Remove", until: .localProfiles) {
             await $0.remove(withId: profile.id)
         }
         XCTAssertTrue(sut.previews.isEmpty)
