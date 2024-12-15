@@ -28,12 +28,7 @@ import CoreData
 import Foundation
 
 extension AppData {
-
-    @MainActor
-    public static let cdProvidersModel: NSManagedObjectModel = {
-        guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
-            fatalError("Unable to build Core Data model (Providers v3)")
-        }
-        return model
+    public static let cdProvidersModel: NSManagedObjectModel? = {
+        .mergedModel(from: [.module])
     }()
 }
