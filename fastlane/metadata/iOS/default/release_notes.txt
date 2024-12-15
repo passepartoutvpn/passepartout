@@ -1,7 +1,4 @@
-* Fix a Core Data crash on Apple TV (#1003)
-* Skip onboarding migration if no migratable profiles (#1002)
-* Fix TV active toggle color when on-demand
-* Fix incorrect selection of VPN preset (#996)
-* Exclude OpenVPN endpoints (#987)
-* Fix missing animations in profiles list (#986)
-* Select preset matching current filter (#985)
+* Resolve Apple TV crashing on launch (#1016)
+* Allow Ethernet on-demand on all platforms (#1012)
+* Temporarily disable auto-deletion of migrated profiles (#1013)
+* Add translations for the former 12 languages (#1005)
