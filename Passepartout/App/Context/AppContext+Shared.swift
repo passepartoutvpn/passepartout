@@ -40,14 +40,16 @@ extension AppContext {
     static let shared: AppContext = {
         let dependencies: Dependencies = .shared
 
-        guard let cdProfilesModel = NSManagedObjectModel.mergedModel(from: [AppData.profilesBundle]) else {
-            fatalError("Unable to load Profiles model")
+        guard let cdRemoteModel = NSManagedObjectModel.mergedModel(from: [
+            AppData.profilesBundle,
+            AppData.preferencesBundle
+        ]) else {
+            fatalError("Unable to load remote model")
         }
-        guard let cdProvidersModel = NSManagedObjectModel.mergedModel(from: [AppData.providersBundle]) else {
-            fatalError("Unable to load Providers model")
-        }
-        guard let cdPreferencesModel = NSManagedObjectModel.mergedModel(from: [AppData.preferencesBundle]) else {
-            fatalError("Unable to load Preferences model")
+        guard let cdLocalModel = NSManagedObjectModel.mergedModel(from: [
+            AppData.providersBundle
+        ]) else {
+            fatalError("Unable to load local model")
         }
 
         let iapManager = IAPManager(
@@ -66,7 +68,7 @@ extension AppContext {
                 let remoteStore = CoreDataPersistentStore(
                     logger: dependencies.coreDataLogger(),
                     containerName: Constants.shared.containers.remoteProfiles,
-                    model: cdProfilesModel,
+                    model: cdRemoteModel,
                     cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
                     author: nil
                 )
@@ -83,11 +85,11 @@ extension AppContext {
             }
             return ProfileManager(
                 repository: dependencies.mainProfileRepository(
-                    model: cdProfilesModel,
+                    model: cdRemoteModel,
                     environment: tunnelEnvironment
                 ),
                 backupRepository: dependencies.backupProfileRepository(
-                    model: cdProfilesModel
+                    model: cdRemoteModel
                 ),
                 remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
@@ -106,7 +108,7 @@ extension AppContext {
             let store = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.providers,
-                model: cdProvidersModel,
+                model: cdLocalModel,
                 cloudKitIdentifier: nil,
                 author: nil
             )
@@ -143,7 +145,7 @@ extension AppContext {
             let preferencesStore = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.preferences,
-                model: cdPreferencesModel,
+                model: cdRemoteModel,
                 cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
                 author: nil
             )
