@@ -8,8 +8,6 @@
 		<string>$(CFG_APP_STORE_ID)</string>
 		<key>cloudKitId</key>
 		<string>$(CFG_CLOUDKIT_ID)</string>
-		<key>cloudKitPreferencesId</key>
-		<string>$(CFG_CLOUDKIT_PREFERENCES_ID)</string>
 		<key>groupId</key>
 		<string>$(CFG_GROUP_ID)</string>
 		<key>iapBundlePrefix</key>

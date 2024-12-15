@@ -24,14 +24,8 @@
 //
 
 import AppData
-import CoreData
 import Foundation
 
 extension AppData {
-    public static var cdPreferencesModel: NSManagedObjectModel {
-        guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
-            fatalError("Unable to build Core Data model (Preferences v3)")
-        }
-        return model
-    }
+    public static let preferencesBundle: Bundle = .module
 }

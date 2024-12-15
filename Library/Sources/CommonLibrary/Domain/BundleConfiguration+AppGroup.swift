@@ -30,28 +30,44 @@ import PassepartoutKit
 
 extension BundleConfiguration {
     public static var urlForAppLog: URL {
-        urlForGroupCaches.appending(path: Constants.shared.log.appPath)
+        urlForCaches.appending(path: Constants.shared.log.appPath)
     }
 
     public static var urlForTunnelLog: URL {
-        urlForGroupCaches.appending(path: Constants.shared.log.tunnelPath)
+        urlForCaches.appending(path: Constants.shared.log.tunnelPath)
     }
 
-    public static var urlForBetaReceipt: URL {
-        urlForGroupCaches.appending(path: Constants.shared.tunnel.betaReceiptPath)
+    public static var urlForBetaReceipt: URL? {
+#if os(iOS)
+        urlForCaches.appending(path: Constants.shared.tunnel.betaReceiptPath)
+#else
+        nil
+#endif
     }
 }
 
+// App Group container is not available on tvOS (#1007)
+
+#if !os(tvOS)
+
 extension BundleConfiguration {
-    public static var urlForGroupCaches: URL {
+    public static var urlForCaches: URL {
         let url = appGroupURL.appending(components: "Library", "Caches")
-        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        } catch {
+            pp_log(.app, .fault, "Unable to create group caches directory: \(error)")
+        }
         return url
     }
 
-    public static var urlForGroupDocuments: URL {
+    public static var urlForDocuments: URL {
         let url = appGroupURL.appending(components: "Library", "Documents")
-        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        } catch {
+            pp_log(.app, .fault, "Unable to create group documents directory: \(error)")
+        }
         return url
     }
 }
@@ -66,3 +82,27 @@ private extension BundleConfiguration {
         return url
     }
 }
+
+#else
+
+extension BundleConfiguration {
+    public static var urlForCaches: URL {
+        do {
+            return try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        } catch {
+            pp_log(.app, .fault, "Unable to create user documents directory: \(error)")
+            return URL(fileURLWithPath: NSTemporaryDirectory())
+        }
+    }
+
+    public static var urlForDocuments: URL {
+        do {
+            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        } catch {
+            pp_log(.app, .fault, "Unable to create user documents directory: \(error)")
+            return URL(fileURLWithPath: NSTemporaryDirectory())
+        }
+    }
+}
+
+#endif
