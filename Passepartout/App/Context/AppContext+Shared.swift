@@ -29,6 +29,7 @@ import AppDataProfiles
 import AppDataProviders
 import CommonLibrary
 import CommonUtils
+import CoreData
 import Foundation
 import LegacyV2
 import PassepartoutKit
@@ -38,6 +39,16 @@ import UILibrary
 extension AppContext {
     static let shared: AppContext = {
         let dependencies: Dependencies = .shared
+
+        guard let cdProfilesModel = AppData.cdProfilesModel else {
+            fatalError("Unable to load Profiles model")
+        }
+        guard let cdProvidersModel = AppData.cdProvidersModel else {
+            fatalError("Unable to load Providers model")
+        }
+        guard let cdPreferencesModel = AppData.cdPreferencesModel else {
+            fatalError("Unable to load Preferences model")
+        }
 
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
@@ -55,7 +66,7 @@ extension AppContext {
                 let remoteStore = CoreDataPersistentStore(
                     logger: dependencies.coreDataLogger(),
                     containerName: Constants.shared.containers.remoteProfiles,
-                    model: AppData.cdProfilesModel,
+                    model: cdProfilesModel,
                     cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
                     author: nil
                 )
@@ -71,8 +82,13 @@ extension AppContext {
                 )
             }
             return ProfileManager(
-                repository: dependencies.mainProfileRepository(environment: tunnelEnvironment),
-                backupRepository: dependencies.backupProfileRepository(),
+                repository: dependencies.mainProfileRepository(
+                    model: cdProfilesModel,
+                    environment: tunnelEnvironment
+                ),
+                backupRepository: dependencies.backupProfileRepository(
+                    model: cdProfilesModel
+                ),
                 remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
                 processor: processor
@@ -90,7 +106,7 @@ extension AppContext {
             let store = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.providers,
-                model: AppData.cdProvidersModel,
+                model: cdProvidersModel,
                 cloudKitIdentifier: nil,
                 author: nil
             )
@@ -127,7 +143,7 @@ extension AppContext {
             let preferencesStore = CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.preferences,
-                model: AppData.cdPreferencesModel,
+                model: cdPreferencesModel,
                 cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitPreferencesId),
                 author: nil
             )
@@ -207,11 +223,11 @@ private extension Dependencies {
         FakeTunnelStrategy(environment: environment, dataCountInterval: 1000)
     }
 
-    func mainProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
-        coreDataProfileRepository(observingResults: true)
+    func mainProfileRepository(model: NSManagedObjectModel, environment: TunnelEnvironment) -> ProfileRepository {
+        coreDataProfileRepository(model: model, observingResults: true)
     }
 
-    func backupProfileRepository() -> ProfileRepository? {
+    func backupProfileRepository(model: NSManagedObjectModel) -> ProfileRepository? {
         nil
     }
 }
@@ -225,12 +241,12 @@ private extension Dependencies {
         neStrategy(environment: environment)
     }
 
-    func mainProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
+    func mainProfileRepository(model: NSManagedObjectModel, environment: TunnelEnvironment) -> ProfileRepository {
         neProfileRepository(environment: environment)
     }
 
-    func backupProfileRepository() -> ProfileRepository? {
-        coreDataProfileRepository(observingResults: false)
+    func backupProfileRepository(model: NSManagedObjectModel) -> ProfileRepository? {
+        coreDataProfileRepository(model: model, observingResults: false)
     }
 }
 
@@ -261,11 +277,11 @@ private extension Dependencies {
         )
     }
 
-    func coreDataProfileRepository(observingResults: Bool) -> ProfileRepository {
+    func coreDataProfileRepository(model: NSManagedObjectModel, observingResults: Bool) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger(),
             containerName: Constants.shared.containers.localProfiles,
-            model: AppData.cdProfilesModel,
+            model: model,
             cloudKitIdentifier: nil,
             author: nil
         )
