@@ -40,13 +40,13 @@ extension AppContext {
     static let shared: AppContext = {
         let dependencies: Dependencies = .shared
 
-        guard let cdProfilesModel = AppData.cdProfilesModel else {
+        guard let cdProfilesModel = NSManagedObjectModel.mergedModel(from: [AppData.profilesBundle]) else {
             fatalError("Unable to load Profiles model")
         }
-        guard let cdProvidersModel = AppData.cdProvidersModel else {
+        guard let cdProvidersModel = NSManagedObjectModel.mergedModel(from: [AppData.providersBundle]) else {
             fatalError("Unable to load Providers model")
         }
-        guard let cdPreferencesModel = AppData.cdPreferencesModel else {
+        guard let cdPreferencesModel = NSManagedObjectModel.mergedModel(from: [AppData.preferencesBundle]) else {
             fatalError("Unable to load Preferences model")
         }
 

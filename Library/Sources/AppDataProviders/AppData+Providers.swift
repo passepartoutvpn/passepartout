@@ -24,11 +24,8 @@
 //
 
 import AppData
-import CoreData
 import Foundation
 
 extension AppData {
-    public static let cdProvidersModel: NSManagedObjectModel? = {
-        .mergedModel(from: [.module])
-    }()
+    public static let providersBundle: Bundle = .module
 }
