@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
 "views.vpn.preset" = "Förinställning";
+"global.nouns.products" = "Produkter"; // Swedish

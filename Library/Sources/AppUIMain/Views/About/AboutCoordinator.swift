@@ -81,7 +81,7 @@ extension AboutCoordinator {
             Strings.Views.About.Links.title
 
         case .purchased:
-            Strings.Views.Purchased.title
+            Strings.Global.Nouns.purchases
 
         case .version:
             Strings.Views.About.title

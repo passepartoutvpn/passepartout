@@ -294,6 +294,7 @@
 "global.nouns.password" = "Password";
 "global.nouns.port" = "Port";
 "global.nouns.private_key" = "Private key";
+"global.nouns.products" = "Products";
 "global.nouns.profile" = "Profile";
 "global.nouns.protocol" = "Protocol";
 "global.nouns.provider" = "Provider";

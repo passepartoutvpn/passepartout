@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Усі категорії";
 "views.vpn.no_servers" = "Немає серверів";
 "views.vpn.preset" = "Попередньо встановлено";
+"global.nouns.products" = "Продукти"; // Ukrainian

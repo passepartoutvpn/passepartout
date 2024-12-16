@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Όλες οι κατηγορίες";
 "views.vpn.no_servers" = "Δεν υπάρχουν διακομιστές";
 "views.vpn.preset" = "Προκαθορισμένο";
+"global.nouns.products" = "Προϊόντα"; // Greek

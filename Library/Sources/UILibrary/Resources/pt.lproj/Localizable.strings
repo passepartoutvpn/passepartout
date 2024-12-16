@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Todas as categorias";
 "views.vpn.no_servers" = "Nenhum servidor";
 "views.vpn.preset" = "Predefinição";
+"global.nouns.products" = "Produtos"; // Portuguese

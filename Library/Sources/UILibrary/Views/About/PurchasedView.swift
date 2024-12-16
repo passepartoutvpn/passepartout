@@ -125,7 +125,7 @@ private extension PurchasedView {
                 Text(Strings.Views.Purchased.noPurchases)
             }
         }
-        .themeSection(header: Strings.Global.Nouns.purchases)
+        .themeSection(header: Strings.Global.Nouns.products)
     }
 
     var featuresSection: some View {

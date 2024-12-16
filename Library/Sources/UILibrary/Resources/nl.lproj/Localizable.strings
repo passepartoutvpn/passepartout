@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
 "views.vpn.preset" = "Voorinstelling";
+"global.nouns.products" = "Producten"; // Dutch

@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
 "views.vpn.preset" = "预设";
+"global.nouns.products" = "产品"; // Chinese (Simplified)

@@ -310,6 +310,8 @@ public enum Strings {
       public static let port = Strings.tr("Localizable", "global.nouns.port", fallback: "Port")
       /// Private key
       public static let privateKey = Strings.tr("Localizable", "global.nouns.private_key", fallback: "Private key")
+      /// Products
+      public static let products = Strings.tr("Localizable", "global.nouns.products", fallback: "Products")
       /// Profile
       public static let profile = Strings.tr("Localizable", "global.nouns.profile", fallback: "Profile")
       /// Protocol

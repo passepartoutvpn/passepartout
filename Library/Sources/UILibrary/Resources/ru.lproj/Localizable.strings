@@ -281,3 +281,4 @@
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
 "views.vpn.preset" = "Предустановка";
+"global.nouns.products" = "Продукты"; // Russian
