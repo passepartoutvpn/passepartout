@@ -87,8 +87,8 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             requiredFeaturesView
-            oneTimeProductsView
             recurringProductsView
+            oneTimeProductsView
             if !iapManager.isFullVersionPurchaser {
                 fullVersionFeaturesView
             }
@@ -110,6 +110,23 @@ private extension PaywallView {
         )
     }
 
+    var recurringProductsView: some View {
+        recurringIAPs.nilIfEmpty.map { iaps in
+            ForEach(iaps, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .recurring,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+            // FIXME: ### l10n
+            .themeSection(header: "Subscription")
+        }
+    }
+
     var oneTimeProductsView: some View {
         oneTimeIAPs.nilIfEmpty.map {
             ForEach($0, id: \.productIdentifier) {
@@ -122,22 +139,8 @@ private extension PaywallView {
                     onError: onError
                 )
             }
-            .themeSection(header: Strings.Global.Nouns.purchases)
-        }
-    }
-
-    var recurringProductsView: some View {
-        recurringIAPs.nilIfEmpty.map {
-            ForEach($0, id: \.productIdentifier) {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .recurring,
-                    product: $0,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
-                )
-            }
+            // FIXME: ### l10n
+            .themeSection(header: "Lifetime")
         }
     }
 
