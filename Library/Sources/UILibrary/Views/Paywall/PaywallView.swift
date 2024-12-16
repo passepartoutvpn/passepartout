@@ -46,7 +46,10 @@ struct PaywallView: View {
     private var isFetchingProducts = true
 
     @State
-    private var iaps: [InAppProduct] = []
+    private var oneTimeIAPs: [InAppProduct] = []
+
+    @State
+    private var recurringIAPs: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -84,7 +87,8 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             requiredFeaturesView
-            productsView
+            oneTimeProductsView
+            recurringProductsView
             if !iapManager.isFullVersionPurchaser {
                 fullVersionFeaturesView
             }
@@ -106,18 +110,35 @@ private extension PaywallView {
         )
     }
 
-    var productsView: some View {
-        ForEach(iaps, id: \.productIdentifier) {
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .recurring,
-                product: $0,
-                purchasingIdentifier: $purchasingIdentifier,
-                onComplete: onComplete,
-                onError: onError
-            )
+    var oneTimeProductsView: some View {
+        oneTimeIAPs.nilIfEmpty.map {
+            ForEach($0, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .oneTime,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+            .themeSection(header: Strings.Global.Nouns.purchases)
         }
-        .themeSection(header: Strings.Global.Nouns.purchases)
+    }
+
+    var recurringProductsView: some View {
+        recurringIAPs.nilIfEmpty.map {
+            ForEach($0, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .recurring,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+        }
     }
 
     var fullVersionFeaturesView: some View {
@@ -185,19 +206,25 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let availableProducts = iapManager.suggestedProducts(for: features)
-            guard !availableProducts.isEmpty else {
-                throw AppError.emptyProducts
-            }
-            let iaps = try await iapManager.purchasableProducts(for: availableProducts)
-            pp_log(.App.iap, .info, "Suggested products: \(availableProducts)")
-            pp_log(.App.iap, .info, "\tIAPs: \(iaps)")
-            guard !iaps.isEmpty else {
+            let suggestedProducts = iapManager.suggestedProducts(for: features)
+            guard let suggestedProducts else {
                 throw AppError.emptyProducts
             }
 
-            self.iaps = iaps
+            let oneTimeIAPs = try await iapManager.purchasableProducts(for: suggestedProducts.oneTime)
+            let recurringIAPs = try await iapManager.purchasableProducts(for: suggestedProducts.recurring)
+
+            pp_log(.App.iap, .info, "Suggested products: \(suggestedProducts)")
+            pp_log(.App.iap, .info, "\tOne-time: \(oneTimeIAPs)")
+            pp_log(.App.iap, .info, "\tRecurring: \(recurringIAPs)")
+            guard !(oneTimeIAPs + recurringIAPs).isEmpty else {
+                throw AppError.emptyProducts
+            }
+
+            self.oneTimeIAPs = oneTimeIAPs
+            self.recurringIAPs = recurringIAPs
         } catch {
+            pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
         }
     }

@@ -33,42 +33,42 @@ extension IAPManager {
         purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
-    public func suggestedProducts(for features: Set<AppFeature>) -> [AppProduct] {
+    public func suggestedProducts(for features: Set<AppFeature>) -> (oneTime: [AppProduct], recurring: [AppProduct])? {
         guard !features.isEmpty else {
-            return []
+            return nil
         }
         guard !eligibleFeatures.isSuperset(of: features) else {
-            return []
+            return nil
         }
 
-        var list: [AppProduct] = []
+        var oneTime: [AppProduct] = []
         let requiredFeatures = features.subtracting(eligibleFeatures)
 
         if isFullVersionPurchaser {
             if requiredFeatures == [.appleTV] {
-                list.append(.Features.appleTV)
+                oneTime.append(.Features.appleTV)
             } else {
                 assertionFailure("Full version purchaser requiring other than [.appleTV]")
             }
         } else { // !isFullVersionPurchaser
             if requiredFeatures == [.appleTV] {
-                list.append(.Features.appleTV)
-                list.append(.Full.OneTime.fullTV)
+                oneTime.append(.Features.appleTV)
+                oneTime.append(.Full.OneTime.fullTV)
             } else if requiredFeatures.contains(.appleTV) {
-                list.append(.Full.OneTime.fullTV)
+                oneTime.append(.Full.OneTime.fullTV)
             } else {
-                list.append(.Full.OneTime.full)
+                oneTime.append(.Full.OneTime.full)
                 if !eligibleFeatures.contains(.appleTV) {
-                    list.append(.Full.OneTime.fullTV)
+                    oneTime.append(.Full.OneTime.fullTV)
                 }
             }
         }
 
-        if list.contains(.Full.OneTime.fullTV) {
-            list.append(.Full.Recurring.monthly)
-            list.append(.Full.Recurring.yearly)
+        var recurring: [AppProduct] = []
+        if oneTime.contains(.Full.OneTime.fullTV) {
+            recurring = [.Full.Recurring.monthly, .Full.Recurring.yearly]
         }
 
-        return list
+        return (oneTime, recurring)
     }
 }
