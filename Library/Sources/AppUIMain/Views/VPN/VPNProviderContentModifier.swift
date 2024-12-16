@@ -39,9 +39,6 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
     @Binding
     var selectedEntity: VPNEntity<Configuration>?
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     let entityDestination: any Hashable
 
     @ViewBuilder
@@ -98,7 +95,6 @@ private extension VPNProviderContentModifier {
                     providerId: .constant(.hideme),
                     providerPreferences: nil,
                     selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
-                    paywallReason: .constant(nil),
                     entityDestination: "Destination",
                     providerRows: {
                         Text("Other")
