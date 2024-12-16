@@ -101,7 +101,7 @@ private extension OpenVPNCredentialsView {
             Toggle(isOn: $isInteractive) {
                 HStack {
                     Text(Strings.Modules.Openvpn.Credentials.interactive)
-                    PurchaseRequiredButton(features: requiredFeatures)
+                    PurchaseRequiredView(features: requiredFeatures)
                 }
             }
             .themeRowWithSubtitle(interactiveFooter)

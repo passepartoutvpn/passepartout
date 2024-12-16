@@ -1,5 +1,5 @@
 //
-//  PurchaseRequiredButton.swift
+//  PurchaseRequiredView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/17/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct PurchaseRequiredButton<Content>: View where Content: View {
+public struct PurchaseRequiredView<Content>: View where Content: View {
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -36,19 +36,15 @@ public struct PurchaseRequiredButton<Content>: View where Content: View {
     let features: Set<AppFeature>?
 
     @ViewBuilder
-    let content: (_ isRestricted: Bool, _ action: @escaping () -> Void) -> Content
+    let content: (_ isRestricted: Bool) -> Content
 
     public var body: some View {
-        content(iapManager.isRestricted, onTap)
+        content(iapManager.isRestricted)
             .opaque(!isEligible)
     }
 }
 
-private extension PurchaseRequiredButton {
-    func onTap() {
-        //
-    }
-
+private extension PurchaseRequiredView {
     var isEligible: Bool {
         if let features {
             return iapManager.isEligible(for: features)
@@ -59,7 +55,7 @@ private extension PurchaseRequiredButton {
 
 // MARK: - Initializers
 
-extension PurchaseRequiredButton where Content == PurchaseRequiredImageButtonContent {
+extension PurchaseRequiredView where Content == PurchaseRequiredImage {
     public init(for requiring: AppFeatureRequiring?) {
         self.init(features: requiring?.features)
     }
@@ -67,29 +63,24 @@ extension PurchaseRequiredButton where Content == PurchaseRequiredImageButtonCon
     public init(features: Set<AppFeature>?) {
         self.features = features
         content = {
-            PurchaseRequiredImageButtonContent(isRestricted: $0, action: $1)
+            PurchaseRequiredImage(isRestricted: $0)
         }
     }
 }
 
-public struct PurchaseRequiredImageButtonContent: View {
+public struct PurchaseRequiredImage: View {
 
     @EnvironmentObject
     private var theme: Theme
 
     let isRestricted: Bool
 
-    let action: () -> Void
-
     public var body: some View {
-        Button(action: action) {
-            ThemeImage(isRestricted ? .warning : .upgrade)
-                .foregroundStyle(theme.upgradeColor)
-                .help(isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help)
-        }
-        .buttonStyle(.plain)
+        ThemeImage(isRestricted ? .warning : .upgrade)
+            .foregroundStyle(theme.upgradeColor)
+            .help(isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help)
 #if os(macOS)
-        .imageScale(.large)
+            .imageScale(.large)
 #endif
     }
 }

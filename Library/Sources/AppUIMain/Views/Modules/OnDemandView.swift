@@ -91,7 +91,7 @@ private extension OnDemandView {
         } label: {
             HStack {
                 Text(Strings.Modules.OnDemand.policy)
-                PurchaseRequiredButton(for: module)
+                PurchaseRequiredView(for: module)
             }
         }
         .themeSectionWithSingleRow(footer: policyFooterDescription)

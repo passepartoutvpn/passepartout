@@ -51,7 +51,7 @@ private extension StorageSection {
         Toggle(isOn: $profileEditor.isShared) {
             HStack {
                 Text(Strings.Modules.General.Rows.shared)
-                PurchaseRequiredButton(features: profileEditor.isShared ? [.sharing] : [])
+                PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
             }
         }
     }
@@ -60,7 +60,7 @@ private extension StorageSection {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
             HStack {
                 Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
-                PurchaseRequiredButton(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+                PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
             }
         }
         .disabled(!profileEditor.isShared)

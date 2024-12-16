@@ -53,7 +53,7 @@ struct ProviderPicker: View {
         } label: {
             HStack {
                 Text(Strings.Global.Nouns.provider)
-                PurchaseRequiredButton(for: providerId)
+                PurchaseRequiredView(for: providerId)
             }
         }
         .disabled(isLoading || providers.isEmpty)

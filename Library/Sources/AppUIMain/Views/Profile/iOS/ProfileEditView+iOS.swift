@@ -115,7 +115,7 @@ private extension ProfileEditView {
                     if errorModuleIds.contains(module.id) {
                         ThemeImage(.warning)
                     } else if profileEditor.isActiveModule(withId: module.id) {
-                        PurchaseRequiredButton(for: module as? AppFeatureRequiring)
+                        PurchaseRequiredView(for: module as? AppFeatureRequiring)
                     }
                     Spacer()
                 }
