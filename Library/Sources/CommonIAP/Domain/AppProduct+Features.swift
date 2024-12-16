@@ -81,6 +81,17 @@ extension AppProduct.Full {
     }
 }
 
+extension AppProduct {
+    public var isRecurring: Bool {
+        switch self {
+        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 // MARK: - Discontinued
 
 extension AppProduct.Features {

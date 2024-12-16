@@ -64,6 +64,11 @@ extension IAPManager {
             }
         }
 
+        if list.contains(.Full.OneTime.fullTV) {
+            list.append(.Full.Recurring.monthly)
+            list.append(.Full.Recurring.yearly)
+        }
+
         return list
     }
 }
