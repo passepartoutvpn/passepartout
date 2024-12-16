@@ -189,12 +189,14 @@ private extension PaywallView {
             guard !availableProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
-            iaps = try await iapManager.purchasableProducts(for: availableProducts)
+            let iaps = try await iapManager.purchasableProducts(for: availableProducts)
             pp_log(.App.iap, .info, "Suggested products: \(availableProducts)")
             pp_log(.App.iap, .info, "\tIAPs: \(iaps)")
             guard !iaps.isEmpty else {
                 throw AppError.emptyProducts
             }
+
+            self.iaps = iaps
         } catch {
             onError(error, dismissing: true)
         }
