@@ -37,12 +37,13 @@ extension AppProduct {
 
     public enum Full {
         static let all: [AppProduct] = [
-            .Full.allPlatforms,
-            .Full.iOS,
-            .Full.macOS,
-            .Full.OneTime.lifetime,
+            .Full.OneTime.full,
+            .Full.OneTime.fullTV,
             .Full.Recurring.monthly,
-            .Full.Recurring.yearly
+            .Full.Recurring.yearly,
+            //
+            .Full.OneTime.iOS,
+            .Full.OneTime.macOS
         ]
     }
 
@@ -65,7 +66,12 @@ extension AppProduct.Features {
 
 extension AppProduct.Full {
     public enum OneTime {
-        public static let lifetime = AppProduct(featureId: "full.lifetime")
+
+        // iOS/macOS
+        public static let full = AppProduct(featureId: "full_multi_version")
+
+        // iOS/macOS + tvOS
+        public static let fullTV = AppProduct(featureId: "full.lifetime")
     }
 
     public enum Recurring {
@@ -85,10 +91,11 @@ extension AppProduct.Features {
     public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
 }
 
-extension AppProduct.Full {
-    public static let allPlatforms = AppProduct(featureId: "full_multi_version")
+extension AppProduct.Full.OneTime {
 
+    @available(*, deprecated)
     public static let iOS = AppProduct(featureId: "full_version")
 
+    @available(*, deprecated)
     public static let macOS = AppProduct(featureId: "full_mac_version")
 }

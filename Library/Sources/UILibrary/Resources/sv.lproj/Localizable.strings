@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Byggnummer";
 "views.purchased.rows.download_date" = "Nedladdningsdatum";
 "views.purchased.sections.download.header" = "Första nedladdning";
-"views.purchased.sections.features.header" = "Funktioner";
-"views.purchased.sections.products.header" = "Köp";
+"global.nouns.features" = "Funktioner";
+"global.nouns.purchases" = "Köp";
 "views.purchased.title" = "Köpt";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";

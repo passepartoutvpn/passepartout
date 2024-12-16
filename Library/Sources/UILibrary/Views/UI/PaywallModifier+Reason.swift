@@ -32,17 +32,13 @@ extension PaywallModifier {
     public struct Reason: Hashable {
         public let requiredFeatures: Set<AppFeature>
 
-        public let suggestedProduct: AppProduct?
-
         public let needsConfirmation: Bool
 
         public init(
             _ requiredFeatures: Set<AppFeature>,
-            suggestedProduct: AppProduct? = nil,
             needsConfirmation: Bool = false
         ) {
             self.requiredFeatures = requiredFeatures
-            self.suggestedProduct = suggestedProduct
             self.needsConfirmation = needsConfirmation
         }
     }

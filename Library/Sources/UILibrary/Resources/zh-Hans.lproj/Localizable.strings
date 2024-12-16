@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "构建编号";
 "views.purchased.rows.download_date" = "下载日期";
 "views.purchased.sections.download.header" = "首次下载";
-"views.purchased.sections.features.header" = "功能";
-"views.purchased.sections.products.header" = "购买内容";
+"global.nouns.features" = "功能";
+"global.nouns.purchases" = "购买内容";
 "views.purchased.title" = "已购买";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";

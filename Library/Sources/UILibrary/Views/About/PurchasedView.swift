@@ -125,7 +125,7 @@ private extension PurchasedView {
                 Text(Strings.Views.Purchased.noPurchases)
             }
         }
-        .themeSection(header: Strings.Views.Purchased.Sections.Products.header)
+        .themeSection(header: Strings.Global.Nouns.purchases)
     }
 
     var featuresSection: some View {
@@ -135,7 +135,7 @@ private extension PurchasedView {
                     .scrollableOnTV()
             }
         }
-        .themeSection(header: Strings.Views.Purchased.Sections.Features.header)
+        .themeSection(header: Strings.Global.Nouns.features)
     }
 }
 

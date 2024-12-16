@@ -34,9 +34,6 @@ struct StorageSection: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     var body: some View {
         debugChanges()
         return Group {
@@ -44,7 +41,6 @@ struct StorageSection: View {
                 .themeRowWithSubtitle(sharingDescription)
             tvToggle
                 .themeRowWithSubtitle(tvDescription)
-            purchaseButton
         }
         .themeSection(header: header, footer: footer)
     }
@@ -52,41 +48,26 @@ struct StorageSection: View {
 
 private extension StorageSection {
     var sharingToggle: some View {
-        Toggle(Strings.Modules.General.Rows.shared, isOn: $profileEditor.isShared)
-            .disabled(!iapManager.isEligible(for: .sharing))
-    }
-
-    var tvToggle: some View {
-        Toggle(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
-            .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
-    }
-
-    @ViewBuilder
-    var purchaseButton: some View {
-        if !iapManager.isEligible(for: .sharing) {
-            purchaseSharingButton
-        } else if !iapManager.isEligible(for: .appleTV) {
-            purchaseTVButton
+        Toggle(isOn: $profileEditor.isShared) {
+            HStack {
+                Text(Strings.Modules.General.Rows.shared)
+                PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+            }
         }
     }
 
-    var purchaseSharingButton: some View {
-        PurchaseRequiredButton(
-            Strings.Modules.General.Rows.Shared.purchase,
-            features: [.sharing],
-            paywallReason: $paywallReason
-        )
+    var tvToggle: some View {
+        Toggle(isOn: $profileEditor.isAvailableForTV) {
+            HStack {
+                Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
+                PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+            }
+        }
+        .disabled(!profileEditor.isShared)
     }
+}
 
-    var purchaseTVButton: some View {
-        PurchaseRequiredButton(
-            Strings.Modules.General.Rows.Appletv.purchase,
-            features: [.appleTV],
-            suggestedProduct: .Features.appleTV,
-            paywallReason: $paywallReason
-        )
-    }
-
+private extension StorageSection {
     var header: String {
         Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
     }
@@ -119,10 +100,7 @@ private extension StorageSection {
 
 #Preview {
     Form {
-        StorageSection(
-            profileEditor: ProfileEditor(),
-            paywallReason: .constant(nil)
-       )
+        StorageSection(profileEditor: ProfileEditor())
     }
     .themeForm()
     .withMockEnvironment()

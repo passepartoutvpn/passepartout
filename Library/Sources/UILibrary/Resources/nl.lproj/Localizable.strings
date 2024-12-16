@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Buildnummer";
 "views.purchased.rows.download_date" = "Downloaddatum";
 "views.purchased.sections.download.header" = "Eerste download";
-"views.purchased.sections.features.header" = "Functies";
-"views.purchased.sections.products.header" = "Aankopen";
+"global.nouns.features" = "Functies";
+"global.nouns.purchases" = "Aankopen";
 "views.purchased.title" = "Aangekocht";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";

@@ -115,8 +115,6 @@
 
 "views.purchased.title" = "Purchased";
 "views.purchased.sections.download.header" = "First download";
-"views.purchased.sections.products.header" = "Purchases";
-"views.purchased.sections.features.header" = "Features";
 "views.purchased.rows.build_number" = "Build number";
 "views.purchased.rows.download_date" = "Download date";
 "views.purchased.no_purchases" = "No purchases";
@@ -271,6 +269,7 @@
 "global.nouns.empty" = "Empty";
 "global.nouns.enabled" = "Enabled";
 "global.nouns.endpoint" = "Endpoint";
+"global.nouns.features" = "Features";
 "global.nouns.filters" = "Filters";
 "global.nouns.folder" = "Folder";
 "global.nouns.gateway" = "Gateway";
@@ -299,6 +298,7 @@
 "global.nouns.protocol" = "Protocol";
 "global.nouns.provider" = "Provider";
 "global.nouns.public_key" = "Public key";
+"global.nouns.purchases" = "Purchases";
 "global.nouns.region" = "Region";
 "global.nouns.route" = "Route";
 "global.nouns.routes" = "Routes";

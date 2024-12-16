@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Αριθμός κατασκευής";
 "views.purchased.rows.download_date" = "Ημερομηνία λήψης";
 "views.purchased.sections.download.header" = "Πρώτη λήψη";
-"views.purchased.sections.features.header" = "Λειτουργίες";
-"views.purchased.sections.products.header" = "Αγορές";
+"global.nouns.features" = "Λειτουργίες";
+"global.nouns.purchases" = "Αγορές";
 "views.purchased.title" = "Αγορασμένα";
 "views.ui.connection_status.on_demand_suffix" = " (κατ' απαίτηση)";
 "views.ui.purchase_required.purchase.help" = "Απαιτείται αγορά";

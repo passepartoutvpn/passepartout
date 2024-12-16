@@ -31,13 +31,30 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
+        case .Full.OneTime.full:
+            return AppFeature.fullFeatures
+
+        case .Full.OneTime.fullTV, .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return AppFeature.fullTVFeatures
+
         case .Features.appleTV:
             return [.appleTV, .sharing]
 
-        case .Full.OneTime.lifetime, .Full.Recurring.monthly, .Full.Recurring.yearly:
-            return AppFeature.allCases
-
         // MARK: Discontinued
+
+        case .Full.OneTime.iOS:
+#if os(iOS)
+            return AppFeature.fullFeatures
+#else
+            return []
+#endif
+
+        case .Full.OneTime.macOS:
+#if os(macOS)
+            return AppFeature.fullFeatures
+#else
+            return []
+#endif
 
         case .Features.allProviders:
             return [.providers]
@@ -47,23 +64,6 @@ extension AppProduct: AppFeatureProviding {
 
         case .Features.trustedNetworks:
             return [.onDemand]
-
-        case .Full.allPlatforms:
-            return AppFeature.fullV2Features
-
-        case .Full.iOS:
-#if os(iOS)
-            return AppFeature.fullV2Features
-#else
-            return []
-#endif
-
-        case .Full.macOS:
-#if os(macOS)
-            return AppFeature.fullV2Features
-#else
-            return []
-#endif
 
         default:
             return []

@@ -35,9 +35,6 @@ public struct InteractiveCoordinator: View {
         case inline(withCancel: Bool)
     }
 
-    @EnvironmentObject
-    private var iapManager: IAPManager
-
     private let style: Style
 
     @ObservedObject

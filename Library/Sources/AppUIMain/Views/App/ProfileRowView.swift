@@ -123,7 +123,7 @@ private struct MarkerView: View {
                 .opaque(requiredFeatures == nil && (profileId == nextProfileId || profileId == tunnel.currentProfile?.id))
 
             if let requiredFeatures {
-                PurchaseRequiredButton(features: requiredFeatures, paywallReason: .constant(nil))
+                PurchaseRequiredView(features: requiredFeatures)
             }
         }
         .frame(width: 24)

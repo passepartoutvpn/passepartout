@@ -33,18 +33,10 @@ struct ProfileGeneralView: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     var body: some View {
         Form {
-            ProfileNameSection(
-                name: $profileEditor.profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
+            ProfileNameSection(name: $profileEditor.profile.name)
+            StorageSection(profileEditor: profileEditor)
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .themeForm()
@@ -52,11 +44,8 @@ struct ProfileGeneralView: View {
 }
 
 #Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor(),
-        paywallReason: .constant(nil)
-    )
-    .withMockEnvironment()
+    ProfileGeneralView(profileEditor: ProfileEditor())
+        .withMockEnvironment()
 }
 
 #endif
