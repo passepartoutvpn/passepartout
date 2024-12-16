@@ -40,7 +40,10 @@ extension AppProduct {
             .Full.OneTime.full,
             .Full.OneTime.fullTV,
             .Full.Recurring.monthly,
-            .Full.Recurring.yearly
+            .Full.Recurring.yearly,
+            //
+            .Full.OneTime.iOS,
+            .Full.OneTime.macOS
         ]
     }
 
