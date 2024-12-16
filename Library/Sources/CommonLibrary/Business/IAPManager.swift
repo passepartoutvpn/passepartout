@@ -136,15 +136,15 @@ extension IAPManager {
         return features.allSatisfy(eligibleFeatures.contains)
     }
 
-    public func isEligibleForFeedback() -> Bool {
+    public var isEligibleForFeedback: Bool {
 #if os(tvOS)
         false
 #else
-        userLevel == .beta || isPayingUser()
+        userLevel == .beta || isPayingUser
 #endif
     }
 
-    public func isPayingUser() -> Bool {
+    public var isPayingUser: Bool {
         !purchasedProducts.isEmpty
     }
 }

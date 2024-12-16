@@ -35,11 +35,11 @@ extension AppUserLevel: AppFeatureProviding {
                 .sharing
             ]
 
-        case .fullV2:
-            return AppFeature.fullV2Features
+        case .full:
+            return AppFeature.fullFeatures
 
-        case .subscriber:
-            return AppFeature.allCases
+        case .fullTV:
+            return AppFeature.fullTVFeatures
 
         default:
             return []

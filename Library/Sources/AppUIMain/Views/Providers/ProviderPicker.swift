@@ -37,9 +37,6 @@ struct ProviderPicker: View {
 
     let isLoading: Bool
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     var body: some View {
         Picker(selection: $providerId) {
             if !providers.isEmpty {
@@ -56,7 +53,7 @@ struct ProviderPicker: View {
         } label: {
             HStack {
                 Text(Strings.Global.Nouns.provider)
-                PurchaseRequiredButton(for: providerId, paywallReason: $paywallReason)
+                PurchaseRequiredButton(for: providerId)
             }
         }
         .disabled(isLoading || providers.isEmpty)

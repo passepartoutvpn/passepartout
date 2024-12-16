@@ -33,7 +33,7 @@ extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let dependencies: Dependencies = .shared
         let iapManager = IAPManager(
-            customUserLevel: .subscriber,
+            customUserLevel: .fullTV,
             inAppHelper: dependencies.appProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),

@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Номер збірки";
 "views.purchased.rows.download_date" = "Дата завантаження";
 "views.purchased.sections.download.header" = "Перший завантаження";
-"views.purchased.sections.features.header" = "Функції";
-"views.purchased.sections.products.header" = "Придбання";
+"global.nouns.features" = "Функції";
+"global.nouns.purchases" = "Придбання";
 "views.purchased.title" = "Придбано";
 "views.ui.connection_status.on_demand_suffix" = " (за запитом)";
 "views.ui.purchase_required.purchase.help" = "Потрібна покупка";

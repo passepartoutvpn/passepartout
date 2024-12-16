@@ -32,22 +32,12 @@ public enum AppUserLevel: Int, Sendable {
 
     case beta = 1
 
-    case fullV2 = 2
+    case full = 2
 
-    case subscriber = 3
+    case fullTV = 3
 }
 
 extension AppUserLevel {
-    public var isFullVersion: Bool {
-        switch self {
-        case .fullV2, .subscriber:
-            return true
-
-        default:
-            return false
-        }
-    }
-
     public var isRestricted: Bool {
         switch self {
         case .undefined, .beta:

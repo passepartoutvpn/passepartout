@@ -258,6 +258,8 @@ public enum Strings {
       public static let enabled = Strings.tr("Localizable", "global.nouns.enabled", fallback: "Enabled")
       /// Endpoint
       public static let endpoint = Strings.tr("Localizable", "global.nouns.endpoint", fallback: "Endpoint")
+      /// Features
+      public static let features = Strings.tr("Localizable", "global.nouns.features", fallback: "Features")
       /// Filters
       public static let filters = Strings.tr("Localizable", "global.nouns.filters", fallback: "Filters")
       /// Folder
@@ -316,6 +318,8 @@ public enum Strings {
       public static let provider = Strings.tr("Localizable", "global.nouns.provider", fallback: "Provider")
       /// Public key
       public static let publicKey = Strings.tr("Localizable", "global.nouns.public_key", fallback: "Public key")
+      /// Purchases
+      public static let purchases = Strings.tr("Localizable", "global.nouns.purchases", fallback: "Purchases")
       /// Region
       public static let region = Strings.tr("Localizable", "global.nouns.region", fallback: "Region")
       /// Route
@@ -852,14 +856,6 @@ public enum Strings {
         public enum Download {
           /// First download
           public static let header = Strings.tr("Localizable", "views.purchased.sections.download.header", fallback: "First download")
-        }
-        public enum Features {
-          /// Features
-          public static let header = Strings.tr("Localizable", "views.purchased.sections.features.header", fallback: "Features")
-        }
-        public enum Products {
-          /// Purchases
-          public static let header = Strings.tr("Localizable", "views.purchased.sections.products.header", fallback: "Purchases")
         }
       }
     }

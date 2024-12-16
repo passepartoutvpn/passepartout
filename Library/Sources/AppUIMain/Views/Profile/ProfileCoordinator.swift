@@ -88,7 +88,6 @@ private extension ProfileCoordinator {
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
             path: $path,
-            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -102,7 +101,6 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
-            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -138,7 +136,7 @@ private extension ProfileCoordinator {
     func onCommitEditingStandard() async throws {
         let savedProfile = try await profileEditor.save(to: profileManager, preferencesManager: preferencesManager)
         do {
-            try iapManager.verify(savedProfile)
+            try iapManager.verify(savedProfile, isShared: profileEditor.isShared)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             paywallReason = .init(requiredFeatures, needsConfirmation: true)
             return
@@ -149,7 +147,7 @@ private extension ProfileCoordinator {
     // restricted: verify before saving
     func onCommitEditingRestricted() async throws {
         do {
-            try iapManager.verify(profileEditor.activeModules)
+            try iapManager.verify(profileEditor.activeModules, isShared: profileEditor.isShared)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             paywallReason = .init(requiredFeatures)
             return

@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Build-Nummer";
 "views.purchased.rows.download_date" = "Download-Datum";
 "views.purchased.sections.download.header" = "Erster Download";
-"views.purchased.sections.features.header" = "Funktionen";
-"views.purchased.sections.products.header" = "Käufe";
+"global.nouns.features" = "Funktionen";
+"global.nouns.purchases" = "Käufe";
 "views.purchased.title" = "Gekauft";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";

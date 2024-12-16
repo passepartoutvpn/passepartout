@@ -42,9 +42,6 @@ struct ProfileEditView: View, Routable {
     @Binding
     var path: NavigationPath
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     var flow: ProfileCoordinator.Flow?
 
     @State
@@ -57,10 +54,7 @@ struct ProfileEditView: View, Routable {
                 name: $profileEditor.profile.name
             )
             modulesSection
-            StorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
+            StorageSection(profileEditor: profileEditor)
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .toolbar(content: toolbarContent)
@@ -121,10 +115,7 @@ private extension ProfileEditView {
                     if errorModuleIds.contains(module.id) {
                         ThemeImage(.warning)
                     } else if profileEditor.isActiveModule(withId: module.id) {
-                        PurchaseRequiredButton(
-                            for: module as? AppFeatureRequiring,
-                            paywallReason: $paywallReason
-                        )
+                        PurchaseRequiredButton(for: module as? AppFeatureRequiring)
                     }
                     Spacer()
                 }
@@ -193,8 +184,7 @@ private extension ProfileEditView {
             profileEditor: ProfileEditor(profile: .newMockProfile()),
             initialModuleId: nil,
             moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
-            path: .constant(NavigationPath()),
-            paywallReason: .constant(nil)
+            path: .constant(NavigationPath())
         )
     }
     .withMockEnvironment()

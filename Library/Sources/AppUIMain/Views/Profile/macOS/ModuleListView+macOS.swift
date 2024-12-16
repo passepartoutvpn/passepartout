@@ -46,9 +46,6 @@ struct ModuleListView: View, Routable {
     @Binding
     var errorModuleIds: Set<UUID>
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     var flow: ProfileCoordinator.Flow?
 
     var body: some View {
@@ -81,10 +78,7 @@ private extension ModuleListView {
             if errorModuleIds.contains(module.id) {
                 ThemeImage(.warning)
             } else if profileEditor.isActiveModule(withId: module.id) {
-                PurchaseRequiredButton(
-                    for: module as? AppFeatureRequiring,
-                    paywallReason: $paywallReason
-                )
+                PurchaseRequiredButton(for: module as? AppFeatureRequiring)
             }
             Spacer()
             if !isUITesting {
@@ -156,8 +150,7 @@ private extension ModuleListView {
     ModuleListView(
         profileEditor: ProfileEditor(profile: .forPreviews),
         selectedModuleId: .constant(nil),
-        errorModuleIds: .constant([]),
-        paywallReason: .constant(nil)
+        errorModuleIds: .constant([])
     )
     .withMockEnvironment()
 }

@@ -42,16 +42,11 @@ struct PaywallView: View {
 
     let features: Set<AppFeature>
 
-    let suggestedProduct: AppProduct?
-
     @State
     private var isFetchingProducts = true
 
     @State
-    private var suggestedIAP: InAppProduct?
-
-    @State
-    private var fullIAPs: [InAppProduct] = []
+    private var iaps: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -89,43 +84,14 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             requiredFeaturesView
-            suggestedProductView
-            if !fullIAPs.isEmpty {
-                fullProductsView
-                allFeaturesView
+            productsView
+            if !iapManager.isFullVersionPurchaser {
+                fullVersionFeaturesView
             }
             restoreView
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
-    }
-
-    var suggestedProductView: some View {
-        suggestedIAP.map { iap in
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .oneTime,
-                product: iap,
-                purchasingIdentifier: $purchasingIdentifier,
-                onComplete: onComplete,
-                onError: onError
-            )
-            .themeSection(header: Strings.Views.Paywall.Sections.SuggestedProduct.header)
-        }
-    }
-
-    var fullProductsView: some View {
-        ForEach(fullIAPs, id: \.productIdentifier) {
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .recurring,
-                product: $0,
-                purchasingIdentifier: $purchasingIdentifier,
-                onComplete: onComplete,
-                onError: onError
-            )
-        }
-        .themeSection(header: Strings.Views.Paywall.Sections.FullProducts.header)
     }
 
     var requiredFeaturesView: some View {
@@ -140,11 +106,25 @@ private extension PaywallView {
         )
     }
 
-    var allFeaturesView: some View {
+    var productsView: some View {
+        ForEach(iaps, id: \.productIdentifier) {
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .recurring,
+                product: $0,
+                purchasingIdentifier: $purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
+        }
+        .themeSection(header: Strings.Global.Nouns.purchases)
+    }
+
+    var fullVersionFeaturesView: some View {
         FeatureListView(
             style: allFeaturesStyle,
             header: Strings.Views.Paywall.Sections.AllFeatures.header,
-            features: allFeatures,
+            features: fullVersionFeatures,
             content: featureView(for:)
         )
     }
@@ -195,20 +175,8 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
-    var allFeatures: [AppFeature] {
-        AppFeature.allCases
-    }
-
-    var lifetimeProduct: AppProduct {
-        .Full.OneTime.lifetime
-    }
-
-    var yearlyProduct: AppProduct {
-        .Full.Recurring.yearly
-    }
-
-    var monthlyProduct: AppProduct {
-        .Full.Recurring.monthly
+    var fullVersionFeatures: [AppFeature] {
+        AppFeature.fullFeatures
     }
 
     func fetchAvailableProducts() async {
@@ -216,41 +184,17 @@ private extension PaywallView {
         defer {
             isFetchingProducts = false
         }
-
-        var list: [AppProduct] = []
-        if let suggestedProduct {
-            list.append(suggestedProduct)
-        }
-        list.append(lifetimeProduct)
-        list.append(yearlyProduct)
-        list.append(monthlyProduct)
-
         do {
-            let availableProducts = try await iapManager.purchasableProducts(for: list)
+            let availableProducts = iapManager.suggestedProducts(for: features)
             guard !availableProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
-
-            var suggestedIAP: InAppProduct?
-            var fullIAPs: [InAppProduct] = []
-            availableProducts.forEach {
-                if let suggestedProduct, $0.productIdentifier.hasSuffix(suggestedProduct.rawValue) {
-                    suggestedIAP = $0
-                } else {
-                    fullIAPs.append($0)
-                }
-            }
-
-            pp_log(.App.iap, .info, "Available products: \(availableProducts)")
-            pp_log(.App.iap, .info, "\tSuggested: \(suggestedIAP.debugDescription)")
-            pp_log(.App.iap, .info, "\tFull: \(fullIAPs)")
-
-            guard suggestedIAP != nil || !fullIAPs.isEmpty else {
+            iaps = try await iapManager.purchasableProducts(for: availableProducts)
+            pp_log(.App.iap, .info, "Suggested products: \(availableProducts)")
+            pp_log(.App.iap, .info, "\tIAPs: \(iaps)")
+            guard !iaps.isEmpty else {
                 throw AppError.emptyProducts
             }
-
-            self.suggestedIAP = suggestedIAP
-            self.fullIAPs = fullIAPs
         } catch {
             onError(error, dismissing: true)
         }
@@ -293,8 +237,7 @@ private extension PaywallView {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        features: [.appleTV],
-        suggestedProduct: .Features.appleTV
+        features: [.appleTV]
     )
     .withMockEnvironment()
 }

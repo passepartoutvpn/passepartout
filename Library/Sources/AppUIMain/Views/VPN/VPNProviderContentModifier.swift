@@ -55,7 +55,6 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
                 providerId: $providerId,
                 providerPreferences: providerPreferences,
                 entityType: VPNEntity<Configuration>.self,
-                paywallReason: $paywallReason,
                 providerRows: {
                     providerEntityRow
                     providerRows

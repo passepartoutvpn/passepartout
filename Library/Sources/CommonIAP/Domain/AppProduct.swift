@@ -44,7 +44,7 @@ extension AppProduct {
 
     var isLegacyPlatformVersion: Bool {
         switch self {
-        case .Full.iOS, .Full.macOS:
+        case .Full.OneTime.iOS, .Full.OneTime.macOS:
             return true
 
         default:

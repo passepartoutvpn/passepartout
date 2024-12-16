@@ -46,9 +46,6 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
 
     let entityType: Entity.Type
 
-    @Binding
-    var paywallReason: PaywallReason?
-
     @ViewBuilder
     let providerRows: ProviderRows
 
@@ -120,8 +117,7 @@ private extension ProviderContentModifier {
             providers: supportedProviders,
             providerId: $providerId,
             isRequired: true,
-            isLoading: providerManager.isLoading,
-            paywallReason: $paywallReason
+            isLoading: providerManager.isLoading
         )
     }
 }
@@ -222,7 +218,6 @@ private extension ProviderContentModifier {
                 providerId: .constant(.hideme),
                 providerPreferences: nil,
                 entityType: VPNEntity<OpenVPN.Configuration>.self,
-                paywallReason: .constant(nil),
                 providerRows: {},
                 onSelectProvider: { _, _, _ in }
             ))

@@ -80,7 +80,7 @@ struct DiagnosticsView: View {
             liveLogSection
             openVPNSection
             tunnelLogsSection
-            if iapManager.isEligibleForFeedback() {
+            if iapManager.isEligibleForFeedback {
                 reportIssueSection
             }
         }

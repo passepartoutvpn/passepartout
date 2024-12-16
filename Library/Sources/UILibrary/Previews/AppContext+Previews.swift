@@ -31,7 +31,7 @@ import PassepartoutKit
 extension AppContext {
     public static let forPreviews: AppContext = {
         let iapManager = IAPManager(
-            customUserLevel: .subscriber,
+            customUserLevel: .fullTV,
             inAppHelper: FakeAppProductHelper(),
             receiptReader: FakeAppReceiptReader(),
             betaChecker: TestFlightChecker(),

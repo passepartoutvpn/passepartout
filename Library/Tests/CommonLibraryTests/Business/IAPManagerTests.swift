@@ -49,7 +49,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         let appProducts: [AppProduct] = [
-            .Full.iOS,
+            .Full.OneTime.full,
             .Donations.huge
         ]
         let inAppProducts = try await sut.purchasableProducts(for: appProducts)
@@ -88,12 +88,12 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Full.allPlatforms]
+                return [.Full.OneTime.full]
             }
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
     }
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
@@ -101,12 +101,12 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Full.allPlatforms]
+                return [.Full.OneTime.full]
             }
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
     }
 }
 
@@ -117,13 +117,13 @@ extension IAPManagerTests {
         let reader = FakeAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.allPlatforms])
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.full])
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
     }
 
     func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() async {
@@ -139,20 +139,20 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
         XCTAssertFalse(sut.isEligible(for: .sharing))
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
     }
 
     func test_givenPurchasedAndCancelledFeature_thenIsNotEligible() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(
             withBuild: defaultBuildNumber,
-            products: [.Full.allPlatforms],
-            cancelledProducts: [.Full.allPlatforms]
+            products: [.Full.OneTime.full],
+            cancelledProducts: [.Full.OneTime.full]
         )
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
     }
 
     func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() async {
@@ -161,8 +161,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.userLevel.isFullVersion)
-        AppFeature.fullV2Features.forEach {
+        AppFeature.fullFeatures.forEach {
             XCTAssertFalse(sut.isEligible(for: $0))
         }
     }
@@ -178,7 +177,7 @@ extension IAPManagerTests {
 
     func test_givenFullV2Version_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.allPlatforms])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.full])
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -187,7 +186,7 @@ extension IAPManagerTests {
             .interactiveLogin
         ]
         AppFeature.allCases.forEach {
-            if AppFeature.fullV2Features.contains($0) {
+            if AppFeature.fullFeatures.contains($0) {
                 XCTAssertTrue(sut.isEligible(for: $0))
             } else {
                 XCTAssertTrue(excluded.contains($0))
@@ -211,13 +210,13 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
 #if os(macOS)
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.macOS, .Features.networkSettings])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
 #else
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.iOS, .Features.networkSettings])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
 #endif
     }
 
@@ -226,20 +225,20 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
 #if os(macOS)
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.iOS, .Features.networkSettings])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 #else
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.macOS, .Features.networkSettings])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 #endif
     }
 
     func test_givenUser_thenIsNotEligibleForFeedback() async {
         let reader = FakeAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
-        XCTAssertFalse(sut.isEligibleForFeedback())
+        XCTAssertFalse(sut.isEligibleForFeedback)
     }
 
     func test_givenBeta_thenIsEligibleForFeedback() async {
@@ -247,15 +246,144 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: .max, identifiers: [])
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligibleForFeedback())
+        XCTAssertTrue(sut.isEligibleForFeedback)
     }
 
     func test_givenPayingUser_thenIsEligibleForFeedback() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: .max, products: [.Full.iOS])
+        await reader.setReceipt(withBuild: .max, products: [.Full.OneTime.iOS])
         let sut = IAPManager(receiptReader: reader)
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligibleForFeedback())
+        XCTAssertTrue(sut.isEligibleForFeedback)
+    }
+}
+
+// MARK: - Suggestions
+
+extension IAPManagerTests {
+    func test_givenFree_whenRequireNothing_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [])
+        XCTAssertTrue(sut.suggestedProducts(for: []).isEmpty)
+    }
+
+    func test_givenFree_whenRequireFeature_thenSuggestsFullAndFullTV() async {
+        let sut = await IAPManager(products: [])
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
+            .Full.OneTime.full,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenFree_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
+        let sut = await IAPManager(products: [])
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
+            .Features.appleTV,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenFree_whenRequireFeatureAndAppleTV_thenSuggestsFullTV() async {
+        let sut = await IAPManager(products: [])
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenCurrentPlatform_whenRequireFeature_thenSuggestsNothing() async {
+        let sut = await IAPManager.withFullCurrentPlatform()
+        XCTAssertTrue(sut.suggestedProducts(for: [.dns]).isEmpty)
+    }
+
+    func test_givenCurrentPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
+        let sut = await IAPManager.withFullCurrentPlatform()
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
+            .Features.appleTV,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenCurrentPlatform_whenRequireFeatureAndAppleTV_thenSuggestsAppleTVAndFullTV() async {
+        let sut = await IAPManager.withFullCurrentPlatform()
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Features.appleTV,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenOtherPlatform_whenRequireFeature_thenSuggestsFullAndFullTV() async {
+        let sut = await IAPManager.withFullOtherPlatform()
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
+            .Full.OneTime.full,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenOtherPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
+        let sut = await IAPManager.withFullOtherPlatform()
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
+            .Features.appleTV,
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenOtherPlatform_whenRequireFeatureAndAppleTV_thenSuggestsFullTV() async {
+        let sut = await IAPManager.withFullOtherPlatform()
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Full.OneTime.fullTV
+        ])
+    }
+
+    func test_givenFull_whenRequireFeature_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [.Full.OneTime.full])
+        XCTAssertTrue(sut.suggestedProducts(for: [.dns]).isEmpty)
+    }
+
+    func test_givenFull_whenRequireAppleTV_thenSuggestsAppleTV() async {
+        let sut = await IAPManager(products: [.Full.OneTime.full])
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
+            .Features.appleTV
+        ])
+    }
+
+    func test_givenFull_whenRequireFeatureAndAppleTV_thenSuggestsAppleTV() async {
+        let sut = await IAPManager(products: [.Full.OneTime.full])
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Features.appleTV
+        ])
+    }
+
+    func test_givenAppleTV_whenRequireFeature_thenSuggestsFull() async {
+        let sut = await IAPManager(products: [.Features.appleTV])
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
+            .Full.OneTime.full
+        ])
+    }
+
+    func test_givenAppleTV_whenRequireAppleTV_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [.Features.appleTV])
+        XCTAssertTrue(sut.suggestedProducts(for: [.appleTV]).isEmpty)
+    }
+
+    func test_givenAppleTV_whenRequireFeatureAndAppleTV_thenSuggestsFull() async {
+        let sut = await IAPManager(products: [.Features.appleTV])
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Full.OneTime.full
+        ])
+    }
+
+    func test_givenAll_whenRequireFeature_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        XCTAssertTrue(sut.suggestedProducts(for: [.dns]).isEmpty)
+    }
+
+    func test_givenAll_whenRequireAppleTV_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        XCTAssertTrue(sut.suggestedProducts(for: [.appleTV]).isEmpty)
+    }
+
+    func test_givenAll_whenRequireFeatureAndAppleTV_thenSuggestsNothing() async {
+        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        XCTAssertTrue(sut.suggestedProducts(for: [.appleTV, .providers]).isEmpty)
     }
 }
 
@@ -300,25 +428,9 @@ extension IAPManagerTests {
         XCTAssertTrue(sut.isEligible(for: eligible))
     }
 
-    func test_givenFullV2App_thenIsFullVersion() async {
-        let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .fullV2, receiptReader: reader)
-
-        await sut.reloadReceipt()
-        XCTAssertTrue(sut.userLevel.isFullVersion)
-    }
-
-    func test_givenSubscriberApp_thenIsFullVersion() async {
-        let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .subscriber, receiptReader: reader)
-
-        await sut.reloadReceipt()
-        XCTAssertTrue(sut.userLevel.isFullVersion)
-    }
-
     func test_givenFullV2App_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .fullV2, receiptReader: reader)
+        let sut = IAPManager(customUserLevel: .full, receiptReader: reader)
 
         await sut.reloadReceipt()
         let excluded: Set<AppFeature> = [
@@ -326,7 +438,7 @@ extension IAPManagerTests {
             .interactiveLogin
         ]
         AppFeature.allCases.forEach {
-            if AppFeature.fullV2Features.contains($0) {
+            if AppFeature.fullFeatures.contains($0) {
                 XCTAssertTrue(sut.isEligible(for: $0))
             } else {
                 XCTAssertTrue(excluded.contains($0))
@@ -337,10 +449,10 @@ extension IAPManagerTests {
 
     func test_givenSubscriberApp_thenIsEligibleForAnyFeature() async {
         let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .subscriber, receiptReader: reader)
+        let sut = IAPManager(customUserLevel: .fullTV, receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullV2Features.forEach {
+        AppFeature.fullFeatures.forEach {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertTrue(sut.isEligible(for: .appleTV))
@@ -397,7 +509,7 @@ extension IAPManagerTests {
         await reader.addPurchase(with: .Features.allProviders, expirationDate: Date().addingTimeInterval(-10))
         await reader.addPurchase(with: .Features.appleTV)
         await reader.addPurchase(with: .Features.networkSettings, expirationDate: Date().addingTimeInterval(10))
-        await reader.addPurchase(with: .Full.iOS, cancellationDate: Date().addingTimeInterval(-60))
+        await reader.addPurchase(with: .Full.OneTime.iOS, cancellationDate: Date().addingTimeInterval(-60))
 
         let sut = IAPManager(receiptReader: reader)
         await sut.reloadReceipt()
@@ -417,7 +529,7 @@ extension IAPManagerTests {
 extension IAPManagerTests {
     func test_givenManager_whenObserveObjects_thenReloadsReceipt() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: .max, products: [.Full.allPlatforms])
+        await reader.setReceipt(withBuild: .max, products: [.Full.OneTime.full])
         let sut = IAPManager(receiptReader: reader)
 
         XCTAssertEqual(sut.userLevel, .undefined)
@@ -459,5 +571,36 @@ private extension IAPManager {
             unrestrictedFeatures: unrestrictedFeatures,
             productsAtBuild: productsAtBuild
         )
+    }
+
+    convenience init(products: Set<AppProduct>) async {
+        let reader = FakeAppReceiptReader()
+        await reader.setReceipt(withBuild: .max, products: products)
+        self.init(receiptReader: reader)
+        await reloadReceipt()
+    }
+
+    static func withFullCurrentPlatform() async -> IAPManager {
+#if os(iOS)
+        await IAPManager(products: [.Full.OneTime.iOS])
+#elseif os(macOS)
+        await IAPManager(products: [.Full.OneTime.macOS])
+#endif
+    }
+
+    static func withFullOtherPlatform() async -> IAPManager {
+#if os(iOS)
+        await IAPManager(products: [.Full.OneTime.macOS])
+#elseif os(macOS)
+        await IAPManager(products: [.Full.OneTime.iOS])
+#endif
+    }
+
+    static var currentPlatformProduct: AppProduct {
+#if os(iOS)
+        .Full.OneTime.iOS
+#elseif os(macOS)
+        .Full.OneTime.macOS
+#endif
     }
 }

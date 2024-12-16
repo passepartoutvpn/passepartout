@@ -271,8 +271,8 @@
 "views.purchased.rows.build_number" = "Номер сборки";
 "views.purchased.rows.download_date" = "Дата скачивания";
 "views.purchased.sections.download.header" = "Первое скачивание";
-"views.purchased.sections.features.header" = "Функции";
-"views.purchased.sections.products.header" = "Покупки";
+"global.nouns.features" = "Функции";
+"global.nouns.purchases" = "Покупки";
 "views.purchased.title" = "Куплено";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";

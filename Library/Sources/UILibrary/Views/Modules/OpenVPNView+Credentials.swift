@@ -61,9 +61,6 @@ public struct OpenVPNCredentialsView: View {
     @State
     private var providerCustomization: OpenVPN.ProviderCustomization?
 
-    @State
-    private var paywallReason: PaywallReason?
-
     @FocusState
     private var focusedField: Field?
 
@@ -93,7 +90,6 @@ public struct OpenVPNCredentialsView: View {
         .themeManualInput()
         .themeAnimation(on: isInteractive, category: .modules)
         .themeAnimation(on: builder, category: .modules)
-        .modifier(PaywallModifier(reason: $paywallReason))
         .onLoad(perform: onLoad)
         .onChange(of: builder, perform: onChange)
     }
@@ -105,7 +101,7 @@ private extension OpenVPNCredentialsView {
             Toggle(isOn: $isInteractive) {
                 HStack {
                     Text(Strings.Modules.Openvpn.Credentials.interactive)
-                    PurchaseRequiredButton(features: requiredFeatures, paywallReason: $paywallReason)
+                    PurchaseRequiredButton(features: requiredFeatures)
                 }
             }
             .themeRowWithSubtitle(interactiveFooter)

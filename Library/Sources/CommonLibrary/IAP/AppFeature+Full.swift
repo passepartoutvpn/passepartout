@@ -26,12 +26,9 @@
 import Foundation
 
 extension AppFeature {
-    public static let fullV2Features: [AppFeature] = [
-        .dns,
-        .httpProxy,
-        .onDemand,
-        .providers,
-        .routing,
-        .sharing
-    ]
+    public static let fullFeatures = AppFeature.allCases.filter {
+        $0 != .appleTV
+    }
+
+    public static let fullTVFeatures = AppFeature.allCases
 }

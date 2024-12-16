@@ -35,11 +35,6 @@ public struct PurchaseRequiredButton<Content>: View where Content: View {
 
     let features: Set<AppFeature>?
 
-    let suggestedProduct: AppProduct?
-
-    @Binding
-    var paywallReason: PaywallReason?
-
     @ViewBuilder
     let content: (_ isRestricted: Bool, _ action: @escaping () -> Void) -> Content
 
@@ -51,12 +46,7 @@ public struct PurchaseRequiredButton<Content>: View where Content: View {
 
 private extension PurchaseRequiredButton {
     func onTap() {
-        guard let features, !isEligible else {
-            return
-        }
-        setLater(.init(features, suggestedProduct: suggestedProduct)) {
-            paywallReason = $0
-        }
+        //
     }
 
     var isEligible: Bool {
@@ -72,13 +62,9 @@ private extension PurchaseRequiredButton {
 extension PurchaseRequiredButton where Content == Button<Text> {
     public init(
         _ title: String,
-        features: Set<AppFeature>?,
-        suggestedProduct: AppProduct? = nil,
-        paywallReason: Binding<PaywallReason?>
+        features: Set<AppFeature>?
     ) {
         self.features = features
-        self.suggestedProduct = suggestedProduct
-        _paywallReason = paywallReason
         content = { _, action in
             Button(title, action: action)
         }
@@ -86,26 +72,15 @@ extension PurchaseRequiredButton where Content == Button<Text> {
 }
 
 extension PurchaseRequiredButton where Content == PurchaseRequiredImageButtonContent {
-    public init(
-        for requiring: AppFeatureRequiring?,
-        suggestedProduct: AppProduct? = nil,
-        paywallReason: Binding<PaywallReason?>
-    ) {
-        self.init(
-            features: requiring?.features,
-            suggestedProduct: suggestedProduct,
-            paywallReason: paywallReason
-        )
+
+    // FIXME: ###, only Profile/ProfileEditor
+    public init(for requiring: AppFeatureRequiring?) {
+        self.init(features: requiring?.features)
     }
 
-    public init(
-        features: Set<AppFeature>?,
-        suggestedProduct: AppProduct? = nil,
-        paywallReason: Binding<PaywallReason?>
-    ) {
+    // FIXME: ###, only Profile/ProfileEditor
+    public init(features: Set<AppFeature>?) {
         self.features = features
-        self.suggestedProduct = suggestedProduct
-        _paywallReason = paywallReason
         content = {
             PurchaseRequiredImageButtonContent(isRestricted: $0, action: $1)
         }
