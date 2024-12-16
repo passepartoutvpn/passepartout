@@ -59,26 +59,11 @@ private extension PurchaseRequiredButton {
 
 // MARK: - Initializers
 
-extension PurchaseRequiredButton where Content == Button<Text> {
-    public init(
-        _ title: String,
-        features: Set<AppFeature>?
-    ) {
-        self.features = features
-        content = { _, action in
-            Button(title, action: action)
-        }
-    }
-}
-
 extension PurchaseRequiredButton where Content == PurchaseRequiredImageButtonContent {
-
-    // FIXME: ###, only Profile/ProfileEditor
     public init(for requiring: AppFeatureRequiring?) {
         self.init(features: requiring?.features)
     }
 
-    // FIXME: ###, only Profile/ProfileEditor
     public init(features: Set<AppFeature>?) {
         self.features = features
         content = {
