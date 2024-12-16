@@ -44,10 +44,7 @@ final class CDProfileRepositoryV2: Sendable {
 
     var hasMigratableProfiles: Bool {
         do {
-            return try context.performAndWait { [weak self] in
-                guard let self else {
-                    return false
-                }
+            return try context.performAndWait {
                 let entities = try CDProfile.fetchRequest().execute()
                 return !entities.compactMap {
                     ($0.encryptedJSON ?? $0.json) != nil
