@@ -282,15 +282,15 @@ private extension AppProduct {
     var fullVersionRank: Int {
         switch self {
         case .Full.Recurring.yearly:
-            return 4
+            return .min
         case .Full.Recurring.monthly:
-            return 3
+            return 1
         case .Full.OneTime.fullTV:
             return 2
         case .Full.OneTime.full:
-            return 1
+            return 3
         default:
-            return 0
+            return .max
         }
     }
 }
