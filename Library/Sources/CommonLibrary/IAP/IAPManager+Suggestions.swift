@@ -33,7 +33,7 @@ extension IAPManager {
         purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
-    public func suggestedProducts(for requiredFeatures: Set<AppFeature>) -> Set<AppProduct>? {
+    public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
         guard !requiredFeatures.isEmpty else {
             return nil
         }
@@ -64,7 +64,7 @@ extension IAPManager {
             }
         }
 
-        if products.contains(.Full.OneTime.fullTV) {
+        if withRecurring && products.contains(.Full.OneTime.fullTV) {
             products.insert(.Full.Recurring.monthly)
             products.insert(.Full.Recurring.yearly)
         }
