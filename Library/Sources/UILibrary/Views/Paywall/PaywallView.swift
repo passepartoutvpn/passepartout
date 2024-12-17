@@ -122,8 +122,7 @@ private extension PaywallView {
                     onError: onError
                 )
             }
-            // FIXME: ### l10n
-            .themeSection(header: "Subscription")
+            .themeSection(header: Strings.Views.Paywall.Sections.Subscription.header)
         }
     }
 
@@ -139,8 +138,7 @@ private extension PaywallView {
                     onError: onError
                 )
             }
-            // FIXME: ### l10n
-            .themeSection(header: "Lifetime")
+            .themeSection(header: Strings.Views.Paywall.Sections.OneTime.header)
         }
     }
 
