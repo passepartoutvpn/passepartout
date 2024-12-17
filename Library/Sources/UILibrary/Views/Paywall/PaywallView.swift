@@ -212,12 +212,20 @@ private extension PaywallView {
                 throw AppError.emptyProducts
             }
 
-            let featureIAPs = try await iapManager.purchasableProducts(for: suggestedProducts.filter {
-                !$0.isFullVersion
-            })
-            let fullIAPs = try await iapManager.purchasableProducts(for: suggestedProducts.filter {
-                $0.isFullVersion
-            })
+            let featureIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
+                .filter {
+                    !$0.isFullVersion
+                }
+                .sorted {
+                    $0.featureRank < $1.featureRank
+                }
+            )
+            let fullIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
+                .filter(\.isFullVersion)
+                .sorted {
+                    $0.fullVersionRank < $1.fullVersionRank
+                }
+            )
 
             pp_log(.App.iap, .info, "Suggested products: \(suggestedProducts)")
             pp_log(.App.iap, .info, "\tFeatures: \(featureIAPs)")
@@ -262,6 +270,27 @@ private extension PaywallView {
             if dismissing {
                 isPresented = false
             }
+        }
+    }
+}
+
+private extension AppProduct {
+    var featureRank: Int {
+        0
+    }
+
+    var fullVersionRank: Int {
+        switch self {
+        case .Full.Recurring.yearly:
+            return 4
+        case .Full.Recurring.monthly:
+            return 3
+        case .Full.OneTime.fullTV:
+            return 2
+        case .Full.OneTime.full:
+            return 1
+        default:
+            return 0
         }
     }
 }

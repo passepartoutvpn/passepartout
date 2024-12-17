@@ -33,7 +33,7 @@ extension IAPManager {
         purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
-    public func suggestedProducts(for requiredFeatures: Set<AppFeature>) -> [AppProduct]? {
+    public func suggestedProducts(for requiredFeatures: Set<AppFeature>) -> Set<AppProduct>? {
         guard !requiredFeatures.isEmpty else {
             return nil
         }
@@ -41,32 +41,32 @@ extension IAPManager {
             return nil
         }
 
-        var products: [AppProduct] = []
+        var products: Set<AppProduct> = []
         let ineligibleFeatures = requiredFeatures.subtracting(eligibleFeatures)
 
         if isFullVersionPurchaser {
             if ineligibleFeatures == [.appleTV] {
-                products.append(.Features.appleTV)
+                products.insert(.Features.appleTV)
             } else {
                 assertionFailure("Full version purchaser requiring other than [.appleTV]")
             }
         } else { // !isFullVersionPurchaser
             if ineligibleFeatures == [.appleTV] {
-                products.append(.Features.appleTV)
-                products.append(.Full.OneTime.fullTV)
+                products.insert(.Features.appleTV)
+                products.insert(.Full.OneTime.fullTV)
             } else if ineligibleFeatures.contains(.appleTV) {
-                products.append(.Full.OneTime.fullTV)
+                products.insert(.Full.OneTime.fullTV)
             } else {
                 if !eligibleFeatures.contains(.appleTV) {
-                    products.append(.Full.OneTime.fullTV)
+                    products.insert(.Full.OneTime.fullTV)
                 }
-                products.append(.Full.OneTime.full)
+                products.insert(.Full.OneTime.full)
             }
         }
 
         if products.contains(.Full.OneTime.fullTV) {
-            products.insert(.Full.Recurring.monthly, at: 0)
-            products.insert(.Full.Recurring.yearly, at: 0)
+            products.insert(.Full.Recurring.monthly)
+            products.insert(.Full.Recurring.yearly)
         }
 
         return products
