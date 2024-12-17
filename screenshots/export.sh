@@ -1,10 +1,16 @@
 #!/bin/bash
 cwd=`dirname $0`
+if [[ -z "$1" ]]; then
+    echo "Device required"
+    exit 1
+fi
 device="$1"
 xcscheme="PassepartoutUITests"
 results_root="$cwd/results"
 results_path="$results_root/$device"
 screenshots_path="$cwd/html/$device"
+cmd_xcodebuild="xcodebuild"
+cmd_xcparse="xcparse"
 
 mkdir -p "$results_root"
 mkdir -p "$screenshots_path"
@@ -39,10 +45,10 @@ esac
 
 # 1. run the tests
 rm -rf "$results_path"
-xcodebuild -scheme "$xcscheme" -testPlan "$xcplan" -destination "$xcdestination" -resultBundlePath "$results_path" test
+$cmd_xcodebuild -scheme "$xcscheme" -testPlan "$xcplan" -destination "$xcdestination" -resultBundlePath "$results_path" test
 
 # 2. parse the screenshots
-xcparse screenshots "$results_path" "$screenshots_path"
+$cmd_xcparse screenshots "$results_path" "$screenshots_path"
 
 # 3. drop the filename suffix
 cd "$screenshots_path"
