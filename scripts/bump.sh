@@ -1,35 +1,35 @@
 #!/bin/bash
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 
-POSITIONAL_ARGS=()
+positional_args=()
 
 while [[ $# -gt 0 ]]; do
   case $1 in
     -v)
-      OPT_VERSION="version:$2"
+      opt_version="version:$2"
       shift # past argument
       shift # past value
       ;;
     -b)
-      OPT_BUILD="build:$2"
+      opt_build="build:$2"
       shift # past argument
       shift # past value
       ;;
     -s)
-      OPT_SINCE="since:$2"
+      opt_since="since:$2"
       shift # past argument
       shift # past value
       ;;
     -na)
-      OPT_NO_API=1
+      opt_no_api=1
       shift # past argument
       ;;
     -nl)
-      OPT_NO_LOG="no_log:true"
+      opt_no_log="no_log:true"
       shift # past argument
       ;;
     -d)
-      OPT_DRY_RUN=1
+      opt_dry_run=1
       shift # past argument
       ;;
     -*|--*)
@@ -37,34 +37,34 @@ while [[ $# -gt 0 ]]; do
       exit 1
       ;;
     *)
-      POSITIONAL_ARGS+=("$1") # save positional arg
+      positional_args+=("$1") # save positional arg
       shift # past argument
       ;;
   esac
 done
 
-set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+set -- "${positional_args[@]}" # restore positional parameters
 
-CMD_API=$(dirname "$0")/update-bundled-api.sh
-CMD_RELEASE_NOTES=$(dirname "$0")/copy-release-notes.sh
-CMD_FASTLANE="bundle exec fastlane bump $OPT_VERSION $OPT_BUILD $OPT_SINCE $OPT_NO_LOG"
+cmd_api=$(dirname "$0")/update-bundled-api.sh
+cmd_release_notes=$(dirname "$0")/copy-release-notes.sh
+cmd_fastlane="bundle exec fastlane bump $opt_version $opt_build $opt_since $opt_no_log"
 
-if [[ -n $OPT_DRY_RUN ]]; then
-    echo "VERSION = $OPT_VERSION"
-    echo "BUILD   = $OPT_BUILD"
-    echo "SINCE   = $OPT_SINCE"
-    echo "NO_API  = $OPT_NO_API"
-    echo "NO_LOG  = $OPT_NO_LOG"
-    if [[ -z $OPT_NO_API ]]; then
-        echo "$CMD_API"
+if [[ -n $opt_dry_run ]]; then
+    echo "version = $opt_version"
+    echo "build   = $opt_build"
+    echo "since   = $opt_since"
+    echo "no_api  = $opt_no_api"
+    echo "no_log  = $opt_no_log"
+    if [[ -z $opt_no_api ]]; then
+        echo "$cmd_api"
     fi
-    echo "$CMD_RELEASE_NOTES"
-    echo "$CMD_FASTLANE"
+    echo "$cmd_release_notes"
+    echo "$cmd_fastlane"
     exit 0
 fi
 
-if [[ -z $OPT_NO_API ]]; then
-    eval "$CMD_API"
+if [[ -z $opt_no_api ]]; then
+    eval "$cmd_api"
 fi
-eval "$CMD_RELEASE_NOTES"
-eval "$CMD_FASTLANE"
+eval "$cmd_release_notes"
+eval "$cmd_fastlane"
