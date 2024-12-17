@@ -763,10 +763,6 @@ public enum Strings {
           /// Restore
           public static let header = Strings.tr("Localizable", "views.paywall.sections.restore.header", fallback: "Restore")
         }
-        public enum SuggestedProduct {
-          /// One-time purchase
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.suggested_product.header", fallback: "One-time purchase")
-        }
       }
     }
     public enum Preferences {

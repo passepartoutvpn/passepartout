@@ -26,9 +26,7 @@
 import Foundation
 
 public enum PaywallProductViewStyle {
-    case oneTime
-
-    case recurring
-
     case donation
+
+    case paywall
 }

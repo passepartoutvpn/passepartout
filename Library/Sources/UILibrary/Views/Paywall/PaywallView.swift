@@ -46,7 +46,10 @@ struct PaywallView: View {
     private var isFetchingProducts = true
 
     @State
-    private var iaps: [InAppProduct] = []
+    private var featureIAPs: [InAppProduct] = []
+
+    @State
+    private var fullIAPs: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -84,7 +87,8 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             requiredFeaturesView
-            productsView
+            featureProductsView
+            fullProductsView
             if !iapManager.isFullVersionPurchaser {
                 fullVersionFeaturesView
             }
@@ -106,18 +110,36 @@ private extension PaywallView {
         )
     }
 
-    var productsView: some View {
-        ForEach(iaps, id: \.productIdentifier) {
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .recurring,
-                product: $0,
-                purchasingIdentifier: $purchasingIdentifier,
-                onComplete: onComplete,
-                onError: onError
-            )
+    var featureProductsView: some View {
+        featureIAPs.nilIfEmpty.map { iaps in
+            ForEach(iaps, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .paywall,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+            .themeSection(header: Strings.Global.Nouns.products)
         }
-        .themeSection(header: Strings.Global.Nouns.purchases)
+    }
+
+    var fullProductsView: some View {
+        fullIAPs.nilIfEmpty.map {
+            ForEach($0, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .paywall,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+            .themeSection(header: Strings.Views.Paywall.Sections.FullProducts.header)
+        }
     }
 
     var fullVersionFeaturesView: some View {
@@ -185,17 +207,37 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let availableProducts = iapManager.suggestedProducts(for: features)
-            guard !availableProducts.isEmpty else {
+            let suggestedProducts = iapManager.suggestedProducts(for: features)
+            guard let suggestedProducts else {
                 throw AppError.emptyProducts
             }
-            iaps = try await iapManager.purchasableProducts(for: availableProducts)
-            pp_log(.App.iap, .info, "Suggested products: \(availableProducts)")
-            pp_log(.App.iap, .info, "\tIAPs: \(iaps)")
-            guard !iaps.isEmpty else {
+
+            let featureIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
+                .filter {
+                    !$0.isFullVersion
+                }
+                .sorted {
+                    $0.featureRank < $1.featureRank
+                }
+            )
+            let fullIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
+                .filter(\.isFullVersion)
+                .sorted {
+                    $0.fullVersionRank < $1.fullVersionRank
+                }
+            )
+
+            pp_log(.App.iap, .info, "Suggested products: \(suggestedProducts)")
+            pp_log(.App.iap, .info, "\tFeatures: \(featureIAPs)")
+            pp_log(.App.iap, .info, "\tFull version: \(fullIAPs)")
+            guard !(featureIAPs + fullIAPs).isEmpty else {
                 throw AppError.emptyProducts
             }
+
+            self.featureIAPs = featureIAPs
+            self.fullIAPs = fullIAPs
         } catch {
+            pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
         }
     }
@@ -228,6 +270,27 @@ private extension PaywallView {
             if dismissing {
                 isPresented = false
             }
+        }
+    }
+}
+
+private extension AppProduct {
+    var featureRank: Int {
+        0
+    }
+
+    var fullVersionRank: Int {
+        switch self {
+        case .Full.Recurring.yearly:
+            return .min
+        case .Full.Recurring.monthly:
+            return 1
+        case .Full.OneTime.fullTV:
+            return 2
+        case .Full.OneTime.full:
+            return 3
+        default:
+            return .max
         }
     }
 }

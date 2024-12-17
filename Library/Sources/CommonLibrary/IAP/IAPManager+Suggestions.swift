@@ -33,37 +33,42 @@ extension IAPManager {
         purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
-    public func suggestedProducts(for features: Set<AppFeature>) -> [AppProduct] {
-        guard !features.isEmpty else {
-            return []
+    public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
+        guard !requiredFeatures.isEmpty else {
+            return nil
         }
-        guard !eligibleFeatures.isSuperset(of: features) else {
-            return []
+        guard !eligibleFeatures.isSuperset(of: requiredFeatures) else {
+            return nil
         }
 
-        var list: [AppProduct] = []
-        let requiredFeatures = features.subtracting(eligibleFeatures)
+        var products: Set<AppProduct> = []
+        let ineligibleFeatures = requiredFeatures.subtracting(eligibleFeatures)
 
         if isFullVersionPurchaser {
-            if requiredFeatures == [.appleTV] {
-                list.append(.Features.appleTV)
+            if ineligibleFeatures == [.appleTV] {
+                products.insert(.Features.appleTV)
             } else {
                 assertionFailure("Full version purchaser requiring other than [.appleTV]")
             }
         } else { // !isFullVersionPurchaser
-            if requiredFeatures == [.appleTV] {
-                list.append(.Features.appleTV)
-                list.append(.Full.OneTime.fullTV)
-            } else if requiredFeatures.contains(.appleTV) {
-                list.append(.Full.OneTime.fullTV)
+            if ineligibleFeatures == [.appleTV] {
+                products.insert(.Features.appleTV)
+                products.insert(.Full.OneTime.fullTV)
+            } else if ineligibleFeatures.contains(.appleTV) {
+                products.insert(.Full.OneTime.fullTV)
             } else {
-                list.append(.Full.OneTime.full)
                 if !eligibleFeatures.contains(.appleTV) {
-                    list.append(.Full.OneTime.fullTV)
+                    products.insert(.Full.OneTime.fullTV)
                 }
+                products.insert(.Full.OneTime.full)
             }
         }
 
-        return list
+        if withRecurring && products.contains(.Full.OneTime.fullTV) {
+            products.insert(.Full.Recurring.monthly)
+            products.insert(.Full.Recurring.yearly)
+        }
+
+        return products
     }
 }

@@ -78,7 +78,6 @@
 "views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.paywall.sections.required_features.header" = "Required features";
-"views.paywall.sections.suggested_product.header" = "One-time purchase";
 "views.paywall.sections.full_products.header" = "Full version";
 "views.paywall.sections.all_features.header" = "Full version includes";
 "views.paywall.sections.restore.header" = "Restore";

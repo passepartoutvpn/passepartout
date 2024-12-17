@@ -98,7 +98,9 @@ private extension AppContext {
 
         pp_log(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects()
-        await iapManager.reloadReceipt()
+        Task {
+            await iapManager.reloadReceipt()
+        }
 
         pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
