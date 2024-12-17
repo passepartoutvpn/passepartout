@@ -1,10 +1,12 @@
 #!/bin/bash
 cwd=`dirname $0`
-devices="iphone ipad mac appletv"
+source $cwd/env.sh
+cd $cwd/..
+
 if [[ -n "$1" ]]; then
-    devices=("$1")
+    devices="$1"
 fi
 for device in $devices; do
-    $cwd/../screenshots/export.sh $device
-    $cwd/../screenshots/compose-device.sh $device
+    screenshots/export.sh $device
+    screenshots/compose-device.sh $device
 done
