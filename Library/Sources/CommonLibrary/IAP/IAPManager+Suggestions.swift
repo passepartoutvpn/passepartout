@@ -57,10 +57,10 @@ extension IAPManager {
             } else if ineligibleFeatures.contains(.appleTV) {
                 products.append(.Full.OneTime.fullTV)
             } else {
-                products.append(.Full.OneTime.full)
                 if !eligibleFeatures.contains(.appleTV) {
                     products.append(.Full.OneTime.fullTV)
                 }
+                products.append(.Full.OneTime.full)
             }
         }
 
