@@ -268,7 +268,9 @@ extension IAPManagerTests {
 
     func test_givenFree_whenRequireFeature_thenSuggestsFullAndFullTV() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.suggestedProducts(for: [.dns])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.full,
             .Full.OneTime.fullTV
         ])
@@ -276,15 +278,19 @@ extension IAPManagerTests {
 
     func test_givenFree_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
 
     func test_givenFree_whenRequireFeatureAndAppleTV_thenSuggestsFullTV() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
@@ -296,39 +302,49 @@ extension IAPManagerTests {
 
     func test_givenCurrentPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullCurrentPlatform()
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
 
     func test_givenCurrentPlatform_whenRequireFeatureAndAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullCurrentPlatform()
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
 
     func test_givenOtherPlatform_whenRequireFeature_thenSuggestsFullAndFullTV() async {
         let sut = await IAPManager.withFullOtherPlatform()
-        XCTAssertEqual(sut.suggestedProducts(for: [.dns])?.oneTime, [
-            .Full.OneTime.full,
-            .Full.OneTime.fullTV
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
+            .Full.OneTime.fullTV,
+            .Full.OneTime.full
         ])
     }
 
     func test_givenOtherPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullOtherPlatform()
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
 
     func test_givenOtherPlatform_whenRequireFeatureAndAppleTV_thenSuggestsFullTV() async {
         let sut = await IAPManager.withFullOtherPlatform()
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
             .Full.OneTime.fullTV
         ])
     }
@@ -340,21 +356,21 @@ extension IAPManagerTests {
 
     func test_givenFull_whenRequireAppleTV_thenSuggestsAppleTV() async {
         let sut = await IAPManager(products: [.Full.OneTime.full])
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV
         ])
     }
 
     func test_givenFull_whenRequireFeatureAndAppleTV_thenSuggestsAppleTV() async {
         let sut = await IAPManager(products: [.Full.OneTime.full])
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Features.appleTV
         ])
     }
 
     func test_givenAppleTV_whenRequireFeature_thenSuggestsFull() async {
         let sut = await IAPManager(products: [.Features.appleTV])
-        XCTAssertEqual(sut.suggestedProducts(for: [.dns])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
             .Full.OneTime.full
         ])
     }
@@ -366,7 +382,7 @@ extension IAPManagerTests {
 
     func test_givenAppleTV_whenRequireFeatureAndAppleTV_thenSuggestsFull() async {
         let sut = await IAPManager(products: [.Features.appleTV])
-        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers])?.oneTime, [
+        XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Full.OneTime.full
         ])
     }
