@@ -1,5 +1,9 @@
 #!/bin/bash
 cwd=`dirname $0`
+if [[ $# < 6 ]]; then
+    echo "6 arguments required"
+    exit 1
+fi
 cmd_chrome="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 cmd_magick="magick"
 

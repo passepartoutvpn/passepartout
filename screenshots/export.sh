@@ -1,5 +1,9 @@
 #!/bin/bash
 cwd=`dirname $0`
+if [[ -z "$1" ]]; then
+    echo "Device required"
+    exit 1
+fi
 device="$1"
 xcscheme="PassepartoutUITests"
 results_root="$cwd/results"
