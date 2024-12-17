@@ -7,6 +7,10 @@ if [[ -n "$1" ]]; then
     devices="$1"
 fi
 for device in $devices; do
-    screenshots/export.sh $device
-    screenshots/compose-device.sh $device
+    if ! screenshots/export.sh $device; then
+        exit 1
+    fi
+    if ! screenshots/compose-device.sh $device; then
+        exit 1
+    fi
 done

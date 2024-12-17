@@ -7,5 +7,7 @@ if [[ -n "$1" ]]; then
     platforms="$1"
 fi
 for platform in $platforms; do
-    bundle exec fastlane --env secret,$platform asc_screenshots
+    if ! bundle exec fastlane --env secret,$platform asc_screenshots; then
+        exit 1
+    fi
 done
