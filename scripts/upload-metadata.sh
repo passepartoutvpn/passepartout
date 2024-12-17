@@ -1,5 +1,5 @@
 #!/bin/bash
-platforms=("iOS macOS tvOS")
+platforms="iOS macOS tvOS"
 if [[ -n "$1" ]]; then
     platforms=("$1")
 fi

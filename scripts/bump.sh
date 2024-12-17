@@ -46,7 +46,7 @@ done
 set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
 CMD_API=$(dirname "$0")/update-bundled-api.sh
-CMD_RELEASE_NOTES=$(dirname "$0")/update-release-notes.sh
+CMD_RELEASE_NOTES=$(dirname "$0")/copy-release-notes.sh
 CMD_FASTLANE="bundle exec fastlane bump $OPT_VERSION $OPT_BUILD $OPT_SINCE $OPT_NO_LOG"
 
 if [[ -n $OPT_DRY_RUN ]]; then
