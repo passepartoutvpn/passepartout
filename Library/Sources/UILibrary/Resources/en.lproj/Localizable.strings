@@ -78,8 +78,7 @@
 "views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.paywall.sections.required_features.header" = "Required features";
-"views.paywall.sections.subscription.header" = "Subscription";
-"views.paywall.sections.one_time.header" = "Lifetime";
+"views.paywall.sections.full_products.header" = "Full version";
 "views.paywall.sections.all_features.header" = "Full version includes";
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";

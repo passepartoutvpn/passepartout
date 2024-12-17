@@ -82,6 +82,15 @@ extension AppProduct.Full {
 }
 
 extension AppProduct {
+    public var isFullVersion: Bool {
+        switch self {
+        case .Full.OneTime.full, .Full.OneTime.fullTV, .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return true
+        default:
+            return false
+        }
+    }
+
     public var isRecurring: Bool {
         switch self {
         case .Full.Recurring.monthly, .Full.Recurring.yearly:

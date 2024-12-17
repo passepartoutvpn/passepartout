@@ -749,9 +749,9 @@ public enum Strings {
           /// Full version includes
           public static let header = Strings.tr("Localizable", "views.paywall.sections.all_features.header", fallback: "Full version includes")
         }
-        public enum OneTime {
-          /// Lifetime
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.one_time.header", fallback: "Lifetime")
+        public enum FullProducts {
+          /// Full version
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "Full version")
         }
         public enum RequiredFeatures {
           /// Required features
@@ -762,10 +762,6 @@ public enum Strings {
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
           /// Restore
           public static let header = Strings.tr("Localizable", "views.paywall.sections.restore.header", fallback: "Restore")
-        }
-        public enum Subscription {
-          /// Subscription
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.subscription.header", fallback: "Subscription")
         }
       }
     }
