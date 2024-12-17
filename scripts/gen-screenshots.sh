@@ -1,6 +1,6 @@
 #!/bin/bash
 cwd=`dirname $0`
-devices=("iphone ipad mac appletv")
+devices="iphone ipad mac appletv"
 if [[ -n "$1" ]]; then
     devices=("$1")
 fi
