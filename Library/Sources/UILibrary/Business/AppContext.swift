@@ -98,14 +98,21 @@ private extension AppContext {
 
         pp_log(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects()
+
+        // load in background, see comment right below
         Task {
             await iapManager.reloadReceipt()
         }
 
+        // using Task above (#1019) causes the receipt to be loaded asynchronously.
+        // the initial call to onEligibleFeatures() may execute before the receipt is
+        // loaded and therefore do nothing. with .removeDuplicates(), there would
+        // not be a second chance to call onEligibleFeatures() after reloading the
+        // receipt. that's why it's commented now
         pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
             .$eligibleFeatures
-            .removeDuplicates()
+//            .removeDuplicates()
             .sink { [weak self] eligible in
                 Task {
                     try await self?.onEligibleFeatures(eligible)
