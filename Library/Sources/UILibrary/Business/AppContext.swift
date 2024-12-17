@@ -107,8 +107,10 @@ private extension AppContext {
         // using Task above (#1019) causes the receipt to be loaded asynchronously.
         // the initial call to onEligibleFeatures() may execute before the receipt is
         // loaded and therefore do nothing. with .removeDuplicates(), there would
-        // not be a second chance to call onEligibleFeatures() after reloading the
-        // receipt. that's why it's commented now
+        // not be a second chance to call onEligibleFeatures() if the eligible
+        // features haven't changed after reloading the receipt (this is the case
+        // for TestFlight where some features are set statically). that's why it's
+        // commented now
         pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
             .$eligibleFeatures
