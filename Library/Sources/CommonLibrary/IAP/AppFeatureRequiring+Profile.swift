@@ -34,11 +34,7 @@ extension Profile: AppFeatureRequiring {
             }
             return builder
         }
-        var requirements = builders.features
-        if attributes.isAvailableForTV == true {
-            requirements.insert(.appleTV)
-        }
-        return requirements
+        return builders.features
     }
 }
 

@@ -136,7 +136,7 @@ private extension ProfileCoordinator {
     func onCommitEditingStandard() async throws {
         let savedProfile = try await profileEditor.save(to: profileManager, preferencesManager: preferencesManager)
         do {
-            try iapManager.verify(savedProfile, isShared: profileEditor.isShared)
+            try iapManager.verify(savedProfile, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             paywallReason = .init(requiredFeatures, needsConfirmation: true)
             return
@@ -147,7 +147,7 @@ private extension ProfileCoordinator {
     // restricted: verify before saving
     func onCommitEditingRestricted() async throws {
         do {
-            try iapManager.verify(profileEditor.activeModules, isShared: profileEditor.isShared)
+            try iapManager.verify(profileEditor.activeModules, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             paywallReason = .init(requiredFeatures)
             return
@@ -159,6 +159,19 @@ private extension ProfileCoordinator {
     func onCancelEditing() {
         profileEditor.discard()
         onDismiss()
+    }
+}
+
+private extension ProfileEditor {
+    var extraFeatures: Set<AppFeature> {
+        var list: Set<AppFeature> = []
+        if isShared {
+            list.insert(.sharing)
+        }
+        if isAvailableForTV {
+            list.insert(.appleTV)
+        }
+        return list
     }
 }
 
