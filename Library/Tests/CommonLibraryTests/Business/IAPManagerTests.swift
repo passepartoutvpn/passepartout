@@ -381,17 +381,17 @@ extension IAPManagerTests {
         ])
     }
 
-    func test_givenAll_whenRequireFeature_thenSuggestsNothing() async {
+    func test_givenFullTV_whenRequireFeature_thenSuggestsNothing() async {
         let sut = await IAPManager(products: [.Full.OneTime.fullTV])
         XCTAssertNil(sut.suggestedProducts(for: [.dns]))
     }
 
-    func test_givenAll_whenRequireAppleTV_thenSuggestsNothing() async {
+    func test_givenFullTV_whenRequireAppleTV_thenSuggestsNothing() async {
         let sut = await IAPManager(products: [.Full.OneTime.fullTV])
         XCTAssertNil(sut.suggestedProducts(for: [.appleTV]))
     }
 
-    func test_givenAll_whenRequireFeatureAndAppleTV_thenSuggestsNothing() async {
+    func test_givenFullTV_whenRequireFeatureAndAppleTV_thenSuggestsNothing() async {
         let sut = await IAPManager(products: [.Full.OneTime.fullTV])
         XCTAssertNil(sut.suggestedProducts(for: [.appleTV, .providers]))
     }
