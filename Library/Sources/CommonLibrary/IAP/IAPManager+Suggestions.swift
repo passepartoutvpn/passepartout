@@ -30,7 +30,7 @@ import PassepartoutKit
 
 extension IAPManager {
     public var isFullVersionPurchaser: Bool {
-        purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
+        purchasedProducts.contains(where: \.isFullVersion) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
     public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
