@@ -49,7 +49,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         let appProducts: [AppProduct] = [
-            .Full.OneTime.full,
+            .Full.OneTime.iOS_macOS,
             .Donations.huge
         ]
         let inAppProducts = try await sut.purchasableProducts(for: appProducts)
@@ -88,7 +88,7 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Full.OneTime.full]
+                return [.Full.OneTime.iOS_macOS]
             }
             return []
         }
@@ -101,7 +101,7 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Full.OneTime.full]
+                return [.Full.OneTime.iOS_macOS]
             }
             return []
         }
@@ -119,7 +119,7 @@ extension IAPManagerTests {
 
         XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.full])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS_macOS])
         XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
 
         await sut.reloadReceipt()
@@ -146,8 +146,8 @@ extension IAPManagerTests {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(
             withBuild: defaultBuildNumber,
-            products: [.Full.OneTime.full],
-            cancelledProducts: [.Full.OneTime.full]
+            products: [.Full.OneTime.iOS_macOS],
+            cancelledProducts: [.Full.OneTime.iOS_macOS]
         )
         let sut = IAPManager(receiptReader: reader)
 
@@ -177,7 +177,7 @@ extension IAPManagerTests {
 
     func test_givenFullV2Version_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.full])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS_macOS])
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -271,7 +271,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -280,7 +280,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -289,7 +289,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -303,7 +303,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -312,7 +312,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -321,7 +321,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -330,7 +330,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
@@ -339,24 +339,24 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+            .Full.OneTime.allFeatures
         ])
     }
 
     func test_givenFull_whenRequireFeature_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.OneTime.full])
+        let sut = await IAPManager(products: [.Full.OneTime.iOS_macOS])
         XCTAssertNil(sut.suggestedProducts(for: [.dns]))
     }
 
     func test_givenFull_whenRequireAppleTV_thenSuggestsAppleTV() async {
-        let sut = await IAPManager(products: [.Full.OneTime.full])
+        let sut = await IAPManager(products: [.Full.OneTime.iOS_macOS])
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV
         ])
     }
 
     func test_givenFull_whenRequireFeatureAndAppleTV_thenSuggestsAppleTV() async {
-        let sut = await IAPManager(products: [.Full.OneTime.full])
+        let sut = await IAPManager(products: [.Full.OneTime.iOS_macOS])
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Features.appleTV
         ])
@@ -365,7 +365,7 @@ extension IAPManagerTests {
     func test_givenAppleTV_whenRequireFeature_thenSuggestsFull() async {
         let sut = await IAPManager(products: [.Features.appleTV])
         XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
-            .Full.OneTime.full
+            .Full.OneTime.iOS_macOS
         ])
     }
 
@@ -377,22 +377,22 @@ extension IAPManagerTests {
     func test_givenAppleTV_whenRequireFeatureAndAppleTV_thenSuggestsFull() async {
         let sut = await IAPManager(products: [.Features.appleTV])
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
-            .Full.OneTime.full
+            .Full.OneTime.iOS_macOS
         ])
     }
 
     func test_givenFullTV_whenRequireFeature_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        let sut = await IAPManager(products: [.Full.OneTime.allFeatures])
         XCTAssertNil(sut.suggestedProducts(for: [.dns]))
     }
 
     func test_givenFullTV_whenRequireAppleTV_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        let sut = await IAPManager(products: [.Full.OneTime.allFeatures])
         XCTAssertNil(sut.suggestedProducts(for: [.appleTV]))
     }
 
     func test_givenFullTV_whenRequireFeatureAndAppleTV_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.OneTime.fullTV])
+        let sut = await IAPManager(products: [.Full.OneTime.allFeatures])
         XCTAssertNil(sut.suggestedProducts(for: [.appleTV, .providers]))
     }
 }
@@ -539,7 +539,7 @@ extension IAPManagerTests {
 extension IAPManagerTests {
     func test_givenManager_whenObserveObjects_thenReloadsReceipt() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: .max, products: [.Full.OneTime.full])
+        await reader.setReceipt(withBuild: .max, products: [.Full.OneTime.iOS_macOS])
         let sut = IAPManager(receiptReader: reader)
 
         XCTAssertEqual(sut.userLevel, .undefined)

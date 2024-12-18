@@ -52,13 +52,13 @@ extension IAPManager {
             }
         } else { // !isFullVersionPurchaser
             if eligibleFeatures.contains(.appleTV) {
-                products.insert(.Full.OneTime.full)
+                products.insert(.Full.OneTime.iOS_macOS)
             } else {
-                products.insert(.Full.OneTime.fullTV)
+                products.insert(.Full.OneTime.allFeatures)
             }
         }
 
-        if withRecurring && products.contains(.Full.OneTime.fullTV) {
+        if withRecurring && products.contains(.Full.OneTime.allFeatures) {
             products.insert(.Full.Recurring.monthly)
             products.insert(.Full.Recurring.yearly)
         }

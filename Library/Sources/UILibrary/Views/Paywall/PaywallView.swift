@@ -285,9 +285,9 @@ private extension AppProduct {
             return .min
         case .Full.Recurring.monthly:
             return 1
-        case .Full.OneTime.fullTV:
+        case .Full.OneTime.allFeatures:
             return 2
-        case .Full.OneTime.full:
+        case .Full.OneTime.iOS_macOS:
             return 3
         default:
             return .max

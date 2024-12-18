@@ -31,10 +31,10 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
-        case .Full.OneTime.full:
+        case .Full.OneTime.iOS_macOS:
             return AppFeature.fullFeatures
 
-        case .Full.OneTime.fullTV, .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .Full.OneTime.allFeatures, .Full.Recurring.monthly, .Full.Recurring.yearly:
             return AppFeature.fullTVFeatures
 
         case .Features.appleTV:
