@@ -303,20 +303,20 @@ extension IAPManagerTests {
     func test_givenCurrentPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullCurrentPlatform()
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
-            .Features.appleTV,
-//            .Full.Recurring.yearly,
-//            .Full.Recurring.monthly,
-//            .Full.OneTime.fullTV
+//            .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
+            .Full.OneTime.fullTV
         ])
     }
 
     func test_givenCurrentPlatform_whenRequireFeatureAndAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullCurrentPlatform()
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
-            .Features.appleTV,
-//            .Full.Recurring.yearly,
-//            .Full.Recurring.monthly,
-//            .Full.OneTime.fullTV
+//            .Features.appleTV,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly,
+            .Full.OneTime.fullTV
         ])
     }
 

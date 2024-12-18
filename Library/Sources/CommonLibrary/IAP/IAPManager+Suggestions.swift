@@ -30,12 +30,12 @@ import PassepartoutKit
 
 extension IAPManager {
     public var isFullVersionPurchaser: Bool {
-        var condition = purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
-#if os(iOS)
-        condition = condition || purchasedProducts.contains(.Full.OneTime.iOS)
-#elseif os(macOS)
-        condition = condition || purchasedProducts.contains(.Full.OneTime.macOS)
-#endif
+        let condition = purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
+//#if os(iOS)
+//        condition = condition || purchasedProducts.contains(.Full.OneTime.iOS)
+//#elseif os(macOS)
+//        condition = condition || purchasedProducts.contains(.Full.OneTime.macOS)
+//#endif
         return condition
     }
 
