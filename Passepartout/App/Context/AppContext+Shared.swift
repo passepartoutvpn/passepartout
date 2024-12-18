@@ -63,6 +63,23 @@ extension AppContext {
         let processor = dependencies.appProcessor(with: iapManager)
         let tunnelEnvironment = dependencies.tunnelEnvironment()
 
+#if targetEnvironment(simulator)
+        let tunnelStrategy = FakeTunnelStrategy(environment: tunnelEnvironment, dataCountInterval: 1000)
+        let mainProfileRepository = dependencies.coreDataProfileRepository(
+            model: cdRemoteModel,
+            observingResults: true
+        )
+#else
+        let tunnelStrategy = NETunnelStrategy(
+            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            coder: dependencies.neProtocolCoder(),
+            environment: tunnelEnvironment
+        )
+        let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
+            dependencies.profileTitle($0)
+        }
+#endif
+
         let profileManager: ProfileManager = {
             let remoteRepositoryBlock: (Bool) -> ProfileRepository = {
                 let remoteStore = CoreDataPersistentStore(
@@ -84,10 +101,7 @@ extension AppContext {
                 )
             }
             return ProfileManager(
-                repository: dependencies.mainProfileRepository(
-                    model: cdRemoteModel,
-                    environment: tunnelEnvironment
-                ),
+                repository: mainProfileRepository,
                 backupRepository: dependencies.backupProfileRepository(
                     model: cdRemoteModel
                 ),
@@ -98,7 +112,7 @@ extension AppContext {
         }()
 
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: dependencies.tunnelStrategy(environment: tunnelEnvironment)),
+            tunnel: Tunnel(strategy: tunnelStrategy),
             environment: tunnelEnvironment,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
@@ -214,49 +228,7 @@ private extension Dependencies {
     var betaReceiptURL: URL? {
         Bundle.main.appStoreProductionReceiptURL
     }
-}
 
-// MARK: Simulator
-
-#if targetEnvironment(simulator)
-
-private extension Dependencies {
-    func tunnelStrategy(environment: TunnelEnvironment) -> TunnelObservableStrategy {
-        FakeTunnelStrategy(environment: environment, dataCountInterval: 1000)
-    }
-
-    func mainProfileRepository(model: NSManagedObjectModel, environment: TunnelEnvironment) -> ProfileRepository {
-        coreDataProfileRepository(model: model, observingResults: true)
-    }
-
-    func backupProfileRepository(model: NSManagedObjectModel) -> ProfileRepository? {
-        nil
-    }
-}
-
-#else
-
-// MARK: Device
-
-private extension Dependencies {
-    func tunnelStrategy(environment: TunnelEnvironment) -> TunnelObservableStrategy {
-        neStrategy(environment: environment)
-    }
-
-    func mainProfileRepository(model: NSManagedObjectModel, environment: TunnelEnvironment) -> ProfileRepository {
-        neProfileRepository(environment: environment)
-    }
-
-    func backupProfileRepository(model: NSManagedObjectModel) -> ProfileRepository? {
-        coreDataProfileRepository(model: model, observingResults: false)
-    }
-}
-
-#endif
-
-// MARK: Common
-
-private extension Dependencies {
     var mirrorsRemoteRepository: Bool {
 #if os(tvOS)
         true
@@ -265,18 +237,12 @@ private extension Dependencies {
 #endif
     }
 
-    func neProfileRepository(environment: TunnelEnvironment) -> ProfileRepository {
-        NEProfileRepository(repository: neStrategy(environment: environment)) {
-            profileTitle($0)
-        }
-    }
-
-    func neStrategy(environment: TunnelEnvironment) -> NETunnelStrategy {
-        NETunnelStrategy(
-            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            coder: neProtocolCoder(),
-            environment: environment
-        )
+    func backupProfileRepository(model: NSManagedObjectModel) -> ProfileRepository? {
+#if targetEnvironment(simulator)
+        nil
+#else
+        coreDataProfileRepository(model: model, observingResults: false)
+#endif
     }
 
     func coreDataProfileRepository(model: NSManagedObjectModel, observingResults: Bool) -> ProfileRepository {
