@@ -216,7 +216,7 @@ extension IAPManagerTests {
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
 #endif
     }
 
@@ -231,7 +231,7 @@ extension IAPManagerTests {
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
 #endif
     }
 
