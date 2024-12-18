@@ -35,11 +35,11 @@ extension AppUserLevel: AppFeatureProviding {
                 .sharing
             ]
 
-        case .full:
-            return AppFeature.fullFeatures
+        case .fullV2:
+            return AppProduct.Full.OneTime.iOS_macOS.features
 
-        case .fullTV:
-            return AppFeature.fullTVFeatures
+        case .fullV3:
+            return AppProduct.Full.OneTime.allFeatures.features
 
         default:
             return []

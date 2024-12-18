@@ -198,7 +198,7 @@ private extension PaywallView {
 
 private extension PaywallView {
     var fullVersionFeatures: [AppFeature] {
-        AppFeature.fullFeatures
+        AppProduct.Full.OneTime.allFeatures.features
     }
 
     func fetchAvailableProducts() async {

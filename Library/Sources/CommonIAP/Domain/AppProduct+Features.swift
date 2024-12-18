@@ -66,8 +66,6 @@ extension AppProduct.Features {
 
 extension AppProduct.Full {
     public enum OneTime {
-
-        // iOS/macOS + tvOS
         public static let allFeatures = AppProduct(featureId: "full.lifetime")
     }
 
