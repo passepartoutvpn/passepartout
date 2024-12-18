@@ -27,18 +27,18 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func verify(_ profile: Profile, isShared: Bool = false) throws {
+    public func verify(_ profile: Profile, extra: Set<AppFeature>? = nil) throws {
         var features = profile.features
-        if isShared {
-            features.insert(.sharing)
+        extra?.forEach {
+            features.insert($0)
         }
         try verify(features)
     }
 
-    public func verify(_ modulesBuilders: [any ModuleBuilder], isShared: Bool = false) throws {
+    public func verify(_ modulesBuilders: [any ModuleBuilder], extra: Set<AppFeature>? = nil) throws {
         var features = modulesBuilders.features
-        if isShared {
-            features.insert(.sharing)
+        extra?.forEach {
+            features.insert($0)
         }
         try verify(features)
     }
