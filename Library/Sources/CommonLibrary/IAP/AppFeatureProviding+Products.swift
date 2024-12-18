@@ -31,11 +31,6 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
-        case .Full.OneTime.iOS_macOS:
-            return AppFeature.allCases.filter {
-                $0 != .appleTV
-            }
-
         case .Full.OneTime.allFeatures, .Full.Recurring.monthly, .Full.Recurring.yearly:
             return AppFeature.allCases
 
@@ -43,6 +38,11 @@ extension AppProduct: AppFeatureProviding {
             return [.appleTV, .sharing]
 
         // MARK: Discontinued
+
+        case .Full.OneTime.iOS_macOS:
+            return AppFeature.allCases.filter {
+                $0 != .appleTV
+            }
 
         case .Full.OneTime.iOS:
 #if os(iOS)
