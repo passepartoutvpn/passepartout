@@ -1,12 +1,5 @@
-WARNING #1: you may lose some old profiles created
-with the early betas, this is necessary now to avoid
-bigger problems with the keychain after release.
-
-WARNING #2: you will lose favorites and excluded
-endpoints one last time, because the database had to
-be moved around.
-
-* Drop malformed keychain group
-* Reword strings in "Purchased" view
-* Unify paywall and eligibility (#1018)
-* Reorganize Core Data containers (#1017)
+Passepartout has been completely rewritten for improved performance and
+usability. The new version delivers a faster, smoother experience across iOS,
+macOS, and tvOS while maintaining its role as your ultimate VPN configuration
+tool. Enjoy a modern, reliable app built from the ground up to meet your
+networking needs.
