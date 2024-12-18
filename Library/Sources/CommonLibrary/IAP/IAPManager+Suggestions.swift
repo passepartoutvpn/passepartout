@@ -30,13 +30,7 @@ import PassepartoutKit
 
 extension IAPManager {
     public var isFullVersionPurchaser: Bool {
-        let condition = purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
-//#if os(iOS)
-//        condition = condition || purchasedProducts.contains(.Full.OneTime.iOS)
-//#elseif os(macOS)
-//        condition = condition || purchasedProducts.contains(.Full.OneTime.macOS)
-//#endif
-        return condition
+        purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
     }
 
     public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
@@ -62,17 +56,6 @@ extension IAPManager {
             } else {
                 products.insert(.Full.OneTime.fullTV)
             }
-//            if ineligibleFeatures == [.appleTV] {
-//                products.insert(.Features.appleTV)
-//                products.insert(.Full.OneTime.fullTV)
-//            } else if ineligibleFeatures.contains(.appleTV) {
-//                products.insert(.Full.OneTime.fullTV)
-//            } else {
-//                if !eligibleFeatures.contains(.appleTV) {
-//                    products.insert(.Full.OneTime.fullTV)
-//                }
-//                products.insert(.Full.OneTime.full)
-//            }
         }
 
         if withRecurring && products.contains(.Full.OneTime.fullTV) {
