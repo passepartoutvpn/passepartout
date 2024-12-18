@@ -90,7 +90,7 @@ private extension PaywallView {
             featureProductsView
             fullProductsView
             if !iapManager.isFullVersionPurchaser {
-                fullVersionFeaturesView
+                allFeaturesView
             }
             restoreView
         }
@@ -142,11 +142,11 @@ private extension PaywallView {
         }
     }
 
-    var fullVersionFeaturesView: some View {
+    var allFeaturesView: some View {
         FeatureListView(
             style: allFeaturesStyle,
             header: Strings.Views.Paywall.Sections.AllFeatures.header,
-            features: fullVersionFeatures,
+            features: allFeatures,
             content: featureView(for:)
         )
     }
@@ -197,8 +197,8 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
-    var fullVersionFeatures: [AppFeature] {
-        AppFeature.fullFeatures
+    var allFeatures: [AppFeature] {
+        AppProduct.Full.OneTime.allFeatures.features
     }
 
     func fetchAvailableProducts() async {
@@ -285,9 +285,9 @@ private extension AppProduct {
             return .min
         case .Full.Recurring.monthly:
             return 1
-        case .Full.OneTime.fullTV:
+        case .Full.OneTime.allFeatures:
             return 2
-        case .Full.OneTime.full:
+        case .Full.OneTime.iOS_macOS:
             return 3
         default:
             return .max

@@ -31,27 +31,29 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
-        case .Full.OneTime.full:
-            return AppFeature.fullFeatures
-
-        case .Full.OneTime.fullTV, .Full.Recurring.monthly, .Full.Recurring.yearly:
-            return AppFeature.fullTVFeatures
+        case .Full.OneTime.allFeatures, .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return AppFeature.allCases
 
         case .Features.appleTV:
             return [.appleTV, .sharing]
 
         // MARK: Discontinued
 
+        case .Full.OneTime.iOS_macOS:
+            return AppFeature.allCases.filter {
+                $0 != .appleTV
+            }
+
         case .Full.OneTime.iOS:
 #if os(iOS)
-            return AppFeature.fullFeatures
+            return AppProduct.Full.OneTime.iOS_macOS.features
 #else
             return []
 #endif
 
         case .Full.OneTime.macOS:
 #if os(macOS)
-            return AppFeature.fullFeatures
+            return AppProduct.Full.OneTime.iOS_macOS.features
 #else
             return []
 #endif
