@@ -93,7 +93,7 @@ extension IAPManagerTests {
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
     }
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
@@ -106,7 +106,7 @@ extension IAPManagerTests {
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
     }
 }
 
@@ -117,13 +117,13 @@ extension IAPManagerTests {
         let reader = FakeAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
 
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS_macOS])
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
 
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
     }
 
     func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() async {
@@ -139,7 +139,7 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
         XCTAssertFalse(sut.isEligible(for: .sharing))
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
     }
 
     func test_givenPurchasedAndCancelledFeature_thenIsNotEligible() async {
@@ -152,7 +152,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
     }
 
     func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() async {
@@ -161,7 +161,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullFeatures.forEach {
+        AppFeature.fullV2Features.forEach {
             XCTAssertFalse(sut.isEligible(for: $0))
         }
     }
@@ -186,7 +186,7 @@ extension IAPManagerTests {
             .interactiveLogin
         ]
         AppFeature.allCases.forEach {
-            if AppFeature.fullFeatures.contains($0) {
+            if AppFeature.fullV2Features.contains($0) {
                 XCTAssertTrue(sut.isEligible(for: $0))
             } else {
                 XCTAssertTrue(excluded.contains($0))
@@ -212,7 +212,7 @@ extension IAPManagerTests {
 #if os(macOS)
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.fullV2Features))
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
@@ -227,7 +227,7 @@ extension IAPManagerTests {
 #if os(macOS)
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullFeatures))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.fullV2Features))
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.OneTime.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
@@ -440,7 +440,7 @@ extension IAPManagerTests {
 
     func test_givenFullV2App_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .full, receiptReader: reader)
+        let sut = IAPManager(customUserLevel: .fullV2, receiptReader: reader)
 
         await sut.reloadReceipt()
         let excluded: Set<AppFeature> = [
@@ -448,7 +448,7 @@ extension IAPManagerTests {
             .interactiveLogin
         ]
         AppFeature.allCases.forEach {
-            if AppFeature.fullFeatures.contains($0) {
+            if AppFeature.fullV2Features.contains($0) {
                 XCTAssertTrue(sut.isEligible(for: $0))
             } else {
                 XCTAssertTrue(excluded.contains($0))
@@ -459,10 +459,10 @@ extension IAPManagerTests {
 
     func test_givenSubscriberApp_thenIsEligibleForAnyFeature() async {
         let reader = FakeAppReceiptReader()
-        let sut = IAPManager(customUserLevel: .fullTV, receiptReader: reader)
+        let sut = IAPManager(customUserLevel: .fullV3, receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullFeatures.forEach {
+        AppFeature.fullV2Features.forEach {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertTrue(sut.isEligible(for: .appleTV))
@@ -613,4 +613,8 @@ private extension IAPManager {
         .Full.OneTime.macOS
 #endif
     }
+}
+
+private extension AppFeature {
+    static let fullV2Features = AppProduct.Full.OneTime.iOS_macOS.features
 }
