@@ -90,7 +90,7 @@ private extension PaywallView {
             featureProductsView
             fullProductsView
             if !iapManager.isFullVersionPurchaser {
-                fullVersionFeaturesView
+                allFeaturesView
             }
             restoreView
         }
@@ -142,11 +142,11 @@ private extension PaywallView {
         }
     }
 
-    var fullVersionFeaturesView: some View {
+    var allFeaturesView: some View {
         FeatureListView(
             style: allFeaturesStyle,
             header: Strings.Views.Paywall.Sections.AllFeatures.header,
-            features: fullVersionFeatures,
+            features: allFeatures,
             content: featureView(for:)
         )
     }
@@ -197,7 +197,7 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
-    var fullVersionFeatures: [AppFeature] {
+    var allFeatures: [AppFeature] {
         AppProduct.Full.OneTime.allFeatures.features
     }
 
