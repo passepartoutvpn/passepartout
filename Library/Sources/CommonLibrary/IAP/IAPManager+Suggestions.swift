@@ -30,7 +30,13 @@ import PassepartoutKit
 
 extension IAPManager {
     public var isFullVersionPurchaser: Bool {
-        purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
+        var condition = purchasedProducts.contains(.Full.OneTime.full) || purchasedProducts.contains(.Full.OneTime.fullTV) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
+#if os(iOS)
+        condition = condition || purchasedProducts.contains(.Full.OneTime.iOS)
+#elseif os(macOS)
+        condition = condition || purchasedProducts.contains(.Full.OneTime.macOS)
+#endif
+        return condition
     }
 
     public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
@@ -51,17 +57,22 @@ extension IAPManager {
                 assertionFailure("Full version purchaser requiring other than [.appleTV]")
             }
         } else { // !isFullVersionPurchaser
-            if ineligibleFeatures == [.appleTV] {
-                products.insert(.Features.appleTV)
-                products.insert(.Full.OneTime.fullTV)
-            } else if ineligibleFeatures.contains(.appleTV) {
-                products.insert(.Full.OneTime.fullTV)
-            } else {
-                if !eligibleFeatures.contains(.appleTV) {
-                    products.insert(.Full.OneTime.fullTV)
-                }
+            if eligibleFeatures.contains(.appleTV) {
                 products.insert(.Full.OneTime.full)
+            } else {
+                products.insert(.Full.OneTime.fullTV)
             }
+//            if ineligibleFeatures == [.appleTV] {
+//                products.insert(.Features.appleTV)
+//                products.insert(.Full.OneTime.fullTV)
+//            } else if ineligibleFeatures.contains(.appleTV) {
+//                products.insert(.Full.OneTime.fullTV)
+//            } else {
+//                if !eligibleFeatures.contains(.appleTV) {
+//                    products.insert(.Full.OneTime.fullTV)
+//                }
+//                products.insert(.Full.OneTime.full)
+//            }
         }
 
         if withRecurring && products.contains(.Full.OneTime.fullTV) {

@@ -271,7 +271,7 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: [.dns]), [
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
-            .Full.OneTime.full,
+//            .Full.OneTime.full,
             .Full.OneTime.fullTV
         ])
     }
@@ -279,7 +279,7 @@ extension IAPManagerTests {
     func test_givenFree_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager(products: [])
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
-            .Features.appleTV,
+//            .Features.appleTV,
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
             .Full.OneTime.fullTV
@@ -304,9 +304,9 @@ extension IAPManagerTests {
         let sut = await IAPManager.withFullCurrentPlatform()
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
             .Features.appleTV,
-            .Full.Recurring.yearly,
-            .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+//            .Full.Recurring.yearly,
+//            .Full.Recurring.monthly,
+//            .Full.OneTime.fullTV
         ])
     }
 
@@ -314,9 +314,9 @@ extension IAPManagerTests {
         let sut = await IAPManager.withFullCurrentPlatform()
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV, .providers]), [
             .Features.appleTV,
-            .Full.Recurring.yearly,
-            .Full.Recurring.monthly,
-            .Full.OneTime.fullTV
+//            .Full.Recurring.yearly,
+//            .Full.Recurring.monthly,
+//            .Full.OneTime.fullTV
         ])
     }
 
@@ -326,14 +326,14 @@ extension IAPManagerTests {
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
             .Full.OneTime.fullTV,
-            .Full.OneTime.full
+//            .Full.OneTime.full
         ])
     }
 
     func test_givenOtherPlatform_whenRequireAppleTV_thenSuggestsAppleTVAndFullTV() async {
         let sut = await IAPManager.withFullOtherPlatform()
         XCTAssertEqual(sut.suggestedProducts(for: [.appleTV]), [
-            .Features.appleTV,
+//            .Features.appleTV,
             .Full.Recurring.yearly,
             .Full.Recurring.monthly,
             .Full.OneTime.fullTV
