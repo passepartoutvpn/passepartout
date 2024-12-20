@@ -12,6 +12,7 @@ env:
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
   TESTFLIGHT_PREFACE: ${{ vars.TESTFLIGHT_PREFACE }}
   XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
+  PLATFORMS: "iOS macOS tvOS"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -83,7 +84,6 @@ jobs:
           PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
           PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ vars.PILOT_NOTIFY_EXTERNAL_TESTERS }}
         run: |
-          PLATFORMS=("iOS" "macOS" "tvOS")
           for PLATFORM in ${PLATFORMS[@]}; do
             bundle exec fastlane --env $PLATFORM public_beta
           done
@@ -104,7 +104,6 @@ jobs:
           bundler-cache: true
       - name: Submit for App Review
         run: |
-          PLATFORMS=("iOS" "macOS" "tvOS")
           for PLATFORM in ${PLATFORMS[@]}; do
             bundle exec fastlane --env $PLATFORM asc_review
           done
