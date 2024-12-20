@@ -108,7 +108,8 @@ extension AppContext {
                 model: cdRemoteModel,
                 observingResults: false
             ),
-            mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository
+            mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
+            readyAfterRemote: true
         )
 
         let tunnel = ExtendedTunnel(

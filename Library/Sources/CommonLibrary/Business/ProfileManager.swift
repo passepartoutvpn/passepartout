@@ -125,7 +125,8 @@ public final class ProfileManager: ObservableObject {
         processor: ProfileProcessor? = nil,
         repository: ProfileRepository,
         backupRepository: ProfileRepository? = nil,
-        mirrorsRemoteRepository: Bool = false
+        mirrorsRemoteRepository: Bool = false,
+        readyAfterRemote: Bool = false
     ) {
         self.processor = processor
         self.repository = repository
@@ -136,7 +137,7 @@ public final class ProfileManager: ObservableObject {
         allRemoteProfiles = [:]
         filteredProfiles = []
         requiredFeatures = [:]
-        if mirrorsRemoteRepository {
+        if readyAfterRemote {
             waitingObservers = [.local, .remote]
         } else {
             waitingObservers = [.local]
