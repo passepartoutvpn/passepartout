@@ -180,20 +180,19 @@ private extension CoreDataRepository {
         request.predicate = predicate
         beforeFetch?(request)
 
-        let newController = try await context.perform {
-            let newController = NSFetchedResultsController(
-                fetchRequest: request,
-                managedObjectContext: self.context,
-                sectionNameKeyPath: nil,
-                cacheName: nil
-            )
-            newController.delegate = self
-            try newController.performFetch()
-            return newController
-        }
-
+        let newController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        newController.delegate = self
         resultsController = newController
-        return await sendResults(from: newController)
+
+        return try await context.perform {
+            try newController.performFetch()
+            return self.unsafeSendResults(from: newController)
+        }
     }
 
     @discardableResult

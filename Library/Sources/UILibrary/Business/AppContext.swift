@@ -48,6 +48,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     private let tunnelReceiptURL: URL?
 
+    private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
+
     private var launchTask: Task<Void, Error>?
 
     private var pendingTask: Task<Void, Never>?
@@ -62,7 +64,8 @@ public final class AppContext: ObservableObject, Sendable {
         preferencesManager: PreferencesManager,
         registry: Registry,
         tunnel: ExtendedTunnel,
-        tunnelReceiptURL: URL?
+        tunnelReceiptURL: URL?,
+        onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.iapManager = iapManager
         self.migrationManager = migrationManager
@@ -72,6 +75,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registry = registry
         self.tunnel = tunnel
         self.tunnelReceiptURL = tunnelReceiptURL
+        self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
     }
 }
@@ -99,22 +103,16 @@ private extension AppContext {
         pp_log(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects()
 
-        // load in background, see comment right below
+        // defer load receipt
         Task {
             await iapManager.reloadReceipt()
         }
 
-        // using Task above (#1019) causes the receipt to be loaded asynchronously.
-        // the initial call to onEligibleFeatures() may execute before the receipt is
-        // loaded and therefore do nothing. with .removeDuplicates(), there would
-        // not be a second chance to call onEligibleFeatures() if the eligible
-        // features haven't changed after reloading the receipt (this is the case
-        // for TestFlight where some features are set statically). that's why it's
-        // commented now
         pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
             .$eligibleFeatures
-//            .removeDuplicates()
+            .dropFirst()
+            .removeDuplicates()
             .sink { [weak self] eligible in
                 Task {
                     try await self?.onEligibleFeatures(eligible)
@@ -184,19 +182,7 @@ private extension AppContext {
 
         pp_log(.app, .notice, "Application did update eligible features")
         pendingTask = Task {
-
-            // toggle sync based on .sharing eligibility
-            let isEligibleForSharing = features.contains(.sharing)
-            do {
-                pp_log(.App.profiles, .info, "\tRefresh remote profiles observers (eligible=\(isEligibleForSharing), CloudKit=\(isCloudKitEnabled))...")
-                try await profileManager.observeRemote(isEligibleForSharing && isCloudKitEnabled)
-            } catch {
-                pp_log(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
-            }
-
-            // refresh required profile features
-            pp_log(.App.profiles, .info, "\tReload profiles required features...")
-            profileManager.reloadRequiredFeatures()
+            await onEligibleFeaturesBlock?(features)
         }
         await pendingTask?.value
         pendingTask = nil
@@ -260,20 +246,5 @@ private extension AppContext {
         pendingTask = nil
 
         return didLaunch
-    }
-}
-
-// MARK: - Helpers
-
-private extension AppContext {
-    var isCloudKitEnabled: Bool {
-#if os(tvOS)
-        true
-#else
-        if AppCommandLine.contains(.uiTesting) {
-            return true
-        }
-        return FileManager.default.ubiquityIdentityToken != nil
-#endif
     }
 }

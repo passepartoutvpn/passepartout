@@ -29,18 +29,15 @@ import PassepartoutKit
 
 @MainActor
 public final class PreferencesManager: ObservableObject {
-    private let modulesFactory: (UUID) throws -> ModulePreferencesRepository
+    public var modulesRepositoryFactory: (UUID) throws -> ModulePreferencesRepository
 
-    private let providersFactory: (ProviderID) throws -> ProviderPreferencesRepository
+    public var providersRepositoryFactory: (ProviderID) throws -> ProviderPreferencesRepository
 
-    public init(
-        modulesFactory: ((UUID) throws -> ModulePreferencesRepository)? = nil,
-        providersFactory: ((ProviderID) throws -> ProviderPreferencesRepository)? = nil
-    ) {
-        self.modulesFactory = modulesFactory ?? { _ in
+    public init() {
+        modulesRepositoryFactory = { _ in
             DummyModulePreferencesRepository()
         }
-        self.providersFactory = providersFactory ?? { _ in
+        providersRepositoryFactory = { _ in
             DummyProviderPreferencesRepository()
         }
     }
@@ -48,11 +45,11 @@ public final class PreferencesManager: ObservableObject {
 
 extension PreferencesManager {
     public func preferencesRepository(forModuleWithId moduleId: UUID) throws -> ModulePreferencesRepository {
-        try modulesFactory(moduleId)
+        try modulesRepositoryFactory(moduleId)
     }
 
     public func preferencesRepository(forProviderWithId providerId: ProviderID) throws -> ProviderPreferencesRepository {
-        try providersFactory(providerId)
+        try providersRepositoryFactory(providerId)
     }
 }
 

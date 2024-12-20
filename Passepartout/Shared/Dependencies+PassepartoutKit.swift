@@ -33,11 +33,15 @@ extension Dependencies {
         Self.sharedRegistry
     }
 
+    func profileCoder() -> ProfileCoder {
+        CodableProfileCoder()
+    }
+
     func neProtocolCoder() -> NEProtocolCoder {
         KeychainNEProtocolCoder(
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: registry,
-            coder: CodableProfileCoder(),
+            coder: profileCoder(),
             keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
         )
     }

@@ -90,6 +90,10 @@ public final class CoreDataPersistentStore: Sendable {
         // container was formerly created with CloudKit option
         desc.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
 
+        // migrate automatically
+        desc.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+        desc.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+
         // report remote notifications (do this BEFORE loadPersistentStores)
         //
         // https://stackoverflow.com/a/69507329/784615
