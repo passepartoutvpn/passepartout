@@ -236,8 +236,8 @@ private extension AppContext {
 
 private extension Dependencies {
     var customUserLevel: AppUserLevel? {
-        guard let userLevelString = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-              let userLevel = AppUserLevel(rawValue: userLevelString) else {
+        guard let userLevelInteger = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
+              let userLevel = AppUserLevel(rawValue: userLevelInteger) else {
             return nil
         }
         return userLevel

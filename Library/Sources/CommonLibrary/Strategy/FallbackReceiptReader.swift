@@ -64,7 +64,9 @@ private extension FallbackReceiptReader {
         pp_log(.App.iap, .debug, "\tParse receipt for user level \(userLevel)")
         if userLevel == .beta, let betaReader {
             pp_log(.App.iap, .debug, "\tTestFlight, read beta receipt")
-            return await betaReader.receipt()
+            if let receipt = await betaReader.receipt() {
+                return receipt
+            }
         }
         pp_log(.App.iap, .debug, "\tProduction, read main receipt")
         return await mainReader.receipt()
