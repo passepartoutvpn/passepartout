@@ -45,14 +45,14 @@ extension AppProduct: AppFeatureProviding {
             }
 
         case .Full.OneTime.iOS:
-#if os(iOS)
+#if os(iOS) || os(tvOS)
             return AppProduct.Full.OneTime.iOS_macOS.features
 #else
             return []
 #endif
 
         case .Full.OneTime.macOS:
-#if os(macOS)
+#if os(macOS) || os(tvOS)
             return AppProduct.Full.OneTime.iOS_macOS.features
 #else
             return []
