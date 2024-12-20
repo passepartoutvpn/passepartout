@@ -38,6 +38,8 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Id
 
     let selectedEntity: VPNEntity<Configuration>?
 
+    let selectTitle: String
+
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
 
     @ObservedObject
@@ -49,7 +51,7 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Id
             providerId: providerId,
             selectedEntity: selectedEntity,
             filtersWithSelection: false,
-            selectTitle: Strings.Global.Actions.connect,
+            selectTitle: selectTitle,
             onSelect: onSelect
         )
         .themeNavigationStack(closable: true)

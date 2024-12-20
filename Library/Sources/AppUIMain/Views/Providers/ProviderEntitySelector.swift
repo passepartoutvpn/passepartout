@@ -33,12 +33,15 @@ struct ProviderEntitySelector: View {
 
     let errorHandler: ErrorHandler
 
+    let selectTitle: String
+
     let onSelect: (Module) async throws -> Void
 
     var body: some View {
         if let viewProvider = module as? any ProviderEntityViewProviding {
             AnyView(viewProvider.providerEntityView(
                 errorHandler: errorHandler,
+                selectTitle: selectTitle,
                 onSelect: onSelect
             ))
         } else {

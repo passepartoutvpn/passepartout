@@ -33,6 +33,7 @@ public protocol ProviderEntityViewProviding {
     @MainActor
     func providerEntityView(
         errorHandler: ErrorHandler,
+        selectTitle: String,
         onSelect: @escaping (Module) async throws -> Void
     ) -> EntityContent
 }
