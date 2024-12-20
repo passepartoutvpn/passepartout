@@ -59,8 +59,6 @@ public final class ProfileManager: ObservableObject {
 
     private let backupRepository: ProfileRepository?
 
-    private let remoteRepositoryBlock: ((Bool) -> ProfileRepository)?
-
     private var remoteRepository: ProfileRepository?
 
     private let mirrorsRemoteRepository: Bool
@@ -94,7 +92,7 @@ public final class ProfileManager: ObservableObject {
     private var requiredFeatures: [Profile.ID: Set<AppFeature>]
 
     @Published
-    public private(set) var isRemoteImportingEnabled: Bool
+    public var isRemoteImportingEnabled = false
 
     private var waitingObservers: Set<Observer> {
         didSet {
@@ -120,34 +118,25 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public convenience init(profiles: [Profile]) {
-        self.init(
-            repository: InMemoryProfileRepository(profiles: profiles),
-            remoteRepositoryBlock: { _ in
-                InMemoryProfileRepository()
-            }
-        )
+        self.init(repository: InMemoryProfileRepository(profiles: profiles))
     }
 
     public init(
+        processor: ProfileProcessor? = nil,
         repository: ProfileRepository,
         backupRepository: ProfileRepository? = nil,
-        remoteRepositoryBlock: ((Bool) -> ProfileRepository)?,
-        mirrorsRemoteRepository: Bool = false,
-        processor: ProfileProcessor? = nil
+        mirrorsRemoteRepository: Bool = false
     ) {
-        precondition(!mirrorsRemoteRepository || remoteRepositoryBlock != nil, "mirrorsRemoteRepository requires a non-nil remoteRepositoryBlock")
+        self.processor = processor
         self.repository = repository
         self.backupRepository = backupRepository
-        self.remoteRepositoryBlock = remoteRepositoryBlock
         self.mirrorsRemoteRepository = mirrorsRemoteRepository
-        self.processor = processor
 
         allProfiles = [:]
         allRemoteProfiles = [:]
         filteredProfiles = []
         requiredFeatures = [:]
-        isRemoteImportingEnabled = false
-        if remoteRepositoryBlock != nil {
+        if mirrorsRemoteRepository {
             waitingObservers = [.local, .remote]
         } else {
             waitingObservers = [.local]
@@ -341,24 +330,13 @@ extension ProfileManager {
             }
     }
 
-    public func observeRemote(_ isRemoteImportingEnabled: Bool) async throws {
-        guard let remoteRepositoryBlock else {
-//            preconditionFailure("Missing remoteRepositoryBlock")
-            return
-        }
-        guard remoteRepository == nil || isRemoteImportingEnabled != self.isRemoteImportingEnabled else {
-            return
-        }
-
-        self.isRemoteImportingEnabled = isRemoteImportingEnabled
-
+    public func observeRemote(repository: ProfileRepository) async throws {
         remoteSubscription = nil
-        let newRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
-        let initialProfiles = try await newRepository.fetchProfiles()
+        remoteRepository = repository
+        let initialProfiles = try await repository.fetchProfiles()
         reloadRemoteProfiles(initialProfiles)
-        remoteRepository = newRepository
 
-        remoteSubscription = remoteRepository?
+        remoteSubscription = repository
             .profilesPublisher
             .dropFirst()
             .receive(on: DispatchQueue.main)
@@ -422,6 +400,7 @@ private extension ProfileManager {
         if waitingObservers.contains(.remote) {
             waitingObservers.remove(.remote)
         }
+
         Task { [weak self] in
             self?.didChange.send(.startRemoteImport)
             await self?.importRemoteProfiles(result)

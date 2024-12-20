@@ -31,14 +31,12 @@ extension ProfileManager {
     public static func forUITesting(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {
         let repository = InMemoryProfileRepository()
         let remoteRepository = InMemoryProfileRepository()
-        let manager = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        }, processor: processor)
+        let manager = ProfileManager(processor: processor, repository: repository)
 
         Task {
             do {
                 try await manager.observeLocal()
-                try await manager.observeRemote(true)
+                try await manager.observeRemote(repository: remoteRepository)
 
                 for parameters in mockParameters {
                     var builder = Profile.Builder()

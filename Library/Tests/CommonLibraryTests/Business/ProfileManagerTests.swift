@@ -50,7 +50,7 @@ extension ProfileManagerTests {
 
     func test_givenRepository_whenNotReady_thenHasNoProfiles() {
         let repository = InMemoryProfileRepository(profiles: [])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
         XCTAssertFalse(sut.isReady)
         XCTAssertFalse(sut.hasProfiles)
         XCTAssertTrue(sut.previews.isEmpty)
@@ -59,7 +59,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenReady_thenHasProfiles() async throws {
         let profile = newProfile()
         let repository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -72,7 +72,7 @@ extension ProfileManagerTests {
         let profile1 = newProfile("foo")
         let profile2 = newProfile("bar")
         let repository = InMemoryProfileRepository(profiles: [profile1, profile2])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -93,7 +93,7 @@ extension ProfileManagerTests {
         let repository = InMemoryProfileRepository(profiles: [profile])
         let processor = MockProfileProcessor()
         processor.requiredFeatures = [.appleTV, .onDemand]
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -115,7 +115,7 @@ extension ProfileManagerTests {
         processor.isIncludedBlock = {
             $0.name == "local2"
         }
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -129,7 +129,7 @@ extension ProfileManagerTests {
         let repository = InMemoryProfileRepository(profiles: [profile])
         let processor = MockProfileProcessor()
         processor.requiredFeatures = [.appleTV, .onDemand]
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -155,7 +155,7 @@ extension ProfileManagerTests {
 extension ProfileManagerTests {
     func test_givenRepository_whenSave_thenIsSaved() async throws {
         let repository = InMemoryProfileRepository(profiles: [])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -172,7 +172,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenSaveExisting_thenIsReplaced() async throws {
         let profile = newProfile("oldName")
         let repository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -191,7 +191,7 @@ extension ProfileManagerTests {
     func test_givenRepositoryAndProcessor_whenSave_thenProcessorIsNotInvoked() async throws {
         let repository = InMemoryProfileRepository(profiles: [])
         let processor = MockProfileProcessor()
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -207,7 +207,7 @@ extension ProfileManagerTests {
     func test_givenRepositoryAndProcessor_whenSaveLocal_thenProcessorIsInvoked() async throws {
         let repository = InMemoryProfileRepository(profiles: [])
         let processor = MockProfileProcessor()
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -221,7 +221,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenSave_thenIsStoredToBackUpRepository() async throws {
         let repository = InMemoryProfileRepository(profiles: [])
         let backupRepository = InMemoryProfileRepository(profiles: [])
-        let sut = ProfileManager(repository: repository, backupRepository: backupRepository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository, backupRepository: backupRepository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -247,7 +247,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenRemove_thenIsRemoved() async throws {
         let profile = newProfile()
         let repository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertTrue(sut.isReady)
@@ -267,11 +267,9 @@ extension ProfileManagerTests {
         let profile = newProfile()
         let repository = InMemoryProfileRepository()
         let remoteRepository = InMemoryProfileRepository()
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
-        try await waitForReady(sut)
+        try await waitForReady(sut, remoteRepository: remoteRepository)
 
         let exp = expectation(description: "Remote")
         remoteRepository
@@ -291,15 +289,13 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isRemotelyShared(profileWithId: profile.id))
     }
 
-    func test_givenRemoteRepository_whenSaveNotRemotelyShared_thenIsRemoveFromRemoteRepository() async throws {
+    func test_givenRemoteRepository_whenSaveNotRemotelyShared_thenIsRemovedFromRemoteRepository() async throws {
         let profile = newProfile()
         let repository = InMemoryProfileRepository(profiles: [profile])
         let remoteRepository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
-        try await waitForReady(sut)
+        try await waitForReady(sut, remoteRepository: remoteRepository)
 
         let exp = expectation(description: "Remote")
         remoteRepository
@@ -325,7 +321,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenNew_thenReturnsProfileWithNewName() async throws {
         let profile = newProfile("example")
         let repository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
         XCTAssertEqual(sut.previews.count, 1)
@@ -337,7 +333,7 @@ extension ProfileManagerTests {
     func test_givenRepository_whenDuplicate_thenSavesProfileWithNewName() async throws {
         let profile = newProfile("example")
         let repository = InMemoryProfileRepository(profiles: [profile])
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: nil)
+        let sut = ProfileManager(repository: repository)
 
         try await waitForReady(sut)
 
@@ -381,13 +377,11 @@ extension ProfileManagerTests {
         let allProfiles = localProfiles + remoteProfiles
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository(profiles: remoteProfiles)
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
         XCTAssertEqual(sut.previews.count, allProfiles.count)
 
@@ -417,13 +411,11 @@ extension ProfileManagerTests {
         ]
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository(profiles: remoteProfiles)
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
         XCTAssertEqual(sut.previews.count, 4) // unique IDs
 
@@ -464,13 +456,11 @@ extension ProfileManagerTests {
         processor.isIncludedBlock = {
             !$0.name.hasPrefix("remote")
         }
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        }, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
 
         XCTAssertEqual(processor.isIncludedCount, allProfiles.count)
@@ -499,13 +489,11 @@ extension ProfileManagerTests {
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository(profiles: remoteProfiles)
         let processor = MockProfileProcessor()
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        }, processor: processor)
+        let sut = ProfileManager(processor: processor, repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
 
         try sut.previews.forEach {
@@ -531,13 +519,11 @@ extension ProfileManagerTests {
         ]
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository()
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
         XCTAssertEqual(sut.previews.count, localProfiles.count)
 
@@ -589,13 +575,11 @@ extension ProfileManagerTests {
         let remoteProfiles = [profile]
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository(profiles: remoteProfiles)
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        })
+        let sut = ProfileManager(repository: repository)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
         XCTAssertEqual(sut.previews.count, 1)
 
@@ -611,13 +595,11 @@ extension ProfileManagerTests {
         let localProfiles = [profile]
         let repository = InMemoryProfileRepository(profiles: localProfiles)
         let remoteRepository = InMemoryProfileRepository(profiles: localProfiles)
-        let sut = ProfileManager(repository: repository, remoteRepositoryBlock: { _ in
-            remoteRepository
-        }, mirrorsRemoteRepository: true)
+        let sut = ProfileManager(repository: repository, mirrorsRemoteRepository: true)
 
         try await wait(sut, "Remote import", until: .stopRemoteImport) {
             try await $0.observeLocal()
-            try await $0.observeRemote(true)
+            try await $0.observeRemote(repository: remoteRepository)
         }
         XCTAssertEqual(sut.previews.count, 1)
 
@@ -644,10 +626,12 @@ private extension ProfileManagerTests {
         }
     }
 
-    func waitForReady(_ sut: ProfileManager, importingRemote: Bool = true) async throws {
+    func waitForReady(_ sut: ProfileManager, remoteRepository: ProfileRepository? = nil) async throws {
         try await wait(sut, "Ready", until: .ready) {
             try await $0.observeLocal()
-            try await $0.observeRemote(importingRemote)
+            if let remoteRepository {
+                try await $0.observeRemote(repository: remoteRepository)
+            }
         }
     }
 
