@@ -88,14 +88,14 @@ private extension ProfileContextMenu {
     }
 
     var providerConnectToButton: some View {
-        profile.map {
+        profile.map { profile in
             ProviderConnectToButton(
-                profile: $0,
+                profile: profile,
                 onTap: {
                     flow?.connectionFlow?.onProviderEntityRequired($0)
                 },
                 label: {
-                    ThemeImageLabel(Strings.Views.App.ProfileContext.connectTo.withTrailingDots, .profileProvider)
+                    ThemeImageLabel(profile.providerServerSelectionTitle, .profileProvider)
                 }
             )
             .uiAccessibility(.App.ProfileMenu.connectTo)
@@ -140,6 +140,13 @@ private extension ProfileContextMenu {
         ) {
             ThemeImageLabel(Strings.Global.Actions.remove, .contextRemove)
         }
+    }
+}
+
+private extension Profile {
+    var providerServerSelectionTitle: String {
+        (attributes.isAvailableForTV == true ?
+         Strings.Views.Providers.selectEntity : Strings.Views.App.ProfileContext.connectTo).withTrailingDots
     }
 }
 

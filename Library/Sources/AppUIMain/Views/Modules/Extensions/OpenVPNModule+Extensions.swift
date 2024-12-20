@@ -37,6 +37,7 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
 extension OpenVPNModule: ProviderEntityViewProviding {
     public func providerEntityView(
         errorHandler: ErrorHandler,
+        selectTitle: String,
         onSelect: @escaping (Module) async throws -> Void
     ) -> some View {
         providerSelection.map {
@@ -44,6 +45,7 @@ extension OpenVPNModule: ProviderEntityViewProviding {
                 moduleId: id,
                 providerId: $0.id,
                 selectedEntity: $0.entity,
+                selectTitle: selectTitle,
                 onSelect: {
                     var newBuilder = builder()
                     newBuilder.providerEntity = $0

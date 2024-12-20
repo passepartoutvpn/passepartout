@@ -191,6 +191,7 @@ extension AppCoordinator {
             ProviderEntitySelector(
                 module: module,
                 errorHandler: errorHandler,
+                selectTitle: profile.providerServerSelectionTitle,
                 onSelect: {
                     try await onSelectProviderEntity(with: $0, in: profile, force: force)
                 }
@@ -270,6 +271,11 @@ private extension AppCoordinator {
 
             let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
             try await profileManager.save(newProfile, isLocal: true)
+
+            guard profile.shouldConnectToProviderServer else {
+                return
+            }
+
             if !wasConnected {
                 pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
                 await onConnect(newProfile, force: force)
@@ -310,6 +316,21 @@ private extension AppCoordinator {
 
     func onDismiss() {
         present(nil)
+    }
+}
+
+private extension Profile {
+    var providerServerSelectionTitle: String {
+        attributes.isAvailableForTV == true ? Strings.Views.Providers.selectEntity : Strings.Global.Actions.connect
+    }
+
+    var shouldConnectToProviderServer: Bool {
+#if os(tvOS)
+        true
+#else
+        // do not connect TV profiles on server selection
+        attributes.isAvailableForTV != true
+#endif
     }
 }
 
