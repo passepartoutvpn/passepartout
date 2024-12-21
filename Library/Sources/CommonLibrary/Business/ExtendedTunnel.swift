@@ -29,6 +29,8 @@ import PassepartoutKit
 
 @MainActor
 public final class ExtendedTunnel: ObservableObject {
+    private let defaults: UserDefaults?
+
     private let tunnel: Tunnel
 
     private let environment: TunnelEnvironment
@@ -54,11 +56,13 @@ public final class ExtendedTunnel: ObservableObject {
     private var subscriptions: Set<AnyCancellable>
 
     public init(
+        defaults: UserDefaults? = nil,
         tunnel: Tunnel,
         environment: TunnelEnvironment,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
+        self.defaults = defaults
         self.tunnel = tunnel
         self.environment = environment
         self.processor = processor
@@ -83,12 +87,15 @@ extension ExtendedTunnel {
 
 extension ExtendedTunnel {
     public var currentProfile: TunnelCurrentProfile? {
-        tunnel.currentProfile
+        tunnel.currentProfile ?? lastUsedProfile
     }
 
     public var currentProfilePublisher: AnyPublisher<TunnelCurrentProfile?, Never> {
         tunnel
             .$currentProfile
+            .map {
+                $0 ?? self.lastUsedProfile
+            }
             .eraseToAnyPublisher()
     }
 
@@ -154,7 +161,10 @@ private extension ExtendedTunnel {
         tunnel
             .$currentProfile
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] in
+                if let id = $0?.id {
+                    self?.defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                }
                 self?.objectWillChange.send()
             }
             .store(in: &subscriptions)
@@ -195,8 +205,18 @@ private extension ExtendedTunnel {
 
 // MARK: - Helpers
 
+private extension ExtendedTunnel {
+    var lastUsedProfile: TunnelCurrentProfile? {
+        guard let uuidString = defaults?.object(forKey: AppPreference.lastUsedProfileId.key) as? String,
+              let uuid = UUID(uuidString: uuidString) else {
+            return nil
+        }
+        return TunnelCurrentProfile(id: uuid, onDemand: false)
+    }
+}
+
 extension TunnelStatus {
-    public func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
+    func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
         var status = self
         if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
             if connectionStatus == .connected {
