@@ -113,6 +113,7 @@ extension AppContext {
         )
 
         let tunnel = ExtendedTunnel(
+            defaults: .standard,
             tunnel: Tunnel(strategy: tunnelStrategy),
             environment: tunnelEnvironment,
             processor: processor,
