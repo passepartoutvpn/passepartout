@@ -26,6 +26,8 @@
 import Foundation
 
 public enum AppPreference: String, PreferenceProtocol {
+    case lastUsedProfileId
+
     case logsPrivateData
 
     public var key: String {
