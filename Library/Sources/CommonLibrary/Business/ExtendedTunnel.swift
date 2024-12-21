@@ -195,8 +195,8 @@ private extension ExtendedTunnel {
 
 // MARK: - Helpers
 
-extension TunnelStatus {
-    public func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
+private extension TunnelStatus {
+    func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
         var status = self
         if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
             if connectionStatus == .connected {
