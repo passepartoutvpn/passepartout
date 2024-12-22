@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Achat requis";
 "errors.tunnel.routing" = "Routage manquant";
 "errors.tunnel.shutdown" = "Arrêt du serveur";
-"global.nouns.timeout" = "Délai d'attente";
 "errors.tunnel.tls" = "Échec du TLS";
 "features.appletv" = "%@";
 "features.dns" = "Paramètres DNS";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Vide";
 "global.nouns.enabled" = "Activé";
 "global.nouns.endpoint" = "Point final";
+"global.nouns.features" = "Fonctionnalités";
 "global.nouns.filters" = "Filtres";
 "global.nouns.folder" = "Dossier";
 "global.nouns.gateway" = "Passerelle";
 "global.nouns.general" = "Général";
 "global.nouns.hostname" = "Nom d'hôte";
 "global.nouns.interface" = "Interface";
+"global.nouns.interval" = "Intervalle";
 "global.nouns.keep_alive" = "Maintenir actif";
 "global.nouns.key" = "Clé";
 "global.nouns.last_update" = "Dernière mise à jour";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Mot de passe";
 "global.nouns.port" = "Port";
 "global.nouns.private_key" = "Clé privée";
+"global.nouns.products" = "Produits"; // French
 "global.nouns.profile" = "Profil";
 "global.nouns.protocol" = "Protocole";
 "global.nouns.provider" = "Fournisseur";
 "global.nouns.public_key" = "Clé publique";
+"global.nouns.purchases" = "Achats";
 "global.nouns.region" = "Région";
 "global.nouns.route" = "Route";
 "global.nouns.routes" = "Routes";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Paramètres";
 "global.nouns.status" = "Statut";
 "global.nouns.subnet" = "Sous-réseau";
+"global.nouns.timeout" = "Délai d'attente";
 "global.nouns.unknown" = "Inconnu";
 "global.nouns.username" = "Nom d'utilisateur";
 "global.nouns.version" = "Version";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Numéro de version";
 "views.purchased.rows.download_date" = "Date de téléchargement";
 "views.purchased.sections.download.header" = "Premier téléchargement";
-"global.nouns.features" = "Fonctionnalités";
-"global.nouns.purchases" = "Achats";
 "views.purchased.title" = "Acheté";
 "views.ui.connection_status.on_demand_suffix" = " (à la demande)";
 "views.ui.purchase_required.purchase.help" = "Achat requis";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Toutes les catégories";
 "views.vpn.no_servers" = "Aucun serveur";
 "views.vpn.preset" = "Préréglé";
-"global.nouns.products" = "Produits"; // French

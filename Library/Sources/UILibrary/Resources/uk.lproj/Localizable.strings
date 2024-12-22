@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Потрібна покупка";
 "errors.tunnel.routing" = "Маршрутизація відсутня";
 "errors.tunnel.shutdown" = "Сервер вимкнено";
-"global.nouns.timeout" = "Перевищено час очікування";
 "errors.tunnel.tls" = "Помилка TLS";
 "features.appletv" = "%@";
 "features.dns" = "Налаштування DNS";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Порожньо";
 "global.nouns.enabled" = "Увімкнено";
 "global.nouns.endpoint" = "Кінцева точка";
+"global.nouns.features" = "Функції";
 "global.nouns.filters" = "Фільтри";
 "global.nouns.folder" = "Папка";
 "global.nouns.gateway" = "Шлюз";
 "global.nouns.general" = "Загальне";
 "global.nouns.hostname" = "Ім'я хоста";
 "global.nouns.interface" = "Інтерфейс";
+"global.nouns.interval" = "Інтервал";
 "global.nouns.keep_alive" = "Підтримувати активність";
 "global.nouns.key" = "Ключ";
 "global.nouns.last_update" = "Останнє оновлення";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Пароль";
 "global.nouns.port" = "Порт";
 "global.nouns.private_key" = "Приватний ключ";
+"global.nouns.products" = "Продукти"; // Ukrainian
 "global.nouns.profile" = "Профіль";
 "global.nouns.protocol" = "Протокол";
 "global.nouns.provider" = "Постачальник";
 "global.nouns.public_key" = "Публічний ключ";
+"global.nouns.purchases" = "Придбання";
 "global.nouns.region" = "Регіон";
 "global.nouns.route" = "Маршрут";
 "global.nouns.routes" = "Маршрути";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Налаштування";
 "global.nouns.status" = "Стан";
 "global.nouns.subnet" = "Підмережа";
+"global.nouns.timeout" = "Перевищено час очікування";
 "global.nouns.unknown" = "Невідомо";
 "global.nouns.username" = "Ім'я користувача";
 "global.nouns.version" = "Версія";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Номер збірки";
 "views.purchased.rows.download_date" = "Дата завантаження";
 "views.purchased.sections.download.header" = "Перший завантаження";
-"global.nouns.features" = "Функції";
-"global.nouns.purchases" = "Придбання";
 "views.purchased.title" = "Придбано";
 "views.ui.connection_status.on_demand_suffix" = " (за запитом)";
 "views.ui.purchase_required.purchase.help" = "Потрібна покупка";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Усі категорії";
 "views.vpn.no_servers" = "Немає серверів";
 "views.vpn.preset" = "Попередньо встановлено";
-"global.nouns.products" = "Продукти"; // Ukrainian

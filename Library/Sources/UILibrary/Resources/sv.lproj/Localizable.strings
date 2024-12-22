@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Köp krävs";
 "errors.tunnel.routing" = "Routning saknas";
 "errors.tunnel.shutdown" = "Server avstängd";
-"global.nouns.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS misslyckades";
 "features.appletv" = "%@";
 "features.dns" = "DNS-inställningar";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Tom";
 "global.nouns.enabled" = "Aktiverad";
 "global.nouns.endpoint" = "Slutpunkt";
+"global.nouns.features" = "Funktioner";
 "global.nouns.filters" = "Filter";
 "global.nouns.folder" = "Mapp";
 "global.nouns.gateway" = "Gateway";
 "global.nouns.general" = "Allmänt";
 "global.nouns.hostname" = "Värdnamn";
 "global.nouns.interface" = "Gränssnitt";
+"global.nouns.interval" = "Intervall";
 "global.nouns.keep_alive" = "Håll vid liv";
 "global.nouns.key" = "Nyckel";
 "global.nouns.last_update" = "Senaste uppdatering";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Lösenord";
 "global.nouns.port" = "Port";
 "global.nouns.private_key" = "Privat nyckel";
+"global.nouns.products" = "Produkter"; // Swedish
 "global.nouns.profile" = "Profil";
 "global.nouns.protocol" = "Protokoll";
 "global.nouns.provider" = "Leverantör";
 "global.nouns.public_key" = "Offentlig nyckel";
+"global.nouns.purchases" = "Köp";
 "global.nouns.region" = "Region";
 "global.nouns.route" = "Rutt";
 "global.nouns.routes" = "Rutter";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Inställningar";
 "global.nouns.status" = "Status";
 "global.nouns.subnet" = "Undernät";
+"global.nouns.timeout" = "Timeout";
 "global.nouns.unknown" = "Okänd";
 "global.nouns.username" = "Användarnamn";
 "global.nouns.version" = "Version";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Byggnummer";
 "views.purchased.rows.download_date" = "Nedladdningsdatum";
 "views.purchased.sections.download.header" = "Första nedladdning";
-"global.nouns.features" = "Funktioner";
-"global.nouns.purchases" = "Köp";
 "views.purchased.title" = "Köpt";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
 "views.vpn.preset" = "Förinställning";
-"global.nouns.products" = "Produkter"; // Swedish

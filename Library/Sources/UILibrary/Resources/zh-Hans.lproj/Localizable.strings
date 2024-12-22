@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "需要购买";
 "errors.tunnel.routing" = "缺少路由";
 "errors.tunnel.shutdown" = "服务器关闭";
-"global.nouns.timeout" = "超时";
 "errors.tunnel.tls" = "TLS 失败";
 "features.appletv" = "%@";
 "features.dns" = "DNS 设置";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "空";
 "global.nouns.enabled" = "已启用";
 "global.nouns.endpoint" = "端点";
+"global.nouns.features" = "功能";
 "global.nouns.filters" = "筛选器";
 "global.nouns.folder" = "文件夹";
 "global.nouns.gateway" = "网关";
 "global.nouns.general" = "常规";
 "global.nouns.hostname" = "主机名";
 "global.nouns.interface" = "接口";
+"global.nouns.interval" = "间隔";
 "global.nouns.keep_alive" = "保持活动";
 "global.nouns.key" = "密钥";
 "global.nouns.last_update" = "最近更新";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "密码";
 "global.nouns.port" = "端口";
 "global.nouns.private_key" = "私钥";
+"global.nouns.products" = "产品"; // Chinese (Simplified)
 "global.nouns.profile" = "配置文件";
 "global.nouns.protocol" = "协议";
 "global.nouns.provider" = "提供商";
 "global.nouns.public_key" = "公钥";
+"global.nouns.purchases" = "购买内容";
 "global.nouns.region" = "区域";
 "global.nouns.route" = "路由";
 "global.nouns.routes" = "路由";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "设置";
 "global.nouns.status" = "状态";
 "global.nouns.subnet" = "子网";
+"global.nouns.timeout" = "超时";
 "global.nouns.unknown" = "未知";
 "global.nouns.username" = "用户名";
 "global.nouns.version" = "版本";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "构建编号";
 "views.purchased.rows.download_date" = "下载日期";
 "views.purchased.sections.download.header" = "首次下载";
-"global.nouns.features" = "功能";
-"global.nouns.purchases" = "购买内容";
 "views.purchased.title" = "已购买";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
 "views.vpn.preset" = "预设";
-"global.nouns.products" = "产品"; // Chinese (Simplified)
