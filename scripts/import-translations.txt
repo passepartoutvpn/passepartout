@@ -1,0 +1,26 @@
+I need translations in the following languages:
+
+- German
+- Greek
+- Spanish
+- French
+- Italian
+- Dutch
+- Polish
+- Portuguese
+- Russian
+- Swedish
+- Ukranian
+- Chinese (Simplified)
+
+of these lines, except the key:
+
+<<< list of "key" = "string"; >>>
+
+I need the result in a single output, but prefix each language with a comment with its language code, e.g. for English:
+
+// en
+
+Remember that Chinese language code is zh-Hans.
+
+Thanks!

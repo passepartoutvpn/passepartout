@@ -11,6 +11,7 @@ fastlane/**/trade_representative_contact_information
 build/
 dist/
 /iap/
+/l10n/
 screenshots/html/*/0*.png
 screenshots/results/
 /templates/
