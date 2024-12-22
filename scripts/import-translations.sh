@@ -50,6 +50,6 @@ for lang in `ls $translations_input_path`; do
     cat $input_path >>$tmp_path
 
     # sort and replace
-    sort $tmp_path >$output_path
+    sort $tmp_path | uniq >$output_path
     rm "$keys_path" "$tmp_path"
 done
