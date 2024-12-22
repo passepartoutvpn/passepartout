@@ -61,14 +61,15 @@ public actor FallbackReceiptReader: AppReceiptReader {
 
 private extension FallbackReceiptReader {
     func asyncReceipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
-        pp_log(.App.iap, .debug, "\tParse receipt for user level \(userLevel)")
+        pp_log(.App.iap, .info, "\tParse receipt for user level \(userLevel)")
         if userLevel == .beta, let betaReader {
-            pp_log(.App.iap, .debug, "\tTestFlight, read beta receipt")
+            pp_log(.App.iap, .info, "\tTestFlight, read beta receipt")
             if let receipt = await betaReader.receipt() {
                 return receipt
             }
+            pp_log(.App.iap, .info, "\tTestFlight, no beta receipt found!")
         }
-        pp_log(.App.iap, .debug, "\tProduction, read main receipt")
+        pp_log(.App.iap, .info, "\tProduction, read main receipt")
         return await mainReader.receipt()
     }
 }

@@ -58,10 +58,10 @@ private extension Dependencies {
     }
 
     var betaReceiptURL: URL? {
-#if !os(tvOS)
-        BundleConfiguration.urlForBetaReceipt // copied by AppContext.onLaunch
-#else
+#if os(tvOS)
         nil
+#else
+        BundleConfiguration.urlForBetaReceipt // copied by AppContext.onLaunch
 #endif
     }
 }

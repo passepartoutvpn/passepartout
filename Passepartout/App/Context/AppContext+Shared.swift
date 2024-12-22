@@ -267,7 +267,11 @@ private extension Dependencies {
     }
 
     var betaReceiptURL: URL? {
+#if os(tvOS)
+        nil
+#else
         Bundle.main.appStoreProductionReceiptURL
+#endif
     }
 
     var mirrorsRemoteRepository: Bool {
