@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Απαιτείται αγορά";
 "errors.tunnel.routing" = "Η δρομολόγηση λείπει";
 "errors.tunnel.shutdown" = "Ο διακομιστής τερματίστηκε";
-"errors.tunnel.timeout" = "Λήξη χρόνου";
 "errors.tunnel.tls" = "Το TLS απέτυχε";
 "features.appletv" = "%@";
 "features.dns" = "Ρυθμίσεις DNS";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Κενό";
 "global.nouns.enabled" = "Ενεργοποιημένο";
 "global.nouns.endpoint" = "Τελικό σημείο";
+"global.nouns.features" = "Λειτουργίες";
 "global.nouns.filters" = "Φίλτρα";
 "global.nouns.folder" = "Φάκελος";
 "global.nouns.gateway" = "Πύλη";
 "global.nouns.general" = "Γενικά";
 "global.nouns.hostname" = "Όνομα κεντρικού υπολογιστή";
 "global.nouns.interface" = "Διασύνδεση";
+"global.nouns.interval" = "Διάστημα";
 "global.nouns.keep_alive" = "Διατήρηση ενεργού";
 "global.nouns.key" = "Κλειδί";
 "global.nouns.last_update" = "Τελευταία ενημέρωση";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Κωδικός πρόσβασης";
 "global.nouns.port" = "Θύρα";
 "global.nouns.private_key" = "Ιδιωτικό κλειδί";
+"global.nouns.products" = "Προϊόντα"; // Greek
 "global.nouns.profile" = "Προφίλ";
 "global.nouns.protocol" = "Πρωτόκολλο";
 "global.nouns.provider" = "Πάροχος";
 "global.nouns.public_key" = "Δημόσιο κλειδί";
+"global.nouns.purchases" = "Αγορές";
 "global.nouns.region" = "Περιοχή";
 "global.nouns.route" = "Διαδρομή";
 "global.nouns.routes" = "Διαδρομές";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Ρυθμίσεις";
 "global.nouns.status" = "Κατάσταση";
 "global.nouns.subnet" = "Υποδίκτυο";
+"global.nouns.timeout" = "Λήξη χρόνου";
 "global.nouns.unknown" = "Άγνωστο";
 "global.nouns.username" = "Όνομα χρήστη";
 "global.nouns.version" = "Έκδοση";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Αριθμός κατασκευής";
 "views.purchased.rows.download_date" = "Ημερομηνία λήψης";
 "views.purchased.sections.download.header" = "Πρώτη λήψη";
-"global.nouns.features" = "Λειτουργίες";
-"global.nouns.purchases" = "Αγορές";
 "views.purchased.title" = "Αγορασμένα";
 "views.ui.connection_status.on_demand_suffix" = " (κατ' απαίτηση)";
 "views.ui.purchase_required.purchase.help" = "Απαιτείται αγορά";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Όλες οι κατηγορίες";
 "views.vpn.no_servers" = "Δεν υπάρχουν διακομιστές";
 "views.vpn.preset" = "Προκαθορισμένο";
-"global.nouns.products" = "Προϊόντα"; // Greek

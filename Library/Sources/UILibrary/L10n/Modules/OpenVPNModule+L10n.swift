@@ -160,6 +160,8 @@ extension OpenVPN.Configuration.Builder: StyledOptionalLocalizableEntity {
     public enum OptionalStyle {
         case keepAlive
 
+        case keepAliveTimeout
+
         case renegotiatesAfter
 
         case randomizeEndpoint
@@ -171,6 +173,9 @@ extension OpenVPN.Configuration.Builder: StyledOptionalLocalizableEntity {
         switch optionalStyle {
         case .keepAlive:
             return keepAliveInterval?.localizedDescription(style: .timeString)
+
+        case .keepAliveTimeout:
+            return keepAliveTimeout?.localizedDescription(style: .timeString)
 
         case .renegotiatesAfter:
             return renegotiatesAfter?.localizedDescription(style: .timeString)

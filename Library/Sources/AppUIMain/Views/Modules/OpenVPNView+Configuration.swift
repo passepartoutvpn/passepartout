@@ -61,6 +61,7 @@ extension OpenVPNView {
             if !isServerPushed {
                 moduleSection(for: tlsRows, header: Strings.Unlocalized.tls)
             }
+            moduleSection(for: keepAliveRows, header: Strings.Global.Nouns.keepAlive)
             moduleSection(for: otherRows, header: Strings.Global.Nouns.other)
         }
     }
@@ -316,11 +317,19 @@ private extension OpenVPNView.ConfigurationView {
         return rows.nilIfEmpty
     }
 
-    var otherRows: [ModuleRow]? {
+    var keepAliveRows: [ModuleRow]? {
         var rows: [ModuleRow] = []
         configuration.localizedDescription(optionalStyle: .keepAlive).map {
-            rows.append(.text(caption: Strings.Global.Nouns.keepAlive, value: $0))
+            rows.append(.text(caption: Strings.Global.Nouns.interval, value: $0))
         }
+        configuration.localizedDescription(optionalStyle: .keepAliveTimeout).map {
+            rows.append(.text(caption: Strings.Global.Nouns.timeout, value: $0))
+        }
+        return rows.nilIfEmpty
+    }
+
+    var otherRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
         configuration.localizedDescription(optionalStyle: .renegotiatesAfter).map {
             rows.append(.text(caption: Strings.Modules.Openvpn.renegotiation, value: $0))
         }

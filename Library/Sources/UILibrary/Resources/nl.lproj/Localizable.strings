@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Aankoop vereist";
 "errors.tunnel.routing" = "Routering ontbreekt";
 "errors.tunnel.shutdown" = "Server uitgeschakeld";
-"errors.tunnel.timeout" = "Time-out";
 "errors.tunnel.tls" = "TLS mislukt";
 "features.appletv" = "%@";
 "features.dns" = "DNS-instellingen";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Leeg";
 "global.nouns.enabled" = "Ingeschakeld";
 "global.nouns.endpoint" = "Eindpunt";
+"global.nouns.features" = "Functies";
 "global.nouns.filters" = "Filters";
 "global.nouns.folder" = "Map";
 "global.nouns.gateway" = "Gateway";
 "global.nouns.general" = "Algemeen";
 "global.nouns.hostname" = "Hostnaam";
 "global.nouns.interface" = "Interface";
+"global.nouns.interval" = "Interval";
 "global.nouns.keep_alive" = "Actief houden";
 "global.nouns.key" = "Sleutel";
 "global.nouns.last_update" = "Laatste update";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Wachtwoord";
 "global.nouns.port" = "Poort";
 "global.nouns.private_key" = "Privésleutel";
+"global.nouns.products" = "Producten"; // Dutch
 "global.nouns.profile" = "Profiel";
 "global.nouns.protocol" = "Protocol";
 "global.nouns.provider" = "Provider";
 "global.nouns.public_key" = "Publieke sleutel";
+"global.nouns.purchases" = "Aankopen";
 "global.nouns.region" = "Regio";
 "global.nouns.route" = "Route";
 "global.nouns.routes" = "Routes";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Instellingen";
 "global.nouns.status" = "Status";
 "global.nouns.subnet" = "Subnet";
+"global.nouns.timeout" = "Time-out";
 "global.nouns.unknown" = "Onbekend";
 "global.nouns.username" = "Gebruikersnaam";
 "global.nouns.version" = "Versie";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Buildnummer";
 "views.purchased.rows.download_date" = "Downloaddatum";
 "views.purchased.sections.download.header" = "Eerste download";
-"global.nouns.features" = "Functies";
-"global.nouns.purchases" = "Aankopen";
 "views.purchased.title" = "Aangekocht";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
 "views.vpn.preset" = "Voorinstelling";
-"global.nouns.products" = "Producten"; // Dutch

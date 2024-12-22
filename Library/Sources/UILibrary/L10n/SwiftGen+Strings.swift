@@ -156,8 +156,6 @@ public enum Strings {
       public static let routing = Strings.tr("Localizable", "errors.tunnel.routing", fallback: "Missing routing")
       /// Server shutdown
       public static let shutdown = Strings.tr("Localizable", "errors.tunnel.shutdown", fallback: "Server shutdown")
-      /// Timeout
-      public static let timeout = Strings.tr("Localizable", "errors.tunnel.timeout", fallback: "Timeout")
       /// TLS failed
       public static let tls = Strings.tr("Localizable", "errors.tunnel.tls", fallback: "TLS failed")
     }
@@ -272,6 +270,8 @@ public enum Strings {
       public static let hostname = Strings.tr("Localizable", "global.nouns.hostname", fallback: "Hostname")
       /// Interface
       public static let interface = Strings.tr("Localizable", "global.nouns.interface", fallback: "Interface")
+      /// Interval
+      public static let interval = Strings.tr("Localizable", "global.nouns.interval", fallback: "Interval")
       /// Keep-alive
       public static let keepAlive = Strings.tr("Localizable", "global.nouns.keep_alive", fallback: "Keep-alive")
       /// Key
@@ -340,6 +340,8 @@ public enum Strings {
       public static let status = Strings.tr("Localizable", "global.nouns.status", fallback: "Status")
       /// Subnet
       public static let subnet = Strings.tr("Localizable", "global.nouns.subnet", fallback: "Subnet")
+      /// Timeout
+      public static let timeout = Strings.tr("Localizable", "global.nouns.timeout", fallback: "Timeout")
       /// Unknown
       public static let unknown = Strings.tr("Localizable", "global.nouns.unknown", fallback: "Unknown")
       /// Username

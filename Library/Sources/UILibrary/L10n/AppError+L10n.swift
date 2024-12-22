@@ -136,7 +136,7 @@ extension PassepartoutError.Code: StyledLocalizableEntity {
                 return V.dns
 
             case .timeout:
-                return V.timeout
+                return Strings.Global.Nouns.timeout
 
             case .OpenVPN.compressionMismatch:
                 return V.compression

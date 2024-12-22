@@ -275,6 +275,7 @@
 "global.nouns.general" = "General";
 "global.nouns.hostname" = "Hostname";
 "global.nouns.interface" = "Interface";
+"global.nouns.interval" = "Interval";
 "global.nouns.keep_alive" = "Keep-alive";
 "global.nouns.key" = "Key";
 "global.nouns.last_update" = "Last update";
@@ -308,6 +309,7 @@
 "global.nouns.settings" = "Settings";
 "global.nouns.status" = "Status";
 "global.nouns.subnet" = "Subnet";
+"global.nouns.timeout" = "Timeout";
 "global.nouns.unknown" = "Unknown";
 "global.nouns.username" = "Username";
 "global.nouns.version" = "Version";
@@ -358,7 +360,6 @@
 "errors.tunnel.ineligible" = "Purchase required";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
-"errors.tunnel.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS failed";
 
 // MARK: Global (Theme)

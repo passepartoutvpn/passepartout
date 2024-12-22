@@ -45,7 +45,6 @@
 "errors.tunnel.ineligible" = "Требуется покупка";
 "errors.tunnel.routing" = "Маршрутизация отсутствует";
 "errors.tunnel.shutdown" = "Сервер отключен";
-"errors.tunnel.timeout" = "Превышено время ожидания";
 "errors.tunnel.tls" = "Ошибка TLS";
 "features.appletv" = "%@";
 "features.dns" = "Настройки DNS";
@@ -90,12 +89,14 @@
 "global.nouns.empty" = "Пусто";
 "global.nouns.enabled" = "Включено";
 "global.nouns.endpoint" = "Конечная точка";
+"global.nouns.features" = "Функции";
 "global.nouns.filters" = "Фильтры";
 "global.nouns.folder" = "Папка";
 "global.nouns.gateway" = "Шлюз";
 "global.nouns.general" = "Общий";
 "global.nouns.hostname" = "Имя хоста";
 "global.nouns.interface" = "Интерфейс";
+"global.nouns.interval" = "Интервал";
 "global.nouns.keep_alive" = "Поддерживать";
 "global.nouns.key" = "Ключ";
 "global.nouns.last_update" = "Последнее обновление";
@@ -114,10 +115,12 @@
 "global.nouns.password" = "Пароль";
 "global.nouns.port" = "Порт";
 "global.nouns.private_key" = "Приватный ключ";
+"global.nouns.products" = "Продукты"; // Russian
 "global.nouns.profile" = "Профиль";
 "global.nouns.protocol" = "Протокол";
 "global.nouns.provider" = "Поставщик";
 "global.nouns.public_key" = "Публичный ключ";
+"global.nouns.purchases" = "Покупки";
 "global.nouns.region" = "Регион";
 "global.nouns.route" = "Маршрут";
 "global.nouns.routes" = "Маршруты";
@@ -127,6 +130,7 @@
 "global.nouns.settings" = "Настройки";
 "global.nouns.status" = "Состояние";
 "global.nouns.subnet" = "Подсеть";
+"global.nouns.timeout" = "Превышено время ожидания";
 "global.nouns.unknown" = "Неизвестно";
 "global.nouns.username" = "Имя пользователя";
 "global.nouns.version" = "Версия";
@@ -271,8 +275,6 @@
 "views.purchased.rows.build_number" = "Номер сборки";
 "views.purchased.rows.download_date" = "Дата скачивания";
 "views.purchased.sections.download.header" = "Первое скачивание";
-"global.nouns.features" = "Функции";
-"global.nouns.purchases" = "Покупки";
 "views.purchased.title" = "Куплено";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";
@@ -281,4 +283,3 @@
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
 "views.vpn.preset" = "Предустановка";
-"global.nouns.products" = "Продукты"; // Russian
