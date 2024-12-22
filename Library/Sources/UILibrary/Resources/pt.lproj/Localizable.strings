@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Compra necessária";
 "errors.tunnel.routing" = "Roteamento ausente";
 "errors.tunnel.shutdown" = "Servidor desligado";
-"errors.tunnel.timeout" = "Tempo esgotado";
+"global.nouns.timeout" = "Tempo esgotado";
 "errors.tunnel.tls" = "Falha no TLS";
 "features.appletv" = "%@";
 "features.dns" = "Configurações de DNS";

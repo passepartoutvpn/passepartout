@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Απαιτείται αγορά";
 "errors.tunnel.routing" = "Η δρομολόγηση λείπει";
 "errors.tunnel.shutdown" = "Ο διακομιστής τερματίστηκε";
-"errors.tunnel.timeout" = "Λήξη χρόνου";
+"global.nouns.timeout" = "Λήξη χρόνου";
 "errors.tunnel.tls" = "Το TLS απέτυχε";
 "features.appletv" = "%@";
 "features.dns" = "Ρυθμίσεις DNS";

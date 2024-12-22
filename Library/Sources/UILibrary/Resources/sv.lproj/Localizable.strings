@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Köp krävs";
 "errors.tunnel.routing" = "Routning saknas";
 "errors.tunnel.shutdown" = "Server avstängd";
-"errors.tunnel.timeout" = "Timeout";
+"global.nouns.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS misslyckades";
 "features.appletv" = "%@";
 "features.dns" = "DNS-inställningar";

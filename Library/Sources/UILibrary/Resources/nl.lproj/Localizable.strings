@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Aankoop vereist";
 "errors.tunnel.routing" = "Routering ontbreekt";
 "errors.tunnel.shutdown" = "Server uitgeschakeld";
-"errors.tunnel.timeout" = "Time-out";
+"global.nouns.timeout" = "Time-out";
 "errors.tunnel.tls" = "TLS mislukt";
 "features.appletv" = "%@";
 "features.dns" = "DNS-instellingen";

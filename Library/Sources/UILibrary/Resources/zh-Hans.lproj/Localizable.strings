@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "需要购买";
 "errors.tunnel.routing" = "缺少路由";
 "errors.tunnel.shutdown" = "服务器关闭";
-"errors.tunnel.timeout" = "超时";
+"global.nouns.timeout" = "超时";
 "errors.tunnel.tls" = "TLS 失败";
 "features.appletv" = "%@";
 "features.dns" = "DNS 设置";

@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Kauf erforderlich";
 "errors.tunnel.routing" = "Routing fehlt";
 "errors.tunnel.shutdown" = "Server heruntergefahren";
-"errors.tunnel.timeout" = "Zeitüberschreitung";
+"global.nouns.timeout" = "Zeitüberschreitung";
 "errors.tunnel.tls" = "TLS fehlgeschlagen";
 "features.appletv" = "%@";
 "features.dns" = "DNS-Einstellungen";

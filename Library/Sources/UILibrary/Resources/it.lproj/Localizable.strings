@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Acquisto richiesto";
 "errors.tunnel.routing" = "Routing mancante";
 "errors.tunnel.shutdown" = "Spegnimento del server";
-"errors.tunnel.timeout" = "Timeout";
+"global.nouns.timeout" = "Timeout";
 "errors.tunnel.tls" = "TLS fallito";
 "features.appletv" = "%@";
 "features.dns" = "Impostazioni DNS";

@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Wymagana zakup";
 "errors.tunnel.routing" = "Brak trasowania";
 "errors.tunnel.shutdown" = "Serwer zamknięty";
-"errors.tunnel.timeout" = "Przekroczono limit czasu";
+"global.nouns.timeout" = "Przekroczono limit czasu";
 "errors.tunnel.tls" = "Błąd TLS";
 "features.appletv" = "%@";
 "features.dns" = "Ustawienia DNS";

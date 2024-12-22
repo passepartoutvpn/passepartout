@@ -45,7 +45,7 @@
 "errors.tunnel.ineligible" = "Потрібна покупка";
 "errors.tunnel.routing" = "Маршрутизація відсутня";
 "errors.tunnel.shutdown" = "Сервер вимкнено";
-"errors.tunnel.timeout" = "Перевищено час очікування";
+"global.nouns.timeout" = "Перевищено час очікування";
 "errors.tunnel.tls" = "Помилка TLS";
 "features.appletv" = "%@";
 "features.dns" = "Налаштування DNS";
