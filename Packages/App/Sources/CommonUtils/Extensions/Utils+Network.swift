@@ -66,6 +66,28 @@ extension Utils {
         ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
 #elseif os(iOS)
         await NEHotspotNetwork.fetchCurrent()?.ssid
+#elseif os(macOS)
+        await Task.detached {
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: "/usr/sbin/networksetup")
+            task.arguments = ["-getairportnetwork", "en0"]
+
+            let pipe = Pipe()
+            task.standardOutput = pipe
+
+            do {
+                try task.run()
+                let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                let output = String(data: data, encoding: .utf8)
+                return output?
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .split(separator: ": ")
+                    .last
+                    .map(String.init)
+            } catch {
+                return nil
+            }
+        }.value
 #else
         nil
 #endif
