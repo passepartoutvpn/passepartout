@@ -1,2 +1,3 @@
 automatic_release false
+phased_release true
 run_precheck_before_submit false
