@@ -65,17 +65,7 @@ extension Utils {
 #if targetEnvironment(simulator)
         ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
 #elseif os(iOS)
-        await withCheckedContinuation { continuation in
-            NEHotspotNetwork.fetchCurrent {
-                guard let network = $0 else {
-                    continuation.resume(with: .success(nil))
-                    return
-                }
-                continuation.resume(with: .success(network.ssid))
-            }
-        }
-#elseif os(macOS)
-        CWWiFiClient.shared().interface()?.ssid()
+        await NEHotspotNetwork.fetchCurrent()?.ssid
 #else
         nil
 #endif
