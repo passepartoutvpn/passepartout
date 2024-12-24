@@ -71,6 +71,11 @@ jobs:
     name: Distribute Public Beta
     runs-on: ubuntu-latest
     needs: [run_tests, build_upload]
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      matrix:
+        platform: ["iOS", "macOS", "tvOS"]
     environment:
       name: public_beta
     steps:
@@ -85,13 +90,16 @@ jobs:
           PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
           PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ vars.PILOT_NOTIFY_EXTERNAL_TESTERS }}
         run: |
-          for PLATFORM in ${PLATFORMS[@]}; do
-            bundle exec fastlane --env $PLATFORM public_beta
-          done
+          bundle exec fastlane --env ${{ matrix.platform }} public_beta
   submit_for_app_review:
     name: Submit to App Review
     runs-on: ubuntu-latest
     needs: [run_tests, build_upload]
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      matrix:
+        platform: ["iOS", "macOS", "tvOS"]
     environment:
       name: app_review
     env:
@@ -105,9 +113,7 @@ jobs:
           bundler-cache: true
       - name: Submit for App Review
         run: |
-          for PLATFORM in ${PLATFORMS[@]}; do
-            bundle exec fastlane --env $PLATFORM asc_review
-          done
+          bundle exec fastlane --env ${{ matrix.platform }} asc_review
   publish_to_app_store:
     name: Publish to App Store
     runs-on: ubuntu-latest
