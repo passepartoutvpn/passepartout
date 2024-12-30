@@ -27,7 +27,7 @@
         "profileTitleFormat": "Passepartout: %@",
         "refreshInterval": 3.0,
         "betaReceiptPath": "beta-receipt",
-        "eligibilityCheckInterval": 60.0
+        "eligibilityCheckInterval": 600.0
     },
     "api": {
         "timeoutInterval": 5.0
