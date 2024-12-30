@@ -89,17 +89,28 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
 // MARK: - Eligibility
 
-@MainActor
 private extension PacketTunnelProvider {
     func checkEligibility(of profile: Profile, environment: TunnelEnvironment) async throws {
-        await context.iapManager.reloadReceipt()
         do {
-            try context.iapManager.verify(profile)
+            pp_log(.app, .info, "Verify profile")
+            await context.iapManager.reloadReceipt()
+            try await context.iapManager.verify(profile)
         } catch {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
             pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
             throw error
+        }
+
+        Task {
+            let interval = Constants.shared.tunnel.eligibilityCheckInterval
+            pp_log(.app, .info, "Will verify profile again in \(interval) seconds...")
+            try await Task.sleep(interval: interval)
+            do {
+                try await checkEligibility(of: profile, environment: environment)
+            } catch {
+                cancelTunnelWithError(error)
+            }
         }
     }
 }
