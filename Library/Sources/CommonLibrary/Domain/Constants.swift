@@ -101,6 +101,8 @@ public struct Constants: Decodable, Sendable {
         public let refreshInterval: TimeInterval
 
         public let betaReceiptPath: String
+
+        public let eligibilityCheckInterval: TimeInterval
     }
 
     public struct API: Decodable, Sendable {
