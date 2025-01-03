@@ -90,6 +90,7 @@ extension AppContext {
             model: cdRemoteModel,
             observingResults: true
         )
+        let backupProfileRepository: ProfileRepository? = nil
 #else
         let tunnelStrategy = NETunnelStrategy(
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
@@ -99,15 +100,16 @@ extension AppContext {
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
             dependencies.profileTitle($0)
         }
+        let backupProfileRepository = dependencies.backupProfileRepository(
+            model: cdRemoteModel,
+            observingResults: false
+        )
 #endif
 
         let profileManager = ProfileManager(
             processor: processor,
             repository: mainProfileRepository,
-            backupRepository: dependencies.backupProfileRepository(
-                model: cdRemoteModel,
-                observingResults: false
-            ),
+            backupRepository: backupProfileRepository,
             mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
             readyAfterRemote: true
         )
