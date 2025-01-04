@@ -164,13 +164,6 @@ private extension AppContext {
 
         pp_log(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
-            do {
-                pp_log(.App.profiles, .info, "\tRefresh local profiles observers...")
-                try await profileManager.observeLocal()
-            } catch {
-                pp_log(.App.profiles, .error, "\tUnable to re-observe local profiles: \(error)")
-            }
-
             await iapManager.reloadReceipt()
         }
         await pendingTask?.value
