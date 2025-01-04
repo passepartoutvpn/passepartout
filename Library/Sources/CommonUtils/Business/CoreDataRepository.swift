@@ -182,7 +182,7 @@ private extension CoreDataRepository {
 
         let newController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: self.context,
+            managedObjectContext: context,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
