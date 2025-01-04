@@ -45,7 +45,6 @@ public final class NEProfileRepository: ProfileRepository {
 
         repository
             .managersPublisher
-            .dropFirst()
             .sink { [weak self] in
                 self?.onUpdatedManagers($0)
             }
@@ -72,26 +71,14 @@ public final class NEProfileRepository: ProfileRepository {
 
     public func saveProfile(_ profile: Profile) async throws {
         try await repository.save(profile, forConnecting: false, options: nil, title: title)
-        if let index = profilesSubject.value.firstIndex(where: { $0.id == profile.id }) {
-            profilesSubject.value[index] = profile
-        } else {
-            profilesSubject.value.append(profile)
-        }
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
         guard !profileIds.isEmpty else {
             return
         }
-        var removedIds: Set<Profile.ID> = []
-        defer {
-            profilesSubject.value.removeAll {
-                removedIds.contains($0.id)
-            }
-        }
         for id in profileIds {
             try await repository.remove(profileId: id)
-            removedIds.insert(id)
         }
     }
 
@@ -102,25 +89,14 @@ public final class NEProfileRepository: ProfileRepository {
 
 private extension NEProfileRepository {
     func onUpdatedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
-        let profiles = profilesSubject
-            .value
-            .filter {
-                managers.keys.contains($0.id)
+        let profiles = managers.values.compactMap {
+            do {
+                return try repository.profile(from: $0)
+            } catch {
+                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                return nil
             }
-
-        let removedProfilesDescription = profilesSubject
-            .value
-            .filter {
-                !managers.keys.contains($0.id)
-            }
-            .map {
-                "\($0.name)(\($0.id)"
-            }
-
-        if !removedProfilesDescription.isEmpty {
-            pp_log(.App.profiles, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
         }
-
         profilesSubject.send(profiles)
     }
 }
