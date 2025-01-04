@@ -164,12 +164,6 @@ private extension AppContext {
 
         pp_log(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
-            do {
-                pp_log(.App.profiles, .info, "\tSync local profiles...")
-                try await profileManager.syncLocal()
-            } catch {
-                pp_log(.App.profiles, .error, "\tUnable to sync local profiles: \(error)")
-            }
             await iapManager.reloadReceipt()
         }
         await pendingTask?.value
