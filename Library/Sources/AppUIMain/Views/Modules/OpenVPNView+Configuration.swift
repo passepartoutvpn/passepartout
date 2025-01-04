@@ -103,14 +103,7 @@ private struct SelectableRemoteButton: View {
             }
         } label: {
             HStack {
-                VStack(alignment: .leading) {
-                    Text(remote.address.rawValue)
-                        .font(.headline)
-
-                    Text("\(remote.proto.socketType.rawValue):\(remote.proto.port.description)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                EndpointCardView(endpoint: remote)
                 Spacer()
                 ThemeImage(.marked)
                     .opaque(!excludedEndpoints.contains(remote))
