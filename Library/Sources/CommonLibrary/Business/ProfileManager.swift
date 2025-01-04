@@ -332,8 +332,7 @@ extension ProfileManager {
     }
 
     public func syncLocal() async throws {
-        let profiles = try await repository.fetchProfiles()
-        reloadLocalProfiles(profiles)
+        _ = try await repository.fetchProfiles()
     }
 
     public func observeRemote(repository: ProfileRepository) async throws {
