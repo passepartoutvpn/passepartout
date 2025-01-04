@@ -42,6 +42,14 @@ public final class NEProfileRepository: ProfileRepository {
         self.title = title
         profilesSubject = CurrentValueSubject([])
         subscriptions = []
+
+        repository
+            .managersPublisher
+            .dropFirst()
+            .sink { [weak self] in
+                self?.onUpdatedManagers($0)
+            }
+            .store(in: &subscriptions)
     }
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {
@@ -89,5 +97,30 @@ public final class NEProfileRepository: ProfileRepository {
 
     public func removeAllProfiles() async throws {
         try await removeProfiles(withIds: profilesSubject.value.map(\.id))
+    }
+}
+
+private extension NEProfileRepository {
+    func onUpdatedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
+        let profiles = profilesSubject
+            .value
+            .filter {
+                managers.keys.contains($0.id)
+            }
+
+        let removedProfilesDescription = profilesSubject
+            .value
+            .filter {
+                !managers.keys.contains($0.id)
+            }
+            .map {
+                "\($0.name)(\($0.id)"
+            }
+
+        if !removedProfilesDescription.isEmpty {
+            pp_log(.App.profiles, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
+        }
+
+        profilesSubject.send(profiles)
     }
 }
