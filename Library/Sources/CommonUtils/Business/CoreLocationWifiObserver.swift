@@ -34,6 +34,9 @@ public actor CoreLocationWifiObserver: NSObject, WifiObserver {
     private var continuation: CheckedContinuation<String, Error>?
 
     public func currentSSID() async throws -> String {
+#if os(macOS)
+        ""
+#else
         if let pendingTask {
             return try await pendingTask.value
         }
@@ -56,6 +59,7 @@ public actor CoreLocationWifiObserver: NSObject, WifiObserver {
         self.pendingTask = nil
         continuation = nil
         return result
+#endif
     }
 
     private func currentSSIDWithoutAuthorization() async -> String {
