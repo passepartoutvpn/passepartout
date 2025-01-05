@@ -54,6 +54,7 @@
 "features.providers" = "Все поставщики";
 "features.routing" = "Пользовательская маршрутизация";
 "features.sharing" = "%@";
+"global.actions.add" = "Добавить";
 "global.actions.cancel" = "Отмена";
 "global.actions.connect" = "Подключить";
 "global.actions.delete" = "Удалить";

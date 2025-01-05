@@ -54,6 +54,7 @@
 "features.providers" = "Alle Anbieter";
 "features.routing" = "Benutzerdefiniertes Routing";
 "features.sharing" = "%@";
+"global.actions.add" = "Hinzufügen";
 "global.actions.cancel" = "Abbrechen";
 "global.actions.connect" = "Verbinden";
 "global.actions.delete" = "Löschen";

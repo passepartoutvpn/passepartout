@@ -54,6 +54,7 @@
 "features.providers" = "Alle providers";
 "features.routing" = "Aangepaste routering";
 "features.sharing" = "%@";
+"global.actions.add" = "Toevoegen";
 "global.actions.cancel" = "Annuleren";
 "global.actions.connect" = "Verbinden";
 "global.actions.delete" = "Verwijderen";

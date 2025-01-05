@@ -54,6 +54,7 @@
 "features.providers" = "Όλοι οι πάροχοι";
 "features.routing" = "Προσαρμοσμένη Δρομολόγηση";
 "features.sharing" = "%@";
+"global.actions.add" = "Προσθήκη";
 "global.actions.cancel" = "Ακύρωση";
 "global.actions.connect" = "Σύνδεση";
 "global.actions.delete" = "Διαγραφή";

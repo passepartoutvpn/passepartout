@@ -54,6 +54,7 @@
 "features.providers" = "Alla leverantörer";
 "features.routing" = "Anpassad Ruttning";
 "features.sharing" = "%@";
+"global.actions.add" = "Lägg till";
 "global.actions.cancel" = "Avbryt";
 "global.actions.connect" = "Anslut";
 "global.actions.delete" = "Ta bort";

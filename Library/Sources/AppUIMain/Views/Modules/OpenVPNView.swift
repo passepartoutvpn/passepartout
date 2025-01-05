@@ -94,6 +94,7 @@ private extension OpenVPNView {
                 isServerPushed: isServerPushed,
                 configuration: configuration,
                 credentialsRoute: Subroute.credentials,
+                remotesRoute: Subroute.editRemotes,
                 excludedEndpoints: excludedEndpoints
             )
         } else {
@@ -147,6 +148,8 @@ private extension OpenVPNView {
         case providerConfiguration(OpenVPN.Configuration)
 
         case credentials
+
+        case editRemotes
     }
 
     @ViewBuilder
@@ -169,6 +172,7 @@ private extension OpenVPNView {
                     isServerPushed: false,
                     configuration: configuration.builder(),
                     credentialsRoute: nil,
+                    remotesRoute: nil,
                     excludedEndpoints: excludedEndpoints
                 )
             }
@@ -186,6 +190,9 @@ private extension OpenVPNView {
             .navigationTitle(Strings.Modules.Openvpn.credentials)
             .themeForm()
             .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
+
+        case .editRemotes:
+            RemotesView(remotes: editableRemotesBinding)
         }
     }
 }
@@ -195,6 +202,16 @@ private extension OpenVPNView {
 private extension OpenVPNView {
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
         editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
+    }
+
+    var editableRemotesBinding: Binding<[String]> {
+        Binding {
+            draft.wrappedValue.configurationBuilder?.remotes?.map(\.rawValue) ?? []
+        } set: {
+            draft.wrappedValue.configurationBuilder?.remotes = $0.compactMap {
+                ExtendedEndpoint(rawValue: $0)
+            }
+        }
     }
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {

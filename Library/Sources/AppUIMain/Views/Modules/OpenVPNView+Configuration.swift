@@ -36,6 +36,8 @@ extension OpenVPNView {
 
         let credentialsRoute: (any Hashable)?
 
+        let remotesRoute: (any Hashable)?
+
         @ObservedObject
         var excludedEndpoints: ObservableList<ExtendedEndpoint>
 
@@ -72,12 +74,17 @@ extension OpenVPNView {
 private extension OpenVPNView.ConfigurationView {
     var remotesSection: some View {
         configuration.remotes.map { remotes in
-            ForEach(remotes, id: \.rawValue) { remote in
-                SelectableRemoteButton(
-                    remote: remote,
-                    all: Set(remotes),
-                    excludedEndpoints: excludedEndpoints
-                )
+            Group {
+                ForEach(remotes, id: \.rawValue) { remote in
+                    SelectableRemoteButton(
+                        remote: remote,
+                        all: Set(remotes),
+                        excludedEndpoints: excludedEndpoints
+                    )
+                }
+                if let remotesRoute {
+                    NavigationLink(Strings.Global.Actions.edit, value: remotesRoute)
+                }
             }
             .themeSection(header: Strings.Modules.Openvpn.remotes)
         }
@@ -103,14 +110,7 @@ private struct SelectableRemoteButton: View {
             }
         } label: {
             HStack {
-                VStack(alignment: .leading) {
-                    Text(remote.address.rawValue)
-                        .font(.headline)
-
-                    Text("\(remote.proto.socketType.rawValue):\(remote.proto.port.description)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                EndpointCardView(endpoint: remote)
                 Spacer()
                 ThemeImage(.marked)
                     .opaque(!excludedEndpoints.contains(remote))
@@ -363,6 +363,7 @@ private extension OpenVPNView.ConfigurationView {
                     isServerPushed: false,
                     configuration: .forPreviews,
                     credentialsRoute: nil,
+                    remotesRoute: nil,
                     excludedEndpoints: excludedEndpoints
                 )
             }

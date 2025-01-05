@@ -230,6 +230,7 @@
 
 // MARK: Global (Actions)
 
+"global.actions.add" = "Add";
 "global.actions.cancel" = "Cancel";
 "global.actions.connect" = "Connect";
 "global.actions.delete" = "Delete";
