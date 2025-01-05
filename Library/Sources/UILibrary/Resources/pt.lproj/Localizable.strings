@@ -54,6 +54,7 @@
 "features.providers" = "Todos os provedores";
 "features.routing" = "Roteamento Personalizado";
 "features.sharing" = "%@";
+"global.actions.add" = "Adicionar";
 "global.actions.cancel" = "Cancelar";
 "global.actions.connect" = "Conectar";
 "global.actions.delete" = "Excluir";

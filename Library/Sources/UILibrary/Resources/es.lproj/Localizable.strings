@@ -54,6 +54,7 @@
 "features.providers" = "Todos los proveedores";
 "features.routing" = "Enrutamiento Personalizado";
 "features.sharing" = "%@";
+"global.actions.add" = "Agregar";
 "global.actions.cancel" = "Cancelar";
 "global.actions.connect" = "Conectar";
 "global.actions.delete" = "Eliminar";

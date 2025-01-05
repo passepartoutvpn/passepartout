@@ -54,6 +54,7 @@
 "features.providers" = "Усі постачальники";
 "features.routing" = "Індивідуальна маршрутизація";
 "features.sharing" = "%@";
+"global.actions.add" = "Додати";
 "global.actions.cancel" = "Скасувати";
 "global.actions.connect" = "Підключитися";
 "global.actions.delete" = "Видалити";

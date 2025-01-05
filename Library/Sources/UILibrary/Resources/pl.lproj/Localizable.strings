@@ -54,6 +54,7 @@
 "features.providers" = "Wszyscy dostawcy";
 "features.routing" = "Niestandardowe trasowanie";
 "features.sharing" = "%@";
+"global.actions.add" = "Dodaj";
 "global.actions.cancel" = "Anuluj";
 "global.actions.connect" = "Połącz";
 "global.actions.delete" = "Usuń";
