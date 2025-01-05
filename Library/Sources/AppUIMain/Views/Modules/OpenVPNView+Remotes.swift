@@ -38,7 +38,7 @@ extension OpenVPNView {
             Form {
                 theme.listSection(
                     Strings.Modules.Openvpn.remotes,
-                    addTitle: "Add",
+                    addTitle: Strings.Global.Actions.add,
                     originalItems: $remotes,
                     itemLabel: {
                         if $0 {
