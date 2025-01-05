@@ -94,6 +94,7 @@ private extension OpenVPNView {
                 isServerPushed: isServerPushed,
                 configuration: configuration,
                 credentialsRoute: Subroute.credentials,
+                remotesRoute: Subroute.editRemotes,
                 excludedEndpoints: excludedEndpoints
             )
         } else {
@@ -147,6 +148,8 @@ private extension OpenVPNView {
         case providerConfiguration(OpenVPN.Configuration)
 
         case credentials
+
+        case editRemotes
     }
 
     @ViewBuilder
@@ -169,6 +172,7 @@ private extension OpenVPNView {
                     isServerPushed: false,
                     configuration: configuration.builder(),
                     credentialsRoute: nil,
+                    remotesRoute: nil,
                     excludedEndpoints: excludedEndpoints
                 )
             }
@@ -186,6 +190,9 @@ private extension OpenVPNView {
             .navigationTitle(Strings.Modules.Openvpn.credentials)
             .themeForm()
             .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
+
+        case .editRemotes:
+            Text("EDIT REMOTES")
         }
     }
 }
