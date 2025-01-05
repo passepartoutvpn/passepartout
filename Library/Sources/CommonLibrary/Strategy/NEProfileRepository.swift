@@ -89,14 +89,20 @@ public final class NEProfileRepository: ProfileRepository {
 
 private extension NEProfileRepository {
     func onUpdatedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
+        var decodingTime = 0.0
         let profiles = managers.values.compactMap {
             do {
-                return try repository.profile(from: $0)
+                let beginDate = Date()
+                let profile = try repository.profile(from: $0)
+                let elapsed = -beginDate.timeIntervalSinceNow
+                decodingTime += elapsed
+                return profile
             } catch {
                 pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
             }
         }
+        pp_log(.App.profiles, .info, "Decoded \(managers.count) managers to \(profiles.count) profiles in \(decodingTime) seconds")
         profilesSubject.send(profiles)
     }
 }
