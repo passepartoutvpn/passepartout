@@ -29,6 +29,14 @@ import Foundation
 import PassepartoutKit
 
 extension Dependencies {
+    var customUserLevel: AppUserLevel? {
+        guard let userLevelInteger = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
+              let userLevel = AppUserLevel(rawValue: userLevelInteger) else {
+            return nil
+        }
+        return userLevel
+    }
+
     func appProductHelper() -> any AppProductHelper {
         StoreKitHelper(
             products: AppProduct.all,

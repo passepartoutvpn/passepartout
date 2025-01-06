@@ -32,6 +32,7 @@ extension TunnelContext {
     static let shared: TunnelContext = {
         let dependencies: Dependencies = .shared
         let iapManager = IAPManager(
+            customUserLevel: dependencies.customUserLevel,
             inAppHelper: dependencies.appProductHelper(),
             receiptReader: dependencies.tunnelReceiptReader(),
             betaChecker: dependencies.betaChecker(),

@@ -238,14 +238,6 @@ private extension AppContext {
 // MARK: - Dependencies
 
 private extension Dependencies {
-    var customUserLevel: AppUserLevel? {
-        guard let userLevelInteger = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-              let userLevel = AppUserLevel(rawValue: userLevelInteger) else {
-            return nil
-        }
-        return userLevel
-    }
-
     func simulatedAppProductHelper() -> any AppProductHelper {
         if AppCommandLine.contains(.fakeIAP) {
             return FakeAppProductHelper()
