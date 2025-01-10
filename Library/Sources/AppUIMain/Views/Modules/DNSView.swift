@@ -84,6 +84,9 @@ private extension DNSView {
             case .tls:
                 ThemeTextField(Strings.Global.Nouns.hostname, text: draft.dotHostname, placeholder: Strings.Unlocalized.Placeholders.dotHostname)
                     .labelsHidden()
+
+            @unknown default:
+                EmptyView()
             }
         }
     }

@@ -168,6 +168,9 @@ extension OnDemandModule.Policy: LocalizableEntity {
 
         case .including:
             return Strings.Entities.OnDemand.Policy.including
+
+        @unknown default:
+            return Strings.Entities.OnDemand.Policy.any
         }
     }
 }
@@ -223,6 +226,9 @@ extension OpenVPN.Credentials.OTPMethod: StyledLocalizableEntity {
 
             case .encode:
                 return V.encode
+
+            @unknown default:
+                return V.none
             }
 
         case .approachDescription:
@@ -236,6 +242,9 @@ extension OpenVPN.Credentials.OTPMethod: StyledLocalizableEntity {
 
             case .encode:
                 return V.encode
+
+            @unknown default:
+                return ""
             }
         }
     }

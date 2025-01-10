@@ -32,12 +32,12 @@ extension DNSProtocol: LocalizableEntity {
         switch self {
         case .cleartext:
             return Strings.Entities.DnsProtocol.cleartext
-
         case .https:
             return Strings.Entities.DnsProtocol.https
-
         case .tls:
             return Strings.Entities.DnsProtocol.tls
+        @unknown default:
+            return ""
         }
     }
 }
