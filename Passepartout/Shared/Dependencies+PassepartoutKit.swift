@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
+import PassepartoutOpenVPNOpenSSL
 import PassepartoutWireGuardGo
 
 extension Dependencies {
@@ -59,25 +59,14 @@ private extension Dependencies {
         withKnownHandlers: true,
         allImplementations: [
             OpenVPNModule.Implementation(
-                prng: SecureRandom(),
-                dns: SimpleDNSResolver {
-                    CFDNSStrategy(hostname: $0)
-                },
-                importer: StandardOpenVPNParser(decrypter: OSSLTLSBox()),
-                sessionBlock: { _, module in
-                    guard let configuration = module.configuration else {
+                importer: StandardOpenVPNParser(),
+                connectionBlock: {
+                    guard let configuration = $1.configuration else {
                         fatalError("Creating session without OpenVPN configuration?")
                     }
-                    return try OpenVPNSession(
-                        configuration: configuration,
-                        credentials: module.credentials,
-                        prng: SecureRandom(),
-                        tlsFactory: {
-                            OSSLTLSBox()
-                        },
-                        cryptoFactory: {
-                            OSSLCryptoBox()
-                        },
+                    return try await OpenVPNConnection(
+                        parameters: $0,
+                        module: $1,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
                 }
@@ -86,7 +75,7 @@ private extension Dependencies {
                 keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
                 connectionBlock: { parameters, module in
-                    try GoWireGuardConnection(parameters: parameters, module: module)
+                    try WireGuardConnection(parameters: parameters, module: module)
                 }
             )
         ]

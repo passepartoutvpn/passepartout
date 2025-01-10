@@ -55,9 +55,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
         module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         editor = ProfileEditor(modules: [module])
         modulePreferences = ModulePreferences()
-        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
         impl = nil
         isServerPushed = true
+        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
     }
 
     init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {

@@ -97,26 +97,36 @@ private extension OpenVPNView.ImportModifier {
             guard let impl else {
                 fatalError("Requires OpenVPNModule implementation")
             }
-            guard let parser = impl.importer as? StandardOpenVPNParser else {
-                fatalError("OpenVPNModule importer should be StandardOpenVPNParser")
-            }
-            let parsed = try parser.parsed(fromURL: url, passphrase: importPassphrase)
+            let parsed: Module
+            do {
+                parsed = try impl.importer.module(fromURL: url, object: importPassphrase)
+            } catch let error as PassepartoutError {
+                pp_log(.app, .error, "Unable to parse URL: \(error)")
 
-            draft.configurationBuilder = parsed.configuration.builder()
-        } catch StandardOpenVPNParserError.encryptionPassphrase,
-                StandardOpenVPNParserError.unableToDecrypt {
-            Task {
-                // XXX: re-present same alert after artificial delay
-                try? await Task.sleep(for: .milliseconds(500))
-                importPassphrase = nil
-                requiresPassphrase = true
+                switch error.code {
+                case .OpenVPN.passphraseRequired:
+                    Task {
+                        // XXX: re-present same alert after artificial delay
+                        try? await Task.sleep(for: .milliseconds(500))
+                        importPassphrase = nil
+                        requiresPassphrase = true
+                    }
+                    return
+
+                case .unknownImportedModule:
+                    throw PassepartoutError(.parsing)
+
+                default:
+                    throw error
+                }
             }
+            guard let module = parsed as? OpenVPNModule else {
+                throw PassepartoutError(.parsing)
+            }
+            draft.configurationBuilder = module.configuration?.builder()
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
-            errorHandler.handle(
-                (error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error,
-                title: draft.moduleType.localizedDescription
-            )
+            errorHandler.handle(error, title: draft.moduleType.localizedDescription)
         }
     }
 }
