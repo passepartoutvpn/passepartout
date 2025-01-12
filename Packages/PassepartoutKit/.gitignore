@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+*.pbxuser
+**/*.xcodeproj/project.xcworkspace
+**/xcuserdata
+.build
+.swiftpm
+PassepartoutKit.xcframework.zip
