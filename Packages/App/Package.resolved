@@ -37,30 +37,6 @@
       }
     },
     {
-      "identity" : "passepartoutkit-source",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
-      "state" : {
-        "revision" : "8ced87ec9ea088603798be820ab8e2f1e71c2196"
-      }
-    },
-    {
-      "identity" : "passepartoutkit-source-openvpn-openssl",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl",
-      "state" : {
-        "revision" : "12c8b9166ba2bf98b63d3ebc5b561ac2ac5a2f86"
-      }
-    },
-    {
-      "identity" : "passepartoutkit-source-wireguard-go",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go",
-      "state" : {
-        "revision" : "279d1bb152e55162dcd2ac58208abf5e37a0a8d8"
-      }
-    },
-    {
       "identity" : "wg-go-apple",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/wg-go-apple",
