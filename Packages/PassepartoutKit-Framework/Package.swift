@@ -4,7 +4,7 @@
 import PackageDescription
 
 let environment: Environment
-environment = .development
+environment = .production
 
 enum Environment {
     case development
@@ -30,7 +30,6 @@ enum Environment {
 //                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.0.1/PassepartoutKit.xcframework.zip",
 //                checksum: "c5f07fc0d32dfbe800789c2dc276d287340fcac211186f957f414e40b622afb5"
             ))
-
         case .production:
             targets.append(.target(
                 name: "Target",
