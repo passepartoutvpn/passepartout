@@ -51,6 +51,9 @@ extension VPNSortField {
 
         case .serverId:
             return NSSortDescriptor(key: "serverId", ascending: true)
+
+        @unknown default:
+            return NSSortDescriptor()
         }
     }
 }

@@ -112,6 +112,9 @@ private extension OnDemandView {
             } else {
                 suffix = Strings.Modules.OnDemand.Policy.Footer.excluding
             }
+
+        @unknown default:
+            suffix = Strings.Modules.OnDemand.Policy.Footer.any
         }
         return Strings.Modules.OnDemand.Policy.footer(suffix)
     }

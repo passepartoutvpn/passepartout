@@ -35,7 +35,8 @@ Tailored for Apple platforms:
 ### Requirements
 
 - iOS 16+ / macOS 13+ / tvOS 17+
-- Xcode 15+ (SwiftPM 5.5)
+- Xcode 16+
+- SwiftPM 6.0
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
 

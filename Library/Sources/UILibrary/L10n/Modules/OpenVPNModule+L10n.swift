@@ -38,6 +38,9 @@ extension OpenVPN.PullMask: LocalizableEntity {
 
         case .proxy:
             return Strings.Unlocalized.proxy
+
+        @unknown default:
+            return ""
         }
     }
 }
@@ -66,7 +69,7 @@ extension OpenVPN.CompressionFraming: LocalizableEntity {
         case .compress, .compressV2:
             return Strings.Unlocalized.OpenVPN.compress
 
-        default:
+        @unknown default:
             return Strings.Global.Nouns.unknown
         }
     }
@@ -84,7 +87,7 @@ extension OpenVPN.CompressionAlgorithm: LocalizableEntity {
         case .other:
             return Strings.Entities.Openvpn.CompressionAlgorithm.other
 
-        default:
+        @unknown default:
             return Strings.Global.Nouns.unknown
         }
     }
@@ -121,6 +124,9 @@ extension OpenVPN.XORMethod: StyledLocalizableEntity {
 
         case .obfuscate:
             return V.obfuscate.rawValue
+
+        @unknown default:
+            return ""
         }
     }
 
@@ -199,9 +205,10 @@ private extension Optional where Wrapped == OpenVPN.TLSWrap {
         switch strategy {
         case .auth:
             return "--tls-auth"
-
         case .crypt:
             return "--tls-crypt"
+        @unknown default:
+            return ""
         }
     }
 }
