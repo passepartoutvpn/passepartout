@@ -89,6 +89,7 @@ private extension PaywallView {
             requiredFeaturesView
             featureProductsView
             fullProductsView
+            linksView
             if !iapManager.isFullVersionPurchaser {
                 allFeaturesView
             }
@@ -127,18 +128,29 @@ private extension PaywallView {
     }
 
     var fullProductsView: some View {
-        fullIAPs.nilIfEmpty.map {
-            ForEach($0, id: \.productIdentifier) {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .paywall,
-                    product: $0,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
-                )
+        fullIAPs.nilIfEmpty.map { iaps in
+            Group {
+                ForEach(iaps, id: \.productIdentifier) {
+                    PaywallProductView(
+                        iapManager: iapManager,
+                        style: .paywall,
+                        product: $0,
+                        purchasingIdentifier: $purchasingIdentifier,
+                        onComplete: onComplete,
+                        onError: onError
+                    )
+                }
             }
             .themeSection(header: Strings.Views.Paywall.Sections.FullProducts.header)
+        }
+    }
+
+    var linksView: some View {
+        fullIAPs.nilIfEmpty.map { _ in
+            Section {
+                Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
+                Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
+            }
         }
     }
 
