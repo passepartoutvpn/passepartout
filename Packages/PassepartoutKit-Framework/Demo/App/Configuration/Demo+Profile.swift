@@ -39,8 +39,8 @@ extension Profile {
             let ovpn = OpenVPN.demoModule
             profile.modules.append(ovpn)
 
-//            let wg = WireGuard.demoModule
-//            profile.modules.append(wg)
+            let wg = WireGuard.demoModule
+            profile.modules.append(wg)
 
             var dns = DNSModule.Builder()
             dns.protocolType = .https
