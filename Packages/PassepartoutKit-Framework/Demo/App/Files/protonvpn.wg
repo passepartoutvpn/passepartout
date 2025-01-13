@@ -1,0 +1,9 @@
+[Interface]
+PrivateKey = IKzK00I3reEj1atU5fE97+p9LE3LlNuXZUkgvClWc3k=
+Address = 10.2.0.2/32
+DNS = 10.2.0.1
+
+[Peer]
+PublicKey = LrxxTiPJjKy7MUJw3S9HOh1qL0Qpi/fD1KrsBwn+gT0=
+AllowedIPs = 0.0.0.0/0
+Endpoint = 89.39.107.157:51820

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfig</key>
+	<dict>
+		<key>team_id</key>
+		<string>$(CFG_TEAM_ID)</string>
+		<key>app_id</key>
+		<string>$(CFG_APP_ID)</string>
+		<key>group_id</key>
+		<string>$(CFG_GROUP_ID)</string>
+		<key>tunnel_id</key>
+		<string>$(CFG_TUNNEL_ID)</string>
+	</dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.networkextension.packet-tunnel</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).PacketTunnelProvider</string>
+	</dict>
+</dict>
+</plist>
