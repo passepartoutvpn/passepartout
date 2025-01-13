@@ -34,8 +34,8 @@ enum Environment {
         case .onlineDevelopment:
             targets.append(.binaryTarget(
                 name: "Target",
-                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.99.1/PassepartoutKit.xcframework.zip",
-                checksum: "6edb8d5d83299f4d1accba43622a25306bcca4f33a2a11f07d61e550a2cf1285"
+                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.99.2/PassepartoutKit.xcframework.zip",
+                checksum: "9fd6db5de77af9e8fe7aa425c1baf434ad54ca8bf2370946899ab344fd03eacc"
             ))
         case .production:
             targets.append(.target(
