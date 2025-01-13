@@ -5,15 +5,18 @@ import PackageDescription
 
 let environment: Environment
 environment = .production
+//environment = .onlineDevelopment
 
 enum Environment {
-    case development
+    case localDevelopment
+
+    case onlineDevelopment
 
     case production
 
     var dependencies: [Package.Dependency] {
         switch self {
-        case .development:
+        case .localDevelopment, .onlineDevelopment:
             return []
         case .production:
             return [.package(path: "../PassepartoutKit")]
@@ -23,12 +26,16 @@ enum Environment {
     var targets: [Target] {
         var targets: [Target] = []
         switch self {
-        case .development:
+        case .localDevelopment:
             targets.append(.binaryTarget(
                 name: "Target",
                 path: "PassepartoutKit.xcframework.zip"
-//                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.0.1/PassepartoutKit.xcframework.zip",
-//                checksum: "c5f07fc0d32dfbe800789c2dc276d287340fcac211186f957f414e40b622afb5"
+            ))
+        case .onlineDevelopment:
+            targets.append(.binaryTarget(
+                name: "Target",
+                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.99.0/PassepartoutKit.xcframework.zip",
+                checksum: "9b75b289e6043de0044b691b1518a595bd7a7dba0b40be3125ca82d3e528a8e4"
             ))
         case .production:
             targets.append(.target(
