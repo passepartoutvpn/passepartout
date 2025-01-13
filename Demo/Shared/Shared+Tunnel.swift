@@ -34,8 +34,6 @@ extension Registry {
     static let shared = Registry(
         withKnownHandlers: true,
         allImplementations: [
-
-            // OpenVPN
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
@@ -45,26 +43,7 @@ extension Registry {
                         cachesURL: Demo.moduleURL(for: "OpenVPN")
                     )
                 }
-//                sessionBlock: { parameters, module in
-//                    guard let configuration = module.configuration else {
-//                        fatalError("Creating session without OpenVPN configuration?")
-//                    }
-//                    var options = OpenVPNSession.Options()
-//                    options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
-//                    options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
-//                    return try OpenVPNSession(
-//                        configuration: configuration,
-//                        credentials: module.credentials,
-//                        prng: prng,
-//                        tlsFactory: { newTLS() },
-//                        cryptoFactory: { newCrypto() },
-//                        cachesURL: Demo.moduleURL(for: "OpenVPN"),
-//                        options: options
-//                    )
-//                }
             ),
-
-            // WireGuard
             WireGuardModule.Implementation(
                 keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
