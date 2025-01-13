@@ -44,6 +44,10 @@ let package = Package(
             targets: ["LegacyV2"]
         ),
         .library(
+            name: "PassepartoutImplementations",
+            targets: ["PassepartoutImplementations"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
         ),
@@ -57,6 +61,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(path: "../PassepartoutKit-Framework"),
         .package(path: "../PassepartoutOpenVPNOpenSSL"),
         .package(path: "../PassepartoutWireGuardGo"),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
@@ -144,8 +149,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                "PassepartoutOpenVPNOpenSSL",
-                "PassepartoutWireGuardGo"
+                "PassepartoutKit-Framework"
             ],
             resources: [
                 .process("Resources")
@@ -157,9 +161,19 @@ let package = Package(
         ),
         .target(
             name: "LegacyV2",
-            dependencies: ["CommonLibrary"],
+            dependencies: [
+                "CommonLibrary",
+                "PassepartoutImplementations"
+            ],
             resources: [
                 .process("Profiles.xcdatamodeld")
+            ]
+        ),
+        .target(
+            name: "PassepartoutImplementations",
+            dependencies: [
+                "PassepartoutOpenVPNOpenSSL",
+                "PassepartoutWireGuardGo"
             ]
         ),
         .target(

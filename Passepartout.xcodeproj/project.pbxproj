@@ -48,6 +48,8 @@
 		0EAEC8A92D05DB8D001AA50C /* DefaultAppProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */; };
 		0EAEC8AA2D05DB8D001AA50C /* DefaultTunnelProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */; };
 		0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EB08B962CA46F4900A02591 /* AppPlist.strings */; };
+		0EB847EA2D35807400B5B205 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EB847E92D35807400B5B205 /* PassepartoutImplementations */; };
+		0EB847EC2D35807A00B5B205 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EB847EB2D35807A00B5B205 /* PassepartoutImplementations */; };
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
@@ -293,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */,
+				0EB847EA2D35807400B5B205 /* PassepartoutImplementations in Frameworks */,
 				0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +307,7 @@
 				0E3E22982CE53510005135DF /* AppUITV in Frameworks */,
 				0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */,
 				0E3E22962CE53510005135DF /* AppUIMain in Frameworks */,
+				0EB847EC2D35807A00B5B205 /* PassepartoutImplementations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +598,7 @@
 				0E3E22952CE53510005135DF /* AppUIMain */,
 				0E3E22972CE53510005135DF /* AppUITV */,
 				0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */,
+				0EB847EB2D35807A00B5B205 /* PassepartoutImplementations */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -671,6 +676,7 @@
 			name = PassepartoutTunnel;
 			packageProductDependencies = (
 				0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */,
+				0EB847E92D35807400B5B205 /* PassepartoutImplementations */,
 			);
 			productName = Tunnel;
 			productReference = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */;
@@ -1581,6 +1587,14 @@
 		0EA6340B2D088C8200180D7C /* UIAccessibility */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UIAccessibility;
+		};
+		0EB847E92D35807400B5B205 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
+		};
+		0EB847EB2D35807A00B5B205 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
 		};
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;

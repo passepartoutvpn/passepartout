@@ -270,7 +270,7 @@ final class NetworkSettingsBuilderTests: XCTestCase {
     // MARK: MTU
 
     func test_givenSettings_whenBuildMTU_thenReturnsLocalMTU() throws {
-        var sut: OpenVPN.NetworkSettingsBuilder
+        var sut: NetworkSettingsBuilder
         var localOptions = OpenVPN.Configuration.Builder()
         var remoteOptions = OpenVPN.Configuration.Builder()
 
@@ -304,8 +304,8 @@ private extension NetworkSettingsBuilderTests {
     func newBuilder(
         with remoteOptions: OpenVPN.Configuration.Builder,
         localOptions: OpenVPN.Configuration.Builder? = nil
-    ) throws -> OpenVPN.NetworkSettingsBuilder {
-        OpenVPN.NetworkSettingsBuilder(
+    ) throws -> NetworkSettingsBuilder {
+        NetworkSettingsBuilder(
             localOptions: try (localOptions ?? OpenVPN.Configuration.Builder()).tryBuild(isClient: false),
             remoteOptions: try remoteOptions.tryBuild(isClient: false)
         )
