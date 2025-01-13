@@ -39,15 +39,15 @@ extension Profile {
             let ovpn = OpenVPN.demoModule
             profile.modules.append(ovpn)
 
-            let wg = WireGuard.demoModule
-            profile.modules.append(wg)
+//            let wg = WireGuard.demoModule
+//            profile.modules.append(wg)
 
-//            var dns = DNSModule.Builder()
-//            dns.protocolType = .https
-//            dns.servers = ["1.1.1.1"]
-//            dns.dohURL = "https://1.1.1.1/dns-query"
-//            profile.modules.append(try dns.tryBuild())
-//
+            var dns = DNSModule.Builder()
+            dns.protocolType = .https
+            dns.servers = ["1.1.1.1"]
+            dns.dohURL = "https://1.1.1.1/dns-query"
+            profile.modules.append(try dns.tryBuild())
+
             var ip = IPModule.Builder()
             ip.ipv4 = IPSettings(subnet: nil)
                 .including(routes: [.init(defaultWithGateway: nil)])
@@ -65,9 +65,9 @@ extension Profile {
 //            var filterModule = FilterModule.Builder()
 //            filterModule.disabledMask = [.dns]
 //            profile.modules.append(filterModule.tryBuild())
-//
-//            profile.activeModulesIds = [ovpn.id, dns.id, ip.id]
-            profile.activeModulesIds = [wg.id]
+
+            profile.activeModulesIds = [ovpn.id, dns.id, ip.id]
+//            profile.activeModulesIds = [wg.id]
 
             return try profile.tryBuild()
         } catch {
