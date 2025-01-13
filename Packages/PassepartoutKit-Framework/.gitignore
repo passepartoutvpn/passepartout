@@ -2,6 +2,7 @@
 *.swp
 *.pbxuser
 **/*.xcodeproj/project.xcworkspace
+**/xcschemes
 **/xcuserdata
 .build
 .swiftpm
