@@ -4,8 +4,8 @@
 import PackageDescription
 
 let environment: Environment
-//environment = .production
-environment = .onlineDevelopment
+environment = .production
+//environment = .onlineDevelopment
 
 enum Environment {
     case localDevelopment

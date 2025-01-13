@@ -50,9 +50,12 @@ Download the app codebase locally:
 
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
-To eventually test the app, open `Passepartout.xcodeproj` in Xcode and run the `Passepartout` target.
+To test the app on your Mac or iOS/tvOS Simulator:
 
-**WARNING: SwiftPM package resolution will fail because PassepartoutKit is a private repository, as it's not ready for public use yet.** [Follow updates here](https://github.com/passepartoutvpn/passepartout/issues/793).
+- Open `Passepartout.xcodeproj` in Xcode
+- Edit `Packages/PassepartoutKit-Framework/Package.swift`
+- Set `environment = .onlineDevelopment`
+- Run the `Passepartout` target
 
 ## License
 
