@@ -61,9 +61,13 @@ private extension Dependencies {
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
-                    try await OpenVPNConnection(
+                    var options = OpenVPN.ConnectionOptions()
+                    options.writeTimeout = TimeInterval($0.options.linkWriteTimeout) / 1000.0
+                    options.minDataCountInterval = TimeInterval($0.options.minDataCountInterval) / 1000.0
+                    return try await OpenVPNConnection(
                         parameters: $0,
                         module: $1,
+                        options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
                 }

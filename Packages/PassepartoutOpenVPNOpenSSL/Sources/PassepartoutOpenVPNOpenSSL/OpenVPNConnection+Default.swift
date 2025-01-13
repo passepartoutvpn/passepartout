@@ -31,6 +31,7 @@ extension OpenVPNConnection {
     public init(
         parameters: ConnectionParameters,
         module: OpenVPNModule,
+        options: OpenVPN.ConnectionOptions,
         cachesURL: URL
     ) async throws {
         guard let configuration = module.configuration else {
@@ -51,9 +52,6 @@ extension OpenVPNConnection {
             return box
         }
 
-        var options = OpenVPNSession.Options()
-        options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
-        options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
         let session = try OpenVPNSession(
             configuration: configuration,
             credentials: module.credentials,

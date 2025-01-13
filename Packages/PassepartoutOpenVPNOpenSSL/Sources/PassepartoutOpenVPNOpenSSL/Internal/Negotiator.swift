@@ -35,7 +35,7 @@ actor Negotiator {
 
         let withLocalOptions: Bool
 
-        let sessionOptions: OpenVPNSession.Options
+        let sessionOptions: OpenVPN.ConnectionOptions
 
         let tlsOptions: OpenVPNTLSOptions
 

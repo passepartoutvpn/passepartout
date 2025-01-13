@@ -53,7 +53,7 @@ actor OpenVPNSession {
 
     private let caURL: URL
 
-    let options: Options
+    let options: OpenVPN.ConnectionOptions
 
     let tlsOptions: OpenVPNTLSOptions
 
@@ -126,7 +126,7 @@ actor OpenVPNSession {
         tlsFactory: @escaping @Sendable () -> OpenVPNTLSProtocol,
         cryptoFactory: @escaping @Sendable () -> OpenVPNCryptoProtocol,
         cachesURL: URL,
-        options: Options = .init()
+        options: OpenVPN.ConnectionOptions = .init()
     ) throws {
         guard let ca = configuration.ca else {
             fatalError("Configuration has no CA")
@@ -163,39 +163,6 @@ actor OpenVPNSession {
 
     deinit {
         try? FileManager.default.removeItem(at: caURL)
-    }
-}
-
-// MARK: - Options
-
-extension OpenVPNSession {
-
-    /// The options for ``OpenVPNSession``. Intervals are expressed in seconds.
-    struct Options: Sendable {
-        var maxPackets: Int = 100
-
-        var writeTimeout: TimeInterval = 5.0
-
-        var minDataCountInterval: TimeInterval = 3.0
-
-        var negotiationTimeout: TimeInterval = 30.0
-
-        var hardResetTimeout: TimeInterval = 10.0
-
-        var tickInterval: TimeInterval = 0.2
-
-        var retxInterval: TimeInterval = 0.1
-
-        var pushRequestInterval: TimeInterval = 2.0
-
-        var pingTimeoutCheckInterval: TimeInterval = 10.0
-
-        var pingTimeout: TimeInterval = 120.0
-
-        var softNegotiationTimeout: TimeInterval = 120.0
-
-        init() {
-        }
     }
 }
 
