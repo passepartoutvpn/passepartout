@@ -31,7 +31,7 @@ extension OpenVPNConnection {
     public init(
         parameters: ConnectionParameters,
         module: OpenVPNModule,
-        options: OpenVPN.ConnectionOptions,
+        options: OpenVPN.ConnectionOptions = .init(),
         cachesURL: URL
     ) async throws {
         guard let configuration = module.configuration else {
