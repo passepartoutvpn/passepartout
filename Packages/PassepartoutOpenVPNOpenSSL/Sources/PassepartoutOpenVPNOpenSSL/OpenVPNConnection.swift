@@ -174,7 +174,7 @@ extension OpenVPNConnection: OpenVPNSessionDelegate {
 
         environment.setEnvironmentValue(remoteOptions, forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
 
-        let builder = OpenVPN.NetworkSettingsBuilder(localOptions: configuration, remoteOptions: remoteOptions)
+        let builder = NetworkSettingsBuilder(localOptions: configuration, remoteOptions: remoteOptions)
         builder.print()
         do {
             try await controller.setTunnelSettings(with: TunnelRemoteInfo(

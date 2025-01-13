@@ -24,65 +24,59 @@
 //
 
 import Foundation
-#if !PP_FRAMEWORK
-import PassepartoutCore
-import PassepartoutOpenVPN
-#endif
+import PassepartoutKit
 
-extension OpenVPN {
+/// Merges local and remote settings.
+///
+/// OpenVPN settings may be set locally, but may also received from a remote server. This object merges the local and remote ``OpenVPN/Configuration`` into a digestible list of `Module`.
+struct NetworkSettingsBuilder {
 
-    /// Merges local and remote settings.
-    ///
-    /// OpenVPN settings may be set locally, but may also received from a remote server. This object merges the local and remote ``OpenVPN/Configuration`` into a digestible list of `Module`.
-    struct NetworkSettingsBuilder {
+    /// The client options.
+    let localOptions: OpenVPN.Configuration
 
-        /// The client options.
-        let localOptions: Configuration
+    /// The server options.
+    let remoteOptions: OpenVPN.Configuration
 
-        /// The server options.
-        let remoteOptions: Configuration
+    init(localOptions: OpenVPN.Configuration, remoteOptions: OpenVPN.Configuration) {
+        self.localOptions = localOptions
+        self.remoteOptions = remoteOptions
+    }
 
-        init(localOptions: Configuration, remoteOptions: Configuration) {
-            self.localOptions = localOptions
-            self.remoteOptions = remoteOptions
+    /// A list of `Module` mapped from ``localOptions`` and ``remoteOptions``.
+    func modules() -> [Module] {
+        pp_log(.openvpn, .info, "Build modules from local/remote options")
+
+        return [
+            ipModule,
+            dnsModule,
+            httpProxyModule
+        ].compactMap { $0 }
+    }
+
+    func print() {
+        pp_log(.openvpn, .notice, "Negotiated options (remote overrides local)")
+        if let negCipher = remoteOptions.cipher {
+            pp_log(.openvpn, .notice, "\tCipher: \(negCipher.rawValue)")
+        }
+        if let negFraming = remoteOptions.compressionFraming {
+            pp_log(.openvpn, .notice, "\tCompression framing: \(negFraming)")
+        }
+        if let negCompression = remoteOptions.compressionAlgorithm {
+            pp_log(.openvpn, .notice, "\tCompression algorithm: \(negCompression)")
+        }
+        if let negPing = remoteOptions.keepAliveInterval {
+            pp_log(.openvpn, .notice, "\tKeep-alive interval: \(negPing.asTimeString)")
+        }
+        if let negPingRestart = remoteOptions.keepAliveTimeout {
+            pp_log(.openvpn, .notice, "\tKeep-alive timeout: \(negPingRestart.asTimeString)")
         }
 
-        /// A list of `Module` mapped from ``localOptions`` and ``remoteOptions``.
-        func modules() -> [Module] {
-            pp_log(.openvpn, .info, "Build modules from local/remote options")
-
-            return [
-                ipModule,
-                dnsModule,
-                httpProxyModule
-            ].compactMap { $0 }
-        }
-
-        func print() {
-            pp_log(.openvpn, .notice, "Negotiated options (remote overrides local)")
-            if let negCipher = remoteOptions.cipher {
-                pp_log(.openvpn, .notice, "\tCipher: \(negCipher.rawValue)")
-            }
-            if let negFraming = remoteOptions.compressionFraming {
-                pp_log(.openvpn, .notice, "\tCompression framing: \(negFraming)")
-            }
-            if let negCompression = remoteOptions.compressionAlgorithm {
-                pp_log(.openvpn, .notice, "\tCompression algorithm: \(negCompression)")
-            }
-            if let negPing = remoteOptions.keepAliveInterval {
-                pp_log(.openvpn, .notice, "\tKeep-alive interval: \(negPing.asTimeString)")
-            }
-            if let negPingRestart = remoteOptions.keepAliveTimeout {
-                pp_log(.openvpn, .notice, "\tKeep-alive timeout: \(negPingRestart.asTimeString)")
-            }
-
-        }
     }
 }
 
 // MARK: - Pull
 
-private extension OpenVPN.NetworkSettingsBuilder {
+private extension NetworkSettingsBuilder {
     var pullRoutes: Bool {
         !(localOptions.noPullMask?.contains(.routes) ?? false)
     }
@@ -98,7 +92,7 @@ private extension OpenVPN.NetworkSettingsBuilder {
 
 // MARK: - Overall
 
-private extension OpenVPN.NetworkSettingsBuilder {
+private extension NetworkSettingsBuilder {
     var isGateway: Bool {
         isIPv4Gateway || isIPv6Gateway
     }
@@ -166,7 +160,7 @@ private extension OpenVPN.NetworkSettingsBuilder {
 
 // MARK: - IP
 
-private extension OpenVPN.NetworkSettingsBuilder {
+private extension NetworkSettingsBuilder {
 
     // IPv4/6 address/mask MUST come from server options
     // routes, instead, can both come from server and local options
@@ -241,7 +235,7 @@ private extension OpenVPN.NetworkSettingsBuilder {
 
 // MARK: - DNS
 
-private extension OpenVPN.NetworkSettingsBuilder {
+private extension NetworkSettingsBuilder {
     private var dnsModule: Module? {
         let dnsServers = allDNSServers
         guard !dnsServers.isEmpty else {
@@ -278,7 +272,7 @@ private extension OpenVPN.NetworkSettingsBuilder {
 
 // MARK: - HTTP Proxy
 
-private extension OpenVPN.NetworkSettingsBuilder {
+private extension NetworkSettingsBuilder {
     private var httpProxyModule: Module? {
         var proxySettings: HTTPProxyModule.Builder?
 
