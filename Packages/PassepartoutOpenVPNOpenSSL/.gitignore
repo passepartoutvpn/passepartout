@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*.pbxuser
+**/*.xcworkspace/xcuserdata
+**/*.xcodeproj/project.xcworkspace
+**/*.xcodeproj/xcuserdata
+docs
+build
+.swiftpm
+.build

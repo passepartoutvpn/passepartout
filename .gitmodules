@@ -1,0 +1,3 @@
+[submodule "Packages/PassepartoutKit"]
+	path = Packages/PassepartoutKit
+	url = git@github.com:passepartoutvpn/passepartoutkit-source.git

@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
+import PassepartoutOpenVPNOpenSSL
 import PassepartoutWireGuardGo
 
 extension Dependencies {
@@ -59,25 +59,15 @@ private extension Dependencies {
         withKnownHandlers: true,
         allImplementations: [
             OpenVPNModule.Implementation(
-                prng: SecureRandom(),
-                dns: SimpleDNSResolver {
-                    CFDNSStrategy(hostname: $0)
-                },
-                importer: StandardOpenVPNParser(decrypter: OSSLTLSBox()),
-                sessionBlock: { _, module in
-                    guard let configuration = module.configuration else {
-                        fatalError("Creating session without OpenVPN configuration?")
-                    }
-                    return try OpenVPNSession(
-                        configuration: configuration,
-                        credentials: module.credentials,
-                        prng: SecureRandom(),
-                        tlsFactory: {
-                            OSSLTLSBox()
-                        },
-                        cryptoFactory: {
-                            OSSLCryptoBox()
-                        },
+                importer: StandardOpenVPNParser(),
+                connectionBlock: {
+                    var options = OpenVPN.ConnectionOptions()
+                    options.writeTimeout = TimeInterval($0.options.linkWriteTimeout) / 1000.0
+                    options.minDataCountInterval = TimeInterval($0.options.minDataCountInterval) / 1000.0
+                    return try await OpenVPNConnection(
+                        parameters: $0,
+                        module: $1,
+                        options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
                 }
@@ -85,8 +75,11 @@ private extension Dependencies {
             WireGuardModule.Implementation(
                 keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
-                connectionBlock: { parameters, module in
-                    try GoWireGuardConnection(parameters: parameters, module: module)
+                connectionBlock: {
+                    try WireGuardConnection(
+                        parameters: $0,
+                        module: $1
+                    )
                 }
             )
         ]
