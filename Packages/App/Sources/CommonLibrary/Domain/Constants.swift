@@ -65,6 +65,8 @@ public struct Constants: Decodable, Sendable {
         public let subreddit: URL
 
         public let githubSponsors: URL
+
+        public let eula: URL
     }
 
     public struct Emails: Decodable, Sendable {

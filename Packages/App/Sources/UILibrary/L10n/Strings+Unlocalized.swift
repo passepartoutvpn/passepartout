@@ -108,6 +108,8 @@ extension Strings {
 
         public static let dns = "DNS"
 
+        public static let eula = "EULA"
+
         public static let faq = "FAQ"
 
         public static let http = "HTTP"
