@@ -17,19 +17,17 @@ let package = Package(
         )
     ],
     dependencies: [
-//        .package(path: "../../passepartoutkit-source"),
-        .package(path: ".."),
-        .package(path: "../../passepartoutkit-source-openvpn-openssl"),
-        .package(path: "../../passepartoutkit-source-wireguard-go")
+        .package(path: "../.."),
+        .package(path: "../../../PassepartoutOpenVPNOpenSSL"),
+        .package(path: "../../../PassepartoutWireGuardGo")
     ],
     targets: [
         .target(
             name: "ExternalDependencies",
             dependencies: [
-                .product(name: "PassepartoutKit", package: "passepartoutkit"),
-//                .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
-                .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
-                .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
+                "PassepartoutKit-Framework",
+                "PassepartoutOpenVPNOpenSSL",
+                "PassepartoutWireGuardGo"
             ]
         ),
         .testTarget(

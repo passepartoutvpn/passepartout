@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,15 +15,11 @@
 		0E336F682B9232CD00BE7BA6 /* Demo+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E336F662B9232CD00BE7BA6 /* Demo+Profile.swift */; };
 		0E8445A82BD8E7360019DF51 /* Files in Resources */ = {isa = PBXBuildFile; fileRef = 0E8445A72BD8E7360019DF51 /* Files */; };
 		0E9CFB7B2B8B34C0009C8D82 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CFB7A2B8B34C0009C8D82 /* Shared+App.swift */; };
+		0EA088D52D352AF5004FC100 /* ExternalDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA088D42D352AF5004FC100 /* ExternalDependencies */; };
+		0EA088D72D352AF8004FC100 /* ExternalDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA088D62D352AF8004FC100 /* ExternalDependencies */; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EC332CD2B8A1808000B9C2F /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC332CC2B8A1808000B9C2F /* PacketTunnelProvider.swift */; };
 		0EC332D22B8A1808000B9C2F /* PassepartoutKitDemoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutKitDemoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0ED34F662D348F8F00CBFCE3 /* PassepartoutKit-Framework in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F652D348F8F00CBFCE3 /* PassepartoutKit-Framework */; };
-		0ED34F6A2D348FB100CBFCE3 /* PassepartoutKit-Framework in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F692D348FB100CBFCE3 /* PassepartoutKit-Framework */; };
-		0ED34F6D2D348FD800CBFCE3 /* PassepartoutOpenVPNOpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F6C2D348FD800CBFCE3 /* PassepartoutOpenVPNOpenSSL */; };
-		0ED34F702D348FE600CBFCE3 /* PassepartoutWireGuardGo in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F6F2D348FE600CBFCE3 /* PassepartoutWireGuardGo */; };
-		0ED34F722D348FEF00CBFCE3 /* PassepartoutOpenVPNOpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F712D348FEF00CBFCE3 /* PassepartoutOpenVPNOpenSSL */; };
-		0ED34F742D348FEF00CBFCE3 /* PassepartoutWireGuardGo in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED34F732D348FEF00CBFCE3 /* PassepartoutWireGuardGo */; };
 		0ED5F8FA2BB34C8C007F8E85 /* Demo+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED5F8F92BB34C8C007F8E85 /* Demo+WireGuard.swift */; };
 		0ED5F8FF2BB3562E007F8E85 /* Shared+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED5F8FD2BB3561F007F8E85 /* Shared+Tunnel.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +59,7 @@
 		0E8445A72BD8E7360019DF51 /* Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Files; sourceTree = "<group>"; };
 		0E94EE5D2B93571800588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
 		0E9CFB7A2B8B34C0009C8D82 /* Shared+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+App.swift"; sourceTree = "<group>"; };
+		0EA088D32D352A68004FC100 /* ExternalDependencies */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ExternalDependencies; sourceTree = "<group>"; };
 		0EC332C82B8A1808000B9C2F /* PassepartoutKitDemoTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutKitDemoTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0EC332CC2B8A1808000B9C2F /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
@@ -78,10 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EA088D72D352AF8004FC100 /* ExternalDependencies in Frameworks */,
 				0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */,
-				0ED34F722D348FEF00CBFCE3 /* PassepartoutOpenVPNOpenSSL in Frameworks */,
-				0ED34F742D348FEF00CBFCE3 /* PassepartoutWireGuardGo in Frameworks */,
-				0ED34F6A2D348FB100CBFCE3 /* PassepartoutKit-Framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,9 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED34F662D348F8F00CBFCE3 /* PassepartoutKit-Framework in Frameworks */,
-				0ED34F702D348FE600CBFCE3 /* PassepartoutWireGuardGo in Frameworks */,
-				0ED34F6D2D348FD800CBFCE3 /* PassepartoutOpenVPNOpenSSL in Frameworks */,
+				0EA088D52D352AF5004FC100 /* ExternalDependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +154,7 @@
 				0E179B242B8A6D2C0053163E /* App */,
 				0E9CFB7C2B8B34CC009C8D82 /* Shared */,
 				0EC332CB2B8A1808000B9C2F /* Tunnel */,
+				0EA088D32D352A68004FC100 /* ExternalDependencies */,
 				0ED5F8FB2BB354B3007F8E85 /* Config.xcconfig */,
 			);
 			path = Demo;
@@ -204,11 +198,6 @@
 				0EC332D12B8A1808000B9C2F /* PBXTargetDependency */,
 			);
 			name = PassepartoutKitDemo;
-			packageProductDependencies = (
-				0ED34F652D348F8F00CBFCE3 /* PassepartoutKit-Framework */,
-				0ED34F6C2D348FD800CBFCE3 /* PassepartoutOpenVPNOpenSSL */,
-				0ED34F6F2D348FE600CBFCE3 /* PassepartoutWireGuardGo */,
-			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* PassepartoutKitDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -227,9 +216,7 @@
 			);
 			name = PassepartoutKitDemoTunnel;
 			packageProductDependencies = (
-				0ED34F692D348FB100CBFCE3 /* PassepartoutKit-Framework */,
-				0ED34F712D348FEF00CBFCE3 /* PassepartoutOpenVPNOpenSSL */,
-				0ED34F732D348FEF00CBFCE3 /* PassepartoutWireGuardGo */,
+				0EA088D62D352AF8004FC100 /* ExternalDependencies */,
 			);
 			productName = Tunnel;
 			productReference = 0EC332C82B8A1808000B9C2F /* PassepartoutKitDemoTunnel.appex */;
@@ -263,9 +250,6 @@
 			);
 			mainGroup = 0E06D1862B87629100176E1D;
 			packageReferences = (
-				0ED34F642D348F8F00CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutKit-Framework" */,
-				0ED34F6B2D348FD800CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutOpenVPNOpenSSL" */,
-				0ED34F6E2D348FE600CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutWireGuardGo" */,
 			);
 			productRefGroup = 0E06D1902B87629100176E1D /* Products */;
 			projectDirPath = "";
@@ -631,48 +615,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		0ED34F642D348F8F00CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutKit-Framework" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../PassepartoutKit-Framework";
-		};
-		0ED34F6B2D348FD800CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutOpenVPNOpenSSL" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PassepartoutOpenVPNOpenSSL;
-		};
-		0ED34F6E2D348FE600CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutWireGuardGo" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../PassepartoutWireGuardGo;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		0ED34F652D348F8F00CBFCE3 /* PassepartoutKit-Framework */ = {
+		0EA088D42D352AF5004FC100 /* ExternalDependencies */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PassepartoutKit-Framework";
+			productName = ExternalDependencies;
 		};
-		0ED34F692D348FB100CBFCE3 /* PassepartoutKit-Framework */ = {
+		0EA088D62D352AF8004FC100 /* ExternalDependencies */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0ED34F642D348F8F00CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutKit-Framework" */;
-			productName = "PassepartoutKit-Framework";
-		};
-		0ED34F6C2D348FD800CBFCE3 /* PassepartoutOpenVPNOpenSSL */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutOpenVPNOpenSSL;
-		};
-		0ED34F6F2D348FE600CBFCE3 /* PassepartoutWireGuardGo */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutWireGuardGo;
-		};
-		0ED34F712D348FEF00CBFCE3 /* PassepartoutOpenVPNOpenSSL */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0ED34F6B2D348FD800CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutOpenVPNOpenSSL" */;
-			productName = PassepartoutOpenVPNOpenSSL;
-		};
-		0ED34F732D348FEF00CBFCE3 /* PassepartoutWireGuardGo */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0ED34F6E2D348FE600CBFCE3 /* XCLocalSwiftPackageReference "../PassepartoutWireGuardGo" */;
-			productName = PassepartoutWireGuardGo;
+			productName = ExternalDependencies;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
