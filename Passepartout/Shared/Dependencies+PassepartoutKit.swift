@@ -61,10 +61,7 @@ private extension Dependencies {
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
-                    guard let configuration = $1.configuration else {
-                        fatalError("Creating connection without OpenVPN configuration?")
-                    }
-                    return try await OpenVPNConnection(
+                    try await OpenVPNConnection(
                         parameters: $0,
                         module: $1,
                         cachesURL: FileManager.default.temporaryDirectory
