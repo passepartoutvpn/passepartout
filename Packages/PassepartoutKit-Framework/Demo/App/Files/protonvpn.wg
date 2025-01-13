@@ -1,9 +1,13 @@
 [Interface]
-PrivateKey = IKzK00I3reEj1atU5fE97+p9LE3LlNuXZUkgvClWc3k=
+# Bouncing = 2
+# NAT-PMP (Port Forwarding) = off
+# VPN Accelerator = on
+PrivateKey = iAOTiIx4mHck9czKlL0+0Z5H7GRa4ELZN45nBzJFh2w=
 Address = 10.2.0.2/32
 DNS = 10.2.0.1
 
 [Peer]
-PublicKey = LrxxTiPJjKy7MUJw3S9HOh1qL0Qpi/fD1KrsBwn+gT0=
+# NL-FREE#95
+PublicKey = xRos1I7E1V29S5DrzSe7+EDWPcIgYmlDm8GwUT0+nXs=
 AllowedIPs = 0.0.0.0/0
-Endpoint = 89.39.107.157:51820
+Endpoint = 138.199.7.225:51820
