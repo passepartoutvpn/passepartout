@@ -62,7 +62,7 @@ private extension Dependencies {
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
                     guard let configuration = $1.configuration else {
-                        fatalError("Creating session without OpenVPN configuration?")
+                        fatalError("Creating connection without OpenVPN configuration?")
                     }
                     return try await OpenVPNConnection(
                         parameters: $0,
@@ -74,8 +74,11 @@ private extension Dependencies {
             WireGuardModule.Implementation(
                 keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
-                connectionBlock: { parameters, module in
-                    try WireGuardConnection(parameters: parameters, module: module)
+                connectionBlock: {
+                    try WireGuardConnection(
+                        parameters: $0,
+                        module: $1
+                    )
                 }
             )
         ]
