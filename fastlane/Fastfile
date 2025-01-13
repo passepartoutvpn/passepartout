@@ -18,7 +18,7 @@ fastlane_require "fileutils"
 Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
-api = "Library/Sources/CommonAPI/API"
+api = ENV["API_PACKAGE_PATH"]
 metadata = "fastlane/metadata"
 logname = "CHANGELOG.txt"
 build_path = "build"

@@ -17,9 +17,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../Packages/PassepartoutKit-Framework"),
-        .package(path: "../../Packages/PassepartoutOpenVPNOpenSSL"),
-        .package(path: "../../Packages/PassepartoutWireGuardGo")
+        .package(path: "../../../Packages/PassepartoutKit-Framework"),
+        .package(path: "../../../Packages/PassepartoutOpenVPNOpenSSL"),
+        .package(path: "../../../Packages/PassepartoutWireGuardGo")
     ],
     targets: [
         .target(
