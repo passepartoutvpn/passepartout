@@ -25,5 +25,5 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
       - name: "Run tests"
         run: |
-          cd Library
+          cd Packages/App
           swift test
