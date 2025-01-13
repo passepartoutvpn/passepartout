@@ -1,5 +1,5 @@
 //
-//  Empty.swift
+//  ParseError+L10n.swift
 //  PassepartoutKit
 //
 //  Created by Davide De Rosa on 11/25/24.
