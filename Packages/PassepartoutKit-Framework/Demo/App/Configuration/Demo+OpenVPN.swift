@@ -45,8 +45,17 @@ extension OpenVPN {
 private enum Constants {
     static let demoURL = Bundle.main.url(forResource: "Files/protonvpn", withExtension: "ovpn")!
 
-    static let demoCredentials = OpenVPN.Credentials.Builder(
-        username: "",
-        password: ""
-    ).build()
+    static let demoCredentials: OpenVPN.Credentials = {
+
+        var builder = OpenVPN.Credentials.Builder()
+        if let url = Bundle.main.url(forResource: "Files/test-protonvpn", withExtension: "txt"),
+           let content = try? String(contentsOf: url, encoding: .utf8) {
+            let lines = content.split(separator: "\n")
+            if lines.count == 2 {
+                builder.username = String(lines[0])
+                builder.password = String(lines[1])
+            }
+        }
+        return builder.build()
+    }()
 }
