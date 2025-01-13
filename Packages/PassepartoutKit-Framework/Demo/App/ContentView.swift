@@ -84,10 +84,6 @@ struct ContentView: View {
                 print(error.localizedDescription)
             }
         }
-        .onAppear {
-            let data = Data(hex: "00000000")
-            print(">>> \(data.asIPAddress)")
-        }
     }
 }
 
