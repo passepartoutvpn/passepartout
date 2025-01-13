@@ -51,7 +51,7 @@ CFG_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT).v3
 CFG_LEGACY_V2_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT)
 CFG_LEGACY_V2_TV_CLOUDKIT_ID = $(CFG_CLOUDKIT_ROOT).Shared
 
-PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
+PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin
 CUSTOM_SCRIPT_PATH = $(PATH)
 
 #include? "Secret.xcconfig"
