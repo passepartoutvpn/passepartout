@@ -39,7 +39,7 @@
 static inline void *_Nullable pp_alloc_crypto(size_t size) {
     void *memory = malloc(size);
     if (!memory) {
-        NSCAssert(NO, @"malloc() call failed");
+        NSCAssert(NO, @"pp_alloc_crypto: malloc() call failed");
         abort();
         return NULL;
     }
