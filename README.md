@@ -120,7 +120,7 @@ The app is mostly translated with [ChatGPT][credits-chatgpt], but these are the 
 
 ## Usage
 
-You are encouraged to read carefully both the [disclaimer][web-disclaimer] and [privacy policy][web-privacy] before using this software.
+You are encouraged to read carefully both the [disclaimer][web-disclaimer] and the [privacy policy][web-privacy] before using this software.
 
 ## Contacts
 

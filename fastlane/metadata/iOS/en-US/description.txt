@@ -54,3 +54,9 @@ OPEN SOURCE AND COMMUNITY-DRIVEN
 Passepartout is open source and constantly evolving with the help of its community. Check out the project on GitHub: https://github.com/passepartoutvpn
 
 Take control of your VPN experience. Download Passepartout today and enjoy secure, private, and effortless connectivity across all your Apple devices!
+
+~
+
+Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+Privacy Policy: https://passepartoutvpn.app/privacy/
