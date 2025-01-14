@@ -26,7 +26,7 @@
 import Foundation
 import Network
 import PassepartoutKit
-import WireGuardKit
+internal import WireGuardKit
 
 extension Subnet {
     init?(wg: IPAddressRange) {

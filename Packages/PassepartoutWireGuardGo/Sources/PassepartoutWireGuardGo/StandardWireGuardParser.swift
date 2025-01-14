@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import WireGuardKit
+internal import WireGuardKit
 
 /// Parses WireGuard configurations in `wg-quick` format.
 public final class StandardWireGuardParser {

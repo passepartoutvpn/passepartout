@@ -33,8 +33,8 @@ import Foundation
 import NetworkExtension
 import PassepartoutKit
 import os
-import WireGuardKit
-import WireGuardKitGo
+internal import WireGuardKit
+internal import WireGuardKitGo
 
 public final class WireGuardConnection: Connection {
     private let statusSubject: CurrentValueSubject<ConnectionStatus, Error>
@@ -50,7 +50,7 @@ public final class WireGuardConnection: Connection {
     private var dataCountTimer: AnyCancellable?
 
     private lazy var adapter: WireGuardAdapter = {
-        WireGuardAdapter(with: self, backend: WireGuardBackendGo()) { logLevel, message in
+        WireGuardAdapter(with: AdapterDelegate(connection: self), backend: WireGuardBackendGo()) { logLevel, message in
             pp_log(.wireguard, osLogLevel: logLevel.osLogLevel, message)
         }
     }()
@@ -156,34 +156,47 @@ public final class WireGuardConnection: Connection {
     }
 }
 
-extension WireGuardConnection: WireGuardAdapterDelegate {
-    public func adapterShouldReassert(_ adapter: WireGuardAdapter, reasserting: Bool) {
-        if reasserting {
-            statusSubject.send(.connecting)
-        }
-    }
+// MARK: - WireGuardAdapterDelegate
 
-    public func adapterShouldSetNetworkSettings(_ adapter: WireGuardAdapter, settings: NEPacketTunnelNetworkSettings, completionHandler: ((Error?) -> Void)?) {
-        let module = NESettingsModule(fullSettings: settings)
-        let addressObject = Address(rawValue: settings.tunnelRemoteAddress)
-        if addressObject == nil {
-            pp_log(.wireguard, .error, "Unable to parse remote tunnel address")
+private extension WireGuardConnection {
+    final class AdapterDelegate: WireGuardAdapterDelegate {
+        private weak var connection: WireGuardConnection?
+
+        init(connection: WireGuardConnection) {
+            self.connection = connection
         }
 
-        Task {
-            do {
-                try await controller.setTunnelSettings(with: TunnelRemoteInfo(
-                    originalModuleId: moduleId,
-                    address: addressObject,
-                    modules: [module]
-                ))
-                completionHandler?(nil)
-                pp_log(.wireguard, .info, "Tunnel interface is now UP")
-                statusSubject.send(.connected)
-            } catch {
-                completionHandler?(error)
-                pp_log(.wireguard, .error, "Unable to configure tunnel settings: \(error)")
-                statusSubject.send(.disconnected)
+        func adapterShouldReassert(_ adapter: WireGuardAdapter, reasserting: Bool) {
+            if reasserting {
+                connection?.statusSubject.send(.connecting)
+            }
+        }
+
+        func adapterShouldSetNetworkSettings(_ adapter: WireGuardAdapter, settings: NEPacketTunnelNetworkSettings, completionHandler: ((Error?) -> Void)?) {
+            guard let connection else {
+                return
+            }
+            let module = NESettingsModule(fullSettings: settings)
+            let addressObject = Address(rawValue: settings.tunnelRemoteAddress)
+            if addressObject == nil {
+                pp_log(.wireguard, .error, "Unable to parse remote tunnel address")
+            }
+
+            Task {
+                do {
+                    try await connection.controller.setTunnelSettings(with: TunnelRemoteInfo(
+                        originalModuleId: connection.moduleId,
+                        address: addressObject,
+                        modules: [module]
+                    ))
+                    completionHandler?(nil)
+                    pp_log(.wireguard, .info, "Tunnel interface is now UP")
+                    connection.statusSubject.send(.connected)
+                } catch {
+                    completionHandler?(error)
+                    pp_log(.wireguard, .error, "Unable to configure tunnel settings: \(error)")
+                    connection.statusSubject.send(.disconnected)
+                }
             }
         }
     }
