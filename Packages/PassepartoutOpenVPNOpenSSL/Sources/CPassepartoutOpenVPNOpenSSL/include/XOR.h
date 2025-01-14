@@ -30,9 +30,9 @@
 
 static inline void xor_mask(uint8_t *dst, const uint8_t *src, ZeroingData *xorMask, size_t length)
 {
-    if (xorMask.count > 0) {
+    if (xorMask.length > 0) {
         for (size_t i = 0; i < length; ++i) {
-            dst[i] = src[i] ^ ((uint8_t *)(xorMask.bytes))[i % xorMask.count];
+            dst[i] = src[i] ^ ((uint8_t *)(xorMask.bytes))[i % xorMask.length];
         }
         return;
     }

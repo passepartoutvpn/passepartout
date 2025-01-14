@@ -39,6 +39,7 @@
 #import <openssl/x509v3.h>
 #import <openssl/err.h>
 
+#import "Allocation.h"
 #import "Errors.h"
 #import "OSSLTLSBox.h"
 
@@ -128,7 +129,7 @@ static BIO *create_BIO_from_PEM(NSString *pem) {
     NSAssert(self.options == nil, @"Already configured");
     self.options = options;
     self.onFailure = onFailure;
-    self.bufferCipherText = pp_alloc(self.options.bufferLength);
+    self.bufferCipherText = pp_alloc_crypto(self.options.bufferLength);
     return YES;
 }
 

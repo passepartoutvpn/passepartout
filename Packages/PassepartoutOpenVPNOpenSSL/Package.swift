@@ -31,14 +31,14 @@ let package = Package(
     targets: [
         .target(
             name: "CPassepartoutCryptoOpenSSL",
-            dependencies: [
-                "openssl-apple",
-                "PassepartoutKit-Framework"
-            ]
+            dependencies: ["openssl-apple",]
         ),
         .target(
             name: "CPassepartoutOpenVPNOpenSSL",
-            dependencies: ["CPassepartoutCryptoOpenSSL"],
+            dependencies: [
+                "CPassepartoutCryptoOpenSSL",
+                "PassepartoutKit-Framework"
+            ],
             exclude: [
                 "lib/COPYING",
                 "lib/Makefile",
@@ -58,7 +58,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "PassepartoutCryptoOpenSSLTests",
+            name: "CPassepartoutCryptoOpenSSLTests",
             dependencies: ["PassepartoutCryptoOpenSSL"]
         ),
         .testTarget(

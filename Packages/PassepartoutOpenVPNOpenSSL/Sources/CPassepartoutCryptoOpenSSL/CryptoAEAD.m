@@ -34,11 +34,12 @@
 //      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <PassepartoutKit/PassepartoutKit.h>
 #import <openssl/evp.h>
 
+#import "Allocation.h"
+#import "Crypto.h"
 #import "CryptoAEAD.h"
-#import "CryptoMacros.h"
+#import "ZeroingData.h"
 
 @interface CryptoAEAD ()
 
@@ -75,8 +76,8 @@
 
         self.cipherCtxEnc = EVP_CIPHER_CTX_new();
         self.cipherCtxDec = EVP_CIPHER_CTX_new();
-        self.cipherIVEnc = pp_alloc(self.cipherIVLength);
-        self.cipherIVDec = pp_alloc(self.cipherIVLength);
+        self.cipherIVEnc = pp_alloc_crypto(self.cipherIVLength);
+        self.cipherIVDec = pp_alloc_crypto(self.cipherIVLength);
 
         self.mappedError = ^NSError *(CryptoAEADError errorCode) {
             return [NSError errorWithDomain:PassepartoutCryptoErrorDomain code:0 userInfo:nil];
@@ -116,7 +117,7 @@
 
 - (void)configureEncryptionWithCipherKey:(ZeroingData *)cipherKey hmacKey:(ZeroingData *)hmacKey
 {
-    NSParameterAssert(cipherKey.count >= self.cipherKeyLength);
+    NSParameterAssert(cipherKey.length >= self.cipherKeyLength);
     NSParameterAssert(hmacKey);
 
     EVP_CIPHER_CTX_reset(self.cipherCtxEnc);
@@ -157,7 +158,7 @@
 
 - (void)configureDecryptionWithCipherKey:(ZeroingData *)cipherKey hmacKey:(ZeroingData *)hmacKey
 {
-    NSParameterAssert(cipherKey.count >= self.cipherKeyLength);
+    NSParameterAssert(cipherKey.length >= self.cipherKeyLength);
     NSParameterAssert(hmacKey);
 
     EVP_CIPHER_CTX_reset(self.cipherCtxDec);

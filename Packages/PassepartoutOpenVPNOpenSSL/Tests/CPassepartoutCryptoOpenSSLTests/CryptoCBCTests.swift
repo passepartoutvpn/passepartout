@@ -25,7 +25,6 @@
 
 internal import CPassepartoutCryptoOpenSSL
 @testable import PassepartoutCryptoOpenSSL
-import PassepartoutKit
 import XCTest
 
 final class CryptoCBCTests: XCTestCase {
@@ -93,11 +92,11 @@ final class CryptoCBCTests: XCTestCase {
 
 private extension CryptoCBCTests {
     var cipherKey: ZeroingData {
-        ZeroingData(count: 32)
+        ZeroingData(length: 32)
     }
 
     var hmacKey: ZeroingData {
-        ZeroingData(count: 32)
+        ZeroingData(length: 32)
     }
 
     var plainData: Data {

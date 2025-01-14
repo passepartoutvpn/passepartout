@@ -1,8 +1,8 @@
 //
-//  CryptoCTR.h
+//  ZeroingData.swift
 //  PassepartoutKit
 //
-//  Created by Davide De Rosa on 9/18/18.
+//  Created by Davide De Rosa on 1/8/25.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,37 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Foundation/Foundation.h>
-#import "Crypto.h"
-#import "CryptoProtocols.h"
+internal import CPassepartoutCryptoOpenSSL
+import Foundation
 
-NS_ASSUME_NONNULL_BEGIN
+func Z() -> ZeroingData {
+    ZeroingData()
+}
 
-typedef NS_ENUM(NSInteger, CryptoCTRError) {
-    CryptoCTRErrorGeneric,
-    CryptoCTRErrorHMAC
-};
+func Z(length: Int) -> ZeroingData {
+    ZeroingData(length: length)
+}
 
-@interface CryptoCTR : NSObject <Encrypter, Decrypter>
+func Z(bytes: UnsafePointer<UInt8>, length: Int) -> ZeroingData {
+    ZeroingData(bytes: bytes, length: length)
+}
 
-- (instancetype)initWithCipherName:(nullable NSString *)cipherName
-                        digestName:(NSString *)digestName
-                         tagLength:(NSInteger)tagLength
-                     payloadLength:(NSInteger)payloadLength;
+func Z(_ uint8: UInt8) -> ZeroingData {
+    ZeroingData(uInt8: uint8)
+}
 
-@property (nonatomic, copy) NSError * (^mappedError)(CryptoCTRError);
+func Z(_ uint16: UInt16) -> ZeroingData {
+    ZeroingData(uInt16: uint16)
+}
 
-@end
+func Z(_ data: Data) -> ZeroingData {
+    ZeroingData(data: data)
+}
 
-NS_ASSUME_NONNULL_END
+func Z(_ data: Data, _ offset: Int, _ length: Int) -> ZeroingData {
+    ZeroingData(data: data, offset: offset, length: length)
+}
+
+func Z(_ string: String, nullTerminated: Bool) -> ZeroingData {
+    ZeroingData(string: string, nullTerminated: nullTerminated)
+}

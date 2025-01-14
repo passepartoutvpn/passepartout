@@ -59,7 +59,7 @@ struct XORProcessor {
      - Returns: The packet after XOR processing.
      **/
     func processPacket(_ packet: Data, outbound: Bool) -> Data {
-        guard let method = method else {
+        guard let method else {
             return packet
         }
         switch method {
@@ -85,7 +85,7 @@ struct XORProcessor {
 extension XORProcessor {
     private static func xormask(packet: Data, mask: ZeroingData) -> Data {
         Data(packet.enumerated().map { (index, byte) in
-            byte ^ mask.bytes[index % mask.count]
+            byte ^ mask.bytes[index % mask.length]
         })
     }
 

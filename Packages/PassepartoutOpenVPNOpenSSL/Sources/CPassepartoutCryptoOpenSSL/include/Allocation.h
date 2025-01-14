@@ -1,8 +1,8 @@
 //
-//  CryptoMacros.h
+//  Allocation.h
 //  PassepartoutKit
 //
-//  Created by Davide De Rosa on 7/6/18.
+//  Created by Davide De Rosa on 3/3/17.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -36,13 +36,24 @@
 
 #import <Foundation/Foundation.h>
 
-#define CRYPTO_OPENSSL_SUCCESS(ret) (ret > 0)
-#define CRYPTO_OPENSSL_TRACK_STATUS(ret) if (ret > 0) ret =
-#define CRYPTO_OPENSSL_RETURN_STATUS(ret, raised)\
-if (ret <= 0) {\
-    if (error) {\
-        *error = raised;\
-    }\
-    return NO;\
-}\
-return YES;
+static inline void *_Nullable pp_alloc_crypto(size_t size) {
+    void *memory = malloc(size);
+    if (!memory) {
+        NSCAssert(NO, @"malloc() call failed");
+        abort();
+        return NULL;
+    }
+    return memory;
+}
+
+#define MAX_BLOCK_SIZE  16  // AES only, block is 128-bit
+
+/// - Parameters:
+///   - size: The base number of bytes.
+///   - overhead: The extra number of bytes.
+/// - Returns: The number of bytes to store a crypto buffer safely.
+static inline size_t pp_alloc_crypto_capacity(size_t size, size_t overhead) {
+
+    // encryption, byte-alignment, overhead (e.g. IV, digest)
+    return 2 * size + MAX_BLOCK_SIZE + overhead;
+}

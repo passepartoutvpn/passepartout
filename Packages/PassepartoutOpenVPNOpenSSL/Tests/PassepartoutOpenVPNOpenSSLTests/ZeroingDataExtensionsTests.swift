@@ -1,8 +1,8 @@
 //
-//  CryptoCTR.h
+//  ZeroingDataExtensionsTests.swift
 //  PassepartoutKit
 //
-//  Created by Davide De Rosa on 9/18/18.
+//  Created by Davide De Rosa on 1/14/25.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,20 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Foundation/Foundation.h>
-#import "Crypto.h"
-#import "CryptoProtocols.h"
+import Foundation
+import PassepartoutKit
+@testable import PassepartoutOpenVPNOpenSSL
+import XCTest
 
-NS_ASSUME_NONNULL_BEGIN
+final class ZeroingDataExtensionsTests: XCTestCase {
+    func test_givenPRNG_whenGenerateSafeData_thenHasGivenLength() {
+        let sut = SecureRandom()
+        XCTAssertEqual(sut.safeData(length: 500).length, 500)
+    }
 
-typedef NS_ENUM(NSInteger, CryptoCTRError) {
-    CryptoCTRErrorGeneric,
-    CryptoCTRErrorHMAC
-};
-
-@interface CryptoCTR : NSObject <Encrypter, Decrypter>
-
-- (instancetype)initWithCipherName:(nullable NSString *)cipherName
-                        digestName:(NSString *)digestName
-                         tagLength:(NSInteger)tagLength
-                     payloadLength:(NSInteger)payloadLength;
-
-@property (nonatomic, copy) NSError * (^mappedError)(CryptoCTRError);
-
-@end
-
-NS_ASSUME_NONNULL_END
+    func test_givenZeroingData_whenAsSensitive_thenOmitsSensitiveData() throws {
+        let sut = Z(Data(hex: "12345678abcdef"))
+        XCTAssertEqual(sut.debugDescription(withSensitiveData: true), "[7 bytes, 12345678abcdef]")
+        XCTAssertEqual(sut.debugDescription(withSensitiveData: false), "[7 bytes]")
+    }
+}

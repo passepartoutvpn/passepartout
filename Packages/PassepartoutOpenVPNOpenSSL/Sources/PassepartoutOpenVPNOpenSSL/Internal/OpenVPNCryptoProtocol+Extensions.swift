@@ -129,7 +129,7 @@ private extension OpenVPNCryptoProtocol {
         var keysArray = [ZeroingData]()
         for i in 0..<Constants.keysCount {
             let offset = i * Constants.keyLength
-            let zbuf = keysData.withOffset(offset, count: Constants.keyLength)
+            let zbuf = keysData.withOffset(offset, length: Constants.keyLength)
             keysArray.append(zbuf)
         }
 
@@ -156,16 +156,16 @@ private extension OpenVPNCryptoProtocol {
         if let ssi = parameters.serverSessionId {
             seed.append(Z(ssi))
         }
-        let len = parameters.secret.count / 2
-        let lenx = len + (parameters.secret.count & 1)
-        let secret1 = parameters.secret.withOffset(0, count: lenx)
-        let secret2 = parameters.secret.withOffset(len, count: lenx)
+        let len = parameters.secret.length / 2
+        let lenx = len + (parameters.secret.length & 1)
+        let secret1 = parameters.secret.withOffset(0, length: lenx)
+        let secret2 = parameters.secret.withOffset(len, length: lenx)
 
         let hash1 = try keysHash("md5", secret1, seed, parameters.size)
         let hash2 = try keysHash("sha1", secret2, seed, parameters.size)
 
         let prf = Z()
-        for i in 0..<hash1.count {
+        for i in 0..<hash1.length {
             let h1 = hash1.bytes[i]
             let h2 = hash2.bytes[i]
 
@@ -176,13 +176,13 @@ private extension OpenVPNCryptoProtocol {
 
     func keysHash(_ digestName: String, _ secret: ZeroingData, _ seed: ZeroingData, _ size: Int) throws -> ZeroingData {
         let out = Z()
-        let buffer = Z(count: maxHmacLength)
+        let buffer = Z(length: maxHmacLength)
         var chain = try hmac(buffer, digestName, secret, seed)
-        while out.count < size {
+        while out.length < size {
             out.append(try hmac(buffer, digestName, secret, chain.appending(seed)))
             chain = try hmac(buffer, digestName, secret, chain)
         }
-        return out.withOffset(0, count: size)
+        return out.withOffset(0, length: size)
     }
 
     func hmac(_ buffer: ZeroingData, _ digestName: String, _ secret: ZeroingData, _ data: ZeroingData) throws -> ZeroingData {
@@ -191,13 +191,13 @@ private extension OpenVPNCryptoProtocol {
         try hmac(
             withDigestName: digestName,
             secret: secret.bytes,
-            secretLength: secret.count,
+            secretLength: secret.length,
             data: data.bytes,
-            dataLength: data.count,
+            dataLength: data.length,
             hmac: buffer.mutableBytes,
             hmacLength: &length
         )
 
-        return buffer.withOffset(0, count: length)
+        return buffer.withOffset(0, length: length)
     }
 }

@@ -38,12 +38,14 @@
 
 #import "OpenVPNCryptoProtocol.h"
 
+@class ZeroingData;
+
 NS_ASSUME_NONNULL_BEGIN
 
 // WARNING: not thread-safe!
 @interface OSSLCryptoBox : NSObject <OpenVPNCryptoProtocol>
 
-- (nullable instancetype)initWithSeed:(const uint8_t *)seed length:(NSInteger)length;
+- (nullable instancetype)initWithSeed:(ZeroingData *)seed;
 
 @end
 

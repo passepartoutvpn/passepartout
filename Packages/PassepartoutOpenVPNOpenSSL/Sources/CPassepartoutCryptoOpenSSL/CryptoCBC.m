@@ -34,12 +34,13 @@
 //      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <PassepartoutKit/PassepartoutKit.h>
 #import <openssl/evp.h>
 #import <openssl/rand.h>
 
+#import "Allocation.h"
+#import "Crypto.h"
 #import "CryptoCBC.h"
-#import "CryptoMacros.h"
+#import "ZeroingData.h"
 
 const NSInteger CryptoCBCMaxHMACLength = 100;
 
@@ -103,7 +104,7 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
         macParams[1] = OSSL_PARAM_construct_end();
         self.macParams = macParams;
 
-        self.bufferDecHMAC = pp_alloc(CryptoCBCMaxHMACLength);
+        self.bufferDecHMAC = pp_alloc_crypto(CryptoCBCMaxHMACLength);
 
         self.mappedError = ^NSError *(CryptoCBCError errorCode) {
             return [NSError errorWithDomain:PassepartoutCryptoErrorDomain code:0 userInfo:nil];
@@ -147,16 +148,16 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
 - (void)configureEncryptionWithCipherKey:(ZeroingData *)cipherKey hmacKey:(ZeroingData *)hmacKey
 {
     NSParameterAssert(hmacKey);
-    NSParameterAssert(hmacKey.count >= self.hmacKeyLength);
+    NSParameterAssert(hmacKey.length >= self.hmacKeyLength);
 
     if (self.cipher) {
-        NSParameterAssert(cipherKey.count >= self.cipherKeyLength);
+        NSParameterAssert(cipherKey.length >= self.cipherKeyLength);
 
         EVP_CIPHER_CTX_reset(self.cipherCtxEnc);
         EVP_CipherInit(self.cipherCtxEnc, self.cipher, cipherKey.bytes, NULL, 1);
     }
 
-    self.hmacKeyEnc = [[ZeroingData alloc] initWithBytes:hmacKey.bytes count:self.hmacKeyLength];
+    self.hmacKeyEnc = [[ZeroingData alloc] initWithBytes:hmacKey.bytes length:self.hmacKeyLength];
 }
 
 - (BOOL)encryptBytes:(const uint8_t *)bytes length:(NSInteger)length dest:(uint8_t *)dest destLength:(NSInteger *)destLength flags:(const CryptoFlags * _Nullable)flags error:(NSError * _Nullable __autoreleasing * _Nullable)error
@@ -188,7 +189,7 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
         l1 = (int)length;
     }
     EVP_MAC_CTX *ctx = EVP_MAC_CTX_new(self.mac);
-    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyEnc.bytes, self.hmacKeyEnc.count, self.macParams);
+    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyEnc.bytes, self.hmacKeyEnc.length, self.macParams);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_update(ctx, outIV, l1 + l2 + self.cipherIVLength);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_final(ctx, dest, &l3, self.digestLength);
     EVP_MAC_CTX_free(ctx);
@@ -203,16 +204,16 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
 - (void)configureDecryptionWithCipherKey:(ZeroingData *)cipherKey hmacKey:(ZeroingData *)hmacKey
 {
     NSParameterAssert(hmacKey);
-    NSParameterAssert(hmacKey.count >= self.hmacKeyLength);
+    NSParameterAssert(hmacKey.length >= self.hmacKeyLength);
 
     if (self.cipher) {
-        NSParameterAssert(cipherKey.count >= self.cipherKeyLength);
+        NSParameterAssert(cipherKey.length >= self.cipherKeyLength);
 
         EVP_CIPHER_CTX_reset(self.cipherCtxDec);
         EVP_CipherInit(self.cipherCtxDec, self.cipher, cipherKey.bytes, NULL, 0);
     }
 
-    self.hmacKeyDec = [[ZeroingData alloc] initWithBytes:hmacKey.bytes count:self.hmacKeyLength];
+    self.hmacKeyDec = [[ZeroingData alloc] initWithBytes:hmacKey.bytes length:self.hmacKeyLength];
 }
 
 - (BOOL)decryptBytes:(const uint8_t *)bytes length:(NSInteger)length dest:(uint8_t *)dest destLength:(NSInteger *)destLength flags:(const CryptoFlags * _Nullable)flags error:(NSError * _Nullable __autoreleasing * _Nullable)error
@@ -223,7 +224,7 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
     int code = 1;
 
     EVP_MAC_CTX *ctx = EVP_MAC_CTX_new(self.mac);
-    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyDec.bytes, self.hmacKeyDec.count, self.macParams);
+    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyDec.bytes, self.hmacKeyDec.length, self.macParams);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_update(ctx, bytes + self.digestLength, length - self.digestLength);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_final(ctx, self.bufferDecHMAC, &l1, self.digestLength);
     EVP_MAC_CTX_free(ctx);
@@ -257,7 +258,7 @@ const NSInteger CryptoCBCMaxHMACLength = 100;
     int code = 1;
 
     EVP_MAC_CTX *ctx = EVP_MAC_CTX_new(self.mac);
-    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyDec.bytes, self.hmacKeyDec.count, self.macParams);
+    CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_init(ctx, self.hmacKeyDec.bytes, self.hmacKeyDec.length, self.macParams);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_update(ctx, bytes + self.digestLength, length - self.digestLength);
     CRYPTO_OPENSSL_TRACK_STATUS(code) EVP_MAC_final(ctx, self.bufferDecHMAC, &l1, self.digestLength);
     EVP_MAC_CTX_free(ctx);

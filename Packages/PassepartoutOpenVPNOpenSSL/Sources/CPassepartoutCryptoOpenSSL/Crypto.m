@@ -25,10 +25,4 @@
 
 #import "Crypto.h"
 
-#define MAX_BLOCK_SIZE  16  // AES only, block is 128-bit
-
-size_t pp_alloc_crypto_capacity(size_t size, size_t overhead) {
-
-    // encryption, byte-alignment, overhead (e.g. IV, digest)
-    return 2 * size + MAX_BLOCK_SIZE + overhead;
-}
+NSString *const PassepartoutCryptoErrorDomain = @"PassepartoutCrypto";
