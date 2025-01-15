@@ -3,7 +3,7 @@
 //  PassepartoutKit
 //
 //  Created by Davide De Rosa on 10/17/22.
-//  Copyright (c) 2024 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
