@@ -4,11 +4,12 @@ on:
   pull_request:
     types: [ opened, synchronize ]
     paths-ignore:
-      - '.env.*'
-      - '**/*.md'
-      - '**/*.sh'
-      - '**/*.yml'
-      - 'fastlane/**'
+      - "README.md"
+      - ".env.*"
+      - "**/*.md"
+      - "**/*.sh"
+      - "**/*.yml"
+      - "fastlane/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

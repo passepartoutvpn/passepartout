@@ -54,3 +54,9 @@ Passepartout är designat med transparens och integritet i åtanke:
 Passepartout är ett projekt med öppen källkod som ständigt utvecklas med hjälp av communityn. Kolla in projektet på GitHub: https://github.com/passepartoutvpn
 
 Ta kontroll över din VPN-upplevelse. Ladda ner Passepartout idag och njut av säker, privat och smidig uppkoppling på alla dina Apple-enheter.
+
+~
+
+Användarvillkor (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+Integritetspolicy: https://passepartoutvpn.app/privacy/

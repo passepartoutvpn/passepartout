@@ -14,3 +14,9 @@ Passepartout создан с учетом прозрачности и уваже
 Passepartout — это проект с открытым исходным кодом, который постоянно развивается благодаря поддержке сообщества. Ознакомьтесь с проектом на GitHub: https://github.com/passepartoutvpn
 
 Возьмите под контроль свой опыт использования VPN. Скачайте Passepartout уже сегодня и наслаждайтесь безопасным, приватным и удобным подключением на вашем Apple TV!
+
+~
+
+Условия использования (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+Политика конфиденциальности: https://passepartoutvpn.app/privacy/

@@ -33,7 +33,7 @@ CFG_CLOUDKIT_ROOT = iCloud.com.algoritmico.Passepartout
 CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
 CFG_TEAM_ID = DTDYD63ZX9
 
-CFG_COPYRIGHT = Copyright © 2024 Davide De Rosa. All rights reserved.
+CFG_COPYRIGHT = Copyright © 2025 Davide De Rosa. All rights reserved.
 CFG_DISPLAY_NAME = Passepartout
 
 CFG_GROUP_ID[sdk=appletvos*] = $(CFG_RAW_GROUP_ID)

@@ -46,7 +46,9 @@ It's highly recommended that you use the Git and Ruby packages provided by [Home
 
 Download the app codebase locally:
 
-    $ git clone https://github.com/passepartoutvpn/passepartout
+```
+$ git clone https://github.com/passepartoutvpn/passepartout
+```
 
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
@@ -59,7 +61,7 @@ To test the app on your Mac or iOS/tvOS Simulator:
 
 ## License
 
-Copyright (c) 2024 Davide De Rosa. All rights reserved.
+Copyright (c) 2025 Davide De Rosa. All rights reserved.
 
 This project is licensed under the [GPLv3][license-content].
 
@@ -80,11 +82,11 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 
 ### OpenVPN
 
-© Copyright 2024 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
+© Copyright 2025 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
 
 ### WireGuard
 
-© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
+© Copyright 2015-2025 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
 
 ### OpenSSL
 
@@ -120,7 +122,7 @@ The app is mostly translated with [ChatGPT][credits-chatgpt], but these are the 
 
 ## Usage
 
-You are encouraged to read carefully both the [disclaimer][web-disclaimer] and [privacy policy][web-privacy] before using this software.
+You are encouraged to read carefully both the [disclaimer][web-disclaimer] and the [privacy policy][web-privacy] before using this software.
 
 ## Contacts
 
