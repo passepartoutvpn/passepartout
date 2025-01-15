@@ -116,7 +116,7 @@ public struct ThemeCountryText: View {
 
     public var body: some View {
         Text(
-            [code.asCountryCodeEmoji, title]
+            [title, code.asCountryCodeEmoji]
                 .compactMap { $0 }
                 .joined(separator: " ")
         )
