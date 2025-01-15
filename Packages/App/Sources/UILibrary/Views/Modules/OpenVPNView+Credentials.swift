@@ -41,7 +41,7 @@ public struct OpenVPNCredentialsView: View {
     private var iapManager: IAPManager
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     @ObservedObject
     private var profileEditor: ProfileEditor
@@ -214,8 +214,8 @@ private extension OpenVPNCredentialsView {
     }
 
     func onLoad() {
-        if let providerId, let provider = providerManager.provider(withId: providerId) {
-            providerCustomization = provider.customization(for: OpenVPN.Configuration.self)
+        if let providerId, let provider = apiManager.provider(withId: providerId) {
+            providerCustomization = provider.customization(for: OpenVPNProviderTemplate.self)
         }
         builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
         if ignoresPassword {

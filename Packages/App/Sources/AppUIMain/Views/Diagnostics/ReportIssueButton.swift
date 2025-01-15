@@ -30,7 +30,7 @@ import SwiftUI
 struct ReportIssueButton {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     @ObservedObject
     var profileManager: ProfileManager
@@ -61,7 +61,7 @@ struct ReportIssueButton {
         guard let id = installedProfile?.selectedProvider?.selection.id else {
             return nil
         }
-        let lastUpdate = providerManager.lastUpdate(for: id)
+        let lastUpdate = apiManager.lastUpdate(for: id)
         return (id, lastUpdate)
     }
 }

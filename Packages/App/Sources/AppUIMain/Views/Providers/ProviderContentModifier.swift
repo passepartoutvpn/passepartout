@@ -2,7 +2,7 @@
 //  ProviderContentModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/14/24.
+//  Created by Davide De Rosa on 10/7/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,183 +27,59 @@ import CommonAPI
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
-import UILibrary
 
-struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, ProviderRows: View {
-
-    @EnvironmentObject
-    private var providerManager: ProviderManager
-
-    @EnvironmentObject
-    private var preferencesManager: PreferencesManager
-
-    let apis: [APIMapper]
+struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Template: IdentifiableConfiguration, ProviderRows: View {
+    var apis: [APIMapper] = API.shared
 
     @Binding
     var providerId: ProviderID?
 
     let providerPreferences: ProviderPreferences?
 
-    let entityType: Entity.Type
+    @Binding
+    var selectedEntity: ProviderEntity<Template>?
+
+    let entityDestination: any Hashable
 
     @ViewBuilder
     let providerRows: ProviderRows
 
-    let onSelectProvider: (ProviderManager, ProviderID?, _ isInitial: Bool) -> Void
-
     func body(content: Content) -> some View {
-        providerView
-            .onLoad(perform: loadCurrentProvider)
-            .onChange(of: providerId) { newId in
-                Task {
-                    if let newId {
-                        await refreshInfrastructure(for: newId)
-                    }
-                    loadPreferences(for: newId)
-                    onSelectProvider(providerManager, newId, false)
-                }
-            }
-            .onDisappear(perform: savePreferences)
-            .disabled(providerManager.isLoading)
-
-        content
-    }
-
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.providerId == rhs.providerId
+        debugChanges()
+        return content
+            .modifier(APIContentModifier(
+                apis: apis,
+                providerId: $providerId,
+                providerPreferences: providerPreferences,
+                templateType: Template.self,
+                providerRows: {
+                    providerEntityRow
+                    providerRows
+                },
+                onSelectProvider: onSelectProvider
+            ))
     }
 }
 
 private extension ProviderContentModifier {
-
-#if os(iOS)
-    @ViewBuilder
-    var providerView: some View {
-        providerPicker
-            .themeSection()
-
-        if let providerId {
-            Group {
-                providerRows
-                RefreshInfrastructureButton(apis: apis, providerId: providerId)
-            }
-            .themeSection(footer: lastUpdatedString)
-        }
-    }
-#else
-    @ViewBuilder
-    var providerView: some View {
-        Section {
-            providerPicker
-        }
-        if let providerId {
-            Section {
-                providerRows
-                HStack {
-                    lastUpdatedString.map {
-                        Text($0)
-                            .themeSubtitle()
-                    }
+    var providerEntityRow: some View {
+        NavigationLink(value: entityDestination) {
+            HStack {
+                Text(Strings.Global.Nouns.server)
+                if let selectedEntity {
                     Spacer()
-                    RefreshInfrastructureButton(apis: apis, providerId: providerId)
+                    Text(selectedEntity.server.hostname ?? selectedEntity.server.serverId)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
     }
-#endif
-
-    var providerPicker: some View {
-        ProviderPicker(
-            providers: supportedProviders,
-            providerId: $providerId,
-            isRequired: true,
-            isLoading: providerManager.isLoading
-        )
-    }
 }
 
 private extension ProviderContentModifier {
-    var supportedProviders: [Provider] {
-        providerManager
-            .providers
-            .filter {
-                $0.supports(Entity.Template.self)
-            }
-    }
-
-    var lastUpdate: Date? {
-        guard let providerId else {
-            return nil
-        }
-        return providerManager.lastUpdate(for: providerId)
-    }
-
-    var lastUpdatedString: String? {
-        guard let lastUpdate else {
-            return providerManager.isLoading ? Strings.Views.Providers.LastUpdated.loading : nil
-        }
-        return Strings.Views.Providers.lastUpdated(lastUpdate.localizedDescription(style: .timestamp))
-    }
-
-    func loadCurrentProvider() {
-       Task {
-           await refreshIndex()
-           if let providerId {
-               onSelectProvider(providerManager, providerId, true)
-               loadPreferences(for: providerId)
-           }
-       }
-    }
-
-    @discardableResult
-    func refreshIndex() async -> Bool {
-        do {
-            try await providerManager.fetchIndex(from: apis)
-            return true
-        } catch {
-            pp_log(.app, .error, "Unable to fetch index: \(error)")
-            return false
-        }
-    }
-
-    @discardableResult
-    func refreshInfrastructure(for providerId: ProviderID) async -> Bool {
-        do {
-            try await providerManager.fetchVPNInfrastructure(from: apis, for: providerId)
-            return true
-        } catch {
-            pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
-            return false
-        }
-    }
-
-    func loadPreferences(for providerId: ProviderID?) {
-        guard let providerPreferences else {
-            return
-        }
-        if let providerId {
-            do {
-                pp_log(.app, .debug, "Load preferences for provider \(providerId)")
-                let repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
-                providerPreferences.setRepository(repository)
-            } catch {
-                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
-                providerPreferences.setRepository(nil)
-            }
-        } else {
-            providerPreferences.setRepository(nil)
-        }
-    }
-
-    func savePreferences() {
-        guard let providerPreferences else {
-            return
-        }
-        do {
-            pp_log(.app, .debug, "Save preferences for provider \(providerId.debugDescription)")
-            try providerPreferences.save()
-        } catch {
-            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.debugDescription): \(error)")
+    func onSelectProvider(manager: APIManager, providerId: ProviderID?, isInitial: Bool) {
+        if !isInitial {
+            selectedEntity = nil
         }
     }
 }
@@ -211,16 +87,24 @@ private extension ProviderContentModifier {
 // MARK: - Preview
 
 #Preview {
-    List {
-        EmptyView()
-            .modifier(ProviderContentModifier(
-                apis: [API.bundled],
-                providerId: .constant(.hideme),
-                providerPreferences: nil,
-                entityType: VPNEntity<OpenVPN.Configuration>.self,
-                providerRows: {},
-                onSelectProvider: { _, _, _ in }
-            ))
+    NavigationStack {
+        List {
+            EmptyView()
+                .modifier(ProviderContentModifier(
+                    apis: [API.bundled],
+                    providerId: .constant(.hideme),
+                    providerPreferences: nil,
+                    selectedEntity: .constant(nil as ProviderEntity<OpenVPNProviderTemplate>?),
+                    entityDestination: "Destination",
+                    providerRows: {
+                        Text("Other")
+                    }
+                ))
+        }
+        .navigationTitle("Preview")
+        .navigationDestination(for: String.self) {
+            Text($0)
+        }
     }
     .withMockEnvironment()
 }

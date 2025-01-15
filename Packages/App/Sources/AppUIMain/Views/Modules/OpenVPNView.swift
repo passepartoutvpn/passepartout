@@ -123,7 +123,7 @@ private extension OpenVPNView {
     }
 
     var providerModifier: some ViewModifier {
-        VPNProviderContentModifier(
+        ProviderContentModifier(
             providerId: providerId,
             providerPreferences: nil,
             selectedEntity: providerEntity,
@@ -157,7 +157,7 @@ private extension OpenVPNView {
         switch route {
         case .providerServer:
             draft.wrappedValue.providerSelection.map {
-                VPNProviderServerView(
+                ProviderServerView(
                     moduleId: module.id,
                     providerId: $0.id,
                     selectedEntity: $0.entity,
@@ -215,8 +215,8 @@ private extension OpenVPNView {
         }
     }
 
-    func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
-        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
+    func onSelectServer(server: ProviderServer, preset: ProviderPreset<OpenVPNProviderTemplate>) {
+        draft.wrappedValue.providerEntity = ProviderEntity(server: server, preset: preset)
         resetExcludedEndpointsWithCurrentProviderEntity()
         path.wrappedValue.removeLast()
     }

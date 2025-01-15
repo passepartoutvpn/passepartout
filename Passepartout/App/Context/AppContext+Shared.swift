@@ -122,9 +122,9 @@ extension AppContext {
             interval: Constants.shared.tunnel.refreshInterval
         )
 
-        let providerManager: ProviderManager = {
-            let repository = AppData.cdProviderRepositoryV3(context: localStore.backgroundContext())
-            return ProviderManager(repository: repository)
+        let apiManager: APIManager = {
+            let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
+            return APIManager(repository: repository)
         }()
 
         let migrationManager: MigrationManager = {
@@ -209,11 +209,11 @@ extension AppContext {
         // MARK: Build
 
         return AppContext(
+            apiManager: apiManager,
             iapManager: iapManager,
             migrationManager: migrationManager,
-            profileManager: profileManager,
-            providerManager: providerManager,
             preferencesManager: preferencesManager,
+            profileManager: profileManager,
             registry: dependencies.registry,
             tunnel: tunnel,
             tunnelReceiptURL: tunnelReceiptURL,

@@ -188,7 +188,7 @@ extension AppCoordinator {
             )
 
         case .editProviderEntity(let profile, let force, let module):
-            ProviderEntitySelector(
+            ProviderServerCoordinatorIfSupported(
                 module: module,
                 errorHandler: errorHandler,
                 selectTitle: profile.providerServerSelectionTitle,
@@ -219,6 +219,30 @@ extension AppCoordinator {
 
         default:
             EmptyView()
+        }
+    }
+}
+
+// MARK: - Providers
+
+private struct ProviderServerCoordinatorIfSupported: View {
+    let module: Module
+
+    let errorHandler: ErrorHandler
+
+    let selectTitle: String
+
+    let onSelect: (Module) async throws -> Void
+
+    var body: some View {
+        if let supporting = module as? any ProviderServerCoordinatorSupporting {
+            supporting.providerServerCoordinator(
+                selectTitle: selectTitle,
+                onSelect: onSelect,
+                errorHandler: errorHandler
+            )
+        } else {
+            fatalError("Module got too far without being ProviderServerCoordinatorSupporting: \(module)")
         }
     }
 }

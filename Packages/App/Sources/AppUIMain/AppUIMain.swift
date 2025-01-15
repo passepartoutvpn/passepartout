@@ -53,10 +53,10 @@ private extension AppUIMain {
                     fatalError("\(moduleType): is not ModuleViewProviding")
                 }
 
-                // ProviderEntityViewProviding
+                // ProviderServerCoordinatorSupporting
                 if providerModuleTypes.contains(moduleType) {
-                    guard module is any ProviderEntityViewProviding else {
-                        fatalError("\(moduleType): is not ProviderEntityViewProviding")
+                    guard module is any ProviderServerCoordinatorSupporting else {
+                        fatalError("\(moduleType): is not ProviderServerCoordinatorSupporting")
                     }
                 }
             } catch {

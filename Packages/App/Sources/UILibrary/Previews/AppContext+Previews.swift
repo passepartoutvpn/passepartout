@@ -54,16 +54,16 @@ extension AppContext {
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
-        let providerManager = ProviderManager(
-            repository: InMemoryProviderRepository()
+        let apiManager = APIManager(
+            repository: InMemoryAPIRepository()
         )
         let migrationManager = MigrationManager()
         return AppContext(
+            apiManager: apiManager,
             iapManager: iapManager,
             migrationManager: migrationManager,
-            profileManager: profileManager,
-            providerManager: providerManager,
             preferencesManager: PreferencesManager(),
+            profileManager: profileManager,
             registry: Registry(),
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt
@@ -91,8 +91,8 @@ extension ExtendedTunnel {
     }
 }
 
-extension ProviderManager {
-    public static var forPreviews: ProviderManager {
-        AppContext.forPreviews.providerManager
+extension APIManager {
+    public static var forPreviews: APIManager {
+        AppContext.forPreviews.apiManager
     }
 }

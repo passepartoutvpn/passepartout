@@ -1,5 +1,5 @@
 //
-//  VPNProviderServer+Content+macOS.swift
+//  ProviderServer+Content+macOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/9/24.
@@ -30,7 +30,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-extension VPNProviderServerView {
+extension ProviderServerView {
     struct ContentView: View {
 
         @EnvironmentObject
@@ -40,21 +40,21 @@ extension VPNProviderServerView {
 
         let providerId: ProviderID
 
-        let servers: [VPNServer]
+        let servers: [ProviderServer]
 
-        let selectedServer: VPNServer?
+        let selectedServer: ProviderServer?
 
         let isFiltering: Bool
 
         @ObservedObject
-        var filtersViewModel: VPNFiltersView.Model
+        var filtersViewModel: ProviderFiltersView.Model
 
         @ObservedObject
         var providerPreferences: ProviderPreferences
 
         let selectTitle: String
 
-        let onSelect: (VPNServer) -> Void
+        let onSelect: (ProviderServer) -> Void
 
         @State
         private var hoveringServerId: String?
@@ -66,7 +66,7 @@ extension VPNProviderServerView {
     }
 }
 
-private extension VPNProviderServerView.ContentView {
+private extension ProviderServerView.ContentView {
     var tableView: some View {
         Table(servers) {
             TableColumn("") { server in
@@ -77,7 +77,7 @@ private extension VPNProviderServerView.ContentView {
             .width(10.0)
 
             TableColumn(Strings.Global.Nouns.region) { server in
-                ThemeCountryText(server.provider.countryCode, title: server.region)
+                ThemeCountryText(server.metadata.countryCode, title: server.region)
                     .help(server.region)
                     .environmentObject(theme) // TODO: #873, Table loses environment
             }

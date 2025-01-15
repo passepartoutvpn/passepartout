@@ -34,26 +34,5 @@ extension WireGuardModule.Builder: ModuleViewProviding {
     }
 }
 
-extension WireGuardModule: ProviderEntityViewProviding {
-    public func providerEntityView(
-        errorHandler: ErrorHandler,
-        selectTitle: String,
-        onSelect: @escaping (Module) async throws -> Void
-    ) -> some View {
-        providerSelection.map {
-            VPNProviderServerCoordinator(
-                moduleId: id,
-                providerId: $0.id,
-                selectedEntity: $0.entity,
-                selectTitle: selectTitle,
-                onSelect: {
-                    var newBuilder = builder()
-                    newBuilder.providerEntity = $0
-                    let newModule = try newBuilder.tryBuild()
-                    try await onSelect(newModule)
-                },
-                errorHandler: errorHandler
-            )
-        }
-    }
+extension WireGuardModule: ProviderServerCoordinatorSupporting {
 }
