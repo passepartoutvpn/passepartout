@@ -59,7 +59,7 @@ To test the app on your Mac or iOS/tvOS Simulator:
 
 ## License
 
-Copyright (c) 2024 Davide De Rosa. All rights reserved.
+Copyright (c) 2025 Davide De Rosa. All rights reserved.
 
 This project is licensed under the [GPLv3][license-content].
 
@@ -80,11 +80,11 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 
 ### OpenVPN
 
-© Copyright 2024 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
+© Copyright 2025 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
 
 ### WireGuard
 
-© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
+© Copyright 2015-2025 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
 
 ### OpenSSL
 
