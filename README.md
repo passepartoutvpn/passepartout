@@ -46,7 +46,7 @@ It's highly recommended that you use the Git and Ruby packages provided by [Home
 
 Download the app codebase locally:
 
-    $ git clone https://github.com/passepartoutvpn/passepartout.git
+    $ git clone https://github.com/passepartoutvpn/passepartout
 
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
