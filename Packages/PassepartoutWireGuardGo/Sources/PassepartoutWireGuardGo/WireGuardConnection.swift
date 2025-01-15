@@ -50,10 +50,12 @@ public final class WireGuardConnection: Connection {
     private var dataCountTimer: AnyCancellable?
 
     private lazy var adapter: WireGuardAdapter = {
-        WireGuardAdapter(with: AdapterDelegate(connection: self), backend: WireGuardBackendGo()) { logLevel, message in
+        WireGuardAdapter(with: delegate, backend: WireGuardBackendGo()) { logLevel, message in
             pp_log(.wireguard, osLogLevel: logLevel.osLogLevel, message)
         }
     }()
+
+    private lazy var delegate: WireGuardAdapterDelegate = AdapterDelegate(connection: self)
 
     public init(
         parameters: ConnectionParameters,
