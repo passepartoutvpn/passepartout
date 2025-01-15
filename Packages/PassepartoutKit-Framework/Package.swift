@@ -19,7 +19,9 @@ enum Environment {
         case .localDevelopment, .onlineDevelopment:
             return []
         case .production:
-            return [.package(path: "../PassepartoutKit")]
+            return [
+                .package(path: "../PassepartoutKit-Source")
+            ]
         }
     }
 
@@ -40,7 +42,9 @@ enum Environment {
         case .production:
             targets.append(.target(
                 name: "Target",
-                dependencies: ["PassepartoutKit"]
+                dependencies: [
+                    .product(name: "PassepartoutKit", package: "PassepartoutKit-Source")
+                ]
             ))
         }
         targets.append(.testTarget(

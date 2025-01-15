@@ -14,9 +14,58 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutSupportTests",
-        "name" : "PassepartoutSupportTests"
+        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
+        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
+        "name" : "PassepartoutOpenVPNOpenSSLTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
+        "identifier" : "PassepartoutWireGuardGoTests",
+        "name" : "PassepartoutWireGuardGoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "identifier" : "PassepartoutCoreTests",
+        "name" : "PassepartoutCoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
+        "identifier" : "CPassepartoutCryptoOpenSSLTests",
+        "name" : "CPassepartoutCryptoOpenSSLTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "identifier" : "PassepartoutNETests",
+        "name" : "PassepartoutNETests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "identifier" : "PassepartoutOpenVPNTests",
+        "name" : "PassepartoutOpenVPNTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "identifier" : "PassepartoutWireGuardTests",
+        "name" : "PassepartoutWireGuardTests"
       }
     },
     {
@@ -29,23 +78,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
-        "name" : "PassepartoutOpenVPNOpenSSLTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutOpenVPNTests",
-        "name" : "PassepartoutOpenVPNTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutNETests",
-        "name" : "PassepartoutNETests"
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "identifier" : "PassepartoutSupportTests",
+        "name" : "PassepartoutSupportTests"
       }
     },
     {
@@ -57,21 +92,7 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonLibraryTests",
-        "name" : "CommonLibraryTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutCoreTests",
-        "name" : "PassepartoutCoreTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
+        "containerPath" : "container:Packages\/PassepartoutKit-Source",
         "identifier" : "PassepartoutAPITests",
         "name" : "PassepartoutAPITests"
       }
@@ -88,27 +109,6 @@
         "containerPath" : "container:Packages\/App",
         "identifier" : "LegacyV2Tests",
         "name" : "LegacyV2Tests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
-        "identifier" : "PassepartoutWireGuardGoTests",
-        "name" : "PassepartoutWireGuardGoTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutWireGuardTests",
-        "name" : "PassepartoutWireGuardTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "CPassepartoutCryptoOpenSSLTests",
-        "name" : "CPassepartoutCryptoOpenSSLTests"
       }
     }
   ],
