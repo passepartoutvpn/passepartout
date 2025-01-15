@@ -50,3 +50,9 @@ OPEN SOURCE ΚΑΙ ΜΕ ΥΠΟΣΤΗΡΙΞΗ ΑΠΟ ΤΗΝ ΚΟΙΝΟΤΗΤΑ
 Το Passepartout είναι ανοιχτού κώδικα και εξελίσσεται συνεχώς με τη βοήθεια της κοινότητάς του. Δείτε το έργο στο GitHub: https://github.com/passepartoutvpn
 
 Πάρτε τον έλεγχο της VPN εμπειρίας σας. Κατεβάστε το Passepartout σήμερα και απολαύστε ασφαλή, ιδιωτική και απρόσκοπτη συνδεσιμότητα σε όλες τις συσκευές Apple!
+
+~
+
+Όροι Χρήσης (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+
+Πολιτική Απορρήτου: https://passepartoutvpn.app/privacy/
