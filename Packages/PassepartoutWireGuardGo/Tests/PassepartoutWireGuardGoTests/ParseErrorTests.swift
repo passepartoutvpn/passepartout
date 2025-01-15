@@ -25,7 +25,7 @@
 
 import PassepartoutKit
 @testable import PassepartoutWireGuardGo
-import WireGuardKit
+internal import WireGuardKit
 import XCTest
 
 final class ParseErrorTests: XCTestCase {

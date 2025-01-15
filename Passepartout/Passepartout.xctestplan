@@ -14,13 +14,6 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "PassepartoutCryptoOpenSSLTests",
-        "name" : "PassepartoutCryptoOpenSSLTests"
-      }
-    },
-    {
-      "target" : {
         "containerPath" : "container:Packages\/PassepartoutKit",
         "identifier" : "PassepartoutSupportTests",
         "name" : "PassepartoutSupportTests"
@@ -36,9 +29,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
-        "identifier" : "PassepartoutWireGuardGoTests",
-        "name" : "PassepartoutWireGuardGoTests"
+        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
+        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
+        "name" : "PassepartoutOpenVPNOpenSSLTests"
       }
     },
     {
@@ -51,36 +44,8 @@
     {
       "target" : {
         "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutAPITests",
-        "name" : "PassepartoutAPITests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonLibraryTests",
-        "name" : "CommonLibraryTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "LegacyV2Tests",
-        "name" : "LegacyV2Tests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutWireGuardTests",
-        "name" : "PassepartoutWireGuardTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutCoreTests",
-        "name" : "PassepartoutCoreTests"
+        "identifier" : "PassepartoutNETests",
+        "name" : "PassepartoutNETests"
       }
     },
     {
@@ -92,9 +57,23 @@
     },
     {
       "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Packages\/PassepartoutKit",
-        "identifier" : "PassepartoutNETests",
-        "name" : "PassepartoutNETests"
+        "identifier" : "PassepartoutCoreTests",
+        "name" : "PassepartoutCoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit",
+        "identifier" : "PassepartoutAPITests",
+        "name" : "PassepartoutAPITests"
       }
     },
     {
@@ -106,9 +85,30 @@
     },
     {
       "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "LegacyV2Tests",
+        "name" : "LegacyV2Tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
+        "identifier" : "PassepartoutWireGuardGoTests",
+        "name" : "PassepartoutWireGuardGoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/PassepartoutKit",
+        "identifier" : "PassepartoutWireGuardTests",
+        "name" : "PassepartoutWireGuardTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
-        "name" : "PassepartoutOpenVPNOpenSSLTests"
+        "identifier" : "CPassepartoutCryptoOpenSSLTests",
+        "name" : "CPassepartoutCryptoOpenSSLTests"
       }
     }
   ],

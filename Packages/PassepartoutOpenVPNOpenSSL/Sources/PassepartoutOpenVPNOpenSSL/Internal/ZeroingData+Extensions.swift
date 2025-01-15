@@ -1,8 +1,8 @@
 //
-//  Endpoint+WireGuardKit.swift
+//  ZeroingData+Extensions.swift
 //  PassepartoutKit
 //
-//  Created by Davide De Rosa on 3/25/24.
+//  Created by Davide De Rosa on 1/14/25.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,35 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+internal import CPassepartoutCryptoOpenSSL
 import Foundation
 import PassepartoutKit
-internal import WireGuardKit
 
-extension PassepartoutKit.Endpoint {
-    init?(wg: WireGuardKit.Endpoint) {
-        guard let address = Address(rawValue: wg.host.debugDescription) else {
-            return nil
+extension PRNGProtocol {
+    func safeData(length: Int) -> ZeroingData {
+        precondition(length > 0)
+        let randomBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+        defer {
+            bzero(randomBytes, length)
+            randomBytes.deallocate()
         }
-        self.init(address, wg.port.rawValue)
-    }
 
-    func toWireGuardEndpoint() throws -> WireGuardKit.Endpoint {
-        guard let wg = WireGuardKit.Endpoint(from: "\(address):\(port)") else {
-            throw PassepartoutError(.parsing)
+        guard SecRandomCopyBytes(kSecRandomDefault, length, randomBytes) == errSecSuccess else {
+            fatalError("SecRandomCopyBytes failed")
         }
-        return wg
+
+        return Z(Data(bytes: randomBytes, count: length))
     }
 }
 
-extension WireGuardKit.Endpoint {
-    var toEndpoint: PassepartoutKit.Endpoint? {
-        .init(wg: self)
+extension SecureData {
+    var zData: ZeroingData {
+        Z(innerData.toData())
+    }
+}
+
+extension ZeroingData: @retroactive SensitiveDebugStringConvertible {
+    func debugDescription(withSensitiveData: Bool) -> String {
+        withSensitiveData ? "[\(length) bytes, \(toHex())]" : "[\(length) bytes]"
     }
 }

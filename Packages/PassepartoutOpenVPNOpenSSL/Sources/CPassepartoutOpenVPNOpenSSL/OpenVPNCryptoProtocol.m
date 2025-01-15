@@ -24,6 +24,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <PassepartoutKit/PassepartoutKit.h>
 
 #import "OpenVPNCryptoProtocol.h"
 

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import WireGuardKit
+internal import WireGuardKit
 
 extension TunnelConfiguration.ParseError: LocalizedError {
     public var errorDescription: String? {

@@ -46,7 +46,7 @@ extension OpenVPNConnection {
         }
         let cryptoFactory = { @Sendable in
             let seed = prng.safeData(length: 64)
-            guard let box = OSSLCryptoBox(seed: seed.zData.bytes, length: seed.zData.count) else {
+            guard let box = OSSLCryptoBox(seed: seed) else {
                 fatalError("Unable to create OSSLCryptoBox")
             }
             return box

@@ -34,8 +34,7 @@
 //      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <PassepartoutKit/PassepartoutKit.h>
-
+#import "Allocation.h"
 #import "ReplayProtector.h"
 
 @import CPassepartoutCryptoOpenSSL;
@@ -61,7 +60,7 @@
 {
     if ((self = [super init])) {
         self.highestPacketId = 0;
-        self.bitmap =  pp_alloc(BITMAP_LEN * sizeof(uint32_t));
+        self.bitmap =  pp_alloc_crypto(BITMAP_LEN * sizeof(uint32_t));
         bzero(self.bitmap, BITMAP_LEN * sizeof(uint32_t));
     }
     return self;

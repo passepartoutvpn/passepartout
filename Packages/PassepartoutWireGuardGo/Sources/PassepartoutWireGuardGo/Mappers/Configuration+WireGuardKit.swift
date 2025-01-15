@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import WireGuardKit
+internal import WireGuardKit
 
 extension WireGuard.Configuration {
     init(wgQuickConfig: String) throws {

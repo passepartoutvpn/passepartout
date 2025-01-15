@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import WireGuardKit
+internal import WireGuardKit
 
 public final class StandardWireGuardKeyGenerator: WireGuardKeyGenerator {
     public init() {

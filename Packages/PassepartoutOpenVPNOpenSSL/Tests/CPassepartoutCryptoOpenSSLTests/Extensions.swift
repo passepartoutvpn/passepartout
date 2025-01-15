@@ -1,8 +1,8 @@
 //
-//  CryptoMacros.m
+//  Extensions.swift
 //  PassepartoutKit
 //
-//  Created by Davide De Rosa on 3/1/24.
+//  Created by Davide De Rosa on 1/14/25.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,6 +23,22 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Foundation/Foundation.h>
+import Foundation
 
-NSString *const PassepartoutCryptoErrorDomain = @"PassepartoutCrypto";
+extension Data {
+    init(hex: String) {
+        assert(hex.count & 1 == 0)
+        var data = Data()
+        var index = hex.startIndex
+        while index < hex.endIndex {
+            let nextIndex = hex.index(index, offsetBy: 2)
+            if let byte = UInt8(hex[index..<nextIndex], radix: 16) {
+                data.append(byte)
+            } else {
+                break
+            }
+            index = nextIndex
+        }
+        self.init(data)
+    }
+}

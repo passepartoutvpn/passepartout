@@ -36,17 +36,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class ZeroingData;
+extern NSString *_Nonnull const PassepartoutCryptoErrorDomain;
 
-NS_ASSUME_NONNULL_BEGIN
-
-extern NSString *const PassepartoutCryptoErrorDomain;
-
-/// - Parameters:
-///   - size: The base number of bytes.
-///   - overhead: The extra number of bytes.
-/// - Returns: The number of bytes to store a crypto buffer safely.
-size_t pp_alloc_crypto_capacity(size_t size, size_t overhead);
+#define CRYPTO_OPENSSL_SUCCESS(ret) (ret > 0)
+#define CRYPTO_OPENSSL_TRACK_STATUS(ret) if (ret > 0) ret =
+#define CRYPTO_OPENSSL_RETURN_STATUS(ret, raised)\
+if (ret <= 0) {\
+    if (error) {\
+        *error = raised;\
+    }\
+    return NO;\
+}\
+return YES;
 
 /// Custom flags for encryption routines.
 typedef struct {
@@ -66,64 +67,3 @@ typedef struct {
     /// Enable testable (predictable) behavior.
     BOOL forTesting;
 } CryptoFlags;
-
-@protocol Crypto
-
-/// The digest length or 0.
-- (int)digestLength;
-
-/// The tag length or 0.
-- (int)tagLength;
-
-/// The preferred encryption capacity.
-/// - Parameter length: The number of bytes to encrypt.
-- (NSInteger)encryptionCapacityWithLength:(NSInteger)length;
-
-@end
-
-@protocol Encrypter <Crypto>
-
-/// Configures the object.
-/// - Parameters:
-///   - cipherKey: The cipher key data.
-///   - hmacKey: The HMAC key data.
-- (void)configureEncryptionWithCipherKey:(nullable ZeroingData *)cipherKey hmacKey:(nullable ZeroingData *)hmacKey;
-
-/// Encrypts a buffer.
-/// - Parameters:
-///   - bytes: Bytes to encrypt.
-///   - length: The number of bytes.
-///   - dest: The destination buffer.
-///   - destLength: The number of bytes written to ``dest``.
-///   - flags: The optional encryption flags.
-- (BOOL)encryptBytes:(const uint8_t *)bytes length:(NSInteger)length dest:(uint8_t *)dest destLength:(NSInteger *)destLength flags:(const CryptoFlags *_Nullable)flags error:(NSError **)error;
-
-@end
-
-@protocol Decrypter <Crypto>
-
-/// Configures the object.
-/// - Parameters:
-///   - cipherKey: The cipher key data.
-///   - hmacKey: The HMAC key data.
-- (void)configureDecryptionWithCipherKey:(nullable ZeroingData *)cipherKey hmacKey:(nullable ZeroingData *)hmacKey;
-
-/// Decrypts a buffer.
-/// - Parameters:
-///   - bytes: Bytes to decrypt.
-///   - length: The number of bytes.
-///   - dest: The destination buffer.
-///   - destLength: The number of bytes written to ``dest``.
-///   - flags: The optional encryption flags.
-- (BOOL)decryptBytes:(const uint8_t *)bytes length:(NSInteger)length dest:(uint8_t *)dest destLength:(NSInteger *)destLength flags:(const CryptoFlags *_Nullable)flags error:(NSError **)error;
-
-/// Verifies an encrypted buffer.
-/// - Parameters:
-///   - bytes: Bytes to decrypt.
-///   - length: The number of bytes.
-///   - flags: The optional encryption flags.
-- (BOOL)verifyBytes:(const uint8_t *)bytes length:(NSInteger)length flags:(const CryptoFlags *_Nullable)flags error:(NSError **)error;
-
-@end
-
-NS_ASSUME_NONNULL_END

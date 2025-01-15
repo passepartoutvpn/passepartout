@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import WireGuardKit
+internal import WireGuardKit
 
 // MARK: - Mapping
 

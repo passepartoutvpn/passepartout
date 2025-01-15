@@ -24,8 +24,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <PassepartoutKit/PassepartoutKit.h>
 
-#import "Crypto.h"
 #import "CryptoProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN

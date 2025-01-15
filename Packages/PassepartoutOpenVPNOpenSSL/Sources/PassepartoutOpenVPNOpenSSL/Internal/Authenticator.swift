@@ -40,7 +40,7 @@ import PassepartoutKit
 
 fileprivate extension ZeroingData {
     func appendSized(_ buf: ZeroingData) {
-        append(Z(UInt16(buf.count).bigEndian))
+        append(Z(UInt16(buf.length).bigEndian))
         append(buf)
     }
 }
@@ -67,9 +67,9 @@ final class Authenticator {
     var sslVersion: String?
 
     init(prng: PRNGProtocol, _ username: String?, _ password: String?) {
-        preMaster = prng.safeData(length: Constants.preMasterLength).zData
-        random1 = prng.safeData(length: Constants.randomLength).zData
-        random2 = prng.safeData(length: Constants.randomLength).zData
+        preMaster = prng.safeData(length: Constants.preMasterLength)
+        random1 = prng.safeData(length: Constants.randomLength)
+        random2 = prng.safeData(length: Constants.randomLength)
 
         // XXX: not 100% secure, can't erase input username/password
         if let username = username, let password = password {
@@ -162,7 +162,7 @@ final class Authenticator {
 
         pp_log(.openvpn, .info, "TLS.auth: Put plaintext \(raw.asSensitiveBytes)")
 
-        try into.putRawPlainText(raw.bytes, length: raw.count)
+        try into.putRawPlainText(raw.bytes, length: raw.length)
     }
 
     // MARK: Server replies
@@ -175,30 +175,30 @@ final class Authenticator {
         let prefixLength = ProtocolMacros.tlsPrefix.count
 
         // TLS prefix + random (x2) + opts length [+ opts]
-        guard controlBuffer.count >= prefixLength + 2 * Constants.randomLength + 2 else {
+        guard controlBuffer.length >= prefixLength + 2 * Constants.randomLength + 2 else {
             return false
         }
 
-        let prefix = controlBuffer.withOffset(0, count: prefixLength)
+        let prefix = controlBuffer.withOffset(0, length: prefixLength)
         guard prefix.isEqual(to: ProtocolMacros.tlsPrefix) else {
             throw OpenVPNSessionError.wrongControlDataPrefix
         }
 
         var offset = ProtocolMacros.tlsPrefix.count
 
-        let serverRandom1 = controlBuffer.withOffset(offset, count: Constants.randomLength)
+        let serverRandom1 = controlBuffer.withOffset(offset, length: Constants.randomLength)
         offset += Constants.randomLength
 
-        let serverRandom2 = controlBuffer.withOffset(offset, count: Constants.randomLength)
+        let serverRandom2 = controlBuffer.withOffset(offset, length: Constants.randomLength)
         offset += Constants.randomLength
 
         let serverOptsLength = Int(controlBuffer.networkUInt16Value(fromOffset: offset))
         offset += 2
 
-        guard controlBuffer.count >= offset + serverOptsLength else {
+        guard controlBuffer.length >= offset + serverOptsLength else {
             return false
         }
-        let serverOpts = controlBuffer.withOffset(offset, count: serverOptsLength)
+        let serverOpts = controlBuffer.withOffset(offset, length: serverOptsLength)
         offset += serverOptsLength
 
         pp_log(.openvpn, .info, "TLS.auth: Parsed server random [\(serverRandom1.asSensitiveBytes), \(serverRandom2.asSensitiveBytes)]")

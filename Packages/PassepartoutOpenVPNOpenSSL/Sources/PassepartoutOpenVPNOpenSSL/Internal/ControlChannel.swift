@@ -81,7 +81,7 @@ actor ControlChannel {
         queue = BidirectionalState(withResetValue: [])
         currentPacketId = BidirectionalState(withResetValue: 0)
         pendingAcks = []
-        plainBuffer = Z(count: OpenVPNTLSOptionsDefaultBufferLength)
+        plainBuffer = Z(length: OpenVPNTLSOptionsDefaultBufferLength)
         sentDates = [:]
     }
 }
@@ -245,6 +245,6 @@ extension ControlChannel {
     func currentControlData(withTLS tls: OpenVPNTLSProtocol) throws -> ZeroingData {
         var length = 0
         try tls.pullRawPlainText(plainBuffer.mutableBytes, length: &length)
-        return plainBuffer.withOffset(0, count: length)
+        return plainBuffer.withOffset(0, length: length)
     }
 }

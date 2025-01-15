@@ -133,10 +133,10 @@ extension OpenVPN.XORMethod: StyledLocalizableEntity {
     private var longDescription: String {
         switch self {
         case .xormask(let mask):
-            return "\(shortDescription) \(mask.zData.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         case .obfuscate(let mask):
-            return "\(shortDescription) \(mask.zData.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         default:
             return shortDescription

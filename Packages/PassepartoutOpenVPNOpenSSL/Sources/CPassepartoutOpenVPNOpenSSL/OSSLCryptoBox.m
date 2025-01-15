@@ -65,7 +65,7 @@ static const NSInteger CryptoCTRPayloadLength = PacketOpcodeLength + PacketSessi
 
 #pragma mark Initialization
 
-- (instancetype)initWithSeed:(const uint8_t *)seed length:(NSInteger)length
+- (instancetype)initWithSeed:(ZeroingData *)seed
 {
     if ((self = [super init])) {
         unsigned char x[1];
@@ -73,7 +73,7 @@ static const NSInteger CryptoCTRPayloadLength = PacketOpcodeLength + PacketSessi
         if (RAND_bytes(x, 1) != 1) {
             return nil;
         }
-        RAND_seed(seed, (int)length);
+        RAND_seed(seed.bytes, (int)seed.length);
     }
     return self;
 }

@@ -1,5 +1,5 @@
 //
-//  CryptoCTRTests.swift
+//  CryptoAEADTests.swift
 //  PassepartoutKit
 //
 //  Created by Davide De Rosa on 12/12/23.
@@ -25,21 +25,17 @@
 
 internal import CPassepartoutCryptoOpenSSL
 @testable import PassepartoutCryptoOpenSSL
-import PassepartoutKit
 import XCTest
 
-final class CryptoCTRTests: XCTestCase {
+final class CryptoAEADTests: XCTestCase {
     func test_givenData_whenEncrypt_thenDecrypts() {
-        let sut = CryptoCTR(cipherName: "aes-128-ctr",
-                            digestName: "sha256",
-                            tagLength: 32,
-                            payloadLength: 128)
+        let sut = CryptoAEAD(cipherName: "aes-256-gcm", tagLength: 16, idLength: 4)
+        var flags = newFlags()
 
         sut.configureEncryption(withCipherKey: cipherKey, hmacKey: hmacKey)
         sut.configureDecryption(withCipherKey: cipherKey, hmacKey: hmacKey)
         let encryptedData: Data
 
-        var flags = newFlags()
         do {
             encryptedData = try sut.encryptData(plainData, flags: &flags)
         } catch {
@@ -55,13 +51,13 @@ final class CryptoCTRTests: XCTestCase {
     }
 }
 
-private extension CryptoCTRTests {
+private extension CryptoAEADTests {
     var cipherKey: ZeroingData {
-        ZeroingData(count: 32)
+        ZeroingData(length: 32)
     }
 
     var hmacKey: ZeroingData {
-        ZeroingData(count: 32)
+        ZeroingData(length: 32)
     }
 
     var plainData: Data {

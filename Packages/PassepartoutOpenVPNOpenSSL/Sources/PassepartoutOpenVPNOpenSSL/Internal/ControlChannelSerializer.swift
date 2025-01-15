@@ -23,6 +23,7 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+internal import CPassepartoutCryptoOpenSSL
 internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
