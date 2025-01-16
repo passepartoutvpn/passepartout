@@ -108,7 +108,8 @@ let package = Package(
             dependencies: [
                 .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
                 .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
-            ]
+            ],
+            path: "Sources/Empty/AppUI"
         ),
         .target(
             name: "AppUIMain",
@@ -121,7 +122,8 @@ let package = Package(
             name: "AppUIMainWrapper",
             dependencies: [
                 .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
-            ]
+            ],
+            path: "Sources/Empty/AppUIMainWrapper"
         ),
         .target(
             name: "AppUITV",
@@ -131,7 +133,8 @@ let package = Package(
             name: "AppUITVWrapper",
             dependencies: [
                 .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
-            ]
+            ],
+            path: "Sources/Empty/AppUITVWrapper"
         ),
         .target(
             name: "CommonAPI",
@@ -174,7 +177,8 @@ let package = Package(
             dependencies: [
                 "PassepartoutOpenVPNOpenSSL",
                 "PassepartoutWireGuardGo"
-            ]
+            ],
+            path: "Sources/Empty/PassepartoutImplementations"
         ),
         .target(
             name: "UIAccessibility"
