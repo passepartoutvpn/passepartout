@@ -30,6 +30,20 @@ import XCTest
 final class PushReplyTests: XCTestCase {
     private let parser = StandardOpenVPNParser()
 
+    func test_givenMessage_whenNoOptions_thenHasNoFallbackValues() throws {
+        let msg = "PUSH_REPLY,redirect-gateway def1"
+        guard let reply = try parser.pushReply(with: msg) else {
+            XCTFail("No reply")
+            return
+        }
+        reply.debug()
+
+        XCTAssertNil(reply.options.cipher)
+        XCTAssertNil(reply.options.digest)
+        XCTAssertNil(reply.options.compressionFraming)
+        XCTAssertNil(reply.options.compressionAlgorithm)
+    }
+
     func test_givenMessage_whenNet30_thenIsHandled() throws {
         let msg = "PUSH_REPLY,redirect-gateway def1,dhcp-option DNS 209.222.18.222,dhcp-option DNS 209.222.18.218,ping 10,comp-lzo no,route 10.5.10.1,topology net30,ifconfig 10.5.10.6 10.5.10.5,auth-token AUkQf/b3nj3L+CH4RJPP0Vuq8/gpntr7uPqzjQhncig="
         guard let reply = try parser.pushReply(with: msg) else {
