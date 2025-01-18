@@ -8,10 +8,10 @@ if [[ -z "$2" ]]; then
     exit 1
 fi
 if [[ -z "$3" ]]; then
-    echo "Setting regex required"
+    echo "Setting value required"
     exit 1
 fi
-xcodeproj="$1"
+xcconfig="$1"
 setting_key="$2"
-setting_pattern="$3"
-grep $setting_key $xcodeproj | sed -E "s/^.*${setting_key} = ${setting_pattern};/\1/" | uniq | tr -d '\n'
+setting_value="$3"
+sed -i "" -E "s/^(.*${setting_key} =) .*$/\1 ${setting_value}/" $xcconfig

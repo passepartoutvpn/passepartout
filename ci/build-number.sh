@@ -1,4 +1,4 @@
 #!/bin/sh
 cwd=`dirname $0`
-xcodeproj="$cwd/../Passepartout.xcodeproj/project.pbxproj"
-$cwd/xcode-get-setting.sh $xcodeproj CURRENT_PROJECT_VERSION "([0-9]+)"
+xcconfig="$cwd/../Passepartout/Config.xcconfig"
+$cwd/xcode-get-setting.sh $xcconfig CURRENT_PROJECT_VERSION "([0-9]+)"
