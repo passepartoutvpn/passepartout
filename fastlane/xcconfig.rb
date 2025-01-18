@@ -3,8 +3,8 @@ def xcconfig_set(path, key, value)
     raise "File not found: #{path}"
   end
   content = File.read(path)
-  pattern = /^(.*#{key} =) .*$/
-  replacement = "\\1 #{value}"
+  pattern = /^(.*#{key}) = .*$/
+  replacement = "\\1 = #{value}"
   modified_content = content.gsub(pattern, replacement)
   File.write(path, modified_content)
 end
