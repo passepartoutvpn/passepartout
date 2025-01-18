@@ -52,7 +52,6 @@ set -- "${positional_args[@]}" # restore positional parameters
 cwd=`dirname $0`
 cmd_api="$cwd/update-bundled-api.sh"
 cmd_fastlane="cd $cwd/.. && bundle exec fastlane bump $opt_version $opt_build $opt_since $opt_no_log $opt_no_tag"
-cmd_release_notes="$cwd/copy-release-notes.sh"
 
 if [[ -n $opt_dry_run ]]; then
     echo "version = $opt_version"
@@ -65,7 +64,6 @@ if [[ -n $opt_dry_run ]]; then
         echo "$cmd_api"
     fi
     echo "$cmd_fastlane"
-    echo "$cmd_release_notes"
     exit 0
 fi
 
@@ -73,4 +71,3 @@ if [[ -z $opt_no_api ]]; then
     eval "$cmd_api"
 fi
 eval "$cmd_fastlane"
-eval "$cmd_release_notes"

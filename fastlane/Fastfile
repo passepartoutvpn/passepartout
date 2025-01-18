@@ -61,6 +61,7 @@ lane :bump do |options|
     unless version.nil? || version.empty?
         xcconfig_set("../#{xcconfig}", "MARKETING_VERSION", version)
     end
+    system("../scripts/copy-release-notes.sh")
     git_add(
         path: [
             xcconfig,
