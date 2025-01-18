@@ -1,5 +1,1 @@
-Passepartout has been completely rewritten for improved performance and
-usability. The new version delivers a faster, smoother experience across iOS,
-macOS, and tvOS while maintaining its role as your ultimate VPN configuration
-tool. Enjoy a modern, reliable app built from the ground up to meet your
-networking needs.
+* Do not fall back to AES-128-CBC when PUSH_REPLY has no cipher (#1073)
