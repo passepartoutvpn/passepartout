@@ -124,6 +124,9 @@ jobs:
       RELEASE_NOTES: CHANGELOG.txt
     steps:
       - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
