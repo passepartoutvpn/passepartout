@@ -262,17 +262,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0E3D7F242D347A41003F1C4B /* Packages */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
+		0E3D7F242D347A41003F1C4B /* Packages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Packages; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1229,7 +1219,6 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1250,7 +1239,6 @@
 				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1268,7 +1256,6 @@
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1289,7 +1276,6 @@
 				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1329,7 +1315,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/LoginItem/LoginItem.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1338,7 +1323,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LOGIN_ITEM_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1354,7 +1338,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/LoginItem/LoginItem.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
@@ -1363,7 +1346,6 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LOGIN_ITEM_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1408,7 +1390,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
@@ -1418,7 +1399,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1434,14 +1414,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1457,7 +1435,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Intents/Intents.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
@@ -1469,7 +1446,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1488,7 +1464,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Intents/Intents.entitlements;
-				CURRENT_PROJECT_VERSION = 3718;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
@@ -1497,7 +1472,6 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents tvos";

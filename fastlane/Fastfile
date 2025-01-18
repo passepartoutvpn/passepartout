@@ -15,9 +15,12 @@
 
 fastlane_require "dotenv"
 fastlane_require "fileutils"
+load "xcconfig.rb"
 Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
+
+xcconfig = ENV["XCCONFIG_PATH"]
 api = ENV["API_PACKAGE_PATH"]
 metadata = "fastlane/metadata"
 logname = "CHANGELOG.txt"
@@ -49,23 +52,32 @@ lane :bump do |options|
             UI.user_error!("CHANGELOG editor cancelled")
         end
     end
-    version = options[:version]
     build = options[:build]
-    increment_build_number(build_number: build)
-    unless version.nil? || version.empty?
-        increment_version_number_in_xcodeproj(version_number: version)
+    version = options[:version]
+    if build.nil? || build.empty?
+        build = xcconfig_get("../#{xcconfig}", "CURRENT_PROJECT_VERSION").to_i + 1
     end
-    git_add(
-        path: [api, metadata, logname]
+    xcconfig_set("../#{xcconfig}", "CURRENT_PROJECT_VERSION", build)
+    unless version.nil? || version.empty?
+        xcconfig_set("../#{xcconfig}", "MARKETING_VERSION", version)
+    end
+    system("../scripts/copy-release-notes.sh")
+    git_commit(
+        path: [
+            xcconfig,
+            api,
+            metadata,
+            logname
+        ],
+        message: "Bump version"
     )
-    commit_version_bump(
-        message: "Bump version",
-        force: true
-    )
-    add_git_tag(
-        includes_lane: false,
-        sign: true
-    )
+    unless options[:no_tag]
+        add_git_tag(
+            includes_lane: false,
+            sign: true,
+            build_number: build
+        )
+    end
 end
 
 desc "Run Xcode tests"

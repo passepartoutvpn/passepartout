@@ -10,7 +10,6 @@ env:
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
   TESTFLIGHT_PREFACE: ${{ vars.TESTFLIGHT_PREFACE }}
-  XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
   PLATFORMS: "iOS macOS tvOS"
 
 concurrency:
@@ -29,8 +28,8 @@ jobs:
       - name: Save app version
         id: app_version
         run: |
-          VERSION=`ci/version-number.sh $XCODEPROJ`
-          BUILD=`ci/build-number.sh $XCODEPROJ`
+          VERSION=`ci/version-number.sh`
+          BUILD=`ci/build-number.sh`
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "build=$BUILD" >> $GITHUB_OUTPUT
       - name: Run Xcode tests

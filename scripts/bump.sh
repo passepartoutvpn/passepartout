@@ -28,6 +28,10 @@ while [[ $# -gt 0 ]]; do
       opt_no_log="no_log:true"
       shift # past argument
       ;;
+    -nt)
+      opt_no_tag="no_tag:true"
+      shift
+      ;;
     -d)
       opt_dry_run=1
       shift # past argument
@@ -47,8 +51,7 @@ set -- "${positional_args[@]}" # restore positional parameters
 
 cwd=`dirname $0`
 cmd_api="$cwd/update-bundled-api.sh"
-cmd_release_notes="$cwd/copy-release-notes.sh"
-cmd_fastlane="cd $cwd/.. && bundle exec fastlane bump $opt_version $opt_build $opt_since $opt_no_log"
+cmd_fastlane="cd $cwd/.. && bundle exec fastlane bump $opt_version $opt_build $opt_since $opt_no_log $opt_no_tag"
 
 if [[ -n $opt_dry_run ]]; then
     echo "version = $opt_version"
@@ -56,10 +59,10 @@ if [[ -n $opt_dry_run ]]; then
     echo "since   = $opt_since"
     echo "no_api  = $opt_no_api"
     echo "no_log  = $opt_no_log"
+    echo "no_tag  = $opt_no_tag"
     if [[ -z $opt_no_api ]]; then
         echo "$cmd_api"
     fi
-    echo "$cmd_release_notes"
     echo "$cmd_fastlane"
     exit 0
 fi
@@ -67,5 +70,4 @@ fi
 if [[ -z $opt_no_api ]]; then
     eval "$cmd_api"
 fi
-eval "$cmd_release_notes"
 eval "$cmd_fastlane"
