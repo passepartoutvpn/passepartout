@@ -1,1 +1,2 @@
-* Do not fall back to AES-128-CBC when PUSH_REPLY has no cipher (#1073)
+* Apple TV: Fix uncredited features to old iOS/macOS purchasers (#1074)
+* OpenVPN: Fix encryption failing when server does not push a cipher (#1073)
