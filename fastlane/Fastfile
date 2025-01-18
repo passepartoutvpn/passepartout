@@ -73,11 +73,13 @@ lane :bump do |options|
         message: "Bump version",
         force: true
     )
-    add_git_tag(
-        includes_lane: false,
-        sign: true,
-        build_number: build
-    )
+    unless options[:no_tag]
+        add_git_tag(
+            includes_lane: false,
+            sign: true,
+            build_number: build
+        )
+    end
 end
 
 desc "Run Xcode tests"
