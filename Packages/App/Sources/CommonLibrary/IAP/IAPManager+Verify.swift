@@ -48,6 +48,10 @@ extension IAPManager {
         guard isEligible(for: .appleTV) else {
             throw AppError.ineligibleProfile([.appleTV])
         }
+        // require only .appleTV to cope with BuildProducts
+        // rely on iOS/macOS eligibility as profiles are not
+        // editable on tvOS
+        return
 #endif
         let requiredFeatures = features.filter {
             !isEligible(for: $0)
