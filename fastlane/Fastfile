@@ -62,17 +62,14 @@ lane :bump do |options|
         xcconfig_set("../#{xcconfig}", "MARKETING_VERSION", version)
     end
     system("../scripts/copy-release-notes.sh")
-    git_add(
+    git_commit(
         path: [
             xcconfig,
             api,
             metadata,
             logname
-        ]
-    )
-    commit_version_bump(
-        message: "Bump version",
-        force: true
+        ],
+        message: "Bump version"
     )
     unless options[:no_tag]
         add_git_tag(
