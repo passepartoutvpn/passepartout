@@ -145,9 +145,7 @@ public struct Constants: Decodable, Sendable {
 
         public let sinceLast: TimeInterval
 
-        public let maxLevel: DebugLog.Level
-
-        public let maxNumberOfLines: Int
+        public let options: LocalLogger.Options
 
         public let maxAge: TimeInterval?
     }

@@ -37,9 +37,12 @@
         "appPath": "app.log",
         "tunnelPath": "tunnel.log",
         "sinceLast": 86400,
-        "maxLevel": 3,
-        "maxNumberOfLines": 10000,
-        "maxAge": 604800,
+        "options": {
+            "maxLevel": 3,
+            "maxSize": 500000,
+            "maxBufferedLines": 5000,
+            "maxAge": 259200
+        },
         "formatter": {
             "timestamp": "HH:mm:ss",
             "message": "%@ - %@"

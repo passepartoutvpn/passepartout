@@ -122,7 +122,7 @@ extension ExtendedTunnel {
     public func currentLog(parameters: Constants.Log) async -> [String] {
         let output = try? await tunnel.sendMessage(.localLog(
             sinceLast: parameters.sinceLast,
-            maxLevel: parameters.maxLevel
+            maxLevel: parameters.options.maxLevel
         ))
         switch output {
         case .debugLog(let log):

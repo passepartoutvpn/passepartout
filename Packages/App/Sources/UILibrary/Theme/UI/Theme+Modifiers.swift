@@ -266,8 +266,23 @@ extension View {
         modifier(ThemeHoverListRowModifier())
     }
 
-    public func themeTip(_ text: String, edge: Edge) -> some View {
-        modifier(ThemeTipModifier(text: text, edge: edge))
+    public func themeTip<Label>(
+        _ text: String,
+        edge: Edge,
+        width: Double = 150.0,
+        alignment: Alignment = .center,
+        label: @escaping () -> Label = {
+            ThemeImage(.tip)
+                .imageScale(.large)
+        }
+    ) -> some View where Label: View {
+        modifier(ThemeTipModifier(
+            text: text,
+            edge: edge,
+            width: width,
+            alignment: alignment,
+            label: label
+        ))
     }
 #endif
 }
@@ -617,10 +632,16 @@ struct ThemeLockScreenModifier<LockedContent>: ViewModifier where LockedContent:
     }
 }
 
-struct ThemeTipModifier: ViewModifier {
+struct ThemeTipModifier<Label>: ViewModifier where Label: View {
     let text: String
 
     let edge: Edge
+
+    let width: Double
+
+    let alignment: Alignment
+
+    let label: () -> Label
 
     @State
     private var isPresenting = false
@@ -631,9 +652,8 @@ struct ThemeTipModifier: ViewModifier {
             Button {
                 isPresenting = true
             } label: {
-                ThemeImage(.tip)
+                label()
             }
-            .imageScale(.large)
             .buttonStyle(.borderless)
             .popover(isPresented: $isPresenting, arrowEdge: edge) {
                 VStack {
@@ -642,7 +662,7 @@ struct ThemeTipModifier: ViewModifier {
                         .foregroundStyle(.primary)
                         .lineLimit(nil)
                         .multilineTextAlignment(.leading)
-                        .frame(width: 150.0)
+                        .frame(width: width, alignment: alignment)
                 }
                 .padding(12)
             }
