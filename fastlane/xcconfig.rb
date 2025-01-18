@@ -3,7 +3,7 @@ def xcconfig_set(path, key, value)
     raise "File not found: #{path}"
   end
   content = File.read(path)
-  pattern = /^(.*#{key}) = .*$/
+  pattern = /^(#{key}) = .*$/
   replacement = "\\1 = #{value}"
   modified_content = content.gsub(pattern, replacement)
   File.write(path, modified_content)
@@ -13,7 +13,7 @@ def xcconfig_get(path, key)
   unless File.exist?(path)
     raise "File not found: #{path}"
   end
-  pattern = /^.*#{key} = (.*)$/
+  pattern = /^#{key} = (.*)$/
   File.foreach(path) do |line|
     if (match = line.match(pattern))
       return match[1]
