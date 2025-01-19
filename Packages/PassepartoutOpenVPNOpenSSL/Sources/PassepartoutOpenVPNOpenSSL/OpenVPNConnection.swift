@@ -90,7 +90,7 @@ public actor OpenVPNConnection {
 
         } upgradeBlock: { [weak self] in
 
-            // #190, may improve this with floating
+            // TODO: may improve this with floating
             pp_log(.openvpn, .notice, "Link has a better path, shut down session to reconnect")
             await self?.session.shutdown(PassepartoutError(.networkChanged))
 
