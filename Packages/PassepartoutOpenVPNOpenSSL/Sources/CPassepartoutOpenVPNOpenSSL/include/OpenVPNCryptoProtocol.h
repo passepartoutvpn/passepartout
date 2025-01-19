@@ -24,7 +24,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PassepartoutKit/PassepartoutKit.h>
 
 #import "CryptoProvider.h"
 

@@ -23,8 +23,6 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <PassepartoutKit/PassepartoutKit.h>
-
 #import "LZOFactory.h"
 #import "StandardLZO.h"
 

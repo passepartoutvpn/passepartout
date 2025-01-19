@@ -23,7 +23,6 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <PassepartoutKit/PassepartoutKit.h>
 #import <Foundation/Foundation.h>
 
 #import "XORMethodNative.h"
