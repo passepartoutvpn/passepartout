@@ -4,8 +4,9 @@
 import PackageDescription
 
 let environment: Environment
-environment = .production
+//environment = .localDevelopment
 //environment = .onlineDevelopment
+environment = .production
 
 enum Environment {
     case localDevelopment
@@ -16,12 +17,27 @@ enum Environment {
 
     var dependencies: [Package.Dependency] {
         switch self {
-        case .localDevelopment, .onlineDevelopment:
+        case .localDevelopment:
             return []
+        case .onlineDevelopment:
+            return [
+                .package(url: "https://github.com/passepartoutvpn/passepartoutkit", from: "0.99.5")
+            ]
         case .production:
             return [
                 .package(path: "../PassepartoutKit-Source")
             ]
+        }
+    }
+
+    var targetName: String {
+        switch self {
+        case .localDevelopment:
+            return "LocalDevelopment"
+        case .onlineDevelopment:
+            return "OnlineDevelopment"
+        case .production:
+            return "Production"
         }
     }
 
@@ -30,18 +46,19 @@ enum Environment {
         switch self {
         case .localDevelopment:
             targets.append(.binaryTarget(
-                name: "Target",
+                name: targetName,
                 path: "PassepartoutKit.xcframework.zip"
             ))
         case .onlineDevelopment:
-            targets.append(.binaryTarget(
-                name: "Target",
-                url: "https://github.com/passepartoutvpn/passepartoutkit/releases/download/0.99.3/PassepartoutKit.xcframework.zip",
-                checksum: "6da09eca9fe26504ac7aa416dcdbccc65c57090f6809c547b3641a3712540041"
+            targets.append(.target(
+                name: targetName,
+                dependencies: [
+                    .product(name: "PassepartoutKit-Binary", package: "passepartoutkit")
+                ]
             ))
         case .production:
             targets.append(.target(
-                name: "Target",
+                name: targetName,
                 dependencies: [
                     .product(name: "PassepartoutKit", package: "PassepartoutKit-Source")
                 ]
@@ -49,7 +66,9 @@ enum Environment {
         }
         targets.append(.testTarget(
             name: "TargetTests",
-            dependencies: ["Target"]
+            dependencies: [
+                .target(name: targetName)
+            ]
         ))
         return targets
     }
@@ -65,7 +84,7 @@ let package = Package(
     products: [
         .library(
             name: "PassepartoutKit-Framework",
-            targets: ["Target"]
+            targets: [environment.targetName]
         )
     ],
     dependencies: environment.dependencies,
