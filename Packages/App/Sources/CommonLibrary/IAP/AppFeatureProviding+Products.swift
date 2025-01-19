@@ -35,7 +35,14 @@ extension AppProduct: AppFeatureProviding {
             return AppFeature.allCases
 
         case .Features.appleTV:
+#if os(tvOS)
+            // treat .appleTV as full version on tvOS to cope
+            // with BuildProducts limitations. rely on iOS/macOS
+            // eligibility as profiles are not editable on tvOS
+            return AppFeature.allCases
+#else
             return [.appleTV, .sharing]
+#endif
 
         // MARK: Discontinued
 
