@@ -89,7 +89,9 @@ private extension PaywallView {
             requiredFeaturesView
             featureProductsView
             fullProductsView
+#if !os(tvOS)
             linksView
+#endif
             if !iapManager.isFullVersionPurchaser {
                 allFeaturesView
             }
