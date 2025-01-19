@@ -37,8 +37,20 @@ extension AppProduct: AppFeatureProviding {
         case .Features.appleTV:
 #if os(tvOS)
             // treat .appleTV as full version on tvOS to cope
-            // with BuildProducts limitations. rely on iOS/macOS
-            // eligibility as profiles are not editable on tvOS
+            // with BuildProducts limitations
+            //
+            // some old iOS/macOS users are acknowledged certain
+            // purchases based on the build number of their first
+            // download, e.g. "Full version (iOS)". unfortunately,
+            // that build number is not the same on tvOS, so
+            // those purchases do not exist and the TV may complain
+            // about missing features other than .appleTV
+            //
+            // we avoid this by relying on iOS/macOS eligibility
+            // alone while only requiring .appleTV on tvOS
+            //
+            // this is a solid workaround as long as profiles are
+            // not editable on tvOS
             return AppFeature.allCases
 #else
             return [.appleTV, .sharing]
