@@ -115,11 +115,11 @@ private extension ProfileImporter {
         profileManager: ProfileManager,
         importer: ModuleImporter
     ) async throws {
-        guard url.startAccessingSecurityScopedResource() else {
-            throw AppError.permissionDenied
-        }
+        let didStartAccess = url.startAccessingSecurityScopedResource()
         defer {
-            url.stopAccessingSecurityScopedResource()
+            if didStartAccess {
+                url.stopAccessingSecurityScopedResource()
+            }
         }
 
         let module = try importer.module(fromURL: url, object: passphrase)
