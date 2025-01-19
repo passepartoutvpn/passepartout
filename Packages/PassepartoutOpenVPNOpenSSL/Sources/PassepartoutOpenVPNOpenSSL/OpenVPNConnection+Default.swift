@@ -55,7 +55,7 @@ extension OpenVPNConnection {
         let session = try OpenVPNSession(
             configuration: configuration,
             credentials: module.credentials,
-            prng: SecureRandom(),
+            prng: prng,
             tlsFactory: tlsFactory,
             cryptoFactory: cryptoFactory,
             cachesURL: cachesURL,
