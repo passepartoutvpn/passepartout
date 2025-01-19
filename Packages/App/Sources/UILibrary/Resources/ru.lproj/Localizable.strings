@@ -36,6 +36,7 @@
 "errors.app.passepartout.no_active_modules" = "В профиле нет активных модулей.";
 "errors.app.passepartout.parsing" = "Не удалось разобрать файл.";
 "errors.app.passepartout.provider_required" = "Поставщик не выбран.";
+"errors.app.permission_denied" = "Доступ запрещен";
 "errors.app.tunnel" = "Не удалось выполнить операцию.";
 "errors.tunnel.auth" = "Ошибка аутентификации";
 "errors.tunnel.compression" = "Сжатие не поддерживается";

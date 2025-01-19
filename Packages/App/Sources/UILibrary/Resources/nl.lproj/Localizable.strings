@@ -36,6 +36,7 @@
 "errors.app.passepartout.no_active_modules" = "Het profiel heeft geen actieve modules.";
 "errors.app.passepartout.parsing" = "Kan bestand niet parseren.";
 "errors.app.passepartout.provider_required" = "Geen provider geselecteerd.";
+"errors.app.permission_denied" = "Toegang geweigerd";
 "errors.app.tunnel" = "Actie kan niet worden uitgevoerd.";
 "errors.tunnel.auth" = "Verificatie mislukt";
 "errors.tunnel.compression" = "Compressie niet ondersteund";
