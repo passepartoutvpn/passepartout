@@ -36,6 +36,7 @@
 "errors.app.passepartout.no_active_modules" = "Profilen har inga aktiva moduler.";
 "errors.app.passepartout.parsing" = "Kan inte tolka filen.";
 "errors.app.passepartout.provider_required" = "Ingen leverantör vald.";
+"errors.app.permission_denied" = "Åtkomst nekad";
 "errors.app.tunnel" = "Kunde inte utföra åtgärden.";
 "errors.tunnel.auth" = "Autentisering misslyckades";
 "errors.tunnel.compression" = "Kompression stöds inte";

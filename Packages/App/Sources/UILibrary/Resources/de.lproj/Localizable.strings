@@ -36,6 +36,7 @@
 "errors.app.passepartout.no_active_modules" = "Das Profil hat keine aktiven Module.";
 "errors.app.passepartout.parsing" = "Datei konnte nicht analysiert werden.";
 "errors.app.passepartout.provider_required" = "Kein Anbieter ausgewählt.";
+"errors.app.permission_denied" = "Zugriff verweigert";
 "errors.app.tunnel" = "Aktion konnte nicht ausgeführt werden.";
 "errors.tunnel.auth" = "Authentifizierung fehlgeschlagen";
 "errors.tunnel.compression" = "Kompression wird nicht unterstützt";

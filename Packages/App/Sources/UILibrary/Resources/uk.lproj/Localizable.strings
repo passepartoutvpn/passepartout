@@ -36,6 +36,7 @@
 "errors.app.passepartout.no_active_modules" = "Профіль не має активних модулів.";
 "errors.app.passepartout.parsing" = "Не вдалося обробити файл.";
 "errors.app.passepartout.provider_required" = "Не вибрано постачальника.";
+"errors.app.permission_denied" = "Доступ заборонено";
 "errors.app.tunnel" = "Не вдалося виконати операцію.";
 "errors.tunnel.auth" = "Помилка аутентифікації";
 "errors.tunnel.compression" = "Стиснення не підтримується";
