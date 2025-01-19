@@ -51,7 +51,7 @@ extension AppError: LocalizedError {
             return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 
         case .permissionDenied:
-            return V.default
+            return V.permissionDenied
 
         case .generic(let error):
             return error.localizedDescription
