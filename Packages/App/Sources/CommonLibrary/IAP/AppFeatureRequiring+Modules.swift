@@ -49,7 +49,11 @@ extension OnDemandModule.Builder: AppFeatureRequiring {
         guard isEnabled else {
             return []
         }
-        return policy != .any ? [.onDemand] : []
+        // empty rules require no purchase
+        if !withMobileNetwork && !withEthernetNetwork && !withSSIDs.map(\.value).contains(true) {
+            return []
+        }
+        return [.onDemand]
     }
 }
 
