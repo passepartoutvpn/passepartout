@@ -158,7 +158,7 @@ extension AppContext {
 
         let onEligibleFeaturesBlock: (Set<AppFeature>) async -> Void = { @MainActor features in
             let isEligibleForSharing = features.contains(.sharing)
-            let isRemoteImportingEnabled = isEligibleForSharing && isCloudKitEnabled
+            let isRemoteImportingEnabled = isEligibleForSharing
 
             // toggle CloudKit sync based on .sharing eligibility
             let remoteStore = newRemoteStore(isRemoteImportingEnabled)
