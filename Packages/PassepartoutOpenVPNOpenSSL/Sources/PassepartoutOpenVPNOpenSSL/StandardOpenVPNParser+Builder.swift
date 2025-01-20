@@ -477,9 +477,9 @@ extension StandardOpenVPNParser.Builder {
 
             var args = components
             args.removeFirst()
-            optRedirectGateway = Set(args.compactMap {
+            optRedirectGateway?.formUnion(Set(args.compactMap {
                 RedirectGateway(rawValue: $0)
-            })
+            }))
 
         case .routeNoPull:
             optRouteNoPull = true
