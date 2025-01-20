@@ -188,6 +188,15 @@ final class PushReplyTests: XCTestCase {
             XCTFail("Unable to parse reply: \(error)")
         }
     }
+
+    func test_givenMultipleRedirectGateway_whenParse_thenIncludesRoutingPolicies() throws {
+        let msg = "PUSH_REPLY,redirect-gateway def1,redirect-gateway bypass-dhcp,redirect-gateway autolocal,dhcp-option DNS 8.8.8.8,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 20,ifconfig 10.8.0.2 255.255.255.0,peer-id 0,cipher AES-256-GCM"
+
+        let reply = try parser.pushReply(with: msg)
+        reply?.debug()
+
+        XCTAssertEqual(reply?.options.routingPolicies, [.IPv4])
+    }
 }
 
 // MARK: - Helpers
