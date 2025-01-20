@@ -1,2 +1,4 @@
+* Fix iCloud/TV sync not working with Advanced Data Protection (#1090)
 * Do not require purchase for empty on-demand rules (#1089)
 * OpenVPN: Default gateway not set properly in some cases (#1087)
+* Fix purchased features on Apple TV (#1083)
