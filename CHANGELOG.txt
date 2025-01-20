@@ -1,1 +1,2 @@
+* Do not require purchase for empty on-demand rules (#1089)
 * OpenVPN: Default gateway not set properly in some cases (#1087)
