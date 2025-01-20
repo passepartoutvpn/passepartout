@@ -1,3 +1,1 @@
-* Fix error alert when importing files from external apps (#1078)
-* Apple TV: Fix uncredited features to old iOS/macOS purchasers (#1074)
-* OpenVPN: Fix encryption failing when server does not push a cipher (#1073)
+* OpenVPN: Default gateway not set properly in some cases (#1087)
