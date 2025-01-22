@@ -31,17 +31,17 @@ import PassepartoutKit
 final class OpenVPNUDPLink {
     private let link: LinkInterface
 
-    private let xor: XORProcessor
+    private let xor: XORProcessor?
 
     /// - Parameters:
     ///   - link: The underlying socket.
     ///   - xorMethod: The optional XOR method.
     convenience init(link: LinkInterface, xorMethod: OpenVPN.XORMethod?) {
         precondition(link.linkType.plainType == .udp)
-        self.init(link: link, xor: XORProcessor(method: xorMethod))
+        self.init(link: link, xor: xorMethod.map(XORProcessor.init(method:)))
     }
 
-    init(link: LinkInterface, xor: XORProcessor) {
+    init(link: LinkInterface, xor: XORProcessor?) {
         self.link = link
         self.xor = xor
     }
@@ -80,21 +80,28 @@ extension OpenVPNUDPLink: LinkInterface {
 extension OpenVPNUDPLink {
     func setReadHandler(_ handler: @escaping ([Data]?, Error?) -> Void) {
         link.setReadHandler { [weak self] packets, error in
-            guard let self else {
+            guard let self, let packets, !packets.isEmpty else {
                 return
             }
-            // FIXME: redundant XOR processing when no XOR
-            var processedPackets: [Data]?
-            if let packets {
-                processedPackets = xor.processPackets(packets, outbound: false)
+            if let xor {
+                let processedPackets = xor.processPackets(packets, outbound: false)
+                handler(processedPackets, error)
+                return
             }
-            handler(processedPackets, error)
+            handler(packets, error)
         }
     }
 
     func writePackets(_ packets: [Data]) async throws {
-        // FIXME: redundant XOR processing when no XOR
-        let processedPackets = xor.processPackets(packets, outbound: true)
-        try await link.writePackets(processedPackets)
+        guard !packets.isEmpty else {
+            assertionFailure("Writing empty packets?")
+            return
+        }
+        if let xor {
+            let processedPackets = xor.processPackets(packets, outbound: true)
+            try await link.writePackets(processedPackets)
+            return
+        }
+        try await link.writePackets(packets)
     }
 }

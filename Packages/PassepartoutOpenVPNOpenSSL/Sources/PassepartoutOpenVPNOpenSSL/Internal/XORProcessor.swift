@@ -29,9 +29,9 @@ import PassepartoutKit
 
 /// Processes data packets according to a XOR method.
 struct XORProcessor {
-    private let method: OpenVPN.XORMethod?
+    private let method: OpenVPN.XORMethod
 
-    init(method: OpenVPN.XORMethod?) {
+    init(method: OpenVPN.XORMethod) {
         self.method = method
     }
 
@@ -43,10 +43,7 @@ struct XORProcessor {
      - Returns: The array of packets after XOR processing.
      **/
     func processPackets(_ packets: [Data], outbound: Bool) -> [Data] {
-        guard method != nil else {
-            return packets
-        }
-        return packets.map {
+        packets.map {
             processPacket($0, outbound: outbound)
         }
     }
@@ -59,9 +56,6 @@ struct XORProcessor {
      - Returns: The packet after XOR processing.
      **/
     func processPacket(_ packet: Data, outbound: Bool) -> Data {
-        guard let method else {
-            return packet
-        }
         switch method {
         case .xormask(let mask):
             return Self.xormask(packet: packet, mask: mask.zData)
