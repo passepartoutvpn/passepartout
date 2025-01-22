@@ -78,6 +78,10 @@ final class Negotiator {
 
     private let tlsBox: OpenVPNTLSProtocol
 
+    private var expectedPacketId: UInt32
+
+    private var pendingPackets: [UInt32: ControlPacket]
+
     private var authenticator: Authenticator?
 
     private var nextPushRequestDate: Date?
@@ -134,6 +138,8 @@ final class Negotiator {
         negotiationTimeout = renegotiation != nil ? options.sessionOptions.softNegotiationTimeout : options.sessionOptions.negotiationTimeout
         state = .idle
         tlsBox = tlsFactory()
+        expectedPacketId = 0
+        pendingPackets = [:]
     }
 
     func forRenegotiation(initiatedBy newRenegotiation: RenegotiationType) -> Negotiator {
@@ -198,7 +204,22 @@ extension Negotiator {
     }
 
     func handleControlPacket(_ packet: ControlPacket) throws {
+        guard packet.packetId >= expectedPacketId else {
+            return
+        }
+        if packet.packetId > expectedPacketId {
+            pendingPackets[packet.packetId] = packet
+            return
+        }
+
         try privateHandleControlPacket(packet)
+        expectedPacketId += 1
+
+        while let packet = pendingPackets[expectedPacketId] {
+            try privateHandleControlPacket(packet)
+            pendingPackets.removeValue(forKey: packet.packetId)
+            expectedPacketId += 1
+        }
     }
 
     func handleAcks() {
