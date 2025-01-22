@@ -158,7 +158,7 @@ private extension OpenVPNSession {
                 break
             }
 
-            try negotiator.sendAck(for: controlPacket, to: link)
+            negotiator.sendAck(for: controlPacket, to: link)
 
             let pendingInboundQueue = negotiator.enqueueInboundPacket(packet: controlPacket)
             pp_log(.openvpn, .debug, "Pending inbound queue: \(pendingInboundQueue.map(\.packetId))")
