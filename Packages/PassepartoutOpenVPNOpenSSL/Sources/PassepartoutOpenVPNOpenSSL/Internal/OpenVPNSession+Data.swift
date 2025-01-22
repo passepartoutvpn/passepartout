@@ -31,25 +31,24 @@ extension OpenVPNSession {
         _ packets: [Data],
         to tunnel: TunnelInterface,
         dataChannel: DataChannel
-    ) throws {
-        do {
-            guard let decryptedPackets = try dataChannel.decrypt(packets: packets) else {
-                pp_log(.openvpn, .error, "Unable to decrypt packets, is SessionKey properly configured (dataPath, peerId)?")
-                return
-            }
-            guard !decryptedPackets.isEmpty else {
-                return
-            }
-            reportInboundDataCount(decryptedPackets.flatCount)
-            Task {
-                // FIXME: catch error
+    ) {
+        Task {
+            do {
+                guard let decryptedPackets = try dataChannel.decrypt(packets: packets) else {
+                    pp_log(.openvpn, .error, "Unable to decrypt packets, is SessionKey properly configured (dataPath, peerId)?")
+                    return
+                }
+                guard !decryptedPackets.isEmpty else {
+                    return
+                }
+                reportInboundDataCount(decryptedPackets.flatCount)
                 try await tunnel.writePackets(decryptedPackets)
+            } catch {
+                if let nativeError = error.asNativeOpenVPNError {
+                    throw nativeError
+                }
+                throw OpenVPNSessionError.recoverable(error)
             }
-        } catch {
-            if let nativeError = error.asNativeOpenVPNError {
-                throw nativeError
-            }
-            throw OpenVPNSessionError.recoverable(error)
         }
     }
 
@@ -57,26 +56,25 @@ extension OpenVPNSession {
         _ packets: [Data],
         to link: LinkInterface,
         dataChannel: DataChannel
-    ) throws {
-        do {
-            guard let encryptedPackets = try dataChannel.encrypt(packets: packets) else {
-                pp_log(.openvpn, .error, "Unable to encrypt packets, is SessionKey properly configured (dataPath, peerId)?")
-                return
-            }
-            guard !encryptedPackets.isEmpty else {
-                return
-            }
-            reportOutboundDataCount(encryptedPackets.flatCount)
-            Task {
-                // FIXME: catch error
+    ) {
+        Task {
+            do {
+                guard let encryptedPackets = try dataChannel.encrypt(packets: packets) else {
+                    pp_log(.openvpn, .error, "Unable to encrypt packets, is SessionKey properly configured (dataPath, peerId)?")
+                    return
+                }
+                guard !encryptedPackets.isEmpty else {
+                    return
+                }
+                reportOutboundDataCount(encryptedPackets.flatCount)
                 try await link.writePackets(encryptedPackets)
+            } catch {
+                if let nativeError = error.asNativeOpenVPNError {
+                    throw nativeError
+                }
+                pp_log(.openvpn, .error, "Data: Failed LINK write during send data: \(error)")
+                await shutdown(PassepartoutError(.linkFailure, error))
             }
-        } catch {
-            if let nativeError = error.asNativeOpenVPNError {
-                throw nativeError
-            }
-            pp_log(.openvpn, .error, "Data: Failed LINK write during send data: \(error)")
-            throw PassepartoutError(.linkFailure)
         }
     }
 }

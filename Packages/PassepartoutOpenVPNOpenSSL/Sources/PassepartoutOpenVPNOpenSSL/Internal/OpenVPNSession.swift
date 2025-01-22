@@ -473,7 +473,7 @@ private extension OpenVPNSession {
         // is keep-alive enabled?
         if keepAliveInterval != nil {
             pp_log(.openvpn, .debug, "Send ping")
-            try sendDataPackets(
+            sendDataPackets(
                 [ProtocolMacros.pingString],
                 to: link,
                 dataChannel: currentDataChannel

@@ -227,7 +227,9 @@ extension Negotiator {
     }
 
     func sendAck(for controlPacket: ControlPacket, to link: LinkInterface) throws {
-        try privateSendAck(for: controlPacket, to: link)
+        Task {
+            try await privateSendAck(for: controlPacket, to: link)
+        }
     }
 
     func shouldRenegotiate() -> Bool {
@@ -338,14 +340,7 @@ private extension Negotiator {
             payload: payload,
             maxPacketSize: Constants.maxPacketSize
         )
-        do {
-            // FIXME: async errors?
-            try flushControlQueue()
-        } catch {
-            Task {
-                await options.onError(key, error)
-            }
-        }
+        try flushControlQueue()
     }
 
     func flushControlQueue() throws {
@@ -364,7 +359,6 @@ private extension Negotiator {
         }
         Task {
             do {
-                // FIXME: catch error elsewhere like it's done here
                 try await link.writePackets(rawList)
             } catch {
                 pp_log(.openvpn, .error, "Failed LINK write during control flush: \(error)")
@@ -483,7 +477,7 @@ private extension Negotiator {
         }
     }
 
-    func privateSendAck(for controlPacket: ControlPacket, to link: LinkInterface) throws {
+    func privateSendAck(for controlPacket: ControlPacket, to link: LinkInterface) async throws {
         do {
             pp_log(.openvpn, .info, "Send ack for received packetId \(controlPacket.packetId)")
             let raw = try channel.writeAcks(
@@ -491,14 +485,11 @@ private extension Negotiator {
                 ackPacketIds: [controlPacket.packetId],
                 ackRemoteSessionId: controlPacket.sessionId
             )
-            Task {
-                // FIXME: catch error
-                try await link.writePackets([raw])
-                pp_log(.openvpn, .info, "Ack successfully written to LINK for packetId \(controlPacket.packetId)")
-            }
+            try await link.writePackets([raw])
+            pp_log(.openvpn, .info, "Ack successfully written to LINK for packetId \(controlPacket.packetId)")
         } catch {
             pp_log(.openvpn, .error, "Failed LINK write during send ack for packetId \(controlPacket.packetId): \(error)")
-            throw PassepartoutError(.linkFailure)
+            await options.onError(key, PassepartoutError(.linkFailure, error))
         }
     }
 
@@ -558,7 +549,6 @@ private extension Negotiator {
         for message in authenticator.parseMessages() {
             pp_log(.openvpn, .info, "Parsed control message \(message.asSensitiveBytes)")
             do {
-                // FIXME: async errors?
                 try handleControlMessage(message)
             } catch {
                 Task {

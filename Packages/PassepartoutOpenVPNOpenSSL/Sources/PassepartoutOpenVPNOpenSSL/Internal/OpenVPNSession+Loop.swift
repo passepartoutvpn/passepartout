@@ -60,7 +60,7 @@ extension OpenVPNSession {
                 }
                 if let error {
                     pp_log(.openvpn, .error, "Failed LINK read: \(error)")
-                    await shutdown(PassepartoutError(.linkFailure))
+                    await shutdown(PassepartoutError(.linkFailure, error))
                 }
                 guard let packets, !packets.isEmpty else {
                     return
@@ -175,7 +175,7 @@ private extension OpenVPNSession {
                     pp_log(.openvpn, .error, "Accounted a data packet for which the cryptographic key hadn't been found")
                     continue
                 }
-                try handleDataPackets(
+                handleDataPackets(
                     dataPackets,
                     to: tunnel,
                     dataChannel: dataChannel
@@ -198,7 +198,7 @@ private extension OpenVPNSession {
 
         try checkPingTimeout()
 
-        try sendDataPackets(
+        sendDataPackets(
             packets,
             to: negotiator.link,
             dataChannel: currentDataChannel
