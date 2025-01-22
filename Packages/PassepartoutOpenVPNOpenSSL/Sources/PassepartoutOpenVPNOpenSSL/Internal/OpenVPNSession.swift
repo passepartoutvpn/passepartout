@@ -196,7 +196,7 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
         self.link = link
         sessionState = .starting
 
-        try await startNegotiation(on: link)
+        try startNegotiation(on: link)
     }
 
     func hasLink() async -> Bool {
@@ -221,7 +221,7 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
            let link, !link.isReliable,
            let currentDataChannel {
             do {
-                if let packets = try await currentDataChannel.encrypt(packets: [OCCPacket.exit.serialized()]) {
+                if let packets = try currentDataChannel.encrypt(packets: [OCCPacket.exit.serialized()]) {
                     pp_log(.openvpn, .info, "Send OCCPacket exit")
 
                     let timeoutMillis = Int((timeout ?? options.writeTimeout) * 1000.0)
@@ -262,7 +262,7 @@ private extension OpenVPNSession {
     func cleanup() async {
         link?.shutdown()
         for neg in negotiators.values {
-            await neg.cancel()
+            neg.cancel()
         }
         negotiators.removeAll()
         dataChannels.removeAll()
@@ -453,7 +453,7 @@ private extension OpenVPNSession {
         }
     }
 
-    func ping() async throws {
+    func ping() throws {
         guard !isStopped else {
             pp_log(.openvpn, .debug, "Ping cancelled, session stopped")
             return
@@ -473,7 +473,7 @@ private extension OpenVPNSession {
         // is keep-alive enabled?
         if keepAliveInterval != nil {
             pp_log(.openvpn, .debug, "Send ping")
-            try await sendDataPackets(
+            sendDataPackets(
                 [ProtocolMacros.pingString],
                 to: link,
                 dataChannel: currentDataChannel

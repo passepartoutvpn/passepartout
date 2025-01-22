@@ -27,7 +27,7 @@ internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
 
-actor ControlChannel {
+final class ControlChannel {
     private let prng: PRNGProtocol
 
     private let serializer: ControlChannelSerializer
@@ -52,11 +52,11 @@ actor ControlChannel {
 
     private var sentDates: [UInt32: Date]
 
-    init(prng: PRNGProtocol) {
+    convenience init(prng: PRNGProtocol) {
         self.init(prng: prng, serializer: PlainSerializer())
     }
 
-    init(
+    convenience init(
         prng: PRNGProtocol,
         crypto: OpenVPNCryptoProtocol,
         authKey key: OpenVPN.StaticKey,
@@ -65,7 +65,7 @@ actor ControlChannel {
         self.init(prng: prng, serializer: try AuthSerializer(with: crypto, key: key, digest: digest))
     }
 
-    init(
+    convenience init(
         prng: PRNGProtocol,
         crypto: OpenVPNCryptoProtocol,
         cryptKey key: OpenVPN.StaticKey
