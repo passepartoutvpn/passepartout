@@ -90,6 +90,8 @@ extension StandardOpenVPNParser {
 // MARK: - Parsing
 
 extension StandardOpenVPNParser.Builder {
+
+    @inlinable
     mutating func putOption(_ option: StandardOpenVPNParser.Option, line: String, components: [String]) throws {
         switch option {
 

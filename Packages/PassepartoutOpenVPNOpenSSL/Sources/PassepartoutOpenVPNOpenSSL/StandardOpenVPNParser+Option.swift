@@ -28,6 +28,10 @@ import Foundation
 extension StandardOpenVPNParser {
     enum Option: String, CaseIterable {
 
+        // MARK: Continuation
+
+        case continuation = "^push-continuation [12]"
+
         // MARK: Unsupported
 
         // check blocks first
@@ -125,9 +129,9 @@ extension StandardOpenVPNParser {
 
         case xorInfo = "^scramble +(xormask|xorptrpos|reverse|obfuscate)[\\s]?([^\\s]+)?"
 
-        // MARK: Continuation
-
-        case continuation = "^push-continuation [12]"
+        func regularExpression() throws -> NSRegularExpression {
+            try NSRegularExpression(pattern: rawValue)
+        }
     }
 }
 
@@ -138,36 +142,6 @@ extension StandardOpenVPNParser.Option {
             return true
         default:
             return false
-        }
-    }
-
-    static func parsed(in line: String) -> (option: Self, components: [String])? {
-        assert(allCases.first == .connectionBlock)
-        for option in allCases {
-            guard let components = option.spacedComponents(in: line) else {
-                continue
-            }
-            return (option, components)
-        }
-        return nil
-    }
-}
-
-extension StandardOpenVPNParser.Option {
-    func spacedComponents(in string: String) -> [String]? {
-        let results = NSRegularExpression(rawValue)
-            .matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
-        guard !results.isEmpty else {
-            return nil
-        }
-        assert(results.count == 1)
-        return results.first.map { result in
-            let match = (string as NSString).substring(with: result.range)
-            return match
-                .components(separatedBy: " ")
-                .filter {
-                    !$0.isEmpty
-                }
         }
     }
 }

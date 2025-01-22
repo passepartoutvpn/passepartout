@@ -70,6 +70,16 @@ public final class StandardOpenVPNParser {
     /// The decrypter for private keys.
     private let decrypter: PrivateKeyDecrypter?
 
+    private let rxOptions: [(option: Option, rx: NSRegularExpression)] = Option.allCases.compactMap {
+        do {
+            let rx = try $0.regularExpression()
+            return ($0, rx)
+        } catch {
+            assertionFailure("Unable to build regex for '\($0.rawValue)': \(error)")
+            return nil
+        }
+    }
+
     public init(decrypter: PrivateKeyDecrypter? = nil) {
         self.decrypter = decrypter ?? OSSLTLSBox()
     }
@@ -149,11 +159,13 @@ private extension StandardOpenVPNParser {
         var builder = Builder(decrypter: decrypter)
         var isUnknown = true
         for line in lines {
-            guard let result = Option.parsed(in: line) else {
+            let found = try enumerateOptions(in: line) {
+                try builder.putOption($0, line: line, components: $1)
+            }
+            guard found else {
                 builder.putLine(line)
                 continue
             }
-            try builder.putOption(result.option, line: line, components: result.components)
             isUnknown = false
         }
         guard !isUnknown else {
@@ -165,19 +177,6 @@ private extension StandardOpenVPNParser {
             configuration: result.configuration,
             warning: result.warning
         )
-    }
-}
-
-private extension String {
-    func trimmedLines() -> [String] {
-        components(separatedBy: .newlines)
-            .map {
-                $0.trimmingCharacters(in: .whitespacesAndNewlines)
-                    .replacingOccurrences(of: "\\s", with: " ", options: .regularExpression)
-            }
-            .filter {
-                !$0.isEmpty
-            }
     }
 }
 
@@ -210,5 +209,70 @@ extension StandardOpenVPNParser: ModuleImporter {
         } catch {
             throw PassepartoutError(.parsing, error)
         }
+    }
+}
+
+// MARK: - Helpers
+
+private extension StandardOpenVPNParser {
+    func enumerateOptions(
+        in line: String,
+        completion: (_ option: Option, _ components: [String]) throws -> Void
+    ) throws -> Bool {
+        assert(rxOptions.first?.option == .continuation)
+        for pair in rxOptions {
+            var lastError: Error?
+            if pair.rx.enumerateSpacedComponents(in: line, using: { components in
+                do {
+                    try completion(pair.option, components)
+                } catch {
+                    lastError = error
+                }
+            }) {
+                if let lastError {
+                    throw lastError
+                }
+                return true
+            }
+        }
+        return false
+    }
+}
+
+extension NSRegularExpression {
+    func enumerateSpacedComponents(in string: String, using block: ([String]) -> Void) -> Bool {
+        var found = false
+        enumerateMatches(
+            in: string,
+            options: [],
+            range: NSRange(location: 0, length: string.count)
+        ) { result, _, _ in
+            guard let result else {
+                return
+            }
+            let match = (string as NSString)
+                .substring(with: result.range)
+            let components = match
+                .components(separatedBy: " ")
+                .filter {
+                    !$0.isEmpty
+                }
+            found = true
+            block(components)
+        }
+        return found
+    }
+}
+
+private extension String {
+    func trimmedLines() -> [String] {
+        components(separatedBy: .newlines)
+            .map {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines)
+                    .replacingOccurrences(of: "\\s", with: " ", options: .regularExpression)
+            }
+            .filter {
+                !$0.isEmpty
+            }
     }
 }
