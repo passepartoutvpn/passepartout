@@ -29,12 +29,12 @@ import PassepartoutKit
 extension OpenVPNSession {
 
     @discardableResult
-    func startNegotiation(on link: LinkInterface) async throws -> Negotiator {
+    func startNegotiation(on link: LinkInterface) throws -> Negotiator {
         pp_log(.openvpn, .info, "Start negotiation")
         let neg = newNegotiator(on: link)
         addNegotiator(neg)
         loopLink()
-        try await neg.start()
+        try neg.start()
         return neg
     }
 
@@ -42,8 +42,8 @@ extension OpenVPNSession {
         after negotiator: Negotiator,
         on link: LinkInterface,
         isServerInitiated: Bool
-    ) async throws -> Negotiator {
-        guard await !negotiator.isRenegotiating else {
+    ) throws -> Negotiator {
+        guard !negotiator.isRenegotiating else {
             pp_log(.openvpn, .error, "Renegotiation already in progress")
             return negotiator
         }
@@ -52,9 +52,9 @@ extension OpenVPNSession {
         } else {
             pp_log(.openvpn, .notice, "Renegotiation request from client")
         }
-        let neg = await negotiator.forRenegotiation(initiatedBy: isServerInitiated ? .server : .client)
+        let neg = negotiator.forRenegotiation(initiatedBy: isServerInitiated ? .server : .client)
         addNegotiator(neg)
-        try await neg.start()
+        try neg.start()
         return neg
     }
 }

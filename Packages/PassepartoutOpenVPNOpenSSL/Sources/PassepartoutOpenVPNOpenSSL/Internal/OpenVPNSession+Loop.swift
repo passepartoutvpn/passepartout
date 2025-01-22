@@ -78,7 +78,7 @@ extension OpenVPNSession {
 // MARK: - Private
 
 private extension OpenVPNSession {
-    func receiveLink(packets: [Data]) async throws {
+    func receiveLink(packets: [Data]) throws {
         guard !isStopped, let link else {
             return
         }
@@ -90,8 +90,8 @@ private extension OpenVPNSession {
             pp_log(.openvpn, .fault, "No negotiator")
             throw OpenVPNSessionError.assertion
         }
-        if await negotiator.shouldRenegotiate() {
-            negotiator = try await startRenegotiation(after: negotiator, on: link, isServerInitiated: false)
+        if negotiator.shouldRenegotiate() {
+            negotiator = try startRenegotiation(after: negotiator, on: link, isServerInitiated: false)
         }
 
         for packet in packets {
@@ -131,8 +131,8 @@ private extension OpenVPNSession {
 
             let controlPacket: ControlPacket
             do {
-                let parsedPacket = try await negotiator.channel.readInboundPacket(withData: packet, offset: 0)
-                handleAcks()
+                let parsedPacket = try negotiator.readInboundPacket(withData: packet, offset: 0)
+                negotiator.handleAcks()
                 if parsedPacket.code == .ackV1 {
                     continue
                 }
@@ -145,28 +145,26 @@ private extension OpenVPNSession {
             case .hardResetServerV2:
 
                 // HARD_RESET coming while connected
-                guard await !negotiator.isConnected else {
+                guard !negotiator.isConnected else {
                     throw OpenVPNSessionError.recoverable(OpenVPNSessionError.staleSession)
                 }
 
             case .softResetV1:
-                if await !negotiator.isRenegotiating {
-                    negotiator = try await startRenegotiation(after: negotiator, on: link, isServerInitiated: true)
+                if !negotiator.isRenegotiating {
+                    negotiator = try startRenegotiation(after: negotiator, on: link, isServerInitiated: true)
                 }
 
             default:
                 break
             }
 
-            try await sendAck(
-                for: controlPacket,
-                to: link,
-                channel: negotiator.channel
-            )
+            try negotiator.sendAck(for: controlPacket, to: link)
 
-            let pendingInboundQueue = await negotiator.channel.enqueueInboundPacket(packet: controlPacket)
+            let pendingInboundQueue = negotiator.enqueueInboundPacket(packet: controlPacket)
+            pp_log(.openvpn, .debug, "Pending inbound queue: \(pendingInboundQueue.map(\.packetId))")
             for inboundPacket in pendingInboundQueue {
-                try await negotiator.readPacket(inboundPacket)
+                pp_log(.openvpn, .debug, "Handle packet: \(inboundPacket.packetId)")
+                try negotiator.handleControlPacket(inboundPacket)
             }
         }
 
@@ -177,7 +175,7 @@ private extension OpenVPNSession {
                     pp_log(.openvpn, .error, "Accounted a data packet for which the cryptographic key hadn't been found")
                     continue
                 }
-                try await handleDataPackets(
+                try handleDataPackets(
                     dataPackets,
                     to: tunnel,
                     dataChannel: dataChannel
@@ -186,7 +184,7 @@ private extension OpenVPNSession {
         }
     }
 
-    func receiveTunnel(packets: [Data]) async throws {
+    func receiveTunnel(packets: [Data]) throws {
         guard !isStopped else {
             return
         }
@@ -194,13 +192,13 @@ private extension OpenVPNSession {
             pp_log(.openvpn, .fault, "No negotiator")
             throw OpenVPNSessionError.assertion
         }
-        guard await negotiator.isConnected, let currentDataChannel else {
+        guard negotiator.isConnected, let currentDataChannel else {
             return
         }
 
         try checkPingTimeout()
 
-        try await sendDataPackets(
+        try sendDataPackets(
             packets,
             to: negotiator.link,
             dataChannel: currentDataChannel

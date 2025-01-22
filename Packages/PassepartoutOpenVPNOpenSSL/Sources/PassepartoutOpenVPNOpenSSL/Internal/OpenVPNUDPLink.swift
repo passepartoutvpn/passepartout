@@ -83,6 +83,7 @@ extension OpenVPNUDPLink {
             guard let self else {
                 return
             }
+            // FIXME: redundant XOR processing when no XOR
             var processedPackets: [Data]?
             if let packets {
                 processedPackets = xor.processPackets(packets, outbound: false)
@@ -92,6 +93,7 @@ extension OpenVPNUDPLink {
     }
 
     func writePackets(_ packets: [Data]) async throws {
+        // FIXME: redundant XOR processing when no XOR
         let processedPackets = xor.processPackets(packets, outbound: true)
         try await link.writePackets(processedPackets)
     }

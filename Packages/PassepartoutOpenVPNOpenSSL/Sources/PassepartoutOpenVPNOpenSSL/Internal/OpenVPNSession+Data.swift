@@ -31,9 +31,9 @@ extension OpenVPNSession {
         _ packets: [Data],
         to tunnel: TunnelInterface,
         dataChannel: DataChannel
-    ) async throws {
+    ) throws {
         do {
-            guard let decryptedPackets = try await dataChannel.decrypt(packets: packets) else {
+            guard let decryptedPackets = try dataChannel.decrypt(packets: packets) else {
                 pp_log(.openvpn, .error, "Unable to decrypt packets, is SessionKey properly configured (dataPath, peerId)?")
                 return
             }
@@ -41,7 +41,10 @@ extension OpenVPNSession {
                 return
             }
             reportInboundDataCount(decryptedPackets.flatCount)
-            try await tunnel.writePackets(decryptedPackets)
+            Task {
+                // FIXME: catch error
+                try await tunnel.writePackets(decryptedPackets)
+            }
         } catch {
             if let nativeError = error.asNativeOpenVPNError {
                 throw nativeError
@@ -54,9 +57,9 @@ extension OpenVPNSession {
         _ packets: [Data],
         to link: LinkInterface,
         dataChannel: DataChannel
-    ) async throws {
+    ) throws {
         do {
-            guard let encryptedPackets = try await dataChannel.encrypt(packets: packets) else {
+            guard let encryptedPackets = try dataChannel.encrypt(packets: packets) else {
                 pp_log(.openvpn, .error, "Unable to encrypt packets, is SessionKey properly configured (dataPath, peerId)?")
                 return
             }
@@ -64,7 +67,10 @@ extension OpenVPNSession {
                 return
             }
             reportOutboundDataCount(encryptedPackets.flatCount)
-            try await link.writePackets(encryptedPackets)
+            Task {
+                // FIXME: catch error
+                try await link.writePackets(encryptedPackets)
+            }
         } catch {
             if let nativeError = error.asNativeOpenVPNError {
                 throw nativeError
