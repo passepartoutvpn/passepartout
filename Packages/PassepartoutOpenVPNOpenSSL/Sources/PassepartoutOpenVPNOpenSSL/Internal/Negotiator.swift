@@ -226,7 +226,7 @@ extension Negotiator {
         //
     }
 
-    func sendAck(for controlPacket: ControlPacket, to link: LinkInterface) throws {
+    func sendAck(for controlPacket: ControlPacket, to link: LinkInterface) {
         Task {
             try await privateSendAck(for: controlPacket, to: link)
         }
