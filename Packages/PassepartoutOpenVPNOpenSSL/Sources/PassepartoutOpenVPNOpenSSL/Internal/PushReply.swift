@@ -72,6 +72,9 @@ extension StandardOpenVPNParser {
         guard let prefixIndex = message.range(of: Self.prefix)?.lowerBound else {
             return nil
         }
+        guard !message.contains("push-continuation 2") else {
+            throw StandardOpenVPNParserError.continuationPushReply
+        }
         let original = String(message[prefixIndex...])
         let lines = original.components(separatedBy: ",")
         let options = try parsed(fromLines: lines).configuration
