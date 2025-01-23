@@ -37,7 +37,7 @@ extension ErrorHandler {
                 AppError($0).localizedDescription
             },
             beforeAlert: {
-                pp_log(.app, .error, $0)
+                pp_log(.app, .error, "Error handler being presented: \($0)")
             }
         )
     }
