@@ -224,20 +224,18 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
                 if let packets = try currentDataChannel.encrypt(packets: [OCCPacket.exit.serialized()]) {
                     pp_log(.openvpn, .info, "Send OCCPacket exit")
 
-                    let timeoutMillis = Int((timeout ?? options.writeTimeout) * 1000.0)
-
                     let writeTask = Task {
                         try await link.writePackets(packets)
-                        try Task.checkCancellation()
+                        do {
+                            try Task.checkCancellation()
+                        } catch {
+                            pp_log(.openvpn, .error, "Cancelled OCCPacket: \(error)")
+                        }
                     }
-                    let timeoutTask = Task {
-                        try await Task.sleep(milliseconds: timeoutMillis)
-                        try Task.checkCancellation()
-                        pp_log(.openvpn, .info, "Cancelled OCCPacket")
-                        writeTask.cancel()
-                    }
-                    try await writeTask.value
-                    timeoutTask.cancel()
+
+                    let timeoutMillis = Int((timeout ?? options.writeTimeout) * 1000.0)
+                    try await Task.sleep(milliseconds: timeoutMillis)
+                    writeTask.cancel()
 
                     pp_log(.openvpn, .info, "Sent OCCPacket correctly")
                 }
