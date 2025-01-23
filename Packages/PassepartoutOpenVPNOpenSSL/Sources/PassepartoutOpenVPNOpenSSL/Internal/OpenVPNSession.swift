@@ -217,32 +217,11 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
         sessionState = .stopping
 
         // shut down after sending exit notification if link is unreliable (normally UDP)
-        if error == nil || (error as? PassepartoutError)?.code == .networkChanged,
-           let link, !link.isReliable,
-           let currentDataChannel {
+        if error == nil || (error as? PassepartoutError)?.code == .networkChanged {
             do {
-                if let packets = try currentDataChannel.encrypt(packets: [OCCPacket.exit.serialized()]) {
-                    pp_log(.openvpn, .info, "Send OCCPacket exit")
-
-                    let timeoutMillis = Int((timeout ?? options.writeTimeout) * 1000.0)
-
-                    let writeTask = Task {
-                        try await link.writePackets(packets)
-                        try Task.checkCancellation()
-                    }
-                    let timeoutTask = Task {
-                        try await Task.sleep(milliseconds: timeoutMillis)
-                        try Task.checkCancellation()
-                        pp_log(.openvpn, .info, "Cancelled OCCPacket")
-                        writeTask.cancel()
-                    }
-                    try await writeTask.value
-                    timeoutTask.cancel()
-
-                    pp_log(.openvpn, .info, "Sent OCCPacket correctly")
-                }
+                try await sendExitPacket(timeout: timeout)
             } catch {
-                pp_log(.openvpn, .error, "Unable to send OCCPacket exit: \(error)")
+                pp_log(.openvpn, .error, "Unable to send exit packet: \(error)")
             }
         }
 
@@ -259,6 +238,41 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
 }
 
 private extension OpenVPNSession {
+    func sendExitPacket(timeout: TimeInterval?) async throws {
+        guard let link, !link.isReliable, let currentDataChannel else {
+            return
+        }
+        guard let packets = try currentDataChannel.encrypt(packets: [OCCPacket.exit.serialized()]) else {
+            pp_log(.openvpn, .error, "Encrypted to empty OCCPacket packets")
+            assertionFailure("Empty OCCPacket packets?")
+            return
+        }
+
+        pp_log(.openvpn, .info, "Send OCCPacket exit")
+
+        let timeoutMillis = Int((timeout ?? options.writeTimeout) * 1000.0)
+        let timeoutTask = Task {
+            try await Task.sleep(milliseconds: timeoutMillis)
+        }
+        let writeTask = Task {
+            try await link.writePackets(packets)
+            timeoutTask.cancel()
+            do {
+                try Task.checkCancellation()
+            } catch {
+                pp_log(.openvpn, .error, "Cancelled OCCPacket: \(error)")
+            }
+        }
+        do {
+            try await timeoutTask.value
+        } catch {
+            pp_log(.openvpn, .info, "Cancelled OCCPacket write timeout (completed earlier): \(error)")
+        }
+        writeTask.cancel()
+
+        pp_log(.openvpn, .info, "Sent OCCPacket correctly")
+    }
+
     func cleanup() async {
         link?.shutdown()
         for neg in negotiators.values {
