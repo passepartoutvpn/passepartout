@@ -44,6 +44,14 @@ extension PassepartoutConfiguration {
         appendLog(parameters.options.maxLevel, message: "")
         appendLog(parameters.options.maxLevel, message: "--- BEGIN ---")
         appendLog(parameters.options.maxLevel, message: "")
+
+        let systemInfo = SystemInformation()
+        appendLog(parameters.options.maxLevel, message: "App: \(BundleConfiguration.mainVersionString)")
+        appendLog(parameters.options.maxLevel, message: "OS: \(systemInfo.osString)")
+        if let deviceString = systemInfo.deviceString {
+            appendLog(parameters.options.maxLevel, message: "Device: \(deviceString)")
+        }
+        appendLog(parameters.options.maxLevel, message: "")
     }
 
     public func currentLog(parameters: Constants.Log) -> [String] {
