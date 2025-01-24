@@ -23,21 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
-
 import CommonLibrary
 import Foundation
 import PassepartoutKit
-import UIKit
-
-#else
-
-import AppKit
-import CommonLibrary
-import Foundation
-import PassepartoutKit
-
-#endif
 
 struct Issue: Identifiable {
     let id: UUID
@@ -71,25 +59,9 @@ struct Issue: Identifiable {
         self.appLog = appLog
         self.tunnelLog = tunnelLog
 
-        let osName: String
-        let osVersion: String
-        let deviceType: String?
-        // providerName / providerLastUpdate
-
-#if os(iOS)
-        let device: UIDevice = .current
-        osName = device.systemName
-        osVersion = device.systemVersion
-        deviceType = device.model
-#else
-        let os = ProcessInfo().operatingSystemVersion
-        osName = "macOS"
-        osVersion = "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
-        deviceType = nil
-#endif
-
-        osLine = "\(osName) \(osVersion)"
-        deviceLine = deviceType
+        let systemInfo = SystemInformation()
+        osLine = systemInfo.osString
+        deviceLine = systemInfo.deviceString
 
         providerName = provider?.0.rawValue
         providerLastUpdate = provider?.1
