@@ -135,7 +135,7 @@ private extension OpenVPNCredentialsView {
                     passwordField
                 }
             }
-            if isEligibleForOTP, isAuthenticating, builder.otpMethod != .none {
+            if isAuthenticating, builder.otpMethod != .none {
                 otpField
             }
         }
@@ -198,10 +198,6 @@ private extension OpenVPNCredentialsView {
 }
 
 private extension OpenVPNCredentialsView {
-    var isEligibleForOTP: Bool {
-        iapManager.isEligible(for: .otp)
-    }
-
     var requiredFeatures: Set<AppFeature>? {
         isInteractive && builder.otpMethod != .none ? [.otp] : nil
     }
@@ -235,14 +231,7 @@ private extension OpenVPNCredentialsView {
     }
 
     func onChange(_ builder: OpenVPN.Credentials.Builder) {
-        var copy = builder
-        if isEligibleForOTP {
-            copy.otp = copy.otp ?? ""
-        } else {
-            copy.otpMethod = .none
-            copy.otp = nil
-        }
-        credentials = copy.build()
+        credentials = builder.build()
     }
 }
 
