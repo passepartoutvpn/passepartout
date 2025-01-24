@@ -501,6 +501,6 @@ private extension ProfileManager {
                 $0.name.lowercased() < $1.name.lowercased()
             }
 
-        pp_log(.App.profiles, .notice, "Filter profiles with '\(search)' (\(filteredProfiles.count) results)")
+        pp_log(.App.profiles, .notice, "Filter profiles with '\(search)' (\(filteredProfiles.count)): \(filteredProfiles.map(\.name))")
     }
 }
