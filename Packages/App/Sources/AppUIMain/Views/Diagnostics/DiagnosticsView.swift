@@ -179,10 +179,10 @@ private extension DiagnosticsView {
     }
 
     func removeTunnelLogs() {
-        tunnelLogs.forEach {
-            try? FileManager.default.removeItem(at: $0.url)
+        PassepartoutConfiguration.shared.purgeLogs(at: BundleConfiguration.urlForTunnelLog)
+        Task {
+            tunnelLogs = await availableTunnelLogs()
         }
-        tunnelLogs.removeAll()
     }
 }
 
