@@ -182,6 +182,7 @@ private extension OpenVPNView {
         case .credentials:
             Form {
                 OpenVPNCredentialsView(
+                    profileEditor: editor,
                     providerId: draft.wrappedValue.providerId,
                     isInteractive: draft.isInteractive,
                     credentials: draft.credentials

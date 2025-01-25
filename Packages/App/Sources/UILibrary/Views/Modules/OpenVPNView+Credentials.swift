@@ -43,6 +43,9 @@ public struct OpenVPNCredentialsView: View {
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @ObservedObject
+    private var profileEditor: ProfileEditor
+
     private let providerId: ProviderID?
 
     @Binding
@@ -65,12 +68,14 @@ public struct OpenVPNCredentialsView: View {
     private var focusedField: Field?
 
     public init(
+        profileEditor: ProfileEditor,
         providerId: ProviderID?,
         isInteractive: Binding<Bool>,
         credentials: Binding<OpenVPN.Credentials?>,
         isAuthenticating: Bool = false,
         onSubmit: (() -> Void)? = nil
     ) {
+        self.profileEditor = profileEditor
         self.providerId = providerId
         _isInteractive = isInteractive
         _credentials = credentials
@@ -249,6 +254,7 @@ private extension OpenVPNCredentialsView {
         var body: some View {
             NavigationStack {
                 OpenVPNCredentialsView(
+                    profileEditor: ProfileEditor(),
                     providerId: nil,
                     isInteractive: $isInteractive,
                     credentials: $credentials
