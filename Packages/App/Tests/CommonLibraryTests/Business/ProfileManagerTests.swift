@@ -135,7 +135,7 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isReady)
 
         XCTAssertEqual(sut.requiredFeatures(forProfileWithId: profile.id), processor.requiredFeatures)
-        processor.requiredFeatures = [.interactiveLogin]
+        processor.requiredFeatures = [.otp]
         XCTAssertNotEqual(sut.requiredFeatures(forProfileWithId: profile.id), processor.requiredFeatures)
         sut.reloadRequiredFeatures()
         XCTAssertEqual(sut.requiredFeatures(forProfileWithId: profile.id), processor.requiredFeatures)
