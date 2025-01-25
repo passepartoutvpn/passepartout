@@ -86,9 +86,7 @@ public struct OpenVPNCredentialsView: View {
     public var body: some View {
         debugChanges()
         return Group {
-            if !isAuthenticating {
-                interactiveSection
-            }
+            interactiveSection
             inputSection
             guidanceSection
         }
@@ -111,7 +109,7 @@ private extension OpenVPNCredentialsView {
             }
             .themeRowWithSubtitle(interactiveFooter)
 
-            if isInteractive {
+            if isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
                     ForEach(otpMethods, id: \.self) {
                         Text($0.localizedDescription(style: .entity))
