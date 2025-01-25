@@ -183,7 +183,7 @@ extension IAPManagerTests {
         await sut.reloadReceipt()
         let excluded: Set<AppFeature> = [
             .appleTV,
-            .interactiveLogin
+            .otp
         ]
         AppFeature.allCases.forEach {
             if AppFeature.fullV2Features.contains($0) {
@@ -445,7 +445,7 @@ extension IAPManagerTests {
         await sut.reloadReceipt()
         let excluded: Set<AppFeature> = [
             .appleTV,
-            .interactiveLogin
+            .otp
         ]
         AppFeature.allCases.forEach {
             if AppFeature.fullV2Features.contains($0) {

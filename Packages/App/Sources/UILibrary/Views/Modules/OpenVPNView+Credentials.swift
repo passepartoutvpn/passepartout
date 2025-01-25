@@ -43,6 +43,9 @@ public struct OpenVPNCredentialsView: View {
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @ObservedObject
+    private var profileEditor: ProfileEditor
+
     private let providerId: ProviderID?
 
     @Binding
@@ -65,12 +68,14 @@ public struct OpenVPNCredentialsView: View {
     private var focusedField: Field?
 
     public init(
+        profileEditor: ProfileEditor,
         providerId: ProviderID?,
         isInteractive: Binding<Bool>,
         credentials: Binding<OpenVPN.Credentials?>,
         isAuthenticating: Bool = false,
         onSubmit: (() -> Void)? = nil
     ) {
+        self.profileEditor = profileEditor
         self.providerId = providerId
         _isInteractive = isInteractive
         _credentials = credentials
@@ -81,9 +86,7 @@ public struct OpenVPNCredentialsView: View {
     public var body: some View {
         debugChanges()
         return Group {
-            if !isAuthenticating {
-                interactiveSection
-            }
+            interactiveSection
             inputSection
             guidanceSection
         }
@@ -106,7 +109,7 @@ private extension OpenVPNCredentialsView {
             }
             .themeRowWithSubtitle(interactiveFooter)
 
-            if isInteractive {
+            if isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
                     ForEach(otpMethods, id: \.self) {
                         Text($0.localizedDescription(style: .entity))
@@ -135,7 +138,7 @@ private extension OpenVPNCredentialsView {
                     passwordField
                 }
             }
-            if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
+            if isAuthenticating, builder.otpMethod != .none {
                 otpField
             }
         }
@@ -198,12 +201,8 @@ private extension OpenVPNCredentialsView {
 }
 
 private extension OpenVPNCredentialsView {
-    var isEligibleForInteractiveLogin: Bool {
-        iapManager.isEligible(for: .interactiveLogin)
-    }
-
     var requiredFeatures: Set<AppFeature>? {
-        isInteractive ? [.interactiveLogin] : nil
+        isInteractive && builder.otpMethod != .none ? [.otp] : nil
     }
 
     var otpMethods: [OpenVPN.Credentials.OTPMethod] {
@@ -235,14 +234,7 @@ private extension OpenVPNCredentialsView {
     }
 
     func onChange(_ builder: OpenVPN.Credentials.Builder) {
-        var copy = builder
-        if isEligibleForInteractiveLogin {
-            copy.otp = copy.otp ?? ""
-        } else {
-            copy.otpMethod = .none
-            copy.otp = nil
-        }
-        credentials = copy.build()
+        credentials = builder.build()
     }
 }
 
@@ -260,6 +252,7 @@ private extension OpenVPNCredentialsView {
         var body: some View {
             NavigationStack {
                 OpenVPNCredentialsView(
+                    profileEditor: ProfileEditor(),
                     providerId: nil,
                     isInteractive: $isInteractive,
                     credentials: $credentials

@@ -40,11 +40,11 @@ extension AppFeature: LocalizableEntity {
         case .httpProxy:
             return V.httpProxy
 
-        case .interactiveLogin:
-            return V.interactiveLogin
-
         case .onDemand:
             return V.onDemand
+
+        case .otp:
+            return Strings.Unlocalized.otp
 
         case .providers:
             return V.providers

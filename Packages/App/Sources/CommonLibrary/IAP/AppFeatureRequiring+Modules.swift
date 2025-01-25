@@ -63,8 +63,8 @@ extension OpenVPNModule.Builder: AppFeatureRequiring {
         providerSelection?.id.features.forEach {
             list.insert($0)
         }
-        if isInteractive {
-            list.insert(.interactiveLogin)
+        if isInteractive, let otpMethod = credentials?.otpMethod, otpMethod != .none {
+            list.insert(.otp)
         }
         return list
     }

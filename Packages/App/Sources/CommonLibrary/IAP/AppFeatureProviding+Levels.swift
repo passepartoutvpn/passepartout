@@ -30,7 +30,7 @@ extension AppUserLevel: AppFeatureProviding {
         switch self {
         case .beta:
             return [
-                .interactiveLogin,
+                .otp,
                 .routing,
                 .sharing
             ]

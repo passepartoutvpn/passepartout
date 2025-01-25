@@ -32,9 +32,9 @@ public enum AppFeature: String, CaseIterable {
 
     case httpProxy
 
-    case interactiveLogin
-
     case onDemand
+
+    case otp
 
     case providers
 
