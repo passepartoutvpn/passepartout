@@ -29,7 +29,7 @@ import SwiftUI
 public struct RefreshInfrastructureButton<Label>: View where Label: View {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     private let apis: [APIMapper]
 
@@ -46,7 +46,7 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
     public var body: some View {
         Button {
             Task {
-                try await providerManager.fetchVPNInfrastructure(from: apis, for: providerId)
+                try await apiManager.fetchInfrastructure(from: apis, for: providerId)
             }
         } label: {
             label()
@@ -67,13 +67,13 @@ extension RefreshInfrastructureButton where Label == RefreshInfrastructureButton
 public struct RefreshInfrastructureButtonProgressView: View {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     public var body: some View {
 #if os(iOS)
         HStack {
             Text(Strings.Views.Providers.refreshInfrastructure)
-            if providerManager.isLoading {
+            if apiManager.isLoading {
                 Spacer()
                 ProgressView()
             }

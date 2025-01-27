@@ -32,9 +32,9 @@ final class CDVPNPresetV3: NSManagedObject {
         NSFetchRequest<CDVPNPresetV3>(entityName: "CDVPNPresetV3")
     }
 
+    @NSManaged var providerId: String?
     @NSManaged var presetId: String?
     @NSManaged var presetDescription: String?
-    @NSManaged var providerId: String?
     @NSManaged var endpoints: Data?
     @NSManaged var configurationId: String?
     @NSManaged var configuration: Data?

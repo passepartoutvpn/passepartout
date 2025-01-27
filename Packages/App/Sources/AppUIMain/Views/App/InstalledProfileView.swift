@@ -133,7 +133,7 @@ private extension InstalledProfileView {
                 Button {
                     flow?.connectionFlow?.onProviderEntityRequired(profile!) // never nil due to .map
                 } label: {
-                    providerSelectorLabel(with: selection.entity?.header)
+                    providerSelectorLabel(with: selection.entityHeader)
                 }
                 .buttonStyle(.plain)
             }

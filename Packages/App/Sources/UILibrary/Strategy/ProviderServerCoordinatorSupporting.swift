@@ -1,5 +1,5 @@
 //
-//  ProviderEntityViewProviding.swift
+//  ProviderServerCoordinatorSupporting.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/16/24.
@@ -27,13 +27,12 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public protocol ProviderEntityViewProviding {
-    associatedtype EntityContent: View
+public protocol ProviderServerCoordinatorSupporting {
 
     @MainActor
-    func providerEntityView(
-        errorHandler: ErrorHandler,
+    func providerServerCoordinator(
         selectTitle: String,
-        onSelect: @escaping (Module) async throws -> Void
-    ) -> EntityContent
+        onSelect: @escaping (Module) async throws -> Void,
+        errorHandler: ErrorHandler
+    ) -> AnyView
 }

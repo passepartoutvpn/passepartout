@@ -42,7 +42,7 @@ struct CoreDataMapper {
     }
 
     @discardableResult
-    func cdServer(from server: VPNServer) throws -> CDVPNServerV3 {
+    func cdServer(from server: ProviderServer) throws -> CDVPNServerV3 {
         let entity = CDVPNServerV3(context: context)
         let encoder = JSONEncoder()
         entity.serverId = server.serverId
@@ -50,27 +50,27 @@ struct CoreDataMapper {
         entity.ipAddresses = try server.ipAddresses.map {
             try encoder.encode($0)
         }
-        entity.providerId = server.provider.id.rawValue
-        entity.countryCode = server.provider.countryCode
-        entity.categoryName = server.provider.categoryName
-        entity.localizedCountry = server.provider.countryCode.localizedAsRegionCode
-        entity.otherCountryCodes = server.provider.otherCountryCodes?.joined(separator: ",")
-        entity.area = server.provider.area
-        entity.supportedConfigurationIds = server.provider.supportedConfigurationIdentifiers?.joined(separator: ",")
-        entity.supportedPresetIds = server.provider.supportedPresetIds?.joined(separator: ",")
+        entity.providerId = server.metadata.providerId.rawValue
+        entity.countryCode = server.metadata.countryCode
+        entity.categoryName = server.metadata.categoryName
+        entity.localizedCountry = server.metadata.countryCode.localizedAsRegionCode
+        entity.otherCountryCodes = server.metadata.otherCountryCodes?.joined(separator: ",")
+        entity.area = server.metadata.area
+        entity.supportedConfigurationIds = server.metadata.supportedConfigurationIdentifiers?.joined(separator: ",")
+        entity.supportedPresetIds = server.metadata.supportedPresetIds?.joined(separator: ",")
         return entity
     }
 
     @discardableResult
-    func cdPreset(from preset: AnyVPNPreset) throws -> CDVPNPresetV3 {
+    func cdPreset(from preset: AnyProviderPreset) throws -> CDVPNPresetV3 {
         let entity = CDVPNPresetV3(context: self.context)
         let encoder = JSONEncoder()
-        entity.presetId = preset.presetId
         entity.providerId = preset.providerId.rawValue
+        entity.presetId = preset.presetId
         entity.presetDescription = preset.description
         entity.endpoints = try encoder.encode(preset.endpoints)
         entity.configurationId = preset.configurationIdentifier
-        entity.configuration = preset.configuration
+        entity.configuration = preset.template
         return entity
     }
 }

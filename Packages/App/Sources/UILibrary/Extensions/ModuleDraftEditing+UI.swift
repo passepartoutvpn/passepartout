@@ -43,7 +43,7 @@ extension ModuleDraftEditing where Draft: MutableProviderSelecting {
         }
     }
 
-    public var providerEntity: Binding<Draft.CustomProviderSelection.Entity?> {
+    public var providerEntity: Binding<ProviderEntity<Draft.CustomProviderSelection.Template>?> {
         Binding {
             draft.providerEntity.wrappedValue
         } set: {

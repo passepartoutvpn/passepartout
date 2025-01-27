@@ -32,15 +32,15 @@ import UIAccessibility
 
 @MainActor
 public final class AppContext: ObservableObject, Sendable {
+    public let apiManager: APIManager
+
     public let iapManager: IAPManager
 
     public let migrationManager: MigrationManager
 
-    public let profileManager: ProfileManager
-
-    public let providerManager: ProviderManager
-
     public let preferencesManager: PreferencesManager
+
+    public let profileManager: ProfileManager
 
     public let registry: Registry
 
@@ -57,21 +57,21 @@ public final class AppContext: ObservableObject, Sendable {
     private var subscriptions: Set<AnyCancellable>
 
     public init(
+        apiManager: APIManager,
         iapManager: IAPManager,
         migrationManager: MigrationManager,
-        profileManager: ProfileManager,
-        providerManager: ProviderManager,
         preferencesManager: PreferencesManager,
+        profileManager: ProfileManager,
         registry: Registry,
         tunnel: ExtendedTunnel,
         tunnelReceiptURL: URL?,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
+        self.apiManager = apiManager
         self.iapManager = iapManager
         self.migrationManager = migrationManager
-        self.profileManager = profileManager
-        self.providerManager = providerManager
         self.preferencesManager = preferencesManager
+        self.profileManager = profileManager
         self.registry = registry
         self.tunnel = tunnel
         self.tunnelReceiptURL = tunnelReceiptURL
@@ -150,7 +150,7 @@ private extension AppContext {
 
         do {
             pp_log(.app, .info, "\tFetch providers index...")
-            try await providerManager.fetchIndex(from: API.shared)
+            try await apiManager.fetchIndex(from: API.shared)
         } catch {
             pp_log(.app, .error, "\tUnable to fetch providers index: \(error)")
         }

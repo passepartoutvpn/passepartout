@@ -1,5 +1,5 @@
 //
-//  VPNProviderServerCoordinator.swift
+//  ProviderServerCoordinator.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/16/24.
@@ -27,7 +27,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct VPNProviderServerCoordinator<Configuration>: View where Configuration: IdentifiableConfiguration {
+struct ProviderServerCoordinator<Template>: View where Template: IdentifiableConfiguration {
 
     @Environment(\.dismiss)
     private var dismiss
@@ -36,17 +36,17 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Id
 
     let providerId: ProviderID
 
-    let selectedEntity: VPNEntity<Configuration>?
+    let selectedEntity: ProviderEntity<Template>?
 
     let selectTitle: String
 
-    let onSelect: (VPNEntity<Configuration>) async throws -> Void
+    let onSelect: (ProviderEntity<Template>) async throws -> Void
 
     @ObservedObject
     var errorHandler: ErrorHandler
 
     var body: some View {
-        VPNProviderServerView(
+        ProviderServerView(
             moduleId: moduleId,
             providerId: providerId,
             selectedEntity: selectedEntity,
@@ -58,15 +58,15 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Id
     }
 }
 
-private extension VPNProviderServerCoordinator {
-    func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
+private extension ProviderServerCoordinator {
+    func onSelect(server: ProviderServer, preset: ProviderPreset<Template>) {
         Task {
             do {
-                let entity = VPNEntity(server: server, preset: preset)
+                let entity = ProviderEntity(server: server, preset: preset)
                 dismiss()
                 try await onSelect(entity)
             } catch {
-                pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.provider.id): \(error)")
+                pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.metadata.providerId): \(error)")
                 errorHandler.handle(error, title: Strings.Views.Providers.selectEntity)
             }
         }

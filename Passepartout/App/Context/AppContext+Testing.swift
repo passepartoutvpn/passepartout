@@ -56,18 +56,18 @@ extension AppContext {
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
-        let providerManager = ProviderManager(
-            repository: InMemoryProviderRepository()
+        let apiManager = APIManager(
+            repository: InMemoryAPIRepository()
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
 
         return AppContext(
+            apiManager: apiManager,
             iapManager: iapManager,
             migrationManager: migrationManager,
-            profileManager: profileManager,
-            providerManager: providerManager,
             preferencesManager: preferencesManager,
+            profileManager: profileManager,
             registry: registry,
             tunnel: tunnel,
             tunnelReceiptURL: BundleConfiguration.urlForBetaReceipt

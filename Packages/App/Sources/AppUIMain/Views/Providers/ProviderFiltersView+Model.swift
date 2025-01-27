@@ -1,5 +1,5 @@
 //
-//  VPNFiltersView+Model.swift
+//  ProviderFiltersView+Model.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/26/24.
@@ -29,7 +29,7 @@ import Foundation
 import PassepartoutKit
 import UIAccessibility
 
-extension VPNFiltersView {
+extension ProviderFiltersView {
 
     @MainActor
     final class Model: ObservableObject {
@@ -37,7 +37,7 @@ extension VPNFiltersView {
 
         private let defaults: UserDefaults
 
-        private var options: VPNFilterOptions
+        private var options: ProviderFilterOptions
 
         @Published
         private(set) var categories: [String]
@@ -46,10 +46,10 @@ extension VPNFiltersView {
         private(set) var countries: [CodeWithDescription]
 
         @Published
-        private(set) var presets: [AnyVPNPreset]
+        private(set) var presets: [AnyProviderPreset]
 
         @Published
-        var filters: VPNFilters
+        var filters: ProviderFilters
 
         @Published
         var onlyShowsFavorites: Bool
@@ -58,11 +58,11 @@ extension VPNFiltersView {
 
         init(defaults: UserDefaults = .standard) {
             self.defaults = defaults
-            options = VPNFilterOptions()
+            options = ProviderFilterOptions()
             categories = []
             countries = []
             presets = []
-            filters = VPNFilters()
+            filters = ProviderFilters()
             onlyShowsFavorites = false
             subscriptions = []
 
@@ -71,7 +71,7 @@ extension VPNFiltersView {
             }
         }
 
-        func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {
+        func load(options: ProviderFilterOptions, initialFilters: ProviderFilters?) {
             self.options = options
             setCategories(withNames: Set(options.countriesByCategoryName.keys))
             setCountries(withCodes: options.countryCodes)
@@ -82,7 +82,7 @@ extension VPNFiltersView {
             }
         }
 
-        func update(with servers: [VPNServer]) {
+        func update(with servers: [ProviderServer]) {
 
             // only countries that have servers in this category
             let knownCountryCodes: Set<String>
@@ -94,7 +94,7 @@ extension VPNFiltersView {
 
             // only presets known in filtered servers
             var knownPresets = options.presets
-            let allPresetIds = Set(servers.compactMap(\.provider.supportedPresetIds).joined())
+            let allPresetIds = Set(servers.compactMap(\.metadata.supportedPresetIds).joined())
             if !allPresetIds.isEmpty {
                 knownPresets = knownPresets
                     .filter {
@@ -108,7 +108,7 @@ extension VPNFiltersView {
     }
 }
 
-private extension VPNFiltersView.Model {
+private extension ProviderFiltersView.Model {
     func setCategories(withNames categoryNames: Set<String>) {
         categories = categoryNames
             .sorted()
@@ -122,7 +122,7 @@ private extension VPNFiltersView.Model {
             }
     }
 
-    func setPresets(with presets: Set<AnyVPNPreset>) {
+    func setPresets(with presets: Set<AnyProviderPreset>) {
         self.presets = presets
             .sorted {
                 $0.description < $1.description
@@ -132,7 +132,7 @@ private extension VPNFiltersView.Model {
 
 // MARK: - Observation
 
-private extension VPNFiltersView.Model {
+private extension ProviderFiltersView.Model {
     func observeObjects() {
         $onlyShowsFavorites
             .dropFirst()
@@ -160,7 +160,7 @@ private extension UserDefaults {
 }
 
 private extension String {
-    var asCountryCodeWithDescription: VPNFiltersView.Model.CodeWithDescription {
+    var asCountryCodeWithDescription: ProviderFiltersView.Model.CodeWithDescription {
         (self, localizedAsRegionCode ?? self)
     }
 }

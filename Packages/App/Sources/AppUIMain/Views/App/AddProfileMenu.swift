@@ -114,7 +114,7 @@ private extension AddProfileMenu {
 private struct ProvidersSubmenu: View {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     let moduleType: ModuleType
 
@@ -124,7 +124,7 @@ private struct ProvidersSubmenu: View {
 
     var body: some View {
         Menu {
-            ForEach(providerManager.providers, content: profileButton(for:))
+            ForEach(apiManager.providers, content: profileButton(for:))
         } label: {
             Text(moduleType.localizedDescription)
         }

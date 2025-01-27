@@ -73,7 +73,7 @@ private extension WireGuardView {
     }
 
     var providerModifier: some ViewModifier {
-        VPNProviderContentModifier(
+        ProviderContentModifier(
             providerId: providerId,
             providerPreferences: nil,
             selectedEntity: providerEntity,
@@ -90,8 +90,8 @@ private extension WireGuardView {
 }
 
 private extension WireGuardView {
-    func onSelectServer(server: VPNServer, preset: VPNPreset<WireGuard.Configuration>) {
-        draft.wrappedValue.providerEntity = VPNEntity(server: server, preset: preset)
+    func onSelectServer(server: ProviderServer, preset: ProviderPreset<WireGuardProviderTemplate>) {
+        draft.wrappedValue.providerEntity = ProviderEntity(server: server, preset: preset)
         path.wrappedValue.removeLast()
     }
 
@@ -114,7 +114,7 @@ private extension WireGuardView {
         switch route {
         case .providerServer:
             draft.wrappedValue.providerSelection.map {
-                VPNProviderServerView(
+                ProviderServerView(
                     moduleId: module.id,
                     providerId: $0.id,
                     selectedEntity: $0.entity,
