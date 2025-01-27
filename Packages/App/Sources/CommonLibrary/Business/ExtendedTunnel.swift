@@ -220,12 +220,14 @@ extension TunnelStatus {
         var status = self
         if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
             switch connectionStatus {
+            case .connecting:
+                status = .activating
             case .connected:
                 status = .active
+            case .disconnecting:
+                status = .deactivating
             case .disconnected:
                 status = .inactive
-            default:
-                status = .activating
             }
         }
         return status
