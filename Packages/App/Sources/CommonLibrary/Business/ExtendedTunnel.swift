@@ -219,9 +219,12 @@ extension TunnelStatus {
     func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
         var status = self
         if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
-            if connectionStatus == .connected {
+            switch connectionStatus {
+            case .connected:
                 status = .active
-            } else {
+            case .disconnected:
+                status = .inactive
+            default:
                 status = .activating
             }
         }
