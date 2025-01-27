@@ -151,12 +151,19 @@ extension ExtendedTunnelTests {
         env.setEnvironmentValue(ConnectionStatus.connected, forKey: key)
         XCTAssertEqual(tunnelActive.withEnvironment(env), .active)
         allConnectionStatuses
-            .filter {
-                $0 != .connected
-            }
             .forEach {
                 env.setEnvironmentValue($0, forKey: key)
-                XCTAssertEqual(tunnelActive.withEnvironment(env), .activating)
+                let statusWithEnv = tunnelActive.withEnvironment(env)
+                switch $0 {
+                case .connecting:
+                    XCTAssertEqual(statusWithEnv, .activating)
+                case .connected:
+                    XCTAssertEqual(statusWithEnv, .active)
+                case .disconnecting:
+                    XCTAssertEqual(statusWithEnv, .deactivating)
+                case .disconnected:
+                    XCTAssertEqual(statusWithEnv, .inactive)
+                }
             }
 
         // unaffected otherwise
