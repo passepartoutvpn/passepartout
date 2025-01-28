@@ -63,16 +63,18 @@ extension PassepartoutApp {
                 }
                 .withEnvironment(from: context, theme: theme)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
+                .frame(minWidth: 600, minHeight: 400)
         }
         .defaultSize(width: 600, height: 400)
 
         Settings {
             PreferencesView(profileManager: context.profileManager)
-                .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
                 .environmentObject(settings)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
         }
+        .defaultSize(width: 500, height: 400)
+
         MenuBarExtra {
             AppMenu(
                 profileManager: context.profileManager,
