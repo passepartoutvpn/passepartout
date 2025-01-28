@@ -84,7 +84,7 @@ private extension VPNProviderServerView.ContentView {
 
             TableColumn(Strings.Global.Nouns.address, value: \.address)
 
-            TableColumn("􀋂") { server in
+            TableColumn("☆") { server in
                 FavoriteToggle(
                     value: server.serverId,
                     selection: providerPreferences.favoriteServers()
