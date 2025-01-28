@@ -82,7 +82,15 @@ private extension VPNProviderServerView.ContentView {
                     .environmentObject(theme) // TODO: #873, Table loses environment
             }
 
-            TableColumn(Strings.Global.Nouns.address, value: \.address)
+            TableColumn(Strings.Global.Nouns.address) { server in
+                Button {
+                    onSelect(server)
+                } label: {
+                    Text(server.address)
+                }
+                .cursor(.hand)
+            }
+            .width(min: 300.0)
 
             TableColumn("☆") { server in
                 FavoriteToggle(
@@ -92,16 +100,6 @@ private extension VPNProviderServerView.ContentView {
                 .environmentObject(theme) // TODO: #873, Table loses environment
             }
             .width(15.0)
-
-            TableColumn("") { server in
-                Button {
-                    onSelect(server)
-                } label: {
-                    Text(selectTitle)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                }
-            }
         }
     }
 }
