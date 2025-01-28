@@ -54,26 +54,24 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
     var body: some View {
         debugChanges()
-        return ScrollViewReader { scrollProxy in
-            Form {
-                if !isSearching {
-                    headerView(scrollProxy: scrollProxy)
-                        .unanimated()
-                }
-                Group {
-                    ForEach(allPreviews, content: profileView)
-                        .onDelete { offsets in
-                            Task {
-                                await profileManager.removeProfiles(at: offsets)
-                            }
-                        }
-                }
-                .themeSection(header: Strings.Views.App.Folders.default)
+        return Form {
+            if !isSearching {
+                headerView
+                    .unanimated()
             }
-            .themeForm()
-            .themeAnimation(on: profileManager.isReady, category: .profiles)
-            .themeAnimation(on: profileManager.previews, category: .profiles)
+            Group {
+                ForEach(allPreviews, content: profileView)
+                    .onDelete { offsets in
+                        Task {
+                            await profileManager.removeProfiles(at: offsets)
+                        }
+                    }
+            }
+            .themeSection(header: Strings.Views.App.Folders.default)
         }
+        .themeForm()
+        .themeAnimation(on: profileManager.isReady, category: .profiles)
+        .themeAnimation(on: profileManager.previews, category: .profiles)
     }
 }
 
@@ -82,7 +80,7 @@ private extension ProfileListView {
         profileManager.previews
     }
 
-    func headerView(scrollProxy: ScrollViewProxy) -> some View {
+    var headerView: some View {
         InstalledProfileView(
             layout: .list,
             profileManager: profileManager,
