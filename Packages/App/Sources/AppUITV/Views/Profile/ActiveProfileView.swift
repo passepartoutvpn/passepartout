@@ -180,10 +180,10 @@ private extension View {
             .background(disabled ? .gray : color)
             .cornerRadius(50)
             .font(.title3)
-            .foregroundColor(.white)
+            .foregroundColor(disabled ? .white.opacity(0.6) : .white)
             .overlay(
                 RoundedRectangle(cornerRadius: 50)
-                    .fill(Color.white.opacity(focused ? 0.3 : 0.0))
+                    .fill(.white.opacity(focused ? 0.3 : 0.0))
             )
             .scaleEffect(focused ? 1.05 : 1.0)
     }
