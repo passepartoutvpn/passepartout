@@ -21,9 +21,13 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 10
     steps:
-      - uses: passepartoutvpn/action-prepare-xcode-build@master
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
+          bundler-cache: true
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 16.1
       - name: "Run tests"
         run: |
           cd Packages/App
