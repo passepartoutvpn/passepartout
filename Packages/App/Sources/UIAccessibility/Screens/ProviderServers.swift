@@ -1,5 +1,5 @@
 //
-//  VPNServers.swift
+//  ProviderServers.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/9/24.
@@ -26,7 +26,7 @@
 import Foundation
 
 extension AccessibilityInfo {
-    public enum VPNServers {
-        public static let countryGroup = AccessibilityInfo("vpnServers.countryGroup", .button)
+    public enum ProviderServers {
+        public static let countryGroup = AccessibilityInfo("providerServers.countryGroup", .button)
     }
 }

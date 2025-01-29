@@ -1,5 +1,5 @@
 //
-//  VPNServersScreen.swift
+//  ProviderServersScreen.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/9/24.
@@ -28,13 +28,13 @@ import UIAccessibility
 import XCTest
 
 @MainActor
-struct VPNServersScreen {
+struct ProviderServersScreen {
     let app: XCUIApplication
 
 #if os(iOS)
     @discardableResult
     func discloseCountry(at index: Int) -> Self {
-        let group = app.get(.VPNServers.countryGroup, at: index)
+        let group = app.get(.ProviderServers.countryGroup, at: index)
         group.tap()
         return self
     }

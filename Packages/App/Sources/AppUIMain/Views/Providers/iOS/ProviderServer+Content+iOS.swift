@@ -106,7 +106,7 @@ private extension ProviderServerView.ContentView {
                 } label: {
                     ThemeCountryText(code)
                 }
-                .uiAccessibility(.VPNServers.countryGroup)
+                .uiAccessibility(.ProviderServers.countryGroup)
             }
     }
 

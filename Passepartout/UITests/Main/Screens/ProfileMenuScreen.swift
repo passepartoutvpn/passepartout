@@ -32,10 +32,10 @@ struct ProfileMenuScreen {
     let app: XCUIApplication
 
     @discardableResult
-    func connectToProfile() -> VPNServersScreen {
+    func connectToProfile() -> ProviderServersScreen {
         let connectToButton = app.get(.App.ProfileMenu.connectTo)
         connectToButton.tap()
-        return VPNServersScreen(app: app)
+        return ProviderServersScreen(app: app)
     }
 
     @discardableResult
