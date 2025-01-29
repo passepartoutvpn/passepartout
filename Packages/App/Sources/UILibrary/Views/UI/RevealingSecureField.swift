@@ -33,8 +33,6 @@ public struct RevealingSecureField<ImageView>: View where ImageView: View {
 
     private var prompt: Text?
 
-    private let imageWidth: CGFloat
-
     private let conceilImage: () -> ImageView
 
     private let revealImage: () -> ImageView
@@ -46,7 +44,6 @@ public struct RevealingSecureField<ImageView>: View where ImageView: View {
         _ title: String,
         text: Binding<String>,
         prompt: Text? = nil,
-        imageWidth: CGFloat,
         conceilImage: @escaping () -> ImageView,
         revealImage: @escaping () -> ImageView
     ) {
@@ -55,34 +52,39 @@ public struct RevealingSecureField<ImageView>: View where ImageView: View {
         self.prompt = prompt
         self.conceilImage = conceilImage
         self.revealImage = revealImage
-        self.imageWidth = imageWidth
     }
 
     public var body: some View {
-        if isRevealed {
-            TextField(title, text: $text, prompt: prompt)
-                .overlay(alignment: .trailing) {
-                    Button {
-                        isRevealed.toggle()
-                    } label: {
-                        conceilImage()
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.trailing, -imageWidth)
+        HStack {
+            if isRevealed {
+                TextField(title, text: $text, prompt: prompt)
+                Button {
+                    isRevealed.toggle()
+                } label: {
+                    conceilImage()
                 }
-                .padding(.trailing, imageWidth)
-        } else {
-            SecureField(title, text: $text, prompt: prompt)
-                .overlay(alignment: .trailing) {
-                    Button {
-                        isRevealed.toggle()
-                    } label: {
-                        revealImage()
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.trailing, -imageWidth)
+                .buttonStyle(.borderless)
+            } else {
+                SecureField(title, text: $text, prompt: prompt)
+                Button {
+                    isRevealed.toggle()
+                } label: {
+                    revealImage()
                 }
-                .padding(.trailing, imageWidth)
+                .buttonStyle(.borderless)
+            }
         }
     }
+}
+
+#Preview {
+    Form {
+        TextField("text", text: .constant("plain-text"))
+        RevealingSecureField("secure", text: .constant("secure-text")) {
+            Image(systemName: "eye.slash")
+        } revealImage: {
+            Image(systemName: "eye")
+        }
+    }
+    .formStyle(.grouped)
 }

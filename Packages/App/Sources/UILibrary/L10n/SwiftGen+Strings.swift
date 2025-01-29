@@ -434,6 +434,10 @@ public enum Strings {
       public static let mobile = Strings.tr("Localizable", "modules.on_demand.mobile", fallback: "Mobile")
       /// Policy
       public static let policy = Strings.tr("Localizable", "modules.on_demand.policy", fallback: "Policy")
+      public enum Networks {
+        /// These rules will only apply on devices where the interface type is supported.
+        public static let footer = Strings.tr("Localizable", "modules.on_demand.networks.footer", fallback: "These rules will only apply on devices where the interface type is supported.")
+      }
       public enum Policy {
         /// Activate the VPN %@.
         public static func footer(_ p1: Any) -> String {

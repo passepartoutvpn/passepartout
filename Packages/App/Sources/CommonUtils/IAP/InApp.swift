@@ -64,11 +64,17 @@ public protocol InAppHelper {
 
     var didUpdate: AnyPublisher<Void, Never> { get }
 
-    func fetchProducts() async throws -> [ProductType: InAppProduct]
+    func fetchProducts(timeout: Int) async throws -> [ProductType: InAppProduct]
 
     func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult
 
     func restorePurchases() async throws
+}
+
+extension InAppHelper {
+    public func fetchProducts() async throws -> [ProductType: InAppProduct] {
+        try await fetchProducts(timeout: 3)
+    }
 }
 
 public struct InAppReceipt: Sendable {

@@ -215,7 +215,7 @@ public struct ThemeSecureField: View {
     }
 
     var fieldView: some View {
-        RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder), imageWidth: 30.0) {
+        RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder)) {
            ThemeImage(.hide)
                 .foregroundStyle(Color.accentColor)
        } revealImage: {

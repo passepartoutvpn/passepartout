@@ -103,10 +103,10 @@ private extension Issue {
         var list: [MailComposerView.Attachment] = []
         let mimeType = Strings.Unlocalized.Issues.attachmentMimeType
         if let appLog {
-            list.append(.init(data: appLog, mimeType: mimeType, fileName: Strings.Unlocalized.Issues.appLogFilename))
+            list.append(.init(data: appLog, mimeType: mimeType, fileName: Constants.shared.log.appPath))
         }
         if let tunnelLog {
-            list.append(.init(data: tunnelLog, mimeType: mimeType, fileName: Strings.Unlocalized.Issues.tunnelLogFilename))
+            list.append(.init(data: tunnelLog, mimeType: mimeType, fileName: Constants.shared.log.tunnelPath))
         }
         return list
     }

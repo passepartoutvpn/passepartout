@@ -92,10 +92,6 @@ extension Strings {
             public static let subject = "\(appName) - Report issue"
 
             public static let attachmentMimeType = "text/plain"
-
-            public static let appLogFilename = "app.log"
-
-            public static let tunnelLogFilename = "tunnel.log"
         }
 
         public static let appName = "Passepartout"

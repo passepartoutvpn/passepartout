@@ -137,6 +137,9 @@ extension AppCoordinator {
         if isUITesting {
             return isBigDevice ? .grid : .list
         }
+        guard isBigDevice else {
+            return .list
+        }
         return layout
     }
 

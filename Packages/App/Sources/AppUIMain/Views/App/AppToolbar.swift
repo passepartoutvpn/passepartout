@@ -65,9 +65,8 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
             ToolbarItem(placement: .navigation) {
                 aboutButton
             }
-            ToolbarItemGroup(placement: .primaryAction) {
+            ToolbarItem(placement: .primaryAction) {
                 addProfileMenu
-                layoutPicker
             }
         }
     }
