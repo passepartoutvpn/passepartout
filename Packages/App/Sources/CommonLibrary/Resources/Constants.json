@@ -41,7 +41,7 @@
             "maxLevel": 3,
             "maxSize": 500000,
             "maxBufferedLines": 5000,
-            "maxAge": 259200
+            "maxAge": 86400
         },
         "formatter": {
             "timestamp": "HH:mm:ss",
