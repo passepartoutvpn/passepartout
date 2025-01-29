@@ -76,6 +76,15 @@ private extension ProviderServerView.ContentView {
             }
             .width(10.0)
 
+            TableColumn("☆") { server in
+                FavoriteToggle(
+                    value: server.serverId,
+                    selection: providerPreferences.favoriteServers()
+                )
+                .environmentObject(theme) // TODO: #873, Table loses environment
+            }
+            .width(15.0)
+
             TableColumn(Strings.Global.Nouns.region) { server in
                 ThemeCountryText(server.metadata.countryCode, title: server.region)
                     .help(server.region)
@@ -91,15 +100,6 @@ private extension ProviderServerView.ContentView {
                 .cursor(.hand)
             }
             .width(min: 300.0)
-
-            TableColumn("☆") { server in
-                FavoriteToggle(
-                    value: server.serverId,
-                    selection: providerPreferences.favoriteServers()
-                )
-                .environmentObject(theme) // TODO: #873, Table loses environment
-            }
-            .width(15.0)
         }
     }
 }
