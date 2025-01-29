@@ -26,41 +26,9 @@
 import Foundation
 #if os(iOS)
 import NetworkExtension
-#elseif os(macOS)
-import CoreWLAN
 #endif
 
 extension Utils {
-#if targetEnvironment(simulator)
-    public static func hasCellularData() -> Bool {
-        true
-    }
-#else
-    // TODO: ###, move this check to kit, and try something similar for Ethernet
-    public static func hasCellularData() -> Bool {
-        var addrs: UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&addrs) == 0 else {
-            return false
-        }
-        var isFound = false
-        var cursor = addrs?.pointee
-        while let ifa = cursor {
-            let name = String(cString: ifa.ifa_name)
-            if name == "pdp_ip0" {
-                isFound = true
-                break
-            }
-            cursor = ifa.ifa_next?.pointee
-        }
-        freeifaddrs(addrs)
-        return isFound
-    }
-#endif
-
-    public static func hasEthernet() -> Bool {
-        true
-    }
-
     public static func currentWifiSSID() async -> String? {
 #if targetEnvironment(simulator)
         ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
