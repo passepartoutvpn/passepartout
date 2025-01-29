@@ -155,6 +155,7 @@
 "modules.ip.routes.included" = "Inkluderade rutter";
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.mobile" = "Mobil";
+"modules.on_demand.networks.footer" = "Dessa regler gäller endast på enheter där gränssnittstypen stöds.";
 "modules.on_demand.policy" = "Policy";
 "modules.on_demand.policy.footer" = "Aktivera VPN %@.";
 "modules.on_demand.policy.footer.any" = "i alla nätverk";

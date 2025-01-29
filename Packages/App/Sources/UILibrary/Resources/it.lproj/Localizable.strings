@@ -155,6 +155,7 @@
 "modules.ip.routes.included" = "Rotte incluse";
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.mobile" = "Mobile";
+"modules.on_demand.networks.footer" = "Queste regole si applicheranno solo sui dispositivi in cui il tipo di interfaccia è supportato.";
 "modules.on_demand.policy" = "Politica";
 "modules.on_demand.policy.footer" = "Attiva la VPN %@.";
 "modules.on_demand.policy.footer.any" = "in qualsiasi rete";
