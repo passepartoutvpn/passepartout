@@ -8,7 +8,6 @@ on:
       - ".env.*"
       - "**/*.md"
       - "**/*.sh"
-      - "**/*.yml"
       - "fastlane/**"
 
 concurrency:
