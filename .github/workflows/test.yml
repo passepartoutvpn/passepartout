@@ -21,6 +21,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: false
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
