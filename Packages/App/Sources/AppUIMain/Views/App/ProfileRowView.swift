@@ -147,7 +147,7 @@ private extension ProfileRowView {
             nextProfileId: $nextProfileId,
             errorHandler: errorHandler,
             flow: flow?.connectionFlow,
-            label: { _ in
+            label: { _, _ in
                 ProfileCardView(
                     style: style,
                     preview: preview
