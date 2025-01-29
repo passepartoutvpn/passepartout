@@ -585,6 +585,9 @@ extension StandardOpenVPNParser.Builder {
 
             case .crypt:
                 optKey = OpenVPN.StaticKey(lines: keyLines, direction: .client)
+
+            @unknown default:
+                optKey = nil
             }
             if let key = optKey {
                 builder.tlsWrap = OpenVPN.TLSWrap(strategy: strategy, key: key)

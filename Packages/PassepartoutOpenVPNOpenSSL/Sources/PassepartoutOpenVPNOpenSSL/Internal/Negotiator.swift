@@ -734,6 +734,7 @@ private extension OpenVPN.CompressionAlgorithm {
         case .disabled: .disabled
         case .LZO: .LZO
         case .other: .other
+        @unknown default: .disabled
         }
     }
 }
@@ -745,6 +746,7 @@ private extension OpenVPN.CompressionFraming {
         case .compLZO: .compLZO
         case .compress: .compress
         case .compressV2: .compressV2
+        @unknown default: .disabled
         }
     }
 }

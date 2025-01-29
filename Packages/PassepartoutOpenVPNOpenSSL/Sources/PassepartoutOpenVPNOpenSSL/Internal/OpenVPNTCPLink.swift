@@ -132,6 +132,9 @@ private extension OpenVPN.XORMethod {
 
         case .obfuscate:
             return .obfuscate
+
+        @unknown default:
+            return .mask
         }
     }
 }

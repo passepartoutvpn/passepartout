@@ -555,6 +555,9 @@ private extension OpenVPNCryptoProtocol {
                     crypto: self,
                     cryptKey: tlsWrap.key
                 )
+
+            @unknown default:
+                channel = ControlChannel(prng: prng)
             }
         } else {
             channel = ControlChannel(prng: prng)

@@ -72,6 +72,9 @@ struct XORProcessor {
             } else {
                 return Self.xorptrpos(packet: Self.reverse(packet: Self.xorptrpos(packet: Self.xormask(packet: packet, mask: mask.zData))))
             }
+
+        @unknown default:
+            return packet
         }
     }
 }
