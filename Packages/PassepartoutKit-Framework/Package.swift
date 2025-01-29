@@ -21,7 +21,7 @@ enum Environment {
             return []
         case .onlineDevelopment:
             return [
-                .package(url: "https://github.com/passepartoutvpn/passepartoutkit", from: "0.99.5")
+                .package(url: "https://github.com/passepartoutvpn/passepartoutkit", from: "0.99.7")
             ]
         case .production:
             return [
