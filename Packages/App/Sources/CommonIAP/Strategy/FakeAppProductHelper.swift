@@ -52,7 +52,7 @@ public actor FakeAppProductHelper: AppProductHelper {
         didUpdateSubject.eraseToAnyPublisher()
     }
 
-    public func fetchProducts() async throws -> [AppProduct: InAppProduct] {
+    public func fetchProducts(timeout: Int) async throws -> [AppProduct: InAppProduct] {
         products = AppProduct.all.reduce(into: [:]) {
             $0[$1] = InAppProduct(
                 productIdentifier: $1.rawValue,
