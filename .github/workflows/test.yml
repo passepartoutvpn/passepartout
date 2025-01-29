@@ -30,5 +30,6 @@ jobs:
           xcode-version: 16.1
       - name: "Run tests"
         run: |
+          sed -i '' "s/environment = .production/environment = .onlineDevelopment/" "Packages/PassepartoutKit-Framework/Package.swift"
           cd Packages/App
           swift test
