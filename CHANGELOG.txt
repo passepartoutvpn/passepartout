@@ -1,5 +1,9 @@
-* Do not show "Activating" when the tunnel is actually idle (#1105)
-* OpenVPN: Prompt for credentials when needed (#1104)
-* OpenVPN: Fix potential deadlock on disconnection (#1097)
-* OpenVPN: Restore and improve negotiation speed (#1095)
-* OpenVPN: Resolve issues with long negotiations (#1094)
+* Fix Ukranian translations (#1122)
+* tvOS: Override focus behavior to enforce button colors (#1123)
+* Fix indefinite spinner when listing products (#1121)
+* Only apply cellular/Ethernet on-demand rules on devices that support the interface (#1120)
+* macOS: Perform provider server action on click address
+* Fix misaligned reveal button in secure fields
+* macOS: Fix unreadable character in provider server favorite column
+* macOS: Prevent main window from being minimized indefinitely
+* iOS: Hide layout toggle on iPhone

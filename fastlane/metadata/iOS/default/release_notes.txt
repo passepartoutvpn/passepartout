@@ -1,5 +1,5 @@
-* Do not show "Activating" when the tunnel is actually idle (#1105)
-* OpenVPN: Prompt for credentials when needed (#1104)
-* OpenVPN: Fix potential deadlock on disconnection (#1097)
-* OpenVPN: Restore and improve negotiation speed (#1095)
-* OpenVPN: Resolve issues with long negotiations (#1094)
+* Fix Ukranian translations (#1122)
+* Fix indefinite spinner when listing products (#1121)
+* Only apply cellular/Ethernet on-demand rules on devices that support the interface (#1120)
+* Fix misaligned reveal button in secure fields
+* iOS: Hide layout toggle on iPhone
