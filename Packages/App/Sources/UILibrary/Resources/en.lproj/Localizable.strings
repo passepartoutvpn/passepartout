@@ -155,6 +155,7 @@
 "modules.on_demand.policy.footer.any" = "in any network";
 "modules.on_demand.policy.footer.including" = "only in the networks below";
 "modules.on_demand.policy.footer.excluding" = "except in the networks below";
+"modules.on_demand.networks.footer" = "These rules will only apply on devices where the interface type is supported.";
 "modules.on_demand.mobile" = "Mobile";
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.ssid.add" = "Add SSID";

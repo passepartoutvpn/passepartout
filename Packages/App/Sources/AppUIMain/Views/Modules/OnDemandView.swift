@@ -124,7 +124,11 @@ private extension OnDemandView {
             Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
             Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
         }
-        .themeSection(header: Strings.Global.Nouns.networks)
+        .themeSection(
+            header: Strings.Global.Nouns.networks,
+            footer: Strings.Modules.OnDemand.Networks.footer,
+            forcesFooter: true
+        )
     }
 
     var wifiSection: some View {
