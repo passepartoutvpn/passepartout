@@ -143,4 +143,3 @@ jobs:
         with:
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
-          draft: true
