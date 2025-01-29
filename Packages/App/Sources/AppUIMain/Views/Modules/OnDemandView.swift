@@ -122,7 +122,7 @@ private extension OnDemandView {
     var networkSection: some View {
         Group {
             Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
-            Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
+            Toggle("\(Strings.Modules.OnDemand.ethernet) (Mac/TV)", isOn: draft.withEthernetNetwork)
         }
         .themeSection(
             header: Strings.Global.Nouns.networks,
