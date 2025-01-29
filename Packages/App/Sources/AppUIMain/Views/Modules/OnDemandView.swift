@@ -121,12 +121,8 @@ private extension OnDemandView {
 
     var networkSection: some View {
         Group {
-            if OnDemandModule.supportsCellular {
-                Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
-            }
-            if OnDemandModule.supportsEthernet {
-                Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
-            }
+            Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
+            Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
         }
         .themeSection(header: Strings.Global.Nouns.networks)
     }
