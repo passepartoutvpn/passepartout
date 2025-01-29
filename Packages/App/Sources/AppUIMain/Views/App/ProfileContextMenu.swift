@@ -78,10 +78,10 @@ private extension ProfileContextMenu {
             nextProfileId: .constant(nil),
             errorHandler: errorHandler,
             flow: flow?.connectionFlow,
-            label: {
+            label: { canConnect, _ in
                 ThemeImageLabel(
-                    $0 ? Strings.Global.Actions.enable : Strings.Global.Actions.disable,
-                    $0 ? .tunnelEnable : .tunnelDisable
+                    canConnect ? Strings.Global.Actions.enable : Strings.Global.Actions.disable,
+                    canConnect ? .tunnelEnable : .tunnelDisable
                 )
             }
         )
