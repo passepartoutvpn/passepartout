@@ -1,5 +1,5 @@
 //
-//  VPNProviderServer+Content+iOS.swift
+//  ProviderServer+Content+iOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/9/24.
@@ -31,30 +31,30 @@ import PassepartoutKit
 import SwiftUI
 import UIAccessibility
 
-extension VPNProviderServerView {
+extension ProviderServerView {
     struct ContentView: View {
         let apis: [APIMapper]
 
         let providerId: ProviderID
 
-        let servers: [VPNServer]
+        let servers: [ProviderServer]
 
-        let selectedServer: VPNServer?
+        let selectedServer: ProviderServer?
 
         let isFiltering: Bool
 
         @ObservedObject
-        var filtersViewModel: VPNFiltersView.Model
+        var filtersViewModel: ProviderFiltersView.Model
 
         @ObservedObject
         var providerPreferences: ProviderPreferences
 
         let selectTitle: String
 
-        let onSelect: (VPNServer) -> Void
+        let onSelect: (ProviderServer) -> Void
 
         @State
-        private var serversByCountryCode: [String: [VPNServer]] = [:]
+        private var serversByCountryCode: [String: [ProviderServer]] = [:]
 
         @State
         private var expandedCodes: Set<String> = []
@@ -68,7 +68,7 @@ extension VPNProviderServerView {
     }
 }
 
-private extension VPNProviderServerView.ContentView {
+private extension ProviderServerView.ContentView {
     var listView: some View {
         List {
             Section {
@@ -92,7 +92,7 @@ private extension VPNProviderServerView.ContentView {
             )
             .onLoad {
                 if let selectedServer {
-                    expandedCodes.insert(selectedServer.provider.countryCode)
+                    expandedCodes.insert(selectedServer.metadata.countryCode)
                 }
             }
         }
@@ -110,7 +110,7 @@ private extension VPNProviderServerView.ContentView {
             }
     }
 
-    func serverView(for server: VPNServer) -> some View {
+    func serverView(for server: ProviderServer) -> some View {
         Button {
             onSelect(server)
         } label: {
@@ -118,7 +118,7 @@ private extension VPNProviderServerView.ContentView {
                 ThemeImage(.marked)
                     .opaque(server.id == selectedServer?.id)
                 VStack(alignment: .leading) {
-                    if let area = server.provider.area {
+                    if let area = server.metadata.area {
                         Text(area)
                             .font(.headline)
                     }
@@ -140,7 +140,7 @@ private extension VPNProviderServerView.ContentView {
     }
 }
 
-private extension VPNProviderServerView.ContentView {
+private extension ProviderServerView.ContentView {
     var countryCodes: [String] {
         filtersViewModel
             .countries
@@ -159,10 +159,10 @@ private extension VPNProviderServerView.ContentView {
         }
     }
 
-    func computeServersByCountry(_ servers: [VPNServer]) {
-        var map: [String: [VPNServer]] = [:]
+    func computeServersByCountry(_ servers: [ProviderServer]) {
+        var map: [String: [ProviderServer]] = [:]
         servers.forEach {
-            let code = $0.provider.countryCode
+            let code = $0.metadata.countryCode
             var list = map[code] ?? []
             list.append($0)
             map[code] = list

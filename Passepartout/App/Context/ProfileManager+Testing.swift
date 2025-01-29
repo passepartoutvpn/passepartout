@@ -140,26 +140,26 @@ private extension ProfileManager {
         Parameters("Personal DoH", false, false, [.dns, .onDemand])
     ]
 
-    static var mockHideMeEntity: VPNEntity<OpenVPN.Configuration> {
+    static var mockHideMeEntity: ProviderEntity<OpenVPNProviderTemplate> {
         do {
             var cfgBuilder = OpenVPN.Configuration.Builder()
             cfgBuilder.ca = .init(pem: "...")
             let cfg = try cfgBuilder.tryBuild(isClient: false)
             let cfgData = try JSONEncoder().encode(cfg)
 
-            let preset = AnyVPNPreset(
+            let preset = AnyProviderPreset(
                 providerId: .hideme,
                 presetId: "default",
                 description: "Default",
                 endpoints: [.init(.udp, 1194)],
                 configurationIdentifier: "OpenVPN",
-                configuration: cfgData
+                template: cfgData
             )
 
-            return VPNEntity(
+            return ProviderEntity(
                 server: .init(
-                    provider: .init(
-                        id: .hideme,
+                    metadata: .init(
+                        providerId: .hideme,
                         serverId: "be-v4",
                         supportedConfigurationIdentifiers: ["OpenVPN"],
                         supportedPresetIds: nil,
@@ -171,7 +171,7 @@ private extension ProfileManager {
                     hostname: "be-v4.hideservers.net",
                     ipAddresses: nil
                 ),
-                preset: try preset.ofType(OpenVPN.Configuration.self)
+                preset: try preset.ofType(OpenVPNProviderTemplate.self)
             )
         } catch {
             fatalError("Unable to build Hide.me entity: \(error)")

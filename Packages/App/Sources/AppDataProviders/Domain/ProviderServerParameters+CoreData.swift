@@ -1,5 +1,5 @@
 //
-//  VPNServerParameters+CoreData.swift
+//  ProviderServerParameters+CoreData.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/28/24.
@@ -40,7 +40,7 @@ extension ProviderID {
     }
 }
 
-extension VPNSortField {
+extension ProviderSortField {
     var sortDescriptor: NSSortDescriptor {
         switch self {
         case .localizedCountry:
@@ -58,7 +58,7 @@ extension VPNSortField {
     }
 }
 
-extension VPNFilters {
+extension ProviderFilters {
     func predicate(for providerId: ProviderID) -> NSPredicate {
         var formats: [String] = []
         var args: [Any] = []

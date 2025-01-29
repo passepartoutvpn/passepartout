@@ -64,12 +64,6 @@ enum Environment {
                 ]
             ))
         }
-        targets.append(.testTarget(
-            name: "TargetTests",
-            dependencies: [
-                .target(name: targetName)
-            ]
-        ))
         return targets
     }
 }

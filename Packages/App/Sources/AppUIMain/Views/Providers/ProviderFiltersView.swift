@@ -1,5 +1,5 @@
 //
-//  VPNFiltersView.swift
+//  ProviderFiltersView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/9/24.
@@ -28,7 +28,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct VPNFiltersView: View {
+struct ProviderFiltersView: View {
     let apis: [APIMapper]
 
     let providerId: ProviderID
@@ -59,7 +59,7 @@ struct VPNFiltersView: View {
     }
 }
 
-private extension VPNFiltersView {
+private extension ProviderFiltersView {
     var categoryNameBinding: Binding<String?> {
         Binding {
             model.filters.categoryName
@@ -108,14 +108,14 @@ private extension VPNFiltersView {
 
     var clearFiltersButton: some View {
         Button(Strings.Views.Providers.clearFilters, role: .destructive) {
-            model.filters = VPNFilters()
+            model.filters = ProviderFilters()
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        VPNFiltersView(
+        ProviderFiltersView(
             apis: [API.bundled],
             providerId: .mullvad,
             model: .init()

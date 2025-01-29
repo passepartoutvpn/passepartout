@@ -35,7 +35,7 @@ struct ActiveProfileView: View {
     private var theme: Theme
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var apiManager: APIManager
 
     let profile: Profile?
 
@@ -106,14 +106,14 @@ private extension ActiveProfileView {
                 }
             }
             if let pair = profile.selectedProvider {
-                if let provider = providerManager.provider(withId: pair.selection.id) {
+                if let provider = apiManager.provider(withId: pair.selection.id) {
                     ListRowView(title: Strings.Global.Nouns.provider) {
                         Text(provider.description)
                     }
                 }
-                if let entity = pair.selection.entity {
+                if let entityHeader = pair.selection.entityHeader {
                     ListRowView(title: Strings.Global.Nouns.country) {
-                        ThemeCountryText(entity.header.countryCode)
+                        ThemeCountryText(entityHeader.countryCode)
                     }
                 }
             }
@@ -217,7 +217,7 @@ private extension ActiveProfileView {
             .frame(maxWidth: .infinity)
     }
     .task {
-        try? await ProviderManager.forPreviews.fetchIndex(from: [API.bundled])
+        try? await APIManager.forPreviews.fetchIndex(from: [API.bundled])
     }
 }
 

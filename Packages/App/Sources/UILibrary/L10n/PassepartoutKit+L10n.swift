@@ -181,9 +181,9 @@ extension ProviderID: @retroactive CustomDebugStringConvertible {
     }
 }
 
-extension VPNServer {
+extension ProviderServer {
     public var region: String {
-        [provider.countryCode.localizedAsRegionCode, provider.area]
+        [metadata.countryCode.localizedAsRegionCode, metadata.area]
             .compactMap { $0 }
             .joined(separator: " - ")
     }

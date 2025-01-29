@@ -63,12 +63,12 @@ struct DomainMapper {
         }
     }
 
-    func preset(from entity: CDVPNPresetV3) throws -> AnyVPNPreset? {
+    func preset(from entity: CDVPNPresetV3) throws -> AnyProviderPreset? {
         guard let presetId = entity.presetId,
               let presetDescription = entity.presetDescription,
               let providerId = entity.providerId,
               let configurationId = entity.configurationId,
-              let configuration = entity.configuration else {
+              let template = entity.configuration else {
             return nil
         }
 
@@ -77,17 +77,17 @@ struct DomainMapper {
             try decoder.decode([EndpointProtocol].self, from: $0)
         } ?? []
 
-        return AnyVPNPreset(
+        return AnyProviderPreset(
             providerId: .init(rawValue: providerId),
             presetId: presetId,
             description: presetDescription,
             endpoints: endpoints,
             configurationIdentifier: configurationId,
-            configuration: configuration
+            template: template
         )
     }
 
-    func server(from entity: CDVPNServerV3) throws -> VPNServer? {
+    func server(from entity: CDVPNServerV3) throws -> ProviderServer? {
         guard let serverId = entity.serverId,
               let providerId = entity.providerId,
               let categoryName = entity.categoryName,
@@ -105,8 +105,8 @@ struct DomainMapper {
         let otherCountryCodes = entity.otherCountryCodes?.components(separatedBy: ",")
         let area = entity.area
 
-        let provider = VPNServer.Provider(
-            id: .init(rawValue: providerId),
+        let metadata = ProviderServer.Metadata(
+            providerId: .init(rawValue: providerId),
             serverId: serverId,
             supportedConfigurationIdentifiers: supportedConfigurationIds,
             supportedPresetIds: supportedPresetIds,
@@ -115,6 +115,6 @@ struct DomainMapper {
             otherCountryCodes: otherCountryCodes,
             area: area
         )
-        return VPNServer(provider: provider, hostname: hostname, ipAddresses: ipAddresses)
+        return ProviderServer(metadata: metadata, hostname: hostname, ipAddresses: ipAddresses)
     }
 }

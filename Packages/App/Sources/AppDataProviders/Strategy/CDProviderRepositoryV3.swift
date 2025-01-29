@@ -24,150 +24,73 @@
 //
 
 import AppData
-import Combine
 import CommonUtils
 import CoreData
 import Foundation
 import PassepartoutKit
 
-extension AppData {
-    public static func cdProviderRepositoryV3(context: NSManagedObjectContext) -> ProviderRepository {
-        CDProviderRepositoryV3(context: context)
-    }
-}
+final class CDProviderRepositoryV3: ProviderRepository {
+    private let context: NSManagedObjectContext
 
-private final class CDProviderRepositoryV3: NSObject, ProviderRepository {
-    private nonisolated let context: NSManagedObjectContext
+    let providerId: ProviderID
 
-    private nonisolated let providersSubject: CurrentValueSubject<[Provider], Never>
-
-    private nonisolated let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
-
-    private nonisolated let providersController: NSFetchedResultsController<CDProviderV3>
-
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, providerId: ProviderID) {
         self.context = context
-        providersSubject = CurrentValueSubject([])
-        lastUpdateSubject = CurrentValueSubject([:])
+        self.providerId = providerId
+    }
 
-        let request = CDProviderV3.fetchRequest()
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "providerId", ascending: true)
-        ]
-        providersController = .init(
-            fetchRequest: request,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
+    func availableOptions<Template>(for templateType: Template.Type) async throws -> ProviderFilterOptions where Template: IdentifiableConfiguration {
+        try await context.perform {
+            let mapper = DomainMapper()
 
-        super.init()
+            let serversRequest = NSFetchRequest<NSDictionary>(entityName: "CDVPNServerV3")
+            serversRequest.predicate = self.providerId.predicate
+            serversRequest.resultType = .dictionaryResultType
+            serversRequest.returnsDistinctResults = true
+            serversRequest.propertiesToFetch = [
+                "categoryName",
+                "countryCode"
+            ]
+            let serversResults = try serversRequest.execute()
 
-        Task {
-            try await context.perform { [weak self] in
-                self?.providersController.delegate = self
-                try self?.providersController.performFetch()
+            var countriesByCategoryName: [String: Set<String>] = [:]
+            var countryCodes: Set<String> = []
+            serversResults.forEach {
+                guard let categoryName = $0.object(forKey: "categoryName") as? String,
+                      let countryCode = $0.object(forKey: "countryCode") as? String else {
+                    return
+                }
+                var codes: Set<String> = countriesByCategoryName[categoryName] ?? []
+                codes.insert(countryCode)
+                countriesByCategoryName[categoryName] = codes
+                countryCodes.insert(countryCode)
             }
+
+            let presetsRequest = CDVPNPresetV3.fetchRequest()
+            presetsRequest.predicate = NSPredicate(
+                format: "providerId == %@ AND configurationId == %@", self.providerId.rawValue,
+                Template.configurationIdentifier
+            )
+            let presetsResults = try presetsRequest.execute()
+
+            return ProviderFilterOptions(
+                countriesByCategoryName: countriesByCategoryName,
+                countryCodes: Set(countryCodes),
+                presets: Set(try presetsResults.compactMap {
+                    try mapper.preset(from: $0)
+                })
+            )
         }
     }
 
-    nonisolated var indexPublisher: AnyPublisher<[Provider], Never> {
-        providersSubject
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-
-    nonisolated var lastUpdatePublisher: AnyPublisher<[ProviderID: Date], Never> {
-        lastUpdateSubject
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-
-    func store(_ index: [Provider]) async throws {
-        try await context.perform { [weak self] in
-            guard let self else {
-                return
-            }
-            do {
-                // fetch existing for last update and deletion
-                let request = CDProviderV3.fetchRequest()
-                let results = try request.execute()
-                let lastUpdatesByProvider = results.reduce(into: [:]) {
-                    $0[$1.providerId] = $1.lastUpdate
-                }
-                results.forEach(context.delete)
-
-                // replace but retain last update
-                let mapper = CoreDataMapper(context: context)
-                try index.forEach {
-                    let lastUpdate = lastUpdatesByProvider[$0.id.rawValue]
-                    try mapper.cdProvider(from: $0, lastUpdate: lastUpdate)
-                }
-
-                try context.save()
-            } catch {
-                context.rollback()
-                throw error
-            }
+    func filteredServers(with parameters: ProviderServerParameters?) async throws -> [ProviderServer] {
+        try await context.perform {
+            let request = CDVPNServerV3.fetchRequest()
+            request.sortDescriptors = parameters?.sorting.map(\.sortDescriptor)
+            request.predicate = parameters?.filters.predicate(for: self.providerId)
+            let results = try request.execute()
+            let mapper = DomainMapper()
+            return try results.compactMap(mapper.server(from:))
         }
-    }
-
-    func store(_ infrastructure: VPNInfrastructure, for providerId: ProviderID) async throws {
-        try await context.perform { [weak self] in
-            guard let self else {
-                return
-            }
-            do {
-                let predicate = providerId.predicate
-
-                // signal update of related provider
-                let providerRequest = CDProviderV3.fetchRequest()
-                providerRequest.predicate = predicate
-                let providers = try providerRequest.execute()
-                if let provider = providers.first {
-                    provider.lastUpdate = infrastructure.lastUpdate
-                }
-
-                // delete all provider entities
-                let serverRequest = CDVPNServerV3.fetchRequest()
-                serverRequest.predicate = predicate
-                let servers = try serverRequest.execute()
-                servers.forEach(context.delete)
-
-                let presetRequest = CDVPNPresetV3.fetchRequest()
-                presetRequest.predicate = predicate
-                let presets = try presetRequest.execute()
-                presets.forEach(context.delete)
-
-                // create new entities
-                let mapper = CoreDataMapper(context: context)
-                try infrastructure.servers.forEach {
-                    try mapper.cdServer(from: $0)
-                }
-                try infrastructure.presets.forEach {
-                    try mapper.cdPreset(from: $0)
-                }
-
-                try context.save()
-            } catch {
-                context.rollback()
-                throw error
-            }
-        }
-    }
-
-    nonisolated func vpnServerRepository(for providerId: ProviderID) -> VPNProviderServerRepository {
-        CDVPNProviderServerRepositoryV3(context: context, providerId: providerId)
-    }
-}
-
-extension CDProviderRepositoryV3: NSFetchedResultsControllerDelegate {
-    nonisolated func controllerDidChangeContent(_ controller: NSFetchedResultsController<any NSFetchRequestResult>) {
-        guard let entities = controller.fetchedObjects as? [CDProviderV3] else {
-            return
-        }
-        let mapper = DomainMapper()
-        providersSubject.send(entities.compactMap(mapper.provider(from:)))
-        lastUpdateSubject.send(mapper.lastUpdate(from: entities))
     }
 }
