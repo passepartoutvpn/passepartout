@@ -45,7 +45,7 @@ public struct TunnelToggleButton<Label>: View, Routable, ThemeProviding where La
 
     public let flow: ConnectionFlow?
 
-    private let label: (Bool) -> Label
+    private let label: (Bool, Bool) -> Label
 
     public init(
         tunnel: ExtendedTunnel,
@@ -53,7 +53,7 @@ public struct TunnelToggleButton<Label>: View, Routable, ThemeProviding where La
         nextProfileId: Binding<Profile.ID?>,
         errorHandler: ErrorHandler,
         flow: ConnectionFlow?,
-        label: @escaping (Bool) -> Label
+        label: @escaping (_ canConnect: Bool, _ isDisabled: Bool) -> Label
     ) {
         self.tunnel = tunnel
         self.profile = profile
@@ -65,13 +65,13 @@ public struct TunnelToggleButton<Label>: View, Routable, ThemeProviding where La
 
     public var body: some View {
         Button(action: tryPerform) {
-            label(canConnect)
+            label(canConnect, isDisabled)
         }
 #if os(macOS)
         .buttonStyle(.plain)
         .cursor(.hand)
 #endif
-        .disabled(profile == nil || (isInstalled && tunnel.status == .deactivating))
+        .disabled(isDisabled)
     }
 }
 
@@ -82,6 +82,10 @@ private extension TunnelToggleButton {
 
     var canConnect: Bool {
         !isInstalled || (tunnel.status == .inactive && tunnel.currentProfile?.onDemand != true)
+    }
+
+    var isDisabled: Bool {
+        profile == nil || (isInstalled && tunnel.status == .deactivating)
     }
 }
 

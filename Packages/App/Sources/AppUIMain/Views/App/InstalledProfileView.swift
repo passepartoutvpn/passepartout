@@ -186,7 +186,7 @@ private struct ToggleButton: View {
             nextProfileId: $nextProfileId,
             errorHandler: errorHandler,
             flow: flow?.connectionFlow,
-            label: { _ in
+            label: { _, _ in
                 ThemeImage(.tunnelToggle)
                     .scaleEffect(1.5, anchor: .trailing)
             }

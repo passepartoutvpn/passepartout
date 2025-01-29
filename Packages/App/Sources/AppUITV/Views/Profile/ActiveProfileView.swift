@@ -71,7 +71,7 @@ struct ActiveProfileView: View {
                     toggleConnectionButton
                     switchProfileButton
                 }
-                .clipShape(RoundedRectangle(cornerRadius: 50))
+                .buttonStyle(.borderless)
             }
             .padding(.horizontal, 100)
 //            .padding(.top, 50)
@@ -136,11 +136,14 @@ private extension ActiveProfileView {
             label: {
                 Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
+                    .fontWeight(theme.relevantWeight)
+                    .forMainButton(
+                        withColor: toggleConnectionColor,
+                        focused: focusedField == .connect,
+                        disabled: $1
+                    )
             }
         )
-        .background(toggleConnectionColor)
-        .fontWeight(theme.relevantWeight)
         .focused($focusedField, equals: .connect)
     }
 
@@ -159,9 +162,30 @@ private extension ActiveProfileView {
         } label: {
             Text(Strings.Global.Actions.select)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
+                .forMainButton(
+                    withColor: .gray,
+                    focused: focusedField == .switchProfile,
+                    disabled: false
+                )
         }
         .focused($focusedField, equals: .switchProfile)
+    }
+}
+
+// MARK: - Local modifiers
+
+private extension View {
+    func forMainButton(withColor color: Color, focused: Bool, disabled: Bool) -> some View {
+        padding(.vertical, 25)
+            .background(disabled ? .gray : color)
+            .cornerRadius(50)
+            .font(.title3)
+            .foregroundColor(disabled ? .white.opacity(0.6) : .white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 50)
+                    .fill(.white.opacity(focused ? 0.3 : 0.0))
+            )
+            .scaleEffect(focused ? 1.05 : 1.0)
     }
 }
 

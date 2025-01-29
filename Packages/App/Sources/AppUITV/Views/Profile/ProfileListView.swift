@@ -80,7 +80,7 @@ private extension ProfileListView {
             nextProfileId: .constant(nil),
             errorHandler: errorHandler,
             flow: flow,
-            label: { _ in
+            label: { _, _ in
                 toggleView(for: preview)
             }
         )
