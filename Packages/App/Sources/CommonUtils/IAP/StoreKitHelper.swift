@@ -64,8 +64,20 @@ extension StoreKitHelper {
         didUpdateSubject.eraseToAnyPublisher()
     }
 
-    public func fetchProducts() async throws -> [ProductType: InAppProduct] {
-        let skProducts = try await Product.products(for: products.map(inAppIdentifier))
+    public func fetchProducts(timeout: Int) async throws -> [ProductType: InAppProduct] {
+        let skProducts = try await withThrowingTaskGroup(of: [Product].self) { group in
+            group.addTask {
+                try await Product.products(for: self.products.map(self.inAppIdentifier))
+            }
+            group.addTask {
+                try await Task.sleep(nanoseconds: UInt64(timeout) * 1_000_000_000)
+                throw URLError(.timedOut)
+            }
+            for try await result in group {
+                return result
+            }
+            throw URLError(.unknown)
+        }
         return skProducts.reduce(into: [:]) {
             guard let pid = ProductType(rawValue: $1.id) else {
                 return
