@@ -155,6 +155,7 @@
 "modules.ip.routes.included" = "已包含路由";
 "modules.on_demand.ethernet" = "以太网";
 "modules.on_demand.mobile" = "移动网络";
+"modules.on_demand.networks.footer" = "这些规则仅适用于支持该接口类型的设备。";
 "modules.on_demand.policy" = "策略";
 "modules.on_demand.policy.footer" = "激活 VPN %@。";
 "modules.on_demand.policy.footer.any" = "在任何网络中";

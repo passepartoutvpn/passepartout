@@ -155,6 +155,7 @@
 "modules.ip.routes.included" = "Uwzględnione trasy";
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.mobile" = "Mobilne";
+"modules.on_demand.networks.footer" = "Te zasady będą obowiązywać tylko na urządzeniach, na których obsługiwany jest dany typ interfejsu.";
 "modules.on_demand.policy" = "Polityka";
 "modules.on_demand.policy.footer" = "Aktywuj VPN %@.";
 "modules.on_demand.policy.footer.any" = "w każdej sieci";

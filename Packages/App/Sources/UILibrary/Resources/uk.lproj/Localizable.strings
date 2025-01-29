@@ -155,6 +155,7 @@
 "modules.ip.routes.included" = "Включені маршрути";
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.mobile" = "Мобільний";
+"modules.on_demand.networks.footer" = "Ці правила застосовуватимуться лише на пристроях, де підтримується тип інтерфейсу.";
 "modules.on_demand.policy" = "Політика";
 "modules.on_demand.policy.footer" = "Активуйте VPN %@.";
 "modules.on_demand.policy.footer.any" = "у будь-якій мережі";
