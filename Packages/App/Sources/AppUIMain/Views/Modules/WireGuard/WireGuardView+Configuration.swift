@@ -44,7 +44,7 @@ extension WireGuardView {
 
 private extension WireGuardView.ConfigurationView {
     var interfaceSection: some View {
-        moduleSection(header: Strings.Modules.Wireguard.interface) {
+        themeModuleSection(header: Strings.Modules.Wireguard.interface) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.privateKey,
                 value: configuration.interface.privateKey
@@ -63,7 +63,7 @@ private extension WireGuardView.ConfigurationView {
     }
 
     var dnsSection: some View {
-        moduleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
+        themeModuleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
             ThemeModuleTextList(
                 caption: Strings.Global.Nouns.servers,
                 values: configuration.interface.dns.servers
@@ -87,7 +87,7 @@ private extension WireGuardView.ConfigurationView {
     }
 
     func peerSection(for peer: WireGuard.RemoteInterface.Builder, at index: Int) -> some View {
-        moduleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
+        themeModuleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.publicKey,
                 value: peer.publicKey

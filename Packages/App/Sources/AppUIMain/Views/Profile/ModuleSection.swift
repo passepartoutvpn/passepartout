@@ -73,16 +73,6 @@ extension View {
                 .themeSection(header: header)
         }
     }
-
-    @ViewBuilder
-    func moduleSection<Content>(if rows: [Any?]? = nil, header: String, @ViewBuilder content: () -> Content) -> some View where Content: View {
-        if let rows, rows.allSatisfy({ $0 == nil }) {
-            EmptyView()
-        } else {
-            content()
-                .themeSection(header: header)
-        }
-    }
 }
 
 private extension View {

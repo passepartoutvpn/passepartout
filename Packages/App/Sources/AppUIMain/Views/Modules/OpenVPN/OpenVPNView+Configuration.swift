@@ -62,7 +62,7 @@ extension OpenVPNView {
 private extension OpenVPNView.ConfigurationView {
     var accountSection: some View {
         credentialsRoute.map { route in
-            moduleSection(if: accountRows, header: Strings.Global.Nouns.account) {
+            themeModuleSection(if: accountRows, header: Strings.Global.Nouns.account) {
                 ThemeModulePush(
                     caption: Strings.Modules.Openvpn.credentials,
                     route: route
@@ -74,7 +74,7 @@ private extension OpenVPNView.ConfigurationView {
     var pullSection: some View {
         configuration.pullMask
             .map { mask in
-                moduleSection(if: pullRows, header: Strings.Modules.Openvpn.pull) {
+                themeModuleSection(if: pullRows, header: Strings.Modules.Openvpn.pull) {
                     ForEach(mask.map(\.localizedDescription).sorted(), id: \.self) {
                         ThemeModuleText(caption: $0, value: nil)
                     }
@@ -85,7 +85,7 @@ private extension OpenVPNView.ConfigurationView {
     var redirectSection: some View {
         configuration.routingPolicies
             .map { policies in
-                moduleSection(if: redirectRows, header: Strings.Modules.Openvpn.redirectGateway) {
+                themeModuleSection(if: redirectRows, header: Strings.Modules.Openvpn.redirectGateway) {
                     let sortedPolicies = policies.compactMap {
                         switch $0 {
                         case .IPv4: return Strings.Unlocalized.ipv4
@@ -103,7 +103,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var ipv4Section: some View {
-        moduleSection(
+        themeModuleSection(
             if: ipRows(for: configuration.ipv4, routes: configuration.routes4),
             header: Strings.Unlocalized.ipv4
         ) {
@@ -112,7 +112,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var ipv6Section: some View {
-        moduleSection(
+        themeModuleSection(
             if: ipRows(for: configuration.ipv6, routes: configuration.routes6),
             header: Strings.Unlocalized.ipv6
         ) {
@@ -159,7 +159,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var dnsSection: some View {
-        moduleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
+        themeModuleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
             configuration.dnsServers?
                 .nilIfEmpty
                 .map {
@@ -188,7 +188,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var proxySection: some View {
-        moduleSection(if: proxyRows, header: Strings.Unlocalized.proxy) {
+        themeModuleSection(if: proxyRows, header: Strings.Unlocalized.proxy) {
             configuration.httpProxy
                 .map {
                     ThemeModuleCopiableText(
@@ -225,7 +225,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var communicationSection: some View {
-        moduleSection(if: communicationRows, header: Strings.Modules.Openvpn.communication) {
+        themeModuleSection(if: communicationRows, header: Strings.Modules.Openvpn.communication) {
             configuration.cipher
                 .map {
                     ThemeModuleText(caption: Strings.Modules.Openvpn.cipher, value: $0.localizedDescription)
@@ -248,7 +248,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var compressionSection: some View {
-        moduleSection(if: compressionRows, header: Strings.Modules.Openvpn.compression) {
+        themeModuleSection(if: compressionRows, header: Strings.Modules.Openvpn.compression) {
             configuration.compressionFraming
                 .map {
                     ThemeModuleText(
@@ -268,7 +268,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var tlsSection: some View {
-        moduleSection(if: tlsRows, header: Strings.Unlocalized.tls) {
+        themeModuleSection(if: tlsRows, header: Strings.Unlocalized.tls) {
             configuration.ca
                 .map {
                     ThemeModuleLongContentPreview(
@@ -313,7 +313,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var keepAliveSection: some View {
-        moduleSection(if: keepAliveRows, header: Strings.Global.Nouns.keepAlive) {
+        themeModuleSection(if: keepAliveRows, header: Strings.Global.Nouns.keepAlive) {
             configuration.localizedDescription(optionalStyle: .keepAlive)
                 .map {
                     ThemeModuleText(caption: Strings.Global.Nouns.interval, value: $0)
@@ -327,7 +327,7 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     var otherSection: some View {
-        moduleSection(if: otherRows, header: Strings.Global.Nouns.other) {
+        themeModuleSection(if: otherRows, header: Strings.Global.Nouns.other) {
             configuration.localizedDescription(optionalStyle: .renegotiatesAfter)
                 .map {
                     ThemeModuleText(caption: Strings.Modules.Openvpn.renegotiation, value: $0)
