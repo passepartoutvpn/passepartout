@@ -110,17 +110,17 @@ public struct ThemeModuleCopiableText: View {
 }
 
 public struct ThemeModuleLongContent: View {
-    private let title: String
+    private let caption: String
 
-    private let content: String
+    private let value: String
 
-    public init(title: String, content: String) {
-        self.title = title
-        self.content = content
+    public init(caption: String, value: String) {
+        self.caption = caption
+        self.value = value
     }
 
     public var body: some View {
-        LongContentLink(title, content: .constant(content)) {
+        LongContentLink(caption, content: .constant(value)) {
             Text($0)
                 .foregroundColor(.secondary)
         }
@@ -128,20 +128,20 @@ public struct ThemeModuleLongContent: View {
 }
 
 public struct ThemeModuleLongContentPreview: View {
-    private let title: String
+    private let caption: String
 
-    private let content: String
+    private let value: String
 
     private let preview: String?
 
-    public init(title: String, content: String, preview: String?) {
-        self.title = title
-        self.content = content
+    public init(caption: String, value: String, preview: String?) {
+        self.caption = caption
+        self.value = value
         self.preview = preview
     }
 
     public var body: some View {
-        LongContentLink(title, content: .constant(content), preview: preview) {
+        LongContentLink(caption, content: .constant(value), preview: preview) {
             Text(preview != nil ? $0 : "")
                 .foregroundColor(.secondary)
         }

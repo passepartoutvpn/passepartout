@@ -46,8 +46,8 @@ private extension WireGuardView.ConfigurationView {
     var interfaceSection: some View {
         moduleSection(header: Strings.Modules.Wireguard.interface) {
             ThemeModuleLongContent(
-                title: Strings.Global.Nouns.privateKey,
-                content: configuration.interface.privateKey
+                caption: Strings.Global.Nouns.privateKey,
+                value: configuration.interface.privateKey
             )
             ThemeModuleTextList(
                 caption: Strings.Global.Nouns.addresses,
@@ -89,14 +89,14 @@ private extension WireGuardView.ConfigurationView {
     func peerSection(for peer: WireGuard.RemoteInterface.Builder, at index: Int) -> some View {
         moduleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
             ThemeModuleLongContent(
-                title: Strings.Global.Nouns.publicKey,
-                content: peer.publicKey
+                caption: Strings.Global.Nouns.publicKey,
+                value: peer.publicKey
             )
             peer.preSharedKey
                 .map {
                     ThemeModuleLongContent(
-                        title: Strings.Modules.Wireguard.presharedKey,
-                        content: $0
+                        caption: Strings.Modules.Wireguard.presharedKey,
+                        value: $0
                     )
                 }
             peer.endpoint

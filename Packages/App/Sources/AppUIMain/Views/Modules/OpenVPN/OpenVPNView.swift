@@ -131,14 +131,12 @@ private extension OpenVPNView {
             selectedEntity: providerEntity,
             entityDestination: ProfileRoute(OpenVPNModule.Subroute.providerServer),
             paywallReason: $paywallReason,
-            providerRows: {
-                moduleGroup(for: providerAccountRows)
-            }
+            providerRows: providerRows
         )
     }
 
-    var providerAccountRows: [ModuleRow]? {
-        [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(ProfileRoute(OpenVPNModule.Subroute.credentials)))]
+    func providerRows() -> some View {
+        ThemeModulePush(caption: Strings.Modules.Openvpn.credentials, route: ProfileRoute(OpenVPNModule.Subroute.credentials))
     }
 }
 

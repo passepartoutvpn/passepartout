@@ -75,8 +75,8 @@ extension View {
     }
 
     @ViewBuilder
-    func moduleSection<Content>(if rows: [Any?] = [], header: String, @ViewBuilder content: () -> Content) -> some View where Content: View {
-        if !rows.isEmpty && rows.allSatisfy({ $0 == nil }) {
+    func moduleSection<Content>(if rows: [Any?]? = nil, header: String, @ViewBuilder content: () -> Content) -> some View where Content: View {
+        if let rows, rows.allSatisfy({ $0 == nil }) {
             EmptyView()
         } else {
             content()
