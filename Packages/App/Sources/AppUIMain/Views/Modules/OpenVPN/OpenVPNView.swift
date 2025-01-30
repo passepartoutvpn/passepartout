@@ -140,7 +140,6 @@ private extension OpenVPNView {
     }
 }
 
-
 // MARK: - Logic
 
 private extension OpenVPNView {

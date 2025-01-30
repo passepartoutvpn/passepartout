@@ -55,7 +55,6 @@ struct WireGuardView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue)
-            .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
@@ -81,14 +80,14 @@ private extension WireGuardView {
             providerId: providerId,
             providerPreferences: nil,
             selectedEntity: providerEntity,
-            entityDestination: Subroute.providerServer,
+            entityDestination: ProfileRoute(Subroute.providerServer),
             paywallReason: $paywallReason,
             providerRows: providerRows
         )
     }
 
     func providerRows() -> some View {
-        ThemeModulePush(caption: Strings.Modules.Wireguard.providerKey, route: Subroute.providerKey)
+        ThemeModulePush(caption: Strings.Modules.Wireguard.providerKey, route: ProfileRoute(Subroute.providerKey))
     }
 }
 

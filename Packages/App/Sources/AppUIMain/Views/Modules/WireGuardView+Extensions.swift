@@ -54,18 +54,22 @@ extension WireGuard.Configuration.Builder {
 
 private final class MockGenerator: WireGuardKeyGenerator {
     func newPrivateKey() -> String {
-        "private-key"
+        "private-key-\(randomNumber)"
     }
 
     func privateKey(from string: String) throws -> String {
-        "private-key"
+        "private-key-\(randomNumber)"
     }
 
     func publicKey(from string: String) throws -> String {
-        "public-key"
+        "public-key-\(randomNumber)"
     }
 
     func publicKey(for privateKey: String) throws -> String {
-        "public-key"
+        "public-key-\(randomNumber)"
+    }
+
+    private var randomNumber: Int {
+        Int.random(in: 0..<1000)
     }
 }

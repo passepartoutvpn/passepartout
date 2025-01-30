@@ -32,11 +32,23 @@ extension WireGuardView {
         @Binding
         var configuration: WireGuard.Configuration.Builder
 
+        @State
+        private var model = ViewModel()
+
         var body: some View {
-            interfaceSection
-            dnsSection
-            ForEach(Array(zip(configuration.peers.indices, configuration.peers)), id: \.1.publicKey) { index, peer in
-                peerSection(for: peer, at: index)
+            Group {
+                interfaceSection
+                dnsSection
+                ForEach(Array(zip(model.peersOrder.indices, model.peersOrder)), id: \.1) { index, publicKey in
+                    peerSection(for: publicKey, at: index)
+                }
+                addPeerButton
+            }
+            .onLoad {
+                model.load(from: configuration)
+            }
+            .onChange(of: model) {
+                $0.save(to: &configuration)
             }
         }
     }
@@ -47,80 +59,83 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: Strings.Modules.Wireguard.interface) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.privateKey,
-                value: configuration.interface.privateKey
+                value: $model.privateKey
             )
-            ThemeModuleTextList(
+            ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.addresses,
-                values: configuration.interface.addresses
+                value: $model.addresses
             )
-            configuration.interface.mtu.map {
-                ThemeModuleText(
-                    caption: Strings.Unlocalized.mtu,
-                    value: $0.description
-                )
-            }
+            ThemeModuleTextField(
+                caption: Strings.Unlocalized.mtu,
+                value: $model.mtu,
+                placeholder: Strings.Unlocalized.Placeholders.mtu
+            )
         }
     }
 
     var dnsSection: some View {
         themeModuleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
-            ThemeModuleTextList(
+            ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.servers,
-                values: configuration.interface.dns.servers
+                value: $model.dnsServers
             )
-            configuration.interface.dns.domainName
-                .map {
-                    ThemeModuleText(
-                        caption: Strings.Global.Nouns.domain,
-                        value: $0
-                    )
-                }
-            configuration.interface.dns.searchDomains?
-                .nilIfEmpty
-                .map {
-                    ThemeModuleTextList(
-                        caption: Strings.Entities.Dns.searchDomains,
-                        values: $0
-                    )
-                }
+            ThemeModuleLongContent(
+                caption: Strings.Global.Nouns.domain,
+                value: $model.dnsDomain
+            )
+            ThemeModuleLongContent(
+                caption: Strings.Entities.Dns.searchDomains,
+                value: $model.dnsSearchDomains
+            )
         }
     }
 
-    func peerSection(for peer: WireGuard.RemoteInterface.Builder, at index: Int) -> some View {
+    func peerSection(for publicKey: String, at index: Int) -> some View {
         themeModuleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
+            let peerBinding = peerBinding(with: publicKey)
+
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.publicKey,
-                value: .constant(peer.publicKey)
+                value: peerBinding.publicKey
             )
-            peer.preSharedKey
-                .map {
-                    ThemeModuleLongContent(
-                        caption: Strings.Modules.Wireguard.presharedKey,
-                        value: .constant($0)
-                    )
+            ThemeModuleLongContent(
+                caption: Strings.Modules.Wireguard.presharedKey,
+                value: peerBinding.preSharedKey
+            )
+            ThemeModuleLongContent(
+                caption: Strings.Global.Nouns.endpoint,
+                value: peerBinding.endpoint
+            )
+            ThemeModuleLongContent(
+                caption: Strings.Modules.Wireguard.allowedIps,
+                value: peerBinding.allowedIPs
+            )
+            ThemeModuleTextField(
+                caption: Strings.Global.Nouns.keepAlive,
+                value: peerBinding.keepAlive,
+                placeholder: Strings.Unlocalized.Placeholders.keepAlive
+            )
+            // FIXME: l10n
+            Button("Delete peer") {
+                withAnimation {
+                    model.peersOrder.remove(at: index)
+                    model.peers.removeValue(forKey: publicKey)
                 }
-            peer.endpoint
-                .map {
-                    ThemeModuleCopiableText(
-                        caption: Strings.Global.Nouns.endpoint,
-                        value: $0
-                    )
-                }
-            peer.allowedIPs
-                .nilIfEmpty
-                .map {
-                    ThemeModuleTextList(
-                        caption: Strings.Modules.Wireguard.allowedIps,
-                        values: $0
-                    )
-                }
-            peer.keepAlive
-                .map {
-                    ThemeModuleText(
-                        caption: Strings.Global.Nouns.keepAlive,
-                        value: TimeInterval($0).localizedDescription(style: .timeString))
-                }
+            }
         }
+    }
+
+    // FIXME: l10n
+    var addPeerButton: some View {
+        Button("Add peer") {
+            let newPeer = ViewModel.Peer()
+            assert(newPeer.publicKey == "")
+            withAnimation {
+                model.peers[newPeer.publicKey] = newPeer
+                model.peersOrder.append(newPeer.publicKey)
+            }
+        }
+        .disabled(model.peers[""] != nil)
     }
 }
 
@@ -131,6 +146,96 @@ private extension WireGuardView.ConfigurationView {
             configuration.interface.dns.domainName,
             configuration.interface.dns.searchDomains?.nilIfEmpty
         ]
+    }
+}
+
+// MARK: - Logic
+
+private extension WireGuardView.ConfigurationView {
+    struct ViewModel: Equatable {
+        struct Peer: Equatable {
+            var publicKey = ""
+
+            var preSharedKey = ""
+
+            var endpoint = ""
+
+            var allowedIPs = ""
+
+            var keepAlive = ""
+        }
+
+        private let separator = ","
+
+        var privateKey = ""
+
+        var addresses = ""
+
+        var mtu = ""
+
+        var dnsServers = ""
+
+        var dnsDomain = ""
+
+        var dnsSearchDomains = ""
+
+        var peers: [String: Peer] = [:]
+
+        var peersOrder: [String] = []
+
+        mutating func load(from configuration: WireGuard.Configuration.Builder) {
+            privateKey = configuration.interface.privateKey
+            addresses = configuration.interface.addresses.joined(separator: separator)
+            mtu = configuration.interface.mtu?.description ?? ""
+
+            dnsServers = configuration.interface.dns.servers.joined(separator: separator)
+            dnsDomain = configuration.interface.dns.domainName ?? ""
+            dnsSearchDomains = configuration.interface.dns.searchDomains?.joined(separator: separator) ?? ""
+
+            peers = configuration.peers.reduce(into: [:]) {
+                var peer = Peer()
+                peer.publicKey = $1.publicKey
+                peer.preSharedKey = $1.preSharedKey ?? ""
+                peer.endpoint = $1.endpoint ?? ""
+                peer.allowedIPs = $1.allowedIPs.joined(separator: separator)
+                peer.keepAlive = $1.keepAlive?.description ?? ""
+                $0[$1.publicKey] = peer
+            }
+            peersOrder = configuration.peers.map(\.publicKey)
+        }
+
+        func save(to configuration: inout WireGuard.Configuration.Builder) {
+            configuration.interface.privateKey = privateKey
+            configuration.interface.addresses = addresses.trimmedSplit(separator: separator)
+            configuration.interface.mtu = UInt16(mtu)
+
+            var dns = DNSModule.Builder()
+            dns.servers = dnsServers.trimmedSplit(separator: separator)
+            dns.domainName = dnsDomain
+            dns.searchDomains = dnsSearchDomains.trimmedSplit(separator: separator)
+            configuration.interface.dns = dns
+
+            configuration.peers = peersOrder
+                .compactMap {
+                    guard let model = peers[$0] else {
+                        return nil
+                    }
+                    var peer = WireGuard.RemoteInterface.Builder(publicKey: model.publicKey)
+                    peer.preSharedKey = model.preSharedKey
+                    peer.endpoint = model.endpoint
+                    peer.allowedIPs = model.allowedIPs.trimmedSplit(separator: separator)
+                    peer.keepAlive = UInt16(model.keepAlive)
+                    return peer
+                }
+        }
+    }
+
+    func peerBinding(with publicKey: String) -> Binding<ViewModel.Peer> {
+        Binding {
+            model.peers[publicKey] ?? ViewModel.Peer()
+        } set: {
+            model.peers[publicKey] = $0
+        }
     }
 }
 
