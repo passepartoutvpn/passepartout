@@ -28,7 +28,7 @@ import SwiftUI
 
 extension WireGuardView {
     struct ConfigurationView: View {
-        let configuration: WireGuard.Configuration.Builder
+        var configuration: WireGuard.Configuration.Builder
 
         var body: some View {
             moduleSection(for: interfaceRows, header: Strings.Modules.Wireguard.interface)
@@ -110,5 +110,19 @@ private extension WireGuardView.ConfigurationView {
             rows.append(.text(caption: Strings.Global.Nouns.keepAlive, value: TimeInterval($0).localizedDescription(style: .timeString)))
         }
         return rows.nilIfEmpty
+    }
+}
+
+// MARK: - Previews
+
+#Preview {
+    NavigationStack {
+        Form {
+            WireGuardView.ConfigurationView(
+                configuration: .forPreviews
+            )
+        }
+        .themeForm()
+        .withMockEnvironment()
     }
 }

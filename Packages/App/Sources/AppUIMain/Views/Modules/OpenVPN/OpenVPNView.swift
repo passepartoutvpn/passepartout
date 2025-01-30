@@ -146,5 +146,5 @@ private extension OpenVPNView {
 
 #Preview {
     let module = OpenVPNModule.Builder(configurationBuilder: .forPreviews)
-    return module.preview(title: "OpenVPN")
+    return module.preview()
 }
