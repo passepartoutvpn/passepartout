@@ -83,14 +83,12 @@ private extension WireGuardView {
             selectedEntity: providerEntity,
             entityDestination: Subroute.providerServer,
             paywallReason: $paywallReason,
-            providerRows: {
-                moduleGroup(for: providerKeyRows)
-            }
+            providerRows: providerRows
         )
     }
 
-    var providerKeyRows: [ModuleRow]? {
-        [.push(caption: Strings.Modules.Wireguard.providerKey, route: HashableRoute(Subroute.providerKey))]
+    func providerRows() -> some View {
+        ThemeModulePush(caption: Strings.Modules.Wireguard.providerKey, route: Subroute.providerKey)
     }
 }
 

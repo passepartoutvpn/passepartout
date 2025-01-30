@@ -33,85 +33,104 @@ extension WireGuardView {
         var configuration: WireGuard.Configuration.Builder
 
         var body: some View {
-            moduleSection(for: interfaceRows, header: Strings.Modules.Wireguard.interface)
-            moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
+            interfaceSection
+            dnsSection
             ForEach(Array(zip(configuration.peers.indices, configuration.peers)), id: \.1.publicKey) { index, peer in
-                moduleSection(for: peersRows(for: peer), header: Strings.Modules.Wireguard.peer(index + 1))
+                peerSection(for: peer, at: index)
             }
         }
     }
 }
 
 private extension WireGuardView.ConfigurationView {
-    var interfaceRows: [ModuleRow]? {
-        var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.Nouns.privateKey, value: configuration.interface.privateKey))
-        configuration.interface.addresses
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Global.Nouns.addresses,
-                    values: $0
-                ))
+    var interfaceSection: some View {
+        moduleSection(header: Strings.Modules.Wireguard.interface) {
+            ThemeModuleLongContent(
+                title: Strings.Global.Nouns.privateKey,
+                content: configuration.interface.privateKey
+            )
+            ThemeModuleTextList(
+                caption: Strings.Global.Nouns.addresses,
+                values: configuration.interface.addresses
+            )
+            configuration.interface.mtu.map {
+                ThemeModuleText(
+                    caption: Strings.Unlocalized.mtu,
+                    value: $0.description
+                )
             }
-        configuration.interface.mtu.map {
-            rows.append(.text(caption: Strings.Unlocalized.mtu, value: $0.description))
         }
-        return rows.nilIfEmpty
     }
 
-    var dnsRows: [ModuleRow]? {
-        var rows: [ModuleRow] = []
-
-        configuration.interface.dns.servers
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Global.Nouns.servers,
-                    values: $0
-                ))
-            }
-
-        configuration.interface.dns.domainName.map {
-            rows.append(.text(
-                caption: Strings.Global.Nouns.domain,
-                value: $0
-            ))
+    var dnsSection: some View {
+        moduleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
+            ThemeModuleTextList(
+                caption: Strings.Global.Nouns.servers,
+                values: configuration.interface.dns.servers
+            )
+            configuration.interface.dns.domainName
+                .map {
+                    ThemeModuleText(
+                        caption: Strings.Global.Nouns.domain,
+                        value: $0
+                    )
+                }
+            configuration.interface.dns.searchDomains?
+                .nilIfEmpty
+                .map {
+                    ThemeModuleTextList(
+                        caption: Strings.Entities.Dns.searchDomains,
+                        values: $0
+                    )
+                }
         }
-
-        configuration.interface.dns.searchDomains?
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Entities.Dns.searchDomains,
-                    values: $0
-                ))
-            }
-
-        return rows.nilIfEmpty
     }
 
-    func peersRows(for peer: WireGuard.RemoteInterface.Builder) -> [ModuleRow]? {
-        var rows: [ModuleRow] = []
-        rows.append(.longContent(caption: Strings.Global.Nouns.publicKey, value: peer.publicKey))
-        peer.preSharedKey.map {
-            rows.append(.longContent(caption: Strings.Modules.Wireguard.presharedKey, value: $0))
+    func peerSection(for peer: WireGuard.RemoteInterface.Builder, at index: Int) -> some View {
+        moduleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
+            ThemeModuleLongContent(
+                title: Strings.Global.Nouns.publicKey,
+                content: peer.publicKey
+            )
+            peer.preSharedKey
+                .map {
+                    ThemeModuleLongContent(
+                        title: Strings.Modules.Wireguard.presharedKey,
+                        content: $0
+                    )
+                }
+            peer.endpoint
+                .map {
+                    ThemeModuleCopiableText(
+                        caption: Strings.Global.Nouns.endpoint,
+                        value: $0
+                    )
+                }
+            peer.allowedIPs
+                .nilIfEmpty
+                .map {
+                    ThemeModuleTextList(
+                        caption: Strings.Modules.Wireguard.allowedIps,
+                        values: $0
+                    )
+                }
+            peer.keepAlive
+                .map {
+                    ThemeModuleText(
+                        caption: Strings.Global.Nouns.keepAlive,
+                        value: TimeInterval($0).localizedDescription(style: .timeString))
+                }
         }
-        peer.endpoint.map {
-            rows.append(.copiableText(caption: Strings.Global.Nouns.endpoint, value: $0))
-        }
-        peer.allowedIPs
-            .nilIfEmpty
-            .map {
-                rows.append(.textList(
-                    caption: Strings.Modules.Wireguard.allowedIps,
-                    values: $0
-                ))
-            }
-        peer.keepAlive.map {
-            rows.append(.text(caption: Strings.Global.Nouns.keepAlive, value: TimeInterval($0).localizedDescription(style: .timeString)))
-        }
-        return rows.nilIfEmpty
+    }
+}
+
+private extension WireGuardView.ConfigurationView {
+    var dnsRows: [Any?] {
+        [
+            configuration.interface.dns.servers.nilIfEmpty,
+            configuration.interface.dns.domainName,
+            configuration.interface.dns.searchDomains?.nilIfEmpty
+        ]
     }
 }
 
