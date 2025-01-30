@@ -68,10 +68,8 @@ private extension WireGuardView {
 
     @ViewBuilder
     var contentView: some View {
-
-        // FIXME: edit WireGuard configuration
-        if let configuration = draft.wrappedValue.configurationBuilder {
-            ConfigurationView(configuration: .constant(configuration))
+        if let configurationBinding {
+            ConfigurationView(configuration: configurationBinding)
         } else {
             EmptyView()
                 .modifier(providerModifier)
@@ -133,6 +131,23 @@ private extension WireGuardView {
         case .providerKey:
             // TODO: #339, WireGuard upload public key to provider
             EmptyView()
+        }
+    }
+}
+
+// MARK: - Logic
+
+private extension WireGuardView {
+    var configurationBinding: Binding<WireGuard.Configuration.Builder>? {
+        guard draft.wrappedValue.configurationBuilder != nil else {
+            return nil
+        }
+        return Binding {
+            draft.wrappedValue.configurationBuilder ?? impl.map {
+                .init(keyGenerator: $0.keyGenerator)
+            } ?? .init(privateKey: "")
+        } set: {
+            draft.wrappedValue.configurationBuilder = $0
         }
     }
 }
