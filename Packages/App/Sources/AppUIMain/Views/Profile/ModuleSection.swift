@@ -26,21 +26,9 @@
 import CommonUtils
 import SwiftUI
 
+// FIXME: delete all these
+
 enum ModuleRow: Hashable {
-    enum CopyOnTap: Int, Hashable, Comparable {
-        case disabled
-
-        case caption
-
-        case value
-
-        case all
-
-        static func < (lhs: Self, rhs: Self) -> Bool {
-            lhs.rawValue < rhs.rawValue
-        }
-    }
-
     case text(caption: String, value: String? = nil)
 
     case textList(caption: String, values: [String])
@@ -82,6 +70,16 @@ extension View {
     func moduleSection(for rows: [ModuleRow]?, header: String) -> some View {
         rows.map { rows in
             moduleGroup(for: rows)
+                .themeSection(header: header)
+        }
+    }
+
+    @ViewBuilder
+    func moduleSection<Content>(if rows: [Any?] = [], header: String, @ViewBuilder content: () -> Content) -> some View where Content: View {
+        if !rows.isEmpty && rows.allSatisfy({ $0 == nil }) {
+            EmptyView()
+        } else {
+            content()
                 .themeSection(header: header)
         }
     }
