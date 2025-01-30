@@ -28,6 +28,8 @@ import SwiftUI
 
 extension WireGuardView {
     struct ConfigurationView: View {
+
+        @Binding
         var configuration: WireGuard.Configuration.Builder
 
         var body: some View {
@@ -116,13 +118,23 @@ private extension WireGuardView.ConfigurationView {
 // MARK: - Previews
 
 #Preview {
-    NavigationStack {
-        Form {
-            WireGuardView.ConfigurationView(
-                configuration: .forPreviews
-            )
+    struct Preview: View {
+
+        @State
+        private var configuration: WireGuard.Configuration.Builder = .forPreviews
+
+        var body: some View {
+            NavigationStack {
+                Form {
+                    WireGuardView.ConfigurationView(
+                        configuration: $configuration
+                    )
+                }
+                .themeForm()
+                .withMockEnvironment()
+            }
         }
-        .themeForm()
-        .withMockEnvironment()
     }
+
+    return Preview()
 }

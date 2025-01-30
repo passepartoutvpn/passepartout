@@ -87,11 +87,13 @@ private extension OpenVPNView {
 
     @ViewBuilder
     var contentView: some View {
+
         if let configuration = draft.wrappedValue.configurationBuilder {
             remotesLink
             ConfigurationView(
                 isServerPushed: isServerPushed,
-                configuration: configuration,
+                // FIXME: edit OpenVPN configuration
+                configuration: .constant(configuration),
                 credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
             )
         } else {

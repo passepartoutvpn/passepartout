@@ -68,8 +68,10 @@ private extension WireGuardView {
 
     @ViewBuilder
     var contentView: some View {
+
+        // FIXME: edit WireGuard configuration
         if let configuration = draft.wrappedValue.configurationBuilder {
-            ConfigurationView(configuration: configuration)
+            ConfigurationView(configuration: .constant(configuration))
         } else {
             EmptyView()
                 .modifier(providerModifier)

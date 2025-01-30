@@ -31,7 +31,8 @@ extension OpenVPNView {
     struct ConfigurationView: View {
         let isServerPushed: Bool
 
-        let configuration: OpenVPN.Configuration.Builder
+        @Binding
+        var configuration: OpenVPN.Configuration.Builder
 
         let credentialsRoute: (any Hashable)?
 
@@ -284,7 +285,8 @@ private extension OpenVPNView.ConfigurationView {
     Form {
         OpenVPNView.ConfigurationView(
             isServerPushed: false,
-            configuration: .forPreviews,
+            // FIXME: edit OpenVPN configuration
+            configuration: .constant(.forPreviews),
             credentialsRoute: nil
         )
     }

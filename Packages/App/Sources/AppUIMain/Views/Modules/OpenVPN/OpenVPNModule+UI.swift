@@ -97,7 +97,8 @@ private struct DestinationView: View {
                 Form {
                     OpenVPNView.ConfigurationView(
                         isServerPushed: false,
-                        configuration: configuration.builder(),
+                        // FIXME: edit OpenVPN configuration
+                        configuration: .constant(configuration.builder()),
                         credentialsRoute: nil
                     )
                 }
