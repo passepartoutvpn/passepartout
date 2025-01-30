@@ -90,13 +90,13 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.publicKey,
-                value: peer.publicKey
+                value: .constant(peer.publicKey)
             )
             peer.preSharedKey
                 .map {
                     ThemeModuleLongContent(
                         caption: Strings.Modules.Wireguard.presharedKey,
-                        value: $0
+                        value: .constant($0)
                     )
                 }
             peer.endpoint

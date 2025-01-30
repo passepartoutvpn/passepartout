@@ -152,7 +152,7 @@ private extension OpenVPNView.ConfigurationView {
             ForEach(routes, id: \.self) {
                 ThemeModuleLongContent(
                     caption: Strings.Global.Nouns.route,
-                    value: $0.localizedDescription
+                    value: .constant($0.localizedDescription)
                 )
             }
         }
@@ -240,7 +240,7 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContentPreview(
                         caption: Strings.Unlocalized.xor,
-                        value: $0.localizedDescription(style: .long),
+                        value: .constant($0.localizedDescription(style: .long)),
                         preview: $0.localizedDescription(style: .short)
                     )
                 }
@@ -273,7 +273,7 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContentPreview(
                         caption: Strings.Unlocalized.ca,
-                        value: $0.pem,
+                        value: .constant($0.pem),
                         preview: nil
                     )
                 }
@@ -282,7 +282,7 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContentPreview(
                         caption: Strings.Global.Nouns.certificate,
-                        value: $0.pem,
+                        value: .constant($0.pem),
                         preview: nil
                     )
                 }
@@ -291,7 +291,7 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContentPreview(
                         caption: Strings.Global.Nouns.key,
-                        value: $0.pem,
+                        value: .constant($0.pem),
                         preview: nil
                     )
                 }
@@ -300,7 +300,7 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContentPreview(
                         caption: Strings.Modules.Openvpn.tlsWrap,
-                        value: $0.key.hexString,
+                        value: .constant($0.key.hexString),
                         preview: configuration.localizedDescription(style: .tlsWrap)
                     )
                 }
