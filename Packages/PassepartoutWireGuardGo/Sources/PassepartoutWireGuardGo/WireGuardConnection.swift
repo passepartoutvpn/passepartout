@@ -69,7 +69,30 @@ public final class WireGuardConnection: Connection {
         guard let configuration = module.configuration else {
             fatalError("No WireGuard configuration defined?")
         }
-        tunnelConfiguration = try configuration.toWireGuardConfiguration()
+
+        // tweak AllowedIPs from included routes
+        var tweakedBuilder = configuration.builder()
+        let ipModules = parameters.controller.profile.activeModules
+            .compactMap {
+                $0 as? IPModule
+            }
+
+        ipModules.forEach { ipModule in
+            tweakedBuilder.peers = configuration.peers
+                .map { oldPeer in
+                    var peer = oldPeer.builder()
+                    ipModule.ipv4?.includedRoutes.forEach { route in
+                        peer.allowedIPs.append(route.destination?.rawValue ?? "0.0.0.0/0")
+                    }
+                    ipModule.ipv6?.includedRoutes.forEach { route in
+                        peer.allowedIPs.append(route.destination?.rawValue ?? "::/0")
+                    }
+                    return peer
+                }
+        }
+        let tweakedConfiguration = try tweakedBuilder.tryBuild()
+        tunnelConfiguration = try tweakedConfiguration.toWireGuardConfiguration()
+//        tunnelConfiguration = try configuration.toWireGuardConfiguration()
 
         let interval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
         dataCountTimer = Timer.publish(every: interval, on: .main, in: .common)
