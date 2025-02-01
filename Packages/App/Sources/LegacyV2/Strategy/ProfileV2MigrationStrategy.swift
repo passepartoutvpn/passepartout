@@ -45,7 +45,7 @@ public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendabl
     private let tvProfilesRepository: CDProfileRepositoryV2
 
     public init(
-        coreDataLogger: CoreDataPersistentStoreLogger?,
+        coreDataLogger: LoggerProtocol?,
         baseURL: URL? = nil,
         profilesContainer: Container,
         tvProfilesContainer: Container

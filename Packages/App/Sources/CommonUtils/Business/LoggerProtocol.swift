@@ -1,8 +1,8 @@
 //
-//  Dependencies+CoreData.swift
+//  LoggerProtocol.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/2/24.
+//  Created by Davide De Rosa on 2/1/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,22 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
 import Foundation
-import PassepartoutKit
 
-extension Dependencies {
-    func coreDataLogger() -> LoggerProtocol {
-        CoreDataPersistentStoreLogger()
-    }
-}
+public protocol LoggerProtocol: Sendable {
+    func debug(_ msg: String)
 
-private struct CoreDataPersistentStoreLogger: LoggerProtocol {
-    func debug(_ msg: String) {
-        pp_log(.app, .info, msg)
-    }
-
-    func warning(_ msg: String) {
-        pp_log(.app, .error, msg)
-    }
+    func warning(_ msg: String)
 }
