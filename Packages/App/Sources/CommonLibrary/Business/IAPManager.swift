@@ -51,6 +51,7 @@ public final class IAPManager: ObservableObject {
     @Published
     public private(set) var eligibleFeatures: Set<AppFeature>
 
+    @Published
     private var pendingReceiptTask: Task<Void, Never>?
 
     private var subscriptions: Set<AnyCancellable>
@@ -79,6 +80,10 @@ public final class IAPManager: ObservableObject {
 // MARK: - Actions
 
 extension IAPManager {
+    public var isLoadingReceipt: Bool {
+        pendingReceiptTask != nil
+    }
+
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
         do {
             let inAppProducts = try await inAppHelper.fetchProducts()
