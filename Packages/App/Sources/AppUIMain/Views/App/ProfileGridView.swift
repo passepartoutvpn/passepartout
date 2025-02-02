@@ -69,7 +69,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                                 }
                             }
                     }
-                    .themeGridHeader(title: Strings.Views.App.Folders.default)
+                    .themeGridHeader(header: sectionHeaderView)
                 }
                 .padding(.horizontal)
             }
@@ -90,6 +90,10 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 private extension ProfileGridView {
     var allPreviews: [ProfilePreview] {
         profileManager.previews
+    }
+
+    func sectionHeaderView() -> some View {
+        Text(Strings.Views.App.Folders.default)
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {

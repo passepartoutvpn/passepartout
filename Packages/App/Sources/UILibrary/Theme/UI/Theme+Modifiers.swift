@@ -254,8 +254,8 @@ extension View {
         modifier(ThemePlainButtonModifier(action: action))
     }
 
-    public func themeGridHeader(title: String?) -> some View {
-        modifier(ThemeGridSectionModifier(title: title))
+    public func themeGridHeader<Header>(@ViewBuilder header: () -> Header) -> some View where Header: View {
+        modifier(ThemeGridSectionModifier(header: header))
     }
 
     public func themeGridCell(isSelected: Bool) -> some View {
@@ -546,24 +546,23 @@ struct ThemePlainButtonModifier: ViewModifier {
     let action: () -> Void
 }
 
-struct ThemeGridSectionModifier: ViewModifier {
+struct ThemeGridSectionModifier<Header>: ViewModifier where Header: View {
 
     @EnvironmentObject
     private var theme: Theme
 
-    let title: String?
+    @ViewBuilder
+    let header: Header
 
     func body(content: Content) -> some View {
-        if let title {
-            Text(title)
-                .font(theme.gridHeaderStyle)
-                .fontWeight(theme.relevantWeight)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading)
-                .padding(.bottom, theme.gridHeaderBottom)
-        }
+        header
+            .font(theme.gridHeaderStyle)
+            .fontWeight(theme.relevantWeight)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading)
+            .padding(.bottom, theme.gridHeaderBottom)
+
         content
-            .padding(.bottom)
             .padding(.bottom)
     }
 }
