@@ -244,7 +244,7 @@ private extension IAPManager {
 // MARK: - Observation
 
 extension IAPManager {
-    public func observeObjects() {
+    public func observeObjects(withProducts: Bool) {
         Task {
             await fetchLevelIfNeeded()
             do {
@@ -258,8 +258,10 @@ extension IAPManager {
                     }
                     .store(in: &subscriptions)
 
-                let products = try await inAppHelper.fetchProducts()
-                pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
+                if withProducts {
+                    let products = try await inAppHelper.fetchProducts()
+                    pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
+                }
             } catch {
                 pp_log(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             }

@@ -101,7 +101,7 @@ private extension AppContext {
         try await profileManager.observeLocal()
 
         pp_log(.App.profiles, .info, "\tObserve in-app events...")
-        iapManager.observeObjects()
+        iapManager.observeObjects(withProducts: true)
 
         // defer load receipt
         Task {
