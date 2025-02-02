@@ -39,12 +39,6 @@ public enum AppUserLevel: Int, Sendable {
 
 extension AppUserLevel {
     public var isRestricted: Bool {
-        switch self {
-        case .undefined, .beta:
-            return true
-
-        default:
-            return false
-        }
+        self == .beta
     }
 }
