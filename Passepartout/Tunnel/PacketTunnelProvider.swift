@@ -99,7 +99,7 @@ private extension PacketTunnelProvider {
         Task {
             while true {
                 do {
-                    pp_log(.app, .info, "Verify profile")
+                    pp_log(.app, .info, "Verify profile, requires: \(profile.features)")
                     await context.iapManager.reloadReceipt()
                     try await context.iapManager.verify(profile)
 
