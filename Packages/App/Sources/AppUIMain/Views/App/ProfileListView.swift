@@ -45,6 +45,8 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
+    let isVerifying: Bool
+
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -59,15 +61,22 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                 headerView
                     .unanimated()
             }
-            Group {
+            Section {
                 ForEach(allPreviews, content: profileView)
                     .onDelete { offsets in
                         Task {
                             await profileManager.removeProfiles(at: offsets)
                         }
                     }
+            } header: {
+                HStack {
+                    Text(Strings.Views.App.Folders.default)
+                    if isVerifying {
+                        Spacer()
+                        Text(Strings.Views.App.verifyingPurchases)
+                    }
+                }
             }
-            .themeSection(header: Strings.Views.App.Folders.default)
         }
         .themeForm()
         .themeAnimation(on: profileManager.isReady, category: .profiles)
@@ -145,6 +154,7 @@ private extension ProfileListView {
     ProfileListView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
+        isVerifying: false,
         errorHandler: .default()
     )
     .withMockEnvironment()

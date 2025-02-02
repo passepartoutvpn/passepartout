@@ -216,6 +216,18 @@ extension View {
         }
     }
 
+    @ViewBuilder
+    public func themeEmpty<EmptyContent>(
+        if isEmpty: Bool,
+        @ViewBuilder emptyContent: @escaping () -> EmptyContent
+    ) -> some View where EmptyContent: View {
+        if !isEmpty {
+            self
+        } else {
+            emptyContent()
+        }
+    }
+
     public func themeProgress(if isProgressing: Bool) -> some View {
         modifier(ThemeProgressViewModifier(isProgressing: isProgressing) {
             EmptyView()

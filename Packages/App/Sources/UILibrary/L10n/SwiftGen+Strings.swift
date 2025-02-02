@@ -596,6 +596,8 @@ public enum Strings {
       }
     }
     public enum App {
+      /// Verifying purchases...
+      public static let verifyingPurchases = Strings.tr("Localizable", "views.app.verifying_purchases", fallback: "Verifying purchases...")
       public enum Folders {
         /// My profiles
         public static let `default` = Strings.tr("Localizable", "views.app.folders.default", fallback: "My profiles")

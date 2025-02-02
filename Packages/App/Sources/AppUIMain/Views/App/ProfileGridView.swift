@@ -39,6 +39,8 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
+    let isVerifying: Bool
+
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -93,7 +95,13 @@ private extension ProfileGridView {
     }
 
     func sectionHeaderView() -> some View {
-        Text(Strings.Views.App.Folders.default)
+        HStack {
+            Text(Strings.Views.App.Folders.default)
+            if isVerifying {
+                Spacer()
+                Text(Strings.Views.App.verifyingPurchases)
+            }
+        }
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {
@@ -152,6 +160,7 @@ private extension ProfileGridView {
     ProfileGridView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
+        isVerifying: false,
         errorHandler: .default()
     )
     .themeWindow(width: 600, height: 300)

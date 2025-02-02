@@ -39,6 +39,7 @@
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
+"views.app.verifying_purchases" = "Verifying purchases...";
 "views.app.installed_profile.none.name" = "No profile";
 "views.app.installed_profile.none.status" = "Tap list to connect";
 "views.app.profile.no_modules" = "No active modules";
