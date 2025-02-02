@@ -70,4 +70,18 @@ extension Dependencies {
 #endif
         }
     }
+
+    func iapLogger() -> LoggerProtocol {
+        IAPLogger()
+    }
+}
+
+private struct IAPLogger: LoggerProtocol {
+    func debug(_ msg: String) {
+        pp_log(.App.iap, .info, msg)
+    }
+
+    func warning(_ msg: String) {
+        pp_log(.App.iap, .error, msg)
+    }
 }
