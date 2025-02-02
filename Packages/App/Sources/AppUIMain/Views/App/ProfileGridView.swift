@@ -71,7 +71,9 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                                 }
                             }
                     }
-                    .themeGridHeader(header: sectionHeaderView)
+                    .themeGridHeader {
+                        VerificationView(isVerifying: isVerifying)
+                    }
                 }
                 .padding(.horizontal)
             }
@@ -92,16 +94,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 private extension ProfileGridView {
     var allPreviews: [ProfilePreview] {
         profileManager.previews
-    }
-
-    func sectionHeaderView() -> some View {
-        HStack {
-            Text(Strings.Views.App.Folders.default)
-            if isVerifying {
-                Spacer()
-                Text(Strings.Views.App.verifyingPurchases)
-            }
-        }
     }
 
     func headerView(scrollProxy: ScrollViewProxy) -> some View {

@@ -69,13 +69,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                         }
                     }
             } header: {
-                HStack {
-                    Text(Strings.Views.App.Folders.default)
-                    if isVerifying {
-                        Spacer()
-                        Text(Strings.Views.App.verifyingPurchases)
-                    }
-                }
+                VerificationView(isVerifying: isVerifying)
             }
         }
         .themeForm()
