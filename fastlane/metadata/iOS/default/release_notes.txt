@@ -1,5 +1,3 @@
-* Fix Ukranian translations (#1122)
-* Fix indefinite spinner when listing products (#1121)
-* Only apply cellular/Ethernet on-demand rules on devices that support the interface (#1120)
-* Fix misaligned reveal button in secure fields
-* iOS: Hide layout toggle on iPhone
+* Fix some German translations
+* Mention in paywall that all purchases support "Family Sharing" (#1138)
+* Fix logic of migrated "Routing" modules (#1136)
