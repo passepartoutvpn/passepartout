@@ -125,7 +125,11 @@ private extension PaywallView {
                     onError: onError
                 )
             }
-            .themeSection(header: Strings.Global.Nouns.products)
+            .themeSection(
+                header: Strings.Global.Nouns.products,
+                footer: Strings.Views.Paywall.Sections.Products.footer,
+                forcesFooter: true
+            )
         }
     }
 
