@@ -244,7 +244,7 @@ private extension IAPManager {
 // MARK: - Observation
 
 extension IAPManager {
-    public func observeObjects(withProducts: Bool) {
+    public func observeObjects(withProducts: Bool = true) {
         Task {
             await fetchLevelIfNeeded()
             do {
