@@ -33,7 +33,7 @@ struct VerificationView: View {
             Text(Strings.Views.App.Folders.default)
             if isVerifying {
                 Spacer()
-                Text(Strings.Views.App.verifyingPurchases)
+                Text(Strings.Views.Paywall.Alerts.Verifying.title.withTrailingDots)
             }
         }
     }
