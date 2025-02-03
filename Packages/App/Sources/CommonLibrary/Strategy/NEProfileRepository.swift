@@ -92,9 +92,9 @@ private extension NEProfileRepository {
         var decodingTime = 0.0
         let profiles = managers.values.compactMap {
             do {
-                let beginDate = Date()
+                let startDate = Date()
                 let profile = try repository.profile(from: $0)
-                let elapsed = -beginDate.timeIntervalSinceNow
+                let elapsed = -startDate.timeIntervalSinceNow
                 decodingTime += elapsed
                 return profile
             } catch {
