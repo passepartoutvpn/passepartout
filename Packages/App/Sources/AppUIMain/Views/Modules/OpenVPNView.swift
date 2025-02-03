@@ -117,7 +117,7 @@ private extension OpenVPNView {
     }
 
     var importButton: some View {
-        Button(Strings.Modules.General.Rows.importFromFile.withTrailingDots) {
+        Button(Strings.Modules.General.Rows.importFromFile.forMenu) {
             isImporting = true
         }
     }
