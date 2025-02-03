@@ -253,7 +253,7 @@ private extension Dependencies {
             return mockHelper.receiptReader
         }
         return FallbackReceiptReader(
-            main: StoreKitReceiptReader(),
+            main: StoreKitReceiptReader(logger: iapLogger()),
             beta: betaReceiptURL.map {
                 KvittoReceiptReader(url: $0)
             }

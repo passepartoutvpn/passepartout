@@ -43,19 +43,24 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        let environment = await dependencies.tunnelEnvironment()
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
                 decoder: dependencies.neProtocolCoder(),
                 registry: dependencies.registry,
-                environment: dependencies.tunnelEnvironment(),
+                environment: environment,
                 profileBlock: context.processor.willStart
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
-            try await checkEligibility(of: fwd.profile, environment: dependencies.tunnelEnvironment())
             try await fwd.startTunnel(options: options)
+
+            // #1070, do not wait for this to start the tunnel. if on-demand is
+            // enabled, networking will stall and StoreKit network calls may
+            // produce a deadlock
+            verifyEligibility(of: fwd.profile, environment: environment)
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
             PassepartoutConfiguration.shared.flushLog()
@@ -90,26 +95,24 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 // MARK: - Eligibility
 
 private extension PacketTunnelProvider {
-    func checkEligibility(of profile: Profile, environment: TunnelEnvironment) async throws {
-        do {
-            pp_log(.app, .info, "Verify profile")
-            await context.iapManager.reloadReceipt()
-            try await context.iapManager.verify(profile)
-        } catch {
-            let error = PassepartoutError(.App.ineligibleProfile)
-            environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-            pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
-            throw error
-        }
-
+    func verifyEligibility(of profile: Profile, environment: TunnelEnvironment) {
         Task {
-            let interval = Constants.shared.tunnel.eligibilityCheckInterval
-            pp_log(.app, .info, "Will verify profile again in \(interval) seconds...")
-            try await Task.sleep(interval: interval)
-            do {
-                try await checkEligibility(of: profile, environment: environment)
-            } catch {
-                cancelTunnelWithError(error)
+            while true {
+                do {
+                    pp_log(.app, .info, "Verify profile, requires: \(profile.features)")
+                    await context.iapManager.reloadReceipt()
+                    try await context.iapManager.verify(profile)
+
+                    let interval = Constants.shared.tunnel.eligibilityCheckInterval
+                    pp_log(.app, .info, "Will verify profile again in \(interval) seconds...")
+                    try await Task.sleep(interval: interval)
+                } catch {
+                    let error = PassepartoutError(.App.ineligibleProfile)
+                    environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
+                    pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
+                    cancelTunnelWithError(error)
+                    return
+                }
             }
         }
     }

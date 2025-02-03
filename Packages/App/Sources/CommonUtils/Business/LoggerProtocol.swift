@@ -1,8 +1,8 @@
 //
-//  AppUserLevel.swift
+//  LoggerProtocol.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/19/23.
+//  Created by Davide De Rosa on 2/1/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,20 +25,8 @@
 
 import Foundation
 
-public enum AppUserLevel: Int, Sendable {
-    case undefined = -1
+public protocol LoggerProtocol: Sendable {
+    func debug(_ msg: String)
 
-    case freemium = 0
-
-    case beta = 1
-
-    case fullV2 = 2 // without .appleTV
-
-    case fullV3 = 3
-}
-
-extension AppUserLevel {
-    public var isRestricted: Bool {
-        self == .beta
-    }
+    func warning(_ msg: String)
 }

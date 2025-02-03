@@ -67,7 +67,7 @@ private extension AddProfileMenu {
         Button {
             isImporting = true
         } label: {
-            ThemeImageLabel(Strings.Views.App.Toolbar.importProfile.withTrailingDots, .profileImport)
+            ThemeImageLabel(Strings.Views.App.Toolbar.importProfile.forMenu, .profileImport)
         }
     }
 
@@ -93,7 +93,7 @@ private extension AddProfileMenu {
 
     var migrateProfilesButton: some View {
         Button(action: onMigrateProfiles) {
-            ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.withTrailingDots, .profileMigrate)
+            ThemeImageLabel(Strings.Views.App.Toolbar.migrateProfiles.forMenu, .profileMigrate)
         }
     }
 }

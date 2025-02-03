@@ -596,6 +596,8 @@ public enum Strings {
       }
     }
     public enum App {
+      /// Verifying purchases...
+      public static let verifyingPurchases = Strings.tr("Localizable", "views.app.verifying_purchases", fallback: "Verifying purchases...")
       public enum Folders {
         /// My profiles
         public static let `default` = Strings.tr("Localizable", "views.app.folders.default", fallback: "My profiles")
@@ -748,6 +750,12 @@ public enum Strings {
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.restricted.message", fallback: "Some features are unavailable in this build.")
           /// Restricted
           public static let title = Strings.tr("Localizable", "views.paywall.alerts.restricted.title", fallback: "Restricted")
+        }
+        public enum Verifying {
+          /// Please wait while your purchases are being verified.
+          public static let message = Strings.tr("Localizable", "views.paywall.alerts.verifying.message", fallback: "Please wait while your purchases are being verified.")
+          /// Verifying
+          public static let title = Strings.tr("Localizable", "views.paywall.alerts.verifying.title", fallback: "Verifying")
         }
       }
       public enum Rows {

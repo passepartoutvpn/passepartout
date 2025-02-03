@@ -1,8 +1,8 @@
 //
-//  AppUserLevel.swift
+//  VerificationView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/19/23.
+//  Created by Davide De Rosa on 2/3/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,22 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AppUserLevel: Int, Sendable {
-    case undefined = -1
+struct VerificationView: View {
+    let isVerifying: Bool
 
-    case freemium = 0
-
-    case beta = 1
-
-    case fullV2 = 2 // without .appleTV
-
-    case fullV3 = 3
-}
-
-extension AppUserLevel {
-    public var isRestricted: Bool {
-        self == .beta
+    var body: some View {
+        HStack {
+            Text(Strings.Views.App.Folders.default)
+            if isVerifying {
+                Spacer()
+                Text(Strings.Views.Paywall.Alerts.Verifying.title.withTrailingDots)
+            }
+        }
     }
 }

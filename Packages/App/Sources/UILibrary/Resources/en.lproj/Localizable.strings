@@ -39,6 +39,7 @@
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
 
+"views.app.verifying_purchases" = "Verifying purchases...";
 "views.app.installed_profile.none.name" = "No profile";
 "views.app.installed_profile.none.status" = "Tap list to connect";
 "views.app.profile.no_modules" = "No active modules";
@@ -85,6 +86,8 @@
 "views.paywall.rows.restore_purchases" = "Restore purchases";
 "views.paywall.alerts.confirmation.title" = "Purchase required";
 "views.paywall.alerts.confirmation.message" = "This profile requires paid features to work.";
+"views.paywall.alerts.verifying.title" = "Verifying";
+"views.paywall.alerts.verifying.message" = "Please wait while your purchases are being verified.";
 "views.paywall.alerts.restricted.title" = "Restricted";
 "views.paywall.alerts.restricted.message" = "Some features are unavailable in this build.";
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";

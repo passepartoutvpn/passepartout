@@ -27,33 +27,46 @@ import Foundation
 import StoreKit
 
 public final class StoreKitReceiptReader: InAppReceiptReader, Sendable {
-    public init() {
+    private let logger: LoggerProtocol
+
+    public init(logger: LoggerProtocol) {
+        self.logger = logger
     }
 
     public func receipt() async -> InAppReceipt? {
+        var startDate: Date
+        var elapsed: TimeInterval
+
+        startDate = Date()
+        logger.debug("Start fetching original build number...")
         let originalBuildNumber: Int?
         do {
             switch try await AppTransaction.shared {
             case .verified(let tx):
                 originalBuildNumber = Int(tx.originalAppVersion)
-
             default:
                 originalBuildNumber = nil
             }
         } catch {
             originalBuildNumber = nil
         }
+        elapsed = -startDate.timeIntervalSinceNow
+        logger.debug("Fetched original build number: \(elapsed)")
 
+        startDate = Date()
+        logger.debug("Start fetching transactions...")
         var transactions: [Transaction] = []
         for await entitlement in Transaction.currentEntitlements {
             switch entitlement {
             case .verified(let tx):
                 transactions.append(tx)
-
             default:
                 break
             }
         }
+        elapsed = -startDate.timeIntervalSinceNow
+        logger.debug("Fetched transactions: \(elapsed)")
+
         let purchaseReceipts = transactions
             .compactMap {
                 InAppReceipt.PurchaseReceipt(

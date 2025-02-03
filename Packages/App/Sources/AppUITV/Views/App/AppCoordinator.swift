@@ -150,6 +150,13 @@ extension AppCoordinator {
     }
 
     public func onPurchaseRequired(_ features: Set<AppFeature>) {
+        guard !iapManager.isLoadingReceipt else {
+            errorHandler.handle(
+                title: Strings.Views.Paywall.Alerts.Verifying.title,
+                message: Strings.Views.Paywall.Alerts.Verifying.message
+            )
+            return
+        }
         pp_log(.app, .info, "Present paywall for features: \(features)")
         setLater(.init(features, needsConfirmation: true)) {
             paywallReason = $0

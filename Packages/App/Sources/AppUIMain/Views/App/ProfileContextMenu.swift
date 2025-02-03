@@ -146,7 +146,7 @@ private extension ProfileContextMenu {
 private extension Profile {
     var providerServerSelectionTitle: String {
         (attributes.isAvailableForTV == true ?
-         Strings.Views.Providers.selectEntity : Strings.Views.App.ProfileContext.connectTo).withTrailingDots
+         Strings.Views.Providers.selectEntity : Strings.Views.App.ProfileContext.connectTo).forMenu
     }
 }
 

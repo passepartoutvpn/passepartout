@@ -28,12 +28,12 @@ import Foundation
 import PassepartoutKit
 
 extension Dependencies {
-    func coreDataLogger() -> CoreDataPersistentStoreLogger {
-        DefaultCoreDataPersistentStoreLogger()
+    func coreDataLogger() -> LoggerProtocol {
+        CoreDataPersistentStoreLogger()
     }
 }
 
-private struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+private struct CoreDataPersistentStoreLogger: LoggerProtocol {
     func debug(_ msg: String) {
         pp_log(.app, .info, msg)
     }

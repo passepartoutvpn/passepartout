@@ -51,6 +51,7 @@ public final class IAPManager: ObservableObject {
     @Published
     public private(set) var eligibleFeatures: Set<AppFeature>
 
+    @Published
     private var pendingReceiptTask: Task<Void, Never>?
 
     private var subscriptions: Set<AnyCancellable>
@@ -79,6 +80,10 @@ public final class IAPManager: ObservableObject {
 // MARK: - Actions
 
 extension IAPManager {
+    public var isLoadingReceipt: Bool {
+        pendingReceiptTask != nil
+    }
+
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
         do {
             let inAppProducts = try await inAppHelper.fetchProducts()
@@ -239,7 +244,7 @@ private extension IAPManager {
 // MARK: - Observation
 
 extension IAPManager {
-    public func observeObjects() {
+    public func observeObjects(withProducts: Bool = true) {
         Task {
             await fetchLevelIfNeeded()
             do {
@@ -253,8 +258,10 @@ extension IAPManager {
                     }
                     .store(in: &subscriptions)
 
-                let products = try await inAppHelper.fetchProducts()
-                pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
+                if withProducts {
+                    let products = try await inAppHelper.fetchProducts()
+                    pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
+                }
             } catch {
                 pp_log(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             }

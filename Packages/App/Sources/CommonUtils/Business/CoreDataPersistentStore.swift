@@ -28,19 +28,13 @@ import Combine
 import CoreData
 import Foundation
 
-public protocol CoreDataPersistentStoreLogger: Sendable {
-    func debug(_ msg: String)
-
-    func warning(_ msg: String)
-}
-
 public final class CoreDataPersistentStore: Sendable {
-    private let logger: CoreDataPersistentStoreLogger?
+    private let logger: LoggerProtocol?
 
     private let container: NSPersistentContainer
 
     public convenience init(
-        logger: CoreDataPersistentStoreLogger? = nil,
+        logger: LoggerProtocol? = nil,
         containerName: String,
         baseURL: URL? = nil,
         model: NSManagedObjectModel,
@@ -68,7 +62,7 @@ public final class CoreDataPersistentStore: Sendable {
     }
 
     private init(
-        logger: CoreDataPersistentStoreLogger?,
+        logger: LoggerProtocol?,
         container: NSPersistentContainer,
         cloudKitIdentifier: String?,
         author: String?

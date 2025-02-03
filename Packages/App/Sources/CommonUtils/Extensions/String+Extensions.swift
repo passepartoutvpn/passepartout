@@ -30,12 +30,16 @@ extension String {
         !isEmpty ? self : nil
     }
 
-    public var withTrailingDots: String {
+    public var forMenu: String {
 #if os(macOS)
-        "\(self)..."
+        withTrailingDots
 #else
         self
 #endif
+    }
+
+    public var withTrailingDots: String {
+        "\(self)..."
     }
 }
 

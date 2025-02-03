@@ -29,6 +29,10 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProfileContainerView: View, Routable {
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -71,6 +75,7 @@ private extension ProfileContainerView {
             ProfileListView(
                 profileManager: profileManager,
                 tunnel: tunnel,
+                isVerifying: isVerifying,
                 errorHandler: errorHandler,
                 flow: flow
             )
@@ -79,10 +84,15 @@ private extension ProfileContainerView {
             ProfileGridView(
                 profileManager: profileManager,
                 tunnel: tunnel,
+                isVerifying: isVerifying,
                 errorHandler: errorHandler,
                 flow: flow
             )
         }
+    }
+
+    var isVerifying: Bool {
+        iapManager.isLoadingReceipt
     }
 }
 
@@ -99,9 +109,8 @@ private struct ContainerModifier: ViewModifier {
     func body(content: Content) -> some View {
         debugChanges()
         return content
-            .themeProgress(
-                if: !profileManager.isReady,
-                isEmpty: !profileManager.hasProfiles,
+            .themeEmpty(
+                if: !profileManager.hasProfiles,
                 emptyContent: emptyView
             )
             .searchable(text: $search)
