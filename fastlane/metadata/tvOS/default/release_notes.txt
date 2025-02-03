@@ -1,3 +1,4 @@
 * Fix some German translations
+* WireGuard: Fix issues with split DNS configurations
 * Mention in paywall that all purchases support "Family Sharing" (#1138)
-* Fix logic of migrated "Routing" modules (#1136)
+* WireGuard: Fix logic of migrated "Routing" modules (#1136)
