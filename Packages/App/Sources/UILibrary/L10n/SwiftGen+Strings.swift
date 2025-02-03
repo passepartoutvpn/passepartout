@@ -771,6 +771,10 @@ public enum Strings {
           /// Full version
           public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "Full version")
         }
+        public enum Products {
+          /// All purchases support Family Sharing.
+          public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
+        }
         public enum RequiredFeatures {
           /// Required features
           public static let header = Strings.tr("Localizable", "views.paywall.sections.required_features.header", fallback: "Required features")

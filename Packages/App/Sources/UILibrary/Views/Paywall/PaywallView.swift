@@ -125,7 +125,11 @@ private extension PaywallView {
                     onError: onError
                 )
             }
-            .themeSection(header: Strings.Global.Nouns.products)
+            .themeSection(
+                header: Strings.Global.Nouns.products,
+                footer: Strings.Views.Paywall.Sections.Products.footer,
+                forcesFooter: true
+            )
         }
     }
 
@@ -143,16 +147,18 @@ private extension PaywallView {
                     )
                 }
             }
-            .themeSection(header: Strings.Views.Paywall.Sections.FullProducts.header)
+            .themeSection(
+                header: Strings.Views.Paywall.Sections.FullProducts.header,
+                footer: Strings.Views.Paywall.Sections.Products.footer,
+                forcesFooter: true
+            )
         }
     }
 
     var linksView: some View {
-        fullIAPs.nilIfEmpty.map { _ in
-            Section {
-                Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
-                Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
-            }
+        Section {
+            Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
+            Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
         }
     }
 
