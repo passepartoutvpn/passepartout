@@ -222,6 +222,7 @@
 "views.app.toolbar.new_profile.empty" = "空配置文件";
 "views.app.toolbar.new_profile.provider" = "提供商";
 "views.app.tv.header" = "在您的 iOS 或 macOS 设备上打开 %@，并启用配置文件的 \"%@\" 开关，使其显示在此处。";
+"views.app.verifying_purchases" = "正在验证购买...";
 "views.app_menu.items.quit" = "退出 %@";
 "views.diagnostics.alerts.report_issue.email" = "设备未配置为发送电子邮件。";
 "views.diagnostics.openvpn.rows.server_configuration" = "服务器配置";
@@ -247,6 +248,8 @@
 "views.paywall.alerts.pending.message" = "购买正在等待外部确认。功能将在获得批准后被授予。";
 "views.paywall.alerts.restricted.message" = "某些功能在此版本中不可用。";
 "views.paywall.alerts.restricted.title" = "受限";
+"views.paywall.alerts.verifying.message" = "请稍候，您的购买正在验证中。";
+"views.paywall.alerts.verifying.title" = "验证";
 "views.paywall.rows.restore_purchases" = "恢复购买";
 "views.paywall.sections.all_features.header" = "完整版本包括";
 "views.paywall.sections.full_products.header" = "完整版本";

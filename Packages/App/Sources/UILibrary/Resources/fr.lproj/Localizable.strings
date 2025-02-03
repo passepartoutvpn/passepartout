@@ -222,6 +222,7 @@
 "views.app.toolbar.new_profile.empty" = "Profil vide";
 "views.app.toolbar.new_profile.provider" = "Fournisseur";
 "views.app.tv.header" = "Ouvrez %@ sur votre appareil iOS ou macOS et activez l'interrupteur \"%@\" d'un profil pour le faire apparaître ici.";
+"views.app.verifying_purchases" = "Vérification des achats...";
 "views.app_menu.items.quit" = "Quitter %@";
 "views.diagnostics.alerts.report_issue.email" = "L'appareil n'est pas configuré pour envoyer des e-mails.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Configuration du serveur";
@@ -247,6 +248,8 @@
 "views.paywall.alerts.pending.message" = "L'achat est en attente de confirmation externe. La fonctionnalité sera créditée une fois approuvée.";
 "views.paywall.alerts.restricted.message" = "Certaines fonctionnalités ne sont pas disponibles dans cette version.";
 "views.paywall.alerts.restricted.title" = "Restreint";
+"views.paywall.alerts.verifying.message" = "Veuillez patienter pendant la vérification de vos achats.";
+"views.paywall.alerts.verifying.title" = "Vérification";
 "views.paywall.rows.restore_purchases" = "Restaurer les achats";
 "views.paywall.sections.all_features.header" = "La version complète inclut";
 "views.paywall.sections.full_products.header" = "Version complète";

@@ -222,6 +222,7 @@
 "views.app.toolbar.new_profile.empty" = "Пустой профиль";
 "views.app.toolbar.new_profile.provider" = "Поставщик";
 "views.app.tv.header" = "Откройте %@ на вашем устройстве iOS или macOS и включите переключатель \"%@\" профиля, чтобы он отобразился здесь.";
+"views.app.verifying_purchases" = "Проверка покупок...";
 "views.app_menu.items.quit" = "Выйти из %@";
 "views.diagnostics.alerts.report_issue.email" = "Устройство не настроено для отправки электронной почты.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Конфигурация сервера";
@@ -247,6 +248,8 @@
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
 "views.paywall.alerts.restricted.message" = "Некоторые функции недоступны в этой версии.";
 "views.paywall.alerts.restricted.title" = "Ограничено";
+"views.paywall.alerts.verifying.message" = "Пожалуйста, подождите, пока проверяются ваши покупки.";
+"views.paywall.alerts.verifying.title" = "Проверка";
 "views.paywall.rows.restore_purchases" = "Восстановить покупки";
 "views.paywall.sections.all_features.header" = "Полная версия включает";
 "views.paywall.sections.full_products.header" = "Полная версия";

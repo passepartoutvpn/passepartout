@@ -222,6 +222,7 @@
 "views.app.toolbar.new_profile.empty" = "Κενό προφίλ";
 "views.app.toolbar.new_profile.provider" = "Πάροχος";
 "views.app.tv.header" = "Ανοίξτε %@ στη συσκευή σας iOS ή macOS και ενεργοποιήστε το διακόπτη \"%@\" ενός προφίλ για να εμφανιστεί εδώ.";
+"views.app.verifying_purchases" = "Επαλήθευση αγορών...";
 "views.app_menu.items.quit" = "Κλείσιμο %@";
 "views.diagnostics.alerts.report_issue.email" = "Η συσκευή δεν είναι ρυθμισμένη για αποστολή email.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Διαμόρφωση διακομιστή";
@@ -247,6 +248,8 @@
 "views.paywall.alerts.pending.message" = "Η αγορά εκκρεμεί για εξωτερική επιβεβαίωση. Η λειτουργία θα πιστωθεί μετά την έγκριση.";
 "views.paywall.alerts.restricted.message" = "Ορισμένες λειτουργίες δεν είναι διαθέσιμες σε αυτήν την έκδοση.";
 "views.paywall.alerts.restricted.title" = "Περιορισμένο";
+"views.paywall.alerts.verifying.message" = "Παρακαλώ περιμένετε ενώ οι αγορές σας επαληθεύονται.";
+"views.paywall.alerts.verifying.title" = "Επαλήθευση";
 "views.paywall.rows.restore_purchases" = "Επαναφορά αγορών";
 "views.paywall.sections.all_features.header" = "Η πλήρης έκδοση περιλαμβάνει";
 "views.paywall.sections.full_products.header" = "Πλήρης έκδοση";

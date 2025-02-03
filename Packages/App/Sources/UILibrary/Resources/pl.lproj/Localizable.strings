@@ -222,6 +222,7 @@
 "views.app.toolbar.new_profile.empty" = "Pusty profil";
 "views.app.toolbar.new_profile.provider" = "Dostawca";
 "views.app.tv.header" = "Otwórz %@ na swoim urządzeniu iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj.";
+"views.app.verifying_purchases" = "Weryfikacja zakupów...";
 "views.app_menu.items.quit" = "Zamknij %@";
 "views.diagnostics.alerts.report_issue.email" = "Urządzenie nie jest skonfigurowane do wysyłania wiadomości e-mail.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Konfiguracja serwera";
@@ -247,6 +248,8 @@
 "views.paywall.alerts.pending.message" = "Zakup oczekuje na zewnętrzne potwierdzenie. Funkcja zostanie przypisana po zatwierdzeniu.";
 "views.paywall.alerts.restricted.message" = "Niektóre funkcje są niedostępne w tej wersji.";
 "views.paywall.alerts.restricted.title" = "Ograniczone";
+"views.paywall.alerts.verifying.message" = "Proszę czekać, aż zakupy zostaną zweryfikowane.";
+"views.paywall.alerts.verifying.title" = "Weryfikacja";
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
 "views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
 "views.paywall.sections.full_products.header" = "Pełna wersja";
