@@ -127,27 +127,9 @@ extension MapperV2 {
         if v2.proxy.choice == .manual {
             modules.append(try toHTTPProxyModule(v2.proxy))
         }
-
-        // TODO: ###, migration to "Routing" module is prone to regressions
-        //
-        // skip the migration of "Default gateway" and "MTU" settings to a
-        // "Routing" because it may be hard to find out until the UX of v3
-        // is on point. after all, the vast majority of users used "Network
-        // settings" to override DNS, not "Default gateway", as this setting
-        // almost always comes from the .ovpn/.conf or the OpenVPN server
-        //
-        // making routing opt-in will prevent reports of migrated profiles
-        // that introduce routing issues. it's much easier to migrate to a
-        // vanilla VPN profile and add proper routing settings as needed, than
-        // a full profile prone to break because the migration wasn't 100%
-        // correct and remove the offending settings. also, without a way
-        // to fully inspect what went wrong in the v2 -> v3 mapping. unit
-        // testing would only get to a point
-        //
-//        if v2.gateway.choice == .manual || v2.mtu.choice == .manual {
-//            modules.append(try toIPModule(v2.gateway, v2MTU: v2.mtu))
-//        }
-
+        if v2.gateway.choice == .manual || v2.mtu.choice == .manual {
+            modules.append(try toIPModule(v2.gateway, v2MTU: v2.mtu))
+        }
         return modules
     }
 
