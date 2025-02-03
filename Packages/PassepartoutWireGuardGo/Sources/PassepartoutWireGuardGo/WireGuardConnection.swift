@@ -70,29 +70,8 @@ public final class WireGuardConnection: Connection {
             fatalError("No WireGuard configuration defined?")
         }
 
-        // tweak AllowedIPs from included routes
-        var tweakedBuilder = configuration.builder()
-        let ipModules = parameters.controller.profile.activeModules
-            .compactMap {
-                $0 as? IPModule
-            }
-
-        ipModules.forEach { ipModule in
-            tweakedBuilder.peers = configuration.peers
-                .map { oldPeer in
-                    var peer = oldPeer.builder()
-                    ipModule.ipv4?.includedRoutes.forEach { route in
-                        peer.allowedIPs.append(route.destination?.rawValue ?? "0.0.0.0/0")
-                    }
-                    ipModule.ipv6?.includedRoutes.forEach { route in
-                        peer.allowedIPs.append(route.destination?.rawValue ?? "::/0")
-                    }
-                    return peer
-                }
-        }
-        let tweakedConfiguration = try tweakedBuilder.tryBuild()
+        let tweakedConfiguration = try configuration.withModules(from: parameters.controller.profile)
         tunnelConfiguration = try tweakedConfiguration.toWireGuardConfiguration()
-//        tunnelConfiguration = try configuration.toWireGuardConfiguration()
 
         let interval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
         dataCountTimer = Timer.publish(every: interval, on: .main, in: .common)
@@ -278,6 +257,31 @@ private extension String {
 }
 
 // MARK: - Helpers
+
+private extension WireGuard.Configuration {
+    func withModules(from profile: Profile) throws -> Self {
+        var newBuilder = builder()
+        let ipModules = profile.activeModules
+            .compactMap {
+                $0 as? IPModule
+            }
+
+        ipModules.forEach { ipModule in
+            newBuilder.peers = peers
+                .map { oldPeer in
+                    var peer = oldPeer.builder()
+                    ipModule.ipv4?.includedRoutes.forEach { route in
+                        peer.allowedIPs.append(route.destination?.rawValue ?? "0.0.0.0/0")
+                    }
+                    ipModule.ipv6?.includedRoutes.forEach { route in
+                        peer.allowedIPs.append(route.destination?.rawValue ?? "::/0")
+                    }
+                    return peer
+                }
+        }
+        return try newBuilder.tryBuild()
+    }
+}
 
 private extension WireGuardLogLevel {
     var osLogLevel: OSLogType {
