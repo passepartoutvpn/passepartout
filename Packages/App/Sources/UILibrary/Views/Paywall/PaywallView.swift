@@ -217,6 +217,10 @@ private extension PaywallView {
         AppProduct.Full.OneTime.allFeatures.features
     }
 
+    var hasProducts: Bool {
+        !featureIAPs.isEmpty || !fullIAPs.isEmpty
+    }
+
     func fetchAvailableProducts() async {
         isFetchingProducts = true
         defer {
@@ -246,7 +250,7 @@ private extension PaywallView {
             pp_log(.App.iap, .info, "Suggested products: \(suggestedProducts)")
             pp_log(.App.iap, .info, "\tFeatures: \(featureIAPs)")
             pp_log(.App.iap, .info, "\tFull version: \(fullIAPs)")
-            guard !(featureIAPs + fullIAPs).isEmpty else {
+            guard hasProducts else {
                 throw AppError.emptyProducts
             }
 
