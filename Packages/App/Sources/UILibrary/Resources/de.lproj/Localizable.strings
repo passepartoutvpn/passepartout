@@ -235,7 +235,7 @@
 "views.diagnostics.sections.tunnel" = "Tunnel-Protokolle";
 "views.diagnostics.title" = "Diagnose";
 "views.donate.alerts.thank_you.message" = "Das bedeutet mir viel, und ich hoffe wirklich, dass du die App weiterhin nutzt und bewirbst.";
-"views.donate.sections.main.footer" = "Wenn du meine Arbeit schätzen möchtest, hier sind ein paar Beträge, die du sofort spenden kannst. Du wirst nur einmal pro Spende berechnet, und du kannst mehrere Spenden machen.";
+"views.donate.sections.main.footer" = "Wenn du meine Arbeit schätzt, sind hier ein paar Beiträge, die du sofort spenden kannst. Du wirst nur einmal pro Spende berechnet und du kannst mehrere Spenden machen.";
 "views.donate.title" = "Spende machen";
 "views.migration.alerts.delete.message" = "Möchtest du diese Profile verwerfen? Du wirst sie später nicht wiederherstellen können.\n\n%@";
 "views.migration.items.discard" = "Verwerfen";
@@ -286,7 +286,7 @@
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";
 "views.ui.purchase_required.restricted.help" = "Funktion eingeschränkt";
-"views.version.extra" = "%@ ist ein Projekt, das von %@ gepflegt wird.\n\nDer Quellcode ist öffentlich auf GitHub unter der GPLv3-Lizenz verfügbar, du findest die Links auf der Startseite.";
+"views.version.extra" = "%@ ist ein Projekt, das von %@ gepflegt wird.\n\nDer Quellcode ist öffentlich auf GitHub unter der GPLv3-Lizenz verfügbar. Du findest die Links auf der Startseite.";
 "views.vpn.category.any" = "Alle Kategorien";
 "views.vpn.no_servers" = "Keine Server";
 "views.vpn.preset" = "Voreinstellung";
