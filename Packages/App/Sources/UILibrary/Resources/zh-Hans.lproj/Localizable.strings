@@ -253,6 +253,7 @@
 "views.paywall.rows.restore_purchases" = "恢复购买";
 "views.paywall.sections.all_features.header" = "完整版本包括";
 "views.paywall.sections.full_products.header" = "完整版本";
+"views.paywall.sections.products.footer" = "所有购买均支持“家人共享”。";
 "views.paywall.sections.required_features.header" = "必需功能";
 "views.paywall.sections.restore.footer" = "如果您过去购买过此应用或功能，可以恢复您的购买记录。";
 "views.paywall.sections.restore.header" = "恢复";

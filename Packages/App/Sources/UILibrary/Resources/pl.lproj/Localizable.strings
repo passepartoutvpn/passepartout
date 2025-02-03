@@ -253,6 +253,7 @@
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
 "views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
 "views.paywall.sections.full_products.header" = "Pełna wersja";
+"views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej kupiłeś tę aplikację lub funkcję, możesz przywrócić swoje zakupy.";
 "views.paywall.sections.restore.header" = "Przywróć";

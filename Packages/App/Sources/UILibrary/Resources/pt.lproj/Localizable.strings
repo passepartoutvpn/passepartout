@@ -253,6 +253,7 @@
 "views.paywall.rows.restore_purchases" = "Restaurar compras";
 "views.paywall.sections.all_features.header" = "A versão completa inclui";
 "views.paywall.sections.full_products.header" = "Versão completa";
+"views.paywall.sections.products.footer" = "Todas as compras são compatíveis com Compartilhamento Familiar.";
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você comprou este app ou recurso no passado, pode restaurar suas compras.";
 "views.paywall.sections.restore.header" = "Restaurar";
