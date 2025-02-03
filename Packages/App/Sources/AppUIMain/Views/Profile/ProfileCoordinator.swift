@@ -138,6 +138,13 @@ private extension ProfileCoordinator {
         do {
             try iapManager.verify(savedProfile, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
+            guard !iapManager.isLoadingReceipt else {
+                errorHandler.handle(
+                    title: Strings.Views.Paywall.Alerts.Verifying.title,
+                    message: Strings.Views.Paywall.Alerts.Verifying.message
+                )
+                return
+            }
             paywallReason = .init(requiredFeatures, needsConfirmation: true)
             return
         }
@@ -149,6 +156,13 @@ private extension ProfileCoordinator {
         do {
             try iapManager.verify(profileEditor.activeModules, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
+            guard !iapManager.isLoadingReceipt else {
+                errorHandler.handle(
+                    title: Strings.Views.Paywall.Alerts.Verifying.title,
+                    message: Strings.Views.Paywall.Alerts.Verifying.message
+                )
+                return
+            }
             paywallReason = .init(requiredFeatures)
             return
         }
