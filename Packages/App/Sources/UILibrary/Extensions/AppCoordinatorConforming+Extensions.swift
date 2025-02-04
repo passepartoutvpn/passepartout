@@ -41,8 +41,10 @@ extension AppCoordinatorConforming {
                 }
             }
         } catch AppError.interactiveLogin {
-            onInteractiveLogin(profile) {
-                await onConnect($0, force: true, verify: verify)
+            onInteractiveLogin(profile) { newProfile in
+                Task {
+                    await onConnect(newProfile, force: true, verify: verify)
+                }
             }
         } catch let ppError as PassepartoutError {
             switch ppError.code {
