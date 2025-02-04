@@ -86,7 +86,7 @@ extension IAPManager {
 
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
         do {
-            let inAppProducts = try await inAppHelper.fetchProducts()
+            let inAppProducts = try await inAppHelper.fetchProducts(timeout: Constants.shared.iap.productsTimeoutInterval)
             return products.compactMap {
                 inAppProducts[$0]
             }
@@ -259,7 +259,7 @@ extension IAPManager {
                     .store(in: &subscriptions)
 
                 if withProducts {
-                    let products = try await inAppHelper.fetchProducts()
+                    let products = try await inAppHelper.fetchProducts(timeout: Constants.shared.iap.productsTimeoutInterval)
                     pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
                 }
             } catch {
