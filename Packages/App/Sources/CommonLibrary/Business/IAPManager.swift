@@ -267,10 +267,8 @@ extension IAPManager {
             }
         }
     }
-}
 
-private extension IAPManager {
-    func fetchLevelIfNeeded() async {
+    public func fetchLevelIfNeeded() async {
         guard userLevel == .undefined else {
             return
         }

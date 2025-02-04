@@ -176,10 +176,13 @@ private extension ExtendedTunnel {
                 guard let self else {
                     return
                 }
-                guard tunnel.status == .active else {
-                    return
+                if let lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode),
+                    lastErrorCode != self.lastErrorCode {
+                    self.lastErrorCode = lastErrorCode
                 }
-                dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
+                if tunnel.status == .active {
+                    dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
+                }
             }
             .store(in: &subscriptions)
     }
