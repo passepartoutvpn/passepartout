@@ -43,7 +43,21 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        pp_log(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+
         let environment = await dependencies.tunnelEnvironment()
+
+        // check hold flag
+        if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
+            pp_log(.app, .info, "Tunnel is on hold")
+            guard options?[ExtendedTunnel.isManualKey] == true as NSNumber else {
+                pp_log(.app, .error, "Tunnel was started non-interactively, hang here")
+                return
+            }
+            pp_log(.app, .info, "Tunnel was started interactively, clear hold flag")
+            environment.removeEnvironmentValue(forKey: TunnelEnvironmentKeys.holdFlag)
+        }
+
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
@@ -119,6 +133,7 @@ private extension PacketTunnelProvider {
                 pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 
                 // prevent on-demand reconnection
+                environment.setEnvironmentValue(true, forKey: TunnelEnvironmentKeys.holdFlag)
                 await fwd?.holdTunnel()
                 return
             }
@@ -127,4 +142,8 @@ private extension PacketTunnelProvider {
             try? await Task.sleep(interval: interval)
         }
     }
+}
+
+private extension TunnelEnvironmentKeys {
+    static let holdFlag = TunnelEnvironmentKey<Bool>("Tunnel.onHold")
 }
