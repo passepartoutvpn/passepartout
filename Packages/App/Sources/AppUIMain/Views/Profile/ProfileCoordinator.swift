@@ -153,22 +153,8 @@ private extension ProfileCoordinator {
         onDismiss()
     }
 
-    // restricted: verify before saving
+    // restricted: skip verification
     func onCommitEditingRestricted() async throws {
-        do {
-            try iapManager.verify(profileEditor.activeModules, extra: profileEditor.extraFeatures)
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
-            guard !iapManager.isLoadingReceipt else {
-                let V = Strings.Views.Paywall.Alerts.Verification.self
-                errorHandler.handle(
-                    title: Strings.Views.Paywall.Alerts.Confirmation.title,
-                    message: [V.edit, V.boot].joined(separator: " ")
-                )
-                return
-            }
-            paywallReason = .init(requiredFeatures)
-            return
-        }
         let profileToSave = try profileEditor.build()
         try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         onDismiss()
