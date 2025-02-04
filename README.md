@@ -110,7 +110,7 @@ The app is mostly translated with [ChatGPT][credits-chatgpt], but these are the 
 - Dutch: Norbert de Vreede - [@paxpacis](https://github.com/paxpacis)
 - English: Davide De Rosa (author)
 - French: Julien Laniel - [@linkjul](https://github.com/linkjul)
-- German: Christian Lederer, Theodor Tietze
+- German: Christian Lederer, Philipp Reynders, Theodor Tietze
 - Greek: Konstantinos Koukoulakis
 - Italian: Davide De Rosa (author)
 - Polish: Piotr Książek
