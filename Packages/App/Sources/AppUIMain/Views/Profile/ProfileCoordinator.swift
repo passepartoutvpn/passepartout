@@ -139,13 +139,18 @@ private extension ProfileCoordinator {
             try iapManager.verify(savedProfile, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
+                let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
-                    title: Strings.Views.Paywall.Alerts.Verifying.title,
-                    message: Strings.Views.Paywall.Alerts.Verifying.message
+                    title: Strings.Views.Paywall.Alerts.Confirmation.title,
+                    message: [V.edit, V.boot].joined(separator: " ")
                 )
                 return
             }
-            paywallReason = .init(requiredFeatures, needsConfirmation: true)
+            paywallReason = .init(
+                requiredFeatures,
+                needsConfirmation: true,
+                forConnecting: false
+            )
             return
         }
         onDismiss()
@@ -157,9 +162,10 @@ private extension ProfileCoordinator {
             try iapManager.verify(profileEditor.activeModules, extra: profileEditor.extraFeatures)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
+                let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
-                    title: Strings.Views.Paywall.Alerts.Verifying.title,
-                    message: Strings.Views.Paywall.Alerts.Verifying.message
+                    title: Strings.Views.Paywall.Alerts.Confirmation.title,
+                    message: [V.edit, V.boot].joined(separator: " ")
                 )
                 return
             }

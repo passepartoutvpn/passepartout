@@ -38,6 +38,8 @@ public struct PaywallModifier: ViewModifier {
 
     private let okAction: (() -> Void)?
 
+    private let onCancel: (() -> Void)?
+
     @State
     private var isConfirming = false
 
@@ -50,11 +52,13 @@ public struct PaywallModifier: ViewModifier {
     public init(
         reason: Binding<PaywallReason?>,
         okTitle: String? = nil,
-        okAction: (() -> Void)? = nil
+        okAction: (() -> Void)? = nil,
+        onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
         self.okTitle = okTitle
         self.okAction = okAction
+        self.onCancel = onCancel
     }
 
     public func body(content: Content) -> some View {
@@ -104,27 +108,9 @@ public struct PaywallModifier: ViewModifier {
 }
 
 private extension PaywallModifier {
-    var ineligibleFeatures: [String] {
-        guard let reason else {
-            return []
-        }
-        return iapManager
-            .excludingEligible(from: reason.requiredFeatures)
-            .map(\.localizedDescription)
-            .sorted()
-    }
-
     func alertMessage(startingWith header: String, features: [String]) -> String {
-        header + "\n\n" + features
-            .joined(separator: "\n")
-    }
-}
+        header + "\n\n" + features.joined(separator: "\n")
 
-private extension IAPManager {
-    func excludingEligible(from features: Set<AppFeature>) -> Set<AppFeature> {
-        features.filter {
-            !isEligible(for: $0)
-        }
     }
 }
 
@@ -146,6 +132,7 @@ private extension PaywallModifier {
         }
         Button(Strings.Global.Actions.cancel, role: .cancel) {
             reason = nil
+            onCancel?()
         }
     }
 
@@ -154,8 +141,13 @@ private extension PaywallModifier {
     }
 
     var confirmationMessageString: String {
-        alertMessage(
-            startingWith: Strings.Views.Paywall.Alerts.Confirmation.message,
+        let V = Strings.Views.Paywall.Alerts.Confirmation.self
+        var messages = [V.message]
+        if reason?.forConnecting == true {
+            messages.append(V.Message.connect(limitedMinutes))
+        }
+        return alertMessage(
+            startingWith: messages.joined(separator: " "),
             features: ineligibleFeatures
         )
     }
@@ -166,7 +158,7 @@ private extension PaywallModifier {
 private extension PaywallModifier {
     func restrictedActions() -> some View {
         Button(Strings.Global.Nouns.ok) {
-            //
+            onCancel?()
         }
     }
 
@@ -175,8 +167,13 @@ private extension PaywallModifier {
     }
 
     var restrictedMessageString: String {
-        alertMessage(
-            startingWith: Strings.Views.Paywall.Alerts.Restricted.message,
+        let V = Strings.Views.Paywall.Alerts.self
+        var messages = [V.Restricted.message]
+        if reason?.forConnecting == true {
+            messages.append(V.Confirmation.Message.connect(limitedMinutes))
+        }
+        return alertMessage(
+            startingWith: messages.joined(separator: " "),
             features: ineligibleFeatures
         )
     }
@@ -186,12 +183,40 @@ private extension PaywallModifier {
 
 private extension PaywallModifier {
     func modalDestination() -> some View {
-        reason.map {
+        assert(!iapManager.isLoadingReceipt, "Paywall presented while still loading receipt?")
+        return reason.map {
             PaywallView(
                 isPresented: $isPurchasing,
                 features: iapManager.excludingEligible(from: $0.requiredFeatures)
             )
             .themeNavigationStack()
+        }
+    }
+}
+
+// MARK: - Logic
+
+private extension PaywallModifier {
+    var ineligibleFeatures: [String] {
+        guard let reason else {
+            return []
+        }
+        return iapManager
+            .excludingEligible(from: reason.requiredFeatures)
+            .map(\.localizedDescription)
+            .sorted()
+    }
+
+    var limitedMinutes: Int {
+        let params = Constants.shared.tunnel.verificationParameters(ifRestricted: iapManager.isRestricted)
+        return Int(params.delay / 60.0)
+    }
+}
+
+private extension IAPManager {
+    func excludingEligible(from features: Set<AppFeature>) -> Set<AppFeature> {
+        features.filter {
+            !isEligible(for: $0)
         }
     }
 }

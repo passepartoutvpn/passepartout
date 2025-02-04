@@ -28,15 +28,21 @@ import Foundation
 import PassepartoutKit
 
 extension AppCoordinatorConforming {
-    public func onConnect(_ profile: Profile, force: Bool) async {
+    public func onConnect(_ profile: Profile, force: Bool, verify: Bool = true) async {
         do {
-            try iapManager.verify(profile)
+            if verify {
+                try iapManager.verify(profile)
+            }
             try await tunnel.connect(with: profile, force: force)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
-            onPurchaseRequired(requiredFeatures)
+            onPurchaseRequired(requiredFeatures) {
+                Task {
+                    await onConnect(profile, force: force, verify: false)
+                }
+            }
         } catch AppError.interactiveLogin {
             onInteractiveLogin(profile) {
-                await onConnect($0, force: true)
+                await onConnect($0, force: true, verify: verify)
             }
         } catch let ppError as PassepartoutError {
             switch ppError.code {
