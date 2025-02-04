@@ -69,11 +69,7 @@ struct ProfileCoordinator: View {
 
     var body: some View {
         contentView
-            .modifier(PaywallModifier(
-                reason: $paywallReason,
-                okTitle: Strings.Views.Profile.Alerts.Purchase.Buttons.ok,
-                okAction: onDismiss
-            ))
+            .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
 }
@@ -134,9 +130,10 @@ private extension ProfileCoordinator {
 
     // standard: always save, warn if purchase required
     func onCommitEditingStandard() async throws {
-        let savedProfile = try await profileEditor.save(to: profileManager, preferencesManager: preferencesManager)
         do {
-            try iapManager.verify(savedProfile, extra: profileEditor.extraFeatures)
+            let profileToSave = try profileEditor.build()
+            try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
+            try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
@@ -172,7 +169,8 @@ private extension ProfileCoordinator {
             paywallReason = .init(requiredFeatures)
             return
         }
-        try await profileEditor.save(to: profileManager, preferencesManager: preferencesManager)
+        let profileToSave = try profileEditor.build()
+        try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         onDismiss()
     }
 

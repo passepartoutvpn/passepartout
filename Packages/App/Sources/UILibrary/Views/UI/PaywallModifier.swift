@@ -34,10 +34,6 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let okTitle: String?
-
-    private let okAction: (() -> Void)?
-
     private let onCancel: (() -> Void)?
 
     @State
@@ -49,15 +45,8 @@ public struct PaywallModifier: ViewModifier {
     @State
     private var isPurchasing = false
 
-    public init(
-        reason: Binding<PaywallReason?>,
-        okTitle: String? = nil,
-        okAction: (() -> Void)? = nil,
-        onCancel: (() -> Void)? = nil
-    ) {
+    public init(reason: Binding<PaywallReason?>, onCancel: (() -> Void)? = nil) {
         _reason = reason
-        self.okTitle = okTitle
-        self.okAction = okAction
         self.onCancel = onCancel
     }
 
@@ -123,12 +112,6 @@ private extension PaywallModifier {
         Button(Strings.Global.Actions.purchase) {
             // IMPORTANT: retain reason because it serves paywall content
             isPurchasing = true
-        }
-        if let okTitle {
-            Button(okTitle) {
-                reason = nil
-                okAction?()
-            }
         }
         Button(Strings.Global.Actions.cancel, role: .cancel) {
             reason = nil
