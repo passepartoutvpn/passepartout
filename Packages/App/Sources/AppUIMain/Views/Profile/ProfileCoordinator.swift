@@ -117,7 +117,7 @@ private extension ProfileCoordinator {
 
     func onCommitEditing() async throws {
         do {
-            if !iapManager.isRestricted {
+            if !iapManager.isBeta {
                 try await onCommitEditingStandard()
             } else {
                 try await onCommitEditingRestricted()

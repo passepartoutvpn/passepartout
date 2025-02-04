@@ -165,7 +165,7 @@ extension AppCoordinator {
                 message: [
                     V.Connect._1,
                     V.boot,
-                    V.Connect._2(Constants.shared.tunnel.verificationDelayMinutes(ifRestricted: iapManager.isRestricted))
+                    V.Connect._2(Constants.shared.tunnel.verificationDelayMinutes(ifRestricted: iapManager.isBeta))
                 ].joined(separator: " "),
                 onDismiss: onCancel
             )

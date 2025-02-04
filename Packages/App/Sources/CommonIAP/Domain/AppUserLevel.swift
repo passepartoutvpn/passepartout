@@ -38,7 +38,7 @@ public enum AppUserLevel: Int, Sendable {
 }
 
 extension AppUserLevel {
-    public var isRestricted: Bool {
+    public var isBeta: Bool {
         self == .beta
     }
 }

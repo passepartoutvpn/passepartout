@@ -116,13 +116,13 @@ public struct Constants: Decodable, Sendable {
 
         public let verification: Verification
 
-        public func verificationDelayMinutes(ifRestricted: Bool) -> Int {
-            let params = verificationParameters(ifRestricted: ifRestricted)
+        public func verificationDelayMinutes(isBeta: Bool) -> Int {
+            let params = verificationParameters(isBeta: isBeta)
             return Int(params.delay / 60.0)
         }
 
-        public func verificationParameters(ifRestricted: Bool) -> Verification.Parameters {
-            ifRestricted ? verification.beta : verification.production
+        public func verificationParameters(isBeta: Bool) -> Verification.Parameters {
+            isBeta ? verification.beta : verification.production
         }
     }
 

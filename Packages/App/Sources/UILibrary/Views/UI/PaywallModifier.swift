@@ -83,7 +83,7 @@ public struct PaywallModifier: ViewModifier {
                 guard let reason = $0 else {
                     return
                 }
-                if !iapManager.isRestricted {
+                if !iapManager.isBeta {
                     if reason.needsConfirmation {
                         isConfirming = true
                     } else {
@@ -191,7 +191,7 @@ private extension PaywallModifier {
     }
 
     var limitedMinutes: Int {
-        let params = Constants.shared.tunnel.verificationParameters(ifRestricted: iapManager.isRestricted)
+        let params = Constants.shared.tunnel.verificationParameters(isBeta: iapManager.isBeta)
         return Int(params.delay / 60.0)
     }
 }

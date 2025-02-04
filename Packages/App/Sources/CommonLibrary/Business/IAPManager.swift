@@ -126,8 +126,8 @@ extension IAPManager {
 // MARK: - Eligibility
 
 extension IAPManager {
-    public var isRestricted: Bool {
-        userLevel.isRestricted
+    public var isBeta: Bool {
+        userLevel.isBeta
     }
 
     public func isEligible(for feature: AppFeature) -> Bool {

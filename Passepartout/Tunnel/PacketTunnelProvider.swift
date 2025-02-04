@@ -71,7 +71,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             }
 
             await context.iapManager.fetchLevelIfNeeded()
-            let params = await Constants.shared.tunnel.verificationParameters(ifRestricted: context.iapManager.isRestricted)
+            let params = await Constants.shared.tunnel.verificationParameters(isBeta: context.iapManager.isBeta)
             pp_log(.app, .info, "Will start profile verification in \(params.delay) seconds")
 
             try await fwd.startTunnel(options: options)
