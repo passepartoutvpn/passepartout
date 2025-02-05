@@ -283,7 +283,7 @@ extension AppCoordinator {
                 message: [
                     V.Connect._1,
                     V.boot,
-                    V.Connect._2(Constants.shared.tunnel.verificationDelayMinutes(isBeta: iapManager.isBeta))
+                    V.Connect._2(iapManager.verificationDelayMinutes)
                 ].joined(separator: " "),
                 onDismiss: onCancel
             )

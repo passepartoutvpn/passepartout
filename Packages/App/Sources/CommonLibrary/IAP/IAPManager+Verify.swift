@@ -57,3 +57,9 @@ extension IAPManager {
         }
     }
 }
+
+extension IAPManager {
+    public var verificationDelayMinutes: Int {
+        Constants.shared.tunnel.verificationDelayMinutes(isBeta: isBeta)
+    }
+}

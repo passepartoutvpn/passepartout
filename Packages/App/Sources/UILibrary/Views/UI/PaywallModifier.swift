@@ -191,8 +191,7 @@ private extension PaywallModifier {
     }
 
     var limitedMinutes: Int {
-        let params = Constants.shared.tunnel.verificationParameters(isBeta: iapManager.isBeta)
-        return Int(params.delay / 60.0)
+        iapManager.verificationDelayMinutes
     }
 }
 
