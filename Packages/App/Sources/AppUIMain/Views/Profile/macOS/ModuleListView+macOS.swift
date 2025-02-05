@@ -51,8 +51,13 @@ struct ModuleListView: View, Routable {
     var body: some View {
         List(selection: $selectedModuleId) {
             Section {
-                NavigationLink(Strings.Global.Nouns.general, value: ProfileSplitView.Detail.general)
-                    .tag(Self.generalModuleId)
+                NavigationLink(value: ProfileSplitView.Detail.general) {
+                    HStack {
+                        Text(Strings.Global.Nouns.general)
+                        PurchaseRequiredView(features: requiredGeneralFeatures)
+                    }
+                }
+                .tag(Self.generalModuleId)
             }
             Group {
                 ForEach(profileEditor.modules, id: \.id) { module in
@@ -116,6 +121,17 @@ private extension ModuleListView {
 }
 
 private extension ModuleListView {
+    var requiredGeneralFeatures: Set<AppFeature> {
+        var features: Set<AppFeature> = []
+        if profileEditor.isShared {
+            features.insert(.sharing)
+        }
+        if profileEditor.isAvailableForTV {
+            features.insert(.appleTV)
+        }
+        return features
+    }
+
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
         profileEditor.moveModules(from: offsets, to: newOffset)
         // XXX: selection is lost after move, reset as a workaround

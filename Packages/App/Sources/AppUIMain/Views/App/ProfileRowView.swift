@@ -121,6 +121,10 @@ private struct MarkerView: View {
         ZStack {
             ThemeImage(profileId == nextProfileId ? .pending : tunnel.statusImageName)
                 .opaque(requiredFeatures == nil && (profileId == nextProfileId || profileId == tunnel.currentProfile?.id))
+
+            if let requiredFeatures {
+                PurchaseRequiredView(features: requiredFeatures)
+            }
         }
         .frame(width: 24)
     }
