@@ -1,30 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "dtfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Cocoanetics/DTFoundation.git",
-      "state" : {
-        "revision" : "a61be65dd7d5b2cde3acabd13bf320b71f2907a5",
-        "version" : "1.7.19"
-      }
-    },
-    {
       "identity" : "generic-json-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/iwill/generic-json-swift",
       "state" : {
         "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
         "version" : "2.0.2"
-      }
-    },
-    {
-      "identity" : "kvitto",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Cocoanetics/Kvitto",
-      "state" : {
-        "revision" : "88888674d772ddcf19671159ed0022cb0bc37be2",
-        "version" : "1.0.6"
       }
     },
     {
