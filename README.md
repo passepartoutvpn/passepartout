@@ -73,7 +73,6 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 
 - [fastlane][credits-fastlane]
 - [GenericJSON][credits-genericjson]
-- [Kvitto][credits-kvitto]
 - [lzo][credits-lzo]
 - [SwiftGen][credits-swiftgen]
 - [SwiftLint][credits-swiftlint]
@@ -145,7 +144,6 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 
 [credits-fastlane]: https://github.com/fastlane/fastlane
 [credits-genericjson]: https://github.com/iwill/generic-json-swift
-[credits-kvitto]: https://github.com/Cocoanetics/Kvitto
 [credits-lzo]: https://www.oberhumer.com/opensource/lzo/
 [credits-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [credits-swiftlint]: https://github.com/realm/SwiftLint
