@@ -139,7 +139,7 @@ private extension ProfileCoordinator {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
                     title: Strings.Views.Paywall.Alerts.Confirmation.title,
-                    message: [V.edit, V.boot].joined(separator: " ")
+                    message: [V.edit, V.boot].joined(separator: "\n\n")
                 )
                 return
             }

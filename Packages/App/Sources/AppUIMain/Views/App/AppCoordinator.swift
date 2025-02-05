@@ -283,6 +283,7 @@ extension AppCoordinator {
                 message: [
                     V.Connect._1,
                     V.boot,
+                    "\n\n",
                     V.Connect._2(iapManager.verificationDelayMinutes)
                 ].joined(separator: " "),
                 onDismiss: onCancel
