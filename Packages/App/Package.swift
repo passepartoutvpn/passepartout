@@ -63,8 +63,7 @@ let package = Package(
     dependencies: [
         .package(path: "../PassepartoutKit-Framework"),
         .package(path: "../PassepartoutOpenVPNOpenSSL"),
-        .package(path: "../PassepartoutWireGuardGo"),
-        .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
+        .package(path: "../PassepartoutWireGuardGo")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -159,8 +158,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "CommonUtils",
-            dependencies: ["Kvitto"]
+            name: "CommonUtils"
         ),
         .target(
             name: "LegacyV2",
