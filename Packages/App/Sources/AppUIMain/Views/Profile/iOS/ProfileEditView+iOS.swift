@@ -107,22 +107,24 @@ private extension ProfileEditView {
 
     func moduleRow(for module: any ModuleBuilder) -> some View {
         EditorModuleToggle(profileEditor: profileEditor, module: module) {
-            Button {
-                push(.moduleDetail(moduleId: module.id))
-            } label: {
-                HStack {
-                    Text(module.description(inEditor: profileEditor))
-                    if errorModuleIds.contains(module.id) {
-                        ThemeImage(.warning)
-                    } else if profileEditor.isActiveModule(withId: module.id) {
-                        PurchaseRequiredView(for: module as? AppFeatureRequiring)
-                    }
-                    Spacer()
+            HStack {
+                Text(module.description(inEditor: profileEditor))
+                if errorModuleIds.contains(module.id) {
+                    ThemeImage(.warning)
+                } else if profileEditor.isActiveModule(withId: module.id) {
+                    PurchaseRequiredView(for: module as? AppFeatureRequiring)
                 }
-                .contentShape(.rect)
+                Button {
+                    push(.moduleDetail(moduleId: module.id))
+                } label: {
+                    Spacer()
+                    ThemeImage(.navigate)
+                        .contentShape(.rect)
+                        .imageScale(.large)
+                }
+                .buttonStyle(.borderless)
+                .uiAccessibility(.Profile.moduleLink)
             }
-            .buttonStyle(.plain)
-            .uiAccessibility(.Profile.moduleLink)
         }
     }
 
