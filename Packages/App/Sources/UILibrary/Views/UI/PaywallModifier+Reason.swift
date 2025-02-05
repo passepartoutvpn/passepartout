@@ -38,7 +38,7 @@ extension PaywallModifier {
 
         public init(
             _ requiredFeatures: Set<AppFeature>,
-            needsConfirmation: Bool = false,
+            needsConfirmation: Bool = true,
             forConnecting: Bool = true
         ) {
             self.requiredFeatures = requiredFeatures

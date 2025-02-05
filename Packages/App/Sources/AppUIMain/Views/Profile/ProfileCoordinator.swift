@@ -143,11 +143,7 @@ private extension ProfileCoordinator {
                 )
                 return
             }
-            paywallReason = .init(
-                requiredFeatures,
-                needsConfirmation: true,
-                forConnecting: false
-            )
+            paywallReason = .init(requiredFeatures, forConnecting: false)
             return
         }
         onDismiss()

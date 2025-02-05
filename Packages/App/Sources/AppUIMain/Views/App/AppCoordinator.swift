@@ -291,7 +291,7 @@ extension AppCoordinator {
         }
         pp_log(.app, .info, "Present paywall")
         onCancelPaywall = onCancel
-        setLater(.init(features, needsConfirmation: true)) {
+        setLater(.init(features)) {
             paywallReason = $0
         }
     }
