@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Blokuj w tle";
 "views.preferences.locks_in_background.footer" = "Zablokuj aplikację za pomocą FaceID, gdy zostanie przeniesiona w tle.";
 "views.profile.alerts.purchase.buttons.ok" = "Zapisz mimo to";
-"views.profile.module_list.section.footer" = "Przeciągnij moduły, aby je uporządkować, ponieważ ich kolejność określa priorytet.";
+"views.profile.module_list.section.footer" = "Stuknij moduły, aby edytować ich ustawienia. Można je przeciągnąć, aby ustalić priorytet.";
 "views.profile.rows.add_module" = "Dodaj moduł";
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
 "views.providers.clear_filters" = "Wyczyść filtry";

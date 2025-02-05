@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Im Hintergrund sperren";
 "views.preferences.locks_in_background.footer" = "Sperre die App mit FaceID, wenn sie in den Hintergrund geschickt wird.";
 "views.profile.alerts.purchase.buttons.ok" = "Trotzdem speichern";
-"views.profile.module_list.section.footer" = "Ziehe die Module, um sie neu anzuordnen, da ihre Reihenfolge die Priorität bestimmt.";
+"views.profile.module_list.section.footer" = "Tippen Sie auf Module, um ihre Einstellungen zu bearbeiten. Module können gezogen werden, um die Priorität festzulegen.";
 "views.profile.rows.add_module" = "Modul hinzufügen";
 "views.profile.sections.name.footer" = "Verwenden Sie diesen Namen, um Ihre VPN-Automationen in der Kurzbefehle-App zu erstellen.";
 "views.providers.clear_filters" = "Filter löschen";

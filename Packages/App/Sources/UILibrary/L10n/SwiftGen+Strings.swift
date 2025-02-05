@@ -838,8 +838,8 @@ public enum Strings {
       }
       public enum ModuleList {
         public enum Section {
-          /// Drag modules to rearrange them, as their order determines priority.
-          public static let footer = Strings.tr("Localizable", "views.profile.module_list.section.footer", fallback: "Drag modules to rearrange them, as their order determines priority.")
+          /// Tap modules to edit their settings. Modules may be dragged to determine priority.
+          public static let footer = Strings.tr("Localizable", "views.profile.module_list.section.footer", fallback: "Tap modules to edit their settings. Modules may be dragged to determine priority.")
         }
       }
       public enum Rows {

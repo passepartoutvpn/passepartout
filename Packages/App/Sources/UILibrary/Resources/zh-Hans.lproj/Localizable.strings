@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "后台锁定";
 "views.preferences.locks_in_background.footer" = "当应用切换到后台时，使用 FaceID 锁定它。";
 "views.profile.alerts.purchase.buttons.ok" = "仍然保存";
-"views.profile.module_list.section.footer" = "拖动模块重新排列，因为它们的顺序决定了优先级。";
+"views.profile.module_list.section.footer" = "点击模块以编辑其设置。可以拖动模块来确定优先级。";
 "views.profile.rows.add_module" = "添加模块";
 "views.profile.sections.name.footer" = "使用此名称在快捷指令应用中创建您的 VPN 自动化。";
 "views.providers.clear_filters" = "清除筛选";
