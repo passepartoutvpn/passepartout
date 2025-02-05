@@ -43,6 +43,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @State
     private var paywallReason: PaywallReason?
 
+    @State
+    private var onCancelPaywall: (() -> Void)?
+
     @StateObject
     private var interactiveManager = InteractiveManager()
 
@@ -75,7 +78,10 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(PaywallModifier(
+                reason: $paywallReason,
+                onCancel: onCancelPaywall
+            ))
             .withErrorHandler(errorHandler)
         }
     }
@@ -149,16 +155,25 @@ extension AppCoordinator {
         )
     }
 
-    public func onPurchaseRequired(_ features: Set<AppFeature>) {
+    public func onPurchaseRequired(_ features: Set<AppFeature>, onCancel: (() -> Void)?) {
+        pp_log(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
+            let V = Strings.Views.Paywall.Alerts.Verification.self
+            pp_log(.app, .info, "Present verification alert")
             errorHandler.handle(
-                title: Strings.Views.Paywall.Alerts.Verifying.title,
-                message: Strings.Views.Paywall.Alerts.Verifying.message
+                title: Strings.Views.Paywall.Alerts.Confirmation.title,
+                message: [
+                    V.Connect._1,
+                    V.boot,
+                    V.Connect._2(iapManager.verificationDelayMinutes)
+                ].joined(separator: " "),
+                onDismiss: onCancel
             )
             return
         }
-        pp_log(.app, .info, "Present paywall for features: \(features)")
-        setLater(.init(features, needsConfirmation: true)) {
+        pp_log(.app, .info, "Present paywall")
+        onCancelPaywall = onCancel
+        setLater(.init(features)) {
             paywallReason = $0
         }
     }
