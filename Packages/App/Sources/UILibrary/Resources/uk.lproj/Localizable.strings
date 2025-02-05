@@ -222,7 +222,7 @@
 "views.app.toolbar.migrate_profiles" = "Перенести профілі";
 "views.app.toolbar.new_profile.empty" = "Порожній профіль";
 "views.app.toolbar.new_profile.provider" = "Постачальник";
-"views.app.tv.header" = "Відкрийте %@ на вашому пристрої iOS або macOS і увімкніть перемикач \"%@\" профілю, щоб він з’явився тут.";
+"views.app.tv.header" = "Відкрийте %@ на своєму пристрої iOS або macOS і увімкніть перемикач \"%@\" у профілі, щоб він з’явився тут. Усі пристрої повинні використовувати версію 3.0.0 або новішу, щоб це працювало.";
 "views.app_menu.items.quit" = "Вийти з %@";
 "views.diagnostics.alerts.report_issue.email" = "Пристрій не налаштований на надсилання електронних листів.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Конфігурація сервера";

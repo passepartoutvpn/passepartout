@@ -637,9 +637,9 @@ public enum Strings {
         }
       }
       public enum Tv {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.
         public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.app.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+          return Strings.tr("Localizable", "views.app.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.")
         }
       }
     }

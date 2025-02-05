@@ -49,7 +49,7 @@
 "views.app.toolbar.new_profile.provider" = "Provider";
 "views.app.toolbar.import_profile" = "Import profile";
 "views.app.toolbar.migrate_profiles" = "Migrate profiles";
-"views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
+"views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.";
 
 "views.app.profile_context.connect_to" = "Connect to";
 

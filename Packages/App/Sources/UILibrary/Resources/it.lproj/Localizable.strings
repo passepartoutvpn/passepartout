@@ -222,7 +222,7 @@
 "views.app.toolbar.migrate_profiles" = "Migra profili";
 "views.app.toolbar.new_profile.empty" = "Profilo vuoto";
 "views.app.toolbar.new_profile.provider" = "Provider";
-"views.app.tv.header" = "Apri %@ sul tuo dispositivo iOS o macOS e abilita l'interruttore \"%@\" di un profilo per farlo apparire qui.";
+"views.app.tv.header" = "Apri %@ sul tuo dispositivo iOS o macOS e abilita l'interruttore \"%@\" di un profilo per farlo apparire qui. Tutti i dispositivi devono eseguire la versione 3.0.0 o successiva affinché funzioni.";
 "views.app_menu.items.quit" = "Esci da %@";
 "views.diagnostics.alerts.report_issue.email" = "Il dispositivo non è configurato per inviare e-mail.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Configurazione del server";

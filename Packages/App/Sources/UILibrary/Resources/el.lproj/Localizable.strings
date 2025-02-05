@@ -222,7 +222,7 @@
 "views.app.toolbar.migrate_profiles" = "Μεταφορά προφίλ";
 "views.app.toolbar.new_profile.empty" = "Κενό προφίλ";
 "views.app.toolbar.new_profile.provider" = "Πάροχος";
-"views.app.tv.header" = "Ανοίξτε %@ στη συσκευή σας iOS ή macOS και ενεργοποιήστε το διακόπτη \"%@\" ενός προφίλ για να εμφανιστεί εδώ.";
+"views.app.tv.header" = "Ανοίξτε το %@ στη συσκευή σας iOS ή macOS και ενεργοποιήστε τον διακόπτη \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ. Όλες οι συσκευές πρέπει να εκτελούν την έκδοση 3.0.0 ή νεότερη για να λειτουργήσει.";
 "views.app_menu.items.quit" = "Κλείσιμο %@";
 "views.diagnostics.alerts.report_issue.email" = "Η συσκευή δεν είναι ρυθμισμένη για αποστολή email.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Διαμόρφωση διακομιστή";

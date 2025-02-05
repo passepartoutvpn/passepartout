@@ -222,7 +222,7 @@
 "views.app.toolbar.migrate_profiles" = "迁移配置文件";
 "views.app.toolbar.new_profile.empty" = "空配置文件";
 "views.app.toolbar.new_profile.provider" = "提供商";
-"views.app.tv.header" = "在您的 iOS 或 macOS 设备上打开 %@，并启用配置文件的 \"%@\" 开关，使其显示在此处。";
+"views.app.tv.header" = "在您的 iOS 或 macOS 设备上打开 %@，并启用配置文件的“%@”开关，使其显示在此处。所有设备必须运行 3.0.0 或更高版本才能正常工作。";
 "views.app_menu.items.quit" = "退出 %@";
 "views.diagnostics.alerts.report_issue.email" = "设备未配置为发送电子邮件。";
 "views.diagnostics.openvpn.rows.server_configuration" = "服务器配置";

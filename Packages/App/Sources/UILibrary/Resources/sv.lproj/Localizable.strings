@@ -222,7 +222,7 @@
 "views.app.toolbar.migrate_profiles" = "Migrera profiler";
 "views.app.toolbar.new_profile.empty" = "Tom profil";
 "views.app.toolbar.new_profile.provider" = "Leverantör";
-"views.app.tv.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" i en profil för att den ska visas här.";
+"views.app.tv.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera \"%@\"-växeln i en profil för att den ska visas här. Alla enheter måste köra version 3.0.0 eller senare för att detta ska fungera.";
 "views.app_menu.items.quit" = "Avsluta %@";
 "views.diagnostics.alerts.report_issue.email" = "Enheten är inte konfigurerad för att skicka e-post.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Serverkonfiguration";
