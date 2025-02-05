@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Lås i bakgrunden";
 "views.preferences.locks_in_background.footer" = "Lås appen med FaceID när den skickas till bakgrunden.";
 "views.profile.alerts.purchase.buttons.ok" = "Spara ändå";
-"views.profile.module_list.section.footer" = "Dra moduler för att ordna om dem, eftersom deras ordning avgör prioritet.";
+"views.profile.module_list.section.footer" = "Tryck på moduler för att redigera inställningarna. Moduler kan dras för att bestämma prioritet.";
 "views.profile.rows.add_module" = "Lägg till modul";
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
 "views.providers.clear_filters" = "Rensa filter";

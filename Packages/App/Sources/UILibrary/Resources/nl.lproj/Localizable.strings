@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Vergrendelen in achtergrond";
 "views.preferences.locks_in_background.footer" = "Vergrendel de app met FaceID wanneer deze naar de achtergrond wordt gestuurd.";
 "views.profile.alerts.purchase.buttons.ok" = "Toch opslaan";
-"views.profile.module_list.section.footer" = "Sleep modules om ze opnieuw te rangschikken, omdat hun volgorde de prioriteit bepaalt.";
+"views.profile.module_list.section.footer" = "Tik op modules om hun instellingen te bewerken. Modules kunnen worden versleept om de prioriteit te bepalen.";
 "views.profile.rows.add_module" = "Module toevoegen";
 "views.profile.sections.name.footer" = "Gebruik deze naam om uw VPN-automatiseringen in de app Opdrachten te maken.";
 "views.providers.clear_filters" = "Filters wissen";

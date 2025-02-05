@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Блокировка в фоновом режиме";
 "views.preferences.locks_in_background.footer" = "Блокируйте приложение с помощью FaceID, когда оно переводится в фоновый режим.";
 "views.profile.alerts.purchase.buttons.ok" = "Сохранить в любом случае";
-"views.profile.module_list.section.footer" = "Перетащите модули для их переупорядочивания, так как их порядок определяет приоритет.";
+"views.profile.module_list.section.footer" = "Нажмите на модули, чтобы изменить их настройки. Их можно перетаскивать для установки приоритета.";
 "views.profile.rows.add_module" = "Добавить модуль";
 "views.profile.sections.name.footer" = "Используйте это имя для создания автоматизаций VPN в приложении Команды.";
 "views.providers.clear_filters" = "Очистить фильтры";

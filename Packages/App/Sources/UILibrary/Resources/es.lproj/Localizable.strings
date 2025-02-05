@@ -270,7 +270,7 @@
 "views.preferences.locks_in_background" = "Bloquear en segundo plano";
 "views.preferences.locks_in_background.footer" = "Bloquea la app con FaceID cuando se envíe al fondo.";
 "views.profile.alerts.purchase.buttons.ok" = "Guardar de todos modos";
-"views.profile.module_list.section.footer" = "Arrastra los módulos para reorganizarlos, ya que su orden determina la prioridad.";
+"views.profile.module_list.section.footer" = "Toca los módulos para editar su configuración. Se pueden arrastrar para establecer la prioridad.";
 "views.profile.rows.add_module" = "Añadir módulo";
 "views.profile.sections.name.footer" = "Usa este nombre para crear automatizaciones VPN en la app Atajos.";
 "views.providers.clear_filters" = "Borrar filtros";
