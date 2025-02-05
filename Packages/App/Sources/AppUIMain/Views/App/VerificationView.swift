@@ -33,7 +33,7 @@ struct VerificationView: View {
             Text(Strings.Views.App.Folders.default)
             if isVerifying {
                 Spacer()
-                Text(Strings.Views.Verification.message.withTrailingDots)
+                Text(Strings.Views.Verification.message)
             }
         }
     }
