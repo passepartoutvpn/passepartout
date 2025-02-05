@@ -120,7 +120,7 @@ private extension ProfileCoordinator {
             if !iapManager.isBeta {
                 try await onCommitEditingStandard()
             } else {
-                try await onCommitEditingRestricted()
+                try await onCommitEditingBeta()
             }
         } catch {
             errorHandler.handle(error, title: Strings.Global.Actions.save)
@@ -128,7 +128,7 @@ private extension ProfileCoordinator {
         }
     }
 
-    // standard: always save, warn if purchase required
+    // standard: verify and alert if purchase required
     func onCommitEditingStandard() async throws {
         do {
             let profileToSave = try profileEditor.build()
@@ -149,8 +149,8 @@ private extension ProfileCoordinator {
         onDismiss()
     }
 
-    // restricted: skip verification
-    func onCommitEditingRestricted() async throws {
+    // beta: skip verification
+    func onCommitEditingBeta() async throws {
         let profileToSave = try profileEditor.build()
         try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         onDismiss()

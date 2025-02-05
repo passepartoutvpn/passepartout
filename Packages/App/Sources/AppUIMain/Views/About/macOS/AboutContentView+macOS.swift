@@ -39,7 +39,7 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
 
     let profileManager: ProfileManager
 
-    let isRestricted: Bool
+    let isBeta: Bool
 
     @Binding
     var path: NavigationPath
@@ -82,7 +82,7 @@ private extension AboutContentView {
                 linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
-                if !isRestricted {
+                if !isBeta {
                     linkContent(.donate)
                 }
                 linkContent(.purchased)
