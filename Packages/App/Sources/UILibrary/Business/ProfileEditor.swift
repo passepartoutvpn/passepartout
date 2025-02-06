@@ -98,6 +98,17 @@ extension ProfileEditor {
         }
     }
 
+    public var keepsAliveOnSleep: Bool {
+        get {
+            !editableProfile.disconnectsOnSleep
+        }
+        set {
+            var behavior = editableProfile.behavior ?? ProfileBehavior()
+            behavior.disconnectsOnSleep = !newValue
+            editableProfile.behavior = behavior
+        }
+    }
+
     public var isAvailableForTV: Bool {
         get {
             editableProfile.attributes.isAvailableForTV == true

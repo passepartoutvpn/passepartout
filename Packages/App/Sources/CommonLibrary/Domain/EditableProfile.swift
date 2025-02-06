@@ -35,6 +35,8 @@ public struct EditableProfile: MutableProfileType {
 
     public var activeModulesIds: Set<UUID>
 
+    public var behavior: ProfileBehavior?
+
     public var userInfo: AnyHashable?
 
     public init(
@@ -42,12 +44,14 @@ public struct EditableProfile: MutableProfileType {
         name: String = "",
         modules: [any ModuleBuilder] = [],
         activeModulesIds: Set<UUID> = [],
+        behavior: ProfileBehavior? = nil,
         userInfo: AnyHashable? = nil
     ) {
         self.id = id
         self.name = name
         self.modules = modules
         self.activeModulesIds = activeModulesIds
+        self.behavior = behavior
         self.userInfo = userInfo
     }
 
@@ -67,6 +71,7 @@ public struct EditableProfile: MutableProfileType {
             throw AppError.emptyProfileName
         }
         builder.name = trimmedName
+        builder.behavior = behavior
         builder.userInfo = userInfo
 
         return builder
@@ -80,6 +85,7 @@ extension Profile {
             name: name,
             modules: modulesBuilders(),
             activeModulesIds: activeModulesIds,
+            behavior: behavior,
             userInfo: userInfo
         )
     }
