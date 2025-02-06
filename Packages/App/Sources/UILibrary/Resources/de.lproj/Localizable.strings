@@ -146,6 +146,7 @@
 "modules.general.rows.keep_alive_on_sleep.footer" = "Deaktivieren um die Batterielaufzeit zu verbessern, allerdings verzögert sich der Verbindungsaufbau beim Aufwachen.";
 "modules.general.rows.shared" = "Aktiviert";
 "modules.general.rows.shared.purchase" = "Auf iCloud teilen";
+"modules.general.sections.behavior.header" = "Verhalten";
 "modules.general.sections.storage.footer" = "Profile werden in %@ verschlüsselt gespeichert.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-Profile funktionieren nicht in Beta-Versionen.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-Profile funktionieren ohne einen Kauf nicht.";

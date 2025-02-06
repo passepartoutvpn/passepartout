@@ -146,6 +146,7 @@
 "modules.general.rows.keep_alive_on_sleep.footer" = "Вимкніть, щоб покращити використання акумулятора, може привести до тимчасових затримок у зв’язку з повторним підключенням після \"пробудження\".";
 "modules.general.rows.shared" = "Увімкнено";
 "modules.general.rows.shared.purchase" = "Поділитися через iCloud";
+"modules.general.sections.behavior.header" = "Поведінка";
 "modules.general.sections.storage.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Профілі TV не працюють у бета-версіях.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Профілі TV не працюють без покупки.";

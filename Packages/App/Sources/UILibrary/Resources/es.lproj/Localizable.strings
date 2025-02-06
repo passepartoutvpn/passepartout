@@ -146,6 +146,7 @@
 "modules.general.rows.keep_alive_on_sleep.footer" = "Deshabilitar para mejorar el uso de la batería, a costa de ralentizaciones ocasionales por las reconexiones al despertar el dispositivo.";
 "modules.general.rows.shared" = "Habilitado";
 "modules.general.rows.shared.purchase" = "Compartir en iCloud";
+"modules.general.sections.behavior.header" = "Comportamiento";
 "modules.general.sections.storage.footer" = "Los perfiles se almacenan en %@ de manera cifrada.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Los perfiles de TV no funcionan en las versiones beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Los perfiles de TV no funcionan sin una compra.";

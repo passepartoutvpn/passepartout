@@ -146,6 +146,7 @@
 "modules.general.rows.keep_alive_on_sleep.footer" = "Отключите для уменьшения расхода заряда аккумулятора, может привести к временным замедлениям в связи с повторным подключением после \"пробуждения\".";
 "modules.general.rows.shared" = "Включено";
 "modules.general.rows.shared.purchase" = "Делиться через iCloud";
+"modules.general.sections.behavior.header" = "Поведение";
 "modules.general.sections.storage.footer" = "Профили хранятся в %@ и зашифрованы.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Профили для ТВ недоступны в бета-версиях.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Профили для ТВ требуют покупки.";

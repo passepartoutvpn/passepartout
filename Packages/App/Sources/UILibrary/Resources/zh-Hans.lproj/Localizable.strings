@@ -146,6 +146,7 @@
 "modules.general.rows.keep_alive_on_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "modules.general.rows.shared" = "已启用";
 "modules.general.rows.shared.purchase" = "通过 iCloud 共享";
+"modules.general.sections.behavior.header" = "行为";
 "modules.general.sections.storage.footer" = "配置文件加密存储于 %@。";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV 配置文件在测试版本中不可用。";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV 配置文件需要购买才能使用。";
