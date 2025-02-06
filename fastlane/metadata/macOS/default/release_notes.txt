@@ -1,5 +1,1 @@
-* Allow graceful period to work around slow receipt validation (#1139)
-* Update credits
-* Fix some German translations
-* Mention in paywall that all purchases support "Family Sharing" (#1138)
-* Fix logic of migrated "Routing" modules (#1136)
+* Restore "Keep alive on sleep" feature (#1143)
