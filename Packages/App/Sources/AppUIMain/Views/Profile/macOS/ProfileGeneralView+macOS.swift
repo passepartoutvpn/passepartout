@@ -36,7 +36,7 @@ struct ProfileGeneralView: View {
     var body: some View {
         Form {
             ProfileNameSection(name: $profileEditor.profile.name)
-            StorageSection(profileEditor: profileEditor)
+            ProfileStorageSection(profileEditor: profileEditor)
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .themeForm()

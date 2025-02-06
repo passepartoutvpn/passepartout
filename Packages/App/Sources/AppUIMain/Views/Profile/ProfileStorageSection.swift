@@ -1,5 +1,5 @@
 //
-//  StorageSection.swift
+//  ProfileStorageSection.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/4/24.
@@ -26,7 +26,7 @@
 import CommonLibrary
 import SwiftUI
 
-struct StorageSection: View {
+struct ProfileStorageSection: View {
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -46,7 +46,7 @@ struct StorageSection: View {
     }
 }
 
-private extension StorageSection {
+private extension ProfileStorageSection {
     var sharingToggle: some View {
         Toggle(isOn: $profileEditor.isShared) {
             HStack {
@@ -67,7 +67,7 @@ private extension StorageSection {
     }
 }
 
-private extension StorageSection {
+private extension ProfileStorageSection {
     var header: String {
         Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
     }
@@ -100,7 +100,7 @@ private extension StorageSection {
 
 #Preview {
     Form {
-        StorageSection(profileEditor: ProfileEditor())
+        ProfileStorageSection(profileEditor: ProfileEditor())
     }
     .themeForm()
     .withMockEnvironment()
