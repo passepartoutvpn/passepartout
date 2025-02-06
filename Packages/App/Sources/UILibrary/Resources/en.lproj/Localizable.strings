@@ -142,11 +142,14 @@
 "modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
+"modules.general.sections.behavior.header" = "Behavior";
 "modules.general.rows.shared" = "Enabled";
 "modules.general.rows.shared.purchase" = "Share on iCloud";
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Drop TV restriction";
 "modules.general.rows.import_from_file" = "Import from file";
+"modules.general.rows.keep_alive_on_sleep" = "Keep alive on sleep";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
 
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";

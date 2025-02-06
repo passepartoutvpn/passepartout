@@ -375,11 +375,17 @@ public enum Strings {
         }
         /// Import from file
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file")
+        /// Keep alive on sleep
+        public static let keepAliveOnSleep = Strings.tr("Localizable", "modules.general.rows.keep_alive_on_sleep", fallback: "Keep alive on sleep")
         /// Enabled
         public static let shared = Strings.tr("Localizable", "modules.general.rows.shared", fallback: "Enabled")
         public enum Appletv {
           /// Drop TV restriction
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.appletv.purchase", fallback: "Drop TV restriction")
+        }
+        public enum KeepAliveOnSleep {
+          /// Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.
+          public static let footer = Strings.tr("Localizable", "modules.general.rows.keep_alive_on_sleep.footer", fallback: "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.")
         }
         public enum Shared {
           /// Share on iCloud
@@ -387,6 +393,10 @@ public enum Strings {
         }
       }
       public enum Sections {
+        public enum Behavior {
+          /// Behavior
+          public static let header = Strings.tr("Localizable", "modules.general.sections.behavior.header", fallback: "Behavior")
+        }
         public enum Storage {
           /// Profiles are stored to %@ encrypted.
           public static func footer(_ p1: Any) -> String {
