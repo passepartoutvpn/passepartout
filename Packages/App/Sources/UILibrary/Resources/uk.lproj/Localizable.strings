@@ -142,6 +142,8 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Зняти обмеження TV";
 "modules.general.rows.import_from_file" = "Імпортувати з файлу";
+"modules.general.rows.keep_alive_on_sleep" = "Залишати включеним під час сну";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Вимкніть, щоб покращити використання акумулятора, може привести до тимчасових затримок у зв’язку з повторним підключенням після \"пробудження\".";
 "modules.general.rows.shared" = "Увімкнено";
 "modules.general.rows.shared.purchase" = "Поділитися через iCloud";
 "modules.general.sections.storage.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";

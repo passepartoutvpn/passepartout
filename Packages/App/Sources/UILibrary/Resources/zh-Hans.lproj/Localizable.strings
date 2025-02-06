@@ -142,6 +142,8 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "取消 TV 限制";
 "modules.general.rows.import_from_file" = "从文件导入";
+"modules.general.rows.keep_alive_on_sleep" = "休眠时保持连接";
+"modules.general.rows.keep_alive_on_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "modules.general.rows.shared" = "已启用";
 "modules.general.rows.shared.purchase" = "通过 iCloud 共享";
 "modules.general.sections.storage.footer" = "配置文件加密存储于 %@。";

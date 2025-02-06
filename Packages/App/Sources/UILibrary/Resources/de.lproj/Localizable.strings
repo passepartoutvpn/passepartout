@@ -142,6 +142,8 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "TV-Einschränkung entfernen";
 "modules.general.rows.import_from_file" = "Aus Datei importieren";
+"modules.general.rows.keep_alive_on_sleep" = "Verbindung aktiv halten trotz Schlafmodus";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Deaktivieren um die Batterielaufzeit zu verbessern, allerdings verzögert sich der Verbindungsaufbau beim Aufwachen.";
 "modules.general.rows.shared" = "Aktiviert";
 "modules.general.rows.shared.purchase" = "Auf iCloud teilen";
 "modules.general.sections.storage.footer" = "Profile werden in %@ verschlüsselt gespeichert.";

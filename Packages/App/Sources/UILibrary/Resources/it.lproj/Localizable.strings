@@ -142,6 +142,8 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Rimuovi restrizione TV";
 "modules.general.rows.import_from_file" = "Importa da file";
+"modules.general.rows.keep_alive_on_sleep" = "Mantieni attivo in sleep";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Disabilita per migliorare il consumo della batteria, a discapito di rallentamenti occasionali causati dalle riconnessioni.";
 "modules.general.rows.shared" = "Abilitato";
 "modules.general.rows.shared.purchase" = "Condividi su iCloud";
 "modules.general.sections.storage.footer" = "I profili sono archiviati su %@ in modo crittografato.";
