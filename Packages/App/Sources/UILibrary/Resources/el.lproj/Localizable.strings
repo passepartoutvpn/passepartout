@@ -142,8 +142,11 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Κατάργηση περιορισμού TV";
 "modules.general.rows.import_from_file" = "Εισαγωγή από αρχείο";
+"modules.general.rows.keep_alive_on_sleep" = "Κρατήστε ζωντανό στον ύπνο";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Απενεργοποιήστε για να βελτιώσετε τη χρήση της μπαταρίας, εις βάρος των περιστασιακών επιβραδύνσεων που οφείλονται σε επανασύνδεση αφύπνισης.";
 "modules.general.rows.shared" = "Ενεργοποιημένο";
 "modules.general.rows.shared.purchase" = "Κοινοποίηση στο iCloud";
+"modules.general.sections.behavior.header" = "Συμπεριφορά";
 "modules.general.sections.storage.footer" = "Τα προφίλ αποθηκεύονται κρυπτογραφημένα στο %@.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Τα προφίλ TV δεν λειτουργούν στις εκδόσεις beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Τα προφίλ TV δεν λειτουργούν χωρίς αγορά.";

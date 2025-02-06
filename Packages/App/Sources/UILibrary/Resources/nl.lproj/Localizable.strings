@@ -142,8 +142,11 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "TV-beperking verwijderen";
 "modules.general.rows.import_from_file" = "Importeren uit bestand";
+"modules.general.rows.keep_alive_on_sleep" = "Actief tijdens slaapstand";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Uitschakelen om het batterijverbruik te verbeteren, ten koste van incidentele vertragingen als gevolg van het opnieuw opstarten na wake-up.";
 "modules.general.rows.shared" = "Ingeschakeld";
 "modules.general.rows.shared.purchase" = "Delen op iCloud";
+"modules.general.sections.behavior.header" = "Gedrag";
 "modules.general.sections.storage.footer" = "Profielen worden versleuteld opgeslagen in %@.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profielen werken niet in bètaversies.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profielen werken niet zonder aankoop.";

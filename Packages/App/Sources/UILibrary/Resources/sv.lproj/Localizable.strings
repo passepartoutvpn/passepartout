@@ -142,8 +142,11 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Ta bort TV-begränsning";
 "modules.general.rows.import_from_file" = "Importera från fil";
+"modules.general.rows.keep_alive_on_sleep" = "Håll dig levande i sömnen";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Inaktivera för att förbättra batterianvändningen, på bekostnad av tillfälliga avmattningar på grund av återuppkoppling.";
 "modules.general.rows.shared" = "Aktiverad";
 "modules.general.rows.shared.purchase" = "Dela på iCloud";
+"modules.general.sections.behavior.header" = "Beteende";
 "modules.general.sections.storage.footer" = "Profiler sparas i %@ och är krypterade.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profiler fungerar inte i beta-versioner.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profiler fungerar inte utan ett köp.";

@@ -54,7 +54,8 @@ struct ProfileEditView: View, Routable {
                 name: $profileEditor.profile.name
             )
             modulesSection
-            StorageSection(profileEditor: profileEditor)
+            ProfileStorageSection(profileEditor: profileEditor)
+            ProfileBehaviorSection(profileEditor: profileEditor)
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .toolbar(content: toolbarContent)

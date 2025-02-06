@@ -142,8 +142,11 @@
 "modules.general.rows.appletv" = "%@";
 "modules.general.rows.appletv.purchase" = "Retirer la restriction TV";
 "modules.general.rows.import_from_file" = "Importer depuis un fichier";
+"modules.general.rows.keep_alive_on_sleep" = "Garder actif lors de la veille";
+"modules.general.rows.keep_alive_on_sleep.footer" = "Désactiver pour augmenter l'autonomie de la batterie, au dépends de la rapidité au réveil pour la reconnection.";
 "modules.general.rows.shared" = "Activé";
 "modules.general.rows.shared.purchase" = "Partager sur iCloud";
+"modules.general.sections.behavior.header" = "Comportement";
 "modules.general.sections.storage.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Les profils TV ne fonctionnent pas dans les versions bêta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Les profils TV ne fonctionnent pas sans un achat.";
