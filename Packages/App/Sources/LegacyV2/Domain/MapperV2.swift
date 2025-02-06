@@ -121,8 +121,8 @@ extension MapperV2 {
 extension MapperV2 {
     func toNetworkModules(_ v2: ProfileV2.NetworkSettings) throws -> [Module] {
         var modules: [Module] = []
-        if v2.dns.choice == .manual {
-            modules.append(try toDNSModule(v2.dns))
+        if v2.dns.choice == .manual, let dnsModule = try toDNSModule(v2.dns) {
+            modules.append(dnsModule)
         }
         if v2.proxy.choice == .manual {
             modules.append(try toHTTPProxyModule(v2.proxy))
@@ -133,10 +133,13 @@ extension MapperV2 {
         return modules
     }
 
-    func toDNSModule(_ v2: Network.DNSSettings) throws -> DNSModule {
+    func toDNSModule(_ v2: Network.DNSSettings) throws -> DNSModule? {
         var builder = DNSModule.Builder()
         builder.protocolType = v2.dnsProtocol ?? .cleartext
         builder.servers = v2.dnsServers ?? []
+        guard builder.protocolType != .cleartext || !builder.servers.isEmpty else {
+            return nil
+        }
         builder.domainName = v2.dnsDomain
         builder.searchDomains = v2.dnsSearchDomains
         builder.dohURL = v2.dnsHTTPSURL?.absoluteString ?? ""
