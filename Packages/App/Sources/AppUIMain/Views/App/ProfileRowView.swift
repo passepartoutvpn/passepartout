@@ -171,55 +171,6 @@ private struct MarkerView: View {
     }
 }
 
-private struct TunnelToggle: View {
-    let profile: Profile?
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    var body: some View {
-        Toggle("", isOn: tunnelBinding)
-            .labelsHidden()
-            .toggleStyle(.switch)
-            .disabled(isDisabled)
-    }
-
-    var tunnelBinding: Binding<Bool> {
-        Binding {
-            tunnelProfile != nil
-        } set: { isOn in
-            guard let profile else {
-                return
-            }
-            Task {
-                if isOn, canConnect {
-                    try await tunnel.connect(with: profile)
-                } else {
-                    try await tunnel.disconnect()
-                }
-            }
-        }
-    }
-
-    var tunnelProfile: TunnelCurrentProfile? {
-        guard let profile else {
-            return nil
-        }
-        return tunnel.currentProfiles[profile.id]
-    }
-
-    var canConnect: Bool {
-        if let tunnelProfile {
-            return tunnelProfile.status == .inactive && !tunnelProfile.onDemand
-        }
-        return true
-    }
-
-    var isDisabled: Bool {
-        profile == nil || tunnelProfile?.status == .deactivating
-    }
-}
-
 // MARK: - Previews
 
 #Preview {
