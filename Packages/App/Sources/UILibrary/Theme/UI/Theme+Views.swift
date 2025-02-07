@@ -90,7 +90,7 @@ public struct ThemeImageLabel<Title>: View where Title: View {
         Label(title: title) {
             ThemeImage(name)
 #if os(iOS)
-                .scaleEffect(inForm ? 0.9 : 1.0)
+                .scaleEffect(inForm ? 0.9 : 1.0, anchor: .center)
 #endif
         }
     }
