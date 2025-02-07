@@ -52,24 +52,34 @@ struct ProfileCardView: View {
                     .themeTruncating()
             }
             if style == .full {
-                Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-                    .multilineTextAlignment(.leading)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .padding(.bottom, 4)
+                modulesView
             }
-            Group {
-                if tunnel.currentProfile?.id == preview.id {
-                    ConnectionStatusText(tunnel: tunnel)
-                } else {
-                    Text(Strings.Entities.TunnelStatus.inactive)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .font(.subheadline)
+            tunnelView
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .unanimated()
+    }
+}
+
+private extension ProfileCardView {
+    var modulesView: some View {
+        Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
+            .multilineTextAlignment(.leading)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .padding(.bottom, 4)
+    }
+
+    var tunnelView: some View {
+        Group {
+            if tunnel.currentProfile?.id == preview.id {
+                ConnectionStatusText(tunnel: tunnel)
+            } else {
+                Text(Strings.Entities.TunnelStatus.inactive)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .font(.subheadline)
     }
 }
 
