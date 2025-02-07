@@ -266,8 +266,8 @@ extension View {
         modifier(ThemeGridSectionModifier(header: header))
     }
 
-    public func themeGridCell(isSelected: Bool) -> some View {
-        modifier(ThemeGridCellModifier(isSelected: isSelected))
+    public func themeGridCell() -> some View {
+        modifier(ThemeGridCellModifier())
     }
 
     public func themeHoverListRow() -> some View {
@@ -576,12 +576,10 @@ struct ThemeGridCellModifier: ViewModifier {
     @EnvironmentObject
     private var theme: Theme
 
-    let isSelected: Bool
-
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(isSelected ? theme.gridCellActiveColor : theme.gridCellColor)
+            .background(theme.gridCellColor)
             .clipShape(.rect(cornerRadius: theme.gridRadius))
     }
 }

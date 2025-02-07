@@ -125,7 +125,7 @@ private extension ProfileGridView {
             errorHandler: errorHandler,
             flow: flow
         )
-        .themeGridCell(isSelected: preview.id == currentProfile?.id)
+        .themeGridCell()
         .contextMenu {
             ProfileContextMenu(
                 style: .containerContext,

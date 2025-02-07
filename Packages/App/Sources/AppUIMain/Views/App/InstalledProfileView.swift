@@ -188,7 +188,7 @@ private struct HeaderModifier: ViewModifier {
 
         case .grid:
             content
-                .themeGridCell(isSelected: false)
+                .themeGridCell()
         }
     }
 }
@@ -231,7 +231,7 @@ private struct CardModifier: ViewModifier {
             HeaderView(layout: .grid)
                 .padding(.bottom)
             ContentView()
-                .themeGridCell(isSelected: false)
+                .themeGridCell()
         }
         .padding()
     }
