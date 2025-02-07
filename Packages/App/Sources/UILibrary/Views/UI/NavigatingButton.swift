@@ -41,8 +41,10 @@ public struct NavigatingButton<Label>: View where Label: View {
                 label()
                 ThemeImage(.navigate)
             }
+            .contentShape(.rect)
         }
         .buttonStyle(.plain)
+        .cursor(.hand)
     }
 }
 
