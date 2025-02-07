@@ -109,8 +109,9 @@ private struct ContainerModifier: ViewModifier {
     func body(content: Content) -> some View {
         debugChanges()
         return content
-            .themeEmpty(
-                if: !profileManager.hasProfiles,
+            .themeProgress(
+                if: !profileManager.isReady,
+                isEmpty: !profileManager.hasProfiles,
                 emptyContent: emptyView
             )
             .searchable(text: $search)
