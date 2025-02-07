@@ -51,9 +51,6 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
     var flow: ProfileFlow?
 
-    @State
-    private var nextProfileId: Profile.ID?
-
     var body: some View {
         debugChanges()
         return Form {
@@ -90,7 +87,6 @@ private extension ProfileListView {
             profile: currentProfile,
             tunnel: tunnel,
             errorHandler: errorHandler,
-            nextProfileId: $nextProfileId,
             flow: flow
         )
         .contextMenu {
@@ -114,8 +110,6 @@ private extension ProfileListView {
             tunnel: tunnel,
             preview: preview,
             errorHandler: errorHandler,
-            nextProfileId: $nextProfileId,
-            withMarker: false,
             flow: flow
         )
         .contextMenu {

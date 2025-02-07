@@ -29,6 +29,7 @@ import PassepartoutKit
 import SwiftUI
 
 // FIXME: ###, duplication in TunnelToggleButton
+#if !os(tvOS)
 
 public struct TunnelToggle: View {
 
@@ -116,3 +117,5 @@ private extension TunnelToggle {
         }
     }
 }
+
+#endif

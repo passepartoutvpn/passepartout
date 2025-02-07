@@ -46,9 +46,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     var flow: ProfileFlow?
 
     @State
-    private var nextProfileId: Profile.ID?
-
-    @State
     private var currentProfile: TunnelCurrentProfile?
 
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300.0))]
@@ -103,7 +100,6 @@ private extension ProfileGridView {
             profile: currentProfile,
             tunnel: tunnel,
             errorHandler: errorHandler,
-            nextProfileId: $nextProfileId,
             flow: flow
         )
         .contextMenu {
@@ -127,11 +123,9 @@ private extension ProfileGridView {
             tunnel: tunnel,
             preview: preview,
             errorHandler: errorHandler,
-            nextProfileId: $nextProfileId,
-            withMarker: false,
             flow: flow
         )
-        .themeGridCell(isSelected: preview.id == nextProfileId ?? currentProfile?.id)
+        .themeGridCell(isSelected: preview.id == currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
                 style: .containerContext,

@@ -50,28 +50,16 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
 
     let errorHandler: ErrorHandler
 
-    @Binding
-    var nextProfileId: Profile.ID?
-
-    let withMarker: Bool
-
     var flow: ProfileFlow?
 
     var body: some View {
         VStack(spacing: .zero) {
             Spacer(minLength: .zero)
             HStack {
-                Group {
-                    if withMarker {
-                        markerView
-                    }
-                    cardView
-                }
+                cardView
                 Spacer()
-                HStack(spacing: 12) {
-                    attributesView
-                    tunnelToggle
-                }
+                attributesView
+                tunnelToggle
             }
             Spacer(minLength: .zero)
         }
@@ -79,15 +67,6 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
 }
 
 private extension ProfileRowView {
-    var markerView: some View {
-        MarkerView(
-            profileId: preview.id,
-            nextProfileId: nextProfileId,
-            tunnel: tunnel,
-            requiredFeatures: requiredFeatures
-        )
-    }
-
     var cardView: some View {
         ProfileCardView(
             style: style,
@@ -148,31 +127,6 @@ private extension ProfileRowView {
     }
 }
 
-// MARK: - Subviews (observing)
-
-private struct MarkerView: View {
-    let profileId: Profile.ID
-
-    let nextProfileId: Profile.ID?
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let requiredFeatures: Set<AppFeature>?
-
-    var body: some View {
-        ZStack {
-            ThemeImage(profileId == nextProfileId ? .pending : tunnel.statusImageName)
-                .opaque(requiredFeatures == nil && (profileId == nextProfileId || profileId == tunnel.currentProfile?.id))
-
-            if let requiredFeatures {
-                PurchaseRequiredView(features: requiredFeatures)
-            }
-        }
-        .frame(width: 24)
-    }
-}
-
 // MARK: - Previews
 
 #Preview {
@@ -185,9 +139,7 @@ private struct MarkerView: View {
             profileManager: profileManager,
             tunnel: .forPreviews,
             preview: .init(profile),
-            errorHandler: .default(),
-            nextProfileId: .constant(nil),
-            withMarker: false
+            errorHandler: .default()
         )
     }
     .task {

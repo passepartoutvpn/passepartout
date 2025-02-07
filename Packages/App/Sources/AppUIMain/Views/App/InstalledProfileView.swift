@@ -44,9 +44,6 @@ struct InstalledProfileView: View, Routable {
 
     let errorHandler: ErrorHandler
 
-    @Binding
-    var nextProfileId: Profile.ID?
-
     var flow: ProfileFlow?
 
     var body: some View {
@@ -250,8 +247,7 @@ private struct HeaderView: View {
             profileManager: .forPreviews,
             profile: .forPreviews,
             tunnel: .forPreviews,
-            errorHandler: .default(),
-            nextProfileId: .constant(nil)
+            errorHandler: .default()
         )
     }
 }
@@ -264,9 +260,7 @@ private struct ContentView: View {
                 profileManager: .forPreviews,
                 tunnel: .forPreviews,
                 preview: .init(.forPreviews),
-                errorHandler: .default(),
-                nextProfileId: .constant(nil),
-                withMarker: false
+                errorHandler: .default()
             )
         }
     }
