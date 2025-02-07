@@ -45,15 +45,15 @@ struct ProfileCardView: View {
                 onTap?(preview)
             } label: {
                 Text(preview.name)
-                    .font(.headline)
+                    .font(style == .full ? .headline : nil)
                     .themeTruncating()
             }
-            Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-                .multilineTextAlignment(.leading)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            // FIXME: ###, handle .full
+            if style == .full {
+                Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
+                    .multilineTextAlignment(.leading)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .unanimated()
