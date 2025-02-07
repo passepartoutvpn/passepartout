@@ -53,16 +53,13 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
     var flow: ProfileFlow?
 
     var body: some View {
-        VStack(spacing: .zero) {
-            Spacer(minLength: .zero)
-            HStack {
-                cardView
-                Spacer()
-                attributesView
-                tunnelToggle
-            }
-            Spacer(minLength: .zero)
+        HStack {
+            cardView
+            Spacer()
+            attributesView
+            tunnelToggle
         }
+        .padding(.vertical, 4)
     }
 }
 
