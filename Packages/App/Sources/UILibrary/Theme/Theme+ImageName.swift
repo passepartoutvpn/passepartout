@@ -45,6 +45,9 @@ extension Theme {
         case hide
         case info
         case marked
+        case moduleConnection
+        case moduleOnDemand
+        case moduleSettings
         case moreDetails
         case navigate
         case pending
@@ -98,6 +101,9 @@ extension Theme.ImageName {
             case .hide: return "eye.slash"
             case .info: return "info.circle"
             case .marked: return "checkmark"
+            case .moduleConnection: return "link"
+            case .moduleOnDemand: return "wifi"
+            case .moduleSettings: return "globe"
             case .moreDetails: return "ellipsis.circle"
             case .navigate: return "chevron.forward"
             case .pending: return "clock"

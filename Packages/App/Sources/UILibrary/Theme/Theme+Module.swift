@@ -27,18 +27,16 @@ import PassepartoutKit
 import SwiftUI
 
 extension ModuleBuilder {
-
-    @ViewBuilder
-    public var themeIcon: some View {
+    public var themeIcon: Theme.ImageName {
         switch moduleType {
         case .openVPN, .wireGuard:
-            Image(systemName: "link")
+            .moduleConnection
         case .onDemand:
-            Image(systemName: "wifi")
+            .moduleOnDemand
         case .dns, .httpProxy, .ip:
-            Image(systemName: "globe")
+            .moduleSettings
         default:
-            EmptyView()
+            .moduleSettings
         }
     }
 }

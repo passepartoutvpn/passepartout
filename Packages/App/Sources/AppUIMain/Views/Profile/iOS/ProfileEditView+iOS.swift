@@ -108,7 +108,7 @@ private extension ProfileEditView {
 
     func moduleRow(for module: any ModuleBuilder) -> some View {
         EditorModuleToggle(profileEditor: profileEditor, module: module) {
-            Label {
+            ThemeImageLabel(module.themeIcon, inForm: true) {
                 HStack {
                     NavigatingButton(module.description(inEditor: profileEditor)) {
                         push(.moduleDetail(moduleId: module.id))
@@ -121,8 +121,6 @@ private extension ProfileEditView {
                         PurchaseRequiredView(for: module as? AppFeatureRequiring)
                     }
                 }
-            } icon: {
-                AnyView(module.themeIcon)
             }
         }
     }
