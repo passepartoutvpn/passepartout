@@ -112,7 +112,9 @@ private extension ProfileRowView {
     var tunnelToggle: some View {
         TunnelToggle(
             profile: profileManager.profile(withId: preview.id),
-            tunnel: tunnel
+            tunnel: tunnel,
+            errorHandler: errorHandler,
+            flow: flow?.connectionFlow
         )
         // FIXME: ###, UI tests
         .uiAccessibility(.App.profileToggle)

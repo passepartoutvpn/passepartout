@@ -24,10 +24,11 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: ###, handle all scenarios from TunnelToggleButton
+// FIXME: ###, duplication in TunnelToggleButton
 
 public struct TunnelToggle: View {
     private let profile: Profile?
@@ -35,9 +36,15 @@ public struct TunnelToggle: View {
     @ObservedObject
     private var tunnel: ExtendedTunnel
 
-    public init(profile: Profile?, tunnel: ExtendedTunnel) {
+    private let errorHandler: ErrorHandler
+
+    private let flow: ConnectionFlow?
+
+    public init(profile: Profile?, tunnel: ExtendedTunnel, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
         self.profile = profile
         self.tunnel = tunnel
+        self.errorHandler = errorHandler
+        self.flow = flow
     }
 
     public var body: some View {
@@ -52,20 +59,13 @@ private extension TunnelToggle {
     var tunnelBinding: Binding<Bool> {
         Binding {
             tunnelProfile != nil
-        } set: { isOn in
-            guard let profile else {
-                return
-            }
-            Task {
-                if isOn, canConnect {
-                    try await tunnel.connect(with: profile)
-                } else {
-                    try await tunnel.disconnect()
-                }
-            }
+        } set: {
+            tryPerform(isOn: $0)
         }
     }
+}
 
+private extension TunnelToggle {
     var tunnelProfile: TunnelCurrentProfile? {
         guard let profile else {
             return nil
@@ -82,5 +82,36 @@ private extension TunnelToggle {
 
     var isDisabled: Bool {
         profile == nil || tunnelProfile?.status == .deactivating
+    }
+
+    func tryPerform(isOn: Bool) {
+        guard let profile else {
+            return
+        }
+        Task {
+            await perform(isOn: isOn, with: profile)
+        }
+    }
+
+    func perform(isOn: Bool, with profile: Profile) async {
+        do {
+            if tunnelProfile != nil {
+                if isOn, canConnect {
+                    await flow?.onConnect(profile)
+                } else {
+                    try await tunnel.disconnect()
+                }
+            } else {
+                await flow?.onConnect(profile)
+            }
+        } catch is CancellationError {
+            //
+        } catch {
+            errorHandler.handle(
+                error,
+                title: profile.name,
+                message: Strings.Errors.App.tunnel
+            )
+        }
     }
 }
