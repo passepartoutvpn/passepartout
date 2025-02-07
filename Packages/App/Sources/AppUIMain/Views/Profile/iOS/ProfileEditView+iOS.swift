@@ -109,15 +109,9 @@ private extension ProfileEditView {
     func moduleRow(for module: any ModuleBuilder) -> some View {
         EditorModuleToggle(profileEditor: profileEditor, module: module) {
             HStack {
-                Button {
+                NavigatingButton(module.description(inEditor: profileEditor)) {
                     push(.moduleDetail(moduleId: module.id))
-                } label: {
-                    HStack {
-                        Text(module.description(inEditor: profileEditor))
-                        ThemeImage(.navigate)
-                    }
                 }
-                .buttonStyle(.borderless)
                 .uiAccessibility(.Profile.moduleLink)
 
                 if errorModuleIds.contains(module.id) {

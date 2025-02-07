@@ -99,7 +99,7 @@ extension Theme.ImageName {
             case .info: return "info.circle"
             case .marked: return "checkmark"
             case .moreDetails: return "ellipsis.circle"
-            case .navigate: return "chevron.forward.circle.fill"
+            case .navigate: return "chevron.forward"
             case .pending: return "clock"
             case .profileEdit: return "square.and.pencil"
             case .profileImport: return "square.and.arrow.down"
