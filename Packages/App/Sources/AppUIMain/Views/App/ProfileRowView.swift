@@ -57,8 +57,10 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
             cardView
             Spacer()
             attributesView
+            providerServerButton
             tunnelToggle
         }
+        .unanimated()
     }
 }
 
@@ -75,6 +77,11 @@ private extension ProfileRowView {
 
         // FIXME: ###, UI tests
         .uiAccessibility(.App.profileMenu)
+    }
+
+    var providerServerButton: some View {
+        profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
+            .font(.title)
     }
 
     var attributesView: some View {
