@@ -66,7 +66,8 @@ public actor OpenVPNConnection {
               !endpoints.isEmpty else {
             fatalError("No OpenVPN remotes defined?")
         }
-        self.configuration = configuration
+
+        self.configuration = try configuration.withModules(from: parameters.controller.profile)
 
         backend = CyclingConnection(
             factory: parameters.factory,
@@ -233,6 +234,47 @@ extension OpenVPNConnection: OpenVPNSessionDelegate {
 }
 
 // MARK: - Helpers
+
+private extension OpenVPN.Configuration {
+    func withModules(from profile: Profile) throws -> Self {
+        var newBuilder = builder()
+        let ipModules = profile.activeModules
+            .compactMap {
+                $0 as? IPModule
+            }
+
+        let defaultRoute = Route(defaultWithGateway: nil)
+        ipModules.forEach { ipModule in
+            var policies = newBuilder.routingPolicies ?? []
+            if !policies.contains(.IPv4), ipModule.shouldAddIPv4Policy {
+                policies.append(.IPv4)
+            }
+            if !policies.contains(.IPv6), ipModule.shouldAddIPv6Policy {
+                policies.append(.IPv6)
+            }
+            newBuilder.routingPolicies = policies
+        }
+        return try newBuilder.tryBuild(isClient: true)
+    }
+}
+
+private extension IPModule {
+    var shouldAddIPv4Policy: Bool {
+        guard let ipv4 else {
+            return false
+        }
+        let defaultRoute = Route(defaultWithGateway: nil)
+        return ipv4.includedRoutes.contains(defaultRoute) && !ipv4.excludedRoutes.contains(defaultRoute)
+    }
+
+    var shouldAddIPv6Policy: Bool {
+        guard let ipv6 else {
+            return false
+        }
+        let defaultRoute = Route(defaultWithGateway: nil)
+        return ipv6.includedRoutes.contains(defaultRoute) && !ipv6.excludedRoutes.contains(defaultRoute)
+    }
+}
 
 private extension OpenVPNConnection {
     nonisolated func onStatus(_ connectionStatus: ConnectionStatus) {
