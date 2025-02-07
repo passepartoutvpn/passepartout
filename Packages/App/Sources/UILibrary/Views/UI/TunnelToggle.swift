@@ -60,7 +60,7 @@ public struct TunnelToggle: View {
 private extension TunnelToggle {
     var tunnelBinding: Binding<Bool> {
         Binding {
-            tunnelProfile != nil
+            isEnabled
         } set: {
             tryPerform(isOn: $0)
         }
@@ -73,6 +73,13 @@ private extension TunnelToggle {
             return nil
         }
         return tunnel.currentProfiles[profile.id]
+    }
+
+    var isEnabled: Bool {
+        guard let tunnelProfile else {
+            return false
+        }
+        return tunnelProfile.status != .inactive || tunnelProfile.onDemand
     }
 
     var canConnect: Bool {
