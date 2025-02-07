@@ -88,7 +88,7 @@ private extension ProfileRowView {
     var tunnelToggle: some View {
         TunnelToggle(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: preview.id),
+            profile: profile,
             errorHandler: errorHandler,
             flow: flow?.connectionFlow
         )
