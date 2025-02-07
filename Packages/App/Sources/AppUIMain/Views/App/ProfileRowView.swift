@@ -141,23 +141,26 @@ private extension ProfileRowView {
     }
 
     var cardView: some View {
-        TunnelToggleButton(
-            tunnel: tunnel,
-            profile: profile,
-            nextProfileId: $nextProfileId,
-            errorHandler: errorHandler,
-            flow: flow?.connectionFlow,
-            label: { _, _ in
-                ProfileCardView(
-                    style: style,
-                    preview: preview
-                )
-                .frame(maxWidth: .infinity)
-                .contentShape(.rect)
-            }
+        ProfileCardView(
+            style: style,
+            preview: preview,
+            onTap: flow?.onEditProfile
         )
+        .contentShape(.rect)
         .foregroundStyle(.primary)
+
+        // FIXME: ###, UI tests
         .uiAccessibility(.App.profileToggle)
+
+//        TunnelToggleButton(
+//            tunnel: tunnel,
+//            profile: profile,
+//            nextProfileId: $nextProfileId,
+//            errorHandler: errorHandler,
+//            flow: flow?.connectionFlow,
+//            label: { _, _ in
+//            }
+//        )
     }
 
     var attributesView: some View {
@@ -201,13 +204,13 @@ private extension ProfileRowView {
 
     return Form {
         ProfileRowView(
-            style: .compact,
+            style: .full,
             profileManager: profileManager,
             tunnel: .forPreviews,
             preview: .init(profile),
             errorHandler: .default(),
             nextProfileId: .constant(nil),
-            withMarker: true
+            withMarker: false
         )
     }
     .task {

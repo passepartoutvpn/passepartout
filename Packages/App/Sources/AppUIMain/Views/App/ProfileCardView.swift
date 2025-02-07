@@ -37,33 +37,32 @@ struct ProfileCardView: View {
 
     let preview: ProfilePreview
 
-    var body: some View {
-        switch style {
-        case .compact:
-            Text(preview.name)
-                .themeTruncating()
-                .frame(maxWidth: .infinity, alignment: .leading)
+    var onTap: ((ProfilePreview) -> Void)?
 
-        case .full:
-            VStack(alignment: .leading) {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            NavigatingButton {
+                onTap?(preview)
+            } label: {
                 Text(preview.name)
                     .font(.headline)
                     .themeTruncating()
-
+            }
+            if style == .full {
                 Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
                     .multilineTextAlignment(.leading)
-                    .font(.subheadline)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 // MARK: - Previews
 
 #Preview {
-    List {
+    Form {
         Section {
             ProfileCardView(
                 style: .compact,
@@ -77,5 +76,6 @@ struct ProfileCardView: View {
             )
         }
     }
+    .themeForm()
     .withMockEnvironment()
 }
