@@ -79,6 +79,49 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
 }
 
 private extension ProfileRowView {
+    var markerView: some View {
+        MarkerView(
+            profileId: preview.id,
+            nextProfileId: nextProfileId,
+            tunnel: tunnel,
+            requiredFeatures: requiredFeatures
+        )
+    }
+
+    var cardView: some View {
+        ProfileCardView(
+            style: style,
+            preview: preview,
+            onTap: flow?.onEditProfile
+        )
+        .contentShape(.rect)
+        .foregroundStyle(.primary)
+
+        // FIXME: ###, UI tests
+        .uiAccessibility(.App.profileMenu)
+    }
+
+    var attributesView: some View {
+        ProfileAttributesView(
+            attributes: attributes,
+            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+        )
+        .imageScale(.large)
+    }
+
+    var tunnelToggle: some View {
+
+        // FIXME: ###, make this work
+        Toggle("", isOn: .constant(true))
+            .labelsHidden()
+            .toggleStyle(.switch)
+
+            // FIXME: ###, UI tests
+            .uiAccessibility(.App.profileToggle)
+    }
+}
+
+private extension ProfileRowView {
     var profile: Profile? {
         profileManager.profile(withId: preview.id)
     }
@@ -127,49 +170,6 @@ private struct MarkerView: View {
             }
         }
         .frame(width: 24)
-    }
-}
-
-private extension ProfileRowView {
-    var markerView: some View {
-        MarkerView(
-            profileId: preview.id,
-            nextProfileId: nextProfileId,
-            tunnel: tunnel,
-            requiredFeatures: requiredFeatures
-        )
-    }
-
-    var cardView: some View {
-        ProfileCardView(
-            style: style,
-            preview: preview,
-            onTap: flow?.onEditProfile
-        )
-        .contentShape(.rect)
-        .foregroundStyle(.primary)
-
-        // FIXME: ###, UI tests
-        .uiAccessibility(.App.profileMenu)
-    }
-
-    var attributesView: some View {
-        ProfileAttributesView(
-            attributes: attributes,
-            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
-        )
-        .imageScale(.large)
-    }
-
-    var tunnelToggle: some View {
-
-        // FIXME: ###, make this work
-        Toggle("", isOn: .constant(true))
-            .labelsHidden()
-            .toggleStyle(.switch)
-
-            // FIXME: ###, UI tests
-            .uiAccessibility(.App.profileToggle)
     }
 }
 
