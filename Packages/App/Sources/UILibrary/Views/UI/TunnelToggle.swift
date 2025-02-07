@@ -53,7 +53,7 @@ public struct TunnelToggle: View {
         Toggle("", isOn: tunnelBinding)
             .labelsHidden()
             .toggleStyle(.switch)
-            .disabled(isDisabled)
+            .disabled(!canInteract)
     }
 }
 
@@ -82,8 +82,8 @@ private extension TunnelToggle {
         return true
     }
 
-    var isDisabled: Bool {
-        profile == nil || tunnelProfile?.status == .deactivating
+    var canInteract: Bool {
+        profile != nil && tunnelProfile?.status != .deactivating
     }
 
     func tryPerform(isOn: Bool) {
