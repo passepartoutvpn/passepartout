@@ -153,7 +153,6 @@ private struct StatusText: View {
     var body: some View {
         debugChanges()
         return ConnectionStatusText(tunnel: tunnel)
-            .foregroundStyle(tunnel.statusColor(theme))
     }
 }
 

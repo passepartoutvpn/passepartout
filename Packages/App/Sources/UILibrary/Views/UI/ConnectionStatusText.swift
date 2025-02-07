@@ -36,12 +36,20 @@ public struct ConnectionStatusText: View, ThemeProviding {
     @ObservedObject
     private var tunnel: ExtendedTunnel
 
-    public init(tunnel: ExtendedTunnel) {
+    private let withColors: Bool
+
+    public init(tunnel: ExtendedTunnel, withColors: Bool = true) {
         self.tunnel = tunnel
+        self.withColors = withColors
     }
 
     public var body: some View {
-        Text(statusDescription)
+        if withColors {
+            Text(statusDescription)
+                .foregroundStyle(tunnel.statusColor(theme))
+        } else {
+            Text(statusDescription)
+        }
     }
 }
 

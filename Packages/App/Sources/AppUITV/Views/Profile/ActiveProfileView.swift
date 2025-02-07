@@ -93,7 +93,6 @@ private extension ActiveProfileView {
         ConnectionStatusText(tunnel: tunnel)
             .font(.title2)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(tunnel.statusColor(theme))
             .brightness(0.2)
     }
 
