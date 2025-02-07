@@ -25,23 +25,31 @@
 
 import SwiftUI
 
-public struct NavigatingButton: View {
-    private let title: String
-
+public struct NavigatingButton<Label>: View where Label: View {
     private let action: () -> Void
 
-    public init(_ title: String, action: @escaping () -> Void) {
-        self.title = title
+    private let label: () -> Label
+
+    public init(action: @escaping () -> Void, label: @escaping () -> Label) {
         self.action = action
+        self.label = label
     }
 
     public var body: some View {
         Button(action: action) {
             HStack {
-                Text(title)
+                label()
                 ThemeImage(.navigate)
             }
         }
         .buttonStyle(.plain)
+    }
+}
+
+extension NavigatingButton where Label == Text {
+    public init(_ title: String, action: @escaping () -> Void) {
+        self.init(action: action) {
+            Text(title)
+        }
     }
 }
