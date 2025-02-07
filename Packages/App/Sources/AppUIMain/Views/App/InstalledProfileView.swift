@@ -95,7 +95,7 @@ private extension InstalledProfileView {
 
     var statusView: some View {
         HStack {
-            providerSelectorButton
+            profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
             StatusText(theme: theme, tunnel: tunnel)
         }
     }
@@ -121,23 +121,6 @@ private extension InstalledProfileView {
             flow: flow
         )
     }
-
-    var providerSelectorButton: some View {
-        profile?
-            .selectedProvider
-            .map { _, selection in
-                Button {
-                    flow?.connectionFlow?.onProviderEntityRequired(profile!) // never nil due to .map
-                } label: {
-                    providerSelectorLabel(with: selection.entityHeader)
-                }
-                .buttonStyle(.plain)
-            }
-    }
-
-    func providerSelectorLabel(with entity: ProviderEntityHeader?) -> some View {
-        ProviderCountryFlag(entity: entity)
-    }
 }
 
 // MARK: - Subviews (observing)
@@ -153,20 +136,6 @@ private struct StatusText: View {
     var body: some View {
         debugChanges()
         return ConnectionStatusText(tunnel: tunnel)
-    }
-}
-
-private struct ProviderCountryFlag: View {
-    let entity: ProviderEntityHeader?
-
-    var body: some View {
-        ThemeCountryFlag(
-            entity?.countryCode,
-            placeholderTip: Strings.Errors.App.Passepartout.missingProviderEntity,
-            countryTip: {
-                $0.localizedAsRegionCode
-            }
-        )
     }
 }
 
