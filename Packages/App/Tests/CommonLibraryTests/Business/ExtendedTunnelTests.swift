@@ -48,9 +48,9 @@ extension ExtendedTunnelTests {
         let exp = expectation(description: "Last error code")
         var didCall = false
         sut
-            .$lastErrorCode
+            .objectWillChange
             .sink {
-                if !didCall, $0 != nil {
+                if !didCall, sut.lastErrorCode != nil {
                     didCall = true
                     exp.fulfill()
                 }
@@ -78,9 +78,9 @@ extension ExtendedTunnelTests {
         let exp = expectation(description: "Data count")
         var didCall = false
         sut
-            .$dataCount
+            .objectWillChange
             .sink {
-                if !didCall, $0 != nil {
+                if !didCall, sut.dataCount != nil {
                     didCall = true
                     exp.fulfill()
                 }

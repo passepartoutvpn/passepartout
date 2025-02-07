@@ -45,14 +45,12 @@ public final class ExtendedTunnel: ObservableObject {
         environment.environmentValue(forKey: key)
     }
 
-    @Published
     public private(set) var lastErrorCode: PassepartoutError.Code? {
         didSet {
             pp_log(.app, .info, "ExtendedTunnel.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
         }
     }
 
-    @Published
     public private(set) var dataCount: DataCount?
 
     private var subscriptions: Set<AnyCancellable>
@@ -90,6 +88,10 @@ extension ExtendedTunnel {
 extension ExtendedTunnel {
     public var currentProfile: TunnelCurrentProfile? {
         tunnel.currentProfile ?? lastUsedProfile
+    }
+
+    public var currentProfiles: [Profile.ID: TunnelCurrentProfile] {
+        tunnel.currentProfiles
     }
 
     public var currentProfilePublisher: AnyPublisher<TunnelCurrentProfile?, Never> {
@@ -151,33 +153,31 @@ extension ExtendedTunnel {
 private extension ExtendedTunnel {
     func observeObjects() {
         tunnel
-            .$status
+            .$currentProfile
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else {
                     return
                 }
-                switch $0 {
+
+                // update last used profile
+                if let id = $0?.id {
+                    defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                }
+
+                // follow status updates
+                switch $0?.status ?? .inactive {
+                case .active:
+                    break
                 case .activating:
                     lastErrorCode = nil
-
+                    dataCount = nil
                 default:
                     lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
-                }
-                if $0 != .active {
                     dataCount = nil
                 }
-            }
-            .store(in: &subscriptions)
 
-        tunnel
-            .$currentProfile
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                if let id = $0?.id {
-                    self?.defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
-                }
-                self?.objectWillChange.send()
+                objectWillChange.send()
             }
             .store(in: &subscriptions)
 
@@ -195,6 +195,7 @@ private extension ExtendedTunnel {
                 if tunnel.status == .active {
                     dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
                 }
+                objectWillChange.send()
             }
             .store(in: &subscriptions)
     }
@@ -226,7 +227,11 @@ private extension ExtendedTunnel {
               let uuid = UUID(uuidString: uuidString) else {
             return nil
         }
-        return TunnelCurrentProfile(id: uuid, onDemand: false)
+        return TunnelCurrentProfile(
+            id: uuid,
+            status: .inactive,
+            onDemand: false
+        )
     }
 }
 
