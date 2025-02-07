@@ -58,18 +58,13 @@ struct ProfileCardView: View {
             Spacer(minLength: .zero)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .unanimated()
+#if os(iOS)
+        .padding(.vertical, 4)
+#endif
     }
 }
 
 private extension ProfileCardView {
-//    var modulesView: some View {
-//        Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-//            .multilineTextAlignment(.leading)
-//            .foregroundStyle(.secondary)
-//            .padding(.bottom, 4)
-//    }
-
     var tunnelView: some View {
         Group {
             if tunnel.currentProfile?.id == preview.id {

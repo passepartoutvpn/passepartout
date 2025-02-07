@@ -57,7 +57,6 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
             cardView
             Spacer()
             attributesView
-            providerServerButton
             tunnelToggle
         }
         .unanimated()
@@ -79,17 +78,12 @@ private extension ProfileRowView {
         .uiAccessibility(.App.profileMenu)
     }
 
-    var providerServerButton: some View {
-        profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
-            .font(.title)
-    }
-
     var attributesView: some View {
         ProfileAttributesView(
             attributes: attributes,
             isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
         )
-        .imageScale(.large)
+        .imageScale(isBigDevice ? .large : .medium)
     }
 
     var tunnelToggle: some View {
