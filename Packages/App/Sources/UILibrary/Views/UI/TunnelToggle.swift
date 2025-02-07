@@ -79,7 +79,7 @@ public struct TunnelTextToggle: View {
 
 extension TunnelToggle where Label == TunnelTextToggle {
     public init(_ title: String = "", tunnel: ExtendedTunnel, profile: Profile?, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
-        self.init(tunnel: tunnel, profile: profile, errorHandler: errorHandler, flow: flow) { isOn, canInteract in
+        self.init(tunnel: tunnel, profile: profile, errorHandler: errorHandler, flow: flow) { isOn, _ in
             TunnelTextToggle(title: title, isOn: isOn)
         }
     }
