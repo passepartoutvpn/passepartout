@@ -95,9 +95,13 @@ private extension InstalledProfileView {
 
     var statusView: some View {
         HStack {
-            profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
+            providerServerButton
             StatusText(theme: theme, tunnel: tunnel)
         }
+    }
+
+    var providerServerButton: some View {
+        profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
     }
 
     var toggleButton: some View {
