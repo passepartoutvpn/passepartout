@@ -139,7 +139,9 @@ private struct ProvidersSubmenu: View {
                 assert(providerBuilder.providerId == provider.id)
             }
             editable.modules.append(newModule)
-            editable.modules.append(OnDemandModule.Builder())
+            var onDemandBuilder = OnDemandModule.Builder()
+            onDemandBuilder.isEnabled = true
+            editable.modules.append(onDemandBuilder)
             editable.activeModulesIds = Set(editable.modules.map(\.id))
             onSelect(editable)
         }
