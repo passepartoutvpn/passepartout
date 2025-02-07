@@ -56,6 +56,7 @@ struct ProfileCardView: View {
             // FIXME: ###, handle .full
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .unanimated()
     }
 }
 
