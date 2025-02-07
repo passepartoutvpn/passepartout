@@ -37,15 +37,18 @@ struct ProfileCardView: View {
 
     let preview: ProfilePreview
 
+    @ObservedObject
+    var tunnel: ExtendedTunnel
+
     var onTap: ((ProfilePreview) -> Void)?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading) {
             NavigatingButton {
                 onTap?(preview)
             } label: {
                 Text(preview.name)
-                    .font(style == .full ? .headline : nil)
+                    .font(.headline)
                     .themeTruncating()
             }
             if style == .full {
@@ -53,7 +56,17 @@ struct ProfileCardView: View {
                     .multilineTextAlignment(.leading)
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .padding(.bottom, 4)
             }
+            Group {
+                if tunnel.currentProfile?.id == preview.id {
+                    ConnectionStatusText(tunnel: tunnel)
+                } else {
+                    Text(Strings.Entities.TunnelStatus.inactive)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .font(.subheadline)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .unanimated()
@@ -67,13 +80,15 @@ struct ProfileCardView: View {
         Section {
             ProfileCardView(
                 style: .compact,
-                preview: .init(.forPreviews)
+                preview: .init(.forPreviews),
+                tunnel: .forPreviews
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                preview: .init(.forPreviews)
+                preview: .init(.forPreviews),
+                tunnel: .forPreviews
             )
         }
     }

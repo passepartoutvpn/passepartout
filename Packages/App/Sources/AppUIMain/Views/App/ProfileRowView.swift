@@ -67,6 +67,7 @@ private extension ProfileRowView {
         ProfileCardView(
             style: style,
             preview: preview,
+            tunnel: tunnel,
             onTap: flow?.onEditProfile
         )
         .contentShape(.rect)
