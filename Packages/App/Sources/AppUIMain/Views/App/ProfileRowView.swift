@@ -68,9 +68,9 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
                     cardView
                 }
                 Spacer()
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     attributesView
-                    infoButton
+                    tunnelToggle
                 }
             }
             Spacer(minLength: .zero)
@@ -150,17 +150,7 @@ private extension ProfileRowView {
         .foregroundStyle(.primary)
 
         // FIXME: ###, UI tests
-        .uiAccessibility(.App.profileToggle)
-
-//        TunnelToggleButton(
-//            tunnel: tunnel,
-//            profile: profile,
-//            nextProfileId: $nextProfileId,
-//            errorHandler: errorHandler,
-//            flow: flow?.connectionFlow,
-//            label: { _, _ in
-//            }
-//        )
+        .uiAccessibility(.App.profileMenu)
     }
 
     var attributesView: some View {
@@ -168,31 +158,18 @@ private extension ProfileRowView {
             attributes: attributes,
             isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
         )
-        .imageScale(isBigDevice ? .large : .medium)
+        .imageScale(.large)
     }
 
-    var infoButton: some View {
-        Menu {
-            ProfileContextMenu(
-                style: preview.id == tunnel.currentProfile?.id ? .installedProfile : .infoButton,
-                profileManager: profileManager,
-                tunnel: tunnel,
-                preview: preview,
-                errorHandler: errorHandler,
-                flow: flow
-            )
-        } label: {
-            ThemeImage(.moreDetails)
-                .imageScale(.large)
-        }
-        // XXX: #584, necessary to avoid cell selection
-#if os(iOS)
-        .menuStyle(.borderlessButton)
-#else
-        .foregroundStyle(.secondary)
-        .buttonStyle(.plain)
-#endif
-        .uiAccessibility(.App.profileMenu)
+    var tunnelToggle: some View {
+
+        // FIXME: ###, make this work
+        Toggle("", isOn: .constant(true))
+            .labelsHidden()
+            .toggleStyle(.switch)
+
+            // FIXME: ###, UI tests
+            .uiAccessibility(.App.profileToggle)
     }
 }
 
