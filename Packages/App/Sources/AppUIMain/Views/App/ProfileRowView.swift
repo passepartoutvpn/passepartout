@@ -82,7 +82,7 @@ private extension ProfileRowView {
             attributes: attributes,
             isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
         )
-        .imageScale(isBigDevice ? .large : .medium)
+        .imageScale(.large)
     }
 
     var tunnelToggle: some View {
