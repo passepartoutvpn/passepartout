@@ -74,14 +74,17 @@ private extension ProfileListView {
     }
 
     func toggleButton(for preview: ProfilePreview) -> some View {
-        TunnelToggleButton(
+        TunnelToggle(
             tunnel: tunnel,
             profile: profileManager.profile(withId: preview.id),
-            nextProfileId: .constant(nil),
             errorHandler: errorHandler,
             flow: flow,
-            label: { _, _ in
-                toggleView(for: preview)
+            label: { isOn, _ in
+                Button {
+                    isOn.wrappedValue.toggle()
+                } label: {
+                    toggleView(for: preview)
+                }
             }
         )
         .focused($focusedField, equals: .profile(preview.id))

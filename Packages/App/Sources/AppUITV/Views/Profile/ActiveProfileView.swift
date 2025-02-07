@@ -126,33 +126,14 @@ private extension ActiveProfileView {
     }
 
     var toggleConnectionButton: some View {
-        TunnelToggleButton(
+        ActiveTunnelButton(
             tunnel: tunnel,
             profile: profile,
-            nextProfileId: .constant(nil),
+            focusedField: $focusedField,
             errorHandler: errorHandler,
-            flow: flow,
-            label: {
-                Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(theme.relevantWeight)
-                    .forMainButton(
-                        withColor: toggleConnectionColor,
-                        focused: focusedField == .connect,
-                        disabled: $1
-                    )
-            }
+            flow: flow
         )
         .focused($focusedField, equals: .connect)
-    }
-
-    var toggleConnectionColor: Color {
-        switch tunnel.status {
-        case .inactive:
-            return tunnel.currentProfile?.onDemand == true ? theme.disableColor : theme.enableColor
-        default:
-            return theme.disableColor
-        }
     }
 
     var switchProfileButton: some View {
