@@ -128,11 +128,7 @@ private extension ProfileListView {
 
 private extension ProfileListView {
     var cardStyle: ProfileCardView.Style {
-        if hsClass == .compact || vsClass == .compact {
-            return .compact
-        } else {
-            return .full
-        }
+        .compact
     }
 }
 

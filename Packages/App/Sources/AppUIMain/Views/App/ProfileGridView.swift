@@ -118,7 +118,7 @@ private extension ProfileGridView {
 
     func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(
-            style: .full,
+            style: .compact,
             profileManager: profileManager,
             tunnel: tunnel,
             preview: preview,
