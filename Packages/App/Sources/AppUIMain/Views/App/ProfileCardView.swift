@@ -48,12 +48,12 @@ struct ProfileCardView: View {
                     .font(.headline)
                     .themeTruncating()
             }
-            if style == .full {
-                Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-                    .multilineTextAlignment(.leading)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+            Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
+                .multilineTextAlignment(.leading)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            // FIXME: ###, handle .full
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
