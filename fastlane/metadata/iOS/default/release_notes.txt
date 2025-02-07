@@ -1,1 +1,4 @@
+* OpenVPN: Fix issue with empty DNS servers
+* OpenVPN: Fix regression in default routes (#1145)
+* Fix migration of DNS settings (#1144)
 * Restore "Keep alive on sleep" feature (#1143)
