@@ -279,6 +279,7 @@ public struct ThemeDisclosableMenu<Content, Label>: View where Content: View, La
 #if os(macOS)
         .buttonStyle(.plain)
 #endif
+        .cursor(.hand)
     }
 }
 
