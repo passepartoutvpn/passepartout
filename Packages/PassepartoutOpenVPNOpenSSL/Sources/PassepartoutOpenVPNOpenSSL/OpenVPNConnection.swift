@@ -243,7 +243,6 @@ private extension OpenVPN.Configuration {
                 $0 as? IPModule
             }
 
-        let defaultRoute = Route(defaultWithGateway: nil)
         ipModules.forEach { ipModule in
             var policies = newBuilder.routingPolicies ?? []
             if !policies.contains(.IPv4), ipModule.shouldAddIPv4Policy {
