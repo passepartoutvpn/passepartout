@@ -66,7 +66,7 @@ public final class Theme: ObservableObject {
         blue: .zero
     )
 
-    public internal(set) var inactiveColor: Color = .gray
+    public internal(set) var inactiveColor: Color = .secondary
 
     public internal(set) var pendingColor: Color = .orange
 
