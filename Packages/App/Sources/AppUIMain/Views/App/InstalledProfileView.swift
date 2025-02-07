@@ -104,13 +104,11 @@ private extension InstalledProfileView {
     }
 
     var toggleButton: some View {
-        ToggleButton(
-            theme: theme,
-            tunnel: tunnel,
+        TunnelToggle(
             profile: profile,
-            nextProfileId: $nextProfileId,
+            tunnel: tunnel,
             errorHandler: errorHandler,
-            flow: flow
+            flow: flow?.connectionFlow
         )
         .opaque(profile != nil)
     }
@@ -158,42 +156,6 @@ private struct StatusText: View {
         debugChanges()
         return ConnectionStatusText(tunnel: tunnel)
             .foregroundStyle(tunnel.statusColor(theme))
-    }
-}
-
-private struct ToggleButton: View {
-
-    @ObservedObject
-    var theme: Theme
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let profile: Profile?
-
-    @Binding
-    var nextProfileId: Profile.ID?
-
-    @ObservedObject
-    var errorHandler: ErrorHandler
-
-    let flow: ProfileFlow?
-
-    var body: some View {
-        TunnelToggleButton(
-            tunnel: tunnel,
-            profile: profile,
-            nextProfileId: $nextProfileId,
-            errorHandler: errorHandler,
-            flow: flow?.connectionFlow,
-            label: { _, _ in
-                ThemeImage(.tunnelToggle)
-                    .scaleEffect(1.5, anchor: .trailing)
-            }
-        )
-        // XXX: #584, necessary to avoid cell selection
-        .buttonStyle(.plain)
-        .foregroundStyle(tunnel.statusColor(theme))
     }
 }
 
