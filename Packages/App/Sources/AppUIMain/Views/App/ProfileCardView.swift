@@ -54,6 +54,7 @@ struct ProfileCardView: View {
                     .themeTruncating()
             }
             tunnelView
+                .font(.subheadline)
 
             Spacer(minLength: .zero)
         }
@@ -65,16 +66,15 @@ struct ProfileCardView: View {
 }
 
 private extension ProfileCardView {
+
+    @ViewBuilder
     var tunnelView: some View {
-        Group {
-            if tunnel.currentProfile?.id == preview.id {
-                ConnectionStatusText(tunnel: tunnel)
-            } else {
-                Text(Strings.Entities.TunnelStatus.inactive)
-                    .foregroundStyle(.secondary)
-            }
+        if tunnel.currentProfile?.id == preview.id {
+            ConnectionStatusText(tunnel: tunnel)
+        } else {
+            Text(Strings.Entities.TunnelStatus.inactive)
+                .foregroundStyle(.secondary)
         }
-        .font(.subheadline)
     }
 }
 
