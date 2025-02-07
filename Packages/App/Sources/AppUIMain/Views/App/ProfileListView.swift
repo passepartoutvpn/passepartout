@@ -115,7 +115,7 @@ private extension ProfileListView {
             preview: preview,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
-            withMarker: true,
+            withMarker: false,
             flow: flow
         )
         .contextMenu {

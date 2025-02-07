@@ -128,7 +128,7 @@ private extension ProfileGridView {
             preview: preview,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
-            withMarker: true,
+            withMarker: false,
             flow: flow
         )
         .themeGridCell(isSelected: preview.id == nextProfileId ?? currentProfile?.id)

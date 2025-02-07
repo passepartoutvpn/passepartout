@@ -304,7 +304,7 @@ private struct ContentView: View {
                 preview: .init(.forPreviews),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),
-                withMarker: true
+                withMarker: false
             )
         }
     }
