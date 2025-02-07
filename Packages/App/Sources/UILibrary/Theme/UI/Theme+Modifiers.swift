@@ -262,10 +262,6 @@ extension View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
     }
 
-    public func themePlainButton(action: @escaping () -> Void) -> some View {
-        modifier(ThemePlainButtonModifier(action: action))
-    }
-
     public func themeGridHeader<Header>(@ViewBuilder header: () -> Header) -> some View where Header: View {
         modifier(ThemeGridSectionModifier(header: header))
     }
@@ -552,10 +548,6 @@ struct ThemeTrailingValueModifier: ViewModifier {
 
 struct ThemeWindowModifier: ViewModifier {
     let size: CGSize
-}
-
-struct ThemePlainButtonModifier: ViewModifier {
-    let action: () -> Void
 }
 
 struct ThemeGridSectionModifier<Header>: ViewModifier where Header: View {

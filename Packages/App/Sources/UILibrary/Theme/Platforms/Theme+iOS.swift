@@ -107,17 +107,6 @@ extension ThemeWindowModifier {
     }
 }
 
-extension ThemePlainButtonModifier {
-    func body(content: Content) -> some View {
-        Button(action: action) {
-            content
-                .frame(maxWidth: .infinity)
-                .contentShape(.rect)
-        }
-        .foregroundStyle(.primary)
-    }
-}
-
 extension ThemeManualInputModifier {
     func body(content: Content) -> some View {
         content
