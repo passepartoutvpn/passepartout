@@ -59,7 +59,6 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
             attributesView
             tunnelToggle
         }
-        .padding(.vertical, 4)
     }
 }
 
