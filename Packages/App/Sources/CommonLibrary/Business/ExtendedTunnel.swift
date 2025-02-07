@@ -45,14 +45,12 @@ public final class ExtendedTunnel: ObservableObject {
         environment.environmentValue(forKey: key)
     }
 
-    @Published
     public private(set) var lastErrorCode: PassepartoutError.Code? {
         didSet {
             pp_log(.app, .info, "ExtendedTunnel.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
         }
     }
 
-    @Published
     public private(set) var dataCount: DataCount?
 
     private var subscriptions: Set<AnyCancellable>
@@ -197,6 +195,7 @@ private extension ExtendedTunnel {
                 if tunnel.status == .active {
                     dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
                 }
+                objectWillChange.send()
             }
             .store(in: &subscriptions)
     }
