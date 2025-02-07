@@ -92,6 +92,7 @@ private extension ProfileRowView {
             errorHandler: errorHandler,
             flow: flow?.connectionFlow
         )
+        .labelsHidden()
         // FIXME: ###, UI tests
         .uiAccessibility(.App.profileToggle)
     }

@@ -107,6 +107,7 @@ private extension InstalledProfileView {
             errorHandler: errorHandler,
             flow: flow?.connectionFlow
         )
+        .labelsHidden()
         .opaque(profile != nil)
     }
 

@@ -28,10 +28,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: ###, duplication in TunnelToggleButton
-#if !os(tvOS)
-
-public struct TunnelToggle: View {
+public struct TunnelToggle<Label>: View where Label: View {
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
@@ -42,25 +39,58 @@ public struct TunnelToggle: View {
 
     private let flow: ConnectionFlow?
 
-    public init(tunnel: ExtendedTunnel, profile: Profile?, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
+    private let label: (Binding<Bool>, Bool) -> Label
+
+    public init(
+        tunnel: ExtendedTunnel,
+        profile: Profile?,
+        errorHandler: ErrorHandler,
+        flow: ConnectionFlow?,
+        label: @escaping (Binding<Bool>, Bool) -> Label
+    ) {
         self.tunnel = tunnel
         self.profile = profile
         self.errorHandler = errorHandler
         self.flow = flow
+        self.label = label
     }
 
     public var body: some View {
-        Toggle("", isOn: tunnelBinding)
-            .labelsHidden()
-            .toggleStyle(.switch)
+        label(isOnBinding, canInteract)
             .disabled(!canInteract)
     }
 }
 
+// MARK: Standard
+
+public struct TunnelTextToggle: View {
+    let title: String
+
+    @Binding
+    var isOn: Bool
+
+    public var body: some View {
+        Toggle(title, isOn: $isOn)
+#if !os(tvOS)
+            .toggleStyle(.switch)
+#endif
+    }
+}
+
+extension TunnelToggle where Label == TunnelTextToggle {
+    public init(_ title: String = "", tunnel: ExtendedTunnel, profile: Profile?, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
+        self.init(tunnel: tunnel, profile: profile, errorHandler: errorHandler, flow: flow) { isOn, canInteract in
+            TunnelTextToggle(title: title, isOn: isOn)
+        }
+    }
+}
+
+// MARK: -
+
 private extension TunnelToggle {
-    var tunnelBinding: Binding<Bool> {
+    var isOnBinding: Binding<Bool> {
         Binding {
-            isEnabled
+            isOn
         } set: {
             tryPerform(isOn: $0)
         }
@@ -75,18 +105,11 @@ private extension TunnelToggle {
         return tunnel.currentProfiles[profile.id]
     }
 
-    var isEnabled: Bool {
+    var isOn: Bool {
         guard let tunnelProfile else {
             return false
         }
         return tunnelProfile.status != .inactive || tunnelProfile.onDemand
-    }
-
-    var canConnect: Bool {
-        if let tunnelProfile {
-            return tunnelProfile.status == .inactive && !tunnelProfile.onDemand
-        }
-        return true
     }
 
     var canInteract: Bool {
@@ -105,7 +128,7 @@ private extension TunnelToggle {
     func perform(isOn: Bool, with profile: Profile) async {
         do {
             if tunnelProfile != nil {
-                if isOn, canConnect {
+                if isOn {
                     await flow?.onConnect(profile)
                 } else {
                     try await tunnel.disconnect()
@@ -124,5 +147,3 @@ private extension TunnelToggle {
         }
     }
 }
-
-#endif
