@@ -49,18 +49,26 @@ struct ProfileStorageSection: View {
 private extension ProfileStorageSection {
     var sharingToggle: some View {
         Toggle(isOn: $profileEditor.isShared) {
-            HStack {
-                Text(Strings.Modules.General.Rows.shared)
-                PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+            Label {
+                HStack {
+                    Text(Strings.Modules.General.Rows.shared)
+                    PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+                }
+            } icon: {
+                ThemeImage(.cloudOn)
             }
         }
     }
 
     var tvToggle: some View {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
-            HStack {
-                Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
-                PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+            Label {
+                HStack {
+                    Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
+                    PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+                }
+            } icon: {
+                ThemeImage(.tvOn)
             }
         }
         .disabled(!profileEditor.isShared)
