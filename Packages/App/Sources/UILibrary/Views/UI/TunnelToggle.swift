@@ -31,18 +31,19 @@ import SwiftUI
 // FIXME: ###, duplication in TunnelToggleButton
 
 public struct TunnelToggle: View {
-    private let profile: Profile?
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
+
+    private let profile: Profile?
 
     private let errorHandler: ErrorHandler
 
     private let flow: ConnectionFlow?
 
-    public init(profile: Profile?, tunnel: ExtendedTunnel, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
-        self.profile = profile
+    public init(tunnel: ExtendedTunnel, profile: Profile?, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
         self.tunnel = tunnel
+        self.profile = profile
         self.errorHandler = errorHandler
         self.flow = flow
     }

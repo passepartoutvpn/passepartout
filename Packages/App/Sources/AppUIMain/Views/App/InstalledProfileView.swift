@@ -105,8 +105,8 @@ private extension InstalledProfileView {
 
     var toggleButton: some View {
         TunnelToggle(
-            profile: profile,
             tunnel: tunnel,
+            profile: profile,
             errorHandler: errorHandler,
             flow: flow?.connectionFlow
         )
