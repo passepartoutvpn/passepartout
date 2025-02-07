@@ -44,6 +44,8 @@ struct ProfileCardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Spacer(minLength: .zero)
+
             NavigatingButton {
                 onTap?(preview)
             } label: {
@@ -51,10 +53,9 @@ struct ProfileCardView: View {
                     .font(.headline)
                     .themeTruncating()
             }
-            if style == .full {
-                modulesView
-            }
             tunnelView
+
+            Spacer(minLength: .zero)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .unanimated()
@@ -62,13 +63,12 @@ struct ProfileCardView: View {
 }
 
 private extension ProfileCardView {
-    var modulesView: some View {
-        Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-            .multilineTextAlignment(.leading)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .padding(.bottom, 4)
-    }
+//    var modulesView: some View {
+//        Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
+//            .multilineTextAlignment(.leading)
+//            .foregroundStyle(.secondary)
+//            .padding(.bottom, 4)
+//    }
 
     var tunnelView: some View {
         Group {
