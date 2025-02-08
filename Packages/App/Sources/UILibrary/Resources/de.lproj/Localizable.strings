@@ -113,7 +113,7 @@
 "global.nouns.no_selection" = "Keine Auswahl";
 "global.nouns.none" = "Keiner";
 "global.nouns.ok" = "OK";
-"global.nouns.on_demand" = "Auf Anfrage";
+"global.nouns.on_demand" = "On-Demand";
 "global.nouns.other" = "Andere";
 "global.nouns.password" = "Passwort";
 "global.nouns.port" = "Port";
@@ -176,7 +176,7 @@
 "modules.openvpn.credentials.guidance.specific" = "Verwende deine spezifischen OpenVPN-Anmeldeinformationen, die nicht mit denen für den Login identisch sind.";
 "modules.openvpn.credentials.guidance.web" = "Verwenden Sie Ihre Anmeldedaten.";
 "modules.openvpn.credentials.interactive" = "Interaktiv";
-"modules.openvpn.credentials.interactive.footer" = "On-demand wird deaktiviert.";
+"modules.openvpn.credentials.interactive.footer" = "On-Demand wird deaktiviert.";
 "modules.openvpn.credentials.otp_method.approach.append" = "Das OTP wird an das Passwort angehängt.";
 "modules.openvpn.credentials.otp_method.approach.encode" = "Das OTP wird zusammen mit dem Passwort in Base64 kodiert.";
 "modules.openvpn.digest" = "Digest";
@@ -203,7 +203,7 @@
 "theme.lock_screen.reason" = "%@ ist gesperrt";
 "views.about.credits.licenses" = "Lizenzen";
 "views.about.credits.notices" = "Hinweise";
-"views.about.credits.title" = "Kredite";
+"views.about.credits.title" = "Credits";
 "views.about.credits.translations" = "Übersetzungen";
 "views.about.links.rows.disclaimer" = "Haftungsausschluss";
 "views.about.links.rows.home_page" = "Startseite";
@@ -239,7 +239,7 @@
 "views.diagnostics.title" = "Diagnose";
 "views.donate.alerts.thank_you.message" = "Das bedeutet mir viel, und ich hoffe wirklich, dass du die App weiterhin nutzt und bewirbst.";
 "views.donate.sections.main.footer" = "Wenn du meine Arbeit schätzt, sind hier ein paar Beiträge, die du sofort spenden kannst. Du wirst nur einmal pro Spende berechnet und du kannst mehrere Spenden machen.";
-"views.donate.title" = "Spende machen";
+"views.donate.title" = "Spenden";
 "views.migration.alerts.delete.message" = "Möchtest du diese Profile verwerfen? Du wirst sie später nicht wiederherstellen können.\n\n%@";
 "views.migration.items.discard" = "Verwerfen";
 "views.migration.items.migrate" = "Fortfahren";
