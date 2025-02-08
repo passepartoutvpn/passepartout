@@ -1,4 +1,6 @@
-* OpenVPN: Fix issue with empty DNS servers
-* OpenVPN: Fix regression in default routes (#1145)
-* Fix migration of DNS settings (#1144)
-* Restore "Keep alive on sleep" feature (#1143)
+* Fix German translations
+* Fix behavior of "Including" on-demand policy (#1151)
+* Wrap rather than truncate long profile names (#1150)
+* Improve the UX of profile editing and management (#1149)
+* Import profiles with on-demand enabled for stability (#1148)
+* Fix "No profiles" message flashing on launch (#1147)
