@@ -49,18 +49,22 @@ struct ProfileStorageSection: View {
 private extension ProfileStorageSection {
     var sharingToggle: some View {
         Toggle(isOn: $profileEditor.isShared) {
-            HStack {
-                Text(Strings.Modules.General.Rows.shared)
-                PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+            ThemeImageLabel(.cloudOn, inForm: true) {
+                HStack {
+                    Text(Strings.Unlocalized.iCloud)
+                    PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+                }
             }
         }
     }
 
     var tvToggle: some View {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
-            HStack {
-                Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
-                PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+            ThemeImageLabel(.tvOn, inForm: true) {
+                HStack {
+                    Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
+                    PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
+                }
             }
         }
         .disabled(!profileEditor.isShared)
@@ -69,7 +73,7 @@ private extension ProfileStorageSection {
 
 private extension ProfileStorageSection {
     var header: String {
-        Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
+        Strings.Modules.General.Sections.Storage.header
     }
 
     var footer: String {

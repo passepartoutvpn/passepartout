@@ -74,7 +74,6 @@ struct ActiveProfileView: View {
                 .buttonStyle(.borderless)
             }
             .padding(.horizontal, 100)
-//            .padding(.top, 50)
 
             Spacer()
         }
@@ -94,7 +93,6 @@ private extension ActiveProfileView {
         ConnectionStatusText(tunnel: tunnel)
             .font(.title2)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundStyle(tunnel.statusColor(theme))
             .brightness(0.2)
     }
 
@@ -127,33 +125,14 @@ private extension ActiveProfileView {
     }
 
     var toggleConnectionButton: some View {
-        TunnelToggleButton(
+        ActiveTunnelButton(
             tunnel: tunnel,
             profile: profile,
-            nextProfileId: .constant(nil),
+            focusedField: $focusedField,
             errorHandler: errorHandler,
-            flow: flow,
-            label: {
-                Text($0 ? Strings.Global.Actions.connect : Strings.Global.Actions.disconnect)
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(theme.relevantWeight)
-                    .forMainButton(
-                        withColor: toggleConnectionColor,
-                        focused: focusedField == .connect,
-                        disabled: $1
-                    )
-            }
+            flow: flow
         )
         .focused($focusedField, equals: .connect)
-    }
-
-    var toggleConnectionColor: Color {
-        switch tunnel.status {
-        case .inactive:
-            return tunnel.currentProfile?.onDemand == true ? theme.disableColor : theme.enableColor
-        default:
-            return theme.disableColor
-        }
     }
 
     var switchProfileButton: some View {
@@ -169,23 +148,6 @@ private extension ActiveProfileView {
                 )
         }
         .focused($focusedField, equals: .switchProfile)
-    }
-}
-
-// MARK: - Local modifiers
-
-private extension View {
-    func forMainButton(withColor color: Color, focused: Bool, disabled: Bool) -> some View {
-        padding(.vertical, 25)
-            .background(disabled ? .gray : color)
-            .cornerRadius(50)
-            .font(.title3)
-            .foregroundColor(disabled ? .white.opacity(0.6) : .white)
-            .overlay(
-                RoundedRectangle(cornerRadius: 50)
-                    .fill(.white.opacity(focused ? 0.3 : 0.0))
-            )
-            .scaleEffect(focused ? 1.05 : 1.0)
     }
 }
 

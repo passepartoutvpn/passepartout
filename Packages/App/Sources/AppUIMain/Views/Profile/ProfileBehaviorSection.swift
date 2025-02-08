@@ -42,10 +42,7 @@ struct ProfileBehaviorSection: View {
 
 private extension ProfileBehaviorSection {
     var keepAliveToggle: some View {
-        Toggle(
-            Strings.Modules.General.Rows.keepAliveOnSleep,
-            isOn: $profileEditor.keepsAliveOnSleep
-        )
+        Toggle(Strings.Modules.General.Rows.keepAliveOnSleep, isOn: $profileEditor.keepsAliveOnSleep)
     }
 }
 

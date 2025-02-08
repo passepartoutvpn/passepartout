@@ -68,25 +68,38 @@ public struct ThemeImage: View {
     }
 }
 
-public struct ThemeImageLabel: View {
+public struct ThemeImageLabel<Title>: View where Title: View {
 
     @EnvironmentObject
     private var theme: Theme
 
-    private let title: String
-
     private let name: Theme.ImageName
 
-    public init(_ title: String, _ name: Theme.ImageName) {
-        self.title = title
+    private let inForm: Bool
+
+    @ViewBuilder
+    private let title: () -> Title
+
+    public init(_ name: Theme.ImageName, inForm: Bool = false, @ViewBuilder title: @escaping () -> Title) {
         self.name = name
+        self.inForm = inForm
+        self.title = title
     }
 
     public var body: some View {
-        Label {
-            Text(title)
-        } icon: {
+        Label(title: title) {
             ThemeImage(name)
+#if os(iOS)
+                .scaleEffect(inForm ? 0.9 : 1.0, anchor: .center)
+#endif
+        }
+    }
+}
+
+extension ThemeImageLabel where Title == Text {
+    public init(_ title: String, inForm: Bool = false, _ name: Theme.ImageName) {
+        self.init(name, inForm: inForm) {
+            Text(title)
         }
     }
 }
@@ -279,6 +292,7 @@ public struct ThemeDisclosableMenu<Content, Label>: View where Content: View, La
 #if os(macOS)
         .buttonStyle(.plain)
 #endif
+        .cursor(.hand)
     }
 }
 

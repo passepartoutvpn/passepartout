@@ -150,7 +150,7 @@
 "modules.general.sections.storage.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Профілі TV не працюють у бета-версіях.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Профілі TV не працюють без покупки.";
-"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.header" = "Синхронізація";
 "modules.http_proxy.bypass_domains.add" = "Додати домен у винятки";
 "modules.ip.routes.add_family" = "Додати %@";
 "modules.ip.routes.exclude" = "Виключити маршрут";

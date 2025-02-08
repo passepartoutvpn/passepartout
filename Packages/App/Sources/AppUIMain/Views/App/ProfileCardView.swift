@@ -37,25 +37,43 @@ struct ProfileCardView: View {
 
     let preview: ProfilePreview
 
-    var body: some View {
-        switch style {
-        case .compact:
-            Text(preview.name)
-                .themeTruncating()
-                .frame(maxWidth: .infinity, alignment: .leading)
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
-        case .full:
-            VStack(alignment: .leading) {
+    var onTap: ((ProfilePreview) -> Void)?
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Spacer(minLength: .zero)
+
+            NavigatingButton {
+                onTap?(preview)
+            } label: {
                 Text(preview.name)
                     .font(.headline)
                     .themeTruncating()
-
-                Text(preview.subtitle ?? Strings.Views.App.Profile.noModules)
-                    .multilineTextAlignment(.leading)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            tunnelView
+                .font(.subheadline)
+
+            Spacer(minLength: .zero)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+#if os(iOS)
+        .padding(.vertical, 4)
+#endif
+    }
+}
+
+private extension ProfileCardView {
+
+    @ViewBuilder
+    var tunnelView: some View {
+        if tunnel.currentProfile?.id == preview.id {
+            ConnectionStatusText(tunnel: tunnel)
+        } else {
+            Text(Strings.Entities.TunnelStatus.inactive)
+                .foregroundStyle(.secondary)
         }
     }
 }
@@ -63,19 +81,22 @@ struct ProfileCardView: View {
 // MARK: - Previews
 
 #Preview {
-    List {
+    Form {
         Section {
             ProfileCardView(
                 style: .compact,
-                preview: .init(.forPreviews)
+                preview: .init(.forPreviews),
+                tunnel: .forPreviews
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                preview: .init(.forPreviews)
+                preview: .init(.forPreviews),
+                tunnel: .forPreviews
             )
         }
     }
+    .themeForm()
     .withMockEnvironment()
 }

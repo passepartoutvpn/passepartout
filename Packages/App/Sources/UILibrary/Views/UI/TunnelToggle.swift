@@ -1,8 +1,8 @@
 //
-//  TunnelToggleButton.swift
+//  TunnelToggle.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/7/24.
+//  Created by Davide De Rosa on 2/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -28,89 +28,107 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct TunnelToggleButton<Label>: View, Routable, ThemeProviding where Label: View {
-
-    @EnvironmentObject
-    public var theme: Theme
+public struct TunnelToggle<Label>: View where Label: View {
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
 
     private let profile: Profile?
 
-    @Binding
-    private var nextProfileId: Profile.ID?
-
     private let errorHandler: ErrorHandler
 
-    public let flow: ConnectionFlow?
+    private let flow: ConnectionFlow?
 
-    private let label: (Bool, Bool) -> Label
+    private let label: (Binding<Bool>, Bool) -> Label
 
     public init(
         tunnel: ExtendedTunnel,
         profile: Profile?,
-        nextProfileId: Binding<Profile.ID?>,
         errorHandler: ErrorHandler,
         flow: ConnectionFlow?,
-        label: @escaping (_ canConnect: Bool, _ isDisabled: Bool) -> Label
+        label: @escaping (Binding<Bool>, Bool) -> Label
     ) {
         self.tunnel = tunnel
         self.profile = profile
-        _nextProfileId = nextProfileId
         self.errorHandler = errorHandler
         self.flow = flow
         self.label = label
     }
 
     public var body: some View {
-        Button(action: tryPerform) {
-            label(canConnect, isDisabled)
-        }
-#if os(macOS)
-        .buttonStyle(.plain)
-        .cursor(.hand)
+        label(isOnBinding, canInteract)
+            .disabled(!canInteract)
+    }
+}
+
+// MARK: Standard
+
+public struct TunnelTextToggle: View {
+    let title: String
+
+    @Binding
+    var isOn: Bool
+
+    public var body: some View {
+        Toggle(title, isOn: $isOn)
+#if !os(tvOS)
+            .toggleStyle(.switch)
 #endif
-        .disabled(isDisabled)
     }
 }
 
-private extension TunnelToggleButton {
-    var isInstalled: Bool {
-        profile?.id == tunnel.currentProfile?.id
-    }
-
-    var canConnect: Bool {
-        !isInstalled || (tunnel.status == .inactive && tunnel.currentProfile?.onDemand != true)
-    }
-
-    var isDisabled: Bool {
-        profile == nil || (isInstalled && tunnel.status == .deactivating)
+extension TunnelToggle where Label == TunnelTextToggle {
+    public init(_ title: String = "", tunnel: ExtendedTunnel, profile: Profile?, errorHandler: ErrorHandler, flow: ConnectionFlow?) {
+        self.init(tunnel: tunnel, profile: profile, errorHandler: errorHandler, flow: flow) { isOn, _ in
+            TunnelTextToggle(title: title, isOn: isOn)
+        }
     }
 }
 
-private extension TunnelToggleButton {
-    func tryPerform() {
+// MARK: -
+
+private extension TunnelToggle {
+    var isOnBinding: Binding<Bool> {
+        Binding {
+            isOn
+        } set: {
+            tryPerform(isOn: $0)
+        }
+    }
+}
+
+private extension TunnelToggle {
+    var tunnelProfile: TunnelCurrentProfile? {
+        guard let profile else {
+            return nil
+        }
+        return tunnel.currentProfiles[profile.id]
+    }
+
+    var isOn: Bool {
+        guard let tunnelProfile else {
+            return false
+        }
+        return tunnelProfile.status != .inactive || tunnelProfile.onDemand
+    }
+
+    var canInteract: Bool {
+        profile != nil && tunnelProfile?.status != .deactivating
+    }
+
+    func tryPerform(isOn: Bool) {
         guard let profile else {
             return
         }
         Task {
-            if !isInstalled {
-                nextProfileId = profile.id
-            }
-            defer {
-                if nextProfileId == profile.id {
-                    nextProfileId = nil
-                }
-            }
-            await perform(with: profile)
+            await perform(isOn: isOn, with: profile)
         }
     }
 
-    func perform(with profile: Profile) async {
+    func perform(isOn: Bool, with profile: Profile) async {
         do {
-            if isInstalled {
-                if canConnect {
+            if tunnelProfile != nil {
+                if isOn {
                     await flow?.onConnect(profile)
                 } else {
                     try await tunnel.disconnect()

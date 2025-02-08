@@ -262,16 +262,12 @@ extension View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
     }
 
-    public func themePlainButton(action: @escaping () -> Void) -> some View {
-        modifier(ThemePlainButtonModifier(action: action))
-    }
-
     public func themeGridHeader<Header>(@ViewBuilder header: () -> Header) -> some View where Header: View {
         modifier(ThemeGridSectionModifier(header: header))
     }
 
-    public func themeGridCell(isSelected: Bool) -> some View {
-        modifier(ThemeGridCellModifier(isSelected: isSelected))
+    public func themeGridCell() -> some View {
+        modifier(ThemeGridCellModifier())
     }
 
     public func themeHoverListRow() -> some View {
@@ -554,10 +550,6 @@ struct ThemeWindowModifier: ViewModifier {
     let size: CGSize
 }
 
-struct ThemePlainButtonModifier: ViewModifier {
-    let action: () -> Void
-}
-
 struct ThemeGridSectionModifier<Header>: ViewModifier where Header: View {
 
     @EnvironmentObject
@@ -584,12 +576,10 @@ struct ThemeGridCellModifier: ViewModifier {
     @EnvironmentObject
     private var theme: Theme
 
-    let isSelected: Bool
-
     func body(content: Content) -> some View {
         content
             .padding()
-            .background(isSelected ? theme.gridCellActiveColor : theme.gridCellColor)
+            .background(theme.gridCellColor)
             .clipShape(.rect(cornerRadius: theme.gridRadius))
     }
 }

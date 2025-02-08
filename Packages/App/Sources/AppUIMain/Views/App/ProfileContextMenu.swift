@@ -42,7 +42,8 @@ struct ProfileContextMenu: View, Routable {
 
     let profileManager: ProfileManager
 
-    let tunnel: ExtendedTunnel
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     let preview: ProfilePreview
 
@@ -51,7 +52,6 @@ struct ProfileContextMenu: View, Routable {
     var flow: ProfileFlow?
 
     var body: some View {
-        tunnelToggleButton
         if style == .installedProfile {
             tunnelRestartButton
         }
@@ -69,22 +69,6 @@ struct ProfileContextMenu: View, Routable {
 private extension ProfileContextMenu {
     var profile: Profile? {
         profileManager.profile(withId: preview.id)
-    }
-
-    var tunnelToggleButton: some View {
-        TunnelToggleButton(
-            tunnel: tunnel,
-            profile: profile,
-            nextProfileId: .constant(nil),
-            errorHandler: errorHandler,
-            flow: flow?.connectionFlow,
-            label: { canConnect, _ in
-                ThemeImageLabel(
-                    canConnect ? Strings.Global.Actions.enable : Strings.Global.Actions.disable,
-                    canConnect ? .tunnelEnable : .tunnelDisable
-                )
-            }
-        )
     }
 
     var providerConnectToButton: some View {

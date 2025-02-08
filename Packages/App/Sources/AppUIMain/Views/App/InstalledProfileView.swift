@@ -44,9 +44,6 @@ struct InstalledProfileView: View, Routable {
 
     let errorHandler: ErrorHandler
 
-    @Binding
-    var nextProfileId: Profile.ID?
-
     var flow: ProfileFlow?
 
     var body: some View {
@@ -98,20 +95,23 @@ private extension InstalledProfileView {
 
     var statusView: some View {
         HStack {
-            providerSelectorButton
+            providerServerButton
             StatusText(theme: theme, tunnel: tunnel)
         }
     }
 
+    var providerServerButton: some View {
+        profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
+    }
+
     var toggleButton: some View {
-        ToggleButton(
-            theme: theme,
+        TunnelToggle(
             tunnel: tunnel,
             profile: profile,
-            nextProfileId: $nextProfileId,
             errorHandler: errorHandler,
-            flow: flow
+            flow: flow?.connectionFlow
         )
+        .labelsHidden()
         .opaque(profile != nil)
     }
 
@@ -124,23 +124,6 @@ private extension InstalledProfileView {
             errorHandler: errorHandler,
             flow: flow
         )
-    }
-
-    var providerSelectorButton: some View {
-        profile?
-            .selectedProvider
-            .map { _, selection in
-                Button {
-                    flow?.connectionFlow?.onProviderEntityRequired(profile!) // never nil due to .map
-                } label: {
-                    providerSelectorLabel(with: selection.entityHeader)
-                }
-                .buttonStyle(.plain)
-            }
-    }
-
-    func providerSelectorLabel(with entity: ProviderEntityHeader?) -> some View {
-        ProviderCountryFlag(entity: entity)
     }
 }
 
@@ -157,57 +140,6 @@ private struct StatusText: View {
     var body: some View {
         debugChanges()
         return ConnectionStatusText(tunnel: tunnel)
-            .foregroundStyle(tunnel.statusColor(theme))
-    }
-}
-
-private struct ToggleButton: View {
-
-    @ObservedObject
-    var theme: Theme
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let profile: Profile?
-
-    @Binding
-    var nextProfileId: Profile.ID?
-
-    @ObservedObject
-    var errorHandler: ErrorHandler
-
-    let flow: ProfileFlow?
-
-    var body: some View {
-        TunnelToggleButton(
-            tunnel: tunnel,
-            profile: profile,
-            nextProfileId: $nextProfileId,
-            errorHandler: errorHandler,
-            flow: flow?.connectionFlow,
-            label: { _, _ in
-                ThemeImage(.tunnelToggle)
-                    .scaleEffect(1.5, anchor: .trailing)
-            }
-        )
-        // XXX: #584, necessary to avoid cell selection
-        .buttonStyle(.plain)
-        .foregroundStyle(tunnel.statusColor(theme))
-    }
-}
-
-private struct ProviderCountryFlag: View {
-    let entity: ProviderEntityHeader?
-
-    var body: some View {
-        ThemeCountryFlag(
-            entity?.countryCode,
-            placeholderTip: Strings.Errors.App.Passepartout.missingProviderEntity,
-            countryTip: {
-                $0.localizedAsRegionCode
-            }
-        )
     }
 }
 
@@ -229,7 +161,7 @@ private struct HeaderModifier: ViewModifier {
 
         case .grid:
             content
-                .themeGridCell(isSelected: false)
+                .themeGridCell()
         }
     }
 }
@@ -272,7 +204,7 @@ private struct CardModifier: ViewModifier {
             HeaderView(layout: .grid)
                 .padding(.bottom)
             ContentView()
-                .themeGridCell(isSelected: false)
+                .themeGridCell()
         }
         .padding()
     }
@@ -288,8 +220,7 @@ private struct HeaderView: View {
             profileManager: .forPreviews,
             profile: .forPreviews,
             tunnel: .forPreviews,
-            errorHandler: .default(),
-            nextProfileId: .constant(nil)
+            errorHandler: .default()
         )
     }
 }
@@ -302,9 +233,7 @@ private struct ContentView: View {
                 profileManager: .forPreviews,
                 tunnel: .forPreviews,
                 preview: .init(.forPreviews),
-                errorHandler: .default(),
-                nextProfileId: .constant(nil),
-                withMarker: true
+                errorHandler: .default()
             )
         }
     }

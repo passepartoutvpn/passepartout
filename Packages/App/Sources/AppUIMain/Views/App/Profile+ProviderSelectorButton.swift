@@ -1,8 +1,8 @@
 //
-//  Theme+Extensions.swift
+//  Profile+ProviderSelectorButton.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 2/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,40 +23,34 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
-extension ExtendedTunnel {
-
-    @MainActor
-    public func statusColor(_ theme: Theme) -> Color {
-        if lastErrorCode != nil {
-            switch status {
-            case .inactive:
-                return theme.inactiveColor
-            default:
-                return theme.errorColor
+extension Profile {
+    func providerSelectorButton(onSelect: ((Profile) -> Void)?) -> some View {
+        selectedProvider
+            .map { _, selection in
+                Button {
+                    onSelect?(self)
+                } label: {
+                    ProviderCountryFlag(entity: selection.entityHeader)
+                }
+                .buttonStyle(.plain)
             }
-        }
-        switch connectionStatus {
-        case .active:
-            return theme.activeColor
-        case .activating, .deactivating:
-            return theme.pendingColor
-        case .inactive:
-            return theme.inactiveColor
-        }
     }
+}
 
-    public var statusImageName: Theme.ImageName? {
-        switch connectionStatus {
-        case .active:
-            return .marked
-        case .activating, .deactivating:
-            return .pending
-        case .inactive:
-            return nil
-        }
+private struct ProviderCountryFlag: View {
+    let entity: ProviderEntityHeader?
+
+    var body: some View {
+        ThemeCountryFlag(
+            entity?.countryCode,
+            placeholderTip: Strings.Errors.App.Passepartout.missingProviderEntity,
+            countryTip: {
+                $0.localizedAsRegionCode
+            }
+        )
     }
 }

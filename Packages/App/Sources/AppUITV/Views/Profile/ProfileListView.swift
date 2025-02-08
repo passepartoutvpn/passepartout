@@ -74,14 +74,17 @@ private extension ProfileListView {
     }
 
     func toggleButton(for preview: ProfilePreview) -> some View {
-        TunnelToggleButton(
+        TunnelToggle(
             tunnel: tunnel,
             profile: profileManager.profile(withId: preview.id),
-            nextProfileId: .constant(nil),
             errorHandler: errorHandler,
             flow: flow,
-            label: { _, _ in
-                toggleView(for: preview)
+            label: { isOn, _ in
+                Button {
+                    isOn.wrappedValue.toggle()
+                } label: {
+                    toggleView(for: preview)
+                }
             }
         )
         .focused($focusedField, equals: .profile(preview.id))
@@ -92,8 +95,11 @@ private extension ProfileListView {
         HStack {
             Text(preview.name)
             Spacer()
-            ThemeImage(tunnel.statusImageName)
-                .opaque(preview.id == tunnel.currentProfile?.id)
+            tunnel.statusImageName
+                .map {
+                    ThemeImage($0)
+                        .opaque(preview.id == tunnel.currentProfile?.id)
+                }
         }
         .font(.headline)
     }

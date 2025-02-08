@@ -50,31 +50,52 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
 
     let errorHandler: ErrorHandler
 
-    @Binding
-    var nextProfileId: Profile.ID?
-
-    let withMarker: Bool
-
     var flow: ProfileFlow?
 
     var body: some View {
-        VStack(spacing: .zero) {
-            Spacer(minLength: .zero)
-            HStack {
-                Group {
-                    if withMarker {
-                        markerView
-                    }
-                    cardView
-                }
-                Spacer()
-                HStack(spacing: 8) {
-                    attributesView
-                    infoButton
-                }
-            }
-            Spacer(minLength: .zero)
+        HStack {
+            cardView
+            Spacer()
+            attributesView
+            tunnelToggle
         }
+        .unanimated()
+    }
+}
+
+private extension ProfileRowView {
+    var cardView: some View {
+        ProfileCardView(
+            style: style,
+            preview: preview,
+            tunnel: tunnel,
+            onTap: flow?.onEditProfile
+        )
+        .contentShape(.rect)
+        .foregroundStyle(.primary)
+
+        // FIXME: ###, UI tests
+        .uiAccessibility(.App.profileMenu)
+    }
+
+    var attributesView: some View {
+        ProfileAttributesView(
+            attributes: attributes,
+            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+        )
+        .imageScale(isBigDevice ? .large : .medium)
+    }
+
+    var tunnelToggle: some View {
+        TunnelToggle(
+            tunnel: tunnel,
+            profile: profile,
+            errorHandler: errorHandler,
+            flow: flow?.connectionFlow
+        )
+        .labelsHidden()
+        // FIXME: ###, UI tests
+        .uiAccessibility(.App.profileToggle)
     }
 }
 
@@ -105,94 +126,6 @@ private extension ProfileRowView {
     }
 }
 
-// MARK: - Subviews (observing)
-
-private struct MarkerView: View {
-    let profileId: Profile.ID
-
-    let nextProfileId: Profile.ID?
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let requiredFeatures: Set<AppFeature>?
-
-    var body: some View {
-        ZStack {
-            ThemeImage(profileId == nextProfileId ? .pending : tunnel.statusImageName)
-                .opaque(requiredFeatures == nil && (profileId == nextProfileId || profileId == tunnel.currentProfile?.id))
-
-            if let requiredFeatures {
-                PurchaseRequiredView(features: requiredFeatures)
-            }
-        }
-        .frame(width: 24)
-    }
-}
-
-private extension ProfileRowView {
-    var markerView: some View {
-        MarkerView(
-            profileId: preview.id,
-            nextProfileId: nextProfileId,
-            tunnel: tunnel,
-            requiredFeatures: requiredFeatures
-        )
-    }
-
-    var cardView: some View {
-        TunnelToggleButton(
-            tunnel: tunnel,
-            profile: profile,
-            nextProfileId: $nextProfileId,
-            errorHandler: errorHandler,
-            flow: flow?.connectionFlow,
-            label: { _, _ in
-                ProfileCardView(
-                    style: style,
-                    preview: preview
-                )
-                .frame(maxWidth: .infinity)
-                .contentShape(.rect)
-            }
-        )
-        .foregroundStyle(.primary)
-        .uiAccessibility(.App.profileToggle)
-    }
-
-    var attributesView: some View {
-        ProfileAttributesView(
-            attributes: attributes,
-            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
-        )
-        .imageScale(isBigDevice ? .large : .medium)
-    }
-
-    var infoButton: some View {
-        Menu {
-            ProfileContextMenu(
-                style: preview.id == tunnel.currentProfile?.id ? .installedProfile : .infoButton,
-                profileManager: profileManager,
-                tunnel: tunnel,
-                preview: preview,
-                errorHandler: errorHandler,
-                flow: flow
-            )
-        } label: {
-            ThemeImage(.moreDetails)
-                .imageScale(.large)
-        }
-        // XXX: #584, necessary to avoid cell selection
-#if os(iOS)
-        .menuStyle(.borderlessButton)
-#else
-        .foregroundStyle(.secondary)
-        .buttonStyle(.plain)
-#endif
-        .uiAccessibility(.App.profileMenu)
-    }
-}
-
 // MARK: - Previews
 
 #Preview {
@@ -201,13 +134,11 @@ private extension ProfileRowView {
 
     return Form {
         ProfileRowView(
-            style: .compact,
+            style: .full,
             profileManager: profileManager,
             tunnel: .forPreviews,
             preview: .init(profile),
-            errorHandler: .default(),
-            nextProfileId: .constant(nil),
-            withMarker: true
+            errorHandler: .default()
         )
     }
     .task {

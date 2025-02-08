@@ -150,7 +150,7 @@
 "modules.general.sections.storage.footer" = "Los perfiles se almacenan en %@ de manera cifrada.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Los perfiles de TV no funcionan en las versiones beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Los perfiles de TV no funcionan sin una compra.";
-"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.header" = "Sincronización";
 "modules.http_proxy.bypass_domains.add" = "Añadir dominio para omitir";
 "modules.ip.routes.add_family" = "Añadir %@";
 "modules.ip.routes.exclude" = "Excluir ruta";
