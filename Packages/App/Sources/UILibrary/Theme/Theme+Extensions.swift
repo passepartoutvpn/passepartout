@@ -35,7 +35,6 @@ extension ExtendedTunnel {
             switch status {
             case .inactive:
                 return theme.inactiveColor
-
             default:
                 return theme.errorColor
             }
@@ -43,25 +42,21 @@ extension ExtendedTunnel {
         switch connectionStatus {
         case .active:
             return theme.activeColor
-
         case .activating, .deactivating:
             return theme.pendingColor
-
         case .inactive:
             return theme.inactiveColor
         }
     }
 
-    public var statusImageName: Theme.ImageName {
+    public var statusImageName: Theme.ImageName? {
         switch connectionStatus {
         case .active:
             return .marked
-
         case .activating, .deactivating:
             return .pending
-
         case .inactive:
-            return .sleeping
+            return nil
         }
     }
 }
