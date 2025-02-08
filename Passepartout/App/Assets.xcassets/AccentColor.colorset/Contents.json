@@ -10,7 +10,31 @@
           "red" : "0xD6"
         }
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
+    },
+    {
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x68",
+          "green" : "0x9C",
+          "red" : "0xD6"
+        }
+      },
+      "idiom" : "ipad"
+    },
+    {
+      "color" : {
+        "color-space" : "srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "0x68",
+          "green" : "0x9C",
+          "red" : "0xD6"
+        }
+      },
+      "idiom" : "mac"
     }
   ],
   "info" : {
