@@ -138,7 +138,7 @@
 
 // MARK: Views (Modules)
 
-"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.header" = "Synchronization";
 "modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";

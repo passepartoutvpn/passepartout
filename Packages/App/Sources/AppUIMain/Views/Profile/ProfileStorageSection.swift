@@ -51,7 +51,7 @@ private extension ProfileStorageSection {
         Toggle(isOn: $profileEditor.isShared) {
             ThemeImageLabel(.cloudOn, inForm: true) {
                 HStack {
-                    Text(Strings.Modules.General.Rows.shared)
+                    Text(Strings.Unlocalized.iCloud)
                     PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
                 }
             }
@@ -73,7 +73,7 @@ private extension ProfileStorageSection {
 
 private extension ProfileStorageSection {
     var header: String {
-        Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
+        Strings.Modules.General.Sections.Storage.header
     }
 
     var footer: String {

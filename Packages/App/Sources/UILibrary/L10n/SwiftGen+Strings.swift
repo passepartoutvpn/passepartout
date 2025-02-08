@@ -402,10 +402,8 @@ public enum Strings {
           public static func footer(_ p1: Any) -> String {
             return Strings.tr("Localizable", "modules.general.sections.storage.footer", String(describing: p1), fallback: "Profiles are stored to %@ encrypted.")
           }
-          /// %@
-          public static func header(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "modules.general.sections.storage.header", String(describing: p1), fallback: "%@")
-          }
+          /// Synchronization
+          public static let header = Strings.tr("Localizable", "modules.general.sections.storage.header", fallback: "Synchronization")
           public enum Footer {
             public enum Purchase {
               /// TV profiles do not work in beta builds.

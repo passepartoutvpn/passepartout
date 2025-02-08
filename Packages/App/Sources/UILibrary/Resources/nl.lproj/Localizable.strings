@@ -150,7 +150,7 @@
 "modules.general.sections.storage.footer" = "Profielen worden versleuteld opgeslagen in %@.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profielen werken niet in bètaversies.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profielen werken niet zonder aankoop.";
-"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.header" = "Synchronisatie";
 "modules.http_proxy.bypass_domains.add" = "Bypass-domein toevoegen";
 "modules.ip.routes.add_family" = "Voeg %@ toe";
 "modules.ip.routes.exclude" = "Route uitsluiten";

@@ -150,7 +150,7 @@
 "modules.general.sections.storage.footer" = "Profiler sparas i %@ och är krypterade.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profiler fungerar inte i beta-versioner.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profiler fungerar inte utan ett köp.";
-"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.header" = "Synkronisering";
 "modules.http_proxy.bypass_domains.add" = "Lägg till kringgående domän";
 "modules.ip.routes.add_family" = "Lägg till %@";
 "modules.ip.routes.exclude" = "Exkludera rutt";
