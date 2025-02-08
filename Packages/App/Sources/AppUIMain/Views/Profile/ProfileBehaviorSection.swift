@@ -42,9 +42,7 @@ struct ProfileBehaviorSection: View {
 
 private extension ProfileBehaviorSection {
     var keepAliveToggle: some View {
-        Toggle(isOn: $profileEditor.keepsAliveOnSleep) {
-            ThemeImageLabel(Strings.Modules.General.Rows.keepAliveOnSleep, inForm: true, .sleeping)
-        }
+        Toggle(Strings.Modules.General.Rows.keepAliveOnSleep, isOn: $profileEditor.keepsAliveOnSleep)
     }
 }
 
