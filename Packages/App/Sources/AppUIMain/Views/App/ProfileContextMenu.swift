@@ -42,7 +42,8 @@ struct ProfileContextMenu: View, Routable {
 
     let profileManager: ProfileManager
 
-    let tunnel: ExtendedTunnel
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     let preview: ProfilePreview
 
