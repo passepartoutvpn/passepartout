@@ -51,7 +51,7 @@ struct ProfileCardView: View {
             } label: {
                 Text(preview.name)
                     .font(.headline)
-                    .themeTruncating()
+                    .themeMultiLine(true)
             }
             tunnelView
                 .font(.subheadline)

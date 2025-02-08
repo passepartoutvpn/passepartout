@@ -90,7 +90,7 @@ private extension InstalledProfileView {
         Text(profile?.name ?? Strings.Views.App.InstalledProfile.None.name)
             .font(.title2)
             .fontWeight(theme.relevantWeight)
-            .themeTruncating(.tail)
+            .themeMultiLine(true)
     }
 
     var statusView: some View {
