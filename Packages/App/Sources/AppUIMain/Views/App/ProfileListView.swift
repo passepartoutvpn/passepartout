@@ -45,8 +45,6 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
-    let isVerifying: Bool
-
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -66,7 +64,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
                         }
                     }
             } header: {
-                VerificationView(isVerifying: isVerifying)
+                ProfilesHeaderView()
             }
         }
         .themeForm()
@@ -138,7 +136,6 @@ private extension ProfileListView {
     ProfileListView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        isVerifying: false,
         errorHandler: .default()
     )
     .withMockEnvironment()

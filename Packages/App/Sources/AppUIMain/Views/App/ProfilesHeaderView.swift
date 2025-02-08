@@ -1,5 +1,5 @@
 //
-//  VerificationView.swift
+//  ProfilesHeaderView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/3/25.
@@ -23,15 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import SwiftUI
 
-struct VerificationView: View {
-    let isVerifying: Bool
+struct ProfilesHeaderView: View {
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
 
     var body: some View {
         HStack {
             Text(Strings.Views.App.Folders.default)
-            if isVerifying {
+            if iapManager.isBeta && iapManager.isLoadingReceipt {
                 Spacer()
                 Text(Strings.Views.Verification.message)
             }

@@ -39,8 +39,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
-    let isVerifying: Bool
-
     let errorHandler: ErrorHandler
 
     var flow: ProfileFlow?
@@ -69,7 +67,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                             }
                     }
                     .themeGridHeader {
-                        VerificationView(isVerifying: isVerifying)
+                        ProfilesHeaderView()
                     }
                 }
                 .padding(.horizontal)
@@ -146,7 +144,6 @@ private extension ProfileGridView {
     ProfileGridView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        isVerifying: false,
         errorHandler: .default()
     )
     .themeWindow(width: 600, height: 300)

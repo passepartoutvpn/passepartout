@@ -75,7 +75,6 @@ private extension ProfileContainerView {
             ProfileListView(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                isVerifying: isVerifying,
                 errorHandler: errorHandler,
                 flow: flow
             )
@@ -84,15 +83,10 @@ private extension ProfileContainerView {
             ProfileGridView(
                 profileManager: profileManager,
                 tunnel: tunnel,
-                isVerifying: isVerifying,
                 errorHandler: errorHandler,
                 flow: flow
             )
         }
-    }
-
-    var isVerifying: Bool {
-        iapManager.isLoadingReceipt
     }
 }
 
