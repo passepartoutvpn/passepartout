@@ -38,27 +38,6 @@ extension IAPManager {
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
     }
-
-    //
-    // VERY IMPORTANT
-    //
-    // there are cases where the user ONLY requires a non-essential feature
-    // implying an essential feature. in those cases, users MUST NOT be
-    // presented the "Essentials" paywall because they don't need it
-    //
-    // this is the case for .appleTV, as it implies .sharing and therefore
-    // the "Essentials" bundle is redundant
-    //
-    public func suggestedProduct(forSavedFeatures features: Set<AppFeature>) -> AppProduct? {
-        if features == [.appleTV, .sharing] {
-            return .Features.appleTV
-        }
-        // TODO: ###, offer bundle if requires (essential feature(s) + .appleTV)
-//        if features.contains(.appleTV) && features.subtracting(AppFeature.essentialFeatures).isEmpty {
-//            return .Essentials.allPlatforms
-//        }
-        return nil
-    }
 }
 
 // for testing
