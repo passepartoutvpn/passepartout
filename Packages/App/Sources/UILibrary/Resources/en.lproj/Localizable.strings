@@ -254,7 +254,7 @@
 "global.actions.hide" = "Hide";
 "global.actions.purchase" = "Purchase";
 "global.actions.remove" = "Delete";
-"global.actions.reconnect" = "Restart";
+"global.actions.reconnect" = "Reconnect";
 "global.actions.save" = "Save";
 "global.actions.select" = "Select";
 "global.actions.show" = "Show";

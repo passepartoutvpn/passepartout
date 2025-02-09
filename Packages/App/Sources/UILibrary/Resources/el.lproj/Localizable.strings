@@ -67,7 +67,7 @@
 "global.actions.enable" = "Ενεργοποίηση";
 "global.actions.hide" = "Απόκρυψη";
 "global.actions.purchase" = "Αγορά";
-"global.actions.reconnect" = "Επανεκκίνηση";
+"global.actions.reconnect" = "Επανασύνδεση";
 "global.actions.remove" = "Κατάργηση";
 "global.actions.save" = "Αποθήκευση";
 "global.actions.select" = "Επιλογή";

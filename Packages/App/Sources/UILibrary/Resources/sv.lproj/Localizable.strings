@@ -67,7 +67,7 @@
 "global.actions.enable" = "Aktivera";
 "global.actions.hide" = "Dölj";
 "global.actions.purchase" = "Köp";
-"global.actions.reconnect" = "Starta om";
+"global.actions.reconnect" = "Återanslut";
 "global.actions.remove" = "Ta bort";
 "global.actions.save" = "Spara";
 "global.actions.select" = "Välj";
