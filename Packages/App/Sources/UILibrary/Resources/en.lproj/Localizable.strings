@@ -79,6 +79,7 @@
 
 "views.paywall.sections.required_features.header" = "Required features";
 "views.paywall.sections.included_features.header" = "Also includes";
+"views.paywall.sections.products.header" = "Required";
 "views.paywall.sections.products.footer" = "All purchases support Family Sharing.";
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
@@ -244,6 +245,7 @@
 
 "global.actions.add" = "Add";
 "global.actions.cancel" = "Cancel";
+"global.actions.close" = "Close";
 "global.actions.connect" = "Connect";
 "global.actions.delete" = "Delete";
 "global.actions.disable" = "Disable";

@@ -29,7 +29,7 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func suggestedProducts() -> Set<AppProduct> {
+    public func suggestedEssentialProducts() -> Set<AppProduct> {
 #if os(iOS)
         suggestedProducts(for: .iOS, asserting: true)
 #elseif os(macOS)
@@ -49,14 +49,24 @@ extension IAPManager {
     // this is the case for .appleTV, as it implies .sharing and therefore
     // the "Essentials" bundle is redundant
     //
-    public func suggestedProduct(forSavedFeatures features: Set<AppFeature>) -> AppProduct? {
-        if features == [.appleTV, .sharing] {
-            return .Features.appleTV
+    public func suggestedProducts(forSavedFeatures features: Set<AppFeature>) -> Set<AppProduct>? {
+
+        // offer .appleTV without essentials (deceived by .sharing)
+        if features == [.appleTV] || features == [.appleTV, .sharing] {
+            return [.Features.appleTV]
         }
-        // TODO: ###, offer bundle if requires (essential feature(s) + .appleTV)
-//        if features.contains(.appleTV) && features.subtracting(AppFeature.essentialFeatures).isEmpty {
-//            return .Essentials.allPlatforms
-//        }
+
+        // offer essentials + .appleTV
+        if features.contains(.appleTV) {
+            var requirements = features
+            requirements.remove(.appleTV)
+            if requirements.isSubset(of: AppFeature.essentialFeatures) {
+                var bundle = suggestedEssentialProducts()
+                bundle.insert(.Features.appleTV)
+                return bundle
+            }
+        }
+
         return nil
     }
 }

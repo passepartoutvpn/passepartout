@@ -191,7 +191,7 @@ private extension PaywallModifier {
             PaywallView(
                 isPresented: $isPurchasing,
                 requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures),
-                suggestedProduct: $0.suggestedProduct
+                suggestedProducts: $0.suggestedProducts
             )
             .themeNavigationStack()
         }

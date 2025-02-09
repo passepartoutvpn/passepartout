@@ -136,7 +136,7 @@ private extension ProfileCoordinator {
 
         do {
             try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-        } catch AppError.ineligibleProfile(var requiredFeatures) {
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
@@ -146,24 +146,16 @@ private extension ProfileCoordinator {
                 return
             }
 
-            let suggestedProduct = iapManager.suggestedProduct(forSavedFeatures: requiredFeatures)
-            pp_log(.App.iap, .info, "Suggest product for \(requiredFeatures): \(suggestedProduct?.debugDescription ?? "nil ('Essential')")")
+            let suggestedProducts = iapManager.suggestedProducts(forSavedFeatures: requiredFeatures)
+            pp_log(.App.iap, .info, "Suggest products for \(requiredFeatures): \(suggestedProducts?.debugDescription ?? "nil ('Essential')")")
 
-            // strip non-essential for the inability of purchasing all at once
-            if suggestedProduct == nil {
-                requiredFeatures.formIntersection(AppFeature.essentialFeatures)
-            }
-
-            // present paywall if purchase required
-            guard requiredFeatures.isEmpty else {
-                paywallReason = .init(
-                    nil,
-                    requiredFeatures: requiredFeatures,
-                    suggestedProduct: suggestedProduct,
-                    forConnecting: false
-                )
-                return
-            }
+            paywallReason = .init(
+                nil,
+                requiredFeatures: requiredFeatures,
+                suggestedProducts: suggestedProducts,
+                forConnecting: false
+            )
+            return
         }
 
         try await profileEditor.save(
