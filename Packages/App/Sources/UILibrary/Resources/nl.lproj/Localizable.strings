@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Volledige versie";
 "views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
+"views.paywall.sections.products.header" = "Beschikbare producten";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je deze app of functie eerder hebt gekocht, kun je je aankopen herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";

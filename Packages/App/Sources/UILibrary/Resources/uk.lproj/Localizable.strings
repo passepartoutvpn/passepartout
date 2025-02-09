@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Повна версія";
 "views.paywall.sections.included_features.header" = "Також включає";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
+"views.paywall.sections.products.header" = "Доступні продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше купували цей додаток або функцію, ви можете відновити свої покупки.";
 "views.paywall.sections.restore.header" = "Відновлення";

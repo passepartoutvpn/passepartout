@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Πλήρης έκδοση";
 "views.paywall.sections.included_features.header" = "Περιλαμβάνει επίσης";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
+"views.paywall.sections.products.header" = "Διαθέσιμα προϊόντα";
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
 "views.paywall.sections.restore.footer" = "Εάν αγοράσατε αυτήν την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας.";
 "views.paywall.sections.restore.header" = "Επαναφορά";

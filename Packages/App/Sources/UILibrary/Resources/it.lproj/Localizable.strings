@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Versione completa";
 "views.paywall.sections.included_features.header" = "Include anche";
 "views.paywall.sections.products.footer" = "Tutti gli acquisti supportano “In famiglia”.";
+"views.paywall.sections.products.header" = "Prodotti disponibili";
 "views.paywall.sections.required_features.header" = "Funzionalità richieste";
 "views.paywall.sections.restore.footer" = "Se hai acquistato questa app o funzionalità in passato, puoi ripristinare i tuoi acquisti.";
 "views.paywall.sections.restore.header" = "Ripristina";

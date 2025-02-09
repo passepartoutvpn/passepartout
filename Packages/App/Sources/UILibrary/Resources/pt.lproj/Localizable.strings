@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Versão completa";
 "views.paywall.sections.included_features.header" = "Também inclui";
 "views.paywall.sections.products.footer" = "Todas as compras são compatíveis com Compartilhamento Familiar.";
+"views.paywall.sections.products.header" = "Produtos disponíveis";
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você comprou este app ou recurso no passado, pode restaurar suas compras.";
 "views.paywall.sections.restore.header" = "Restaurar";

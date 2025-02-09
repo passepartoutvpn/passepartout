@@ -264,6 +264,7 @@
 "views.paywall.sections.full_products.header" = "Vollversion";
 "views.paywall.sections.included_features.header" = "Enthält außerdem";
 "views.paywall.sections.products.footer" = "Alle Käufe unterstützen die Familienfreigabe.";
+"views.paywall.sections.products.header" = "Verfügbare Produkte";
 "views.paywall.sections.required_features.header" = "Erforderliche Funktionen";
 "views.paywall.sections.restore.footer" = "Wenn du diese App oder Funktion in der Vergangenheit gekauft hast, kannst du deine Käufe wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";
