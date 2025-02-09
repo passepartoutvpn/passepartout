@@ -32,15 +32,7 @@ extension AppProduct: AppFeatureProviding {
         // MARK: Current
 
         case .Essentials.allPlatforms:
-            return [
-                .dns,
-                .httpProxy,
-                .onDemand,
-                .otp,
-                .providers,
-                .routing,
-                .sharing
-            ]
+            return AppFeature.essentialFeatures
 
         case .Essentials.iOS:
 #if os(iOS) || os(tvOS)

@@ -536,7 +536,3 @@ private extension IAPManager {
         await reloadReceipt()
     }
 }
-
-private extension AppFeature {
-    static let essentialFeatures = AppProduct.Essentials.allPlatforms.features
-}
