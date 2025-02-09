@@ -93,7 +93,7 @@ extension PurchaseRequiredView where Content == Button<Text> {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features,
-                    suggestedProducts: [product],
+                    suggestedProduct: product,
                     needsConfirmation: false
                 )
             }

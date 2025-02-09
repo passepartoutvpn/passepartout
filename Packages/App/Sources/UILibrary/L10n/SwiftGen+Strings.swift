@@ -192,8 +192,6 @@ public enum Strings {
       public static let add = Strings.tr("Localizable", "global.actions.add", fallback: "Add")
       /// Cancel
       public static let cancel = Strings.tr("Localizable", "global.actions.cancel", fallback: "Cancel")
-      /// Close
-      public static let close = Strings.tr("Localizable", "global.actions.close", fallback: "Close")
       /// Connect
       public static let connect = Strings.tr("Localizable", "global.actions.connect", fallback: "Connect")
       /// Delete
@@ -798,8 +796,6 @@ public enum Strings {
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
-          /// Required
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Required")
         }
         public enum RequiredFeatures {
           /// Required features

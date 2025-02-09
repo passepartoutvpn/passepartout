@@ -45,7 +45,7 @@ struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
     // nil = essentials
-    let suggestedProducts: Set<AppProduct>?
+    let suggestedProduct: AppProduct?
 
     @State
     private var isFetchingProducts = true
@@ -72,7 +72,7 @@ struct PaywallView: View {
                 actions: pendingActions,
                 message: pendingMessage
             )
-            .task(id: suggestedProducts) {
+            .task(id: suggestedProduct) {
                 await fetchAvailableProducts()
             }
             .withErrorHandler(errorHandler)
@@ -86,15 +86,32 @@ private extension PaywallView {
 
     var contentView: some View {
         Form {
-            productsView
-            if suggestedProducts == nil {
-                alsoIncludedEssentialsView
+            if suggestedProduct == nil {
+                requiredFeaturesView
             }
+            productsView
+            alsoIncludedView
             restoreView
             linksView
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
+    }
+
+    var requiredFeaturesView: some View {
+        requiredFeatures
+            .nilIfEmpty
+            .map { features in
+                FeatureListView(
+                    style: .list,
+                    header: Strings.Views.Paywall.Sections.RequiredFeatures.header,
+                    features: features.sorted(),
+                    content: {
+                        featureView(for: $0)
+                            .fontWeight(theme.relevantWeight)
+                    }
+                )
+            }
     }
 
     var productsView: some View {
@@ -112,15 +129,16 @@ private extension PaywallView {
                     )
                 }
                 .themeSection(
-                    header: Strings.Views.Paywall.Sections.Products.header,
+                    header: Strings.Global.Nouns.products,
                     footer: Strings.Views.Paywall.Sections.Products.footer,
                     forcesFooter: true
                 )
             }
     }
 
-    var alsoIncludedEssentialsView: some View {
-        essentialFeatures
+    var alsoIncludedView: some View {
+        let alsoIncluded = suggestedProduct?.features ?? essentialFeatures
+        return alsoIncluded
             .filter {
                 !requiredFeatures.contains($0)
             }
@@ -166,15 +184,17 @@ private extension PaywallView {
 
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
-            Button(Strings.Global.Actions.close) {
+            Button {
                 isPresented = false
+            } label: {
+                ThemeCloseLabel()
             }
         }
     }
 
     func pendingActions() -> some View {
         Button(Strings.Global.Nouns.ok) {
-            dismissIfNoRemainingPurchases()
+            isPresented = false
         }
     }
 
@@ -196,7 +216,12 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let rawProducts = suggestedProducts ?? iapManager.suggestedEssentialProducts()
+            let rawProducts: Set<AppProduct>
+            if let suggestedProduct {
+                rawProducts = [suggestedProduct]
+            } else {
+                rawProducts = iapManager.suggestedProducts()
+            }
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
@@ -218,20 +243,13 @@ private extension PaywallView {
         }
     }
 
-    func dismissIfNoRemainingPurchases() {
-        guard iapManager.isEligible(for: requiredFeatures) else {
-            return
-        }
-        isPresented = false
-    }
-
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
         switch result {
         case .done:
             Task {
                 await iapManager.reloadReceipt()
-                dismissIfNoRemainingPurchases()
             }
+            isPresented = false
 
         case .pending:
             isPurchasePendingConfirmation = true
@@ -278,7 +296,7 @@ private extension AppProduct {
     PaywallView(
         isPresented: .constant(true),
         requiredFeatures: [.appleTV],
-        suggestedProducts: [.Features.appleTV]
+        suggestedProduct: .Features.appleTV
     )
     .withMockEnvironment()
 }

@@ -35,7 +35,7 @@ extension PaywallModifier {
 
         public let requiredFeatures: Set<AppFeature>
 
-        public let suggestedProducts: Set<AppProduct>?
+        public let suggestedProduct: AppProduct?
 
         public let needsConfirmation: Bool
 
@@ -44,13 +44,13 @@ extension PaywallModifier {
         public init(
             _ profile: Profile?,
             requiredFeatures: Set<AppFeature>,
-            suggestedProducts: Set<AppProduct>? = nil,
+            suggestedProduct: AppProduct? = nil,
             needsConfirmation: Bool = true,
             forConnecting: Bool = true
         ) {
             self.profile = profile
             self.requiredFeatures = requiredFeatures
-            self.suggestedProducts = suggestedProducts
+            self.suggestedProduct = suggestedProduct
             self.needsConfirmation = needsConfirmation
             self.forConnecting = forConnecting
         }
