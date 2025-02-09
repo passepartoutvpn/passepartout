@@ -53,6 +53,10 @@ extension IAPManager {
         if features == [.appleTV, .sharing] {
             return .Features.appleTV
         }
+        // TODO: ###, offer bundle if requires (essential feature(s) + .appleTV)
+//        if features.contains(.appleTV) && features.subtracting(AppFeature.essentialFeatures).isEmpty {
+//            return .Essentials.allPlatforms
+//        }
         return nil
     }
 }
