@@ -32,9 +32,15 @@ extension AppProduct: AppFeatureProviding {
         // MARK: Current
 
         case .Essentials.allPlatforms:
-            return AppFeature.allCases.filter {
-                $0 != .appleTV
-            }
+            return [
+                .dns,
+                .httpProxy,
+                .onDemand,
+                .otp,
+                .providers,
+                .routing,
+                .sharing
+            ]
 
         case .Essentials.iOS:
 #if os(iOS) || os(tvOS)
