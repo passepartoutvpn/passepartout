@@ -47,18 +47,6 @@ struct ProviderConnectToButton<Label>: View where Label: View {
                 } label: {
                     label()
                 }
-                .disabled(!isEligible)
             }
-    }
-}
-
-private extension ProviderConnectToButton {
-    var isEligible: Bool {
-        do {
-            try iapManager.verify(profile)
-            return true
-        } catch {
-            return false
-        }
     }
 }
