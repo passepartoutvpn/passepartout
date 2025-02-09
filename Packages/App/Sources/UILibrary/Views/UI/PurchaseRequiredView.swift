@@ -63,15 +63,15 @@ extension PurchaseRequiredView where Content == PurchaseRequiredButton {
     public init(
         for requiring: AppFeatureRequiring?,
         reason: Binding<PaywallReason?>,
-        suggesting product: AppProduct? = nil
+        suggesting products: Set<AppProduct>? = nil
     ) {
-        self.init(requiring: requiring?.features, reason: reason, suggesting: product)
+        self.init(requiring: requiring?.features, reason: reason, suggesting: products)
     }
 
     public init(
         requiring features: Set<AppFeature>?,
         reason: Binding<PaywallReason?>,
-        suggesting product: AppProduct? = nil
+        suggesting products: Set<AppProduct>? = nil
     ) {
         self.features = features
         content = {
@@ -79,7 +79,7 @@ extension PurchaseRequiredView where Content == PurchaseRequiredButton {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features ?? [],
-                    suggestedProduct: product,
+                    suggestedProducts: products,
                     needsConfirmation: false
                 )
             }
@@ -93,7 +93,7 @@ extension PurchaseRequiredView where Content == Button<Text> {
         requiring features: Set<AppFeature>,
         reason: Binding<PaywallReason?>,
         title: String,
-        suggesting product: AppProduct
+        suggesting products: Set<AppProduct>
     ) {
         self.features = features
         force = true
@@ -102,7 +102,7 @@ extension PurchaseRequiredView where Content == Button<Text> {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features,
-                    suggestedProduct: product,
+                    suggestedProducts: products,
                     needsConfirmation: false
                 )
             }

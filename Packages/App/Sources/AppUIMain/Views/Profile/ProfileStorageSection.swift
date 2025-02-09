@@ -73,7 +73,12 @@ private extension ProfileStorageSection {
     var sharingPurchaseButton: some View {
         PurchaseRequiredView(
             requiring: sharingRequirements,
-            reason: $paywallReason
+            reason: $paywallReason,
+            suggesting: {
+                var essentials = iapManager.suggestedProducts()
+                essentials.insert(.Features.appleTV)
+                return essentials
+            }()
         )
     }
 
@@ -90,7 +95,7 @@ private extension ProfileStorageSection {
             requiring: tvRequirements,
             reason: $paywallReason,
             title: Strings.Global.Actions.purchase,
-            suggesting: .Features.appleTV
+            suggesting: [.Features.appleTV]
         )
     }
 }

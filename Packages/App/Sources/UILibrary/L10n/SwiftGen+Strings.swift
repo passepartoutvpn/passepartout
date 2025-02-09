@@ -796,6 +796,8 @@ public enum Strings {
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
+          /// Available products
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Available products")
         }
         public enum RequiredFeatures {
           /// Required features

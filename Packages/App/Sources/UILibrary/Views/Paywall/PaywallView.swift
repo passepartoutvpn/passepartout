@@ -45,7 +45,7 @@ struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
     // nil = essentials
-    let suggestedProduct: AppProduct?
+    let suggestedProducts: Set<AppProduct>?
 
     @State
     private var isFetchingProducts = true
@@ -72,7 +72,7 @@ struct PaywallView: View {
                 actions: pendingActions,
                 message: pendingMessage
             )
-            .task(id: suggestedProduct) {
+            .task(id: suggestedProducts) {
                 await fetchAvailableProducts()
             }
             .withErrorHandler(errorHandler)
@@ -86,12 +86,10 @@ private extension PaywallView {
 
     var contentView: some View {
         Form {
-            if suggestedProduct == nil {
-                requiredFeaturesView
-            }
+            requiredFeaturesView
             productsView
-            if suggestedProduct == nil {
-                alsoIncludedView
+            if suggestedProducts == nil {
+                alsoIncludedEssentialsView
             }
             restoreView
             linksView
@@ -131,16 +129,15 @@ private extension PaywallView {
                     )
                 }
                 .themeSection(
-                    header: Strings.Global.Nouns.products,
+                    header: Strings.Views.Paywall.Sections.Products.header,
                     footer: Strings.Views.Paywall.Sections.Products.footer,
                     forcesFooter: true
                 )
             }
     }
 
-    var alsoIncludedView: some View {
-        let alsoIncluded = suggestedProduct?.features ?? essentialFeatures
-        return alsoIncluded
+    var alsoIncludedEssentialsView: some View {
+        essentialFeatures
             .filter {
                 !requiredFeatures.contains($0)
             }
@@ -218,12 +215,7 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let rawProducts: Set<AppProduct>
-            if let suggestedProduct {
-                rawProducts = [suggestedProduct]
-            } else {
-                rawProducts = iapManager.suggestedProducts()
-            }
+            let rawProducts = suggestedProducts ?? iapManager.suggestedProducts()
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
@@ -298,7 +290,7 @@ private extension AppProduct {
     PaywallView(
         isPresented: .constant(true),
         requiredFeatures: [.appleTV],
-        suggestedProduct: .Features.appleTV
+        suggestedProducts: [.Features.appleTV]
     )
     .withMockEnvironment()
 }

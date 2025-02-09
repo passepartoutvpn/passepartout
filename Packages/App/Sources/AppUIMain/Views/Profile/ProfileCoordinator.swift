@@ -151,7 +151,7 @@ private extension ProfileCoordinator {
                 paywallReason = .init(
                     nil,
                     requiredFeatures: requiredFeatures,
-                    suggestedProduct: nil,
+                    suggestedProducts: nil,
                     forConnecting: false
                 )
                 return
