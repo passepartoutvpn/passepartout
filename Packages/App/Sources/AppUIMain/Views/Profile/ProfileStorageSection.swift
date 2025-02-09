@@ -105,7 +105,7 @@ private extension ProfileStorageSection {
     }
 
     var tvRequirements: Set<AppFeature> {
-        profileEditor.isAvailableForTV ? [.appleTV] : []
+        profileEditor.isAvailableForTV ? [.appleTV, .sharing] : []
     }
 
     var sharingDescription: String {
