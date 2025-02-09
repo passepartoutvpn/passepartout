@@ -86,9 +86,14 @@ private extension ProviderServerView.ContentView {
             .width(15.0)
 
             TableColumn(Strings.Global.Nouns.region) { server in
-                ThemeCountryText(server.metadata.countryCode, title: server.region)
-                    .help(server.region)
-                    .environmentObject(theme) // TODO: #873, Table loses environment
+                Button {
+                    onSelect(server)
+                } label: {
+                    ThemeCountryText(server.metadata.countryCode, title: server.region)
+                }
+                .help(server.region)
+                .cursor(.hand)
+                .environmentObject(theme) // TODO: #873, Table loses environment
             }
 
             TableColumn(Strings.Global.Nouns.address) { server in
