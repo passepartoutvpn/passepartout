@@ -49,9 +49,8 @@ extension AppProduct: AppFeatureProviding {
 #endif
 
         case .Features.appleTV:
+            var eligible: [AppFeature] = [.appleTV, .sharing]
 #if os(tvOS)
-            var features: [AppFeature] = [.appleTV]
-
             // include "Essentials" to cope with BuildProducts
             // limitations
             //
@@ -67,12 +66,9 @@ extension AppProduct: AppFeatureProviding {
             //
             // this is a solid workaround as long as profiles are
             // not editable on tvOS
-            features.append(contentsOf: AppProduct.Essentials.allPlatforms.features)
-
-            return features
-#else
-            return [.appleTV, .sharing]
+            eligible.append(contentsOf: AppProduct.Essentials.allPlatforms.features)
 #endif
+            return eligible
 
         // MARK: Discontinued
 
