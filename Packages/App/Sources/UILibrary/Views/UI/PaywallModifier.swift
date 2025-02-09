@@ -141,10 +141,13 @@ private extension PaywallModifier {
     var confirmationMessageString: String {
         let V = Strings.Views.Paywall.Alerts.Confirmation.self
         var messages = [V.message]
-        if reason?.forConnecting == true {
+        switch reason?.action {
+        case .connect:
             messages.append(V.Message.connect(limitedMinutes))
-        } else {
+        case .save:
             messages.append(V.Message.save)
+        default:
+            break
         }
         return alertMessage(
             startingWith: messages.joined(separator: " "),
@@ -169,7 +172,7 @@ private extension PaywallModifier {
     var restrictedMessageString: String {
         let V = Strings.Views.Paywall.Alerts.self
         var messages = [V.Restricted.message]
-        if reason?.forConnecting == true {
+        if reason?.action == .connect {
             messages.append(V.Confirmation.Message.connect(limitedMinutes))
         }
         return alertMessage(

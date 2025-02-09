@@ -152,7 +152,7 @@ private extension ProfileCoordinator {
                     nil,
                     requiredFeatures: requiredFeatures,
                     suggestedProducts: nil,
-                    forConnecting: false
+                    action: .save
                 )
                 return
             }

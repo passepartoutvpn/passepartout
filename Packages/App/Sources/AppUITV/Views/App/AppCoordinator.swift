@@ -179,7 +179,7 @@ extension AppCoordinator {
         pp_log(.app, .info, "Present paywall")
         onCancelPaywall = onCancel
 
-        setLater(.init(nil, requiredFeatures: features)) {
+        setLater(.init(nil, requiredFeatures: features, action: .connect)) {
             paywallReason = $0
         }
     }

@@ -80,7 +80,7 @@ extension PurchaseRequiredView where Content == PurchaseRequiredButton {
                     nil,
                     requiredFeatures: features ?? [],
                     suggestedProducts: products,
-                    needsConfirmation: false
+                    action: .purchase
                 )
             }
         }
@@ -103,7 +103,7 @@ extension PurchaseRequiredView where Content == Button<Text> {
                     nil,
                     requiredFeatures: features,
                     suggestedProducts: products,
-                    needsConfirmation: false
+                    action: .purchase
                 )
             }
         }
