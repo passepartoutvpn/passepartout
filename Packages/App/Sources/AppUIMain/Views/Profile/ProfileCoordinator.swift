@@ -132,27 +132,15 @@ private extension ProfileCoordinator {
 
     // standard: verify and alert if purchase required
     func onCommitEditingStandard() async throws {
+        let profileToSave = try profileEditor.build()
+
         do {
-            let profileToSave = try profileEditor.build()
-
-            // IMPORTANT: only verify essential features, and let the user
-            // purchase extra features through ad hoc paywalls
-            //
-            // the ineligible connection would trigger "Edit profile" while
-            // still working during the grace period
-            //
-            // e.g. this will not prevent "Save" on iOS/macOS if ineligible
-            // for non-essential features like .appleTV. this is not an
-            // issue on tvOS because the profile will eventually fail
-            // verification and disconnect after the grace period
-            //
-            try iapManager.verify(
+            try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
+            try await profileEditor.save(
                 profileToSave,
-                extra: profileEditor.extraFeatures,
-                intersectingWith: Set(AppFeature.essentialFeatures)
+                to: profileManager,
+                preferencesManager: preferencesManager
             )
-
-            try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
@@ -162,9 +150,13 @@ private extension ProfileCoordinator {
                 )
                 return
             }
+
+            let suggestedProduct = iapManager.suggestedProduct(forSavedFeatures: requiredFeatures)
+
             paywallReason = .init(
                 nil,
                 requiredFeatures: requiredFeatures,
+                suggestedProduct: suggestedProduct,
                 forConnecting: false
             )
             return
