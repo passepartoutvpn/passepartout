@@ -136,11 +136,6 @@ private extension ProfileCoordinator {
 
         do {
             try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-            try await profileEditor.save(
-                profileToSave,
-                to: profileManager,
-                preferencesManager: preferencesManager
-            )
         } catch AppError.ineligibleProfile(var requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
@@ -158,14 +153,23 @@ private extension ProfileCoordinator {
                 requiredFeatures.formIntersection(AppFeature.essentialFeatures)
             }
 
-            paywallReason = .init(
-                nil,
-                requiredFeatures: requiredFeatures,
-                suggestedProduct: suggestedProduct,
-                forConnecting: false
-            )
-            return
+            // present paywall if purchase required
+            guard requiredFeatures.isEmpty else {
+                paywallReason = .init(
+                    nil,
+                    requiredFeatures: requiredFeatures,
+                    suggestedProduct: suggestedProduct,
+                    forConnecting: false
+                )
+                return
+            }
         }
+
+        try await profileEditor.save(
+            profileToSave,
+            to: profileManager,
+            preferencesManager: preferencesManager
+        )
         onDismiss()
     }
 
