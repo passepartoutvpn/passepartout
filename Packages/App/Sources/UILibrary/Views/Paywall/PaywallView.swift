@@ -215,7 +215,7 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let rawProducts = suggestedProducts ?? iapManager.suggestedProducts()
+            let rawProducts = suggestedProducts ?? iapManager.suggestedEssentialProducts()
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }

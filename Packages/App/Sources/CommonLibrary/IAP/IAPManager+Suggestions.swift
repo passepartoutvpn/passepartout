@@ -29,11 +29,11 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func suggestedProducts() -> Set<AppProduct> {
+    public func suggestedEssentialProducts() -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: .iOS, asserting: true)
+        suggestedEssentialProducts(for: .iOS)
 #elseif os(macOS)
-        suggestedProducts(for: .macOS, asserting: true)
+        suggestedEssentialProducts(for: .macOS)
 #elseif os(tvOS)
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
@@ -69,7 +69,7 @@ extension IAPManager {
         case macOS
     }
 
-    func suggestedProducts(for platform: Platform, asserting: Bool = false) -> Set<AppProduct> {
+    func suggestedEssentialProducts(for platform: Platform, asserting: Bool = false) -> Set<AppProduct> {
         guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
             if asserting {
                 assertionFailure("Suggesting 'Essentials' to former all platforms purchaser?")
