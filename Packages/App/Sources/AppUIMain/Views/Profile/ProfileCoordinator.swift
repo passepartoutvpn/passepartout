@@ -136,10 +136,16 @@ private extension ProfileCoordinator {
             let profileToSave = try profileEditor.build()
 
             // IMPORTANT: only verify essential features, and let the user
-            // purchase extra features through ad hoc paywalls (e.g. .appleTV)
+            // purchase extra features through ad hoc paywalls
             //
             // the ineligible connection would trigger "Edit profile" while
             // still working during the grace period
+            //
+            // e.g. this will not prevent "Save" on iOS/macOS if ineligible
+            // for non-essential features like .appleTV. this is not an
+            // issue on tvOS because the profile will eventually fail
+            // verification and disconnect after the grace period
+            //
             try iapManager.verify(
                 profileToSave,
                 extra: profileEditor.extraFeatures,
