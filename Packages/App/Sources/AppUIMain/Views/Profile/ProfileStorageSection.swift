@@ -110,7 +110,7 @@ private extension ProfileStorageSection {
     }
 
     var tvRequirements: Set<AppFeature> {
-        profileEditor.isAvailableForTV ? [.appleTV, .sharing] : []
+        profileEditor.isShared && profileEditor.isAvailableForTV ? [.appleTV, .sharing] : []
     }
 
     var sharingDescription: String {
