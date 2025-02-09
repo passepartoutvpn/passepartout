@@ -28,7 +28,7 @@ import Foundation
 extension AppProduct {
     public enum Essentials {
         static let all: [AppProduct] = [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Essentials.macOS
         ]
@@ -66,7 +66,11 @@ extension AppProduct {
 // MARK: - Current
 
 extension AppProduct.Essentials {
-    public static let allPlatforms = AppProduct(featureId: "full_multi_version")
+
+    // TODO: ###, iOS/macOS/tvOS bundle
+//    public static let allPlatforms = AppProduct(featureId: "essentials")
+
+    public static let iOS_macOS = AppProduct(featureId: "full_multi_version")
 
     public static let iOS = AppProduct(featureId: "full_version")
 

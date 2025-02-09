@@ -36,7 +36,7 @@ extension AppUserLevel: AppFeatureProviding {
             ]
 
         case .essentials:
-            return AppProduct.Essentials.allPlatforms.features
+            return AppProduct.Essentials.iOS_macOS.features
 
         case .complete:
             return AppFeature.allCases

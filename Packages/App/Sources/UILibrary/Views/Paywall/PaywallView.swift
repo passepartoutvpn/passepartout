@@ -207,7 +207,7 @@ private extension PaywallView {
 
 private extension PaywallView {
     var essentialFeatures: [AppFeature] {
-        AppProduct.Essentials.allPlatforms.features
+        AppProduct.Essentials.iOS_macOS.features
     }
 
     func fetchAvailableProducts() async {
@@ -278,7 +278,7 @@ private extension PaywallView {
 private extension AppProduct {
     var productRank: Int {
         switch self {
-        case .Essentials.allPlatforms:
+        case .Essentials.iOS_macOS:
             return .min
         case .Essentials.iOS:
             return 1

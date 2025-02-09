@@ -49,7 +49,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         let appProducts: [AppProduct] = [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Donations.huge
         ]
         let inAppProducts = try await sut.purchasableProducts(for: appProducts)
@@ -88,7 +88,7 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Essentials.allPlatforms]
+                return [.Essentials.iOS_macOS]
             }
             return []
         }
@@ -101,7 +101,7 @@ extension IAPManagerTests {
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
-                return [.Essentials.allPlatforms]
+                return [.Essentials.iOS_macOS]
             }
             return []
         }
@@ -119,7 +119,7 @@ extension IAPManagerTests {
 
         XCTAssertFalse(sut.isEligible(for: AppFeature.essentialFeatures))
 
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Essentials.allPlatforms])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Essentials.iOS_macOS])
         XCTAssertFalse(sut.isEligible(for: AppFeature.essentialFeatures))
 
         await sut.reloadReceipt()
@@ -146,8 +146,8 @@ extension IAPManagerTests {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(
             withBuild: defaultBuildNumber,
-            products: [.Essentials.allPlatforms],
-            cancelledProducts: [.Essentials.allPlatforms]
+            products: [.Essentials.iOS_macOS],
+            cancelledProducts: [.Essentials.iOS_macOS]
         )
         let sut = IAPManager(receiptReader: reader)
 
@@ -177,7 +177,7 @@ extension IAPManagerTests {
 
     func test_givenEssentialsVersion_thenIsEligibleForEssentialFeatures() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Essentials.allPlatforms])
+        await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Essentials.iOS_macOS])
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -264,11 +264,11 @@ extension IAPManagerTests {
     func test_givenFree_thenSuggestsEssentialsAllAndPlatform() async {
         let sut = await IAPManager(products: [])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.macOS
         ])
     }
@@ -296,7 +296,7 @@ extension IAPManagerTests {
     }
 
     func test_givenEssentialsAll_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Essentials.allPlatforms])
+        let sut = await IAPManager(products: [.Essentials.iOS_macOS])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
@@ -304,11 +304,11 @@ extension IAPManagerTests {
     func test_givenAppleTV_thenSuggestsEssentialsAllAndPlatform() async {
         let sut = await IAPManager(products: [.Features.appleTV])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.macOS
         ])
     }
@@ -316,11 +316,11 @@ extension IAPManagerTests {
     func test_givenFeature_thenSuggestsEssentialsAllAndPlatform() async {
         let sut = await IAPManager(products: [.Features.trustedNetworks])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [
-            .Essentials.allPlatforms,
+            .Essentials.iOS_macOS,
             .Essentials.macOS
         ])
     }
@@ -485,7 +485,7 @@ extension IAPManagerTests {
 extension IAPManagerTests {
     func test_givenManager_whenObserveObjects_thenReloadsReceipt() async {
         let reader = FakeAppReceiptReader()
-        await reader.setReceipt(withBuild: .max, products: [.Essentials.allPlatforms])
+        await reader.setReceipt(withBuild: .max, products: [.Essentials.iOS_macOS])
         let sut = IAPManager(receiptReader: reader)
 
         XCTAssertEqual(sut.userLevel, .undefined)

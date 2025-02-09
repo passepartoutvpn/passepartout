@@ -31,19 +31,19 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
-        case .Essentials.allPlatforms:
+        case .Essentials.iOS_macOS:
             return AppFeature.essentialFeatures
 
         case .Essentials.iOS:
 #if os(iOS) || os(tvOS)
-            return AppProduct.Essentials.allPlatforms.features
+            return AppProduct.Essentials.iOS_macOS.features
 #else
             return []
 #endif
 
         case .Essentials.macOS:
 #if os(macOS) || os(tvOS)
-            return AppProduct.Essentials.allPlatforms.features
+            return AppProduct.Essentials.iOS_macOS.features
 #else
             return []
 #endif
@@ -66,7 +66,7 @@ extension AppProduct: AppFeatureProviding {
             //
             // this is a solid workaround as long as profiles are
             // not editable on tvOS
-            eligible.append(contentsOf: AppProduct.Essentials.allPlatforms.features)
+            eligible.append(contentsOf: AppProduct.Essentials.iOS_macOS.features)
 #endif
             return eligible
 

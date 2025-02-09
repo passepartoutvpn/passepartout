@@ -66,7 +66,7 @@ extension IAPManager {
     }
 
     func suggestedProducts(for platform: Platform, asserting: Bool = false) -> Set<AppProduct> {
-        guard !purchasedProducts.contains(.Essentials.allPlatforms) else {
+        guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
             if asserting {
                 assertionFailure("Suggesting 'Essentials' to former all platforms purchaser?")
             }
@@ -89,7 +89,7 @@ extension IAPManager {
                 return []
             }
             if !purchasedProducts.contains(.Essentials.macOS) {
-                suggested.insert(.Essentials.allPlatforms)
+                suggested.insert(.Essentials.iOS_macOS)
             }
             suggested.insert(.Essentials.iOS)
         case .macOS:
@@ -100,7 +100,7 @@ extension IAPManager {
                 return []
             }
             if !purchasedProducts.contains(.Essentials.iOS) {
-                suggested.insert(.Essentials.allPlatforms)
+                suggested.insert(.Essentials.iOS_macOS)
             }
             suggested.insert(.Essentials.macOS)
         }
