@@ -32,9 +32,9 @@ public enum AppUserLevel: Int, Sendable {
 
     case beta = 1
 
-    case fullV2 = 2 // without .appleTV
+    case essentials = 2 // without .appleTV and future features
 
-    case fullV3 = 3
+    case complete = 3
 }
 
 extension AppUserLevel {

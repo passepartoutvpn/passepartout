@@ -25,23 +25,32 @@
 
 import CommonIAP
 import Foundation
+import PassepartoutKit
 
 public typealias PaywallReason = PaywallModifier.Reason
 
 extension PaywallModifier {
     public struct Reason: Hashable {
+        public let profile: Profile?
+
         public let requiredFeatures: Set<AppFeature>
+
+        public let suggestedProduct: AppProduct?
 
         public let needsConfirmation: Bool
 
         public let forConnecting: Bool
 
         public init(
-            _ requiredFeatures: Set<AppFeature>,
+            _ profile: Profile?,
+            requiredFeatures: Set<AppFeature>,
+            suggestedProduct: AppProduct? = nil,
             needsConfirmation: Bool = true,
             forConnecting: Bool = true
         ) {
+            self.profile = profile
             self.requiredFeatures = requiredFeatures
+            self.suggestedProduct = suggestedProduct
             self.needsConfirmation = needsConfirmation
             self.forConnecting = forConnecting
         }

@@ -155,7 +155,11 @@ extension AppCoordinator {
         )
     }
 
-    public func onPurchaseRequired(_ features: Set<AppFeature>, onCancel: (() -> Void)?) {
+    public func onPurchaseRequired(
+        for profile: Profile,
+        features: Set<AppFeature>,
+        onCancel: (() -> Void)?
+    ) {
         pp_log(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
             let V = Strings.Views.Paywall.Alerts.Verification.self
@@ -174,7 +178,8 @@ extension AppCoordinator {
         }
         pp_log(.app, .info, "Present paywall")
         onCancelPaywall = onCancel
-        setLater(.init(features)) {
+
+        setLater(.init(nil, requiredFeatures: features)) {
             paywallReason = $0
         }
     }

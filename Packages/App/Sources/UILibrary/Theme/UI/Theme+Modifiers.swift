@@ -164,6 +164,12 @@ extension View {
 
     // subtitle is hidden on iOS/tvOS
     public func themeRowWithSubtitle(_ subtitle: String?) -> some View {
+        themeRowWithSubtitle {
+            subtitle.map(Text.init)
+        }
+    }
+
+    public func themeRowWithSubtitle<Subtitle>(_ subtitle: () -> Subtitle) -> some View where Subtitle: View {
         modifier(ThemeRowWithSubtitleModifier(subtitle: subtitle))
     }
 
@@ -450,8 +456,10 @@ struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
     let forcesFooter: Bool
 }
 
-struct ThemeRowWithSubtitleModifier: ViewModifier {
-    let subtitle: String?
+struct ThemeRowWithSubtitleModifier<Subtitle>: ViewModifier where Subtitle: View {
+
+    @ViewBuilder
+    let subtitle: Subtitle
 }
 
 struct ThemeEmptyMessageModifier: ViewModifier {

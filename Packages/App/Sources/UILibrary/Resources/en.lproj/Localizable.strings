@@ -78,8 +78,7 @@
 "views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.paywall.sections.required_features.header" = "Required features";
-"views.paywall.sections.full_products.header" = "Full version";
-"views.paywall.sections.all_features.header" = "Full version includes";
+"views.paywall.sections.included_features.header" = "Also includes";
 "views.paywall.sections.products.footer" = "All purchases support Family Sharing.";
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
@@ -87,6 +86,7 @@
 "views.paywall.alerts.confirmation.title" = "Purchase required";
 "views.paywall.alerts.confirmation.message" = "This profile requires paid features to work.";
 "views.paywall.alerts.confirmation.message.connect" = "You may test the connection for %d minutes.";
+"views.paywall.alerts.confirmation.edit_profile" = "Edit profile";
 "views.paywall.alerts.verification.connect.1" = "Your purchases are being verified.";
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
@@ -139,9 +139,9 @@
 // MARK: Views (Modules)
 
 "modules.general.sections.storage.header" = "Synchronization";
-"modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
+"modules.general.sections.storage.sharing.footer" = "Profiles are stored to %@ encrypted.";
+"modules.general.sections.storage.tv.footer" = "iCloud is required to share your profiles with your Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase" = "Purchase to drop the restriction.";
 "modules.general.sections.behavior.header" = "Behavior";
 "modules.general.rows.shared" = "Enabled";
 "modules.general.rows.shared.purchase" = "Share on iCloud";

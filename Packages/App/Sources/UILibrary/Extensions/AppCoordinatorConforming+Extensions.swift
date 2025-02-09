@@ -35,7 +35,7 @@ extension AppCoordinatorConforming {
             }
             try await tunnel.connect(with: profile, force: force)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
-            onPurchaseRequired(requiredFeatures) {
+            onPurchaseRequired(for: profile, features: requiredFeatures) {
                 Task {
                     await onConnect(profile, force: force, verify: false)
                 }

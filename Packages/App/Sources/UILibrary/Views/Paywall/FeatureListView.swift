@@ -46,17 +46,34 @@ struct FeatureListView<Content>: View where Content: View {
     var body: some View {
         switch style {
         case .list:
-            ForEach(features.sorted(), id: \.id, content: content)
-                .themeSection(header: header)
+            listView
 
 #if !os(tvOS)
         case .table:
-            Table(features.sorted()) {
-                TableColumn("", content: content)
+            // XXX: work around Table artifact when 1 row and no headers
+            if features.count > 1 {
+                tableView
+            } else {
+                listView
             }
-            .withoutColumnHeaders()
-            .themeSection(header: header)
 #endif
         }
     }
+}
+
+private extension FeatureListView {
+    var listView: some View {
+        ForEach(features.sorted(), id: \.id, content: content)
+            .themeSection(header: header)
+    }
+
+#if !os(tvOS)
+    var tableView: some View {
+        Table(features.sorted()) {
+            TableColumn("", content: content)
+        }
+        .withoutColumnHeaders()
+        .themeSection(header: header)
+    }
+#endif
 }

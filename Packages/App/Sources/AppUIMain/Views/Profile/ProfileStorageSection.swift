@@ -34,15 +34,27 @@ struct ProfileStorageSection: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     var body: some View {
         debugChanges()
         return Group {
             sharingToggle
-                .themeRowWithSubtitle(sharingDescription)
-            tvToggle
-                .themeRowWithSubtitle(tvDescription)
+                .themeSectionWithSingleRow(
+                    header: header,
+                    footer: sharingDescription
+                )
+
+            Group {
+                tvToggle
+                    .themeRowWithSubtitle(tvDescription)
+
+                tvPurchaseButton
+            }
+            .themeSection(footer: tvDescription)
+            .disabled(!profileEditor.isShared)
         }
-        .themeSection(header: header, footer: footer)
     }
 }
 
@@ -52,22 +64,34 @@ private extension ProfileStorageSection {
             ThemeImageLabel(.cloudOn, inForm: true) {
                 HStack {
                     Text(Strings.Unlocalized.iCloud)
-                    PurchaseRequiredView(features: profileEditor.isShared ? [.sharing] : [])
+                    sharingPurchaseButton
                 }
             }
         }
     }
 
+    var sharingPurchaseButton: some View {
+        PurchaseRequiredView(
+            requiring: sharingRequirements,
+            reason: $paywallReason
+        )
+    }
+
     var tvToggle: some View {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
             ThemeImageLabel(.tvOn, inForm: true) {
-                HStack {
-                    Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
-                    PurchaseRequiredView(features: profileEditor.isAvailableForTV ? [.appleTV] : [])
-                }
+                Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
             }
         }
-        .disabled(!profileEditor.isShared)
+    }
+
+    var tvPurchaseButton: some View {
+        PurchaseRequiredView(
+            requiring: tvRequirements,
+            reason: $paywallReason,
+            title: Strings.Global.Actions.purchase,
+            suggesting: .Features.appleTV
+        )
     }
 }
 
@@ -76,35 +100,36 @@ private extension ProfileStorageSection {
         Strings.Modules.General.Sections.Storage.header
     }
 
-    var footer: String {
-        var desc = [
-            Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
-        ]
-        if let tvDescription {
-            desc.append(tvDescription)
-        }
-        return desc.joined(separator: " ")
+    var sharingRequirements: Set<AppFeature> {
+        profileEditor.isShared ? [.sharing] : []
+    }
+
+    var tvRequirements: Set<AppFeature> {
+        profileEditor.isAvailableForTV ? [.appleTV] : []
     }
 
     var sharingDescription: String {
-        Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
+        Strings.Modules.General.Sections.Storage.Sharing.footer(Strings.Unlocalized.iCloud)
     }
 
     var tvDescription: String? {
-        if iapManager.isEligible(for: .appleTV) {
-            return nil
+        var desc: [String] = [Strings.Modules.General.Sections.Storage.Tv.footer]
+        if !iapManager.isEligible(for: .appleTV) {
+            desc.append(Strings.Views.Paywall.Alerts.Confirmation.Message.connect(iapManager.verificationDelayMinutes))
+            if !iapManager.isBeta {
+                desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchase)
+            }
         }
-        if !iapManager.isBeta {
-            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease
-        } else {
-            return Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta
-        }
+        return desc.joined(separator: " ")
     }
 }
 
 #Preview {
     Form {
-        ProfileStorageSection(profileEditor: ProfileEditor())
+        ProfileStorageSection(
+            profileEditor: ProfileEditor(),
+            paywallReason: .constant(nil)
+        )
     }
     .themeForm()
     .withMockEnvironment()

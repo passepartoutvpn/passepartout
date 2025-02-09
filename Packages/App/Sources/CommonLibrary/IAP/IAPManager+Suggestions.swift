@@ -29,40 +29,64 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public var isFullVersionPurchaser: Bool {
-        purchasedProducts.contains(where: \.isFullVersion) || (purchasedProducts.contains(.Full.OneTime.iOS) && purchasedProducts.contains(.Full.OneTime.macOS))
+    public func suggestedProducts() -> Set<AppProduct> {
+#if os(iOS)
+        suggestedProducts(for: .iOS, asserting: true)
+#elseif os(macOS)
+        suggestedProducts(for: .macOS, asserting: true)
+#elseif os(tvOS)
+        fatalError("tvOS: Do not suggest products, paywall unsupported")
+#endif
+    }
+}
+
+// for testing
+extension IAPManager {
+    enum Platform {
+        case iOS
+
+        case macOS
     }
 
-    public func suggestedProducts(for requiredFeatures: Set<AppFeature>, withRecurring: Bool = true) -> Set<AppProduct>? {
-        guard !requiredFeatures.isEmpty else {
-            return nil
-        }
-        guard !eligibleFeatures.isSuperset(of: requiredFeatures) else {
-            return nil
-        }
-
-        var products: Set<AppProduct> = []
-        let ineligibleFeatures = requiredFeatures.subtracting(eligibleFeatures)
-
-        if isFullVersionPurchaser {
-            if ineligibleFeatures == [.appleTV] {
-                products.insert(.Features.appleTV)
-            } else {
-                assertionFailure("Full version purchaser requiring other than [.appleTV]")
+    func suggestedProducts(for platform: Platform, asserting: Bool = false) -> Set<AppProduct> {
+        guard !purchasedProducts.contains(.Essentials.allPlatforms) else {
+            if asserting {
+                assertionFailure("Suggesting 'Essentials' to former all platforms purchaser?")
             }
-        } else { // !isFullVersionPurchaser
-            if eligibleFeatures.contains(.appleTV) {
-                products.insert(.Full.OneTime.iOS_macOS)
-            } else {
-                products.insert(.Full.OneTime.allFeatures)
+            return []
+        }
+        guard !purchasedProducts.contains(where: \.isFullVersion) else {
+            if asserting {
+                assertionFailure("Suggesting 'Essentials' to full version purchaser?")
             }
+            return []
         }
 
-        if withRecurring && products.contains(.Full.OneTime.allFeatures) {
-            products.insert(.Full.Recurring.monthly)
-            products.insert(.Full.Recurring.yearly)
+        var suggested: Set<AppProduct> = []
+        switch platform {
+        case .iOS:
+            guard !purchasedProducts.contains(.Essentials.iOS) else {
+                if asserting {
+                    assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
+                }
+                return []
+            }
+            if !purchasedProducts.contains(.Essentials.macOS) {
+                suggested.insert(.Essentials.allPlatforms)
+            }
+            suggested.insert(.Essentials.iOS)
+        case .macOS:
+            guard !purchasedProducts.contains(.Essentials.macOS) else {
+                if asserting {
+                    assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
+                }
+                return []
+            }
+            if !purchasedProducts.contains(.Essentials.iOS) {
+                suggested.insert(.Essentials.allPlatforms)
+            }
+            suggested.insert(.Essentials.macOS)
         }
-
-        return products
+        return suggested
     }
 }

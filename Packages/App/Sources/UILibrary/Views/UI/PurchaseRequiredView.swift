@@ -35,12 +35,15 @@ public struct PurchaseRequiredView<Content>: View where Content: View {
 
     let features: Set<AppFeature>?
 
+    var force: Bool = false
+
     @ViewBuilder
-    let content: (_ isRestricted: Bool) -> Content
+    let content: () -> Content
 
     public var body: some View {
-        content(iapManager.isBeta)
-            .opaque(!isEligible)
+        content()
+            .opaque(force || !isEligible)
+            .if(!iapManager.isBeta)
     }
 }
 
@@ -55,16 +58,74 @@ private extension PurchaseRequiredView {
 
 // MARK: - Initializers
 
-extension PurchaseRequiredView where Content == PurchaseRequiredImage {
-    public init(for requiring: AppFeatureRequiring?) {
-        self.init(features: requiring?.features)
+// use for essential paywall, presents without confirmation
+extension PurchaseRequiredView where Content == PurchaseRequiredButton {
+    public init(for requiring: AppFeatureRequiring?, reason: Binding<PaywallReason?>) {
+        self.init(requiring: requiring?.features, reason: reason)
     }
 
-    public init(features: Set<AppFeature>?) {
+    public init(requiring features: Set<AppFeature>?, reason: Binding<PaywallReason?>) {
         self.features = features
         content = {
-            PurchaseRequiredImage(isRestricted: $0)
+            PurchaseRequiredButton {
+                reason.wrappedValue = .init(
+                    nil,
+                    requiredFeatures: features ?? [],
+                    needsConfirmation: false
+                )
+            }
         }
+    }
+}
+
+// use for ad hoc feature paywalls, presents without confirmation
+extension PurchaseRequiredView where Content == Button<Text> {
+    public init(
+        requiring features: Set<AppFeature>,
+        reason: Binding<PaywallReason?>,
+        title: String,
+        suggesting product: AppProduct
+    ) {
+        self.features = features
+        force = true
+        content = {
+            Button(title) {
+                reason.wrappedValue = .init(
+                    nil,
+                    requiredFeatures: features,
+                    suggestedProduct: product,
+                    needsConfirmation: false
+                )
+            }
+        }
+    }
+}
+
+// use for upgrade icon only
+extension PurchaseRequiredView where Content == PurchaseRequiredImage {
+    public init(for requiring: AppFeatureRequiring?) {
+        self.init(requiring: requiring?.features)
+    }
+
+    public init(requiring features: Set<AppFeature>?) {
+        self.features = features
+        content = {
+            PurchaseRequiredImage()
+        }
+    }
+}
+
+// MARK: - Labels
+
+public struct PurchaseRequiredButton: View {
+    let action: () -> Void
+
+    public var body: some View {
+        Button(action: action) {
+            PurchaseRequiredImage()
+        }
+        .buttonStyle(.plain)
+        .cursor(.hand)
     }
 }
 
@@ -73,12 +134,10 @@ public struct PurchaseRequiredImage: View {
     @EnvironmentObject
     private var theme: Theme
 
-    let isRestricted: Bool
-
     public var body: some View {
-        ThemeImage(isRestricted ? .warning : .upgrade)
+        ThemeImage(.upgrade)
             .foregroundStyle(theme.upgradeColor)
-            .help(isRestricted ? Strings.Views.Ui.PurchaseRequired.Restricted.help : Strings.Views.Ui.PurchaseRequired.Purchase.help)
+            .help(Strings.Views.Ui.PurchaseRequired.Purchase.help)
 #if os(macOS)
             .imageScale(.large)
 #endif

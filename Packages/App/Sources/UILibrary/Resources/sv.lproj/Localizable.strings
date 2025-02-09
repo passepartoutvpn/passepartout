@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Aktiverad";
 "modules.general.rows.shared.purchase" = "Dela på iCloud";
 "modules.general.sections.behavior.header" = "Beteende";
-"modules.general.sections.storage.footer" = "Profiler sparas i %@ och är krypterade.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profiler fungerar inte i beta-versioner.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profiler fungerar inte utan ett köp.";
 "modules.general.sections.storage.header" = "Synkronisering";
+"modules.general.sections.storage.sharing.footer" = "Profiler sparas i %@ och är krypterade.";
+"modules.general.sections.storage.tv.footer" = "iCloud krävs för att dela dina profiler med din Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase" = "Köp för att ta bort begränsningen.";
 "modules.http_proxy.bypass_domains.add" = "Lägg till kringgående domän";
 "modules.ip.routes.add_family" = "Lägg till %@";
 "modules.ip.routes.exclude" = "Exkludera rutt";
@@ -246,6 +248,7 @@
 "views.migration.no_profiles" = "Inget att migrera";
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
+"views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.title" = "Köp krävs";
@@ -259,6 +262,7 @@
 "views.paywall.rows.restore_purchases" = "Återställ köp";
 "views.paywall.sections.all_features.header" = "Den fullständiga versionen innehåller";
 "views.paywall.sections.full_products.header" = "Fullständig version";
+"views.paywall.sections.included_features.header" = "Inkluderar även";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har köpt denna app eller funktion tidigare kan du återställa dina köp.";

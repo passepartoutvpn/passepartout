@@ -41,6 +41,9 @@ struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Templ
 
     let entityDestination: any Hashable
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     @ViewBuilder
     let providerRows: ProviderRows
 
@@ -52,6 +55,7 @@ struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Templ
                 providerId: $providerId,
                 providerPreferences: providerPreferences,
                 templateType: Template.self,
+                paywallReason: $paywallReason,
                 providerRows: {
                     providerEntityRow
                     providerRows
@@ -96,6 +100,7 @@ private extension ProviderContentModifier {
                     providerPreferences: nil,
                     selectedEntity: .constant(nil as ProviderEntity<OpenVPNProviderTemplate>?),
                     entityDestination: "Destination",
+                    paywallReason: .constant(nil),
                     providerRows: {
                         Text("Other")
                     }

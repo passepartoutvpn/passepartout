@@ -84,6 +84,7 @@ private extension ProfileCoordinator {
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
             path: $path,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -97,6 +98,7 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -143,7 +145,11 @@ private extension ProfileCoordinator {
                 )
                 return
             }
-            paywallReason = .init(requiredFeatures, forConnecting: false)
+            paywallReason = .init(
+                nil,
+                requiredFeatures: requiredFeatures,
+                forConnecting: false
+            )
             return
         }
         onDismiss()
