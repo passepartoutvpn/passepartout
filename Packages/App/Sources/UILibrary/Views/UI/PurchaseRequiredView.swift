@@ -60,17 +60,26 @@ private extension PurchaseRequiredView {
 
 // use for essential paywall, presents without confirmation
 extension PurchaseRequiredView where Content == PurchaseRequiredButton {
-    public init(for requiring: AppFeatureRequiring?, reason: Binding<PaywallReason?>) {
-        self.init(requiring: requiring?.features, reason: reason)
+    public init(
+        for requiring: AppFeatureRequiring?,
+        reason: Binding<PaywallReason?>,
+        suggesting product: AppProduct? = nil
+    ) {
+        self.init(requiring: requiring?.features, reason: reason, suggesting: product)
     }
 
-    public init(requiring features: Set<AppFeature>?, reason: Binding<PaywallReason?>) {
+    public init(
+        requiring features: Set<AppFeature>?,
+        reason: Binding<PaywallReason?>,
+        suggesting product: AppProduct? = nil
+    ) {
         self.features = features
         content = {
             PurchaseRequiredButton {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features ?? [],
+                    suggestedProduct: product,
                     needsConfirmation: false
                 )
             }
