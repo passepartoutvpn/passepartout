@@ -141,7 +141,7 @@ private extension ProfileCoordinator {
                 to: profileManager,
                 preferencesManager: preferencesManager
             )
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
+        } catch AppError.ineligibleProfile(var requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
@@ -152,6 +152,11 @@ private extension ProfileCoordinator {
             }
 
             let suggestedProduct = iapManager.suggestedProduct(forSavedFeatures: requiredFeatures)
+
+            // strip non-essential for the inability of purchasing all at once
+            if suggestedProduct == nil {
+                requiredFeatures.formIntersection(AppFeature.essentialFeatures)
+            }
 
             paywallReason = .init(
                 nil,
