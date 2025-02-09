@@ -49,8 +49,6 @@ struct ProfileStorageSection: View {
             Group {
                 tvToggle
                     .themeRowWithSubtitle(tvDescription)
-
-                tvPurchaseButton
             }
             .themeSection(footer: tvDescription)
             .disabled(!profileEditor.isShared)
@@ -85,7 +83,10 @@ private extension ProfileStorageSection {
     var tvToggle: some View {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
             ThemeImageLabel(.tvOn, inForm: true) {
-                Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
+                HStack {
+                    Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
+                    tvPurchaseButton
+                }
             }
         }
     }
@@ -94,7 +95,6 @@ private extension ProfileStorageSection {
         PurchaseRequiredView(
             requiring: tvRequirements,
             reason: $paywallReason,
-            title: Strings.Global.Actions.purchase,
             suggesting: [.Features.appleTV]
         )
     }
