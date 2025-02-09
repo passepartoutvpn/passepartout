@@ -80,11 +80,9 @@ extension ThemeRowWithSubtitleModifier {
             content
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            subtitle.map {
-                Text($0)
-                    .themeSubtitle()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
+            subtitle
+                .themeSubtitle()
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }

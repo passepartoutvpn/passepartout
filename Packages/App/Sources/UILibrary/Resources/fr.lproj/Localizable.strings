@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Activé";
 "modules.general.rows.shared.purchase" = "Partager sur iCloud";
 "modules.general.sections.behavior.header" = "Comportement";
-"modules.general.sections.storage.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Les profils TV ne fonctionnent pas dans les versions bêta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Les profils TV ne fonctionnent pas sans un achat.";
 "modules.general.sections.storage.header" = "Synchronisation";
+"modules.general.sections.storage.sharing.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
+"modules.general.sections.storage.tv.footer" = "iCloud est requis pour partager vos profils avec votre Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase" = "Achetez pour supprimer la restriction.";
 "modules.http_proxy.bypass_domains.add" = "Ajouter un domaine à contourner";
 "modules.ip.routes.add_family" = "Ajouter %@";
 "modules.ip.routes.exclude" = "Exclure une route";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Rien à migrer";
 "views.migration.sections.main.header" = "Sélectionnez ci-dessous les profils des anciennes versions de %@ que vous souhaitez importer. Si vos profils sont stockés sur iCloud, ils peuvent mettre un certain temps à se synchroniser. Si vous ne les voyez pas maintenant, revenez plus tard.";
 "views.migration.title" = "Migrer";
+"views.paywall.alerts.confirmation.edit_profile" = "Modifier le profil";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
+"views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de mise à niveau pour débloquer les fonctionnalités.";
 "views.paywall.alerts.confirmation.title" = "Achat requis";
 "views.paywall.alerts.pending.message" = "L'achat est en attente de confirmation externe. La fonctionnalité sera créditée une fois approuvée.";
 "views.paywall.alerts.restricted.message" = "Certaines fonctionnalités ne sont pas disponibles dans cette version.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Restaurer les achats";
 "views.paywall.sections.all_features.header" = "La version complète inclut";
 "views.paywall.sections.full_products.header" = "Version complète";
+"views.paywall.sections.included_features.header" = "Comprend également";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
+"views.paywall.sections.products.header" = "Produits disponibles";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
 "views.paywall.sections.restore.footer" = "Si vous avez acheté cette application ou cette fonctionnalité dans le passé, vous pouvez restaurer vos achats.";
 "views.paywall.sections.restore.header" = "Restaurer";

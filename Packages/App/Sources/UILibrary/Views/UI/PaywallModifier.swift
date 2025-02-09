@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 public struct PaywallModifier: ViewModifier {
@@ -34,46 +35,43 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
+    private let otherTitle: String?
+
+    private let onOtherAction: ((Profile?) -> Void)?
+
     private let onCancel: (() -> Void)?
 
     @State
     private var isConfirming = false
 
     @State
-    private var isRestricted = false
-
-    @State
     private var isPurchasing = false
 
-    public init(reason: Binding<PaywallReason?>, onCancel: (() -> Void)? = nil) {
+    public init(
+        reason: Binding<PaywallReason?>,
+        otherTitle: String? = nil,
+        onOtherAction: ((Profile?) -> Void)? = nil,
+        onCancel: (() -> Void)? = nil
+    ) {
         _reason = reason
+        self.otherTitle = otherTitle
+        self.onOtherAction = onOtherAction
         self.onCancel = onCancel
     }
 
     public func body(content: Content) -> some View {
         content
             .alert(
-                Strings.Views.Paywall.Alerts.Confirmation.title,
+                confirmationTitle,
                 isPresented: $isConfirming,
                 actions: confirmationActions,
                 message: confirmationMessage
-            )
-            .alert(
-                Strings.Views.Paywall.Alerts.Restricted.title,
-                isPresented: $isRestricted,
-                actions: restrictedActions,
-                message: restrictedMessage
             )
             .themeModal(
                 isPresented: $isPurchasing,
                 options: .init(size: .custom(width: 400, height: 400)),
                 content: modalDestination
             )
-            .onChange(of: isRestricted) {
-                if !$0 {
-                    reason = nil
-                }
-            }
             .onChange(of: isPurchasing) {
                 if !$0 {
                     reason = nil
@@ -83,14 +81,14 @@ public struct PaywallModifier: ViewModifier {
                 guard let reason = $0 else {
                     return
                 }
-                if !iapManager.isBeta {
-                    if reason.needsConfirmation {
-                        isConfirming = true
-                    } else {
-                        isPurchasing = true
-                    }
+                if reason.needsConfirmation {
+                    isConfirming = true
                 } else {
-                    isRestricted = true
+                    guard !iapManager.isBeta else {
+                        assertionFailure("Purchasing in beta?")
+                        return
+                    }
+                    isPurchasing = true
                 }
             }
     }
@@ -99,7 +97,6 @@ public struct PaywallModifier: ViewModifier {
 private extension PaywallModifier {
     func alertMessage(startingWith header: String, features: [String]) -> String {
         header + "\n\n" + features.joined(separator: "\n")
-
     }
 }
 
@@ -109,14 +106,31 @@ private extension PaywallModifier {
 
     @ViewBuilder
     func confirmationActions() -> some View {
-        Button(Strings.Global.Actions.purchase) {
-            // IMPORTANT: retain reason because it serves paywall content
-            isPurchasing = true
+#if !os(tvOS)
+        if !iapManager.isBeta, let otherTitle, let onOtherAction {
+            Button(otherTitle) {
+                onOtherAction(reason?.profile)
+            }
         }
-        Button(Strings.Global.Actions.cancel, role: .cancel) {
+#endif
+        Button(confirmationCancel, role: .cancel) {
             reason = nil
             onCancel?()
         }
+    }
+
+    var confirmationTitle: String {
+        guard !iapManager.isBeta else {
+            return Strings.Views.Paywall.Alerts.Restricted.title
+        }
+        return Strings.Views.Paywall.Alerts.Confirmation.title
+    }
+
+    var confirmationCancel: String {
+        if otherTitle == nil {
+            return Strings.Global.Nouns.ok
+        }
+        return Strings.Global.Actions.cancel
     }
 
     func confirmationMessage() -> some View {
@@ -126,8 +140,13 @@ private extension PaywallModifier {
     var confirmationMessageString: String {
         let V = Strings.Views.Paywall.Alerts.Confirmation.self
         var messages = [V.message]
-        if reason?.forConnecting == true {
+        switch reason?.action {
+        case .connect:
             messages.append(V.Message.connect(limitedMinutes))
+        case .save:
+            messages.append(V.Message.save)
+        default:
+            break
         }
         return alertMessage(
             startingWith: messages.joined(separator: " "),
@@ -152,7 +171,7 @@ private extension PaywallModifier {
     var restrictedMessageString: String {
         let V = Strings.Views.Paywall.Alerts.self
         var messages = [V.Restricted.message]
-        if reason?.forConnecting == true {
+        if reason?.action == .connect {
             messages.append(V.Confirmation.Message.connect(limitedMinutes))
         }
         return alertMessage(
@@ -166,14 +185,18 @@ private extension PaywallModifier {
 
 private extension PaywallModifier {
     func modalDestination() -> some View {
-        assert(!iapManager.isLoadingReceipt, "Paywall presented while still loading receipt?")
-        return reason.map {
+#if !os(tvOS)
+        reason.map {
             PaywallView(
                 isPresented: $isPurchasing,
-                features: iapManager.excludingEligible(from: $0.requiredFeatures)
+                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures),
+                suggestedProducts: $0.suggestedProducts
             )
             .themeNavigationStack()
         }
+#else
+        fatalError("tvOS: Paywall unsupported")
+#endif
     }
 }
 

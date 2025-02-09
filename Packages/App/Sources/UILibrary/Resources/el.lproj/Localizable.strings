@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Ενεργοποιημένο";
 "modules.general.rows.shared.purchase" = "Κοινοποίηση στο iCloud";
 "modules.general.sections.behavior.header" = "Συμπεριφορά";
-"modules.general.sections.storage.footer" = "Τα προφίλ αποθηκεύονται κρυπτογραφημένα στο %@.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Τα προφίλ TV δεν λειτουργούν στις εκδόσεις beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Τα προφίλ TV δεν λειτουργούν χωρίς αγορά.";
 "modules.general.sections.storage.header" = "Συγχρονισμός";
+"modules.general.sections.storage.sharing.footer" = "Τα προφίλ αποθηκεύονται κρυπτογραφημένα στο %@.";
+"modules.general.sections.storage.tv.footer" = "Απαιτείται iCloud για να μοιραστείτε τα προφίλ σας με το Apple TV σας.";
+"modules.general.sections.storage.tv.footer.purchase" = "Αγοράστε για να καταργήσετε τον περιορισμό.";
 "modules.http_proxy.bypass_domains.add" = "Προσθήκη τομέα παράκαμψης";
 "modules.ip.routes.add_family" = "Προσθήκη %@";
 "modules.ip.routes.exclude" = "Εξαίρεση διαδρομής";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Δεν υπάρχει τίποτα για μεταφορά";
 "views.migration.sections.main.header" = "Επιλέξτε παρακάτω τα προφίλ από τις παλιές εκδόσεις του %@ που θέλετε να εισάγετε. Εάν τα προφίλ σας είναι αποθηκευμένα στο iCloud, μπορεί να χρειαστεί λίγος χρόνος για να συγχρονιστούν. Εάν δεν τα βλέπετε τώρα, επιστρέψτε αργότερα.";
 "views.migration.title" = "Μεταφορά";
+"views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
+"views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια αναβάθμισης για να ξεκλειδώσετε τις λειτουργίες.";
 "views.paywall.alerts.confirmation.title" = "Απαιτείται αγορά";
 "views.paywall.alerts.pending.message" = "Η αγορά εκκρεμεί για εξωτερική επιβεβαίωση. Η λειτουργία θα πιστωθεί μετά την έγκριση.";
 "views.paywall.alerts.restricted.message" = "Ορισμένες λειτουργίες δεν είναι διαθέσιμες σε αυτήν την έκδοση.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Επαναφορά αγορών";
 "views.paywall.sections.all_features.header" = "Η πλήρης έκδοση περιλαμβάνει";
 "views.paywall.sections.full_products.header" = "Πλήρης έκδοση";
+"views.paywall.sections.included_features.header" = "Περιλαμβάνει επίσης";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
+"views.paywall.sections.products.header" = "Διαθέσιμα προϊόντα";
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
 "views.paywall.sections.restore.footer" = "Εάν αγοράσατε αυτήν την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας.";
 "views.paywall.sections.restore.header" = "Επαναφορά";

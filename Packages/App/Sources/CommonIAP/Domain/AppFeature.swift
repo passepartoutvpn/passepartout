@@ -43,6 +43,18 @@ public enum AppFeature: String, CaseIterable {
     case sharing
 }
 
+extension AppFeature {
+    public static let essentialFeatures: [AppFeature] = [
+        .dns,
+        .httpProxy,
+        .onDemand,
+        .otp,
+        .providers,
+        .routing,
+        .sharing
+    ]
+}
+
 extension AppFeature: Identifiable {
     public var id: String {
         rawValue

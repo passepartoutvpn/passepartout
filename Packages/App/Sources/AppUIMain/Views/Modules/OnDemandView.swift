@@ -38,6 +38,9 @@ struct OnDemandView: View, ModuleDraftEditing {
     @ObservedObject
     var editor: ProfileEditor
 
+    @State
+    private var paywallReason: PaywallReason?
+
     private let wifi: Wifi
 
     init(
@@ -56,6 +59,7 @@ struct OnDemandView: View, ModuleDraftEditing {
             rulesArea
         }
         .moduleView(editor: editor, draft: draft.wrappedValue)
+        .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
 
@@ -91,7 +95,10 @@ private extension OnDemandView {
         } label: {
             HStack {
                 Text(Strings.Modules.OnDemand.policy)
-                PurchaseRequiredView(for: module)
+                PurchaseRequiredView(
+                    for: module,
+                    reason: $paywallReason
+                )
             }
         }
         .themeSectionWithSingleRow(footer: policyFooterDescription)

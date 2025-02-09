@@ -46,6 +46,9 @@ struct ModuleListView: View, Routable {
     @Binding
     var errorModuleIds: Set<UUID>
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     var flow: ProfileCoordinator.Flow?
 
     var body: some View {
@@ -54,7 +57,10 @@ struct ModuleListView: View, Routable {
                 NavigationLink(value: ProfileSplitView.Detail.general) {
                     HStack {
                         Text(Strings.Global.Nouns.general)
-                        PurchaseRequiredView(features: requiredGeneralFeatures)
+                        PurchaseRequiredView(
+                            requiring: requiredGeneralFeatures,
+                            reason: $paywallReason
+                        )
                     }
                 }
                 .tag(Self.generalModuleId)
@@ -83,7 +89,10 @@ private extension ModuleListView {
             if errorModuleIds.contains(module.id) {
                 ThemeImage(.warning)
             } else if profileEditor.isActiveModule(withId: module.id) {
-                PurchaseRequiredView(for: module as? AppFeatureRequiring)
+                PurchaseRequiredView(
+                    for: module as? AppFeatureRequiring,
+                    reason: $paywallReason
+                )
             }
             Spacer()
             if !isUITesting {
@@ -126,9 +135,6 @@ private extension ModuleListView {
         if profileEditor.isShared {
             features.insert(.sharing)
         }
-        if profileEditor.isAvailableForTV {
-            features.insert(.appleTV)
-        }
         return features
     }
 
@@ -166,7 +172,8 @@ private extension ModuleListView {
     ModuleListView(
         profileEditor: ProfileEditor(profile: .forPreviews),
         selectedModuleId: .constant(nil),
-        errorModuleIds: .constant([])
+        errorModuleIds: .constant([]),
+        paywallReason: .constant(nil)
     )
     .withMockEnvironment()
 }

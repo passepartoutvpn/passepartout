@@ -9,6 +9,7 @@ if [[ -z "$1" ]]; then
 fi
 
 translations=`cat "$1"`
+rm -rf "$translations_input_path"
 mkdir -p "$translations_input_path"
 
 # Split translations into separate files

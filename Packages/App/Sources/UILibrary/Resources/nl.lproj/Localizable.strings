@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Ingeschakeld";
 "modules.general.rows.shared.purchase" = "Delen op iCloud";
 "modules.general.sections.behavior.header" = "Gedrag";
-"modules.general.sections.storage.footer" = "Profielen worden versleuteld opgeslagen in %@.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profielen werken niet in bètaversies.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV-profielen werken niet zonder aankoop.";
 "modules.general.sections.storage.header" = "Synchronisatie";
+"modules.general.sections.storage.sharing.footer" = "Profielen worden versleuteld opgeslagen in %@.";
+"modules.general.sections.storage.tv.footer" = "iCloud is vereist om je profielen met je Apple TV te delen.";
+"modules.general.sections.storage.tv.footer.purchase" = "Koop om de beperking op te heffen.";
 "modules.http_proxy.bypass_domains.add" = "Bypass-domein toevoegen";
 "modules.ip.routes.add_family" = "Voeg %@ toe";
 "modules.ip.routes.exclude" = "Route uitsluiten";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Niets om te migreren";
 "views.migration.sections.main.header" = "Selecteer hieronder de profielen van oudere versies van %@ die je wilt importeren. Als je profielen zijn opgeslagen in iCloud, kan het even duren voordat ze worden gesynchroniseerd. Als je ze nu niet ziet, kom dan later terug.";
 "views.migration.title" = "Migreren";
+"views.paywall.alerts.confirmation.edit_profile" = "Profiel bewerken";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
+"views.paywall.alerts.confirmation.message.save" = "Tik op de upgrade-iconen om de functies te ontgrendelen.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
 "views.paywall.alerts.pending.message" = "De aankoop wacht op externe bevestiging. De functie wordt na goedkeuring gecrediteerd.";
 "views.paywall.alerts.restricted.message" = "Sommige functies zijn niet beschikbaar in deze versie.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Aankopen herstellen";
 "views.paywall.sections.all_features.header" = "De volledige versie bevat";
 "views.paywall.sections.full_products.header" = "Volledige versie";
+"views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
+"views.paywall.sections.products.header" = "Beschikbare producten";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je deze app of functie eerder hebt gekocht, kun je je aankopen herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";

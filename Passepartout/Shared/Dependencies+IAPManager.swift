@@ -55,7 +55,7 @@ extension Dependencies {
         {
 #if os(iOS)
             if $0 <= 2016 {
-                return [.Full.OneTime.iOS]
+                return [.Essentials.iOS]
             } else if $0 <= 3000 {
                 return [.Features.networkSettings]
             }

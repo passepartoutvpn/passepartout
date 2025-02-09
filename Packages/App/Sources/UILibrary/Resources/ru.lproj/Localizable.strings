@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Включено";
 "modules.general.rows.shared.purchase" = "Делиться через iCloud";
 "modules.general.sections.behavior.header" = "Поведение";
-"modules.general.sections.storage.footer" = "Профили хранятся в %@ и зашифрованы.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Профили для ТВ недоступны в бета-версиях.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Профили для ТВ требуют покупки.";
 "modules.general.sections.storage.header" = "Синхронизация";
+"modules.general.sections.storage.sharing.footer" = "Профили хранятся в %@ и зашифрованы.";
+"modules.general.sections.storage.tv.footer" = "Для совместного использования профилей с Apple TV требуется iCloud.";
+"modules.general.sections.storage.tv.footer.purchase" = "Купите, чтобы снять ограничение.";
 "modules.http_proxy.bypass_domains.add" = "Добавить исключаемый домен";
 "modules.ip.routes.add_family" = "Добавить %@";
 "modules.ip.routes.exclude" = "Исключить маршрут";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Нечего мигрировать";
 "views.migration.sections.main.header" = "Выберите ниже профили из старых версий %@, которые вы хотите импортировать. Если ваши профили хранятся в iCloud, синхронизация может занять некоторое время. Если вы их сейчас не видите, вернитесь позже.";
 "views.migration.title" = "Миграция";
+"views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
+"views.paywall.alerts.confirmation.message.save" = "Нажмите на значки обновления, чтобы разблокировать функции.";
 "views.paywall.alerts.confirmation.title" = "Требуется покупка";
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
 "views.paywall.alerts.restricted.message" = "Некоторые функции недоступны в этой версии.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Восстановить покупки";
 "views.paywall.sections.all_features.header" = "Полная версия включает";
 "views.paywall.sections.full_products.header" = "Полная версия";
+"views.paywall.sections.included_features.header" = "Также включает";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
+"views.paywall.sections.products.header" = "Доступные продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
 "views.paywall.sections.restore.footer" = "Если вы уже купили это приложение или функцию в прошлом, вы можете восстановить свои покупки.";
 "views.paywall.sections.restore.header" = "Восстановить";

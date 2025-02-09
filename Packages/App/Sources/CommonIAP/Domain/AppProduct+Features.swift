@@ -26,6 +26,14 @@
 import Foundation
 
 extension AppProduct {
+    public enum Essentials {
+        static let all: [AppProduct] = [
+            .Essentials.iOS_macOS,
+            .Essentials.iOS,
+            .Essentials.macOS
+        ]
+    }
+
     public enum Features {
         static let all: [AppProduct] = [
             .Features.allProviders,
@@ -35,15 +43,12 @@ extension AppProduct {
         ]
     }
 
+    @available(*, deprecated)
     public enum Full {
         static let all: [AppProduct] = [
-            .Full.OneTime.allFeatures,
+            .Full.OneTime.lifetime,
             .Full.Recurring.monthly,
             .Full.Recurring.yearly,
-            //
-            .Full.OneTime.iOS_macOS,
-            .Full.OneTime.iOS,
-            .Full.OneTime.macOS
         ]
     }
 
@@ -60,29 +65,31 @@ extension AppProduct {
 
 // MARK: - Current
 
+extension AppProduct.Essentials {
+
+    // TODO: ###, iOS/macOS/tvOS bundle
+//    public static let allPlatforms = AppProduct(featureId: "essentials")
+
+    public static let iOS_macOS = AppProduct(featureId: "full_multi_version")
+
+    public static let iOS = AppProduct(featureId: "full_version")
+
+    public static let macOS = AppProduct(featureId: "full_mac_version")
+}
+
 extension AppProduct.Features {
     public static let appleTV = AppProduct(featureId: "appletv")
 }
 
-extension AppProduct.Full {
-    public enum OneTime {
-        public static let allFeatures = AppProduct(featureId: "full.lifetime")
-    }
+// MARK: - Discontinued
 
-    public enum Recurring {
-        public static let monthly = AppProduct(featureId: "full.monthly")
-
-        public static let yearly = AppProduct(featureId: "full.yearly")
-    }
-}
-
+@available(*, deprecated)
 extension AppProduct {
     public var isFullVersion: Bool {
         switch self {
         case .Full.Recurring.yearly,
                 .Full.Recurring.monthly,
-                .Full.OneTime.allFeatures,
-                .Full.OneTime.iOS_macOS:
+                .Full.OneTime.lifetime:
             return true
         default:
             return false
@@ -99,8 +106,7 @@ extension AppProduct {
     }
 }
 
-// MARK: - Discontinued
-
+@available(*, deprecated)
 extension AppProduct.Features {
     public static let allProviders = AppProduct(featureId: "all_providers")
 
@@ -109,14 +115,15 @@ extension AppProduct.Features {
     public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
 }
 
-extension AppProduct.Full.OneTime {
+@available(*, deprecated)
+extension AppProduct.Full {
+    public enum OneTime {
+        public static let lifetime = AppProduct(featureId: "full.lifetime")
+    }
 
-    @available(*, deprecated)
-    public static let iOS_macOS = AppProduct(featureId: "full_multi_version")
+    public enum Recurring {
+        public static let monthly = AppProduct(featureId: "full.monthly")
 
-    @available(*, deprecated)
-    public static let iOS = AppProduct(featureId: "full_version")
-
-    @available(*, deprecated)
-    public static let macOS = AppProduct(featureId: "full_mac_version")
+        public static let yearly = AppProduct(featureId: "full.yearly")
+    }
 }

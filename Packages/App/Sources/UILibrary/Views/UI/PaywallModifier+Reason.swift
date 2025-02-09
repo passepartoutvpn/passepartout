@@ -25,25 +25,42 @@
 
 import CommonIAP
 import Foundation
+import PassepartoutKit
 
 public typealias PaywallReason = PaywallModifier.Reason
 
 extension PaywallModifier {
+    public enum Action {
+        case connect
+
+        case save
+
+        case purchase
+    }
+
     public struct Reason: Hashable {
+        public let profile: Profile?
+
         public let requiredFeatures: Set<AppFeature>
 
-        public let needsConfirmation: Bool
+        public let suggestedProducts: Set<AppProduct>?
 
-        public let forConnecting: Bool
+        public let action: Action
 
         public init(
-            _ requiredFeatures: Set<AppFeature>,
-            needsConfirmation: Bool = true,
-            forConnecting: Bool = true
+            _ profile: Profile?,
+            requiredFeatures: Set<AppFeature>,
+            suggestedProducts: Set<AppProduct>? = nil,
+            action: Action
         ) {
+            self.profile = profile
             self.requiredFeatures = requiredFeatures
-            self.needsConfirmation = needsConfirmation
-            self.forConnecting = forConnecting
+            self.suggestedProducts = suggestedProducts
+            self.action = action
+        }
+
+        public var needsConfirmation: Bool {
+            action != .purchase
         }
     }
 }

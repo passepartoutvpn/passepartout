@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Abilitato";
 "modules.general.rows.shared.purchase" = "Condividi su iCloud";
 "modules.general.sections.behavior.header" = "Comportamento";
-"modules.general.sections.storage.footer" = "I profili sono archiviati su %@ in modo crittografato.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "I profili TV non funzionano nelle versioni beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "I profili TV non funzionano senza un acquisto.";
 "modules.general.sections.storage.header" = "Sincronizzazione";
+"modules.general.sections.storage.sharing.footer" = "I profili sono archiviati su %@ in modo crittografato.";
+"modules.general.sections.storage.tv.footer" = "iCloud è necessario per condividere i tuoi profili con Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase" = "Acquista per rimuovere la restrizione.";
 "modules.http_proxy.bypass_domains.add" = "Aggiungi dominio di bypass";
 "modules.ip.routes.add_family" = "Aggiungi %@";
 "modules.ip.routes.exclude" = "Escludi rotta";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Niente da migrare";
 "views.migration.sections.main.header" = "Seleziona di seguito i profili dalle versioni precedenti di %@ che vuoi importare. Se i tuoi profili sono archiviati su iCloud, potrebbero impiegare un po' a sincronizzarsi. Se non li vedi ora, torna più tardi.";
 "views.migration.title" = "Migra";
+"views.paywall.alerts.confirmation.edit_profile" = "Modifica profilo";
 "views.paywall.alerts.confirmation.message" = "Questo profilo richiede funzionalità a pagamento per funzionare.";
 "views.paywall.alerts.confirmation.message.connect" = "Puoi provare la connessione per %d minuti.";
+"views.paywall.alerts.confirmation.message.save" = "Tocca le icone di aggiornamento per sbloccare le funzionalità.";
 "views.paywall.alerts.confirmation.title" = "Acquisto richiesto";
 "views.paywall.alerts.pending.message" = "L'acquisto è in attesa di conferma esterna. La funzionalità verrà accreditata dopo l'approvazione.";
 "views.paywall.alerts.restricted.message" = "Alcune funzionalità non sono disponibili in questa versione.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Ripristina acquisti";
 "views.paywall.sections.all_features.header" = "La versione completa include";
 "views.paywall.sections.full_products.header" = "Versione completa";
+"views.paywall.sections.included_features.header" = "Include anche";
 "views.paywall.sections.products.footer" = "Tutti gli acquisti supportano “In famiglia”.";
+"views.paywall.sections.products.header" = "Prodotti disponibili";
 "views.paywall.sections.required_features.header" = "Funzionalità richieste";
 "views.paywall.sections.restore.footer" = "Se hai acquistato questa app o funzionalità in passato, puoi ripristinare i tuoi acquisti.";
 "views.paywall.sections.restore.header" = "Ripristina";

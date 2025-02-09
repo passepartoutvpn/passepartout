@@ -31,17 +31,32 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Current
 
-        case .Full.OneTime.allFeatures, .Full.Recurring.monthly, .Full.Recurring.yearly:
-            return AppFeature.allCases
+        case .Essentials.iOS_macOS:
+            return AppFeature.essentialFeatures
+
+        case .Essentials.iOS:
+#if os(iOS) || os(tvOS)
+            return AppProduct.Essentials.iOS_macOS.features
+#else
+            return []
+#endif
+
+        case .Essentials.macOS:
+#if os(macOS) || os(tvOS)
+            return AppProduct.Essentials.iOS_macOS.features
+#else
+            return []
+#endif
 
         case .Features.appleTV:
+            var eligible: [AppFeature] = [.appleTV, .sharing]
 #if os(tvOS)
-            // treat .appleTV as full version on tvOS to cope
-            // with BuildProducts limitations
+            // include "Essentials" to cope with BuildProducts
+            // limitations
             //
-            // some old iOS/macOS users are acknowledged certain
+            // some old iOS users are acknowledged certain
             // purchases based on the build number of their first
-            // download, e.g. "Full version (iOS)". unfortunately,
+            // download, e.g. "Essentials iOS". unfortunately,
             // that build number is not the same on tvOS, so
             // those purchases do not exist and the TV may complain
             // about missing features other than .appleTV
@@ -51,31 +66,14 @@ extension AppProduct: AppFeatureProviding {
             //
             // this is a solid workaround as long as profiles are
             // not editable on tvOS
-            return AppFeature.allCases
-#else
-            return [.appleTV, .sharing]
+            eligible.append(contentsOf: AppProduct.Essentials.iOS_macOS.features)
 #endif
+            return eligible
 
         // MARK: Discontinued
 
-        case .Full.OneTime.iOS_macOS:
-            return AppFeature.allCases.filter {
-                $0 != .appleTV
-            }
-
-        case .Full.OneTime.iOS:
-#if os(iOS) || os(tvOS)
-            return AppProduct.Full.OneTime.iOS_macOS.features
-#else
-            return []
-#endif
-
-        case .Full.OneTime.macOS:
-#if os(macOS) || os(tvOS)
-            return AppProduct.Full.OneTime.iOS_macOS.features
-#else
-            return []
-#endif
+        case .Full.OneTime.lifetime, .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return AppFeature.allCases
 
         case .Features.allProviders:
             return [.providers]

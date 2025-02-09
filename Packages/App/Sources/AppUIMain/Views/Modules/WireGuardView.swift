@@ -41,6 +41,9 @@ struct WireGuardView: View, ModuleDraftEditing {
     let impl: WireGuardModule.Implementation?
 
     @State
+    private var paywallReason: PaywallReason?
+
+    @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     init(module: WireGuardModule.Builder, parameters: ModuleViewParameters) {
@@ -54,6 +57,7 @@ struct WireGuardView: View, ModuleDraftEditing {
             .moduleView(editor: editor, draft: draft.wrappedValue)
             .navigationDestination(for: Subroute.self, destination: destination)
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
+            .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
 }
@@ -78,6 +82,7 @@ private extension WireGuardView {
             providerPreferences: nil,
             selectedEntity: providerEntity,
             entityDestination: Subroute.providerServer,
+            paywallReason: $paywallReason,
             providerRows: {
                 moduleGroup(for: providerKeyRows)
             }

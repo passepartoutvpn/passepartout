@@ -39,17 +39,7 @@ public struct AppProduct: RawRepresentable, Hashable, Sendable {
 
 extension AppProduct {
     public static var all: [Self] {
-        Features.all + Full.all + Donations.all
-    }
-
-    var isLegacyPlatformVersion: Bool {
-        switch self {
-        case .Full.OneTime.iOS, .Full.OneTime.macOS:
-            return true
-
-        default:
-            return false
-        }
+        Features.all + Essentials.all + Full.all + Donations.all
     }
 }
 

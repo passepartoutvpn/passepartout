@@ -398,18 +398,20 @@ public enum Strings {
           public static let header = Strings.tr("Localizable", "modules.general.sections.behavior.header", fallback: "Behavior")
         }
         public enum Storage {
-          /// Profiles are stored to %@ encrypted.
-          public static func footer(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "modules.general.sections.storage.footer", String(describing: p1), fallback: "Profiles are stored to %@ encrypted.")
-          }
           /// Synchronization
           public static let header = Strings.tr("Localizable", "modules.general.sections.storage.header", fallback: "Synchronization")
-          public enum Footer {
-            public enum Purchase {
-              /// TV profiles do not work in beta builds.
-              public static let tvBeta = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_beta", fallback: "TV profiles do not work in beta builds.")
-              /// TV profiles do not work without a purchase.
-              public static let tvRelease = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_release", fallback: "TV profiles do not work without a purchase.")
+          public enum Sharing {
+            /// Profiles are stored to %@ encrypted.
+            public static func footer(_ p1: Any) -> String {
+              return Strings.tr("Localizable", "modules.general.sections.storage.sharing.footer", String(describing: p1), fallback: "Profiles are stored to %@ encrypted.")
+            }
+          }
+          public enum Tv {
+            /// iCloud is required to share your profiles with your Apple TV.
+            public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer", fallback: "iCloud is required to share your profiles with your Apple TV.")
+            public enum Footer {
+              /// Purchase to drop the restriction.
+              public static let purchase = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase", fallback: "Purchase to drop the restriction.")
             }
           }
         }
@@ -744,6 +746,8 @@ public enum Strings {
     public enum Paywall {
       public enum Alerts {
         public enum Confirmation {
+          /// Edit profile
+          public static let editProfile = Strings.tr("Localizable", "views.paywall.alerts.confirmation.edit_profile", fallback: "Edit profile")
           /// This profile requires paid features to work.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message", fallback: "This profile requires paid features to work.")
           /// Purchase required
@@ -753,6 +757,8 @@ public enum Strings {
             public static func connect(_ p1: Int) -> String {
               return Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.connect", p1, fallback: "You may test the connection for %d minutes.")
             }
+            /// Tap the upgrade icons to unlock the features.
+            public static let save = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.save", fallback: "Tap the upgrade icons to unlock the features.")
           }
         }
         public enum Pending {
@@ -785,17 +791,15 @@ public enum Strings {
         public static let restorePurchases = Strings.tr("Localizable", "views.paywall.rows.restore_purchases", fallback: "Restore purchases")
       }
       public enum Sections {
-        public enum AllFeatures {
-          /// Full version includes
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.all_features.header", fallback: "Full version includes")
-        }
-        public enum FullProducts {
-          /// Full version
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "Full version")
+        public enum IncludedFeatures {
+          /// Also includes
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.included_features.header", fallback: "Also includes")
         }
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
+          /// Available products
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Available products")
         }
         public enum RequiredFeatures {
           /// Required features

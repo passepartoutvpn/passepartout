@@ -46,6 +46,9 @@ struct APIContentModifier<Template, ProviderRows>: ViewModifier where Template: 
 
     let templateType: Template.Type
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     @ViewBuilder
     let providerRows: ProviderRows
 
@@ -117,7 +120,8 @@ private extension APIContentModifier {
             providers: supportedProviders,
             providerId: $providerId,
             isRequired: true,
-            isLoading: apiManager.isLoading
+            isLoading: apiManager.isLoading,
+            paywallReason: $paywallReason
         )
     }
 }
@@ -218,6 +222,7 @@ private extension APIContentModifier {
                 providerId: .constant(.hideme),
                 providerPreferences: nil,
                 templateType: OpenVPNProviderTemplate.self,
+                paywallReason: .constant(nil),
                 providerRows: {},
                 onSelectProvider: { _, _, _ in }
             ))

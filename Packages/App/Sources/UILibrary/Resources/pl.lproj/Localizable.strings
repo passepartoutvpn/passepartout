@@ -147,10 +147,12 @@
 "modules.general.rows.shared" = "Włączone";
 "modules.general.rows.shared.purchase" = "Udostępnij w iCloud";
 "modules.general.sections.behavior.header" = "Zachowanie";
-"modules.general.sections.storage.footer" = "Profile są przechowywane w %@ i szyfrowane.";
 "modules.general.sections.storage.footer.purchase.tv_beta" = "Profile TV nie działają w wersjach beta.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "Profile TV nie działają bez zakupu.";
 "modules.general.sections.storage.header" = "Synchronizacja";
+"modules.general.sections.storage.sharing.footer" = "Profile są przechowywane w %@ i szyfrowane.";
+"modules.general.sections.storage.tv.footer" = "iCloud jest wymagany do udostępniania profili na Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase" = "Zakup, aby usunąć ograniczenie.";
 "modules.http_proxy.bypass_domains.add" = "Dodaj domenę wykluczającą";
 "modules.ip.routes.add_family" = "Dodaj %@";
 "modules.ip.routes.exclude" = "Wyklucz trasę";
@@ -246,8 +248,10 @@
 "views.migration.no_profiles" = "Brak profili do migracji";
 "views.migration.sections.main.header" = "Wybierz poniżej profile ze starszych wersji %@, które chcesz zaimportować. Jeśli Twoje profile są przechowywane w iCloud, synchronizacja może zająć trochę czasu. Jeśli ich teraz nie widzisz, wróć później.";
 "views.migration.title" = "Migracja";
+"views.paywall.alerts.confirmation.edit_profile" = "Edytuj profil";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
+"views.paywall.alerts.confirmation.message.save" = "Stuknij ikony aktualizacji, aby odblokować funkcje.";
 "views.paywall.alerts.confirmation.title" = "Wymagana zakup";
 "views.paywall.alerts.pending.message" = "Zakup oczekuje na zewnętrzne potwierdzenie. Funkcja zostanie przypisana po zatwierdzeniu.";
 "views.paywall.alerts.restricted.message" = "Niektóre funkcje są niedostępne w tej wersji.";
@@ -259,7 +263,9 @@
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
 "views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
 "views.paywall.sections.full_products.header" = "Pełna wersja";
+"views.paywall.sections.included_features.header" = "Zawiera także";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
+"views.paywall.sections.products.header" = "Dostępne produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej kupiłeś tę aplikację lub funkcję, możesz przywrócić swoje zakupy.";
 "views.paywall.sections.restore.header" = "Przywróć";

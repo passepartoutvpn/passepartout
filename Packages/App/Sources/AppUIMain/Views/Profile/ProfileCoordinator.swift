@@ -84,6 +84,7 @@ private extension ProfileCoordinator {
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
             path: $path,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -97,6 +98,7 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
+            paywallReason: $paywallReason,
             flow: .init(
                 onNewModule: onNewModule,
                 onCommitEditing: onCommitEditing,
@@ -130,11 +132,11 @@ private extension ProfileCoordinator {
 
     // standard: verify and alert if purchase required
     func onCommitEditingStandard() async throws {
+        let profileToSave = try profileEditor.build()
+
         do {
-            let profileToSave = try profileEditor.build()
             try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-            try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
+        } catch AppError.ineligibleProfile(var requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
@@ -143,9 +145,24 @@ private extension ProfileCoordinator {
                 )
                 return
             }
-            paywallReason = .init(requiredFeatures, forConnecting: false)
-            return
+
+            // present paywall if purchase required
+            guard requiredFeatures.isEmpty else {
+                paywallReason = .init(
+                    nil,
+                    requiredFeatures: requiredFeatures,
+                    suggestedProducts: nil,
+                    action: .save
+                )
+                return
+            }
         }
+
+        try await profileEditor.save(
+            profileToSave,
+            to: profileManager,
+            preferencesManager: preferencesManager
+        )
         onDismiss()
     }
 
@@ -167,9 +184,9 @@ private extension ProfileEditor {
         var list: Set<AppFeature> = []
         if isShared {
             list.insert(.sharing)
-        }
-        if isAvailableForTV {
-            list.insert(.appleTV)
+            if isAvailableForTV {
+                list.insert(.appleTV)
+            }
         }
         return list
     }

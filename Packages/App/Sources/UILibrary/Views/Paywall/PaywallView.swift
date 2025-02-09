@@ -29,6 +29,8 @@ import PassepartoutKit
 import StoreKit
 import SwiftUI
 
+#if !os(tvOS)
+
 struct PaywallView: View {
 
     @EnvironmentObject
@@ -40,16 +42,16 @@ struct PaywallView: View {
     @Binding
     var isPresented: Bool
 
-    let features: Set<AppFeature>
+    let requiredFeatures: Set<AppFeature>
+
+    // nil = essentials
+    let suggestedProducts: Set<AppProduct>?
 
     @State
     private var isFetchingProducts = true
 
     @State
-    private var featureIAPs: [InAppProduct] = []
-
-    @State
-    private var fullIAPs: [InAppProduct] = []
+    private var products: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -63,16 +65,14 @@ struct PaywallView: View {
     var body: some View {
         contentView
             .themeProgress(if: isFetchingProducts)
-#if !os(tvOS)
             .toolbar(content: toolbarContent)
-#endif
             .alert(
                 Strings.Global.Actions.purchase,
                 isPresented: $isPurchasePendingConfirmation,
                 actions: pendingActions,
                 message: pendingMessage
             )
-            .task(id: features) {
+            .task(id: suggestedProducts) {
                 await fetchAvailableProducts()
             }
             .withErrorHandler(errorHandler)
@@ -87,56 +87,38 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             requiredFeaturesView
-            featureProductsView
-            fullProductsView
-#if !os(tvOS)
-            linksView
-#endif
-            if !iapManager.isFullVersionPurchaser {
-                allFeaturesView
+            productsView
+            if suggestedProducts == nil {
+                alsoIncludedEssentialsView
             }
             restoreView
+            linksView
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
     }
 
     var requiredFeaturesView: some View {
-        FeatureListView(
-            style: .list,
-            header: Strings.Views.Paywall.Sections.RequiredFeatures.header,
-            features: Array(features),
-            content: {
-                featureView(for: $0)
-                    .fontWeight(theme.relevantWeight)
-            }
-        )
-    }
-
-    var featureProductsView: some View {
-        featureIAPs.nilIfEmpty.map { iaps in
-            ForEach(iaps, id: \.productIdentifier) {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .paywall,
-                    product: $0,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
+        requiredFeatures
+            .nilIfEmpty
+            .map { features in
+                FeatureListView(
+                    style: .list,
+                    header: Strings.Views.Paywall.Sections.RequiredFeatures.header,
+                    features: features.sorted(),
+                    content: {
+                        featureView(for: $0)
+                            .fontWeight(theme.relevantWeight)
+                    }
                 )
             }
-            .themeSection(
-                header: Strings.Global.Nouns.products,
-                footer: Strings.Views.Paywall.Sections.Products.footer,
-                forcesFooter: true
-            )
-        }
     }
 
-    var fullProductsView: some View {
-        fullIAPs.nilIfEmpty.map { iaps in
-            Group {
-                ForEach(iaps, id: \.productIdentifier) {
+    var productsView: some View {
+        products
+            .nilIfEmpty
+            .map { products in
+                ForEach(products, id: \.productIdentifier) {
                     PaywallProductView(
                         iapManager: iapManager,
                         style: .paywall,
@@ -146,13 +128,28 @@ private extension PaywallView {
                         onError: onError
                     )
                 }
+                .themeSection(
+                    header: Strings.Views.Paywall.Sections.Products.header,
+                    footer: Strings.Views.Paywall.Sections.Products.footer,
+                    forcesFooter: true
+                )
             }
-            .themeSection(
-                header: Strings.Views.Paywall.Sections.FullProducts.header,
-                footer: Strings.Views.Paywall.Sections.Products.footer,
-                forcesFooter: true
-            )
-        }
+    }
+
+    var alsoIncludedEssentialsView: some View {
+        essentialFeatures
+            .filter {
+                !requiredFeatures.contains($0)
+            }
+            .nilIfEmpty
+            .map {
+                FeatureListView(
+                    style: featuresStyle,
+                    header: Strings.Views.Paywall.Sections.IncludedFeatures.header,
+                    features: $0,
+                    content: featureView(for:)
+                )
+            }
     }
 
     var linksView: some View {
@@ -162,17 +159,8 @@ private extension PaywallView {
         }
     }
 
-    var allFeaturesView: some View {
-        FeatureListView(
-            style: allFeaturesStyle,
-            header: Strings.Views.Paywall.Sections.AllFeatures.header,
-            features: allFeatures,
-            content: featureView(for:)
-        )
-    }
-
-    var allFeaturesStyle: FeatureListViewStyle {
-#if os(iOS) || os(tvOS)
+    var featuresStyle: FeatureListViewStyle {
+#if os(iOS)
         .list
 #else
         .table
@@ -217,8 +205,8 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
-    var allFeatures: [AppFeature] {
-        AppProduct.Full.OneTime.allFeatures.features
+    var essentialFeatures: [AppFeature] {
+        AppProduct.Essentials.iOS_macOS.features
     }
 
     func fetchAvailableProducts() async {
@@ -227,35 +215,22 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let suggestedProducts = iapManager.suggestedProducts(for: features)
-            guard let suggestedProducts else {
+            let rawProducts = suggestedProducts ?? iapManager.suggestedEssentialProducts()
+            guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
 
-            let featureIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
-                .filter {
-                    !$0.isFullVersion
-                }
+            let products = try await iapManager.purchasableProducts(for: rawProducts
                 .sorted {
-                    $0.featureRank < $1.featureRank
-                }
-            )
-            let fullIAPs = try await iapManager.purchasableProducts(for: suggestedProducts
-                .filter(\.isFullVersion)
-                .sorted {
-                    $0.fullVersionRank < $1.fullVersionRank
+                    $0.productRank < $1.productRank
                 }
             )
 
-            pp_log(.App.iap, .info, "Suggested products: \(suggestedProducts)")
-            pp_log(.App.iap, .info, "\tFeatures: \(featureIAPs)")
-            pp_log(.App.iap, .info, "\tFull version: \(fullIAPs)")
-            guard !(featureIAPs + fullIAPs).isEmpty else {
+            pp_log(.App.iap, .info, "Suggested products: \(products)")
+            guard !products.isEmpty else {
                 throw AppError.emptyProducts
             }
-
-            self.featureIAPs = featureIAPs
-            self.fullIAPs = fullIAPs
+            self.products = products
         } catch {
             pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
@@ -295,20 +270,14 @@ private extension PaywallView {
 }
 
 private extension AppProduct {
-    var featureRank: Int {
-        0
-    }
-
-    var fullVersionRank: Int {
+    var productRank: Int {
         switch self {
-        case .Full.Recurring.yearly:
+        case .Essentials.iOS_macOS:
             return .min
-        case .Full.Recurring.monthly:
+        case .Essentials.iOS:
             return 1
-        case .Full.OneTime.allFeatures:
+        case .Essentials.macOS:
             return 2
-        case .Full.OneTime.iOS_macOS:
-            return 3
         default:
             return .max
         }
@@ -320,7 +289,10 @@ private extension AppProduct {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        features: [.appleTV]
+        requiredFeatures: [.appleTV],
+        suggestedProducts: [.Features.appleTV]
     )
     .withMockEnvironment()
 }
+
+#endif

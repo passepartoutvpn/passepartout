@@ -37,6 +37,9 @@ struct ProfileSplitView: View, Routable {
 
     let moduleViewFactory: any ModuleViewFactory
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     var flow: ProfileCoordinator.Flow?
 
     @State
@@ -55,6 +58,7 @@ struct ProfileSplitView: View, Routable {
                 profileEditor: profileEditor,
                 selectedModuleId: $selectedModuleId,
                 errorModuleIds: $errorModuleIds,
+                paywallReason: $paywallReason,
                 flow: flow
             )
             .navigationSplitViewColumnWidth(200)
@@ -119,7 +123,10 @@ private extension ProfileSplitView {
     func detailView(for detail: Detail) -> some View {
         switch detail {
         case .general:
-            ProfileGeneralView(profileEditor: profileEditor)
+            ProfileGeneralView(
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
+            )
 
         case .module(let id):
             ModuleDetailView(
@@ -135,7 +142,8 @@ private extension ProfileSplitView {
     ProfileSplitView(
         profileEditor: ProfileEditor(profile: .newMockProfile()),
         initialModuleId: nil,
-        moduleViewFactory: DefaultModuleViewFactory(registry: Registry())
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
+        paywallReason: .constant(nil)
     )
     .withMockEnvironment()
 }
