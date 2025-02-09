@@ -108,14 +108,9 @@ private extension PaywallModifier {
     @ViewBuilder
     func confirmationActions() -> some View {
 #if !os(tvOS)
-        if !iapManager.isBeta {
-            Button(otherTitle ?? Strings.Global.Actions.purchase) {
-                if let onOtherAction {
-                    onOtherAction(reason?.profile)
-                    return
-                }
-                // IMPORTANT: retain reason because it serves paywall content
-                isPurchasing = true
+        if !iapManager.isBeta, let otherTitle, let onOtherAction {
+            Button(otherTitle) {
+                onOtherAction(reason?.profile)
             }
         }
 #endif
@@ -133,7 +128,7 @@ private extension PaywallModifier {
     }
 
     var confirmationCancel: String {
-        guard !iapManager.isBeta else {
+        guard !iapManager.isBeta && otherTitle != nil else {
             return Strings.Global.Nouns.ok
         }
         return Strings.Global.Actions.cancel

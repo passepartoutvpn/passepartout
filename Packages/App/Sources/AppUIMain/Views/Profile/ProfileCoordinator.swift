@@ -146,20 +146,12 @@ private extension ProfileCoordinator {
                 return
             }
 
-            let suggestedProduct = iapManager.suggestedProduct(forSavedFeatures: requiredFeatures)
-            pp_log(.App.iap, .info, "Suggest product for \(requiredFeatures): \(suggestedProduct?.debugDescription ?? "nil ('Essential')")")
-
-            // strip non-essential for the inability of purchasing all at once
-            if suggestedProduct == nil {
-                requiredFeatures.formIntersection(AppFeature.essentialFeatures)
-            }
-
             // present paywall if purchase required
             guard requiredFeatures.isEmpty else {
                 paywallReason = .init(
                     nil,
                     requiredFeatures: requiredFeatures,
-                    suggestedProduct: suggestedProduct,
+                    suggestedProduct: nil,
                     forConnecting: false
                 )
                 return
