@@ -128,7 +128,7 @@ private extension PaywallModifier {
     }
 
     var confirmationCancel: String {
-        guard !iapManager.isBeta && otherTitle != nil else {
+        if otherTitle == nil {
             return Strings.Global.Nouns.ok
         }
         return Strings.Global.Actions.cancel
