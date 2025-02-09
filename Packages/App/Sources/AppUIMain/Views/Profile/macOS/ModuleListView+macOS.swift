@@ -135,9 +135,6 @@ private extension ModuleListView {
         if profileEditor.isShared {
             features.insert(.sharing)
         }
-//        if profileEditor.isAvailableForTV {
-//            features.insert(.appleTV)
-//        }
         return features
     }
 

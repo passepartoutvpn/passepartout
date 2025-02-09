@@ -27,10 +27,17 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func verify(_ profile: Profile, extra: Set<AppFeature>? = nil) throws {
+    public func verify(
+        _ profile: Profile,
+        extra: Set<AppFeature>? = nil,
+        intersectingWith intersection: Set<AppFeature>? = nil
+    ) throws {
         var features = profile.features
         extra?.forEach {
             features.insert($0)
+        }
+        if let intersection {
+            features.formIntersection(intersection)
         }
         try verify(features)
     }

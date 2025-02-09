@@ -134,7 +134,18 @@ private extension ProfileCoordinator {
     func onCommitEditingStandard() async throws {
         do {
             let profileToSave = try profileEditor.build()
-            try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
+
+            // IMPORTANT: only verify essential features, and let the user
+            // purchase extra features through ad hoc paywalls (e.g. .appleTV)
+            //
+            // the ineligible connection would trigger "Edit profile" while
+            // still working during the grace period
+            try iapManager.verify(
+                profileToSave,
+                extra: profileEditor.extraFeatures,
+                intersectingWith: Set(AppFeature.essentialFeatures)
+            )
+
             try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
