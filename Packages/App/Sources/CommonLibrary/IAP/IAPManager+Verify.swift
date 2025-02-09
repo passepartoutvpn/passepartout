@@ -35,14 +35,6 @@ extension IAPManager {
         try verify(features)
     }
 
-    public func verify(_ modulesBuilders: [any ModuleBuilder], extra: Set<AppFeature>? = nil) throws {
-        var features = modulesBuilders.features
-        extra?.forEach {
-            features.insert($0)
-        }
-        try verify(features)
-    }
-
     public func verify(_ features: Set<AppFeature>) throws {
 #if os(tvOS)
         guard isEligible(for: .appleTV) else {
