@@ -90,7 +90,9 @@ private extension PaywallView {
                 requiredFeaturesView
             }
             productsView
-            alsoIncludedView
+            if suggestedProduct == nil {
+                alsoIncludedView
+            }
             restoreView
             linksView
         }
