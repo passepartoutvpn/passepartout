@@ -251,6 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Profil bearbeiten";
 "views.paywall.alerts.confirmation.message" = "Dieses Profil erfordert kostenpflichtige Funktionen, um zu funktionieren.";
 "views.paywall.alerts.confirmation.message.connect" = "Sie können die Verbindung für %d Minuten testen.";
+"views.paywall.alerts.confirmation.message.save" = "Tippen Sie auf die Upgrade-Symbole, um die Funktionen freizuschalten.";
 "views.paywall.alerts.confirmation.title" = "Kauf erforderlich";
 "views.paywall.alerts.pending.message" = "Der Kauf wartet auf eine externe Bestätigung. Die Funktion wird nach Genehmigung gutgeschrieben.";
 "views.paywall.alerts.restricted.message" = "Einige Funktionen sind in dieser Version nicht verfügbar.";

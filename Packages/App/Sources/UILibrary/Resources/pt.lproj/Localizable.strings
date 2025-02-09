@@ -251,6 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
+"views.paywall.alerts.confirmation.message.save" = "Toque nos ícones de atualização para desbloquear os recursos.";
 "views.paywall.alerts.confirmation.title" = "Compra necessária";
 "views.paywall.alerts.pending.message" = "A compra está pendente de confirmação externa. O recurso será creditado após a aprovação.";
 "views.paywall.alerts.restricted.message" = "Alguns recursos estão indisponíveis nesta versão.";

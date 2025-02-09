@@ -251,6 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
 "views.paywall.alerts.confirmation.message" = "Este perfil requiere características de pago para funcionar.";
 "views.paywall.alerts.confirmation.message.connect" = "Puedes probar la conexión durante %d minutos.";
+"views.paywall.alerts.confirmation.message.save" = "Toca los iconos de actualización para desbloquear las funciones.";
 "views.paywall.alerts.confirmation.title" = "Compra requerida";
 "views.paywall.alerts.pending.message" = "La compra está pendiente de confirmación externa. La característica será acreditada tras la aprobación.";
 "views.paywall.alerts.restricted.message" = "Algunas características no están disponibles en esta versión.";

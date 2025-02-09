@@ -251,6 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
+"views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια αναβάθμισης για να ξεκλειδώσετε τις λειτουργίες.";
 "views.paywall.alerts.confirmation.title" = "Απαιτείται αγορά";
 "views.paywall.alerts.pending.message" = "Η αγορά εκκρεμεί για εξωτερική επιβεβαίωση. Η λειτουργία θα πιστωθεί μετά την έγκριση.";
 "views.paywall.alerts.restricted.message" = "Ορισμένες λειτουργίες δεν είναι διαθέσιμες σε αυτήν την έκδοση.";

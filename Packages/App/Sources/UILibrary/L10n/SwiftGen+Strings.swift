@@ -757,6 +757,8 @@ public enum Strings {
             public static func connect(_ p1: Int) -> String {
               return Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.connect", p1, fallback: "You may test the connection for %d minutes.")
             }
+            /// Tap the upgrade icons to unlock the features.
+            public static let save = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.save", fallback: "Tap the upgrade icons to unlock the features.")
           }
         }
         public enum Pending {

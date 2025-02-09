@@ -143,6 +143,8 @@ private extension PaywallModifier {
         var messages = [V.message]
         if reason?.forConnecting == true {
             messages.append(V.Message.connect(limitedMinutes))
+        } else {
+            messages.append(V.Message.save)
         }
         return alertMessage(
             startingWith: messages.joined(separator: " "),

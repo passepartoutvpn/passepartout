@@ -251,6 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Редагувати профіль";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
+"views.paywall.alerts.confirmation.message.save" = "Торкніться значків оновлення, щоб розблокувати функції.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
 "views.paywall.alerts.pending.message" = "Покупка очікує зовнішнього підтвердження. Функція буде увімкнена після схвалення.";
 "views.paywall.alerts.restricted.message" = "Деякі функції недоступні в цій версії.";
