@@ -191,9 +191,9 @@ private extension ProfileEditor {
         var list: Set<AppFeature> = []
         if isShared {
             list.insert(.sharing)
-        }
-        if isAvailableForTV {
-            list.insert(.appleTV)
+            if isAvailableForTV {
+                list.insert(.appleTV)
+            }
         }
         return list
     }
