@@ -97,7 +97,6 @@ public struct PaywallModifier: ViewModifier {
 private extension PaywallModifier {
     func alertMessage(startingWith header: String, features: [String]) -> String {
         header + "\n\n" + features.joined(separator: "\n")
-
     }
 }
 
