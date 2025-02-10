@@ -148,6 +148,8 @@ public struct PurchaseRequiredImage: View {
             .foregroundStyle(theme.upgradeColor)
             .help(Strings.Views.Ui.PurchaseRequired.Purchase.help)
             .imageScale(.large)
+#if os(iOS)
             .padding(.leading, 4)
+#endif
     }
 }
