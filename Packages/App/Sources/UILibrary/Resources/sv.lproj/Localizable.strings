@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Endast favoriter";
 "views.providers.refresh_infrastructure" = "Uppdatera infrastruktur";
 "views.providers.select_entity" = "Välj";
-"views.providers.select_provider" = "Välj leverantör";
+"views.providers.select_provider" = "Ingen leverantör";
 "views.purchased.no_purchases" = "Inga köp";
 "views.purchased.rows.build_number" = "Byggnummer";
 "views.purchased.rows.download_date" = "Nedladdningsdatum";

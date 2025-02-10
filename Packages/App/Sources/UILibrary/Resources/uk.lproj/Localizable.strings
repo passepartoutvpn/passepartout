@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Тільки улюблені";
 "views.providers.refresh_infrastructure" = "Оновити інфраструктуру";
 "views.providers.select_entity" = "Вибрати";
-"views.providers.select_provider" = "Виберіть постачальника";
+"views.providers.select_provider" = "Немає провайдера";
 "views.purchased.no_purchases" = "Немає покупок";
 "views.purchased.rows.build_number" = "Номер збірки";
 "views.purchased.rows.download_date" = "Дата завантаження";

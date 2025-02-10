@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Solo preferiti";
 "views.providers.refresh_infrastructure" = "Ricarica infrastruttura";
 "views.providers.select_entity" = "Seleziona";
-"views.providers.select_provider" = "Seleziona un provider";
+"views.providers.select_provider" = "Nessun provider";
 "views.purchased.no_purchases" = "Nessun acquisto";
 "views.purchased.rows.build_number" = "Numero di build";
 "views.purchased.rows.download_date" = "Data di download";

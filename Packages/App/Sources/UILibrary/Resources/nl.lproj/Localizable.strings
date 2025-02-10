@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Alleen favorieten";
 "views.providers.refresh_infrastructure" = "Infrastructuur vernieuwen";
 "views.providers.select_entity" = "Selecteer";
-"views.providers.select_provider" = "Selecteer een provider";
+"views.providers.select_provider" = "Geen provider";
 "views.purchased.no_purchases" = "Geen aankopen";
 "views.purchased.rows.build_number" = "Buildnummer";
 "views.purchased.rows.download_date" = "Downloaddatum";

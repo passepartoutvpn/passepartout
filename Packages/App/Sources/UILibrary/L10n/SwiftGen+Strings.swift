@@ -880,8 +880,8 @@ public enum Strings {
       public static let refreshInfrastructure = Strings.tr("Localizable", "views.providers.refresh_infrastructure", fallback: "Refresh infrastructure")
       /// Select
       public static let selectEntity = Strings.tr("Localizable", "views.providers.select_entity", fallback: "Select")
-      /// Select a provider
-      public static let selectProvider = Strings.tr("Localizable", "views.providers.select_provider", fallback: "Select a provider")
+      /// No provider
+      public static let selectProvider = Strings.tr("Localizable", "views.providers.select_provider", fallback: "No provider")
       public enum LastUpdated {
         /// Loading...
         public static let loading = Strings.tr("Localizable", "views.providers.last_updated.loading", fallback: "Loading...")

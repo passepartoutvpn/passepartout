@@ -112,7 +112,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";
 
 "views.providers.no_provider" = "None";
-"views.providers.select_provider" = "Select a provider";
+"views.providers.select_provider" = "No provider";
 "views.providers.select_entity" = "Select";
 "views.providers.only_favorites" = "Only favorites";
 "views.providers.clear_filters" = "Clear filters";

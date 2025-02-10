@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Только избранное";
 "views.providers.refresh_infrastructure" = "Обновить инфраструктуру";
 "views.providers.select_entity" = "Выбрать";
-"views.providers.select_provider" = "Выбрать поставщика";
+"views.providers.select_provider" = "Нет провайдера";
 "views.purchased.no_purchases" = "Нет покупок";
 "views.purchased.rows.build_number" = "Номер сборки";
 "views.purchased.rows.download_date" = "Дата скачивания";

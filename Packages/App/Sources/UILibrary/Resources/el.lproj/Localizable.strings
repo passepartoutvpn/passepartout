@@ -290,7 +290,7 @@
 "views.providers.only_favorites" = "Μόνο αγαπημένα";
 "views.providers.refresh_infrastructure" = "Ανανέωση υποδομής";
 "views.providers.select_entity" = "Επιλογή";
-"views.providers.select_provider" = "Επιλέξτε πάροχο";
+"views.providers.select_provider" = "Κανένας πάροχος";
 "views.purchased.no_purchases" = "Δεν υπάρχουν αγορές";
 "views.purchased.rows.build_number" = "Αριθμός κατασκευής";
 "views.purchased.rows.download_date" = "Ημερομηνία λήψης";
