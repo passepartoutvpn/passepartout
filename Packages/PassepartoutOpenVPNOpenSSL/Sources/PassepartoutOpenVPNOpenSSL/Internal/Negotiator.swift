@@ -27,6 +27,7 @@ internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
 
+@OpenVPNActor
 final class Negotiator {
     struct Options {
         let configuration: OpenVPN.Configuration

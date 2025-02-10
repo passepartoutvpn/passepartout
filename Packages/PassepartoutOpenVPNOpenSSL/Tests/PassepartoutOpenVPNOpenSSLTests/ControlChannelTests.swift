@@ -27,6 +27,7 @@ internal import CPassepartoutOpenVPNOpenSSL
 @testable import PassepartoutOpenVPNOpenSSL
 import XCTest
 
+@OpenVPNActor
 final class ControlChannelTests: XCTestCase {
     func test_givenChannel_whenHandleSequence_thenIsReordered() {
         let seq1: [UInt32] = [0, 5, 2, 1, 4, 3]

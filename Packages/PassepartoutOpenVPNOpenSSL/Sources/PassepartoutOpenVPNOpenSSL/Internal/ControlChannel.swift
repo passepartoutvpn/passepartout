@@ -27,6 +27,7 @@ internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
 import PassepartoutKit
 
+@OpenVPNActor
 final class ControlChannel {
     private let prng: PRNGProtocol
 

@@ -28,7 +28,8 @@ import Foundation
 import PassepartoutKit
 
 /// Default implementation of ``OpenVPNSessionProtocol``.
-actor OpenVPNSession {
+@OpenVPNActor
+final class OpenVPNSession {
     enum SessionState {
         case stopped
 
@@ -533,6 +534,7 @@ private extension OpenVPNSession {
     }
 }
 
+@OpenVPNActor
 private extension OpenVPNCryptoProtocol {
     func newControlChannel(
         with prng: PRNGProtocol,
