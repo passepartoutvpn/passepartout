@@ -53,6 +53,12 @@ public struct AppMenu: View {
         loginToggle
         keepToggle
         Divider()
+        Group {
+            reconnectButton
+            disconnectButton
+        }
+        .disabled(!isTunnelActionable)
+        Divider()
         profilesList
         Divider()
         aboutButton
@@ -77,6 +83,37 @@ private extension AppMenu {
 
     var keepToggle: some View {
         Toggle(Strings.Views.Preferences.keepsInMenu, isOn: $settings.keepsInMenu)
+    }
+
+    var reconnectButton: some View {
+        Button(Strings.Global.Actions.reconnect) {
+            Task {
+                guard let currentProfileId = tunnel.currentProfile?.id else {
+                    return
+                }
+                guard let profile = profileManager.profile(withId: currentProfileId) else {
+                    return
+                }
+                do {
+                    try await tunnel.disconnect()
+                    try await tunnel.connect(with: profile)
+                } catch {
+                    pp_log(.app, .error, "Unable to reconnect to profile \(profile.id) from menu: \(error)")
+                }
+            }
+        }
+    }
+
+    var disconnectButton: some View {
+        Button(Strings.Global.Actions.disconnect) {
+            Task {
+                do {
+                    try await tunnel.disconnect()
+                } catch {
+                    pp_log(.app, .error, "Unable to disconnect from menu: \(error)")
+                }
+            }
+        }
     }
 
     var profilesList: some View {
@@ -122,6 +159,12 @@ private extension AppMenu {
         Button(Strings.Views.AppMenu.Items.quit(BundleConfiguration.mainDisplayName)) {
             NSApp.terminate(self)
         }
+    }
+}
+
+private extension AppMenu {
+    var isTunnelActionable: Bool {
+        [.activating, .active].contains(tunnel.status)
     }
 }
 

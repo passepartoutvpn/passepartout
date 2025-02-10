@@ -67,7 +67,7 @@
 "global.actions.enable" = "Abilita";
 "global.actions.hide" = "Nascondi";
 "global.actions.purchase" = "Acquista";
-"global.actions.reconnect" = "Riavvia";
+"global.actions.reconnect" = "Riconnetti";
 "global.actions.remove" = "Elimina";
 "global.actions.save" = "Salva";
 "global.actions.select" = "Seleziona";

@@ -67,7 +67,7 @@
 "global.actions.enable" = "启用";
 "global.actions.hide" = "隐藏";
 "global.actions.purchase" = "购买";
-"global.actions.reconnect" = "重新启动";
+"global.actions.reconnect" = "重新连接";
 "global.actions.remove" = "删除";
 "global.actions.save" = "保存";
 "global.actions.select" = "选择";

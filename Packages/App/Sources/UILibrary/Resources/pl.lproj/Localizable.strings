@@ -67,7 +67,7 @@
 "global.actions.enable" = "Włącz";
 "global.actions.hide" = "Ukryj";
 "global.actions.purchase" = "Zakup";
-"global.actions.reconnect" = "Uruchom ponownie";
+"global.actions.reconnect" = "Ponowne połączenie";
 "global.actions.remove" = "Usuń";
 "global.actions.save" = "Zapisz";
 "global.actions.select" = "Wybierz";

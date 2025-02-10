@@ -67,7 +67,7 @@
 "global.actions.enable" = "Включить";
 "global.actions.hide" = "Скрыть";
 "global.actions.purchase" = "Купить";
-"global.actions.reconnect" = "Перезапустить";
+"global.actions.reconnect" = "Переподключение";
 "global.actions.remove" = "Удалить";
 "global.actions.save" = "Сохранить";
 "global.actions.select" = "Выбрать";

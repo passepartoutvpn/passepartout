@@ -67,7 +67,7 @@
 "global.actions.enable" = "Inschakelen";
 "global.actions.hide" = "Verbergen";
 "global.actions.purchase" = "Aankopen";
-"global.actions.reconnect" = "Herstarten";
+"global.actions.reconnect" = "Opnieuw verbinden";
 "global.actions.remove" = "Verwijderen";
 "global.actions.save" = "Opslaan";
 "global.actions.select" = "Selecteren";

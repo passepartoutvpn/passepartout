@@ -210,8 +210,8 @@ public enum Strings {
       public static let hide = Strings.tr("Localizable", "global.actions.hide", fallback: "Hide")
       /// Purchase
       public static let purchase = Strings.tr("Localizable", "global.actions.purchase", fallback: "Purchase")
-      /// Restart
-      public static let reconnect = Strings.tr("Localizable", "global.actions.reconnect", fallback: "Restart")
+      /// Reconnect
+      public static let reconnect = Strings.tr("Localizable", "global.actions.reconnect", fallback: "Reconnect")
       /// Delete
       public static let remove = Strings.tr("Localizable", "global.actions.remove", fallback: "Delete")
       /// Save
