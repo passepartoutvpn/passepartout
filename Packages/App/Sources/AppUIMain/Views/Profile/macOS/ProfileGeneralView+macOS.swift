@@ -29,6 +29,7 @@ import CommonLibrary
 import SwiftUI
 
 struct ProfileGeneralView: View {
+    let profileManager: ProfileManager
 
     @ObservedObject
     var profileEditor: ProfileEditor
@@ -44,7 +45,10 @@ struct ProfileGeneralView: View {
                 paywallReason: $paywallReason
             )
             ProfileBehaviorSection(profileEditor: profileEditor)
-            UUIDSection(uuid: profileEditor.profile.id)
+            ProfileActionsSection(
+                profileManager: profileManager,
+                profileEditor: profileEditor
+            )
         }
         .themeForm()
     }
@@ -52,6 +56,7 @@ struct ProfileGeneralView: View {
 
 #Preview {
     ProfileGeneralView(
+        profileManager: .forPreviews,
         profileEditor: ProfileEditor(),
         paywallReason: .constant(nil)
     )

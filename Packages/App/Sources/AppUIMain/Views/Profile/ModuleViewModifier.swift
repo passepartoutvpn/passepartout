@@ -42,7 +42,9 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
             content
 #if DEBUG
             if !isUITesting {
-                UUIDSection(uuid: draft.id)
+                Section {
+                    UUIDText(uuid: draft.id)
+                }
             }
 #endif
         }

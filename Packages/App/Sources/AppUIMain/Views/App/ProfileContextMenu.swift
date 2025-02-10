@@ -122,10 +122,11 @@ private extension ProfileContextMenu {
     }
 
     var profileRemoveButton: some View {
-        ProfileRemoveButton(
-            profileManager: profileManager,
-            preview: preview
-        ) {
+        Button(role: .destructive) {
+            Task {
+                await profileManager.remove(withId: preview.id)
+            }
+        } label: {
             ThemeImageLabel(Strings.Global.Actions.remove, .contextRemove)
         }
     }

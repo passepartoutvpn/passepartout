@@ -47,10 +47,12 @@ public struct HideActiveProfileButton: View {
     }
 
     public var body: some View {
-        Button(Strings.Global.Actions.hide) {
+        Button {
             withAnimation {
                 pinsActiveProfile = false
             }
+        } label: {
+            ThemeImageLabel(Strings.Global.Actions.hide, .hide)
         }
     }
 }

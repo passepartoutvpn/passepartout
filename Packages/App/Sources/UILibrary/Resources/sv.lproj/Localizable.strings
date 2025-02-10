@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Spara ändå";
 "views.profile.module_list.section.footer" = "Tryck på moduler för att redigera inställningarna. Moduler kan dras för att bestämma prioritet.";
 "views.profile.rows.add_module" = "Lägg till modul";
+"views.profile.rows.delete_profile" = "Ta bort profil";
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
 "views.providers.clear_filters" = "Rensa filter";
 "views.providers.last_updated" = "Senast uppdaterad %@";

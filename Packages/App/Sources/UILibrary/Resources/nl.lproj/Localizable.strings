@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Toch opslaan";
 "views.profile.module_list.section.footer" = "Tik op modules om hun instellingen te bewerken. Modules kunnen worden versleept om de prioriteit te bepalen.";
 "views.profile.rows.add_module" = "Module toevoegen";
+"views.profile.rows.delete_profile" = "Verwijder profiel";
 "views.profile.sections.name.footer" = "Gebruik deze naam om uw VPN-automatiseringen in de app Opdrachten te maken.";
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";

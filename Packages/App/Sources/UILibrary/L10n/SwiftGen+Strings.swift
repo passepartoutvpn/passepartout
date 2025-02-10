@@ -863,6 +863,8 @@ public enum Strings {
       public enum Rows {
         /// Add module
         public static let addModule = Strings.tr("Localizable", "views.profile.rows.add_module", fallback: "Add module")
+        /// Delete profile
+        public static let deleteProfile = Strings.tr("Localizable", "views.profile.rows.delete_profile", fallback: "Delete profile")
       }
       public enum Sections {
         public enum Name {

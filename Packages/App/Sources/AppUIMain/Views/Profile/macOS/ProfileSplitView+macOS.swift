@@ -31,6 +31,8 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProfileSplitView: View, Routable {
+    let profileManager: ProfileManager
+
     let profileEditor: ProfileEditor
 
     let initialModuleId: UUID?
@@ -124,6 +126,7 @@ private extension ProfileSplitView {
         switch detail {
         case .general:
             ProfileGeneralView(
+                profileManager: profileManager,
                 profileEditor: profileEditor,
                 paywallReason: $paywallReason
             )
@@ -140,6 +143,7 @@ private extension ProfileSplitView {
 
 #Preview {
     ProfileSplitView(
+        profileManager: .forPreviews,
         profileEditor: ProfileEditor(profile: .newMockProfile()),
         initialModuleId: nil,
         moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),

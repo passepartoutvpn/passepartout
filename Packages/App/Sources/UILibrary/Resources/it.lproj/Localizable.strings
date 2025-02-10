@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Salva comunque";
 "views.profile.module_list.section.footer" = "Tocca i moduli per modificarne le impostazioni. Possono essere trascinati per determinare la priorità.";
 "views.profile.rows.add_module" = "Aggiungi modulo";
+"views.profile.rows.delete_profile" = "Elimina profilo";
 "views.profile.sections.name.footer" = "Usa questo nome per creare le automazioni VPN nell'app Comandi Rapidi.";
 "views.providers.clear_filters" = "Cancella filtri";
 "views.providers.last_updated" = "Ultimo aggiornamento il %@";

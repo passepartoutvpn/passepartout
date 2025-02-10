@@ -1,8 +1,8 @@
 //
-//  ProfileRemoveButton.swift
+//  UUIDText.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 11/4/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import SwiftUI
 
-struct ProfileRemoveButton<Label>: View where Label: View {
-    let profileManager: ProfileManager
-
-    let preview: ProfilePreview
-
-    let label: () -> Label
+struct UUIDText: View {
+    let uuid: UUID
 
     var body: some View {
-        Button(role: .destructive) {
-            Task {
-                await profileManager.remove(withId: preview.id)
+        ThemeCopiableText(
+            title: Strings.Unlocalized.uuid,
+            value: uuid,
+            valueView: {
+                Text($0.flatString.localizedDescription(style: .quartets))
+                    .monospaced()
             }
-        } label: {
-            label()
-        }
+        )
     }
 }

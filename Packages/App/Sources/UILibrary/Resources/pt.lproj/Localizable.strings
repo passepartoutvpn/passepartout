@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Salvar assim mesmo";
 "views.profile.module_list.section.footer" = "Toque nos módulos para editar suas configurações. Eles podem ser arrastados para definir a prioridade.";
 "views.profile.rows.add_module" = "Adicionar módulo";
+"views.profile.rows.delete_profile" = "Excluir perfil";
 "views.profile.sections.name.footer" = "Use este nome para criar automações VPN no app Atalhos.";
 "views.providers.clear_filters" = "Limpar filtros";
 "views.providers.last_updated" = "Última atualização em %@";

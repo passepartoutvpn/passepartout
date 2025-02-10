@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "仍然保存";
 "views.profile.module_list.section.footer" = "点击模块以编辑其设置。可以拖动模块来确定优先级。";
 "views.profile.rows.add_module" = "添加模块";
+"views.profile.rows.delete_profile" = "删除配置文件";
 "views.profile.sections.name.footer" = "使用此名称在快捷指令应用中创建您的 VPN 自动化。";
 "views.providers.clear_filters" = "清除筛选";
 "views.providers.last_updated" = "最近更新于 %@";

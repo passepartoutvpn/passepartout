@@ -31,6 +31,7 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProfileEditView: View, Routable {
+    let profileManager: ProfileManager
 
     @ObservedObject
     var profileEditor: ProfileEditor
@@ -62,7 +63,10 @@ struct ProfileEditView: View, Routable {
                 paywallReason: $paywallReason
             )
             ProfileBehaviorSection(profileEditor: profileEditor)
-            UUIDSection(uuid: profileEditor.profile.id)
+            ProfileActionsSection(
+                profileManager: profileManager,
+                profileEditor: profileEditor
+            )
         }
         .toolbar(content: toolbarContent)
         .navigationTitle(Strings.Global.Nouns.profile)
@@ -187,6 +191,7 @@ private extension ProfileEditView {
 #Preview {
     NavigationStack {
         ProfileEditView(
+            profileManager: .forPreviews,
             profileEditor: ProfileEditor(profile: .newMockProfile()),
             initialModuleId: nil,
             moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
