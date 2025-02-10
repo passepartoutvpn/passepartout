@@ -1,3 +1,4 @@
+* OpenVPN: Fix random crashes during negotiation (#1161)
 * Add "Delete profile" in profile editor (#1160)
 * Unpin active profile from preferences (#1159)
 * macOS: Add "Reconnect" and "Disconnect" from menu (#1154)
