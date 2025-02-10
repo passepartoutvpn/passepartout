@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Ваші покупки перевіряються.";
 "views.paywall.alerts.verification.connect.2" = "Якщо перевірку не вдасться завершити, підключення завершиться через %d хвилин.";
 "views.paywall.alerts.verification.edit" = "Будь ласка, зачекайте, поки ваші покупки перевіряються.";
+"views.paywall.product.included_features" = "Включені функції";
 "views.paywall.rows.restore_purchases" = "Відновити покупки";
 "views.paywall.sections.all_features.header" = "Повна версія включає";
 "views.paywall.sections.full_products.header" = "Повна версія";
 "views.paywall.sections.included_features.header" = "Також включає";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
-"views.paywall.sections.products.header" = "Доступні продукти";
+"views.paywall.sections.products.header" = "Рекомендовані продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше купували цей додаток або функцію, ви можете відновити свої покупки.";
 "views.paywall.sections.restore.header" = "Відновлення";

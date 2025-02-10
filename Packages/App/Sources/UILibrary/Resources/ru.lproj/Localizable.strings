@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Ваши покупки проверяются.";
 "views.paywall.alerts.verification.connect.2" = "Если проверка не будет завершена, соединение завершится через %d минут.";
 "views.paywall.alerts.verification.edit" = "Пожалуйста, подождите, пока ваши покупки проверяются.";
+"views.paywall.product.included_features" = "Включенные функции";
 "views.paywall.rows.restore_purchases" = "Восстановить покупки";
 "views.paywall.sections.all_features.header" = "Полная версия включает";
 "views.paywall.sections.full_products.header" = "Полная версия";
 "views.paywall.sections.included_features.header" = "Также включает";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
-"views.paywall.sections.products.header" = "Доступные продукты";
+"views.paywall.sections.products.header" = "Рекомендуемые продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
 "views.paywall.sections.restore.footer" = "Если вы уже купили это приложение или функцию в прошлом, вы можете восстановить свои покупки.";
 "views.paywall.sections.restore.header" = "Восстановить";

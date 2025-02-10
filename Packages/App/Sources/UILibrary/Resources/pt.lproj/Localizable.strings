@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Suas compras estão sendo verificadas.";
 "views.paywall.alerts.verification.connect.2" = "Se a verificação não for concluída, a conexão será encerrada em %d minutos.";
 "views.paywall.alerts.verification.edit" = "Aguarde enquanto suas compras estão sendo verificadas.";
+"views.paywall.product.included_features" = "Recursos incluídos";
 "views.paywall.rows.restore_purchases" = "Restaurar compras";
 "views.paywall.sections.all_features.header" = "A versão completa inclui";
 "views.paywall.sections.full_products.header" = "Versão completa";
 "views.paywall.sections.included_features.header" = "Também inclui";
 "views.paywall.sections.products.footer" = "Todas as compras são compatíveis com Compartilhamento Familiar.";
-"views.paywall.sections.products.header" = "Produtos disponíveis";
+"views.paywall.sections.products.header" = "Produtos sugeridos";
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você comprou este app ou recurso no passado, pode restaurar suas compras.";
 "views.paywall.sections.restore.header" = "Restaurar";

@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Twoje zakupy są weryfikowane.";
 "views.paywall.alerts.verification.connect.2" = "Jeśli weryfikacja nie zostanie zakończona, połączenie zostanie zakończone za %d minut.";
 "views.paywall.alerts.verification.edit" = "Proszę czekać, trwa weryfikacja zakupów.";
+"views.paywall.product.included_features" = "Uwzględnione funkcje";
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
 "views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
 "views.paywall.sections.full_products.header" = "Pełna wersja";
 "views.paywall.sections.included_features.header" = "Zawiera także";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
-"views.paywall.sections.products.header" = "Dostępne produkty";
+"views.paywall.sections.products.header" = "Sugerowane produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej kupiłeś tę aplikację lub funkcję, możesz przywrócić swoje zakupy.";
 "views.paywall.sections.restore.header" = "Przywróć";
