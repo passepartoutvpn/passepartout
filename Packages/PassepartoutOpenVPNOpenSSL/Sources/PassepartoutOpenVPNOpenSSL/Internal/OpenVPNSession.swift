@@ -28,7 +28,8 @@ import Foundation
 import PassepartoutKit
 
 /// Default implementation of ``OpenVPNSessionProtocol``.
-actor OpenVPNSession {
+@OpenVPNActor
+final class OpenVPNSession {
     enum SessionState {
         case stopped
 
