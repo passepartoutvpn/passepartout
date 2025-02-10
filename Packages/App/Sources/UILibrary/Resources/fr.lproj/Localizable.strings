@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Modifier le profil";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
-"views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de mise à niveau pour débloquer les fonctionnalités.";
+"views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de cadenas pour acheter les fonctionnalités manquantes.";
 "views.paywall.alerts.confirmation.title" = "Achat requis";
 "views.paywall.alerts.pending.message" = "L'achat est en attente de confirmation externe. La fonctionnalité sera créditée une fois approuvée.";
 "views.paywall.alerts.restricted.message" = "Certaines fonctionnalités ne sont pas disponibles dans cette version.";
