@@ -112,8 +112,10 @@ private extension PaywallProductView {
                 Text(Strings.Views.Paywall.Product.includedFeatures)
                 ThemeImage(isPresentingFeatures ? .undisclose : .disclose)
             }
+            .contentShape(.rect)
         }
         .buttonStyle(.plain)
+        .cursor(.hand)
     }
 
     var includedFeaturesList: some View {
