@@ -34,7 +34,7 @@ public struct PinActiveProfileToggle: View {
     }
 
     public var body: some View {
-        Toggle(Strings.Views.Preferences.pinsActiveProfile, isOn: $pinsActiveProfile)
+        Toggle(Strings.Views.Preferences.pinsActiveProfile, isOn: $pinsActiveProfile.animation())
     }
 }
 
@@ -48,7 +48,9 @@ public struct HideActiveProfileButton: View {
 
     public var body: some View {
         Button(Strings.Global.Actions.hide) {
-            pinsActiveProfile = false
+            withAnimation {
+                pinsActiveProfile = false
+            }
         }
     }
 }

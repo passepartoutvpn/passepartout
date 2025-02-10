@@ -55,7 +55,6 @@ struct InstalledProfileView: View, Routable {
             toggleButton
         }
         .modifier(HeaderModifier(layout: layout))
-        .unanimated()
     }
 }
 
