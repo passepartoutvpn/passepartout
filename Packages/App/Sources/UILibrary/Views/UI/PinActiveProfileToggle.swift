@@ -33,9 +33,8 @@ public struct PinActiveProfileToggle: View {
     public init() {
     }
 
-    // FIXME: ###
     public var body: some View {
-        Toggle("Pin active profile", isOn: $pinsActiveProfile)
+        Toggle(Strings.Views.Preferences.pinsActiveProfile, isOn: $pinsActiveProfile)
     }
 }
 

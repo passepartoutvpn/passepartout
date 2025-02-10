@@ -80,10 +80,9 @@ private extension PreferencesGroup {
     }
 #endif
 
-    // FIXME: ###
     var pinActiveProfileToggle: some View {
         PinActiveProfileToggle()
-            .themeSectionWithSingleRow(footer: "Pin active profile")
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.PinsActiveProfile.footer)
     }
 
     var eraseCloudKitButton: some View {
