@@ -37,7 +37,7 @@ enum FeatureListViewStyle {
 struct FeatureListView<Content>: View where Content: View {
     let style: FeatureListViewStyle
 
-    let header: String
+    var header: String?
 
     let features: [AppFeature]
 
@@ -50,12 +50,7 @@ struct FeatureListView<Content>: View where Content: View {
 
 #if !os(tvOS)
         case .table:
-            // XXX: work around Table artifact when 1 row and no headers
-            if features.count > 1 {
-                tableView
-            } else {
-                listView
-            }
+            tableView
 #endif
         }
     }
@@ -70,10 +65,8 @@ private extension FeatureListView {
 #if !os(tvOS)
     var tableView: some View {
         Table(features.sorted()) {
-            TableColumn("", content: content)
+            TableColumn(header ?? "", content: content)
         }
-        .withoutColumnHeaders()
-        .themeSection(header: header)
     }
 #endif
 }

@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Dina köp verifieras.";
 "views.paywall.alerts.verification.connect.2" = "Om verifieringen inte kan slutföras kommer anslutningen att avslutas om %d minuter.";
 "views.paywall.alerts.verification.edit" = "Vänligen vänta medan dina köp verifieras.";
+"views.paywall.product.included_features" = "Inkluderade funktioner";
 "views.paywall.rows.restore_purchases" = "Återställ köp";
 "views.paywall.sections.all_features.header" = "Den fullständiga versionen innehåller";
 "views.paywall.sections.full_products.header" = "Fullständig version";
 "views.paywall.sections.included_features.header" = "Inkluderar även";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
-"views.paywall.sections.products.header" = "Tillgängliga produkter";
+"views.paywall.sections.products.header" = "Föreslagna produkter";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har köpt denna app eller funktion tidigare kan du återställa dina köp.";
 "views.paywall.sections.restore.header" = "Återställ";

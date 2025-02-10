@@ -786,20 +786,20 @@ public enum Strings {
           }
         }
       }
+      public enum Product {
+        /// Included features
+        public static let includedFeatures = Strings.tr("Localizable", "views.paywall.product.included_features", fallback: "Included features")
+      }
       public enum Rows {
         /// Restore purchases
         public static let restorePurchases = Strings.tr("Localizable", "views.paywall.rows.restore_purchases", fallback: "Restore purchases")
       }
       public enum Sections {
-        public enum IncludedFeatures {
-          /// Also includes
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.included_features.header", fallback: "Also includes")
-        }
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
-          /// Available products
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Available products")
+          /// Suggested products
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Suggested products")
         }
         public enum RequiredFeatures {
           /// Required features

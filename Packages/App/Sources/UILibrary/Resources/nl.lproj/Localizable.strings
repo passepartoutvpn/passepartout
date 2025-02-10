@@ -260,12 +260,13 @@
 "views.paywall.alerts.verification.connect.1" = "Je aankopen worden geverifieerd.";
 "views.paywall.alerts.verification.connect.2" = "Als de verificatie niet kan worden voltooid, wordt de verbinding over %d minuten beëindigd.";
 "views.paywall.alerts.verification.edit" = "Even geduld terwijl we je aankopen verifiëren.";
+"views.paywall.product.included_features" = "Inbegrepen functies";
 "views.paywall.rows.restore_purchases" = "Aankopen herstellen";
 "views.paywall.sections.all_features.header" = "De volledige versie bevat";
 "views.paywall.sections.full_products.header" = "Volledige versie";
 "views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
-"views.paywall.sections.products.header" = "Beschikbare producten";
+"views.paywall.sections.products.header" = "Voorgestelde producten";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je deze app of functie eerder hebt gekocht, kun je je aankopen herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";
