@@ -28,6 +28,8 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
+#if !os(tvOS)
+
 public struct PreferencesGroup: View {
 
 #if os(iOS)
@@ -113,3 +115,5 @@ private extension PreferencesGroup {
         .disabled(isErasingiCloud)
     }
 }
+
+#endif

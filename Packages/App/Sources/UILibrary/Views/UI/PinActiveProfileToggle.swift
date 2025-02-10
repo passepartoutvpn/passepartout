@@ -25,6 +25,8 @@
 
 import SwiftUI
 
+#if !os(tvOS)
+
 public struct PinActiveProfileToggle: View {
 
     @AppStorage(UIPreference.pinsActiveProfile.key)
@@ -68,3 +70,5 @@ public struct HideActiveProfileModifier: ViewModifier {
             }
     }
 }
+
+#endif

@@ -26,6 +26,8 @@
 import CommonLibrary
 import SwiftUI
 
+#if !os(tvOS)
+
 public struct PreferencesView: View {
     private let profileManager: ProfileManager
 
@@ -48,3 +50,5 @@ public struct PreferencesView: View {
 #endif
     }
 }
+
+#endif
