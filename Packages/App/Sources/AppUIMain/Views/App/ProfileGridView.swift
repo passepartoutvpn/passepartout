@@ -27,11 +27,15 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     @Environment(\.isSearching)
     private var isSearching
+
+    @AppStorage(UIPreference.pinsActiveProfile.key)
+    private var pinsActiveProfile = true
 
     @ObservedObject
     var profileManager: ProfileManager
@@ -53,7 +57,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
         return ScrollViewReader { scrollProxy in
             ScrollView {
                 VStack(spacing: .zero) {
-                    if !isSearching {
+                    if !isSearching && pinsActiveProfile {
                         headerView(scrollProxy: scrollProxy)
                             .padding(.bottom)
                             .unanimated()
@@ -112,6 +116,7 @@ private extension ProfileGridView {
                 )
             }
         }
+        .modifier(HideActiveProfileModifier())
     }
 
     func profileView(for preview: ProfilePreview) -> some View {

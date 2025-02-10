@@ -35,6 +35,8 @@ public enum UIPreference: String, PreferenceProtocol {
 
     case onlyShowsFavorites
 
+    case pinsActiveProfile
+
     case profilesLayout
 
     public var key: String {

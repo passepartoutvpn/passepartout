@@ -27,6 +27,7 @@ import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
+import UILibrary
 
 struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
@@ -38,6 +39,9 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
     @Environment(\.isSearching)
     private var isSearching
+
+    @AppStorage(UIPreference.pinsActiveProfile.key)
+    private var pinsActiveProfile = true
 
     @ObservedObject
     var profileManager: ProfileManager
@@ -52,7 +56,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     var body: some View {
         debugChanges()
         return Form {
-            if !isSearching {
+            if !isSearching && pinsActiveProfile {
                 headerView
                     .unanimated()
             }
@@ -99,6 +103,7 @@ private extension ProfileListView {
                 )
             }
         }
+        .modifier(HideActiveProfileModifier())
     }
 
     func profileView(for preview: ProfilePreview) -> some View {

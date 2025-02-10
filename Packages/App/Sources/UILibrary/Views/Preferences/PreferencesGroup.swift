@@ -57,6 +57,7 @@ public struct PreferencesGroup: View {
         launchesOnLoginToggle
         keepsInMenuToggle
 #endif
+        pinActiveProfileToggle
         eraseCloudKitButton
     }
 }
@@ -78,6 +79,13 @@ private extension PreferencesGroup {
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.KeepsInMenu.footer)
     }
 #endif
+
+    // FIXME: ###
+    var pinActiveProfileToggle: some View {
+        PinActiveProfileToggle()
+            .themeSectionWithSingleRow(footer: "Pin active profile")
+    }
+
     var eraseCloudKitButton: some View {
         Button(Strings.Views.Preferences.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
