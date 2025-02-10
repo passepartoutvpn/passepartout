@@ -28,27 +28,48 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProfileActionsSection: View {
+
+    @Environment(\.dismissProfile)
+    private var dismissProfile
+
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor
+
+    @State
+    private var isConfirmingDeletion = false
 
     var body: some View {
         UUIDText(uuid: profileId)
             .asSectionWithTrailingContent {
                 if profileManager.profile(withId: profileId) != nil {
-                    ProfileRemoveButton(
-                        profileManager: profileManager,
-                        profileId: profileId,
-                        profileName: profileEditor.profile.name,
-                        label: {
-                            Text(Strings.Views.Profile.Rows.deleteProfile)
-                        }
-                    )
+                    removeButton
+                        .themeConfirmation(
+                            isPresented: $isConfirmingDeletion,
+                            title: Strings.Global.Actions.delete,
+                            isDestructive: true,
+                            action: {
+                                Task {
+                                    dismissProfile()
+                                    await profileManager.remove(withId: profileId)
+                                }
+                            }
+                        )
                 }
             }
     }
+}
 
-    private var profileId: Profile.ID {
+private extension ProfileActionsSection {
+    var removeButton: some View {
+        Button(Strings.Views.Profile.Rows.deleteProfile, role: .destructive) {
+            isConfirmingDeletion = true
+        }
+    }
+}
+
+private extension ProfileActionsSection {
+    var profileId: Profile.ID {
         profileEditor.profile.id
     }
 }
