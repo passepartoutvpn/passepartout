@@ -88,9 +88,6 @@ private extension PaywallView {
         Form {
             requiredFeaturesView
             productsView
-            if suggestedProducts == nil {
-                alsoIncludedEssentialsView
-            }
             restoreView
             linksView
         }
@@ -123,6 +120,7 @@ private extension PaywallView {
                         iapManager: iapManager,
                         style: .paywall,
                         product: $0,
+                        highlightedFeatures: requiredFeatures,
                         purchasingIdentifier: $purchasingIdentifier,
                         onComplete: onComplete,
                         onError: onError
@@ -136,35 +134,11 @@ private extension PaywallView {
             }
     }
 
-    var alsoIncludedEssentialsView: some View {
-        essentialFeatures
-            .filter {
-                !requiredFeatures.contains($0)
-            }
-            .nilIfEmpty
-            .map {
-                FeatureListView(
-                    style: featuresStyle,
-                    header: Strings.Views.Paywall.Sections.IncludedFeatures.header,
-                    features: $0,
-                    content: featureView(for:)
-                )
-            }
-    }
-
     var linksView: some View {
         Section {
             Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
             Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
         }
-    }
-
-    var featuresStyle: FeatureListViewStyle {
-#if os(iOS)
-        .list
-#else
-        .table
-#endif
     }
 
     func featureView(for feature: AppFeature) -> some View {

@@ -74,6 +74,7 @@ extension Theme {
         case tunnelUninstall
         case tvOff
         case tvOn
+        case undisclose
         case upgrade
         case warning
     }
@@ -135,6 +136,7 @@ extension Theme.ImageName {
                     return "tv"
                 }
             case .tvOn: return "tv"
+            case .undisclose: return "chevron.up"
             case .upgrade: return "arrow.up.circle"
             case .warning: return "exclamationmark.triangle"
             }
