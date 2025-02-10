@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Zapisz mimo to";
 "views.profile.module_list.section.footer" = "Stuknij moduły, aby edytować ich ustawienia. Można je przeciągnąć, aby ustalić priorytet.";
 "views.profile.rows.add_module" = "Dodaj moduł";
+"views.profile.rows.delete_profile" = "Usuń profil";
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
 "views.providers.clear_filters" = "Wyczyść filtry";
 "views.providers.last_updated" = "Ostatnia aktualizacja: %@";

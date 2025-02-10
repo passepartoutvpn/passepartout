@@ -41,7 +41,7 @@ struct ProfileActionsSection: View {
                         profileId: profileId,
                         profileName: profileEditor.profile.name,
                         label: {
-                            Text(Strings.Global.Actions.delete)
+                            Text(Strings.Views.Profile.Rows.deleteProfile)
                         }
                     )
                 }

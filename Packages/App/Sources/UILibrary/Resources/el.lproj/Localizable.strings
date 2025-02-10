@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";
+"views.profile.rows.delete_profile" = "Διαγραφή προφίλ";
 "views.profile.sections.name.footer" = "Χρησιμοποιήστε αυτό το όνομα για να δημιουργήσετε αυτοματισμούς VPN στην εφαρμογή Συντομεύσεις.";
 "views.providers.clear_filters" = "Καθαρισμός φίλτρων";
 "views.providers.last_updated" = "Τελευταία ενημέρωση στις %@";

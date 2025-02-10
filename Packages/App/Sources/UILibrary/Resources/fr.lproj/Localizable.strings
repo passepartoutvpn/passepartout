@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Enregistrer quand même";
 "views.profile.module_list.section.footer" = "Touchez les modules pour modifier leurs paramètres. Ils peuvent être glissés pour définir leur priorité.";
 "views.profile.rows.add_module" = "Ajouter un module";
+"views.profile.rows.delete_profile" = "Supprimer le profil";
 "views.profile.sections.name.footer" = "Utilisez ce nom pour créer vos automatisations VPN dans l'app Raccourcis.";
 "views.providers.clear_filters" = "Effacer les filtres";
 "views.providers.last_updated" = "Dernière mise à jour le %@";

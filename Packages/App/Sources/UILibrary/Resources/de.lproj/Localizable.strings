@@ -284,6 +284,7 @@
 "views.profile.alerts.purchase.buttons.ok" = "Trotzdem speichern";
 "views.profile.module_list.section.footer" = "Tippen Sie auf Module, um ihre Einstellungen zu bearbeiten. Module können gezogen werden, um die Priorität festzulegen.";
 "views.profile.rows.add_module" = "Modul hinzufügen";
+"views.profile.rows.delete_profile" = "Profil löschen";
 "views.profile.sections.name.footer" = "Verwenden Sie diesen Namen, um Ihre VPN-Automationen in der Kurzbefehle-App zu erstellen.";
 "views.providers.clear_filters" = "Filter löschen";
 "views.providers.last_updated" = "Zuletzt aktualisiert am %@";
