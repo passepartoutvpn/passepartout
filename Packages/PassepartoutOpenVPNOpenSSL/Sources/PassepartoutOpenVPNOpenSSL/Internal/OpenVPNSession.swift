@@ -534,6 +534,7 @@ private extension OpenVPNSession {
     }
 }
 
+@OpenVPNActor
 private extension OpenVPNCryptoProtocol {
     func newControlChannel(
         with prng: PRNGProtocol,

@@ -52,7 +52,7 @@ extension OpenVPNConnection {
             return box
         }
 
-        let session = try OpenVPNSession(
+        let session = try await OpenVPNSession(
             configuration: configuration,
             credentials: module.credentials,
             prng: prng,
