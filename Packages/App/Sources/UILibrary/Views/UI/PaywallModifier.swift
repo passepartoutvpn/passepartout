@@ -113,7 +113,7 @@ private extension PaywallModifier {
             }
         }
 #endif
-        Button(confirmationCancel, role: .cancel) {
+        Button(Strings.Global.Nouns.ok, role: .cancel) {
             reason = nil
             onCancel?()
         }
@@ -124,13 +124,6 @@ private extension PaywallModifier {
             return Strings.Views.Paywall.Alerts.Restricted.title
         }
         return Strings.Views.Paywall.Alerts.Confirmation.title
-    }
-
-    var confirmationCancel: String {
-        if iapManager.isBeta || otherTitle == nil {
-            return Strings.Global.Nouns.ok
-        }
-        return Strings.Global.Actions.cancel
     }
 
     func confirmationMessage() -> some View {
