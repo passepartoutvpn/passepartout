@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Die App im Hintergrund nach dem Login öffnen.";
 "views.preferences.locks_in_background" = "Im Hintergrund sperren";
 "views.preferences.locks_in_background.footer" = "Sperre die App mit FaceID, wenn sie in den Hintergrund geschickt wird.";
+"views.preferences.pins_active_profile" = "Aktives Profil anheften";
+"views.preferences.pins_active_profile.footer" = "Zeigt das aktive Profil auch oben für schnellen Zugriff an.";
 "views.profile.alerts.purchase.buttons.ok" = "Trotzdem speichern";
 "views.profile.module_list.section.footer" = "Tippen Sie auf Module, um ihre Einstellungen zu bearbeiten. Module können gezogen werden, um die Priorität festzulegen.";
 "views.profile.rows.add_module" = "Modul hinzufügen";

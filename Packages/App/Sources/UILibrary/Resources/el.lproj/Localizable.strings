@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Ανοίξτε την εφαρμογή στο παρασκήνιο μετά την είσοδο.";
 "views.preferences.locks_in_background" = "Κλείδωμα στο παρασκήνιο";
 "views.preferences.locks_in_background.footer" = "Κλειδώστε την εφαρμογή με το FaceID όταν αποστέλλεται στο παρασκήνιο.";
+"views.preferences.pins_active_profile" = "Καρφίτσωμα ενεργού προφίλ";
+"views.preferences.pins_active_profile.footer" = "Εμφανίζει επίσης το ενεργό προφίλ στην κορυφή για γρήγορη πρόσβαση.";
 "views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";

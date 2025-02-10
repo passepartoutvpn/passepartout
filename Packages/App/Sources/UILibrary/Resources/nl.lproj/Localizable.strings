@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Open de app op de achtergrond na het inloggen.";
 "views.preferences.locks_in_background" = "Vergrendelen in achtergrond";
 "views.preferences.locks_in_background.footer" = "Vergrendel de app met FaceID wanneer deze naar de achtergrond wordt gestuurd.";
+"views.preferences.pins_active_profile" = "Actief profiel vastzetten";
+"views.preferences.pins_active_profile.footer" = "Toont ook het actieve profiel bovenaan voor snelle toegang.";
 "views.profile.alerts.purchase.buttons.ok" = "Toch opslaan";
 "views.profile.module_list.section.footer" = "Tik op modules om hun instellingen te bewerken. Modules kunnen worden versleept om de prioriteit te bepalen.";
 "views.profile.rows.add_module" = "Module toevoegen";

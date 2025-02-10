@@ -28,6 +28,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 import UIAccessibility
+import UILibrary
 
 struct ProfileContextMenu: View, Routable {
     enum Style {
@@ -58,6 +59,9 @@ struct ProfileContextMenu: View, Routable {
         providerConnectToButton
         Divider()
         profileEditButton
+        if style == .installedProfile {
+            HideActiveProfileButton()
+        }
         if style == .containerContext {
             profileDuplicateButton
             profileRemoveButton

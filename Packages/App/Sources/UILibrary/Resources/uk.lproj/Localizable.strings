@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Відкрити додаток у фоновому режимі після входу.";
 "views.preferences.locks_in_background" = "Блокування у фоновому режимі";
 "views.preferences.locks_in_background.footer" = "Блокуйте додаток за допомогою FaceID, коли він переходе у фоновий режим.";
+"views.preferences.pins_active_profile" = "Закріпити активний профіль";
+"views.preferences.pins_active_profile.footer" = "Також показує активний профіль зверху для швидкого доступу.";
 "views.profile.alerts.purchase.buttons.ok" = "Зберегти все одно";
 "views.profile.module_list.section.footer" = "Торкніться модулів, щоб змінити їхні налаштування. Їх можна перетягувати для визначення пріоритету.";
 "views.profile.rows.add_module" = "Додати модуль";
