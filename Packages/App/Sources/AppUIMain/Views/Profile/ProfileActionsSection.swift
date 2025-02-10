@@ -40,27 +40,42 @@ struct ProfileActionsSection: View {
     private var isConfirmingDeletion = false
 
     var body: some View {
+#if os(iOS)
+        Section {
+            UUIDText(uuid: profileId)
+        }
+        Section {
+            removeContent
+                .frame(maxWidth: .infinity, alignment: .center)
+        }
+#else
         UUIDText(uuid: profileId)
             .asSectionWithTrailingContent {
-                if profileManager.profile(withId: profileId) != nil {
-                    removeButton
-                        .themeConfirmation(
-                            isPresented: $isConfirmingDeletion,
-                            title: Strings.Global.Actions.delete,
-                            isDestructive: true,
-                            action: {
-                                Task {
-                                    dismissProfile()
-                                    await profileManager.remove(withId: profileId)
-                                }
-                            }
-                        )
-                }
+                removeContent
             }
+#endif
     }
 }
 
 private extension ProfileActionsSection {
+    var removeContent: some View {
+        profileManager.profile(withId: profileId)
+            .map { _ in
+                removeButton
+                    .themeConfirmation(
+                        isPresented: $isConfirmingDeletion,
+                        title: Strings.Global.Actions.delete,
+                        isDestructive: true,
+                        action: {
+                            Task {
+                                dismissProfile()
+                                await profileManager.remove(withId: profileId)
+                            }
+                        }
+                    )
+            }
+    }
+
     var removeButton: some View {
         Button(Strings.Views.Profile.Rows.deleteProfile, role: .destructive) {
             isConfirmingDeletion = true
