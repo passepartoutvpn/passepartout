@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Profiel bewerken";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
-"views.paywall.alerts.confirmation.message.save" = "Tik op de upgrade-iconen om de functies te ontgrendelen.";
+"views.paywall.alerts.confirmation.message.save" = "Tik op de slotpictogrammen om de ontbrekende functies te kopen.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
 "views.paywall.alerts.pending.message" = "De aankoop wacht op externe bevestiging. De functie wordt na goedkeuring gecrediteerd.";
 "views.paywall.alerts.restricted.message" = "Sommige functies zijn niet beschikbaar in deze versie.";

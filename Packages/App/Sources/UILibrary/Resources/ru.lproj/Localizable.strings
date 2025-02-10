@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
-"views.paywall.alerts.confirmation.message.save" = "Нажмите на значки обновления, чтобы разблокировать функции.";
+"views.paywall.alerts.confirmation.message.save" = "Нажмите на значки замка, чтобы приобрести недостающие функции.";
 "views.paywall.alerts.confirmation.title" = "Требуется покупка";
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
 "views.paywall.alerts.restricted.message" = "Некоторые функции недоступны в этой версии.";

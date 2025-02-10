@@ -137,7 +137,7 @@ extension Theme.ImageName {
                 }
             case .tvOn: return "tv"
             case .undisclose: return "chevron.up"
-            case .upgrade: return "arrow.up.circle"
+            case .upgrade: return "lock"
             case .warning: return "exclamationmark.triangle"
             }
         }

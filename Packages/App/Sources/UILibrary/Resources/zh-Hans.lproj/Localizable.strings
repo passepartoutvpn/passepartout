@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "编辑配置文件";
 "views.paywall.alerts.confirmation.message" = "此配置文件需要付费功能才能工作。";
 "views.paywall.alerts.confirmation.message.connect" = "您可以试用连接 %d 分钟。";
-"views.paywall.alerts.confirmation.message.save" = "点击升级图标以解锁功能。";
+"views.paywall.alerts.confirmation.message.save" = "点击锁定图标以购买缺失的功能。";
 "views.paywall.alerts.confirmation.title" = "需要购买";
 "views.paywall.alerts.pending.message" = "购买正在等待外部确认。功能将在获得批准后被授予。";
 "views.paywall.alerts.restricted.message" = "某些功能在此版本中不可用。";

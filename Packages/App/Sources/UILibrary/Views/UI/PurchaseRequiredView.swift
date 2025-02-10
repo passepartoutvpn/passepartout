@@ -147,8 +147,9 @@ public struct PurchaseRequiredImage: View {
         ThemeImage(.upgrade)
             .foregroundStyle(theme.upgradeColor)
             .help(Strings.Views.Ui.PurchaseRequired.Purchase.help)
-#if os(macOS)
             .imageScale(.large)
+#if os(iOS)
+            .padding(.leading, 4)
 #endif
     }
 }

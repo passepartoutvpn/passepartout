@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Edytuj profil";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
-"views.paywall.alerts.confirmation.message.save" = "Stuknij ikony aktualizacji, aby odblokować funkcje.";
+"views.paywall.alerts.confirmation.message.save" = "Stuknij ikony kłódki, aby kupić brakujące funkcje.";
 "views.paywall.alerts.confirmation.title" = "Wymagana zakup";
 "views.paywall.alerts.pending.message" = "Zakup oczekuje na zewnętrzne potwierdzenie. Funkcja zostanie przypisana po zatwierdzeniu.";
 "views.paywall.alerts.restricted.message" = "Niektóre funkcje są niedostępne w tej wersji.";

@@ -251,7 +251,7 @@
 "views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
-"views.paywall.alerts.confirmation.message.save" = "Tryck på uppgraderingsikonerna för att låsa upp funktionerna.";
+"views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
 "views.paywall.alerts.confirmation.title" = "Köp krävs";
 "views.paywall.alerts.pending.message" = "Köpet väntar på extern bekräftelse. Funktionen aktiveras efter godkännande.";
 "views.paywall.alerts.restricted.message" = "Vissa funktioner är inte tillgängliga i denna version.";
