@@ -124,7 +124,8 @@ private extension ProfileContextMenu {
     var profileRemoveButton: some View {
         ProfileRemoveButton(
             profileManager: profileManager,
-            preview: preview
+            profileId: preview.id,
+            profileName: preview.name
         ) {
             ThemeImageLabel(Strings.Global.Actions.remove, .contextRemove)
         }

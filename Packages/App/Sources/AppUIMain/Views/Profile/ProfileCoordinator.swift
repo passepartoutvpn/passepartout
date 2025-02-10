@@ -70,6 +70,7 @@ struct ProfileCoordinator: View {
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
+            .environment(\.dismissProfile, onDismiss)
             .withErrorHandler(errorHandler)
     }
 }
@@ -80,6 +81,7 @@ private extension ProfileCoordinator {
     var contentView: some View {
 #if os(iOS)
         ProfileEditView(
+            profileManager: profileManager,
             profileEditor: profileEditor,
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,
@@ -95,6 +97,7 @@ private extension ProfileCoordinator {
         .themeNavigationStack(path: $path)
 #else
         ProfileSplitView(
+            profileManager: profileManager,
             profileEditor: profileEditor,
             initialModuleId: initialModuleId,
             moduleViewFactory: moduleViewFactory,

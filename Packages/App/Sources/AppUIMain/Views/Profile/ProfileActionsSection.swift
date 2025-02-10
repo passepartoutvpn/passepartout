@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  ProfileActionsSection.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 2/10/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,44 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
-struct ProfileGeneralView: View {
+struct ProfileActionsSection: View {
     let profileManager: ProfileManager
 
-    @ObservedObject
-    var profileEditor: ProfileEditor
-
-    @Binding
-    var paywallReason: PaywallReason?
+    let profileEditor: ProfileEditor
 
     var body: some View {
-        Form {
-            ProfileNameSection(name: $profileEditor.profile.name)
-            ProfileStorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
-            ProfileBehaviorSection(profileEditor: profileEditor)
-            ProfileActionsSection(
-                profileManager: profileManager,
-                profileEditor: profileEditor
-            )
-        }
-        .themeForm()
+        UUIDText(uuid: profileId)
+            .asSectionWithTrailingContent {
+                if profileManager.profile(withId: profileId) != nil {
+                    ProfileRemoveButton(
+                        profileManager: profileManager,
+                        profileId: profileId,
+                        profileName: profileEditor.profile.name,
+                        label: {
+                            Text(Strings.Global.Actions.delete)
+                        }
+                    )
+                }
+            }
+    }
+
+    private var profileId: Profile.ID {
+        profileEditor.profile.id
     }
 }
-
-#Preview {
-    ProfileGeneralView(
-        profileManager: .forPreviews,
-        profileEditor: ProfileEditor(),
-        paywallReason: .constant(nil)
-    )
-    .withMockEnvironment()
-}
-
-#endif

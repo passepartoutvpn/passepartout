@@ -1,5 +1,5 @@
 //
-//  UUIDSection.swift
+//  UUIDText.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/4/24.
@@ -25,19 +25,17 @@
 
 import SwiftUI
 
-struct UUIDSection: View {
+struct UUIDText: View {
     let uuid: UUID
 
     var body: some View {
-        Section {
-            ThemeCopiableText(
-                title: Strings.Unlocalized.uuid,
-                value: uuid,
-                valueView: {
-                    Text($0.flatString.localizedDescription(style: .quartets))
-                        .monospaced()
-                }
-            )
-        }
+        ThemeCopiableText(
+            title: Strings.Unlocalized.uuid,
+            value: uuid,
+            valueView: {
+                Text($0.flatString.localizedDescription(style: .quartets))
+                    .monospaced()
+            }
+        )
     }
 }

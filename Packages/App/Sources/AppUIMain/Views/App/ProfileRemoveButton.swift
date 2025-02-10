@@ -24,22 +24,41 @@
 //
 
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 struct ProfileRemoveButton<Label>: View where Label: View {
+
+    @Environment(\.dismissProfile)
+    private var dismissProfile
+
     let profileManager: ProfileManager
 
-    let preview: ProfilePreview
+    let profileId: Profile.ID
+
+    let profileName: String
 
     let label: () -> Label
 
+    @State
+    private var isConfirming = false
+
     var body: some View {
         Button(role: .destructive) {
-            Task {
-                await profileManager.remove(withId: preview.id)
-            }
+            isConfirming = true
         } label: {
             label()
         }
+        .themeConfirmation(
+            isPresented: $isConfirming,
+            title: Strings.Global.Actions.delete,
+            isDestructive: true,
+            action: {
+                Task {
+                    dismissProfile()
+                    await profileManager.remove(withId: profileId)
+                }
+            }
+        )
     }
 }
