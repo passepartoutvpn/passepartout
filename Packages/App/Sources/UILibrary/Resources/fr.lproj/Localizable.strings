@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Ouvrir l'application en arrière-plan après la connexion.";
 "views.preferences.locks_in_background" = "Verrouiller en arrière-plan";
 "views.preferences.locks_in_background.footer" = "Verrouillez l'application avec FaceID lorsqu'elle est envoyée en arrière-plan.";
+"views.preferences.pins_active_profile" = "Épingler le profil actif";
+"views.preferences.pins_active_profile.footer" = "Affiche également le profil actif en haut pour un accès rapide.";
 "views.profile.alerts.purchase.buttons.ok" = "Enregistrer quand même";
 "views.profile.module_list.section.footer" = "Touchez les modules pour modifier leurs paramètres. Ils peuvent être glissés pour définir leur priorité.";
 "views.profile.rows.add_module" = "Ajouter un module";

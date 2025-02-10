@@ -279,6 +279,8 @@
 "views.preferences.launches_on_login.footer" = "Открыть приложение в фоновом режиме после входа.";
 "views.preferences.locks_in_background" = "Блокировка в фоновом режиме";
 "views.preferences.locks_in_background.footer" = "Блокируйте приложение с помощью FaceID, когда оно переводится в фоновый режим.";
+"views.preferences.pins_active_profile" = "Закрепить активный профиль";
+"views.preferences.pins_active_profile.footer" = "Также отображает активный профиль сверху для быстрого доступа.";
 "views.profile.alerts.purchase.buttons.ok" = "Сохранить в любом случае";
 "views.profile.module_list.section.footer" = "Нажмите на модули, чтобы изменить их настройки. Их можно перетаскивать для установки приоритета.";
 "views.profile.rows.add_module" = "Добавить модуль";
