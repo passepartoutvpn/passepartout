@@ -116,7 +116,6 @@ private extension ProfileGridView {
                 )
             }
         }
-        .modifier(HideActiveProfileModifier())
     }
 
     func profileView(for preview: ProfilePreview) -> some View {
