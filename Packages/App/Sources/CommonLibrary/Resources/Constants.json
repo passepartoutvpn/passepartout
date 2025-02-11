@@ -27,6 +27,10 @@
     "tunnel": {
         "profileTitleFormat": "Passepartout: %@",
         "refreshInterval": 3.0,
+        "dnsFallbackServers": [
+            "1.1.1.1",
+            "1.0.0.1"
+        ],
         "verification": {
             "production": {
                 "delay": 120.0,

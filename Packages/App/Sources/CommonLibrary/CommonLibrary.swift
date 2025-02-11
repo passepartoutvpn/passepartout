@@ -65,8 +65,17 @@ private extension CommonLibrary {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        if UserDefaults.appGroup.bool(forKey: AppPreference.dnsFallsBack.key) {
+            let servers = Constants.shared.tunnel.dnsFallbackServers
+            PassepartoutConfiguration.shared.dnsFallbackServers = servers
+            pp_log(.app, .info, "Enable DNS fallback servers: \(servers)")
+        }
     }
 
     func configureShared() {
+        UserDefaults.appGroup.register(defaults: [
+            AppPreference.logsPrivateData.key: false,
+            AppPreference.dnsFallsBack.key: true
+        ])
     }
 }

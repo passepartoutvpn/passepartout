@@ -40,6 +40,9 @@ public struct PreferencesGroup: View {
     private var settings: MacSettingsModel
 #endif
 
+    @AppStorage(AppPreference.dnsFallsBack.key, store: .appGroup)
+    private var dnsFallsBack = true
+
     private let profileManager: ProfileManager
 
     @State
@@ -60,6 +63,7 @@ public struct PreferencesGroup: View {
         keepsInMenuToggle
 #endif
         pinActiveProfileToggle
+        dnsFallsBackToggle
         eraseCloudKitButton
     }
 }
@@ -85,6 +89,11 @@ private extension PreferencesGroup {
     var pinActiveProfileToggle: some View {
         PinActiveProfileToggle()
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.PinsActiveProfile.footer)
+    }
+
+    var dnsFallsBackToggle: some View {
+        Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $dnsFallsBack)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.DnsFallsBack.footer)
     }
 
     var eraseCloudKitButton: some View {
