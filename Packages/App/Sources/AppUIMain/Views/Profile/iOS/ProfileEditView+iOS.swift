@@ -137,19 +137,11 @@ private extension ProfileEditView {
     }
 
     var addModuleButton: some View {
-        let moduleTypes = profileEditor.availableModuleTypes.sorted {
-            $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
-        }
-        return Menu {
-            ForEach(moduleTypes) { selectedType in
-                Button(selectedType.localizedDescription) {
-                    flow?.onNewModule(selectedType)
-                }
-            }
+        AddModuleMenu(moduleTypes: profileEditor.availableModuleTypes) {
+            flow?.onNewModule($0)
         } label: {
             Text(Strings.Views.Profile.Rows.addModule)
         }
-        .disabled(moduleTypes.isEmpty)
     }
 }
 

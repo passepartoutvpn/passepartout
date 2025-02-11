@@ -80,9 +80,6 @@ extension ProfileEditor {
             .filter {
                 !moduleTypes.contains($0)
             }
-            .sorted {
-                $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
-            }
     }
 }
 

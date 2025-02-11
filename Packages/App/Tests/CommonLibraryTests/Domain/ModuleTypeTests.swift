@@ -1,8 +1,8 @@
 //
-//  ModuleType.swift
+//  ModuleTypeTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/19/24.
+//  Created by Davide De Rosa on 2/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,32 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import CommonLibrary
 import Foundation
 import PassepartoutKit
+import XCTest
 
-public struct ModuleType: Hashable {
-    public let rawValue: String
-
-    public let isConnection: Bool
-
-    init(_ moduleType: Module.Type) {
-        self.init(moduleType.moduleHandler, isConnection: moduleType is ConnectionModule.Type)
-    }
-
-    init(_ moduleHandler: ModuleHandler, isConnection: Bool) {
-        rawValue = moduleHandler.id.name
-        self.isConnection = isConnection
-    }
-}
-
-extension ModuleType: Identifiable {
-    public var id: String {
-        rawValue
-    }
-}
-
-extension ModuleType: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.rawValue == rhs.rawValue
+final class ModuleTypeTests: XCTestCase {
+    func test_givenModuleType_whenModuleIsConnectionType_thenIsConnection() {
+        XCTAssertTrue(ModuleType(OpenVPNModule.self).isConnection)
+        XCTAssertTrue(ModuleType(WireGuardModule.self).isConnection)
     }
 }

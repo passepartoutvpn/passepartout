@@ -115,17 +115,11 @@ private extension ModuleListView {
     }
 
     var addModuleMenu: some View {
-        let moduleTypes = profileEditor.availableModuleTypes
-        return Menu {
-            ForEach(moduleTypes, id: \.self) { moduleType in
-                Button(moduleType.localizedDescription) {
-                    flow?.onNewModule(moduleType)
-                }
-            }
+        AddModuleMenu(moduleTypes: profileEditor.availableModuleTypes) {
+            flow?.onNewModule($0)
         } label: {
             ThemeImage(.add)
         }
-        .disabled(moduleTypes.isEmpty)
     }
 }
 
