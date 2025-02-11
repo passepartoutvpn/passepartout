@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Ви впевнені, що хочете продовжити виконання цієї операції?";
 "theme.confirmation.ok" = "Підтвердити";
 "theme.lock_screen.reason" = "%@ заблоковано";
+"tips.profile.build_your_profile.message" = "Додавайте та видаляйте модулі, щоб налаштувати свій профіль підключення.";
+"tips.profile.build_your_profile.title" = "Створіть свій профіль тут";
 "views.about.credits.licenses" = "Ліцензії";
 "views.about.credits.notices" = "Повідомлення";
 "views.about.credits.title" = "Подяки";

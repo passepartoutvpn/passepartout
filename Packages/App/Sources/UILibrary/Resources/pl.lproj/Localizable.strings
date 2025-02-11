@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Czy na pewno chcesz kontynuować tę operację?";
 "theme.confirmation.ok" = "Potwierdź";
 "theme.lock_screen.reason" = "%@ jest zablokowane";
+"tips.profile.build_your_profile.message" = "Dodaj i usuń moduły, aby dostosować swój profil połączenia.";
+"tips.profile.build_your_profile.title" = "Zbuduj swój profil tutaj";
 "views.about.credits.licenses" = "Licencje";
 "views.about.credits.notices" = "Powiadomienia";
 "views.about.credits.title" = "Podziękowania";

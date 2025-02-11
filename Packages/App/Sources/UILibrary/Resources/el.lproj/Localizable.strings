@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Είστε βέβαιοι ότι θέλετε να συνεχίσετε με αυτήν τη λειτουργία;";
 "theme.confirmation.ok" = "Επιβεβαίωση";
 "theme.lock_screen.reason" = "Το %@ είναι κλειδωμένο";
+"tips.profile.build_your_profile.message" = "Προσθέστε και διαγράψτε modules για να προσαρμόσετε το προφίλ σύνδεσής σας.";
+"tips.profile.build_your_profile.title" = "Δημιουργήστε το προφίλ σας εδώ";
 "views.about.credits.licenses" = "Άδειες";
 "views.about.credits.notices" = "Ειδοποιήσεις";
 "views.about.credits.title" = "Συντελεστές";
