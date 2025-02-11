@@ -37,8 +37,9 @@ public final class AppUIMain: UILibraryConfiguring {
         assertMissingImplementations(with: context.registry)
 
         if #available(iOS 17, macOS 14, *) {
+
             // for debugging
-//            try? Tips.resetDatastore()
+//            Tips.showAllTipsForTesting()
 
             try? Tips.configure([
                 .displayFrequency(.immediate)
