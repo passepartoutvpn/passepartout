@@ -71,6 +71,9 @@ private extension AppUIMain {
                     }
                 }
             } catch {
+                if (error as? PassepartoutError)?.code == .incompleteModule {
+                    return
+                }
                 fatalError("\(moduleType): empty module is not buildable: \(error)")
             }
         }
