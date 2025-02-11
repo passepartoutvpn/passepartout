@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Är du säker på att du vill fortsätta med denna åtgärd?";
 "theme.confirmation.ok" = "Bekräfta";
 "theme.lock_screen.reason" = "%@ är låst";
+"tips.profile.build_your_profile.message" = "Lägg till och ta bort moduler för att anpassa din anslutningsprofil.";
+"tips.profile.build_your_profile.title" = "Bygg din profil här";
 "views.about.credits.licenses" = "Licenser";
 "views.about.credits.notices" = "Notiser";
 "views.about.credits.title" = "Tack";

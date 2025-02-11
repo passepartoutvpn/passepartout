@@ -26,6 +26,7 @@
 import CommonLibrary
 import Foundation
 import PassepartoutKit
+import TipKit
 @_exported import UILibrary
 
 public final class AppUIMain: UILibraryConfiguring {
@@ -34,6 +35,16 @@ public final class AppUIMain: UILibraryConfiguring {
 
     public func configure(with context: AppContext) {
         assertMissingImplementations(with: context.registry)
+
+        if #available(iOS 17, macOS 14, *) {
+
+            // for debugging
+//            Tips.showAllTipsForTesting()
+
+            try? Tips.configure([
+                .displayFrequency(.immediate)
+            ])
+        }
     }
 }
 

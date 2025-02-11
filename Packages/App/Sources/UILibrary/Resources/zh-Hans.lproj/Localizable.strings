@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "您确定要继续此操作吗？";
 "theme.confirmation.ok" = "确认";
 "theme.lock_screen.reason" = "%@ 已锁定";
+"tips.profile.build_your_profile.message" = "添加和删除模块以自定义您的连接配置文件。";
+"tips.profile.build_your_profile.title" = "在这里创建您的配置文件";
 "views.about.credits.licenses" = "许可证";
 "views.about.credits.notices" = "通知";
 "views.about.credits.title" = "致谢";

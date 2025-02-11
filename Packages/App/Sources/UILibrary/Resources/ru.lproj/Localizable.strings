@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Вы уверены, что хотите продолжить выполнение этой операции?";
 "theme.confirmation.ok" = "Подтвердить";
 "theme.lock_screen.reason" = "%@ заблокировано";
+"tips.profile.build_your_profile.message" = "Добавляйте и удаляйте модули, чтобы настроить профиль подключения.";
+"tips.profile.build_your_profile.title" = "Создайте свой профиль здесь";
 "views.about.credits.licenses" = "Лицензии";
 "views.about.credits.notices" = "Уведомления";
 "views.about.credits.title" = "Благодарности";

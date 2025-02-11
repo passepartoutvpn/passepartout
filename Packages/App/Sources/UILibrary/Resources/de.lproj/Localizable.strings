@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Bist du sicher, dass du mit dieser Aktion fortfahren möchtest?";
 "theme.confirmation.ok" = "Bestätigen";
 "theme.lock_screen.reason" = "%@ ist gesperrt";
+"tips.profile.build_your_profile.message" = "Fügen Sie Module hinzu oder entfernen Sie sie, um Ihr Verbindungsprofil anzupassen.";
+"tips.profile.build_your_profile.title" = "Erstellen Sie Ihr Profil hier";
 "views.about.credits.licenses" = "Lizenzen";
 "views.about.credits.notices" = "Hinweise";
 "views.about.credits.title" = "Credits";

@@ -243,6 +243,13 @@
 "features.routing" = "Custom Routing";
 "features.sharing" = "%@";
 
+// MARK: - Tips
+
+// MARK: Tips (Profile)
+
+"tips.profile.build_your_profile.title" = "Build your profile here";
+"tips.profile.build_your_profile.message" = "Add and delete modules to customize your connection profile.";
+
 // MARK: - Global
 
 // MARK: Global (Actions)

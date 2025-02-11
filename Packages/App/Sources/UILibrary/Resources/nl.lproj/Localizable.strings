@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "Weet je zeker dat je wilt doorgaan met deze bewerking?";
 "theme.confirmation.ok" = "Bevestigen";
 "theme.lock_screen.reason" = "%@ is vergrendeld";
+"tips.profile.build_your_profile.message" = "Voeg modules toe en verwijder ze om je verbindingsprofiel aan te passen.";
+"tips.profile.build_your_profile.title" = "Bouw hier je profiel";
 "views.about.credits.licenses" = "Licenties";
 "views.about.credits.notices" = "Mededelingen";
 "views.about.credits.title" = "Credits";

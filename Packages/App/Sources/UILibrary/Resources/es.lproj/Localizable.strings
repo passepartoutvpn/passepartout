@@ -203,6 +203,8 @@
 "theme.confirmation.message" = "¿Estás seguro de que deseas proceder con esta operación?";
 "theme.confirmation.ok" = "Confirmar";
 "theme.lock_screen.reason" = "%@ está bloqueado";
+"tips.profile.build_your_profile.message" = "Agrega y elimina módulos para personalizar tu perfil de conexión.";
+"tips.profile.build_your_profile.title" = "Crea tu perfil aquí";
 "views.about.credits.licenses" = "Licencias";
 "views.about.credits.notices" = "Avisos";
 "views.about.credits.title" = "Créditos";
