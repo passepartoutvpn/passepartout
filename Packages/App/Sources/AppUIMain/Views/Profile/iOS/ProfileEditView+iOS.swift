@@ -114,6 +114,7 @@ private extension ProfileEditView {
             header: Strings.Global.Nouns.modules,
             footer: Strings.Views.Profile.ModuleList.Section.footer
         )
+        .themeTip(.Profile.buildYourProfile)
     }
 
     func moduleRow(for module: any ModuleBuilder) -> some View {

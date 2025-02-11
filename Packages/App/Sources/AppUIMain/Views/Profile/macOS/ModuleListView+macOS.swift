@@ -106,10 +106,13 @@ private extension ModuleListView {
     @ViewBuilder
     func toolbarContent() -> some View {
         addModuleMenu
+            .themeTip(.Profile.buildYourProfile)
+
         Button(action: removeSelectedModule) {
             ThemeImage(.remove)
         }
         .disabled(!canRemoveSelectedModule)
+
         EmptyView()
             .themeTip(Strings.Views.Profile.ModuleList.Section.footer, edge: .bottom)
     }
