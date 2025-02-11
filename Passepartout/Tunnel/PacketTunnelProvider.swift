@@ -38,11 +38,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var fwd: NEPTPForwarder?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        PassepartoutConfiguration.shared.configureLogging(
-            to: BundleConfiguration.urlForTunnelLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
-        )
+        CommonLibrary().configure(.tunnel)
+
         pp_log(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
         let environment = await dependencies.tunnelEnvironment()
