@@ -114,6 +114,8 @@ public struct Constants: Decodable, Sendable {
 
         public let refreshInterval: TimeInterval
 
+        public let dnsFallbackServers: [String]
+
         public let verification: Verification
 
         public func verificationDelayMinutes(isBeta: Bool) -> Int {

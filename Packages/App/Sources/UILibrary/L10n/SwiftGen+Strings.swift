@@ -828,6 +828,8 @@ public enum Strings {
       }
     }
     public enum Preferences {
+      /// DNS fallback
+      public static let dnsFallsBack = Strings.tr("Localizable", "views.preferences.dns_falls_back", fallback: "DNS fallback")
       /// Erase profiles from iCloud
       public static let eraseIcloud = Strings.tr("Localizable", "views.preferences.erase_icloud", fallback: "Erase profiles from iCloud")
       /// Keep in menu bar
@@ -838,6 +840,10 @@ public enum Strings {
       public static let locksInBackground = Strings.tr("Localizable", "views.preferences.locks_in_background", fallback: "Lock in background")
       /// Pin active profile
       public static let pinsActiveProfile = Strings.tr("Localizable", "views.preferences.pins_active_profile", fallback: "Pin active profile")
+      public enum DnsFallsBack {
+        /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.
+        public static let footer = Strings.tr("Localizable", "views.preferences.dns_falls_back.footer", fallback: "Fall back to CloudFlare servers when the VPN does not provide DNS settings.")
+      }
       public enum EraseIcloud {
         /// To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
         public static let footer = Strings.tr("Localizable", "views.preferences.erase_icloud.footer", fallback: "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")

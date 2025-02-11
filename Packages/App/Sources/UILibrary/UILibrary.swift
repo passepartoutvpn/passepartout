@@ -41,11 +41,8 @@ public final class UILibrary: UILibraryConfiguring {
     }
 
     public func configure(with context: AppContext) {
-        PassepartoutConfiguration.shared.configureLogging(
-            to: BundleConfiguration.urlForAppLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
-        )
+        CommonLibrary().configure(.app)
+
         assertMissingImplementations(with: context.registry)
         uiConfiguring?.configure(with: context)
     }

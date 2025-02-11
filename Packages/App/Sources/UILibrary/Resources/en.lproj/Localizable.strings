@@ -105,6 +105,8 @@
 "views.preferences.pins_active_profile.footer" = "Also show the active profile on top for quick access.";
 "views.preferences.locks_in_background" = "Lock in background";
 "views.preferences.locks_in_background.footer" = "Lock the app with FaceID when sent to the background.";
+"views.preferences.dns_falls_back" = "DNS fallback";
+"views.preferences.dns_falls_back.footer" = "Fall back to CloudFlare servers when the VPN does not provide DNS settings.";
 "views.preferences.erase_icloud" = "Erase profiles from iCloud";
 "views.preferences.erase_icloud.footer" = "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 
