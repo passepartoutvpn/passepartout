@@ -129,6 +129,10 @@ public enum Strings {
         }
         /// Some active modules are incompatible, try to only activate one of them.
         public static let incompatibleModules = Strings.tr("Localizable", "errors.app.passepartout.incompatible_modules", fallback: "Some active modules are incompatible, try to only activate one of them.")
+        /// Please finish the configuration of the %@ module.
+        public static func incompleteModule(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "errors.app.passepartout.incomplete_module", String(describing: p1), fallback: "Please finish the configuration of the %@ module.")
+        }
         /// Invalid fields.
         public static let invalidFields = Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", fallback: "Invalid fields.")
         /// No server selected in provider.

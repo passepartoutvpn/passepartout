@@ -31,6 +31,7 @@
 "errors.app.passepartout.corrupt_provider_module" = "Nie można połączyć się z serwerem dostawcy (powód=%@).";
 "errors.app.passepartout.default" = "Nie można ukończyć operacji (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Niektóre aktywne moduły są niekompatybilne. Spróbuj aktywować tylko jeden.";
+"errors.app.passepartout.incomplete_module" = "Proszę dokończyć konfigurację modułu %@.";
 "errors.app.passepartout.invalid_fields" = "Nieprawidłowe pola.";
 "errors.app.passepartout.missing_provider_entity" = "Nie wybrano serwera w dostawcy.";
 "errors.app.passepartout.no_active_modules" = "Profil nie ma aktywnych modułów.";

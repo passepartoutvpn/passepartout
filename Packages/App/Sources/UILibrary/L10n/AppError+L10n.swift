@@ -80,6 +80,12 @@ extension PassepartoutError: @retroactive LocalizedError {
         case .incompatibleModules:
             return V.incompatibleModules
 
+        case .incompleteModule:
+            guard let builder = userInfo as? any ModuleBuilder else {
+                break
+            }
+            return V.incompleteModule(builder.moduleType.localizedDescription)
+
         case .invalidFields:
             let fields = (userInfo as? [String: String?])
                 .map {

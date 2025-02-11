@@ -31,6 +31,7 @@
 "errors.app.passepartout.corrupt_provider_module" = "Δεν ήταν δυνατή η σύνδεση στον διακομιστή παρόχου (λόγος=%@).";
 "errors.app.passepartout.default" = "Δεν ήταν δυνατή η ολοκλήρωση της λειτουργίας (κωδικός=%@).";
 "errors.app.passepartout.incompatible_modules" = "Μερικές ενεργές μονάδες είναι ασύμβατες, δοκιμάστε να ενεργοποιήσετε μόνο μία.";
+"errors.app.passepartout.incomplete_module" = "Ολοκληρώστε τη ρύθμιση του %@ module.";
 "errors.app.passepartout.invalid_fields" = "Μη έγκυρα πεδία.";
 "errors.app.passepartout.missing_provider_entity" = "Δεν επιλέχθηκε διακομιστής στον πάροχο.";
 "errors.app.passepartout.no_active_modules" = "Το προφίλ δεν έχει ενεργές μονάδες.";
