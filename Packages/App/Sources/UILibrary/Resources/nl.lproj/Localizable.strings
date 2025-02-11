@@ -31,6 +31,7 @@
 "errors.app.passepartout.corrupt_provider_module" = "Kan geen verbinding maken met de provider-server (reden=%@).";
 "errors.app.passepartout.default" = "Kan bewerking niet voltooien (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Sommige actieve modules zijn incompatibel. Probeer er slechts één te activeren.";
+"errors.app.passepartout.incomplete_module" = "Voltooi de configuratie van de %@-module.";
 "errors.app.passepartout.invalid_fields" = "Ongeldige velden.";
 "errors.app.passepartout.missing_provider_entity" = "Geen server geselecteerd bij provider.";
 "errors.app.passepartout.no_active_modules" = "Het profiel heeft geen actieve modules.";

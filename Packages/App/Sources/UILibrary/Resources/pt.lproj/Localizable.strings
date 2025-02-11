@@ -31,6 +31,7 @@
 "errors.app.passepartout.corrupt_provider_module" = "Não foi possível conectar ao servidor do provedor (motivo=%@).";
 "errors.app.passepartout.default" = "Não foi possível concluir a operação (código=%@).";
 "errors.app.passepartout.incompatible_modules" = "Alguns módulos ativos são incompatíveis, tente ativar apenas um.";
+"errors.app.passepartout.incomplete_module" = "Conclua a configuração do módulo %@.";
 "errors.app.passepartout.invalid_fields" = "Campos inválidos.";
 "errors.app.passepartout.missing_provider_entity" = "Nenhum servidor selecionado no provedor.";
 "errors.app.passepartout.no_active_modules" = "O perfil não possui módulos ativos.";

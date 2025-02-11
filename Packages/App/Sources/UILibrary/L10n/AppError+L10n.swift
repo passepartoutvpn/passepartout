@@ -69,15 +69,22 @@ extension TaskTimeoutError: PassepartoutErrorMappable {
 
 extension PassepartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
+        let V = Strings.Errors.App.Passepartout.self
         switch code {
         case .connectionModuleRequired:
-            return Strings.Errors.App.Passepartout.connectionModuleRequired
+            return V.connectionModuleRequired
 
         case .corruptProviderModule:
-            return Strings.Errors.App.Passepartout.corruptProviderModule(reason?.localizedDescription ?? "")
+            return V.corruptProviderModule(reason?.localizedDescription ?? "")
 
         case .incompatibleModules:
-            return Strings.Errors.App.Passepartout.incompatibleModules
+            return V.incompatibleModules
+
+        case .incompleteModule:
+            guard let builder = userInfo as? any ModuleBuilder else {
+                break
+            }
+            return V.incompleteModule(builder.moduleType.localizedDescription)
 
         case .invalidFields:
             let fields = (userInfo as? [String: String?])
@@ -88,35 +95,36 @@ extension PassepartoutError: @retroactive LocalizedError {
                     .joined(separator: ",")
                 }
 
-            return [Strings.Errors.App.Passepartout.invalidFields, fields]
+            return [V.invalidFields, fields]
                 .compactMap { $0 }
                 .joined(separator: " ")
 
         case .missingProviderEntity:
-            return Strings.Errors.App.Passepartout.missingProviderEntity
+            return V.missingProviderEntity
 
         case .noActiveModules:
-            return Strings.Errors.App.Passepartout.noActiveModules
+            return V.noActiveModules
 
         case .parsing:
             let message = userInfo as? String ?? (reason as? LocalizedError)?.localizedDescription
 
-            return [Strings.Errors.App.Passepartout.parsing, message]
+            return [V.parsing, message]
                 .compactMap { $0 }
                 .joined(separator: " ")
 
         case .providerRequired:
-            return Strings.Errors.App.Passepartout.providerRequired
+            return V.providerRequired
 
         case .timeout:
-            return Strings.Errors.App.Passepartout.timeout
+            return V.timeout
 
         case .unhandled:
             return reason?.localizedDescription
 
         default:
-            return Strings.Errors.App.Passepartout.default(code.rawValue)
+            break
         }
+        return V.default(code.rawValue)
     }
 }
 

@@ -108,7 +108,7 @@ private extension ProfileEditView {
                 .onMove(perform: moveModules)
                 .onDelete(perform: removeModules)
 
-            addModuleButton
+            addModuleMenu
         }
         .themeSection(
             header: Strings.Global.Nouns.modules,
@@ -137,7 +137,7 @@ private extension ProfileEditView {
         }
     }
 
-    var addModuleButton: some View {
+    var addModuleMenu: some View {
         AddModuleMenu(moduleTypes: profileEditor.availableModuleTypes) {
             flow?.onNewModule($0)
         } label: {

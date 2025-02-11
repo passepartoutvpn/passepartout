@@ -31,6 +31,7 @@
 "errors.app.passepartout.corrupt_provider_module" = "Verbindung zum Anbieter-Server konnte nicht hergestellt werden (Grund=%@).";
 "errors.app.passepartout.default" = "Operation konnte nicht abgeschlossen werden (Code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Einige aktive Module sind inkompatibel, versuche, nur eines von ihnen zu aktivieren.";
+"errors.app.passepartout.incomplete_module" = "Bitte schließen Sie die Konfiguration des %@-Moduls ab.";
 "errors.app.passepartout.invalid_fields" = "Ungültige Felder.";
 "errors.app.passepartout.missing_provider_entity" = "Kein Server beim Anbieter ausgewählt.";
 "errors.app.passepartout.no_active_modules" = "Das Profil hat keine aktiven Module.";

@@ -139,7 +139,7 @@ private extension ProfileCoordinator {
 
         do {
             try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-        } catch AppError.ineligibleProfile(var requiredFeatures) {
+        } catch AppError.ineligibleProfile(let requiredFeatures) {
             guard !iapManager.isLoadingReceipt else {
                 let V = Strings.Views.Paywall.Alerts.Verification.self
                 errorHandler.handle(
