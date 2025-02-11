@@ -104,16 +104,17 @@ private extension ProfileEditView {
 
     var modulesSection: some View {
         Group {
-            ForEach(profileEditor.modules, id: \.id, content: moduleRow)
-                .onMove(perform: moveModules)
-                .onDelete(perform: removeModules)
-
+            if !profileEditor.modules.isEmpty {
+                ForEach(profileEditor.modules, id: \.id, content: moduleRow)
+                    .onMove(perform: moveModules)
+                    .onDelete(perform: removeModules)
+                    .themeSection(
+                        header: Strings.Global.Nouns.modules,
+                        footer: Strings.Views.Profile.ModuleList.Section.footer
+                    )
+            }
             addModuleButton
         }
-        .themeSection(
-            header: Strings.Global.Nouns.modules,
-            footer: Strings.Views.Profile.ModuleList.Section.footer
-        )
     }
 
     func moduleRow(for module: any ModuleBuilder) -> some View {
