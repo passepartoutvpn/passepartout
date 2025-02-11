@@ -49,16 +49,26 @@ struct ProfileActionsSection: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
 #else
-        UUIDText(uuid: profileId)
-            .asSectionWithTrailingContent {
-                removeContent
-            }
+        if isExistingProfile {
+            uuidView
+                .asSectionWithTrailingContent(removeContent)
+        } else {
+            uuidView
+        }
 #endif
     }
 }
 
 private extension ProfileActionsSection {
-    var removeContent: some View {
+    var isExistingProfile: Bool {
+        profileManager.profile(withId: profileId) != nil
+    }
+
+    var uuidView: some View {
+        UUIDText(uuid: profileId)
+    }
+
+    func removeContent() -> some View {
         profileManager.profile(withId: profileId)
             .map { _ in
                 removeButton
