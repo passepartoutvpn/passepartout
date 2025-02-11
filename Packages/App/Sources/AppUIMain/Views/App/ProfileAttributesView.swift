@@ -64,13 +64,13 @@ struct ProfileAttributesView: View {
             case .shared:
                 return (
                     isRemoteImportingEnabled ? .cloudOn : .cloudOff,
-                    Strings.Modules.General.Rows.shared
+                    Strings.Unlocalized.iCloud
                 )
 
             case .tv:
                 return (
                     isRemoteImportingEnabled ? .tvOn : .tvOff,
-                    Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV)
+                    Strings.Unlocalized.appleTV
                 )
             }
         }
