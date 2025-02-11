@@ -26,6 +26,10 @@
 import CommonLibrary
 import SwiftUI
 
+// WARNING: Menu sections look good on physical device, whereas
+// they erroneously inherit the List section styling on iOS Simulator
+// and Previews (bug!)
+
 struct AddModuleMenu<Label>: View where Label: View {
     let moduleTypes: [ModuleType]
 
