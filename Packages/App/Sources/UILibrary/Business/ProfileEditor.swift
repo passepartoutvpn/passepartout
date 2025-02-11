@@ -191,6 +191,9 @@ private extension ProfileEditor {
 
 extension ProfileEditor {
     public func build() throws -> Profile {
+        guard !editableProfile.activeModulesIds.isEmpty else {
+            throw PassepartoutError(.noActiveModules)
+        }
         let builder = try editableProfile.builder()
         let profile = try builder.tryBuild()
 
