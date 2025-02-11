@@ -104,7 +104,6 @@ private extension ProviderServerView.ContentView {
                 }
                 .cursor(.hand)
             }
-            .width(min: 300.0)
         }
     }
 }
