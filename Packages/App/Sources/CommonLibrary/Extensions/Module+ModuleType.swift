@@ -28,12 +28,12 @@ import PassepartoutKit
 
 extension Module {
     public var moduleType: ModuleType {
-        ModuleType(moduleHandler)
+        ModuleType(moduleHandler, isConnection: self is ConnectionModule)
     }
 }
 
 extension ModuleBuilder {
     public var moduleType: ModuleType {
-        ModuleType(BuiltType.moduleHandler)
+        ModuleType(BuiltType.moduleHandler, isConnection: BuiltType.self is ConnectionModule)
     }
 }

@@ -1,8 +1,8 @@
 //
-//  ModuleType+Known.swift
+//  ModuleTypeTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/2/24.
+//  Created by Davide De Rosa on 2/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import CommonLibrary
 import Foundation
 import PassepartoutKit
+import XCTest
 
-extension ModuleType: CaseIterable {
-    public static let allCases: [ModuleType] = [
-        .openVPN,
-        .wireGuard,
-        .dns,
-        .httpProxy,
-        .ip,
-        .onDemand
-    ]
-
-    public static let openVPN = ModuleType(OpenVPNModule.self)
-
-    public static let wireGuard = ModuleType(WireGuardModule.self)
-
-    public static let dns = ModuleType(DNSModule.self)
-
-    public static let httpProxy = ModuleType(HTTPProxyModule.self)
-
-    public static let ip = ModuleType(IPModule.self)
-
-    public static let onDemand = ModuleType(OnDemandModule.self)
+final class ModuleTypeTests: XCTestCase {
+    func test_givenModuleType_whenModuleIsConnectionType_thenIsConnection() {
+        XCTAssertTrue(ModuleType(OpenVPNModule.self).isConnection)
+        XCTAssertTrue(ModuleType(WireGuardModule.self).isConnection)
+    }
 }

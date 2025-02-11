@@ -31,11 +31,11 @@ public struct ModuleType: Hashable {
 
     public let isConnection: Bool
 
-    init(_ moduleType: Module.Type, isConnection: Bool = false) {
-        self.init(moduleType.moduleHandler, isConnection: isConnection)
+    init(_ moduleType: Module.Type) {
+        self.init(moduleType.moduleHandler, isConnection: moduleType is ConnectionModule.Type)
     }
 
-    init(_ moduleHandler: ModuleHandler, isConnection: Bool = false) {
+    init(_ moduleHandler: ModuleHandler, isConnection: Bool) {
         rawValue = moduleHandler.id.name
         self.isConnection = isConnection
     }
