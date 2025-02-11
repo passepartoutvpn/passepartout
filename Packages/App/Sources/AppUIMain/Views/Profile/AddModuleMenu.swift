@@ -59,3 +59,15 @@ struct AddModuleMenu<Label>: View where Label: View {
         .disabled(moduleTypes.isEmpty)
     }
 }
+
+#Preview {
+    List {
+        AddModuleMenu(
+            moduleTypes: ModuleType.allCases,
+            action: { _ in },
+            label: {
+                Text("Add module")
+            }
+        )
+    }
+}
