@@ -45,7 +45,7 @@ struct ProfileActionsSection: View {
             UUIDText(uuid: profileId)
         }
         Section {
-            removeContent
+            removeContent()
                 .frame(maxWidth: .infinity, alignment: .center)
         }
 #else
