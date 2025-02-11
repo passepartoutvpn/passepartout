@@ -274,6 +274,8 @@
 "views.paywall.sections.restore.footer" = "Om du har köpt denna app eller funktion tidigare kan du återställa dina köp.";
 "views.paywall.sections.restore.header" = "Återställ";
 "views.paywall.sections.suggested_product.header" = "Engångsköp";
+"views.preferences.dns_falls_back" = "DNS-backup";
+"views.preferences.dns_falls_back.footer" = "Återgår till CloudFlare-servrar när VPN inte tillhandahåller DNS-inställningar.";
 "views.preferences.erase_icloud" = "Radera profiler från iCloud";
 "views.preferences.erase_icloud.footer" = "För att säkert radera alla profiler från iCloud-lagringen, gör det på alla dina synkroniserade enheter. Detta påverkar inte lokala profiler.";
 "views.preferences.keeps_in_menu" = "Behåll i menyraden";

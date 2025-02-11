@@ -274,6 +274,8 @@
 "views.paywall.sections.restore.footer" = "Wenn du diese App oder Funktion in der Vergangenheit gekauft hast, kannst du deine Käufe wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";
 "views.paywall.sections.suggested_product.header" = "Einmaliger Kauf";
+"views.preferences.dns_falls_back" = "DNS-Fallback";
+"views.preferences.dns_falls_back.footer" = "Fällt auf CloudFlare-Server zurück, wenn das VPN keine DNS-Einstellungen bereitstellt.";
 "views.preferences.erase_icloud" = "Profile aus iCloud löschen";
 "views.preferences.erase_icloud.footer" = "Um alle Profile sicher aus dem iCloud-Speicher zu löschen, führen Sie diese Aktion auf allen synchronisierten Geräten aus. Lokale Profile werden nicht betroffen.";
 "views.preferences.keeps_in_menu" = "In der Menüleiste behalten";

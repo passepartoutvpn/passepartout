@@ -274,6 +274,8 @@
 "views.paywall.sections.restore.footer" = "Εάν αγοράσατε αυτήν την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας.";
 "views.paywall.sections.restore.header" = "Επαναφορά";
 "views.paywall.sections.suggested_product.header" = "Εφάπαξ αγορά";
+"views.preferences.dns_falls_back" = "Εναλλακτικό DNS";
+"views.preferences.dns_falls_back.footer" = "Χρησιμοποιεί τους διακομιστές CloudFlare όταν το VPN δεν παρέχει ρυθμίσεις DNS.";
 "views.preferences.erase_icloud" = "Διαγραφή προφίλ από το iCloud";
 "views.preferences.erase_icloud.footer" = "Για να διαγράψετε όλα τα προφίλ από το iCloud με ασφάλεια, κάντε το σε όλες τις συγχρονισμένες συσκευές σας. Αυτό δεν θα επηρεάσει τα τοπικά προφίλ.";
 "views.preferences.keeps_in_menu" = "Διατήρηση στη γραμμή μενού";

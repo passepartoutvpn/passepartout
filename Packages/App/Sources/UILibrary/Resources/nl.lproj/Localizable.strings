@@ -274,6 +274,8 @@
 "views.paywall.sections.restore.footer" = "Als je deze app of functie eerder hebt gekocht, kun je je aankopen herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";
 "views.paywall.sections.suggested_product.header" = "Eenmalige aankoop";
+"views.preferences.dns_falls_back" = "DNS-terugval";
+"views.preferences.dns_falls_back.footer" = "Valt terug op CloudFlare-servers wanneer het VPN geen DNS-instellingen biedt.";
 "views.preferences.erase_icloud" = "Verwijder profielen van iCloud";
 "views.preferences.erase_icloud.footer" = "Om alle profielen veilig van de iCloud-opslag te verwijderen, doe dit op al uw gesynchroniseerde apparaten. Dit heeft geen invloed op lokale profielen.";
 "views.preferences.keeps_in_menu" = "In menubalk houden";
