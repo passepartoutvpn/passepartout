@@ -1,8 +1,4 @@
-* OpenVPN: Fix random crashes during negotiation (#1161)
-* Add "Delete profile" in profile editor (#1160)
-* Unpin active profile from preferences (#1159)
-* macOS: Add "Reconnect" and "Disconnect" from menu (#1154)
-* Rework the app colors for upgrade icons (#1158)
-* macOS: Perform provider server action on click country (#1155)
-* Rework in-app purchases and paywalls (#1156)
-* Only show 'Verifying...' message in beta
+* Optionally resort to CloudFlare when no DNS settings are provided (#1165)
+* Prevent save profile without active modules (#1164)
+* Ignore cancellation on "Restore purchase"
+* Add tip to suggest how to build profiles (#1163)
