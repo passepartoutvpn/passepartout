@@ -570,6 +570,16 @@ public enum Strings {
       }
     }
   }
+  public enum Tips {
+    public enum Profile {
+      public enum BuildYourProfile {
+        /// Add and delete modules to customize your connection profile.
+        public static let message = Strings.tr("Localizable", "tips.profile.build_your_profile.message", fallback: "Add and delete modules to customize your connection profile.")
+        /// Build your profile here
+        public static let title = Strings.tr("Localizable", "tips.profile.build_your_profile.title", fallback: "Build your profile here")
+      }
+    }
+  }
   public enum Views {
     public enum About {
       /// About

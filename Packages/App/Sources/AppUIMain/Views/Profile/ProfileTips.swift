@@ -28,9 +28,9 @@ import Foundation
 extension AppTip {
     enum Profile {
         static let buildYourProfile = AppTip(
-            id: "profile-modules",
-            titleString: "Build your profile here",
-            messageString: "Add and delete modules to customize your connection profile."
+            id: "build-your-profile",
+            titleString: Strings.Tips.Profile.BuildYourProfile.title,
+            messageString: Strings.Tips.Profile.BuildYourProfile.message
         )
     }
 }
