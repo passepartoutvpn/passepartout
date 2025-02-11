@@ -42,6 +42,21 @@ extension ProfileEditor {
             self?.saveModule($0, activating: false)
         }
     }
+
+    public func shortcutsSections(path: Binding<NavigationPath>) -> some View {
+        ForEach(shortcutsProviders, id: \.id) {
+            if $0.isVisible {
+                AnyView($0.moduleShortcutsView(editor: self, path: path))
+                    .themeSection(header: $0.moduleType.localizedDescription)
+            }
+        }
+    }
+
+    private var shortcutsProviders: [any ModuleShortcutsProviding] {
+        modules.compactMap {
+            $0 as? any ModuleShortcutsProviding
+        }
+    }
 }
 
 // MARK: - ModulePreferences

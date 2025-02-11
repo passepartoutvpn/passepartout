@@ -23,11 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import PassepartoutKit
 import SwiftUI
 
-public protocol ModuleShortcutsProviding {
+public protocol ModuleShortcutsProviding: ModuleBuilder {
     associatedtype ShortcutsContent: View
 
+    var id: UUID { get }
+
+    var isVisible: Bool { get }
+
     @MainActor
-    func moduleShortcutsView() -> ShortcutsContent
+    func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> ShortcutsContent
 }

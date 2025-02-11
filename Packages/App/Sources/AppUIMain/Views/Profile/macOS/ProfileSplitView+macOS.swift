@@ -128,6 +128,7 @@ private extension ProfileSplitView {
             ProfileGeneralView(
                 profileManager: profileManager,
                 profileEditor: profileEditor,
+                path: $detailPath,
                 paywallReason: $paywallReason
             )
 
