@@ -108,7 +108,11 @@ extension StoreKitHelper {
     }
 
     public func restorePurchases() async throws {
-        try await AppStore.sync()
+        do {
+            try await AppStore.sync()
+        } catch StoreKitError.userCancelled {
+            //
+        }
     }
 }
 
