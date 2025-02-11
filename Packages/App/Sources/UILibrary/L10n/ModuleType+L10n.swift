@@ -55,3 +55,9 @@ extension ModuleType: LocalizableEntity {
         }
     }
 }
+
+extension ModuleType: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.localizedDescription.lowercased() < rhs.localizedDescription.lowercased()
+    }
+}

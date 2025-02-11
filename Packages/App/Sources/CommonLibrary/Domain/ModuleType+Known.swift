@@ -36,9 +36,9 @@ extension ModuleType: CaseIterable {
         .onDemand
     ]
 
-    public static let openVPN = ModuleType(OpenVPNModule.self)
+    public static let openVPN = ModuleType(OpenVPNModule.self, isConnection: true)
 
-    public static let wireGuard = ModuleType(WireGuardModule.self)
+    public static let wireGuard = ModuleType(WireGuardModule.self, isConnection: true)
 
     public static let dns = ModuleType(DNSModule.self)
 

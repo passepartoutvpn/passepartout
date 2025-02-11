@@ -26,19 +26,18 @@
 import Foundation
 import PassepartoutKit
 
-public struct ModuleType: RawRepresentable, Hashable {
+public struct ModuleType: Hashable {
     public let rawValue: String
 
-    public init?(rawValue: String) {
-        self.rawValue = rawValue
+    public let isConnection: Bool
+
+    init(_ moduleType: Module.Type, isConnection: Bool = false) {
+        self.init(moduleType.moduleHandler, isConnection: isConnection)
     }
 
-    init(_ moduleType: Module.Type) {
-        self.init(moduleType.moduleHandler)
-    }
-
-    init(_ moduleHandler: ModuleHandler) {
+    init(_ moduleHandler: ModuleHandler, isConnection: Bool = false) {
         rawValue = moduleHandler.id.name
+        self.isConnection = isConnection
     }
 }
 
