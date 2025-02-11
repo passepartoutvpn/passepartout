@@ -280,6 +280,15 @@ extension View {
         modifier(ThemeHoverListRowModifier())
     }
 
+    @ViewBuilder
+    public func themeTip(_ tip: AppTip) -> some View {
+        if #available(iOS 18, macOS 15, *) {
+            popoverTip(tip)
+        } else {
+            self
+        }
+    }
+
     public func themeTip<Label>(
         _ text: String,
         edge: Edge,
