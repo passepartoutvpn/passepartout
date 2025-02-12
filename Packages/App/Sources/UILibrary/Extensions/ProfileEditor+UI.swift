@@ -62,8 +62,7 @@ private extension ProfileEditor {
                 with: .init(
                     editor: self,
                     module: $0,
-                    preferences: ModulePreferences(), // FIXME: ###, missing preferences
-                    impl: nil // FIXME: ###, missing impl
+                    impl: nil
                 ),
                 path: path
             )

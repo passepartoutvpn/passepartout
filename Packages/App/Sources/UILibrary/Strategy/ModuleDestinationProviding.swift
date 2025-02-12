@@ -39,20 +39,16 @@ public struct ModuleDestinationParameters {
 
     public let module: any ModuleBuilder
 
-    public let preferences: ModulePreferences
-
     public let impl: (any ModuleImplementation)?
 
     @MainActor
     public init(
         editor: ProfileEditor,
         module: any ModuleBuilder,
-        preferences: ModulePreferences,
         impl: (any ModuleImplementation)?
     ) {
         self.editor = editor
         self.module = module
-        self.preferences = preferences
         self.impl = impl
     }
 }

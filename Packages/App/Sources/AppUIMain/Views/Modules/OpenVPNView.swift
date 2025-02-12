@@ -38,9 +38,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @ObservedObject
     var editor: ProfileEditor
 
-    @ObservedObject
-    var modulePreferences: ModulePreferences
-
     let impl: OpenVPNModule.Implementation?
 
     private let isServerPushed: Bool
@@ -57,7 +54,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(serverConfiguration: OpenVPN.Configuration) {
         module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         editor = ProfileEditor(modules: [module])
-        modulePreferences = ModulePreferences()
         impl = nil
         isServerPushed = true
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
@@ -66,7 +62,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {
         self.module = module
         editor = parameters.editor
-        modulePreferences = parameters.preferences
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
     }
@@ -84,7 +79,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 with: .init(
                     editor: editor,
                     module: module,
-                    preferences: modulePreferences,
                     impl: impl
                 ),
                 path: path
@@ -153,8 +147,10 @@ private extension OpenVPNView {
 }
 
 private extension OpenVPNView {
+
+    // FIXME: ###, ModulePreferences()
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
+        editor.excludedEndpoints(for: module.id, preferences: ModulePreferences())
     }
 }
 

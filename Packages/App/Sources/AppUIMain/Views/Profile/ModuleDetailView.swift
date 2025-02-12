@@ -59,7 +59,6 @@ private extension ModuleDetailView {
     func editorView(forModuleWithId moduleId: UUID) -> some View {
         AnyView(moduleViewFactory.view(
             with: profileEditor,
-            preferences: preferences,
             moduleId: moduleId
         ))
         .modifier(ModulePreferencesModifier(

@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
@@ -50,6 +51,9 @@ private struct DestinationModifier: ViewModifier {
 
     @Binding
     var path: NavigationPath
+
+    @State
+    private var preferences = ModulePreferences()
 
     func body(content: Content) -> some View {
         content
@@ -108,7 +112,7 @@ private extension DestinationModifier {
     }
 
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: parameters.preferences)
+        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
     }
 
     var editableRemotesBinding: Binding<[String]> {
@@ -134,7 +138,7 @@ private extension DestinationModifier {
             parameters.editor.profile.attributes.editPreferences(inModule: parameters.module.id) {
                 if let cfg {
                     $0.excludedEndpoints = Set(cfg.remotes?.filter {
-                        parameters.preferences.isExcludedEndpoint($0)
+                        preferences.isExcludedEndpoint($0)
                     } ?? [])
                 } else {
                     $0.excludedEndpoints = []
