@@ -24,11 +24,35 @@
 //
 
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 public protocol ModuleDestinationProviding {
     associatedtype Destination: ViewModifier
 
     @MainActor
-    func moduleDestination(with editor: ProfileEditor, path: Binding<NavigationPath>) -> Destination
+    func moduleDestination(with parameters: ModuleDestinationParameters, path: Binding<NavigationPath>) -> Destination
+}
+
+public struct ModuleDestinationParameters {
+    public let editor: ProfileEditor
+
+    public let module: any ModuleBuilder
+
+    public let preferences: ModulePreferences
+
+    public let impl: (any ModuleImplementation)?
+
+    @MainActor
+    public init(
+        editor: ProfileEditor,
+        module: any ModuleBuilder,
+        preferences: ModulePreferences,
+        impl: (any ModuleImplementation)?
+    ) {
+        self.editor = editor
+        self.module = module
+        self.preferences = preferences
+        self.impl = impl
+    }
 }
