@@ -69,9 +69,11 @@ struct ProfileSplitView: View, Routable {
                 switch selectedModuleId {
                 case ModuleListView.generalModuleId:
                     detailView(for: .general)
+                        .navigationDestinations(for: profileEditor, path: $detailPath)
 
                 default:
                     detailView(for: .module(id: selectedModuleId))
+                        .navigationDestinations(for: profileEditor, path: $detailPath)
                 }
             }
             .themeNavigationStack(path: $detailPath)
