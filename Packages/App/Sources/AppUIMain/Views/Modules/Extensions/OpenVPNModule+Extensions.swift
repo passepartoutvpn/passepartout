@@ -40,7 +40,7 @@ extension OpenVPNModule: ProviderServerCoordinatorSupporting {
 
 extension OpenVPNModule.Builder: ModuleShortcutsProviding {
     public var isVisible: Bool {
-        providerSelection != nil
+        providerSelection != nil || configurationBuilder?.authUserPass == true
     }
 
     @ViewBuilder
@@ -49,6 +49,8 @@ extension OpenVPNModule.Builder: ModuleShortcutsProviding {
             NavigationLink(value: OpenVPNView.Subroute.providerServer) {
                 ProviderServerRow(selectedEntity: providerSelection.entity)
             }
+        }
+        if providerSelection != nil || configurationBuilder?.authUserPass == true {
             NavigationLink(value: OpenVPNView.Subroute.credentials) {
                 Text(Strings.Modules.Openvpn.credentials)
             }
