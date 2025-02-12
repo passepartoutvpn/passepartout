@@ -1,4 +1,4 @@
-* Optionally resort to CloudFlare when no DNS settings are provided (#1165)
-* Prevent save profile without active modules (#1164)
-* Ignore cancellation on "Restore purchase"
-* Add tip to suggest how to build profiles (#1163)
+* OpenVPN: Add shortcuts in main profile view (#1167)
+* Fix primary/accent colors
+* Fix provider server columns wrapping on macOS
+* Fix help captions of attribute icons
