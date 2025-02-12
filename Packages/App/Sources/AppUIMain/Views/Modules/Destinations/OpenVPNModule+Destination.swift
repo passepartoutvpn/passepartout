@@ -107,6 +107,10 @@ private struct DestinationModifier: ViewModifier {
                     OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
                 }
             }
+            .modifier(ModulePreferencesModifier(
+                moduleId: parameters.module.id,
+                preferences: preferences
+            ))
     }
 }
 

@@ -150,14 +150,6 @@ private extension OpenVPNView {
     }
 }
 
-private extension OpenVPNView {
-
-    // FIXME: ###, ModulePreferences()
-    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        editor.excludedEndpoints(for: module.id, preferences: ModulePreferences())
-    }
-}
-
 // MARK: - Previews
 
 #Preview {
