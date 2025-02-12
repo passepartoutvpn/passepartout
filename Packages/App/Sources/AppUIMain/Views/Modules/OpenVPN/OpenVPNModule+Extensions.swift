@@ -46,6 +46,7 @@ extension OpenVPNModule.Builder: ModuleShortcutsProviding {
     @ViewBuilder
     public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
         if let providerSelection {
+            ProviderNameRow(id: providerSelection.id)
             NavigationLink(value: OpenVPNView.Subroute.providerServer) {
                 ProviderServerRow(selectedEntity: providerSelection.entity)
             }
