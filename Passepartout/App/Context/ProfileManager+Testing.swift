@@ -52,7 +52,11 @@ extension ProfileManager {
 
                         if parameters.name == "Hide.me" {
                             if var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
+#if !os(tvOS)
+                                ovpnBuilder.isInteractive = true
+#endif
                                 ovpnBuilder.providerEntity = mockHideMeEntity
+                                ovpnBuilder.credentials = OpenVPN.Credentials.Builder(username: "foo", password: "bar").build()
                                 moduleBuilder = ovpnBuilder
                             } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
 #if !os(tvOS)
