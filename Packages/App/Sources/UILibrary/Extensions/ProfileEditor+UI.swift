@@ -46,8 +46,14 @@ extension ProfileEditor {
 
 // MARK: - Destination
 
-extension ProfileEditor {
-    public func moduleDestinationModifiers(path: Binding<NavigationPath>) -> [any ViewModifier] {
+extension View {
+    public func navigationDestinations(for editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        modifiers(editor.moduleDestinationModifiers(path: path))
+    }
+}
+
+private extension ProfileEditor {
+    func moduleDestinationModifiers(path: Binding<NavigationPath>) -> [any ViewModifier] {
         modules.compactMap {
             guard let provider = $0 as? any ModuleDestinationProviding else {
                 return nil
@@ -62,12 +68,6 @@ extension ProfileEditor {
                 path: path
             )
         }
-    }
-}
-
-extension View {
-    public func navigationDestinations(for editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
-        modifiers(editor.moduleDestinationModifiers(path: path))
     }
 }
 
