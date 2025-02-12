@@ -50,6 +50,7 @@ extension OpenVPNModule.Builder: ModuleShortcutsProviding {
             NavigationLink(value: OpenVPNView.Subroute.providerServer) {
                 ProviderServerRow(selectedEntity: providerSelection.entity)
             }
+            .uiAccessibility(.Profile.providerServerLink)
         }
         if providerSelection != nil || configurationBuilder?.authUserPass == true {
             NavigationLink(value: OpenVPNView.Subroute.credentials) {

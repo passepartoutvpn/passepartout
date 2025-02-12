@@ -58,14 +58,12 @@ final class MainFlowTests: XCTestCase {
             .leaveModule()
     }
 
-    // FIXME: ###, ui tests
-//#if os(iOS)
-//    func testDiscloseProviderCountry() {
-//        AppScreen(app: app)
-//            .waitForProfiles()
-//            .editProfile(at: 2)
-//            .connectToProfile()
-//            .discloseCountry(at: 2)
-//    }
-//#endif
+#if os(iOS)
+    func testDiscloseProviderCountry() {
+        AppScreen(app: app)
+            .waitForProfiles()
+            .editProfile(at: 2)
+            .editProviderServer()
+    }
+#endif
 }

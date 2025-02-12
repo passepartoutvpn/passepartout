@@ -31,6 +31,8 @@ extension AccessibilityInfo {
 
         public static let moduleLink = AccessibilityInfo("profile.moduleLink", .link)
 
+        public static let providerServerLink = AccessibilityInfo("profile.providerServerLink", .link)
+
         public static let cancel = AccessibilityInfo("profile.cancel", .button)
     }
 }
