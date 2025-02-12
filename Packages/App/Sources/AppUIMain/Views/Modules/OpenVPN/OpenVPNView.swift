@@ -75,14 +75,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 isImporting: $isImporting,
                 errorHandler: errorHandler
             ))
-            .modifier(module.moduleDestination(
-                with: .init(
-                    editor: editor,
-                    module: module,
-                    impl: impl
-                ),
-                path: path
-            ))
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
