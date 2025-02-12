@@ -55,6 +55,7 @@ struct ProfileGeneralView: View {
             )
         }
         .themeForm()
+        .navigationDestinations(for: profileEditor, path: $path)
     }
 }
 

@@ -73,6 +73,7 @@ struct ProfileEditView: View, Routable {
         .navigationTitle(Strings.Global.Nouns.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+        .navigationDestinations(for: profileEditor, path: $path)
         .onLoad {
             if let initialModuleId {
                 push(.moduleDetail(moduleId: initialModuleId))
