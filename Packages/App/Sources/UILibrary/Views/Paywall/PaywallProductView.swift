@@ -36,6 +36,8 @@ public struct PaywallProductView: View {
 
     private let product: InAppProduct
 
+    private let withIncludedFeatures: Bool
+
     private let highlightedFeatures: Set<AppFeature>
 
     @Binding
@@ -52,6 +54,7 @@ public struct PaywallProductView: View {
         iapManager: IAPManager,
         style: PaywallProductViewStyle,
         product: InAppProduct,
+        withIncludedFeatures: Bool = true,
         highlightedFeatures: Set<AppFeature> = [],
         purchasingIdentifier: Binding<String?>,
         onComplete: @escaping (String, InAppPurchaseResult) -> Void,
@@ -60,6 +63,7 @@ public struct PaywallProductView: View {
         self.iapManager = iapManager
         self.style = style
         self.product = product
+        self.withIncludedFeatures = withIncludedFeatures
         self.highlightedFeatures = highlightedFeatures
         _purchasingIdentifier = purchasingIdentifier
         self.onComplete = onComplete
@@ -69,13 +73,9 @@ public struct PaywallProductView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             productView
-            Group {
-                includedFeaturesButton
-                    .padding(.top, 8)
-                includedFeaturesList
-                    .if(isPresentingFeatures)
+            if withIncludedFeatures {
+                includedFeaturesView
             }
-            .font(.subheadline)
         }
     }
 }
@@ -102,6 +102,16 @@ private extension PaywallProductView {
                 onError: onError
             )
         }
+    }
+
+    var includedFeaturesView: some View {
+        Group {
+            includedFeaturesButton
+                .padding(.top, 8)
+            includedFeaturesList
+                .if(isPresentingFeatures)
+        }
+        .font(.subheadline)
     }
 
     var includedFeaturesButton: some View {

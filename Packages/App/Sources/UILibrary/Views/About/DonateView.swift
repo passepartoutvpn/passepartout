@@ -85,6 +85,7 @@ private extension DonateView {
                 iapManager: iapManager,
                 style: .donation,
                 product: $0,
+                withIncludedFeatures: false,
                 purchasingIdentifier: $purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
