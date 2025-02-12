@@ -38,15 +38,19 @@ extension OpenVPNView {
 
         var body: some View {
             Form {
-                ForEach(endpoints, id: \.rawValue) { remote in
-                    SelectableRemoteButton(
-                        remote: remote,
-                        all: Set(endpoints),
-                        excludedEndpoints: excludedEndpoints
-                    )
-                }
                 if let remotesRoute {
-                    NavigationLink(Strings.Global.Actions.edit, value: remotesRoute)
+                    Section {
+                        NavigationLink(Strings.Global.Actions.edit, value: remotesRoute)
+                    }
+                }
+                Section {
+                    ForEach(endpoints, id: \.rawValue) { remote in
+                        SelectableRemoteButton(
+                            remote: remote,
+                            all: Set(endpoints),
+                            excludedEndpoints: excludedEndpoints
+                        )
+                    }
                 }
             }
             .themeForm()
