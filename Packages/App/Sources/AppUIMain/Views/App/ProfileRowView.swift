@@ -73,9 +73,6 @@ private extension ProfileRowView {
         )
         .contentShape(.rect)
         .foregroundStyle(.primary)
-
-        // FIXME: ###, UI tests
-        .uiAccessibility(.App.profileMenu)
     }
 
     var attributesView: some View {

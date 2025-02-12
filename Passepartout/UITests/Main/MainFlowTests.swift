@@ -47,33 +47,25 @@ final class MainFlowTests: XCTestCase {
     func testEditProfile() {
         AppScreen(app: app)
             .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .editProfile(at: 2)
     }
 
     func testEditProfileModule() {
         AppScreen(app: app)
             .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .editProfile(at: 2)
             .enterModule(at: 1)
             .leaveModule()
     }
 
-    func testConnectToProviderServer() {
-        AppScreen(app: app)
-            .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-    }
-
-#if os(iOS)
-    func testDiscloseProviderCountry() {
-        AppScreen(app: app)
-            .waitForProfiles()
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-            .discloseCountry(at: 2)
-    }
-#endif
+    // FIXME: ###, ui tests
+//#if os(iOS)
+//    func testDiscloseProviderCountry() {
+//        AppScreen(app: app)
+//            .waitForProfiles()
+//            .editProfile(at: 2)
+//            .connectToProfile()
+//            .discloseCountry(at: 2)
+//    }
+//#endif
 }

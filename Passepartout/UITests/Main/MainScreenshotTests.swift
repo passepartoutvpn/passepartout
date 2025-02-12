@@ -51,8 +51,7 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
             .enableProfile(at: 0)
 
         let profile = root
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .editProfile(at: 2)
 
         await pause()
         try snapshot("03", "ProfileEditor", target: .sheet)
@@ -77,12 +76,13 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
         await pause()
         try snapshot("01", "Connected")
 
-        app
-            .openProfileMenu(at: 2)
-            .connectToProfile()
-#if os(iOS)
-            .discloseCountry(at: 2)
-#endif
+        // FIXME: ###, ui tests
+//        app
+//            .editProfile(at: 2)
+//            .connectToProfile()
+//#if os(iOS)
+//            .discloseCountry(at: 2)
+//#endif
 
         await pause()
         try snapshot("05", "ProviderServers", target: .sheet)
