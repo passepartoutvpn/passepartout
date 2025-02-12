@@ -49,7 +49,7 @@ private extension XCUIElement {
         case .text:
             return staticTexts
         case .toggle:
-            return toggles
+            return switches
         }
 #else
         switch elementType {
