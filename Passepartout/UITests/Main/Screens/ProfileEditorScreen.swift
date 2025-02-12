@@ -49,10 +49,10 @@ struct ProfileEditorScreen {
     }
 
     @discardableResult
-    func editProviderServer() -> Self {
+    func editProviderServer() -> ProviderServersScreen {
         let providerServerLink = app.get(.Profile.providerServerLink)
         providerServerLink.tap()
-        return self
+        return ProviderServersScreen(app: app)
     }
 
     @discardableResult

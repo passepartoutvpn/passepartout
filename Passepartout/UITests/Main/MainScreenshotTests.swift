@@ -76,13 +76,12 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
         await pause()
         try snapshot("01", "Connected")
 
-        // FIXME: ###, ui tests
-//        app
-//            .editProfile(at: 2)
-//            .connectToProfile()
-//#if os(iOS)
-//            .discloseCountry(at: 2)
-//#endif
+        app
+            .editProfile(at: 2)
+            .editProviderServer()
+#if os(iOS)
+            .discloseCountry(at: 2)
+#endif
 
         await pause()
         try snapshot("05", "ProviderServers", target: .sheet)
