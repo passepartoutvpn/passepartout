@@ -42,7 +42,38 @@ extension ProfileEditor {
             self?.saveModule($0, activating: false)
         }
     }
+}
 
+// MARK: - Destination
+
+extension ProfileEditor {
+    public func moduleDestinationModifiers(path: Binding<NavigationPath>) -> [any ViewModifier] {
+        modules.compactMap {
+            guard let provider = $0 as? any ModuleDestinationProviding else {
+                return nil
+            }
+            return provider.moduleDestination(
+                with: .init(
+                    editor: self,
+                    module: $0,
+                    preferences: ModulePreferences(), // FIXME: ###, missing preferences
+                    impl: nil // FIXME: ###, missing impl
+                ),
+                path: path
+            )
+        }
+    }
+}
+
+extension View {
+    public func navigationDestinations(for editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        modifiers(editor.moduleDestinationModifiers(path: path))
+    }
+}
+
+// MARK: - Shortcuts
+
+extension ProfileEditor {
     public func shortcutsSections(path: Binding<NavigationPath>) -> some View {
         ForEach(shortcutsProviders, id: \.id) {
             if $0.isVisible {
