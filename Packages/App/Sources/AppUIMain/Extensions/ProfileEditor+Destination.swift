@@ -35,8 +35,7 @@ extension View {
                         for: route.wrapped,
                         with: .init(
                             editor: editor,
-                            module: handler,
-                            impl: nil
+                            module: handler
                         ),
                         path: path
                     ))
