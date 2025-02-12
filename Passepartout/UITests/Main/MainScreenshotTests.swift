@@ -48,7 +48,7 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
     func testTakeScreenshots() async throws {
         let root = AppScreen(app: app)
             .waitForProfiles()
-            .enableProfile(at: 0)
+            .enableProfile(at: 1)
 
         let profile = root
             .editProfile(at: 2)
