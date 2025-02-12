@@ -54,7 +54,9 @@ public final class Theme: ObservableObject {
 
     public internal(set) var emptyMessageColor: Color = .secondary
 
-    public internal(set) var primaryColor = Color(hex: 0xd69c68)
+    public internal(set) var primaryColor = Color(hex: 0x515d70)
+
+    public internal(set) var accentColor = Color(hex: 0xd69c68)
 
     public internal(set) var activeColor = Color(hex: 0x00aa00)
 
@@ -73,7 +75,7 @@ public final class Theme: ObservableObject {
     }
 
     public var upgradeColor: Color {
-        primaryColor
+        accentColor
     }
 
     public internal(set) var logoImage = "Logo"
