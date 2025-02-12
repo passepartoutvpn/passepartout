@@ -52,9 +52,6 @@ extension ProfileManager {
 
                         if parameters.name == "Hide.me" {
                             if var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
-#if !os(tvOS)
-                                ovpnBuilder.isInteractive = true
-#endif
                                 ovpnBuilder.providerEntity = mockHideMeEntity
                                 moduleBuilder = ovpnBuilder
                             } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
