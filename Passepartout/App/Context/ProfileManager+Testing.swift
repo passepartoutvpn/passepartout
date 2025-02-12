@@ -168,7 +168,7 @@ private extension ProfileManager {
                         serverId: "be-v4",
                         supportedConfigurationIdentifiers: ["OpenVPN"],
                         supportedPresetIds: nil,
-                        categoryName: "",
+                        categoryName: "default",
                         countryCode: "BE",
                         otherCountryCodes: nil,
                         area: nil
