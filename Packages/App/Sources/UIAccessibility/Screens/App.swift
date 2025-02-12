@@ -37,9 +37,9 @@ extension AccessibilityInfo {
             public static let profile = AccessibilityInfo("app.profileList.profile", .button)
         }
 
-        public static let installedProfile = AccessibilityInfo("app.installedProfile", .text)
+        public static let profilesHeader = AccessibilityInfo("app.profilesHeader", .text)
 
-        public static let profileToggle = AccessibilityInfo("app.profileToggle", .button)
+        public static let profileToggle = AccessibilityInfo("app.profileToggle", .toggle)
 
         public static let profileMenu = AccessibilityInfo("app.profileMenu", .menu)
     }

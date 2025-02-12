@@ -36,6 +36,8 @@ public struct AccessibilityInfo: Equatable, Sendable {
         case menuItem
 
         case text
+
+        case toggle
     }
 
     public let id: String

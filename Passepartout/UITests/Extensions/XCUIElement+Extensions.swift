@@ -48,6 +48,8 @@ private extension XCUIElement {
             return buttons
         case .text:
             return staticTexts
+        case .toggle:
+            return toggles
         }
 #else
         switch elementType {
@@ -59,6 +61,8 @@ private extension XCUIElement {
             return menuItems
         case .text:
             return staticTexts
+        case .toggle:
+            return checkBoxes
         }
 #endif
     }

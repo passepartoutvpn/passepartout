@@ -50,7 +50,6 @@ struct InstalledProfileView: View, Routable {
         debugChanges()
         return HStack(alignment: .center) {
             cardView
-                .uiAccessibility(.App.installedProfile)
             Spacer()
             toggleButton
         }
