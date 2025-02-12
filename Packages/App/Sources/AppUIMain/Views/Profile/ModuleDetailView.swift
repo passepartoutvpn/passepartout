@@ -38,9 +38,6 @@ struct ModuleDetailView: View {
 
     let moduleViewFactory: any ModuleViewFactory
 
-    @StateObject
-    private var preferences = ModulePreferences()
-
     var body: some View {
         debugChanges()
         return Group {
@@ -60,10 +57,6 @@ private extension ModuleDetailView {
         AnyView(moduleViewFactory.view(
             with: profileEditor,
             moduleId: moduleId
-        ))
-        .modifier(ModulePreferencesModifier(
-            moduleId: moduleId,
-            preferences: preferences
         ))
     }
 
