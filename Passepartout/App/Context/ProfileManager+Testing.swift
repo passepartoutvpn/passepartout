@@ -93,6 +93,11 @@ extension ProfileManager {
                             }
                         }
 
+                        if var wgBuilder = moduleBuilder as? WireGuardModule.Builder {
+                            wgBuilder.configurationBuilder = WireGuard.Configuration.Builder(privateKey: "")
+                            moduleBuilder = wgBuilder
+                        }
+
                         let module = try moduleBuilder.tryBuild()
                         builder.modules.append(module)
                     }
