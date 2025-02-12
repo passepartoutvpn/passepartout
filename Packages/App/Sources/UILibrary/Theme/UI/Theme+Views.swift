@@ -285,6 +285,7 @@ public struct ThemeDisclosableMenu<Content, Label>: View where Content: View, La
             HStack(alignment: .firstTextBaseline) {
                 label()
                 ThemeImage(.disclose)
+                    .foregroundStyle(.secondary)
             }
             .contentShape(.rect)
         }
