@@ -86,7 +86,7 @@ private extension ActiveProfileView {
             .font(.title)
             .fontWeight(theme.relevantWeight)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .uiAccessibility(.App.installedProfile)
+            .uiAccessibility(.App.profilesHeader)
     }
 
     var statusView: some View {
