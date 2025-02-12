@@ -62,21 +62,10 @@ private extension ModuleDetailView {
             preferences: preferences,
             moduleId: moduleId
         ))
-        .onLoad {
-            do {
-                let repository = try preferencesManager.preferencesRepository(forModuleWithId: moduleId)
-                preferences.setRepository(repository)
-            } catch {
-                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
-            }
-        }
-        .onDisappear {
-            do {
-                try preferences.save()
-            } catch {
-                pp_log(.app, .error, "Unable to save preferences for module \(moduleId): \(error)")
-            }
-        }
+        .modifier(ModulePreferencesModifier(
+            moduleId: moduleId,
+            preferences: preferences
+        ))
     }
 
     var emptyView: some View {
