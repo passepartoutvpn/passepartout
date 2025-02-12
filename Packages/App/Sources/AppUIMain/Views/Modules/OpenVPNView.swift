@@ -80,7 +80,15 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 isImporting: $isImporting,
                 errorHandler: errorHandler
             ))
-            .navigationDestination(for: Subroute.self, destination: destination)
+            .modifier(module.moduleDestination(
+                with: .init(
+                    editor: editor,
+                    module: module,
+                    preferences: modulePreferences,
+                    impl: impl
+                ),
+                path: path
+            ))
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
@@ -144,104 +152,9 @@ private extension OpenVPNView {
     }
 }
 
-// MARK: - Destinations
-
-private extension OpenVPNView {
-    enum Subroute: Hashable {
-        case providerServer
-
-        case providerConfiguration(OpenVPN.Configuration)
-
-        case credentials
-
-        case editRemotes
-    }
-
-    @ViewBuilder
-    func destination(for route: Subroute) -> some View {
-        switch route {
-        case .providerServer:
-            draft.wrappedValue.providerSelection.map {
-                ProviderServerView(
-                    moduleId: module.id,
-                    providerId: $0.id,
-                    selectedEntity: $0.entity,
-                    filtersWithSelection: true,
-                    onSelect: onSelectServer
-                )
-            }
-
-        case .providerConfiguration(let configuration):
-            Form {
-                ConfigurationView(
-                    isServerPushed: false,
-                    configuration: configuration.builder(),
-                    credentialsRoute: nil,
-                    remotesRoute: nil,
-                    excludedEndpoints: excludedEndpoints
-                )
-            }
-            .themeForm()
-            .navigationTitle(Strings.Global.Nouns.configuration)
-
-        case .credentials:
-            Form {
-                OpenVPNCredentialsView(
-                    profileEditor: editor,
-                    providerId: draft.wrappedValue.providerId,
-                    isInteractive: draft.isInteractive,
-                    credentials: draft.credentials
-                )
-            }
-            .navigationTitle(Strings.Modules.Openvpn.credentials)
-            .themeForm()
-            .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
-
-        case .editRemotes:
-            RemotesView(remotes: editableRemotesBinding)
-        }
-    }
-}
-
-// MARK: - Logic
-
 private extension OpenVPNView {
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
         editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
-    }
-
-    var editableRemotesBinding: Binding<[String]> {
-        Binding {
-            draft.wrappedValue.configurationBuilder?.remotes?.map(\.rawValue) ?? []
-        } set: {
-            draft.wrappedValue.configurationBuilder?.remotes = $0.compactMap {
-                ExtendedEndpoint(rawValue: $0)
-            }
-        }
-    }
-
-    func onSelectServer(server: ProviderServer, preset: ProviderPreset<OpenVPNProviderTemplate>) {
-        draft.wrappedValue.providerEntity = ProviderEntity(server: server, preset: preset)
-        resetExcludedEndpointsWithCurrentProviderEntity()
-        path.wrappedValue.removeLast()
-    }
-
-    // filter out exclusions unrelated to current server
-    func resetExcludedEndpointsWithCurrentProviderEntity() {
-        do {
-            let cfg = try draft.wrappedValue.providerSelection?.configuration()
-            editor.profile.attributes.editPreferences(inModule: module.id) {
-                if let cfg {
-                    $0.excludedEndpoints = Set(cfg.remotes?.filter {
-                        modulePreferences.isExcludedEndpoint($0)
-                    } ?? [])
-                } else {
-                    $0.excludedEndpoints = []
-                }
-            }
-        } catch {
-            pp_log(.app, .error, "Unable to build provider configuration for excluded endpoints: \(error)")
-        }
     }
 }
 
