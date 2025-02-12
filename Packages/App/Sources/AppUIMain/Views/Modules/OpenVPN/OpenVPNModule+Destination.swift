@@ -112,7 +112,7 @@ private struct DestinationView: View {
                 OpenVPNView.RemotesView(
                     endpoints: endpoints,
                     excludedEndpoints: excludedEndpoints,
-                    remotesRoute: draft.wrappedValue.providerSelection == nil ? OpenVPNView.Subroute.editRemotes : nil
+                    remotesRoute: draft.wrappedValue.providerSelection == nil ? ProfileRoute(OpenVPNView.Subroute.editRemotes) : nil
                 )
 
             case .editRemotes:

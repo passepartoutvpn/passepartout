@@ -47,13 +47,13 @@ extension OpenVPNModule.Builder: ModuleShortcutsProviding {
     public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
         if let providerSelection {
 //            ProviderNameRow(id: providerSelection.id)
-            NavigationLink(value: OpenVPNView.Subroute.providerServer) {
+            NavigationLink(value: ProfileRoute(OpenVPNView.Subroute.providerServer)) {
                 ProviderServerRow(selectedEntity: providerSelection.entity)
             }
             .uiAccessibility(.Profile.providerServerLink)
         }
         if providerSelection != nil || configurationBuilder?.authUserPass == true {
-            NavigationLink(value: OpenVPNView.Subroute.credentials) {
+            NavigationLink(value: ProfileRoute(OpenVPNView.Subroute.credentials)) {
                 Text(Strings.Modules.Openvpn.credentials)
             }
         }

@@ -27,4 +27,8 @@ import Foundation
 
 struct ProfileRoute: Hashable {
     let wrapped: AnyHashable
+
+    init(_ wrapped: AnyHashable) {
+        self.wrapped = wrapped
+    }
 }

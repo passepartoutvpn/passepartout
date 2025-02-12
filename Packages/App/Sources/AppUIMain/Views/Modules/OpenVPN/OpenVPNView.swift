@@ -92,7 +92,7 @@ private extension OpenVPNView {
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
-                credentialsRoute: Subroute.credentials
+                credentialsRoute: ProfileRoute(Subroute.credentials)
             )
         } else {
             emptyConfigurationView
@@ -111,11 +111,11 @@ private extension OpenVPNView {
     }
 
     func remotesLink(with endpoints: [ExtendedEndpoint]) -> some View {
-        NavigationLink(Strings.Modules.Openvpn.remotes, value: Subroute.remotes(endpoints))
+        NavigationLink(Strings.Modules.Openvpn.remotes, value: ProfileRoute(Subroute.remotes(endpoints)))
     }
 
     func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {
-        NavigationLink(Strings.Global.Nouns.configuration, value: Subroute.providerConfiguration(configuration))
+        NavigationLink(Strings.Global.Nouns.configuration, value: ProfileRoute(Subroute.providerConfiguration(configuration)))
     }
 
     var importButton: some View {
@@ -129,7 +129,7 @@ private extension OpenVPNView {
             providerId: providerId,
             providerPreferences: nil,
             selectedEntity: providerEntity,
-            entityDestination: Subroute.providerServer,
+            entityDestination: ProfileRoute(Subroute.providerServer),
             paywallReason: $paywallReason,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
@@ -138,7 +138,7 @@ private extension OpenVPNView {
     }
 
     var providerAccountRows: [ModuleRow]? {
-        [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(Subroute.credentials))]
+        [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(ProfileRoute(Subroute.credentials)))]
     }
 }
 
