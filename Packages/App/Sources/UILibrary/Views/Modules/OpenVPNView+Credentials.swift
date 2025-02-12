@@ -89,7 +89,9 @@ public struct OpenVPNCredentialsView: View {
     public var body: some View {
         debugChanges()
         return Group {
+#if !os(tvOS)
             interactiveSection
+#endif
             inputSection
             guidanceSection
         }
