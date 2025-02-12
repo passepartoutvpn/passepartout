@@ -44,6 +44,51 @@ extension ProfileEditor {
     }
 }
 
+// MARK: - Destination
+
+extension View {
+    public func navigationDestinations(for editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        modifiers(editor.moduleDestinationModifiers(path: path))
+    }
+}
+
+private extension ProfileEditor {
+    func moduleDestinationModifiers(path: Binding<NavigationPath>) -> [any ViewModifier] {
+        modules.compactMap {
+            guard let provider = $0 as? any ModuleDestinationProviding else {
+                return nil
+            }
+            return provider.moduleDestination(
+                with: .init(
+                    editor: self,
+                    module: $0,
+                    impl: nil
+                ),
+                path: path
+            )
+        }
+    }
+}
+
+// MARK: - Shortcuts
+
+extension ProfileEditor {
+    public func shortcutsSections(path: Binding<NavigationPath>) -> some View {
+        ForEach(shortcutsProviders, id: \.id) {
+            if $0.isVisible {
+                AnyView($0.moduleShortcutsView(editor: self, path: path))
+                    .themeSection(header: $0.moduleType.localizedDescription)
+            }
+        }
+    }
+
+    private var shortcutsProviders: [any ModuleShortcutsProviding] {
+        modules.compactMap {
+            $0 as? any ModuleShortcutsProviding
+        }
+    }
+}
+
 // MARK: - ModulePreferences
 
 extension ProfileEditor {

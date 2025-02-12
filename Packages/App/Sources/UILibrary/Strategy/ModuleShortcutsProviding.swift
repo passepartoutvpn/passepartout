@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Previews.swift
+//  ModuleShortcutsProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 2/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,29 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-extension ModuleBuilder where Self: ModuleViewProviding {
+public protocol ModuleShortcutsProviding: ModuleBuilder {
+    associatedtype ShortcutsContent: View
+
+    var id: UUID { get }
+
+    var isVisible: Bool { get }
 
     @MainActor
-    public func preview(title: String = "") -> some View {
-        NavigationStack {
-            moduleView(with: .init(
-                editor: ProfileEditor(modules: [self]),
-                impl: nil
-            ))
-            .navigationTitle(title)
-        }
-        .withMockEnvironment()
-    }
-
-    @MainActor
-    public func preview<C: View>(with content: (Self, ProfileEditor) -> C) -> some View {
-        NavigationStack {
-            content(self, ProfileEditor(modules: [self]))
-        }
-        .withMockEnvironment()
-    }
+    func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> ShortcutsContent
 }

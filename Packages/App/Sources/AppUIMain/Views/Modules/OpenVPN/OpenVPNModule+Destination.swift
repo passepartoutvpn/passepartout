@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import PassepartoutKit
 import SwiftUI
@@ -34,6 +35,8 @@ extension OpenVPNView {
         case providerConfiguration(OpenVPN.Configuration)
 
         case credentials
+
+        case remotes([ExtendedEndpoint])
 
         case editRemotes
     }
@@ -50,6 +53,9 @@ private struct DestinationModifier: ViewModifier {
 
     @Binding
     var path: NavigationPath
+
+    @State
+    private var preferences = ModulePreferences()
 
     func body(content: Content) -> some View {
         content
@@ -71,9 +77,7 @@ private struct DestinationModifier: ViewModifier {
                         OpenVPNView.ConfigurationView(
                             isServerPushed: false,
                             configuration: configuration.builder(),
-                            credentialsRoute: nil,
-                            remotesRoute: nil,
-                            excludedEndpoints: excludedEndpoints
+                            credentialsRoute: nil
                         )
                     }
                     .themeForm()
@@ -92,10 +96,21 @@ private struct DestinationModifier: ViewModifier {
                     .themeForm()
                     .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
 
+                case .remotes(let endpoints):
+                    OpenVPNView.RemotesView(
+                        endpoints: endpoints,
+                        excludedEndpoints: excludedEndpoints,
+                        remotesRoute: draft.wrappedValue.providerSelection == nil ? OpenVPNView.Subroute.editRemotes : nil
+                    )
+
                 case .editRemotes:
-                    OpenVPNView.RemotesView(remotes: editableRemotesBinding)
+                    OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
                 }
             }
+            .modifier(ModulePreferencesModifier(
+                moduleId: parameters.module.id,
+                preferences: preferences
+            ))
     }
 }
 
@@ -108,7 +123,7 @@ private extension DestinationModifier {
     }
 
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: parameters.preferences)
+        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
     }
 
     var editableRemotesBinding: Binding<[String]> {
@@ -134,7 +149,7 @@ private extension DestinationModifier {
             parameters.editor.profile.attributes.editPreferences(inModule: parameters.module.id) {
                 if let cfg {
                     $0.excludedEndpoints = Set(cfg.remotes?.filter {
-                        parameters.preferences.isExcludedEndpoint($0)
+                        preferences.isExcludedEndpoint($0)
                     } ?? [])
                 } else {
                     $0.excludedEndpoints = []

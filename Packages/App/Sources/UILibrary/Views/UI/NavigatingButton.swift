@@ -40,6 +40,7 @@ public struct NavigatingButton<Label>: View where Label: View {
             HStack {
                 label()
                 ThemeImage(.navigate)
+                    .foregroundStyle(.secondary)
             }
             .contentShape(.rect)
         }

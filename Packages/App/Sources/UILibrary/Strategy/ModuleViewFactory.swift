@@ -24,12 +24,11 @@
 //
 
 import CommonLibrary
-import Foundation
 import SwiftUI
 
 public protocol ModuleViewFactory: AnyObject {
     associatedtype Content: View
 
     @MainActor
-    func view(with editor: ProfileEditor, preferences: ModulePreferences, moduleId: UUID) -> Content
+    func view(with editor: ProfileEditor, moduleId: UUID) -> Content
 }

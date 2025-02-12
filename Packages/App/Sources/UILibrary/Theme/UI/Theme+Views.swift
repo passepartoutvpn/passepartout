@@ -31,7 +31,7 @@ import SwiftUI
 #if !os(tvOS)
 extension Theme {
     public func listSection<ItemView: View, T: EditableValue>(
-        _ title: String,
+        _ title: String?,
         addTitle: String,
         originalItems: Binding<[T]>,
         emptyValue: (() async -> T)? = nil,
@@ -285,6 +285,7 @@ public struct ThemeDisclosableMenu<Content, Label>: View where Content: View, La
             HStack(alignment: .firstTextBaseline) {
                 label()
                 ThemeImage(.disclose)
+                    .foregroundStyle(.secondary)
             }
             .contentShape(.rect)
         }

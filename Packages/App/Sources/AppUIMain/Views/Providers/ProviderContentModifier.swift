@@ -68,14 +68,7 @@ struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Templ
 private extension ProviderContentModifier {
     var providerEntityRow: some View {
         NavigationLink(value: entityDestination) {
-            HStack {
-                Text(Strings.Global.Nouns.server)
-                if let selectedEntity {
-                    Spacer()
-                    Text(selectedEntity.server.hostname ?? selectedEntity.server.serverId)
-                        .foregroundStyle(.secondary)
-                }
-            }
+            ProviderServerRow(selectedEntity: selectedEntity)
         }
     }
 }

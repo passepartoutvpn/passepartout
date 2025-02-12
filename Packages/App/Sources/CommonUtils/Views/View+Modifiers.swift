@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Previews.swift
+//  View+Modifiers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 2/12/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,29 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
 import SwiftUI
 
-extension ModuleBuilder where Self: ModuleViewProviding {
-
-    @MainActor
-    public func preview(title: String = "") -> some View {
-        NavigationStack {
-            moduleView(with: .init(
-                editor: ProfileEditor(modules: [self]),
-                impl: nil
-            ))
-            .navigationTitle(title)
+extension View {
+    public func modifiers(_ modifiers: [any ViewModifier]) -> some View {
+        modifiers.reduce(into: AnyView(self)) { view, modifier in
+            view = AnyView(view.modifier(AnyViewModifier(modifier)))
         }
-        .withMockEnvironment()
+    }
+}
+
+private struct AnyViewModifier: ViewModifier {
+    let apply: (AnyView) -> AnyView
+
+    init<M: ViewModifier>(_ modifier: M) {
+        self.apply = { AnyView($0.modifier(modifier)) }
     }
 
-    @MainActor
-    public func preview<C: View>(with content: (Self, ProfileEditor) -> C) -> some View {
-        NavigationStack {
-            content(self, ProfileEditor(modules: [self]))
-        }
-        .withMockEnvironment()
+    func body(content: Content) -> some View {
+        apply(AnyView(content))
     }
 }

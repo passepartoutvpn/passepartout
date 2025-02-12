@@ -36,6 +36,28 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
 extension OpenVPNModule: ProviderServerCoordinatorSupporting {
 }
 
+// MARK: - Shortcuts
+
+extension OpenVPNModule.Builder: ModuleShortcutsProviding {
+    public var isVisible: Bool {
+        providerSelection != nil || configurationBuilder?.authUserPass == true
+    }
+
+    @ViewBuilder
+    public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        if let providerSelection {
+            NavigationLink(value: OpenVPNView.Subroute.providerServer) {
+                ProviderServerRow(selectedEntity: providerSelection.entity)
+            }
+        }
+        if providerSelection != nil || configurationBuilder?.authUserPass == true {
+            NavigationLink(value: OpenVPNView.Subroute.credentials) {
+                Text(Strings.Modules.Openvpn.credentials)
+            }
+        }
+    }
+}
+
 // MARK: - Previews
 
 // swiftlint: disable force_try

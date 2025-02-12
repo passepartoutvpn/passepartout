@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -36,14 +35,8 @@ extension OpenVPNView {
 
         let credentialsRoute: (any Hashable)?
 
-        let remotesRoute: (any Hashable)?
-
-        @ObservedObject
-        var excludedEndpoints: ObservableList<ExtendedEndpoint>
-
         var body: some View {
             moduleSection(for: accountRows, header: Strings.Global.Nouns.account)
-            remotesSection
             if !isServerPushed {
                 moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
             }
@@ -71,61 +64,7 @@ extension OpenVPNView {
 
 // MARK: - Editable
 
-private extension OpenVPNView.ConfigurationView {
-    var remotesSection: some View {
-        configuration.remotes.map { remotes in
-            Group {
-                ForEach(remotes, id: \.rawValue) { remote in
-                    SelectableRemoteButton(
-                        remote: remote,
-                        all: Set(remotes),
-                        excludedEndpoints: excludedEndpoints
-                    )
-                }
-                if let remotesRoute {
-                    NavigationLink(Strings.Global.Actions.edit, value: remotesRoute)
-                }
-            }
-            .themeSection(header: Strings.Modules.Openvpn.remotes)
-        }
-    }
-}
 
-private struct SelectableRemoteButton: View {
-    let remote: ExtendedEndpoint
-
-    let all: Set<ExtendedEndpoint>
-
-    @ObservedObject
-    var excludedEndpoints: ObservableList<ExtendedEndpoint>
-
-    var body: some View {
-        Button {
-            if excludedEndpoints.contains(remote) {
-                excludedEndpoints.remove(remote)
-            } else {
-                if remaining.count > 1 {
-                    excludedEndpoints.add(remote)
-                }
-            }
-        } label: {
-            HStack {
-                EndpointCardView(endpoint: remote)
-                Spacer()
-                ThemeImage(.marked)
-                    .opaque(!excludedEndpoints.contains(remote))
-            }
-            .contentShape(.rect)
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var remaining: Set<ExtendedEndpoint> {
-        all.filter {
-            !excludedEndpoints.contains($0)
-        }
-    }
-}
 
 // MARK: - Constant
 
@@ -346,30 +285,13 @@ private extension OpenVPNView.ConfigurationView {
 // MARK: - Previews
 
 #Preview {
-    struct Preview: View {
-
-        @StateObject
-        private var excludedEndpoints = ObservableList<ExtendedEndpoint> { _ in
-            true
-        } add: { _ in
-            //
-        } remove: { _ in
-            //
-        }
-
-        var body: some View {
-            Form {
-                OpenVPNView.ConfigurationView(
-                    isServerPushed: false,
-                    configuration: .forPreviews,
-                    credentialsRoute: nil,
-                    remotesRoute: nil,
-                    excludedEndpoints: excludedEndpoints
-                )
-            }
-            .withMockEnvironment()
-        }
+    Form {
+        OpenVPNView.ConfigurationView(
+            isServerPushed: false,
+            configuration: .forPreviews,
+            credentialsRoute: nil
+        )
     }
-
-    return Preview()
+    .themeForm()
+    .withMockEnvironment()
 }

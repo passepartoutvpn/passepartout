@@ -35,11 +35,15 @@ struct ProfileGeneralView: View {
     var profileEditor: ProfileEditor
 
     @Binding
+    var path: NavigationPath
+
+    @Binding
     var paywallReason: PaywallReason?
 
     var body: some View {
         Form {
             ProfileNameSection(name: $profileEditor.profile.name)
+            profileEditor.shortcutsSections(path: $path)
             ProfileStorageSection(
                 profileEditor: profileEditor,
                 paywallReason: $paywallReason
@@ -51,6 +55,7 @@ struct ProfileGeneralView: View {
             )
         }
         .themeForm()
+        .navigationDestinations(for: profileEditor, path: $path)
     }
 }
 
@@ -58,6 +63,7 @@ struct ProfileGeneralView: View {
     ProfileGeneralView(
         profileManager: .forPreviews,
         profileEditor: ProfileEditor(),
+        path: .constant(NavigationPath()),
         paywallReason: .constant(nil)
     )
     .withMockEnvironment()

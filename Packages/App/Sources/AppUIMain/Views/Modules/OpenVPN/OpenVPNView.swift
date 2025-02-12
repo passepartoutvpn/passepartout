@@ -38,9 +38,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @ObservedObject
     var editor: ProfileEditor
 
-    @ObservedObject
-    var modulePreferences: ModulePreferences
-
     let impl: OpenVPNModule.Implementation?
 
     private let isServerPushed: Bool
@@ -57,7 +54,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(serverConfiguration: OpenVPN.Configuration) {
         module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         editor = ProfileEditor(modules: [module])
-        modulePreferences = ModulePreferences()
         impl = nil
         isServerPushed = true
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
@@ -66,7 +62,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {
         self.module = module
         editor = parameters.editor
-        modulePreferences = parameters.preferences
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
     }
@@ -79,15 +74,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 impl: impl,
                 isImporting: $isImporting,
                 errorHandler: errorHandler
-            ))
-            .modifier(module.moduleDestination(
-                with: .init(
-                    editor: editor,
-                    module: module,
-                    preferences: modulePreferences,
-                    impl: impl
-                ),
-                path: path
             ))
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
@@ -102,12 +88,11 @@ private extension OpenVPNView {
     @ViewBuilder
     var contentView: some View {
         if let configuration = draft.wrappedValue.configurationBuilder {
+            remotesLink(with: configuration.remotes ?? [])
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
-                credentialsRoute: Subroute.credentials,
-                remotesRoute: Subroute.editRemotes,
-                excludedEndpoints: excludedEndpoints
+                credentialsRoute: Subroute.credentials
             )
         } else {
             emptyConfigurationView
@@ -120,8 +105,13 @@ private extension OpenVPNView {
         if draft.wrappedValue.providerSelection == nil {
             importButton
         } else if let configuration = try? draft.wrappedValue.providerSelection?.configuration() {
+            remotesLink(with: configuration.remotes ?? [])
             providerConfigurationLink(with: configuration)
         }
+    }
+
+    func remotesLink(with endpoints: [ExtendedEndpoint]) -> some View {
+        NavigationLink(Strings.Modules.Openvpn.remotes, value: Subroute.remotes(endpoints))
     }
 
     func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {
@@ -149,12 +139,6 @@ private extension OpenVPNView {
 
     var providerAccountRows: [ModuleRow]? {
         [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(Subroute.credentials))]
-    }
-}
-
-private extension OpenVPNView {
-    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        editor.excludedEndpoints(for: module.id, preferences: modulePreferences)
     }
 }
 
