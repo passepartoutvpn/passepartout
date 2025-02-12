@@ -100,7 +100,7 @@ private struct DestinationModifier: ViewModifier {
                     OpenVPNView.RemotesView(
                         endpoints: endpoints,
                         excludedEndpoints: excludedEndpoints,
-                        remotesRoute: OpenVPNView.Subroute.editRemotes
+                        remotesRoute: draft.wrappedValue.providerSelection == nil ? OpenVPNView.Subroute.editRemotes : nil
                     )
 
                 case .editRemotes:
