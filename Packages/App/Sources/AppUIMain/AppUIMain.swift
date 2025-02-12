@@ -27,6 +27,7 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 import TipKit
+import UIAccessibility
 @_exported import UILibrary
 
 public final class AppUIMain: UILibraryConfiguring {
@@ -40,6 +41,9 @@ public final class AppUIMain: UILibraryConfiguring {
 
             // for debugging
 //            Tips.showAllTipsForTesting()
+            if AppCommandLine.contains(.uiTesting) {
+                Tips.hideAllTipsForTesting()
+            }
 
             try? Tips.configure([
                 .displayFrequency(.immediate)
