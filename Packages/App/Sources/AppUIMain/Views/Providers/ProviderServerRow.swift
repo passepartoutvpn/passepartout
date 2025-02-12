@@ -34,12 +34,17 @@ struct ProviderServerRow<Template>: View where Template: IdentifiableConfigurati
             Text(Strings.Global.Nouns.server)
             if let selectedEntity {
                 Spacer()
-                VStack(alignment: .trailing) {
-                    selectedEntity.server.localizedCountry.map(Text.init)
-                    selectedEntity.server.metadata.area.map(Text.init)
-                }
+                Text(selectedEntity.value)
                 .foregroundStyle(.secondary)
             }
         }
+    }
+}
+
+private extension ProviderEntity {
+    var value: String {
+        [server.localizedCountry, server.metadata.area]
+            .compactMap { $0 }
+            .joined(separator: ", ")
     }
 }
