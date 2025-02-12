@@ -1,5 +1,5 @@
 //
-//  View+Modifiers.swift
+//  ProfileRoute.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/12/25.
@@ -23,24 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
-extension View {
-    public func modifiers(_ modifiers: [any ViewModifier]) -> some View {
-        modifiers.reduce(into: AnyView(self)) { view, modifier in
-            view = AnyView(view.modifier(AnyViewModifier(modifier)))
-        }
-    }
-}
-
-private struct AnyViewModifier: ViewModifier {
-    let apply: (AnyView) -> AnyView
-
-    init<M: ViewModifier>(_ modifier: M) {
-        self.apply = { AnyView($0.modifier(modifier)) }
-    }
-
-    func body(content: Content) -> some View {
-        apply(AnyView(content))
-    }
+struct ProfileRoute: Hashable {
+    let wrapped: AnyHashable
 }

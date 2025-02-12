@@ -43,12 +43,25 @@ extension OpenVPNView {
 }
 
 extension OpenVPNModule.Builder: ModuleDestinationProviding {
-    public func moduleDestination(with parameters: ModuleDestinationParameters, path: Binding<NavigationPath>) -> some ViewModifier {
-        DestinationModifier(parameters: parameters, path: path)
+    public func handlesRoute(_ route: AnyHashable) -> Bool {
+        route is OpenVPNView.Subroute
+    }
+
+    public func moduleDestination(
+        for route: AnyHashable,
+        with parameters: ModuleDestinationParameters,
+        path: Binding<NavigationPath>
+    ) -> some View {
+        (route as? OpenVPNView.Subroute)
+            .map {
+                DestinationView(route: $0, parameters: parameters, path: path)
+            }
     }
 }
 
-private struct DestinationModifier: ViewModifier {
+private struct DestinationView: View {
+    let route: OpenVPNView.Subroute
+
     let parameters: ModuleDestinationParameters
 
     @Binding
@@ -57,64 +70,63 @@ private struct DestinationModifier: ViewModifier {
     @State
     private var preferences = ModulePreferences()
 
-    func body(content: Content) -> some View {
-        content
-            .navigationDestination(for: OpenVPNView.Subroute.self) {
-                switch $0 {
-                case .providerServer:
-                    draft.wrappedValue.providerSelection.map {
-                        ProviderServerView(
-                            moduleId: parameters.module.id,
-                            providerId: $0.id,
-                            selectedEntity: $0.entity,
-                            filtersWithSelection: true,
-                            onSelect: onSelectServer
-                        )
-                    }
-
-                case .providerConfiguration(let configuration):
-                    Form {
-                        OpenVPNView.ConfigurationView(
-                            isServerPushed: false,
-                            configuration: configuration.builder(),
-                            credentialsRoute: nil
-                        )
-                    }
-                    .themeForm()
-                    .navigationTitle(Strings.Global.Nouns.configuration)
-
-                case .credentials:
-                    Form {
-                        OpenVPNCredentialsView(
-                            profileEditor: parameters.editor,
-                            providerId: draft.wrappedValue.providerId,
-                            isInteractive: draft.isInteractive,
-                            credentials: draft.credentials
-                        )
-                    }
-                    .navigationTitle(Strings.Modules.Openvpn.credentials)
-                    .themeForm()
-                    .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
-
-                case .remotes(let endpoints):
-                    OpenVPNView.RemotesView(
-                        endpoints: endpoints,
-                        excludedEndpoints: excludedEndpoints,
-                        remotesRoute: draft.wrappedValue.providerSelection == nil ? OpenVPNView.Subroute.editRemotes : nil
+    var body: some View {
+        Group {
+            switch route {
+            case .providerServer:
+                draft.wrappedValue.providerSelection.map {
+                    ProviderServerView(
+                        moduleId: parameters.module.id,
+                        providerId: $0.id,
+                        selectedEntity: $0.entity,
+                        filtersWithSelection: true,
+                        onSelect: onSelectServer
                     )
-
-                case .editRemotes:
-                    OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
                 }
+
+            case .providerConfiguration(let configuration):
+                Form {
+                    OpenVPNView.ConfigurationView(
+                        isServerPushed: false,
+                        configuration: configuration.builder(),
+                        credentialsRoute: nil
+                    )
+                }
+                .themeForm()
+                .navigationTitle(Strings.Global.Nouns.configuration)
+
+            case .credentials:
+                Form {
+                    OpenVPNCredentialsView(
+                        profileEditor: parameters.editor,
+                        providerId: draft.wrappedValue.providerId,
+                        isInteractive: draft.isInteractive,
+                        credentials: draft.credentials
+                    )
+                }
+                .navigationTitle(Strings.Modules.Openvpn.credentials)
+                .themeForm()
+                .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
+
+            case .remotes(let endpoints):
+                OpenVPNView.RemotesView(
+                    endpoints: endpoints,
+                    excludedEndpoints: excludedEndpoints,
+                    remotesRoute: draft.wrappedValue.providerSelection == nil ? OpenVPNView.Subroute.editRemotes : nil
+                )
+
+            case .editRemotes:
+                OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
             }
-            .modifier(ModulePreferencesModifier(
-                moduleId: parameters.module.id,
-                preferences: preferences
-            ))
+        }
+        .modifier(ModulePreferencesModifier(
+            moduleId: parameters.module.id,
+            preferences: preferences
+        ))
     }
 }
 
-private extension DestinationModifier {
+private extension DestinationView {
     var draft: Binding<OpenVPNModule.Builder> {
         guard let builder = parameters.module as? OpenVPNModule.Builder else {
             fatalError("Not a OpenVPNModule.Builder")

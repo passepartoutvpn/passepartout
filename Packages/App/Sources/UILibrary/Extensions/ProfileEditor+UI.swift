@@ -44,32 +44,6 @@ extension ProfileEditor {
     }
 }
 
-// MARK: - Destination
-
-extension View {
-    public func navigationDestinations(for editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
-        modifiers(editor.moduleDestinationModifiers(path: path))
-    }
-}
-
-private extension ProfileEditor {
-    func moduleDestinationModifiers(path: Binding<NavigationPath>) -> [any ViewModifier] {
-        modules.compactMap {
-            guard let provider = $0 as? any ModuleDestinationProviding else {
-                return nil
-            }
-            return provider.moduleDestination(
-                with: .init(
-                    editor: self,
-                    module: $0,
-                    impl: nil
-                ),
-                path: path
-            )
-        }
-    }
-}
-
 // MARK: - Shortcuts
 
 extension ProfileEditor {
