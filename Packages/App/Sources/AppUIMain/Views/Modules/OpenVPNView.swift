@@ -74,6 +74,12 @@ struct OpenVPNView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue)
+            .modifier(ImportModifier(
+                draft: draft,
+                impl: impl,
+                isImporting: $isImporting,
+                errorHandler: errorHandler
+            ))
             .modifier(module.moduleDestination(
                 with: .init(
                     editor: editor,
@@ -82,12 +88,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
                     impl: impl
                 ),
                 path: path
-            ))
-            .modifier(ImportModifier(
-                draft: draft,
-                impl: impl,
-                isImporting: $isImporting,
-                errorHandler: errorHandler
             ))
             .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
