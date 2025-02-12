@@ -44,7 +44,7 @@ extension String: EditableValue {
 }
 
 public struct EditableListSection<ItemView: View, RemoveView: View, EditView: View, T: EditableValue>: View {
-    private let title: String
+    private let title: String?
 
     private let addTitle: String
 
@@ -69,7 +69,7 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
     private var isEditing = false
 
     public init(
-        _ title: String,
+        _ title: String?,
         addTitle: String,
         originalItems: Binding<[T]>,
         emptyValue: (() async -> T)? = nil,

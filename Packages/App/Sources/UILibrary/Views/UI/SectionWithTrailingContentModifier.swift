@@ -30,7 +30,7 @@ extension View {
         modifier(SectionWithTrailingContentModifier(header: nil, trailing: trailing))
     }
 
-    public func asSectionWithHeader<TrailingContent>(_ header: String, @ViewBuilder trailing: @escaping () -> TrailingContent) -> some View where TrailingContent: View {
+    public func asSectionWithHeader<TrailingContent>(_ header: String?, @ViewBuilder trailing: @escaping () -> TrailingContent) -> some View where TrailingContent: View {
         modifier(SectionWithTrailingContentModifier(header: header, trailing: trailing))
     }
 }

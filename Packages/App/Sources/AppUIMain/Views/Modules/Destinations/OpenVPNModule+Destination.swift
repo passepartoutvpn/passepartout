@@ -36,6 +36,8 @@ extension OpenVPNView {
 
         case credentials
 
+        case remotes([ExtendedEndpoint])
+
         case editRemotes
     }
 }
@@ -75,9 +77,7 @@ private struct DestinationModifier: ViewModifier {
                         OpenVPNView.ConfigurationView(
                             isServerPushed: false,
                             configuration: configuration.builder(),
-                            credentialsRoute: nil,
-                            remotesRoute: nil,
-                            excludedEndpoints: excludedEndpoints
+                            credentialsRoute: nil
                         )
                     }
                     .themeForm()
@@ -96,8 +96,15 @@ private struct DestinationModifier: ViewModifier {
                     .themeForm()
                     .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
 
+                case .remotes(let endpoints):
+                    OpenVPNView.RemotesView(
+                        endpoints: endpoints,
+                        excludedEndpoints: excludedEndpoints,
+                        remotesRoute: OpenVPNView.Subroute.editRemotes
+                    )
+
                 case .editRemotes:
-                    OpenVPNView.RemotesView(remotes: editableRemotesBinding)
+                    OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
                 }
             }
     }
