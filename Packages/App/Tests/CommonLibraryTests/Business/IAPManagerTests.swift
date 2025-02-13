@@ -342,6 +342,34 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
+
+    func test_givenFree_whenWithRecurring_thenSuggestsEssentialsAndRecurring() async {
+        let sut = await IAPManager(products: [])
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withRecurring: true), [
+            .Essentials.iOS_macOS,
+            .Essentials.iOS,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly
+        ])
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withRecurring: true), [
+            .Essentials.iOS_macOS,
+            .Essentials.macOS,
+            .Full.Recurring.yearly,
+            .Full.Recurring.monthly
+        ])
+    }
+
+    func test_givenNonFree_whenWithRecurring_thenSuggestsEssentials() async {
+        let sut = await IAPManager(products: [.Features.trustedNetworks])
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withRecurring: true), [
+            .Essentials.iOS_macOS,
+            .Essentials.iOS
+        ])
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withRecurring: true), [
+            .Essentials.iOS_macOS,
+            .Essentials.macOS
+        ])
+    }
 }
 
 // MARK: - App level
