@@ -73,9 +73,9 @@ private extension ProfileStorageSection {
             requiring: sharingRequirements,
             reason: $paywallReason,
             suggesting: {
-                var essentials = iapManager.suggestedEssentialProducts()
-                essentials.insert(.Features.appleTV)
-                return essentials
+                var products = iapManager.suggestedProducts()
+                products.insert(.Features.appleTV)
+                return products
             }()
         )
     }
