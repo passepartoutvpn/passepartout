@@ -54,9 +54,9 @@ public final class Theme: ObservableObject {
 
     public internal(set) var emptyMessageColor: Color = .secondary
 
-    public internal(set) var primaryColor = Color(hex: 0x515d70)
+    public internal(set) var lightAccentColor: Color = .accentColor // gold
 
-    public internal(set) var accentColor = Color(hex: 0xd69c68)
+    public internal(set) var darkAccentColor = Color(hex: 0x515d70) // blue
 
     public internal(set) var activeColor = Color(hex: 0x00aa00)
 
@@ -75,7 +75,22 @@ public final class Theme: ObservableObject {
     }
 
     public var upgradeColor: Color {
-        accentColor
+        pendingColor
+    }
+
+    public func backgroundColor(_ scheme: ColorScheme) -> Color {
+        switch scheme {
+        case .dark:
+#if os(iOS)
+            return Color(.systemBackground)
+#elseif os(macOS)
+            return Color(.windowBackgroundColor)
+#else
+            return .black
+#endif
+        default:
+            return darkAccentColor
+        }
     }
 
     public internal(set) var logoImage = "Logo"

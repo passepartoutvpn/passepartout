@@ -35,7 +35,7 @@ extension Theme {
     }
 
     public var primaryGradient: AnyGradient {
-        primaryColor
+        darkAccentColor
             .opacity(0.6)
             .gradient
     }
