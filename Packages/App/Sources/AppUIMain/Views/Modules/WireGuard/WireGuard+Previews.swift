@@ -1,5 +1,5 @@
 //
-//  WireGuardView+Extensions.swift
+//  WireGuard+Previews.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 1/30/25.
