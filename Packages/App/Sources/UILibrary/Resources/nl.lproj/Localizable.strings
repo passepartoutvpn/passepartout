@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Inbegrepen functies";
 "views.paywall.rows.restore_purchases" = "Aankopen herstellen";
 "views.paywall.sections.all_features.header" = "De volledige versie bevat";
-"views.paywall.sections.full_products.header" = "Volledige versie";
+"views.paywall.sections.full_products.header" = "Alle functies";
 "views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
 "views.paywall.sections.products.header" = "Voorgestelde producten";

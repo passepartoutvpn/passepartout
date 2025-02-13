@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Включені функції";
 "views.paywall.rows.restore_purchases" = "Відновити покупки";
 "views.paywall.sections.all_features.header" = "Повна версія включає";
-"views.paywall.sections.full_products.header" = "Повна версія";
+"views.paywall.sections.full_products.header" = "Усі функції";
 "views.paywall.sections.included_features.header" = "Також включає";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
 "views.paywall.sections.products.header" = "Рекомендовані продукти";

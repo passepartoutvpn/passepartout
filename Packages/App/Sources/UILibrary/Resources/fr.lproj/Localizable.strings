@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Fonctionnalités incluses";
 "views.paywall.rows.restore_purchases" = "Restaurer les achats";
 "views.paywall.sections.all_features.header" = "La version complète inclut";
-"views.paywall.sections.full_products.header" = "Version complète";
+"views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.included_features.header" = "Comprend également";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
 "views.paywall.sections.products.header" = "Produits suggérés";
