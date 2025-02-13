@@ -80,6 +80,7 @@
 "views.paywall.sections.required_features.header" = "Required features";
 "views.paywall.sections.products.header" = "Suggested products";
 "views.paywall.sections.products.footer" = "All purchases support Family Sharing.";
+"views.paywall.sections.full_products.header" = "All features";
 "views.paywall.sections.restore.header" = "Restore";
 "views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
 "views.paywall.rows.restore_purchases" = "Restore purchases";

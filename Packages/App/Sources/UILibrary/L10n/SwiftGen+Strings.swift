@@ -809,6 +809,10 @@ public enum Strings {
         public static let restorePurchases = Strings.tr("Localizable", "views.paywall.rows.restore_purchases", fallback: "Restore purchases")
       }
       public enum Sections {
+        public enum FullProducts {
+          /// All features
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "All features")
+        }
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")

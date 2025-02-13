@@ -87,6 +87,12 @@ extension IAPManager {
             }
             suggested.insert(.Essentials.macOS)
         }
+
+        if purchasedProducts.isEmpty {
+            suggested.insert(.Full.Recurring.yearly)
+            suggested.insert(.Full.Recurring.monthly)
+        }
+
         return suggested
     }
 }
