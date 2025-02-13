@@ -30,6 +30,9 @@ public struct FullScreenView<Icon>: View where Icon: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.colorScheme)
+    private var colorScheme
+
     @ViewBuilder
     private let icon: () -> Icon
 
@@ -39,8 +42,16 @@ public struct FullScreenView<Icon>: View where Icon: View {
 
     public var body: some View {
         ZStack {
-            theme.primaryColor
-                .ignoresSafeArea()
+            Group {
+                switch colorScheme {
+                case .dark:
+                    Color.black
+                default:
+                    theme.primaryColor
+                }
+            }
+            .ignoresSafeArea()
+
             icon()
         }
         .ignoresSafeArea()
