@@ -32,6 +32,9 @@ public struct VersionView<Icon>: View where Icon: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.colorScheme)
+    private var colorScheme
+
     private let icon: () -> Icon
 
     public init(icon: @escaping () -> Icon) {
@@ -43,7 +46,7 @@ public struct VersionView<Icon>: View where Icon: View {
             contentView
         }
 #if os(iOS)
-        .background(theme.primaryColor)
+        .background(theme.backgroundColor(colorScheme))
         .foregroundStyle(.white)
 #endif
     }

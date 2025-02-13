@@ -42,16 +42,8 @@ public struct FullScreenView<Icon>: View where Icon: View {
 
     public var body: some View {
         ZStack {
-            Group {
-                switch colorScheme {
-                case .dark:
-                    Color.black
-                default:
-                    theme.primaryColor
-                }
-            }
-            .ignoresSafeArea()
-
+            theme.backgroundColor(colorScheme)
+                .ignoresSafeArea()
             icon()
         }
         .ignoresSafeArea()
