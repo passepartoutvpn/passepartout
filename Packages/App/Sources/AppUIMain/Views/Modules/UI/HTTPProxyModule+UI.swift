@@ -1,5 +1,5 @@
 //
-//  IPModule+Extensions.swift
+//  HTTPProxyModule+UI.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/17/24.
@@ -28,8 +28,8 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-extension IPModule.Builder: ModuleViewProviding {
+extension HTTPProxyModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        IPView(module: self, parameters: parameters)
+        HTTPProxyView(module: self, parameters: parameters)
     }
 }

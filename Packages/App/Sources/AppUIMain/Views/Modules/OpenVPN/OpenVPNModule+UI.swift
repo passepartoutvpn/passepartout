@@ -1,5 +1,5 @@
 //
-//  OpenVPNModule+Destination.swift
+//  OpenVPNModule+UI.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/12/25.
@@ -28,7 +28,18 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-extension OpenVPNView {
+extension OpenVPNModule.Builder: ModuleViewProviding {
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        OpenVPNView(module: self, parameters: parameters)
+    }
+}
+
+extension OpenVPNModule: ProviderServerCoordinatorSupporting {
+}
+
+// MARK: - Destination
+
+extension OpenVPNModule {
     enum Subroute: Hashable {
         case providerServer
 
@@ -44,7 +55,7 @@ extension OpenVPNView {
 
 extension OpenVPNModule.Builder: ModuleDestinationProviding {
     public func handlesRoute(_ route: AnyHashable) -> Bool {
-        route is OpenVPNView.Subroute
+        route is OpenVPNModule.Subroute
     }
 
     public func moduleDestination(
@@ -52,7 +63,7 @@ extension OpenVPNModule.Builder: ModuleDestinationProviding {
         with parameters: ModuleDestinationParameters,
         path: Binding<NavigationPath>
     ) -> some View {
-        (route as? OpenVPNView.Subroute)
+        (route as? OpenVPNModule.Subroute)
             .map {
                 DestinationView(route: $0, parameters: parameters, path: path)
             }
@@ -60,7 +71,7 @@ extension OpenVPNModule.Builder: ModuleDestinationProviding {
 }
 
 private struct DestinationView: View {
-    let route: OpenVPNView.Subroute
+    let route: OpenVPNModule.Subroute
 
     let parameters: ModuleDestinationParameters
 
@@ -112,7 +123,7 @@ private struct DestinationView: View {
                 OpenVPNView.RemotesView(
                     endpoints: endpoints,
                     excludedEndpoints: excludedEndpoints,
-                    remotesRoute: draft.wrappedValue.providerSelection == nil ? ProfileRoute(OpenVPNView.Subroute.editRemotes) : nil
+                    remotesRoute: draft.wrappedValue.providerSelection == nil ? ProfileRoute(OpenVPNModule.Subroute.editRemotes) : nil
                 )
 
             case .editRemotes:
@@ -169,6 +180,30 @@ private extension DestinationView {
             }
         } catch {
             pp_log(.app, .error, "Unable to build provider configuration for excluded endpoints: \(error)")
+        }
+    }
+}
+
+// MARK: - Shortcuts
+
+extension OpenVPNModule.Builder: ModuleShortcutsProviding {
+    public var isVisible: Bool {
+        providerSelection != nil || configurationBuilder?.authUserPass == true
+    }
+
+    @ViewBuilder
+    public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        if let providerSelection {
+//            ProviderNameRow(id: providerSelection.id)
+            NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.providerServer)) {
+                ProviderServerRow(selectedEntity: providerSelection.entity)
+            }
+            .uiAccessibility(.Profile.providerServerLink)
+        }
+        if providerSelection != nil || configurationBuilder?.authUserPass == true {
+            NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.credentials)) {
+                Text(Strings.Modules.Openvpn.credentials)
+            }
         }
     }
 }

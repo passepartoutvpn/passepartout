@@ -1,5 +1,5 @@
 //
-//  OpenVPNModule+Extensions.swift
+//  OpenVPN+Previews.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/17/24.
@@ -25,42 +25,6 @@
 
 import PassepartoutKit
 import SwiftUI
-import UILibrary
-
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        OpenVPNView(module: self, parameters: parameters)
-    }
-}
-
-extension OpenVPNModule: ProviderServerCoordinatorSupporting {
-}
-
-// MARK: - Shortcuts
-
-extension OpenVPNModule.Builder: ModuleShortcutsProviding {
-    public var isVisible: Bool {
-        providerSelection != nil || configurationBuilder?.authUserPass == true
-    }
-
-    @ViewBuilder
-    public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
-        if let providerSelection {
-//            ProviderNameRow(id: providerSelection.id)
-            NavigationLink(value: ProfileRoute(OpenVPNView.Subroute.providerServer)) {
-                ProviderServerRow(selectedEntity: providerSelection.entity)
-            }
-            .uiAccessibility(.Profile.providerServerLink)
-        }
-        if providerSelection != nil || configurationBuilder?.authUserPass == true {
-            NavigationLink(value: ProfileRoute(OpenVPNView.Subroute.credentials)) {
-                Text(Strings.Modules.Openvpn.credentials)
-            }
-        }
-    }
-}
-
-// MARK: - Previews
 
 // swiftlint: disable force_try
 extension OpenVPN.Configuration.Builder {

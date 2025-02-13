@@ -1,8 +1,8 @@
 //
-//  HTTPProxyModule+Extensions.swift
+//  OnDemandModule+UI.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 2/23/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-extension HTTPProxyModule.Builder: ModuleViewProviding {
+extension OnDemandModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        HTTPProxyView(module: self, parameters: parameters)
+        OnDemandView(module: self, parameters: parameters)
     }
 }
