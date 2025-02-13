@@ -48,7 +48,7 @@ extension AppProduct {
         static let all: [AppProduct] = [
             .Full.OneTime.lifetime,
             .Full.Recurring.monthly,
-            .Full.Recurring.yearly,
+            .Full.Recurring.yearly
         ]
     }
 

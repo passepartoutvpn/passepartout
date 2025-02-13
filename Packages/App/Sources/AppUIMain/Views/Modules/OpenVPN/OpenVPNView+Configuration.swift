@@ -62,10 +62,6 @@ extension OpenVPNView {
     }
 }
 
-// MARK: - Editable
-
-
-
 // MARK: - Constant
 
 private extension OpenVPNView.ConfigurationView {

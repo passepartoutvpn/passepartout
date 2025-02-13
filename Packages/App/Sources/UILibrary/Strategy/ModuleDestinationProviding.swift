@@ -28,10 +28,16 @@ import PassepartoutKit
 import SwiftUI
 
 public protocol ModuleDestinationProviding {
-    associatedtype Destination: ViewModifier
+    associatedtype Destination: View
+
+    func handlesRoute(_ route: AnyHashable) -> Bool
 
     @MainActor
-    func moduleDestination(with parameters: ModuleDestinationParameters, path: Binding<NavigationPath>) -> Destination
+    func moduleDestination(
+        for route: AnyHashable,
+        with parameters: ModuleDestinationParameters,
+        path: Binding<NavigationPath>
+    ) -> Destination
 }
 
 public struct ModuleDestinationParameters {
@@ -39,16 +45,12 @@ public struct ModuleDestinationParameters {
 
     public let module: any ModuleBuilder
 
-    public let impl: (any ModuleImplementation)?
-
     @MainActor
     public init(
         editor: ProfileEditor,
-        module: any ModuleBuilder,
-        impl: (any ModuleImplementation)?
+        module: any ModuleBuilder
     ) {
         self.editor = editor
         self.module = module
-        self.impl = impl
     }
 }
