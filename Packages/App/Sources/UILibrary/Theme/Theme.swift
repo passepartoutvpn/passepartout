@@ -75,7 +75,7 @@ public final class Theme: ObservableObject {
     }
 
     public var upgradeColor: Color {
-        accentColor
+        pendingColor
     }
 
     public internal(set) var logoImage = "Logo"
