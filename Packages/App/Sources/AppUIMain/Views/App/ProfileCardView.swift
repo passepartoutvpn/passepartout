@@ -53,6 +53,8 @@ struct ProfileCardView: View {
                     .font(.headline)
                     .themeMultiLine(true)
             }
+            .uiAccessibility(.App.profileEdit)
+
             tunnelView
                 .font(.subheadline)
 

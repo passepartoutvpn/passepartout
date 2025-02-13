@@ -33,7 +33,7 @@ struct AppScreen {
 
     @discardableResult
     func waitForProfiles() -> Self {
-        app.get(.App.installedProfile)
+        app.get(.App.profilesHeader)
         return self
     }
 
@@ -45,9 +45,9 @@ struct AppScreen {
     }
 
     @discardableResult
-    func openProfileMenu(at index: Int) -> ProfileMenuScreen {
-        let profileMenu = app.get(.App.profileMenu, at: index)
+    func editProfile(at index: Int) -> ProfileEditorScreen {
+        let profileMenu = app.get(.App.profileEdit, at: index)
         profileMenu.tap()
-        return ProfileMenuScreen(app: app)
+        return ProfileEditorScreen(app: app)
     }
 }

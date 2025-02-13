@@ -39,5 +39,6 @@ struct ProfilesHeaderView: View {
                 Text(Strings.Views.Verification.message)
             }
         }
+        .uiAccessibility(.App.profilesHeader)
     }
 }

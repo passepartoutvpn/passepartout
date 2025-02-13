@@ -73,9 +73,6 @@ private extension ProfileRowView {
         )
         .contentShape(.rect)
         .foregroundStyle(.primary)
-
-        // FIXME: ###, UI tests
-        .uiAccessibility(.App.profileMenu)
     }
 
     var attributesView: some View {
@@ -94,7 +91,6 @@ private extension ProfileRowView {
             flow: flow?.connectionFlow
         )
         .labelsHidden()
-        // FIXME: ###, UI tests
         .uiAccessibility(.App.profileToggle)
     }
 }

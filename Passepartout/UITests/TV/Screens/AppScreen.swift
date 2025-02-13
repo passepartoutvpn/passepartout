@@ -35,7 +35,7 @@ struct AppScreen {
 
     @discardableResult
     func waitForProfiles() -> Self {
-        app.get(.App.installedProfile)
+        app.get(.App.profilesHeader)
         return self
     }
 

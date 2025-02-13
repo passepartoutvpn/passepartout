@@ -49,6 +49,13 @@ struct ProfileEditorScreen {
     }
 
     @discardableResult
+    func editProviderServer() -> ProviderServersScreen {
+        let providerServerLink = app.get(.Profile.providerServerLink)
+        providerServerLink.tap()
+        return ProviderServersScreen(app: app)
+    }
+
+    @discardableResult
     func closeProfile() -> AppScreen {
         let cancelButton = app.get(.Profile.cancel)
         cancelButton.tap()

@@ -56,6 +56,7 @@ extension ProfileManager {
                                 ovpnBuilder.isInteractive = true
 #endif
                                 ovpnBuilder.providerEntity = mockHideMeEntity
+                                ovpnBuilder.credentials = OpenVPN.Credentials.Builder(username: "foo", password: "bar").build()
                                 moduleBuilder = ovpnBuilder
                             } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
 #if !os(tvOS)
@@ -91,6 +92,11 @@ extension ProfileManager {
                                 onDemandBuilder.isEnabled = true
                                 moduleBuilder = onDemandBuilder
                             }
+                        }
+
+                        if var wgBuilder = moduleBuilder as? WireGuardModule.Builder {
+                            wgBuilder.configurationBuilder = WireGuard.Configuration.Builder(privateKey: "")
+                            moduleBuilder = wgBuilder
                         }
 
                         let module = try moduleBuilder.tryBuild()
@@ -163,7 +169,7 @@ private extension ProfileManager {
                         serverId: "be-v4",
                         supportedConfigurationIdentifiers: ["OpenVPN"],
                         supportedPresetIds: nil,
-                        categoryName: "",
+                        categoryName: "default",
                         countryCode: "BE",
                         otherCountryCodes: nil,
                         area: nil

@@ -48,11 +48,10 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
     func testTakeScreenshots() async throws {
         let root = AppScreen(app: app)
             .waitForProfiles()
-            .enableProfile(at: 0)
+            .enableProfile(at: 1)
 
         let profile = root
-            .openProfileMenu(at: 2)
-            .editProfile()
+            .editProfile(at: 2)
 
         await pause()
         try snapshot("03", "ProfileEditor", target: .sheet)
@@ -78,8 +77,8 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
         try snapshot("01", "Connected")
 
         app
-            .openProfileMenu(at: 2)
-            .connectToProfile()
+            .editProfile(at: 2)
+            .editProviderServer()
 #if os(iOS)
             .discloseCountry(at: 2)
 #endif
