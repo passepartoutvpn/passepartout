@@ -1,4 +1,17 @@
+* Improve the UX of profile editing and management (#1149)
+* Unpin active profile from preferences (#1159)
+* Add "Reconnect" and "Disconnect" from menu (#1154)
+* Perform provider server action on click country (#1155)
 * OpenVPN: Add shortcuts in main profile view (#1167)
-* Fix primary/accent colors
-* Fix provider server columns wrapping on macOS
-* Fix help captions of attribute icons
+* OpenVPN: Fix random crashes during negotiation (#1161)
+* Fix "No profiles" message flashing on launch (#1147)
+* Fix behavior of "Including" on-demand policy (#1151)
+* Fix on-demand paywall on .any policy
+* Optionally resort to CloudFlare when no DNS settings are provided (#1165)
+* Prevent save profile without active modules (#1164)
+* Add tip to suggest how to build profiles (#1163)
+* Add "Delete profile" in profile editor (#1160)
+* Show the list of features included in each product (#1157)
+* Wrap rather than truncate long profile names (#1150)
+* Import profiles with on-demand enabled for stability (#1148)
+* Fix German translations
