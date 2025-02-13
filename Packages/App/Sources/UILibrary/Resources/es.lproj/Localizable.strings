@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Funciones incluidas";
 "views.paywall.rows.restore_purchases" = "Restaurar compras";
 "views.paywall.sections.all_features.header" = "La versión completa incluye";
-"views.paywall.sections.full_products.header" = "Versión completa";
+"views.paywall.sections.full_products.header" = "Todas las funciones";
 "views.paywall.sections.included_features.header" = "También incluye";
 "views.paywall.sections.products.footer" = "Todas las compras admiten En Familia.";
 "views.paywall.sections.products.header" = "Productos sugeridos";

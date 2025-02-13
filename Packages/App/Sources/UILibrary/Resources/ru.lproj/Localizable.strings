@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Включенные функции";
 "views.paywall.rows.restore_purchases" = "Восстановить покупки";
 "views.paywall.sections.all_features.header" = "Полная версия включает";
-"views.paywall.sections.full_products.header" = "Полная версия";
+"views.paywall.sections.full_products.header" = "Все функции";
 "views.paywall.sections.included_features.header" = "Также включает";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
 "views.paywall.sections.products.header" = "Рекомендуемые продукты";

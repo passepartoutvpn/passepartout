@@ -54,6 +54,9 @@ struct PaywallView: View {
     private var products: [InAppProduct] = []
 
     @State
+    private var fullProducts: [InAppProduct] = []
+
+    @State
     private var purchasingIdentifier: String?
 
     @State
@@ -88,6 +91,7 @@ private extension PaywallView {
         Form {
             requiredFeaturesView
             productsView
+            fullProductsView
             restoreView
             linksView
         }
@@ -128,6 +132,30 @@ private extension PaywallView {
                 }
                 .themeSection(
                     header: Strings.Views.Paywall.Sections.Products.header,
+                    footer: Strings.Views.Paywall.Sections.Products.footer,
+                    forcesFooter: true
+                )
+            }
+    }
+
+    var fullProductsView: some View {
+        fullProducts
+            .nilIfEmpty
+            .map { products in
+                ForEach(products, id: \.productIdentifier) {
+                    PaywallProductView(
+                        iapManager: iapManager,
+                        style: .paywall,
+                        product: $0,
+                        withIncludedFeatures: false,
+                        highlightedFeatures: requiredFeatures,
+                        purchasingIdentifier: $purchasingIdentifier,
+                        onComplete: onComplete,
+                        onError: onError
+                    )
+                }
+                .themeSection(
+                    header: Strings.Views.Paywall.Sections.FullProducts.header,
                     footer: Strings.Views.Paywall.Sections.Products.footer,
                     forcesFooter: true
                 )
@@ -189,22 +217,37 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let rawProducts = suggestedProducts ?? iapManager.suggestedEssentialProducts()
+            let rawProducts = suggestedProducts ?? iapManager.suggestedProducts()
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
+            let rawFullProducts = rawProducts.filter(\.isFullVersion)
 
-            let products = try await iapManager.purchasableProducts(for: rawProducts
+            let allProducts = try await iapManager.purchasableProducts(for: rawProducts
                 .sorted {
                     $0.productRank < $1.productRank
                 }
             )
+            var products: [InAppProduct] = []
+            var fullProducts: [InAppProduct] = []
+            allProducts.forEach {
+                guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
+                    return
+                }
+                if rawFullProducts.contains(raw) {
+                    fullProducts.append($0)
+                } else {
+                    products.append($0)
+                }
+            }
 
             pp_log(.App.iap, .info, "Suggested products: \(products)")
             guard !products.isEmpty else {
                 throw AppError.emptyProducts
             }
+
             self.products = products
+            self.fullProducts = fullProducts
         } catch {
             pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
@@ -252,6 +295,10 @@ private extension AppProduct {
             return 1
         case .Essentials.macOS:
             return 2
+        case .Full.Recurring.yearly:
+            return 3
+        case .Full.Recurring.monthly:
+            return 4
         default:
             return .max
         }

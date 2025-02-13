@@ -266,7 +266,7 @@
 "views.paywall.product.included_features" = "Uwzględnione funkcje";
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
 "views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
-"views.paywall.sections.full_products.header" = "Pełna wersja";
+"views.paywall.sections.full_products.header" = "Wszystkie funkcje";
 "views.paywall.sections.included_features.header" = "Zawiera także";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
 "views.paywall.sections.products.header" = "Sugerowane produkty";
