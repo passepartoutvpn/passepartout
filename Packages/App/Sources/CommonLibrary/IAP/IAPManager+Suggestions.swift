@@ -31,9 +31,9 @@ import PassepartoutKit
 extension IAPManager {
     public func suggestedProducts() -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: .iOS)
+        suggestedProducts(for: .iOS, withRecurring: true)
 #elseif os(macOS)
-        suggestedProducts(for: .macOS)
+        suggestedProducts(for: .macOS, withRecurring: true)
 #elseif os(tvOS)
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
@@ -48,7 +48,11 @@ extension IAPManager {
         case macOS
     }
 
-    func suggestedProducts(for platform: Platform, asserting: Bool = false) -> Set<AppProduct> {
+    func suggestedProducts(
+        for platform: Platform,
+        withRecurring: Bool = false,
+        asserting: Bool = false
+    ) -> Set<AppProduct> {
         guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
             if asserting {
                 assertionFailure("Suggesting 'Essentials' to former all platforms purchaser?")
@@ -88,7 +92,7 @@ extension IAPManager {
             suggested.insert(.Essentials.macOS)
         }
 
-        if purchasedProducts.isEmpty {
+        if withRecurring && purchasedProducts.isEmpty {
             suggested.insert(.Full.Recurring.yearly)
             suggested.insert(.Full.Recurring.monthly)
         }
