@@ -185,7 +185,7 @@ extension ProviderServer {
     public var region: String {
         [metadata.countryCode.localizedAsRegionCode, metadata.area]
             .compactMap { $0 }
-            .joined(separator: " - ")
+            .joined(separator: ", ")
     }
 
     public var address: String {
