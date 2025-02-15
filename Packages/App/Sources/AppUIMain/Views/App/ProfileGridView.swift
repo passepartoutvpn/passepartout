@@ -75,6 +75,9 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                     }
                 }
                 .padding(.horizontal)
+#if os(macOS)
+                .padding(.top)
+#endif
             }
             .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.previews, category: .profiles)
@@ -82,9 +85,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
         .onReceive(tunnel.currentProfilePublisher) {
             currentProfile = $0
         }
-#if os(macOS)
-        .padding(.top)
-#endif
     }
 }
 
