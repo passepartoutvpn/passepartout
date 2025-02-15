@@ -22,7 +22,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" name="PrimaryColor"/>
+                        <color key="backgroundColor" name="DarkAccentColor"/>
                         <constraints>
                             <constraint firstItem="8IV-GE-VGC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2ev-eX-Oo6"/>
                             <constraint firstItem="8IV-GE-VGC" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="cwn-G0-ZER"/>
@@ -36,7 +36,7 @@
     </scenes>
     <resources>
         <image name="Logo" width="200" height="200"/>
-        <namedColor name="PrimaryColor">
+        <namedColor name="DarkAccentColor">
             <color red="0.31764705882352939" green="0.36470588235294116" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
