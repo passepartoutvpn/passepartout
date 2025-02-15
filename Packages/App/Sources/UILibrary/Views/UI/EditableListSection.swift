@@ -44,6 +44,8 @@ extension String: EditableValue {
 }
 
 public struct EditableListSection<ItemView: View, RemoveView: View, EditView: View, T: EditableValue>: View {
+    typealias Item = EditableListSectionItem<T>
+
     private let title: String?
 
     private let addTitle: String
@@ -52,6 +54,8 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
     private var originalItems: [T]
 
     private let emptyValue: (() async -> T)?
+
+    private let canRemove: ([Item]) -> Bool
 
     private let itemLabel: (Bool, Binding<T>) -> ItemView
 
@@ -73,6 +77,7 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
         addTitle: String,
         originalItems: Binding<[T]>,
         emptyValue: (() async -> T)? = nil,
+        canRemove: @escaping ([EditableListSectionItem<T>]) -> Bool = { _ in true },
         @ViewBuilder itemLabel: @escaping (Bool, Binding<T>) -> ItemView,
         @ViewBuilder removeLabel: @escaping (@escaping () -> Void) -> RemoveView,
         @ViewBuilder editLabel: @escaping () -> EditView
@@ -81,6 +86,7 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
         self.addTitle = addTitle
         _originalItems = originalItems
         self.emptyValue = emptyValue
+        self.canRemove = canRemove
         self.itemLabel = itemLabel
         self.removeLabel = removeLabel
         self.editLabel = editLabel
@@ -92,6 +98,7 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
                 itemView(for: item)
             } removeView: {
                 removeView(for: item)
+                    .disabled(!canRemove(items))
             }
             .onDrag {
                 draggingItem = item
@@ -122,17 +129,17 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
     }
 }
 
-private extension EditableListSection {
-    struct Item: Identifiable, Hashable {
-        let id = UUID()
+public struct EditableListSectionItem<T>: Identifiable, Hashable where T: EditableValue {
+    public let id = UUID()
 
-        var value: T
+    public var value: T
 
-        var isEmpty: Bool {
-            value.isEmptyValue
-        }
+    public var isEmpty: Bool {
+        value.isEmptyValue
     }
+}
 
+private extension EditableListSection {
     struct ItemDropDelegate: DropDelegate {
         let item: Item
 
@@ -196,6 +203,10 @@ private extension EditableListSection {
 
     func removeView(for item: Item) -> some View {
         removeLabel {
+            guard canRemove(items) else {
+                assertionFailure("EditableListSection: Remove view should be disabled (!canRemove)")
+                return
+            }
             withAnimation {
                 items.removeAll {
                     $0.id == item.id

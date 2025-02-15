@@ -47,9 +47,7 @@ extension OpenVPNModule {
 
         case credentials
 
-        case remotes([ExtendedEndpoint])
-
-        case editRemotes
+        case remotes
     }
 }
 
@@ -119,15 +117,12 @@ private struct DestinationView: View {
                 .themeForm()
                 .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
 
-            case .remotes(let endpoints):
+            case .remotes:
                 OpenVPNView.RemotesView(
-                    endpoints: endpoints,
+                    configurationBuilder: configurationBuilderBinding,
                     excludedEndpoints: excludedEndpoints,
-                    remotesRoute: draft.wrappedValue.providerSelection == nil ? ProfileRoute(OpenVPNModule.Subroute.editRemotes) : nil
+                    isEditable: draft.wrappedValue.providerSelection == nil
                 )
-
-            case .editRemotes:
-                OpenVPNView.EditableRemotesView(remotes: editableRemotesBinding)
             }
         }
         .modifier(ModulePreferencesModifier(
@@ -145,18 +140,16 @@ private extension DestinationView {
         return parameters.editor[builder]
     }
 
-    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
+    var configurationBuilderBinding: Binding<OpenVPN.Configuration.Builder> {
+        Binding {
+            draft.wrappedValue.configurationBuilder ?? OpenVPN.Configuration.Builder()
+        } set: {
+            draft.wrappedValue.configurationBuilder = $0
+        }
     }
 
-    var editableRemotesBinding: Binding<[String]> {
-        Binding {
-            draft.wrappedValue.configurationBuilder?.remotes?.map(\.rawValue) ?? []
-        } set: {
-            draft.wrappedValue.configurationBuilder?.remotes = $0.compactMap {
-                ExtendedEndpoint(rawValue: $0)
-            }
-        }
+    var excludedEndpoints: ObservableList<ExtendedEndpoint> {
+        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
     }
 
     func onSelectServer(server: ProviderServer, preset: ProviderPreset<OpenVPNProviderTemplate>) {

@@ -29,32 +29,161 @@ import SwiftUI
 
 extension OpenVPNView {
     struct RemotesView: View {
-        let endpoints: [ExtendedEndpoint]
+
+        @Binding
+        var configurationBuilder: OpenVPN.Configuration.Builder
 
         @ObservedObject
         var excludedEndpoints: ObservableList<ExtendedEndpoint>
 
-        let remotesRoute: (any Hashable)?
+        let isEditable: Bool
+
+        @State
+        private var editMode: EditMode = .inactive
+
+        var body: some View {
+            RemotesInnerView(
+                configurationBuilder: $configurationBuilder,
+                excludedEndpoints: excludedEndpoints,
+                isEditable: isEditable
+            )
+            .environment(\.editMode, $editMode)
+        }
+    }
+
+    struct RemotesInnerView: View {
+
+        @EnvironmentObject
+        private var theme: Theme
+
+        @Environment(\.editMode)
+        private var editMode: Binding<EditMode>?
+
+        @Binding
+        var configurationBuilder: OpenVPN.Configuration.Builder
+
+        @ObservedObject
+        var excludedEndpoints: ObservableList<ExtendedEndpoint>
+
+        let isEditable: Bool
 
         var body: some View {
             Form {
-                if let remotesRoute {
-                    Section {
-                        NavigationLink(Strings.Global.Actions.edit, value: remotesRoute)
+                if isEditable {
+#if os(iOS)
+                    if editMode?.wrappedValue == .active {
+                        editableSection
+                    } else {
+                        nonEditableSection
                     }
-                }
-                Section {
-                    ForEach(endpoints, id: \.rawValue) { remote in
-                        SelectableRemoteButton(
-                            remote: remote,
-                            all: Set(endpoints),
-                            excludedEndpoints: excludedEndpoints
-                        )
-                    }
+#else
+                    editableSection
+#endif
+                } else {
+                    nonEditableSection
                 }
             }
             .themeForm()
             .navigationTitle(Strings.Modules.Openvpn.remotes)
+            .toolbar {
+#if os(iOS)
+                EditButton()
+#endif
+            }
+        }
+    }
+}
+
+private extension OpenVPNView.RemotesInnerView {
+    var editableSection: some View {
+        theme.listSection(
+            nil,
+            addTitle: Strings.Global.Actions.add,
+            originalItems: editableRemotesBinding,
+            canEmpty: false,
+            itemLabel: { isEditing, remote in
+#if os(iOS)
+                EditableRemoteRow(remote: remote)
+#else
+                if isEditing {
+                    EditableRemoteRow(remote: remote)
+                } else if let remote = remote.wrappedValue.asEndpoint {
+                    SelectableRemoteButton(
+                        remote: remote,
+                        all: Set(allRemotes),
+                        excludedEndpoints: excludedEndpoints
+                    )
+                } else {
+                    HStack {
+                        Text(remote.wrappedValue.description)
+                        ThemeImage(.warning)
+                    }
+                }
+#endif
+            }
+        )
+        .labelsHidden()
+    }
+
+    var nonEditableSection: some View {
+        Section {
+            ForEach(allRemotes, id: \.rawValue) { remote in
+                SelectableRemoteButton(
+                    remote: remote,
+                    all: Set(allRemotes),
+                    excludedEndpoints: excludedEndpoints
+                )
+            }
+        }
+    }
+}
+
+private extension OpenVPNView.RemotesInnerView {
+    var allRemotes: [ExtendedEndpoint] {
+        configurationBuilder.remotes ?? []
+    }
+
+    var editableRemotesBinding: Binding<[EditableRemote]> {
+        Binding {
+            guard let remotes = configurationBuilder.remotes else {
+                return []
+            }
+            return remotes.map {
+                EditableRemote(
+                    endpoint: "\($0.address):\($0.proto.port)",
+                    socketType: $0.proto.socketType
+                )
+            }
+        } set: {
+            configurationBuilder.remotes = $0.compactMap(\.asEndpoint)
+        }
+    }
+}
+
+// MARK: - Subviews
+
+private struct EditableRemoteRow: View {
+    static let socketTypes: [IPSocketType] = [
+        .udp,
+        .udp4,
+        .udp6,
+        .tcp,
+        .tcp4,
+        .tcp6
+    ]
+
+    @Binding
+    var remote: EditableRemote
+
+    var body: some View {
+        HStack {
+            ThemeTextField("", text: $remote.endpoint, placeholder: Strings.Unlocalized.OpenVPN.Placeholders.endpoint)
+            Spacer()
+            Picker("", selection: $remote.socketType) {
+                ForEach(Self.socketTypes, id: \.self) {
+                    Text($0.rawValue)
+                }
+            }
         }
     }
 }
@@ -95,33 +224,75 @@ private struct SelectableRemoteButton: View {
     }
 }
 
-extension OpenVPNView {
-    struct EditableRemotesView: View {
+// MARK: - View models
 
-        @EnvironmentObject
-        private var theme: Theme
+private struct EditableRemote: Equatable, EditableValue {
+    static let emptyValue = EditableRemote(endpoint: "", socketType: .udp)
 
-        @Binding
-        var remotes: [String]
-
-        var body: some View {
-            Form {
-                theme.listSection(
-                    nil,
-                    addTitle: Strings.Global.Actions.add,
-                    originalItems: $remotes,
-                    itemLabel: {
-                        if $0 {
-                            Text($1.wrappedValue)
-                        } else {
-                            ThemeTextField("", text: $1, placeholder: Strings.Unlocalized.OpenVPN.Placeholders.remote)
-                        }
-                    }
-                )
-            }
-            .labelsHidden()
-            .themeForm()
-            .navigationTitle(Strings.Modules.Openvpn.remotes)
-        }
+    var isEmptyValue: Bool {
+        self == Self.emptyValue
     }
+
+    var endpoint: String
+
+    var socketType: IPSocketType
+
+    var description: String {
+        endpoint
+    }
+}
+
+extension EditableRemote {
+    init(endpoint: ExtendedEndpoint) {
+        self.init(
+            endpoint: "\(endpoint.address):\(endpoint.proto.port)",
+            socketType: endpoint.proto.socketType
+        )
+    }
+
+    var asEndpoint: ExtendedEndpoint? {
+        var components = endpoint.split(separator: ":")
+        guard components.count >= 2, let port = components.last else {
+            return nil
+        }
+        components.removeLast()
+        let address = components.joined(separator: ":")
+        let rawValue = "\(address):\(socketType.rawValue):\(port)"
+        return ExtendedEndpoint(rawValue: rawValue)
+    }
+}
+
+// MARK: - Previews
+
+private struct Preview: View {
+    let isEditable: Bool
+
+    @State
+    private var builder: OpenVPN.Configuration.Builder = .forPreviews
+
+    @State
+    private var list: Set<ExtendedEndpoint> = []
+
+    var body: some View {
+        OpenVPNView.RemotesView(
+            configurationBuilder: $builder,
+            excludedEndpoints: ObservableList<ExtendedEndpoint>(
+                contains: { list.contains($0) },
+                add: { list.insert($0) },
+                remove: { list.remove($0) }
+            ),
+            isEditable: isEditable
+        )
+    }
+}
+
+#Preview("Non-Editable") {
+    Preview(isEditable: false)
+        .withMockEnvironment()
+}
+
+#Preview("Editable") {
+    Preview(isEditable: true)
+        .withMockEnvironment()
+        .themeNavigationStack()
 }
