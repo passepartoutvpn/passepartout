@@ -50,7 +50,11 @@ extension OpenVPNView {
             .environment(\.editMode, $editMode)
         }
     }
+}
 
+// MARK: - Inner view
+
+private extension OpenVPNView {
     struct RemotesInnerView: View {
 
         @EnvironmentObject
@@ -177,7 +181,11 @@ private struct EditableRemoteRow: View {
 
     var body: some View {
         HStack {
-            ThemeTextField("", text: $remote.endpoint, placeholder: Strings.Unlocalized.OpenVPN.Placeholders.endpoint)
+            ThemeTextField(
+                "",
+                text: $remote.endpoint,
+                placeholder: Strings.Unlocalized.OpenVPN.Placeholders.endpoint
+            )
             Spacer()
             Picker("", selection: $remote.socketType) {
                 ForEach(Self.socketTypes, id: \.self) {
