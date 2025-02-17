@@ -45,7 +45,7 @@ extension ExtendedTunnel {
         case .activating, .deactivating:
             return theme.pendingColor
         case .inactive:
-            return theme.inactiveColor
+            return currentProfile?.onDemand == true ? theme.pendingColor : theme.inactiveColor
         }
     }
 
