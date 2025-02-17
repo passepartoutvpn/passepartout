@@ -88,7 +88,7 @@ private extension OpenVPNView {
     @ViewBuilder
     var contentView: some View {
         if let configuration = draft.wrappedValue.configurationBuilder {
-            remotesLink(with: configuration.remotes ?? [])
+            remotesLink
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
@@ -105,13 +105,13 @@ private extension OpenVPNView {
         if draft.wrappedValue.providerSelection == nil {
             importButton
         } else if let configuration = try? draft.wrappedValue.providerSelection?.configuration() {
-            remotesLink(with: configuration.remotes ?? [])
+            remotesLink
             providerConfigurationLink(with: configuration)
         }
     }
 
-    func remotesLink(with endpoints: [ExtendedEndpoint]) -> some View {
-        NavigationLink(Strings.Modules.Openvpn.remotes, value: ProfileRoute(OpenVPNModule.Subroute.remotes(endpoints)))
+    var remotesLink: some View {
+        NavigationLink(Strings.Modules.Openvpn.remotes, value: ProfileRoute(OpenVPNModule.Subroute.remotes))
     }
 
     func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {

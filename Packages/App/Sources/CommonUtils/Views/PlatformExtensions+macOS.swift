@@ -27,6 +27,25 @@ import SwiftUI
 
 #if os(macOS)
 
+//public struct EditButton: View {
+//
+//    @Environment(\.editMode)
+//    private var editMode: Binding<EditMode>?
+//
+//    public init() {
+//    }
+//
+//    public var body: some View {
+//        Button(!isEditing ? "Edit" : "Done") {
+//           editMode?.wrappedValue = !isEditing ? .active : .inactive
+//        }
+//    }
+//
+//    private var isEditing: Bool {
+//        editMode?.wrappedValue == .active
+//    }
+//}
+
 public enum EditMode {
     case inactive
 

@@ -30,7 +30,7 @@ extension Strings {
     public enum Unlocalized {
         public enum OpenVPN {
             public enum Placeholders {
-                public static let remote = "1.1.1.1:UDP:2222"
+                public static let endpoint = "1.1.1.1:2222"
             }
 
             public enum XOR: String {
