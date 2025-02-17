@@ -54,7 +54,7 @@ struct PaywallView: View {
     private var products: [InAppProduct] = []
 
     @State
-    private var fullProducts: [InAppProduct] = []
+    private var completeProducts: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -91,7 +91,7 @@ private extension PaywallView {
         Form {
             requiredFeaturesView
             productsView
-            fullProductsView
+            completeProductsView
             restoreView
             linksView
         }
@@ -138,8 +138,8 @@ private extension PaywallView {
             }
     }
 
-    var fullProductsView: some View {
-        fullProducts
+    var completeProductsView: some View {
+        completeProducts
             .nilIfEmpty
             .map { products in
                 ForEach(products, id: \.productIdentifier) {
@@ -221,7 +221,7 @@ private extension PaywallView {
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
-            let rawFullProducts = rawProducts.filter(\.isFullVersion)
+            let rawCompleteProducts = rawProducts.filter(\.isComplete)
 
             let allProducts = try await iapManager.purchasableProducts(for: rawProducts
                 .sorted {
@@ -229,13 +229,13 @@ private extension PaywallView {
                 }
             )
             var products: [InAppProduct] = []
-            var fullProducts: [InAppProduct] = []
+            var completeProducts: [InAppProduct] = []
             allProducts.forEach {
                 guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
                     return
                 }
-                if rawFullProducts.contains(raw) {
-                    fullProducts.append($0)
+                if rawCompleteProducts.contains(raw) {
+                    completeProducts.append($0)
                 } else {
                     products.append($0)
                 }
@@ -247,7 +247,7 @@ private extension PaywallView {
             }
 
             self.products = products
-            self.fullProducts = fullProducts
+            self.completeProducts = completeProducts
         } catch {
             pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)

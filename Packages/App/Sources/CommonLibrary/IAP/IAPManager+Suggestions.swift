@@ -59,9 +59,9 @@ extension IAPManager {
             }
             return []
         }
-        guard !purchasedProducts.contains(where: \.isFullVersion) else {
+        guard !purchasedProducts.contains(where: \.isComplete) else {
             if asserting {
-                assertionFailure("Suggesting 'Essentials' to full version purchaser?")
+                assertionFailure("Suggesting 'Essentials' to complete version purchaser?")
             }
             return []
         }

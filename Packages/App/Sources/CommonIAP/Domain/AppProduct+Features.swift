@@ -93,7 +93,7 @@ extension AppProduct.Full {
 }
 
 extension AppProduct {
-    public var isFullVersion: Bool {
+    public var isComplete: Bool {
         switch self {
         case .Full.Recurring.yearly,
                 .Full.Recurring.monthly,
