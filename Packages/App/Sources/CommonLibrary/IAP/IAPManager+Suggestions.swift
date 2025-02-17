@@ -31,9 +31,9 @@ import PassepartoutKit
 extension IAPManager {
     public func suggestedProducts() -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: .iOS, withRecurring: true)
+        suggestedProducts(for: .iOS, withComplete: true)
 #elseif os(macOS)
-        suggestedProducts(for: .macOS, withRecurring: true)
+        suggestedProducts(for: .macOS, withComplete: true)
 #elseif os(tvOS)
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
@@ -50,7 +50,7 @@ extension IAPManager {
 
     func suggestedProducts(
         for platform: Platform,
-        withRecurring: Bool = false,
+        withComplete: Bool = false,
         asserting: Bool = false
     ) -> Set<AppProduct> {
         guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
@@ -59,9 +59,9 @@ extension IAPManager {
             }
             return []
         }
-        guard !purchasedProducts.contains(where: \.isFullVersion) else {
+        guard !purchasedProducts.contains(where: \.isComplete) else {
             if asserting {
-                assertionFailure("Suggesting 'Essentials' to full version purchaser?")
+                assertionFailure("Suggesting 'Essentials' to complete version purchaser?")
             }
             return []
         }
@@ -92,9 +92,10 @@ extension IAPManager {
             suggested.insert(.Essentials.macOS)
         }
 
-        if withRecurring && purchasedProducts.isEmpty {
-            suggested.insert(.Full.Recurring.yearly)
-            suggested.insert(.Full.Recurring.monthly)
+        if withComplete && purchasedProducts.isEmpty {
+            suggested.insert(.Complete.Recurring.yearly)
+            suggested.insert(.Complete.Recurring.monthly)
+            suggested.insert(.Complete.OneTime.lifetime)
         }
 
         return suggested

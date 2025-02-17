@@ -43,11 +43,11 @@ extension AppProduct {
         ]
     }
 
-    public enum Full {
+    public enum Complete {
         static let all: [AppProduct] = [
-            .Full.OneTime.lifetime,
-            .Full.Recurring.monthly,
-            .Full.Recurring.yearly
+            .Complete.OneTime.lifetime,
+            .Complete.Recurring.monthly,
+            .Complete.Recurring.yearly
         ]
     }
 
@@ -80,20 +80,24 @@ extension AppProduct.Features {
     public static let appleTV = AppProduct(featureId: "appletv")
 }
 
-extension AppProduct.Full {
+extension AppProduct.Complete {
     public enum Recurring {
         public static let monthly = AppProduct(featureId: "full.monthly")
 
         public static let yearly = AppProduct(featureId: "full.yearly")
     }
+
+    public enum OneTime {
+        public static let lifetime = AppProduct(featureId: "full.lifetime")
+    }
 }
 
 extension AppProduct {
-    public var isFullVersion: Bool {
+    public var isComplete: Bool {
         switch self {
-        case .Full.Recurring.yearly,
-                .Full.Recurring.monthly,
-                .Full.OneTime.lifetime:
+        case .Complete.Recurring.yearly,
+                .Complete.Recurring.monthly,
+                .Complete.OneTime.lifetime:
             return true
         default:
             return false
@@ -102,7 +106,7 @@ extension AppProduct {
 
     public var isRecurring: Bool {
         switch self {
-        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return true
         default:
             return false
@@ -119,12 +123,4 @@ extension AppProduct.Features {
     public static let networkSettings = AppProduct(featureId: "network_settings")
 
     public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
-}
-
-extension AppProduct.Full {
-    public enum OneTime {
-
-        @available(*, deprecated)
-        public static let lifetime = AppProduct(featureId: "full.lifetime")
-    }
 }
