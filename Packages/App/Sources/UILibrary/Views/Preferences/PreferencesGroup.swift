@@ -32,6 +32,9 @@ import SwiftUI
 
 public struct PreferencesGroup: View {
 
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
+
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
@@ -56,6 +59,7 @@ public struct PreferencesGroup: View {
     }
 
     public var body: some View {
+        systemAppearancePicker
 #if os(iOS)
         lockInBackgroundToggle
 #elseif os(macOS)
@@ -69,6 +73,20 @@ public struct PreferencesGroup: View {
 }
 
 private extension PreferencesGroup {
+    static let systemAppearances: [SystemAppearance?] = [
+        nil,
+        .light,
+        .dark
+    ]
+
+    var systemAppearancePicker: some View {
+        Picker(Strings.Views.Preferences.systemAppearance, selection: $systemAppearance) {
+            ForEach(Self.systemAppearances, id: \.self) {
+                Text($0.localizedDescription)
+            }
+        }
+    }
+
 #if os(iOS)
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Preferences.locksInBackground, isOn: $locksInBackground)

@@ -93,6 +93,16 @@ public enum Strings {
       /// Inactive
       public static let inactive = Strings.tr("Localizable", "entities.tunnel_status.inactive", fallback: "Inactive")
     }
+    public enum Ui {
+      public enum SystemAppearance {
+        /// Dark
+        public static let dark = Strings.tr("Localizable", "entities.ui.system_appearance.dark", fallback: "Dark")
+        /// Light
+        public static let light = Strings.tr("Localizable", "entities.ui.system_appearance.light", fallback: "Light")
+        /// System
+        public static let system = Strings.tr("Localizable", "entities.ui.system_appearance.system", fallback: "System")
+      }
+    }
   }
   public enum Errors {
     public enum App {
@@ -844,6 +854,8 @@ public enum Strings {
       public static let locksInBackground = Strings.tr("Localizable", "views.preferences.locks_in_background", fallback: "Lock in background")
       /// Pin active profile
       public static let pinsActiveProfile = Strings.tr("Localizable", "views.preferences.pins_active_profile", fallback: "Pin active profile")
+      /// Appearance
+      public static let systemAppearance = Strings.tr("Localizable", "views.preferences.system_appearance", fallback: "Appearance")
       public enum DnsFallsBack {
         /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.
         public static let footer = Strings.tr("Localizable", "views.preferences.dns_falls_back.footer", fallback: "Fall back to CloudFlare servers when the VPN does not provide DNS settings.")

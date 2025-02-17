@@ -1,8 +1,8 @@
 //
-//  UIPreference.swift
+//  UILibrary+L10n.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/26/24.
+//  Created by Davide De Rosa on 2/17/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,25 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import CommonUtils
 import Foundation
 
-public enum UIPreference: String, PreferenceProtocol {
-    case keepsInMenu
-
-    case locksInBackground
-
-    case onboardingStep
-
-    case onlyShowsFavorites
-
-    case pinsActiveProfile
-
-    case profilesLayout
-
-    case systemAppearance
-
-    public var key: String {
-        "UI.\(rawValue)"
+extension Optional: LocalizableEntity where Wrapped == SystemAppearance {
+    public var localizedDescription: String {
+        let V = Strings.Entities.Ui.SystemAppearance.self
+        switch self {
+        case .none: return V.system
+        case .light: return V.light
+        case .dark: return V.dark
+        }
     }
 }
