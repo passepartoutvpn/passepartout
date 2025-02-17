@@ -343,29 +343,31 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
 
-    func test_givenFree_whenWithRecurring_thenSuggestsEssentialsAndRecurring() async {
+    func test_givenFree_whenWithComplete_thenSuggestsEssentialsAndComplete() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withRecurring: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Full.Recurring.yearly,
-            .Full.Recurring.monthly
+            .Full.Recurring.monthly,
+            .Full.OneTime.lifetime
         ])
-        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withRecurring: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
             .Full.Recurring.yearly,
-            .Full.Recurring.monthly
+            .Full.Recurring.monthly,
+            .Full.OneTime.lifetime
         ])
     }
 
-    func test_givenNonFree_whenWithRecurring_thenSuggestsEssentials() async {
+    func test_givenNonFree_whenWithComplete_thenSuggestsEssentials() async {
         let sut = await IAPManager(products: [.Features.trustedNetworks])
-        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withRecurring: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
-        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withRecurring: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.macOS
         ])

@@ -86,6 +86,10 @@ extension AppProduct.Full {
 
         public static let yearly = AppProduct(featureId: "full.yearly")
     }
+
+    public enum OneTime {
+        public static let lifetime = AppProduct(featureId: "full.lifetime")
+    }
 }
 
 extension AppProduct {
@@ -119,12 +123,4 @@ extension AppProduct.Features {
     public static let networkSettings = AppProduct(featureId: "network_settings")
 
     public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
-}
-
-extension AppProduct.Full {
-    public enum OneTime {
-
-        @available(*, deprecated)
-        public static let lifetime = AppProduct(featureId: "full.lifetime")
-    }
 }
