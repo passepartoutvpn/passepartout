@@ -74,7 +74,7 @@ private extension WireGuardView.ConfigurationView {
     }
 
     var dnsSection: some View {
-        themeModuleSection(if: dnsRows, header: Strings.Unlocalized.dns) {
+        themeModuleSection(header: Strings.Unlocalized.dns) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.servers,
                 value: $model.dnsServers
