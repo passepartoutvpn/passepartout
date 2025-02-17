@@ -74,8 +74,8 @@ private extension CommonLibrary {
 
     func configureShared() {
         UserDefaults.appGroup.register(defaults: [
-            AppPreference.logsPrivateData.key: false,
-            AppPreference.dnsFallsBack.key: true
+            AppPreference.dnsFallsBack.key: true,
+            AppPreference.logsPrivateData.key: false
         ])
     }
 }

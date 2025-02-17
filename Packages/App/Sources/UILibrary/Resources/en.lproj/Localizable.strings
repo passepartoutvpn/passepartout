@@ -98,6 +98,7 @@
 "views.paywall.alerts.restricted.message" = "Some features are unavailable in this build.";
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
 
+"views.preferences.system_appearance" = "Appearance";
 "views.preferences.launches_on_login" = "Launch on login";
 "views.preferences.launches_on_login.footer" = "Open the app in background after login.";
 "views.preferences.keeps_in_menu" = "Keep in menu bar";
@@ -234,6 +235,12 @@
 "entities.openvpn.otp_method.none" = "None";
 "entities.openvpn.otp_method.append" = "Append";
 "entities.openvpn.otp_method.encode" = "Encode";
+
+// MARK: Entities (Library)
+
+"entities.ui.system_appearance.system" = "System";
+"entities.ui.system_appearance.light" = "Light";
+"entities.ui.system_appearance.dark" = "Dark";
 
 // MARK: - Features
 

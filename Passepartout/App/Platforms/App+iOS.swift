@@ -52,6 +52,7 @@ extension PassepartoutApp {
                 .withEnvironment(from: context, theme: theme)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
                 .tint(.accentColor)
+                .themeAppearance(systemScheme: colorScheme)
         }
     }
 }

@@ -65,6 +65,10 @@ public enum ThemeModalSize: Hashable {
 }
 
 extension View {
+    public func themeAppearance(systemScheme: ColorScheme) -> some View {
+        modifier(ThemeAppearanceModifier(systemScheme: systemScheme))
+    }
+
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
         options: ThemeModalOptions? = nil,
@@ -335,6 +339,12 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.colorScheme)
+    private var colorScheme
+
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
+
     @Binding
     var isPresented: Bool
 
@@ -358,6 +368,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
+                    .themeAppearance(systemScheme: colorScheme)
             }
     }
 }
@@ -366,6 +377,12 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 
     @EnvironmentObject
     private var theme: Theme
+
+    @Environment(\.colorScheme)
+    private var colorScheme
+
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
 
     @Binding
     var item: T?
@@ -390,6 +407,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
+                    .themeAppearance(systemScheme: colorScheme)
             }
     }
 }
@@ -453,6 +471,19 @@ struct ThemeNavigationStackModifier: ViewModifier {
 }
 
 // MARK: - Content modifiers
+
+struct ThemeAppearanceModifier: ViewModifier {
+
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
+
+    let systemScheme: ColorScheme
+
+    func body(content: Content) -> some View {
+        content
+            .preferredColorScheme(systemAppearance.colorScheme ?? systemScheme)
+    }
+}
 
 struct ThemeManualInputModifier: ViewModifier {
 }
