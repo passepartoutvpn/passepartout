@@ -105,29 +105,34 @@ private extension OpenVPNView.RemotesInnerView {
             addTitle: Strings.Global.Actions.add,
             originalItems: editableRemotesBinding,
             canEmpty: false,
-            itemLabel: { isEditing, remote in
-#if os(iOS)
-                EditableRemoteRow(remote: remote)
-#else
-                if isEditing {
-                    EditableRemoteRow(remote: remote)
-                } else if let remote = remote.wrappedValue.asEndpoint {
-                    SelectableRemoteButton(
-                        remote: remote,
-                        all: Set(allRemotes),
-                        excludedEndpoints: excludedEndpoints
-                    )
-                } else {
-                    HStack {
-                        ThemeImage(.warning)
-                        Text(remote.wrappedValue.description)
-                    }
-                }
-#endif
-            }
+            itemLabel: editableLabel
         )
         .labelsHidden()
     }
+
+#if os(iOS)
+    func editableLabel(isEditing: Bool, remote: Binding<EditableRemote>) -> some View {
+        EditableRemoteRow(remote: remote)
+    }
+#else
+    @ViewBuilder
+    func editableLabel(isEditing: Bool, remote: Binding<EditableRemote>) -> some View {
+        if isEditing {
+            EditableRemoteRow(remote: remote)
+        } else if let remote = remote.wrappedValue.asEndpoint {
+            SelectableRemoteButton(
+                remote: remote,
+                all: Set(allRemotes),
+                excludedEndpoints: excludedEndpoints
+            )
+        } else {
+            HStack {
+                ThemeImage(.warning)
+                Text(remote.wrappedValue.description)
+            }
+        }
+    }
+#endif
 
     var nonEditableSection: some View {
         Section {
