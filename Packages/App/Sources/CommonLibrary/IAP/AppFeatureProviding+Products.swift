@@ -70,10 +70,10 @@ extension AppProduct: AppFeatureProviding {
 #endif
             return eligible
 
-        // MARK: Discontinued
-
         case .Complete.OneTime.lifetime, .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return AppFeature.allCases
+
+        // MARK: Discontinued
 
         case .Features.allProviders:
             return [.providers]
