@@ -242,7 +242,7 @@ private extension PaywallView {
             }
 
             pp_log(.App.iap, .info, "Suggested products: \(products)")
-            guard !products.isEmpty else {
+            guard !products.isEmpty || !completeProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
 
