@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Ενεργό";
 "entities.tunnel_status.deactivating" = "Απενεργοποίηση";
 "entities.tunnel_status.inactive" = "Ανενεργό";
+"entities.ui.system_appearance.dark" = "Σκούρο";
+"entities.ui.system_appearance.light" = "Φωτεινό";
+"entities.ui.system_appearance.system" = "Σύστημα";
 "errors.app.default" = "Δεν ήταν δυνατή η ολοκλήρωση της λειτουργίας.";
 "errors.app.duplicate" = "Δεν ήταν δυνατή η αντιγραφή του προφίλ '%@'.";
 "errors.app.empty_products" = "Δεν ήταν δυνατή η ανάκτηση προϊόντων, παρακαλώ δοκιμάστε αργότερα.";
@@ -286,6 +289,7 @@
 "views.preferences.locks_in_background.footer" = "Κλειδώστε την εφαρμογή με το FaceID όταν αποστέλλεται στο παρασκήνιο.";
 "views.preferences.pins_active_profile" = "Καρφίτσωμα ενεργού προφίλ";
 "views.preferences.pins_active_profile.footer" = "Εμφανίζει επίσης το ενεργό προφίλ στην κορυφή για γρήγορη πρόσβαση.";
+"views.preferences.system_appearance" = "Εμφάνιση";
 "views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";

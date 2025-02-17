@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "已激活";
 "entities.tunnel_status.deactivating" = "停用中";
 "entities.tunnel_status.inactive" = "未激活";
+"entities.ui.system_appearance.dark" = "深色";
+"entities.ui.system_appearance.light" = "浅色";
+"entities.ui.system_appearance.system" = "系统";
 "errors.app.default" = "无法完成操作。";
 "errors.app.duplicate" = "无法复制配置文件 \"%@\"。";
 "errors.app.empty_products" = "无法获取产品，请稍后重试。";
@@ -286,6 +289,7 @@
 "views.preferences.locks_in_background.footer" = "当应用切换到后台时，使用 FaceID 锁定它。";
 "views.preferences.pins_active_profile" = "固定活动配置文件";
 "views.preferences.pins_active_profile.footer" = "还会在顶部显示活动配置文件，以便快速访问。";
+"views.preferences.system_appearance" = "外观";
 "views.profile.alerts.purchase.buttons.ok" = "仍然保存";
 "views.profile.module_list.section.footer" = "点击模块以编辑其设置。可以拖动模块来确定优先级。";
 "views.profile.rows.add_module" = "添加模块";

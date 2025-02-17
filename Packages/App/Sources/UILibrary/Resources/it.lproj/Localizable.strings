@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Attivo";
 "entities.tunnel_status.deactivating" = "Disattivazione";
 "entities.tunnel_status.inactive" = "Inattivo";
+"entities.ui.system_appearance.dark" = "Scuro";
+"entities.ui.system_appearance.light" = "Chiaro";
+"entities.ui.system_appearance.system" = "Sistema";
 "errors.app.default" = "Impossibile completare l'operazione.";
 "errors.app.duplicate" = "Impossibile duplicare il profilo '%@'.";
 "errors.app.empty_products" = "Impossibile recuperare i prodotti, riprova più tardi.";
@@ -286,6 +289,7 @@
 "views.preferences.locks_in_background.footer" = "Blocca l'app con FaceID quando viene inviata in background.";
 "views.preferences.pins_active_profile" = "Fissa profilo attivo";
 "views.preferences.pins_active_profile.footer" = "Mostra anche il profilo attivo in cima per un accesso rapido.";
+"views.preferences.system_appearance" = "Aspetto";
 "views.profile.alerts.purchase.buttons.ok" = "Salva comunque";
 "views.profile.module_list.section.footer" = "Tocca i moduli per modificarne le impostazioni. Possono essere trascinati per determinare la priorità.";
 "views.profile.rows.add_module" = "Aggiungi modulo";

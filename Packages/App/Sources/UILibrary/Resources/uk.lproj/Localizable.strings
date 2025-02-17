@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Активний";
 "entities.tunnel_status.deactivating" = "Деактивація";
 "entities.tunnel_status.inactive" = "Неактивний";
+"entities.ui.system_appearance.dark" = "Темна";
+"entities.ui.system_appearance.light" = "Світла";
+"entities.ui.system_appearance.system" = "Система";
 "errors.app.default" = "Не вдалося завершити операцію.";
 "errors.app.duplicate" = "Не вдалося дублювати профіль '%@'.";
 "errors.app.empty_products" = "Не вдалося отримати продукти, спробуйте пізніше.";
@@ -286,6 +289,7 @@
 "views.preferences.locks_in_background.footer" = "Блокуйте додаток за допомогою FaceID, коли він переходе у фоновий режим.";
 "views.preferences.pins_active_profile" = "Закріпити активний профіль";
 "views.preferences.pins_active_profile.footer" = "Також показує активний профіль зверху для швидкого доступу.";
+"views.preferences.system_appearance" = "Зовнішній вигляд";
 "views.profile.alerts.purchase.buttons.ok" = "Зберегти все одно";
 "views.profile.module_list.section.footer" = "Торкніться модулів, щоб змінити їхні налаштування. Їх можна перетягувати для визначення пріоритету.";
 "views.profile.rows.add_module" = "Додати модуль";

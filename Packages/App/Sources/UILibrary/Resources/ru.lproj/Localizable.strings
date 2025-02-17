@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Активный";
 "entities.tunnel_status.deactivating" = "Деактивация";
 "entities.tunnel_status.inactive" = "Неактивный";
+"entities.ui.system_appearance.dark" = "Тёмная";
+"entities.ui.system_appearance.light" = "Светлая";
+"entities.ui.system_appearance.system" = "Система";
 "errors.app.default" = "Не удалось выполнить операцию.";
 "errors.app.duplicate" = "Не удалось дублировать профиль '%@'.";
 "errors.app.empty_products" = "Не удалось получить продукты, повторите позже.";
@@ -286,6 +289,7 @@
 "views.preferences.locks_in_background.footer" = "Блокируйте приложение с помощью FaceID, когда оно переводится в фоновый режим.";
 "views.preferences.pins_active_profile" = "Закрепить активный профиль";
 "views.preferences.pins_active_profile.footer" = "Также отображает активный профиль сверху для быстрого доступа.";
+"views.preferences.system_appearance" = "Внешний вид";
 "views.profile.alerts.purchase.buttons.ok" = "Сохранить в любом случае";
 "views.profile.module_list.section.footer" = "Нажмите на модули, чтобы изменить их настройки. Их можно перетаскивать для установки приоритета.";
 "views.profile.rows.add_module" = "Добавить модуль";
