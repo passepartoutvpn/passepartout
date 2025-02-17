@@ -73,7 +73,7 @@ private extension AddProfileMenu {
 
     var providerProfileMenu: some View {
         Menu {
-            ForEach(supportedModuleTypes, content: providerSubmenu(for:))
+            ForEach(supportedProviderModuleTypes, content: providerSubmenu(for:))
         } label: {
             ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.provider, .profileProvider)
         }
@@ -104,7 +104,7 @@ private extension AddProfileMenu {
     }
 
     // TODO: #657, define this list in a single global place
-    var supportedModuleTypes: [ModuleType] {
+    var supportedProviderModuleTypes: [ModuleType] {
         [.openVPN]
     }
 }
