@@ -335,6 +335,9 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
+
     @Binding
     var isPresented: Bool
 
@@ -358,6 +361,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
+                    .preferredColorScheme(systemAppearance.colorScheme)
             }
     }
 }
@@ -366,6 +370,9 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 
     @EnvironmentObject
     private var theme: Theme
+
+    @AppStorage(UIPreference.systemAppearance.key)
+    private var systemAppearance: SystemAppearance?
 
     @Binding
     var item: T?
@@ -390,6 +397,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
+                    .preferredColorScheme(systemAppearance.colorScheme)
             }
     }
 }
