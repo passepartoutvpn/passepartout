@@ -103,7 +103,7 @@ private extension AddProfileMenu {
         profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
     }
 
-    // TODO: #657, define this list in a single global place
+    // TODO: #507, define this list in a single global place
     var supportedProviderModuleTypes: [ModuleType] {
         [.openVPN]
     }

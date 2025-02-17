@@ -98,7 +98,11 @@ private extension WireGuardView {
     }
 
     func importConfiguration(from url: URL) {
-        // TODO: #657, import draft from external URL
+        // TODO: #397, import draft from external URL
+    }
+
+    func editConfiguration() {
+        // TODO: #397, edit configuration as text
     }
 }
 
