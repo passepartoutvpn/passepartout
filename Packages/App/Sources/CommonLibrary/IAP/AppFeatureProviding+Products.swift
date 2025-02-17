@@ -72,7 +72,7 @@ extension AppProduct: AppFeatureProviding {
 
         // MARK: Discontinued
 
-        case .Full.OneTime.lifetime, .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .Complete.OneTime.lifetime, .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return AppFeature.allCases
 
         case .Features.allProviders:

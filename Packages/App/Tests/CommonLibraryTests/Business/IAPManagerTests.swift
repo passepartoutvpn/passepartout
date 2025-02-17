@@ -326,19 +326,19 @@ extension IAPManagerTests {
     }
 
     func test_givenLifetime_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.OneTime.lifetime])
+        let sut = await IAPManager(products: [.Complete.OneTime.lifetime])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
 
     func test_givenRecurringMonthly_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.Recurring.monthly])
+        let sut = await IAPManager(products: [.Complete.Recurring.monthly])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
 
     func test_givenRecurringYearly_thenSuggestsNothing() async {
-        let sut = await IAPManager(products: [.Full.Recurring.yearly])
+        let sut = await IAPManager(products: [.Complete.Recurring.yearly])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS), [])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS), [])
     }
@@ -348,16 +348,16 @@ extension IAPManagerTests {
         XCTAssertEqual(sut.suggestedProducts(for: .iOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
-            .Full.Recurring.yearly,
-            .Full.Recurring.monthly,
-            .Full.OneTime.lifetime
+            .Complete.Recurring.yearly,
+            .Complete.Recurring.monthly,
+            .Complete.OneTime.lifetime
         ])
         XCTAssertEqual(sut.suggestedProducts(for: .macOS, withComplete: true), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
-            .Full.Recurring.yearly,
-            .Full.Recurring.monthly,
-            .Full.OneTime.lifetime
+            .Complete.Recurring.yearly,
+            .Complete.Recurring.monthly,
+            .Complete.OneTime.lifetime
         ])
     }
 

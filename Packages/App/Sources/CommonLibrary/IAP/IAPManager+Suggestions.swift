@@ -93,9 +93,9 @@ extension IAPManager {
         }
 
         if withComplete && purchasedProducts.isEmpty {
-            suggested.insert(.Full.Recurring.yearly)
-            suggested.insert(.Full.Recurring.monthly)
-            suggested.insert(.Full.OneTime.lifetime)
+            suggested.insert(.Complete.Recurring.yearly)
+            suggested.insert(.Complete.Recurring.monthly)
+            suggested.insert(.Complete.OneTime.lifetime)
         }
 
         return suggested

@@ -295,9 +295,9 @@ private extension AppProduct {
             return 1
         case .Essentials.macOS:
             return 2
-        case .Full.Recurring.yearly:
+        case .Complete.Recurring.yearly:
             return 3
-        case .Full.Recurring.monthly:
+        case .Complete.Recurring.monthly:
             return 4
         default:
             return .max

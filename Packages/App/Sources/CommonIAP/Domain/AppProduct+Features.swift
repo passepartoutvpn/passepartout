@@ -43,11 +43,11 @@ extension AppProduct {
         ]
     }
 
-    public enum Full {
+    public enum Complete {
         static let all: [AppProduct] = [
-            .Full.OneTime.lifetime,
-            .Full.Recurring.monthly,
-            .Full.Recurring.yearly
+            .Complete.OneTime.lifetime,
+            .Complete.Recurring.monthly,
+            .Complete.Recurring.yearly
         ]
     }
 
@@ -80,7 +80,7 @@ extension AppProduct.Features {
     public static let appleTV = AppProduct(featureId: "appletv")
 }
 
-extension AppProduct.Full {
+extension AppProduct.Complete {
     public enum Recurring {
         public static let monthly = AppProduct(featureId: "full.monthly")
 
@@ -95,9 +95,9 @@ extension AppProduct.Full {
 extension AppProduct {
     public var isComplete: Bool {
         switch self {
-        case .Full.Recurring.yearly,
-                .Full.Recurring.monthly,
-                .Full.OneTime.lifetime:
+        case .Complete.Recurring.yearly,
+                .Complete.Recurring.monthly,
+                .Complete.OneTime.lifetime:
             return true
         default:
             return false
@@ -106,7 +106,7 @@ extension AppProduct {
 
     public var isRecurring: Bool {
         switch self {
-        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+        case .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return true
         default:
             return false

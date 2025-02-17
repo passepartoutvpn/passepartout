@@ -39,7 +39,7 @@ public struct AppProduct: RawRepresentable, Hashable, Sendable {
 
 extension AppProduct {
     public static var all: [Self] {
-        Features.all + Essentials.all + Full.all + Donations.all
+        Features.all + Essentials.all + Complete.all + Donations.all
     }
 }
 
