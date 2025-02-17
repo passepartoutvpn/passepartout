@@ -65,8 +65,8 @@ public enum ThemeModalSize: Hashable {
 }
 
 extension View {
-    public func themeAppearance(_ appearance: SystemAppearance?, defaultScheme: ColorScheme) -> some View {
-        preferredColorScheme(appearance.colorScheme ?? defaultScheme)
+    public func themeAppearance() -> some View {
+        modifier(ThemeAppearanceModifier())
     }
 
     public func themeModal<Content>(
@@ -368,7 +368,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
-                    .themeAppearance(systemAppearance, defaultScheme: colorScheme)
+                    .themeAppearance()
             }
     }
 }
@@ -407,7 +407,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 #endif
                     .interactiveDismissDisabled(!options.isInteractive)
                     .themeLockScreen()
-                    .themeAppearance(systemAppearance, defaultScheme: colorScheme)
+                    .themeAppearance()
             }
     }
 }
@@ -471,6 +471,20 @@ struct ThemeNavigationStackModifier: ViewModifier {
 }
 
 // MARK: - Content modifiers
+
+struct ThemeAppearanceModifier: ViewModifier {
+
+    @Environment(\.colorScheme)
+    var colorScheme
+
+    @AppStorage(UIPreference.systemAppearance.key)
+    var systemAppearance: SystemAppearance?
+
+    func body(content: Content) -> some View {
+        content
+            .preferredColorScheme(systemAppearance.colorScheme ?? colorScheme)
+    }
+}
 
 struct ThemeManualInputModifier: ViewModifier {
 }
