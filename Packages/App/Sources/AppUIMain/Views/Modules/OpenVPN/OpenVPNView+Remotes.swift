@@ -119,8 +119,8 @@ private extension OpenVPNView.RemotesInnerView {
                     )
                 } else {
                     HStack {
-                        Text(remote.wrappedValue.description)
                         ThemeImage(.warning)
+                        Text(remote.wrappedValue.description)
                     }
                 }
 #endif
