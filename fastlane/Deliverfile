@@ -1,3 +1,4 @@
 automatic_release false
+overwrite_screenshots true
 phased_release true
 run_precheck_before_submit false
