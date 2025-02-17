@@ -34,6 +34,9 @@ import UIAccessibility
 struct ModuleListView: View, Routable {
     static let generalModuleId = UUID()
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     @Environment(\.isUITesting)
     private var isUITesting
 
@@ -59,7 +62,8 @@ struct ModuleListView: View, Routable {
                         Text(Strings.Global.Nouns.general)
                         PurchaseRequiredView(
                             requiring: requiredGeneralFeatures,
-                            reason: $paywallReason
+                            reason: $paywallReason,
+                            suggesting: suggestedGeneralProducts
                         )
                     }
                 }
@@ -133,6 +137,12 @@ private extension ModuleListView {
             features.insert(.sharing)
         }
         return features
+    }
+
+    var suggestedGeneralProducts: Set<AppProduct> {
+        var products = iapManager.suggestedProducts()
+        products.insert(.Features.appleTV)
+        return products
     }
 
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
