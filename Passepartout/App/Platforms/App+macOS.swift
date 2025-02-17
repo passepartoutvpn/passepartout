@@ -64,7 +64,6 @@ extension PassepartoutApp {
                 .withEnvironment(from: context, theme: theme)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
                 .frame(minWidth: 600, minHeight: 400)
-                .themeAppearance(systemScheme: colorScheme)
         }
         .defaultSize(width: 600, height: 400)
 
@@ -73,7 +72,6 @@ extension PassepartoutApp {
                 .withEnvironment(from: context, theme: theme)
                 .environmentObject(settings)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
-                .themeAppearance(systemScheme: colorScheme)
         }
         .defaultSize(width: 500, height: 400)
 
