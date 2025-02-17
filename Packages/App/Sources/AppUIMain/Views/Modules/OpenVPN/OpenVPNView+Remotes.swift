@@ -74,15 +74,7 @@ private extension OpenVPNView {
         var body: some View {
             Form {
                 if isEditable {
-#if os(iOS)
-                    if editMode?.wrappedValue == .active {
-                        editableSection
-                    } else {
-                        nonEditableSection
-                    }
-#else
                     editableSection
-#endif
                 } else {
                     nonEditableSection
                 }
@@ -99,22 +91,24 @@ private extension OpenVPNView {
 }
 
 private extension OpenVPNView.RemotesInnerView {
+#if os(iOS)
+    @ViewBuilder
     var editableSection: some View {
-        theme.listSection(
-            nil,
-            addTitle: Strings.Global.Actions.add,
-            originalItems: editableRemotesBinding,
-            canEmpty: false,
-            itemLabel: editableLabel
-        )
-        .labelsHidden()
+        if editMode?.wrappedValue == .active {
+            editableListSection
+        } else {
+            nonEditableSection
+        }
     }
 
-#if os(iOS)
     func editableLabel(isEditing: Bool, remote: Binding<EditableRemote>) -> some View {
         EditableRemoteRow(remote: remote)
     }
 #else
+    var editableSection: some View {
+        editableListSection
+    }
+
     @ViewBuilder
     func editableLabel(isEditing: Bool, remote: Binding<EditableRemote>) -> some View {
         if isEditing {
@@ -133,6 +127,17 @@ private extension OpenVPNView.RemotesInnerView {
         }
     }
 #endif
+
+    var editableListSection: some View {
+        theme.listSection(
+            nil,
+            addTitle: Strings.Global.Actions.add,
+            originalItems: editableRemotesBinding,
+            canEmpty: false,
+            itemLabel: editableLabel
+        )
+        .labelsHidden()
+    }
 
     var nonEditableSection: some View {
         Section {
