@@ -28,19 +28,22 @@ import SwiftUI
 
 @MainActor
 public final class AppearanceManager: ObservableObject {
+    private let defaults: UserDefaults
 
     @Published
     public var systemAppearance: SystemAppearance? {
         didSet {
+            defaults.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
             apply()
         }
     }
 
-    public init() {
-        guard let rawValue = UserDefaults.standard.string(forKey: UIPreference.systemAppearance.key) else {
-            return
-        }
-        systemAppearance = SystemAppearance(rawValue: rawValue)
+    public init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        systemAppearance = defaults.string(forKey: UIPreference.systemAppearance.key)
+            .flatMap {
+                SystemAppearance(rawValue: $0)
+            }
     }
 }
 
