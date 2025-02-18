@@ -40,6 +40,9 @@ extension PassepartoutApp {
     var body: some Scene {
         WindowGroup {
             contentView()
+                .onLoad {
+                    context.appearanceManager.apply()
+                }
                 .task(id: scenePhase) {
                     if scenePhase == .active {
                         context.onApplicationActive()
