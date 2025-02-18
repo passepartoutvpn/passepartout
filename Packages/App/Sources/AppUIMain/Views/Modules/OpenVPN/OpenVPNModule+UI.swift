@@ -141,7 +141,10 @@ private extension DestinationView {
     }
 
     var configurationBuilderBinding: Binding<OpenVPN.Configuration.Builder> {
-        Binding {
+        if let providerConfiguration = try? draft.wrappedValue.providerSelection?.configuration().builder() {
+            return .constant(providerConfiguration)
+        }
+        return Binding {
             draft.wrappedValue.configurationBuilder ?? OpenVPN.Configuration.Builder()
         } set: {
             draft.wrappedValue.configurationBuilder = $0
