@@ -32,8 +32,8 @@ import SwiftUI
 
 public struct PreferencesGroup: View {
 
-    @AppStorage(UIPreference.systemAppearance.key)
-    private var systemAppearance: SystemAppearance?
+    @EnvironmentObject
+    private var appearanceManager: AppearanceManager
 
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
@@ -80,7 +80,7 @@ private extension PreferencesGroup {
     ]
 
     var systemAppearancePicker: some View {
-        Picker(Strings.Views.Preferences.systemAppearance, selection: $systemAppearance) {
+        Picker(Strings.Views.Preferences.systemAppearance, selection: $appearanceManager.systemAppearance) {
             ForEach(Self.systemAppearances, id: \.self) {
                 Text($0.localizedDescription)
             }

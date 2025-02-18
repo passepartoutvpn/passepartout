@@ -24,20 +24,9 @@
 //
 
 import Foundation
-import SwiftUI
 
 public enum SystemAppearance: String, RawRepresentable {
     case light
 
     case dark
-}
-
-extension Optional where Wrapped == SystemAppearance {
-    public var colorScheme: ColorScheme? {
-        switch self {
-        case .none: return nil
-        case .light: return .light
-        case .dark: return .dark
-        }
-    }
 }
