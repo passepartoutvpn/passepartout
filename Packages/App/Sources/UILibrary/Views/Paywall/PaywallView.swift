@@ -157,14 +157,20 @@ private extension PaywallView {
                     }
                     VStack(alignment: .leading) {
                         ForEach(AppFeature.allCases.sorted()) {
-                            IncludedFeatureRow(feature: $0, isHighlighted: requiredFeatures.contains($0))
-                                .font(.subheadline)
+                            IncludedFeatureRow(
+                                feature: $0,
+                                isHighlighted: requiredFeatures.contains($0)
+                            )
+                            .font(.subheadline)
                         }
                     }
                 }
                 .themeSection(
                     header: Strings.Views.Paywall.Sections.FullProducts.header,
-                    footer: Strings.Views.Paywall.Sections.Products.footer,
+                    footer: [
+                        Strings.Views.Paywall.Sections.FullProducts.footer,
+                        Strings.Views.Paywall.Sections.Products.footer
+                    ].joined(separator: " "),
                     forcesFooter: true
                 )
             }
