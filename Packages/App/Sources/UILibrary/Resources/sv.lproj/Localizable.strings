@@ -269,6 +269,7 @@
 "views.paywall.product.included_features" = "Inkluderade funktioner";
 "views.paywall.rows.restore_purchases" = "Återställ köp";
 "views.paywall.sections.all_features.header" = "Den fullständiga versionen innehåller";
+"views.paywall.sections.full_products.footer" = "Dessa produkter inkluderar nuvarande och framtida funktioner.";
 "views.paywall.sections.full_products.header" = "Alla funktioner";
 "views.paywall.sections.included_features.header" = "Inkluderar även";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
