@@ -73,21 +73,8 @@ private extension IncludedFeaturesView {
     }
 
     var featuresList: some View {
-        FeatureListView(
-            style: .list,
-            features: product.features,
-            content: featureView
-        )
-    }
-
-    func featureView(for feature: AppFeature) -> some View {
-        HStack {
-            ThemeImage(.marked)
-                .opaque(highlightedFeatures.contains(feature))
-
-            Text(feature.localizedDescription)
-                .fontWeight(highlightedFeatures.contains(feature) ? .bold : .regular)
-                .scrollableOnTV()
+        FeatureListView(style: .list, features: product.features) {
+            IncludedFeatureRow(feature: $0, isHighlighted: highlightedFeatures.contains($0))
         }
     }
 }
