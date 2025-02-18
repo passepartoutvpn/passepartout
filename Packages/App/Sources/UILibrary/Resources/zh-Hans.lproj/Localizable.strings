@@ -269,6 +269,7 @@
 "views.paywall.product.included_features" = "包含的功能";
 "views.paywall.rows.restore_purchases" = "恢复购买";
 "views.paywall.sections.all_features.header" = "完整版本包括";
+"views.paywall.sections.full_products.footer" = "这些产品包含当前和未来的功能。";
 "views.paywall.sections.full_products.header" = "所有功能";
 "views.paywall.sections.included_features.header" = "还包括";
 "views.paywall.sections.products.footer" = "所有购买均支持“家人共享”。";

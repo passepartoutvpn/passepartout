@@ -820,6 +820,8 @@ public enum Strings {
       }
       public enum Sections {
         public enum FullProducts {
+          /// These products include current and future features.
+          public static let footer = Strings.tr("Localizable", "views.paywall.sections.full_products.footer", fallback: "These products include current and future features.")
           /// All features
           public static let header = Strings.tr("Localizable", "views.paywall.sections.full_products.header", fallback: "All features")
         }

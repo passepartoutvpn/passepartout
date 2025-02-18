@@ -142,21 +142,35 @@ private extension PaywallView {
         completeProducts
             .nilIfEmpty
             .map { products in
-                ForEach(products, id: \.productIdentifier) {
-                    PaywallProductView(
-                        iapManager: iapManager,
-                        style: .paywall,
-                        product: $0,
-                        withIncludedFeatures: false,
-                        highlightedFeatures: requiredFeatures,
-                        purchasingIdentifier: $purchasingIdentifier,
-                        onComplete: onComplete,
-                        onError: onError
-                    )
+                Group {
+                    ForEach(products, id: \.productIdentifier) {
+                        PaywallProductView(
+                            iapManager: iapManager,
+                            style: .paywall,
+                            product: $0,
+                            withIncludedFeatures: false,
+                            highlightedFeatures: requiredFeatures,
+                            purchasingIdentifier: $purchasingIdentifier,
+                            onComplete: onComplete,
+                            onError: onError
+                        )
+                    }
+                    VStack(alignment: .leading) {
+                        ForEach(AppFeature.allCases.sorted()) {
+                            IncludedFeatureRow(
+                                feature: $0,
+                                isHighlighted: requiredFeatures.contains($0)
+                            )
+                            .font(.subheadline)
+                        }
+                    }
                 }
                 .themeSection(
                     header: Strings.Views.Paywall.Sections.FullProducts.header,
-                    footer: Strings.Views.Paywall.Sections.Products.footer,
+                    footer: [
+                        Strings.Views.Paywall.Sections.FullProducts.footer,
+                        Strings.Views.Paywall.Sections.Products.footer
+                    ].joined(separator: " "),
                     forcesFooter: true
                 )
             }
@@ -311,7 +325,7 @@ private extension AppProduct {
     PaywallView(
         isPresented: .constant(true),
         requiredFeatures: [.appleTV],
-        suggestedProducts: [.Features.appleTV]
+        suggestedProducts: [.Features.appleTV, .Complete.OneTime.lifetime]
     )
     .withMockEnvironment()
 }

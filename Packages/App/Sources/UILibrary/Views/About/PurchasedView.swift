@@ -131,7 +131,7 @@ private extension PurchasedView {
     var featuresSection: some View {
         Group {
             ForEach(allFeatures, id: \.self) { feature in
-                FeatureView(text: feature.localizedDescription, isEligible: iapManager.isEligible(for: feature))
+                PurchasedFeatureView(text: feature.localizedDescription, isEligible: iapManager.isEligible(for: feature))
                     .scrollableOnTV()
             }
         }
@@ -139,7 +139,7 @@ private extension PurchasedView {
     }
 }
 
-private struct FeatureView: View {
+private struct PurchasedFeatureView: View {
     let text: String
 
     let isEligible: Bool

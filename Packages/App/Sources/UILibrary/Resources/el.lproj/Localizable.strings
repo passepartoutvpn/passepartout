@@ -269,6 +269,7 @@
 "views.paywall.product.included_features" = "Περιλαμβανόμενες λειτουργίες";
 "views.paywall.rows.restore_purchases" = "Επαναφορά αγορών";
 "views.paywall.sections.all_features.header" = "Η πλήρης έκδοση περιλαμβάνει";
+"views.paywall.sections.full_products.footer" = "Αυτά τα προϊόντα περιλαμβάνουν τρέχουσες και μελλοντικές δυνατότητες.";
 "views.paywall.sections.full_products.header" = "Όλες οι λειτουργίες";
 "views.paywall.sections.included_features.header" = "Περιλαμβάνει επίσης";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
