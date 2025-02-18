@@ -47,11 +47,13 @@ public final class AppearanceManager: ObservableObject {
     }
 }
 
-private extension AppearanceManager {
-    func apply() {
+extension AppearanceManager {
+    public func apply() {
 #if os(iOS)
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = scene.keyWindow else {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        guard let window = scene.keyWindow else {
             return
         }
         switch systemAppearance {

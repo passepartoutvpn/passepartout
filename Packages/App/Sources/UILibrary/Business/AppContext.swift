@@ -95,6 +95,8 @@ extension AppContext {
 private extension AppContext {
     func onLaunch() async throws {
         pp_log(.app, .notice, "Application did launch")
+        pp_log(.App.profiles, .info, "\tSet appearance: \(appearanceManager.systemAppearance?.rawValue ?? "system")")
+        appearanceManager.apply()
 
         pp_log(.App.profiles, .info, "\tRead and observe local profiles...")
         try await profileManager.observeLocal()
