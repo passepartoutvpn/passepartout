@@ -52,4 +52,28 @@ final class MappersTests: XCTestCase {
         }
     }
 
+    func test_givenConfigurationWithAllowedIPs_whenMapped_thenReverts() throws {
+        let quickConfig = """
+[Interface]
+PrivateKey = 4hBza7JtPKZFKwqtEmDR0iZyru1kqpQta/DRduMbHQw=
+Address = 10.8.0.6/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = muwialz9E36nXp9qgbGIxwMrH+5Ovr8d7cutH8JHdvE=
+PresharedKey = 4hBza7JtPKZFKwqtEmDR0iZyru1kqpQta/DRduMbHQw=
+AllowedIPs = 8.8.4.0/24, 8.8.8.0/24, 8.34.208.0/20, 8.35.192.0/20, 23.236.48.0/20, 23.251.128.0/19, 212.188.34.209/32, 172.217.169.138/32, 142.250.187.106/32, 142.250.186.33/32, 172.217.17.23/32
+PersistentKeepalive = 0
+Endpoint = 1.2.3.4:12345
+"""
+        let wg = try TunnelConfiguration(fromWgQuickConfig: quickConfig)
+        let sut = try WireGuard.Configuration(wg: wg)
+
+        XCTAssertEqual(try sut.interface.toWireGuardConfiguration(), wg.interface)
+        try sut.peers.enumerated().forEach { i, peer in
+            XCTAssertEqual(try peer.toWireGuardConfiguration(), wg.peers[i])
+        }
+
+        XCTAssertEqual(wg, try sut.toWireGuardConfiguration())
+    }
 }
