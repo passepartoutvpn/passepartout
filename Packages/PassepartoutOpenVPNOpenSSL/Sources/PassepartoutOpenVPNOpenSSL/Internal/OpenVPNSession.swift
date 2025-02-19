@@ -323,7 +323,7 @@ extension OpenVPNSession {
             sessionOptions: options,
             tlsOptions: tlsOptions,
             onConnected: { [weak self] key, dataChannel, pushReply in
-                await self?.didNegotiate(
+                self?.didNegotiate(
                     key: key,
                     dataChannel: dataChannel,
                     pushReply: pushReply
@@ -461,7 +461,7 @@ private extension OpenVPNSession {
         pendingPingTask?.cancel()
         pendingPingTask = runInActor(after: interval) { [weak self] in
             do {
-                try await self?.ping()
+                try self?.ping()
             } catch {
                 await self?.shutdown(error)
             }

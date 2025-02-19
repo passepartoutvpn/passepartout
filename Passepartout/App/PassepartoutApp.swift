@@ -36,6 +36,9 @@ import SwiftUI
 @main
 struct PassepartoutApp: App {
 
+    @Environment(\.colorScheme)
+    var colorScheme
+
 #if os(iOS) || os(tvOS)
 
     @UIApplicationDelegateAdaptor

@@ -46,6 +46,7 @@ extension AppContext {
             withRegistry: dependencies.registry,
             processor: processor
         )
+        profileManager.isRemoteImportingEnabled = true
         let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: FakeTunnelStrategy(

@@ -139,7 +139,7 @@ lane :asc_review do |options|
         submit_for_review: true,
         skip_binary_upload: true,
         skip_metadata: false,
-        skip_screenshots: false,
+        skip_screenshots: true,
         submission_information: {
             add_id_info_uses_idfa: false,
             export_compliance_uses_encryption: false

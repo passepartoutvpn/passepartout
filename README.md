@@ -105,19 +105,19 @@ A _huge_ credit goes to:
 
 The app is mostly translated with [ChatGPT][credits-chatgpt], but these are the acknowledgments to the original translators:
 
-- Chinese (Simplified): OnlyThen - [@OnlyThen](https://github.com/OnlyThen)
-- Dutch: Norbert de Vreede - [@paxpacis](https://github.com/paxpacis)
-- English: Davide De Rosa (author)
-- French: Julien Laniel - [@linkjul](https://github.com/linkjul)
+- Chinese (Simplified): [OnlyThen](https://github.com/OnlyThen)
+- Dutch: [Norbert de Vreede](https://github.com/paxpacis)
+- English: [Davide De Rosa](https://github.com/keeshux) (author)
+- French: [Julien Laniel](https://github.com/linkjul)
 - German: Christian Lederer, Philipp Reynders, Theodor Tietze
 - Greek: Konstantinos Koukoulakis
-- Italian: Davide De Rosa (author)
+- Italian: [Davide De Rosa](https://github.com/keeshux) (author)
 - Polish: Piotr Książek
-- Portuguese: Helder Santana - [@heldr](https://github.com/heldr)
+- Portuguese: [Helder Santana](https://github.com/heldr)
 - Russian: Alexander Korobynikov
-- Spanish: Davide De Rosa (author), Elena Vivó
-- Swedish: Henry Gross-Hellsen - [@cowpod](https://github.com/cowpod)
-- Ukranian: Dmitry Chirkin - [@josser](https://github.com/josser)
+- Spanish: [Davide De Rosa](https://github.com/keeshux) (author), Elena Vivó
+- Swedish: [Henry Gross-Hellsen](https://github.com/cowpod)
+- Ukranian: [Dmitry Chirkin](https://github.com/josser)
 
 ## Usage
 

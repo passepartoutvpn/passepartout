@@ -74,7 +74,14 @@ public struct PaywallProductView: View {
         VStack(alignment: .leading) {
             productView
             if withIncludedFeatures {
-                includedFeaturesView
+                AppProduct(rawValue: product.productIdentifier)
+                    .map {
+                        IncludedFeaturesView(
+                            product: $0,
+                            highlightedFeatures: highlightedFeatures,
+                            isDisclosing: $isPresentingFeatures
+                        )
+                    }
             }
         }
     }
@@ -101,52 +108,6 @@ private extension PaywallProductView {
                 onComplete: onComplete,
                 onError: onError
             )
-        }
-    }
-
-    var includedFeaturesView: some View {
-        Group {
-            includedFeaturesButton
-                .padding(.top, 8)
-            includedFeaturesList
-                .if(isPresentingFeatures)
-        }
-        .font(.subheadline)
-    }
-
-    var includedFeaturesButton: some View {
-        Button {
-            isPresentingFeatures.toggle()
-        } label: {
-            HStack {
-                Text(Strings.Views.Paywall.Product.includedFeatures)
-                ThemeImage(isPresentingFeatures ? .undisclose : .disclose)
-            }
-            .contentShape(.rect)
-        }
-        .buttonStyle(.plain)
-        .cursor(.hand)
-    }
-
-    var includedFeaturesList: some View {
-        AppProduct(rawValue: product.productIdentifier)
-            .map { product in
-                FeatureListView(
-                    style: .list,
-                    features: product.features,
-                    content: featureView
-                )
-            }
-    }
-
-    func featureView(for feature: AppFeature) -> some View {
-        HStack {
-            ThemeImage(.marked)
-                .opaque(highlightedFeatures.contains(feature))
-
-            Text(feature.localizedDescription)
-                .fontWeight(highlightedFeatures.contains(feature) ? .bold : .regular)
-                .scrollableOnTV()
         }
     }
 }

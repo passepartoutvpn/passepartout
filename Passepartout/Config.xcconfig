@@ -26,8 +26,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-MARKETING_VERSION = 3.1.0
-CURRENT_PROJECT_VERSION = 3758
+MARKETING_VERSION = 3.1.2
+CURRENT_PROJECT_VERSION = 3765
 
 // tweak these based on app and team
 CFG_APP_ID = com.algoritmico.ios.Passepartout

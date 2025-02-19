@@ -1,8 +1,8 @@
 //
-//  View+Environment.swift
+//  SystemAppearance.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/2/24.
+//  Created by Davide De Rosa on 2/17/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
-@MainActor
-extension View {
-    public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
-        environmentObject(theme)
-            .environmentObject(context.apiManager)
-            .environmentObject(context.appearanceManager)
-            .environmentObject(context.iapManager)
-            .environmentObject(context.migrationManager)
-            .environmentObject(context.preferencesManager)
-    }
+public enum SystemAppearance: String, RawRepresentable {
+    case light
 
-    public func withMockEnvironment() -> some View {
-        task {
-            try? await AppContext.forPreviews.profileManager.observeLocal()
-        }
-        .withEnvironment(from: .forPreviews, theme: Theme())
-    }
+    case dark
 }

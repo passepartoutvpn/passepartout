@@ -147,7 +147,14 @@ extension OpenVPNConnection: Connection {
 
     @discardableResult
     public func start() async throws -> Bool {
-        try await backend.start()
+        do {
+            return try await backend.start()
+        } catch let error as PassepartoutError {
+            if error.code == .exhaustedEndpoints, let reason = error.reason {
+                throw reason
+            }
+            throw error
+        }
     }
 
     public func stop(timeout: Int) async {

@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Активний";
 "entities.tunnel_status.deactivating" = "Деактивація";
 "entities.tunnel_status.inactive" = "Неактивний";
+"entities.ui.system_appearance.dark" = "Темна";
+"entities.ui.system_appearance.light" = "Світла";
+"entities.ui.system_appearance.system" = "Система";
 "errors.app.default" = "Не вдалося завершити операцію.";
 "errors.app.duplicate" = "Не вдалося дублювати профіль '%@'.";
 "errors.app.empty_products" = "Не вдалося отримати продукти, спробуйте пізніше.";
@@ -266,6 +269,7 @@
 "views.paywall.product.included_features" = "Включені функції";
 "views.paywall.rows.restore_purchases" = "Відновити покупки";
 "views.paywall.sections.all_features.header" = "Повна версія включає";
+"views.paywall.sections.full_products.footer" = "Ці продукти містять поточні та майбутні функції.";
 "views.paywall.sections.full_products.header" = "Усі функції";
 "views.paywall.sections.included_features.header" = "Також включає";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
@@ -286,6 +290,7 @@
 "views.preferences.locks_in_background.footer" = "Блокуйте додаток за допомогою FaceID, коли він переходе у фоновий режим.";
 "views.preferences.pins_active_profile" = "Закріпити активний профіль";
 "views.preferences.pins_active_profile.footer" = "Також показує активний профіль зверху для швидкого доступу.";
+"views.preferences.system_appearance" = "Зовнішній вигляд";
 "views.profile.alerts.purchase.buttons.ok" = "Зберегти все одно";
 "views.profile.module_list.section.footer" = "Торкніться модулів, щоб змінити їхні налаштування. Їх можна перетягувати для визначення пріоритету.";
 "views.profile.rows.add_module" = "Додати модуль";

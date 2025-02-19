@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Ενεργό";
 "entities.tunnel_status.deactivating" = "Απενεργοποίηση";
 "entities.tunnel_status.inactive" = "Ανενεργό";
+"entities.ui.system_appearance.dark" = "Σκούρο";
+"entities.ui.system_appearance.light" = "Φωτεινό";
+"entities.ui.system_appearance.system" = "Σύστημα";
 "errors.app.default" = "Δεν ήταν δυνατή η ολοκλήρωση της λειτουργίας.";
 "errors.app.duplicate" = "Δεν ήταν δυνατή η αντιγραφή του προφίλ '%@'.";
 "errors.app.empty_products" = "Δεν ήταν δυνατή η ανάκτηση προϊόντων, παρακαλώ δοκιμάστε αργότερα.";
@@ -266,6 +269,7 @@
 "views.paywall.product.included_features" = "Περιλαμβανόμενες λειτουργίες";
 "views.paywall.rows.restore_purchases" = "Επαναφορά αγορών";
 "views.paywall.sections.all_features.header" = "Η πλήρης έκδοση περιλαμβάνει";
+"views.paywall.sections.full_products.footer" = "Αυτά τα προϊόντα περιλαμβάνουν τρέχουσες και μελλοντικές δυνατότητες.";
 "views.paywall.sections.full_products.header" = "Όλες οι λειτουργίες";
 "views.paywall.sections.included_features.header" = "Περιλαμβάνει επίσης";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
@@ -286,6 +290,7 @@
 "views.preferences.locks_in_background.footer" = "Κλειδώστε την εφαρμογή με το FaceID όταν αποστέλλεται στο παρασκήνιο.";
 "views.preferences.pins_active_profile" = "Καρφίτσωμα ενεργού προφίλ";
 "views.preferences.pins_active_profile.footer" = "Εμφανίζει επίσης το ενεργό προφίλ στην κορυφή για γρήγορη πρόσβαση.";
+"views.preferences.system_appearance" = "Εμφάνιση";
 "views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";

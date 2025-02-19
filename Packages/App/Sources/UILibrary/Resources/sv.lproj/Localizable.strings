@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Aktiv";
 "entities.tunnel_status.deactivating" = "Inaktiverar";
 "entities.tunnel_status.inactive" = "Inaktiv";
+"entities.ui.system_appearance.dark" = "Mörk";
+"entities.ui.system_appearance.light" = "Ljus";
+"entities.ui.system_appearance.system" = "System";
 "errors.app.default" = "Kan inte slutföra åtgärden.";
 "errors.app.duplicate" = "Kan inte duplicera profil '%@'.";
 "errors.app.empty_products" = "Kan inte hämta produkter, försök igen senare.";
@@ -266,6 +269,7 @@
 "views.paywall.product.included_features" = "Inkluderade funktioner";
 "views.paywall.rows.restore_purchases" = "Återställ köp";
 "views.paywall.sections.all_features.header" = "Den fullständiga versionen innehåller";
+"views.paywall.sections.full_products.footer" = "Dessa produkter inkluderar nuvarande och framtida funktioner.";
 "views.paywall.sections.full_products.header" = "Alla funktioner";
 "views.paywall.sections.included_features.header" = "Inkluderar även";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
@@ -286,6 +290,7 @@
 "views.preferences.locks_in_background.footer" = "Lås appen med FaceID när den skickas till bakgrunden.";
 "views.preferences.pins_active_profile" = "Fäst aktiv profil";
 "views.preferences.pins_active_profile.footer" = "Visar även den aktiva profilen överst för snabb åtkomst.";
+"views.preferences.system_appearance" = "Utseende";
 "views.profile.alerts.purchase.buttons.ok" = "Spara ändå";
 "views.profile.module_list.section.footer" = "Tryck på moduler för att redigera inställningarna. Moduler kan dras för att bestämma prioritet.";
 "views.profile.rows.add_module" = "Lägg till modul";

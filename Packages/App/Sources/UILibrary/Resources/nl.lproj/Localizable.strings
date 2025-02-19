@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Actief";
 "entities.tunnel_status.deactivating" = "Deactiveren";
 "entities.tunnel_status.inactive" = "Inactief";
+"entities.ui.system_appearance.dark" = "Donker";
+"entities.ui.system_appearance.light" = "Licht";
+"entities.ui.system_appearance.system" = "Systeem";
 "errors.app.default" = "Kan bewerking niet voltooien.";
 "errors.app.duplicate" = "Kan profiel '%@' niet dupliceren.";
 "errors.app.empty_products" = "Kan producten niet ophalen, probeer het later opnieuw.";
@@ -266,6 +269,7 @@
 "views.paywall.product.included_features" = "Inbegrepen functies";
 "views.paywall.rows.restore_purchases" = "Aankopen herstellen";
 "views.paywall.sections.all_features.header" = "De volledige versie bevat";
+"views.paywall.sections.full_products.footer" = "Deze producten bevatten huidige en toekomstige functies.";
 "views.paywall.sections.full_products.header" = "Alle functies";
 "views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
@@ -286,6 +290,7 @@
 "views.preferences.locks_in_background.footer" = "Vergrendel de app met FaceID wanneer deze naar de achtergrond wordt gestuurd.";
 "views.preferences.pins_active_profile" = "Actief profiel vastzetten";
 "views.preferences.pins_active_profile.footer" = "Toont ook het actieve profiel bovenaan voor snelle toegang.";
+"views.preferences.system_appearance" = "Uiterlijk";
 "views.profile.alerts.purchase.buttons.ok" = "Toch opslaan";
 "views.profile.module_list.section.footer" = "Tik op modules om hun instellingen te bewerken. Modules kunnen worden versleept om de prioriteit te bepalen.";
 "views.profile.rows.add_module" = "Module toevoegen";

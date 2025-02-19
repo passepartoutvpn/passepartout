@@ -335,6 +335,9 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.colorScheme)
+    private var colorScheme
+
     @Binding
     var isPresented: Bool
 
@@ -366,6 +369,9 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 
     @EnvironmentObject
     private var theme: Theme
+
+    @Environment(\.colorScheme)
+    private var colorScheme
 
     @Binding
     var item: T?

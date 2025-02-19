@@ -34,6 +34,8 @@ import UIAccessibility
 public final class AppContext: ObservableObject, Sendable {
     public let apiManager: APIManager
 
+    public let appearanceManager: AppearanceManager
+
     public let iapManager: IAPManager
 
     public let migrationManager: MigrationManager
@@ -65,6 +67,7 @@ public final class AppContext: ObservableObject, Sendable {
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
+        appearanceManager = AppearanceManager()
         self.iapManager = iapManager
         self.migrationManager = migrationManager
         self.preferencesManager = preferencesManager

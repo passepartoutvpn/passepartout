@@ -1,8 +1,8 @@
 //
-//  View+Environment.swift
+//  IncludedFeatureRow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/2/24.
+//  Created by Davide De Rosa on 2/18/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonIAP
 import SwiftUI
 
-@MainActor
-extension View {
-    public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
-        environmentObject(theme)
-            .environmentObject(context.apiManager)
-            .environmentObject(context.appearanceManager)
-            .environmentObject(context.iapManager)
-            .environmentObject(context.migrationManager)
-            .environmentObject(context.preferencesManager)
+public struct IncludedFeatureRow: View {
+    private let feature: AppFeature
+
+    private let isHighlighted: Bool
+
+    public init(feature: AppFeature, isHighlighted: Bool) {
+        self.feature = feature
+        self.isHighlighted = isHighlighted
     }
 
-    public func withMockEnvironment() -> some View {
-        task {
-            try? await AppContext.forPreviews.profileManager.observeLocal()
+    public var body: some View {
+        HStack {
+            ThemeImage(.marked)
+                .opaque(isHighlighted)
+
+            Text(feature.localizedDescription)
+                .fontWeight(isHighlighted ? .bold : .regular)
+                .scrollableOnTV()
         }
-        .withEnvironment(from: .forPreviews, theme: Theme())
     }
 }

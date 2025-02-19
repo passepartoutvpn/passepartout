@@ -21,6 +21,9 @@
 "entities.tunnel_status.active" = "Actif";
 "entities.tunnel_status.deactivating" = "Désactivation";
 "entities.tunnel_status.inactive" = "Inactif";
+"entities.ui.system_appearance.dark" = "Sombre";
+"entities.ui.system_appearance.light" = "Clair";
+"entities.ui.system_appearance.system" = "Système";
 "errors.app.default" = "Impossible de terminer l'opération.";
 "errors.app.duplicate" = "Impossible de dupliquer le profil '%@'.";
 "errors.app.empty_products" = "Impossible d'obtenir les produits, réessayez plus tard.";
@@ -266,6 +269,7 @@
 "views.paywall.product.included_features" = "Fonctionnalités incluses";
 "views.paywall.rows.restore_purchases" = "Restaurer les achats";
 "views.paywall.sections.all_features.header" = "La version complète inclut";
+"views.paywall.sections.full_products.footer" = "Ces produits incluent les fonctionnalités actuelles et futures.";
 "views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.included_features.header" = "Comprend également";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
@@ -286,6 +290,7 @@
 "views.preferences.locks_in_background.footer" = "Verrouillez l'application avec FaceID lorsqu'elle est envoyée en arrière-plan.";
 "views.preferences.pins_active_profile" = "Épingler le profil actif";
 "views.preferences.pins_active_profile.footer" = "Affiche également le profil actif en haut pour un accès rapide.";
+"views.preferences.system_appearance" = "Apparence";
 "views.profile.alerts.purchase.buttons.ok" = "Enregistrer quand même";
 "views.profile.module_list.section.footer" = "Touchez les modules pour modifier leurs paramètres. Ils peuvent être glissés pour définir leur priorité.";
 "views.profile.rows.add_module" = "Ajouter un module";

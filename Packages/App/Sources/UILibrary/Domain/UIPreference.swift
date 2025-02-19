@@ -39,6 +39,8 @@ public enum UIPreference: String, PreferenceProtocol {
 
     case profilesLayout
 
+    case systemAppearance
+
     public var key: String {
         "UI.\(rawValue)"
     }

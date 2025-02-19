@@ -1,8 +1,8 @@
 //
-//  View+Environment.swift
+//  UILibrary+L10n.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/2/24.
+//  Created by Davide De Rosa on 2/17/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import CommonUtils
+import Foundation
 
-@MainActor
-extension View {
-    public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
-        environmentObject(theme)
-            .environmentObject(context.apiManager)
-            .environmentObject(context.appearanceManager)
-            .environmentObject(context.iapManager)
-            .environmentObject(context.migrationManager)
-            .environmentObject(context.preferencesManager)
-    }
-
-    public func withMockEnvironment() -> some View {
-        task {
-            try? await AppContext.forPreviews.profileManager.observeLocal()
+extension Optional: LocalizableEntity where Wrapped == SystemAppearance {
+    public var localizedDescription: String {
+        let V = Strings.Entities.Ui.SystemAppearance.self
+        switch self {
+        case .none: return V.system
+        case .light: return V.light
+        case .dark: return V.dark
         }
-        .withEnvironment(from: .forPreviews, theme: Theme())
     }
 }

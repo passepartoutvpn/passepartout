@@ -31,7 +31,7 @@ import PassepartoutKit
 extension OpenVPNSession {
     func loopTunnel() {
         runInActor { [weak self] in
-            guard let self, let tunnel = await tunnel else {
+            guard let self, let tunnel else {
                 pp_log(.openvpn, .info, "Ignore read from outdated TUN")
                 return
             }
@@ -40,14 +40,14 @@ extension OpenVPNSession {
                 guard !packets.isEmpty else {
                     return
                 }
-                try await receiveTunnel(packets: packets)
+                try receiveTunnel(packets: packets)
             } catch {
                 pp_log(.openvpn, .error, "Failed TUN read: \(error)")
                 await shutdown(error)
             }
 
             // repeat as long as self and tunnel exist
-            await loopTunnel()
+            loopTunnel()
         }
     }
 
@@ -66,7 +66,7 @@ extension OpenVPNSession {
                     return
                 }
                 do {
-                    try await receiveLink(packets: packets)
+                    try receiveLink(packets: packets)
                 } catch {
                     await shutdown(error)
                 }

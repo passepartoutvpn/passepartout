@@ -83,7 +83,9 @@ private extension OpenVPNView {
             .navigationTitle(Strings.Modules.Openvpn.remotes)
             .toolbar {
 #if os(iOS)
-                EditButton()
+                if isEditable {
+                    EditButton()
+                }
 #endif
             }
         }
