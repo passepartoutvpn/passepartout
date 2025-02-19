@@ -36,7 +36,14 @@ extension PassepartoutKit.Endpoint {
     }
 
     func toWireGuardEndpoint() throws -> WireGuardKit.Endpoint {
-        guard let wg = WireGuardKit.Endpoint(from: "\(address):\(port)") else {
+        let wgAddress: String
+        switch address {
+        case .ip(let raw, let family):
+            wgAddress = family == .v6 ? "[\(raw)]" : raw
+        case .hostname(let raw):
+            wgAddress = raw
+        }
+        guard let wg = WireGuardKit.Endpoint(from: "\(wgAddress):\(port)") else {
             throw PassepartoutError(.parsing)
         }
         return wg
