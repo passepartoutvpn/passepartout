@@ -1,1 +1,1 @@
-* WireGuard: Fix IPv6 endpoints not recognized (#1203)
+* WireGuard: Fix public DNS in split VPN setups (#1207)
