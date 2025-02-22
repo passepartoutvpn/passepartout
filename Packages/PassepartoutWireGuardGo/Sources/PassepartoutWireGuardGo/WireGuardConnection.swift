@@ -178,6 +178,7 @@ private extension WireGuardConnection {
 
         func adapterShouldSetNetworkSettings(_ adapter: WireGuardAdapter, settings: NEPacketTunnelNetworkSettings, completionHandler: ((Error?) -> Void)?) {
             guard let connection else {
+                pp_log(.wireguard, .error, "Lost weak reference to connection?")
                 return
             }
             let module = NESettingsModule(fullSettings: settings)
