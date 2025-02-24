@@ -206,19 +206,6 @@ private extension NetworkSettingsBuilder {
             return ipv4Route
         }
 
-        if !isIPv4Gateway {
-            try? allDNSServers.forEach {
-                switch Address(rawValue: $0) {
-                case .ip(let addr, let family):
-                    if family == .v4 {
-                        routes.append(.init(try Subnet(addr, 32), nil))
-                    }
-                default:
-                    break
-                }
-            }
-        }
-
         return ipv4.including(routes: routes)
     }
 
@@ -242,19 +229,6 @@ private extension NetworkSettingsBuilder {
                 pp_log(.openvpn, .info, "\tIPv6: Add route \(route.destination?.description ?? "default") -> \(route.gateway?.description ?? "*")")
             }
             return ipv6Route
-        }
-
-        if !isIPv6Gateway {
-            try? allDNSServers.forEach {
-                switch Address(rawValue: $0) {
-                case .ip(let addr, let family):
-                    if family == .v6 {
-                        routes.append(.init(try Subnet(addr, 128), nil))
-                    }
-                default:
-                    break
-                }
-            }
         }
 
         return ipv6.including(routes: routes)
