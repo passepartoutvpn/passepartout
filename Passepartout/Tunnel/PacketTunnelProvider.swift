@@ -156,6 +156,9 @@ private extension PacketTunnelProvider {
 
             pp_log(.app, .info, "Will verify profile again in \(params.interval) seconds...")
             try? await Task.sleep(interval: params.interval)
+
+            // reset attempts for next verification
+            attempts = params.attempts
         }
     }
 }
