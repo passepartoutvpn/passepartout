@@ -103,6 +103,10 @@ public struct Constants: Decodable, Sendable {
                 public let delay: TimeInterval
 
                 public let interval: TimeInterval
+
+                public let attempts: Int
+
+                public let retryInterval: TimeInterval
             }
 
             public let production: Parameters
