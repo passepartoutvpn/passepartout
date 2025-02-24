@@ -1,1 +1,1 @@
-* WireGuard: Fix public DNS in split VPN setups (#1207)
+* OpenVPN: Do not route DNS implicitly through the VPN (#1213)
