@@ -31,6 +31,9 @@ import UILibrary
 
 struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
+    @Environment(\.isUITesting)
+    private var isUITesting
+
     @Environment(\.horizontalSizeClass)
     private var hsClass
 
@@ -56,7 +59,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     var body: some View {
         debugChanges()
         return Form {
-            if !isSearching && pinsActiveProfile {
+            if !isUITesting && !isSearching && pinsActiveProfile {
                 headerView
                     .unanimated()
             }
