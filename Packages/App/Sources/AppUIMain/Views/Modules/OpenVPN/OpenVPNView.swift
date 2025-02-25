@@ -88,7 +88,9 @@ private extension OpenVPNView {
     @ViewBuilder
     var contentView: some View {
         if let configurationBinding {
-            remotesLink
+            if !isServerPushed {
+                remotesLink
+            }
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configurationBinding,

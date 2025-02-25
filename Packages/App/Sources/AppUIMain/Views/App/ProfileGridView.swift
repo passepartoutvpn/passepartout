@@ -31,6 +31,9 @@ import UILibrary
 
 struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
+    @Environment(\.isUITesting)
+    private var isUITesting
+
     @Environment(\.isSearching)
     private var isSearching
 
@@ -57,7 +60,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
         return ScrollViewReader { scrollProxy in
             ScrollView {
                 VStack(spacing: .zero) {
-                    if !isSearching && pinsActiveProfile {
+                    if !isUITesting && !isSearching && pinsActiveProfile {
                         headerView(scrollProxy: scrollProxy)
                             .padding(.bottom)
                             .unanimated()

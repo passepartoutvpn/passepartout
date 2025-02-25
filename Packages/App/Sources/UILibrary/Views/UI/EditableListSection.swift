@@ -100,6 +100,7 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
                 removeView(for: item)
                     .disabled(!canRemove(items))
             }
+            .deleteDisabled(!canRemove(items))
             .onDrag {
                 draggingItem = item
                 return NSItemProvider(object: item.value.description as NSString)
@@ -114,6 +115,10 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
             items.move(fromOffsets: $0, toOffset: $1)
         }
         .onDelete {
+            guard canRemove(items) else {
+                assertionFailure("EditableListSection: Remove view should be disabled (!canRemove)")
+                return
+            }
             items.remove(atOffsets: $0)
         }
         .onChange(of: items, perform: exportItems)

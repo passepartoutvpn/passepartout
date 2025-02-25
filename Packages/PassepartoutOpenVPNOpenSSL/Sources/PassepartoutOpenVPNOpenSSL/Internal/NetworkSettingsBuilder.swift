@@ -193,7 +193,7 @@ private extension NetworkSettingsBuilder {
         var target = allRoutes4
         target.insert(contentsOf: ipv4.includedRoutes, at: 0)
 
-        let routes: [Route] = target.compactMap { route in
+        var routes: [Route] = target.compactMap { route in
             let ipv4Route = Route(route.destination, route.gateway)
             if route.destination == nil {
                 guard isIPv4Gateway, let gw = route.gateway else {
@@ -205,6 +205,7 @@ private extension NetworkSettingsBuilder {
             }
             return ipv4Route
         }
+
         return ipv4.including(routes: routes)
     }
 
@@ -217,7 +218,7 @@ private extension NetworkSettingsBuilder {
         var target = allRoutes6
         target.insert(contentsOf: ipv6.includedRoutes, at: 0)
 
-        let routes: [Route] = target.compactMap { route in
+        var routes: [Route] = target.compactMap { route in
             let ipv6Route = Route(route.destination, route.gateway)
             if route.destination == nil {
                 guard isIPv6Gateway, let gw = route.gateway else {
@@ -229,6 +230,7 @@ private extension NetworkSettingsBuilder {
             }
             return ipv6Route
         }
+
         return ipv6.including(routes: routes)
     }
 }
