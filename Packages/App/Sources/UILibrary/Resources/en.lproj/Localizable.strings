@@ -207,6 +207,8 @@
 "modules.wireguard.provider_key" = "Private key";
 "modules.wireguard.interface" = "Interface";
 "modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.peer.add" = "Add peer";
+"modules.wireguard.peer.delete" = "Delete peer";
 "modules.wireguard.preshared_key" = "Pre-shared key";
 "modules.wireguard.allowed_ips" = "Allowed IPs";
 

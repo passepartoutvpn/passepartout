@@ -115,8 +115,7 @@ private extension WireGuardView.ConfigurationView {
                 value: peerBinding.keepAlive,
                 placeholder: Strings.Unlocalized.Placeholders.keepAlive
             )
-            // FIXME: #1197, l10n
-            Button("Delete peer") {
+            Button(Strings.Modules.Wireguard.Peer.delete) {
                 withAnimation {
                     model.peersOrder.remove(at: index)
                     model.peers.removeValue(forKey: publicKey)
@@ -125,9 +124,8 @@ private extension WireGuardView.ConfigurationView {
         }
     }
 
-    // FIXME: #1197, l10n
     var addPeerButton: some View {
-        Button("Add peer") {
+        Button(Strings.Modules.Wireguard.Peer.add) {
             let newPeer = ViewModel.Peer()
             assert(newPeer.publicKey == "")
             withAnimation {
