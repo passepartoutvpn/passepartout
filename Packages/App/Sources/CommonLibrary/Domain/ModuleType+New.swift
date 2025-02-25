@@ -39,12 +39,12 @@ extension ModuleType {
         case .wireGuard:
             var builder = WireGuardModule.Builder()
             if let providerId {
-                builder.providerSelection = .init(id: providerId)
+                builder.providerSelection = ProviderSelection(id: providerId)
             } else {
                 guard let impl = registry.implementation(for: builder) as? WireGuardModule.Implementation else {
                     fatalError("Missing WireGuard implementation for module creation")
                 }
-                builder.configurationBuilder = .init(keyGenerator: impl.keyGenerator)
+                builder.configurationBuilder = WireGuard.Configuration.Builder(keyGenerator: impl.keyGenerator)
             }
             return builder
 
