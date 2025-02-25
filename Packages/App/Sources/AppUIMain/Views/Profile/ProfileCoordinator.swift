@@ -135,7 +135,7 @@ private extension ProfileCoordinator {
 
     // standard: verify and alert if purchase required
     func onCommitEditingStandard() async throws {
-        let profileToSave = try profileEditor.build()
+        let profileToSave = try profileEditor.build(with: registry)
 
         do {
             try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
@@ -171,7 +171,7 @@ private extension ProfileCoordinator {
 
     // beta: skip verification
     func onCommitEditingBeta() async throws {
-        let profileToSave = try profileEditor.build()
+        let profileToSave = try profileEditor.build(with: registry)
         try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         onDismiss()
     }
