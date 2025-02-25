@@ -88,7 +88,9 @@ private extension OpenVPNView {
     @ViewBuilder
     var contentView: some View {
         if let configuration = draft.wrappedValue.configurationBuilder {
-            remotesLink
+            if !isServerPushed {
+                remotesLink
+            }
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: configuration,
