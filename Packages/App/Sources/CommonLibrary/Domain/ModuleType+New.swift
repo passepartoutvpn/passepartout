@@ -30,16 +30,21 @@ extension ModuleType {
     public func newModule(with registry: Registry, providerId: ProviderID? = nil) -> any ModuleBuilder {
         switch self {
         case .openVPN:
-            return OpenVPNModule.Builder(providerSelection: providerId.map {
-                .init(id: $0)
-            })
+            var builder = OpenVPNModule.Builder()
+            if let providerId {
+                builder.providerSelection = ProviderSelection(id: providerId)
+            }
+            return builder
 
         case .wireGuard:
             var builder = WireGuardModule.Builder()
             if let providerId {
                 builder.providerSelection = .init(id: providerId)
             } else {
-                builder.configurationBuilder = .init(privateKey: "")
+                guard let impl = registry.implementation(for: builder) as? WireGuardModule.Implementation else {
+                    fatalError("Missing WireGuard implementation for module creation")
+                }
+                builder.configurationBuilder = .init(keyGenerator: impl.keyGenerator)
             }
             return builder
 
