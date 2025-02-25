@@ -197,6 +197,8 @@
 "modules.wireguard.allowed_ips" = "Дозволені IP-адреси";
 "modules.wireguard.interface" = "Інтерфейс";
 "modules.wireguard.peer" = "Вузол #%d";
+"modules.wireguard.peer.add" = "Додати вузол";
+"modules.wireguard.peer.delete" = "Видалити вузол";
 "modules.wireguard.preshared_key" = "Попередньо спільний ключ";
 "modules.wireguard.provider_key" = "Приватний ключ";
 "placeholders.on_demand.ssid" = "Мій SSID";
