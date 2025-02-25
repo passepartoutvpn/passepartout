@@ -44,7 +44,8 @@ final class StandardWireGuardParserTests: XCTestCase {
         dns.searchDomains = ["domain.local"]
         sut.interface.dns = dns
 
-        XCTAssertNoThrow(try parser.validate(sut))
+        let builder = WireGuardModule.Builder(configurationBuilder: sut)
+        XCTAssertNoThrow(try parser.validate(builder))
     }
 
     func test_givenParser_whenBadPrivateKey_thenThrows() {
@@ -196,7 +197,8 @@ private extension StandardWireGuardParserTests {
         return builder
     }
 
-    func assertValidationFailure(_ builder: WireGuard.Configuration.Builder) throws {
+    func assertValidationFailure(_ wgBuilder: WireGuard.Configuration.Builder) throws {
+        let builder = WireGuardModule.Builder(configurationBuilder: wgBuilder)
         try parser.validate(builder)
         XCTFail("Must fail")
     }
