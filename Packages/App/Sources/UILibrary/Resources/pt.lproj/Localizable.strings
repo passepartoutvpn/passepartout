@@ -197,6 +197,8 @@
 "modules.wireguard.allowed_ips" = "IPs permitidos";
 "modules.wireguard.interface" = "Interface";
 "modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.peer.add" = "Adicionar peer";
+"modules.wireguard.peer.delete" = "Excluir peer";
 "modules.wireguard.preshared_key" = "Chave pré-compartilhada";
 "modules.wireguard.provider_key" = "Chave privada";
 "placeholders.on_demand.ssid" = "Meu SSID";

@@ -77,12 +77,8 @@ extension ProfileEditorTests {
         XCTAssertTrue(moduleTypes.contains(.httpProxy))
         XCTAssertFalse(moduleTypes.contains(.ip))
         XCTAssertTrue(moduleTypes.contains(.onDemand))
-
-        // provider only
         XCTAssertTrue(moduleTypes.contains(.openVPN))
-
-        // until editable
-        XCTAssertFalse(moduleTypes.contains(.wireGuard))
+        XCTAssertTrue(moduleTypes.contains(.wireGuard))
     }
 
     func test_givenModules_thenReturnsModuleById() {

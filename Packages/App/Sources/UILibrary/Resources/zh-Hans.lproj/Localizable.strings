@@ -197,6 +197,8 @@
 "modules.wireguard.allowed_ips" = "允许的 IP";
 "modules.wireguard.interface" = "接口";
 "modules.wireguard.peer" = "对等 #%d";
+"modules.wireguard.peer.add" = "添加对等端";
+"modules.wireguard.peer.delete" = "删除对等端";
 "modules.wireguard.preshared_key" = "预共享密钥";
 "modules.wireguard.provider_key" = "私钥";
 "placeholders.on_demand.ssid" = "我的 SSID";
