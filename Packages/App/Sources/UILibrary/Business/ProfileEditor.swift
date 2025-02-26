@@ -191,10 +191,26 @@ private extension ProfileEditor {
 
 extension ProfileEditor {
     public func build() throws -> Profile {
+        try build(with: nil)
+    }
+
+    public func build(with registry: Registry?) throws -> Profile {
 
         // add this check in the app, the library does not enforce it
         guard !editableProfile.activeModulesIds.isEmpty else {
             throw PassepartoutError(.noActiveModules)
+        }
+
+        // validate builders if implementation supports it
+        try editableProfile.modules.forEach {
+            guard let impl = registry?.implementation(for: $0) as? ModuleBuilderValidator else {
+                return
+            }
+            do {
+                try impl.validate($0)
+            } catch {
+                throw AppError.malformedModule($0, error: error)
+            }
         }
 
         let builder = try editableProfile.builder()
