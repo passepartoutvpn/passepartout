@@ -65,7 +65,7 @@ private extension WireGuard.Configuration.Builder {
         peers.forEach {
             lines.append("[Peer]")
             lines.append("PublicKey = \($0.publicKey)")
-            if let preSharedKey = $0.preSharedKey {
+            if let preSharedKey = $0.preSharedKey, !preSharedKey.isEmpty {
                 lines.append("PresharedKey = \(preSharedKey)")
             }
             if !$0.allowedIPs.isEmpty {
