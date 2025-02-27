@@ -1,4 +1,1 @@
-* Fix regressions with DoH/DoT (#1218)
-* OpenVPN: Omit remotes from "Server configuration"
-* OpenVPN: Prevent last remote from being deleted
-* OpenVPN: Do not route DNS implicitly through the VPN (#1213)
+Bump
