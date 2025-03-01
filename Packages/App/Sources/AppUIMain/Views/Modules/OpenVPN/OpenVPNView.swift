@@ -68,7 +68,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     var body: some View {
         contentView
-            .moduleView(editor: editor, draft: draft.wrappedValue)
+            .moduleView(editor: editor, draft: draft.wrappedValue, withUUID: !isServerPushed)
             .modifier(ImportModifier(
                 draft: draft,
                 impl: impl,
