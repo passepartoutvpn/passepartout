@@ -58,8 +58,10 @@ public struct AppMenu: View {
             disconnectButton
         }
         .disabled(!isTunnelActionable)
-        Divider()
-        profilesList
+        if profileManager.hasProfiles {
+            Divider()
+            profilesList
+        }
         Divider()
         aboutButton
         quitButton
