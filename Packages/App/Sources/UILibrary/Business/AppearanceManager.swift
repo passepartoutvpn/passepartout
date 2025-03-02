@@ -65,13 +65,17 @@ extension AppearanceManager {
             window.overrideUserInterfaceStyle = .unspecified
         }
 #elseif os(macOS)
+        guard let app = NSApp else {
+//            assertionFailure("NSApp is being used too early")
+            return
+        }
         switch systemAppearance {
         case .light:
-            NSApp.appearance = NSAppearance(named: .vibrantLight)
+            app.appearance = NSAppearance(named: .vibrantLight)
         case .dark:
-            NSApp.appearance = NSAppearance(named: .vibrantDark)
+            app.appearance = NSAppearance(named: .vibrantDark)
         case .none:
-            NSApp.appearance = nil
+            app.appearance = nil
         }
 #endif
     }
