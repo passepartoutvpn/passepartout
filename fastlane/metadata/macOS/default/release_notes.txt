@@ -1,1 +1,2 @@
-Bump
+* macOS: Omit empty profiles from menu
+* macOS: Fix application crashing on launch (#1224)
