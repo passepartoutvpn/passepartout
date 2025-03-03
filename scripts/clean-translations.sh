@@ -27,9 +27,9 @@ for dir in *.lproj; do
             # Exit if there are missing keys after printing them
             sed -n 's/^"\(.*\)"[[:space:]]*=.*/"\1"/p' "$target_file" >"$target_file.excluded"
             if grep -v -f "$target_file.excluded" "$keys_file"; then
-                echo "Stopped."
                 rm "$keys_file"
                 rm "$target_file.excluded"
+                echo "Stopped."
                 exit 1
             fi
 
