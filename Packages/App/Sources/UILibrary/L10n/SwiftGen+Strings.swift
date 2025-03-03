@@ -378,6 +378,12 @@ public enum Strings {
   }
   public enum Modules {
     public enum Dns {
+      /// Route through VPN
+      public static let routeThroughVpn = Strings.tr("Localizable", "modules.dns.route_through_vpn", fallback: "Route through VPN")
+      public enum RouteThroughVpn {
+        /// If enabled, DNS queries will be routed through the VPN tunnel.
+        public static let footer = Strings.tr("Localizable", "modules.dns.route_through_vpn.footer", fallback: "If enabled, DNS queries will be routed through the VPN tunnel.")
+      }
       public enum SearchDomains {
         /// Add domain
         public static let add = Strings.tr("Localizable", "modules.dns.search_domains.add", fallback: "Add domain")
