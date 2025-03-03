@@ -30,52 +30,58 @@ extension TunnelConfiguration.ParseError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidLine(let line):
-            return Strings.macAlertInvalidLine(String(line))
+            return tr("macAlertInvalidLine", String(line))
         case .noInterface:
-            return Strings.macAlertNoInterface
+            return tr("macAlertNoInterface")
         case .multipleInterfaces:
-            return Strings.macAlertMultipleInterfaces
+            return tr("macAlertMultipleInterfaces")
         case .interfaceHasNoPrivateKey:
-            return composed(Strings.alertInvalidInterfaceMessagePrivateKeyRequired, Strings.alertInvalidInterfaceMessagePrivateKeyInvalid)
+            return composed(tr("alertInvalidInterfaceMessagePrivateKeyRequired"), tr("alertInvalidInterfaceMessagePrivateKeyInvalid"))
         case .interfaceHasInvalidPrivateKey:
-            return composed(Strings.macAlertPrivateKeyInvalid, Strings.alertInvalidInterfaceMessagePrivateKeyInvalid)
+            return composed(tr("macAlertPrivateKeyInvalid"), tr("alertInvalidInterfaceMessagePrivateKeyInvalid"))
         case .interfaceHasInvalidListenPort(let value):
-            return composed(Strings.macAlertListenPortInvalid(value), Strings.alertInvalidInterfaceMessageListenPortInvalid)
+            return composed(tr("macAlertListenPortInvalid", value), tr("alertInvalidInterfaceMessageListenPortInvalid"))
         case .interfaceHasInvalidAddress(let value):
-            return composed(Strings.macAlertAddressInvalid(value), Strings.alertInvalidInterfaceMessageAddressInvalid)
+            return composed(tr("macAlertAddressInvalid", value), tr("alertInvalidInterfaceMessageAddressInvalid"))
         case .interfaceHasInvalidDNS(let value):
-            return composed(Strings.macAlertDNSInvalid(value), Strings.alertInvalidInterfaceMessageDNSInvalid)
+            return composed(tr("macAlertDNSInvalid", value), tr("alertInvalidInterfaceMessageDNSInvalid"))
         case .interfaceHasInvalidMTU(let value):
-            return composed(Strings.macAlertMTUInvalid(value), Strings.alertInvalidInterfaceMessageMTUInvalid)
+            return composed(tr("macAlertMTUInvalid", value), tr("alertInvalidInterfaceMessageMTUInvalid"))
         case .interfaceHasUnrecognizedKey(let value):
-            return composed(Strings.macAlertUnrecognizedInterfaceKey(value), Strings.macAlertInfoUnrecognizedInterfaceKey)
+            return composed(tr("macAlertUnrecognizedInterfaceKey", value), tr("macAlertInfoUnrecognizedInterfaceKey"))
         case .peerHasNoPublicKey:
-            return composed(Strings.alertInvalidPeerMessagePublicKeyRequired, Strings.alertInvalidPeerMessagePublicKeyInvalid)
+            return composed(tr("alertInvalidPeerMessagePublicKeyRequired"), tr("alertInvalidPeerMessagePublicKeyInvalid"))
         case .peerHasInvalidPublicKey:
-            return composed(Strings.macAlertPublicKeyInvalid, Strings.alertInvalidPeerMessagePublicKeyInvalid)
+            return composed(tr("macAlertPublicKeyInvalid"), tr("alertInvalidPeerMessagePublicKeyInvalid"))
         case .peerHasInvalidPreSharedKey:
-            return composed(Strings.macAlertPreSharedKeyInvalid, Strings.alertInvalidPeerMessagePreSharedKeyInvalid)
+            return composed(tr("macAlertPreSharedKeyInvalid"), tr("alertInvalidPeerMessagePreSharedKeyInvalid"))
         case .peerHasInvalidAllowedIP(let value):
-            return composed(Strings.macAlertAllowedIPInvalid(value), Strings.alertInvalidPeerMessageAllowedIPsInvalid)
+            return composed(tr("macAlertAllowedIPInvalid", value), tr("alertInvalidPeerMessageAllowedIPsInvalid"))
         case .peerHasInvalidEndpoint(let value):
-            return composed(Strings.macAlertEndpointInvalid(value), Strings.alertInvalidPeerMessageEndpointInvalid)
+            return composed(tr("macAlertEndpointInvalid", value), tr("alertInvalidPeerMessageEndpointInvalid"))
         case .peerHasInvalidPersistentKeepAlive(let value):
-            return composed(Strings.macAlertPersistentKeepliveInvalid(value), Strings.alertInvalidPeerMessagePersistentKeepaliveInvalid)
+            return composed(tr("macAlertPersistentKeepliveInvalid", value), tr("alertInvalidPeerMessagePersistentKeepaliveInvalid"))
         case .peerHasUnrecognizedKey(let value):
-            return composed(Strings.macAlertUnrecognizedPeerKey(value), Strings.macAlertInfoUnrecognizedPeerKey)
+            return composed(tr("macAlertUnrecognizedPeerKey", value), tr("macAlertInfoUnrecognizedPeerKey"))
         case .peerHasInvalidTransferBytes(let line):
-            return Strings.macAlertInvalidLine(String(line))
+            return tr("macAlertInvalidLine", line)
         case .peerHasInvalidLastHandshakeTime(let line):
-            return Strings.macAlertInvalidLine(String(line))
+            return tr("macAlertInvalidLine", line)
         case .multiplePeersWithSamePublicKey:
-            return Strings.alertInvalidPeerMessagePublicKeyDuplicated
+            return tr("alertInvalidPeerMessagePublicKeyDuplicated")
         case .multipleEntriesForKey(let value):
-            return Strings.macAlertMultipleEntriesForKey(value)
+            return tr("macAlertMultipleEntriesForKey", value)
         }
     }
 }
 
-private typealias Strings = WireGuardStrings
+private func tr(_ key: String) -> String {
+    NSLocalizedString(key, bundle: .module, comment: "")
+}
+
+private func tr(_ format: String, _ arguments: CVarArg...) -> String {
+    String(format: tr(format), arguments: arguments)
+}
 
 private func composed(_ title: String, _ info: String) -> String {
     [title, info].joined(separator: " ")

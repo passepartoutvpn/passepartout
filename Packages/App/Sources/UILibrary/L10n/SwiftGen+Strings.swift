@@ -276,6 +276,12 @@ public enum Strings {
       public static let enabled = Strings.tr("Localizable", "global.nouns.enabled", fallback: "Enabled")
       /// Endpoint
       public static let endpoint = Strings.tr("Localizable", "global.nouns.endpoint", fallback: "Endpoint")
+      /// %d Entries
+      public static func entriesN(_ p1: Int) -> String {
+        return Strings.tr("Localizable", "global.nouns.entries_n", p1, fallback: "%d Entries")
+      }
+      /// 1 Entry
+      public static let entriesOne = Strings.tr("Localizable", "global.nouns.entries_one", fallback: "1 Entry")
       /// Features
       public static let features = Strings.tr("Localizable", "global.nouns.features", fallback: "Features")
       /// Filters
@@ -550,8 +556,16 @@ public enum Strings {
       }
       /// Pre-shared key
       public static let presharedKey = Strings.tr("Localizable", "modules.wireguard.preshared_key", fallback: "Pre-shared key")
-      /// Private key
-      public static let providerKey = Strings.tr("Localizable", "modules.wireguard.provider_key", fallback: "Private key")
+      public enum Peer {
+        /// Add peer
+        public static let add = Strings.tr("Localizable", "modules.wireguard.peer.add", fallback: "Add peer")
+        /// Delete peer
+        public static let delete = Strings.tr("Localizable", "modules.wireguard.peer.delete", fallback: "Delete peer")
+      }
+      public enum PrivateKey {
+        /// Generate new key
+        public static let generate = Strings.tr("Localizable", "modules.wireguard.private_key.generate", fallback: "Generate new key")
+      }
     }
   }
   public enum Placeholders {

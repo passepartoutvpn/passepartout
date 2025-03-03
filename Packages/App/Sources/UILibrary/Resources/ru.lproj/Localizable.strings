@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Пусто";
 "global.nouns.enabled" = "Включено";
 "global.nouns.endpoint" = "Конечная точка";
+"global.nouns.entries_n" = "%d Записи";
+"global.nouns.entries_one" = "1 Запись";
 "global.nouns.features" = "Функции";
 "global.nouns.filters" = "Фильтры";
 "global.nouns.folder" = "Папка";
@@ -197,8 +199,10 @@
 "modules.wireguard.allowed_ips" = "Разрешенные IP-адреса";
 "modules.wireguard.interface" = "Интерфейс";
 "modules.wireguard.peer" = "Узел #%d";
+"modules.wireguard.peer.add" = "Добавить узел";
+"modules.wireguard.peer.delete" = "Удалить узел";
 "modules.wireguard.preshared_key" = "Предварительно общий ключ";
-"modules.wireguard.provider_key" = "Приватный ключ";
+"modules.wireguard.private_key" = "Приватный ключ";
 "placeholders.on_demand.ssid" = "Мой SSID";
 "placeholders.profile.name" = "Мой профиль";
 "placeholders.secret" = "секрет";

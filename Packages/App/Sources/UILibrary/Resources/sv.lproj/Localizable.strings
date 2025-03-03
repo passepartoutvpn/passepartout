@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Tom";
 "global.nouns.enabled" = "Aktiverad";
 "global.nouns.endpoint" = "Slutpunkt";
+"global.nouns.entries_n" = "%d Poster";
+"global.nouns.entries_one" = "1 Post";
 "global.nouns.features" = "Funktioner";
 "global.nouns.filters" = "Filter";
 "global.nouns.folder" = "Mapp";
@@ -197,8 +199,10 @@
 "modules.wireguard.allowed_ips" = "Tillåtna IP";
 "modules.wireguard.interface" = "Gränssnitt";
 "modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.peer.add" = "Lägg till peer";
+"modules.wireguard.peer.delete" = "Ta bort peer";
 "modules.wireguard.preshared_key" = "Fördelad nyckel";
-"modules.wireguard.provider_key" = "Privat nyckel";
+"modules.wireguard.private_key" = "Privat nyckel";
 "placeholders.on_demand.ssid" = "Min SSID";
 "placeholders.profile.name" = "Min profil";
 "placeholders.secret" = "hemlighet";

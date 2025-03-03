@@ -96,6 +96,8 @@
 "global.nouns.empty" = "空";
 "global.nouns.enabled" = "已启用";
 "global.nouns.endpoint" = "端点";
+"global.nouns.entries_n" = "%d 条目";
+"global.nouns.entries_one" = "1 条目";
 "global.nouns.features" = "功能";
 "global.nouns.filters" = "筛选器";
 "global.nouns.folder" = "文件夹";
@@ -197,8 +199,10 @@
 "modules.wireguard.allowed_ips" = "允许的 IP";
 "modules.wireguard.interface" = "接口";
 "modules.wireguard.peer" = "对等 #%d";
+"modules.wireguard.peer.add" = "添加对等端";
+"modules.wireguard.peer.delete" = "删除对等端";
 "modules.wireguard.preshared_key" = "预共享密钥";
-"modules.wireguard.provider_key" = "私钥";
+"modules.wireguard.private_key" = "私钥";
 "placeholders.on_demand.ssid" = "我的 SSID";
 "placeholders.profile.name" = "我的配置文件";
 "placeholders.secret" = "密钥";

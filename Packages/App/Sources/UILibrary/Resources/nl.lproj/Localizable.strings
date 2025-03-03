@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Leeg";
 "global.nouns.enabled" = "Ingeschakeld";
 "global.nouns.endpoint" = "Eindpunt";
+"global.nouns.entries_n" = "%d Invoeren";
+"global.nouns.entries_one" = "1 Invoer";
 "global.nouns.features" = "Functies";
 "global.nouns.filters" = "Filters";
 "global.nouns.folder" = "Map";
@@ -197,8 +199,10 @@
 "modules.wireguard.allowed_ips" = "Toegestane IP's";
 "modules.wireguard.interface" = "Interface";
 "modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.peer.add" = "Peer toevoegen";
+"modules.wireguard.peer.delete" = "Peer verwijderen";
 "modules.wireguard.preshared_key" = "Vooraf gedeelde sleutel";
-"modules.wireguard.provider_key" = "Privésleutel";
+"modules.wireguard.private_key" = "Privésleutel";
 "placeholders.on_demand.ssid" = "Mijn SSID";
 "placeholders.profile.name" = "Mijn profiel";
 "placeholders.secret" = "geheim";

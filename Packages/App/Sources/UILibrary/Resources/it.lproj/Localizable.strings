@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Vuoto";
 "global.nouns.enabled" = "Abilitato";
 "global.nouns.endpoint" = "Endpoint";
+"global.nouns.entries_n" = "%d Voci";
+"global.nouns.entries_one" = "1 Voce";
 "global.nouns.features" = "Funzionalità";
 "global.nouns.filters" = "Filtri";
 "global.nouns.folder" = "Cartella";
@@ -197,8 +199,10 @@
 "modules.wireguard.allowed_ips" = "IP consentiti";
 "modules.wireguard.interface" = "Interfaccia";
 "modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.peer.add" = "Aggiungi peer";
+"modules.wireguard.peer.delete" = "Elimina peer";
 "modules.wireguard.preshared_key" = "Chiave precondivisa";
-"modules.wireguard.provider_key" = "Chiave privata";
+"modules.wireguard.private_key" = "Chiave privata";
 "placeholders.on_demand.ssid" = "Il mio SSID";
 "placeholders.profile.name" = "Il mio profilo";
 "placeholders.secret" = "segreto";
