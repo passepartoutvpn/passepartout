@@ -273,7 +273,8 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContent(
                         caption: Strings.Unlocalized.ca,
-                        value: .constant($0.pem)
+                        value: .constant($0.pem),
+                        preview: ""
                     )
                 }
 
@@ -281,7 +282,8 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContent(
                         caption: Strings.Global.Nouns.certificate,
-                        value: .constant($0.pem)
+                        value: .constant($0.pem),
+                        preview: ""
                     )
                 }
 
@@ -289,7 +291,8 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleLongContent(
                         caption: Strings.Global.Nouns.key,
-                        value: .constant($0.pem)
+                        value: .constant($0.pem),
+                        preview: ""
                     )
                 }
 

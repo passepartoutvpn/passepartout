@@ -133,7 +133,7 @@ public struct ThemeModuleLongContent: View {
     public init(caption: String, value: Binding<String>, preview: String? = nil) {
         self.caption = caption
         _value = value
-        self.preview = preview
+        self.preview = preview ?? value.wrappedValue
     }
 
     public init(caption: String, value: Binding<String>, preview: (String) -> String?) {
