@@ -22,9 +22,18 @@ for dir in *.lproj; do
 
             # Use grep to filter only keys that exist in the base file
             grep -f "$keys_file" "$target_file" > "$target_file.tmp"
-
-            # Overwrite the original file with the cleaned version
             mv "$target_file.tmp" "$target_file"
+
+            # Exit if there are missing keys after printing them
+            sed -n 's/^"\(.*\)"[[:space:]]*=.*/"\1"/p' "$target_file" >"$target_file.excluded"
+            if grep -v -f "$target_file.excluded" "$keys_file"; then
+                echo "Stopped."
+                rm "$keys_file"
+                rm "$target_file.excluded"
+                exit 1
+            fi
+
+            rm "$target_file.excluded"
         fi
     fi
 done
