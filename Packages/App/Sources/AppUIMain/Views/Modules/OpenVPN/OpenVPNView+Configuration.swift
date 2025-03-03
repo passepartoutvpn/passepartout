@@ -238,7 +238,7 @@ private extension OpenVPNView.ConfigurationView {
 
             configuration.xorMethod
                 .map {
-                    ThemeModuleLongContentPreview(
+                    ThemeModuleLongContent(
                         caption: Strings.Unlocalized.xor,
                         value: .constant($0.localizedDescription(style: .long)),
                         preview: $0.localizedDescription(style: .short)
@@ -271,34 +271,31 @@ private extension OpenVPNView.ConfigurationView {
         themeModuleSection(if: tlsRows, header: Strings.Unlocalized.tls) {
             configuration.ca
                 .map {
-                    ThemeModuleLongContentPreview(
+                    ThemeModuleLongContent(
                         caption: Strings.Unlocalized.ca,
-                        value: .constant($0.pem),
-                        preview: nil
+                        value: .constant($0.pem)
                     )
                 }
 
             configuration.clientCertificate
                 .map {
-                    ThemeModuleLongContentPreview(
+                    ThemeModuleLongContent(
                         caption: Strings.Global.Nouns.certificate,
-                        value: .constant($0.pem),
-                        preview: nil
+                        value: .constant($0.pem)
                     )
                 }
 
             configuration.clientKey
                 .map {
-                    ThemeModuleLongContentPreview(
+                    ThemeModuleLongContent(
                         caption: Strings.Global.Nouns.key,
-                        value: .constant($0.pem),
-                        preview: nil
+                        value: .constant($0.pem)
                     )
                 }
 
             configuration.tlsWrap
                 .map {
-                    ThemeModuleLongContentPreview(
+                    ThemeModuleLongContent(
                         caption: Strings.Modules.Openvpn.tlsWrap,
                         value: .constant($0.key.hexString),
                         preview: configuration.localizedDescription(style: .tlsWrap)

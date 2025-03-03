@@ -128,37 +128,18 @@ public struct ThemeModuleLongContent: View {
     @Binding
     private var value: String
 
-    public init(caption: String, value: Binding<String>) {
+    private let preview: String?
+
+    public init(caption: String, value: Binding<String>, preview: String? = nil) {
         self.caption = caption
         _value = value
+        self.preview = preview
     }
-
-    public var body: some View {
-        LongContentLink(caption, content: $value) {
-            Text($0)
-                .foregroundColor(.secondary)
-        }
-    }
-}
-
-public struct ThemeModuleLongContentPreview: View {
-    private let caption: String
-
-    @Binding
-    private var value: String
-
-    private let preview: String?
 
     public init(caption: String, value: Binding<String>, preview: (String) -> String?) {
         self.caption = caption
         _value = value
         self.preview = preview(value.wrappedValue)
-    }
-
-    public init(caption: String, value: Binding<String>, preview: String?) {
-        self.caption = caption
-        _value = value
-        self.preview = preview
     }
 
     public var body: some View {

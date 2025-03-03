@@ -61,7 +61,7 @@ private extension WireGuardView.ConfigurationView {
                 caption: Strings.Global.Nouns.privateKey,
                 value: $model.privateKey
             )
-            ThemeModuleLongContentPreview(
+            ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.addresses,
                 value: $model.addresses,
                 preview: \.asNumberOfEntries
@@ -76,7 +76,7 @@ private extension WireGuardView.ConfigurationView {
 
     var dnsSection: some View {
         themeModuleSection(header: Strings.Unlocalized.dns) {
-            ThemeModuleLongContentPreview(
+            ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.servers,
                 value: $model.dnsServers,
                 preview: \.asNumberOfEntries
@@ -85,7 +85,7 @@ private extension WireGuardView.ConfigurationView {
                 caption: Strings.Global.Nouns.domain,
                 value: $model.dnsDomain
             )
-            ThemeModuleLongContentPreview(
+            ThemeModuleLongContent(
                 caption: Strings.Entities.Dns.searchDomains,
                 value: $model.dnsSearchDomains,
                 preview: \.asNumberOfEntries
@@ -109,7 +109,7 @@ private extension WireGuardView.ConfigurationView {
                 caption: Strings.Global.Nouns.endpoint,
                 value: peerBinding.endpoint
             )
-            ThemeModuleLongContentPreview(
+            ThemeModuleLongContent(
                 caption: Strings.Modules.Wireguard.allowedIps,
                 value: peerBinding.allowedIPs,
                 preview: \.asNumberOfEntries
