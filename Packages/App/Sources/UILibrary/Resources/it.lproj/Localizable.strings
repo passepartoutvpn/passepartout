@@ -200,6 +200,7 @@
 "modules.wireguard.peer.add" = "Aggiungi peer";
 "modules.wireguard.peer.delete" = "Elimina peer";
 "modules.wireguard.preshared_key" = "Chiave precondivisa";
+"modules.wireguard.private_key.generate" = "Genera nuova chiave";
 "placeholders.on_demand.ssid" = "Il mio SSID";
 "placeholders.profile.name" = "Il mio profilo";
 "placeholders.secret" = "segreto";

@@ -200,6 +200,7 @@
 "modules.wireguard.peer.add" = "Peer toevoegen";
 "modules.wireguard.peer.delete" = "Peer verwijderen";
 "modules.wireguard.preshared_key" = "Vooraf gedeelde sleutel";
+"modules.wireguard.private_key.generate" = "Nieuwe sleutel genereren";
 "placeholders.on_demand.ssid" = "Mijn SSID";
 "placeholders.profile.name" = "Mijn profiel";
 "placeholders.secret" = "geheim";

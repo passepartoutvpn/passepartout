@@ -200,6 +200,7 @@
 "modules.wireguard.peer.add" = "Lägg till peer";
 "modules.wireguard.peer.delete" = "Ta bort peer";
 "modules.wireguard.preshared_key" = "Fördelad nyckel";
+"modules.wireguard.private_key.generate" = "Generera nyckel";
 "placeholders.on_demand.ssid" = "Min SSID";
 "placeholders.profile.name" = "Min profil";
 "placeholders.secret" = "hemlighet";

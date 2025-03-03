@@ -200,6 +200,7 @@
 "modules.wireguard.peer.add" = "添加对等端";
 "modules.wireguard.peer.delete" = "删除对等端";
 "modules.wireguard.preshared_key" = "预共享密钥";
+"modules.wireguard.private_key.generate" = "生成新密钥";
 "placeholders.on_demand.ssid" = "我的 SSID";
 "placeholders.profile.name" = "我的配置文件";
 "placeholders.secret" = "密钥";

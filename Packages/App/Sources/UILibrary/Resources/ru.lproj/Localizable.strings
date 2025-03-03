@@ -200,6 +200,7 @@
 "modules.wireguard.peer.add" = "Добавить узел";
 "modules.wireguard.peer.delete" = "Удалить узел";
 "modules.wireguard.preshared_key" = "Предварительно общий ключ";
+"modules.wireguard.private_key.generate" = "Сгенерировать новый ключ";
 "placeholders.on_demand.ssid" = "Мой SSID";
 "placeholders.profile.name" = "Мой профиль";
 "placeholders.secret" = "секрет";
