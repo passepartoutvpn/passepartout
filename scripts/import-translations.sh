@@ -44,7 +44,7 @@ for lang in `ls $translations_input_path`; do
     tmp_path="$output_path.tmp"
 
     # remove keys
-    sed -E 's/^"(.*)" = .*$/\1/' $input_path >$keys_path
+    sed -E 's/^"(.*)" = .*$/"\1"/' $input_path >$keys_path
     grep -vf $keys_path $output_path >$tmp_path
 
     # append new strings
