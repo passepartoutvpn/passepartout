@@ -81,9 +81,10 @@ private extension WireGuardView.ConfigurationView {
                 value: $model.dnsServers,
                 preview: \.asNumberOfEntries
             )
-            ThemeModuleLongContent(
+            ThemeModuleTextField(
                 caption: Strings.Global.Nouns.domain,
-                value: $model.dnsDomain
+                value: $model.dnsDomain,
+                placeholder: Strings.Unlocalized.Placeholders.hostname
             )
             ThemeModuleLongContent(
                 caption: Strings.Entities.Dns.searchDomains,
