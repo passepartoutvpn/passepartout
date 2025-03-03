@@ -167,7 +167,7 @@ private extension WireGuardView.ConfigurationView {
             var keepAlive = ""
         }
 
-        private let separator = "\n"
+        private let separator = ","
 
         var privateKey = ""
 
@@ -247,7 +247,7 @@ private extension String {
         guard !trimmed.isEmpty else {
             return nil
         }
-        let count = 1 + trimmed.ranges(of: "\n").count
+        let count = 1 + trimmed.ranges(of: ",").count
         if count == 1 {
             return Strings.Global.Nouns.entriesOne
         }
