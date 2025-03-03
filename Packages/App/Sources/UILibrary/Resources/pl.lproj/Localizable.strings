@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Pusty";
 "global.nouns.enabled" = "Włączony";
 "global.nouns.endpoint" = "Punkt końcowy";
+"global.nouns.entries_n" = "%d Wpisy";
+"global.nouns.entries_one" = "1 Wpis";
 "global.nouns.features" = "Funkcje";
 "global.nouns.filters" = "Filtry";
 "global.nouns.folder" = "Folder";

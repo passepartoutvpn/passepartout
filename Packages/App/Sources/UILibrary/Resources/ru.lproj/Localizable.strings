@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Пусто";
 "global.nouns.enabled" = "Включено";
 "global.nouns.endpoint" = "Конечная точка";
+"global.nouns.entries_n" = "%d Записи";
+"global.nouns.entries_one" = "1 Запись";
 "global.nouns.features" = "Функции";
 "global.nouns.filters" = "Фильтры";
 "global.nouns.folder" = "Папка";

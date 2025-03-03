@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Leeg";
 "global.nouns.enabled" = "Ingeschakeld";
 "global.nouns.endpoint" = "Eindpunt";
+"global.nouns.entries_n" = "%d Invoeren";
+"global.nouns.entries_one" = "1 Invoer";
 "global.nouns.features" = "Functies";
 "global.nouns.filters" = "Filters";
 "global.nouns.folder" = "Map";

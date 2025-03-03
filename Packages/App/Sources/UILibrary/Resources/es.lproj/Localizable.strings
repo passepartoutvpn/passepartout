@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Vacío";
 "global.nouns.enabled" = "Habilitado";
 "global.nouns.endpoint" = "Punto final";
+"global.nouns.entries_n" = "%d Entradas";
+"global.nouns.entries_one" = "1 Entrada";
 "global.nouns.features" = "Funciones";
 "global.nouns.filters" = "Filtros";
 "global.nouns.folder" = "Carpeta";

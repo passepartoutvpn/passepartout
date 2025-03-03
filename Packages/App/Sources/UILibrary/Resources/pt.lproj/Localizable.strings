@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Vazio";
 "global.nouns.enabled" = "Ativado";
 "global.nouns.endpoint" = "Ponto final";
+"global.nouns.entries_n" = "%d Entradas";
+"global.nouns.entries_one" = "1 Entrada";
 "global.nouns.features" = "Recursos";
 "global.nouns.filters" = "Filtros";
 "global.nouns.folder" = "Pasta";

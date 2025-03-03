@@ -96,6 +96,8 @@
 "global.nouns.empty" = "空";
 "global.nouns.enabled" = "已启用";
 "global.nouns.endpoint" = "端点";
+"global.nouns.entries_n" = "%d 条目";
+"global.nouns.entries_one" = "1 条目";
 "global.nouns.features" = "功能";
 "global.nouns.filters" = "筛选器";
 "global.nouns.folder" = "文件夹";

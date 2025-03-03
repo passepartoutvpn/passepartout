@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Κενό";
 "global.nouns.enabled" = "Ενεργοποιημένο";
 "global.nouns.endpoint" = "Τελικό σημείο";
+"global.nouns.entries_n" = "%d Εγγραφές";
+"global.nouns.entries_one" = "1 Εγγραφή";
 "global.nouns.features" = "Λειτουργίες";
 "global.nouns.filters" = "Φίλτρα";
 "global.nouns.folder" = "Φάκελος";

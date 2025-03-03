@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Tom";
 "global.nouns.enabled" = "Aktiverad";
 "global.nouns.endpoint" = "Slutpunkt";
+"global.nouns.entries_n" = "%d Poster";
+"global.nouns.entries_one" = "1 Post";
 "global.nouns.features" = "Funktioner";
 "global.nouns.filters" = "Filter";
 "global.nouns.folder" = "Mapp";

@@ -96,6 +96,8 @@
 "global.nouns.empty" = "Vide";
 "global.nouns.enabled" = "Activé";
 "global.nouns.endpoint" = "Point final";
+"global.nouns.entries_n" = "%d Entrées";
+"global.nouns.entries_one" = "1 Entrée";
 "global.nouns.features" = "Fonctionnalités";
 "global.nouns.filters" = "Filtres";
 "global.nouns.folder" = "Dossier";
