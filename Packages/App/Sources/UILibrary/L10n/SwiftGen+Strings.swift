@@ -556,8 +556,6 @@ public enum Strings {
       }
       /// Pre-shared key
       public static let presharedKey = Strings.tr("Localizable", "modules.wireguard.preshared_key", fallback: "Pre-shared key")
-      /// Private key
-      public static let privateKey = Strings.tr("Localizable", "modules.wireguard.private_key", fallback: "Private key")
       public enum Peer {
         /// Add peer
         public static let add = Strings.tr("Localizable", "modules.wireguard.peer.add", fallback: "Add peer")
