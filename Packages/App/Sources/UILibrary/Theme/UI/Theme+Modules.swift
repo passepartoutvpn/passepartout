@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import CommonUtils
 import SwiftUI
 
@@ -164,3 +166,5 @@ public struct ThemeModulePush: View {
         NavigationLink(caption, value: route)
     }
 }
+
+#endif
