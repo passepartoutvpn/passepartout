@@ -149,6 +149,12 @@ public struct ThemeModuleLongContentPreview: View {
 
     private let preview: String?
 
+    public init(caption: String, value: Binding<String>, preview: (String) -> String?) {
+        self.caption = caption
+        _value = value
+        self.preview = preview(value.wrappedValue)
+    }
+
     public init(caption: String, value: Binding<String>, preview: String?) {
         self.caption = caption
         _value = value

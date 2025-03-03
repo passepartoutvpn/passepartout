@@ -306,6 +306,8 @@
 "global.nouns.empty" = "Empty";
 "global.nouns.enabled" = "Enabled";
 "global.nouns.endpoint" = "Endpoint";
+"global.nouns.entries_n" = "%d Entries";
+"global.nouns.entries_one" = "1 Entry";
 "global.nouns.features" = "Features";
 "global.nouns.filters" = "Filters";
 "global.nouns.folder" = "Folder";

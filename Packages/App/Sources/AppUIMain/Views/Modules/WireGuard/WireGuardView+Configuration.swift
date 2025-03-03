@@ -61,9 +61,10 @@ private extension WireGuardView.ConfigurationView {
                 caption: Strings.Global.Nouns.privateKey,
                 value: $model.privateKey
             )
-            ThemeModuleLongContent(
+            ThemeModuleLongContentPreview(
                 caption: Strings.Global.Nouns.addresses,
-                value: $model.addresses
+                value: $model.addresses,
+                preview: \.asNumberOfEntries
             )
             ThemeModuleTextField(
                 caption: Strings.Unlocalized.mtu,
@@ -75,17 +76,19 @@ private extension WireGuardView.ConfigurationView {
 
     var dnsSection: some View {
         themeModuleSection(header: Strings.Unlocalized.dns) {
-            ThemeModuleLongContent(
+            ThemeModuleLongContentPreview(
                 caption: Strings.Global.Nouns.servers,
-                value: $model.dnsServers
+                value: $model.dnsServers,
+                preview: \.asNumberOfEntries
             )
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.domain,
                 value: $model.dnsDomain
             )
-            ThemeModuleLongContent(
+            ThemeModuleLongContentPreview(
                 caption: Strings.Entities.Dns.searchDomains,
-                value: $model.dnsSearchDomains
+                value: $model.dnsSearchDomains,
+                preview: \.asNumberOfEntries
             )
         }
     }
@@ -106,9 +109,10 @@ private extension WireGuardView.ConfigurationView {
                 caption: Strings.Global.Nouns.endpoint,
                 value: peerBinding.endpoint
             )
-            ThemeModuleLongContent(
+            ThemeModuleLongContentPreview(
                 caption: Strings.Modules.Wireguard.allowedIps,
-                value: peerBinding.allowedIPs
+                value: peerBinding.allowedIPs,
+                preview: \.asNumberOfEntries
             )
             ThemeModuleTextField(
                 caption: Strings.Global.Nouns.keepAlive,
@@ -163,7 +167,7 @@ private extension WireGuardView.ConfigurationView {
             var keepAlive = ""
         }
 
-        private let separator = ","
+        private let separator = "\n"
 
         var privateKey = ""
 
@@ -234,6 +238,20 @@ private extension WireGuardView.ConfigurationView {
         } set: {
             model.peers[publicKey] = $0
         }
+    }
+}
+
+private extension String {
+    var asNumberOfEntries: String? {
+        let trimmed = trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            return nil
+        }
+        let count = 1 + trimmed.ranges(of: "\n").count
+        if count == 1 {
+            return Strings.Global.Nouns.entriesOne
+        }
+        return Strings.Global.Nouns.entriesN(count)
     }
 }
 

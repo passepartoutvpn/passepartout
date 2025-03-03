@@ -276,6 +276,12 @@ public enum Strings {
       public static let enabled = Strings.tr("Localizable", "global.nouns.enabled", fallback: "Enabled")
       /// Endpoint
       public static let endpoint = Strings.tr("Localizable", "global.nouns.endpoint", fallback: "Endpoint")
+      /// %d Entries
+      public static func entriesN(_ p1: Int) -> String {
+        return Strings.tr("Localizable", "global.nouns.entries_n", p1, fallback: "%d Entries")
+      }
+      /// 1 Entry
+      public static let entriesOne = Strings.tr("Localizable", "global.nouns.entries_one", fallback: "1 Entry")
       /// Features
       public static let features = Strings.tr("Localizable", "global.nouns.features", fallback: "Features")
       /// Filters
