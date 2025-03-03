@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Включено";
 "modules.general.rows.shared.purchase" = "Делиться через iCloud";
 "modules.general.sections.behavior.header" = "Поведение";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "Профили для ТВ недоступны в бета-версиях.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "Профили для ТВ требуют покупки.";
 "modules.general.sections.storage.header" = "Синхронизация";
 "modules.general.sections.storage.sharing.footer" = "Профили хранятся в %@ и зашифрованы.";
 "modules.general.sections.storage.tv.footer" = "Для совместного использования профилей с Apple TV требуется iCloud.";
@@ -202,7 +200,6 @@
 "modules.wireguard.peer.add" = "Добавить узел";
 "modules.wireguard.peer.delete" = "Удалить узел";
 "modules.wireguard.preshared_key" = "Предварительно общий ключ";
-"modules.wireguard.private_key" = "Приватный ключ";
 "placeholders.on_demand.ssid" = "Мой SSID";
 "placeholders.profile.name" = "Мой профиль";
 "placeholders.secret" = "секрет";
@@ -272,16 +269,13 @@
 "views.paywall.alerts.verification.edit" = "Пожалуйста, подождите, пока ваши покупки проверяются.";
 "views.paywall.product.included_features" = "Включенные функции";
 "views.paywall.rows.restore_purchases" = "Восстановить покупки";
-"views.paywall.sections.all_features.header" = "Полная версия включает";
 "views.paywall.sections.full_products.footer" = "Эти продукты включают текущие и будущие функции.";
 "views.paywall.sections.full_products.header" = "Все функции";
-"views.paywall.sections.included_features.header" = "Также включает";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
 "views.paywall.sections.products.header" = "Рекомендуемые продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
 "views.paywall.sections.restore.footer" = "Если вы уже купили это приложение или функцию в прошлом, вы можете восстановить свои покупки.";
 "views.paywall.sections.restore.header" = "Восстановить";
-"views.paywall.sections.suggested_product.header" = "Единоразовая покупка";
 "views.preferences.dns_falls_back" = "Резервный DNS";
 "views.preferences.dns_falls_back.footer" = "Переключается на серверы CloudFlare, если VPN не предоставляет настройки DNS.";
 "views.preferences.erase_icloud" = "Удалить профили из iCloud";

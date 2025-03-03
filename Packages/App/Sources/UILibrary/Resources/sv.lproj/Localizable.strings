@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Aktiverad";
 "modules.general.rows.shared.purchase" = "Dela på iCloud";
 "modules.general.sections.behavior.header" = "Beteende";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profiler fungerar inte i beta-versioner.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "TV-profiler fungerar inte utan ett köp.";
 "modules.general.sections.storage.header" = "Synkronisering";
 "modules.general.sections.storage.sharing.footer" = "Profiler sparas i %@ och är krypterade.";
 "modules.general.sections.storage.tv.footer" = "iCloud krävs för att dela dina profiler med din Apple TV.";
@@ -202,7 +200,6 @@
 "modules.wireguard.peer.add" = "Lägg till peer";
 "modules.wireguard.peer.delete" = "Ta bort peer";
 "modules.wireguard.preshared_key" = "Fördelad nyckel";
-"modules.wireguard.private_key" = "Privat nyckel";
 "placeholders.on_demand.ssid" = "Min SSID";
 "placeholders.profile.name" = "Min profil";
 "placeholders.secret" = "hemlighet";
@@ -272,16 +269,13 @@
 "views.paywall.alerts.verification.edit" = "Vänligen vänta medan dina köp verifieras.";
 "views.paywall.product.included_features" = "Inkluderade funktioner";
 "views.paywall.rows.restore_purchases" = "Återställ köp";
-"views.paywall.sections.all_features.header" = "Den fullständiga versionen innehåller";
 "views.paywall.sections.full_products.footer" = "Dessa produkter inkluderar nuvarande och framtida funktioner.";
 "views.paywall.sections.full_products.header" = "Alla funktioner";
-"views.paywall.sections.included_features.header" = "Inkluderar även";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
 "views.paywall.sections.products.header" = "Föreslagna produkter";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har köpt denna app eller funktion tidigare kan du återställa dina köp.";
 "views.paywall.sections.restore.header" = "Återställ";
-"views.paywall.sections.suggested_product.header" = "Engångsköp";
 "views.preferences.dns_falls_back" = "DNS-backup";
 "views.preferences.dns_falls_back.footer" = "Återgår till CloudFlare-servrar när VPN inte tillhandahåller DNS-inställningar.";
 "views.preferences.erase_icloud" = "Radera profiler från iCloud";

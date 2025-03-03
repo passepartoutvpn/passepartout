@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Ingeschakeld";
 "modules.general.rows.shared.purchase" = "Delen op iCloud";
 "modules.general.sections.behavior.header" = "Gedrag";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "TV-profielen werken niet in bètaversies.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "TV-profielen werken niet zonder aankoop.";
 "modules.general.sections.storage.header" = "Synchronisatie";
 "modules.general.sections.storage.sharing.footer" = "Profielen worden versleuteld opgeslagen in %@.";
 "modules.general.sections.storage.tv.footer" = "iCloud is vereist om je profielen met je Apple TV te delen.";
@@ -202,7 +200,6 @@
 "modules.wireguard.peer.add" = "Peer toevoegen";
 "modules.wireguard.peer.delete" = "Peer verwijderen";
 "modules.wireguard.preshared_key" = "Vooraf gedeelde sleutel";
-"modules.wireguard.private_key" = "Privésleutel";
 "placeholders.on_demand.ssid" = "Mijn SSID";
 "placeholders.profile.name" = "Mijn profiel";
 "placeholders.secret" = "geheim";
@@ -272,16 +269,13 @@
 "views.paywall.alerts.verification.edit" = "Even geduld terwijl we je aankopen verifiëren.";
 "views.paywall.product.included_features" = "Inbegrepen functies";
 "views.paywall.rows.restore_purchases" = "Aankopen herstellen";
-"views.paywall.sections.all_features.header" = "De volledige versie bevat";
 "views.paywall.sections.full_products.footer" = "Deze producten bevatten huidige en toekomstige functies.";
 "views.paywall.sections.full_products.header" = "Alle functies";
-"views.paywall.sections.included_features.header" = "Bevat ook";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
 "views.paywall.sections.products.header" = "Voorgestelde producten";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je deze app of functie eerder hebt gekocht, kun je je aankopen herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";
-"views.paywall.sections.suggested_product.header" = "Eenmalige aankoop";
 "views.preferences.dns_falls_back" = "DNS-terugval";
 "views.preferences.dns_falls_back.footer" = "Valt terug op CloudFlare-servers wanneer het VPN geen DNS-instellingen biedt.";
 "views.preferences.erase_icloud" = "Verwijder profielen van iCloud";
