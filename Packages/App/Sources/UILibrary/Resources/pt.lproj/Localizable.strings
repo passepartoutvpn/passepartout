@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d segundos";
 "global.nouns.name" = "Nome";
 "global.nouns.networks" = "Redes";
+"global.nouns.no" = "Não";
 "global.nouns.no_content" = "Sem conteúdo";
 "global.nouns.no_selection" = "Nenhuma seleção";
 "global.nouns.none" = "Nenhum";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "Desconhecido";
 "global.nouns.username" = "Nome de usuário";
 "global.nouns.version" = "Versão";
+"global.nouns.yes" = "Sim";
+"modules.dns.route_through_vpn" = "Roteamento através do VPN";
+"modules.dns.route_through_vpn.footer" = "Se ativado, as consultas DNS serão roteadas através do túnel VPN.";
 "modules.dns.search_domains.add" = "Adicionar domínio";
 "modules.dns.servers.add" = "Adicionar endereço";
 "modules.general.rows.appletv" = "%@";

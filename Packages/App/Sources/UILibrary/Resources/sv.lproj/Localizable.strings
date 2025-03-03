@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d sekunder";
 "global.nouns.name" = "Namn";
 "global.nouns.networks" = "Nätverk";
+"global.nouns.no" = "Nej";
 "global.nouns.no_content" = "Inget innehåll";
 "global.nouns.no_selection" = "Ingen val";
 "global.nouns.none" = "Ingen";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "Okänd";
 "global.nouns.username" = "Användarnamn";
 "global.nouns.version" = "Version";
+"global.nouns.yes" = "Ja";
+"modules.dns.route_through_vpn" = "Routa via VPN";
+"modules.dns.route_through_vpn.footer" = "Om aktiverat, kommer DNS-förfrågningar att routas genom VPN-tunneln.";
 "modules.dns.search_domains.add" = "Lägg till domän";
 "modules.dns.servers.add" = "Lägg till adress";
 "modules.general.rows.appletv" = "%@";

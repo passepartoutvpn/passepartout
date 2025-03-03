@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d секунд";
 "global.nouns.name" = "Ім'я";
 "global.nouns.networks" = "Мережі";
+"global.nouns.no" = "Ні";
 "global.nouns.no_content" = "Немає вмісту";
 "global.nouns.no_selection" = "Немає вибору";
 "global.nouns.none" = "Жодний";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "Невідомо";
 "global.nouns.username" = "Ім'я користувача";
 "global.nouns.version" = "Версія";
+"global.nouns.yes" = "Так";
+"modules.dns.route_through_vpn" = "Маршрутизувати через VPN";
+"modules.dns.route_through_vpn.footer" = "Якщо ввімкнено, DNS-запити будуть спрямовані через VPN-тунель.";
 "modules.dns.search_domains.add" = "Додати домен";
 "modules.dns.servers.add" = "Додати адресу";
 "modules.general.rows.appletv" = "%@";

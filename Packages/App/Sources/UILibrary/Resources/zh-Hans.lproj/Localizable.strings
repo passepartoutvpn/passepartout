@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d 秒";
 "global.nouns.name" = "名称";
 "global.nouns.networks" = "网络";
+"global.nouns.no" = "否";
 "global.nouns.no_content" = "无内容";
 "global.nouns.no_selection" = "未选择";
 "global.nouns.none" = "无";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "未知";
 "global.nouns.username" = "用户名";
 "global.nouns.version" = "版本";
+"global.nouns.yes" = "是";
+"modules.dns.route_through_vpn" = "通过 VPN 路由";
+"modules.dns.route_through_vpn.footer" = "如果启用，DNS 查询将通过 VPN 隧道进行路由。";
 "modules.dns.search_domains.add" = "添加域名";
 "modules.dns.servers.add" = "添加地址";
 "modules.general.rows.appletv" = "%@";
