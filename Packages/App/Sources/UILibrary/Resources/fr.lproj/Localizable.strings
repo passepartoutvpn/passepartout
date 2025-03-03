@@ -202,7 +202,7 @@
 "modules.wireguard.peer.add" = "Ajouter un pair";
 "modules.wireguard.peer.delete" = "Supprimer un pair";
 "modules.wireguard.preshared_key" = "Clé prépartagée";
-"modules.wireguard.provider_key" = "Clé privée";
+"modules.wireguard.private_key" = "Clé privée";
 "placeholders.on_demand.ssid" = "Mon SSID";
 "placeholders.profile.name" = "Mon profil";
 "placeholders.secret" = "secret";

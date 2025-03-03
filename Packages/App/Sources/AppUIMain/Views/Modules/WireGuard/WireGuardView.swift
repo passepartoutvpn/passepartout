@@ -87,7 +87,7 @@ private extension WireGuardView {
     }
 
     func providerRows() -> some View {
-        ThemeModulePush(caption: Strings.Modules.Wireguard.providerKey, route: ProfileRoute(Subroute.providerKey))
+        ThemeModulePush(caption: Strings.Modules.Wireguard.privateKey, route: ProfileRoute(Subroute.providerKey))
     }
 }
 

@@ -202,7 +202,7 @@
 "modules.wireguard.peer.add" = "Додати вузол";
 "modules.wireguard.peer.delete" = "Видалити вузол";
 "modules.wireguard.preshared_key" = "Попередньо спільний ключ";
-"modules.wireguard.provider_key" = "Приватний ключ";
+"modules.wireguard.private_key" = "Приватний ключ";
 "placeholders.on_demand.ssid" = "Мій SSID";
 "placeholders.profile.name" = "Мій профіль";
 "placeholders.secret" = "секрет";

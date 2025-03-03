@@ -202,7 +202,7 @@
 "modules.wireguard.peer.add" = "Προσθήκη ομότιμου";
 "modules.wireguard.peer.delete" = "Διαγραφή ομότιμου";
 "modules.wireguard.preshared_key" = "Προμοιρασμένο κλειδί";
-"modules.wireguard.provider_key" = "Ιδιωτικό κλειδί";
+"modules.wireguard.private_key" = "Ιδιωτικό κλειδί";
 "placeholders.on_demand.ssid" = "Το SSID μου";
 "placeholders.profile.name" = "Το προφίλ μου";
 "placeholders.secret" = "μυστικό";
