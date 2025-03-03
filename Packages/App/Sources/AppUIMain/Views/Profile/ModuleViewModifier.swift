@@ -37,11 +37,13 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 
     let draft: T
 
+    let withUUID: Bool
+
     func body(content: Content) -> some View {
         Form {
             content
 #if DEBUG
-            if !isUITesting {
+            if !isUITesting && withUUID {
                 Section {
                     UUIDText(uuid: draft.id)
                 }
@@ -55,7 +57,7 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 }
 
 extension View {
-    func moduleView<T>(editor: ProfileEditor, draft: T) -> some View where T: ModuleBuilder & Equatable {
-        modifier(ModuleViewModifier(editor: editor, draft: draft))
+    func moduleView<T>(editor: ProfileEditor, draft: T, withUUID: Bool = true) -> some View where T: ModuleBuilder & Equatable {
+        modifier(ModuleViewModifier(editor: editor, draft: draft, withUUID: withUUID))
     }
 }

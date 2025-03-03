@@ -44,6 +44,7 @@ public final class UILibrary: UILibraryConfiguring {
         CommonLibrary().configure(.app)
 
         assertMissingImplementations(with: context.registry)
+        context.appearanceManager.apply()
         uiConfiguring?.configure(with: context)
     }
 }
