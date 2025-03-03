@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Habilitado";
 "modules.general.rows.shared.purchase" = "Compartir en iCloud";
 "modules.general.sections.behavior.header" = "Comportamiento";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "Los perfiles de TV no funcionan en las versiones beta.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "Los perfiles de TV no funcionan sin una compra.";
 "modules.general.sections.storage.header" = "Sincronización";
 "modules.general.sections.storage.sharing.footer" = "Los perfiles se almacenan en %@ de manera cifrada.";
 "modules.general.sections.storage.tv.footer" = "Se requiere iCloud para compartir tus perfiles con tu Apple TV.";
@@ -202,7 +200,7 @@
 "modules.wireguard.peer.add" = "Añadir par";
 "modules.wireguard.peer.delete" = "Eliminar par";
 "modules.wireguard.preshared_key" = "Clave precompartida";
-"modules.wireguard.private_key" = "Clave privada";
+"modules.wireguard.private_key.generate" = "Generar nueva clave";
 "placeholders.on_demand.ssid" = "Mi SSID";
 "placeholders.profile.name" = "Mi perfil";
 "placeholders.secret" = "secreto";
@@ -272,16 +270,13 @@
 "views.paywall.alerts.verification.edit" = "Por favor, espera mientras verificamos tus compras.";
 "views.paywall.product.included_features" = "Funciones incluidas";
 "views.paywall.rows.restore_purchases" = "Restaurar compras";
-"views.paywall.sections.all_features.header" = "La versión completa incluye";
 "views.paywall.sections.full_products.footer" = "Estos productos incluyen características actuales y futuras.";
 "views.paywall.sections.full_products.header" = "Todas las funciones";
-"views.paywall.sections.included_features.header" = "También incluye";
 "views.paywall.sections.products.footer" = "Todas las compras admiten En Familia.";
 "views.paywall.sections.products.header" = "Productos sugeridos";
 "views.paywall.sections.required_features.header" = "Características requeridas";
 "views.paywall.sections.restore.footer" = "Si compraste esta app o característica en el pasado, puedes restaurar tus compras.";
 "views.paywall.sections.restore.header" = "Restaurar";
-"views.paywall.sections.suggested_product.header" = "Compra única";
 "views.preferences.dns_falls_back" = "DNS de respaldo";
 "views.preferences.dns_falls_back.footer" = "Usa los servidores de CloudFlare cuando el VPN no proporciona configuraciones de DNS.";
 "views.preferences.erase_icloud" = "Eliminar perfiles de iCloud";

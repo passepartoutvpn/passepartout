@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Увімкнено";
 "modules.general.rows.shared.purchase" = "Поділитися через iCloud";
 "modules.general.sections.behavior.header" = "Поведінка";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "Профілі TV не працюють у бета-версіях.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "Профілі TV не працюють без покупки.";
 "modules.general.sections.storage.header" = "Синхронізація";
 "modules.general.sections.storage.sharing.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";
 "modules.general.sections.storage.tv.footer" = "Для спільного використання профілів з Apple TV потрібен iCloud.";
@@ -202,7 +200,7 @@
 "modules.wireguard.peer.add" = "Додати вузол";
 "modules.wireguard.peer.delete" = "Видалити вузол";
 "modules.wireguard.preshared_key" = "Попередньо спільний ключ";
-"modules.wireguard.private_key" = "Приватний ключ";
+"modules.wireguard.private_key.generate" = "Згенерувати новий ключ";
 "placeholders.on_demand.ssid" = "Мій SSID";
 "placeholders.profile.name" = "Мій профіль";
 "placeholders.secret" = "секрет";
@@ -272,16 +270,13 @@
 "views.paywall.alerts.verification.edit" = "Будь ласка, зачекайте, поки ваші покупки перевіряються.";
 "views.paywall.product.included_features" = "Включені функції";
 "views.paywall.rows.restore_purchases" = "Відновити покупки";
-"views.paywall.sections.all_features.header" = "Повна версія включає";
 "views.paywall.sections.full_products.footer" = "Ці продукти містять поточні та майбутні функції.";
 "views.paywall.sections.full_products.header" = "Усі функції";
-"views.paywall.sections.included_features.header" = "Також включає";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
 "views.paywall.sections.products.header" = "Рекомендовані продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше купували цей додаток або функцію, ви можете відновити свої покупки.";
 "views.paywall.sections.restore.header" = "Відновлення";
-"views.paywall.sections.suggested_product.header" = "Одноразова покупка";
 "views.preferences.dns_falls_back" = "Резервний DNS";
 "views.preferences.dns_falls_back.footer" = "Перемикається на сервери CloudFlare, коли VPN не надає налаштування DNS.";
 "views.preferences.erase_icloud" = "Видалити профілі з iCloud";

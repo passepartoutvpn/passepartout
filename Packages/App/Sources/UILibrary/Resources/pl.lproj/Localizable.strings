@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Włączone";
 "modules.general.rows.shared.purchase" = "Udostępnij w iCloud";
 "modules.general.sections.behavior.header" = "Zachowanie";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "Profile TV nie działają w wersjach beta.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "Profile TV nie działają bez zakupu.";
 "modules.general.sections.storage.header" = "Synchronizacja";
 "modules.general.sections.storage.sharing.footer" = "Profile są przechowywane w %@ i szyfrowane.";
 "modules.general.sections.storage.tv.footer" = "iCloud jest wymagany do udostępniania profili na Apple TV.";
@@ -202,7 +200,7 @@
 "modules.wireguard.peer.add" = "Dodaj peer";
 "modules.wireguard.peer.delete" = "Usuń peer";
 "modules.wireguard.preshared_key" = "Współdzielony klucz";
-"modules.wireguard.private_key" = "Klucz prywatny";
+"modules.wireguard.private_key.generate" = "Wygeneruj nowy klucz";
 "placeholders.on_demand.ssid" = "Mój SSID";
 "placeholders.profile.name" = "Mój profil";
 "placeholders.secret" = "sekret";
@@ -272,16 +270,13 @@
 "views.paywall.alerts.verification.edit" = "Proszę czekać, trwa weryfikacja zakupów.";
 "views.paywall.product.included_features" = "Uwzględnione funkcje";
 "views.paywall.rows.restore_purchases" = "Przywróć zakupy";
-"views.paywall.sections.all_features.header" = "Pełna wersja zawiera";
 "views.paywall.sections.full_products.footer" = "Te produkty zawierają obecne i przyszłe funkcje.";
 "views.paywall.sections.full_products.header" = "Wszystkie funkcje";
-"views.paywall.sections.included_features.header" = "Zawiera także";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
 "views.paywall.sections.products.header" = "Sugerowane produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej kupiłeś tę aplikację lub funkcję, możesz przywrócić swoje zakupy.";
 "views.paywall.sections.restore.header" = "Przywróć";
-"views.paywall.sections.suggested_product.header" = "Jednorazowy zakup";
 "views.preferences.dns_falls_back" = "Awaryjny DNS";
 "views.preferences.dns_falls_back.footer" = "Przełącza się na serwery CloudFlare, gdy VPN nie zapewnia ustawień DNS.";
 "views.preferences.erase_icloud" = "Usuń profile z iCloud";

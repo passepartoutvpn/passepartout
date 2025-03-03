@@ -153,8 +153,6 @@
 "modules.general.rows.shared" = "Ενεργοποιημένο";
 "modules.general.rows.shared.purchase" = "Κοινοποίηση στο iCloud";
 "modules.general.sections.behavior.header" = "Συμπεριφορά";
-"modules.general.sections.storage.footer.purchase.tv_beta" = "Τα προφίλ TV δεν λειτουργούν στις εκδόσεις beta.";
-"modules.general.sections.storage.footer.purchase.tv_release" = "Τα προφίλ TV δεν λειτουργούν χωρίς αγορά.";
 "modules.general.sections.storage.header" = "Συγχρονισμός";
 "modules.general.sections.storage.sharing.footer" = "Τα προφίλ αποθηκεύονται κρυπτογραφημένα στο %@.";
 "modules.general.sections.storage.tv.footer" = "Απαιτείται iCloud για να μοιραστείτε τα προφίλ σας με το Apple TV σας.";
@@ -202,7 +200,7 @@
 "modules.wireguard.peer.add" = "Προσθήκη ομότιμου";
 "modules.wireguard.peer.delete" = "Διαγραφή ομότιμου";
 "modules.wireguard.preshared_key" = "Προμοιρασμένο κλειδί";
-"modules.wireguard.private_key" = "Ιδιωτικό κλειδί";
+"modules.wireguard.private_key.generate" = "Δημιουργία νέου κλειδιού";
 "placeholders.on_demand.ssid" = "Το SSID μου";
 "placeholders.profile.name" = "Το προφίλ μου";
 "placeholders.secret" = "μυστικό";
@@ -272,16 +270,13 @@
 "views.paywall.alerts.verification.edit" = "Παρακαλώ περιμένετε όσο επαληθεύονται οι αγορές σας.";
 "views.paywall.product.included_features" = "Περιλαμβανόμενες λειτουργίες";
 "views.paywall.rows.restore_purchases" = "Επαναφορά αγορών";
-"views.paywall.sections.all_features.header" = "Η πλήρης έκδοση περιλαμβάνει";
 "views.paywall.sections.full_products.footer" = "Αυτά τα προϊόντα περιλαμβάνουν τρέχουσες και μελλοντικές δυνατότητες.";
 "views.paywall.sections.full_products.header" = "Όλες οι λειτουργίες";
-"views.paywall.sections.included_features.header" = "Περιλαμβάνει επίσης";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
 "views.paywall.sections.products.header" = "Προτεινόμενα προϊόντα";
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
 "views.paywall.sections.restore.footer" = "Εάν αγοράσατε αυτήν την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας.";
 "views.paywall.sections.restore.header" = "Επαναφορά";
-"views.paywall.sections.suggested_product.header" = "Εφάπαξ αγορά";
 "views.preferences.dns_falls_back" = "Εναλλακτικό DNS";
 "views.preferences.dns_falls_back.footer" = "Χρησιμοποιεί τους διακομιστές CloudFlare όταν το VPN δεν παρέχει ρυθμίσεις DNS.";
 "views.preferences.erase_icloud" = "Διαγραφή προφίλ από το iCloud";
