@@ -318,6 +318,8 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "global.nouns.name", fallback: "Name")
       /// Networks
       public static let networks = Strings.tr("Localizable", "global.nouns.networks", fallback: "Networks")
+      /// No
+      public static let no = Strings.tr("Localizable", "global.nouns.no", fallback: "No")
       /// No content
       public static let noContent = Strings.tr("Localizable", "global.nouns.no_content", fallback: "No content")
       /// No selection
@@ -374,6 +376,8 @@ public enum Strings {
       public static let username = Strings.tr("Localizable", "global.nouns.username", fallback: "Username")
       /// Version
       public static let version = Strings.tr("Localizable", "global.nouns.version", fallback: "Version")
+      /// Yes
+      public static let yes = Strings.tr("Localizable", "global.nouns.yes", fallback: "Yes")
     }
   }
   public enum Modules {

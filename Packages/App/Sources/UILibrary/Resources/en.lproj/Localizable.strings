@@ -327,6 +327,7 @@
 "global.nouns.n_seconds" = "%d seconds";
 "global.nouns.name" = "Name";
 "global.nouns.networks" = "Networks";
+"global.nouns.no" = "No";
 "global.nouns.no_content" = "No content";
 "global.nouns.no_selection" = "No selection";
 "global.nouns.none" = "None";
@@ -355,6 +356,7 @@
 "global.nouns.unknown" = "Unknown";
 "global.nouns.username" = "Username";
 "global.nouns.version" = "Version";
+"global.nouns.yes" = "Yes";
 
 // MARK: Global (Placeholders)
 

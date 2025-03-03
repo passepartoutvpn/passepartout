@@ -97,9 +97,9 @@ private extension DNSView {
             Picker(Strings.Modules.Dns.routeThroughVpn, selection: draft.routesThroughVPN) {
                 Text(Strings.Global.Nouns.default)
                     .tag(nil as Bool?)
-                Text(Strings.Global.Nouns.enabled)
+                Text(Strings.Global.Nouns.yes)
                     .tag(true as Bool?)
-                Text(Strings.Global.Nouns.disabled)
+                Text(Strings.Global.Nouns.no)
                     .tag(false as Bool?)
             }
             .themeRowWithSubtitle(Strings.Modules.Dns.RouteThroughVpn.footer)
