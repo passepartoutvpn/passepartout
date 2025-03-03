@@ -68,7 +68,10 @@ private extension WireGuardView {
     @ViewBuilder
     var contentView: some View {
         if let configurationBinding {
-            ConfigurationView(configuration: configurationBinding)
+            ConfigurationView(
+                configuration: configurationBinding,
+                keyGenerator: impl?.keyGenerator
+            )
         } else {
             EmptyView()
                 .modifier(providerModifier)

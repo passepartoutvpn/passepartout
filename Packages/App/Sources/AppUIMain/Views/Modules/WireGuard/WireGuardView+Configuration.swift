@@ -32,11 +32,14 @@ extension WireGuardView {
         @Binding
         var configuration: WireGuard.Configuration.Builder
 
+        let keyGenerator: WireGuardKeyGenerator?
+
         @State
         private var model = ViewModel()
 
         var body: some View {
             Group {
+                privateKeySection
                 interfaceSection
                 dnsSection
                 ForEach(Array(zip(model.peersOrder.indices, model.peersOrder)), id: \.1) { index, publicKey in
@@ -55,12 +58,22 @@ extension WireGuardView {
 }
 
 private extension WireGuardView.ConfigurationView {
-    var interfaceSection: some View {
+    var privateKeySection: some View {
         themeModuleSection(header: Strings.Modules.Wireguard.interface) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.privateKey,
                 value: $model.privateKey
             )
+            if let keyGenerator {
+                Button(Strings.Modules.Wireguard.PrivateKey.generate) {
+                    model.privateKey = keyGenerator.newPrivateKey()
+                }
+            }
+        }
+    }
+
+    var interfaceSection: some View {
+        themeModuleSection(header: nil) {
             ThemeModuleLongContent(
                 caption: Strings.Global.Nouns.addresses,
                 value: $model.addresses,
@@ -268,7 +281,8 @@ private extension String {
             NavigationStack {
                 Form {
                     WireGuardView.ConfigurationView(
-                        configuration: $configuration
+                        configuration: $configuration,
+                        keyGenerator: nil
                     )
                 }
                 .themeForm()

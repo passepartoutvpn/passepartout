@@ -564,6 +564,10 @@ public enum Strings {
         /// Delete peer
         public static let delete = Strings.tr("Localizable", "modules.wireguard.peer.delete", fallback: "Delete peer")
       }
+      public enum PrivateKey {
+        /// Generate new key
+        public static let generate = Strings.tr("Localizable", "modules.wireguard.private_key.generate", fallback: "Generate new key")
+      }
     }
   }
   public enum Placeholders {
