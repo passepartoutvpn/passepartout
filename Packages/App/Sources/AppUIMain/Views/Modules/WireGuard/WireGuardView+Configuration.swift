@@ -65,6 +65,10 @@ private extension WireGuardView.ConfigurationView {
                 value: $model.privateKey
             )
             if let keyGenerator {
+                ThemeModuleLongContent(
+                    caption: Strings.Global.Nouns.publicKey,
+                    value: .constant((try? keyGenerator.publicKey(for: model.privateKey)) ?? "")
+                )
                 Button(Strings.Modules.Wireguard.PrivateKey.generate) {
                     model.privateKey = keyGenerator.newPrivateKey()
                 }
