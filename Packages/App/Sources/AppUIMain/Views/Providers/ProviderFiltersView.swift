@@ -83,7 +83,7 @@ private extension ProviderFiltersView {
             Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.countries, id: \.code) {
-                ThemeCountryText($0.code, title: $0.description)
+                Text($0.description)
                     .tag($0.code as String?)
             }
         }
