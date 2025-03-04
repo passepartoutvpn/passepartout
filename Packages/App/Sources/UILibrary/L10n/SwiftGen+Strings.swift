@@ -318,6 +318,8 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "global.nouns.name", fallback: "Name")
       /// Networks
       public static let networks = Strings.tr("Localizable", "global.nouns.networks", fallback: "Networks")
+      /// No
+      public static let no = Strings.tr("Localizable", "global.nouns.no", fallback: "No")
       /// No content
       public static let noContent = Strings.tr("Localizable", "global.nouns.no_content", fallback: "No content")
       /// No selection
@@ -374,10 +376,18 @@ public enum Strings {
       public static let username = Strings.tr("Localizable", "global.nouns.username", fallback: "Username")
       /// Version
       public static let version = Strings.tr("Localizable", "global.nouns.version", fallback: "Version")
+      /// Yes
+      public static let yes = Strings.tr("Localizable", "global.nouns.yes", fallback: "Yes")
     }
   }
   public enum Modules {
     public enum Dns {
+      /// Route through VPN
+      public static let routeThroughVpn = Strings.tr("Localizable", "modules.dns.route_through_vpn", fallback: "Route through VPN")
+      public enum RouteThroughVpn {
+        /// If enabled, DNS queries will be routed through the VPN tunnel.
+        public static let footer = Strings.tr("Localizable", "modules.dns.route_through_vpn.footer", fallback: "If enabled, DNS queries will be routed through the VPN tunnel.")
+      }
       public enum SearchDomains {
         /// Add domain
         public static let add = Strings.tr("Localizable", "modules.dns.search_domains.add", fallback: "Add domain")

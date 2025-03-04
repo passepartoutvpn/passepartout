@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d seconden";
 "global.nouns.name" = "Naam";
 "global.nouns.networks" = "Netwerken";
+"global.nouns.no" = "Nee";
 "global.nouns.no_content" = "Geen inhoud";
 "global.nouns.no_selection" = "Geen selectie";
 "global.nouns.none" = "Geen";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "Onbekend";
 "global.nouns.username" = "Gebruikersnaam";
 "global.nouns.version" = "Versie";
+"global.nouns.yes" = "Ja";
+"modules.dns.route_through_vpn" = "Routeren via VPN";
+"modules.dns.route_through_vpn.footer" = "Indien ingeschakeld, worden DNS-verzoeken via de VPN-tunnel geleid.";
 "modules.dns.search_domains.add" = "Domein toevoegen";
 "modules.dns.servers.add" = "Adres toevoegen";
 "modules.general.rows.appletv" = "%@";

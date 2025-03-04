@@ -161,6 +161,8 @@
 "modules.general.rows.keep_alive_on_sleep" = "Keep alive on sleep";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
 
+"modules.dns.route_through_vpn" = "Route through VPN";
+"modules.dns.route_through_vpn.footer" = "If enabled, DNS queries will be routed through the VPN tunnel.";
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";
 "modules.http_proxy.bypass_domains.add" = "Add bypass domain";
@@ -325,6 +327,7 @@
 "global.nouns.n_seconds" = "%d seconds";
 "global.nouns.name" = "Name";
 "global.nouns.networks" = "Networks";
+"global.nouns.no" = "No";
 "global.nouns.no_content" = "No content";
 "global.nouns.no_selection" = "No selection";
 "global.nouns.none" = "None";
@@ -353,6 +356,7 @@
 "global.nouns.unknown" = "Unknown";
 "global.nouns.username" = "Username";
 "global.nouns.version" = "Version";
+"global.nouns.yes" = "Yes";
 
 // MARK: Global (Placeholders)
 

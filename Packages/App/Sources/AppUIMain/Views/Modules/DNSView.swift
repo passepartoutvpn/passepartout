@@ -47,6 +47,7 @@ struct DNSView: View, ModuleDraftEditing {
         debugChanges()
         return Group {
             protocolSection
+            routingSection
             Group {
                 domainSection
                 serversSection
@@ -89,6 +90,21 @@ private extension DNSView {
                 EmptyView()
             }
         }
+    }
+
+    var routingSection: some View {
+        Group {
+            Picker(Strings.Modules.Dns.routeThroughVpn, selection: draft.routesThroughVPN) {
+                Text(Strings.Global.Nouns.default)
+                    .tag(nil as Bool?)
+                Text(Strings.Global.Nouns.yes)
+                    .tag(true as Bool?)
+                Text(Strings.Global.Nouns.no)
+                    .tag(false as Bool?)
+            }
+            .themeRowWithSubtitle(Strings.Modules.Dns.RouteThroughVpn.footer)
+        }
+        .themeSection(footer: Strings.Modules.Dns.RouteThroughVpn.footer)
     }
 
     var domainSection: some View {

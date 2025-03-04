@@ -115,6 +115,7 @@
 "global.nouns.n_seconds" = "%d δευτερόλεπτα";
 "global.nouns.name" = "Όνομα";
 "global.nouns.networks" = "Δίκτυα";
+"global.nouns.no" = "Όχι";
 "global.nouns.no_content" = "Χωρίς περιεχόμενο";
 "global.nouns.no_selection" = "Καμία επιλογή";
 "global.nouns.none" = "Κανένα";
@@ -143,6 +144,9 @@
 "global.nouns.unknown" = "Άγνωστο";
 "global.nouns.username" = "Όνομα χρήστη";
 "global.nouns.version" = "Έκδοση";
+"global.nouns.yes" = "Ναι";
+"modules.dns.route_through_vpn" = "Δρομολόγηση μέσω VPN";
+"modules.dns.route_through_vpn.footer" = "Εάν ενεργοποιηθεί, τα DNS ερωτήματα θα δρομολογούνται μέσω της σήραγγας VPN.";
 "modules.dns.search_domains.add" = "Προσθήκη τομέα";
 "modules.dns.servers.add" = "Προσθήκη διεύθυνσης";
 "modules.general.rows.appletv" = "%@";
