@@ -262,24 +262,55 @@ private extension String {
 private extension WireGuard.Configuration {
     func withModules(from profile: Profile) throws -> Self {
         var newBuilder = builder()
-        let ipModules = profile.activeModules
+
+        // add IPModule.*.includedRoutes to AllowedIPs
+        profile.activeModules
             .compactMap {
                 $0 as? IPModule
             }
+            .forEach { ipModule in
+                newBuilder.peers = peers
+                    .map { oldPeer in
+                        var peer = oldPeer.builder()
+                        ipModule.ipv4?.includedRoutes.forEach { route in
+                            peer.allowedIPs.append(route.destination?.rawValue ?? "0.0.0.0/0")
+                        }
+                        ipModule.ipv6?.includedRoutes.forEach { route in
+                            peer.allowedIPs.append(route.destination?.rawValue ?? "::/0")
+                        }
+                        return peer
+                    }
+            }
 
-        ipModules.forEach { ipModule in
-            newBuilder.peers = peers
-                .map { oldPeer in
-                    var peer = oldPeer.builder()
-                    ipModule.ipv4?.includedRoutes.forEach { route in
-                        peer.allowedIPs.append(route.destination?.rawValue ?? "0.0.0.0/0")
+        // if routesThroughVPN, add DNSModule.servers to AllowedIPs
+        profile.activeModules
+            .compactMap {
+                $0 as? DNSModule
+            }
+            .filter {
+                $0.routesThroughVPN == true
+            }
+            .forEach { dnsModule in
+                newBuilder.peers = peers
+                    .map { oldPeer in
+                        var peer = oldPeer.builder()
+                        dnsModule.servers.forEach {
+                            switch $0 {
+                            case .ip(let addr, let family):
+                                switch family {
+                                case .v4:
+                                    peer.allowedIPs.append("\(addr)/32")
+                                case .v6:
+                                    peer.allowedIPs.append("\(addr)/128")
+                                }
+                            case .hostname:
+                                break
+                            }
+                        }
+                        return peer
                     }
-                    ipModule.ipv6?.includedRoutes.forEach { route in
-                        peer.allowedIPs.append(route.destination?.rawValue ?? "::/0")
-                    }
-                    return peer
-                }
-        }
+            }
+
         return try newBuilder.tryBuild()
     }
 }
