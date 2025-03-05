@@ -29,7 +29,6 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Template: IdentifiableConfiguration, ProviderRows: View {
-    var apis: [APIMapper] = API.shared
 
     @Binding
     var providerId: ProviderID?
@@ -51,7 +50,6 @@ struct ProviderContentModifier<Template, ProviderRows>: ViewModifier where Templ
         debugChanges()
         return content
             .modifier(APIContentModifier(
-                apis: apis,
                 providerId: $providerId,
                 providerPreferences: providerPreferences,
                 templateType: Template.self,
@@ -88,7 +86,6 @@ private extension ProviderContentModifier {
         List {
             EmptyView()
                 .modifier(ProviderContentModifier(
-                    apis: [API.bundled],
                     providerId: .constant(.hideme),
                     providerPreferences: nil,
                     selectedEntity: .constant(nil as ProviderEntity<OpenVPNProviderTemplate>?),

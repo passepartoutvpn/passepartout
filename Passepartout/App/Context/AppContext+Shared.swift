@@ -123,7 +123,7 @@ extension AppContext {
 
         let apiManager: APIManager = {
             let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
-            return APIManager(repository: repository)
+            return APIManager(from: API.shared, repository: repository)
         }()
 
         let migrationManager: MigrationManager = {

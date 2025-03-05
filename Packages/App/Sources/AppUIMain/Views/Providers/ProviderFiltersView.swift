@@ -29,8 +29,6 @@ import PassepartoutKit
 import SwiftUI
 
 struct ProviderFiltersView: View {
-    let apis: [APIMapper]
-
     let providerId: ProviderID
 
     @ObservedObject
@@ -50,7 +48,7 @@ struct ProviderFiltersView: View {
                 HStack {
                     favoritesToggle
                     Spacer()
-                    RefreshInfrastructureButton(apis: apis, providerId: providerId)
+                    RefreshInfrastructureButton(providerId: providerId)
                     clearFiltersButton
                 }
 #endif
@@ -116,7 +114,6 @@ private extension ProviderFiltersView {
 #Preview {
     NavigationStack {
         ProviderFiltersView(
-            apis: [API.bundled],
             providerId: .mullvad,
             model: .init()
         )

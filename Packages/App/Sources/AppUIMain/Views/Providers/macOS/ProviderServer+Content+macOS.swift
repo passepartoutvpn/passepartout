@@ -36,8 +36,6 @@ extension ProviderServerView {
         @EnvironmentObject
         private var theme: Theme
 
-        let apis: [APIMapper]
-
         let providerId: ProviderID
 
         let servers: [ProviderServer]

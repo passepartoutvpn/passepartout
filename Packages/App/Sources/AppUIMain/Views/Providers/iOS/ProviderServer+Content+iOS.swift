@@ -33,8 +33,6 @@ import UIAccessibility
 
 extension ProviderServerView {
     struct ContentView: View {
-        let apis: [APIMapper]
-
         let providerId: ProviderID
 
         let servers: [ProviderServer]
@@ -73,7 +71,7 @@ private extension ProviderServerView.ContentView {
         List {
             Section {
                 Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
-                RefreshInfrastructureButton(apis: apis, providerId: providerId)
+                RefreshInfrastructureButton(providerId: providerId)
             }
             Group {
                 if isFiltering || !servers.isEmpty {

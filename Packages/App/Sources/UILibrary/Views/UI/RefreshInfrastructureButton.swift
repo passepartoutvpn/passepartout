@@ -31,14 +31,11 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
     @EnvironmentObject
     private var apiManager: APIManager
 
-    private let apis: [APIMapper]
-
     private let providerId: ProviderID
 
     private let label: () -> Label
 
-    public init(apis: [APIMapper], providerId: ProviderID, label: @escaping () -> Label) {
-        self.apis = apis
+    public init(providerId: ProviderID, label: @escaping () -> Label) {
         self.providerId = providerId
         self.label = label
     }
@@ -46,7 +43,7 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
     public var body: some View {
         Button {
             Task {
-                try await apiManager.fetchInfrastructure(from: apis, for: providerId)
+                try await apiManager.fetchInfrastructure(for: providerId)
             }
         } label: {
             label()
@@ -55,8 +52,7 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
 }
 
 extension RefreshInfrastructureButton where Label == RefreshInfrastructureButtonProgressView {
-    public init(apis: [APIMapper], providerId: ProviderID) {
-        self.apis = apis
+    public init(providerId: ProviderID) {
         self.providerId = providerId
         label = {
             RefreshInfrastructureButtonProgressView()
