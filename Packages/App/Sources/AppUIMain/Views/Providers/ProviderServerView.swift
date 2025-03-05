@@ -37,8 +37,6 @@ struct ProviderServerView<Template>: View where Template: IdentifiableConfigurat
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
-    var apis: [APIMapper] = API.shared
-
     let moduleId: UUID
 
     let providerId: ProviderID
@@ -91,7 +89,6 @@ struct ProviderServerView<Template>: View where Template: IdentifiableConfigurat
 extension ProviderServerView {
     func contentView() -> some View {
         ContentView(
-            apis: apis,
             providerId: providerId,
             servers: filteredServers,
             selectedServer: selectedEntity?.server,
@@ -111,7 +108,6 @@ extension ProviderServerView {
 
     func filtersView() -> some View {
         ProviderFiltersView(
-            apis: apis,
             providerId: providerId,
             model: filtersViewModel
         )
@@ -155,10 +151,7 @@ private extension ProviderServerView {
             pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
         }
         do {
-            let repository = try await apiManager.providerRepository(
-                from: apis,
-                for: providerId
-            )
+            let repository = try await apiManager.providerRepository(for: providerId)
             try await providerManager.setRepository(repository)
             filtersViewModel.load(options: providerManager.options, initialFilters: initialFilters)
             await reloadServers(filters: filtersViewModel.filters)
@@ -232,7 +225,6 @@ private extension ProviderServerView {
 #Preview {
     NavigationStack {
         ProviderServerView(
-            apis: [API.bundled],
             moduleId: UUID(),
             providerId: .protonvpn,
             selectedEntity: nil as ProviderEntity<OpenVPNProviderTemplate>?,

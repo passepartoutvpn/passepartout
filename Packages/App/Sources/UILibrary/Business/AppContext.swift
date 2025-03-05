@@ -137,7 +137,7 @@ private extension AppContext {
 
         do {
             pp_log(.app, .info, "\tFetch providers index...")
-            try await apiManager.fetchIndex(from: API.shared)
+            try await apiManager.fetchIndex()
         } catch {
             pp_log(.app, .error, "\tUnable to fetch providers index: \(error)")
         }

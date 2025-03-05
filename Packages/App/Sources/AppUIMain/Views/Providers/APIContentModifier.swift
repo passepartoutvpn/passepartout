@@ -37,8 +37,6 @@ struct APIContentModifier<Template, ProviderRows>: ViewModifier where Template: 
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
-    let apis: [APIMapper]
-
     @Binding
     var providerId: ProviderID?
 
@@ -88,7 +86,7 @@ private extension APIContentModifier {
         if let providerId {
             Group {
                 providerRows
-                RefreshInfrastructureButton(apis: apis, providerId: providerId)
+                RefreshInfrastructureButton(providerId: providerId)
             }
             .themeSection(footer: lastUpdatedString)
         }
@@ -108,7 +106,7 @@ private extension APIContentModifier {
                             .themeSubtitle()
                     }
                     Spacer()
-                    RefreshInfrastructureButton(apis: apis, providerId: providerId)
+                    RefreshInfrastructureButton(providerId: providerId)
                 }
             }
         }
@@ -162,7 +160,7 @@ private extension APIContentModifier {
     @discardableResult
     func refreshIndex() async -> Bool {
         do {
-            try await apiManager.fetchIndex(from: apis)
+            try await apiManager.fetchIndex()
             return true
         } catch {
             pp_log(.app, .error, "Unable to fetch index: \(error)")
@@ -173,7 +171,7 @@ private extension APIContentModifier {
     @discardableResult
     func refreshInfrastructure(for providerId: ProviderID) async -> Bool {
         do {
-            try await apiManager.fetchInfrastructure(from: apis, for: providerId)
+            try await apiManager.fetchInfrastructure(for: providerId)
             return true
         } catch {
             pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
@@ -218,7 +216,6 @@ private extension APIContentModifier {
     List {
         EmptyView()
             .modifier(APIContentModifier(
-                apis: [API.bundled],
                 providerId: .constant(.hideme),
                 providerPreferences: nil,
                 templateType: OpenVPNProviderTemplate.self,
