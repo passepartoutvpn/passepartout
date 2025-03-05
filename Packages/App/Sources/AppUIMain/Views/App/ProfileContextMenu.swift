@@ -53,9 +53,7 @@ struct ProfileContextMenu: View, Routable {
     var flow: ProfileFlow?
 
     var body: some View {
-        if style == .installedProfile {
-            tunnelRestartButton
-        }
+        tunnelRestartButton
         providerConnectToButton
         Divider()
         profileEditButton
