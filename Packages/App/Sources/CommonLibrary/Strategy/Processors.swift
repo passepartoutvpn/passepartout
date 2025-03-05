@@ -41,7 +41,7 @@ public protocol ProfileProcessor: Sendable {
 public protocol AppTunnelProcessor: Sendable {
     func title(for profile: Profile) -> String
 
-    func willInstall(_ profile: Profile) throws -> Profile
+    func willInstall(_ profile: Profile) async throws -> Profile
 }
 
 public protocol PacketTunnelProcessor: Sendable {

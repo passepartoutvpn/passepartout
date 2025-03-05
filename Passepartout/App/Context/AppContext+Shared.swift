@@ -73,6 +73,10 @@ extension AppContext {
 
         // MARK: Managers
 
+        let apiManager: APIManager = {
+            let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
+            return APIManager(from: API.shared, repository: repository)
+        }()
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
             inAppHelper: dependencies.simulatedAppProductHelper(),
@@ -80,7 +84,7 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-        let processor = dependencies.appProcessor(with: iapManager)
+        let processor = dependencies.appProcessor(apiManager: apiManager, iapManager: iapManager)
 
         let tunnelEnvironment = dependencies.tunnelEnvironment()
 #if targetEnvironment(simulator)
@@ -120,11 +124,6 @@ extension AppContext {
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
-
-        let apiManager: APIManager = {
-            let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
-            return APIManager(from: API.shared, repository: repository)
-        }()
 
         let migrationManager: MigrationManager = {
             let profileStrategy = ProfileV2MigrationStrategy(

@@ -32,6 +32,10 @@ import UILibrary
 extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let dependencies: Dependencies = .shared
+        let apiManager = APIManager(
+            from: [API.bundled],
+            repository: InMemoryAPIRepository()
+        )
         let iapManager = IAPManager(
             customUserLevel: .complete,
             inAppHelper: dependencies.appProductHelper(),
@@ -41,7 +45,7 @@ extension AppContext {
                 []
             }
         )
-        let processor = dependencies.appProcessor(with: iapManager)
+        let processor = dependencies.appProcessor(apiManager: apiManager, iapManager: iapManager)
         let profileManager: ProfileManager = .forUITesting(
             withRegistry: dependencies.registry,
             processor: processor
@@ -56,10 +60,6 @@ extension AppContext {
             environment: tunnelEnvironment,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
-        )
-        let apiManager = APIManager(
-            from: [API.bundled],
-            repository: InMemoryAPIRepository()
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()

@@ -105,7 +105,7 @@ extension ExtendedTunnel {
 
     public func install(_ profile: Profile) async throws {
         pp_log(.app, .notice, "Install profile \(profile.id)...")
-        let newProfile = try processedProfile(profile)
+        let newProfile = try await processedProfile(profile)
         try await tunnel.install(
             newProfile,
             connect: false,
@@ -116,7 +116,7 @@ extension ExtendedTunnel {
 
     public func connect(with profile: Profile, force: Bool = false) async throws {
         pp_log(.app, .notice, "Connect to profile \(profile.id)...")
-        let newProfile = try processedProfile(profile)
+        let newProfile = try await processedProfile(profile)
         if !force && newProfile.isInteractive {
             throw AppError.interactiveLogin
         }
@@ -211,9 +211,9 @@ private extension ExtendedTunnel {
         return \.name
     }
 
-    func processedProfile(_ profile: Profile) throws -> Profile {
+    func processedProfile(_ profile: Profile) async throws -> Profile {
         if let processor {
-            return try processor.willInstall(profile)
+            return try await processor.willInstall(profile)
         }
         return profile
     }
