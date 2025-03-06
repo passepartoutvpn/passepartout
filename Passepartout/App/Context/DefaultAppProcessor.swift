@@ -28,14 +28,18 @@ import Foundation
 import PassepartoutKit
 
 final class DefaultAppProcessor: Sendable {
+    private let apiManager: APIManager
+
     private let iapManager: IAPManager
 
     private let title: @Sendable (Profile) -> String
 
     init(
+        apiManager: APIManager,
         iapManager: IAPManager,
         title: @escaping @Sendable (Profile) -> String
     ) {
+        self.apiManager = apiManager
         self.iapManager = iapManager
         self.title = title
     }

@@ -266,10 +266,7 @@ private extension String {
             return nil
         }
         let count = 1 + trimmed.ranges(of: ",").count
-        if count == 1 {
-            return Strings.Global.Nouns.entriesOne
-        }
-        return Strings.Global.Nouns.entriesN(count)
+        return count.localizedEntries
     }
 }
 

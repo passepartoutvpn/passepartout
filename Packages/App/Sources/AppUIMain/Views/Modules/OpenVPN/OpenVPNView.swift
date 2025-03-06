@@ -42,6 +42,8 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     private let isServerPushed: Bool
 
+    private let providerConfiguration: OpenVPN.Configuration?
+
     @State
     private var isImporting = false
 
@@ -56,6 +58,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
         editor = ProfileEditor(modules: [module])
         impl = nil
         isServerPushed = true
+        providerConfiguration = nil
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
     }
 
@@ -64,6 +67,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
         editor = parameters.editor
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
+        providerConfiguration = try? module.providerSelection?.configuration()
     }
 
     var body: some View {
@@ -106,9 +110,9 @@ private extension OpenVPNView {
     var emptyConfigurationView: some View {
         if draft.wrappedValue.providerSelection == nil {
             importButton
-        } else if let configuration = try? draft.wrappedValue.providerSelection?.configuration() {
+        } else if let providerConfiguration {
             remotesLink
-            providerConfigurationLink(with: configuration)
+            providerConfigurationLink(with: providerConfiguration)
         }
     }
 

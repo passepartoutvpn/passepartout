@@ -82,7 +82,7 @@ private extension PreferencesGroup {
     var systemAppearancePicker: some View {
         Picker(Strings.Views.Preferences.systemAppearance, selection: $appearanceManager.systemAppearance) {
             ForEach(Self.systemAppearances, id: \.self) {
-                Text($0.localizedDescription)
+                Text($0?.localizedDescription ?? Strings.Entities.Ui.SystemAppearance.system)
             }
         }
     }

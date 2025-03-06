@@ -110,3 +110,13 @@ extension String: StyledLocalizableEntity {
             .joined(separator: rowSeparator)
     }
 }
+
+extension Int {
+    public var localizedEntries: String? {
+        switch self {
+        case 0: return nil
+        case 1: return Strings.Global.Nouns.entriesOne
+        default: return Strings.Global.Nouns.entriesN(self)
+        }
+    }
+}

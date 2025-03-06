@@ -23,14 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
 import Foundation
 
-extension Optional: LocalizableEntity where Wrapped == SystemAppearance {
+extension SystemAppearance {
     public var localizedDescription: String {
         let V = Strings.Entities.Ui.SystemAppearance.self
         switch self {
-        case .none: return V.system
+//        case .none: return V.system
         case .light: return V.light
         case .dark: return V.dark
         }
