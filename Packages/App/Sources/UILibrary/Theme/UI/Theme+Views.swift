@@ -407,48 +407,4 @@ public enum ThemeEditableListSection {
     }
 }
 
-public struct ThemeMultiplePicker<Element>: View where Element: Identifiable & Hashable {
-    private let title: String
-
-    private let options: [Element]
-
-    @Binding
-    private var selection: Set<Element>
-
-    private let description: (Element) -> String
-
-    public init(_ title: String, options: [Element], selection: Binding<Set<Element>>, description: @escaping (Element) -> String) {
-        self.title = title
-        self.options = options
-        _selection = selection
-        self.description = description
-    }
-
-    public var body: some View {
-        NavigationLink {
-            List {
-                ForEach(options) { option in
-                    Button {
-                        if selection.contains(option) {
-                            selection.remove(option)
-                        } else {
-                            selection.insert(option)
-                        }
-                    } label: {
-                        HStack {
-                            Text(description(option))
-                            Spacer()
-                            ThemeImage(.marked)
-                                .opaque(selection.contains(option))
-                        }
-                    }
-                }
-            }
-        } label: {
-            Text(title)
-                .themeTrailingValue(selection.count.localizedEntries)
-        }
-    }
-}
-
 #endif
