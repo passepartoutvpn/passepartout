@@ -31,28 +31,17 @@ struct ProfileBehaviorSection: View {
     var profileEditor: ProfileEditor
 
     var body: some View {
-        debugChanges()
-        return Group {
-            keepAliveToggle
-                .themeRowWithSubtitle(footer)
-        }
-        .themeSection(header: header, footer: footer)
+        keepAliveToggle
+            .themeSectionWithSingleRow(
+                header: Strings.Modules.General.Sections.Behavior.header,
+                footer: Strings.Modules.General.Rows.KeepAliveOnSleep.footer
+            )
     }
 }
 
 private extension ProfileBehaviorSection {
     var keepAliveToggle: some View {
         Toggle(Strings.Modules.General.Rows.keepAliveOnSleep, isOn: $profileEditor.keepsAliveOnSleep)
-    }
-}
-
-private extension ProfileBehaviorSection {
-    var header: String {
-        Strings.Modules.General.Sections.Behavior.header
-    }
-
-    var footer: String {
-        Strings.Modules.General.Rows.KeepAliveOnSleep.footer
     }
 }
 
