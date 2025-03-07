@@ -74,9 +74,7 @@ private extension WireGuardView {
     @ViewBuilder
     var contentView: some View {
         if draft.module.configurationBuilder != nil {
-            Section {
-                importButton
-            }
+            ModuleImportSection(isImporting: $isImporting)
             ConfigurationView(
                 configuration: $draft.module.configurationBuilder ?? impl.map {
                     .init(keyGenerator: $0.keyGenerator)
@@ -84,14 +82,8 @@ private extension WireGuardView {
                 keyGenerator: impl?.keyGenerator
             )
         } else {
-            importButton
+            ModuleImportSection(isImporting: $isImporting)
                 .modifier(providerModifier)
-        }
-    }
-
-    var importButton: some View {
-        Button(Strings.Modules.General.Rows.importFromFile.forMenu) {
-            isImporting = true
         }
     }
 

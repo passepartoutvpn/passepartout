@@ -90,7 +90,7 @@ private extension OpenVPNView {
     var contentView: some View {
         if draft.module.configurationBuilder != nil {
             if !isServerPushed {
-                importSection
+                ModuleImportSection(isImporting: $isImporting)
                 connectionSection
             }
             ConfigurationView(
@@ -106,25 +106,14 @@ private extension OpenVPNView {
             }
             .modifier(providerModifier)
         } else {
-            importSection
+            ModuleImportSection(isImporting: $isImporting)
                 .modifier(providerModifier)
         }
-    }
-
-    var importSection: some View {
-        importButton
-            .themeSection()
     }
 
     var connectionSection: some View {
         remotesLink
             .themeSection(header: Strings.Global.Nouns.connection)
-    }
-
-    var importButton: some View {
-        Button(Strings.Modules.General.Rows.importFromFile.forMenu) {
-            isImporting = true
-        }
     }
 
     var remotesLink: some View {
