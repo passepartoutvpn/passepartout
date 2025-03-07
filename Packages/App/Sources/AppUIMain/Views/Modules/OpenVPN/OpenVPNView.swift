@@ -102,7 +102,9 @@ private extension OpenVPNView {
             providerConfiguration
                 .map { cfg in
                     Section {
-                        remotesLink
+                        cfg.remotes.map {
+                            remotesLink(with: $0)
+                        }
                         providerConfigurationLink(with: cfg)
                     }
                 }
@@ -114,12 +116,17 @@ private extension OpenVPNView {
     }
 
     var connectionSection: some View {
-        remotesLink
-            .themeSection(header: Strings.Global.Nouns.connection)
+        draft.module.configurationBuilder?.remotes.map {
+            remotesLink(with: $0)
+                .themeSection(header: Strings.Global.Nouns.connection)
+        }
     }
 
-    var remotesLink: some View {
-        NavigationLink(Strings.Modules.Openvpn.remotes, value: ProfileRoute(OpenVPNModule.Subroute.remotes))
+    func remotesLink(with remotes: [ExtendedEndpoint]) -> some View {
+        NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.remotes)) {
+            Text(Strings.Modules.Openvpn.remotes)
+                .themeTrailingValue(remotes.count.localizedEntries)
+        }
     }
 
     func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {

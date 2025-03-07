@@ -79,23 +79,44 @@ public struct ThemeModuleTextField: View {
 public struct ThemeModuleTextList: View {
     private let caption: String
 
+    private let withEntries: Bool
+
     private let values: [String]
 
-    public init(caption: String, values: [String]) {
+    private let copiable: Bool
+
+    public init(caption: String, withEntries: Bool = false, values: [String], copiable: Bool = false) {
         self.caption = caption
+        self.withEntries = withEntries
         self.values = values
+        self.copiable = copiable
     }
 
     public var body: some View {
         if !values.isEmpty {
-            NavigationLink(caption) {
+            NavigationLink {
                 Form {
-                    ForEach(Array(values.enumerated()), id: \.offset) {
-                        Text($0.element)
+                    ForEach(Array(values.enumerated()), id: \.offset) { pair in
+                        HStack {
+                            Text(pair.element)
+                            if copiable {
+                                Spacer()
+                                Button {
+                                    Utils.copyToPasteboard(pair.element)
+                                } label: {
+                                    ThemeImage(.copy)
+                                }
+                                // TODO: #XXX, necessary to avoid cell selection
+                                .buttonStyle(.borderless)
+                            }
+                        }
                     }
                 }
                 .navigationTitle(caption)
                 .themeForm()
+            } label: {
+                Text(caption)
+                    .themeTrailingValue(withEntries ? values.count.localizedEntries : nil)
             }
         } else {
             Text(caption)
@@ -165,6 +186,28 @@ public struct ThemeModulePush: View {
 
     public var body: some View {
         NavigationLink(caption, value: route)
+    }
+}
+
+public struct ThemeTrailingContent<Content>: View where Content: View {
+
+    @ViewBuilder
+    private let content: () -> Content
+
+    public init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    public var body: some View {
+#if os(iOS)
+        content()
+            .frame(maxWidth: .infinity)
+#else
+        HStack {
+            Spacer()
+            content()
+        }
+#endif
     }
 }
 

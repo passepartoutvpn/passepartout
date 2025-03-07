@@ -90,30 +90,36 @@ private extension IPView {
     @ViewBuilder
     func ipSections(for family: Address.Family) -> some View {
         let ip = binding(forSettingsIn: family)
-        ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
-            row(forRoute: item.element) {
-                ip.wrappedValue.removeIncluded(at: IndexSet(integer: item.offset))
+        Group {
+            ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
+                row(forRoute: item.element) {
+                    ip.wrappedValue.removeIncluded(at: IndexSet(integer: item.offset))
+                }
+            }
+            .onDelete {
+                ip.wrappedValue.removeIncluded(at: $0)
+            }
+            ThemeTrailingContent {
+                Button(Strings.Modules.Ip.Routes.include) {
+                    routePresentation = .included(family)
+                }
             }
         }
-        .onDelete {
-            ip.wrappedValue.removeIncluded(at: $0)
-        }
-        .asSectionWithHeader(family.localizedDescription) {
-            Button(Strings.Modules.Ip.Routes.include) {
-                routePresentation = .included(family)
+        .themeSection(header: family.localizedDescription)
+
+        Group {
+            ForEach(Array(ip.wrappedValue.excludedRoutes.enumerated()), id: \.offset) { item in
+                row(forRoute: item.element) {
+                    ip.wrappedValue.removeExcluded(at: IndexSet(integer: item.offset))
+                }
             }
-        }
-        ForEach(Array(ip.wrappedValue.excludedRoutes.enumerated()), id: \.offset) { item in
-            row(forRoute: item.element) {
-                ip.wrappedValue.removeExcluded(at: IndexSet(integer: item.offset))
+            .onDelete {
+                ip.wrappedValue.removeExcluded(at: $0)
             }
-        }
-        .onDelete {
-            ip.wrappedValue.removeExcluded(at: $0)
-        }
-        .asSectionWithTrailingContent {
-            Button(Strings.Modules.Ip.Routes.exclude) {
-                routePresentation = .excluded(family)
+            ThemeTrailingContent {
+                Button(Strings.Modules.Ip.Routes.exclude) {
+                    routePresentation = .excluded(family)
+                }
             }
         }
     }

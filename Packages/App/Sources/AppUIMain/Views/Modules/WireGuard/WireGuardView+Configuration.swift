@@ -45,7 +45,9 @@ extension WireGuardView {
                 ForEach(Array(zip(model.peersOrder.indices, model.peersOrder)), id: \.1) { index, publicKey in
                     peerSection(for: publicKey, at: index)
                 }
-                addPeerButton
+                Section {
+                    ThemeTrailingContent(content: addPeerButton)
+                }
             }
             .onLoad {
                 model.load(from: configuration)
@@ -140,16 +142,13 @@ private extension WireGuardView.ConfigurationView {
                 value: peerBinding.keepAlive,
                 placeholder: Strings.Unlocalized.Placeholders.keepAlive
             )
-            Button(Strings.Modules.Wireguard.Peer.delete) {
-                withAnimation {
-                    model.peersOrder.remove(at: index)
-                    model.peers.removeValue(forKey: publicKey)
-                }
+            ThemeTrailingContent {
+                removePeerButton(at: index, publicKey: publicKey)
             }
         }
     }
 
-    var addPeerButton: some View {
+    func addPeerButton() -> some View {
         Button(Strings.Modules.Wireguard.Peer.add) {
             let newPeer = ViewModel.Peer()
             assert(newPeer.publicKey == "")
@@ -159,6 +158,15 @@ private extension WireGuardView.ConfigurationView {
             }
         }
         .disabled(model.peers[""] != nil)
+    }
+
+    func removePeerButton(at index: Int, publicKey: String) -> some View {
+        Button(Strings.Modules.Wireguard.Peer.delete, role: .destructive) {
+            withAnimation {
+                model.peersOrder.remove(at: index)
+                model.peers.removeValue(forKey: publicKey)
+            }
+        }
     }
 }
 

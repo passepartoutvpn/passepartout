@@ -130,12 +130,14 @@ private extension OpenVPNView.ConfigurationView {
                 ThemeModuleCopiableText(caption: Strings.Global.Nouns.gateway, value: $0)
             }
 
-            ip.includedRoutes
+            (ip.includedRoutes + (routes ?? []))
                 .nilIfEmpty
                 .map {
                     ThemeModuleTextList(
                         caption: Strings.Modules.Ip.Routes.included,
-                        values: $0.map(\.localizedDescription)
+                        withEntries: true,
+                        values: $0.map(\.localizedDescription),
+                        copiable: true
                     )
                 }
 
@@ -144,17 +146,11 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleTextList(
                         caption: Strings.Modules.Ip.Routes.excluded,
-                        values: $0.map(\.localizedDescription)
+                        withEntries: true,
+                        values: $0.map(\.localizedDescription),
+                        copiable: true
                     )
                 }
-        }
-        routes.map { routes in
-            ForEach(routes, id: \.self) {
-                ThemeModuleLongContent(
-                    caption: Strings.Global.Nouns.route,
-                    value: .constant($0.localizedDescription)
-                )
-            }
         }
     }
 
@@ -165,7 +161,9 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleTextList(
                         caption: Strings.Global.Nouns.servers,
-                        values: $0
+                        withEntries: true,
+                        values: $0,
+                        copiable: true
                     )
                 }
 
@@ -181,7 +179,9 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleTextList(
                         caption: Strings.Entities.Dns.searchDomains,
-                        values: $0
+                        withEntries: true,
+                        values: $0,
+                        copiable: true
                     )
                 }
         }
@@ -218,7 +218,9 @@ private extension OpenVPNView.ConfigurationView {
                 .map {
                     ThemeModuleTextList(
                         caption: Strings.Entities.HttpProxy.bypassDomains,
-                        values: $0
+                        withEntries: true,
+                        values: $0,
+                        copiable: true
                     )
                 }
         }
