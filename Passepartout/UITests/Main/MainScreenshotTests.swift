@@ -79,9 +79,6 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
         app
             .editProfile(at: 2)
             .editProviderServer()
-#if os(iOS)
-            .discloseCountry(at: 2)
-#endif
 
         await pause()
         try snapshot("05", "ProviderServers", target: .sheet)
