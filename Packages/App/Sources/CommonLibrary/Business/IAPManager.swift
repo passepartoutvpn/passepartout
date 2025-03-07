@@ -46,9 +46,6 @@ public final class IAPManager: ObservableObject {
     public var isEnabled = true {
         didSet {
             pendingReceiptTask?.cancel()
-            Task {
-                await reloadReceipt()
-            }
         }
     }
 

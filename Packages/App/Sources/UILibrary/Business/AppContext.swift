@@ -109,10 +109,14 @@ private extension AppContext {
 
         iapManager
             .$isEnabled
+            .dropFirst()
             .removeDuplicates()
-            .sink {
+            .sink { [weak self] in
                 pp_log(.App.iap, .info, "IAPManager.isEnabled -> \($0)")
                 UserDefaults.appGroup.set(!$0, forKey: AppPreference.skipsPurchases.key)
+                Task {
+                    await self?.iapManager.reloadReceipt()
+                }
             }
             .store(in: &subscriptions)
 
