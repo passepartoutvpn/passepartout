@@ -50,6 +50,9 @@ public final class IAPManager: ObservableObject {
         didSet {
             pp_log(.App.iap, .info, "IAPManager.isEnabled -> \(isEnabled)")
             pendingReceiptTask?.cancel()
+            Task {
+                await reloadReceipt()
+            }
         }
     }
 

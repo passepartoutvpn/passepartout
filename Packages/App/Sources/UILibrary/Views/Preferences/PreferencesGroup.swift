@@ -35,6 +35,9 @@ public struct PreferencesGroup: View {
     @EnvironmentObject
     private var appearanceManager: AppearanceManager
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
@@ -158,6 +161,7 @@ private extension PreferencesGroup {
             !skipsPurchases
         } set: {
             skipsPurchases = !$0
+            iapManager.isEnabled = $0
         }
     }
 }
