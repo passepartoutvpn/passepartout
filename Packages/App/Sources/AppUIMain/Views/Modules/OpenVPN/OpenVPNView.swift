@@ -98,13 +98,15 @@ private extension OpenVPNView {
                 configuration: $draft.module.configurationBuilder ?? .init(),
                 credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
             )
-        } else if draft.module.providerSelection != nil,
-                  let providerConfiguration {
-            Section {
-                remotesLink
-                providerConfigurationLink(with: providerConfiguration)
-            }
-            .modifier(providerModifier)
+        } else if draft.module.providerSelection != nil {
+            providerConfiguration
+                .map { cfg in
+                    Section {
+                        remotesLink
+                        providerConfigurationLink(with: cfg)
+                    }
+                }
+                .modifier(providerModifier)
         } else {
             ModuleImportSection(isImporting: $isImporting)
                 .modifier(providerModifier)
