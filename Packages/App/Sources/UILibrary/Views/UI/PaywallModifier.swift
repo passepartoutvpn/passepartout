@@ -81,14 +81,24 @@ public struct PaywallModifier: ViewModifier {
                 guard let reason = $0 else {
                     return
                 }
-                if reason.needsConfirmation {
-                    isConfirming = true
-                } else {
-                    guard !iapManager.isBeta else {
-                        assertionFailure("Purchasing in beta?")
-                        return
+                Task {
+                    if !iapManager.isEnabled {
+                        pp_log(.App.iap, .info, "In-app purchases are disabled, enabling...")
+                        await iapManager.enable()
+                        guard !iapManager.isEligible(for: reason.requiredFeatures) else {
+                            pp_log(.App.iap, .info, "Skipping paywall because eligible for features: \(reason.requiredFeatures)")
+                            return
+                        }
                     }
-                    isPurchasing = true
+                    if reason.needsConfirmation {
+                        isConfirming = true
+                    } else {
+                        guard !iapManager.isBeta else {
+                            assertionFailure("Purchasing in beta?")
+                            return
+                        }
+                        isPurchasing = true
+                    }
                 }
             }
     }

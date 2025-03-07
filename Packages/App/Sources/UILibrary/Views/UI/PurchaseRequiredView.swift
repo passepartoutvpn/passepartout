@@ -43,7 +43,7 @@ public struct PurchaseRequiredView<Content>: View where Content: View {
     public var body: some View {
         content()
             .opaque(force || !isEligible)
-            .if(iapManager.isEnabled && !iapManager.isBeta)
+            .if(!iapManager.isBeta)
     }
 }
 

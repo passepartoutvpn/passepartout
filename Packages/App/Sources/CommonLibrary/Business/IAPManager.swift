@@ -42,19 +42,16 @@ public final class IAPManager: ObservableObject {
 
     private let productsAtBuild: BuildProducts<AppProduct>?
 
+    @Published
+    public var isEnabled = true {
+        didSet {
+            pendingReceiptTask?.cancel()
+        }
+    }
+
     private(set) var userLevel: AppUserLevel
 
     public private(set) var purchasedAppBuild: Int?
-
-    public var isEnabled = true {
-        didSet {
-            pp_log(.App.iap, .info, "IAPManager.isEnabled -> \(isEnabled)")
-            pendingReceiptTask?.cancel()
-            Task {
-                await reloadReceipt()
-            }
-        }
-    }
 
     public private(set) var purchasedProducts: Set<AppProduct>
 
@@ -92,6 +89,14 @@ public final class IAPManager: ObservableObject {
 extension IAPManager {
     public var isLoadingReceipt: Bool {
         pendingReceiptTask != nil
+    }
+
+    public func enable() async {
+        guard !isEnabled else {
+            return
+        }
+        isEnabled = true
+        await reloadReceipt()
     }
 
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
