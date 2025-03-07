@@ -30,6 +30,6 @@ import UILibrary
 
 extension HTTPProxyModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        HTTPProxyView(module: self, parameters: parameters)
+        HTTPProxyView(draft: parameters.editor[self], parameters: parameters)
     }
 }

@@ -28,17 +28,15 @@ import PassepartoutKit
 import SwiftUI
 
 struct IPView: View, ModuleDraftEditing {
-    let module: IPModule.Builder
 
     @ObservedObject
-    var editor: ProfileEditor
+    var draft: ModuleDraft<IPModule.Builder>
 
     @State
     private var routePresentation: RoutePresentation?
 
-    init(module: IPModule.Builder, parameters: ModuleViewParameters) {
-        self.module = module
-        editor = parameters.editor
+    init(draft: ModuleDraft<IPModule.Builder>, parameters: ModuleViewParameters) {
+        self.draft = draft
     }
 
     var body: some View {
@@ -47,7 +45,7 @@ struct IPView: View, ModuleDraftEditing {
             ipSections(for: .v6)
             interfaceSection
         }
-        .moduleView(editor: editor, draft: draft.wrappedValue)
+        .moduleView(draft: draft)
         .themeModal(item: $routePresentation, content: routeModal)
     }
 }
@@ -135,9 +133,9 @@ private extension IPView {
             ThemeTextField(
                 Strings.Unlocalized.mtu,
                 text: Binding {
-                    draft.wrappedValue.mtu?.description ?? ""
+                    draft.module.mtu?.description ?? ""
                 } set: {
-                    draft.wrappedValue.mtu = Int($0)
+                    draft.module.mtu = Int($0)
                 },
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
@@ -150,18 +148,10 @@ private extension IPView {
     func binding(forSettingsIn family: Address.Family) -> Binding<IPSettings> {
         switch family {
         case .v4:
-            return Binding {
-                draft.wrappedValue.ipv4 ?? IPSettings(subnet: nil)
-            } set: {
-                draft.wrappedValue.ipv4 = $0
-            }
+            return $draft.module.ipv4 ?? IPSettings(subnet: nil)
 
         case .v6:
-            return Binding {
-                draft.wrappedValue.ipv6 ?? IPSettings(subnet: nil)
-            } set: {
-                draft.wrappedValue.ipv6 = $0
-            }
+            return $draft.module.ipv6 ?? IPSettings(subnet: nil)
         }
     }
 
@@ -178,31 +168,31 @@ private extension IPView {
                 case .included(let family):
                     switch family {
                     case .v4:
-                        if draft.wrappedValue.ipv4 == nil {
-                            draft.wrappedValue.ipv4 = IPSettings(subnet: nil)
+                        if draft.module.ipv4 == nil {
+                            draft.module.ipv4 = IPSettings(subnet: nil)
                         }
-                        draft.wrappedValue.ipv4?.include(route)
+                        draft.module.ipv4?.include(route)
 
                     case .v6:
-                        if draft.wrappedValue.ipv6 == nil {
-                            draft.wrappedValue.ipv6 = IPSettings(subnet: nil)
+                        if draft.module.ipv6 == nil {
+                            draft.module.ipv6 = IPSettings(subnet: nil)
                         }
-                        draft.wrappedValue.ipv6?.include(route)
+                        draft.module.ipv6?.include(route)
                     }
 
                 case .excluded(let family):
                     switch family {
                     case .v4:
-                        if draft.wrappedValue.ipv4 == nil {
-                            draft.wrappedValue.ipv4 = IPSettings(subnet: nil)
+                        if draft.module.ipv4 == nil {
+                            draft.module.ipv4 = IPSettings(subnet: nil)
                         }
-                        draft.wrappedValue.ipv4?.exclude(route)
+                        draft.module.ipv4?.exclude(route)
 
                     case .v6:
-                        if draft.wrappedValue.ipv6 == nil {
-                            draft.wrappedValue.ipv6 = IPSettings(subnet: nil)
+                        if draft.module.ipv6 == nil {
+                            draft.module.ipv6 = IPSettings(subnet: nil)
                         }
-                        draft.wrappedValue.ipv6?.exclude(route)
+                        draft.module.ipv6?.exclude(route)
                     }
                 }
             }

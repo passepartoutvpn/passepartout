@@ -33,10 +33,8 @@ struct WireGuardView: View, ModuleDraftEditing {
     @Environment(\.navigationPath)
     private var path
 
-    let module: WireGuardModule.Builder
-
     @ObservedObject
-    var editor: ProfileEditor
+    var draft: ModuleDraft<WireGuardModule.Builder>
 
     let impl: WireGuardModule.Implementation?
 
@@ -46,16 +44,15 @@ struct WireGuardView: View, ModuleDraftEditing {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    init(module: WireGuardModule.Builder, parameters: ModuleViewParameters) {
-        self.module = module
-        editor = parameters.editor
+    init(draft: ModuleDraft<WireGuardModule.Builder>, parameters: ModuleViewParameters) {
+        self.draft = draft
         impl = parameters.impl as? WireGuardModule.Implementation
     }
 
     var body: some View {
         contentView
-            .moduleView(editor: editor, draft: draft.wrappedValue)
-            .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
+            .moduleView(draft: draft)
+            .themeAnimation(on: draft.module.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
@@ -67,9 +64,11 @@ private extension WireGuardView {
 
     @ViewBuilder
     var contentView: some View {
-        if let configurationBinding {
+        if draft.module.configurationBuilder != nil {
             ConfigurationView(
-                configuration: configurationBinding,
+                configuration: $draft.module.configurationBuilder ?? impl.map {
+                    .init(keyGenerator: $0.keyGenerator)
+                } ?? .init(privateKey: ""),
                 keyGenerator: impl?.keyGenerator
             )
         } else {
@@ -100,7 +99,7 @@ private extension WireGuardView {
         heuristic: ProviderHeuristic?,
         preset: ProviderPreset<WireGuardProviderTemplate>
     ) {
-        draft.wrappedValue.providerEntity = ProviderEntity(
+        draft.module.providerEntity = ProviderEntity(
             server: server,
             heuristic: heuristic,
             preset: preset
@@ -130,9 +129,9 @@ private extension WireGuardView {
     func destination(for route: Subroute) -> some View {
         switch route {
         case .providerServer:
-            draft.wrappedValue.providerSelection.map {
+            draft.module.providerSelection.map {
                 ProviderServerView(
-                    moduleId: module.id,
+                    moduleId: draft.module.id,
                     providerId: $0.id,
                     selectedEntity: $0.entity,
                     filtersWithSelection: true,
@@ -143,23 +142,6 @@ private extension WireGuardView {
         case .providerKey:
             // TODO: #339, WireGuard upload public key to provider
             EmptyView()
-        }
-    }
-}
-
-// MARK: - Logic
-
-private extension WireGuardView {
-    var configurationBinding: Binding<WireGuard.Configuration.Builder>? {
-        guard draft.wrappedValue.configurationBuilder != nil else {
-            return nil
-        }
-        return Binding {
-            draft.wrappedValue.configurationBuilder ?? impl.map {
-                .init(keyGenerator: $0.keyGenerator)
-            } ?? .init(privateKey: "")
-        } set: {
-            draft.wrappedValue.configurationBuilder = $0
         }
     }
 }

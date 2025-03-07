@@ -29,18 +29,8 @@ import PassepartoutKit
 import SwiftUI
 
 extension ProfileEditor {
-    public subscript<T>(module: T) -> Binding<T> where T: ModuleBuilder {
-        Binding { [weak self] in
-            guard let foundModule = self?.module(withId: module.id) else {
-                fatalError("Module not found in editor: \(module.id)")
-            }
-            guard let matchingModule = foundModule as? T else {
-                fatalError("Type mismatch when binding to editor module: \(type(of: foundModule)) != \(type(of: module))")
-            }
-            return matchingModule
-        } set: { [weak self] in
-            self?.saveModule($0, activating: false)
-        }
+    public subscript<T>(module: T) -> ModuleDraft<T> where T: ModuleBuilder {
+        ModuleDraft(editor: self, module: module)
     }
 }
 

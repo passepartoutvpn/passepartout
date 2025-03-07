@@ -30,7 +30,7 @@ import SwiftUI
 
 extension OpenVPNModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        OpenVPNView(module: self, parameters: parameters)
+        OpenVPNView(draft: parameters.editor[self], parameters: parameters)
     }
 }
 
@@ -83,7 +83,7 @@ private struct DestinationView: View {
         Group {
             switch route {
             case .providerServer:
-                draft.wrappedValue.providerSelection.map {
+                draft.module.providerSelection.map {
                     ProviderServerView(
                         moduleId: parameters.module.id,
                         providerId: $0.id,
@@ -106,22 +106,17 @@ private struct DestinationView: View {
 
             case .credentials:
                 Form {
-                    OpenVPNCredentialsView(
-                        profileEditor: parameters.editor,
-                        providerId: draft.wrappedValue.providerId,
-                        isInteractive: draft.isInteractive,
-                        credentials: draft.credentials
-                    )
+                    OpenVPNCredentialsView(draft: draft)
                 }
                 .navigationTitle(Strings.Modules.Openvpn.credentials)
                 .themeForm()
-                .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
+                .themeAnimation(on: draft.module.isInteractive, category: .modules)
 
             case .remotes:
                 OpenVPNView.RemotesView(
                     configurationBuilder: configurationBuilderBinding,
                     excludedEndpoints: excludedEndpoints,
-                    isEditable: draft.wrappedValue.providerSelection == nil
+                    isEditable: draft.module.providerSelection == nil
                 )
             }
         }
@@ -133,7 +128,7 @@ private struct DestinationView: View {
 }
 
 private extension DestinationView {
-    var draft: Binding<OpenVPNModule.Builder> {
+    var draft: ModuleDraft<OpenVPNModule.Builder> {
         guard let builder = parameters.module as? OpenVPNModule.Builder else {
             fatalError("Not a OpenVPNModule.Builder")
         }
@@ -141,13 +136,13 @@ private extension DestinationView {
     }
 
     var configurationBuilderBinding: Binding<OpenVPN.Configuration.Builder> {
-        if let providerConfiguration = try? draft.wrappedValue.providerSelection?.configuration().builder() {
+        if let providerConfiguration = try? draft.module.providerSelection?.configuration().builder() {
             return .constant(providerConfiguration)
         }
         return Binding {
-            draft.wrappedValue.configurationBuilder ?? OpenVPN.Configuration.Builder()
+            draft.module.configurationBuilder ?? OpenVPN.Configuration.Builder()
         } set: {
-            draft.wrappedValue.configurationBuilder = $0
+            draft.module.configurationBuilder = $0
         }
     }
 
@@ -160,7 +155,7 @@ private extension DestinationView {
         heuristic: ProviderHeuristic?,
         preset: ProviderPreset<OpenVPNProviderTemplate>
     ) {
-        draft.wrappedValue.providerEntity = ProviderEntity(
+        draft.module.providerEntity = ProviderEntity(
             server: server,
             heuristic: heuristic,
             preset: preset
@@ -172,7 +167,7 @@ private extension DestinationView {
     // filter out exclusions unrelated to current server
     func resetExcludedEndpointsWithCurrentProviderEntity() {
         do {
-            let cfg = try draft.wrappedValue.providerSelection?.configuration()
+            let cfg = try draft.module.providerSelection?.configuration()
             parameters.editor.profile.attributes.editPreferences(inModule: parameters.module.id) {
                 if let cfg {
                     $0.excludedEndpoints = Set(cfg.remotes?.filter {

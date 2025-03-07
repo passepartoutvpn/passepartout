@@ -31,8 +31,8 @@ import SwiftUI
 extension OpenVPNView {
     struct ImportModifier: ViewModifier {
 
-        @Binding
-        var draft: OpenVPNModule.Builder
+        @ObservedObject
+        var draft: ModuleDraft<OpenVPNModule.Builder>
 
         let impl: OpenVPNModule.Implementation?
 
@@ -59,7 +59,7 @@ extension OpenVPNView {
                     onCompletion: importConfiguration
                 )
                 .alert(
-                    draft.moduleType.localizedDescription,
+                    draft.module.moduleType.localizedDescription,
                     isPresented: $requiresPassphrase,
                     presenting: importURL,
                     actions: { url in
@@ -123,10 +123,10 @@ private extension OpenVPNView.ImportModifier {
             guard let module = parsed as? OpenVPNModule else {
                 throw PassepartoutError(.parsing)
             }
-            draft.configurationBuilder = module.configuration?.builder()
+            draft.module.configurationBuilder = module.configuration?.builder()
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
-            errorHandler.handle(error, title: draft.moduleType.localizedDescription)
+            errorHandler.handle(error, title: draft.module.moduleType.localizedDescription)
         }
     }
 }

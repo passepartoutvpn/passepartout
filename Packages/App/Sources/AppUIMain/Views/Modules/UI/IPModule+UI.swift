@@ -30,6 +30,6 @@ import UILibrary
 
 extension IPModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        IPView(module: self, parameters: parameters)
+        IPView(draft: parameters.editor[self], parameters: parameters)
     }
 }

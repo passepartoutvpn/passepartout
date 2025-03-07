@@ -29,6 +29,6 @@ import UILibrary
 
 extension OnDemandModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        OnDemandView(module: self, parameters: parameters)
+        OnDemandView(draft: parameters.editor[self], parameters: parameters)
     }
 }

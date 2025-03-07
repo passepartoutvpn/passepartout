@@ -44,15 +44,7 @@ public struct OpenVPNCredentialsView: View {
     private var apiManager: APIManager
 
     @ObservedObject
-    private var profileEditor: ProfileEditor
-
-    private let providerId: ProviderID?
-
-    @Binding
-    private var isInteractive: Bool
-
-    @Binding
-    private var credentials: OpenVPN.Credentials?
+    private var draft: ModuleDraft<OpenVPNModule.Builder>
 
     private let isAuthenticating: Bool
 
@@ -71,17 +63,11 @@ public struct OpenVPNCredentialsView: View {
     private var focusedField: Field?
 
     public init(
-        profileEditor: ProfileEditor,
-        providerId: ProviderID?,
-        isInteractive: Binding<Bool>,
-        credentials: Binding<OpenVPN.Credentials?>,
+        draft: ModuleDraft<OpenVPNModule.Builder>,
         isAuthenticating: Bool = false,
         onSubmit: (() -> Void)? = nil
     ) {
-        self.profileEditor = profileEditor
-        self.providerId = providerId
-        _isInteractive = isInteractive
-        _credentials = credentials
+        self.draft = draft
         self.isAuthenticating = isAuthenticating
         self.onSubmit = onSubmit
     }
@@ -96,7 +82,7 @@ public struct OpenVPNCredentialsView: View {
             guidanceSection
         }
         .themeManualInput()
-        .themeAnimation(on: isInteractive, category: .modules)
+        .themeAnimation(on: draft.module.isInteractive, category: .modules)
         .themeAnimation(on: builder, category: .modules)
         .onLoad(perform: onLoad)
         .onChange(of: builder, perform: onChange)
@@ -107,7 +93,7 @@ public struct OpenVPNCredentialsView: View {
 private extension OpenVPNCredentialsView {
     var interactiveSection: some View {
         Group {
-            Toggle(isOn: $isInteractive) {
+            Toggle(isOn: $draft.module.isInteractive) {
                 HStack {
                     Text(Strings.Modules.Openvpn.Credentials.interactive)
                     PurchaseRequiredView(
@@ -118,7 +104,7 @@ private extension OpenVPNCredentialsView {
             }
             .themeRowWithSubtitle(interactiveFooter)
 
-            if isInteractive && !isAuthenticating {
+            if draft.module.isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
                     ForEach(otpMethods, id: \.self) {
                         Text($0.localizedDescription(style: .entity))
@@ -130,7 +116,7 @@ private extension OpenVPNCredentialsView {
     }
 
     var interactiveFooter: String? {
-        if isInteractive {
+        if draft.module.isInteractive {
             return [
                 Strings.Modules.Openvpn.Credentials.Interactive.footer,
                 builder.otpMethod.localizedDescription(style: .approachDescription)
@@ -165,7 +151,7 @@ private extension OpenVPNCredentialsView {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if providerId != nil {
+        } else if draft.module.providerId != nil {
             switch providerCustomization?.credentials.purpose {
             case .specific:
                 return Strings.Modules.Openvpn.Credentials.Guidance.specific
@@ -211,7 +197,7 @@ private extension OpenVPNCredentialsView {
 
 private extension OpenVPNCredentialsView {
     var requiredFeatures: Set<AppFeature>? {
-        isInteractive && builder.otpMethod != .none ? [.otp] : nil
+        draft.module.isInteractive && builder.otpMethod != .none ? [.otp] : nil
     }
 
     var otpMethods: [OpenVPN.Credentials.OTPMethod] {
@@ -223,10 +209,11 @@ private extension OpenVPNCredentialsView {
     }
 
     func onLoad() {
-        if let providerId, let provider = apiManager.provider(withId: providerId) {
+        if let providerId = draft.module.providerId,
+           let provider = apiManager.provider(withId: providerId) {
             providerCustomization = provider.customization(for: OpenVPNProviderTemplate.self)
         }
-        builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
+        builder = draft.module.credentials?.builder() ?? OpenVPN.Credentials.Builder()
         if ignoresPassword {
             builder.password = ""
         }
@@ -243,33 +230,32 @@ private extension OpenVPNCredentialsView {
     }
 
     func onChange(_ builder: OpenVPN.Credentials.Builder) {
-        credentials = builder.build()
+        draft.module.credentials = builder.build()
     }
 }
 
 // MARK: - Previews
 
 #Preview {
+    let module = OpenVPNModule.Builder()
+    let editor = ProfileEditor(modules: [module])
+
     struct ContentView: View {
 
-        @State
-        private var credentials: OpenVPN.Credentials?
+        @ObservedObject
+        var editor: ProfileEditor
 
-        @State
-        private var isInteractive = true
+        let module: OpenVPNModule.Builder
 
         var body: some View {
             NavigationStack {
                 OpenVPNCredentialsView(
-                    profileEditor: ProfileEditor(),
-                    providerId: nil,
-                    isInteractive: $isInteractive,
-                    credentials: $credentials
+                    draft: editor[module]
                 )
             }
         }
     }
 
-    return ContentView()
+    return ContentView(editor: editor, module: module)
         .withMockEnvironment()
 }

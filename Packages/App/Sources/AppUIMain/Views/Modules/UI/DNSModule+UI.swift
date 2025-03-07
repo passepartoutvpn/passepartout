@@ -30,6 +30,6 @@ import UILibrary
 
 extension DNSModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        DNSView(module: self, parameters: parameters)
+        DNSView(draft: parameters.editor[self], parameters: parameters)
     }
 }

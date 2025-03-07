@@ -27,35 +27,28 @@ import PassepartoutKit
 import SwiftUI
 
 @MainActor
-extension ModuleDraftEditing {
-    public var draft: Binding<Draft> {
-        editor[module]
-    }
-}
-
-@MainActor
 extension ModuleDraftEditing where Draft: MutableProviderSelecting {
     public var providerId: Binding<ProviderID?> {
         Binding {
-            draft.providerId.wrappedValue
+            draft.module.providerId
         } set: {
-            draft.providerId.wrappedValue = $0
+            draft.module.providerId = $0
         }
     }
 
     public var providerEntity: Binding<ProviderEntity<Draft.CustomProviderSelection.Template>?> {
         Binding {
-            draft.providerEntity.wrappedValue
+            draft.module.providerEntity
         } set: {
-            draft.providerEntity.wrappedValue = $0
+            draft.module.providerEntity = $0
         }
     }
 
     public var providerOptions: Binding<Set<Draft.CustomProviderSelection.Option>?> {
         Binding {
-            draft.providerOptions.wrappedValue
+            draft.module.providerOptions
         } set: {
-            draft.providerOptions.wrappedValue = $0
+            draft.module.providerOptions = $0
         }
     }
 }

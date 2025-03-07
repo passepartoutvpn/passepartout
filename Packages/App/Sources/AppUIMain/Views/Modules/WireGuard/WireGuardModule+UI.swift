@@ -29,7 +29,7 @@ import SwiftUI
 
 extension WireGuardModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {
-        WireGuardView(module: self, parameters: parameters)
+        WireGuardView(draft: parameters.editor[self], parameters: parameters)
     }
 }
 
