@@ -82,6 +82,10 @@ extension ProviderFilters {
             formats.append("countryCode == %@")
             args.append(countryCode)
         }
+        if let area {
+            formats.append("area == %@")
+            args.append(area)
+        }
 
         let format = formats.joined(separator: " AND ")
         return NSPredicate(format: format, argumentArray: args)
