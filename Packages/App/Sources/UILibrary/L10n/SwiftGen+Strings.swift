@@ -870,6 +870,8 @@ public enum Strings {
     public enum Preferences {
       /// DNS fallback
       public static let dnsFallsBack = Strings.tr("Localizable", "views.preferences.dns_falls_back", fallback: "DNS fallback")
+      /// In-app purchases
+      public static let enablesIap = Strings.tr("Localizable", "views.preferences.enables_iap", fallback: "In-app purchases")
       /// Erase profiles from iCloud
       public static let eraseIcloud = Strings.tr("Localizable", "views.preferences.erase_icloud", fallback: "Erase profiles from iCloud")
       /// Keep in menu bar
@@ -885,6 +887,10 @@ public enum Strings {
       public enum DnsFallsBack {
         /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.
         public static let footer = Strings.tr("Localizable", "views.preferences.dns_falls_back.footer", fallback: "Fall back to CloudFlare servers when the VPN does not provide DNS settings.")
+      }
+      public enum EnablesIap {
+        /// Enable support for paid features. Disable this if you do not have an Apple ID.
+        public static let footer = Strings.tr("Localizable", "views.preferences.enables_iap.footer", fallback: "Enable support for paid features. Disable this if you do not have an Apple ID.")
       }
       public enum EraseIcloud {
         /// To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.

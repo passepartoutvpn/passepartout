@@ -46,6 +46,16 @@ public final class IAPManager: ObservableObject {
 
     public private(set) var purchasedAppBuild: Int?
 
+    public var isEnabled = true {
+        didSet {
+            pp_log(.App.iap, .info, "IAPManager.isEnabled -> \(isEnabled)")
+            pendingReceiptTask?.cancel()
+            Task {
+                await reloadReceipt()
+            }
+        }
+    }
+
     public private(set) var purchasedProducts: Set<AppProduct>
 
     @Published
@@ -85,6 +95,9 @@ extension IAPManager {
     }
 
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
+        guard isEnabled else {
+            return []
+        }
         do {
             let inAppProducts = try await inAppHelper.fetchProducts(timeout: Constants.shared.iap.productsTimeoutInterval)
             return products.compactMap {
@@ -97,6 +110,9 @@ extension IAPManager {
     }
 
     public func purchase(_ purchasableProduct: InAppProduct) async throws -> InAppPurchaseResult {
+        guard isEnabled else {
+            return .cancelled
+        }
         let result = try await inAppHelper.purchase(purchasableProduct)
         if result == .done {
             await receiptReader.addPurchase(with: purchasableProduct.productIdentifier)
@@ -106,11 +122,19 @@ extension IAPManager {
     }
 
     public func restorePurchases() async throws {
+        guard isEnabled else {
+            return
+        }
         try await inAppHelper.restorePurchases()
         await reloadReceipt()
     }
 
     public func reloadReceipt() async {
+        guard isEnabled else {
+            purchasedProducts = []
+            eligibleFeatures = []
+            return
+        }
         if let pendingReceiptTask {
             await pendingReceiptTask.value
         }
@@ -269,6 +293,10 @@ extension IAPManager {
     }
 
     public func fetchLevelIfNeeded() async {
+        guard isEnabled else {
+            userLevel = .freemium
+            return
+        }
         guard userLevel == .undefined else {
             return
         }

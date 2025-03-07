@@ -283,6 +283,8 @@
 "views.paywall.sections.restore.header" = "Ripristina";
 "views.preferences.dns_falls_back" = "DNS di fallback";
 "views.preferences.dns_falls_back.footer" = "Ripiega sui server CloudFlare quando il VPN non fornisce impostazioni DNS.";
+"views.preferences.enables_iap" = "Acquisti in-app";
+"views.preferences.enables_iap.footer" = "Abilita il supporto per le funzionalità a pagamento. Disabilitalo se non hai Apple ID.";
 "views.preferences.erase_icloud" = "Elimina i profili da iCloud";
 "views.preferences.erase_icloud.footer" = "Per eliminare in modo sicuro tutti i profili dall'archivio iCloud, fallo su tutti i tuoi dispositivi sincronizzati. Questo non influirà sui profili locali.";
 "views.preferences.keeps_in_menu" = "Mantieni nella barra dei menu";
