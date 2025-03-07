@@ -27,13 +27,6 @@ import PassepartoutKit
 import SwiftUI
 
 @MainActor
-extension ModuleDraftEditing {
-    public var draft: ModuleDraft<Draft> {
-        editor[module]
-    }
-}
-
-@MainActor
 extension ModuleDraftEditing where Draft: MutableProviderSelecting {
     public var providerId: Binding<ProviderID?> {
         Binding {

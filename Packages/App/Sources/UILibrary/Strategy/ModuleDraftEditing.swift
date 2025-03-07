@@ -26,10 +26,9 @@
 import PassepartoutKit
 import SwiftUI
 
+@MainActor
 public protocol ModuleDraftEditing {
     associatedtype Draft: ModuleBuilder
 
-    var editor: ProfileEditor { get }
-
-    var module: Draft { get }
+    var draft: ModuleDraft<Draft> { get }
 }
