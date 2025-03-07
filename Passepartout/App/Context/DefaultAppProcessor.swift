@@ -79,15 +79,87 @@ extension DefaultAppProcessor: AppTunnelProcessor {
         title(profile)
     }
 
-    func willInstall(_ profile: Profile) throws -> Profile {
+    func willInstall(_ profile: Profile) async throws -> Profile {
+
+        // apply connection heuristic
+        var newProfile = profile
+        if let builder = newProfile.activeProviderModule?.moduleBuilder() as? any MutableProviderSelecting,
+           let heuristic = builder.providerSelection?.entityHeuristic {
+            pp_log(.app, .info, "Apply connection heuristic: \(heuristic)")
+            newProfile.activeProviderModule?.providerSelection?.entityServer.map {
+                pp_log(.app, .info, "\tOld server: \($0)")
+            }
+            newProfile = try await profile.withNewServer(using: heuristic, apiManager: apiManager)
+            newProfile.activeProviderModule?.providerSelection?.entityServer.map {
+                pp_log(.app, .info, "\tNew server: \($0)")
+            }
+        }
 
         // validate provider modules
         do {
-            _ = try profile.withProviderModules()
-            return profile
+            _ = try newProfile.withProviderModules()
+            return newProfile
         } catch {
             pp_log(.app, .error, "Unable to inject provider modules: \(error)")
             throw error
         }
+    }
+}
+
+// MARK: - Heuristics
+
+// FIXME: #1231, these should be implemented in the library
+
+private extension Profile {
+
+    @MainActor
+    func withNewServer(using heuristic: ProviderHeuristic, apiManager: APIManager) async throws -> Profile {
+        guard var providerModule = activeProviderModule?.moduleBuilder() as? any ModuleBuilder & MutableProviderSelecting else {
+            return self
+        }
+        try await providerModule.setRandomServer(using: heuristic, apiManager: apiManager)
+
+        var newBuilder = builder()
+        newBuilder.saveModule(try providerModule.tryBuild())
+        return try newBuilder.tryBuild()
+    }
+}
+
+private extension MutableProviderSelecting {
+
+    @MainActor
+    mutating func setRandomServer(using heuristic: ProviderHeuristic, apiManager: APIManager) async throws {
+        guard let providerEntity else {
+            return
+        }
+        let repo = try await apiManager.providerRepository(for: providerEntity.header.providerId)
+        let providerManager = ProviderManager<CustomProviderSelection.Template>()
+        try await providerManager.setRepository(repo)
+
+        var filters = ProviderFilters()
+        filters.presetId = providerEntity.preset.presetId
+
+        switch heuristic {
+        case .exact(let server):
+            filters.serverIds = [server.serverId]
+        case .sameCountry(let code):
+            filters.countryCode = code
+        case .sameRegion(let region):
+            filters.countryCode = region.countryCode
+            filters.area = region.area
+        }
+
+        var servers = try await providerManager.filteredServers(with: filters)
+        servers.removeAll {
+            $0.serverId == providerEntity.server.serverId
+        }
+        guard let randomServer = servers.randomElement() else {
+            return
+        }
+        providerSelection?.entity = ProviderEntity(
+            server: randomServer,
+            heuristic: providerEntity.heuristic,
+            preset: providerEntity.preset
+        )
     }
 }
