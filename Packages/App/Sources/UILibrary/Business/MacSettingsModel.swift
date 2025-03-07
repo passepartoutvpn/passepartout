@@ -48,8 +48,8 @@ public final class MacSettingsModel: ObservableObject {
             appWindow.isVisible
         }
         set {
-            appWindow.isVisible = newValue
             objectWillChange.send()
+            appWindow.isVisible = newValue
         }
     }
 
@@ -58,6 +58,7 @@ public final class MacSettingsModel: ObservableObject {
             appService.status == .enabled
         }
         set {
+            objectWillChange.send()
             do {
                 if newValue {
                     try appService.register()
@@ -67,7 +68,6 @@ public final class MacSettingsModel: ObservableObject {
             } catch {
                 pp_log(.app, .error, "Unable to (un)register login item: \(error)")
             }
-            objectWillChange.send()
         }
     }
 
@@ -76,8 +76,8 @@ public final class MacSettingsModel: ObservableObject {
             defaults.bool(forKey: UIPreference.keepsInMenu.key)
         }
         set {
-            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
             objectWillChange.send()
+            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
         }
     }
 
