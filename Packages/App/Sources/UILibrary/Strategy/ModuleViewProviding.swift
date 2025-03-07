@@ -35,6 +35,8 @@ public protocol ModuleViewProviding {
 }
 
 public struct ModuleViewParameters {
+
+    // FIXME: ###, drop this, only impl
     public let editor: ProfileEditor
 
     public let impl: (any ModuleImplementation)?
