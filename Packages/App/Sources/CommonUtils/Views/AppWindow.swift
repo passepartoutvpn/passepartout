@@ -33,15 +33,15 @@ public final class AppWindow {
 
     public var isVisible: Bool {
         get {
-            NSApp.activationPolicy() == .regular && window.isVisible
+            NSApp.activationPolicy() == .regular && window?.isVisible == true
         }
         set {
             NSApp.setActivationPolicy(newValue ? .regular : .accessory)
             if newValue {
                 NSApp.activate(ignoringOtherApps: true)
-                window.makeKeyAndOrderFront(self)
+                window?.makeKeyAndOrderFront(self)
             } else {
-                window.close()
+                window?.close()
             }
         }
     }
@@ -51,11 +51,14 @@ public final class AppWindow {
 }
 
 private extension AppWindow {
-    var window: NSWindow {
-        guard let window = NSApp.windows.first else {
-            fatalError("No Mac window?")
-        }
-        return window
+    var window: NSWindow? {
+        NSApp.windows.first(where: \.isWindow)
+    }
+}
+
+private extension NSWindow {
+    var isWindow: Bool {
+        !className.contains("NSStatusBar")
     }
 }
 
