@@ -38,6 +38,7 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
     override func setUp() async throws {
         continueAfterFailure = false
         app.launch()
+        app.activate()
 #if os(iOS)
         if UIDevice.current.userInterfaceIdiom == .pad {
             XCUIDevice.shared.orientation = .portrait
