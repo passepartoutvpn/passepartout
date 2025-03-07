@@ -81,15 +81,17 @@ public struct PaywallModifier: ViewModifier {
                 guard let reason = $0 else {
                     return
                 }
-                iapManager.isEnabled = true
-                if reason.needsConfirmation {
-                    isConfirming = true
-                } else {
-                    guard !iapManager.isBeta else {
-                        assertionFailure("Purchasing in beta?")
-                        return
+                Task {
+                    await iapManager.enable()
+                    if reason.needsConfirmation {
+                        isConfirming = true
+                    } else {
+                        guard !iapManager.isBeta else {
+                            assertionFailure("Purchasing in beta?")
+                            return
+                        }
+                        isPurchasing = true
                     }
-                    isPurchasing = true
                 }
             }
     }

@@ -91,6 +91,14 @@ extension IAPManager {
         pendingReceiptTask != nil
     }
 
+    public func enable() async {
+        guard !isEnabled else {
+            return
+        }
+        isEnabled = true
+        await reloadReceipt()
+    }
+
     public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
         guard isEnabled else {
             return []
