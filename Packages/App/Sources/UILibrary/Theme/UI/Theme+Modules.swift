@@ -120,6 +120,7 @@ public struct ThemeModuleCopiableText: View {
     public var body: some View {
         ThemeCopiableText(title: caption, value: value, isMultiLine: multiline) {
             Text($0)
+                .themeTruncating(.middle)
         }
     }
 }
