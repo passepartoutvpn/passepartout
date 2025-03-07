@@ -177,7 +177,7 @@ private extension ProfileManager {
                     hostname: "be-v4.hideservers.net",
                     ipAddresses: nil
                 ),
-                heuristic: nil,
+                heuristic: .sameCountry("BE"),
                 preset: try preset.ofType(OpenVPNProviderTemplate.self)
             )
         } catch {
