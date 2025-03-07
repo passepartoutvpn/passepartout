@@ -1,8 +1,8 @@
 //
-//  ModuleDraftEditing+UI.swift
+//  ModuleDraft.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/20/24.
+//  Created by Davide De Rosa on 3/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,39 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
 @MainActor
-extension ModuleDraftEditing {
-    public var draft: ModuleDraft<Draft> {
-        editor[module]
-    }
-}
+public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {
+    private weak var editor: ProfileEditor?
 
-@MainActor
-extension ModuleDraftEditing where Draft: MutableProviderSelecting {
-    public var providerId: Binding<ProviderID?> {
-        Binding {
-            draft.module.providerId
-        } set: {
-            draft.module.providerId = $0
+    private let moduleId: UUID
+
+    public var module: T {
+        get {
+            guard let foundModule = editor?.module(withId: moduleId) else {
+                fatalError("Module not found in editor: \(moduleId)")
+            }
+            guard let matchingModule = foundModule as? T else {
+                fatalError("Type mismatch when binding to editor module: \(type(of: foundModule)) != \(T.self)")
+            }
+            return matchingModule
+        }
+        set {
+            objectWillChange.send()
+            editor?.saveModule(newValue, activating: false)
         }
     }
 
-    public var providerEntity: Binding<ProviderEntity<Draft.CustomProviderSelection.Template>?> {
-        Binding {
-            draft.module.providerEntity
-        } set: {
-            draft.module.providerEntity = $0
-        }
-    }
-
-    public var providerOptions: Binding<Set<Draft.CustomProviderSelection.Option>?> {
-        Binding {
-            draft.module.providerOptions
-        } set: {
-            draft.module.providerOptions = $0
-        }
+    init(editor: ProfileEditor, module: T) {
+        self.editor = editor
+        moduleId = module.id
     }
 }
