@@ -31,6 +31,22 @@ extension ProviderServer {
     }
 }
 
+extension String {
+    func isCountryCodeSelected(by heuristic: ProviderHeuristic?) -> Bool {
+        guard let heuristic else {
+            return false
+        }
+        switch heuristic {
+        case .exact(let server):
+            return self == server.metadata.countryCode
+        case .sameCountry(let code):
+            return self == code
+        case .sameRegion(let region):
+            return self == region.countryCode
+        }
+    }
+}
+
 extension ProviderRegion {
     func isSelected(by heuristic: ProviderHeuristic?) -> Bool {
         guard let heuristic else {

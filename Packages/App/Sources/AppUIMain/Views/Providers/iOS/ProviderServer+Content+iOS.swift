@@ -107,7 +107,11 @@ private extension ProviderServerView.ContentView {
                         DisclosureGroup(isExpanded: isExpandedCountry(code)) {
                             ForEach(regions, id: \.id, content: regionView)
                         } label: {
-                            ThemeCountryText(code)
+                            HStack {
+                                ThemeImage(.marked)
+                                    .opaque(code.isCountryCodeSelected(by: heuristic))
+                                ThemeCountryText(code)
+                            }
                         }
                         .uiAccessibility(.ProviderServers.countryGroup)
                     } else if let singleRegion = regions.first {
