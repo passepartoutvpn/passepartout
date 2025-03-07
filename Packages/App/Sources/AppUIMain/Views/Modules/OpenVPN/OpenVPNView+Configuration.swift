@@ -130,7 +130,7 @@ private extension OpenVPNView.ConfigurationView {
                 ThemeModuleCopiableText(caption: Strings.Global.Nouns.gateway, value: $0)
             }
 
-            ip.includedRoutes
+            (ip.includedRoutes + (routes ?? []))
                 .nilIfEmpty
                 .map {
                     ThemeModuleTextList(
@@ -147,14 +147,6 @@ private extension OpenVPNView.ConfigurationView {
                         values: $0.map(\.localizedDescription)
                     )
                 }
-        }
-        routes.map { routes in
-            ForEach(routes, id: \.self) {
-                ThemeModuleLongContent(
-                    caption: Strings.Global.Nouns.route,
-                    value: .constant($0.localizedDescription)
-                )
-            }
         }
     }
 
