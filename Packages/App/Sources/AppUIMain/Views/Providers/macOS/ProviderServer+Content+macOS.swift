@@ -42,6 +42,9 @@ extension ProviderServerView {
 
         let selectedServer: ProviderServer?
 
+        @Binding
+        var heuristic: ProviderHeuristic?
+
         let isFiltering: Bool
 
         @ObservedObject
@@ -52,55 +55,71 @@ extension ProviderServerView {
 
         let selectTitle: String
 
-        let onSelect: (ProviderServer) -> Void
+        let onSelect: (ProviderServer, ProviderHeuristic?) -> Void
 
         @State
         private var hoveringServerId: String?
 
         var body: some View {
             debugChanges()
-            return tableView
+            return serversTable
         }
     }
 }
 
 private extension ProviderServerView.ContentView {
-    var tableView: some View {
-        Table(servers) {
-            TableColumn("") { server in
+    var serversTable: some View {
+        // FIXME: #1231, servers.regions is inefficient, fetch regions directly
+        Table(servers.regions) {
+            TableColumn("") { region in
                 ThemeImage(.marked)
-                    .opaque(server.id == selectedServer?.id)
+                    .opaque(region.isSelected(by: heuristic))
                     .environmentObject(theme) // TODO: #873, Table loses environment
             }
             .width(10.0)
 
-            TableColumn("☆") { server in
+            TableColumn("☆") { region in
                 FavoriteToggle(
-                    value: server.serverId,
+                    value: region.id,
                     selection: providerPreferences.favoriteServers()
                 )
                 .environmentObject(theme) // TODO: #873, Table loses environment
             }
             .width(15.0)
 
-            TableColumn(Strings.Global.Nouns.region) { server in
+            TableColumn(Strings.Global.Nouns.country) { region in
                 Button {
-                    onSelect(server)
+                    let heuristic: ProviderHeuristic
+                    if region.area != nil {
+                        heuristic = .sameRegion(region)
+                    } else {
+                        heuristic = .sameCountry(region.countryCode)
+                    }
+                    guard let randomServer = servers.randomServer(using: heuristic) else {
+                        return
+                    }
+                    onSelect(randomServer, heuristic)
                 } label: {
-                    ThemeCountryText(server.metadata.countryCode, title: server.region)
+                    ThemeCountryText(region.countryCode)
                 }
-                .help(server.region)
+                .help(region.localizedDescription)
                 .cursor(.hand)
                 .environmentObject(theme) // TODO: #873, Table loses environment
             }
 
-            TableColumn(Strings.Global.Nouns.address) { server in
+            TableColumn(Strings.Global.Nouns.region) { region in
                 Button {
-                    onSelect(server)
+                    let heuristic: ProviderHeuristic = .sameRegion(region)
+                    guard let randomServer = servers.randomServer(using: heuristic) else {
+                        return
+                    }
+                    onSelect(randomServer, heuristic)
                 } label: {
-                    Text(server.address)
+                    region.area.map(Text.init)
                 }
+                .help(region.area ?? "")
                 .cursor(.hand)
+                .environmentObject(theme) // TODO: #873, Table loses environment
             }
         }
     }

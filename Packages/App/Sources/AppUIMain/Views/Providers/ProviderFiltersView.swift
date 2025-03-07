@@ -34,6 +34,9 @@ struct ProviderFiltersView: View {
     @ObservedObject
     var model: Model
 
+    @Binding
+    var heuristic: ProviderHeuristic?
+
     var body: some View {
         debugChanges()
         return Form {
@@ -115,7 +118,8 @@ private extension ProviderFiltersView {
     NavigationStack {
         ProviderFiltersView(
             providerId: .mullvad,
-            model: .init()
+            model: .init(),
+            heuristic: .constant(nil)
         )
     }
 }

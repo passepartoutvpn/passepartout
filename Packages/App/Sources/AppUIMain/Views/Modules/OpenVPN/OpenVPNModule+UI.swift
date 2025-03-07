@@ -155,8 +155,16 @@ private extension DestinationView {
         parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
     }
 
-    func onSelectServer(server: ProviderServer, preset: ProviderPreset<OpenVPNProviderTemplate>) {
-        draft.wrappedValue.providerEntity = ProviderEntity(server: server, preset: preset)
+    func onSelectServer(
+        server: ProviderServer,
+        heuristic: ProviderHeuristic?,
+        preset: ProviderPreset<OpenVPNProviderTemplate>
+    ) {
+        draft.wrappedValue.providerEntity = ProviderEntity(
+            server: server,
+            heuristic: heuristic,
+            preset: preset
+        )
         resetExcludedEndpointsWithCurrentProviderEntity()
         path.removeLast()
     }
