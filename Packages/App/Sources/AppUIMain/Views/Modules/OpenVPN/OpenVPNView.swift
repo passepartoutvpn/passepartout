@@ -90,27 +90,30 @@ private extension OpenVPNView {
     var contentView: some View {
         if draft.module.configurationBuilder != nil {
             if !isServerPushed {
-                remotesLink
+                ModuleImportSection(isImporting: $isImporting)
+                connectionSection
             }
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: $draft.module.configurationBuilder ?? .init(),
                 credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
             )
+        } else if draft.module.providerSelection != nil,
+                  let providerConfiguration {
+            Section {
+                remotesLink
+                providerConfigurationLink(with: providerConfiguration)
+            }
+            .modifier(providerModifier)
         } else {
-            emptyConfigurationView
+            ModuleImportSection(isImporting: $isImporting)
                 .modifier(providerModifier)
         }
     }
 
-    @ViewBuilder
-    var emptyConfigurationView: some View {
-        if draft.module.providerSelection == nil {
-            importButton
-        } else if let providerConfiguration {
-            remotesLink
-            providerConfigurationLink(with: providerConfiguration)
-        }
+    var connectionSection: some View {
+        remotesLink
+            .themeSection(header: Strings.Global.Nouns.connection)
     }
 
     var remotesLink: some View {
@@ -119,12 +122,6 @@ private extension OpenVPNView {
 
     func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {
         NavigationLink(Strings.Global.Nouns.configuration, value: ProfileRoute(OpenVPNModule.Subroute.providerConfiguration(configuration)))
-    }
-
-    var importButton: some View {
-        Button(Strings.Modules.General.Rows.importFromFile.forMenu) {
-            isImporting = true
-        }
     }
 
     var providerModifier: some ViewModifier {

@@ -41,6 +41,9 @@ struct WireGuardView: View, ModuleDraftEditing {
     @State
     private var paywallReason: PaywallReason?
 
+    @State
+    private var isImporting = false
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -52,6 +55,12 @@ struct WireGuardView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(draft: draft)
+            .modifier(ImportModifier(
+                draft: draft,
+                impl: impl,
+                isImporting: $isImporting,
+                errorHandler: errorHandler
+            ))
             .themeAnimation(on: draft.module.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
@@ -65,6 +74,7 @@ private extension WireGuardView {
     @ViewBuilder
     var contentView: some View {
         if draft.module.configurationBuilder != nil {
+            ModuleImportSection(isImporting: $isImporting)
             ConfigurationView(
                 configuration: $draft.module.configurationBuilder ?? impl.map {
                     .init(keyGenerator: $0.keyGenerator)
@@ -72,7 +82,7 @@ private extension WireGuardView {
                 keyGenerator: impl?.keyGenerator
             )
         } else {
-            EmptyView()
+            ModuleImportSection(isImporting: $isImporting)
                 .modifier(providerModifier)
         }
     }
@@ -105,10 +115,6 @@ private extension WireGuardView {
             preset: preset
         )
         path.wrappedValue.removeLast()
-    }
-
-    func importConfiguration(from url: URL) {
-        // TODO: #397, import draft from external URL
     }
 
     func editConfiguration() {
