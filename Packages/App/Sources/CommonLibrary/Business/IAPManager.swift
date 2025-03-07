@@ -42,19 +42,19 @@ public final class IAPManager: ObservableObject {
 
     private let productsAtBuild: BuildProducts<AppProduct>?
 
-    private(set) var userLevel: AppUserLevel
-
-    public private(set) var purchasedAppBuild: Int?
-
+    @Published
     public var isEnabled = true {
         didSet {
-            pp_log(.App.iap, .info, "IAPManager.isEnabled -> \(isEnabled)")
             pendingReceiptTask?.cancel()
             Task {
                 await reloadReceipt()
             }
         }
     }
+
+    private(set) var userLevel: AppUserLevel
+
+    public private(set) var purchasedAppBuild: Int?
 
     public private(set) var purchasedProducts: Set<AppProduct>
 

@@ -49,9 +49,6 @@ public struct PreferencesGroup: View {
     @AppStorage(AppPreference.dnsFallsBack.key, store: .appGroup)
     private var dnsFallsBack = true
 
-    @AppStorage(AppPreference.skipsPurchases.key, store: .appGroup)
-    private var skipsPurchases = false
-
     private let profileManager: ProfileManager
 
     @State
@@ -122,7 +119,7 @@ private extension PreferencesGroup {
     }
 
     var enablesPurchasesToggle: some View {
-        Toggle(Strings.Views.Preferences.enablesIap, isOn: enablesPurchasesBinding)
+        Toggle(Strings.Views.Preferences.enablesIap, isOn: $iapManager.isEnabled)
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.EnablesIap.footer)
     }
 
@@ -152,17 +149,6 @@ private extension PreferencesGroup {
             above: true
         )
         .disabled(isErasingiCloud)
-    }
-}
-
-private extension PreferencesGroup {
-    var enablesPurchasesBinding: Binding<Bool> {
-        Binding {
-            !skipsPurchases
-        } set: {
-            skipsPurchases = !$0
-            iapManager.isEnabled = $0
-        }
     }
 }
 

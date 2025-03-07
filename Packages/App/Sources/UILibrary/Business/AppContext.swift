@@ -107,6 +107,15 @@ private extension AppContext {
             await iapManager.reloadReceipt()
         }
 
+        iapManager
+            .$isEnabled
+            .removeDuplicates()
+            .sink {
+                pp_log(.App.iap, .info, "IAPManager.isEnabled -> \($0)")
+                UserDefaults.appGroup.set(!$0, forKey: AppPreference.skipsPurchases.key)
+            }
+            .store(in: &subscriptions)
+
         pp_log(.App.profiles, .info, "\tObserve eligible features...")
         iapManager
             .$eligibleFeatures
