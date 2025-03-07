@@ -81,17 +81,32 @@ public struct ThemeModuleTextList: View {
 
     private let values: [String]
 
-    public init(caption: String, values: [String]) {
+    private let copiable: Bool
+
+    public init(caption: String, values: [String], copiable: Bool = false) {
         self.caption = caption
         self.values = values
+        self.copiable = copiable
     }
 
     public var body: some View {
         if !values.isEmpty {
             NavigationLink(caption) {
                 Form {
-                    ForEach(Array(values.enumerated()), id: \.offset) {
-                        Text($0.element)
+                    ForEach(Array(values.enumerated()), id: \.offset) { pair in
+                        HStack {
+                            Text(pair.element)
+                            if copiable {
+                                Spacer()
+                                Button {
+                                    Utils.copyToPasteboard(pair.element)
+                                } label: {
+                                    ThemeImage(.copy)
+                                }
+                                // TODO: #XXX, necessary to avoid cell selection
+                                .buttonStyle(.borderless)
+                            }
+                        }
                     }
                 }
                 .navigationTitle(caption)
