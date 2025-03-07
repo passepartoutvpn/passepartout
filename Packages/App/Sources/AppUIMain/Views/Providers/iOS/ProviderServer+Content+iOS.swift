@@ -108,9 +108,10 @@ private extension ProviderServerView.ContentView {
                             ForEach(regions, id: \.id, content: regionView)
                         } label: {
                             HStack {
+                                ThemeCountryText(code)
+                                Spacer()
                                 ThemeImage(.marked)
                                     .opaque(code.isCountryCodeSelected(by: heuristic))
-                                ThemeCountryText(code)
                             }
                         }
                         .uiAccessibility(.ProviderServers.countryGroup)
@@ -139,21 +140,17 @@ private extension ProviderServerView.ContentView {
             onSelect(randomServer, heuristic)
         } label: {
             if !isSingle && region.area == nil {
-                HStack {
-                    ThemeImage(.marked)
-                        .opaque(region.isSelected(by: heuristic))
-                    Text(Strings.Global.Nouns.any)
-                }
+                Text(Strings.Global.Nouns.any)
             } else {
                 HStack {
-                    ThemeImage(.marked)
-                        .opaque(region.isSelected(by: heuristic))
                     if isSingle {
                         ThemeCountryText(region.countryCode, title: region.localizedDescription)
                     } else if let area = region.area {
                         Text(area)
                     }
                     Spacer()
+                    ThemeImage(.marked)
+                        .opaque(region.isSelected(by: heuristic))
                     FavoriteToggle(
                         value: region.id,
                         selection: providerPreferences.favoriteServers()
