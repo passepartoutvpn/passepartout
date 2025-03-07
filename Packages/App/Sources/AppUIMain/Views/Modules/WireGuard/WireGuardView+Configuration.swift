@@ -50,6 +50,9 @@ extension WireGuardView {
             .onLoad {
                 model.load(from: configuration)
             }
+            .onChange(of: configuration) {
+                model.load(from: $0)
+            }
             .onChange(of: model) {
                 $0.save(to: &configuration)
             }
