@@ -83,16 +83,20 @@ extension DefaultAppProcessor: AppTunnelProcessor {
 
         // apply connection heuristic
         var newProfile = profile
-        if let builder = newProfile.activeProviderModule?.moduleBuilder() as? any MutableProviderSelecting,
-           let heuristic = builder.providerSelection?.entityHeuristic {
-            pp_log(.app, .info, "Apply connection heuristic: \(heuristic)")
-            newProfile.activeProviderModule?.providerSelection?.entityServer.map {
-                pp_log(.app, .info, "\tOld server: \($0)")
+        do {
+            if let builder = newProfile.activeProviderModule?.moduleBuilder() as? any MutableProviderSelecting,
+               let heuristic = builder.providerSelection?.entityHeuristic {
+                pp_log(.app, .info, "Apply connection heuristic: \(heuristic)")
+                newProfile.activeProviderModule?.providerSelection?.entityServer.map {
+                    pp_log(.app, .info, "\tOld server: \($0)")
+                }
+                newProfile = try await profile.withNewServer(using: heuristic, apiManager: apiManager)
+                newProfile.activeProviderModule?.providerSelection?.entityServer.map {
+                    pp_log(.app, .info, "\tNew server: \($0)")
+                }
             }
-            newProfile = try await profile.withNewServer(using: heuristic, apiManager: apiManager)
-            newProfile.activeProviderModule?.providerSelection?.entityServer.map {
-                pp_log(.app, .info, "\tNew server: \($0)")
-            }
+        } catch {
+            pp_log(.app, .error, "Unable to pick new provider server: \(error)")
         }
 
         // validate provider modules
