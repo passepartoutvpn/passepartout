@@ -131,6 +131,7 @@ extension IAPManager {
 
     public func reloadReceipt() async {
         guard isEnabled else {
+            purchasedProducts = []
             eligibleFeatures = []
             return
         }
@@ -294,8 +295,6 @@ extension IAPManager {
     public func fetchLevelIfNeeded() async {
         guard isEnabled else {
             userLevel = .freemium
-            purchasedProducts = []
-            eligibleFeatures = []
             return
         }
         guard userLevel == .undefined else {
