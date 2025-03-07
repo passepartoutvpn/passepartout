@@ -46,6 +46,9 @@ public struct PreferencesGroup: View {
     @AppStorage(AppPreference.dnsFallsBack.key, store: .appGroup)
     private var dnsFallsBack = true
 
+    @AppStorage(AppPreference.skipsPurchases.key, store: .appGroup)
+    private var skipsPurchases = false
+
     private let profileManager: ProfileManager
 
     @State
@@ -68,6 +71,7 @@ public struct PreferencesGroup: View {
 #endif
         pinActiveProfileToggle
         dnsFallsBackToggle
+        enablesPurchasesToggle
         eraseCloudKitButton
     }
 }
@@ -114,6 +118,11 @@ private extension PreferencesGroup {
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.DnsFallsBack.footer)
     }
 
+    var enablesPurchasesToggle: some View {
+        Toggle(Strings.Views.Preferences.enablesIap, isOn: enablesPurchasesBinding)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.EnablesIap.footer)
+    }
+
     var eraseCloudKitButton: some View {
         Button(Strings.Views.Preferences.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
@@ -140,6 +149,16 @@ private extension PreferencesGroup {
             above: true
         )
         .disabled(isErasingiCloud)
+    }
+}
+
+private extension PreferencesGroup {
+    var enablesPurchasesBinding: Binding<Bool> {
+        Binding {
+            !skipsPurchases
+        } set: {
+            skipsPurchases = !$0
+        }
     }
 }
 

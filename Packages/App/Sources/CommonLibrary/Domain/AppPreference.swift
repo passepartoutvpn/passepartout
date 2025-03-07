@@ -29,6 +29,8 @@ public enum AppPreference: String, PreferenceProtocol {
     case dnsFallsBack
 //    case dnsFallbackServers
 
+    case skipsPurchases
+
     case lastUsedProfileId
 
     case logsPrivateData
