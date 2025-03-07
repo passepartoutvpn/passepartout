@@ -33,9 +33,7 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
     private var isUITesting
 
     @ObservedObject
-    var editor: ProfileEditor
-
-    let draft: T
+    var draft: ModuleDraft<T>
 
     let withUUID: Bool
 
@@ -45,19 +43,19 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 #if DEBUG
             if !isUITesting && withUUID {
                 Section {
-                    UUIDText(uuid: draft.id)
+                    UUIDText(uuid: draft.module.id)
                 }
             }
 #endif
         }
         .themeForm()
         .themeManualInput()
-        .themeAnimation(on: draft, category: .modules)
+        .themeAnimation(on: draft.module, category: .modules)
     }
 }
 
 extension View {
-    func moduleView<T>(editor: ProfileEditor, draft: T, withUUID: Bool = true) -> some View where T: ModuleBuilder & Equatable {
-        modifier(ModuleViewModifier(editor: editor, draft: draft, withUUID: withUUID))
+    func moduleView<T>(draft: ModuleDraft<T>, withUUID: Bool = true) -> some View where T: ModuleBuilder & Equatable {
+        modifier(ModuleViewModifier(draft: draft, withUUID: withUUID))
     }
 }
