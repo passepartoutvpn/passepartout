@@ -28,13 +28,8 @@ import SwiftUI
 
 extension OpenVPNModule.Builder: InteractiveViewProviding {
     public func interactiveView(with editor: ProfileEditor, onSubmit: @escaping () -> Void) -> some View {
-        let draft = editor[self]
-
-        return OpenVPNCredentialsView(
-            profileEditor: editor,
-            providerId: draft.wrappedValue.providerId,
-            isInteractive: draft.isInteractive,
-            credentials: draft.credentials,
+        OpenVPNCredentialsView(
+            draft: editor[self],
             isAuthenticating: true,
             onSubmit: onSubmit
         )

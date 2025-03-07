@@ -33,10 +33,8 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @Environment(\.navigationPath)
     private var path
 
-    let module: OpenVPNModule.Builder
-
     @ObservedObject
-    var editor: ProfileEditor
+    var draft: ModuleDraft<OpenVPNModule.Builder>
 
     let impl: OpenVPNModule.Implementation?
 
@@ -53,33 +51,33 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    init(serverConfiguration: OpenVPN.Configuration) {
-        module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
-        editor = ProfileEditor(modules: [module])
-        impl = nil
-        isServerPushed = true
-        providerConfiguration = nil
-        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
-    }
+    // FIXME: ###, restore
+//    init(serverConfiguration: OpenVPN.Configuration) {
+//        module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
+//        editor = ProfileEditor(modules: [module])
+//        impl = nil
+//        isServerPushed = true
+//        providerConfiguration = nil
+//        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
+//    }
 
-    init(module: OpenVPNModule.Builder, parameters: ModuleViewParameters) {
-        self.module = module
-        editor = parameters.editor
+    init(draft: ModuleDraft<OpenVPNModule.Builder>, parameters: ModuleViewParameters) {
+        self.draft = draft
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
-        providerConfiguration = try? module.providerSelection?.configuration()
+        providerConfiguration = try? draft.module.providerSelection?.configuration()
     }
 
     var body: some View {
         contentView
-            .moduleView(editor: editor, draft: draft.wrappedValue, withUUID: !isServerPushed)
+            .moduleView(draft: draft, withUUID: !isServerPushed)
             .modifier(ImportModifier(
                 draft: draft,
                 impl: impl,
                 isImporting: $isImporting,
                 errorHandler: errorHandler
             ))
-            .themeAnimation(on: draft.wrappedValue.providerId, category: .modules)
+            .themeAnimation(on: draft.module.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
@@ -91,13 +89,13 @@ private extension OpenVPNView {
 
     @ViewBuilder
     var contentView: some View {
-        if let configurationBinding {
+        if draft.module.configurationBuilder != nil {
             if !isServerPushed {
                 remotesLink
             }
             ConfigurationView(
                 isServerPushed: isServerPushed,
-                configuration: configurationBinding,
+                configuration: $draft.module.configurationBuilder ?? .init(),
                 credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
             )
         } else {
@@ -108,7 +106,7 @@ private extension OpenVPNView {
 
     @ViewBuilder
     var emptyConfigurationView: some View {
-        if draft.wrappedValue.providerSelection == nil {
+        if draft.module.providerSelection == nil {
             importButton
         } else if let providerConfiguration {
             remotesLink
@@ -143,21 +141,6 @@ private extension OpenVPNView {
 
     func providerRows() -> some View {
         ThemeModulePush(caption: Strings.Modules.Openvpn.credentials, route: ProfileRoute(OpenVPNModule.Subroute.credentials))
-    }
-}
-
-// MARK: - Logic
-
-private extension OpenVPNView {
-    var configurationBinding: Binding<OpenVPN.Configuration.Builder>? {
-        guard draft.wrappedValue.configurationBuilder != nil else {
-            return nil
-        }
-        return Binding {
-            draft.wrappedValue.configurationBuilder ?? .init()
-        } set: {
-            draft.wrappedValue.configurationBuilder = $0
-        }
     }
 }
 
