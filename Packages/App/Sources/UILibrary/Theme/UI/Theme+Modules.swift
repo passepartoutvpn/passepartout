@@ -168,4 +168,26 @@ public struct ThemeModulePush: View {
     }
 }
 
+public struct ThemeTrailingContent<Content>: View where Content: View {
+
+    @ViewBuilder
+    private let content: () -> Content
+
+    public init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    public var body: some View {
+#if os(iOS)
+        content()
+            .frame(maxWidth: .infinity)
+#else
+        HStack {
+            Spacer()
+            content()
+        }
+#endif
+    }
+}
+
 #endif

@@ -50,8 +50,10 @@ struct ProfileActionsSection: View {
         }
 #else
         if isExistingProfile {
-            uuidView
-                .asSectionWithTrailingContent(removeContent)
+            Section {
+                uuidView
+                ThemeTrailingContent(content: removeContent)
+            }
         } else {
             uuidView
         }

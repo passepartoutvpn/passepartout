@@ -93,43 +93,47 @@ public struct EditableListSection<ItemView: View, RemoveView: View, EditView: Vi
     }
 
     public var body: some View {
-        ForEach(items, id: \.id) { item in
-            RemovableItemRow(isEditing: isEditing) {
-                itemView(for: item)
-            } removeView: {
-                removeView(for: item)
-                    .disabled(!canRemove(items))
+        Group {
+            ForEach(items, id: \.id) { item in
+                RemovableItemRow(isEditing: isEditing) {
+                    itemView(for: item)
+                } removeView: {
+                    removeView(for: item)
+                        .disabled(!canRemove(items))
+                }
+                .deleteDisabled(!canRemove(items))
+                .onDrag {
+                    draggingItem = item
+                    return NSItemProvider(object: item.value.description as NSString)
+                }
+                .onDrop(of: [.text], delegate: ItemDropDelegate(
+                    item: item,
+                    items: $items,
+                    draggingItem: $draggingItem
+                ))
             }
-            .deleteDisabled(!canRemove(items))
-            .onDrag {
-                draggingItem = item
-                return NSItemProvider(object: item.value.description as NSString)
+            .onMove {
+                items.move(fromOffsets: $0, toOffset: $1)
             }
-            .onDrop(of: [.text], delegate: ItemDropDelegate(
-                item: item,
-                items: $items,
-                draggingItem: $draggingItem
-            ))
-        }
-        .onMove {
-            items.move(fromOffsets: $0, toOffset: $1)
-        }
-        .onDelete {
-            guard canRemove(items) else {
-                assertionFailure("EditableListSection: Remove view should be disabled (!canRemove)")
-                return
+            .onDelete {
+                guard canRemove(items) else {
+                    assertionFailure("EditableListSection: Remove view should be disabled (!canRemove)")
+                    return
+                }
+                items.remove(atOffsets: $0)
             }
-            items.remove(atOffsets: $0)
-        }
-        .onChange(of: items, perform: exportItems)
-        .asSectionWithHeader(title) {
+            .onChange(of: items, perform: exportItems)
+
+            ThemeTrailingContent {
 #if os(iOS)
-            addButton
+                addButton
 #elseif os(macOS)
-            editButton
-            addButton
+                editButton
+                addButton
 #endif
+            }
         }
+        .themeSection(header: title)
         .onLoad(perform: importItems)
     }
 }
