@@ -79,19 +79,22 @@ public struct ThemeModuleTextField: View {
 public struct ThemeModuleTextList: View {
     private let caption: String
 
+    private let withEntries: Bool
+
     private let values: [String]
 
     private let copiable: Bool
 
-    public init(caption: String, values: [String], copiable: Bool = false) {
+    public init(caption: String, withEntries: Bool = false, values: [String], copiable: Bool = false) {
         self.caption = caption
+        self.withEntries = withEntries
         self.values = values
         self.copiable = copiable
     }
 
     public var body: some View {
         if !values.isEmpty {
-            NavigationLink(caption) {
+            NavigationLink {
                 Form {
                     ForEach(Array(values.enumerated()), id: \.offset) { pair in
                         HStack {
@@ -111,6 +114,9 @@ public struct ThemeModuleTextList: View {
                 }
                 .navigationTitle(caption)
                 .themeForm()
+            } label: {
+                Text(caption)
+                    .themeTrailingValue(withEntries ? values.count.localizedEntries : nil)
             }
         } else {
             Text(caption)
