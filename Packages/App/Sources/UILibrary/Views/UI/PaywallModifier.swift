@@ -81,6 +81,7 @@ public struct PaywallModifier: ViewModifier {
                 guard let reason = $0 else {
                     return
                 }
+                iapManager.isEnabled = true
                 if reason.needsConfirmation {
                     isConfirming = true
                 } else {
