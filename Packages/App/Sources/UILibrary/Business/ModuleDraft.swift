@@ -30,6 +30,8 @@ import PassepartoutKit
 public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {
     private weak var editor: ProfileEditor?
 
+    private let staticEditor: ProfileEditor?
+
     private let moduleId: UUID
 
     public var module: T {
@@ -48,8 +50,15 @@ public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {
         }
     }
 
+    public init(module: T) {
+        staticEditor = ProfileEditor(modules: [module])
+        editor = staticEditor
+        moduleId = module.id
+    }
+
     init(editor: ProfileEditor, module: T) {
         self.editor = editor
+        staticEditor = nil
         moduleId = module.id
     }
 }

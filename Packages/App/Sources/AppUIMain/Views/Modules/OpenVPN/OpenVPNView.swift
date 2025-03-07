@@ -51,15 +51,14 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    // FIXME: ###, restore
-//    init(serverConfiguration: OpenVPN.Configuration) {
-//        module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
-//        editor = ProfileEditor(modules: [module])
-//        impl = nil
-//        isServerPushed = true
-//        providerConfiguration = nil
-//        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
-//    }
+    init(serverConfiguration: OpenVPN.Configuration) {
+        let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
+        draft = ModuleDraft(module: module)
+        impl = nil
+        isServerPushed = true
+        providerConfiguration = nil
+        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
+    }
 
     init(draft: ModuleDraft<OpenVPNModule.Builder>, parameters: ModuleViewParameters) {
         self.draft = draft
