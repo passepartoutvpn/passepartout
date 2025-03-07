@@ -39,6 +39,9 @@ extension ProviderServerView {
 
         let selectedServer: ProviderServer?
 
+        @Binding
+        var heuristic: ProviderHeuristic?
+
         let isFiltering: Bool
 
         @ObservedObject
@@ -49,10 +52,10 @@ extension ProviderServerView {
 
         let selectTitle: String
 
-        let onSelect: (ProviderServer) -> Void
+        let onSelect: (ProviderServer, ProviderHeuristic?) -> Void
 
         @State
-        private var serversByCountryCode: [String: [ProviderServer]] = [:]
+        private var regionsByCountryCode: [String: [ProviderRegion]] = [:]
 
         @State
         private var expandedCodes: Set<String> = []
@@ -97,40 +100,64 @@ private extension ProviderServerView.ContentView {
     }
 
     func countryView(for code: String) -> some View {
-        serversByCountryCode[code]
-            .map { servers in
-                DisclosureGroup(isExpanded: isExpandedCountry(code)) {
-                    ForEach(servers, id: \.id, content: serverView)
-                } label: {
-                    ThemeCountryText(code)
+        regionsByCountryCode[code]
+            .map { regions in
+                Group {
+                    if regions.count > 1 {
+                        DisclosureGroup(isExpanded: isExpandedCountry(code)) {
+                            ForEach(regions, id: \.id, content: regionView)
+                        } label: {
+                            ThemeCountryText(code)
+                        }
+                        .uiAccessibility(.ProviderServers.countryGroup)
+                    } else if let singleRegion = regions.first {
+                        regionView(for: singleRegion, isSingle: true)
+                    }
                 }
-                .uiAccessibility(.ProviderServers.countryGroup)
             }
     }
 
-    func serverView(for server: ProviderServer) -> some View {
+    func regionView(for region: ProviderRegion) -> some View {
+        regionView(for: region, isSingle: false)
+    }
+
+    func regionView(for region: ProviderRegion, isSingle: Bool) -> some View {
         Button {
-            onSelect(server)
+            let heuristic: ProviderHeuristic
+            if !isSingle && region.area != nil {
+                heuristic = .sameRegion(region)
+            } else {
+                heuristic = .sameCountry(region.countryCode)
+            }
+            guard let randomServer = servers.randomServer(using: heuristic) else {
+                return
+            }
+            onSelect(randomServer, heuristic)
         } label: {
-            HStack {
-                ThemeImage(.marked)
-                    .opaque(server.id == selectedServer?.id)
-                VStack(alignment: .leading) {
-                    if let area = server.metadata.area {
-                        Text(area)
-                            .font(.headline)
-                    }
-                    Text(server.hostname ?? server.serverId)
-                        .font(.subheadline)
-                        .truncationMode(.middle)
+            if !isSingle && region.area == nil {
+                HStack {
+                    ThemeImage(.marked)
+                        .opaque(region.isSelected(by: heuristic))
+                    Text(Strings.Global.Nouns.any)
                 }
-                Spacer()
-                FavoriteToggle(
-                    value: server.serverId,
-                    selection: providerPreferences.favoriteServers()
-                )
+            } else {
+                HStack {
+                    ThemeImage(.marked)
+                        .opaque(region.isSelected(by: heuristic))
+                    if isSingle {
+                        ThemeCountryText(region.countryCode, title: region.localizedDescription)
+                    } else if let area = region.area {
+                        Text(area)
+                    }
+                    Spacer()
+                    FavoriteToggle(
+                        value: region.id,
+                        selection: providerPreferences.favoriteServers()
+                    )
+                }
             }
         }
+        .foregroundStyle(.primary)
     }
 
     var emptyView: some View {
@@ -157,15 +184,17 @@ private extension ProviderServerView.ContentView {
         }
     }
 
+    // FIXME: #1231, servers.regions is inefficient, fetch regions directly
     func computeServersByCountry(_ servers: [ProviderServer]) {
-        var map: [String: [ProviderServer]] = [:]
-        servers.forEach {
-            let code = $0.metadata.countryCode
+        let regions = servers.regions
+        var map: [String: [ProviderRegion]] = [:]
+        regions.forEach {
+            let code = $0.countryCode
             var list = map[code] ?? []
             list.append($0)
             map[code] = list
         }
-        serversByCountryCode = map
+        regionsByCountryCode = map
     }
 }
 

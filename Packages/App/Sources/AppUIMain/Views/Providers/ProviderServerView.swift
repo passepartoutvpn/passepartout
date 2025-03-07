@@ -47,7 +47,7 @@ struct ProviderServerView<Template>: View where Template: IdentifiableConfigurat
 
     var selectTitle = Strings.Views.Providers.selectEntity
 
-    let onSelect: (ProviderServer, ProviderPreset<Template>) -> Void
+    let onSelect: (ProviderServer, ProviderHeuristic?, ProviderPreset<Template>) -> Void
 
     @StateObject
     private var providerManager = ProviderManager<Template>(sorting: [
@@ -64,6 +64,9 @@ struct ProviderServerView<Template>: View where Template: IdentifiableConfigurat
 
     @State
     private var onlyShowsFavorites = false
+
+    @State
+    private var heuristic: ProviderHeuristic?
 
     @StateObject
     private var providerPreferences = ProviderPreferences()
@@ -92,12 +95,16 @@ extension ProviderServerView {
             providerId: providerId,
             servers: filteredServers,
             selectedServer: selectedEntity?.server,
+            heuristic: $heuristic,
             isFiltering: isFiltering,
             filtersViewModel: filtersViewModel,
             providerPreferences: providerPreferences,
             selectTitle: selectTitle,
             onSelect: onSelectServer
         )
+        .onLoad {
+            heuristic = selectedEntity?.heuristic
+        }
         .task {
             await loadInitialServers()
         }
@@ -109,7 +116,8 @@ extension ProviderServerView {
     func filtersView() -> some View {
         ProviderFiltersView(
             providerId: providerId,
-            model: filtersViewModel
+            model: filtersViewModel,
+            heuristic: $heuristic
         )
     }
 }
@@ -122,7 +130,7 @@ private extension ProviderServerView {
     var filteredServers: [ProviderServer] {
         if onlyShowsFavorites {
             return servers.filter {
-                providerPreferences.isFavoriteServer($0.serverId)
+                providerPreferences.isFavoriteServer($0.regionId)
             }
         }
         return servers
@@ -209,14 +217,14 @@ private extension ProviderServerView {
         }
     }
 
-    func onSelectServer(_ server: ProviderServer) {
+    func onSelectServer(_ server: ProviderServer, heuristic: ProviderHeuristic?) {
         let presets = compatiblePresets(with: server)
         guard let preset = presets.first else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.metadata.supportedPresetIds ?? [])")
             assertionFailure("No compatible presets for server \(server.serverId) (provider=\(providerManager.providerId), template=\(Template.configurationIdentifier), supported=\(server.metadata.supportedPresetIds ?? []))")
             return
         }
-        onSelect(server, preset)
+        onSelect(server, heuristic, preset)
     }
 }
 
@@ -230,7 +238,7 @@ private extension ProviderServerView {
             selectedEntity: nil as ProviderEntity<OpenVPNProviderTemplate>?,
             filtersWithSelection: false,
             selectTitle: "Select",
-            onSelect: { _, _ in }
+            onSelect: { _, _, _ in }
         )
     }
     .withMockEnvironment()

@@ -59,10 +59,14 @@ struct ProviderServerCoordinator<Template>: View where Template: IdentifiableCon
 }
 
 private extension ProviderServerCoordinator {
-    func onSelect(server: ProviderServer, preset: ProviderPreset<Template>) {
+    func onSelect(server: ProviderServer, heuristic: ProviderHeuristic?, preset: ProviderPreset<Template>) {
         Task {
             do {
-                let entity = ProviderEntity(server: server, preset: preset)
+                let entity = ProviderEntity(
+                    server: server,
+                    heuristic: heuristic,
+                    preset: preset
+                )
                 dismiss()
                 try await onSelect(entity)
             } catch {

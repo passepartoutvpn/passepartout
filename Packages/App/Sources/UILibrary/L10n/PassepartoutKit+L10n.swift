@@ -181,11 +181,44 @@ extension ProviderID: @retroactive CustomDebugStringConvertible {
     }
 }
 
-extension ProviderServer {
-    public var region: String {
+extension ProviderEntity: LocalizableEntity {
+    public var localizedDescription: String {
+        heuristic?.localizedDescription ?? server.localizedDescription
+    }
+}
+
+extension ProviderHeuristic: LocalizableEntity {
+    public var localizedDescription: String {
+        switch self {
+        case .exact(let server):
+            return server.localizedDescription
+        case .sameCountry(let countryCode):
+            return countryCode.localizedAsRegionCode ?? countryCode
+        case .sameRegion(let region):
+            return region.localizedDescription
+        }
+    }
+}
+
+extension ProviderRegion: LocalizableEntity {
+    public var localizedDescription: String {
+        [countryCode.localizedAsRegionCode, area]
+            .compactMap { $0 }
+            .joined(separator: ", ")
+    }
+}
+
+extension ProviderServer: LocalizableEntity {
+    public var localizedDescription: String {
         [metadata.countryCode.localizedAsRegionCode, metadata.area]
             .compactMap { $0 }
             .joined(separator: ", ")
+    }
+}
+
+extension ProviderServer {
+    public var localizedCountry: String? {
+        metadata.countryCode.localizedAsRegionCode
     }
 
     public var address: String {

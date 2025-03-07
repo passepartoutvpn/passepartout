@@ -95,8 +95,16 @@ private extension WireGuardView {
 }
 
 private extension WireGuardView {
-    func onSelectServer(server: ProviderServer, preset: ProviderPreset<WireGuardProviderTemplate>) {
-        draft.wrappedValue.providerEntity = ProviderEntity(server: server, preset: preset)
+    func onSelectServer(
+        server: ProviderServer,
+        heuristic: ProviderHeuristic?,
+        preset: ProviderPreset<WireGuardProviderTemplate>
+    ) {
+        draft.wrappedValue.providerEntity = ProviderEntity(
+            server: server,
+            heuristic: heuristic,
+            preset: preset
+        )
         path.wrappedValue.removeLast()
     }
 
