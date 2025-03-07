@@ -1,4 +1,2 @@
-* Select provider server by country/region (#1232)
-* Add "Reconnect" in profile context menu
-* DNS: Add option to route queries through VPN (#1227)
-* WireGuard: Create from scratch or edit configuration (#1197)
+* Resolve visual inconsistencies in module fields (#1240)
+* Import VPN configuration file into module (#1238)
