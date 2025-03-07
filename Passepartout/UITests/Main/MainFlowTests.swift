@@ -36,6 +36,7 @@ final class MainFlowTests: XCTestCase {
         app = XCUIApplication()
         app.appArguments = [.uiTesting]
         app.launch()
+        app.activate()
     }
 
     func testConnect() {

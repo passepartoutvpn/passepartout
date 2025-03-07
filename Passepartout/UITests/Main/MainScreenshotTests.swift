@@ -38,6 +38,7 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
     override func setUp() async throws {
         continueAfterFailure = false
         app.launch()
+        app.activate()
 #if os(iOS)
         if UIDevice.current.userInterfaceIdiom == .pad {
             XCUIDevice.shared.orientation = .portrait
@@ -79,9 +80,6 @@ final class MainScreenshotTests: XCTestCase, XCUIApplicationProviding {
         app
             .editProfile(at: 2)
             .editProviderServer()
-#if os(iOS)
-            .discloseCountry(at: 2)
-#endif
 
         await pause()
         try snapshot("05", "ProviderServers", target: .sheet)

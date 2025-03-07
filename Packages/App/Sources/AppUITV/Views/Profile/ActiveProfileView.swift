@@ -203,7 +203,7 @@ private extension ActiveProfileView {
             .frame(maxWidth: .infinity)
     }
     .task {
-        try? await APIManager.forPreviews.fetchIndex(from: [API.bundled])
+        try? await APIManager.forPreviews.fetchIndex()
     }
 }
 
