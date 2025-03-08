@@ -1,2 +1,3 @@
+* Add preference to disable in-app purchases (#1241)
 * Resolve visual inconsistencies in module fields (#1240)
 * Import VPN configuration file into module (#1238)
