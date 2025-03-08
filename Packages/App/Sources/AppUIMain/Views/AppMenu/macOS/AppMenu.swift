@@ -49,7 +49,7 @@ public struct AppMenu: View {
     public var body: some View {
         versionItem
         Divider()
-        showToggle
+        showButton
         loginToggle
         keepToggle
         Divider()
@@ -73,9 +73,18 @@ private extension AppMenu {
         Text(BundleConfiguration.mainVersionString)
     }
 
-    var showToggle: some View {
+    var showButton: some View {
         Button(Strings.Global.Actions.show) {
-            settings.isVisible = true
+            Task {
+                let url = Bundle.main.bundleURL
+                let config = NSWorkspace.OpenConfiguration()
+                config.createsNewApplicationInstance = false
+                do {
+                    try await NSWorkspace.shared.openApplication(at: url, configuration: config)
+                } catch {
+                    pp_log(.app, .error, "Unable to reopen app: \(error)")
+                }
+            }
         }
     }
 

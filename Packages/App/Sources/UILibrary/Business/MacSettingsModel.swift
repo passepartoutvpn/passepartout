@@ -35,22 +35,10 @@ import ServiceManagement
 public final class MacSettingsModel: ObservableObject {
     private let defaults: UserDefaults
 
-    private let appWindow: AppWindow
-
     private let appService: SMAppService
 
     public var isStartedFromLoginItem: Bool {
         NSApp.isHidden
-    }
-
-    public var isVisible: Bool {
-        get {
-            appWindow.isVisible
-        }
-        set {
-            appWindow.isVisible = newValue
-            objectWillChange.send()
-        }
     }
 
     public var launchesOnLogin: Bool {
@@ -58,6 +46,7 @@ public final class MacSettingsModel: ObservableObject {
             appService.status == .enabled
         }
         set {
+            objectWillChange.send()
             do {
                 if newValue {
                     try appService.register()
@@ -67,7 +56,6 @@ public final class MacSettingsModel: ObservableObject {
             } catch {
                 pp_log(.app, .error, "Unable to (un)register login item: \(error)")
             }
-            objectWillChange.send()
         }
     }
 
@@ -76,14 +64,13 @@ public final class MacSettingsModel: ObservableObject {
             defaults.bool(forKey: UIPreference.keepsInMenu.key)
         }
         set {
-            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
             objectWillChange.send()
+            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
         }
     }
 
-    public init(defaults: UserDefaults, appWindow: AppWindow, loginItemId: String) {
+    public init(defaults: UserDefaults, loginItemId: String) {
         self.defaults = defaults
-        self.appWindow = appWindow
         appService = SMAppService.loginItem(identifier: loginItemId)
     }
 }
