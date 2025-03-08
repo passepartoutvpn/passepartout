@@ -35,22 +35,10 @@ import ServiceManagement
 public final class MacSettingsModel: ObservableObject {
     private let defaults: UserDefaults
 
-    private let appWindow: AppWindow
-
     private let appService: SMAppService
 
     public var isStartedFromLoginItem: Bool {
         NSApp.isHidden
-    }
-
-    public var isVisible: Bool {
-        get {
-            appWindow.isVisible
-        }
-        set {
-            objectWillChange.send()
-            appWindow.isVisible = newValue
-        }
     }
 
     public var launchesOnLogin: Bool {
@@ -81,9 +69,8 @@ public final class MacSettingsModel: ObservableObject {
         }
     }
 
-    public init(defaults: UserDefaults, appWindow: AppWindow, loginItemId: String) {
+    public init(defaults: UserDefaults, loginItemId: String) {
         self.defaults = defaults
-        self.appWindow = appWindow
         appService = SMAppService.loginItem(identifier: loginItemId)
     }
 }

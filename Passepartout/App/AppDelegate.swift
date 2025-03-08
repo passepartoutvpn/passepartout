@@ -43,7 +43,6 @@ final class AppDelegate: NSObject {
 #if os(macOS)
     let settings = MacSettingsModel(
         defaults: .standard,
-        appWindow: .shared,
         loginItemId: BundleConfiguration.mainString(for: .loginItemId)
     )
 #endif
