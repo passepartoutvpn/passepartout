@@ -38,7 +38,7 @@ extension AppDelegate: NSApplicationDelegate {
         configure(with: AppUIMain())
         context.onApplicationActive()
         if settings.isStartedFromLoginItem {
-            AppWindow.shared.isVisible = false
+            NSApp.setActivationPolicy(.accessory)
         }
     }
 
