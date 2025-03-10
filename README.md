@@ -4,7 +4,9 @@
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
 [![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
-[![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
+
+[![Discuss on GitHub](https://img.shields.io/badge/discuss-GitHub-lightgray.svg)][about-github-discussions]
+[![Join Reddit](https://img.shields.io/badge/support-Reddit-orange.svg)][about-reddit]
 [![Join TestFlight](https://img.shields.io/badge/beta-Testflight-blue.svg)][about-testflight]
 
 Passepartout is your go-to app for VPN and privacy.
@@ -155,5 +157,6 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
 [about-faq]: https://passepartoutvpn.app/faq/
+[about-github-discussions]: https://github.com/orgs/passepartoutvpn/discussions
 [about-reddit]: https://www.reddit.com/r/passepartout
 [about-testflight]: https://testflight.apple.com/join/K71mtLjZ
