@@ -26,7 +26,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../PassepartoutKit-Framework"),
-        .package(url: "https://github.com/passepartoutvpn/openssl-apple", from: "3.2.105")
+        .package(url: "https://github.com/passepartoutvpn/openssl-apple", from: "3.4.200")
     ],
     targets: [
         .target(
