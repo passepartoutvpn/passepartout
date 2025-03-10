@@ -1,6 +1,6 @@
 ![Passepartout logo](Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
 
-# [Passepartout][about-website]
+# [Passepartout][web-home]
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
 [![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
@@ -11,7 +11,7 @@
 
 Passepartout is your go-to app for VPN and privacy.
 
-Passepartout runs on [iPhone, iPad, Mac, and Apple TV][web-appstore].
+Passepartout runs on [iPhone, iPad, Mac, and Apple TV][appstore].
 
 ## Features
 
@@ -71,6 +71,10 @@ This project is licensed under the [GPLv3][license-content].
 
 By contributing to this project you are agreeing to the terms stated in the [Contributor License Agreement (CLA)][contrib-cla]. For more details please see [CONTRIBUTING][contrib-readme].
 
+## Blog
+
+[Follow the blog][web-blog] for insights, real-world challenges, and lessons learned from building and maintaining Passepartout.
+
 ## Credits
 
 - [fastlane][credits-fastlane]
@@ -129,9 +133,9 @@ You are encouraged to read carefully both the [disclaimer][web-disclaimer] and t
 
 Twitter: [@keeshux][about-twitter]
 
-Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
+Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 
-[web-appstore]: https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8
+[appstore]: https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 [openvpn-xor-patch]: https://tunnelblick.net/cOpenvpn_xorpatch.html
@@ -151,12 +155,13 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [credits-swiftlint]: https://github.com/realm/SwiftLint
 [credits-chatgpt]: https://chatgpt.com/
 
+[web-home]: https://passepartoutvpn.app
+[web-blog]: https://passepartoutvpn.app/blog/
+[web-faq]: https://passepartoutvpn.app/faq/
 [web-disclaimer]: https://passepartoutvpn.app/disclaimer/
 [web-privacy]: https://passepartoutvpn.app/privacy/
 
 [about-twitter]: https://twitter.com/keeshux
-[about-website]: https://passepartoutvpn.app
-[about-faq]: https://passepartoutvpn.app/faq/
 [about-github-discussions]: https://github.com/orgs/passepartoutvpn/discussions
 [about-reddit]: https://www.reddit.com/r/passepartout
 [about-testflight]: https://testflight.apple.com/join/K71mtLjZ
