@@ -27,7 +27,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderView: View {
+struct ProviderView: View, ModuleDraftEditing {
 
     @EnvironmentObject
     private var apiManager: APIManager
