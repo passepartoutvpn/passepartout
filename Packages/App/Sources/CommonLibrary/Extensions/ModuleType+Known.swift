@@ -1,8 +1,8 @@
 //
-//  ProviderServerRow.swift
+//  ModuleType+Known.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/12/25.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-struct ProviderServerRow<Template>: View where Template: IdentifiableConfiguration {
-    let selectedEntity: ProviderEntity<Template>?
+extension ModuleType: @retroactive CaseIterable {
+    public static let allCases: [ModuleType] = [
+        .openVPN,
+        .wireGuard,
+        .dns,
+        .httpProxy,
+        .ip,
+        .onDemand,
+        .provider
+    ]
+}
 
-    var body: some View {
-        HStack {
-            Text(Strings.Global.Nouns.server)
-            if let selectedEntity {
-                Spacer()
-                Text(selectedEntity.localizedDescription)
-                    .foregroundStyle(.secondary)
-            }
+extension ModuleType {
+    public var isConnection: Bool {
+        switch self {
+        case .openVPN, .wireGuard:
+            return true
+        default:
+            return false
         }
     }
 }

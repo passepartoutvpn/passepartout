@@ -304,10 +304,12 @@
 "views.providers.clear_filters" = "Очистить фильтры";
 "views.providers.last_updated" = "Последнее обновление %@";
 "views.providers.last_updated.loading" = "Загрузка...";
-"views.providers.no_provider" = "Нет";
+"views.providers.module" = "Тип";
 "views.providers.only_favorites" = "Только избранное";
+"views.providers.preset" = "Предустановка";
 "views.providers.refresh_infrastructure" = "Обновить инфраструктуру";
 "views.providers.select_entity" = "Выбрать";
+"views.providers.select_module" = "Выбрать тип";
 "views.providers.select_provider" = "Нет провайдера";
 "views.purchased.no_purchases" = "Нет покупок";
 "views.purchased.rows.build_number" = "Номер сборки";
@@ -321,4 +323,3 @@
 "views.version.extra" = "%@ — проект, поддерживаемый %@.\n\nИсходный код доступен на GitHub под лицензией GPLv3, ссылки можно найти на домашней странице.";
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
-"views.vpn.preset" = "Предустановка";

@@ -304,10 +304,12 @@
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";
 "views.providers.last_updated.loading" = "Laden...";
-"views.providers.no_provider" = "Geen";
+"views.providers.module" = "Type";
 "views.providers.only_favorites" = "Alleen favorieten";
+"views.providers.preset" = "Voorinstelling";
 "views.providers.refresh_infrastructure" = "Infrastructuur vernieuwen";
 "views.providers.select_entity" = "Selecteer";
+"views.providers.select_module" = "Selecteer type";
 "views.providers.select_provider" = "Geen provider";
 "views.purchased.no_purchases" = "Geen aankopen";
 "views.purchased.rows.build_number" = "Buildnummer";
@@ -321,4 +323,3 @@
 "views.version.extra" = "%@ is een project onderhouden door %@.\n\nDe broncode is openbaar beschikbaar op GitHub onder de GPLv3-licentie. Je kunt links vinden op de startpagina.";
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
-"views.vpn.preset" = "Voorinstelling";

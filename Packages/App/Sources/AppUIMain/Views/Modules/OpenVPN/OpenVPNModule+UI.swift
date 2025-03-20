@@ -35,17 +35,10 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
     }
 }
 
-extension OpenVPNModule: ProviderServerCoordinatorSupporting {
-}
-
 // MARK: - Destination
 
 extension OpenVPNModule {
     enum Subroute: Hashable {
-        case providerServer
-
-        case providerConfiguration(OpenVPN.Configuration)
-
         case credentials
 
         case remotes
@@ -59,12 +52,12 @@ extension OpenVPNModule.Builder: ModuleDestinationProviding {
 
     public func moduleDestination(
         for route: AnyHashable,
-        with parameters: ModuleDestinationParameters,
-        path: Binding<NavigationPath>
+        path: Binding<NavigationPath>,
+        editor: ProfileEditor
     ) -> some View {
         (route as? OpenVPNModule.Subroute)
             .map {
-                DestinationView(route: $0, parameters: parameters, path: path)
+                DestinationView(route: $0, path: path, editor: editor, draft: editor[self])
             }
     }
 }
@@ -72,42 +65,24 @@ extension OpenVPNModule.Builder: ModuleDestinationProviding {
 private struct DestinationView: View {
     let route: OpenVPNModule.Subroute
 
-    let parameters: ModuleDestinationParameters
-
     @Binding
     var path: NavigationPath
 
-    @State
+    @ObservedObject
+    var editor: ProfileEditor
+
+    @ObservedObject
+    var draft: ModuleDraft<OpenVPNModule.Builder>
+
+    @StateObject
     private var preferences = ModulePreferences()
 
     var body: some View {
         Group {
             switch route {
-            case .providerServer:
-                draft.module.providerSelection.map {
-                    ProviderServerView(
-                        moduleId: parameters.module.id,
-                        providerId: $0.id,
-                        selectedEntity: $0.entity,
-                        filtersWithSelection: true,
-                        onSelect: onSelectServer
-                    )
-                }
-
-            case .providerConfiguration(let configuration):
-                Form {
-                    OpenVPNView.ConfigurationView(
-                        isServerPushed: false,
-                        configuration: .constant(configuration.builder()),
-                        credentialsRoute: nil
-                    )
-                }
-                .themeForm()
-                .navigationTitle(Strings.Global.Nouns.configuration)
-
             case .credentials:
                 Form {
-                    OpenVPNCredentialsView(draft: draft)
+                    OpenVPNCredentialsGroup(draft: draft)
                 }
                 .navigationTitle(Strings.Modules.Openvpn.credentials)
                 .themeForm()
@@ -115,32 +90,22 @@ private struct DestinationView: View {
 
             case .remotes:
                 OpenVPNView.RemotesView(
-                    configurationBuilder: configurationBuilderBinding,
+                    configuration: configurationBuilderBinding,
                     excludedEndpoints: excludedEndpoints,
-                    isEditable: draft.module.providerSelection == nil
+                    isEditable: true
                 )
             }
         }
         .modifier(ModulePreferencesModifier(
-            moduleId: parameters.module.id,
+            moduleId: draft.module.id,
             preferences: preferences
         ))
     }
 }
 
 private extension DestinationView {
-    var draft: ModuleDraft<OpenVPNModule.Builder> {
-        guard let builder = parameters.module as? OpenVPNModule.Builder else {
-            fatalError("Not a OpenVPNModule.Builder")
-        }
-        return parameters.editor[builder]
-    }
-
     var configurationBuilderBinding: Binding<OpenVPN.Configuration.Builder> {
-        if let providerConfiguration = try? draft.module.providerSelection?.configuration().builder() {
-            return .constant(providerConfiguration)
-        }
-        return Binding {
+        Binding {
             draft.module.configurationBuilder ?? OpenVPN.Configuration.Builder()
         } set: {
             draft.module.configurationBuilder = $0
@@ -148,39 +113,7 @@ private extension DestinationView {
     }
 
     var excludedEndpoints: ObservableList<ExtendedEndpoint> {
-        parameters.editor.excludedEndpoints(for: parameters.module.id, preferences: preferences)
-    }
-
-    func onSelectServer(
-        server: ProviderServer,
-        heuristic: ProviderHeuristic?,
-        preset: ProviderPreset<OpenVPNProviderTemplate>
-    ) {
-        draft.module.providerEntity = ProviderEntity(
-            server: server,
-            heuristic: heuristic,
-            preset: preset
-        )
-        resetExcludedEndpointsWithCurrentProviderEntity()
-        path.removeLast()
-    }
-
-    // filter out exclusions unrelated to current server
-    func resetExcludedEndpointsWithCurrentProviderEntity() {
-        do {
-            let cfg = try draft.module.providerSelection?.configuration()
-            parameters.editor.profile.attributes.editPreferences(inModule: parameters.module.id) {
-                if let cfg {
-                    $0.excludedEndpoints = Set(cfg.remotes?.filter {
-                        preferences.isExcludedEndpoint($0)
-                    } ?? [])
-                } else {
-                    $0.excludedEndpoints = []
-                }
-            }
-        } catch {
-            pp_log(.app, .error, "Unable to build provider configuration for excluded endpoints: \(error)")
-        }
+        editor.excludedEndpoints(for: draft.module.id, preferences: preferences)
     }
 }
 
@@ -188,19 +121,12 @@ private extension DestinationView {
 
 extension OpenVPNModule.Builder: ModuleShortcutsProviding {
     public var isVisible: Bool {
-        providerSelection != nil || configurationBuilder?.authUserPass == true
+        configurationBuilder?.authUserPass == true
     }
 
     @ViewBuilder
     public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
-        if let providerSelection {
-//            ProviderNameRow(id: providerSelection.id)
-            NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.providerServer)) {
-                ProviderServerRow(selectedEntity: providerSelection.entity)
-            }
-            .uiAccessibility(.Profile.providerServerLink)
-        }
-        if providerSelection != nil || configurationBuilder?.authUserPass == true {
+        if configurationBuilder?.authUserPass == true {
             NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.credentials)) {
                 Text(Strings.Modules.Openvpn.credentials)
             }

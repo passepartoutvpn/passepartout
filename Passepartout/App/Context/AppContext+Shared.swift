@@ -85,7 +85,11 @@ extension AppContext {
             productsAtBuild: dependencies.productsAtBuild()
         )
         iapManager.isEnabled = !UserDefaults.appGroup.bool(forKey: AppPreference.skipsPurchases.key)
-        let processor = dependencies.appProcessor(apiManager: apiManager, iapManager: iapManager)
+        let processor = dependencies.appProcessor(
+            apiManager: apiManager,
+            iapManager: iapManager,
+            registry: dependencies.registry
+        )
 
         let tunnelEnvironment = dependencies.tunnelEnvironment()
 #if targetEnvironment(simulator)

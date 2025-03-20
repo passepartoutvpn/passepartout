@@ -304,10 +304,12 @@
 "views.providers.clear_filters" = "Cancella filtri";
 "views.providers.last_updated" = "Ultimo aggiornamento il %@";
 "views.providers.last_updated.loading" = "Caricamento...";
-"views.providers.no_provider" = "Nessuno";
+"views.providers.module" = "Tipo";
 "views.providers.only_favorites" = "Solo preferiti";
+"views.providers.preset" = "Preimpostato";
 "views.providers.refresh_infrastructure" = "Ricarica infrastruttura";
 "views.providers.select_entity" = "Seleziona";
+"views.providers.select_module" = "Seleziona tipo";
 "views.providers.select_provider" = "Nessun provider";
 "views.purchased.no_purchases" = "Nessun acquisto";
 "views.purchased.rows.build_number" = "Numero di build";
@@ -321,4 +323,3 @@
 "views.version.extra" = "%@ è un progetto mantenuto da %@.\n\nIl codice sorgente è pubblicamente disponibile su GitHub sotto la licenza GPLv3, puoi trovare i link nella home page.";
 "views.vpn.category.any" = "Tutte le categorie";
 "views.vpn.no_servers" = "Nessun server";
-"views.vpn.preset" = "Preimpostato";

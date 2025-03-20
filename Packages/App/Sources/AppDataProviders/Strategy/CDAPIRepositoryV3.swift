@@ -129,12 +129,12 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
                 }
 
                 // delete all provider entities
-                let serverRequest = CDVPNServerV3.fetchRequest()
+                let serverRequest = CDProviderServerV3.fetchRequest()
                 serverRequest.predicate = predicate
                 let servers = try serverRequest.execute()
                 servers.forEach(context.delete)
 
-                let presetRequest = CDVPNPresetV3.fetchRequest()
+                let presetRequest = CDProviderPresetV3.fetchRequest()
                 presetRequest.predicate = predicate
                 let presets = try presetRequest.execute()
                 presets.forEach(context.delete)
@@ -153,6 +153,29 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
                 context.rollback()
                 throw error
             }
+        }
+    }
+
+    nonisolated func presets(for server: ProviderServer, moduleType: ModuleType) async throws -> [ProviderPreset] {
+        try await context.perform {
+            let request = CDProviderPresetV3.fetchRequest()
+            if let supported = server.supportedPresetIds {
+                request.predicate = NSPredicate(
+                    format: "providerId == %@ AND moduleType == %@ AND (presetId IN %@)",
+                    server.metadata.providerId.rawValue,
+                    moduleType.rawValue,
+                    supported
+                )
+            } else {
+                request.predicate = NSPredicate(
+                    format: "providerId == %@ AND moduleType == %@",
+                    server.metadata.providerId.rawValue,
+                    moduleType.rawValue
+                )
+            }
+            let results = try request.execute()
+            let mapper = DomainMapper()
+            return try results.compactMap(mapper.preset(from:))
         }
     }
 

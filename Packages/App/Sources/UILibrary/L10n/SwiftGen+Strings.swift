@@ -948,16 +948,20 @@ public enum Strings {
       public static func lastUpdated(_ p1: Any) -> String {
         return Strings.tr("Localizable", "views.providers.last_updated", String(describing: p1), fallback: "Last updated on %@")
       }
-      /// None
-      public static let noProvider = Strings.tr("Localizable", "views.providers.no_provider", fallback: "None")
+      /// Type
+      public static let module = Strings.tr("Localizable", "views.providers.module", fallback: "Type")
       /// Only favorites
       public static let onlyFavorites = Strings.tr("Localizable", "views.providers.only_favorites", fallback: "Only favorites")
+      /// Preset
+      public static let preset = Strings.tr("Localizable", "views.providers.preset", fallback: "Preset")
       /// Refresh infrastructure
       public static let refreshInfrastructure = Strings.tr("Localizable", "views.providers.refresh_infrastructure", fallback: "Refresh infrastructure")
       /// Select
       public static let selectEntity = Strings.tr("Localizable", "views.providers.select_entity", fallback: "Select")
-      /// No provider
-      public static let selectProvider = Strings.tr("Localizable", "views.providers.select_provider", fallback: "No provider")
+      /// Select type
+      public static let selectModule = Strings.tr("Localizable", "views.providers.select_module", fallback: "Select type")
+      /// Select provider
+      public static let selectProvider = Strings.tr("Localizable", "views.providers.select_provider", fallback: "Select provider")
       public enum LastUpdated {
         /// Loading...
         public static let loading = Strings.tr("Localizable", "views.providers.last_updated.loading", fallback: "Loading...")
@@ -1012,8 +1016,6 @@ public enum Strings {
     public enum Vpn {
       /// No servers
       public static let noServers = Strings.tr("Localizable", "views.vpn.no_servers", fallback: "No servers")
-      /// Preset
-      public static let preset = Strings.tr("Localizable", "views.vpn.preset", fallback: "Preset")
       public enum Category {
         /// All categories
         public static let any = Strings.tr("Localizable", "views.vpn.category.any", fallback: "All categories")

@@ -26,6 +26,7 @@
 import CoreData
 import Foundation
 
+@available(*, deprecated)
 @objc(CDVPNServerV3)
 final class CDVPNServerV3: NSManagedObject {
     @nonobjc static func fetchRequest() -> NSFetchRequest<CDVPNServerV3> {

@@ -28,7 +28,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct OpenVPNCredentialsView: View {
+public struct OpenVPNCredentialsGroup: View {
     private enum Field: Hashable {
         case username
 
@@ -54,9 +54,6 @@ public struct OpenVPNCredentialsView: View {
     private var builder = OpenVPN.Credentials.Builder()
 
     @State
-    private var providerCustomization: OpenVPN.ProviderCustomization?
-
-    @State
     private var paywallReason: PaywallReason?
 
     @FocusState
@@ -79,7 +76,6 @@ public struct OpenVPNCredentialsView: View {
             interactiveSection
 #endif
             inputSection
-            guidanceSection
         }
         .themeManualInput()
         .themeAnimation(on: draft.module.isInteractive, category: .modules)
@@ -90,7 +86,7 @@ public struct OpenVPNCredentialsView: View {
     }
 }
 
-private extension OpenVPNCredentialsView {
+private extension OpenVPNCredentialsGroup {
     var interactiveSection: some View {
         Group {
             Toggle(isOn: $draft.module.isInteractive) {
@@ -129,9 +125,7 @@ private extension OpenVPNCredentialsView {
         Group {
             if !isAuthenticating || builder.otpMethod == .none {
                 usernameField
-                if !ignoresPassword {
-                    passwordField
-                }
+                passwordField
             }
             if isAuthenticating, builder.otpMethod != .none {
                 otpField
@@ -140,24 +134,10 @@ private extension OpenVPNCredentialsView {
         .themeSection(footer: inputFooter, forcesFooter: true)
     }
 
-    @ViewBuilder
-    var guidanceSection: some View {
-        if let url = providerCustomization?.credentials.url {
-            Link(Strings.Modules.Openvpn.Credentials.Guidance.link, destination: url)
-        }
-    }
-
     var inputFooter: String? {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
                 .nilIfEmpty
-        } else if draft.module.providerId != nil {
-            switch providerCustomization?.credentials.purpose {
-            case .specific:
-                return Strings.Modules.Openvpn.Credentials.Guidance.specific
-            default:
-                return Strings.Modules.Openvpn.Credentials.Guidance.web
-            }
         }
         return nil
     }
@@ -195,7 +175,7 @@ private extension OpenVPNCredentialsView {
     }
 }
 
-private extension OpenVPNCredentialsView {
+private extension OpenVPNCredentialsGroup {
     var requiredFeatures: Set<AppFeature>? {
         draft.module.isInteractive && builder.otpMethod != .none ? [.otp] : nil
     }
@@ -204,19 +184,8 @@ private extension OpenVPNCredentialsView {
         [.none, .append, .encode]
     }
 
-    var ignoresPassword: Bool {
-        providerCustomization?.credentials.options?.contains(.noPassword) ?? false
-    }
-
     func onLoad() {
-        if let providerId = draft.module.providerId,
-           let provider = apiManager.provider(withId: providerId) {
-            providerCustomization = provider.customization(for: OpenVPNProviderTemplate.self)
-        }
         builder = draft.module.credentials?.builder() ?? OpenVPN.Credentials.Builder()
-        if ignoresPassword {
-            builder.password = ""
-        }
         builder.otp = nil
         if isAuthenticating {
             switch builder.otpMethod {
@@ -249,7 +218,7 @@ private extension OpenVPNCredentialsView {
 
         var body: some View {
             NavigationStack {
-                OpenVPNCredentialsView(
+                OpenVPNCredentialsGroup(
                     draft: editor[module]
                 )
             }

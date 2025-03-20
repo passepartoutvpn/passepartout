@@ -251,14 +251,22 @@ private struct ProviderServerCoordinatorIfSupported: View {
     let onSelect: (Module) async throws -> Void
 
     var body: some View {
-        if let supporting = module as? any ProviderServerCoordinatorSupporting {
-            supporting.providerServerCoordinator(
+        if let supporting = module as? ProviderModule {
+            ProviderServerCoordinator(
+                providerId: supporting.providerId,
+                moduleType: supporting.providerModuleType,
+                selectedEntity: supporting.entity,
                 selectTitle: selectTitle,
-                onSelect: onSelect,
+                onSelect: {
+                    var newBuilder = supporting.builder()
+                    newBuilder.entity = $0
+                    let newModule = try newBuilder.tryBuild()
+                    try await onSelect(newModule)
+                },
                 errorHandler: errorHandler
             )
         } else {
-            fatalError("Module got too far without being ProviderServerCoordinatorSupporting: \(module)")
+            fatalError("Module got too far without being ProviderModule: \(module)")
         }
     }
 }
@@ -272,7 +280,7 @@ extension AppCoordinator {
     }
 
     public func onProviderEntityRequired(_ profile: Profile, force: Bool) {
-        guard let module = profile.selectedProvider?.module else {
+        guard let module = profile.activeProviderModule else {
             assertionFailure("Editing provider entity, but profile has no selected provider module")
             return
         }

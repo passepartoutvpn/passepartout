@@ -26,6 +26,7 @@
 import CoreData
 import Foundation
 
+@available(*, deprecated)
 @objc(CDVPNPresetV3)
 final class CDVPNPresetV3: NSManagedObject {
     @nonobjc static func fetchRequest() -> NSFetchRequest<CDVPNPresetV3> {

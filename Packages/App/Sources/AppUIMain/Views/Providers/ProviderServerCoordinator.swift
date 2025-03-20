@@ -27,28 +27,28 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderServerCoordinator<Template>: View where Template: IdentifiableConfiguration {
+struct ProviderServerCoordinator: View {
 
     @Environment(\.dismiss)
     private var dismiss
 
-    let moduleId: UUID
-
     let providerId: ProviderID
 
-    let selectedEntity: ProviderEntity<Template>?
+    let moduleType: ModuleType
+
+    let selectedEntity: ProviderEntity?
 
     let selectTitle: String
 
-    let onSelect: (ProviderEntity<Template>) async throws -> Void
+    let onSelect: (ProviderEntity) async throws -> Void
 
     @ObservedObject
     var errorHandler: ErrorHandler
 
     var body: some View {
         ProviderServerView(
-            moduleId: moduleId,
             providerId: providerId,
+            moduleType: moduleType,
             selectedEntity: selectedEntity,
             filtersWithSelection: false,
             selectTitle: selectTitle,
@@ -59,18 +59,13 @@ struct ProviderServerCoordinator<Template>: View where Template: IdentifiableCon
 }
 
 private extension ProviderServerCoordinator {
-    func onSelect(server: ProviderServer, heuristic: ProviderHeuristic?, preset: ProviderPreset<Template>) {
+    func onSelect(entity: ProviderEntity) {
         Task {
             do {
-                let entity = ProviderEntity(
-                    server: server,
-                    heuristic: heuristic,
-                    preset: preset
-                )
                 dismiss()
                 try await onSelect(entity)
             } catch {
-                pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.metadata.providerId): \(error)")
+                pp_log(.app, .fault, "Unable to select server \(entity.server.serverId) for provider \(entity.server.metadata.providerId): \(error)")
                 errorHandler.handle(error, title: Strings.Views.Providers.selectEntity)
             }
         }

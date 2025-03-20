@@ -103,13 +103,13 @@ private extension ActiveProfileView {
                     Text(connectionType)
                 }
             }
-            if let pair = profile.selectedProvider {
-                if let provider = apiManager.provider(withId: pair.selection.id) {
+            if let pair = profile.activeProviderModule {
+                if let provider = apiManager.provider(withId: pair.providerId) {
                     ListRowView(title: Strings.Global.Nouns.provider) {
                         Text(provider.description)
                     }
                 }
-                if let entityHeader = pair.selection.entityHeader {
+                if let entityHeader = pair.entity?.header {
                     ListRowView(title: Strings.Global.Nouns.country) {
                         ThemeCountryText(entityHeader.countryCode)
                     }
@@ -156,7 +156,12 @@ private extension ActiveProfileView {
 #Preview("Host") {
     let profile: Profile = {
         do {
-            let moduleBuilder = OpenVPNModule.Builder()
+            var moduleBuilder = OpenVPNModule.Builder()
+            moduleBuilder.configurationBuilder = .init()
+            moduleBuilder.configurationBuilder?.ca = .init(pem: "")
+            moduleBuilder.configurationBuilder?.remotes = [
+                try .init("1.2.3.4", .init(.tcp, 1234))
+            ]
             let module = try moduleBuilder.tryBuild()
 
             let builder = Profile.Builder(
@@ -181,8 +186,9 @@ private extension ActiveProfileView {
 #Preview("Provider") {
     let profile: Profile = {
         do {
-            var moduleBuilder = OpenVPNModule.Builder()
+            var moduleBuilder = ProviderModule.Builder()
             moduleBuilder.providerId = .mullvad
+            moduleBuilder.moduleId = .openVPN
             let module = try moduleBuilder.tryBuild()
 
             let builder = Profile.Builder(

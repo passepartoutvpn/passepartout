@@ -304,10 +304,12 @@
 "views.providers.clear_filters" = "清除筛选";
 "views.providers.last_updated" = "最近更新于 %@";
 "views.providers.last_updated.loading" = "加载中...";
-"views.providers.no_provider" = "无";
+"views.providers.module" = "类型";
 "views.providers.only_favorites" = "仅收藏";
+"views.providers.preset" = "预设";
 "views.providers.refresh_infrastructure" = "刷新基础设施";
 "views.providers.select_entity" = "选择";
+"views.providers.select_module" = "选择类型";
 "views.providers.select_provider" = "无提供商";
 "views.purchased.no_purchases" = "无购买记录";
 "views.purchased.rows.build_number" = "构建编号";
@@ -321,4 +323,3 @@
 "views.version.extra" = "%@ 是由 %@ 维护的项目。\n\n源代码在 GitHub 上公开提供，遵循 GPLv3 许可协议，您可以在主页找到相关链接。";
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
-"views.vpn.preset" = "预设";

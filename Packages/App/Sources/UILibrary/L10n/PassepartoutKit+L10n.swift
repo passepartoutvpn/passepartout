@@ -64,7 +64,7 @@ extension Profile: StyledOptionalLocalizableEntity {
         case .nonConnectionTypes:
             return activeModules
                 .filter {
-                    !($0 is ConnectionModule)
+                    !($0 is ProviderModule) && !($0 is ConnectionModule)
                 }
                 .nilIfEmpty?
                 .map(\.moduleType.localizedDescription)

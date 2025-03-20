@@ -121,8 +121,10 @@
 "views.profile.module_list.section.footer" = "Tap modules to edit their settings. Modules may be dragged to determine priority.";
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";
 
-"views.providers.no_provider" = "None";
-"views.providers.select_provider" = "No provider";
+"views.providers.module" = "Type";
+"views.providers.preset" = "Preset";
+"views.providers.select_provider" = "Select provider";
+"views.providers.select_module" = "Select type";
 "views.providers.select_entity" = "Select";
 "views.providers.only_favorites" = "Only favorites";
 "views.providers.clear_filters" = "Clear filters";
@@ -145,7 +147,6 @@
 "views.version.extra" = "%@ is a project maintained by %@.\n\nSource code is publicly available on GitHub under the GPLv3, you can find links in the home page.";
 
 "views.vpn.category.any" = "All categories";
-"views.vpn.preset" = "Preset";
 "views.vpn.no_servers" = "No servers";
 
 // MARK: Views (Modules)

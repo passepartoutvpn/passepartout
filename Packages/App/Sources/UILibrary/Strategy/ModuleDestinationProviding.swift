@@ -35,22 +35,7 @@ public protocol ModuleDestinationProviding {
     @MainActor
     func moduleDestination(
         for route: AnyHashable,
-        with parameters: ModuleDestinationParameters,
-        path: Binding<NavigationPath>
+        path: Binding<NavigationPath>,
+        editor: ProfileEditor
     ) -> Destination
-}
-
-public struct ModuleDestinationParameters {
-    public let editor: ProfileEditor
-
-    public let module: any ModuleBuilder
-
-    @MainActor
-    public init(
-        editor: ProfileEditor,
-        module: any ModuleBuilder
-    ) {
-        self.editor = editor
-        self.module = module
-    }
 }

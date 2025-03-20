@@ -60,9 +60,6 @@ extension OnDemandModule.Builder: AppFeatureRequiring {
 extension OpenVPNModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {
         var list: Set<AppFeature> = []
-        providerSelection?.id.features.forEach {
-            list.insert($0)
-        }
         if isInteractive, let otpMethod = credentials?.otpMethod, otpMethod != .none {
             list.insert(.otp)
         }
@@ -70,8 +67,18 @@ extension OpenVPNModule.Builder: AppFeatureRequiring {
     }
 }
 
+extension ProviderModule.Builder: AppFeatureRequiring {
+    public var features: Set<AppFeature> {
+        var list: Set<AppFeature> = []
+        providerId?.features.forEach {
+            list.insert($0)
+        }
+        return list
+    }
+}
+
 extension WireGuardModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {
-        providerSelection?.id.features ?? []
+        []
     }
 }

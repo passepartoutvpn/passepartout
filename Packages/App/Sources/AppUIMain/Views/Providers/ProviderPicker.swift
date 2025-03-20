@@ -33,8 +33,6 @@ struct ProviderPicker: View {
     @Binding
     var providerId: ProviderID?
 
-    let isRequired: Bool
-
     let isLoading: Bool
 
     @Binding
@@ -43,7 +41,7 @@ struct ProviderPicker: View {
     var body: some View {
         Picker(selection: $providerId) {
             if !providers.isEmpty {
-                Text(isRequired ? Strings.Views.Providers.selectProvider : Strings.Views.Providers.noProvider)
+                Text(Strings.Views.Providers.selectProvider)
                     .tag(nil as ProviderID?)
                 ForEach(providers, id: \.id) {
                     Text($0.description)

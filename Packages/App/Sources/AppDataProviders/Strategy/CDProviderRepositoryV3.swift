@@ -39,11 +39,11 @@ final class CDProviderRepositoryV3: ProviderRepository {
         self.providerId = providerId
     }
 
-    func availableOptions<Template>(for templateType: Template.Type) async throws -> ProviderFilterOptions where Template: IdentifiableConfiguration {
+    func availableOptions(for moduleType: ModuleType) async throws -> ProviderFilterOptions {
         try await context.perform {
             let mapper = DomainMapper()
 
-            let serversRequest = NSFetchRequest<NSDictionary>(entityName: "CDVPNServerV3")
+            let serversRequest = NSFetchRequest<NSDictionary>(entityName: "CDProviderServerV3")
             serversRequest.predicate = self.providerId.predicate
             serversRequest.resultType = .dictionaryResultType
             serversRequest.returnsDistinctResults = true
@@ -66,10 +66,11 @@ final class CDProviderRepositoryV3: ProviderRepository {
                 countryCodes.insert(countryCode)
             }
 
-            let presetsRequest = CDVPNPresetV3.fetchRequest()
+            let presetsRequest = CDProviderPresetV3.fetchRequest()
             presetsRequest.predicate = NSPredicate(
-                format: "providerId == %@ AND configurationId == %@", self.providerId.rawValue,
-                Template.configurationIdentifier
+                format: "providerId == %@ AND moduleType == %@",
+                self.providerId.rawValue,
+                moduleType.rawValue
             )
             let presetsResults = try presetsRequest.execute()
 
@@ -85,7 +86,7 @@ final class CDProviderRepositoryV3: ProviderRepository {
 
     func filteredServers(with parameters: ProviderServerParameters?) async throws -> [ProviderServer] {
         try await context.perform {
-            let request = CDVPNServerV3.fetchRequest()
+            let request = CDProviderServerV3.fetchRequest()
             request.sortDescriptors = parameters?.sorting.map(\.sortDescriptor)
             request.predicate = parameters?.filters.predicate(for: self.providerId)
             let results = try request.execute()

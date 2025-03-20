@@ -103,7 +103,7 @@ extension MapperV2 {
 }
 
 extension MapperV2 {
-    func toProviderModule(_ v2: ProfileV2.Provider) throws -> OpenVPNModule? {
+    func toProviderModule(_ v2: ProfileV2.Provider) throws -> ProviderModule? {
         assert(v2.vpnSettings.count == 1)
         guard let entry = v2.vpnSettings.first else {
             return nil
@@ -111,9 +111,13 @@ extension MapperV2 {
         assert(entry.key == .openVPN)
         let settings = entry.value
 
-        var builder = OpenVPNModule.Builder()
-        builder.providerSelection = ProviderSelection(id: ProviderID(rawValue: v2.name))
-        builder.credentials = settings.account.map(toOpenVPNCredentials)
+        var builder = ProviderModule.Builder()
+        builder.providerId = ProviderID(rawValue: v2.name)
+        if let credentials = settings.account.map(toOpenVPNCredentials) {
+            var options = OpenVPNProviderTemplate.Options()
+            options.credentials = credentials
+            try? builder.setOptions(options, for: .openVPN)
+        }
         return try builder.tryBuild()
     }
 }

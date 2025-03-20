@@ -1,8 +1,8 @@
 //
-//  ModuleType+Known.swift
+//  CDProviderServerV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/2/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
-import PassepartoutKit
 
-extension ModuleType: CaseIterable {
-    public static let allCases: [ModuleType] = [
-        .openVPN,
-        .wireGuard,
-        .dns,
-        .httpProxy,
-        .ip,
-        .onDemand
-    ]
+@objc(CDProviderServerV3)
+final class CDProviderServerV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDProviderServerV3> {
+        NSFetchRequest<CDProviderServerV3>(entityName: "CDProviderServerV3")
+    }
 
-    public static let openVPN = ModuleType(OpenVPNModule.self)
-
-    public static let wireGuard = ModuleType(WireGuardModule.self)
-
-    public static let dns = ModuleType(DNSModule.self)
-
-    public static let httpProxy = ModuleType(HTTPProxyModule.self)
-
-    public static let ip = ModuleType(IPModule.self)
-
-    public static let onDemand = ModuleType(OnDemandModule.self)
+    @NSManaged var serverId: String?
+    @NSManaged var hostname: String?
+    @NSManaged var ipAddresses: Data?
+    @NSManaged var providerId: String?
+    @NSManaged var countryCode: String?
+    @NSManaged var supportedModuleTypes: String?
+    @NSManaged var supportedPresetIds: String?
+    @NSManaged var categoryName: String?
+    @NSManaged var localizedCountry: String?
+    @NSManaged var otherCountryCodes: String?
+    @NSManaged var area: String?
 }

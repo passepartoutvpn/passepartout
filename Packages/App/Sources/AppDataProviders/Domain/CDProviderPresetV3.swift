@@ -1,8 +1,8 @@
 //
-//  ModuleDraftEditing+UI.swift
+//  CDProviderPresetV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/20/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,32 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import CoreData
+import Foundation
 
-@MainActor
-extension ModuleDraftEditing where Draft: MutableProviderSelecting {
-    public var providerId: Binding<ProviderID?> {
-        Binding {
-            draft.module.providerId
-        } set: {
-            draft.module.providerId = $0
-        }
+@objc(CDProviderPresetV3)
+final class CDProviderPresetV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDProviderPresetV3> {
+        NSFetchRequest<CDProviderPresetV3>(entityName: "CDProviderPresetV3")
     }
 
-    public var providerEntity: Binding<ProviderEntity<Draft.CustomProviderSelection.Template>?> {
-        Binding {
-            draft.module.providerEntity
-        } set: {
-            draft.module.providerEntity = $0
-        }
-    }
-
-    public var providerOptions: Binding<Set<Draft.CustomProviderSelection.Option>?> {
-        Binding {
-            draft.module.providerOptions
-        } set: {
-            draft.module.providerOptions = $0
-        }
-    }
+    @NSManaged var providerId: String?
+    @NSManaged var presetId: String?
+    @NSManaged var presetDescription: String?
+    @NSManaged var moduleType: String?
+    @NSManaged var templateData: Data?
 }

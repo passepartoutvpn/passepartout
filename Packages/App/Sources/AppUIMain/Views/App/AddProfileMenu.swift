@@ -28,6 +28,10 @@ import PassepartoutKit
 import SwiftUI
 
 struct AddProfileMenu: View {
+
+    @EnvironmentObject
+    private var apiManager: APIManager
+
     let profileManager: ProfileManager
 
     let registry: Registry
@@ -73,15 +77,16 @@ private extension AddProfileMenu {
 
     var providerProfileMenu: some View {
         Menu {
-            ForEach(supportedProviderModuleTypes, content: providerSubmenu(for:))
+            ForEach(supportedProviders, content: providerSubmenu(for:))
         } label: {
             ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.provider, .profileProvider)
         }
     }
 
-    func providerSubmenu(for moduleType: ModuleType) -> some View {
-        ProvidersSubmenu(
-            moduleType: moduleType,
+//    func providerSubmenu(for moduleType: ModuleType) -> some View {
+    func providerSubmenu(for provider: Provider) -> some View {
+        ProviderSubmenu(
+            provider: provider,
             registry: registry,
             onSelect: {
                 var copy = $0
@@ -103,20 +108,15 @@ private extension AddProfileMenu {
         profileManager.firstUniqueName(from: Strings.Placeholders.Profile.name)
     }
 
-    // TODO: #507, define this list in a single global place
-    var supportedProviderModuleTypes: [ModuleType] {
-        [.openVPN]
+    var supportedProviders: [Provider] {
+        apiManager.providers
     }
 }
 
 // MARK: - Providers
 
-private struct ProvidersSubmenu: View {
-
-    @EnvironmentObject
-    private var apiManager: APIManager
-
-    let moduleType: ModuleType
+private struct ProviderSubmenu: View {
+    let provider: Provider
 
     let registry: Registry
 
@@ -124,21 +124,20 @@ private struct ProvidersSubmenu: View {
 
     var body: some View {
         Menu {
-            ForEach(apiManager.providers, content: profileButton(for:))
+            ForEach(Array(provider.metadata.keys), id: \.self, content: profileButton(for:))
         } label: {
-            Text(moduleType.localizedDescription)
+            Text(provider.description)
         }
     }
 
-    func profileButton(for provider: Provider) -> some View {
-        Button(provider.description) {
+    func profileButton(for moduleType: ModuleType) -> some View {
+        Button(moduleType.localizedDescription) {
             var editable = EditableProfile()
             editable.name = provider.description
-            let newModule = moduleType.newModule(with: registry, providerId: provider.id)
-            if let providerBuilder = newModule as? any ProviderSelecting {
-                assert(providerBuilder.providerId == provider.id)
-            }
-            editable.modules.append(newModule)
+            var moduleBuilder = ProviderModule.Builder()
+            moduleBuilder.providerId = provider.id
+            moduleBuilder.providerModuleType = moduleType
+            editable.modules.append(moduleBuilder)
             var onDemandBuilder = OnDemandModule.Builder()
             onDemandBuilder.isEnabled = true
             editable.modules.append(onDemandBuilder)

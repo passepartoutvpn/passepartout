@@ -304,10 +304,12 @@
 "views.providers.clear_filters" = "Limpar filtros";
 "views.providers.last_updated" = "Última atualização em %@";
 "views.providers.last_updated.loading" = "Carregando...";
-"views.providers.no_provider" = "Nenhum";
+"views.providers.module" = "Tipo";
 "views.providers.only_favorites" = "Apenas favoritos";
+"views.providers.preset" = "Predefinição";
 "views.providers.refresh_infrastructure" = "Atualizar infraestrutura";
 "views.providers.select_entity" = "Selecionar";
+"views.providers.select_module" = "Selecionar tipo";
 "views.providers.select_provider" = "Nenhum provedor";
 "views.purchased.no_purchases" = "Nenhuma compra";
 "views.purchased.rows.build_number" = "Número da compilação";
@@ -321,4 +323,3 @@
 "views.version.extra" = "%@ é um projeto mantido por %@.\n\nO código-fonte está disponível publicamente no GitHub sob a licença GPLv3, você pode encontrar os links na página inicial.";
 "views.vpn.category.any" = "Todas as categorias";
 "views.vpn.no_servers" = "Nenhum servidor";
-"views.vpn.preset" = "Predefinição";

@@ -58,10 +58,10 @@ struct ReportIssueButton {
     }
 
     var currentProvider: (ProviderID, Date?)? {
-        guard let id = installedProfile?.selectedProvider?.selection.id else {
+        guard let providerId = installedProfile?.activeProviderModule?.providerId else {
             return nil
         }
-        let lastUpdate = apiManager.lastUpdate(for: id)
-        return (id, lastUpdate)
+        let lastUpdate = apiManager.lastUpdate(for: providerId)
+        return (providerId, lastUpdate)
     }
 }

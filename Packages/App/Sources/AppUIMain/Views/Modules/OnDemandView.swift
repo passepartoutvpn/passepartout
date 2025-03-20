@@ -241,11 +241,11 @@ private extension OnDemandView {
         "Two": false,
         "Three": false
     ]
-    let editor = ProfileEditor(modules: [module])
     return module.preview {
         OnDemandView(
             draft: $1[$0],
             parameters: .init(
+                registry: Registry(),
                 editor: $1,
                 impl: nil
             ),
