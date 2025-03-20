@@ -78,7 +78,7 @@ struct DiagnosticsView: View {
     var body: some View {
         Form {
             if iapManager.isBeta {
-                betaSection
+                BetaSection()
             }
             liveLogSection
             openVPNSection
@@ -102,13 +102,6 @@ struct DiagnosticsView: View {
 }
 
 private extension DiagnosticsView {
-    var betaSection: some View {
-        Group {
-            Text("This is a beta build")
-        }
-        .themeSection(header: "Beta")
-    }
-
     var liveLogSection: some View {
         Group {
             navLink(Strings.Views.Diagnostics.Rows.app, to: .app(title: Strings.Views.Diagnostics.Rows.app))

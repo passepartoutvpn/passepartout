@@ -44,6 +44,9 @@ enum Detail {
 struct SettingsView: View {
 
     @EnvironmentObject
+    private var iapManager: IAPManager
+
+    @EnvironmentObject
     private var theme: Theme
 
     let tunnel: ExtendedTunnel
@@ -76,6 +79,9 @@ struct SettingsView: View {
 private extension SettingsView {
     var masterView: some View {
         List {
+            if iapManager.isBeta {
+                BetaSection()
+            }
             creditsSection
             diagnosticsSection
             aboutSection
