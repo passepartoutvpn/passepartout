@@ -56,13 +56,17 @@ extension DefaultAppProcessor: ProfileProcessor {
             var builder = profile.builder(withNewId: false, forUpgrade: true)
 
             // convert OpenVPN provider modules to ProviderModule of type .openVPN
-            let ovpnModules = builder.modules
+            let ovpnPairs: [(offset: Int, module: OpenVPNModule)] = builder.modules
+                .enumerated()
                 .compactMap {
-                    $0 as? OpenVPNModule
+                    guard let module = $0.element as? OpenVPNModule else {
+                        return nil
+                    }
+                    return ($0.offset, module)
                 }
-            try ovpnModules
+            try ovpnPairs
                 .forEach {
-                    guard let selection = $0.providerSelection else {
+                    guard let selection = $0.module.providerSelection else {
                         return
                     }
 
@@ -71,22 +75,20 @@ extension DefaultAppProcessor: ProfileProcessor {
                     providerBuilder.providerModuleType = .openVPN
 
                     var options = OpenVPNProviderTemplate.Options()
-                    options.credentials = $0.credentials
+                    options.credentials = $0.module.credentials
                     try providerBuilder.setOptions(options, for: .openVPN)
                     let provider = try providerBuilder.tryBuild()
-                    builder.modules.append(provider)
 
-                    if builder.activeModulesIds.contains($0.id) {
-                        builder.activeModulesIds.insert(provider.id)
-                    }
+                    builder.modules[$0.offset] = provider
+                    builder.activeModulesIds.insert(provider.id)
                 }
 
             // remove old modules
-            ovpnModules.forEach { module in
+            ovpnPairs.forEach { pair in
                 builder.modules.removeAll {
-                    module.id == $0.id
+                    pair.module.id == $0.id
                 }
-                builder.activeModulesIds.remove(module.id)
+                builder.activeModulesIds.remove(pair.module.id)
             }
 
             return try builder.tryBuild()
