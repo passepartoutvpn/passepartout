@@ -83,7 +83,6 @@ private extension AddProfileMenu {
         }
     }
 
-//    func providerSubmenu(for moduleType: ModuleType) -> some View {
     func providerSubmenu(for provider: Provider) -> some View {
         ProviderSubmenu(
             provider: provider,
