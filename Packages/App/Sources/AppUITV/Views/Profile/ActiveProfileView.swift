@@ -188,7 +188,7 @@ private extension ActiveProfileView {
         do {
             var moduleBuilder = ProviderModule.Builder()
             moduleBuilder.providerId = .mullvad
-            moduleBuilder.moduleId = .openVPN
+            moduleBuilder.providerModuleType = .openVPN
             let module = try moduleBuilder.tryBuild()
 
             let builder = Profile.Builder(
