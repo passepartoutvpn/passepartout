@@ -28,7 +28,7 @@ import PassepartoutKit
 
 @MainActor
 public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {
-    public private(set) weak var editor: ProfileEditor?
+    private weak var editor: ProfileEditor?
 
     private let staticEditor: ProfileEditor?
 
