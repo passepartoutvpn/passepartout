@@ -108,11 +108,14 @@ private struct DestinationView: View {
 
 extension ProviderModule.Builder: ModuleShortcutsProviding {
     public var isVisible: Bool {
-        providerModuleType != nil
+        providerId != nil && providerModuleType != nil
     }
 
     @ViewBuilder
     public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
+        if let providerId {
+            ProviderNameRow(id: providerId)
+        }
         ProviderServerLink(entity: entity)
         switch providerModuleType {
         case .openVPN:

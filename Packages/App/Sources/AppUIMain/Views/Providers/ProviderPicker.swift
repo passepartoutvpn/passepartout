@@ -53,7 +53,7 @@ struct ProviderPicker: View {
             }
         } label: {
             HStack {
-                Text(Strings.Global.Nouns.provider)
+                Text(Strings.Global.Nouns.name)
                 PurchaseRequiredView(
                     for: providerId,
                     reason: $paywallReason
