@@ -222,7 +222,7 @@ private extension ProviderServerView {
     func onSelectServer(_ server: ProviderServer, heuristic: ProviderHeuristic?) {
         let presets = compatiblePresets(with: server)
         guard let preset = presets.first else {
-            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.supportedPresetIds ?? [])")
+            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.supportedPresetIds?.description ?? "all")")
             assertionFailure("No compatible presets for server \(server.serverId) (provider=\(providerManager.providerId), moduleType=\(providerManager.moduleType), supported=\(server.supportedPresetIds ?? []))")
             return
         }
