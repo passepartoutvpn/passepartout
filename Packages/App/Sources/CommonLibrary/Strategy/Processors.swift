@@ -28,6 +28,8 @@ import PassepartoutKit
 
 @MainActor
 public protocol ProfileProcessor: Sendable {
+    func migrated(_ profile: Profile) throws -> Profile?
+
     func isIncluded(_ profile: Profile) -> Bool
 
     func preview(from profile: Profile) -> ProfilePreview

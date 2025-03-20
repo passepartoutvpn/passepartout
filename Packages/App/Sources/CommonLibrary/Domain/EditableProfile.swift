@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutKit
 
 public struct EditableProfile: MutableProfileType {
+    public let version: Int? = nil
+
     public var id: UUID
 
     public var name: String

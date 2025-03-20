@@ -50,6 +50,51 @@ final class DefaultAppProcessor: Sendable {
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
+    func migrated(_ profile: Profile) throws -> Profile? {
+        switch profile.version {
+        case nil:
+            var builder = profile.builder(withNewId: false, forUpgrade: true)
+
+            // convert OpenVPN provider modules to ProviderModule of type .openVPN
+            let ovpnModules = builder.modules
+                .compactMap {
+                    $0 as? OpenVPNModule
+                }
+            try ovpnModules
+                .forEach {
+                    guard let selection = $0.providerSelection else {
+                        return
+                    }
+
+                    var providerBuilder = ProviderModule.Builder()
+                    providerBuilder.providerId = selection.id
+                    providerBuilder.providerModuleType = .openVPN
+
+                    var options = OpenVPNProviderTemplate.Options()
+                    options.credentials = $0.credentials
+                    try providerBuilder.setOptions(options, for: .openVPN)
+                    let provider = try providerBuilder.tryBuild()
+                    builder.modules.append(provider)
+
+                    if builder.activeModulesIds.contains($0.id) {
+                        builder.activeModulesIds.insert(provider.id)
+                    }
+                }
+
+            // remove old modules
+            ovpnModules.forEach { module in
+                builder.modules.removeAll {
+                    module.id == $0.id
+                }
+                builder.activeModulesIds.remove(module.id)
+            }
+
+            return try builder.tryBuild()
+        default:
+            return nil
+        }
+    }
+
     func isIncluded(_ profile: Profile) -> Bool {
 #if os(tvOS)
         profile.attributes.isAvailableForTV == true
