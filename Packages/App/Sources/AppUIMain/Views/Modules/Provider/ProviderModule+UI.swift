@@ -85,7 +85,6 @@ private struct DestinationView: View {
                         providerId: providerId,
                         moduleType: providerModuleType,
                         selectedEntity: draft.module.entity,
-                        filtersWithSelection: false,
                         onSelect: {
                             draft.module.entity = $0
                             path.removeLast()

@@ -43,8 +43,6 @@ struct ProviderServerView: View {
 
     let selectedEntity: ProviderEntity?
 
-    let filtersWithSelection: Bool
-
     var selectTitle = Strings.Views.Providers.selectEntity
 
     let onSelect: (ProviderEntity) -> Void
@@ -144,12 +142,6 @@ private extension ProviderServerView {
         }
         var filters = ProviderFilters()
         filters.presetId = selectedEntity.preset.presetId
-        if filtersWithSelection {
-            filters.categoryName = selectedEntity.server.metadata.categoryName
-#if os(macOS)
-            filters.countryCode = selectedEntity.server.metadata.countryCode
-#endif
-        }
         return filters
     }
 
@@ -239,7 +231,6 @@ private extension ProviderServerView {
             providerId: .protonvpn,
             moduleType: .openVPN,
             selectedEntity: nil as ProviderEntity?,
-            filtersWithSelection: false,
             selectTitle: "Select",
             onSelect: { _ in }
         )

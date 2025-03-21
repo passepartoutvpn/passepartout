@@ -50,7 +50,6 @@ struct ProviderServerCoordinator: View {
             providerId: providerId,
             moduleType: moduleType,
             selectedEntity: selectedEntity,
-            filtersWithSelection: false,
             selectTitle: selectTitle,
             onSelect: onSelect
         )
