@@ -453,8 +453,8 @@ public enum Strings {
     }
     public enum Ip {
       public enum Address {
-        /// Automatic
-        public static let automatic = Strings.tr("Localizable", "modules.ip.address.automatic", fallback: "Automatic")
+        /// Leave empty to assign automatically.
+        public static let footer = Strings.tr("Localizable", "modules.ip.address.footer", fallback: "Leave empty to assign automatically.")
       }
       public enum Routes {
         /// Add %@

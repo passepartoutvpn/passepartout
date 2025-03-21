@@ -98,10 +98,14 @@ private extension IPView {
             ThemeModuleTextField(
                 caption: Strings.Global.Nouns.address,
                 value: $addresses[family] ?? "",
-                placeholder: Strings.Modules.Ip.Address.automatic
+                placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
             )
+            .themeRowWithSubtitle(Strings.Modules.Ip.Address.footer)
         }
-        .themeSection(header: family.localizedDescription)
+        .themeSection(
+            header: family.localizedDescription,
+            footer: Strings.Modules.Ip.Address.footer
+        )
 
         Group {
             ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
@@ -213,22 +217,17 @@ private extension IPView {
 
 private extension IPView {
     func loadAddresses() {
-        if let v4 = draft.module.ipv4?.subnet?.address.rawValue {
+        if let v4 = draft.module.ipv4?.subnet?.rawValue {
             addresses[.v4] = v4
         }
-        if let v6 = draft.module.ipv6?.subnet?.address.rawValue {
+        if let v6 = draft.module.ipv6?.subnet?.rawValue {
             addresses[.v6] = v6
         }
     }
 
     func saveAddresses(_ addresses: [Address.Family: String]) {
         addresses.forEach { pair in
-            let subnet: Subnet? = {
-                guard let addr = Address(rawValue: pair.value), addr.family != nil else {
-                    return nil
-                }
-                return Subnet(addr)
-            }()
+            let subnet = Subnet(rawValue: pair.value)
             switch pair.key {
             case .v4:
                 draft.module.ipv4 = draft.module.ipv4?.with(subnet: subnet) ?? IPSettings(subnet: subnet)
