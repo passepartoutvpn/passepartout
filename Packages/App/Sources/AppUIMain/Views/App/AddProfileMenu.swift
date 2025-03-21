@@ -123,7 +123,7 @@ private struct ProviderSubmenu: View {
 
     var body: some View {
         Menu {
-            ForEach(Array(provider.metadata.keys), id: \.self, content: profileButton(for:))
+            ForEach(Array(sortedTypes), id: \.self, content: profileButton(for:))
         } label: {
             Text(provider.description)
         }
@@ -143,5 +143,12 @@ private struct ProviderSubmenu: View {
             editable.activeModulesIds = Set(editable.modules.map(\.id))
             onSelect(editable)
         }
+    }
+
+    private var sortedTypes: [ModuleType] {
+        provider.metadata.keys
+            .sorted {
+                $0.localizedDescription < $1.localizedDescription
+            }
     }
 }
