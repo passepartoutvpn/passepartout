@@ -108,13 +108,3 @@ extension Module {
         return builder as? any ModuleBuilder
     }
 }
-
-// MARK: -
-
-private extension EditableProfile {
-    var activeConnectionModule: (any ModuleBuilder)? {
-        modules.first {
-            isActiveModule(withId: $0.id) && $0.buildsConnectionModule
-        }
-    }
-}
