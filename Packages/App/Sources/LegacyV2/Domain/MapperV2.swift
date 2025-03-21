@@ -113,6 +113,7 @@ extension MapperV2 {
 
         var builder = ProviderModule.Builder()
         builder.providerId = ProviderID(rawValue: v2.name)
+        builder.providerModuleType = .openVPN
         if let credentials = settings.account.map(toOpenVPNCredentials) {
             var options = OpenVPNProviderTemplate.Options()
             options.credentials = credentials
