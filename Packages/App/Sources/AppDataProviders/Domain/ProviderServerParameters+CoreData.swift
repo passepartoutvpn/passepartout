@@ -66,9 +66,9 @@ extension ProviderFilters {
         formats.append(providerId.predicateFormat)
         args.append(providerId.rawValue)
 
-        if let configurationIdentifier {
-            formats.append("supportedConfigurationIds contains %@")
-            args.append(configurationIdentifier)
+        if let moduleType {
+            formats.append("supportedModuleTypes contains %@")
+            args.append(moduleType.rawValue)
         }
         if let presetId {
             formats.append("supportedPresetIds contains %@")

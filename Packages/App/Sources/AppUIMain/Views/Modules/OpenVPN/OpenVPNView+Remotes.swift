@@ -31,7 +31,7 @@ extension OpenVPNView {
     struct RemotesView: View {
 
         @Binding
-        var configurationBuilder: OpenVPN.Configuration.Builder
+        var configuration: OpenVPN.Configuration.Builder
 
         @ObservedObject
         var excludedEndpoints: ObservableList<ExtendedEndpoint>
@@ -43,7 +43,7 @@ extension OpenVPNView {
 
         var body: some View {
             RemotesInnerView(
-                configurationBuilder: $configurationBuilder,
+                configuration: $configuration,
                 excludedEndpoints: excludedEndpoints,
                 isEditable: isEditable
             )
@@ -64,7 +64,7 @@ private extension OpenVPNView {
         private var editMode: Binding<EditMode>?
 
         @Binding
-        var configurationBuilder: OpenVPN.Configuration.Builder
+        var configuration: OpenVPN.Configuration.Builder
 
         @ObservedObject
         var excludedEndpoints: ObservableList<ExtendedEndpoint>
@@ -156,12 +156,12 @@ private extension OpenVPNView.RemotesInnerView {
 
 private extension OpenVPNView.RemotesInnerView {
     var allRemotes: [ExtendedEndpoint] {
-        configurationBuilder.remotes ?? []
+        configuration.remotes ?? []
     }
 
     var editableRemotesBinding: Binding<[EditableRemote]> {
         Binding {
-            guard let remotes = configurationBuilder.remotes else {
+            guard let remotes = configuration.remotes else {
                 return []
             }
             return remotes.map {
@@ -171,7 +171,7 @@ private extension OpenVPNView.RemotesInnerView {
                 )
             }
         } set: {
-            configurationBuilder.remotes = $0.compactMap(\.asEndpoint)
+            configuration.remotes = $0.compactMap(\.asEndpoint)
         }
     }
 }
@@ -295,7 +295,7 @@ private struct Preview: View {
 
     var body: some View {
         OpenVPNView.RemotesView(
-            configurationBuilder: $builder,
+            configuration: $builder,
             excludedEndpoints: ObservableList<ExtendedEndpoint>(
                 contains: { list.contains($0) },
                 add: { list.insert($0) },

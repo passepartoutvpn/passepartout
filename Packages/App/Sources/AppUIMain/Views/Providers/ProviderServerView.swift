@@ -29,7 +29,7 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderServerView<Template>: View where Template: IdentifiableConfiguration {
+struct ProviderServerView: View {
 
     @EnvironmentObject
     private var apiManager: APIManager
@@ -37,24 +37,24 @@ struct ProviderServerView<Template>: View where Template: IdentifiableConfigurat
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
-    let moduleId: UUID
-
     let providerId: ProviderID
 
-    let selectedEntity: ProviderEntity<Template>?
+    let moduleType: ModuleType
 
-    let filtersWithSelection: Bool
+    let selectedEntity: ProviderEntity?
 
     var selectTitle = Strings.Views.Providers.selectEntity
 
-    let onSelect: (ProviderServer, ProviderHeuristic?, ProviderPreset<Template>) -> Void
+    let onSelect: (ProviderEntity) -> Void
 
     @StateObject
-    private var providerManager = ProviderManager<Template>(sorting: [
-        .localizedCountry,
-        .area,
-        .serverId
-    ])
+    private var providerManager = ProviderManager(
+        sorting: [
+            .localizedCountry,
+            .area,
+            .serverId
+        ]
+    )
 
     @State
     private var servers: [ProviderServer] = []
@@ -142,12 +142,6 @@ private extension ProviderServerView {
         }
         var filters = ProviderFilters()
         filters.presetId = selectedEntity.preset.presetId
-        if filtersWithSelection {
-            filters.categoryName = selectedEntity.server.metadata.categoryName
-#if os(macOS)
-            filters.countryCode = selectedEntity.server.metadata.countryCode
-#endif
-        }
         return filters
     }
 
@@ -160,7 +154,7 @@ private extension ProviderServerView {
         }
         do {
             let repository = try await apiManager.providerRepository(for: providerId)
-            try await providerManager.setRepository(repository)
+            try await providerManager.setRepository(repository, for: moduleType)
             filtersViewModel.load(options: providerManager.options, initialFilters: initialFilters)
             await reloadServers(filters: filtersViewModel.filters)
         } catch {
@@ -182,7 +176,7 @@ private extension ProviderServerView {
         }
     }
 
-    func compatiblePresets(with server: ProviderServer) -> [ProviderPreset<Template>] {
+    func compatiblePresets(with server: ProviderServer) -> [ProviderPreset] {
         providerManager
             .presets
             .filter {
@@ -192,7 +186,7 @@ private extension ProviderServerView {
                 return true
             }
             .filter {
-                if let supportedIds = server.metadata.supportedPresetIds {
+                if let supportedIds = server.supportedPresetIds {
                     return supportedIds.contains($0.presetId)
                 }
                 return true
@@ -220,11 +214,12 @@ private extension ProviderServerView {
     func onSelectServer(_ server: ProviderServer, heuristic: ProviderHeuristic?) {
         let presets = compatiblePresets(with: server)
         guard let preset = presets.first else {
-            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.metadata.supportedPresetIds ?? [])")
-            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(providerManager.providerId), template=\(Template.configurationIdentifier), supported=\(server.metadata.supportedPresetIds ?? []))")
+            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.supportedPresetIds?.description ?? "all")")
+            assertionFailure("No compatible presets for server \(server.serverId) (provider=\(providerManager.providerId), moduleType=\(providerManager.moduleType), supported=\(server.supportedPresetIds ?? []))")
             return
         }
-        onSelect(server, heuristic, preset)
+        let entity = ProviderEntity(server: server, preset: preset, heuristic: heuristic)
+        onSelect(entity)
     }
 }
 
@@ -233,12 +228,11 @@ private extension ProviderServerView {
 #Preview {
     NavigationStack {
         ProviderServerView(
-            moduleId: UUID(),
             providerId: .protonvpn,
-            selectedEntity: nil as ProviderEntity<OpenVPNProviderTemplate>?,
-            filtersWithSelection: false,
+            moduleType: .openVPN,
+            selectedEntity: nil as ProviderEntity?,
             selectTitle: "Select",
-            onSelect: { _, _, _ in }
+            onSelect: { _ in }
         )
     }
     .withMockEnvironment()

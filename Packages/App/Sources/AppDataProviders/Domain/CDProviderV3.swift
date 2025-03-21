@@ -34,7 +34,7 @@ final class CDProviderV3: NSManagedObject {
 
     @NSManaged var providerId: String?
     @NSManaged var fullName: String?
-    @NSManaged var supportedConfigurationIds: String?
+    @NSManaged var supportedModuleTypes: String?
     @NSManaged var encodedMetadata: Data? // [String: Provider.Metadata]
     @NSManaged var lastUpdate: Date?
 }

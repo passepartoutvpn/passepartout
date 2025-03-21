@@ -23,15 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
 struct ProviderConnectToButton<Label>: View where Label: View {
-
-    @EnvironmentObject
-    private var iapManager: IAPManager
-
     let profile: Profile
 
     let onTap: (Profile) -> Void
@@ -40,7 +35,7 @@ struct ProviderConnectToButton<Label>: View where Label: View {
 
     var body: some View {
         profile
-            .selectedProvider
+            .activeProviderModule
             .map { _ in
                 Button {
                     onTap(profile)

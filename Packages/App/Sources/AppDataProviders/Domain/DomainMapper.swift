@@ -32,16 +32,16 @@ struct DomainMapper {
         guard let id = entity.providerId, let fullName = entity.fullName else {
             return nil
         }
-        let metadata: [String: Provider.Metadata]
+        let metadata: [ModuleType: Provider.Metadata]
         if let encodedMetadata = entity.encodedMetadata {
             do {
-                metadata = try JSONDecoder().decode([String: Provider.Metadata].self, from: encodedMetadata)
+                metadata = try JSONDecoder().decode([ModuleType: Provider.Metadata].self, from: encodedMetadata)
             } catch {
                 return nil
             }
-        } else if let supportedConfigurationIds = entity.supportedConfigurationIds?.components(separatedBy: ",") {
-            metadata = supportedConfigurationIds.reduce(into: [:]) {
-                $0[$1] = .init()
+        } else if let supportedModuleTypes = entity.supportedModuleTypes?.components(separatedBy: ",") {
+            metadata = supportedModuleTypes.reduce(into: [:]) {
+                $0[ModuleType($1)] = .init()
             }
         } else {
             metadata = [:]
@@ -63,31 +63,24 @@ struct DomainMapper {
         }
     }
 
-    func preset(from entity: CDVPNPresetV3) throws -> AnyProviderPreset? {
+    func preset(from entity: CDProviderPresetV3) throws -> ProviderPreset? {
         guard let presetId = entity.presetId,
               let presetDescription = entity.presetDescription,
               let providerId = entity.providerId,
-              let configurationId = entity.configurationId,
-              let template = entity.configuration else {
+              let moduleType = entity.moduleType,
+              let templateData = entity.templateData else {
             return nil
         }
-
-        let decoder = JSONDecoder()
-        let endpoints = try entity.endpoints.map {
-            try decoder.decode([EndpointProtocol].self, from: $0)
-        } ?? []
-
-        return AnyProviderPreset(
+        return ProviderPreset(
             providerId: .init(rawValue: providerId),
             presetId: presetId,
             description: presetDescription,
-            endpoints: endpoints,
-            configurationIdentifier: configurationId,
-            template: template
+            moduleType: ModuleType(moduleType),
+            templateData: templateData
         )
     }
 
-    func server(from entity: CDVPNServerV3) throws -> ProviderServer? {
+    func server(from entity: CDProviderServerV3) throws -> ProviderServer? {
         guard let serverId = entity.serverId,
               let providerId = entity.providerId,
               let categoryName = entity.categoryName,
@@ -100,21 +93,25 @@ struct DomainMapper {
         let ipAddresses = try entity.ipAddresses.map {
             Set(try decoder.decode([Data].self, from: $0))
         }
-        let supportedConfigurationIds = entity.supportedConfigurationIds?.components(separatedBy: ",")
+        let supportedModuleTypes = entity.supportedModuleTypes?.components(separatedBy: ",")
         let supportedPresetIds = entity.supportedPresetIds?.components(separatedBy: ",")
         let otherCountryCodes = entity.otherCountryCodes?.components(separatedBy: ",")
         let area = entity.area
 
         let metadata = ProviderServer.Metadata(
             providerId: .init(rawValue: providerId),
-            serverId: serverId,
-            supportedConfigurationIdentifiers: supportedConfigurationIds,
-            supportedPresetIds: supportedPresetIds,
             categoryName: categoryName,
             countryCode: countryCode,
             otherCountryCodes: otherCountryCodes,
             area: area
         )
-        return ProviderServer(metadata: metadata, hostname: hostname, ipAddresses: ipAddresses)
+        return ProviderServer(
+            metadata: metadata,
+            serverId: serverId,
+            hostname: hostname,
+            ipAddresses: ipAddresses,
+            supportedModuleTypes: supportedModuleTypes?.map(ModuleType.init(rawValue:)),
+            supportedPresetIds: supportedPresetIds
+        )
     }
 }

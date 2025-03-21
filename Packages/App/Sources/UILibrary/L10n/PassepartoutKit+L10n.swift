@@ -42,9 +42,9 @@ extension Profile: StyledOptionalLocalizableEntity {
     public enum OptionalStyle {
         case moduleTypes
 
-        case connectionType
+        case primaryType
 
-        case nonConnectionTypes
+        case secondaryTypes
     }
 
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
@@ -56,21 +56,28 @@ extension Profile: StyledOptionalLocalizableEntity {
                 .sorted()
                 .joined(separator: ", ")
 
-        case .connectionType:
-            return firstConnectionModule(ifActive: true)?
+        case .primaryType:
+            return activeModules
+                .first {
+                    primaryCondition(for: $0)
+                }?
                 .moduleType
                 .localizedDescription
 
-        case .nonConnectionTypes:
+        case .secondaryTypes:
             return activeModules
                 .filter {
-                    !($0 is ConnectionModule)
+                    !primaryCondition(for: $0)
                 }
                 .nilIfEmpty?
                 .map(\.moduleType.localizedDescription)
                 .sorted()
                 .joined(separator: ", ")
         }
+    }
+
+    private func primaryCondition(for module: Module) -> Bool {
+        module is ProviderModule || module.buildsConnection
     }
 }
 

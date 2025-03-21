@@ -32,6 +32,3 @@ extension WireGuardModule.Builder: ModuleViewProviding {
         WireGuardView(draft: parameters.editor[self], parameters: parameters)
     }
 }
-
-extension WireGuardModule: ProviderServerCoordinatorSupporting {
-}

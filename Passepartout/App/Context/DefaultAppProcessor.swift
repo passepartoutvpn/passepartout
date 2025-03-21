@@ -32,20 +32,71 @@ final class DefaultAppProcessor: Sendable {
 
     private let iapManager: IAPManager
 
+    private let registry: Registry
+
     private let title: @Sendable (Profile) -> String
 
     init(
         apiManager: APIManager,
         iapManager: IAPManager,
+        registry: Registry,
         title: @escaping @Sendable (Profile) -> String
     ) {
         self.apiManager = apiManager
         self.iapManager = iapManager
+        self.registry = registry
         self.title = title
     }
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
+    func migrated(_ profile: Profile) throws -> Profile? {
+        switch profile.version {
+        case nil:
+            var builder = profile.builder(withNewId: false, forUpgrade: true)
+
+            // convert OpenVPN provider modules to ProviderModule of type .openVPN
+            let ovpnPairs: [(offset: Int, module: OpenVPNModule)] = builder.modules
+                .enumerated()
+                .compactMap {
+                    guard let module = $0.element as? OpenVPNModule else {
+                        return nil
+                    }
+                    return ($0.offset, module)
+                }
+            try ovpnPairs
+                .forEach {
+                    guard let selection = $0.module.providerSelection else {
+                        return
+                    }
+
+                    var providerBuilder = ProviderModule.Builder()
+                    providerBuilder.providerId = selection.id
+                    providerBuilder.providerModuleType = .openVPN
+
+                    var options = OpenVPNProviderTemplate.Options()
+                    options.credentials = $0.module.credentials
+                    try providerBuilder.setOptions(options, for: .openVPN)
+                    let provider = try providerBuilder.tryBuild()
+
+                    builder.modules[$0.offset] = provider
+                    builder.activeModulesIds.insert(provider.id)
+                }
+
+            // remove old modules
+            ovpnPairs.forEach { pair in
+                builder.modules.removeAll {
+                    pair.module.id == $0.id
+                }
+                builder.activeModulesIds.remove(pair.module.id)
+            }
+
+            return try builder.tryBuild()
+        default:
+            return nil
+        }
+    }
+
     func isIncluded(_ profile: Profile) -> Bool {
 #if os(tvOS)
         profile.attributes.isAvailableForTV == true
@@ -84,15 +135,15 @@ extension DefaultAppProcessor: AppTunnelProcessor {
         // apply connection heuristic
         var newProfile = profile
         do {
-            if let builder = newProfile.activeProviderModule?.moduleBuilder() as? any MutableProviderSelecting,
-               let heuristic = builder.providerSelection?.entityHeuristic {
+            if let builder = newProfile.activeProviderModule?.moduleBuilder() as? ProviderModule.Builder,
+               let heuristic = builder.entity?.heuristic {
                 pp_log(.app, .info, "Apply connection heuristic: \(heuristic)")
-                newProfile.activeProviderModule?.providerSelection?.entityServer.map {
-                    pp_log(.app, .info, "\tOld server: \($0)")
+                newProfile.activeProviderModule?.entity.map {
+                    pp_log(.app, .info, "\tOld server: \($0.server)")
                 }
                 newProfile = try await profile.withNewServer(using: heuristic, apiManager: apiManager)
-                newProfile.activeProviderModule?.providerSelection?.entityServer.map {
-                    pp_log(.app, .info, "\tNew server: \($0)")
+                newProfile.activeProviderModule?.entity.map {
+                    pp_log(.app, .info, "\tNew server: \($0.server)")
                 }
             }
         } catch {
@@ -101,7 +152,7 @@ extension DefaultAppProcessor: AppTunnelProcessor {
 
         // validate provider modules
         do {
-            _ = try newProfile.withProviderModules()
+            _ = try newProfile.resolvingProviderModules(with: registry)
             return newProfile
         } catch {
             pp_log(.app, .error, "Unable to inject provider modules: \(error)")
@@ -118,7 +169,7 @@ private extension Profile {
 
     @MainActor
     func withNewServer(using heuristic: ProviderHeuristic, apiManager: APIManager) async throws -> Profile {
-        guard var providerModule = activeProviderModule?.moduleBuilder() as? any ModuleBuilder & MutableProviderSelecting else {
+        guard var providerModule = activeProviderModule?.moduleBuilder() as? ProviderModule.Builder else {
             return self
         }
         try await providerModule.setRandomServer(using: heuristic, apiManager: apiManager)
@@ -129,19 +180,19 @@ private extension Profile {
     }
 }
 
-private extension MutableProviderSelecting {
+private extension ProviderModule.Builder {
 
     @MainActor
     mutating func setRandomServer(using heuristic: ProviderHeuristic, apiManager: APIManager) async throws {
-        guard let providerEntity else {
+        guard let providerId, let providerModuleType, let entity else {
             return
         }
-        let repo = try await apiManager.providerRepository(for: providerEntity.header.providerId)
-        let providerManager = ProviderManager<CustomProviderSelection.Template>()
-        try await providerManager.setRepository(repo)
+        let repo = try await apiManager.providerRepository(for: providerId)
+        let providerManager = ProviderManager()
+        try await providerManager.setRepository(repo, for: providerModuleType)
 
         var filters = ProviderFilters()
-        filters.presetId = providerEntity.preset.presetId
+        filters.presetId = entity.preset.presetId
 
         switch heuristic {
         case .exact(let server):
@@ -155,15 +206,15 @@ private extension MutableProviderSelecting {
 
         var servers = try await providerManager.filteredServers(with: filters)
         servers.removeAll {
-            $0.serverId == providerEntity.server.serverId
+            $0.serverId == entity.server.serverId
         }
         guard let randomServer = servers.randomElement() else {
             return
         }
-        providerSelection?.entity = ProviderEntity(
+        self.entity = ProviderEntity(
             server: randomServer,
-            heuristic: providerEntity.heuristic,
-            preset: providerEntity.preset
+            preset: entity.preset,
+            heuristic: entity.heuristic
         )
     }
 }

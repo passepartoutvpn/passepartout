@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Profilname ist leer.";
 "errors.app.import" = "Profile konnten nicht importiert werden.";
 "errors.app.malformed_module" = "Modul %@ ist fehlerhaft. %@";
-"errors.app.passepartout.connection_module_required" = "Das Routing-Modul kann nur zusammen mit einer Verbindung aktiviert werden.";
 "errors.app.passepartout.corrupt_provider_module" = "Verbindung zum Anbieter-Server konnte nicht hergestellt werden (Grund=%@).";
 "errors.app.passepartout.default" = "Operation konnte nicht abgeschlossen werden (Code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Einige aktive Module sind inkompatibel, versuche, nur eines von ihnen zu aktivieren.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Filter löschen";
 "views.providers.last_updated" = "Zuletzt aktualisiert am %@";
 "views.providers.last_updated.loading" = "Lädt...";
-"views.providers.no_provider" = "Keiner";
+"views.providers.module" = "Typ";
 "views.providers.only_favorites" = "Nur Favoriten";
+"views.providers.preset" = "Voreinstellung";
 "views.providers.refresh_infrastructure" = "Infrastruktur aktualisieren";
 "views.providers.select_entity" = "Wählen";
+"views.providers.select_module" = "Typ auswählen";
 "views.providers.select_provider" = "Kein Anbieter";
 "views.purchased.no_purchases" = "Keine Käufe";
 "views.purchased.rows.build_number" = "Build-Nummer";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ ist ein Projekt, das von %@ gepflegt wird.\n\nDer Quellcode ist öffentlich auf GitHub unter der GPLv3-Lizenz verfügbar. Du findest die Links auf der Startseite.";
 "views.vpn.category.any" = "Alle Kategorien";
 "views.vpn.no_servers" = "Keine Server";
-"views.vpn.preset" = "Voreinstellung";

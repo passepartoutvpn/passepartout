@@ -33,11 +33,8 @@ extension View {
                 .map { handler in
                     AnyView(handler.moduleDestination(
                         for: route.wrapped,
-                        with: .init(
-                            editor: editor,
-                            module: handler
-                        ),
-                        path: path
+                        path: path,
+                        editor: editor
                     ))
                 }
         }

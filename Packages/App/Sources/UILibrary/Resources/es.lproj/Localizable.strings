@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "El nombre del perfil está vacío.";
 "errors.app.import" = "No se pudieron importar los perfiles.";
 "errors.app.malformed_module" = "El módulo %@ está malformado. %@";
-"errors.app.passepartout.connection_module_required" = "El módulo de enrutamiento solo puede habilitarse junto con una conexión.";
 "errors.app.passepartout.corrupt_provider_module" = "No se pudo conectar al servidor del proveedor (motivo=%@).";
 "errors.app.passepartout.default" = "No se pudo completar la operación (código=%@).";
 "errors.app.passepartout.incompatible_modules" = "Algunos módulos activos son incompatibles, intenta activar solo uno de ellos.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Borrar filtros";
 "views.providers.last_updated" = "Última actualización el %@";
 "views.providers.last_updated.loading" = "Cargando...";
-"views.providers.no_provider" = "Ninguno";
+"views.providers.module" = "Tipo";
 "views.providers.only_favorites" = "Solo favoritos";
+"views.providers.preset" = "Preestablecido";
 "views.providers.refresh_infrastructure" = "Actualizar infraestructura";
 "views.providers.select_entity" = "Seleccionar";
+"views.providers.select_module" = "Seleccionar tipo";
 "views.providers.select_provider" = "Ningún proveedor";
 "views.purchased.no_purchases" = "No hay compras";
 "views.purchased.rows.build_number" = "Número de versión";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ es un proyecto mantenido por %@.\n\nEl código fuente está disponible públicamente en GitHub bajo la GPLv3, puedes encontrar los enlaces en la página principal.";
 "views.vpn.category.any" = "Todas las categorías";
 "views.vpn.no_servers" = "No hay servidores";
-"views.vpn.preset" = "Preestablecido";

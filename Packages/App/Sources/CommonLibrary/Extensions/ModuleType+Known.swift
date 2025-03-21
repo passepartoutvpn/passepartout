@@ -26,25 +26,25 @@
 import Foundation
 import PassepartoutKit
 
-extension ModuleType: CaseIterable {
+extension ModuleType: @retroactive CaseIterable {
     public static let allCases: [ModuleType] = [
         .openVPN,
         .wireGuard,
         .dns,
         .httpProxy,
         .ip,
-        .onDemand
+        .onDemand,
+        .provider
     ]
+}
 
-    public static let openVPN = ModuleType(OpenVPNModule.self)
-
-    public static let wireGuard = ModuleType(WireGuardModule.self)
-
-    public static let dns = ModuleType(DNSModule.self)
-
-    public static let httpProxy = ModuleType(HTTPProxyModule.self)
-
-    public static let ip = ModuleType(IPModule.self)
-
-    public static let onDemand = ModuleType(OnDemandModule.self)
+extension ModuleType {
+    public var isConnection: Bool {
+        switch self {
+        case .openVPN, .wireGuard:
+            return true
+        default:
+            return false
+        }
+    }
 }

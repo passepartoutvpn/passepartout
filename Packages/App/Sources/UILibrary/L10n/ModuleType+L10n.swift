@@ -49,6 +49,9 @@ extension ModuleType: LocalizableEntity {
         case .onDemand:
             return Strings.Global.Nouns.onDemand
 
+        case .provider:
+            return Strings.Global.Nouns.provider
+
         default:
             assertionFailure("Missing localization for ModuleType: \(rawValue)")
             return rawValue
@@ -56,7 +59,7 @@ extension ModuleType: LocalizableEntity {
     }
 }
 
-extension ModuleType: Comparable {
+extension ModuleType: @retroactive Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.localizedDescription.lowercased() < rhs.localizedDescription.lowercased()
     }

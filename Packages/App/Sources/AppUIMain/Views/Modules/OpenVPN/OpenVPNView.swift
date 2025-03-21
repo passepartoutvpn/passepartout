@@ -40,8 +40,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     private let isServerPushed: Bool
 
-    private let providerConfiguration: OpenVPN.Configuration?
-
     @State
     private var isImporting = false
 
@@ -56,7 +54,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
         draft = ModuleDraft(module: module)
         impl = nil
         isServerPushed = true
-        providerConfiguration = nil
         assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
     }
 
@@ -64,7 +61,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
         self.draft = draft
         impl = parameters.impl as? OpenVPNModule.Implementation
         isServerPushed = false
-        providerConfiguration = try? draft.module.providerSelection?.configuration()
     }
 
     var body: some View {
@@ -76,7 +72,6 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 isImporting: $isImporting,
                 errorHandler: errorHandler
             ))
-            .themeAnimation(on: draft.module.providerId, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
@@ -98,20 +93,8 @@ private extension OpenVPNView {
                 configuration: $draft.module.configurationBuilder ?? .init(),
                 credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
             )
-        } else if draft.module.providerSelection != nil {
-            providerConfiguration
-                .map { cfg in
-                    Section {
-                        cfg.remotes.map {
-                            remotesLink(with: $0)
-                        }
-                        providerConfigurationLink(with: cfg)
-                    }
-                }
-                .modifier(providerModifier)
         } else {
             ModuleImportSection(isImporting: $isImporting)
-                .modifier(providerModifier)
         }
     }
 
@@ -127,25 +110,6 @@ private extension OpenVPNView {
             Text(Strings.Modules.Openvpn.remotes)
                 .themeTrailingValue(remotes.count.localizedEntries)
         }
-    }
-
-    func providerConfigurationLink(with configuration: OpenVPN.Configuration) -> some View {
-        NavigationLink(Strings.Global.Nouns.configuration, value: ProfileRoute(OpenVPNModule.Subroute.providerConfiguration(configuration)))
-    }
-
-    var providerModifier: some ViewModifier {
-        ProviderContentModifier(
-            providerId: providerId,
-            providerPreferences: nil,
-            selectedEntity: providerEntity,
-            entityDestination: ProfileRoute(OpenVPNModule.Subroute.providerServer),
-            paywallReason: $paywallReason,
-            providerRows: providerRows
-        )
-    }
-
-    func providerRows() -> some View {
-        ThemeModulePush(caption: Strings.Modules.Openvpn.credentials, route: ProfileRoute(OpenVPNModule.Subroute.credentials))
     }
 }
 

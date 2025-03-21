@@ -93,7 +93,7 @@ private extension ProviderFiltersView {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Views.Vpn.preset, selection: $model.filters.presetId) {
+        Picker(Strings.Views.Providers.preset, selection: $model.filters.presetId) {
             Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.presets, id: \.presetId) {

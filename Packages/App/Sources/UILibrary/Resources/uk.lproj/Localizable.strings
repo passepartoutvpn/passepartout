@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Ім'я профілю порожнє.";
 "errors.app.import" = "Не вдалося імпортувати профілі.";
 "errors.app.malformed_module" = "Модуль %@ некоректний. %@";
-"errors.app.passepartout.connection_module_required" = "Модуль маршрутизації можна увімкнути лише разом із підключенням.";
 "errors.app.passepartout.corrupt_provider_module" = "Не вдалося підключитися до сервера постачальника (причина=%@).";
 "errors.app.passepartout.default" = "Не вдалося виконати операцію (код=%@).";
 "errors.app.passepartout.incompatible_modules" = "Деякі активні модулі несумісні, спробуйте активувати лише один.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Очистити фільтри";
 "views.providers.last_updated" = "Останнє оновлення %@";
 "views.providers.last_updated.loading" = "Завантаження...";
-"views.providers.no_provider" = "Жодного";
+"views.providers.module" = "Тип";
 "views.providers.only_favorites" = "Тільки улюблені";
+"views.providers.preset" = "Попередньо встановлено";
 "views.providers.refresh_infrastructure" = "Оновити інфраструктуру";
 "views.providers.select_entity" = "Вибрати";
+"views.providers.select_module" = "Виберіть тип";
 "views.providers.select_provider" = "Немає провайдера";
 "views.purchased.no_purchases" = "Немає покупок";
 "views.purchased.rows.build_number" = "Номер збірки";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ є проектом, який підтримується %@.\n\nВихідний код доступний публічно на GitHub під ліцензією GPLv3. Посилання можна знайти на домашній сторінці.";
 "views.vpn.category.any" = "Усі категорії";
 "views.vpn.no_servers" = "Немає серверів";
-"views.vpn.preset" = "Попередньо встановлено";

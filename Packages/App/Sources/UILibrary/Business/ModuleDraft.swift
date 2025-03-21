@@ -36,8 +36,12 @@ public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {
 
     public var module: T {
         get {
-            guard let foundModule = editor?.module(withId: moduleId) else {
-                fatalError("Module not found in editor: \(moduleId)")
+            guard let editor else {
+                fatalError("Editor is nil")
+            }
+            guard let foundModule = editor.module(withId: moduleId) else {
+//                fatalError("Module not found in editor: \(moduleId)")
+                return T.empty()
             }
             guard let matchingModule = foundModule as? T else {
                 fatalError("Type mismatch when binding to editor module: \(type(of: foundModule)) != \(T.self)")

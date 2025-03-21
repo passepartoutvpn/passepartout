@@ -42,6 +42,10 @@ final class MockProfileProcessor: ProfileProcessor {
         profile.name
     }
 
+    func migrated(_ profile: Profile) throws -> Profile? {
+        nil
+    }
+
     func isIncluded(_ profile: Profile) -> Bool {
         isIncludedCount += 1
         return isIncludedBlock(profile)

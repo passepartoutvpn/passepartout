@@ -106,7 +106,7 @@ public struct ThemeModuleTextList: View {
                                 } label: {
                                     ThemeImage(.copy)
                                 }
-                                // TODO: #XXX, necessary to avoid cell selection
+                                // XXX: #584, necessary to avoid cell selection
                                 .buttonStyle(.borderless)
                             }
                         }

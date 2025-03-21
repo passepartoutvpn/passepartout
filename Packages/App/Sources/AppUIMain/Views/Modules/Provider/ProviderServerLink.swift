@@ -1,8 +1,8 @@
 //
-//  ModuleDraftEditing+UI.swift
+//  ProviderServerLink.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/20/24.
+//  Created by Davide De Rosa on 3/16/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,29 +26,14 @@
 import PassepartoutKit
 import SwiftUI
 
-@MainActor
-extension ModuleDraftEditing where Draft: MutableProviderSelecting {
-    public var providerId: Binding<ProviderID?> {
-        Binding {
-            draft.module.providerId
-        } set: {
-            draft.module.providerId = $0
-        }
-    }
+struct ProviderServerLink: View {
+    let entity: ProviderEntity?
 
-    public var providerEntity: Binding<ProviderEntity<Draft.CustomProviderSelection.Template>?> {
-        Binding {
-            draft.module.providerEntity
-        } set: {
-            draft.module.providerEntity = $0
+    var body: some View {
+        NavigationLink(value: ProfileRoute(ProviderModule.Subroute.server)) {
+            Text(Strings.Global.Nouns.server)
+                .themeTrailingValue(entity?.localizedDescription)
         }
-    }
-
-    public var providerOptions: Binding<Set<Draft.CustomProviderSelection.Option>?> {
-        Binding {
-            draft.module.providerOptions
-        } set: {
-            draft.module.providerOptions = $0
-        }
+        .uiAccessibility(.Profile.providerServerLink)
     }
 }

@@ -44,19 +44,17 @@ extension ProfileManager {
                     builder.attributes.isAvailableForTV = parameters.isTV
 
                     for moduleType in parameters.moduleTypes {
-                        var moduleBuilder = moduleType.newModule(with: registry, providerId: parameters.providerId)
-
-                        if moduleBuilder.buildsConnectionModule {
-                            assert((moduleBuilder as? any ProviderSelecting)?.providerId == parameters.providerId)
-                        }
+                        var moduleBuilder = moduleType.newModule(with: registry)
 
                         if parameters.name == "Hide.me" {
-                            if var ovpnBuilder = moduleBuilder as? OpenVPNModule.Builder {
-#if !os(tvOS)
-                                ovpnBuilder.isInteractive = true
-#endif
-                                ovpnBuilder.providerEntity = mockHideMeEntity
-                                ovpnBuilder.credentials = OpenVPN.Credentials.Builder(username: "foo", password: "bar").build()
+                            if var ovpnBuilder = moduleBuilder as? ProviderModule.Builder {
+                                ovpnBuilder.providerId = parameters.providerId
+                                ovpnBuilder.providerModuleType = .openVPN
+                                ovpnBuilder.entity = mockHideMeEntity
+                                let credentials = OpenVPN.Credentials.Builder(username: "foo", password: "bar").build()
+                                var options = OpenVPNProviderTemplate.Options()
+                                options.credentials = credentials
+                                try ovpnBuilder.setOptions(options, for: moduleType)
                                 moduleBuilder = ovpnBuilder
                             } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
 #if !os(tvOS)
@@ -140,45 +138,46 @@ private extension ProfileManager {
     static let mockParameters: [Parameters] = [
         Parameters("CloudFlare DoT", false, false, [.dns]),
         Parameters("Coffee VPN", true, false, [.wireGuard, .onDemand]),
-        Parameters("Hide.me", true, true, [.openVPN, .onDemand, .dns, .ip], .hideme),
+        Parameters("Hide.me", true, true, [.provider, .onDemand, .dns, .ip], .hideme),
         Parameters("My VPS", true, true, [.openVPN, .onDemand]),
         Parameters("Office", true, false, [.onDemand, .httpProxy]),
         Parameters("Personal DoH", false, false, [.dns, .onDemand])
     ]
 
-    static var mockHideMeEntity: ProviderEntity<OpenVPNProviderTemplate> {
+    static var mockHideMeEntity: ProviderEntity {
         do {
             var cfgBuilder = OpenVPN.Configuration.Builder()
             cfgBuilder.ca = .init(pem: "...")
             let cfg = try cfgBuilder.tryBuild(isClient: false)
-            let cfgData = try JSONEncoder().encode(cfg)
+            let endpoints: [EndpointProtocol] = [.init(.udp, 1194)]
+            let template = OpenVPNProviderTemplate(configuration: cfg, endpoints: endpoints)
+            let templateData = try JSONEncoder().encode(template)
 
-            let preset = AnyProviderPreset(
+            let preset = ProviderPreset(
                 providerId: .hideme,
                 presetId: "default",
                 description: "Default",
-                endpoints: [.init(.udp, 1194)],
-                configurationIdentifier: "OpenVPN",
-                template: cfgData
+                moduleType: .openVPN,
+                templateData: templateData
             )
 
             return ProviderEntity(
                 server: .init(
                     metadata: .init(
                         providerId: .hideme,
-                        serverId: "be-v4",
-                        supportedConfigurationIdentifiers: ["OpenVPN"],
-                        supportedPresetIds: nil,
                         categoryName: "default",
                         countryCode: "BE",
                         otherCountryCodes: nil,
                         area: nil
                     ),
+                    serverId: "be-v4",
                     hostname: "be-v4.hideservers.net",
-                    ipAddresses: nil
+                    ipAddresses: nil,
+                    supportedModuleTypes: [.openVPN],
+                    supportedPresetIds: nil
                 ),
-                heuristic: .sameCountry("BE"),
-                preset: try preset.ofType(OpenVPNProviderTemplate.self)
+                preset: preset,
+                heuristic: .sameCountry("BE")
             )
         } catch {
             fatalError("Unable to build Hide.me entity: \(error)")

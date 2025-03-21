@@ -29,10 +29,15 @@ import PassepartoutKit
 import UILibrary
 
 extension Dependencies {
-    func appProcessor(apiManager: APIManager, iapManager: IAPManager) -> DefaultAppProcessor {
+    func appProcessor(
+        apiManager: APIManager,
+        iapManager: IAPManager,
+        registry: Registry
+    ) -> DefaultAppProcessor {
         DefaultAppProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
+            registry: registry,
             title: profileTitle
         )
     }

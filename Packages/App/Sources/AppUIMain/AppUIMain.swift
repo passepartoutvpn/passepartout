@@ -54,31 +54,12 @@ public final class AppUIMain: UILibraryConfiguring {
 
 private extension AppUIMain {
     func assertMissingImplementations(with registry: Registry) {
-        let providerModuleTypes: Set<ModuleType> = [
-            .openVPN,
-            .wireGuard
-        ]
         ModuleType.allCases.forEach { moduleType in
-            do {
-                let builder = moduleType.newModule(with: registry)
-                let module = try builder.tryBuild()
+            let builder = moduleType.newModule(with: registry)
 
-                // ModuleViewProviding
-                guard builder is any ModuleViewProviding else {
-                    fatalError("\(moduleType): is not ModuleViewProviding")
-                }
-
-                // ProviderServerCoordinatorSupporting
-                if providerModuleTypes.contains(moduleType) {
-                    guard module is any ProviderServerCoordinatorSupporting else {
-                        fatalError("\(moduleType): is not ProviderServerCoordinatorSupporting")
-                    }
-                }
-            } catch {
-                if (error as? PassepartoutError)?.code == .incompleteModule {
-                    return
-                }
-                fatalError("\(moduleType): empty module is not buildable: \(error)")
+            // ModuleViewProviding
+            guard builder is any ModuleViewProviding else {
+                fatalError("\(moduleType): is not ModuleViewProviding")
             }
         }
     }

@@ -71,6 +71,23 @@ public final class ProfileManager: ObservableObject {
         didSet {
             didChange.send(.localProfiles)
 
+            if let processor {
+                let toMigrate = allProfiles.values.compactMap {
+                    do {
+                        return try processor.migrated($0)
+                    } catch {
+                        pp_log(.App.profiles, .error, "Unable to migrate profile \($0.id): \(error)")
+                        return nil
+                    }
+                }
+                if !toMigrate.isEmpty {
+                    pp_log(.App.profiles, .info, "Migrate profiles: \(toMigrate.map(\.id))")
+                    toMigrate.forEach {
+                        allProfiles[$0.id] = $0
+                    }
+                }
+            }
+
             reloadFilteredProfiles(with: searchSubject.value)
             reloadRequiredFeatures()
         }

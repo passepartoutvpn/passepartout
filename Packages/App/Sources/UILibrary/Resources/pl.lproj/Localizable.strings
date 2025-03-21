@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Nazwa profilu jest pusta.";
 "errors.app.import" = "Nie można zaimportować profili.";
 "errors.app.malformed_module" = "Moduł %@ jest uszkodzony. %@";
-"errors.app.passepartout.connection_module_required" = "Moduł trasowania można włączyć tylko razem z połączeniem.";
 "errors.app.passepartout.corrupt_provider_module" = "Nie można połączyć się z serwerem dostawcy (powód=%@).";
 "errors.app.passepartout.default" = "Nie można ukończyć operacji (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Niektóre aktywne moduły są niekompatybilne. Spróbuj aktywować tylko jeden.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Wyczyść filtry";
 "views.providers.last_updated" = "Ostatnia aktualizacja: %@";
 "views.providers.last_updated.loading" = "Ładowanie...";
-"views.providers.no_provider" = "Brak";
+"views.providers.module" = "Typ";
 "views.providers.only_favorites" = "Tylko ulubione";
+"views.providers.preset" = "Wstępna konfiguracja";
 "views.providers.refresh_infrastructure" = "Odśwież infrastrukturę";
 "views.providers.select_entity" = "Wybierz";
+"views.providers.select_module" = "Wybierz typ";
 "views.providers.select_provider" = "Brak dostawcy";
 "views.purchased.no_purchases" = "Brak zakupów";
 "views.purchased.rows.build_number" = "Numer kompilacji";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ to projekt utrzymywany przez %@.\n\nKod źródłowy jest dostępny publicznie na GitHub pod licencją GPLv3. Linki można znaleźć na stronie głównej.";
 "views.vpn.category.any" = "Wszystkie kategorie";
 "views.vpn.no_servers" = "Brak serwerów";
-"views.vpn.preset" = "Wstępna konfiguracja";

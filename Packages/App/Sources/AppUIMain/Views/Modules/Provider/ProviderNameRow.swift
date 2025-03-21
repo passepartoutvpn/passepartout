@@ -1,5 +1,5 @@
 //
-//  ProviderServerRow.swift
+//  ProviderNameRow.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/12/25.
@@ -26,17 +26,18 @@
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderServerRow<Template>: View where Template: IdentifiableConfiguration {
-    let selectedEntity: ProviderEntity<Template>?
+struct ProviderNameRow: View {
+
+    @EnvironmentObject
+    private var apiManager: APIManager
+
+    let id: ProviderID
 
     var body: some View {
-        HStack {
-            Text(Strings.Global.Nouns.server)
-            if let selectedEntity {
-                Spacer()
-                Text(selectedEntity.localizedDescription)
-                    .foregroundStyle(.secondary)
+        apiManager.provider(withId: id)
+            .map {
+                Text(Strings.Global.Nouns.name)
+                    .themeTrailingValue($0.description)
             }
-        }
     }
 }

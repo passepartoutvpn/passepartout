@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutKit
 
 public struct EditableProfile: MutableProfileType {
+    public let version: Int? = nil
+
     public var id: UUID
 
     public var name: String
@@ -104,15 +106,5 @@ extension Module {
         }
         let builder = buildableModule.builder() as any BuilderType
         return builder as? any ModuleBuilder
-    }
-}
-
-// MARK: -
-
-private extension EditableProfile {
-    var activeConnectionModule: (any ModuleBuilder)? {
-        modules.first {
-            isActiveModule(withId: $0.id) && $0.buildsConnectionModule
-        }
     }
 }

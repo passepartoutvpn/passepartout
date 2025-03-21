@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Profielnaam is leeg.";
 "errors.app.import" = "Kan profielen niet importeren.";
 "errors.app.malformed_module" = "Module %@ is ongeldig. %@";
-"errors.app.passepartout.connection_module_required" = "De routeringsmodule kan alleen worden ingeschakeld samen met een verbinding.";
 "errors.app.passepartout.corrupt_provider_module" = "Kan geen verbinding maken met de provider-server (reden=%@).";
 "errors.app.passepartout.default" = "Kan bewerking niet voltooien (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Sommige actieve modules zijn incompatibel. Probeer er slechts één te activeren.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";
 "views.providers.last_updated.loading" = "Laden...";
-"views.providers.no_provider" = "Geen";
+"views.providers.module" = "Type";
 "views.providers.only_favorites" = "Alleen favorieten";
+"views.providers.preset" = "Voorinstelling";
 "views.providers.refresh_infrastructure" = "Infrastructuur vernieuwen";
 "views.providers.select_entity" = "Selecteer";
+"views.providers.select_module" = "Selecteer type";
 "views.providers.select_provider" = "Geen provider";
 "views.purchased.no_purchases" = "Geen aankopen";
 "views.purchased.rows.build_number" = "Buildnummer";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ is een project onderhouden door %@.\n\nDe broncode is openbaar beschikbaar op GitHub onder de GPLv3-licentie. Je kunt links vinden op de startpagina.";
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
-"views.vpn.preset" = "Voorinstelling";

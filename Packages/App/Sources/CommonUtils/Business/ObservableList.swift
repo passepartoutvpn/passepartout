@@ -33,6 +33,12 @@ public final class ObservableList<T>: ObservableObject where T: Equatable {
 
     private let remove: (T) -> Void
 
+    public init() {
+        contains = { _ in false }
+        add = { _ in }
+        remove = { _ in }
+    }
+
     public init(
         contains: @escaping (T) -> Bool,
         add: @escaping (T) -> Void,

@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "配置文件名称为空。";
 "errors.app.import" = "无法导入配置文件。";
 "errors.app.malformed_module" = "模块 %@ 格式错误。%@";
-"errors.app.passepartout.connection_module_required" = "路由模块只能与连接模块一起启用。";
 "errors.app.passepartout.corrupt_provider_module" = "无法连接到提供商服务器（原因=%@）。";
 "errors.app.passepartout.default" = "无法完成操作（代码=%@）。";
 "errors.app.passepartout.incompatible_modules" = "某些激活的模块不兼容，请尝试仅激活一个模块。";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "清除筛选";
 "views.providers.last_updated" = "最近更新于 %@";
 "views.providers.last_updated.loading" = "加载中...";
-"views.providers.no_provider" = "无";
+"views.providers.module" = "类型";
 "views.providers.only_favorites" = "仅收藏";
+"views.providers.preset" = "预设";
 "views.providers.refresh_infrastructure" = "刷新基础设施";
 "views.providers.select_entity" = "选择";
+"views.providers.select_module" = "选择类型";
 "views.providers.select_provider" = "无提供商";
 "views.purchased.no_purchases" = "无购买记录";
 "views.purchased.rows.build_number" = "构建编号";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ 是由 %@ 维护的项目。\n\n源代码在 GitHub 上公开提供，遵循 GPLv3 许可协议，您可以在主页找到相关链接。";
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
-"views.vpn.preset" = "预设";

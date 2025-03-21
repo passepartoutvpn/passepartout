@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Имя профиля пустое.";
 "errors.app.import" = "Не удалось импортировать профили.";
 "errors.app.malformed_module" = "Модуль %@ поврежден. %@";
-"errors.app.passepartout.connection_module_required" = "Модуль маршрутизации можно активировать только вместе с подключением.";
 "errors.app.passepartout.corrupt_provider_module" = "Не удалось подключиться к серверу поставщика (причина=%@).";
 "errors.app.passepartout.default" = "Не удалось выполнить операцию (код=%@).";
 "errors.app.passepartout.incompatible_modules" = "Некоторые активные модули несовместимы, попробуйте активировать только один.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Очистить фильтры";
 "views.providers.last_updated" = "Последнее обновление %@";
 "views.providers.last_updated.loading" = "Загрузка...";
-"views.providers.no_provider" = "Нет";
+"views.providers.module" = "Тип";
 "views.providers.only_favorites" = "Только избранное";
+"views.providers.preset" = "Предустановка";
 "views.providers.refresh_infrastructure" = "Обновить инфраструктуру";
 "views.providers.select_entity" = "Выбрать";
+"views.providers.select_module" = "Выбрать тип";
 "views.providers.select_provider" = "Нет провайдера";
 "views.purchased.no_purchases" = "Нет покупок";
 "views.purchased.rows.build_number" = "Номер сборки";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ — проект, поддерживаемый %@.\n\nИсходный код доступен на GitHub под лицензией GPLv3, ссылки можно найти на домашней странице.";
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
-"views.vpn.preset" = "Предустановка";

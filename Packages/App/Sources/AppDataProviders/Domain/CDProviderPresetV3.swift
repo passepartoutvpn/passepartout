@@ -1,8 +1,8 @@
 //
-//  ProviderServerCoordinatorSupporting.swift
+//  CDProviderPresetV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/16/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
-import PassepartoutKit
-import SwiftUI
+import CoreData
+import Foundation
 
-public protocol ProviderServerCoordinatorSupporting {
+@objc(CDProviderPresetV3)
+final class CDProviderPresetV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDProviderPresetV3> {
+        NSFetchRequest<CDProviderPresetV3>(entityName: "CDProviderPresetV3")
+    }
 
-    @MainActor
-    func providerServerCoordinator(
-        selectTitle: String,
-        onSelect: @escaping (Module) async throws -> Void,
-        errorHandler: ErrorHandler
-    ) -> AnyView
+    @NSManaged var providerId: String?
+    @NSManaged var presetId: String?
+    @NSManaged var presetDescription: String?
+    @NSManaged var moduleType: String?
+    @NSManaged var templateData: Data?
 }

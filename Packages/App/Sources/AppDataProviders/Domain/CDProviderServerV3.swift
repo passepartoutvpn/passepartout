@@ -1,8 +1,8 @@
 //
-//  ModuleType.swift
+//  CDProviderServerV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/19/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,32 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
-import PassepartoutKit
 
-public struct ModuleType: Hashable {
-    public let rawValue: String
-
-    public let isConnection: Bool
-
-    init(_ moduleType: Module.Type) {
-        self.init(moduleType.moduleHandler, isConnection: moduleType is ConnectionModule.Type)
+@objc(CDProviderServerV3)
+final class CDProviderServerV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDProviderServerV3> {
+        NSFetchRequest<CDProviderServerV3>(entityName: "CDProviderServerV3")
     }
 
-    init(_ moduleHandler: ModuleHandler, isConnection: Bool) {
-        rawValue = moduleHandler.id.name
-        self.isConnection = isConnection
-    }
-}
-
-extension ModuleType: Identifiable {
-    public var id: String {
-        rawValue
-    }
-}
-
-extension ModuleType: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
+    @NSManaged var serverId: String?
+    @NSManaged var hostname: String?
+    @NSManaged var ipAddresses: Data?
+    @NSManaged var providerId: String?
+    @NSManaged var countryCode: String?
+    @NSManaged var supportedModuleTypes: String?
+    @NSManaged var supportedPresetIds: String?
+    @NSManaged var categoryName: String?
+    @NSManaged var localizedCountry: String?
+    @NSManaged var otherCountryCodes: String?
+    @NSManaged var area: String?
 }

@@ -46,7 +46,7 @@ extension ProviderFiltersView {
         private(set) var countries: [CodeWithDescription]
 
         @Published
-        private(set) var presets: [AnyProviderPreset]
+        private(set) var presets: [ProviderPreset]
 
         @Published
         var filters: ProviderFilters
@@ -94,7 +94,7 @@ extension ProviderFiltersView {
 
             // only presets known in filtered servers
             var knownPresets = options.presets
-            let allPresetIds = Set(servers.compactMap(\.metadata.supportedPresetIds).joined())
+            let allPresetIds = Set(servers.compactMap(\.supportedPresetIds).joined())
             if !allPresetIds.isEmpty {
                 knownPresets = knownPresets
                     .filter {
@@ -122,7 +122,7 @@ private extension ProviderFiltersView.Model {
             }
     }
 
-    func setPresets(with presets: Set<AnyProviderPreset>) {
+    func setPresets(with presets: Set<ProviderPreset>) {
         self.presets = presets
             .sorted {
                 $0.description < $1.description

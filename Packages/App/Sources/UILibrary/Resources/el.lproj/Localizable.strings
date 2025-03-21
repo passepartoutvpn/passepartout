@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Το όνομα του προφίλ είναι κενό.";
 "errors.app.import" = "Δεν ήταν δυνατή η εισαγωγή προφίλ.";
 "errors.app.malformed_module" = "Το μονάδα %@ είναι εσφαλμένη. %@";
-"errors.app.passepartout.connection_module_required" = "Η μονάδα δρομολόγησης μπορεί να ενεργοποιηθεί μόνο μαζί με μια σύνδεση.";
 "errors.app.passepartout.corrupt_provider_module" = "Δεν ήταν δυνατή η σύνδεση στον διακομιστή παρόχου (λόγος=%@).";
 "errors.app.passepartout.default" = "Δεν ήταν δυνατή η ολοκλήρωση της λειτουργίας (κωδικός=%@).";
 "errors.app.passepartout.incompatible_modules" = "Μερικές ενεργές μονάδες είναι ασύμβατες, δοκιμάστε να ενεργοποιήσετε μόνο μία.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Καθαρισμός φίλτρων";
 "views.providers.last_updated" = "Τελευταία ενημέρωση στις %@";
 "views.providers.last_updated.loading" = "Φόρτωση...";
-"views.providers.no_provider" = "Κανένας";
+"views.providers.module" = "Τύπος";
 "views.providers.only_favorites" = "Μόνο αγαπημένα";
+"views.providers.preset" = "Προκαθορισμένο";
 "views.providers.refresh_infrastructure" = "Ανανέωση υποδομής";
 "views.providers.select_entity" = "Επιλογή";
+"views.providers.select_module" = "Επιλέξτε τύπο";
 "views.providers.select_provider" = "Κανένας πάροχος";
 "views.purchased.no_purchases" = "Δεν υπάρχουν αγορές";
 "views.purchased.rows.build_number" = "Αριθμός κατασκευής";
@@ -321,4 +322,3 @@
 "views.version.extra" = "Το %@ είναι ένα έργο που συντηρείται από τον/την %@.\n\nΟ πηγαίος κώδικας είναι διαθέσιμος δημόσια στο GitHub υπό την άδεια GPLv3. Μπορείτε να βρείτε τους συνδέσμους στην αρχική σελίδα.";
 "views.vpn.category.any" = "Όλες οι κατηγορίες";
 "views.vpn.no_servers" = "Δεν υπάρχουν διακομιστές";
-"views.vpn.preset" = "Προκαθορισμένο";

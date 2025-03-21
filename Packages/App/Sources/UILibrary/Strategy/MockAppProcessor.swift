@@ -36,6 +36,10 @@ final class MockAppProcessor {
 }
 
 extension MockAppProcessor: ProfileProcessor {
+    func migrated(_ profile: Profile) -> Profile? {
+        nil
+    }
+
     func isIncluded(_ profile: Profile) -> Bool {
         true
     }

@@ -343,7 +343,7 @@ public struct ThemeCopiableText<Value, ValueView>: View where Value: CustomStrin
             } label: {
                 ThemeImage(.copy)
             }
-            // TODO: #XXX, necessary to avoid cell selection
+            // XXX: #584, necessary to avoid cell selection
             .buttonStyle(.borderless)
         }
     }

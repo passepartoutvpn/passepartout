@@ -29,12 +29,12 @@ import UILibrary
 
 extension Profile {
     func providerSelectorButton(onSelect: ((Profile) -> Void)?) -> some View {
-        selectedProvider
-            .map { _, selection in
+        activeProviderModule
+            .map { module in
                 Button {
                     onSelect?(self)
                 } label: {
-                    ProviderCountryFlag(entity: selection.entityHeader)
+                    ProviderCountryFlag(entity: module.entity?.header)
                 }
                 .buttonStyle(.plain)
             }
@@ -42,7 +42,7 @@ extension Profile {
 }
 
 private struct ProviderCountryFlag: View {
-    let entity: ProviderEntityHeader?
+    let entity: ProviderEntity.Header?
 
     var body: some View {
         ThemeCountryFlag(

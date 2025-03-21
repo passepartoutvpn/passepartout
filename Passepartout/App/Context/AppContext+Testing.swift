@@ -45,7 +45,11 @@ extension AppContext {
                 []
             }
         )
-        let processor = dependencies.appProcessor(apiManager: apiManager, iapManager: iapManager)
+        let processor = dependencies.appProcessor(
+            apiManager: apiManager,
+            iapManager: iapManager,
+            registry: registry
+        )
         let profileManager: ProfileManager = .forUITesting(
             withRegistry: dependencies.registry,
             processor: processor

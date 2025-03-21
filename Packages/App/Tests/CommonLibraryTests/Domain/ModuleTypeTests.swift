@@ -30,7 +30,7 @@ import XCTest
 
 final class ModuleTypeTests: XCTestCase {
     func test_givenModuleType_whenModuleIsConnectionType_thenIsConnection() {
-        XCTAssertTrue(ModuleType(OpenVPNModule.self).isConnection)
-        XCTAssertTrue(ModuleType(WireGuardModule.self).isConnection)
+        XCTAssertTrue(ModuleType.openVPN.isConnection)
+        XCTAssertTrue(ModuleType.wireGuard.isConnection)
     }
 }

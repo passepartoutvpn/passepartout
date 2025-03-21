@@ -134,7 +134,7 @@ extension ProfileImporterTests {
 
 private struct SomeModule: Module {
     struct Implementation: ModuleImplementation {
-        var moduleHandlerId: ModuleHandler.ID {
+        var moduleHandlerId: ModuleType {
             moduleHandler.id
         }
     }

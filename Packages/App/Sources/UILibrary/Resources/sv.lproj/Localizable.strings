@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Profilnamnet är tomt.";
 "errors.app.import" = "Kan inte importera profiler.";
 "errors.app.malformed_module" = "Modulen %@ är felaktig. %@";
-"errors.app.passepartout.connection_module_required" = "Routningsmodulen kan endast aktiveras tillsammans med en anslutning.";
 "errors.app.passepartout.corrupt_provider_module" = "Kan inte ansluta till leverantörsservern (anledning=%@).";
 "errors.app.passepartout.default" = "Kan inte slutföra åtgärden (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Vissa aktiva moduler är inkompatibla, försök att endast aktivera en.";
@@ -304,10 +303,12 @@
 "views.providers.clear_filters" = "Rensa filter";
 "views.providers.last_updated" = "Senast uppdaterad %@";
 "views.providers.last_updated.loading" = "Laddar...";
-"views.providers.no_provider" = "Ingen";
+"views.providers.module" = "Typ";
 "views.providers.only_favorites" = "Endast favoriter";
+"views.providers.preset" = "Förinställning";
 "views.providers.refresh_infrastructure" = "Uppdatera infrastruktur";
 "views.providers.select_entity" = "Välj";
+"views.providers.select_module" = "Välj typ";
 "views.providers.select_provider" = "Ingen leverantör";
 "views.purchased.no_purchases" = "Inga köp";
 "views.purchased.rows.build_number" = "Byggnummer";
@@ -321,4 +322,3 @@
 "views.version.extra" = "%@ är ett projekt som underhålls av %@.\n\nKällkoden är offentligt tillgänglig på GitHub under GPLv3-licensen. Du hittar länkar på hemsidan.";
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
-"views.vpn.preset" = "Förinställning";

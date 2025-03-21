@@ -40,6 +40,7 @@ public final class DefaultModuleViewFactory: ModuleViewFactory {
         let result = editor.moduleViewProvider(withId: moduleId, registry: registry)
         if let result {
             AnyView(result.provider.moduleView(with: .init(
+                registry: registry,
                 editor: editor,
                 impl: result.impl
             )))

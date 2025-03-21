@@ -56,7 +56,7 @@ extension Dependencies {
 
 private extension Dependencies {
     static let sharedRegistry = Registry(
-        withKnownHandlers: true,
+        withKnown: true,
         allImplementations: [
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
