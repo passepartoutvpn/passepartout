@@ -294,14 +294,11 @@ private extension ProviderView {
        }
     }
 
-    @discardableResult
-    func refreshIndex() async -> Bool {
+    func refreshIndex() async {
         do {
             try await apiManager.fetchIndex()
-            return true
         } catch {
             pp_log(.app, .error, "Unable to fetch index: \(error)")
-            return false
         }
     }
 
