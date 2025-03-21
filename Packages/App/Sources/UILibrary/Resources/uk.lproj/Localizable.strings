@@ -161,6 +161,7 @@
 "modules.general.sections.storage.tv.footer" = "Для спільного використання профілів з Apple TV потрібен iCloud.";
 "modules.general.sections.storage.tv.footer.purchase" = "Придбайте, щоб зняти обмеження.";
 "modules.http_proxy.bypass_domains.add" = "Додати домен у винятки";
+"modules.ip.address.footer" = "Залиште порожнім для автоматичного призначення.";
 "modules.ip.routes.add_family" = "Додати %@";
 "modules.ip.routes.exclude" = "Виключити маршрут";
 "modules.ip.routes.excluded" = "Виключені маршрути";

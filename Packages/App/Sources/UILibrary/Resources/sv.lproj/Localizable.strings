@@ -161,6 +161,7 @@
 "modules.general.sections.storage.tv.footer" = "iCloud krävs för att dela dina profiler med din Apple TV.";
 "modules.general.sections.storage.tv.footer.purchase" = "Köp för att ta bort begränsningen.";
 "modules.http_proxy.bypass_domains.add" = "Lägg till kringgående domän";
+"modules.ip.address.footer" = "Lämna tomt för att tilldela automatiskt.";
 "modules.ip.routes.add_family" = "Lägg till %@";
 "modules.ip.routes.exclude" = "Exkludera rutt";
 "modules.ip.routes.excluded" = "Exkluderade rutter";

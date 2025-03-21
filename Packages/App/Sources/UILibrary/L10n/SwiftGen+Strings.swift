@@ -452,6 +452,10 @@ public enum Strings {
       }
     }
     public enum Ip {
+      public enum Address {
+        /// Leave empty to assign automatically.
+        public static let footer = Strings.tr("Localizable", "modules.ip.address.footer", fallback: "Leave empty to assign automatically.")
+      }
       public enum Routes {
         /// Add %@
         public static func addFamily(_ p1: Any) -> String {

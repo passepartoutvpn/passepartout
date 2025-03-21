@@ -33,6 +33,9 @@ struct IPView: View, ModuleDraftEditing {
     var draft: ModuleDraft<IPModule.Builder>
 
     @State
+    private var subnets: [Address.Family: String] = [:]
+
+    @State
     private var routePresentation: RoutePresentation?
 
     init(draft: ModuleDraft<IPModule.Builder>, parameters: ModuleViewParameters) {
@@ -41,12 +44,14 @@ struct IPView: View, ModuleDraftEditing {
 
     var body: some View {
         Group {
-            ipSections(for: .v4)
-            ipSections(for: .v6)
+            ipSections(for: $draft.module.ipv4 ?? IPSettings(subnet: nil), family: .v4)
+            ipSections(for: $draft.module.ipv6 ?? IPSettings(subnet: nil), family: .v6)
             interfaceSection
         }
         .moduleView(draft: draft)
         .themeModal(item: $routePresentation, content: routeModal)
+        .onLoad(perform: loadSubnets)
+        .onChange(of: subnets, perform: saveSubnets)
     }
 }
 
@@ -88,8 +93,20 @@ private extension IPView {
     }
 
     @ViewBuilder
-    func ipSections(for family: Address.Family) -> some View {
-        let ip = binding(forSettingsIn: family)
+    func ipSections(for ip: Binding<IPSettings>, family: Address.Family) -> some View {
+        Group {
+            ThemeModuleTextField(
+                caption: Strings.Global.Nouns.address,
+                value: $subnets[family] ?? "",
+                placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
+            )
+            .themeRowWithSubtitle(Strings.Modules.Ip.Address.footer)
+        }
+        .themeSection(
+            header: family.localizedDescription,
+            footer: Strings.Modules.Ip.Address.footer
+        )
+
         Group {
             ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
                 row(forRoute: item.element) {
@@ -105,7 +122,7 @@ private extension IPView {
                 }
             }
         }
-        .themeSection(header: family.localizedDescription)
+        .themeSection()
 
         Group {
             ForEach(Array(ip.wrappedValue.excludedRoutes.enumerated()), id: \.offset) { item in
@@ -122,6 +139,7 @@ private extension IPView {
                 }
             }
         }
+        .themeSection()
     }
 
     func row(forRoute route: Route, removeAction: @escaping () -> Void) -> some View {
@@ -151,16 +169,6 @@ private extension IPView {
 }
 
 private extension IPView {
-    func binding(forSettingsIn family: Address.Family) -> Binding<IPSettings> {
-        switch family {
-        case .v4:
-            return $draft.module.ipv4 ?? IPSettings(subnet: nil)
-
-        case .v6:
-            return $draft.module.ipv6 ?? IPSettings(subnet: nil)
-        }
-    }
-
     func routeModal(item: RoutePresentation) -> some View {
         NavigationStack {
             RouteView(family: item.family) { route in
@@ -207,9 +215,32 @@ private extension IPView {
     }
 }
 
+private extension IPView {
+    func loadSubnets() {
+        if let v4 = draft.module.ipv4?.subnet?.rawValue {
+            subnets[.v4] = v4
+        }
+        if let v6 = draft.module.ipv6?.subnet?.rawValue {
+            subnets[.v6] = v6
+        }
+    }
+
+    func saveSubnets(_ newSubnets: [Address.Family: String]) {
+        newSubnets.forEach { pair in
+            let subnet = Subnet(rawValue: pair.value)
+            switch pair.key {
+            case .v4:
+                draft.module.ipv4 = draft.module.ipv4?.with(subnet: subnet) ?? IPSettings(subnet: subnet)
+            case .v6:
+                draft.module.ipv6 = draft.module.ipv6?.with(subnet: subnet) ?? IPSettings(subnet: subnet)
+            }
+        }
+    }
+}
+
 #Preview {
     var module = IPModule.Builder()
-    module.ipv4 = IPSettings(subnet: nil)
+    module.ipv4 = IPSettings(subnet: .init(rawValue: "10.20.30.40/16"))
         .including(routes: [
             .init(defaultWithGateway: .ip("1.2.3.4", .v4)),
             .init(.init(rawValue: "5.5.0.0/16"), .init(rawValue: "5.5.5.5"))

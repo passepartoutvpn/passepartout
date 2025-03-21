@@ -161,6 +161,7 @@
 "modules.general.sections.storage.tv.footer" = "Απαιτείται iCloud για να μοιραστείτε τα προφίλ σας με το Apple TV σας.";
 "modules.general.sections.storage.tv.footer.purchase" = "Αγοράστε για να καταργήσετε τον περιορισμό.";
 "modules.http_proxy.bypass_domains.add" = "Προσθήκη τομέα παράκαμψης";
+"modules.ip.address.footer" = "Αφήστε το κενό για αυτόματη ανάθεση.";
 "modules.ip.routes.add_family" = "Προσθήκη %@";
 "modules.ip.routes.exclude" = "Εξαίρεση διαδρομής";
 "modules.ip.routes.excluded" = "Εξαιρούμενες διαδρομές";
