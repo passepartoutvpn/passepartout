@@ -161,6 +161,7 @@
 "modules.general.sections.storage.tv.footer" = "O iCloud é necessário para compartilhar seus perfis com a Apple TV.";
 "modules.general.sections.storage.tv.footer.purchase" = "Compre para remover a restrição.";
 "modules.http_proxy.bypass_domains.add" = "Adicionar domínio a ignorar";
+"modules.ip.address.automatic" = "Automático";
 "modules.ip.routes.add_family" = "Adicionar %@";
 "modules.ip.routes.exclude" = "Excluir rota";
 "modules.ip.routes.excluded" = "Rotas excluídas";
