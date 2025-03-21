@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UILibrary
@@ -72,9 +71,6 @@ private struct DestinationView: View {
     @Binding
     var path: NavigationPath
 
-    @StateObject
-    private var preferences = ModulePreferences()
-
     var body: some View {
         Group {
             switch route {
@@ -96,10 +92,6 @@ private struct DestinationView: View {
                 ProviderView.OpenVPNCredentialsView(draft: draft)
             }
         }
-        .modifier(ModulePreferencesModifier(
-            moduleId: draft.module.id,
-            preferences: preferences
-        ))
     }
 }
 
