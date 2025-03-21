@@ -1,3 +1,2 @@
-* Add preference to disable in-app purchases (#1241)
-* Resolve visual inconsistencies in module fields (#1240)
-* Import VPN configuration file into module (#1238)
+* Customize IPv4/6 address in Routing module (#1256)
+* Upgrade to OpenSSL 3.4.1 (#1248)
