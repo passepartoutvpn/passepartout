@@ -240,7 +240,7 @@ private extension IPView {
 
 #Preview {
     var module = IPModule.Builder()
-    module.ipv4 = IPSettings(subnet: nil)
+    module.ipv4 = IPSettings(subnet: .init(rawValue: "10.20.30.40/16"))
         .including(routes: [
             .init(defaultWithGateway: .ip("1.2.3.4", .v4)),
             .init(.init(rawValue: "5.5.0.0/16"), .init(rawValue: "5.5.5.5"))
