@@ -452,6 +452,10 @@ public enum Strings {
       }
     }
     public enum Ip {
+      public enum Address {
+        /// Automatic
+        public static let automatic = Strings.tr("Localizable", "modules.ip.address.automatic", fallback: "Automatic")
+      }
       public enum Routes {
         /// Add %@
         public static func addFamily(_ p1: Any) -> String {

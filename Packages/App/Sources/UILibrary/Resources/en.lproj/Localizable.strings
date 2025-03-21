@@ -170,6 +170,7 @@
 "modules.dns.search_domains.add" = "Add domain";
 "modules.http_proxy.bypass_domains.add" = "Add bypass domain";
 
+"modules.ip.address.automatic" = "Automatic";
 "modules.ip.routes.include" = "Include route";
 "modules.ip.routes.exclude" = "Exclude route";
 "modules.ip.routes.included" = "Included routes";

@@ -33,6 +33,9 @@ struct IPView: View, ModuleDraftEditing {
     var draft: ModuleDraft<IPModule.Builder>
 
     @State
+    private var addresses: [Address.Family: String] = [:]
+
+    @State
     private var routePresentation: RoutePresentation?
 
     init(draft: ModuleDraft<IPModule.Builder>, parameters: ModuleViewParameters) {
@@ -47,6 +50,8 @@ struct IPView: View, ModuleDraftEditing {
         }
         .moduleView(draft: draft)
         .themeModal(item: $routePresentation, content: routeModal)
+        .onLoad(perform: loadAddresses)
+        .onChange(of: addresses, perform: saveAddresses)
     }
 }
 
@@ -90,6 +95,15 @@ private extension IPView {
     @ViewBuilder
     func ipSections(for ip: Binding<IPSettings>, family: Address.Family) -> some View {
         Group {
+            ThemeModuleTextField(
+                caption: Strings.Global.Nouns.address,
+                value: $addresses[family] ?? "",
+                placeholder: Strings.Modules.Ip.Address.automatic
+            )
+        }
+        .themeSection(header: family.localizedDescription)
+
+        Group {
             ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
                 row(forRoute: item.element) {
                     ip.wrappedValue.removeIncluded(at: IndexSet(integer: item.offset))
@@ -104,7 +118,7 @@ private extension IPView {
                 }
             }
         }
-        .themeSection(header: family.localizedDescription)
+        .themeSection()
 
         Group {
             ForEach(Array(ip.wrappedValue.excludedRoutes.enumerated()), id: \.offset) { item in
@@ -121,6 +135,7 @@ private extension IPView {
                 }
             }
         }
+        .themeSection()
     }
 
     func row(forRoute route: Route, removeAction: @escaping () -> Void) -> some View {
@@ -192,6 +207,34 @@ private extension IPView {
                 }
             }
             .navigationTitle(item.localizedTitle)
+        }
+    }
+}
+
+private extension IPView {
+    func loadAddresses() {
+        if let v4 = draft.module.ipv4?.subnet?.address.rawValue {
+            addresses[.v4] = v4
+        }
+        if let v6 = draft.module.ipv6?.subnet?.address.rawValue {
+            addresses[.v6] = v6
+        }
+    }
+
+    func saveAddresses(_ addresses: [Address.Family: String]) {
+        addresses.forEach { pair in
+            let subnet: Subnet? = {
+                guard let addr = Address(rawValue: pair.value), addr.family != nil else {
+                    return nil
+                }
+                return Subnet(addr)
+            }()
+            switch pair.key {
+            case .v4:
+                draft.module.ipv4 = draft.module.ipv4?.with(subnet: subnet) ?? IPSettings(subnet: subnet)
+            case .v6:
+                draft.module.ipv6 = draft.module.ipv6?.with(subnet: subnet) ?? IPSettings(subnet: subnet)
+            }
         }
     }
 }
