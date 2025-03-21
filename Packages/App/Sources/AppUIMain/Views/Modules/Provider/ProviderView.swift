@@ -305,14 +305,11 @@ private extension ProviderView {
         }
     }
 
-    @discardableResult
-    func refreshInfrastructure(for newProviderId: ProviderID) async -> Bool {
+    func refreshInfrastructure(for newProviderId: ProviderID) async {
         do {
             try await apiManager.fetchInfrastructure(for: newProviderId)
-            return true
         } catch {
             pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
-            return false
         }
     }
 
