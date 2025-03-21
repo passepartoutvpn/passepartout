@@ -98,9 +98,9 @@ private extension ActiveProfileView {
 
     func detailView(for profile: Profile) -> some View {
         VStack(spacing: 10) {
-            if let connectionType = profile.localizedDescription(optionalStyle: .connectionType) {
+            if let primaryType = profile.localizedDescription(optionalStyle: .primaryType) {
                 ListRowView(title: Strings.Global.Nouns.protocol) {
-                    Text(connectionType)
+                    Text(primaryType)
                 }
             }
             if let pair = profile.activeProviderModule {
@@ -115,8 +115,8 @@ private extension ActiveProfileView {
                     }
                 }
             }
-            if let otherList = profile.localizedDescription(optionalStyle: .nonConnectionTypes) {
-                ListRowView(title: otherList) {
+            if let secondaryTypes = profile.localizedDescription(optionalStyle: .secondaryTypes) {
+                ListRowView(title: secondaryTypes) {
                     EmptyView()
                 }
             }
