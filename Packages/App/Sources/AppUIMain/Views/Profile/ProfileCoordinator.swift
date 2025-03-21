@@ -122,42 +122,39 @@ private extension ProfileCoordinator {
 
     func onCommitEditing() async throws {
         do {
-            if !iapManager.isBeta {
-                try await onCommitEditingStandard()
-            } else {
-                try await onCommitEditingBeta()
-            }
+            try await onCommitEditing(verifying: !iapManager.isBeta)
         } catch {
             errorHandler.handle(error, title: Strings.Global.Actions.save)
             throw error
         }
     }
 
-    // standard: verify and alert if purchase required
-    func onCommitEditingStandard() async throws {
+    func onCommitEditing(verifying: Bool) async throws {
         let profileToSave = try profileEditor.build(with: registry)
 
-        do {
-            try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-        } catch AppError.ineligibleProfile(let requiredFeatures) {
-            guard !iapManager.isLoadingReceipt else {
-                let V = Strings.Views.Paywall.Alerts.Verification.self
-                errorHandler.handle(
-                    title: Strings.Views.Paywall.Alerts.Confirmation.title,
-                    message: [V.edit, V.boot].joined(separator: "\n\n")
-                )
-                return
-            }
+        if verifying {
+            do {
+                try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
+            } catch AppError.ineligibleProfile(let requiredFeatures) {
+                guard !iapManager.isLoadingReceipt else {
+                    let V = Strings.Views.Paywall.Alerts.Verification.self
+                    errorHandler.handle(
+                        title: Strings.Views.Paywall.Alerts.Confirmation.title,
+                        message: [V.edit, V.boot].joined(separator: "\n\n")
+                    )
+                    return
+                }
 
-            // present paywall if purchase required
-            guard requiredFeatures.isEmpty else {
-                paywallReason = .init(
-                    nil,
-                    requiredFeatures: requiredFeatures,
-                    suggestedProducts: nil,
-                    action: .save
-                )
-                return
+                // present paywall if purchase required
+                guard requiredFeatures.isEmpty else {
+                    paywallReason = .init(
+                        nil,
+                        requiredFeatures: requiredFeatures,
+                        suggestedProducts: nil,
+                        action: .save
+                    )
+                    return
+                }
             }
         }
 
@@ -166,13 +163,6 @@ private extension ProfileCoordinator {
             to: profileManager,
             preferencesManager: preferencesManager
         )
-        onDismiss()
-    }
-
-    // beta: skip verification
-    func onCommitEditingBeta() async throws {
-        let profileToSave = try profileEditor.build(with: registry)
-        try await profileEditor.save(profileToSave, to: profileManager, preferencesManager: preferencesManager)
         onDismiss()
     }
 
