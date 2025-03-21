@@ -161,7 +161,7 @@
 "modules.general.sections.storage.tv.footer" = "iCloud jest wymagany do udostępniania profili na Apple TV.";
 "modules.general.sections.storage.tv.footer.purchase" = "Zakup, aby usunąć ograniczenie.";
 "modules.http_proxy.bypass_domains.add" = "Dodaj domenę wykluczającą";
-"modules.ip.address.automatic" = "Automatyczny";
+"modules.ip.address.footer" = "Pozostaw puste, aby przypisać automatycznie.";
 "modules.ip.routes.add_family" = "Dodaj %@";
 "modules.ip.routes.exclude" = "Wyklucz trasę";
 "modules.ip.routes.excluded" = "Wykluczone trasy";
