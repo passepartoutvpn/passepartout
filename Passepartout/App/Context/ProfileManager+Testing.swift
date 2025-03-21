@@ -49,7 +49,7 @@ extension ProfileManager {
                         if parameters.name == "Hide.me" {
                             if var ovpnBuilder = moduleBuilder as? ProviderModule.Builder {
                                 ovpnBuilder.providerId = parameters.providerId
-                                ovpnBuilder.providerModuleType = moduleType
+                                ovpnBuilder.providerModuleType = .openVPN
                                 ovpnBuilder.entity = mockHideMeEntity
                                 let credentials = OpenVPN.Credentials.Builder(username: "foo", password: "bar").build()
                                 var options = OpenVPNProviderTemplate.Options()
@@ -138,7 +138,7 @@ private extension ProfileManager {
     static let mockParameters: [Parameters] = [
         Parameters("CloudFlare DoT", false, false, [.dns]),
         Parameters("Coffee VPN", true, false, [.wireGuard, .onDemand]),
-        Parameters("Hide.me", true, true, [.openVPN, .onDemand, .dns, .ip], .hideme),
+        Parameters("Hide.me", true, true, [.provider, .onDemand, .dns, .ip], .hideme),
         Parameters("My VPS", true, true, [.openVPN, .onDemand]),
         Parameters("Office", true, false, [.onDemand, .httpProxy]),
         Parameters("Personal DoH", false, false, [.dns, .onDemand])
