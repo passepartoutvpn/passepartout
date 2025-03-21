@@ -71,9 +71,6 @@ extension PassepartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         let V = Strings.Errors.App.Passepartout.self
         switch code {
-        case .connectionModuleRequired:
-            return V.connectionModuleRequired
-
         case .corruptProviderModule:
             return V.corruptProviderModule(reason?.localizedDescription ?? "")
 

@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "El nombre del perfil está vacío.";
 "errors.app.import" = "No se pudieron importar los perfiles.";
 "errors.app.malformed_module" = "El módulo %@ está malformado. %@";
-"errors.app.passepartout.connection_module_required" = "El módulo de enrutamiento solo puede habilitarse junto con una conexión.";
 "errors.app.passepartout.corrupt_provider_module" = "No se pudo conectar al servidor del proveedor (motivo=%@).";
 "errors.app.passepartout.default" = "No se pudo completar la operación (código=%@).";
 "errors.app.passepartout.incompatible_modules" = "Algunos módulos activos son incompatibles, intenta activar solo uno de ellos.";

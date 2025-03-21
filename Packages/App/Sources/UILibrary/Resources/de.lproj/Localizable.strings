@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Profilname ist leer.";
 "errors.app.import" = "Profile konnten nicht importiert werden.";
 "errors.app.malformed_module" = "Modul %@ ist fehlerhaft. %@";
-"errors.app.passepartout.connection_module_required" = "Das Routing-Modul kann nur zusammen mit einer Verbindung aktiviert werden.";
 "errors.app.passepartout.corrupt_provider_module" = "Verbindung zum Anbieter-Server konnte nicht hergestellt werden (Grund=%@).";
 "errors.app.passepartout.default" = "Operation konnte nicht abgeschlossen werden (Code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Einige aktive Module sind inkompatibel, versuche, nur eines von ihnen zu aktivieren.";

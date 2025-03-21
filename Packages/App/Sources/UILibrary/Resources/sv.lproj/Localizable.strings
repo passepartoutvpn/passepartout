@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Profilnamnet är tomt.";
 "errors.app.import" = "Kan inte importera profiler.";
 "errors.app.malformed_module" = "Modulen %@ är felaktig. %@";
-"errors.app.passepartout.connection_module_required" = "Routningsmodulen kan endast aktiveras tillsammans med en anslutning.";
 "errors.app.passepartout.corrupt_provider_module" = "Kan inte ansluta till leverantörsservern (anledning=%@).";
 "errors.app.passepartout.default" = "Kan inte slutföra åtgärden (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Vissa aktiva moduler är inkompatibla, försök att endast aktivera en.";

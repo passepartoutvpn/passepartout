@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Имя профиля пустое.";
 "errors.app.import" = "Не удалось импортировать профили.";
 "errors.app.malformed_module" = "Модуль %@ поврежден. %@";
-"errors.app.passepartout.connection_module_required" = "Модуль маршрутизации можно активировать только вместе с подключением.";
 "errors.app.passepartout.corrupt_provider_module" = "Не удалось подключиться к серверу поставщика (причина=%@).";
 "errors.app.passepartout.default" = "Не удалось выполнить операцию (код=%@).";
 "errors.app.passepartout.incompatible_modules" = "Некоторые активные модули несовместимы, попробуйте активировать только один.";

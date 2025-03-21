@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Nazwa profilu jest pusta.";
 "errors.app.import" = "Nie można zaimportować profili.";
 "errors.app.malformed_module" = "Moduł %@ jest uszkodzony. %@";
-"errors.app.passepartout.connection_module_required" = "Moduł trasowania można włączyć tylko razem z połączeniem.";
 "errors.app.passepartout.corrupt_provider_module" = "Nie można połączyć się z serwerem dostawcy (powód=%@).";
 "errors.app.passepartout.default" = "Nie można ukończyć operacji (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Niektóre aktywne moduły są niekompatybilne. Spróbuj aktywować tylko jeden.";

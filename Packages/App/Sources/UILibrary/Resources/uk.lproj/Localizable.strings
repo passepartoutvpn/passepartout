@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "Ім'я профілю порожнє.";
 "errors.app.import" = "Не вдалося імпортувати профілі.";
 "errors.app.malformed_module" = "Модуль %@ некоректний. %@";
-"errors.app.passepartout.connection_module_required" = "Модуль маршрутизації можна увімкнути лише разом із підключенням.";
 "errors.app.passepartout.corrupt_provider_module" = "Не вдалося підключитися до сервера постачальника (причина=%@).";
 "errors.app.passepartout.default" = "Не вдалося виконати операцію (код=%@).";
 "errors.app.passepartout.incompatible_modules" = "Деякі активні модулі несумісні, спробуйте активувати лише один.";

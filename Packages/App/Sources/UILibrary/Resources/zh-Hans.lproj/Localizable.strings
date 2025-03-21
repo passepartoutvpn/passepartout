@@ -30,7 +30,6 @@
 "errors.app.empty_profile_name" = "配置文件名称为空。";
 "errors.app.import" = "无法导入配置文件。";
 "errors.app.malformed_module" = "模块 %@ 格式错误。%@";
-"errors.app.passepartout.connection_module_required" = "路由模块只能与连接模块一起启用。";
 "errors.app.passepartout.corrupt_provider_module" = "无法连接到提供商服务器（原因=%@）。";
 "errors.app.passepartout.default" = "无法完成操作（代码=%@）。";
 "errors.app.passepartout.incompatible_modules" = "某些激活的模块不兼容，请尝试仅激活一个模块。";

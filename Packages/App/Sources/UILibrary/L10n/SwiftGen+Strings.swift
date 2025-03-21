@@ -127,8 +127,6 @@ public enum Strings {
       /// Unable to execute operation.
       public static let tunnel = Strings.tr("Localizable", "errors.app.tunnel", fallback: "Unable to execute operation.")
       public enum Passepartout {
-        /// Routing module can only be enabled together with a connection.
-        public static let connectionModuleRequired = Strings.tr("Localizable", "errors.app.passepartout.connection_module_required", fallback: "Routing module can only be enabled together with a connection.")
         /// Unable to connect to provider server (reason=%@).
         public static func corruptProviderModule(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.corrupt_provider_module", String(describing: p1), fallback: "Unable to connect to provider server (reason=%@).")

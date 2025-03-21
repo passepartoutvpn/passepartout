@@ -390,7 +390,6 @@
 
 // MARK: Global (PassepartoutKit errors)
 
-"errors.app.passepartout.connection_module_required" = "Routing module can only be enabled together with a connection.";
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
 "errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Some active modules are incompatible, try to only activate one of them.";
