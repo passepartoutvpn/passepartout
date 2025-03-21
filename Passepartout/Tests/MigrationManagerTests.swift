@@ -97,9 +97,12 @@ extension MigrationManagerTests {
         ])
         XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
 
-        let openVPN = try XCTUnwrap(profile.firstModule(ofType: OpenVPNModule.self))
-        XCTAssertEqual(openVPN.credentials?.username, "foo")
-        XCTAssertEqual(openVPN.credentials?.password, "bar")
+        let provider = try XCTUnwrap(profile.firstModule(ofType: ProviderModule.self))
+        XCTAssertEqual(provider.providerId, .hideme)
+        XCTAssertEqual(provider.providerModuleType, .openVPN)
+        let options: OpenVPNProviderTemplate.Options? = provider.options(for: .openVPN)
+        XCTAssertEqual(options?.credentials?.username, "foo")
+        XCTAssertEqual(options?.credentials?.password, "bar")
 
         let dns = try XCTUnwrap(profile.firstModule(ofType: DNSModule.self))
         let dohURL = try XCTUnwrap(URL(string: "https://1.1.1.1/dns-query"))
@@ -129,9 +132,12 @@ extension MigrationManagerTests {
         XCTAssertTrue(onDemand.withSSIDs.isEmpty)
         XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
 
-        let openVPN = try XCTUnwrap(profile.firstModule(ofType: OpenVPNModule.self))
-        XCTAssertEqual(openVPN.credentials?.username, "foo")
-        XCTAssertEqual(openVPN.credentials?.password, "bar")
+        let provider = try XCTUnwrap(profile.firstModule(ofType: ProviderModule.self))
+        XCTAssertEqual(provider.providerId, .protonvpn)
+        XCTAssertEqual(provider.providerModuleType, .openVPN)
+        let options: OpenVPNProviderTemplate.Options? = provider.options(for: .openVPN)
+        XCTAssertEqual(options?.credentials?.username, "foo")
+        XCTAssertEqual(options?.credentials?.password, "bar")
     }
 
     func test_givenManager_whenMigrateVPSOpenVPN_thenIsExpected() async throws {
