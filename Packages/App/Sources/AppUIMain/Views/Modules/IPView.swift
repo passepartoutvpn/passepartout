@@ -41,8 +41,8 @@ struct IPView: View, ModuleDraftEditing {
 
     var body: some View {
         Group {
-            ipSections(for: .v4)
-            ipSections(for: .v6)
+            ipSections(for: $draft.module.ipv4 ?? IPSettings(subnet: nil), family: .v4)
+            ipSections(for: $draft.module.ipv6 ?? IPSettings(subnet: nil), family: .v6)
             interfaceSection
         }
         .moduleView(draft: draft)
@@ -88,8 +88,7 @@ private extension IPView {
     }
 
     @ViewBuilder
-    func ipSections(for family: Address.Family) -> some View {
-        let ip = binding(forSettingsIn: family)
+    func ipSections(for ip: Binding<IPSettings>, family: Address.Family) -> some View {
         Group {
             ForEach(Array(ip.wrappedValue.includedRoutes.enumerated()), id: \.offset) { item in
                 row(forRoute: item.element) {
@@ -151,16 +150,6 @@ private extension IPView {
 }
 
 private extension IPView {
-    func binding(forSettingsIn family: Address.Family) -> Binding<IPSettings> {
-        switch family {
-        case .v4:
-            return $draft.module.ipv4 ?? IPSettings(subnet: nil)
-
-        case .v6:
-            return $draft.module.ipv6 ?? IPSettings(subnet: nil)
-        }
-    }
-
     func routeModal(item: RoutePresentation) -> some View {
         NavigationStack {
             RouteView(family: item.family) { route in
