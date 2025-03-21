@@ -57,14 +57,14 @@ extension Profile: StyledOptionalLocalizableEntity {
                 .joined(separator: ", ")
 
         case .connectionType:
-            return firstConnectionModule(ifActive: true)?
+            return firstBuildingConnection(ifActive: true)?
                 .moduleType
                 .localizedDescription
 
         case .nonConnectionTypes:
             return activeModules
                 .filter {
-                    !($0 is ProviderModule) && !($0 is ConnectionModule)
+                    !($0 is ProviderModule) && !$0.buildsConnection
                 }
                 .nilIfEmpty?
                 .map(\.moduleType.localizedDescription)
