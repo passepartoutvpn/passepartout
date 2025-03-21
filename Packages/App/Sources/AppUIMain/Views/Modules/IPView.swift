@@ -33,7 +33,7 @@ struct IPView: View, ModuleDraftEditing {
     var draft: ModuleDraft<IPModule.Builder>
 
     @State
-    private var addresses: [Address.Family: String] = [:]
+    private var subnets: [Address.Family: String] = [:]
 
     @State
     private var routePresentation: RoutePresentation?
@@ -50,8 +50,8 @@ struct IPView: View, ModuleDraftEditing {
         }
         .moduleView(draft: draft)
         .themeModal(item: $routePresentation, content: routeModal)
-        .onLoad(perform: loadAddresses)
-        .onChange(of: addresses, perform: saveAddresses)
+        .onLoad(perform: loadSubnets)
+        .onChange(of: subnets, perform: saveSubnets)
     }
 }
 
@@ -97,7 +97,7 @@ private extension IPView {
         Group {
             ThemeModuleTextField(
                 caption: Strings.Global.Nouns.address,
-                value: $addresses[family] ?? "",
+                value: $subnets[family] ?? "",
                 placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
             )
             .themeRowWithSubtitle(Strings.Modules.Ip.Address.footer)
@@ -216,17 +216,17 @@ private extension IPView {
 }
 
 private extension IPView {
-    func loadAddresses() {
+    func loadSubnets() {
         if let v4 = draft.module.ipv4?.subnet?.rawValue {
-            addresses[.v4] = v4
+            subnets[.v4] = v4
         }
         if let v6 = draft.module.ipv6?.subnet?.rawValue {
-            addresses[.v6] = v6
+            subnets[.v6] = v6
         }
     }
 
-    func saveAddresses(_ addresses: [Address.Family: String]) {
-        addresses.forEach { pair in
+    func saveSubnets(_ newSubnets: [Address.Family: String]) {
+        newSubnets.forEach { pair in
             let subnet = Subnet(rawValue: pair.value)
             switch pair.key {
             case .v4:
