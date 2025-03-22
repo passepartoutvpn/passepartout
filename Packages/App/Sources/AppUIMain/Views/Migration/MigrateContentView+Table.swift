@@ -95,8 +95,8 @@ private extension MigrateContentView.TableView {
                 }
                 .width(20)
             }
+            .disabled(!step.canSelect)
         }
-        .disabled(!step.canSelect)
         .themeForm()
         .themeEmpty(if: isEmpty, message: Strings.Views.Migration.noProfiles)
     }
