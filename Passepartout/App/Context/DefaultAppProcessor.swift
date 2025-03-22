@@ -55,15 +55,21 @@ extension DefaultAppProcessor: ProfileProcessor {
         case nil:
             var builder = profile.builder(withNewId: false, forUpgrade: true)
 
-            // convert OpenVPN provider modules to ProviderModule of type .openVPN
+            // convert OpenVPN provider modules...
             let ovpnPairs: [(offset: Int, module: OpenVPNModule)] = builder.modules
                 .enumerated()
                 .compactMap {
-                    guard let module = $0.element as? OpenVPNModule else {
+                    guard let module = $0.element as? OpenVPNModule,
+                          module.providerSelection != nil else {
                         return nil
                     }
                     return ($0.offset, module)
                 }
+            guard !ovpnPairs.isEmpty else {
+                return nil
+            }
+
+            // ...to ProviderModule of type .openVPN
             try ovpnPairs
                 .forEach {
                     guard let selection = $0.module.providerSelection else {
