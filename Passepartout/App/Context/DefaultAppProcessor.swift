@@ -54,6 +54,7 @@ extension DefaultAppProcessor: ProfileProcessor {
         switch profile.version {
         case nil:
             var builder = profile.builder(withNewId: false, forUpgrade: true)
+            builder.name = profile.name + " [\(BundleConfiguration.mainVersionNumber)]"
 
             // convert OpenVPN provider modules...
             let ovpnPairs: [(offset: Int, module: OpenVPNModule)] = builder.modules
