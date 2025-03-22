@@ -32,6 +32,10 @@ public enum OnboardingStep: String, RawRepresentable, CaseIterable {
     case community
 
     case doneV3
+
+    case migrateV3_2_1
+
+    case doneV3_2_1
 }
 
 extension Optional where Wrapped == OnboardingStep {
