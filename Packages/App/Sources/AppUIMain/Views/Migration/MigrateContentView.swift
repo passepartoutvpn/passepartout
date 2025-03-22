@@ -129,9 +129,16 @@ private struct PrivatePreviews {
     static let profiles: [MigratableProfile] = [
         .init(id: UUID(), name: "1 One", lastUpdate: Date().addingTimeInterval(-oneDay)),
         .init(id: UUID(), name: "2 Two", lastUpdate: Date().addingTimeInterval(-3 * oneDay)),
-        .init(id: UUID(), name: "3 Three", lastUpdate: Date().addingTimeInterval(-90 * oneDay)),
-        .init(id: UUID(), name: "4 Four", lastUpdate: Date().addingTimeInterval(-180 * oneDay)),
-        .init(id: UUID(), name: "5 Five", lastUpdate: Date().addingTimeInterval(-240 * oneDay))
+        .init(id: UUID(), name: "3 Three", lastUpdate: Date().addingTimeInterval(-9 * oneDay)),
+        .init(id: UUID(), name: "4 Four", lastUpdate: Date().addingTimeInterval(-18 * oneDay)),
+        .init(id: UUID(), name: "5 Five", lastUpdate: Date().addingTimeInterval(-24 * oneDay)),
+        .init(id: UUID(), name: "6 Six", lastUpdate: Date().addingTimeInterval(-60 * oneDay)),
+        .init(id: UUID(), name: "7 Seven", lastUpdate: Date().addingTimeInterval(-64 * oneDay)),
+        .init(id: UUID(), name: "8 Eight", lastUpdate: Date().addingTimeInterval(-120 * oneDay)),
+        .init(id: UUID(), name: "9 Nine", lastUpdate: Date().addingTimeInterval(-130 * oneDay)),
+        .init(id: UUID(), name: "10 Ten", lastUpdate: Date().addingTimeInterval(-400 * oneDay)),
+        .init(id: UUID(), name: "11 Eleven", lastUpdate: Date().addingTimeInterval(-412 * oneDay)),
+        .init(id: UUID(), name: "12 Twelve", lastUpdate: Date().addingTimeInterval(-640 * oneDay))
     ]
 
     struct MigratePreview: View {
