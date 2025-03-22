@@ -50,7 +50,7 @@ final class DefaultAppProcessor: Sendable {
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
-    func migrated(_ profile: Profile) throws -> Profile? {
+    func migratedProfile(from profile: Profile) throws -> Profile? {
         switch profile.version {
         case nil:
             var builder = profile.builder(withNewId: false, forUpgrade: true)
@@ -85,17 +85,11 @@ extension DefaultAppProcessor: ProfileProcessor {
                     try providerBuilder.setOptions(options, for: .openVPN)
                     let provider = try providerBuilder.tryBuild()
 
+                    // replace old module
                     builder.modules[$0.offset] = provider
                     builder.activeModulesIds.insert(provider.id)
+                    builder.activeModulesIds.remove($0.module.id)
                 }
-
-            // remove old modules
-            ovpnPairs.forEach { pair in
-                builder.modules.removeAll {
-                    pair.module.id == $0.id
-                }
-                builder.activeModulesIds.remove(pair.module.id)
-            }
 
             return try builder.tryBuild()
         default:

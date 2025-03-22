@@ -36,7 +36,7 @@ final class MockAppProcessor {
 }
 
 extension MockAppProcessor: ProfileProcessor {
-    func migrated(_ profile: Profile) -> Profile? {
+    func migratedProfile(from profile: Profile) -> Profile? {
         nil
     }
 
