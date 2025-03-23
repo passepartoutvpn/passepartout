@@ -52,7 +52,7 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
 
     let onMigrateProfiles: () -> Void
 
-    let onNewProfile: (EditableProfile, UUID?) -> Void
+    let onNewProfile: (EditableProfile) -> Void
 
     var body: some ToolbarContent {
         if isBigDevice {
@@ -116,7 +116,7 @@ private extension AppToolbar {
                     onPreferences: {},
                     onAbout: {},
                     onMigrateProfiles: {},
-                    onNewProfile: { _, _ in }
+                    onNewProfile: { _ in }
                 )
             }
             .frame(width: 600, height: 400)
