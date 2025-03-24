@@ -307,6 +307,7 @@
 "views.providers.module" = "Typ";
 "views.providers.only_favorites" = "Tylko ulubione";
 "views.providers.preset" = "Wstępna konfiguracja";
+"views.providers.preset.placeholder" = "Wybierz serwer";
 "views.providers.refresh_infrastructure" = "Odśwież infrastrukturę";
 "views.providers.select_entity" = "Wybierz";
 "views.providers.select_module" = "Wybierz typ";

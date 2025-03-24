@@ -307,6 +307,7 @@
 "views.providers.module" = "Тип";
 "views.providers.only_favorites" = "Только избранное";
 "views.providers.preset" = "Предустановка";
+"views.providers.preset.placeholder" = "Выберите сервер";
 "views.providers.refresh_infrastructure" = "Обновить инфраструктуру";
 "views.providers.select_entity" = "Выбрать";
 "views.providers.select_module" = "Выбрать тип";

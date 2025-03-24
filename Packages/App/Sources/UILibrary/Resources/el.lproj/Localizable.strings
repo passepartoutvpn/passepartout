@@ -307,6 +307,7 @@
 "views.providers.module" = "Τύπος";
 "views.providers.only_favorites" = "Μόνο αγαπημένα";
 "views.providers.preset" = "Προκαθορισμένο";
+"views.providers.preset.placeholder" = "Επιλέξτε διακομιστή";
 "views.providers.refresh_infrastructure" = "Ανανέωση υποδομής";
 "views.providers.select_entity" = "Επιλογή";
 "views.providers.select_module" = "Επιλέξτε τύπο";
