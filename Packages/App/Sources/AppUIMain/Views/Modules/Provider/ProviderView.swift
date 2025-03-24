@@ -341,11 +341,14 @@ private extension ProviderView {
     }
 
     func savePreferences() {
+        guard let providerId else {
+            return
+        }
         do {
-            pp_log(.app, .debug, "Save preferences for provider \(providerId.debugDescription)")
+            pp_log(.app, .debug, "Save preferences for provider \(providerId)")
             try providerPreferences.save()
         } catch {
-            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.debugDescription): \(error)")
+            pp_log(.app, .error, "Unable to save preferences for provider \(providerId): \(error)")
         }
     }
 }
