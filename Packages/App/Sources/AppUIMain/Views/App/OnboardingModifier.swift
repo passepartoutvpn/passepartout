@@ -45,25 +45,16 @@ struct OnboardingModifier: ViewModifier {
     var modalRoute: AppCoordinator.ModalRoute?
 
     @State
-    private var isPresentingCommunity = false
+    private var isAlertPresented = false
 
     func body(content: Content) -> some View {
         content
             .alert(
-                Strings.Unlocalized.reddit,
-                isPresented: $isPresentingCommunity,
-                actions: {
-                    Link(Strings.Alerts.Community.subscribe, destination: Constants.shared.websites.subreddit)
-                        .environment(\.openURL, OpenURLAction { _ in
-                            advance()
-                            return .systemAction
-                        })
-
-                    Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
-                },
-                message: {
-                    Text(Strings.Alerts.Community.message(Strings.Unlocalized.appName))
-                }
+                alertTitle(for: step),
+                isPresented: $isAlertPresented,
+                presenting: step,
+                actions: alertActions,
+                message: alertMessage
             )
             .onLoad(perform: advance)
             .onChange(of: modalRoute) {
@@ -71,6 +62,43 @@ struct OnboardingModifier: ViewModifier {
                     advance()
                 }
             }
+    }
+}
+
+private extension OnboardingModifier {
+    func alertTitle(for item: OnboardingStep?) -> String {
+        switch item {
+        case .community:
+            return Strings.Unlocalized.reddit
+        default:
+            return ""
+        }
+    }
+
+    @ViewBuilder
+    func alertActions(for item: OnboardingStep) -> some View {
+        switch item {
+        case .community:
+            Link(Strings.Alerts.Community.subscribe, destination: Constants.shared.websites.subreddit)
+                .environment(\.openURL, OpenURLAction { _ in
+                    advance()
+                    return .systemAction
+                })
+
+            Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
+        default:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    func alertMessage(for item: OnboardingStep) -> some View {
+        switch item {
+        case .community:
+            Text(Strings.Alerts.Community.message(Strings.Unlocalized.appName))
+        default:
+            EmptyView()
+        }
     }
 }
 
@@ -99,7 +127,7 @@ private extension OnboardingModifier {
             }
             modalRoute = .migrateProfiles
         case .community:
-            isPresentingCommunity = true
+            isAlertPresented = true
         case .migrateV3_2_2:
             Task {
                 await apiManager.resetLastUpdateForAllProviders()
