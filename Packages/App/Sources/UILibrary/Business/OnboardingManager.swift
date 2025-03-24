@@ -29,16 +29,24 @@ import PassepartoutKit
 
 @MainActor
 public final class OnboardingManager: ObservableObject {
+    private let defaults: UserDefaults?
+
     private let initialStep: OnboardingStep
 
-    public private(set) var step: OnboardingStep
+    public private(set) var step: OnboardingStep {
+        didSet {
+            defaults?.set(step.rawValue, forKey: UIPreference.onboardingStep.key)
+        }
+    }
 
     public init(initialStep: OnboardingStep = .doneV2) {
+        defaults = nil
         self.initialStep = initialStep
         step = initialStep
     }
 
     public init(defaults: UserDefaults) {
+        self.defaults = defaults
         if let rawStep = defaults.string(forKey: UIPreference.onboardingStep.key),
            let initialStep = OnboardingStep(rawValue: rawStep) {
             self.initialStep = initialStep
