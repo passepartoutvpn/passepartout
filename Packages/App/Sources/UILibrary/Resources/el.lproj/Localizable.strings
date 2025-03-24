@@ -1,6 +1,3 @@
-"onboarding.community.dismiss" = "Όχι, ευχαριστώ";
-"onboarding.community.message" = "Γνωρίζατε ότι το %@ έχει subreddit; Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα, δυνατότητες, νέες πλατφόρμες ή ό,τι άλλο θέλετε.\n\nΕίναι επίσης ένας εξαιρετικός τρόπος να δείξετε ότι σας ενδιαφέρει αυτό το έργο.";
-"onboarding.community.subscribe" = "Εγγραφή τώρα";
 "alerts.import.passphrase.message" = "Εισάγετε το μυστικό κλειδί για '%@'.";
 "alerts.import.passphrase.ok" = "Αποκρυπτογράφηση";
 "alerts.providers.missing_server.message" = "Δεν έχει επιλεγεί διακομιστής παρόχου. Επιλέξτε έναν διακομιστή προορισμού στη συσκευή σας iOS/macOS.";
@@ -205,6 +202,10 @@
 "modules.wireguard.peer.delete" = "Διαγραφή ομότιμου";
 "modules.wireguard.preshared_key" = "Προμοιρασμένο κλειδί";
 "modules.wireguard.private_key.generate" = "Δημιουργία νέου κλειδιού";
+"onboarding.community.dismiss" = "Όχι, ευχαριστώ";
+"onboarding.community.message" = "Γνωρίζατε ότι το %@ έχει subreddit; Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα, δυνατότητες, νέες πλατφόρμες ή ό,τι άλλο θέλετε.\n\nΕίναι επίσης ένας εξαιρετικός τρόπος να δείξετε ότι σας ενδιαφέρει αυτό το έργο.";
+"onboarding.community.subscribe" = "Εγγραφή τώρα";
+"onboarding.migrate_3_2_2.message" = "Η έκδοση 3.2.2 άλλαξε τον τρόπο αποθήκευσης των παρόχων και τα επηρεαζόμενα προφίλ θα μετονομαστούν.\n\nΒεβαιωθείτε ότι έχετε αναβαθμίσει όλες τις συσκευές σας στην πιο πρόσφατη έκδοση για να χρησιμοποιήσετε τα νέα προφίλ.";
 "placeholders.on_demand.ssid" = "Το SSID μου";
 "placeholders.profile.name" = "Το προφίλ μου";
 "placeholders.secret" = "μυστικό";

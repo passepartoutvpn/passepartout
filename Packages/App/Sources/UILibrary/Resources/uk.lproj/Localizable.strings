@@ -1,6 +1,3 @@
-"onboarding.community.dismiss" = "Ні, дякую";
-"onboarding.community.message" = "Чи знаєте ви, що %@ має subreddit? Підпишіться, щоб отримувати оновлення або обговорювати проблеми, функції, нові платформи чи будь-що інше.\n\nЦе також чудовий спосіб показати, що вам небайдуже до цього проекту.";
-"onboarding.community.subscribe" = "Підписатися зараз";
 "alerts.import.passphrase.message" = "Введіть пароль для '%@'.";
 "alerts.import.passphrase.ok" = "Розшифрувати";
 "alerts.providers.missing_server.message" = "Не вибрано сервер постачальника. Будь ласка, виберіть сервер призначення на вашому пристрої iOS/macOS.";
@@ -205,6 +202,10 @@
 "modules.wireguard.peer.delete" = "Видалити вузол";
 "modules.wireguard.preshared_key" = "Попередньо спільний ключ";
 "modules.wireguard.private_key.generate" = "Згенерувати новий ключ";
+"onboarding.community.dismiss" = "Ні, дякую";
+"onboarding.community.message" = "Чи знаєте ви, що %@ має subreddit? Підпишіться, щоб отримувати оновлення або обговорювати проблеми, функції, нові платформи чи будь-що інше.\n\nЦе також чудовий спосіб показати, що вам небайдуже до цього проекту.";
+"onboarding.community.subscribe" = "Підписатися зараз";
+"onboarding.migrate_3_2_2.message" = "Версія 3.2.2 змінила спосіб збереження провайдерів, і відповідні профілі будуть перейменовані.\n\nПереконайтеся, що ви оновили всі свої пристрої до останньої версії, щоб використовувати нові профілі.";
 "placeholders.on_demand.ssid" = "Мій SSID";
 "placeholders.profile.name" = "Мій профіль";
 "placeholders.secret" = "секрет";

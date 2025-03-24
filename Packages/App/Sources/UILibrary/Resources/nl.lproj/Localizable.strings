@@ -1,6 +1,3 @@
-"onboarding.community.dismiss" = "Nee, bedankt";
-"onboarding.community.message" = "Wist je dat %@ een subreddit heeft? Abonneer je voor updates of om problemen, functies, nieuwe platforms of wat je maar wilt te bespreken.\n\nHet is ook een geweldige manier om te laten zien dat je om dit project geeft.";
-"onboarding.community.subscribe" = "Nu abonneren";
 "alerts.import.passphrase.message" = "Voer het wachtwoord in voor '%@'.";
 "alerts.import.passphrase.ok" = "Ontsleutelen";
 "alerts.providers.missing_server.message" = "Geen provider-server geselecteerd. Selecteer een doellocatieserver op je iOS-/macOS-apparaat.";
@@ -205,6 +202,10 @@
 "modules.wireguard.peer.delete" = "Peer verwijderen";
 "modules.wireguard.preshared_key" = "Vooraf gedeelde sleutel";
 "modules.wireguard.private_key.generate" = "Nieuwe sleutel genereren";
+"onboarding.community.dismiss" = "Nee, bedankt";
+"onboarding.community.message" = "Wist je dat %@ een subreddit heeft? Abonneer je voor updates of om problemen, functies, nieuwe platforms of wat je maar wilt te bespreken.\n\nHet is ook een geweldige manier om te laten zien dat je om dit project geeft.";
+"onboarding.community.subscribe" = "Nu abonneren";
+"onboarding.migrate_3_2_2.message" = "Versie 3.2.2 heeft de manier waarop providers worden opgeslagen gewijzigd, en de getroffen profielen worden hernoemd.\n\nZorg ervoor dat je al je apparaten bijwerkt naar de nieuwste versie om de nieuwe profielen te gebruiken.";
 "placeholders.on_demand.ssid" = "Mijn SSID";
 "placeholders.profile.name" = "Mijn profiel";
 "placeholders.secret" = "geheim";

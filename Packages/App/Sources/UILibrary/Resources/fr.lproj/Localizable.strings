@@ -1,6 +1,3 @@
-"onboarding.community.dismiss" = "Non, merci";
-"onboarding.community.message" = "Saviez-vous que %@ a un subreddit ? Abonnez-vous pour des mises à jour ou pour discuter des problèmes, fonctionnalités, nouvelles plateformes ou tout ce que vous voulez.\n\nC'est aussi un excellent moyen de montrer que vous vous souciez de ce projet.";
-"onboarding.community.subscribe" = "Abonnez-vous maintenant";
 "alerts.import.passphrase.message" = "Entrez la passphrase pour '%@'.";
 "alerts.import.passphrase.ok" = "Décrypter";
 "alerts.providers.missing_server.message" = "Aucun serveur fournisseur sélectionné. Veuillez sélectionner un serveur de destination sur votre appareil iOS/macOS.";
@@ -205,6 +202,10 @@
 "modules.wireguard.peer.delete" = "Supprimer un pair";
 "modules.wireguard.preshared_key" = "Clé prépartagée";
 "modules.wireguard.private_key.generate" = "Générer une nouvelle clé";
+"onboarding.community.dismiss" = "Non, merci";
+"onboarding.community.message" = "Saviez-vous que %@ a un subreddit ? Abonnez-vous pour des mises à jour ou pour discuter des problèmes, fonctionnalités, nouvelles plateformes ou tout ce que vous voulez.\n\nC'est aussi un excellent moyen de montrer que vous vous souciez de ce projet.";
+"onboarding.community.subscribe" = "Abonnez-vous maintenant";
+"onboarding.migrate_3_2_2.message" = "La version 3.2.2 a modifié la manière dont les fournisseurs sont stockés, et les profils affectés seront renommés.\n\nAssurez-vous de mettre à jour tous vos appareils vers la dernière version pour utiliser les nouveaux profils.";
 "placeholders.on_demand.ssid" = "Mon SSID";
 "placeholders.profile.name" = "Mon profil";
 "placeholders.secret" = "secret";

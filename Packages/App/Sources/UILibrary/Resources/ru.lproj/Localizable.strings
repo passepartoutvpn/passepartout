@@ -1,6 +1,3 @@
-"onboarding.community.dismiss" = "Нет, спасибо";
-"onboarding.community.message" = "Вы знали, что у %@ есть сабреддит? Подпишитесь, чтобы получать обновления или обсуждать проблемы, функции, новые платформы или что угодно еще.\n\nЭто также отличный способ показать, что вам не безразличен этот проект.";
-"onboarding.community.subscribe" = "Подписаться";
 "alerts.import.passphrase.message" = "Введите пароль для '%@'.";
 "alerts.import.passphrase.ok" = "Расшифровать";
 "alerts.providers.missing_server.message" = "Не выбран сервер поставщика. Выберите целевой сервер на вашем устройстве iOS/macOS.";
@@ -205,6 +202,10 @@
 "modules.wireguard.peer.delete" = "Удалить узел";
 "modules.wireguard.preshared_key" = "Предварительно общий ключ";
 "modules.wireguard.private_key.generate" = "Сгенерировать новый ключ";
+"onboarding.community.dismiss" = "Нет, спасибо";
+"onboarding.community.message" = "Вы знали, что у %@ есть сабреддит? Подпишитесь, чтобы получать обновления или обсуждать проблемы, функции, новые платформы или что угодно еще.\n\nЭто также отличный способ показать, что вам не безразличен этот проект.";
+"onboarding.community.subscribe" = "Подписаться";
+"onboarding.migrate_3_2_2.message" = "Версия 3.2.2 изменила способ хранения провайдеров, и затронутые профили будут переименованы.\n\nУбедитесь, что вы обновили все свои устройства до последней версии, чтобы использовать новые профили.";
 "placeholders.on_demand.ssid" = "Мой SSID";
 "placeholders.profile.name" = "Мой профиль";
 "placeholders.secret" = "секрет";
