@@ -287,13 +287,13 @@ private extension ProviderView {
 
     func loadCurrentProvider() {
        Task {
-           await refreshIndex()
            if let providerId {
                loadPreferences(for: providerId)
                if let providerEntity {
                    await loadSupportedPresets(for: providerEntity.server)
                }
            }
+           await refreshIndex()
        }
     }
 
