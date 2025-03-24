@@ -46,6 +46,7 @@ extension Issue {
         let parameters: Constants.Log
     }
 
+    @MainActor
     static func withMetadata(_ metadata: Metadata) async -> Issue {
         let appLog = metadata.configuration.currentLog(parameters: metadata.parameters)
             .joined(separator: "\n")
@@ -54,7 +55,7 @@ extension Issue {
         let tunnelLog: Data?
 
         // live tunnel log
-        if await metadata.tunnel.status != .inactive {
+        if metadata.tunnel.status != .inactive {
             tunnelLog = await metadata.tunnel.currentLog(parameters: metadata.parameters)
                 .joined(separator: "\n")
                 .data(using: .utf8)
