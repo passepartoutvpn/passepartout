@@ -1,6 +1,3 @@
-"alerts.community.dismiss" = "Nie, dziękuję";
-"alerts.community.message" = "Czy wiesz, że %@ ma subreddit? Zasubskrybuj, aby otrzymywać aktualizacje lub omawiać problemy, funkcje, nowe platformy lub cokolwiek innego.\n\nTo także świetny sposób na okazanie wsparcia dla tego projektu.";
-"alerts.community.subscribe" = "Zasubskrybuj teraz";
 "alerts.import.passphrase.message" = "Wprowadź hasło dla '%@'.";
 "alerts.import.passphrase.ok" = "Odszyfruj";
 "alerts.providers.missing_server.message" = "Nie wybrano serwera dostawcy. Wybierz serwer docelowy na swoim urządzeniu iOS/macOS.";
@@ -110,6 +107,7 @@
 "global.nouns.last_update" = "Ostatnia aktualizacja";
 "global.nouns.loading" = "Ładowanie";
 "global.nouns.method" = "Metoda";
+"global.nouns.migration" = "Migracja";
 "global.nouns.modules" = "Moduły";
 "global.nouns.n_seconds" = "%d sekund";
 "global.nouns.name" = "Nazwa";
@@ -205,6 +203,10 @@
 "modules.wireguard.peer.delete" = "Usuń peer";
 "modules.wireguard.preshared_key" = "Współdzielony klucz";
 "modules.wireguard.private_key.generate" = "Wygeneruj nowy klucz";
+"onboarding.community.dismiss" = "Nie, dziękuję";
+"onboarding.community.message" = "Czy wiesz, że %@ ma subreddit? Zasubskrybuj, aby otrzymywać aktualizacje lub omawiać problemy, funkcje, nowe platformy lub cokolwiek innego.\n\nTo także świetny sposób na okazanie wsparcia dla tego projektu.";
+"onboarding.community.subscribe" = "Zasubskrybuj teraz";
+"onboarding.migrate_3_2_2.message" = "Wersja 3.2.2 zmieniła sposób przechowywania dostawców, a dotknięte profile zostaną przemianowane.\n\nUpewnij się, że zaktualizowałeś wszystkie swoje urządzenia do najnowszej wersji, aby korzystać z nowych profili.";
 "placeholders.on_demand.ssid" = "Mój SSID";
 "placeholders.profile.name" = "Mój profil";
 "placeholders.secret" = "sekret";

@@ -219,6 +219,13 @@
 "modules.wireguard.preshared_key" = "Pre-shared key";
 "modules.wireguard.allowed_ips" = "Allowed IPs";
 
+// MARK: Views (Onboarding)
+
+"onboarding.community.message" = "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
+"onboarding.community.subscribe" = "Subscribe now";
+"onboarding.community.dismiss" = "No, thanks";
+"onboarding.migrate_3_2_2.message" = "Version 3.2.2 changed the way providers are stored, and the affected profiles will be renamed.\n\nMake sure to upgrade all your devices to the latest version to use the new profiles.";
+
 // MARK: - Entities
 
 "entities.tunnel_status.inactive" = "Inactive";
@@ -328,6 +335,7 @@
 "global.nouns.last_update" = "Last update";
 "global.nouns.loading" = "Loading";
 "global.nouns.method" = "Method";
+"global.nouns.migration" = "Migration";
 "global.nouns.modules" = "Modules";
 "global.nouns.n_seconds" = "%d seconds";
 "global.nouns.name" = "Name";
@@ -372,9 +380,6 @@
 
 // MARK: Global (Alerts)
 
-"alerts.community.message" = "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
-"alerts.community.subscribe" = "Subscribe now";
-"alerts.community.dismiss" = "No, thanks";
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
 "alerts.import.passphrase.ok" = "Decrypt";
 "alerts.providers.missing_server.message" = "No provider server selected. Please select a destination server on your iOS/macOS device.";

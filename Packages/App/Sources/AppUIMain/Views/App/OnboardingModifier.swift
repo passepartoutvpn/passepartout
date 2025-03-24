@@ -35,35 +35,26 @@ struct OnboardingModifier: ViewModifier {
     @EnvironmentObject
     private var migrationManager: MigrationManager
 
+    @EnvironmentObject
+    private var onboardingManager: OnboardingManager
+
     @Environment(\.isUITesting)
     private var isUITesting
-
-    @AppStorage(UIPreference.onboardingStep.key)
-    private var step: OnboardingStep?
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
 
     @State
-    private var isPresentingCommunity = false
+    private var isAlertPresented = false
 
     func body(content: Content) -> some View {
         content
             .alert(
-                Strings.Unlocalized.reddit,
-                isPresented: $isPresentingCommunity,
-                actions: {
-                    Link(Strings.Alerts.Community.subscribe, destination: Constants.shared.websites.subreddit)
-                        .environment(\.openURL, OpenURLAction { _ in
-                            advance()
-                            return .systemAction
-                        })
-
-                    Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
-                },
-                message: {
-                    Text(Strings.Alerts.Community.message(Strings.Unlocalized.appName))
-                }
+                alertTitle(for: onboardingManager.step),
+                isPresented: $isAlertPresented,
+                presenting: onboardingManager.step,
+                actions: alertActions,
+                message: alertMessage
             )
             .onLoad(perform: advance)
             .onChange(of: modalRoute) {
@@ -71,6 +62,56 @@ struct OnboardingModifier: ViewModifier {
                     advance()
                 }
             }
+    }
+}
+
+private extension OnboardingModifier {
+    func alertTitle(for item: OnboardingStep?) -> String {
+        switch item {
+        case .community:
+            return Strings.Unlocalized.reddit
+        case .migrateV3_2_2:
+            return Strings.Global.Nouns.migration
+        default:
+            return ""
+        }
+    }
+
+    @ViewBuilder
+    func alertActions(for item: OnboardingStep) -> some View {
+        switch item {
+        case .community:
+            Link(Strings.Onboarding.Community.subscribe, destination: Constants.shared.websites.subreddit)
+                .environment(\.openURL, OpenURLAction { _ in
+                    advance()
+                    return .systemAction
+                })
+
+            Button(Strings.Onboarding.Community.dismiss, role: .cancel, action: advance)
+
+        case .migrateV3_2_2:
+            Button(Strings.Global.Nouns.ok) {
+                Task {
+                    await apiManager.resetLastUpdateForAllProviders()
+                    advance()
+                }
+            }
+
+        default:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    func alertMessage(for item: OnboardingStep) -> some View {
+        switch item {
+        case .community:
+            Text(Strings.Onboarding.Community.message(Strings.Unlocalized.appName))
+        case .migrateV3_2_2:
+            Text(Strings.Onboarding.Migrate322.message)
+        default:
+            EmptyView()
+        }
     }
 }
 
@@ -87,11 +128,9 @@ private extension OnboardingModifier {
     }
 
     func doAdvance() {
-        pp_log(.app, .info, "Current step: \(step.debugDescription)")
-        step = step.nextStep
-        pp_log(.app, .info, "Next step: \(step.debugDescription)")
+        onboardingManager.advance()
 
-        switch step {
+        switch onboardingManager.step {
         case .migrateV3:
             guard migrationManager.hasMigratableProfiles else {
                 advance()
@@ -99,14 +138,11 @@ private extension OnboardingModifier {
             }
             modalRoute = .migrateProfiles
         case .community:
-            isPresentingCommunity = true
+            isAlertPresented = true
         case .migrateV3_2_2:
-            Task {
-                await apiManager.resetLastUpdateForAllProviders()
-                advance()
-            }
+            isAlertPresented = true
         default:
-            if step != OnboardingStep.allCases.last {
+            if onboardingManager.step != OnboardingStep.allCases.last {
                 advance()
             }
         }
