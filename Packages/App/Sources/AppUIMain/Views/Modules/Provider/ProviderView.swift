@@ -164,14 +164,17 @@ private extension ProviderView {
     }
 
     var presetPicker: some View {
-        providerEntity.map { _ in
-            Picker(Strings.Views.Providers.preset, selection: presetIdBinding) {
-                ForEach(availablePresets, id: \.presetId) {
-                    Text($0.description)
-                        .tag($0.presetId as String?)
-                }
+        Picker(Strings.Views.Providers.preset, selection: presetIdBinding) {
+            if draft.module.entity == nil {
+                Text(Strings.Views.Providers.Preset.placeholder)
+                    .tag(nil as String?)
+            }
+            ForEach(availablePresets, id: \.presetId) {
+                Text($0.description)
+                    .tag($0.presetId as String?)
             }
         }
+        .disabled(draft.module.entity == nil)
     }
 
     var optionsSection: some View {

@@ -968,6 +968,10 @@ public enum Strings {
         /// Loading...
         public static let loading = Strings.tr("Localizable", "views.providers.last_updated.loading", fallback: "Loading...")
       }
+      public enum Preset {
+        /// Select server
+        public static let placeholder = Strings.tr("Localizable", "views.providers.preset.placeholder", fallback: "Select server")
+      }
     }
     public enum Purchased {
       /// No purchases
