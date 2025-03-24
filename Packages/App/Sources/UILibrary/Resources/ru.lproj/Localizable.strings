@@ -107,6 +107,7 @@
 "global.nouns.last_update" = "Последнее обновление";
 "global.nouns.loading" = "Загрузка";
 "global.nouns.method" = "Метод";
+"global.nouns.migration" = "Миграция";
 "global.nouns.modules" = "Модули";
 "global.nouns.n_seconds" = "%d секунд";
 "global.nouns.name" = "Имя";

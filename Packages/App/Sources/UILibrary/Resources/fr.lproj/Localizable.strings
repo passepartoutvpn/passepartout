@@ -107,6 +107,7 @@
 "global.nouns.last_update" = "Dernière mise à jour";
 "global.nouns.loading" = "Chargement";
 "global.nouns.method" = "Méthode";
+"global.nouns.migration" = "Migration";
 "global.nouns.modules" = "Modules";
 "global.nouns.n_seconds" = "%d secondes";
 "global.nouns.name" = "Nom";

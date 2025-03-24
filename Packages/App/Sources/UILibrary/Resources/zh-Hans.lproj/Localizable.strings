@@ -107,6 +107,7 @@
 "global.nouns.last_update" = "最近更新";
 "global.nouns.loading" = "加载中";
 "global.nouns.method" = "方法";
+"global.nouns.migration" = "迁移";
 "global.nouns.modules" = "模块";
 "global.nouns.n_seconds" = "%d 秒";
 "global.nouns.name" = "名称";

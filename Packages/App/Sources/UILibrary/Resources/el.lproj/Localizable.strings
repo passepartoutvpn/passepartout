@@ -107,6 +107,7 @@
 "global.nouns.last_update" = "Τελευταία ενημέρωση";
 "global.nouns.loading" = "Φόρτωση";
 "global.nouns.method" = "Μέθοδος";
+"global.nouns.migration" = "Μετανάστευση";
 "global.nouns.modules" = "Μονάδες";
 "global.nouns.n_seconds" = "%d δευτερόλεπτα";
 "global.nouns.name" = "Όνομα";
