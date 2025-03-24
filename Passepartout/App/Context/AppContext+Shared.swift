@@ -118,8 +118,7 @@ extension AppContext {
             processor: processor,
             repository: mainProfileRepository,
             backupRepository: backupProfileRepository,
-            mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository,
-            readyAfterRemote: true
+            mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository
         )
 
         let tunnel = ExtendedTunnel(
