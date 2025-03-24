@@ -185,7 +185,7 @@ private extension ProviderServerView.ContentView {
         }
     }
 
-    // FIXME: #1231, servers.regions is inefficient, fetch regions directly
+    // FIXME: #1263, servers.regions is inefficient, fetch regions directly
     func computeServersByCountry(_ servers: [ProviderServer]) {
         let regions = servers.regions
         var map: [String: [ProviderRegion]] = [:]

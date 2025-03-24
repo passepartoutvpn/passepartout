@@ -65,7 +65,7 @@ extension ProviderRegion {
 
 extension Collection where Element == ProviderServer {
 
-    // FIXME: #1231, drop this later, fetch regions directly from Core Data
+    // FIXME: #1263, drop this later, fetch regions directly from Core Data
     var regions: [ProviderRegion] {
         var list: [ProviderRegion] = []
         var added: Set<String> = []
