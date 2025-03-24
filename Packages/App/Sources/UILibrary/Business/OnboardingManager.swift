@@ -29,28 +29,29 @@ import PassepartoutKit
 
 @MainActor
 public final class OnboardingManager: ObservableObject {
-    private let initialStep: OnboardingStep?
+    private let initialStep: OnboardingStep
 
-    public private(set) var step: OnboardingStep?
+    public private(set) var step: OnboardingStep
 
-    public init() {
-        initialStep = .migrateV3
-        step = .migrateV3
+    public init(initialStep: OnboardingStep = .doneV2) {
+        self.initialStep = initialStep
+        step = initialStep
     }
 
     public init(defaults: UserDefaults) {
-        if let rawStep = defaults.string(forKey: UIPreference.onboardingStep.key) {
-            initialStep = OnboardingStep(rawValue: rawStep)
+        if let rawStep = defaults.string(forKey: UIPreference.onboardingStep.key),
+           let initialStep = OnboardingStep(rawValue: rawStep) {
+            self.initialStep = initialStep
         } else {
-            initialStep = nil
+            initialStep = .doneV2
         }
         step = initialStep
     }
 
     public func advance() {
-        pp_log(.app, .info, "Current step: \(step.debugDescription)")
+        pp_log(.app, .info, "Current step: \(step)")
         step = step.nextStep
-        pp_log(.app, .info, "Next step: \(step.debugDescription)")
+        pp_log(.app, .info, "Next step: \(step)")
 
         // skip step about 3.2.2 providers migration for new installs or 2.x.x
         if initialStep != .doneV3 && step == .migrateV3_2_2 {
@@ -59,12 +60,13 @@ public final class OnboardingManager: ObservableObject {
     }
 }
 
-private extension Optional where Wrapped == OnboardingStep {
-    var nextStep: OnboardingStep? {
+extension OnboardingStep {
+    var order: Int {
+        OnboardingStep.allCases.firstIndex(of: self) ?? .max
+    }
+
+    var nextStep: OnboardingStep {
         let all = OnboardingStep.allCases
-        guard let self else {
-            return all.first
-        }
         guard let index = all.firstIndex(of: self) else {
             fatalError("How can self not be part of allCases?")
         }
