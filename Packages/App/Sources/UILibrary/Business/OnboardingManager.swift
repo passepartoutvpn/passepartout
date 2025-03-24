@@ -39,21 +39,20 @@ public final class OnboardingManager: ObservableObject {
         }
     }
 
-    public init(initialStep: OnboardingStep = .doneV2) {
-        defaults = nil
-        self.initialStep = initialStep
-        step = initialStep
+    public init(defaults: UserDefaults? = nil, initialStep: OnboardingStep? = nil) {
+        self.defaults = defaults
+        self.initialStep = initialStep ?? .doneV2
+        step = self.initialStep
     }
 
-    public init(defaults: UserDefaults) {
-        self.defaults = defaults
-        if let rawStep = defaults.string(forKey: UIPreference.onboardingStep.key),
-           let initialStep = OnboardingStep(rawValue: rawStep) {
-            self.initialStep = initialStep
+    public convenience init(defaults: UserDefaults) {
+        let initialStep: OnboardingStep?
+        if let rawStep = defaults.string(forKey: UIPreference.onboardingStep.key) {
+            initialStep = OnboardingStep(rawValue: rawStep)
         } else {
-            initialStep = .doneV2
+            initialStep = nil
         }
-        step = initialStep
+        self.init(defaults: defaults, initialStep: initialStep)
     }
 
     public func advance() {
