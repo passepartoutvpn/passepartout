@@ -94,7 +94,10 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
             contentView
                 .toolbar(content: toolbarContent)
         }
-        .modifier(OnboardingModifier(modalRoute: $modalRoute))
+        .modifier(OnboardingModifier(
+            tunnel: tunnel,
+            modalRoute: $modalRoute
+        ))
         .modifier(PaywallModifier(
             reason: $paywallReason,
             otherTitle: Strings.Views.Paywall.Alerts.Confirmation.editProfile,
