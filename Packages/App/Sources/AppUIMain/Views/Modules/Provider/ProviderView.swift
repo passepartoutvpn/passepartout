@@ -60,22 +60,8 @@ struct ProviderView: View, ModuleDraftEditing {
             .moduleView(draft: draft)
             .modifier(PaywallModifier(reason: $paywallReason))
             .onLoad(perform: loadCurrentProvider)
-            .onChange(of: providerId) { newId in
-                Task {
-                    if let newId {
-                        await refreshInfrastructure(for: newId)
-                    }
-                    loadPreferences(for: newId)
-                }
-            }
-            .onChange(of: providerEntity) { entity in
-                guard let entity else {
-                    return
-                }
-                Task {
-                    await loadSupportedPresets(for: entity.server)
-                }
-            }
+            .onChange(of: providerId, perform: onChangeProvider)
+            .onChange(of: providerEntity, perform: onChangeEntity)
             .onDisappear(perform: savePreferences)
             .disabled(apiManager.isLoading)
     }
@@ -322,6 +308,24 @@ private extension ProviderView {
         } catch {
             pp_log(.app, .error, "Unable to fetch presets for current server: \(error)")
             availablePresets = []
+        }
+    }
+
+    func onChangeProvider(_ newProviderId: ProviderID?) {
+       Task {
+           if let newProviderId {
+               await refreshInfrastructure(for: newProviderId)
+           }
+           loadPreferences(for: newProviderId)
+       }
+    }
+
+    func onChangeEntity(_ newEntity: ProviderEntity?) {
+        guard let newEntity else {
+            return
+        }
+        Task {
+            await loadSupportedPresets(for: newEntity.server)
         }
     }
 
