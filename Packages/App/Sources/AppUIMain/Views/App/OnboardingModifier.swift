@@ -100,7 +100,7 @@ private extension OnboardingModifier {
             modalRoute = .migrateProfiles
         case .community:
             isPresentingCommunity = true
-        case .migrateV3_2_1:
+        case .migrateV3_2_2:
             Task {
                 await apiManager.resetLastUpdateForAllProviders()
                 advance()

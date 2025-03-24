@@ -33,9 +33,9 @@ public enum OnboardingStep: String, RawRepresentable, CaseIterable {
 
     case doneV3
 
-    case migrateV3_2_1
+    case migrateV3_2_2
 
-    case doneV3_2_1
+    case doneV3_2_2
 }
 
 extension Optional where Wrapped == OnboardingStep {
