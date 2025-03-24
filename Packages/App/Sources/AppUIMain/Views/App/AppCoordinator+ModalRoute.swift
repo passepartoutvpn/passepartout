@@ -30,7 +30,7 @@ extension AppCoordinator {
     enum ModalRoute: Identifiable {
         case about
 
-        case editProfile(UUID?)
+        case editProfile
 
         case editProviderEntity(Profile, Bool, Module)
 

@@ -60,9 +60,16 @@ extension BundleConfiguration {
         return main.displayName
     }
 
-    public static var mainVersionString: String {
+    public static var mainVersionNumber: String {
         if isPreview {
             return "preview-1.2.3"
+        }
+        return main.versionNumber
+    }
+
+    public static var mainVersionString: String {
+        if isPreview {
+            return "preview-1.2.3-1234"
         }
         return main.versionString
     }

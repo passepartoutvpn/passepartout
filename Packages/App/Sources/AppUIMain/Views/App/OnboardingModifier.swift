@@ -30,6 +30,9 @@ import SwiftUI
 struct OnboardingModifier: ViewModifier {
 
     @EnvironmentObject
+    private var apiManager: APIManager
+
+    @EnvironmentObject
     private var migrationManager: MigrationManager
 
     @Environment(\.isUITesting)
@@ -97,8 +100,15 @@ private extension OnboardingModifier {
             modalRoute = .migrateProfiles
         case .community:
             isPresentingCommunity = true
+        case .migrateV3_2_2:
+            Task {
+                await apiManager.resetLastUpdateForAllProviders()
+                advance()
+            }
         default:
-            break
+            if step != OnboardingStep.allCases.last {
+                advance()
+            }
         }
     }
 }

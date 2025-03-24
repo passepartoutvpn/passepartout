@@ -41,7 +41,7 @@ struct AddProfileMenu: View {
 
     let onMigrateProfiles: () -> Void
 
-    let onNewProfile: (EditableProfile, UUID?) -> Void
+    let onNewProfile: (EditableProfile) -> Void
 
     var body: some View {
         Menu {
@@ -61,7 +61,7 @@ private extension AddProfileMenu {
     var emptyProfileButton: some View {
         Button {
             let editable = EditableProfile(name: newName)
-            onNewProfile(editable, nil)
+            onNewProfile(editable)
         } label: {
             ThemeImageLabel(Strings.Views.App.Toolbar.NewProfile.empty, .profileEdit)
         }
@@ -90,7 +90,7 @@ private extension AddProfileMenu {
             onSelect: {
                 var copy = $0
                 copy.name = profileManager.firstUniqueName(from: copy.name)
-                onNewProfile(copy, copy.modules.first?.id)
+                onNewProfile(copy)
             }
         )
     }

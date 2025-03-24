@@ -50,20 +50,27 @@ final class DefaultAppProcessor: Sendable {
 }
 
 extension DefaultAppProcessor: ProfileProcessor {
-    func migrated(_ profile: Profile) throws -> Profile? {
+    func migratedProfile(from profile: Profile) throws -> Profile? {
         switch profile.version {
         case nil:
             var builder = profile.builder(withNewId: false, forUpgrade: true)
+            builder.name = profile.name + " [\(BundleConfiguration.mainVersionNumber)]"
 
-            // convert OpenVPN provider modules to ProviderModule of type .openVPN
+            // convert OpenVPN provider modules...
             let ovpnPairs: [(offset: Int, module: OpenVPNModule)] = builder.modules
                 .enumerated()
                 .compactMap {
-                    guard let module = $0.element as? OpenVPNModule else {
+                    guard let module = $0.element as? OpenVPNModule,
+                          module.providerSelection != nil else {
                         return nil
                     }
                     return ($0.offset, module)
                 }
+            guard !ovpnPairs.isEmpty else {
+                return nil
+            }
+
+            // ...to ProviderModule of type .openVPN
             try ovpnPairs
                 .forEach {
                     guard let selection = $0.module.providerSelection else {
@@ -79,17 +86,11 @@ extension DefaultAppProcessor: ProfileProcessor {
                     try providerBuilder.setOptions(options, for: .openVPN)
                     let provider = try providerBuilder.tryBuild()
 
+                    // replace old module
                     builder.modules[$0.offset] = provider
                     builder.activeModulesIds.insert(provider.id)
+                    builder.activeModulesIds.remove($0.module.id)
                 }
-
-            // remove old modules
-            ovpnPairs.forEach { pair in
-                builder.modules.removeAll {
-                    pair.module.id == $0.id
-                }
-                builder.activeModulesIds.remove(pair.module.id)
-            }
 
             return try builder.tryBuild()
         default:

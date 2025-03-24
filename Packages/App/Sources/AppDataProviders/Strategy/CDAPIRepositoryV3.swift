@@ -156,6 +156,26 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
         }
     }
 
+    func resetLastUpdate(for providerIds: [ProviderID]?) async {
+        try? await context.perform { [weak self] in
+            guard let self else {
+                return
+            }
+            let providerRequest = CDProviderV3.fetchRequest()
+            if let providerIds {
+                providerRequest.predicate = NSPredicate(
+                    format: "providerId in %@",
+                    providerIds.map(\.rawValue)
+                )
+            }
+            let providers = try providerRequest.execute()
+            providers.forEach {
+                $0.lastUpdate = nil
+            }
+            try context.save()
+        }
+    }
+
     nonisolated func presets(for server: ProviderServer, moduleType: ModuleType) async throws -> [ProviderPreset] {
         try await context.perform {
             let request = CDProviderPresetV3.fetchRequest()

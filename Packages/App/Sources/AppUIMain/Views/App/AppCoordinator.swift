@@ -192,11 +192,10 @@ extension AppCoordinator {
                 tunnel: tunnel
             )
 
-        case .editProfile(let initialModuleId):
+        case .editProfile:
             ProfileCoordinator(
                 profileManager: profileManager,
                 profileEditor: profileEditor,
-                initialModuleId: initialModuleId,
                 registry: registry,
                 moduleViewFactory: DefaultModuleViewFactory(registry: registry),
                 path: $profilePath,
@@ -358,22 +357,22 @@ private extension AppCoordinator {
         }
     }
 
-    func onNewProfile(_ profile: EditableProfile, initialModuleId: UUID?) {
-        editProfile(profile, initialModuleId: initialModuleId)
+    func onNewProfile(_ profile: EditableProfile) {
+        editProfile(profile)
     }
 
     func onEditProfile(_ preview: ProfilePreview) {
         guard let profile = profileManager.profile(withId: preview.id) else {
             return
         }
-        editProfile(profile.editable(), initialModuleId: nil)
+        editProfile(profile.editable())
     }
 
-    func editProfile(_ profile: EditableProfile, initialModuleId: UUID?) {
+    func editProfile(_ profile: EditableProfile) {
         profilePath = NavigationPath()
         let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
         profileEditor.load(profile, isShared: isShared)
-        present(.editProfile(initialModuleId))
+        present(.editProfile)
     }
 }
 

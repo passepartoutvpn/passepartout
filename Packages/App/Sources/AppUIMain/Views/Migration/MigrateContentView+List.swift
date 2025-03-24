@@ -86,6 +86,7 @@ private extension MigrateContentView.ListView {
                         )
                     }
                 }
+                .disabled(!step.canSelect)
             } header: {
                 EditProfilesButton(isEditing: $isEditing, selection: $selection) {
                     onDelete(profiles.filter {
@@ -94,10 +95,10 @@ private extension MigrateContentView.ListView {
                     // disable isEditing after confirmation
                 }
                 .textCase(.none)
+                .disabled(!step.canSelect)
             }
         }
         .listStyle(.plain)
-        .disabled(!step.canSelect)
         .themeEmpty(if: isEmpty, message: Strings.Views.Migration.noProfiles)
     }
 

@@ -42,7 +42,7 @@ final class MockProfileProcessor: ProfileProcessor {
         profile.name
     }
 
-    func migrated(_ profile: Profile) throws -> Profile? {
+    func migratedProfile(from profile: Profile) throws -> Profile? {
         nil
     }
 

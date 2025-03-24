@@ -123,6 +123,7 @@
 
 "views.providers.module" = "Type";
 "views.providers.preset" = "Preset";
+"views.providers.preset.placeholder" = "Select server";
 "views.providers.select_provider" = "Select provider";
 "views.providers.select_module" = "Select type";
 "views.providers.select_entity" = "Select";

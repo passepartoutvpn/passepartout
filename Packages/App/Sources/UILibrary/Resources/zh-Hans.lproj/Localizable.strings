@@ -307,6 +307,7 @@
 "views.providers.module" = "类型";
 "views.providers.only_favorites" = "仅收藏";
 "views.providers.preset" = "预设";
+"views.providers.preset.placeholder" = "选择服务器";
 "views.providers.refresh_infrastructure" = "刷新基础设施";
 "views.providers.select_entity" = "选择";
 "views.providers.select_module" = "选择类型";

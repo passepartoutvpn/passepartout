@@ -307,6 +307,7 @@
 "views.providers.module" = "Typ";
 "views.providers.only_favorites" = "Endast favoriter";
 "views.providers.preset" = "Förinställning";
+"views.providers.preset.placeholder" = "Välj server";
 "views.providers.refresh_infrastructure" = "Uppdatera infrastruktur";
 "views.providers.select_entity" = "Välj";
 "views.providers.select_module" = "Välj typ";

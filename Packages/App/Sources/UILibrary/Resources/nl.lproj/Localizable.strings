@@ -307,6 +307,7 @@
 "views.providers.module" = "Type";
 "views.providers.only_favorites" = "Alleen favorieten";
 "views.providers.preset" = "Voorinstelling";
+"views.providers.preset.placeholder" = "Server selecteren";
 "views.providers.refresh_infrastructure" = "Infrastructuur vernieuwen";
 "views.providers.select_entity" = "Selecteer";
 "views.providers.select_module" = "Selecteer type";
