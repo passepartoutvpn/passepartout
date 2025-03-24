@@ -106,7 +106,9 @@ private extension OnboardingModifier {
                 advance()
             }
         default:
-            break
+            if step != OnboardingStep.allCases.last {
+                advance()
+            }
         }
     }
 }
