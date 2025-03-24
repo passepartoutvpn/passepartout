@@ -1,5 +1,5 @@
 //
-//  NameSection.swift
+//  ThemeNameSection.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/15/24.
@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-public struct NameSection: View {
+public struct ThemeNameSection: View {
 
     @Binding
     private var name: String
@@ -61,7 +61,7 @@ public struct NameSection: View {
 
         var body: some View {
             Form {
-                NameSection(
+                ThemeNameSection(
                     name: $name,
                     placeholder: "My name"
                 )

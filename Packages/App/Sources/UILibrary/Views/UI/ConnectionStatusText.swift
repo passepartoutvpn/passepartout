@@ -28,10 +28,10 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-public struct ConnectionStatusText: View, ThemeProviding {
+public struct ConnectionStatusText: View {
 
     @EnvironmentObject
-    public var theme: Theme
+    private var theme: Theme
 
     @ObservedObject
     private var tunnel: ExtendedTunnel

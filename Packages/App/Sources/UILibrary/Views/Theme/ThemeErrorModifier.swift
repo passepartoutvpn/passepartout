@@ -1,5 +1,5 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeErrorModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/25.
@@ -23,24 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
-    }
-}
+struct ThemeErrorModifier: ViewModifier {
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
-        }
+    @EnvironmentObject
+    private var theme: Theme
+
+    let isError: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .foregroundStyle(isError ? theme.errorColor : theme.titleColor)
     }
 }

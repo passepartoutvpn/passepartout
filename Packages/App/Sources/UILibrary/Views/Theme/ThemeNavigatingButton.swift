@@ -1,8 +1,8 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeNavigatingButton.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 2/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,36 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+public struct ThemeNavigatingButton<Label>: View where Label: View {
+    private let action: () -> Void
+
+    private let label: () -> Label
+
+    public init(action: @escaping () -> Void, label: @escaping () -> Label) {
+        self.action = action
+        self.label = label
+    }
+
+    public var body: some View {
+        Button(action: action) {
+            HStack {
+                label()
+                ThemeImage(.navigate)
+                    .foregroundStyle(.secondary)
+            }
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .cursor(.hand)
     }
 }
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
+extension ThemeNavigatingButton where Label == Text {
+    public init(_ title: String, action: @escaping () -> Void) {
+        self.init(action: action) {
+            Text(title)
         }
     }
 }

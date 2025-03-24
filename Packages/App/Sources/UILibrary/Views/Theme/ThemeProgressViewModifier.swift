@@ -1,8 +1,8 @@
 //
-//  ProfileRoute.swift
+//  ThemeProgressViewModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/12/25.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-struct ProfileRoute: Hashable {
-    let wrapped: AnyHashable
+struct ThemeProgressViewModifier<EmptyContent>: ViewModifier where EmptyContent: View {
+    let isProgressing: Bool
 
-    init(_ wrapped: AnyHashable) {
-        self.wrapped = wrapped
+    var isEmpty: Bool?
+
+    var emptyContent: (() -> EmptyContent)?
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+                .opaque(!isProgressing && isEmpty != true)
+
+            if isProgressing {
+                ThemeProgressView()
+            } else if let isEmpty, let emptyContent, isEmpty {
+                emptyContent()
+            }
+        }
     }
 }

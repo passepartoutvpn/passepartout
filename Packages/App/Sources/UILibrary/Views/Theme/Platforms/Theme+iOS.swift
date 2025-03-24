@@ -52,8 +52,8 @@ extension View {
 
     public func themeLockScreen() -> some View {
         modifier(ThemeLockScreenModifier {
-            FullScreenView {
-                LogoImage()
+            ThemeFullScreenView {
+                ThemeLogo()
             }
         })
     }

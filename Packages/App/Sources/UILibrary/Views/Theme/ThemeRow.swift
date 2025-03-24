@@ -1,8 +1,8 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeRow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 1/30/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+public struct ThemeRow: View {
+    private let title: String
+
+    private let value: String?
+
+    public init(_ title: String, value: String? = nil) {
+        self.title = title
+        self.value = value
     }
-}
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
-        }
+    public var body: some View {
+        Text(title)
+            .themeTrailingValue(value)
     }
 }

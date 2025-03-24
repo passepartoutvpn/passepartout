@@ -46,7 +46,7 @@ struct ProfileCardView: View {
         VStack(alignment: .leading) {
             Spacer(minLength: .zero)
 
-            NavigatingButton {
+            ThemeNavigatingButton {
                 onTap?(preview)
             } label: {
                 Text(preview.name)

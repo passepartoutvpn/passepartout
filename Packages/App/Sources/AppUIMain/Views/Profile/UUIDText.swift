@@ -30,7 +30,7 @@ struct UUIDText: View {
 
     var body: some View {
         ThemeCopiableText(
-            title: Strings.Unlocalized.uuid,
+            Strings.Unlocalized.uuid,
             value: uuid,
             valueView: {
                 Text($0.flatString.localizedDescription(style: .quartets))

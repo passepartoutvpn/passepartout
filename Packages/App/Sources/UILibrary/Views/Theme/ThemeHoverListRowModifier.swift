@@ -1,8 +1,8 @@
 //
-//  RemovableItemRow.swift
+//  ThemeHoverListRowModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/3/24.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,32 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 
-public struct RemovableItemRow<ItemView, RemoveView>: View where ItemView: View,
-                                                                 RemoveView: View {
-    private let isEditing: Bool
-
-    private let itemView: () -> ItemView
-
-    private let removeView: () -> RemoveView
-
-    public init(
-        isEditing: Bool,
-        @ViewBuilder itemView: @escaping () -> ItemView,
-        @ViewBuilder removeView: @escaping () -> RemoveView
-    ) {
-        self.isEditing = isEditing
-        self.itemView = itemView
-        self.removeView = removeView
-    }
-
-    public var body: some View {
-        HStack {
-            if isEditing {
-                removeView()
-            }
-            itemView()
-        }
+struct ThemeHoverListRowModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxHeight: .infinity)
+            .listRowInsets(.init())
     }
 }
+
+#endif

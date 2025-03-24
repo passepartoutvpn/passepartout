@@ -52,10 +52,10 @@ public struct VersionView<Icon>: View where Icon: View {
     }
 }
 
-extension VersionView where Icon == LogoImage {
+extension VersionView where Icon == ThemeLogo {
     public init() {
         icon = {
-            LogoImage()
+            ThemeLogo()
         }
     }
 }

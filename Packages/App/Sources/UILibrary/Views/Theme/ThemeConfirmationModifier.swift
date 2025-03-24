@@ -1,5 +1,5 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeConfirmationModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/25.
@@ -23,24 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
-    }
-}
+struct ThemeConfirmationModifier: ViewModifier {
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
+    @Binding
+    var isPresented: Bool
+
+    let title: String
+
+    let message: String?
+
+    let isDestructive: Bool
+
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .confirmationDialog(title, isPresented: $isPresented, titleVisibility: .visible) {
+                Button(Strings.Theme.Confirmation.ok, role: isDestructive ? .destructive : nil, action: action)
+                Text(Strings.Theme.Confirmation.cancel)
+            } message: {
+                Text(message ?? Strings.Theme.Confirmation.message)
             }
-        }
     }
 }

@@ -32,7 +32,7 @@ struct ProfileNameSection: View {
     var name: String
 
     var body: some View {
-        NameSection(
+        ThemeNameSection(
             name: $name,
             placeholder: Strings.Placeholders.Profile.name,
             footer: Strings.Views.Profile.Sections.Name.footer

@@ -79,7 +79,7 @@ private extension ProviderServerView.ContentView {
             .width(10.0)
 
             TableColumn("☆") { region in
-                FavoriteToggle(
+                ThemeFavoriteToggle(
                     value: region.id,
                     selection: providerPreferences.favoriteServers()
                 )

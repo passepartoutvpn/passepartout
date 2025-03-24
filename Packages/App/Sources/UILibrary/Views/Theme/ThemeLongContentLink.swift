@@ -1,8 +1,8 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeLongContentLink.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 1/30/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,37 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if !os(tvOS)
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+import CommonUtils
+import SwiftUI
+
+public struct ThemeLongContentLink: View {
+    private let title: String
+
+    @Binding
+    private var text: String
+
+    private let preview: String?
+
+    public init(_ title: String, text: Binding<String>, preview: String? = nil) {
+        self.title = title
+        _text = text
+        self.preview = preview ?? text.wrappedValue
     }
-}
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
+    public init(_ title: String, text: Binding<String>, preview: (String) -> String?) {
+        self.title = title
+        _text = text
+        self.preview = preview(text.wrappedValue)
+    }
+
+    public var body: some View {
+        LongContentLink(title, content: $text, preview: preview) {
+            Text(preview != nil ? $0 : "")
+                .foregroundColor(.secondary)
         }
     }
 }
+
+#endif

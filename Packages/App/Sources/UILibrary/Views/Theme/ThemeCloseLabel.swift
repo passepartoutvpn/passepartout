@@ -1,8 +1,8 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeCloseLabel.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+public struct ThemeCloseLabel: View {
+    public init() {
     }
-}
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
-        }
+    public var body: some View {
+#if os(iOS) || os(tvOS)
+        ThemeImage(.close)
+#else
+        Text(Strings.Global.Actions.cancel)
+#endif
     }
 }

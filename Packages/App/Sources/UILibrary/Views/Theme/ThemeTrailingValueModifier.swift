@@ -1,5 +1,5 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeTrailingValueModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/25.
@@ -23,24 +23,23 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
-    }
-}
+struct ThemeTrailingValueModifier: ViewModifier {
+    let value: CustomStringConvertible?
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
+    let truncationMode: Text.TruncationMode
+
+    func body(content: Content) -> some View {
+        LabeledContent {
+            if let value {
+                Text(value.description)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .truncationMode(truncationMode)
             }
+        } label: {
+            content
         }
     }
 }

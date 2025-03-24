@@ -1,8 +1,8 @@
 //
-//  Theme+MenuImageName.swift
+//  ProfileLink.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 1/30/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+struct ProfileRoute: Hashable {
+    let wrapped: AnyHashable
+
+    fileprivate init(_ wrapped: AnyHashable) {
+        self.wrapped = wrapped
     }
 }
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
+struct ProfileLink<R>: View where R: Hashable {
+    private let caption: String
+
+    private let value: String?
+
+    private let route: R
+
+    init(_ caption: String, value: String? = nil, route: R) {
+        self.caption = caption
+        self.value = value
+        self.route = route
+    }
+
+    var body: some View {
+        NavigationLink(value: ProfileRoute(route)) {
+            ThemeRow(caption, value: value)
         }
     }
 }
