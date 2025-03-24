@@ -252,7 +252,7 @@ private extension ProviderView {
             let module = try draft.module.tryBuild()
             return try module.resolvedModule(with: registry)
         } catch {
-            pp_log(.app, .error, "Unable to resolve provider module: \(error)")
+            pp_log(.app, .debug, "Unable to resolve provider module: \(error)")
             return nil
         }
     }
