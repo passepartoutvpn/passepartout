@@ -38,11 +38,11 @@ struct OnboardingModifier: ViewModifier {
     @EnvironmentObject
     private var migrationManager: MigrationManager
 
-    @EnvironmentObject
-    private var tunnel: ExtendedTunnel
-
     @Environment(\.isUITesting)
     private var isUITesting
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
