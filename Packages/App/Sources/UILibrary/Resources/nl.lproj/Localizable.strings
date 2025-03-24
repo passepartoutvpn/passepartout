@@ -1,6 +1,6 @@
-"alerts.community.dismiss" = "Nee, bedankt";
-"alerts.community.message" = "Wist je dat %@ een subreddit heeft? Abonneer je voor updates of om problemen, functies, nieuwe platforms of wat je maar wilt te bespreken.\n\nHet is ook een geweldige manier om te laten zien dat je om dit project geeft.";
-"alerts.community.subscribe" = "Nu abonneren";
+"onboarding.community.dismiss" = "Nee, bedankt";
+"onboarding.community.message" = "Wist je dat %@ een subreddit heeft? Abonneer je voor updates of om problemen, functies, nieuwe platforms of wat je maar wilt te bespreken.\n\nHet is ook een geweldige manier om te laten zien dat je om dit project geeft.";
+"onboarding.community.subscribe" = "Nu abonneren";
 "alerts.import.passphrase.message" = "Voer het wachtwoord in voor '%@'.";
 "alerts.import.passphrase.ok" = "Ontsleutelen";
 "alerts.providers.missing_server.message" = "Geen provider-server geselecteerd. Selecteer een doellocatieserver op je iOS-/macOS-apparaat.";

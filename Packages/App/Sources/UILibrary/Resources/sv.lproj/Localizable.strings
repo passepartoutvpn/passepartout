@@ -1,6 +1,6 @@
-"alerts.community.dismiss" = "Nej, tack";
-"alerts.community.message" = "Visste du att %@ har en subreddit? Prenumerera för att få uppdateringar eller för att diskutera problem, funktioner, nya plattformar eller vad du vill.\n\nDet är också ett bra sätt att visa att du bryr dig om det här projektet.";
-"alerts.community.subscribe" = "Prenumerera nu";
+"onboarding.community.dismiss" = "Nej, tack";
+"onboarding.community.message" = "Visste du att %@ har en subreddit? Prenumerera för att få uppdateringar eller för att diskutera problem, funktioner, nya plattformar eller vad du vill.\n\nDet är också ett bra sätt att visa att du bryr dig om det här projektet.";
+"onboarding.community.subscribe" = "Prenumerera nu";
 "alerts.import.passphrase.message" = "Ange lösenfras för '%@'.";
 "alerts.import.passphrase.ok" = "Dekryptera";
 "alerts.providers.missing_server.message" = "Ingen leverantörsserver vald. Välj en målserver på din iOS/macOS-enhet.";

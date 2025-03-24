@@ -79,13 +79,14 @@ private extension OnboardingModifier {
     func alertActions(for item: OnboardingStep) -> some View {
         switch item {
         case .community:
-            Link(Strings.Alerts.Community.subscribe, destination: Constants.shared.websites.subreddit)
+            Link(Strings.Onboarding.Community.subscribe, destination: Constants.shared.websites.subreddit)
                 .environment(\.openURL, OpenURLAction { _ in
                     advance()
                     return .systemAction
                 })
 
-            Button(Strings.Alerts.Community.dismiss, role: .cancel, action: advance)
+            Button(Strings.Onboarding.Community.dismiss, role: .cancel, action: advance)
+
         default:
             EmptyView()
         }
@@ -95,7 +96,7 @@ private extension OnboardingModifier {
     func alertMessage(for item: OnboardingStep) -> some View {
         switch item {
         case .community:
-            Text(Strings.Alerts.Community.message(Strings.Unlocalized.appName))
+            Text(Strings.Onboarding.Community.message(Strings.Unlocalized.appName))
         default:
             EmptyView()
         }

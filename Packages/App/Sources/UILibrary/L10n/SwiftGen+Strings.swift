@@ -11,18 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum Alerts {
-    public enum Community {
-      /// No, thanks
-      public static let dismiss = Strings.tr("Localizable", "alerts.community.dismiss", fallback: "No, thanks")
-      /// Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.
-      /// 
-      /// It's also a great way to show you care about this project.
-      public static func message(_ p1: Any) -> String {
-        return Strings.tr("Localizable", "alerts.community.message", String(describing: p1), fallback: "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.")
-      }
-      /// Subscribe now
-      public static let subscribe = Strings.tr("Localizable", "alerts.community.subscribe", fallback: "Subscribe now")
-    }
     public enum Import {
       public enum Passphrase {
         /// Enter passphrase for '%@'.
@@ -578,6 +566,20 @@ public enum Strings {
         /// Generate new key
         public static let generate = Strings.tr("Localizable", "modules.wireguard.private_key.generate", fallback: "Generate new key")
       }
+    }
+  }
+  public enum Onboarding {
+    public enum Community {
+      /// No, thanks
+      public static let dismiss = Strings.tr("Localizable", "onboarding.community.dismiss", fallback: "No, thanks")
+      /// Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.
+      /// 
+      /// It's also a great way to show you care about this project.
+      public static func message(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "onboarding.community.message", String(describing: p1), fallback: "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.")
+      }
+      /// Subscribe now
+      public static let subscribe = Strings.tr("Localizable", "onboarding.community.subscribe", fallback: "Subscribe now")
     }
   }
   public enum Placeholders {

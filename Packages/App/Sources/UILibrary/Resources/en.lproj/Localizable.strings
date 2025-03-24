@@ -219,6 +219,12 @@
 "modules.wireguard.preshared_key" = "Pre-shared key";
 "modules.wireguard.allowed_ips" = "Allowed IPs";
 
+// MARK: Views (Onboarding)
+
+"onboarding.community.message" = "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
+"onboarding.community.subscribe" = "Subscribe now";
+"onboarding.community.dismiss" = "No, thanks";
+
 // MARK: - Entities
 
 "entities.tunnel_status.inactive" = "Inactive";
@@ -372,9 +378,6 @@
 
 // MARK: Global (Alerts)
 
-"alerts.community.message" = "Did you know that %@ has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
-"alerts.community.subscribe" = "Subscribe now";
-"alerts.community.dismiss" = "No, thanks";
 "alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
 "alerts.import.passphrase.ok" = "Decrypt";
 "alerts.providers.missing_server.message" = "No provider server selected. Please select a destination server on your iOS/macOS device.";

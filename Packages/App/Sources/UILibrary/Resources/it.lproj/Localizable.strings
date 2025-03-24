@@ -1,6 +1,6 @@
-"alerts.community.dismiss" = "No, grazie";
-"alerts.community.message" = "Sai che %@ ha un subreddit? Iscriviti per gli aggiornamenti o per discutere di problemi, funzionalità, nuove piattaforme o qualsiasi altra cosa.\n\nÈ anche un ottimo modo per dimostrare che ti interessa questo progetto.";
-"alerts.community.subscribe" = "Iscriviti ora";
+"onboarding.community.dismiss" = "No, grazie";
+"onboarding.community.message" = "Sai che %@ ha un subreddit? Iscriviti per gli aggiornamenti o per discutere di problemi, funzionalità, nuove piattaforme o qualsiasi altra cosa.\n\nÈ anche un ottimo modo per dimostrare che ti interessa questo progetto.";
+"onboarding.community.subscribe" = "Iscriviti ora";
 "alerts.import.passphrase.message" = "Inserisci la passphrase per '%@'.";
 "alerts.import.passphrase.ok" = "Decrittografa";
 "alerts.providers.missing_server.message" = "Nessun server provider selezionato. Seleziona un server di destinazione sul tuo dispositivo iOS/macOS.";
