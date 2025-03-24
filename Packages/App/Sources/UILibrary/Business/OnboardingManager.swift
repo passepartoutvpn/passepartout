@@ -54,7 +54,7 @@ public final class OnboardingManager: ObservableObject {
         pp_log(.app, .info, "Next step: \(step)")
 
         // skip step about 3.2.2 providers migration for new installs or 2.x.x
-        if initialStep != .doneV3 && step == .migrateV3_2_2 {
+        if initialStep < .doneV3 && step == .migrateV3_2_2 {
             step = .doneV3_2_2
         }
     }
@@ -74,5 +74,9 @@ extension OnboardingStep {
             return self
         }
         return all[index + 1]
+    }
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.order < rhs.order
     }
 }
