@@ -155,6 +155,7 @@ extension AppContext {
             return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
         }()
 
+        let onboardingManager = OnboardingManager(defaults: .standard)
         let preferencesManager = PreferencesManager()
 
         // MARK: Eligibility
@@ -215,6 +216,7 @@ extension AppContext {
             apiManager: apiManager,
             iapManager: iapManager,
             migrationManager: migrationManager,
+            onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: dependencies.registry,

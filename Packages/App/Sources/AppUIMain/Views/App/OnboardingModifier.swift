@@ -35,11 +35,11 @@ struct OnboardingModifier: ViewModifier {
     @EnvironmentObject
     private var migrationManager: MigrationManager
 
+    @EnvironmentObject
+    private var onboardingManager: OnboardingManager
+
     @Environment(\.isUITesting)
     private var isUITesting
-
-    @AppStorage(UIPreference.onboardingStep.key)
-    private var step: OnboardingStep?
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
@@ -50,9 +50,9 @@ struct OnboardingModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .alert(
-                alertTitle(for: step),
+                alertTitle(for: onboardingManager.step),
                 isPresented: $isAlertPresented,
-                presenting: step,
+                presenting: onboardingManager.step,
                 actions: alertActions,
                 message: alertMessage
             )
@@ -115,11 +115,9 @@ private extension OnboardingModifier {
     }
 
     func doAdvance() {
-        pp_log(.app, .info, "Current step: \(step.debugDescription)")
-        step = step.nextStep
-        pp_log(.app, .info, "Next step: \(step.debugDescription)")
+        onboardingManager.advance()
 
-        switch step {
+        switch onboardingManager.step {
         case .migrateV3:
             guard migrationManager.hasMigratableProfiles else {
                 advance()
@@ -129,12 +127,12 @@ private extension OnboardingModifier {
         case .community:
             isAlertPresented = true
         case .migrateV3_2_2:
+            isAlertPresented = true
             Task {
                 await apiManager.resetLastUpdateForAllProviders()
-                advance()
             }
         default:
-            if step != OnboardingStep.allCases.last {
+            if onboardingManager.step != OnboardingStep.allCases.last {
                 advance()
             }
         }

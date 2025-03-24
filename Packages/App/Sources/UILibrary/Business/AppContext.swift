@@ -40,6 +40,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let migrationManager: MigrationManager
 
+    public let onboardingManager: OnboardingManager
+
     public let preferencesManager: PreferencesManager
 
     public let profileManager: ProfileManager
@@ -60,6 +62,7 @@ public final class AppContext: ObservableObject, Sendable {
         apiManager: APIManager,
         iapManager: IAPManager,
         migrationManager: MigrationManager,
+        onboardingManager: OnboardingManager? = nil,
         preferencesManager: PreferencesManager,
         profileManager: ProfileManager,
         registry: Registry,
@@ -70,6 +73,7 @@ public final class AppContext: ObservableObject, Sendable {
         appearanceManager = AppearanceManager()
         self.iapManager = iapManager
         self.migrationManager = migrationManager
+        self.onboardingManager = onboardingManager ?? OnboardingManager()
         self.preferencesManager = preferencesManager
         self.profileManager = profileManager
         self.registry = registry

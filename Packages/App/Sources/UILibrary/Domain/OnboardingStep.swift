@@ -37,19 +37,3 @@ public enum OnboardingStep: String, RawRepresentable, CaseIterable {
 
     case doneV3_2_2
 }
-
-extension Optional where Wrapped == OnboardingStep {
-    public var nextStep: OnboardingStep? {
-        let all = OnboardingStep.allCases
-        guard let self else {
-            return all.first
-        }
-        guard let index = all.firstIndex(of: self) else {
-            fatalError("How can self not be part of allCases?")
-        }
-        guard index < all.count - 1 else {
-            return self
-        }
-        return all[index + 1]
-    }
-}

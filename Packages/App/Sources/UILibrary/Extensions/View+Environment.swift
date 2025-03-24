@@ -33,6 +33,7 @@ extension View {
             .environmentObject(context.appearanceManager)
             .environmentObject(context.iapManager)
             .environmentObject(context.migrationManager)
+            .environmentObject(context.onboardingManager)
             .environmentObject(context.preferencesManager)
     }
 
