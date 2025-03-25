@@ -91,7 +91,7 @@ private extension OpenVPNView {
             ConfigurationView(
                 isServerPushed: isServerPushed,
                 configuration: $draft.module.configurationBuilder ?? .init(),
-                credentialsRoute: ProfileRoute(OpenVPNModule.Subroute.credentials)
+                credentialsRoute: OpenVPNModule.Subroute.credentials
             )
         } else {
             ModuleImportSection(isImporting: $isImporting)
@@ -106,10 +106,11 @@ private extension OpenVPNView {
     }
 
     func remotesLink(with remotes: [ExtendedEndpoint]) -> some View {
-        NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.remotes)) {
-            Text(Strings.Modules.Openvpn.remotes)
-                .themeTrailingValue(remotes.count.localizedEntries)
-        }
+        ProfileLink(
+            Strings.Modules.Openvpn.remotes,
+            value: remotes.count.localizedEntries,
+            route: OpenVPNModule.Subroute.remotes
+        )
     }
 }
 

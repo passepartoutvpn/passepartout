@@ -127,9 +127,10 @@ extension OpenVPNModule.Builder: ModuleShortcutsProviding {
     @ViewBuilder
     public func moduleShortcutsView(editor: ProfileEditor, path: Binding<NavigationPath>) -> some View {
         if configurationBuilder?.authUserPass == true {
-            NavigationLink(value: ProfileRoute(OpenVPNModule.Subroute.credentials)) {
-                Text(Strings.Modules.Openvpn.credentials)
-            }
+            ProfileLink(
+                Strings.Modules.Openvpn.credentials,
+                route: OpenVPNModule.Subroute.credentials
+            )
         }
     }
 }

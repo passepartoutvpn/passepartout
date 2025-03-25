@@ -1,8 +1,8 @@
 //
-//  EditableListSection.swift
+//  ThemeEditableListSection.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,6 +26,21 @@
 #if !os(tvOS)
 
 import SwiftUI
+
+public enum ThemeEditableListSection {
+    public struct RemoveLabel: View {
+        let action: () -> Void
+
+        public init(action: @escaping () -> Void) {
+            self.action = action
+        }
+    }
+
+    public struct EditLabel: View {
+    }
+}
+
+// MARK: - Implementation
 
 public protocol EditableValue: Hashable, CustomStringConvertible {
     static var emptyValue: Self { get }
@@ -256,6 +271,8 @@ private extension EditableListSection {
         originalItems = newOriginalItems
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     struct ContentView: View {

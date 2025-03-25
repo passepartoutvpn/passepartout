@@ -1,8 +1,8 @@
 //
-//  LogoImage.swift
+//  ThemeWindowModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/27/24.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,17 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 
-public struct LogoImage: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    public init() {
-    }
-
-    public var body: some View {
-        Image(theme.logoImage)
-    }
+struct ThemeWindowModifier: ViewModifier {
+    let size: CGSize
 }
+
+#endif

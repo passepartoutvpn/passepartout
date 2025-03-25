@@ -1,5 +1,5 @@
 //
-//  FavoriteToggle.swift
+//  ThemeFavoriteToggle.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/25/24.
@@ -26,7 +26,7 @@
 import CommonUtils
 import SwiftUI
 
-public struct FavoriteToggle<ID>: View where ID: Hashable {
+public struct ThemeFavoriteToggle<ID>: View where ID: Hashable {
     private let value: ID
 
     @ObservedObject
@@ -59,7 +59,7 @@ public struct FavoriteToggle<ID>: View where ID: Hashable {
     }
 }
 
-private extension FavoriteToggle {
+private extension ThemeFavoriteToggle {
     var opaque: Bool {
 #if os(macOS)
         selection.contains(value) || value == hover

@@ -27,6 +27,23 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
+extension ModuleBuilder {
+
+    @MainActor
+    public var themeIcon: Theme.ImageName {
+        switch moduleType {
+        case .openVPN, .wireGuard:
+            .moduleConnection
+        case .onDemand:
+            .moduleOnDemand
+        case .dns, .httpProxy, .ip:
+            .moduleSettings
+        default:
+            .moduleSettings
+        }
+    }
+}
+
 extension ExtendedTunnel {
 
     @MainActor

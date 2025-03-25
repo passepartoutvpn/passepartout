@@ -31,9 +31,9 @@ import SwiftUI
 extension ProviderView {
     struct OpenVPNCredentialsLink: View {
         var body: some View {
-            NavigationLink(
+            ProfileLink(
                 Strings.Modules.Openvpn.credentials,
-                value: ProfileRoute(ProviderModule.Subroute.openVPNCredentials)
+                route: ProviderModule.Subroute.openVPNCredentials
             )
         }
     }
@@ -139,14 +139,13 @@ extension ProviderView {
             Form {
                 NavigationLink(
                     destination: remotesDestination,
-                    label: remotesLink
+                    label: remotesLinkLabel
                 )
                 .themeSection(header: Strings.Global.Nouns.connection)
 
                 OpenVPNView.ConfigurationView(
                     isServerPushed: false,
-                    configuration: .constant(configuration),
-                    credentialsRoute: nil
+                    configuration: .constant(configuration)
                 )
             }
             .themeForm()
@@ -156,9 +155,11 @@ extension ProviderView {
 }
 
 private extension ProviderView.OpenVPNConfigurationView {
-    func remotesLink() -> some View {
-        Text(Strings.Modules.Openvpn.remotes)
-            .themeTrailingValue(configuration.remotes?.count.localizedEntries)
+    func remotesLinkLabel() -> some View {
+        ThemeRow(
+            Strings.Modules.Openvpn.remotes,
+            value: configuration.remotes?.count.localizedEntries
+        )
     }
 
     func remotesDestination() -> some View {

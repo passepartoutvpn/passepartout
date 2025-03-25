@@ -36,8 +36,7 @@ struct ProviderNameRow: View {
     var body: some View {
         apiManager.provider(withId: id)
             .map {
-                Text(Strings.Global.Nouns.name)
-                    .themeTrailingValue($0.description)
+                ThemeRow(Strings.Global.Nouns.name, value: $0.description)
             }
     }
 }

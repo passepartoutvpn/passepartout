@@ -30,10 +30,11 @@ struct ProviderServerLink: View {
     let entity: ProviderEntity?
 
     var body: some View {
-        NavigationLink(value: ProfileRoute(ProviderModule.Subroute.server)) {
-            Text(Strings.Global.Nouns.server)
-                .themeTrailingValue(entity?.localizedDescription)
-        }
+        ProfileLink(
+            Strings.Global.Nouns.server,
+            value: entity?.localizedDescription,
+            route: ProviderModule.Subroute.server
+        )
         .uiAccessibility(.Profile.providerServerLink)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Theme+MenuImageName.swift
+//  ThemeGridSectionModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/25.
@@ -23,24 +23,29 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if !os(tvOS)
 
-extension Theme {
-    public enum MenuImageName {
-        case active
-        case inactive
-        case pending
+import SwiftUI
+
+struct ThemeGridSectionModifier<Header>: ViewModifier where Header: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    @ViewBuilder
+    let header: Header
+
+    func body(content: Content) -> some View {
+        header
+            .font(theme.gridHeaderStyle)
+            .fontWeight(theme.relevantWeight)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading)
+            .padding(.bottom, theme.gridHeaderBottom)
+
+        content
+            .padding(.bottom)
     }
 }
 
-extension Theme.MenuImageName {
-    static var defaultImageName: (Self) -> String {
-        {
-            switch $0 {
-            case .active: return "MenuActive"
-            case .inactive: return "MenuInactive"
-            case .pending: return "MenuPending"
-            }
-        }
-    }
-}
+#endif

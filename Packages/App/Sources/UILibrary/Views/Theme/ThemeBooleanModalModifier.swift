@@ -1,8 +1,8 @@
 //
-//  FullScreenView.swift
+//  ThemeBooleanModalModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/20/23.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-public struct FullScreenView<Icon>: View where Icon: View {
+struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     @EnvironmentObject
     private var theme: Theme
@@ -33,27 +33,29 @@ public struct FullScreenView<Icon>: View where Icon: View {
     @Environment(\.colorScheme)
     private var colorScheme
 
-    @ViewBuilder
-    private let icon: () -> Icon
+    @Binding
+    var isPresented: Bool
 
-    public init(icon: @escaping () -> Icon) {
-        self.icon = icon
-    }
+    let options: ThemeModalOptions
 
-    public var body: some View {
-        ZStack {
-            theme.backgroundColor(colorScheme)
-                .ignoresSafeArea()
-            icon()
-        }
-        .ignoresSafeArea()
-    }
-}
+    let modal: () -> Modal
 
-#Preview {
-    FullScreenView {
-        ThemeImage(.cloudOn)
-            .foregroundStyle(.white)
+    func body(content: Content) -> some View {
+        let modalSize = theme.modalSize(options.size)
+        _ = modalSize
+        return content
+            .sheet(isPresented: $isPresented) {
+                modal()
+#if os(macOS)
+                    .frame(
+                        minWidth: modalSize.width,
+                        maxWidth: options.isFixedWidth ? modalSize.width : nil,
+                        minHeight: modalSize.height,
+                        maxHeight: options.isFixedHeight ? modalSize.height : nil
+                    )
+#endif
+                    .interactiveDismissDisabled(!options.isInteractive)
+                    .themeLockScreen()
+            }
     }
-    .withMockEnvironment()
 }

@@ -151,7 +151,7 @@ private extension ProviderServerView.ContentView {
                     Spacer()
                     ThemeImage(.marked)
                         .opaque(region.isSelected(by: heuristic))
-                    FavoriteToggle(
+                    ThemeFavoriteToggle(
                         value: region.id,
                         selection: providerPreferences.favoriteServers()
                     )

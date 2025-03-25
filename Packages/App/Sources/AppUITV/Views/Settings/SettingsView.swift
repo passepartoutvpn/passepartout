@@ -93,8 +93,10 @@ private extension SettingsView {
         Group {
             Button {
             } label: {
-                Text(Strings.Global.Nouns.version)
-                    .themeTrailingValue(BundleConfiguration.mainVersionString)
+                ThemeRow(
+                    Strings.Global.Nouns.version,
+                    value: BundleConfiguration.mainVersionString
+                )
             }
             .focused($focus, equals: .version)
             Button(Strings.Views.About.Credits.title) {}

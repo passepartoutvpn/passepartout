@@ -65,13 +65,13 @@ extension WireGuardView {
 private extension WireGuardView.ConfigurationView {
     var privateKeySection: some View {
         themeModuleSection(header: Strings.Modules.Wireguard.interface) {
-            ThemeModuleLongContent(
-                caption: Strings.Global.Nouns.privateKey,
-                value: $model.privateKey
+            ThemeLongContentLink(
+                Strings.Global.Nouns.privateKey,
+                text: $model.privateKey
             )
             if let keyGenerator {
-                ThemeModuleCopiableText(
-                    caption: Strings.Global.Nouns.publicKey,
+                ThemeCopiableText(
+                    Strings.Global.Nouns.publicKey,
                     value: (try? keyGenerator.publicKey(for: model.privateKey)) ?? ""
                 )
                 Button(Strings.Modules.Wireguard.PrivateKey.generate) {
@@ -83,14 +83,14 @@ private extension WireGuardView.ConfigurationView {
 
     var interfaceSection: some View {
         themeModuleSection(header: nil) {
-            ThemeModuleLongContent(
-                caption: Strings.Global.Nouns.addresses,
-                value: $model.addresses,
+            ThemeLongContentLink(
+                Strings.Global.Nouns.addresses,
+                text: $model.addresses,
                 preview: \.asNumberOfEntries
             )
-            ThemeModuleTextField(
-                caption: Strings.Unlocalized.mtu,
-                value: $model.mtu,
+            ThemeTextField(
+                Strings.Unlocalized.mtu,
+                text: $model.mtu,
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
         }
@@ -98,19 +98,19 @@ private extension WireGuardView.ConfigurationView {
 
     var dnsSection: some View {
         themeModuleSection(header: Strings.Unlocalized.dns) {
-            ThemeModuleLongContent(
-                caption: Strings.Global.Nouns.servers,
-                value: $model.dnsServers,
+            ThemeLongContentLink(
+                Strings.Global.Nouns.servers,
+                text: $model.dnsServers,
                 preview: \.asNumberOfEntries
             )
-            ThemeModuleTextField(
-                caption: Strings.Global.Nouns.domain,
-                value: $model.dnsDomain,
+            ThemeTextField(
+                Strings.Global.Nouns.domain,
+                text: $model.dnsDomain,
                 placeholder: Strings.Unlocalized.Placeholders.hostname
             )
-            ThemeModuleLongContent(
-                caption: Strings.Entities.Dns.searchDomains,
-                value: $model.dnsSearchDomains,
+            ThemeLongContentLink(
+                Strings.Entities.Dns.searchDomains,
+                text: $model.dnsSearchDomains,
                 preview: \.asNumberOfEntries
             )
         }
@@ -120,26 +120,26 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: Strings.Modules.Wireguard.peer(index + 1)) {
             let peerBinding = peerBinding(with: publicKey)
 
-            ThemeModuleLongContent(
-                caption: Strings.Global.Nouns.publicKey,
-                value: peerBinding.publicKey
+            ThemeLongContentLink(
+                Strings.Global.Nouns.publicKey,
+                text: peerBinding.publicKey
             )
-            ThemeModuleLongContent(
-                caption: Strings.Modules.Wireguard.presharedKey,
-                value: peerBinding.preSharedKey
+            ThemeLongContentLink(
+                Strings.Modules.Wireguard.presharedKey,
+                text: peerBinding.preSharedKey
             )
-            ThemeModuleLongContent(
-                caption: Strings.Global.Nouns.endpoint,
-                value: peerBinding.endpoint
+            ThemeLongContentLink(
+                Strings.Global.Nouns.endpoint,
+                text: peerBinding.endpoint
             )
-            ThemeModuleLongContent(
-                caption: Strings.Modules.Wireguard.allowedIps,
-                value: peerBinding.allowedIPs,
+            ThemeLongContentLink(
+                Strings.Modules.Wireguard.allowedIps,
+                text: peerBinding.allowedIPs,
                 preview: \.asNumberOfEntries
             )
-            ThemeModuleTextField(
-                caption: Strings.Global.Nouns.keepAlive,
-                value: peerBinding.keepAlive,
+            ThemeTextField(
+                Strings.Global.Nouns.keepAlive,
+                text: peerBinding.keepAlive,
                 placeholder: Strings.Unlocalized.Placeholders.keepAlive
             )
             ThemeTrailingContent {

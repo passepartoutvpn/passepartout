@@ -105,8 +105,7 @@ private extension PurchasedView {
     var downloadSection: some View {
         iapManager.purchasedAppBuild.map { build in
             Group {
-                Text(Strings.Views.Purchased.Rows.buildNumber)
-                    .themeTrailingValue(build.description)
+                ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: build.description)
                     .scrollableOnTV()
             }
             .themeSection(header: Strings.Views.Purchased.Sections.Download.header)
@@ -117,8 +116,7 @@ private extension PurchasedView {
         Group {
             if !products.isEmpty {
                 ForEach(products, id: \.productIdentifier) {
-                    Text($0.localizedTitle)
-                        .themeTrailingValue($0.localizedPrice)
+                    ThemeRow($0.localizedTitle, value: $0.localizedPrice)
                         .scrollableOnTV()
                 }
             } else {

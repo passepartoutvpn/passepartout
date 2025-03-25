@@ -115,7 +115,7 @@ private extension ProfileEditView {
     func moduleRow(for module: any ModuleBuilder) -> some View {
         EditorModuleToggle(profileEditor: profileEditor, module: module) {
             HStack {
-                NavigatingButton(module.description(inEditor: profileEditor)) {
+                ThemeNavigatingButton(module.description(inEditor: profileEditor)) {
                     push(.moduleDetail(moduleId: module.id))
                 }
                 .uiAccessibility(.Profile.moduleLink)

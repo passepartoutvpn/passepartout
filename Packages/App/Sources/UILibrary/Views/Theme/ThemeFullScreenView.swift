@@ -1,8 +1,8 @@
 //
-//  NavigatingButton.swift
+//  ThemeFullScreenView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/7/25.
+//  Created by Davide De Rosa on 3/20/23.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,34 +25,35 @@
 
 import SwiftUI
 
-public struct NavigatingButton<Label>: View where Label: View {
-    private let action: () -> Void
+public struct ThemeFullScreenView<Icon>: View where Icon: View {
 
-    private let label: () -> Label
+    @EnvironmentObject
+    private var theme: Theme
 
-    public init(action: @escaping () -> Void, label: @escaping () -> Label) {
-        self.action = action
-        self.label = label
+    @Environment(\.colorScheme)
+    private var colorScheme
+
+    @ViewBuilder
+    private let icon: () -> Icon
+
+    public init(icon: @escaping () -> Icon) {
+        self.icon = icon
     }
 
     public var body: some View {
-        Button(action: action) {
-            HStack {
-                label()
-                ThemeImage(.navigate)
-                    .foregroundStyle(.secondary)
-            }
-            .contentShape(.rect)
+        ZStack {
+            theme.backgroundColor(colorScheme)
+                .ignoresSafeArea()
+            icon()
         }
-        .buttonStyle(.plain)
-        .cursor(.hand)
+        .ignoresSafeArea()
     }
 }
 
-extension NavigatingButton where Label == Text {
-    public init(_ title: String, action: @escaping () -> Void) {
-        self.init(action: action) {
-            Text(title)
-        }
+#Preview {
+    ThemeFullScreenView {
+        ThemeImage(.cloudOn)
+            .foregroundStyle(.white)
     }
+    .withMockEnvironment()
 }
