@@ -33,13 +33,16 @@ struct OnboardingModifier: ViewModifier {
     private var apiManager: APIManager
 
     @EnvironmentObject
-    private var migrationManager: MigrationManager
+    private var onboardingManager: OnboardingManager
 
     @EnvironmentObject
-    private var onboardingManager: OnboardingManager
+    private var migrationManager: MigrationManager
 
     @Environment(\.isUITesting)
     private var isUITesting
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
@@ -92,6 +95,7 @@ private extension OnboardingModifier {
         case .migrateV3_2_2:
             Button(Strings.Global.Nouns.ok) {
                 Task {
+                    try await tunnel.disconnect()
                     await apiManager.resetLastUpdateForAllProviders()
                     advance()
                 }

@@ -60,22 +60,8 @@ struct ProviderView: View, ModuleDraftEditing {
             .moduleView(draft: draft)
             .modifier(PaywallModifier(reason: $paywallReason))
             .onLoad(perform: loadCurrentProvider)
-            .onChange(of: providerId) { newId in
-                Task {
-                    if let newId {
-                        await refreshInfrastructure(for: newId)
-                    }
-                    loadPreferences(for: newId)
-                }
-            }
-            .onChange(of: providerEntity) { entity in
-                guard let entity else {
-                    return
-                }
-                Task {
-                    await loadSupportedPresets(for: entity.server)
-                }
-            }
+            .onChange(of: providerId, perform: onChangeProvider)
+            .onChange(of: providerEntity, perform: onChangeEntity)
             .onDisappear(perform: savePreferences)
             .disabled(apiManager.isLoading)
     }
@@ -266,7 +252,7 @@ private extension ProviderView {
             let module = try draft.module.tryBuild()
             return try module.resolvedModule(with: registry)
         } catch {
-            pp_log(.app, .error, "Unable to resolve provider module: \(error)")
+            pp_log(.app, .debug, "Unable to resolve provider module: \(error)")
             return nil
         }
     }
@@ -287,13 +273,13 @@ private extension ProviderView {
 
     func loadCurrentProvider() {
        Task {
-           await refreshIndex()
            if let providerId {
                loadPreferences(for: providerId)
                if let providerEntity {
                    await loadSupportedPresets(for: providerEntity.server)
                }
            }
+           await refreshIndex()
        }
     }
 
@@ -325,6 +311,24 @@ private extension ProviderView {
         }
     }
 
+    func onChangeProvider(_ newProviderId: ProviderID?) {
+       Task {
+           if let newProviderId {
+               await refreshInfrastructure(for: newProviderId)
+           }
+           loadPreferences(for: newProviderId)
+       }
+    }
+
+    func onChangeEntity(_ newEntity: ProviderEntity?) {
+        guard let newEntity else {
+            return
+        }
+        Task {
+            await loadSupportedPresets(for: newEntity.server)
+        }
+    }
+
     func loadPreferences(for newProviderId: ProviderID?) {
         if let newProviderId {
             do {
@@ -341,11 +345,14 @@ private extension ProviderView {
     }
 
     func savePreferences() {
+        guard let providerId else {
+            return
+        }
         do {
-            pp_log(.app, .debug, "Save preferences for provider \(providerId.debugDescription)")
+            pp_log(.app, .debug, "Save preferences for provider \(providerId)")
             try providerPreferences.save()
         } catch {
-            pp_log(.app, .error, "Unable to save preferences for provider \(providerId.debugDescription): \(error)")
+            pp_log(.app, .error, "Unable to save preferences for provider \(providerId): \(error)")
         }
     }
 }
