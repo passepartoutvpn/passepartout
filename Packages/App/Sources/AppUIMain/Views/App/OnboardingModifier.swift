@@ -146,7 +146,7 @@ private extension OnboardingModifier {
         case .migrateV3_2_2:
             isAlertPresented = true
         default:
-            if onboardingManager.step != OnboardingStep.allCases.last {
+            if onboardingManager.step < .last {
                 advance()
             }
         }

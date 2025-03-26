@@ -39,3 +39,19 @@ public enum OnboardingStep: String, RawRepresentable, CaseIterable {
 
     case doneV3_2_2
 }
+
+extension OnboardingStep {
+    public static var last: Self {
+        allCases.last!
+    }
+}
+
+extension OnboardingStep: Comparable {
+    var order: Int {
+        OnboardingStep.allCases.firstIndex(of: self) ?? .max
+    }
+
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.order < rhs.order
+    }
+}

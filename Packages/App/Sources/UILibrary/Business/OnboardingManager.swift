@@ -68,10 +68,6 @@ public final class OnboardingManager: ObservableObject {
 }
 
 extension OnboardingStep {
-    var order: Int {
-        OnboardingStep.allCases.firstIndex(of: self) ?? .max
-    }
-
     var nextStep: OnboardingStep {
         let all = OnboardingStep.allCases
         guard let index = all.firstIndex(of: self) else {
@@ -81,9 +77,5 @@ extension OnboardingStep {
             return self
         }
         return all[index + 1]
-    }
-
-    static func < (lhs: Self, rhs: Self) -> Bool {
-        lhs.order < rhs.order
     }
 }
