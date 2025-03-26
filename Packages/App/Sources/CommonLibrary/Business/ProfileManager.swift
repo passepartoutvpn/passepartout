@@ -368,31 +368,12 @@ private extension ProfileManager {
             }
             .map(\.id))
 
-        var processedResult = result
+        allProfiles = result
+            .filter {
+                !excludedIds.contains($0.id)
+            }
             .reduce(into: [:]) {
                 $0[$1.id] = $1
-            }
-
-        if let processor {
-            let toMigrate = processedResult.values.compactMap {
-                do {
-                    return try processor.migratedProfile(from: $0)
-                } catch {
-                    pp_log(.App.profiles, .error, "Unable to migrate profile \($0.id): \(error)")
-                    return nil
-                }
-            }
-            if !toMigrate.isEmpty {
-                pp_log(.App.profiles, .info, "Migrate profiles: \(toMigrate.map(\.id))")
-                toMigrate.forEach {
-                    processedResult[$0.id] = $0
-                }
-            }
-        }
-
-        allProfiles = processedResult
-            .filter {
-                !excludedIds.contains($0.key)
             }
 
         pp_log(.App.profiles, .info, "Local profiles after exclusions: \(allProfiles.keys)")
