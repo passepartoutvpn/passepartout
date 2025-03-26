@@ -41,9 +41,6 @@ struct OnboardingModifier: ViewModifier {
     @Environment(\.isUITesting)
     private var isUITesting
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
 
@@ -73,8 +70,6 @@ private extension OnboardingModifier {
         switch item {
         case .community:
             return Strings.Unlocalized.reddit
-        case .migrateV3_2_2:
-            return Strings.Global.Nouns.migration
         default:
             return ""
         }
@@ -92,15 +87,6 @@ private extension OnboardingModifier {
 
             Button(Strings.Onboarding.Community.dismiss, role: .cancel, action: advance)
 
-        case .migrateV3_2_2:
-            Button(Strings.Global.Nouns.ok) {
-                Task {
-                    try await tunnel.disconnect()
-                    await apiManager.resetLastUpdateForAllProviders()
-                    advance()
-                }
-            }
-
         default:
             EmptyView()
         }
@@ -111,8 +97,6 @@ private extension OnboardingModifier {
         switch item {
         case .community:
             Text(Strings.Onboarding.Community.message(Strings.Unlocalized.appName))
-        case .migrateV3_2_2:
-            Text(Strings.Onboarding.Migrate322.message)
         default:
             EmptyView()
         }
@@ -144,7 +128,10 @@ private extension OnboardingModifier {
         case .community:
             isAlertPresented = true
         case .migrateV3_2_2:
-            isAlertPresented = true
+            Task {
+                await apiManager.resetLastUpdateForAllProviders()
+                advance()
+            }
         default:
             if onboardingManager.step < .last {
                 advance()
