@@ -41,9 +41,6 @@ struct OnboardingModifier: ViewModifier {
     @Environment(\.isUITesting)
     private var isUITesting
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
     @Binding
     var modalRoute: AppCoordinator.ModalRoute?
 
@@ -95,7 +92,6 @@ private extension OnboardingModifier {
         case .migrateV3_2_2:
             Button(Strings.Global.Nouns.ok) {
                 Task {
-                    try await tunnel.disconnect()
                     await apiManager.resetLastUpdateForAllProviders()
                     advance()
                 }
@@ -146,7 +142,7 @@ private extension OnboardingModifier {
         case .migrateV3_2_2:
             isAlertPresented = true
         default:
-            if onboardingManager.step != OnboardingStep.allCases.last {
+            if onboardingManager.step < .last {
                 advance()
             }
         }
