@@ -206,7 +206,7 @@
 "onboarding.community.dismiss" = "Nej, tack";
 "onboarding.community.message" = "Visste du att %@ har en subreddit? Prenumerera för att få uppdateringar eller för att diskutera problem, funktioner, nya plattformar eller vad du vill.\n\nDet är också ett bra sätt att visa att du bryr dig om det här projektet.";
 "onboarding.community.subscribe" = "Prenumerera nu";
-"onboarding.migrate_3_2_2.message" = "Version 3.2.2 har ändrat hur leverantörer lagras, och de berörda profilerna kommer att byta namn.\n\nSe till att uppdatera alla dina enheter till den senaste versionen för att använda de nya profilerna.";
+"onboarding.migrate_3_2_2.message" = "Version 3.2.2 har ändrat hur leverantörer lagras, se till att uppdatera alla dina enheter till den senaste versionen för att använda de nya profilerna.";
 "placeholders.on_demand.ssid" = "Min SSID";
 "placeholders.profile.name" = "Min profil";
 "placeholders.secret" = "hemlighet";
