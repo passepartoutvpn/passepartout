@@ -583,9 +583,9 @@ public enum Strings {
       /// Subscribe now
       public static let subscribe = Strings.tr("Localizable", "onboarding.community.subscribe", fallback: "Subscribe now")
     }
-    public enum Migrate322 {
-      /// Version 3.2.2 changed the way providers are stored, make sure to upgrade all your devices to the latest version to use the new profiles.
-      public static let message = Strings.tr("Localizable", "onboarding.migrate_3_2_2.message", fallback: "Version 3.2.2 changed the way providers are stored, make sure to upgrade all your devices to the latest version to use the new profiles.")
+    public enum Migrate323 {
+      /// Version 3.2.3 changed the way providers are stored, make sure to upgrade all your devices to the latest version to use the new profiles.
+      public static let message = Strings.tr("Localizable", "onboarding.migrate_3_2_3.message", fallback: "Version 3.2.3 changed the way providers are stored, make sure to upgrade all your devices to the latest version to use the new profiles.")
     }
   }
   public enum Placeholders {

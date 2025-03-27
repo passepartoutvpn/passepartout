@@ -70,7 +70,7 @@ private extension OnboardingModifier {
         switch item {
         case .community:
             return Strings.Unlocalized.reddit
-        case .migrateV3_2_2:
+        case .migrateV3_2_3:
             return Strings.Global.Nouns.migration
         default:
             return ""
@@ -89,7 +89,7 @@ private extension OnboardingModifier {
 
             Button(Strings.Onboarding.Community.dismiss, role: .cancel, action: advance)
 
-        case .migrateV3_2_2:
+        case .migrateV3_2_3:
             Button(Strings.Global.Nouns.ok) {
                 Task {
                     await apiManager.resetLastUpdateForAllProviders()
@@ -107,8 +107,8 @@ private extension OnboardingModifier {
         switch item {
         case .community:
             Text(Strings.Onboarding.Community.message(Strings.Unlocalized.appName))
-        case .migrateV3_2_2:
-            Text(Strings.Onboarding.Migrate322.message)
+        case .migrateV3_2_3:
+            Text(Strings.Onboarding.Migrate323.message)
         default:
             EmptyView()
         }
@@ -139,7 +139,7 @@ private extension OnboardingModifier {
             modalRoute = .migrateProfiles
         case .community:
             isAlertPresented = true
-        case .migrateV3_2_2:
+        case .migrateV3_2_3:
             isAlertPresented = true
         default:
             if onboardingManager.step < .last {
