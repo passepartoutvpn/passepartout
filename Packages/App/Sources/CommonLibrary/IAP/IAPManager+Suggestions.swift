@@ -102,7 +102,10 @@ extension IAPManager {
                 suggested.insert(.Essentials.macOS)
             }
         }
-        if filter != .excludingComplete && purchasedProducts.isEmpty {
+
+        // TODO: ###, this condition may be improved by excluding very old products
+        let isEligibleForComplete = purchasedProducts.isEmpty
+        if filter != .excludingComplete && isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
