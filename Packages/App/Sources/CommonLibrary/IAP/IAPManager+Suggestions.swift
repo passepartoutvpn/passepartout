@@ -29,11 +29,19 @@ import Foundation
 import PassepartoutKit
 
 extension IAPManager {
-    public func suggestedProducts() -> Set<AppProduct> {
+    public enum SuggestionFilter {
+        case excludingComplete
+
+        case includingComplete
+
+        case onlyComplete
+    }
+
+    public func suggestedProducts(filter: SuggestionFilter = .includingComplete) -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: .iOS, withComplete: true)
+        suggestedProducts(for: .iOS, filter: filter)
 #elseif os(macOS)
-        suggestedProducts(for: .macOS, withComplete: true)
+        suggestedProducts(for: .macOS, filter: filter)
 #elseif os(tvOS)
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
@@ -50,7 +58,7 @@ extension IAPManager {
 
     func suggestedProducts(
         for platform: Platform,
-        withComplete: Bool = false,
+        filter: SuggestionFilter,
         asserting: Bool = false
     ) -> Set<AppProduct> {
         guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
@@ -67,32 +75,34 @@ extension IAPManager {
         }
 
         var suggested: Set<AppProduct> = []
-        switch platform {
-        case .iOS:
-            guard !purchasedProducts.contains(.Essentials.iOS) else {
-                if asserting {
-                    assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
-                }
-                return []
-            }
-            if !purchasedProducts.contains(.Essentials.macOS) {
-                suggested.insert(.Essentials.iOS_macOS)
-            }
-            suggested.insert(.Essentials.iOS)
-        case .macOS:
-            guard !purchasedProducts.contains(.Essentials.macOS) else {
-                if asserting {
-                    assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
-                }
-                return []
-            }
-            if !purchasedProducts.contains(.Essentials.iOS) {
-                suggested.insert(.Essentials.iOS_macOS)
-            }
-            suggested.insert(.Essentials.macOS)
-        }
 
-        if withComplete && purchasedProducts.isEmpty {
+        if filter != .onlyComplete {
+            switch platform {
+            case .iOS:
+                guard !purchasedProducts.contains(.Essentials.iOS) else {
+                    if asserting {
+                        assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
+                    }
+                    return []
+                }
+                if !purchasedProducts.contains(.Essentials.macOS) {
+                    suggested.insert(.Essentials.iOS_macOS)
+                }
+                suggested.insert(.Essentials.iOS)
+            case .macOS:
+                guard !purchasedProducts.contains(.Essentials.macOS) else {
+                    if asserting {
+                        assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
+                    }
+                    return []
+                }
+                if !purchasedProducts.contains(.Essentials.iOS) {
+                    suggested.insert(.Essentials.iOS_macOS)
+                }
+                suggested.insert(.Essentials.macOS)
+            }
+        }
+        if filter != .excludingComplete && purchasedProducts.isEmpty {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
