@@ -95,7 +95,11 @@ private extension ProfileStorageSection {
         PurchaseRequiredView(
             requiring: tvRequirements,
             reason: $paywallReason,
-            suggesting: [.Features.appleTV]
+            suggesting: {
+                var products = iapManager.suggestedProducts(filter: .onlyComplete)
+                products.insert(.Features.appleTV)
+                return products
+            }()
         )
     }
 }
