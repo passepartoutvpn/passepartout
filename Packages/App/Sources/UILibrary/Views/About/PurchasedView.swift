@@ -99,6 +99,7 @@ private extension PurchasedView {
             downloadSection
             productsSection
             featuresSection
+            restoreSection
         }
     }
 
@@ -134,6 +135,15 @@ private extension PurchasedView {
             }
         }
         .themeSection(header: Strings.Global.Nouns.features)
+    }
+
+    var restoreSection: some View {
+        RestorePurchasesButton(errorHandler: errorHandler)
+            .themeSectionWithSingleRow(
+                header: Strings.Views.Paywall.Sections.Restore.header,
+                footer: Strings.Views.Paywall.Sections.Restore.footer,
+                above: true
+            )
     }
 }
 
