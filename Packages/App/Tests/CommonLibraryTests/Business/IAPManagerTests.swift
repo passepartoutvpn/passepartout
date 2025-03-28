@@ -345,14 +345,14 @@ extension IAPManagerTests {
 
     func test_givenFree_whenWithComplete_thenSuggestsEssentialsAndComplete() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withComplete: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, filter: .includingComplete), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Complete.Recurring.yearly,
             .Complete.Recurring.monthly,
             .Complete.OneTime.lifetime
         ])
-        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withComplete: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, filter: .includingComplete), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
             .Complete.Recurring.yearly,
@@ -363,11 +363,11 @@ extension IAPManagerTests {
 
     func test_givenNonFree_whenWithComplete_thenSuggestsEssentials() async {
         let sut = await IAPManager(products: [.Features.trustedNetworks])
-        XCTAssertEqual(sut.suggestedProducts(for: .iOS, withComplete: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, filter: .includingComplete), [
             .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
-        XCTAssertEqual(sut.suggestedProducts(for: .macOS, withComplete: true), [
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, filter: .includingComplete), [
             .Essentials.iOS_macOS,
             .Essentials.macOS
         ])
@@ -564,5 +564,9 @@ private extension IAPManager {
         await reader.setReceipt(withBuild: .max, products: products)
         self.init(receiptReader: reader)
         await reloadReceipt()
+    }
+
+    func suggestedProducts(for platform: Platform) -> Set<AppProduct> {
+        suggestedProducts(for: platform, filter: .excludingComplete)
     }
 }
