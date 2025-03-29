@@ -75,7 +75,7 @@ private extension ProviderFiltersView {
             Text(Strings.Global.Nouns.any)
                 .tag(nil as String?)
             ForEach(model.categories, id: \.self) {
-                Text($0)
+                Text($0.capitalized)
                     .tag($0 as String?)
             }
         }
