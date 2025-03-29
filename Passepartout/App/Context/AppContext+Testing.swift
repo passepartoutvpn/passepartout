@@ -33,7 +33,7 @@ extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let dependencies: Dependencies = .shared
         let apiManager = APIManager(
-            from: [API.bundled],
+            from: API.bundled,
             repository: InMemoryAPIRepository()
         )
         let iapManager = IAPManager(

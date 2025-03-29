@@ -31,18 +31,24 @@ import PassepartoutKit
 extension API {
     public static var shared: [APIMapper] {
 #if DEBUG
-        [API.bundled]
+        API.bundled
 #else
         API.remoteThenBundled
 #endif
     }
 
-    private static let remoteThenBundled: [APIMapper] = [
-        Self.remote,
-        Self.bundled
+    public static let bundled: [APIMapper] = [
+        Self.bundledV5
     ]
 
-    public static let bundled: APIMapper = {
+    public static let remoteThenBundled: [APIMapper] = [
+        Self.remoteV5,
+        Self.bundledV5
+    ]
+}
+
+private extension API {
+    static let bundledV5: APIMapper = {
         guard let url = Bundle.module.url(forResource: "API", withExtension: nil) else {
             fatalError("Unable to find bundled API")
         }
@@ -53,7 +59,7 @@ extension API {
         return API.V5.Mapper(webServices: ws)
     }()
 
-    public static let remote: APIMapper = {
+    static let remoteV5: APIMapper = {
         let ws = API.V5.DefaultWebServices(
             Constants.shared.websites.api,
             timeout: Constants.shared.api.timeoutInterval
