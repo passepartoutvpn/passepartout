@@ -139,23 +139,21 @@ private extension ProviderServerView.ContentView {
             }
             onSelect(randomServer, heuristic)
         } label: {
-            if !isSingle && region.area == nil {
-                Text(Strings.Global.Nouns.any)
-            } else {
-                HStack {
-                    if isSingle {
-                        ThemeCountryText(region.countryCode, title: region.localizedDescription)
-                    } else if let area = region.area {
-                        Text(area)
-                    }
-                    Spacer()
-                    ThemeImage(.marked)
-                        .opaque(region.isSelected(by: heuristic))
-                    ThemeFavoriteToggle(
-                        value: region.id,
-                        selection: providerPreferences.favoriteServers()
-                    )
+            HStack {
+                if isSingle {
+                    ThemeCountryText(region.countryCode, title: region.localizedDescription)
+                } else if let area = region.area {
+                    Text(area)
+                } else {
+                    Text(Strings.Global.Nouns.any)
                 }
+                Spacer()
+                ThemeImage(.marked)
+                    .opaque(region.isSelected(by: heuristic))
+                ThemeFavoriteToggle(
+                    value: region.id,
+                    selection: providerPreferences.favoriteServers()
+                )
             }
         }
         .foregroundStyle(.primary)

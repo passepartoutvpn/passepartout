@@ -71,7 +71,7 @@ extension ProviderFilters {
             args.append(moduleType.rawValue)
         }
         if let presetId {
-            formats.append("supportedPresetIds contains %@")
+            formats.append("(supportedPresetIds == NULL OR supportedPresetIds contains %@)")
             args.append(presetId)
         }
         if let categoryName {

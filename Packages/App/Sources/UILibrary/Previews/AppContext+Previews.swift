@@ -55,7 +55,7 @@ extension AppContext {
             interval: Constants.shared.tunnel.refreshInterval
         )
         let apiManager = APIManager(
-            from: [API.bundled],
+            from: API.bundled,
             repository: InMemoryAPIRepository()
         )
         let migrationManager = MigrationManager()
