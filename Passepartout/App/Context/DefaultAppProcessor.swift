@@ -145,6 +145,7 @@ private extension ProviderModule.Builder {
         try await providerManager.setRepository(repo, for: providerModuleType)
 
         var filters = ProviderFilters()
+        filters.categoryName = entity.server.metadata.categoryName
         filters.presetId = entity.preset.presetId
 
         switch heuristic {
