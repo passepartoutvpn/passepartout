@@ -1,2 +1,3 @@
-* Customize IPv4/6 address in Routing module (#1256)
-* Upgrade to OpenSSL 3.4.1 (#1248)
+* Heuristic not sticking to same server category (#1288)
+* Fix some bugs with providers (#1270)
+* Suggest complete products with Apple TV (#1269)
