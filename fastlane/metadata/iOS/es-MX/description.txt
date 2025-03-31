@@ -46,7 +46,6 @@ PRIVACIDAD EN LA QUE PUEDES CONFIAR
 
 Passepartout está diseñado pensando en la transparencia y la privacidad:  
 - Ve exactamente a qué servidores te estás conectando.  
-- Utiliza puntos finales pre-resueltos para un funcionamiento fluido en redes restringidas.  
 - Sin anuncios, rastreadores ni actividades en segundo plano innecesarias: solo la conexión VPN que necesitas.
 
 CÓDIGO ABIERTO Y BASADO EN LA COMUNIDAD

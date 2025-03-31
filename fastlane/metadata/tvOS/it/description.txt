@@ -6,7 +6,6 @@ PRIVACY SU CUI PUOI CONTARE
 
 Passepartout è progettato con trasparenza e rispetto per la tua privacy:  
 - Scopri esattamente a quali server ti stai collegando.  
-- Utilizza endpoint pre-risolti per un funzionamento fluido su reti limitate.  
 - Niente pubblicità, tracker o attività inutili in background: solo la connessione VPN di cui hai bisogno.
 
 OPEN SOURCE E SUPPORTATO DALLA COMMUNITY

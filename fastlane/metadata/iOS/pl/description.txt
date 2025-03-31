@@ -46,7 +46,6 @@ PRYWATNOŚĆ, KTÓREJ MOŻESZ UFAĆ
 
 Passepartout zostało zaprojektowane z myślą o przejrzystości i prywatności:  
 - Sprawdzaj dokładnie, z którymi serwerami się łączysz.  
-- Używaj wstępnie rozwiązanych punktów końcowych dla płynnego działania w ograniczonych sieciach.  
 - Bez reklam, trackerów czy niepotrzebnych procesów w tle – tylko połączenie VPN, którego potrzebujesz.
 
 OPEN SOURCE I WSPARCIE SPOŁECZNOŚCI

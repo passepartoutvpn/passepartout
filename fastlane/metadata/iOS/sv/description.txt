@@ -46,7 +46,6 @@ INTEGRITET DU KAN LITA PÅ
 
 Passepartout är designat med transparens och integritet i åtanke:  
 - Se exakt vilka servrar du ansluter till.  
-- Använd förupplösta ändpunkter för smidig användning i begränsade nätverk.  
 - Inga annonser, spårare eller onödiga bakgrundsaktiviteter – bara den VPN-anslutning du behöver.
 
 ÖPPEN KÄLLKOD OCH COMMUNITY-DRIVET

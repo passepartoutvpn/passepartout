@@ -6,7 +6,6 @@ UNE CONFIDENTIALITÉ FIABLE
 
 Passepartout est conçu avec transparence et respect de votre vie privée :  
 - Voyez exactement à quels serveurs vous vous connectez.  
-- Utilisez des points de terminaison pré-résolus pour un fonctionnement fluide dans les réseaux restreints.  
 - Pas de publicités, de traqueurs ou d'activités en arrière-plan inutiles, seulement la connexion VPN dont vous avez besoin.
 
 OPEN SOURCE ET SOUTENU PAR LA COMMUNAUTÉ

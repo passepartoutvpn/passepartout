@@ -46,7 +46,6 @@ VERTRAUENSWÜRDIGE PRIVATSPHÄRE
 
 Passepartout wurde mit Blick auf Transparenz und Datenschutz entwickelt:
 - Sehen Sie genau, mit welchen Servern Sie verbunden sind.
-- Verwenden Sie vorab aufgelöste Endpunkte für einen reibungslosen Betrieb in eingeschränkten Netzwerken.
 - Keine Werbung, Tracker oder unnötige Hintergrundaktivitäten – nur die VPN-Verbindung, die Sie benötigen.
 
 OPEN SOURCE UND COMMUNITY-GESTEUERT

@@ -46,7 +46,6 @@ PRIVACY WAAR JE OP KUNT VERTROUWEN
 
 Passepartout is ontworpen met transparantie en privacy in gedachten:  
 - Bekijk precies met welke servers je verbinding maakt.  
-- Gebruik vooraf opgeloste eindpunten voor soepel gebruik in beperkte netwerken.  
 - Geen advertenties, trackers of onnodige achtergrondactiviteiten: alleen de VPN-verbinding die je nodig hebt.
 
 OPEN SOURCE EN COMMUNITY-GEDREVEN

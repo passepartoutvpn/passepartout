@@ -46,7 +46,6 @@ UNE VIE PRIVÉE FIABLE
 
 Passepartout est conçu avec la transparence et la vie privée en tête :  
 - Voyez exactement à quels serveurs vous vous connectez.  
-- Utilisez des points de terminaison pré-résolus pour un fonctionnement fluide sur les réseaux restreints.  
 - Pas de publicités, de traqueurs ou d'activités en arrière-plan inutiles : juste la connexion VPN dont vous avez besoin.
 
 CODE OUVERT ET COMMUNAUTÉ ENGAGÉE
