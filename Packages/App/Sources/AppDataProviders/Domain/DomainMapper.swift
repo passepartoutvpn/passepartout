@@ -53,13 +53,13 @@ struct DomainMapper {
         )
     }
 
-    func lastUpdate(from entities: [CDProviderV3]) -> [ProviderID: Date] {
+    func cache(from entities: [CDProviderV3]) -> [ProviderID: ProviderCache] {
         entities.reduce(into: [:]) {
             guard let id = $1.providerId,
                   let lastUpdate = $1.lastUpdate else {
                 return
             }
-            $0[.init(rawValue: id)] = lastUpdate
+            $0[.init(rawValue: id)] = ProviderCache(lastUpdate: lastUpdate)
         }
     }
 

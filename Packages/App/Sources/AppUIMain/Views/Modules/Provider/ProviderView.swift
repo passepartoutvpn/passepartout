@@ -261,7 +261,7 @@ private extension ProviderView {
         guard let providerId else {
             return nil
         }
-        return apiManager.lastUpdate(for: providerId)
+        return apiManager.cache(for: providerId)?.lastUpdate
     }
 
     var lastUpdatedString: String? {

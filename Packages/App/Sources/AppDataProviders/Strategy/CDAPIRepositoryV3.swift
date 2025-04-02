@@ -41,14 +41,14 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
 
     private nonisolated let providersSubject: CurrentValueSubject<[Provider], Never>
 
-    private nonisolated let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
+    private nonisolated let cacheSubject: CurrentValueSubject<[ProviderID: ProviderCache], Never>
 
     private nonisolated let providersController: NSFetchedResultsController<CDProviderV3>
 
     init(context: NSManagedObjectContext) {
         self.context = context
         providersSubject = CurrentValueSubject([])
-        lastUpdateSubject = CurrentValueSubject([:])
+        cacheSubject = CurrentValueSubject([:])
 
         let request = CDProviderV3.fetchRequest()
         request.sortDescriptors = [
@@ -77,8 +77,8 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
             .eraseToAnyPublisher()
     }
 
-    nonisolated var lastUpdatePublisher: AnyPublisher<[ProviderID: Date], Never> {
-        lastUpdateSubject
+    nonisolated var cachePublisher: AnyPublisher<[ProviderID: ProviderCache], Never> {
+        cacheSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
@@ -156,7 +156,7 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
         }
     }
 
-    func resetLastUpdate(for providerIds: [ProviderID]?) async {
+    func resetCache(for providerIds: [ProviderID]?) async {
         try? await context.perform { [weak self] in
             guard let self else {
                 return
@@ -211,6 +211,6 @@ extension CDAPIRepositoryV3: NSFetchedResultsControllerDelegate {
         }
         let mapper = DomainMapper()
         providersSubject.send(entities.compactMap(mapper.provider(from:)))
-        lastUpdateSubject.send(mapper.lastUpdate(from: entities))
+        cacheSubject.send(mapper.cache(from: entities))
     }
 }
