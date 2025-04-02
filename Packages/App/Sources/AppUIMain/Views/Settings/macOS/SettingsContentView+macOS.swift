@@ -92,7 +92,7 @@ private extension SettingsContentView {
 
             Group {
                 linkContent(.diagnostics)
-                linkContent(.purchases)
+                linkContent(.purchased)
             }
             .themeSection(header: Strings.Global.Nouns.troubleshooting)
         }

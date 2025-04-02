@@ -38,7 +38,7 @@ enum SettingsCoordinatorRoute: Hashable {
 
     case preferences
 
-    case purchases
+    case purchased
 
     case version
 }

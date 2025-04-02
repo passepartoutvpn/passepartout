@@ -79,7 +79,7 @@ private extension SettingsContentView {
 
             Section {
                 linkContent(.diagnostics)
-                linkContent(.purchases)
+                linkContent(.purchased)
             }
             .themeSection(header: Strings.Global.Nouns.troubleshooting)
         }

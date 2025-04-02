@@ -86,7 +86,7 @@ extension SettingsCoordinator {
         case .preferences:
             Strings.Global.Nouns.preferences
 
-        case .purchases:
+        case .purchased:
             Strings.Global.Nouns.purchases
 
         case .version:
@@ -135,7 +135,7 @@ extension SettingsCoordinator {
             PreferencesView(profileManager: profileManager)
                 .navigationTitle(title(for: .preferences))
 
-        case .purchases:
+        case .purchased:
             PurchasedView()
                 .navigationTitle(Strings.Global.Nouns.purchases)
 
