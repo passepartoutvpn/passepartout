@@ -46,6 +46,7 @@ extension ChangelogEntry {
         let optionalIssue: Int?
         if comps.count >= 2, let last = comps.last,
            last.hasPrefix("(#"), last.hasSuffix(")") {
+            assert(last.count >= 3)
             let lastString = String(last)
             let start = lastString.index(lastString.startIndex, offsetBy: 2)
             let end = lastString.index(lastString.endIndex, offsetBy: -1)
