@@ -77,9 +77,7 @@ private extension ChangelogView {
     func loadChangelog() async {
         do {
             pp_log(.app, .info, "CHANGELOG: Load for version \(versionNumber)")
-            guard let url = Constants.shared.github.urlForChangelog(ofVersion: versionNumber) else {
-                throw PassepartoutError(.notFound)
-            }
+            let url = Constants.shared.github.urlForChangelog(ofVersion: versionNumber)
             pp_log(.app, .info, "CHANGELOG: Fetching \(url)")
             let result = try await URLSession.shared.data(from: url)
             guard let text = String(data: result.0, encoding: .utf8) else {

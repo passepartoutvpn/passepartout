@@ -76,8 +76,8 @@ public struct Constants: Decodable, Sendable {
             issues.appending(path: issue.description)
         }
 
-        public func urlForChangelog(ofVersion version: String) -> URL? {
-            URL(string: "refs/heads/v\(version)/CHANGELOG.txt", relativeTo: raw)
+        public func urlForChangelog(ofVersion version: String) -> URL {
+            raw.appending(path: "refs/tags/v\(version)/CHANGELOG.txt")
         }
 
         public let discussions: URL
