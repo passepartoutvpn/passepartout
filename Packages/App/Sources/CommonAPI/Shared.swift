@@ -64,12 +64,4 @@ private extension API {
         let remoteURL = Constants.shared.websites.api.appendingPathComponent("v6")
         return API.V6.Mapper(baseURL: remoteURL)
     }()
-
-    static let remoteV5: APIMapper = {
-        let ws = API.V5.DefaultWebServices(
-            Constants.shared.websites.api,
-            timeout: Constants.shared.api.timeoutInterval
-        )
-        return API.V5.Mapper(webServices: ws)
-    }()
 }
