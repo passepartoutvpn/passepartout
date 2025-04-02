@@ -32,13 +32,14 @@ import SwiftUI
 import WebKit
 
 public struct ChangelogView: View {
-    private let url: URL
 
     @State
     private var entries: [ChangelogEntry] = []
 
+    @State
+    private var isLoading = true
+
     public init() {
-        url = Constants.shared.websites.changelog
     }
 
     public var body: some View {
@@ -50,10 +51,14 @@ public struct ChangelogView: View {
                     Text(entry.comment)
                 }
             }
-            .themeSection(header: BundleConfiguration.mainVersionString)
+            .themeSection(header: versionString)
         }
         .themeForm()
-        .themeProgress(if: entries.isEmpty)
+        .themeProgress(
+            if: isLoading,
+            isEmpty: entries.isEmpty,
+            emptyMessage: Strings.Global.Nouns.noContent
+        )
         .task {
             await loadChangelog()
         }
@@ -61,11 +66,22 @@ public struct ChangelogView: View {
 }
 
 private extension ChangelogView {
+    var versionString: String {
+        BundleConfiguration.mainVersionString
+    }
+
+    var versionNumber: String {
+        BundleConfiguration.mainVersionNumber
+    }
+
     func loadChangelog() async {
         do {
+            pp_log(.app, .info, "CHANGELOG: Load for version \(versionNumber)")
+            let url = Constants.shared.github.urlForChangelog(ofVersion: versionNumber)
+            pp_log(.app, .info, "CHANGELOG: Fetching \(url)")
             let result = try await URLSession.shared.data(from: url)
             guard let text = String(data: result.0, encoding: .utf8) else {
-                return
+                throw PassepartoutError(.notFound)
             }
             entries = text
                 .split(separator: "\n")
@@ -74,8 +90,9 @@ private extension ChangelogView {
                     ChangelogEntry($0.offset, line: String($0.element))
                 }
         } catch {
-            pp_log(.app, .error, "Unable to load CHANGELOG: \(error)")
+            pp_log(.app, .error, "CHANGELOG: Unable to load: \(error)")
         }
+        isLoading = false
     }
 }
 

@@ -53,7 +53,7 @@ private extension LinksView {
     var supportSection: some View {
         Group {
             Link(Strings.Views.Settings.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
-            Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.websites.discussions)
+            Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.github.discussions)
             Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
         }
         .themeSection(header: Strings.Views.Settings.Links.Sections.support)

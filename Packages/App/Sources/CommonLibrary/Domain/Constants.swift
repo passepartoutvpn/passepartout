@@ -68,13 +68,23 @@ public struct Constants: Decodable, Sendable {
 
         public let subreddit: URL
 
-        public let discussions: URL
+        public let eula: URL
+    }
 
-        public let changelog: URL
+    public struct GitHub: Decodable, Sendable {
+        public func urlForIssue(_ issue: Int) -> URL {
+            issues.appending(path: issue.description)
+        }
+
+        public func urlForChangelog(ofVersion version: String) -> URL {
+            raw.appending(path: "refs/tags/v\(version)/CHANGELOG.txt")
+        }
+
+        public let discussions: URL
 
         public let issues: URL
 
-        public let eula: URL
+        public let raw: URL
     }
 
     public struct Emails: Decodable, Sendable {
@@ -186,6 +196,8 @@ public struct Constants: Decodable, Sendable {
     public let containers: Containers
 
     public let websites: Websites
+
+    public let github: GitHub
 
     public let emails: Emails
 

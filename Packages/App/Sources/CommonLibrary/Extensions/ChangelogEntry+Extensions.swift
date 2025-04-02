@@ -28,7 +28,7 @@ import Foundation
 extension ChangelogEntry {
     public var issueURL: URL? {
         issue.map {
-            Constants.shared.websites.issues.appendingPathComponent($0.description)
+            Constants.shared.github.urlForIssue($0)
         }
     }
 }
