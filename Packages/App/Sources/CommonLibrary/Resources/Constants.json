@@ -11,10 +11,12 @@
     "websites": {
         "home": "https://passepartoutvpn.app",
         "subreddit": "https://www.reddit.com/r/passepartout/",
-        "discussions": "http://github.com/passepartoutvpn/discussions",
-        "changelog": "https://raw.githubusercontent.com/passepartoutvpn/passepartout/refs/heads/master/CHANGELOG.txt",
-        "issues": "https://github.com/passepartoutvpn/passepartout/issues",
         "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+    },
+    "github": {
+        "discussions": "http://github.com/passepartoutvpn/discussions",
+        "issues": "https://github.com/passepartoutvpn/passepartout/issues",
+        "raw": "https://raw.githubusercontent.com/passepartoutvpn/passepartout"
     },
     "emails": {
         "domain": "passepartoutvpn.app",
