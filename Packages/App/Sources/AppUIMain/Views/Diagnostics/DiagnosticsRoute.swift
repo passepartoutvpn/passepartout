@@ -1,8 +1,8 @@
 //
-//  App+tvOS.swift
+//  DiagnosticsRoute.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/29/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppUITV
-import SwiftUI
-import UIAccessibility
+import Foundation
 
-extension AppDelegate: UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure(with: AppUITV())
-        return true
-    }
-}
+enum DiagnosticsRoute: Hashable {
+    case appLog(title: String)
 
-extension PassepartoutApp {
-    var body: some Scene {
-        WindowGroup {
-            contentView()
-                .task(id: scenePhase) {
-                    if scenePhase == .active {
-                        context.onApplicationActive()
-                    }
-                }
-                .withEnvironment(from: context, theme: theme)
-                .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
-        }
-    }
+    case tunnelLog(title: String, url: URL?)
 }

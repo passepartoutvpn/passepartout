@@ -1,5 +1,5 @@
 //
-//  AboutContentView+iOS.swift
+//  SettingsContentView+iOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/27/24.
@@ -30,7 +30,7 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View where LinkContent: View, AboutDestination: View, LogDestination: View {
+struct SettingsContentView<LinkContent, SettingsDestination, LogDestination>: View where LinkContent: View, SettingsDestination: View, LogDestination: View {
 
     @Environment(\.dismiss)
     private var dismiss
@@ -43,40 +43,45 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
     var path: NavigationPath
 
     @Binding
-    var navigationRoute: AboutCoordinatorRoute?
+    var navigationRoute: SettingsCoordinatorRoute?
 
-    let linkContent: (AboutCoordinatorRoute) -> LinkContent
+    let linkContent: (SettingsCoordinatorRoute) -> LinkContent
 
-    let aboutDestination: (AboutCoordinatorRoute?) -> AboutDestination
+    let settingsDestination: (SettingsCoordinatorRoute?) -> SettingsDestination
 
-    let logDestination: (DebugLogRoute?) -> LogDestination
+    let diagnosticsDestination: (DiagnosticsRoute?) -> LogDestination
 
     var body: some View {
         listView
-            .navigationDestination(for: AboutCoordinatorRoute.self, destination: aboutDestination)
-            .navigationDestination(for: DebugLogRoute.self, destination: logDestination)
+            .navigationDestination(for: SettingsCoordinatorRoute.self, destination: settingsDestination)
+            .navigationDestination(for: DiagnosticsRoute.self, destination: diagnosticsDestination)
             .themeNavigationDetail()
             .themeNavigationStack(closable: true, path: $path)
     }
 }
 
-private extension AboutContentView {
+private extension SettingsContentView {
     var listView: some View {
         List {
-            PreferencesGroup(profileManager: profileManager)
-            Group {
+            Section {
+                linkContent(.preferences)
                 linkContent(.version)
+            }
+
+            Group {
                 linkContent(.links)
                 linkContent(.credits)
                 if !isBeta {
                     linkContent(.donate)
                 }
             }
-            .themeSection(header: Strings.Views.About.title)
+            .themeSection(header: Strings.Global.Nouns.about)
+
             Section {
-                linkContent(.purchased)
                 linkContent(.diagnostics)
+                linkContent(.purchases)
             }
+            .themeSection(header: Strings.Global.Nouns.troubleshooting)
         }
         .navigationTitle(Strings.Global.Nouns.settings)
     }

@@ -117,6 +117,12 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         .onChange(of: interactiveManager.isPresented) {
             modalRoute = $0 ? .interactiveLogin : nil
         }
+        .onReceive(AppPipe.settings) {
+            guard modalRoute != .settings else {
+                return
+            }
+            present(.settings)
+        }
     }
 }
 
@@ -172,11 +178,8 @@ extension AppCoordinator {
             registry: registry,
             layout: $layout,
             isImporting: $isImporting,
-            onPreferences: {
-                present(.preferences)
-            },
-            onAbout: {
-                present(.about)
+            onSettings: {
+                present(.settings)
             },
             onMigrateProfiles: {
                 present(.migrateProfiles)
@@ -188,8 +191,8 @@ extension AppCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
-        case .about:
-            AboutCoordinator(
+        case .settings:
+            SettingsCoordinator(
                 profileManager: profileManager,
                 tunnel: tunnel
             )
@@ -230,9 +233,6 @@ extension AppCoordinator {
                 profileManager: profileManager
             )
             .themeNavigationStack(closable: true, path: $migrationPath)
-
-        case .preferences:
-            PreferencesView(profileManager: profileManager)
 
         default:
             EmptyView()

@@ -324,6 +324,8 @@ public enum Strings {
       public static let password = Strings.tr("Localizable", "global.nouns.password", fallback: "Password")
       /// Port
       public static let port = Strings.tr("Localizable", "global.nouns.port", fallback: "Port")
+      /// Preferences
+      public static let preferences = Strings.tr("Localizable", "global.nouns.preferences", fallback: "Preferences")
       /// Private key
       public static let privateKey = Strings.tr("Localizable", "global.nouns.private_key", fallback: "Private key")
       /// Products
@@ -358,6 +360,8 @@ public enum Strings {
       public static let subnet = Strings.tr("Localizable", "global.nouns.subnet", fallback: "Subnet")
       /// Timeout
       public static let timeout = Strings.tr("Localizable", "global.nouns.timeout", fallback: "Timeout")
+      /// Troubleshooting
+      public static let troubleshooting = Strings.tr("Localizable", "global.nouns.troubleshooting", fallback: "Troubleshooting")
       /// Unknown
       public static let unknown = Strings.tr("Localizable", "global.nouns.unknown", fallback: "Unknown")
       /// Username
@@ -629,42 +633,6 @@ public enum Strings {
     }
   }
   public enum Views {
-    public enum About {
-      /// About
-      public static let title = Strings.tr("Localizable", "views.about.title", fallback: "About")
-      public enum Credits {
-        /// Licenses
-        public static let licenses = Strings.tr("Localizable", "views.about.credits.licenses", fallback: "Licenses")
-        /// Notices
-        public static let notices = Strings.tr("Localizable", "views.about.credits.notices", fallback: "Notices")
-        /// Credits
-        public static let title = Strings.tr("Localizable", "views.about.credits.title", fallback: "Credits")
-        /// Translations
-        public static let translations = Strings.tr("Localizable", "views.about.credits.translations", fallback: "Translations")
-      }
-      public enum Links {
-        /// Links
-        public static let title = Strings.tr("Localizable", "views.about.links.title", fallback: "Links")
-        public enum Rows {
-          /// Disclaimer
-          public static let disclaimer = Strings.tr("Localizable", "views.about.links.rows.disclaimer", fallback: "Disclaimer")
-          /// Home page
-          public static let homePage = Strings.tr("Localizable", "views.about.links.rows.home_page", fallback: "Home page")
-          /// Join community
-          public static let joinCommunity = Strings.tr("Localizable", "views.about.links.rows.join_community", fallback: "Join community")
-          /// Privacy policy
-          public static let privacyPolicy = Strings.tr("Localizable", "views.about.links.rows.privacy_policy", fallback: "Privacy policy")
-          /// Write a review
-          public static let writeReview = Strings.tr("Localizable", "views.about.links.rows.write_review", fallback: "Write a review")
-        }
-        public enum Sections {
-          /// Support
-          public static let support = Strings.tr("Localizable", "views.about.links.sections.support", fallback: "Support")
-          /// Web
-          public static let web = Strings.tr("Localizable", "views.about.links.sections.web", fallback: "Web")
-        }
-      }
-    }
     public enum App {
       public enum Folders {
         /// My profiles
@@ -996,6 +964,46 @@ public enum Strings {
         public enum Download {
           /// First download
           public static let header = Strings.tr("Localizable", "views.purchased.sections.download.header", fallback: "First download")
+        }
+      }
+    }
+    public enum Settings {
+      /// Settings
+      public static let title = Strings.tr("Localizable", "views.settings.title", fallback: "Settings")
+      public enum Credits {
+        /// Licenses
+        public static let licenses = Strings.tr("Localizable", "views.settings.credits.licenses", fallback: "Licenses")
+        /// Notices
+        public static let notices = Strings.tr("Localizable", "views.settings.credits.notices", fallback: "Notices")
+        /// Credits
+        public static let title = Strings.tr("Localizable", "views.settings.credits.title", fallback: "Credits")
+        /// Translations
+        public static let translations = Strings.tr("Localizable", "views.settings.credits.translations", fallback: "Translations")
+      }
+      public enum Links {
+        /// Links
+        public static let title = Strings.tr("Localizable", "views.settings.links.title", fallback: "Links")
+        public enum Rows {
+          /// Blog
+          public static let blog = Strings.tr("Localizable", "views.settings.links.rows.blog", fallback: "Blog")
+          /// Disclaimer
+          public static let disclaimer = Strings.tr("Localizable", "views.settings.links.rows.disclaimer", fallback: "Disclaimer")
+          /// Home page
+          public static let homePage = Strings.tr("Localizable", "views.settings.links.rows.home_page", fallback: "Home page")
+          /// Join community
+          public static let joinCommunity = Strings.tr("Localizable", "views.settings.links.rows.join_community", fallback: "Join community")
+          /// Start a discussion
+          public static let openDiscussion = Strings.tr("Localizable", "views.settings.links.rows.open_discussion", fallback: "Start a discussion")
+          /// Privacy policy
+          public static let privacyPolicy = Strings.tr("Localizable", "views.settings.links.rows.privacy_policy", fallback: "Privacy policy")
+          /// Write a review
+          public static let writeReview = Strings.tr("Localizable", "views.settings.links.rows.write_review", fallback: "Write a review")
+        }
+        public enum Sections {
+          /// Support
+          public static let support = Strings.tr("Localizable", "views.settings.links.sections.support", fallback: "Support")
+          /// Web
+          public static let web = Strings.tr("Localizable", "views.settings.links.sections.web", fallback: "Web")
         }
       }
     }

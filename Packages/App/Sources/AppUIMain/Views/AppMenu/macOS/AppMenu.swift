@@ -27,6 +27,7 @@
 
 import Combine
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -75,16 +76,7 @@ private extension AppMenu {
 
     var showButton: some View {
         Button(Strings.Global.Actions.show) {
-            Task {
-                let url = Bundle.main.bundleURL
-                let config = NSWorkspace.OpenConfiguration()
-                config.createsNewApplicationInstance = false
-                do {
-                    try await NSWorkspace.shared.openApplication(at: url, configuration: config)
-                } catch {
-                    pp_log(.app, .error, "Unable to reopen app: \(error)")
-                }
-            }
+            showApp()
         }
     }
 
@@ -97,41 +89,16 @@ private extension AppMenu {
     }
 
     var reconnectButton: some View {
-        Button(Strings.Global.Actions.reconnect) {
-            Task {
-                guard let currentProfileId = tunnel.currentProfile?.id else {
-                    return
-                }
-                guard let profile = profileManager.profile(withId: currentProfileId) else {
-                    return
-                }
-                do {
-                    try await tunnel.disconnect()
-                    try await tunnel.connect(with: profile)
-                } catch {
-                    pp_log(.app, .error, "Unable to reconnect to profile \(profile.id) from menu: \(error)")
-                }
-            }
-        }
+        Button(Strings.Global.Actions.reconnect, action: reconnect)
     }
 
     var disconnectButton: some View {
-        Button(Strings.Global.Actions.disconnect) {
-            Task {
-                do {
-                    try await tunnel.disconnect()
-                } catch {
-                    pp_log(.app, .error, "Unable to disconnect from menu: \(error)")
-                }
-            }
-        }
+        Button(Strings.Global.Actions.disconnect, action: disconnect)
     }
 
     var profilesList: some View {
-        Group {
-            ForEach(profileManager.previews, id: \.id, content: profileToggle)
-        }
-        .themeSection(header: Strings.Views.App.Folders.default)
+        ForEach(profileManager.previews, id: \.id, content: profileToggle)
+            .themeSection(header: Strings.Views.App.Folders.default)
     }
 
     func profileToggle(for preview: ProfilePreview) -> some View {
@@ -140,42 +107,93 @@ private extension AppMenu {
 
     func profileToggleBinding(for preview: ProfilePreview) -> Binding<Bool> {
         Binding {
-            preview.id == tunnel.currentProfile?.id && tunnel.status != .inactive
+            isProfileActive(preview)
         } set: { isOn in
-            Task {
-                guard let profile = profileManager.profile(withId: preview.id) else {
-                    return
-                }
-                do {
-                    if isOn {
-                        try await tunnel.connect(with: profile)
-                    } else {
-                        try await tunnel.disconnect()
-                    }
-                } catch {
-                    pp_log(.app, .error, "Unable to toggle profile \(preview.id) from menu: \(error)")
-                }
-            }
+            toggleProfile(isOn, for: preview)
         }
     }
 
     var aboutButton: some View {
-        Button(Strings.Global.Nouns.about) {
-            NSApp.activate(ignoringOtherApps: true)
-            NSApp.orderFrontStandardAboutPanel(self)
-        }
+        Button(Strings.Global.Nouns.about, action: openAbout)
     }
 
     var quitButton: some View {
-        Button(Strings.Views.AppMenu.Items.quit(BundleConfiguration.mainDisplayName)) {
-            NSApp.terminate(self)
-        }
+        Button(Strings.Views.AppMenu.Items.quit(BundleConfiguration.mainDisplayName), action: quit)
     }
 }
 
 private extension AppMenu {
     var isTunnelActionable: Bool {
         [.activating, .active].contains(tunnel.status)
+    }
+
+    func showApp(completion: (() -> Void)? = nil) {
+        Task {
+            do {
+                try await AppWindow.shared.show()
+                completion?()
+            } catch {
+                pp_log(.app, .error, "Unable to launch app: \(error)")
+            }
+        }
+    }
+
+    func reconnect() {
+        Task {
+            guard let currentProfileId = tunnel.currentProfile?.id else {
+                return
+            }
+            guard let profile = profileManager.profile(withId: currentProfileId) else {
+                return
+            }
+            do {
+                try await tunnel.disconnect()
+                try await tunnel.connect(with: profile)
+            } catch {
+                pp_log(.app, .error, "Unable to reconnect to profile \(profile.id) from menu: \(error)")
+            }
+        }
+    }
+
+    func disconnect() {
+        Task {
+            do {
+                try await tunnel.disconnect()
+            } catch {
+                pp_log(.app, .error, "Unable to disconnect from menu: \(error)")
+            }
+        }
+    }
+
+    func isProfileActive(_ preview: ProfilePreview) -> Bool {
+        preview.id == tunnel.currentProfile?.id && tunnel.status != .inactive
+    }
+
+    func toggleProfile(_ isOn: Bool, for preview: ProfilePreview) {
+        Task {
+            guard let profile = profileManager.profile(withId: preview.id) else {
+                return
+            }
+            do {
+                if isOn {
+                    try await tunnel.connect(with: profile)
+                } else {
+                    try await tunnel.disconnect()
+                }
+            } catch {
+                pp_log(.app, .error, "Unable to toggle profile \(preview.id) from menu: \(error)")
+            }
+        }
+    }
+
+    func openAbout() {
+        showApp {
+            NSApp.orderFrontStandardAboutPanel(self)
+        }
+    }
+
+    func quit() {
+        NSApp.terminate(self)
     }
 }
 

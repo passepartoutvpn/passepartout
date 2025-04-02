@@ -1,8 +1,8 @@
 //
-//  DebugLogRoute.swift
+//  AppPipe.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 9/30/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,10 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 
-enum DebugLogRoute: Hashable {
-    case app(title: String)
+@MainActor
+public enum AppPipe {
+    public static let importer = PassthroughSubject<[URL], Never>()
 
-    case tunnel(title: String, url: URL?)
+    public static let settings = PassthroughSubject<Void, Never>()
 }

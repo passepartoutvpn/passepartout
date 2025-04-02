@@ -179,7 +179,7 @@ private extension PaywallView {
     var linksView: some View {
         Section {
             Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
-            Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
+            Link(Strings.Views.Settings.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
         }
     }
 

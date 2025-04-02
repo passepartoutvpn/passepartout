@@ -46,9 +46,7 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
     @Binding
     var isImporting: Bool
 
-    let onPreferences: () -> Void
-
-    let onAbout: () -> Void
+    let onSettings: () -> Void
 
     let onMigrateProfiles: () -> Void
 
@@ -58,12 +56,12 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
         if isBigDevice {
             ToolbarItemGroup {
                 addProfileMenu
-                aboutButton
+                settingsButton
                 layoutPicker
             }
         } else {
             ToolbarItem(placement: .navigation) {
-                aboutButton
+                settingsButton
             }
             ToolbarItem(placement: .primaryAction) {
                 addProfileMenu
@@ -83,19 +81,9 @@ private extension AppToolbar {
         )
     }
 
-    var preferencesButton: some View {
-        Button(action: onPreferences) {
+    var settingsButton: some View {
+        Button(action: onSettings) {
             ThemeImage(.settings)
-        }
-    }
-
-    var aboutButton: some View {
-        Button(action: onAbout) {
-#if os(iOS)
-            ThemeImage(.settings)
-#else
-            ThemeImage(.info)
-#endif
         }
     }
 
@@ -113,8 +101,7 @@ private extension AppToolbar {
                     registry: Registry(),
                     layout: .constant(.list),
                     isImporting: .constant(false),
-                    onPreferences: {},
-                    onAbout: {},
+                    onSettings: {},
                     onMigrateProfiles: {},
                     onNewProfile: { _ in }
                 )

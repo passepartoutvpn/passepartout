@@ -23,12 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
 extension URL {
     public var filename: String {
         deletingPathExtension()
             .lastPathComponent
+    }
+
+    public func open() {
+#if os(iOS)
+        UIApplication.shared.open(self)
+#elseif os(macOS)
+        NSWorkspace.shared.open(self)
+#else
+        fatalError("Unsupported")
+#endif
     }
 
     public static func mailto(to: String, subject: String, body: String) -> URL? {

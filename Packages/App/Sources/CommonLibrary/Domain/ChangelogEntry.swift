@@ -1,8 +1,8 @@
 //
-//  AboutCoordinatorRoute.swift
+//  ChangelogEntry.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 4/2/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,16 +25,16 @@
 
 import Foundation
 
-enum AboutCoordinatorRoute: Hashable {
-    case credits
+public struct ChangelogEntry {
+    public let id: Int
 
-    case diagnostics
+    public let comment: String
 
-    case donate
+    public let issue: Int?
 
-    case links
-
-    case purchased
-
-    case version
+    public init(_ id: Int, _ comment: String, _ issue: Int?) {
+        self.id = id
+        self.comment = comment
+        self.issue = issue
+    }
 }

@@ -36,6 +36,7 @@ public final class AppWindow {
             NSApp.activationPolicy() == .regular && window?.isVisible == true
         }
         set {
+            // this code is unused, show() is more solid
             NSApp.setActivationPolicy(newValue ? .regular : .accessory)
             if newValue {
                 NSApp.activate(ignoringOtherApps: true)
@@ -47,6 +48,16 @@ public final class AppWindow {
     }
 
     private init() {
+    }
+
+    public func show(completion: (() -> Void)? = nil) async throws {
+        if isVisible {
+            return
+        }
+        let url = Bundle.main.bundleURL
+        let config = NSWorkspace.OpenConfiguration()
+        config.createsNewApplicationInstance = false
+        try await NSWorkspace.shared.openApplication(at: url, configuration: config)
     }
 }
 

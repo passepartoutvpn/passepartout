@@ -28,8 +28,6 @@ import PassepartoutKit
 
 extension AppCoordinator {
     enum ModalRoute: Identifiable {
-        case about
-
         case editProfile
 
         case editProviderEntity(Profile, Bool, Module)
@@ -38,16 +36,15 @@ extension AppCoordinator {
 
         case migrateProfiles
 
-        case preferences
+        case settings
 
         var id: Int {
             switch self {
-            case .about: return 1
-            case .editProfile: return 2
-            case .editProviderEntity: return 3
-            case .interactiveLogin: return 4
-            case .migrateProfiles: return 5
-            case .preferences: return 6
+            case .editProfile: return 1
+            case .editProviderEntity: return 2
+            case .interactiveLogin: return 3
+            case .migrateProfiles: return 4
+            case .settings: return 5
             }
         }
 

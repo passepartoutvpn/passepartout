@@ -49,7 +49,7 @@ struct ProfileImporterModifier: ViewModifier {
                 allowsMultipleSelection: true,
                 onCompletion: handleResult
             )
-            .onReceive(ImporterPipe.shared) {
+            .onReceive(AppPipe.importer) {
                 handleResult(.success($0))
             }
             .alert(

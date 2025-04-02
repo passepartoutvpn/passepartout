@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
-
 import AppUIMain
 import SwiftUI
 import UIAccessibility
@@ -49,7 +47,7 @@ extension PassepartoutApp {
                     }
                 }
                 .onOpenURL { url in
-                    ImporterPipe.shared.send([url])
+                    AppPipe.importer.send([url])
                 }
                 .themeLockScreen()
                 .withEnvironment(from: context, theme: theme)
@@ -58,5 +56,3 @@ extension PassepartoutApp {
         }
     }
 }
-
-#endif

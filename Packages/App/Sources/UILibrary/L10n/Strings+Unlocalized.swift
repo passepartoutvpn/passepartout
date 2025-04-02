@@ -104,6 +104,8 @@ extension Strings {
 
         public static let ca = "CA"
 
+        public static let changelog = "CHANGELOG"
+
         public static let dns = "DNS"
 
         public static let eula = "EULA"

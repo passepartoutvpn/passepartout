@@ -35,6 +35,7 @@ public struct LinksView: View {
         Form {
             supportSection
             webSection
+            policySection
         }
         .themeForm()
     }
@@ -51,20 +52,27 @@ private extension LinksView {
 
     var supportSection: some View {
         Group {
-            Link(Strings.Views.About.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
-            Link(Strings.Views.About.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
+            Link(Strings.Views.Settings.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
+            Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.websites.discussions)
+            Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
         }
-        .themeSection(header: Strings.Views.About.Links.Sections.support)
+        .themeSection(header: Strings.Views.Settings.Links.Sections.support)
     }
 
     var webSection: some View {
         Group {
-            Link(Strings.Views.About.Links.Rows.homePage, destination: constants.websites.home)
+            Link(Strings.Views.Settings.Links.Rows.homePage, destination: constants.websites.home)
             Link(Strings.Unlocalized.faq, destination: constants.websites.faq)
-            Link(Strings.Views.About.Links.Rows.disclaimer, destination: constants.websites.disclaimer)
-            Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: constants.websites.privacyPolicy)
+            Link(Strings.Views.Settings.Links.Rows.blog, destination: constants.websites.blog)
         }
-        .themeSection(header: Strings.Views.About.Links.Sections.web)
+        .themeSection(header: Strings.Views.Settings.Links.Sections.web)
+    }
+
+    var policySection: some View {
+        Section {
+            Link(Strings.Views.Settings.Links.Rows.disclaimer, destination: constants.websites.disclaimer)
+            Link(Strings.Views.Settings.Links.Rows.privacyPolicy, destination: constants.websites.privacyPolicy)
+        }
     }
 }
 
