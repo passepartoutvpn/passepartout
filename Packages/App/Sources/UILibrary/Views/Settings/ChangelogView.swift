@@ -36,6 +36,9 @@ public struct ChangelogView: View {
     @State
     private var entries: [ChangelogEntry] = []
 
+    @State
+    private var isLoading = true
+
     public init() {
     }
 
@@ -51,7 +54,11 @@ public struct ChangelogView: View {
             .themeSection(header: versionString)
         }
         .themeForm()
-        .themeProgress(if: entries.isEmpty)
+        .themeProgress(
+            if: isLoading,
+            isEmpty: entries.isEmpty,
+            emptyMessage: Strings.Global.Nouns.noContent
+        )
         .task {
             await loadChangelog()
         }
@@ -87,6 +94,7 @@ private extension ChangelogView {
         } catch {
             pp_log(.app, .error, "CHANGELOG: Unable to load: \(error)")
         }
+        isLoading = false
     }
 }
 
