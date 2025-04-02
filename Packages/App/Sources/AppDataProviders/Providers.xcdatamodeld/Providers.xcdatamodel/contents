@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D70" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="CDProviderPresetV3" representedClassName="CDProviderPresetV3" syncable="YES">
         <attribute name="moduleType" optional="YES" attributeType="String"/>
         <attribute name="presetDescription" optional="YES" attributeType="String"/>
@@ -21,6 +21,7 @@
         <attribute name="supportedPresetIds" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CDProviderV3" representedClassName="CDProviderV3" syncable="YES">
+        <attribute name="cache" optional="YES" attributeType="Binary"/>
         <attribute name="encodedMetadata" optional="YES" attributeType="Binary"/>
         <attribute name="fullName" optional="YES" attributeType="String"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -61,7 +61,7 @@ struct ReportIssueButton {
         guard let providerId = installedProfile?.activeProviderModule?.providerId else {
             return nil
         }
-        let lastUpdate = apiManager.lastUpdate(for: providerId)
+        let lastUpdate = apiManager.cache(for: providerId)?.lastUpdate
         return (providerId, lastUpdate)
     }
 }

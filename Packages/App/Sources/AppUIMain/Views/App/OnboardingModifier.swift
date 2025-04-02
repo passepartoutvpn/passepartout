@@ -92,7 +92,7 @@ private extension OnboardingModifier {
         case .migrateV3_2_3:
             Button(Strings.Global.Nouns.ok) {
                 Task {
-                    await apiManager.resetLastUpdateForAllProviders()
+                    await apiManager.resetCacheForAllProviders()
                     advance()
                 }
             }
