@@ -1,5 +1,5 @@
 //
-//  AboutContentView+macOS.swift
+//  SettingsContentView+macOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/27/24.
@@ -29,7 +29,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View where LinkContent: View, AboutDestination: View, LogDestination: View {
+struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestination>: View where LinkContent: View, SettingsDestination: View, DiagnosticsDestination: View {
 
     @EnvironmentObject
     private var theme: Theme
@@ -45,21 +45,21 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
     var path: NavigationPath
 
     @Binding
-    var navigationRoute: AboutCoordinatorRoute?
+    var navigationRoute: SettingsCoordinatorRoute?
 
-    let linkContent: (AboutCoordinatorRoute) -> LinkContent
+    let linkContent: (SettingsCoordinatorRoute) -> LinkContent
 
-    let aboutDestination: (AboutCoordinatorRoute?) -> AboutDestination
+    let settingsDestination: (SettingsCoordinatorRoute?) -> SettingsDestination
 
-    let logDestination: (DebugLogRoute?) -> LogDestination
+    let diagnosticsDestination: (DiagnosticsRoute?) -> DiagnosticsDestination
 
     var body: some View {
         NavigationSplitView {
             listView
         } detail: {
-            aboutDestination(navigationRoute)
-                .navigationDestination(for: AboutCoordinatorRoute.self, destination: aboutDestination)
-                .navigationDestination(for: DebugLogRoute.self, destination: logDestination)
+            settingsDestination(navigationRoute)
+                .navigationDestination(for: SettingsCoordinatorRoute.self, destination: settingsDestination)
+                .navigationDestination(for: DiagnosticsRoute.self, destination: diagnosticsDestination)
                 .themeNavigationStack(closable: false, path: $path)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
@@ -70,30 +70,37 @@ struct AboutContentView<LinkContent, AboutDestination, LogDestination>: View whe
                 }
         }
         .onLoad {
-            navigationRoute = .version
+            navigationRoute = .preferences
         }
     }
 }
 
-private extension AboutContentView {
+private extension SettingsContentView {
     var listView: some View {
         List(selection: $navigationRoute) {
-            Section {
-                linkContent(.version)
+            linkContent(.preferences)
+            linkContent(.version)
+
+            Group {
                 linkContent(.links)
                 linkContent(.credits)
                 if !isBeta {
                     linkContent(.donate)
                 }
-                linkContent(.purchased)
-                linkContent(.diagnostics)
             }
+            .themeSection(header: Strings.Global.Nouns.about)
+
+            Group {
+                linkContent(.diagnostics)
+                linkContent(.purchased)
+            }
+            .themeSection(header: Strings.Global.Nouns.troubleshooting)
         }
         .safeAreaInset(edge: .bottom) {
             Text(BundleConfiguration.mainVersionString)
                 .padding(.bottom)
         }
-        .navigationTitle(Strings.Views.About.title)
+        .navigationTitle(Strings.Views.Settings.title)
     }
 }
 

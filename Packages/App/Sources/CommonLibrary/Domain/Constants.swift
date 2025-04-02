@@ -50,6 +50,10 @@ public struct Constants: Decodable, Sendable {
             home.appendingPathComponent("faq/")
         }
 
+        public var blog: URL {
+            home.appendingPathComponent("blog/")
+        }
+
         public var disclaimer: URL {
             home.appendingPathComponent("disclaimer/")
         }
@@ -64,7 +68,11 @@ public struct Constants: Decodable, Sendable {
 
         public let subreddit: URL
 
-        public let githubSponsors: URL
+        public let discussions: URL
+
+        public let changelog: URL
+
+        public let issues: URL
 
         public let eula: URL
     }

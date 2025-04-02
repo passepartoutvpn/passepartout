@@ -33,9 +33,9 @@ import ServiceManagement
 
 @MainActor
 public final class MacSettingsModel: ObservableObject {
-    private let defaults: UserDefaults
+    private let defaults: UserDefaults?
 
-    private let appService: SMAppService
+    private let appService: SMAppService?
 
     public var isStartedFromLoginItem: Bool {
         NSApp.isHidden
@@ -43,10 +43,13 @@ public final class MacSettingsModel: ObservableObject {
 
     public var launchesOnLogin: Bool {
         get {
-            appService.status == .enabled
+            appService?.status == .enabled
         }
         set {
             objectWillChange.send()
+            guard let appService else {
+                return
+            }
             do {
                 if newValue {
                     try appService.register()
@@ -61,12 +64,17 @@ public final class MacSettingsModel: ObservableObject {
 
     public var keepsInMenu: Bool {
         get {
-            defaults.bool(forKey: UIPreference.keepsInMenu.key)
+            defaults?.bool(forKey: UIPreference.keepsInMenu.key) ?? false
         }
         set {
             objectWillChange.send()
-            defaults.set(newValue, forKey: UIPreference.keepsInMenu.key)
+            defaults?.set(newValue, forKey: UIPreference.keepsInMenu.key)
         }
+    }
+
+    public init() {
+        defaults = nil
+        appService = nil
     }
 
     public init(defaults: UserDefaults, loginItemId: String) {

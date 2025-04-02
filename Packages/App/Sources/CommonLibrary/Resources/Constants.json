@@ -11,7 +11,9 @@
     "websites": {
         "home": "https://passepartoutvpn.app",
         "subreddit": "https://www.reddit.com/r/passepartout/",
-        "githubSponsors": "https://www.github.com/sponsors/passepartoutvpn",
+        "discussions": "http://github.com/passepartoutvpn/discussions",
+        "changelog": "https://raw.githubusercontent.com/passepartoutvpn/passepartout/refs/heads/master/CHANGELOG.txt",
+        "issues": "https://github.com/passepartoutvpn/passepartout/issues",
         "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
     },
     "emails": {

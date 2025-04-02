@@ -84,7 +84,6 @@ private extension SettingsView {
             }
             creditsSection
             diagnosticsSection
-            aboutSection
         }
         .themeList()
     }
@@ -99,12 +98,12 @@ private extension SettingsView {
                 )
             }
             .focused($focus, equals: .version)
-            Button(Strings.Views.About.Credits.title) {}
+            Button(Strings.Views.Settings.Credits.title) {}
                 .focused($focus, equals: .credits)
             Button(Strings.Views.Donate.title) {}
                 .focused($focus, equals: .donate)
         }
-        .themeSection(header: Strings.Views.About.title)
+        .themeSection(header: Strings.Views.Settings.title)
     }
 
     var diagnosticsSection: some View {
@@ -112,16 +111,10 @@ private extension SettingsView {
             NavigationLink(Strings.Views.Diagnostics.Rows.app, value: AppCoordinatorRoute.appLog)
             NavigationLink(Strings.Views.Diagnostics.Rows.tunnel, value: AppCoordinatorRoute.tunnelLog)
             LogsPrivateDataToggle()
-        }
-        .themeSection(header: Strings.Views.Diagnostics.title)
-    }
-
-    var aboutSection: some View {
-        Group {
             Button(Strings.Views.Purchased.title) {}
                 .focused($focus, equals: .purchased)
         }
-        .themeSection()
+        .themeSection(header: Strings.Views.Diagnostics.title)
     }
 }
 

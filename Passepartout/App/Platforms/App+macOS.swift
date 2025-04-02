@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
 import AppUIMain
 import Combine
 import CommonLibrary
@@ -48,7 +46,7 @@ extension AppDelegate: NSApplicationDelegate {
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
-        ImporterPipe.shared.send(urls)
+        AppPipe.importer.send(urls)
     }
 }
 
@@ -62,18 +60,22 @@ extension PassepartoutApp {
                     context.onApplicationActive()
                 }
                 .withEnvironment(from: context, theme: theme)
+                .environmentObject(settings)
                 .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
                 .frame(minWidth: 600, minHeight: 400)
         }
         .defaultSize(width: 600, height: 400)
-
-        Settings {
-            PreferencesView(profileManager: context.profileManager)
-                .withEnvironment(from: context, theme: theme)
-                .environmentObject(settings)
-                .environment(\.isUITesting, AppCommandLine.contains(.uiTesting))
+        .commands {
+            CommandGroup(replacing: .appSettings) {
+                Button(Strings.Global.Nouns.settings) {
+                    Task {
+                        try await AppWindow.shared.show()
+                        AppPipe.settings.send()
+                    }
+                }
+                .keyboardShortcut(",", modifiers: .command)
+            }
         }
-        .defaultSize(width: 500, height: 400)
 
         MenuBarExtra {
             AppMenu(
@@ -106,5 +108,3 @@ private extension PassepartoutApp {
             .eraseToAnyPublisher()
     }
 }
-
-#endif

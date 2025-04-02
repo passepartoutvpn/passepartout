@@ -27,7 +27,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-public struct VersionView<Icon>: View where Icon: View {
+public struct VersionView<R, Icon>: View where R: Hashable, Icon: View {
 
     @EnvironmentObject
     private var theme: Theme
@@ -35,9 +35,12 @@ public struct VersionView<Icon>: View where Icon: View {
     @Environment(\.colorScheme)
     private var colorScheme
 
+    private let changelogRoute: R?
+
     private let icon: () -> Icon
 
-    public init(icon: @escaping () -> Icon) {
+    public init(changelogRoute: R? = nil as String?, icon: @escaping () -> Icon) {
+        self.changelogRoute = changelogRoute
         self.icon = icon
     }
 
@@ -53,8 +56,8 @@ public struct VersionView<Icon>: View where Icon: View {
 }
 
 extension VersionView where Icon == ThemeLogo {
-    public init() {
-        icon = {
+    public init(changelogRoute: R? = nil as String?) {
+        self.init(changelogRoute: changelogRoute) {
             ThemeLogo()
         }
     }
@@ -75,6 +78,11 @@ private extension VersionView {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .multilineTextAlignment(.center)
                     .padding()
+
+                if let changelogRoute {
+                    NavigationLink(Strings.Unlocalized.changelog, value: changelogRoute)
+                        .buttonStyle(.bordered)
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
 //
-//  ImporterPipe.swift
+//  SettingsCoordinatorRoute.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/30/24.
+//  Created by Davide De Rosa on 11/23/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Combine
 import Foundation
 
-public enum ImporterPipe {
+enum SettingsCoordinatorRoute: Hashable {
+    case changelog
 
-    @MainActor
-    public static let shared = PassthroughSubject<[URL], Never>()
+    case credits
+
+    case diagnostics
+
+    case donate
+
+    case links
+
+    case preferences
+
+    case purchased
+
+    case version
 }

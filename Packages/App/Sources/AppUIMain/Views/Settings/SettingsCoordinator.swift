@@ -1,5 +1,5 @@
 //
-//  AboutCoordinator.swift
+//  SettingsCoordinator.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/22/24.
@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UILibrary
 
-struct AboutCoordinator: View {
+struct SettingsCoordinator: View {
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -44,32 +44,35 @@ struct AboutCoordinator: View {
     private var path = NavigationPath()
 
     @State
-    private var navigationRoute: AboutCoordinatorRoute?
+    private var navigationRoute: SettingsCoordinatorRoute?
 
     var body: some View {
-        AboutContentView(
+        SettingsContentView(
             profileManager: profileManager,
             isBeta: iapManager.isBeta,
             path: $path,
             navigationRoute: $navigationRoute,
             linkContent: linkView(to:),
-            aboutDestination: pushDestination(for:),
-            logDestination: pushDestination(for:)
+            settingsDestination: pushDestination(for:),
+            diagnosticsDestination: pushDestination(for:)
         )
     }
 }
 
-extension AboutCoordinator {
-    func linkView(to route: AboutCoordinatorRoute) -> some View {
+extension SettingsCoordinator {
+    func linkView(to route: SettingsCoordinatorRoute) -> some View {
         NavigationLink(value: route) {
             linkLabel(for: route)
         }
     }
 
-    func title(for route: AboutCoordinatorRoute) -> String {
+    func title(for route: SettingsCoordinatorRoute) -> String {
         switch route {
+        case .changelog:
+            Strings.Unlocalized.changelog
+
         case .credits:
-            Strings.Views.About.Credits.title
+            Strings.Views.Settings.Credits.title
 
         case .diagnostics:
             Strings.Views.Diagnostics.title
@@ -78,18 +81,21 @@ extension AboutCoordinator {
             Strings.Views.Donate.title
 
         case .links:
-            Strings.Views.About.Links.title
+            Strings.Views.Settings.Links.title
+
+        case .preferences:
+            Strings.Global.Nouns.preferences
 
         case .purchased:
             Strings.Global.Nouns.purchases
 
         case .version:
-            Strings.Views.About.title
+            Strings.Views.Settings.title
         }
     }
 
     @ViewBuilder
-    func linkLabel(for route: AboutCoordinatorRoute) -> some View {
+    func linkLabel(for route: SettingsCoordinatorRoute) -> some View {
         switch route {
         case .version:
             Text(Strings.Global.Nouns.version)
@@ -103,8 +109,12 @@ extension AboutCoordinator {
     }
 
     @ViewBuilder
-    func pushDestination(for item: AboutCoordinatorRoute?) -> some View {
+    func pushDestination(for item: SettingsCoordinatorRoute?) -> some View {
         switch item {
+        case .changelog:
+            ChangelogView()
+                .navigationTitle(title(for: .changelog))
+
         case .credits:
             CreditsView()
                 .navigationTitle(title(for: .credits))
@@ -121,12 +131,16 @@ extension AboutCoordinator {
             LinksView()
                 .navigationTitle(title(for: .links))
 
+        case .preferences:
+            PreferencesView(profileManager: profileManager)
+                .navigationTitle(title(for: .preferences))
+
         case .purchased:
             PurchasedView()
-                .navigationTitle(title(for: .purchased))
+                .navigationTitle(Strings.Global.Nouns.purchases)
 
         case .version:
-            VersionView()
+            VersionView(changelogRoute: SettingsCoordinatorRoute.changelog)
 
         default:
             Text(Strings.Global.Nouns.noSelection)
@@ -135,15 +149,15 @@ extension AboutCoordinator {
     }
 
     @ViewBuilder
-    func pushDestination(for item: DebugLogRoute?) -> some View {
+    func pushDestination(for item: DiagnosticsRoute?) -> some View {
         switch item {
-        case .app(let title):
+        case .appLog(let title):
             DebugLogView(withAppParameters: Constants.shared.log) {
                 DebugLogContentView(lines: $0)
             }
             .navigationTitle(title)
 
-        case .tunnel(let title, let url):
+        case .tunnelLog(let title, let url):
             if let url {
                 DebugLogView(withURL: url) {
                     DebugLogContentView(lines: $0)
@@ -164,9 +178,12 @@ extension AboutCoordinator {
 }
 
 #Preview {
-    AboutCoordinator(
+    SettingsCoordinator(
         profileManager: .forPreviews,
         tunnel: .forPreviews
     )
     .withMockEnvironment()
+#if os(macOS)
+    .environmentObject(MacSettingsModel())
+#endif
 }

@@ -25,19 +25,21 @@
 
 // MARK: Views
 
-"views.about.title" = "About";
-"views.about.links.title" = "Links";
-"views.about.links.sections.support" = "Support";
-"views.about.links.sections.web" = "Web";
-"views.about.links.rows.join_community" = "Join community";
-"views.about.links.rows.write_review" = "Write a review";
-"views.about.links.rows.home_page" = "Home page";
-"views.about.links.rows.disclaimer" = "Disclaimer";
-"views.about.links.rows.privacy_policy" = "Privacy policy";
-"views.about.credits.title" = "Credits";
-"views.about.credits.licenses" = "Licenses";
-"views.about.credits.notices" = "Notices";
-"views.about.credits.translations" = "Translations";
+"views.settings.title" = "Settings";
+"views.settings.links.title" = "Links";
+"views.settings.links.sections.support" = "Support";
+"views.settings.links.sections.web" = "Web";
+"views.settings.links.rows.join_community" = "Join community";
+"views.settings.links.rows.open_discussion" = "Start a discussion";
+"views.settings.links.rows.write_review" = "Write a review";
+"views.settings.links.rows.home_page" = "Home page";
+"views.settings.links.rows.blog" = "Blog";
+"views.settings.links.rows.disclaimer" = "Disclaimer";
+"views.settings.links.rows.privacy_policy" = "Privacy policy";
+"views.settings.credits.title" = "Credits";
+"views.settings.credits.licenses" = "Licenses";
+"views.settings.credits.notices" = "Notices";
+"views.settings.credits.translations" = "Translations";
 
 "views.app.installed_profile.none.name" = "No profile";
 "views.app.installed_profile.none.status" = "Tap list to connect";
@@ -349,6 +351,7 @@
 "global.nouns.other" = "Other";
 "global.nouns.password" = "Password";
 "global.nouns.port" = "Port";
+"global.nouns.preferences" = "Preferences";
 "global.nouns.private_key" = "Private key";
 "global.nouns.products" = "Products";
 "global.nouns.profile" = "Profile";
@@ -366,6 +369,7 @@
 "global.nouns.status" = "Status";
 "global.nouns.subnet" = "Subnet";
 "global.nouns.timeout" = "Timeout";
+"global.nouns.troubleshooting" = "Troubleshooting";
 "global.nouns.unknown" = "Unknown";
 "global.nouns.username" = "Username";
 "global.nouns.version" = "Version";
