@@ -54,12 +54,20 @@ struct DomainMapper {
     }
 
     func cache(from entities: [CDProviderV3]) -> [ProviderID: ProviderCache] {
-        entities.reduce(into: [:]) {
-            guard let id = $1.providerId,
-                  let lastUpdate = $1.lastUpdate else {
+        let decoder = JSONDecoder()
+        return entities.reduce(into: [:]) {
+            guard let id = $1.providerId else {
                 return
             }
-            $0[.init(rawValue: id)] = ProviderCache(lastUpdate: lastUpdate)
+            do {
+                if let cache = $1.cache {
+                    $0[.init(rawValue: id)] = try decoder.decode(ProviderCache.self, from: cache)
+                } else if let lastUpdate = $1.lastUpdate {
+                    $0[.init(rawValue: id)] = ProviderCache(lastUpdate: lastUpdate)
+                }
+            } catch {
+                pp_log(.providers, .error, "Unable to decode cache: \(error)")
+            }
         }
     }
 

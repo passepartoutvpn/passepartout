@@ -89,19 +89,19 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
                 return
             }
             do {
-                // fetch existing for last update and deletion
+                // fetch existing for cache then deletion
                 let request = CDProviderV3.fetchRequest()
                 let results = try request.execute()
-                let lastUpdatesByProvider = results.reduce(into: [:]) {
-                    $0[$1.providerId] = $1.lastUpdate
+                let cacheByProvider = results.reduce(into: [:]) {
+                    $0[$1.providerId] = $1.cache
                 }
                 results.forEach(context.delete)
 
-                // replace but retain last update
+                // replace but retain cache
                 let mapper = CoreDataMapper(context: context)
                 try index.forEach {
-                    let lastUpdate = lastUpdatesByProvider[$0.id.rawValue]
-                    try mapper.cdProvider(from: $0, lastUpdate: lastUpdate)
+                    let cache = cacheByProvider[$0.id.rawValue]
+                    try mapper.cdProvider(from: $0, cache: cache)
                 }
 
                 try context.save()
@@ -125,7 +125,7 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
                 providerRequest.predicate = predicate
                 let providers = try providerRequest.execute()
                 if let provider = providers.first {
-                    provider.lastUpdate = infrastructure.lastUpdate
+                    provider.cache = try JSONEncoder().encode(infrastructure.cache)
                 }
 
                 // delete all provider entities

@@ -36,5 +36,7 @@ final class CDProviderV3: NSManagedObject {
     @NSManaged var fullName: String?
     @NSManaged var supportedModuleTypes: String?
     @NSManaged var encodedMetadata: Data? // [String: Provider.Metadata]
+    @NSManaged var cache: Data?
+    @available(*, deprecated, message: "Use the more generic cache")
     @NSManaged var lastUpdate: Date?
 }
