@@ -38,32 +38,30 @@ extension API {
     }
 
     public static let bundled: [APIMapper] = [
-        Self.bundledV5
+        Self.bundledV6
     ]
 
-    public static let remoteThenBundled: [APIMapper] = [
-        Self.remoteV5,
-        Self.bundledV5
+    private static let remoteThenBundled: [APIMapper] = [
+        Self.remoteV6,
+        Self.bundledV6
     ]
 }
 
 private extension API {
-    static let bundledV5: APIMapper = {
-        guard let url = Bundle.module.url(forResource: "API", withExtension: nil) else {
+
+    // use local JS (baseURL = local)
+    // fetch remote JSON (URL in scripts)
+    static let bundledV6: APIMapper = {
+        guard let bundledURL = Bundle.module.url(forResource: "API/v6", withExtension: nil) else {
             fatalError("Unable to find bundled API")
         }
-        let ws = API.V5.DefaultWebServices(
-            url,
-            timeout: Constants.shared.api.timeoutInterval
-        )
-        return API.V5.Mapper(webServices: ws)
+        return API.V6.Mapper(baseURL: bundledURL)
     }()
 
-    static let remoteV5: APIMapper = {
-        let ws = API.V5.DefaultWebServices(
-            Constants.shared.websites.api,
-            timeout: Constants.shared.api.timeoutInterval
-        )
-        return API.V5.Mapper(webServices: ws)
+    // fetch remote JS (baseURL = remote)
+    // fetch remote JSON (URL in scripts)
+    static let remoteV6: APIMapper = {
+        let remoteURL = Constants.shared.websites.api.appendingPathComponent("v6")
+        return API.V6.Mapper(baseURL: remoteURL)
     }()
 }
