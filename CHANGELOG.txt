@@ -1,4 +1,1 @@
-* Add CHANGELOG to "Version" with links to GitHub (#1290)
-* Heuristic not sticking to same server category (#1288)
-* Fix some bugs with providers (#1270)
-* Suggest complete products with Apple TV (#1269)
+* Enable JavaScript API v6 (#1293)
