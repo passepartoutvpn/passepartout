@@ -79,9 +79,9 @@ private extension SettingsContentView {
     var listView: some View {
         List(selection: $navigationRoute) {
             linkContent(.preferences)
-            linkContent(.version)
 
             Group {
+                linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
                 if !isBeta {

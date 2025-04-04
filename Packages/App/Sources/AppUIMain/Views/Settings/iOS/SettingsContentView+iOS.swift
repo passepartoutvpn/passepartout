@@ -65,10 +65,10 @@ private extension SettingsContentView {
         List {
             Section {
                 linkContent(.preferences)
-                linkContent(.version)
             }
 
             Group {
+                linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
                 if !isBeta {
@@ -77,7 +77,7 @@ private extension SettingsContentView {
             }
             .themeSection(header: Strings.Global.Nouns.about)
 
-            Section {
+            Group {
                 linkContent(.diagnostics)
                 linkContent(.purchased)
             }
