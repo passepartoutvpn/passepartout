@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
 "views.paywall.sections.products.header" = "Föreslagna produkter";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
-"views.paywall.sections.restore.footer" = "Om du har köpt denna app eller funktion tidigare kan du återställa dina köp.";
+"views.paywall.sections.restore.footer" = "Om du har gjort köp tidigare kan du återställa dem här.";
 "views.paywall.sections.restore.header" = "Återställ";
 "views.preferences.dns_falls_back" = "DNS-backup";
 "views.preferences.dns_falls_back.footer" = "Återgår till CloudFlare-servrar när VPN inte tillhandahåller DNS-inställningar.";

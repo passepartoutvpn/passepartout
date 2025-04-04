@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
 "views.paywall.sections.products.header" = "Produits suggérés";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
-"views.paywall.sections.restore.footer" = "Si vous avez acheté cette application ou cette fonctionnalité dans le passé, vous pouvez restaurer vos achats.";
+"views.paywall.sections.restore.footer" = "Si vous avez effectué des achats par le passé, vous pouvez les restaurer ici.";
 "views.paywall.sections.restore.header" = "Restaurer";
 "views.preferences.dns_falls_back" = "Basculement DNS";
 "views.preferences.dns_falls_back.footer" = "Bascule vers les serveurs CloudFlare lorsque le VPN ne fournit pas de paramètres DNS.";

@@ -838,8 +838,8 @@ public enum Strings {
           public static let header = Strings.tr("Localizable", "views.paywall.sections.required_features.header", fallback: "Required features")
         }
         public enum Restore {
-          /// If you bought this app or feature in the past, you can restore your purchases.
-          public static let footer = Strings.tr("Localizable", "views.paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
+          /// If you made purchases in the past, you can restore them here.
+          public static let footer = Strings.tr("Localizable", "views.paywall.sections.restore.footer", fallback: "If you made purchases in the past, you can restore them here.")
           /// Restore
           public static let header = Strings.tr("Localizable", "views.paywall.sections.restore.header", fallback: "Restore")
         }

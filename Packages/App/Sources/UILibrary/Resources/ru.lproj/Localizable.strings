@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
 "views.paywall.sections.products.header" = "Рекомендуемые продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
-"views.paywall.sections.restore.footer" = "Если вы уже купили это приложение или функцию в прошлом, вы можете восстановить свои покупки.";
+"views.paywall.sections.restore.footer" = "Если вы совершали покупки ранее, вы можете восстановить их здесь.";
 "views.paywall.sections.restore.header" = "Восстановить";
 "views.preferences.dns_falls_back" = "Резервный DNS";
 "views.preferences.dns_falls_back.footer" = "Переключается на серверы CloudFlare, если VPN не предоставляет настройки DNS.";

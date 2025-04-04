@@ -85,7 +85,7 @@
 "views.paywall.sections.full_products.header" = "All features";
 "views.paywall.sections.full_products.footer" = "These products include current and future features.";
 "views.paywall.sections.restore.header" = "Restore";
-"views.paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
+"views.paywall.sections.restore.footer" = "If you made purchases in the past, you can restore them here.";
 "views.paywall.rows.restore_purchases" = "Restore purchases";
 "views.paywall.product.included_features" = "Included features";
 "views.paywall.alerts.confirmation.title" = "Purchase required";

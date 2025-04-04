@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
 "views.paywall.sections.products.header" = "Рекомендовані продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
-"views.paywall.sections.restore.footer" = "Якщо ви раніше купували цей додаток або функцію, ви можете відновити свої покупки.";
+"views.paywall.sections.restore.footer" = "Якщо ви раніше здійснювали покупки, ви можете відновити їх тут.";
 "views.paywall.sections.restore.header" = "Відновлення";
 "views.preferences.dns_falls_back" = "Резервний DNS";
 "views.preferences.dns_falls_back.footer" = "Перемикається на сервери CloudFlare, коли VPN не надає налаштування DNS.";

@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
 "views.paywall.sections.products.header" = "Sugerowane produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
-"views.paywall.sections.restore.footer" = "Jeśli wcześniej kupiłeś tę aplikację lub funkcję, możesz przywrócić swoje zakupy.";
+"views.paywall.sections.restore.footer" = "Jeśli wcześniej dokonałeś zakupów, możesz je tutaj przywrócić.";
 "views.paywall.sections.restore.header" = "Przywróć";
 "views.preferences.dns_falls_back" = "Awaryjny DNS";
 "views.preferences.dns_falls_back.footer" = "Przełącza się na serwery CloudFlare, gdy VPN nie zapewnia ustawień DNS.";

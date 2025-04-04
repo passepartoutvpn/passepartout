@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Todas las compras admiten En Familia.";
 "views.paywall.sections.products.header" = "Productos sugeridos";
 "views.paywall.sections.required_features.header" = "Características requeridas";
-"views.paywall.sections.restore.footer" = "Si compraste esta app o característica en el pasado, puedes restaurar tus compras.";
+"views.paywall.sections.restore.footer" = "Si has realizado compras en el pasado, puedes restaurarlas aquí.";
 "views.paywall.sections.restore.header" = "Restaurar";
 "views.preferences.dns_falls_back" = "DNS de respaldo";
 "views.preferences.dns_falls_back.footer" = "Usa los servidores de CloudFlare cuando el VPN no proporciona configuraciones de DNS.";

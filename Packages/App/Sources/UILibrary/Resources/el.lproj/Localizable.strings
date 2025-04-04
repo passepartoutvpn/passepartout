@@ -270,7 +270,7 @@
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
 "views.paywall.sections.products.header" = "Προτεινόμενα προϊόντα";
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
-"views.paywall.sections.restore.footer" = "Εάν αγοράσατε αυτήν την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας.";
+"views.paywall.sections.restore.footer" = "Αν έχετε πραγματοποιήσει αγορές στο παρελθόν, μπορείτε να τις επαναφέρετε εδώ.";
 "views.paywall.sections.restore.header" = "Επαναφορά";
 "views.preferences.dns_falls_back" = "Εναλλακτικό DNS";
 "views.preferences.dns_falls_back.footer" = "Χρησιμοποιεί τους διακομιστές CloudFlare όταν το VPN δεν παρέχει ρυθμίσεις DNS.";
