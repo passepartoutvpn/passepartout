@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "PassepartoutWireGuardGo",
+    name: "PartoutWireGuardGo",
     defaultLocalization: "en",
     platforms: [
         .iOS(.v15),
@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "PassepartoutWireGuardGo",
-            targets: ["PassepartoutWireGuardGo"]
+            name: "PartoutWireGuardGo",
+            targets: ["PartoutWireGuardGo"]
         )
     ],
     dependencies: [
@@ -23,7 +23,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "PassepartoutWireGuardGo",
+            name: "PartoutWireGuardGo",
             dependencies: [
                 "Partout-Framework",
                 .product(name: "WireGuardKit", package: "wireguard-apple")
@@ -33,8 +33,8 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "PassepartoutWireGuardGoTests",
-            dependencies: ["PassepartoutWireGuardGo"]
+            name: "PartoutWireGuardGoTests",
+            dependencies: ["PartoutWireGuardGo"]
         )
     ]
 )

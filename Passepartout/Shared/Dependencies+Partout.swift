@@ -26,7 +26,7 @@
 import Foundation
 import Partout
 import PassepartoutOpenVPNOpenSSL
-import PassepartoutWireGuardGo
+import PartoutWireGuardGo
 
 extension Dependencies {
     var registry: Registry {

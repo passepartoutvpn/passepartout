@@ -25,7 +25,7 @@
 
 import Foundation
 import Partout
-@testable import PassepartoutWireGuardGo
+@testable import PartoutWireGuardGo
 internal import WireGuardKit
 import XCTest
 

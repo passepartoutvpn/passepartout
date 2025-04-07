@@ -25,7 +25,7 @@
 
 import Foundation
 import Partout
-import PassepartoutWireGuardGo
+import PartoutWireGuardGo
 
 extension ProfileV2 {
     struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {

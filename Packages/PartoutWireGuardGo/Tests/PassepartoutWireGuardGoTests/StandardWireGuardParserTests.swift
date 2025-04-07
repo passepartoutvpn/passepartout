@@ -24,7 +24,7 @@
 //
 
 import Partout
-@testable import PassepartoutWireGuardGo
+@testable import PartoutWireGuardGo
 @testable internal import WireGuardKit
 import XCTest
 
