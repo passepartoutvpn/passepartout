@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Недопустимый интерфейс";
+"alertInvalidInterfaceMessageNameRequired" = "Требуется имя интерфейса";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "Требуется закрытый ключ интерфейса";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "Закрытый ключ интерфейса должен быть 32-байтовым ключом в кодировке base64";
+"alertInvalidInterfaceMessageAddressInvalid" = "Адреса интерфейса должны представлять собой список IP-адресов, разделенных запятыми, возможно в нотации CIDR";
+"alertInvalidInterfaceMessageListenPortInvalid" = "Порт прослушивания интерфейса должен быть от 0 до 65535 или не указан";
+"alertInvalidInterfaceMessageMTUInvalid" = "MTU интерфейса должен быть от 576 до 65535 или не указан";
+"alertInvalidInterfaceMessageDNSInvalid" = "Серверы DNS интерфейса должны представлять собой список IP-адресов, разделенных запятыми";
+
+"alertInvalidPeerTitle" = "Недопустимый peer";
+"alertInvalidPeerMessagePublicKeyRequired" = "Требуется открытый ключ peer’а";
+"alertInvalidPeerMessagePublicKeyInvalid" = "Открытый ключ peer’а должен быть 32-байтовым ключом в кодировке base64";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "Предварительно разделяемый ключ peer’а должен быть 32-байтовым ключом в кодировке base64";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Разрешенные IP-адреса peer’а должны представлять собой список IP-адресов, разделенных запятыми, возможно в нотации CIDR";
+"alertInvalidPeerMessageEndpointInvalid" = "Адрес peer’а должен быть в формате 'host:port' или '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "Значение постоянного keepalive peer’а должно быть от 0 до 65535 или не указано";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Два или более peer’ов не могут иметь один и тот же открытый ключ";
+
+"macAlertInvalidLine (%@)" = "Недопустимая строка: '%@'.";
+"macAlertNoInterface" = "Конфигурация должна содержать раздел 'Interface'.";
+"macAlertMultipleInterfaces" = "Конфигурация должна содержать только один раздел 'Interface'.";
+"macAlertPrivateKeyInvalid" = "Закрытый ключ недопустим.";
+"macAlertListenPortInvalid (%@)" = "Порт прослушивания '%@' недопустим.";
+"macAlertAddressInvalid (%@)" = "Адрес '%@' недопустим.";
+"macAlertDNSInvalid (%@)" = "DNS '%@' недопустим.";
+"macAlertMTUInvalid (%@)" = "MTU '%@' недопустим.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "Интерфейс содержит нераспознанный ключ '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Допустимые ключи: 'PrivateKey', 'ListenPort', 'Address', 'DNS' и 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "Открытый ключ недопустим";
+"macAlertPreSharedKeyInvalid" = "Предварительно разделяемый ключ недопустим";
+"macAlertAllowedIPInvalid (%@)" = "Разрешенный IP '%@' недопустим";
+"macAlertEndpointInvalid (%@)" = "Адрес '%@' недопустим";
+"macAlertPersistentKeepliveInvalid (%@)" = "Значение постоянного keepalive '%@' недопустимо";
+
+"macAlertUnrecognizedPeerKey (%@)" = "Peer содержит нераспознанный ключ '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Допустимые ключи: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' и 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Должна быть только одна запись на раздел для ключа '%@'";

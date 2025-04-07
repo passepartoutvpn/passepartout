@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension ProviderID: AppFeatureRequiring {
     public var features: Set<AppFeature> {

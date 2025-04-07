@@ -25,4 +25,4 @@
 
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout

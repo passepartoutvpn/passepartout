@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Ogiltigt gränssnitt";
+"alertInvalidInterfaceMessageNameRequired" = "Gränssnittsnamn krävs";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "Gränssnittets privata nyckel krävs";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "Gränssnittets privata nyckel måste vara en 32-byte nyckel i base64-kodning";
+"alertInvalidInterfaceMessageAddressInvalid" = "Gränssnittsadresser måste vara en lista med IP-adresser separerade med kommatecken, eventuellt i CIDR-notation";
+"alertInvalidInterfaceMessageListenPortInvalid" = "Gränssnittets lyssningsport måste vara mellan 0 och 65535, eller ospecificerad";
+"alertInvalidInterfaceMessageMTUInvalid" = "Gränssnittets MTU måste vara mellan 576 och 65535, eller ospecificerad";
+"alertInvalidInterfaceMessageDNSInvalid" = "Gränssnittets DNS-servrar måste vara en lista med IP-adresser separerade med kommatecken";
+
+"alertInvalidPeerTitle" = "Ogiltig peer";
+"alertInvalidPeerMessagePublicKeyRequired" = "Peers publika nyckel krävs";
+"alertInvalidPeerMessagePublicKeyInvalid" = "Peers publika nyckel måste vara en 32-byte nyckel i base64-kodning";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "Peers fördelade nyckel måste vara en 32-byte nyckel i base64-kodning";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Peers tillåtna IP-adresser måste vara en lista med IP-adresser separerade med kommatecken, eventuellt i CIDR-notation";
+"alertInvalidPeerMessageEndpointInvalid" = "Peers slutpunkt måste ha formatet 'host:port' eller '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "Peers persistent keepalive-värde måste vara mellan 0 och 65535, eller ospecificerat";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Två eller fler peers kan inte ha samma publika nyckel";
+
+"macAlertInvalidLine (%@)" = "Ogiltig rad: '%@'.";
+"macAlertNoInterface" = "Konfigurationen måste ha en 'Interface'-sektion.";
+"macAlertMultipleInterfaces" = "Konfigurationen får endast ha en 'Interface'-sektion.";
+"macAlertPrivateKeyInvalid" = "Privat nyckel är ogiltig.";
+"macAlertListenPortInvalid (%@)" = "Lyssningsport '%@' är ogiltig.";
+"macAlertAddressInvalid (%@)" = "Adress '%@' är ogiltig.";
+"macAlertDNSInvalid (%@)" = "DNS '%@' är ogiltig.";
+"macAlertMTUInvalid (%@)" = "MTU '%@' är ogiltig.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "Gränssnittet innehåller en okänd nyckel '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Giltiga nycklar är: 'PrivateKey', 'ListenPort', 'Address', 'DNS' och 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "Publik nyckel är ogiltig";
+"macAlertPreSharedKeyInvalid" = "Fördelad nyckel är ogiltig";
+"macAlertAllowedIPInvalid (%@)" = "Tillåten IP '%@' är ogiltig";
+"macAlertEndpointInvalid (%@)" = "Slutpunkt '%@' är ogiltig";
+"macAlertPersistentKeepliveInvalid (%@)" = "Persistent keepalive-värde '%@' är ogiltigt";
+
+"macAlertUnrecognizedPeerKey (%@)" = "Peer innehåller en okänd nyckel '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Giltiga nycklar är: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' och 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Det bör endast finnas en post per sektion för nyckeln '%@'";

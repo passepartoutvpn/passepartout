@@ -24,7 +24,7 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 import UIAccessibility
 import UILibrary

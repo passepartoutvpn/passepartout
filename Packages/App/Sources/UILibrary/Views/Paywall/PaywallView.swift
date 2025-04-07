@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import StoreKit
 import SwiftUI
 

@@ -25,7 +25,7 @@
 
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 public final class ProviderPreferences: ObservableObject, ProviderPreferencesRepository {
     private var repository: ProviderPreferencesRepository?

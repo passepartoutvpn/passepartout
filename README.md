@@ -57,7 +57,7 @@ For everything to work properly, you must comply with all the capabilities and e
 To test the app on your Mac or iOS/tvOS Simulator:
 
 - Open `Passepartout.xcodeproj` in Xcode
-- Edit `Packages/PassepartoutKit-Framework/Package.swift`
+- Edit `Packages/Partout-Framework/Package.swift`
 - Set `environment = .onlineDevelopment`
 - Run the `Passepartout` target
 

@@ -24,7 +24,7 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 extension OpenVPNView.ConfigurationView where R == AnyHashable {

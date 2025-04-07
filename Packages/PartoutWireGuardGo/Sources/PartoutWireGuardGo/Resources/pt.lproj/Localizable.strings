@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Interface inválida";
+"alertInvalidInterfaceMessageNameRequired" = "O nome da interface é obrigatório";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "A chave privada da interface é obrigatória";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "A chave privada da interface deve ser uma chave de 32 bytes em codificação base64";
+"alertInvalidInterfaceMessageAddressInvalid" = "Os endereços da interface devem ser uma lista de endereços IP separados por vírgulas, opcionalmente em notação CIDR";
+"alertInvalidInterfaceMessageListenPortInvalid" = "A porta de escuta da interface deve estar entre 0 e 65535, ou não especificada";
+"alertInvalidInterfaceMessageMTUInvalid" = "O MTU da interface deve estar entre 576 e 65535, ou não especificado";
+"alertInvalidInterfaceMessageDNSInvalid" = "Os servidores DNS da interface devem ser uma lista de endereços IP separados por vírgulas";
+
+"alertInvalidPeerTitle" = "Peer inválido";
+"alertInvalidPeerMessagePublicKeyRequired" = "A chave pública do peer é obrigatória";
+"alertInvalidPeerMessagePublicKeyInvalid" = "A chave pública do peer deve ser uma chave de 32 bytes em codificação base64";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "A chave pré-compartilhada do peer deve ser uma chave de 32 bytes em codificação base64";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Os IPs permitidos do peer devem ser uma lista de endereços IP separados por vírgulas, opcionalmente em notação CIDR";
+"alertInvalidPeerMessageEndpointInvalid" = "O endpoint do peer deve estar no formato 'host:port' ou '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "O valor de keepalive persistente do peer deve estar entre 0 e 65535, ou não especificado";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Dois ou mais peers não podem ter a mesma chave pública";
+
+"macAlertInvalidLine (%@)" = "Linha inválida: '%@'.";
+"macAlertNoInterface" = "A configuração deve ter uma seção 'Interface'.";
+"macAlertMultipleInterfaces" = "A configuração deve ter apenas uma seção 'Interface'.";
+"macAlertPrivateKeyInvalid" = "A chave privada é inválida.";
+"macAlertListenPortInvalid (%@)" = "A porta de escuta '%@' é inválida.";
+"macAlertAddressInvalid (%@)" = "O endereço '%@' é inválido.";
+"macAlertDNSInvalid (%@)" = "O DNS '%@' é inválido.";
+"macAlertMTUInvalid (%@)" = "O MTU '%@' é inválido.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "A interface contém uma chave não reconhecida '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "As chaves válidas são: 'PrivateKey', 'ListenPort', 'Address', 'DNS' e 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "A chave pública é inválida";
+"macAlertPreSharedKeyInvalid" = "A chave pré-compartilhada é inválida";
+"macAlertAllowedIPInvalid (%@)" = "O IP permitido '%@' é inválido";
+"macAlertEndpointInvalid (%@)" = "O endpoint '%@' é inválido";
+"macAlertPersistentKeepliveInvalid (%@)" = "O valor de keepalive persistente '%@' é inválido";
+
+"macAlertUnrecognizedPeerKey (%@)" = "O peer contém uma chave não reconhecida '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "As chaves válidas são: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' e 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Deve haver apenas uma entrada por seção para a chave '%@'";

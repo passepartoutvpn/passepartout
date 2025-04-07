@@ -24,7 +24,7 @@
 //
 
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct HTTPProxyView: View, ModuleDraftEditing {

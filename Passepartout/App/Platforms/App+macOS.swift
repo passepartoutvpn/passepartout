@@ -27,7 +27,7 @@ import AppUIMain
 import Combine
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 import UIAccessibility
 

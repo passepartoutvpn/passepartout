@@ -26,7 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension AppError: LocalizedError {
     public var errorDescription: String? {
@@ -59,15 +59,15 @@ extension AppError: LocalizedError {
     }
 }
 
-extension TaskTimeoutError: PassepartoutErrorMappable {
-    public var asPassepartoutError: PassepartoutError {
-        PassepartoutError(.timeout)
+extension TaskTimeoutError: PartoutErrorMappable {
+    public var asPartoutError: PartoutError {
+        PartoutError(.timeout)
     }
 }
 
 // MARK: - App side
 
-extension PassepartoutError: @retroactive LocalizedError {
+extension PartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         let V = Strings.Errors.App.Passepartout.self
         switch code {
@@ -127,7 +127,7 @@ extension PassepartoutError: @retroactive LocalizedError {
 
 // MARK: - Tunnel side
 
-extension PassepartoutError.Code: StyledLocalizableEntity {
+extension PartoutError.Code: StyledLocalizableEntity {
     public enum Style {
         case tunnel
     }

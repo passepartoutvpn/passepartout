@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Ongeldige interface";
+"alertInvalidInterfaceMessageNameRequired" = "Interfacenaam is vereist";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "Privésleutel van de interface is vereist";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "De privésleutel van de interface moet een 32-byte sleutel zijn in base64-codering";
+"alertInvalidInterfaceMessageAddressInvalid" = "Interface-adressen moeten een lijst zijn van door komma's gescheiden IP-adressen, optioneel in CIDR-notatie";
+"alertInvalidInterfaceMessageListenPortInvalid" = "De luisterpoort van de interface moet tussen 0 en 65535 liggen, of niet gespecificeerd";
+"alertInvalidInterfaceMessageMTUInvalid" = "De MTU van de interface moet tussen 576 en 65535 liggen, of niet gespecificeerd";
+"alertInvalidInterfaceMessageDNSInvalid" = "De DNS-servers van de interface moeten een lijst zijn van door komma's gescheiden IP-adressen";
+
+"alertInvalidPeerTitle" = "Ongeldige peer";
+"alertInvalidPeerMessagePublicKeyRequired" = "De openbare sleutel van de peer is vereist";
+"alertInvalidPeerMessagePublicKeyInvalid" = "De openbare sleutel van de peer moet een 32-byte sleutel zijn in base64-codering";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "De vooraf gedeelde sleutel van de peer moet een 32-byte sleutel zijn in base64-codering";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "De toegestane IP's van de peer moeten een lijst zijn van door komma's gescheiden IP-adressen, optioneel in CIDR-notatie";
+"alertInvalidPeerMessageEndpointInvalid" = "De endpoint van de peer moet de vorm 'host:port' of '[host]:port' hebben";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "De persistent keepalive van de peer moet tussen 0 en 65535 liggen, of niet gespecificeerd";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Twee of meer peers kunnen niet dezelfde openbare sleutel hebben";
+
+"macAlertInvalidLine (%@)" = "Ongeldige regel: '%@'.";
+"macAlertNoInterface" = "De configuratie moet een 'Interface'-sectie bevatten.";
+"macAlertMultipleInterfaces" = "De configuratie mag slechts één 'Interface'-sectie bevatten.";
+"macAlertPrivateKeyInvalid" = "De privésleutel is ongeldig.";
+"macAlertListenPortInvalid (%@)" = "De luisterpoort '%@' is ongeldig.";
+"macAlertAddressInvalid (%@)" = "Het adres '%@' is ongeldig.";
+"macAlertDNSInvalid (%@)" = "De DNS '%@' is ongeldig.";
+"macAlertMTUInvalid (%@)" = "De MTU '%@' is ongeldig.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "De interface bevat een niet-herkende sleutel '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Geldige sleutels zijn: 'PrivateKey', 'ListenPort', 'Address', 'DNS' en 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "De openbare sleutel is ongeldig";
+"macAlertPreSharedKeyInvalid" = "De vooraf gedeelde sleutel is ongeldig";
+"macAlertAllowedIPInvalid (%@)" = "De toegestane IP '%@' is ongeldig";
+"macAlertEndpointInvalid (%@)" = "De endpoint '%@' is ongeldig";
+"macAlertPersistentKeepliveInvalid (%@)" = "De persistent keepalive waarde '%@' is ongeldig";
+
+"macAlertUnrecognizedPeerKey (%@)" = "De peer bevat een niet-herkende sleutel '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Geldige sleutels zijn: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' en 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Er mag slechts één invoer per sectie zijn voor sleutel '%@'";

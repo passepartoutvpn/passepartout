@@ -14,16 +14,16 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
-        "name" : "PassepartoutOpenVPNOpenSSLTests"
+        "containerPath" : "container:Packages\/PartoutOpenVPNOpenSSL",
+        "identifier" : "PartoutOpenVPNOpenSSLTests",
+        "name" : "PartoutOpenVPNOpenSSLTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
-        "identifier" : "PassepartoutWireGuardGoTests",
-        "name" : "PassepartoutWireGuardGoTests"
+        "containerPath" : "container:Packages\/PartoutWireGuardGo",
+        "identifier" : "PartoutWireGuardGoTests",
+        "name" : "PartoutWireGuardGoTests"
       }
     },
     {
@@ -35,37 +35,37 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutCoreTests",
-        "name" : "PassepartoutCoreTests"
+        "containerPath" : "container:Packages\/Partout-Source",
+        "identifier" : "PartoutCoreTests",
+        "name" : "PartoutCoreTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "CPassepartoutCryptoOpenSSLTests",
-        "name" : "CPassepartoutCryptoOpenSSLTests"
+        "containerPath" : "container:Packages\/PartoutOpenVPNOpenSSL",
+        "identifier" : "CPartoutCryptoOpenSSLTests",
+        "name" : "CPartoutCryptoOpenSSLTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutNETests",
-        "name" : "PassepartoutNETests"
+        "containerPath" : "container:Packages\/Partout-Source",
+        "identifier" : "PartoutNETests",
+        "name" : "PartoutNETests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutOpenVPNTests",
-        "name" : "PassepartoutOpenVPNTests"
+        "containerPath" : "container:Packages\/Partout-Source",
+        "identifier" : "PartoutOpenVPNTests",
+        "name" : "PartoutOpenVPNTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutWireGuardTests",
-        "name" : "PassepartoutWireGuardTests"
+        "containerPath" : "container:Packages\/Partout-Source",
+        "identifier" : "PartoutWireGuardTests",
+        "name" : "PartoutWireGuardTests"
       }
     },
     {
@@ -78,9 +78,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutSupportTests",
-        "name" : "PassepartoutSupportTests"
+        "containerPath" : "container:Packages\/Partout-Source",
+        "identifier" : "PartoutSupportTests",
+        "name" : "PartoutSupportTests"
       }
     },
     {
@@ -88,13 +88,6 @@
         "containerPath" : "container:Packages\/App",
         "identifier" : "AppUIMainTests",
         "name" : "AppUIMainTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
-        "identifier" : "PassepartoutAPITests",
-        "name" : "PassepartoutAPITests"
       }
     },
     {

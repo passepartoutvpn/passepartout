@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension IAPManager {
     public func verify(_ profile: Profile, extra: Set<AppFeature>? = nil) throws {

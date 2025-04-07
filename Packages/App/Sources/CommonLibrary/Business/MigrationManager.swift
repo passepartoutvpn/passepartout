@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public protocol MigrationManagerImporter {
     func importProfile(_ profile: Profile, remotelyShared: Bool) async throws
@@ -148,7 +148,7 @@ private extension MigrationManager {
             try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
         }
         if simulation.randomFailures, Bool.random() {
-            throw PassepartoutError(.unhandled)
+            throw PartoutError(.unhandled)
         }
     }
 

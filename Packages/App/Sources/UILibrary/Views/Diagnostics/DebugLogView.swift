@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 public struct DebugLogView<Content>: View where Content: View {
@@ -82,7 +82,7 @@ extension DebugLogView {
         content: @escaping ([String]) -> Content
     ) {
         self.init {
-            PassepartoutConfiguration.shared.currentLog(parameters: parameters)
+            PartoutConfiguration.shared.currentLog(parameters: parameters)
         } content: {
             content($0)
         }

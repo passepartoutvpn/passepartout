@@ -25,7 +25,7 @@
 
 import Combine
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct DNSView: View, ModuleDraftEditing {

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct MapperV2 {
     func toProfileV3(_ v2: ProfileV2, isTV: Bool) throws -> Profile {

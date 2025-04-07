@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension ProfileV2 {
     struct OpenVPNSettings: Codable, Equatable, VPNProtocolProviding {

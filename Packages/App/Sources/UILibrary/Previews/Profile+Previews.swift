@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension Profile {
     public static let forPreviews: Profile = {

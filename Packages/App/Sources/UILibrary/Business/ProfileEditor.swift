@@ -26,7 +26,7 @@
 import Combine
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 public final class ProfileEditor: ObservableObject {
@@ -193,7 +193,7 @@ extension ProfileEditor {
 
         // add this check in the app, the library does not enforce it
         guard !editableProfile.activeModulesIds.isEmpty else {
-            throw PassepartoutError(.noActiveModules)
+            throw PartoutError(.noActiveModules)
         }
 
         // validate builders if implementation supports it

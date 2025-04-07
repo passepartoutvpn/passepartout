@@ -26,7 +26,7 @@
 import CommonLibrary
 @preconcurrency import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 final class CDProfileRepositoryV2: Sendable {
     static var model: NSManagedObjectModel {

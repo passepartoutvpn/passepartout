@@ -24,7 +24,7 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct MigrateContentView<PerformButton>: View where PerformButton: View {

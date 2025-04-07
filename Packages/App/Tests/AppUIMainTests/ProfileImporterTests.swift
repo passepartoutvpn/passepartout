@@ -27,7 +27,7 @@
 import Combine
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 import XCTest
 
 final class ProfileImporterTests: XCTestCase {
@@ -148,10 +148,10 @@ extension SomeModule.Implementation: ModuleImporter {
     func module(fromURL url: URL, object: Any?) throws -> Module {
         if url.absoluteString.hasSuffix(".encrypted") {
             guard let passphrase = object as? String else {
-                throw PassepartoutError(.OpenVPN.passphraseRequired)
+                throw PartoutError(.OpenVPN.passphraseRequired)
             }
             guard passphrase == "passphrase" else {
-                throw PassepartoutError(.crypto)
+                throw PartoutError(.crypto)
             }
         }
         return SomeModule()

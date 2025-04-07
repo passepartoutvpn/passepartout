@@ -399,7 +399,7 @@
 "errors.app.permission_denied" = "Permission denied";
 "errors.app.tunnel" = "Unable to execute operation.";
 
-// MARK: Global (PassepartoutKit errors)
+// MARK: Global (Partout errors)
 
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
 "errors.app.passepartout.default" = "Unable to complete operation (code=%@).";

@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Interface invalide";
+"alertInvalidInterfaceMessageNameRequired" = "Le nom de l'interface est requis";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "La clé privée de l'interface est requise";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "La clé privée de l'interface doit être une clé de 32 octets en encodage base64";
+"alertInvalidInterfaceMessageAddressInvalid" = "Les adresses de l'interface doivent être une liste d'adresses IP séparées par des virgules, éventuellement en notation CIDR";
+"alertInvalidInterfaceMessageListenPortInvalid" = "Le port d'écoute de l'interface doit être compris entre 0 et 65535, ou non spécifié";
+"alertInvalidInterfaceMessageMTUInvalid" = "Le MTU de l'interface doit être compris entre 576 et 65535, ou non spécifié";
+"alertInvalidInterfaceMessageDNSInvalid" = "Les serveurs DNS de l'interface doivent être une liste d'adresses IP séparées par des virgules";
+
+"alertInvalidPeerTitle" = "Pair invalide";
+"alertInvalidPeerMessagePublicKeyRequired" = "La clé publique du pair est requise";
+"alertInvalidPeerMessagePublicKeyInvalid" = "La clé publique du pair doit être une clé de 32 octets en encodage base64";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "La clé pré-partagée du pair doit être une clé de 32 octets en encodage base64";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Les IP autorisées du pair doivent être une liste d'adresses IP séparées par des virgules, éventuellement en notation CIDR";
+"alertInvalidPeerMessageEndpointInvalid" = "Le point de terminaison du pair doit être au format 'host:port' ou '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "La valeur du keepalive persistant du pair doit être comprise entre 0 et 65535, ou non spécifiée";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Deux pairs ou plus ne peuvent pas avoir la même clé publique";
+
+"macAlertInvalidLine (%@)" = "Ligne invalide : '%@'.";
+"macAlertNoInterface" = "La configuration doit comporter une section 'Interface'.";
+"macAlertMultipleInterfaces" = "La configuration ne doit comporter qu'une seule section 'Interface'.";
+"macAlertPrivateKeyInvalid" = "La clé privée est invalide.";
+"macAlertListenPortInvalid (%@)" = "Le port d'écoute '%@' est invalide.";
+"macAlertAddressInvalid (%@)" = "L'adresse '%@' est invalide.";
+"macAlertDNSInvalid (%@)" = "Le DNS '%@' est invalide.";
+"macAlertMTUInvalid (%@)" = "Le MTU '%@' est invalide.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "L'interface contient une clé non reconnue '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Les clés valides sont : 'PrivateKey', 'ListenPort', 'Address', 'DNS' et 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "La clé publique est invalide";
+"macAlertPreSharedKeyInvalid" = "La clé pré-partagée est invalide";
+"macAlertAllowedIPInvalid (%@)" = "L'IP autorisée '%@' est invalide";
+"macAlertEndpointInvalid (%@)" = "Le point de terminaison '%@' est invalide";
+"macAlertPersistentKeepliveInvalid (%@)" = "La valeur du keepalive persistant '%@' est invalide";
+
+"macAlertUnrecognizedPeerKey (%@)" = "Le pair contient une clé non reconnue '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Les clés valides sont : 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' et 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Il ne doit y avoir qu'une seule entrée par section pour la clé '%@'";

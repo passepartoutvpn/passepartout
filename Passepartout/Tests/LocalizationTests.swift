@@ -24,8 +24,8 @@
 //
 
 import Foundation
-import PassepartoutKit
-@testable import PassepartoutWireGuardGo
+import Partout
+@testable import PartoutWireGuardGo
 import UILibrary
 import WireGuardKit
 import XCTest

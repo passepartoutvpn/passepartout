@@ -26,7 +26,7 @@
 import CommonAPI
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct ProviderServerView: View {

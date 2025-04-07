@@ -28,7 +28,7 @@
 import AppKit
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import ServiceManagement
 
 @MainActor

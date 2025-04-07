@@ -26,7 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 final class ProfileImporter: ObservableObject {
@@ -59,7 +59,7 @@ final class ProfileImporter: ObservableObject {
                     importer: importer
                 )
             } catch {
-                if let error = error as? PassepartoutError, error.code == .OpenVPN.passphraseRequired {
+                if let error = error as? PartoutError, error.code == .OpenVPN.passphraseRequired {
                     withPassphrase.append(url)
                     continue
                 }

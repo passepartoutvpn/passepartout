@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public enum AppError: Error {
     case couldNotLaunch(reason: Error)
@@ -41,19 +41,19 @@ public enum AppError: Error {
 
     case permissionDenied
 
-    case generic(PassepartoutError)
+    case generic(PartoutError)
 
     public init(_ error: Error) {
         if let spError = error as? AppError {
             self = spError
         } else {
-            self = .generic(PassepartoutError(error))
+            self = .generic(PartoutError(error))
         }
     }
 }
 
-extension PassepartoutError.Code {
+extension PartoutError.Code {
     public enum App {
-        public static let ineligibleProfile = PassepartoutError.Code("App.ineligibleProfile")
+        public static let ineligibleProfile = PartoutError.Code("App.ineligibleProfile")
     }
 }

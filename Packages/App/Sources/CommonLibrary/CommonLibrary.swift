@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public final class CommonLibrary {
     public enum Target {
@@ -50,7 +50,7 @@ private extension CommonLibrary {
     func configureApp() {
         configureShared()
 
-        PassepartoutConfiguration.shared.configureLogging(
+        PartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForAppLog,
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
@@ -60,14 +60,14 @@ private extension CommonLibrary {
     func configureTunnel() {
         configureShared()
 
-        PassepartoutConfiguration.shared.configureLogging(
+        PartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
         if UserDefaults.appGroup.bool(forKey: AppPreference.dnsFallsBack.key) {
             let servers = Constants.shared.tunnel.dnsFallbackServers
-            PassepartoutConfiguration.shared.dnsFallbackServers = servers
+            PartoutConfiguration.shared.dnsFallbackServers = servers
             pp_log(.app, .info, "Enable DNS fallback servers: \(servers)")
         }
     }

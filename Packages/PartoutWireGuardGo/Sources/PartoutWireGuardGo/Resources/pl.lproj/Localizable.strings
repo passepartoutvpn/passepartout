@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Nieprawidłowy interfejs";
+"alertInvalidInterfaceMessageNameRequired" = "Nazwa interfejsu jest wymagana";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "Klucz prywatny interfejsu jest wymagany";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "Klucz prywatny interfejsu musi być kluczem 32-bajtowym w kodowaniu base64";
+"alertInvalidInterfaceMessageAddressInvalid" = "Adresy interfejsu muszą być listą adresów IP oddzielonych przecinkami, opcjonalnie w notacji CIDR";
+"alertInvalidInterfaceMessageListenPortInvalid" = "Port nasłuchu interfejsu musi być w zakresie od 0 do 65535 lub nieokreślony";
+"alertInvalidInterfaceMessageMTUInvalid" = "MTU interfejsu musi być w zakresie od 576 do 65535 lub nieokreślone";
+"alertInvalidInterfaceMessageDNSInvalid" = "Serwery DNS interfejsu muszą być listą adresów IP oddzielonych przecinkami";
+
+"alertInvalidPeerTitle" = "Nieprawidłowy peer";
+"alertInvalidPeerMessagePublicKeyRequired" = "Klucz publiczny peer’a jest wymagany";
+"alertInvalidPeerMessagePublicKeyInvalid" = "Klucz publiczny peer’a musi być kluczem 32-bajtowym w kodowaniu base64";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "Klucz współdzielony peer’a musi być kluczem 32-bajtowym w kodowaniu base64";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Dozwolone IP peer’a muszą być listą adresów IP oddzielonych przecinkami, opcjonalnie w notacji CIDR";
+"alertInvalidPeerMessageEndpointInvalid" = "Endpoint peer’a musi mieć format 'host:port' lub '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "Wartość persistent keepalive peer’a musi być w zakresie od 0 do 65535 lub nieokreślona";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Dwa lub więcej peer’ów nie może mieć tego samego klucza publicznego";
+
+"macAlertInvalidLine (%@)" = "Nieprawidłowa linia: '%@'.";
+"macAlertNoInterface" = "Konfiguracja musi zawierać sekcję 'Interface'.";
+"macAlertMultipleInterfaces" = "Konfiguracja może zawierać tylko jedną sekcję 'Interface'.";
+"macAlertPrivateKeyInvalid" = "Klucz prywatny jest nieprawidłowy.";
+"macAlertListenPortInvalid (%@)" = "Port nasłuchu '%@' jest nieprawidłowy.";
+"macAlertAddressInvalid (%@)" = "Adres '%@' jest nieprawidłowy.";
+"macAlertDNSInvalid (%@)" = "DNS '%@' jest nieprawidłowy.";
+"macAlertMTUInvalid (%@)" = "MTU '%@' jest nieprawidłowe.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "Interfejs zawiera nierozpoznany klucz '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Prawidłowe klucze to: 'PrivateKey', 'ListenPort', 'Address', 'DNS' i 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "Klucz publiczny jest nieprawidłowy";
+"macAlertPreSharedKeyInvalid" = "Klucz współdzielony jest nieprawidłowy";
+"macAlertAllowedIPInvalid (%@)" = "Dozwolone IP '%@' jest nieprawidłowe";
+"macAlertEndpointInvalid (%@)" = "Endpoint '%@' jest nieprawidłowy";
+"macAlertPersistentKeepliveInvalid (%@)" = "Wartość persistent keepalive '%@' jest nieprawidłowa";
+
+"macAlertUnrecognizedPeerKey (%@)" = "Peer zawiera nierozpoznany klucz '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Prawidłowe klucze to: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' i 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Powinna być tylko jedna wartość na sekcję dla klucza '%@'";

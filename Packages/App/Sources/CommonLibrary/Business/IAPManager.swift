@@ -26,7 +26,7 @@
 import Combine
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 public final class IAPManager: ObservableObject {

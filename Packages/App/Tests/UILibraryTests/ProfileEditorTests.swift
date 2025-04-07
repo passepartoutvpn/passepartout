@@ -26,7 +26,7 @@
 import Combine
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 @testable import UILibrary
 import XCTest
 

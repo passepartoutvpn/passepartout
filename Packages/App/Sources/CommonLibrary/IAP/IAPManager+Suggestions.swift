@@ -26,7 +26,7 @@
 import CommonIAP
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension IAPManager {
     public enum SuggestionFilter {

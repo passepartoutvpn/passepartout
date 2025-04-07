@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 import TipKit
 import UIAccessibility
 @_exported import UILibrary

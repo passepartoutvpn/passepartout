@@ -1,0 +1,65 @@
+//
+//  Localizable.strings
+//  Partout
+//
+//  Created by Davide De Rosa on 11/25/24.
+//  Copyright (c) 2025 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Partout.
+//
+//  Partout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Partout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Partout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"alertInvalidInterfaceTitle" = "Μη έγκυρη διεπαφή";
+"alertInvalidInterfaceMessageNameRequired" = "Απαιτείται όνομα διεπαφής";
+"alertInvalidInterfaceMessagePrivateKeyRequired" = "Απαιτείται ιδιωτικό κλειδί διεπαφής";
+"alertInvalidInterfaceMessagePrivateKeyInvalid" = "Το ιδιωτικό κλειδί της διεπαφής πρέπει να είναι ένα κλειδί 32-byte σε κωδικοποίηση base64";
+"alertInvalidInterfaceMessageAddressInvalid" = "Οι διευθύνσεις της διεπαφής πρέπει να είναι μια λίστα από IP διευθύνσεις χωρισμένες με κόμμα, προαιρετικά σε σημειογραφία CIDR";
+"alertInvalidInterfaceMessageListenPortInvalid" = "Η θύρα ακρόασης της διεπαφής πρέπει να είναι μεταξύ 0 και 65535, ή να μην έχει καθοριστεί";
+"alertInvalidInterfaceMessageMTUInvalid" = "Το MTU της διεπαφής πρέπει να είναι μεταξύ 576 και 65535, ή να μην έχει καθοριστεί";
+"alertInvalidInterfaceMessageDNSInvalid" = "Οι διακομιστές DNS της διεπαφής πρέπει να είναι μια λίστα από IP διευθύνσεις χωρισμένες με κόμμα";
+
+"alertInvalidPeerTitle" = "Μη έγκυρος peer";
+"alertInvalidPeerMessagePublicKeyRequired" = "Απαιτείται δημόσιο κλειδί του peer";
+"alertInvalidPeerMessagePublicKeyInvalid" = "Το δημόσιο κλειδί του peer πρέπει να είναι ένα κλειδί 32-byte σε κωδικοποίηση base64";
+"alertInvalidPeerMessagePreSharedKeyInvalid" = "Το προ-μοιρασμένο κλειδί του peer πρέπει να είναι ένα κλειδί 32-byte σε κωδικοποίηση base64";
+"alertInvalidPeerMessageAllowedIPsInvalid" = "Οι επιτρεπόμενες IP του peer πρέπει να είναι μια λίστα από IP διευθύνσεις χωρισμένες με κόμμα, προαιρετικά σε σημειογραφία CIDR";
+"alertInvalidPeerMessageEndpointInvalid" = "Το endpoint του peer πρέπει να είναι της μορφής 'host:port' ή '[host]:port'";
+"alertInvalidPeerMessagePersistentKeepaliveInvalid" = "Η τιμή του persistent keepalive του peer πρέπει να είναι μεταξύ 0 και 65535, ή να μην έχει καθοριστεί";
+"alertInvalidPeerMessagePublicKeyDuplicated" = "Δύο ή περισσότεροι peers δεν μπορούν να έχουν το ίδιο δημόσιο κλειδί";
+
+"macAlertInvalidLine (%@)" = "Μη έγκυρη γραμμή: '%@'.";
+"macAlertNoInterface" = "Η διαμόρφωση πρέπει να έχει ένα τμήμα 'Interface'.";
+"macAlertMultipleInterfaces" = "Η διαμόρφωση πρέπει να έχει μόνο ένα τμήμα 'Interface'.";
+"macAlertPrivateKeyInvalid" = "Το ιδιωτικό κλειδί δεν είναι έγκυρο.";
+"macAlertListenPortInvalid (%@)" = "Η θύρα ακρόασης '%@' δεν είναι έγκυρη.";
+"macAlertAddressInvalid (%@)" = "Η διεύθυνση '%@' δεν είναι έγκυρη.";
+"macAlertDNSInvalid (%@)" = "Το DNS '%@' δεν είναι έγκυρο.";
+"macAlertMTUInvalid (%@)" = "Το MTU '%@' δεν είναι έγκυρο.";
+
+"macAlertUnrecognizedInterfaceKey (%@)" = "Η διεπαφή περιέχει μη αναγνωρισμένο κλειδί '%@'";
+"macAlertInfoUnrecognizedInterfaceKey" = "Τα έγκυρα κλειδιά είναι: 'PrivateKey', 'ListenPort', 'Address', 'DNS' και 'MTU'.";
+
+"macAlertPublicKeyInvalid" = "Το δημόσιο κλειδί δεν είναι έγκυρο";
+"macAlertPreSharedKeyInvalid" = "Το προ-μοιρασμένο κλειδί δεν είναι έγκυρο";
+"macAlertAllowedIPInvalid (%@)" = "Η επιτρεπόμενη IP '%@' δεν είναι έγκυρη";
+"macAlertEndpointInvalid (%@)" = "Το endpoint '%@' δεν είναι έγκυρο";
+"macAlertPersistentKeepliveInvalid (%@)" = "Η τιμή του persistent keepalive '%@' δεν είναι έγκυρη";
+
+"macAlertUnrecognizedPeerKey (%@)" = "Ο peer περιέχει μη αναγνωρισμένο κλειδί '%@'";
+"macAlertInfoUnrecognizedPeerKey" = "Τα έγκυρα κλειδιά είναι: 'PublicKey', 'PresharedKey', 'AllowedIPs', 'Endpoint' και 'PersistentKeepalive'";
+
+"macAlertMultipleEntriesForKey (%@)" = "Πρέπει να υπάρχει μόνο μία καταχώρηση ανά τμήμα για το κλειδί '%@'";

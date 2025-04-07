@@ -24,7 +24,7 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 public struct LogsPrivateDataToggle: View {
@@ -38,8 +38,8 @@ public struct LogsPrivateDataToggle: View {
     public var body: some View {
         Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
             .onChange(of: logsPrivateData) {
-                PassepartoutConfiguration.shared.logsAddresses = $0
-                PassepartoutConfiguration.shared.logsModules = $0
+                PartoutConfiguration.shared.logsAddresses = $0
+                PartoutConfiguration.shared.logsModules = $0
             }
     }
 }

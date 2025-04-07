@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension Issue {
     struct Metadata {
@@ -33,7 +33,7 @@ extension Issue {
 
         let provider: (ProviderID, Date?)?
 
-        let configuration: PassepartoutConfiguration
+        let configuration: PartoutConfiguration
 
         let versionString: String
 
