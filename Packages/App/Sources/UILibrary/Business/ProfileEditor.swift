@@ -193,7 +193,7 @@ extension ProfileEditor {
 
         // add this check in the app, the library does not enforce it
         guard !editableProfile.activeModulesIds.isEmpty else {
-            throw PassepartoutError(.noActiveModules)
+            throw PartoutError(.noActiveModules)
         }
 
         // validate builders if implementation supports it

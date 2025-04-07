@@ -1,5 +1,5 @@
 //
-//  PassepartoutConfiguration+Logging.swift
+//  PartoutConfiguration+Logging.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/4/24.
@@ -26,7 +26,7 @@
 import Foundation
 import Partout
 
-extension PassepartoutConfiguration {
+extension PartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
         pp_log(.app, .debug, "Log to: \(url)")
 

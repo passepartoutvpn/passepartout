@@ -37,21 +37,21 @@ public final class StandardWireGuardKeyGenerator: WireGuardKeyGenerator {
 
     public func privateKey(from string: String) throws -> String {
         guard let key = PrivateKey(base64Key: string) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return key.base64Key
     }
 
     public func publicKey(from string: String) throws -> String {
         guard let key = PublicKey(base64Key: string) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return key.base64Key
     }
 
     public func publicKey(for privateKey: String) throws -> String {
         guard let key = PrivateKey(base64Key: privateKey) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return key.publicKey.base64Key
     }

@@ -46,7 +46,7 @@ extension AppCoordinatorConforming {
                     await onConnect(newProfile, force: true, verify: verify)
                 }
             }
-        } catch let ppError as PassepartoutError {
+        } catch let ppError as PartoutError {
             switch ppError.code {
             case .missingProviderEntity:
                 onProviderEntityRequired(profile, force: force)

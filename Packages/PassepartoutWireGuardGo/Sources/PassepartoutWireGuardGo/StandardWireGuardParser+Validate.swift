@@ -30,7 +30,7 @@ internal import WireGuardKit
 extension StandardWireGuardParser: ModuleBuilderValidator {
     public func validate(_ builder: any ModuleBuilder) throws {
         guard let builder = builder as? WireGuardModule.Builder else {
-            throw PassepartoutError(.unknownModuleHandler)
+            throw PartoutError(.unknownModuleHandler)
         }
         guard let configurationBuilder = builder.configurationBuilder else {
             // assume provider configurations to be valid
@@ -40,7 +40,7 @@ extension StandardWireGuardParser: ModuleBuilderValidator {
             let quickConfig = configurationBuilder.toQuickConfig()
             _ = try TunnelConfiguration(fromWgQuickConfig: quickConfig)
         } catch {
-            throw PassepartoutError(.parsing, error)
+            throw PartoutError(.parsing, error)
         }
     }
 }

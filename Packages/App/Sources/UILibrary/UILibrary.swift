@@ -70,7 +70,7 @@ private extension UILibrary {
                     fatalError("\(moduleType): #2 is not AppFeatureRequiring")
                 }
             } catch {
-                if (error as? PassepartoutError)?.code == .incompleteModule {
+                if (error as? PartoutError)?.code == .incompleteModule {
                     return
                 }
                 fatalError("\(moduleType): empty module is not buildable: \(error)")

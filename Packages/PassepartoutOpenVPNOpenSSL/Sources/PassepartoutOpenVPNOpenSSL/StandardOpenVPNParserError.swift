@@ -53,20 +53,20 @@ public enum StandardOpenVPNParserError: Error {
 
 // MARK: - Mapping
 
-extension StandardOpenVPNParserError: PassepartoutErrorMappable {
-    public var asPassepartoutError: PassepartoutError {
+extension StandardOpenVPNParserError: PartoutErrorMappable {
+    public var asPartoutError: PartoutError {
         switch self {
         case .malformed(let option):
-            return PassepartoutError(.parsing, option, self)
+            return PartoutError(.parsing, option, self)
 
         case .unsupportedConfiguration(let option):
-            return PassepartoutError(.parsing, option, self)
+            return PartoutError(.parsing, option, self)
 
         case .encryptionPassphrase, .unableToDecrypt:
-            return PassepartoutError(.crypto, self)
+            return PartoutError(.crypto, self)
 
         default:
-            return PassepartoutError(.parsing, self)
+            return PartoutError(.parsing, self)
         }
     }
 }

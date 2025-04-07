@@ -54,9 +54,9 @@ extension StandardWireGuardParser: ModuleImporter {
             let builder = WireGuardModule.Builder(configurationBuilder: cfg.builder())
             return try builder.tryBuild()
         } catch TunnelConfiguration.ParseError.invalidLine {
-            throw PassepartoutError(.unknownImportedModule)
+            throw PartoutError(.unknownImportedModule)
         } catch {
-            throw PassepartoutError(.parsing, error)
+            throw PartoutError(.parsing, error)
         }
     }
 }

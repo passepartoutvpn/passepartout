@@ -1,5 +1,5 @@
 //
-//  PassepartoutError+OpenVPN.swift
+//  PartoutError+OpenVPN.swift
 //  PassepartoutKit
 //
 //  Created by Davide De Rosa on 1/10/25.
@@ -26,12 +26,12 @@
 internal import CPassepartoutOpenVPNOpenSSL
 import Partout
 
-extension OpenVPNSessionError: PassepartoutErrorMappable {
-    public var asPassepartoutError: PassepartoutError {
-        PassepartoutError(errorCode, self)
+extension OpenVPNSessionError: PartoutErrorMappable {
+    public var asPartoutError: PartoutError {
+        PartoutError(errorCode, self)
     }
 
-    private var errorCode: PassepartoutError.Code {
+    private var errorCode: PartoutError.Code {
         switch self {
         case .negotiationTimeout, .pingTimeout, .writeTimeout:
             return .timeout

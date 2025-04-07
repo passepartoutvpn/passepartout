@@ -37,4 +37,4 @@
 #import "Errors.h"
 
 NSString *const OpenVPNErrorDomain     = @"PassepartoutOpenVPN";
-NSString *const OpenVPNErrorKey        = @"PassepartoutErrorKey";
+NSString *const OpenVPNErrorKey        = @"PartoutErrorKey";

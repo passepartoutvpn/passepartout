@@ -45,7 +45,7 @@ public final class ExtendedTunnel: ObservableObject {
         environment.environmentValue(forKey: key)
     }
 
-    public private(set) var lastErrorCode: PassepartoutError.Code? {
+    public private(set) var lastErrorCode: PartoutError.Code? {
         didSet {
             pp_log(.app, .info, "ExtendedTunnel.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
         }

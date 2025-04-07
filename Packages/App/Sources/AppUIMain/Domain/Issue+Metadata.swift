@@ -33,7 +33,7 @@ extension Issue {
 
         let provider: (ProviderID, Date?)?
 
-        let configuration: PassepartoutConfiguration
+        let configuration: PartoutConfiguration
 
         let versionString: String
 

@@ -205,8 +205,8 @@ private extension StandardWireGuardParserTests {
 
     func assertParseError(_ error: Error, _ block: (TunnelConfiguration.ParseError) -> Void) {
         NSLog("Thrown: \(error.localizedDescription)")
-        guard let ppError = error as? PassepartoutError else {
-            XCTFail("Not a PassepartoutError")
+        guard let ppError = error as? PartoutError else {
+            XCTFail("Not a PartoutError")
             return
         }
         guard let parseError = ppError.reason as? TunnelConfiguration.ParseError else {

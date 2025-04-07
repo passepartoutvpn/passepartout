@@ -39,7 +39,7 @@ extension Subnet {
 
     func toWireGuardRange() throws -> IPAddressRange {
         guard let wg = IPAddressRange(from: "\(address)/\(prefixLength)") else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return wg
     }

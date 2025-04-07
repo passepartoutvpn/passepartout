@@ -81,7 +81,7 @@ extension WireGuard.RemoteInterface {
 
     func toWireGuardConfiguration() throws -> PeerConfiguration {
         guard let wgPublicKey = PublicKey(base64Key: publicKey.rawValue) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         var wg = PeerConfiguration(publicKey: wgPublicKey)
         if let preSharedKey {

@@ -44,7 +44,7 @@ extension PassepartoutKit.Endpoint {
             wgAddress = raw
         }
         guard let wg = WireGuardKit.Endpoint(from: "\(wgAddress):\(port)") else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return wg
     }

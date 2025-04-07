@@ -218,7 +218,7 @@ extension OpenVPNSession: OpenVPNSessionProtocol {
         sessionState = .stopping
 
         // shut down after sending exit notification if link is unreliable (normally UDP)
-        if error == nil || (error as? PassepartoutError)?.code == .networkChanged {
+        if error == nil || (error as? PartoutError)?.code == .networkChanged {
             do {
                 try await sendExitPacket(timeout: timeout)
             } catch {

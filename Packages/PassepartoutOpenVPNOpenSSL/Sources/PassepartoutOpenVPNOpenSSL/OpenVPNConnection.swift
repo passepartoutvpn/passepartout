@@ -93,7 +93,7 @@ public actor OpenVPNConnection {
 
             // TODO: ###, may improve this with floating
             pp_log(.openvpn, .notice, "Link has a better path, shut down session to reconnect")
-            await self?.session.shutdown(PassepartoutError(.networkChanged))
+            await self?.session.shutdown(PartoutError(.networkChanged))
 
         } stopBlock: { [weak self] _, timeout in
 
@@ -132,7 +132,7 @@ public actor OpenVPNConnection {
 
         // set this once
         guard let tunnelInterface = parameters.factory.tunnelInterface() else {
-            throw PassepartoutError(.releasedObject)
+            throw PartoutError(.releasedObject)
         }
         await session.setTunnel(tunnelInterface)
     }
@@ -149,7 +149,7 @@ extension OpenVPNConnection: Connection {
     public func start() async throws -> Bool {
         do {
             return try await backend.start()
-        } catch let error as PassepartoutError {
+        } catch let error as PartoutError {
             if error.code == .exhaustedEndpoints, let reason = error.reason {
                 throw reason
             }
@@ -315,7 +315,7 @@ private extension LinkInterface {
     }
 }
 
-private let ppRecoverableCodes: [PassepartoutError.Code] = [
+private let ppRecoverableCodes: [PartoutError.Code] = [
     .timeout,
     .linkFailure,
     .networkChanged,
@@ -325,7 +325,7 @@ private let ppRecoverableCodes: [PassepartoutError.Code] = [
 
 extension Error {
     var isOpenVPNRecoverable: Bool {
-        let ppError = PassepartoutError(self)
+        let ppError = PartoutError(self)
         if ppRecoverableCodes.contains(ppError.code) {
             return true
         }

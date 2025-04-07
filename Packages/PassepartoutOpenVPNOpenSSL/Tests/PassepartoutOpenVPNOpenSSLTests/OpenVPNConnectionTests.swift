@@ -63,7 +63,7 @@ final class OpenVPNConnectionTests: XCTestCase {
 
         let expLink = expectation(description: "Link")
         session.onSetLink = {
-            throw PassepartoutError(.crypto)
+            throw PartoutError(.crypto)
         }
         session.onDidFailToSetLink = {
             expLink.fulfill()
@@ -77,7 +77,7 @@ final class OpenVPNConnectionTests: XCTestCase {
             try await sut.start()
             await fulfillment(of: [expLink], timeout: 0.3)
         } catch {
-            XCTAssertEqual((error as? PassepartoutError)?.code, .crypto)
+            XCTAssertEqual((error as? PartoutError)?.code, .crypto)
         }
     }
 
@@ -86,11 +86,11 @@ final class OpenVPNConnectionTests: XCTestCase {
         var status: ConnectionStatus
         let controller = MockTunnelController()
         controller.onSetTunnelSettings = { _ in
-            throw PassepartoutError(.incompatibleModules)
+            throw PartoutError(.incompatibleModules)
         }
 
         session.onStop = {
-            XCTAssertEqual(($0 as? PassepartoutError)?.code, .incompatibleModules)
+            XCTAssertEqual(($0 as? PartoutError)?.code, .incompatibleModules)
         }
 
         let sut = try await constants.newConnection(with: session, controller: controller)
@@ -100,7 +100,7 @@ final class OpenVPNConnectionTests: XCTestCase {
         do {
             try await sut.start()
         } catch {
-            XCTAssertEqual((error as? PassepartoutError)?.code, .incompatibleModules)
+            XCTAssertEqual((error as? PartoutError)?.code, .incompatibleModules)
         }
     }
 
@@ -113,11 +113,11 @@ final class OpenVPNConnectionTests: XCTestCase {
         session.onSetLink = {
             Task {
                 try? await Task.sleep(milliseconds: 200)
-                await session.shutdown(PassepartoutError(.crypto))
+                await session.shutdown(PartoutError(.crypto))
             }
         }
         session.onStop = {
-            XCTAssertEqual(($0 as? PassepartoutError)?.code, .crypto)
+            XCTAssertEqual(($0 as? PartoutError)?.code, .crypto)
             expStop.fulfill()
         }
 
@@ -133,7 +133,7 @@ final class OpenVPNConnectionTests: XCTestCase {
         let session = MockOpenVPNSession()
         var status: ConnectionStatus
         let controller = MockTunnelController()
-        let recoverableError = PassepartoutError(.timeout)
+        let recoverableError = PartoutError(.timeout)
         assert(recoverableError.isOpenVPNRecoverable)
 
         let expStart = expectation(description: "Start")
@@ -142,7 +142,7 @@ final class OpenVPNConnectionTests: XCTestCase {
             expStart.fulfill()
         }
         session.onStop = {
-            XCTAssertEqual(($0 as? PassepartoutError)?.code, recoverableError.code)
+            XCTAssertEqual(($0 as? PartoutError)?.code, recoverableError.code)
             expStop.fulfill()
         }
         controller.onCancelTunnelConnection = { _ in
@@ -248,7 +248,7 @@ final class OpenVPNConnectionTests: XCTestCase {
             expConnected.fulfill()
         }
         session.onStop = {
-            XCTAssertEqual(($0 as? PassepartoutError)?.code, .networkChanged)
+            XCTAssertEqual(($0 as? PartoutError)?.code, .networkChanged)
             expStop.fulfill()
         }
 

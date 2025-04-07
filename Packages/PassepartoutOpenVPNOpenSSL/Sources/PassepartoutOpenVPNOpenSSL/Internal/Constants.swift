@@ -49,7 +49,7 @@ struct Constants {
     // MARK: Authentication
 
     static func peerInfo(sslVersion: String? = nil, withPlatform: Bool = true, extra: [String: String]? = nil) -> String {
-        let uiVersion = PassepartoutConfiguration.shared.versionIdentifier
+        let uiVersion = PartoutConfiguration.shared.versionIdentifier
         var info = [
             "IV_VER=2.4",
             "IV_UI_VER=\(uiVersion)",

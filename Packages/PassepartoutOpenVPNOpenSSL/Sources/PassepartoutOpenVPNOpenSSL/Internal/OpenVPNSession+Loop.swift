@@ -60,7 +60,7 @@ extension OpenVPNSession {
                 }
                 if let error {
                     pp_log(.openvpn, .error, "Failed LINK read: \(error)")
-                    await shutdown(PassepartoutError(.linkFailure, error))
+                    await shutdown(PartoutError(.linkFailure, error))
                 }
                 guard let packets, !packets.isEmpty else {
                     return

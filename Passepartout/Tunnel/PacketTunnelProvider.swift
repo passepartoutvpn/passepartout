@@ -86,7 +86,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             }
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
-            PassepartoutConfiguration.shared.flushLog()
+            PartoutConfiguration.shared.flushLog()
             throw error
         }
     }
@@ -94,11 +94,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     override func stopTunnel(with reason: NEProviderStopReason) async {
         await fwd?.stopTunnel(with: reason)
         fwd = nil
-        PassepartoutConfiguration.shared.flushLog()
+        PartoutConfiguration.shared.flushLog()
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
-        PassepartoutConfiguration.shared.flushLog()
+        PartoutConfiguration.shared.flushLog()
         super.cancelTunnelWithError(error)
     }
 
@@ -125,7 +125,7 @@ private extension PacketTunnelProvider {
                 await context.iapManager.reloadReceipt()
                 try await context.iapManager.verify(profile)
             } catch {
-                let error = PassepartoutError(.App.ineligibleProfile)
+                let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
                 pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 

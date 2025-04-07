@@ -53,7 +53,7 @@ extension WireGuard.LocalInterface {
 
     func toWireGuardConfiguration() throws -> InterfaceConfiguration {
         guard let wgPrivateKey = PrivateKey(base64Key: privateKey.rawValue) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         var wg = InterfaceConfiguration(privateKey: wgPrivateKey)
         wg.addresses = try addresses.map {
@@ -73,7 +73,7 @@ extension WireGuard.LocalInterface {
 extension String {
     func toWireGuardDNS() throws -> DNSServer {
         guard let wg = DNSServer(from: self) else {
-            throw PassepartoutError(.parsing)
+            throw PartoutError(.parsing)
         }
         return wg
     }

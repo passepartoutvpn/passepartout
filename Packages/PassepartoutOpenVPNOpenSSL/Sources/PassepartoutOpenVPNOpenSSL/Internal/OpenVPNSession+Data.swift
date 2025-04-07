@@ -73,7 +73,7 @@ extension OpenVPNSession {
                     throw nativeError
                 }
                 pp_log(.openvpn, .error, "Data: Failed LINK write during send data: \(error)")
-                await shutdown(PassepartoutError(.linkFailure, error))
+                await shutdown(PartoutError(.linkFailure, error))
             }
         }
     }

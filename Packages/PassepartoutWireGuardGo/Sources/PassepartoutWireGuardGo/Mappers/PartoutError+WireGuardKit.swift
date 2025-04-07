@@ -1,5 +1,5 @@
 //
-//  PassepartoutError+WireGuardKit.swift
+//  PartoutError+WireGuardKit.swift
 //  PassepartoutKit
 //
 //  Created by Davide De Rosa on 3/29/24.
@@ -29,14 +29,14 @@ internal import WireGuardKit
 
 // MARK: - Mapping
 
-extension WireGuardConnectionError: PassepartoutErrorMappable {
-    var asPassepartoutError: PassepartoutError {
-        PassepartoutError(.connectionNotStarted, self)
+extension WireGuardConnectionError: PartoutErrorMappable {
+    var asPartoutError: PartoutError {
+        PartoutError(.connectionNotStarted, self)
     }
 }
 
-extension TunnelConfiguration.ParseError: PassepartoutErrorMappable {
-    var asPassepartoutError: PassepartoutError {
-        PassepartoutError(.parsing, self)
+extension TunnelConfiguration.ParseError: PartoutErrorMappable {
+    var asPartoutError: PartoutError {
+        PartoutError(.parsing, self)
     }
 }

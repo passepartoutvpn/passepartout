@@ -31,7 +31,7 @@ import XCTest
 final class ParseErrorTests: XCTestCase {
     func test_givenParseError_whenMap_thenReturnsAsReason() throws {
         let sut = TunnelConfiguration.ParseError.noInterface
-        let mapped = sut.asPassepartoutError
+        let mapped = sut.asPartoutError
         XCTAssertTrue(mapped.reason is TunnelConfiguration.ParseError)
         let reason = try XCTUnwrap(mapped.reason as? TunnelConfiguration.ParseError)
         switch reason {
