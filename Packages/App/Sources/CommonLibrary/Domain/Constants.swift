@@ -148,6 +148,8 @@ public struct Constants: Decodable, Sendable {
 
     public struct API: Decodable, Sendable {
         public let timeoutInterval: TimeInterval
+
+        public let refreshInfrastructureRateLimit: TimeInterval
     }
 
     public struct IAP: Decodable, Sendable {

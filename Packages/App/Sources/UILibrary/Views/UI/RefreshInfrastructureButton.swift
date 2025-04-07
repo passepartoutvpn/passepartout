@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Partout
 import SwiftUI
 
@@ -35,6 +36,11 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
 
     private let label: () -> Label
 
+    private let defaults: UserDefaults = .standard
+
+    @State
+    private var elapsed: TimeInterval = .infinity
+
     public init(providerId: ProviderID, label: @escaping () -> Label) {
         self.providerId = providerId
         self.label = label
@@ -44,9 +50,17 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
         Button {
             Task {
                 try await apiManager.fetchInfrastructure(for: providerId)
+                saveLastUpdate()
             }
         } label: {
             label()
+        }
+        .disabled(elapsed <= Constants.shared.api.refreshInfrastructureRateLimit)
+        .task {
+            loadLastUpdate()
+        }
+        .onChange(of: elapsed) {
+            pp_log(.app, .info, "Elapsed since last update of \(providerId): \($0)")
         }
     }
 }
@@ -77,5 +91,26 @@ public struct RefreshInfrastructureButtonProgressView: View {
 #else
         Text(Strings.Views.Providers.refreshInfrastructure)
 #endif
+    }
+}
+
+private extension RefreshInfrastructureButton {
+    func loadLastUpdate() {
+        guard let map = defaults.object(forKey: AppPreference.lastInfrastructureRefresh.key) as? [String: TimeInterval] else {
+            elapsed = .infinity
+            return
+        }
+        guard let lastUpdate = map[providerId.rawValue] else {
+            elapsed = .infinity
+            return
+        }
+        elapsed = Date.timeIntervalSinceReferenceDate - lastUpdate
+    }
+
+    func saveLastUpdate() {
+        var map = defaults.object(forKey: AppPreference.lastInfrastructureRefresh.key) as? [String: TimeInterval] ?? [:]
+        map[providerId.rawValue] = Date.timeIntervalSinceReferenceDate
+        defaults.set(map, forKey: AppPreference.lastInfrastructureRefresh.key)
+        elapsed = .zero
     }
 }

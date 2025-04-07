@@ -31,6 +31,8 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case skipsPurchases
 
+    case lastInfrastructureRefresh
+
     case lastUsedProfileId
 
     case logsPrivateData
