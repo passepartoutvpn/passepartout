@@ -14,16 +14,16 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "PassepartoutOpenVPNOpenSSLTests",
-        "name" : "PassepartoutOpenVPNOpenSSLTests"
+        "containerPath" : "container:Packages\/PartoutOpenVPNOpenSSL",
+        "identifier" : "PartoutOpenVPNOpenSSLTests",
+        "name" : "PartoutOpenVPNOpenSSLTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutWireGuardGo",
-        "identifier" : "PassepartoutWireGuardGoTests",
-        "name" : "PassepartoutWireGuardGoTests"
+        "containerPath" : "container:Packages\/PartoutWireGuardGo",
+        "identifier" : "PartoutWireGuardGoTests",
+        "name" : "PartoutWireGuardGoTests"
       }
     },
     {
@@ -42,9 +42,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutOpenVPNOpenSSL",
-        "identifier" : "CPassepartoutCryptoOpenSSLTests",
-        "name" : "CPassepartoutCryptoOpenSSLTests"
+        "containerPath" : "container:Packages\/PartoutOpenVPNOpenSSL",
+        "identifier" : "CPartoutCryptoOpenSSLTests",
+        "name" : "CPartoutCryptoOpenSSLTests"
       }
     },
     {
@@ -64,8 +64,8 @@
     {
       "target" : {
         "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutWireGuardTests",
-        "name" : "PassepartoutWireGuardTests"
+        "identifier" : "PartoutWireGuardTests",
+        "name" : "PartoutWireGuardTests"
       }
     },
     {
