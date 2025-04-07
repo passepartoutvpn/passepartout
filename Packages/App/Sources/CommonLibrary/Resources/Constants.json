@@ -47,7 +47,8 @@
         }
     },
     "api": {
-        "timeoutInterval": 5.0
+        "timeoutInterval": 5.0,
+        "refreshInfrastructureRateLimit": 86400.0
     },
     "iap": {
         "productsTimeoutInterval": 10.0
