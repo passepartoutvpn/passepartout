@@ -25,7 +25,7 @@
 
 import Combine
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 public final class ExtendedTunnel: ObservableObject {

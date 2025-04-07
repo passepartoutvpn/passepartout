@@ -36,7 +36,7 @@
 
 internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
-import PassepartoutKit
+import Partout
 
 fileprivate extension ZeroingData {
     func appendSized(_ buf: ZeroingData) {

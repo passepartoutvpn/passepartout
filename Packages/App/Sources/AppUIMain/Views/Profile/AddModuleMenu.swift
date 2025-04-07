@@ -24,7 +24,7 @@
 //
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 // WARNING: Menu sections look good on physical device, whereas

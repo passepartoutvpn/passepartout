@@ -27,7 +27,7 @@
 
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct ProfileSplitView: View, Routable {

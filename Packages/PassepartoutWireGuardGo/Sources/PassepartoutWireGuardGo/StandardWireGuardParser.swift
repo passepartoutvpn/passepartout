@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 internal import WireGuardKit
 
 /// Parses WireGuard configurations in `wg-quick` format.

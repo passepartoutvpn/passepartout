@@ -25,7 +25,7 @@
 
 import Foundation
 import Network
-import PassepartoutKit
+import Partout
 internal import WireGuardKit
 
 extension WireGuard.RemoteInterface {

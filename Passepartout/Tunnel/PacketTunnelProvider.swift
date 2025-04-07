@@ -25,7 +25,7 @@
 
 import CommonLibrary
 @preconcurrency import NetworkExtension
-import PassepartoutKit
+import Partout
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 

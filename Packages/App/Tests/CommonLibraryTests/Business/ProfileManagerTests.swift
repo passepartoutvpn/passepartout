@@ -26,7 +26,7 @@
 import Combine
 @testable import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 import XCTest
 
 @MainActor

@@ -26,7 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension Profile {
     public var localizedPreview: ProfilePreview {

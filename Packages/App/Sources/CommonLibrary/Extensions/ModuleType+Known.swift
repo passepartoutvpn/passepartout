@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension ModuleType: @retroactive CaseIterable {
     public static let allCases: [ModuleType] = [

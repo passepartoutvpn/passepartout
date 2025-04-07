@@ -25,7 +25,7 @@
 
 internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
-import PassepartoutKit
+import Partout
 
 @OpenVPNActor
 final class ControlChannel {

@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import CommonUtils
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 public struct DebugLogView<Content>: View where Content: View {

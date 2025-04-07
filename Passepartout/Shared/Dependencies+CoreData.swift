@@ -25,7 +25,7 @@
 
 import CommonUtils
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension Dependencies {
     func coreDataLogger() -> LoggerProtocol {

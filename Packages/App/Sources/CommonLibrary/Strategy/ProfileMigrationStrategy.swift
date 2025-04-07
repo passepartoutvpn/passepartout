@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public protocol ProfileMigrationStrategy {
     var hasMigratableProfiles: Bool { get}

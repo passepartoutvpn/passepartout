@@ -25,7 +25,7 @@
 
 internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
-import PassepartoutKit
+import Partout
 
 final class DataChannel {
     let key: UInt8

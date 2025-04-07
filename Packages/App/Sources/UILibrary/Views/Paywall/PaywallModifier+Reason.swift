@@ -25,7 +25,7 @@
 
 import CommonIAP
 import Foundation
-import PassepartoutKit
+import Partout
 
 public typealias PaywallReason = PaywallModifier.Reason
 

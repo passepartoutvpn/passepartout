@@ -35,7 +35,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct PIAHardReset {
     private static let obfuscationKeyLength = 3

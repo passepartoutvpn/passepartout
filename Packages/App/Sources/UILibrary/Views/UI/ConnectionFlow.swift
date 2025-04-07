@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public struct ConnectionFlow {
     public let onConnect: (Profile) async -> Void

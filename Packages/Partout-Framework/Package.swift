@@ -21,11 +21,11 @@ enum Environment {
             return []
         case .onlineDevelopment:
             return [
-                .package(url: "https://github.com/passepartoutvpn/passepartoutkit", from: "0.99.7")
+                .package(url: "https://github.com/passepartoutvpn/partout", from: "0.99.50")
             ]
         case .production:
             return [
-                .package(path: "../PassepartoutKit-Source")
+                .package(path: "../Partout-Source")
             ]
         }
     }
@@ -47,20 +47,20 @@ enum Environment {
         case .localDevelopment:
             targets.append(.binaryTarget(
                 name: targetName,
-                path: "PassepartoutKit.xcframework.zip"
+                path: "Partout.xcframework.zip"
             ))
         case .onlineDevelopment:
             targets.append(.target(
                 name: targetName,
                 dependencies: [
-                    .product(name: "PassepartoutKit-Binary", package: "passepartoutkit")
+                    .product(name: "Partout-Binary", package: "partout")
                 ]
             ))
         case .production:
             targets.append(.target(
                 name: targetName,
                 dependencies: [
-                    .product(name: "PassepartoutKit", package: "PassepartoutKit-Source")
+                    .product(name: "Partout", package: "Partout-Source")
                 ]
             ))
         }
@@ -69,7 +69,7 @@ enum Environment {
 }
 
 let package = Package(
-    name: "PassepartoutKit-Framework",
+    name: "Partout-Framework",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
@@ -77,7 +77,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "PassepartoutKit-Framework",
+            name: "Partout-Framework",
             targets: [environment.targetName]
         )
     ],

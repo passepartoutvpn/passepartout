@@ -35,7 +35,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct PushReply {
     private let original: String

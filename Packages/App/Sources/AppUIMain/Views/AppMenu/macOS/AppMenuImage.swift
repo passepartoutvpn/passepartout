@@ -26,7 +26,7 @@
 #if os(macOS)
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 public struct AppMenuImage: View {

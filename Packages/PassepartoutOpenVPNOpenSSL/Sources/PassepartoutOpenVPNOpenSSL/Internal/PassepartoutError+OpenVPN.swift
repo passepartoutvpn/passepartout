@@ -24,7 +24,7 @@
 //
 
 internal import CPassepartoutOpenVPNOpenSSL
-import PassepartoutKit
+import Partout
 
 extension OpenVPNSessionError: PassepartoutErrorMappable {
     public var asPassepartoutError: PassepartoutError {

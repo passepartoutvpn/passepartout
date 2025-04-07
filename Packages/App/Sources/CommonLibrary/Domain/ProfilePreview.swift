@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public struct ProfilePreview: Identifiable, Hashable {
     public let id: Profile.ID

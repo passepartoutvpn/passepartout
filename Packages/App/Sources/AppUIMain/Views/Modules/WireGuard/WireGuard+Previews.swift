@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 // swiftlint: disable force_try
 extension WireGuard.Configuration.Builder {

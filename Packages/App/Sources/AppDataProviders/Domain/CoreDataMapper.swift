@@ -25,7 +25,7 @@
 
 import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct CoreDataMapper {
     let context: NSManagedObjectContext

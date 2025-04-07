@@ -25,7 +25,7 @@
 
 import Combine
 import Foundation
-import PassepartoutKit
+import Partout
 
 public actor OpenVPNConnection {
 

@@ -61,7 +61,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../PassepartoutKit-Framework"),
+        .package(path: "../Partout-Framework"),
         .package(path: "../PassepartoutOpenVPNOpenSSL"),
         .package(path: "../PassepartoutWireGuardGo")
     ],
@@ -151,7 +151,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                "PassepartoutKit-Framework"
+                "Partout-Framework"
             ],
             resources: [
                 .process("Resources")

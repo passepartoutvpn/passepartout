@@ -30,7 +30,7 @@ import AppUITV
 #endif
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 @main

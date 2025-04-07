@@ -25,7 +25,7 @@
 
 import Combine
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct ProviderFiltersView: View {

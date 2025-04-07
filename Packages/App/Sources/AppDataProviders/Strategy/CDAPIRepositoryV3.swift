@@ -28,7 +28,7 @@ import Combine
 import CommonUtils
 import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension AppData {
     public static func cdAPIRepositoryV3(context: NSManagedObjectContext) -> APIRepository {

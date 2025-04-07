@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public struct Constants: Decodable, Sendable {
     public struct Containers: Decodable, Sendable {

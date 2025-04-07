@@ -29,7 +29,7 @@ import CommonLibrary
 import CommonUtils
 import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension AppData {
     public static func cdProfileRepositoryV3(

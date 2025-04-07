@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 @testable import PassepartoutOpenVPNOpenSSL
 import XCTest
 

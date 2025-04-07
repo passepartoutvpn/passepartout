@@ -35,7 +35,7 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutCoreTests",
         "name" : "PassepartoutCoreTests"
       }
@@ -49,21 +49,21 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutNETests",
         "name" : "PassepartoutNETests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutOpenVPNTests",
         "name" : "PassepartoutOpenVPNTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutWireGuardTests",
         "name" : "PassepartoutWireGuardTests"
       }
@@ -78,7 +78,7 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutSupportTests",
         "name" : "PassepartoutSupportTests"
       }
@@ -92,7 +92,7 @@
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/PassepartoutKit-Source",
+        "containerPath" : "container:Packages\/Partout-Source",
         "identifier" : "PassepartoutAPITests",
         "name" : "PassepartoutAPITests"
       }

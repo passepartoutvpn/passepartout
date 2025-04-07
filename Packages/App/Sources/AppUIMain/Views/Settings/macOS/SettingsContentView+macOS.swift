@@ -26,7 +26,7 @@
 #if os(macOS)
 
 import CommonLibrary
-import PassepartoutKit
+import Partout
 import SwiftUI
 
 struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestination>: View where LinkContent: View, SettingsDestination: View, DiagnosticsDestination: View {

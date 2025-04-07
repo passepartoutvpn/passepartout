@@ -26,7 +26,7 @@
 import CommonAPI
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 public protocol UILibraryConfiguring {

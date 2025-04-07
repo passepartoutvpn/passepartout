@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 // WARNING: beware of Constants.shared dependency
 

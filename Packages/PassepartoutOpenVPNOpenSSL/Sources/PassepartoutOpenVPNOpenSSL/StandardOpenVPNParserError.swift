@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 /// Thrown by ``StandardOpenVPNParser``, with details about the line that triggered it.
 public enum StandardOpenVPNParserError: Error {

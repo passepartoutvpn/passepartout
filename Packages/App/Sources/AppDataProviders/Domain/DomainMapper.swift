@@ -25,7 +25,7 @@
 
 import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct DomainMapper {
     func provider(from entity: CDProviderV3) -> Provider? {

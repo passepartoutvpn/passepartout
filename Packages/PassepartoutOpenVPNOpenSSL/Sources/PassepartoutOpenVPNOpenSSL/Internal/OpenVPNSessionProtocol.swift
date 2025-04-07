@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 /// Observes major events notified by a ``OpenVPNSessionProtocol``.
 protocol OpenVPNSessionDelegate: AnyObject {

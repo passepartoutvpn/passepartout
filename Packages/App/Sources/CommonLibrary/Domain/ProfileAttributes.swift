@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 // WARNING: upcast to [String: AnyHashable] relies on CodableProfileCoder
 // implementation returning JSONSerialization

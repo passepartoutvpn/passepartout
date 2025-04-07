@@ -25,7 +25,7 @@
 
 internal import CPassepartoutCryptoOpenSSL
 import Foundation
-import PassepartoutKit
+import Partout
 
 /// Processes data packets according to a XOR method.
 struct XORProcessor {

@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 
 extension AppCoordinatorConforming {
     public func onConnect(_ profile: Profile, force: Bool, verify: Bool = true) async {

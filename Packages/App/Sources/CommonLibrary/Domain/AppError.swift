@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public enum AppError: Error {
     case couldNotLaunch(reason: Error)

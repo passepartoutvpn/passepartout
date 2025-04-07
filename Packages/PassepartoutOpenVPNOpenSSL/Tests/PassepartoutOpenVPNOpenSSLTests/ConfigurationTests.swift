@@ -24,7 +24,7 @@
 //
 
 @testable import PassepartoutOpenVPNOpenSSL
-import PassepartoutKit
+import Partout
 import XCTest
 
 final class ConfigurationTests: XCTestCase {

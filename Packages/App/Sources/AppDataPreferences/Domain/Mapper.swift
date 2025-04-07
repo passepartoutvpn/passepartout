@@ -26,7 +26,7 @@
 import CommonLibrary
 import CoreData
 import Foundation
-import PassepartoutKit
+import Partout
 
 struct DomainMapper {
 }

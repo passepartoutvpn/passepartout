@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 import PassepartoutOpenVPNOpenSSL
 import PassepartoutWireGuardGo
 

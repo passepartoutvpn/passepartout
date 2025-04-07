@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 public struct EditableProfile: MutableProfileType {
     public let version: Int? = nil

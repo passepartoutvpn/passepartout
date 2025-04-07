@@ -24,7 +24,7 @@
 //
 
 internal import CPassepartoutOpenVPNOpenSSL
-import PassepartoutKit
+import Partout
 @testable import PassepartoutOpenVPNOpenSSL
 import XCTest
 

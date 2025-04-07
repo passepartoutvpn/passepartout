@@ -25,7 +25,7 @@
 
 internal import CPassepartoutOpenVPNOpenSSL
 import Foundation
-import PassepartoutKit
+import Partout
 
 /// Provides methods to parse a ``OpenVPN/Configuration`` from an .ovpn configuration file.
 ///

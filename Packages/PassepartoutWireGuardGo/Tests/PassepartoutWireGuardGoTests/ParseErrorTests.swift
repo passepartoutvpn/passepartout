@@ -23,7 +23,7 @@
 //  along with PassepartoutKit.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
+import Partout
 @testable import PassepartoutWireGuardGo
 internal import WireGuardKit
 import XCTest

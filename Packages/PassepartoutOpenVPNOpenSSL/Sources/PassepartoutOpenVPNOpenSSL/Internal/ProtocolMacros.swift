@@ -35,7 +35,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 enum ProtocolMacros {
 

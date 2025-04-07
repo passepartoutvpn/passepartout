@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-import PassepartoutKit
+import Partout
 
 final class MockAppProcessor {
     private let iapManager: IAPManager

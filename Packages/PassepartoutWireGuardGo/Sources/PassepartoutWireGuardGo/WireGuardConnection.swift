@@ -31,7 +31,7 @@
 import Combine
 import Foundation
 import NetworkExtension
-import PassepartoutKit
+import Partout
 import os
 internal import WireGuardKit
 internal import WireGuardKitGo

@@ -26,7 +26,7 @@
 internal import CPassepartoutCryptoOpenSSL
 internal import CPassepartoutOpenVPNOpenSSL
 @testable import PassepartoutCryptoOpenSSL
-import PassepartoutKit
+import Partout
 @testable import PassepartoutOpenVPNOpenSSL
 import XCTest
 

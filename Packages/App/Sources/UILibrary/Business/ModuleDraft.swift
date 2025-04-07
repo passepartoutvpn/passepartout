@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
+import Partout
 
 @MainActor
 public final class ModuleDraft<T>: ObservableObject where T: ModuleBuilder {

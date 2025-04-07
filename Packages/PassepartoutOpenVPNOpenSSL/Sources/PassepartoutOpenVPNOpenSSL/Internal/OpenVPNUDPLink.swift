@@ -25,7 +25,7 @@
 
 import Combine
 import Foundation
-import PassepartoutKit
+import Partout
 
 /// Wrapper for connecting over a UDP socket.
 final class OpenVPNUDPLink {
