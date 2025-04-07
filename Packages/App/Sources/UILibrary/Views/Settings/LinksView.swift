@@ -28,6 +28,10 @@ import PassepartoutKit
 import SwiftUI
 
 public struct LinksView: View {
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     public init() {
     }
 
@@ -54,7 +58,9 @@ private extension LinksView {
         Group {
             Link(Strings.Views.Settings.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
             Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.github.discussions)
-            Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
+            if iapManager.isPayingUser {
+                Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
+            }
         }
         .themeSection(header: Strings.Views.Settings.Links.Sections.support)
     }
