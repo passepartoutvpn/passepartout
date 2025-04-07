@@ -36,8 +36,8 @@
     {
       "target" : {
         "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutCoreTests",
-        "name" : "PassepartoutCoreTests"
+        "identifier" : "PartoutCoreTests",
+        "name" : "PartoutCoreTests"
       }
     },
     {
@@ -50,15 +50,15 @@
     {
       "target" : {
         "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutNETests",
-        "name" : "PassepartoutNETests"
+        "identifier" : "PartoutNETests",
+        "name" : "PartoutNETests"
       }
     },
     {
       "target" : {
         "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutOpenVPNTests",
-        "name" : "PassepartoutOpenVPNTests"
+        "identifier" : "PartoutOpenVPNTests",
+        "name" : "PartoutOpenVPNTests"
       }
     },
     {
@@ -79,8 +79,8 @@
     {
       "target" : {
         "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutSupportTests",
-        "name" : "PassepartoutSupportTests"
+        "identifier" : "PartoutSupportTests",
+        "name" : "PartoutSupportTests"
       }
     },
     {
@@ -88,13 +88,6 @@
         "containerPath" : "container:Packages\/App",
         "identifier" : "AppUIMainTests",
         "name" : "AppUIMainTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/Partout-Source",
-        "identifier" : "PassepartoutAPITests",
-        "name" : "PassepartoutAPITests"
       }
     },
     {
