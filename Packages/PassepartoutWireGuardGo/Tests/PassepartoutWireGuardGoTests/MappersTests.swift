@@ -41,7 +41,7 @@ final class MappersTests: XCTestCase {
         ]
         for (i, raw) in sut.enumerated() {
             let wg = try XCTUnwrap(WireGuardKit.Endpoint(from: raw))
-            let kit = try XCTUnwrap(PassepartoutKit.Endpoint(wg: wg))
+            let kit = try XCTUnwrap(Partout.Endpoint(wg: wg))
             try XCTAssertEqual(wg, kit.toWireGuardEndpoint(), "Index \(i) failed")
 
             let pair = expected[i]

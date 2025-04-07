@@ -48,11 +48,11 @@ extension WireGuard.RemoteInterface {
             address = nil
         }
 
-        let endpoint: PassepartoutKit.Endpoint?
+        let endpoint: Partout.Endpoint?
         if let address,
            let addressObject = Address(rawValue: address),
            let port = wg.endpoint?.port.rawValue {
-            endpoint = PassepartoutKit.Endpoint(addressObject, port)
+            endpoint = Partout.Endpoint(addressObject, port)
         } else {
             endpoint = nil
         }
