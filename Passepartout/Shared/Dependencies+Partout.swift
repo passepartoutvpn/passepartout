@@ -25,7 +25,7 @@
 
 import Foundation
 import Partout
-import PassepartoutOpenVPNOpenSSL
+import PartoutOpenVPNOpenSSL
 import PartoutWireGuardGo
 
 extension Dependencies {

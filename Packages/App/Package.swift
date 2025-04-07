@@ -62,7 +62,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Partout-Framework"),
-        .package(path: "../PassepartoutOpenVPNOpenSSL"),
+        .package(path: "../PartoutOpenVPNOpenSSL"),
         .package(path: "../PartoutWireGuardGo")
     ],
     targets: [
@@ -173,7 +173,7 @@ let package = Package(
         .target(
             name: "PassepartoutImplementations",
             dependencies: [
-                "PassepartoutOpenVPNOpenSSL",
+                "PartoutOpenVPNOpenSSL",
                 "PartoutWireGuardGo"
             ],
             path: "Sources/Empty/PassepartoutImplementations"
