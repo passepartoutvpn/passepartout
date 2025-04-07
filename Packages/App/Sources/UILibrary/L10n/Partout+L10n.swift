@@ -1,5 +1,5 @@
 //
-//  PassepartoutKit+L10n.swift
+//  Partout+L10n.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/24.

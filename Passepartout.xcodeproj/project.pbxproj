@@ -30,11 +30,11 @@
 		0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
 		0E81955B2CFDA7BF00CC8FFD /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
 		0E8DFD482D05FA7000531CDE /* TunnelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD472D05FA7000531CDE /* TunnelContext.swift */; };
-		0E8DFD4E2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */; };
+		0E8DFD4E2D05FE5A00531CDE /* Dependencies+Partout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */; };
 		0E8DFD4F2D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */; };
 		0E8DFD502D05FE5A00531CDE /* Dependencies+Processors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4D2D05FE5A00531CDE /* Dependencies+Processors.swift */; };
 		0E8DFD512D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */; };
-		0E8DFD532D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */; };
+		0E8DFD532D05FE5A00531CDE /* Dependencies+Partout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */; };
 		0E8DFD542D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */; };
 		0E8DFD562D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */; };
 		0E916B782CF80FD60072921A /* ProfileEditorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */; platformFilters = (ios, macos, ); };
@@ -232,7 +232,7 @@
 		0E8DFD472D05FA7000531CDE /* TunnelContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelContext.swift; sourceTree = "<group>"; };
 		0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+CoreData.swift"; sourceTree = "<group>"; };
 		0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+IAPManager.swift"; sourceTree = "<group>"; };
-		0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+PassepartoutKit.swift"; sourceTree = "<group>"; };
+		0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+Partout.swift"; sourceTree = "<group>"; };
 		0E8DFD4D2D05FE5A00531CDE /* Dependencies+Processors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dependencies+Processors.swift"; sourceTree = "<group>"; };
 		0E916B772CF80FD60072921A /* ProfileEditorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorScreen.swift; sourceTree = "<group>"; };
 		0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
@@ -454,7 +454,7 @@
 				0E8195592CFDA75200CC8FFD /* Dependencies.swift */,
 				0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */,
 				0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */,
-				0E8DFD4C2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift */,
+				0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -908,7 +908,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED61CF82CD0418C008FE259 /* App+macOS.swift in Sources */,
-				0E8DFD4E2D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */,
+				0E8DFD4E2D05FE5A00531CDE /* Dependencies+Partout.swift in Sources */,
 				0E8DFD4F2D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */,
 				0E8DFD502D05FE5A00531CDE /* Dependencies+Processors.swift in Sources */,
 				0E8DFD512D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */,
@@ -970,7 +970,7 @@
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
 				0E483E812CE64D6B00584B32 /* TunnelContext+Shared.swift in Sources */,
 				0E8DFD482D05FA7000531CDE /* TunnelContext.swift in Sources */,
-				0E8DFD532D05FE5A00531CDE /* Dependencies+PassepartoutKit.swift in Sources */,
+				0E8DFD532D05FE5A00531CDE /* Dependencies+Partout.swift in Sources */,
 				0E8DFD542D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */,
 				0E8DFD562D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */,
 			);

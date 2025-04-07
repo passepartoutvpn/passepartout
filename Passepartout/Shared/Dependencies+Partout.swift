@@ -1,5 +1,5 @@
 //
-//  Dependencies+PassepartoutKit.swift
+//  Dependencies+Partout.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/2/24.
@@ -49,7 +49,7 @@ extension Dependencies {
     func tunnelEnvironment() -> TunnelEnvironment {
         AppGroupEnvironment(
             appGroup: BundleConfiguration.mainString(for: .groupId),
-            prefix: "PassepartoutKit."
+            prefix: "Partout."
         )
     }
 }
