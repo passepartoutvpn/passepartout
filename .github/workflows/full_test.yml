@@ -1,4 +1,4 @@
-name: Xcode Tests
+name: Full Tests
 
 on:
   workflow_dispatch:
@@ -13,13 +13,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_tests:
-    name: Run Xcode tests
+  all_tests:
+    name: All tests
     runs-on: macos-15
     timeout-minutes: 15
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - run: |
+      - name: Run Xcode tests
+        run: |
           bundle exec fastlane test
+      - name: Run Partout tests
+        run: |
+          cd Partout
+          swift test
+      - name: Run OpenVPN tests
+        run: |
+          cd Partout/Plugins/PartoutOpenVPNOpenSSL
+          swift test
+      - name: Run WireGuard tests
+        run: |
+          cd Partout/Plugins/PartoutWireGuardGo
+          swift test

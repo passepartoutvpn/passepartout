@@ -35,9 +35,12 @@ jobs:
       - name: Validate translations
         run: |
           scripts/clean-translations.sh
-      - name: Run Xcode tests
+      - name: Run all tests
         run: |
           bundle exec fastlane test
+          ( cd Partout && swift test )
+          ( cd Partout/Plugins/PartoutOpenVPNOpenSSL && swift test )
+          ( cd Partout/Plugins/PartoutWireGuardGo && swift test )
     outputs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}
