@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: false
+          submodules: true
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
