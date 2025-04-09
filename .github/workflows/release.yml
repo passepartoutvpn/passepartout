@@ -25,7 +25,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-          submodules: true
+          submodules: recursive
       - name: Save app version
         id: app_version
         run: |
