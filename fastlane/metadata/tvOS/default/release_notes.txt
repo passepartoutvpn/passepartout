@@ -1,2 +1,1 @@
-* Limit "Refresh infrastructure" to once a day (#1322)
-* Enable JavaScript API v6 (#1293)
+* Move plugins to Partout library (#1323)
