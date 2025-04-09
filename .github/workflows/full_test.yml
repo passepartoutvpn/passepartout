@@ -21,6 +21,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
       - name: Run Xcode tests
         run: |
           bundle exec fastlane test

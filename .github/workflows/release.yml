@@ -25,6 +25,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
       - name: Save app version
         id: app_version
         run: |
@@ -57,6 +58,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 30
