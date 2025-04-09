@@ -50,15 +50,19 @@ Download the app codebase locally:
 
 ```
 $ git clone https://github.com/passepartoutvpn/passepartout
+$ git submodule update --init
 ```
+
+Then:
+
+- Edit `Partout/Package.swift`
+- Set `environment = .onlineDevelopment`
 
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
 To test the app on your Mac or iOS/tvOS Simulator:
 
 - Open `Passepartout.xcodeproj` in Xcode
-- Edit `Packages/Partout-Framework/Package.swift`
-- Set `environment = .onlineDevelopment`
 - Run the `Passepartout` target
 
 ## License
