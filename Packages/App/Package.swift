@@ -61,9 +61,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../Partout-Framework"),
-        .package(path: "../PartoutOpenVPNOpenSSL"),
-        .package(path: "../PartoutWireGuardGo")
+        .package(path: "../../Partout/Libraries/Partout-Framework"),
+        .package(path: "../../Partout/Plugins/PartoutOpenVPNOpenSSL"),
+        .package(path: "../../Partout/Plugins/PartoutWireGuardGo")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

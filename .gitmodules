@@ -1,0 +1,3 @@
+[submodule "Partout"]
+	path = Partout
+	url = git@github.com:passepartoutvpn/partout.git
