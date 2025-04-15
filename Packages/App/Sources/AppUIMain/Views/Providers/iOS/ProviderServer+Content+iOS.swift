@@ -27,7 +27,6 @@
 
 import CommonAPI
 import CommonLibrary
-import Partout
 import SwiftUI
 import UIAccessibility
 

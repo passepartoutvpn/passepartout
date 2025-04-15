@@ -26,7 +26,6 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import Partout
 
 extension TunnelContext {
     static let shared: TunnelContext = {

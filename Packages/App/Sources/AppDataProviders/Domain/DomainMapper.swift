@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CoreData
 import Foundation
-import Partout
 
 struct DomainMapper {
     func provider(from entity: CDProviderV3) -> Provider? {
@@ -66,7 +66,7 @@ struct DomainMapper {
                     $0[.init(rawValue: id)] = ProviderCache(lastUpdate: lastUpdate, tag: nil)
                 }
             } catch {
-                pp_log(.providers, .error, "Unable to decode cache: \(error)")
+                pp_log(.api, .error, "Unable to decode cache: \(error)")
             }
         }
     }

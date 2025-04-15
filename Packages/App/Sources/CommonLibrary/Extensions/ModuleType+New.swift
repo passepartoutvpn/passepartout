@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 extension ModuleType {
     public func newModule(with registry: Registry) -> any ModuleBuilder {

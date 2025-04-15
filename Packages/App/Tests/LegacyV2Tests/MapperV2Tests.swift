@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 @testable import LegacyV2
-import Partout
 import XCTest
 
 final class MapperV2Tests: XCTestCase {

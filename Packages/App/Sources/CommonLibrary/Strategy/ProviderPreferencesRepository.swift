@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 @MainActor
 public protocol ProviderPreferencesRepository {

@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 extension AppCoordinatorConforming {
     public func onConnect(_ profile: Profile, force: Bool, verify: Bool = true) async {
@@ -48,7 +47,7 @@ extension AppCoordinatorConforming {
             }
         } catch let ppError as PartoutError {
             switch ppError.code {
-            case .missingProviderEntity:
+            case .API.missingProviderEntity:
                 onProviderEntityRequired(profile, force: force)
             default:
                 onError(ppError, profile: profile)

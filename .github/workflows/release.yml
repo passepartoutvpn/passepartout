@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_tests:
-    name: Run tests
+  validate_codebase:
+    name: Validate codebase
     runs-on: macos-15
     timeout-minutes: 15
     steps:
@@ -36,12 +36,12 @@ jobs:
       - name: Validate translations
         run: |
           scripts/clean-translations.sh
-      - name: Run all tests
+      - name: Run Xcode tests
         run: |
-          bundle exec fastlane test
-          ( cd Partout && swift test )
-          ( cd Partout/Plugins/PartoutOpenVPNOpenSSL && swift test )
-          ( cd Partout/Plugins/PartoutWireGuardGo && swift test )
+          ci/run-xcode-tests.sh
+      - name: Run Partout tests
+        run: |
+          ci/run-partout-tests.sh
     outputs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}

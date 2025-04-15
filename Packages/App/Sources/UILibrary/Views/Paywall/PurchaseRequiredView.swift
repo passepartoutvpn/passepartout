@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import CommonUtils
-import Partout
 import SwiftUI
 
 public struct PurchaseRequiredView<Content>: View where Content: View {

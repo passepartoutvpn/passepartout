@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 public protocol ProfileMigrationStrategy {
     var hasMigratableProfiles: Bool { get}

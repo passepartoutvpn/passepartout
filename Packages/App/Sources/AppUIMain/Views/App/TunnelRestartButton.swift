@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import CommonUtils
-import Partout
 import SwiftUI
 
 struct TunnelRestartButton<Label>: View where Label: View {

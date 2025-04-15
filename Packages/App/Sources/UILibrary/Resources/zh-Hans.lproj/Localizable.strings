@@ -35,7 +35,6 @@
 "errors.app.passepartout.missing_provider_entity" = "未在提供商中选择服务器。";
 "errors.app.passepartout.no_active_modules" = "配置文件没有激活模块。";
 "errors.app.passepartout.parsing" = "无法解析文件。";
-"errors.app.passepartout.provider_required" = "未选择提供商。";
 "errors.app.passepartout.timeout" = "操作超时。";
 "errors.app.permission_denied" = "权限被拒绝";
 "errors.app.tunnel" = "无法执行操作。";

@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import Partout
 import SwiftUI
 
 public struct RefreshInfrastructureButton<Label>: View where Label: View {

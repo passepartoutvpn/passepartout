@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import Partout
 import SwiftUI
 
 struct OnboardingModifier: ViewModifier {

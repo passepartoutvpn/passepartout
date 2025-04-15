@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 extension MigrateView {
     struct Model: Equatable {

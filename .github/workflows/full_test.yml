@@ -6,7 +6,6 @@ on:
 env:
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-  XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,16 +23,7 @@ jobs:
           submodules: recursive
       - name: Run Xcode tests
         run: |
-          bundle exec fastlane test
+          ci/run-xcode-tests.sh
       - name: Run Partout tests
         run: |
-          cd Partout
-          swift test
-      - name: Run OpenVPN tests
-        run: |
-          cd Partout/Plugins/PartoutOpenVPNOpenSSL
-          swift test
-      - name: Run WireGuard tests
-        run: |
-          cd Partout/Plugins/PartoutWireGuardGo
-          swift test
+          ci/run-partout-tests.sh

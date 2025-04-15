@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 public struct ProfilePreview: Identifiable, Hashable {
     public let id: Profile.ID

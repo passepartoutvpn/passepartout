@@ -31,6 +31,6 @@ jobs:
           xcode-version: 16.1
       - name: "Run tests"
         run: |
-          sed -i '' "s/environment = .production/environment = .onlineDevelopment/" "Partout/Package.swift"
+          sed -i '' "s/environment = .production/environment = .onlineDevelopment/" "Partout/Core/Package.swift"
           cd Packages/App
           swift test

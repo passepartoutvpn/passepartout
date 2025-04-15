@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 public enum AppError: Error {
     case couldNotLaunch(reason: Error)

@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 public protocol MigrationManagerImporter {
     func importProfile(_ profile: Profile, remotelyShared: Bool) async throws

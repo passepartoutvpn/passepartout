@@ -25,7 +25,6 @@
 
 @_exported import CommonIAP
 import Foundation
-import Partout
 
 extension LoggerDestination {
     public static let app = LoggerDestination(category: "app")

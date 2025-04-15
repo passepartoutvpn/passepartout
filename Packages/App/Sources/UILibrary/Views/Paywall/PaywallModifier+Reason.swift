@@ -24,8 +24,8 @@
 //
 
 import CommonIAP
+import CommonLibrary
 import Foundation
-import Partout
 
 public typealias PaywallReason = PaywallModifier.Reason
 

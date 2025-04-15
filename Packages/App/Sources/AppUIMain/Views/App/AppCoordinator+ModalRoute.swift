@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
-import Partout
 
 extension AppCoordinator {
     enum ModalRoute: Identifiable {

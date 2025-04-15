@@ -35,7 +35,6 @@
 "errors.app.passepartout.missing_provider_entity" = "Δεν επιλέχθηκε διακομιστής στον πάροχο.";
 "errors.app.passepartout.no_active_modules" = "Το προφίλ δεν έχει ενεργές μονάδες.";
 "errors.app.passepartout.parsing" = "Δεν ήταν δυνατή η ανάλυση αρχείου.";
-"errors.app.passepartout.provider_required" = "Δεν έχει επιλεγεί πάροχος.";
 "errors.app.passepartout.timeout" = "Η λειτουργία έληξε λόγω χρονικού ορίου.";
 "errors.app.permission_denied" = "Άρνηση άδειας";
 "errors.app.tunnel" = "Δεν ήταν δυνατή η εκτέλεση της ενέργειας.";

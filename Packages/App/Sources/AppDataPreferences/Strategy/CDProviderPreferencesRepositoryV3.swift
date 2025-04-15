@@ -27,7 +27,6 @@ import AppData
 import CommonLibrary
 import CoreData
 import Foundation
-import Partout
 
 extension AppData {
 

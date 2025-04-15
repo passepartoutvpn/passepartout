@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 // TODO: #716, move to Environment
 extension API {

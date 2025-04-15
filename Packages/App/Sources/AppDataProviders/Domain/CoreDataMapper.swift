@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CoreData
 import Foundation
-import Partout
 
 struct CoreDataMapper {
     let context: NSManagedObjectContext

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
-import Partout
 
 struct MapperV2 {
     func toProfileV3(_ v2: ProfileV2, isTV: Bool) throws -> Profile {

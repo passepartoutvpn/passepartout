@@ -26,7 +26,6 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import Partout
 
 public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendable {
     public struct Container {

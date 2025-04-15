@@ -28,7 +28,6 @@
 import Combine
 import CommonLibrary
 import CommonUtils
-import Partout
 import SwiftUI
 
 public struct AppMenu: View {

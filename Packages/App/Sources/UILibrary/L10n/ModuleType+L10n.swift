@@ -26,7 +26,6 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import Partout
 
 extension ModuleType: LocalizableEntity {
     public var localizedDescription: String {

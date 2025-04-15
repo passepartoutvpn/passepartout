@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Partout
+import CommonLibrary
 import SwiftUI
 
 public protocol ModuleShortcutsProviding: ModuleBuilder {

@@ -25,7 +25,6 @@
 
 import CommonUtils
 import Foundation
-import Partout
 
 public actor SharedReceiptReader: AppReceiptReader {
     private let reader: InAppReceiptReader

@@ -24,7 +24,10 @@
 //
 
 import Foundation
-import Partout
+
+@_exported import PartoutAPI
+@_exported import PartoutCore
+@_exported import PartoutSupport
 
 public final class CommonLibrary {
     public enum Target {

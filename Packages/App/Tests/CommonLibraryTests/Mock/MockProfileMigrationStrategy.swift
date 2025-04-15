@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 final class MockProfileMigrationStrategy: ProfileMigrationStrategy {
     var migratableProfiles: [MigratableProfile] = []

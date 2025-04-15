@@ -26,7 +26,6 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import Partout
 
 extension AppError: LocalizedError {
     public var errorDescription: String? {
@@ -71,7 +70,7 @@ extension PartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         let V = Strings.Errors.App.Passepartout.self
         switch code {
-        case .corruptProviderModule:
+        case .Support.corruptProviderModule:
             return V.corruptProviderModule(reason?.localizedDescription ?? "")
 
         case .incompatibleModules:
@@ -96,7 +95,7 @@ extension PartoutError: @retroactive LocalizedError {
                 .compactMap { $0 }
                 .joined(separator: " ")
 
-        case .missingProviderEntity:
+        case .API.missingProviderEntity:
             return V.missingProviderEntity
 
         case .noActiveModules:
@@ -108,9 +107,6 @@ extension PartoutError: @retroactive LocalizedError {
             return [V.parsing, message]
                 .compactMap { $0 }
                 .joined(separator: " ")
-
-        case .providerRequired:
-            return V.providerRequired
 
         case .timeout:
             return V.timeout
