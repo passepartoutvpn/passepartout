@@ -32,7 +32,7 @@ import CommonUtils
 import CoreData
 import Foundation
 import LegacyV2
-import Partout
+import PartoutNE
 import UIAccessibility
 import UILibrary
 

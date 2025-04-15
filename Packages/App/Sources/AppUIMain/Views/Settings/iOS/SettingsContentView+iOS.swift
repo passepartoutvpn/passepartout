@@ -26,7 +26,6 @@
 #if os(iOS)
 
 import CommonLibrary
-import Partout
 import SwiftUI
 import UILibrary
 

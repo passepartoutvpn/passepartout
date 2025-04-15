@@ -25,7 +25,6 @@
 
 import Combine
 import Foundation
-import Partout
 
 public final class InMemoryProfileRepository: ProfileRepository {
     var profiles: [Profile] {

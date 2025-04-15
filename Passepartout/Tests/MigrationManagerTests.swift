@@ -26,7 +26,6 @@
 import CommonLibrary
 import Foundation
 @testable import LegacyV2
-import Partout
 import XCTest
 
 @MainActor

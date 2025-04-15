@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 extension Module {
     public var moduleType: ModuleType {

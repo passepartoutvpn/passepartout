@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 @testable import PartoutWireGuardGo
 import UILibrary
 import WireGuardKit

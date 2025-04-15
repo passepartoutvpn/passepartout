@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 final class MockProfileProcessor: ProfileProcessor {
     var isIncludedCount = 0

@@ -27,7 +27,6 @@ import Combine
 import CommonLibrary
 import CommonUtils
 import Foundation
-import Partout
 import UIAccessibility
 
 @MainActor

@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 @MainActor
 public final class InteractiveManager: ObservableObject {

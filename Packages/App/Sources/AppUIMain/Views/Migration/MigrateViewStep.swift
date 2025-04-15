@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 enum MigrateViewStep: Equatable {
     case initial

@@ -24,10 +24,10 @@
 //
 
 import AppData
+import CommonLibrary
 import CommonUtils
 import CoreData
 import Foundation
-import Partout
 
 final class CDProviderRepositoryV3: ProviderRepository {
     private let context: NSManagedObjectContext

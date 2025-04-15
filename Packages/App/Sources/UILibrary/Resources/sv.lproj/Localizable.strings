@@ -35,7 +35,6 @@
 "errors.app.passepartout.missing_provider_entity" = "Ingen server vald hos leverantören.";
 "errors.app.passepartout.no_active_modules" = "Profilen har inga aktiva moduler.";
 "errors.app.passepartout.parsing" = "Kan inte tolka filen.";
-"errors.app.passepartout.provider_required" = "Ingen leverantör vald.";
 "errors.app.passepartout.timeout" = "Åtgärden tog för lång tid.";
 "errors.app.permission_denied" = "Åtkomst nekad";
 "errors.app.tunnel" = "Kunde inte utföra åtgärden.";

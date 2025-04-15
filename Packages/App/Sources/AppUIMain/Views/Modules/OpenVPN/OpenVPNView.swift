@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import CommonUtils
-import Partout
 import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {

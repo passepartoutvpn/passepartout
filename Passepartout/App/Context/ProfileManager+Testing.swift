@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 extension ProfileManager {
     public static func forUITesting(withRegistry registry: Registry, processor: ProfileProcessor) -> ProfileManager {

@@ -35,7 +35,6 @@
 "errors.app.passepartout.missing_provider_entity" = "На провайдере не выбран сервер.";
 "errors.app.passepartout.no_active_modules" = "В профиле нет активных модулей.";
 "errors.app.passepartout.parsing" = "Не удалось разобрать файл.";
-"errors.app.passepartout.provider_required" = "Поставщик не выбран.";
 "errors.app.passepartout.timeout" = "Время операции истекло.";
 "errors.app.permission_denied" = "Доступ запрещен";
 "errors.app.tunnel" = "Не удалось выполнить операцию.";

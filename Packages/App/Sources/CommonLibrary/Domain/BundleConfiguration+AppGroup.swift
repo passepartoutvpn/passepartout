@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 // WARNING: beware of Constants.shared dependency
 

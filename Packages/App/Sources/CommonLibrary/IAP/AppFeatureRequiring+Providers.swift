@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 extension ProviderID: AppFeatureRequiring {
     public var features: Set<AppFeature> {

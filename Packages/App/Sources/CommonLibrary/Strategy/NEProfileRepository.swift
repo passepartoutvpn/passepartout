@@ -26,7 +26,7 @@
 import Combine
 import Foundation
 import NetworkExtension
-import Partout
+import PartoutNE
 
 public final class NEProfileRepository: ProfileRepository {
     private let repository: NETunnelManagerRepository

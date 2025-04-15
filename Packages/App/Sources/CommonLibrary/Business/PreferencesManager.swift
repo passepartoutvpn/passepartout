@@ -25,7 +25,6 @@
 
 import CommonUtils
 import Foundation
-import Partout
 
 @MainActor
 public final class PreferencesManager: ObservableObject {

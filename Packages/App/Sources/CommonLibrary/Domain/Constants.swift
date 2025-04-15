@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 public struct Constants: Decodable, Sendable {
     public struct Containers: Decodable, Sendable {

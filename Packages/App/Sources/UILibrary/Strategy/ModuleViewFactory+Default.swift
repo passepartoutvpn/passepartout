@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 import SwiftUI
 
 public final class DefaultModuleViewFactory: ModuleViewFactory {

@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import Partout
 import SwiftUI
 
 struct ProviderView: View, ModuleDraftEditing {
@@ -250,7 +249,7 @@ private extension ProviderView {
     var resolvedModule: Module? {
         do {
             let module = try draft.module.tryBuild()
-            return try module.resolvedModule(with: registry)
+            return try registry.resolvedModule(module, in: nil)
         } catch {
             pp_log(.app, .debug, "Unable to resolve provider module: \(error)")
             return nil

@@ -61,9 +61,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../Partout"),
-        .package(path: "../../Partout/Plugins/PartoutOpenVPNOpenSSL"),
-        .package(path: "../../Partout/Plugins/PartoutWireGuardGo")
+        .package(path: "../../Partout")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -151,7 +149,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                .product(name: "Partout-Framework", package: "Partout")
+                "Partout"
             ],
             resources: [
                 .process("Resources")
@@ -173,8 +171,7 @@ let package = Package(
         .target(
             name: "PassepartoutImplementations",
             dependencies: [
-                "PartoutOpenVPNOpenSSL",
-                "PartoutWireGuardGo"
+                .product(name: "PartoutNetworking", package: "Partout")
             ],
             path: "Sources/Empty/PassepartoutImplementations"
         ),

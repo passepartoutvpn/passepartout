@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 extension DNSModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {

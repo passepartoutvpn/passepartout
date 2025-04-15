@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import Partout
 
 extension ProfileManager: MigrationManagerImporter {
     public func importProfile(_ profile: Profile, remotelyShared: Bool) async throws {

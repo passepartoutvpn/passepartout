@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import Foundation
-import Partout
 
 final class DefaultAppProcessor: Sendable {
     private let apiManager: APIManager
@@ -105,7 +104,7 @@ extension DefaultAppProcessor: AppTunnelProcessor {
 
         // validate provider modules
         do {
-            _ = try newProfile.resolvingProviderModules(with: registry)
+            _ = try registry.resolvedProfile(newProfile)
             return newProfile
         } catch {
             pp_log(.app, .error, "Unable to inject provider modules: \(error)")

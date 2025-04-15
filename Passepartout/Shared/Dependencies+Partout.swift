@@ -23,8 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
-import Partout
+import PartoutNE
 import PartoutOpenVPNOpenSSL
 import PartoutWireGuardGo
 

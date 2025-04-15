@@ -30,7 +30,6 @@ import AppUITV
 #endif
 
 import CommonLibrary
-import Partout
 import SwiftUI
 
 @main

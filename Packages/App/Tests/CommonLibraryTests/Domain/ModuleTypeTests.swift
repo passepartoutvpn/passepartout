@@ -25,7 +25,6 @@
 
 @testable import CommonLibrary
 import Foundation
-import Partout
 import XCTest
 
 final class ModuleTypeTests: XCTestCase {

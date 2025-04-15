@@ -25,7 +25,6 @@
 
 import CommonUtils
 import Foundation
-import Partout
 
 extension ProfileAttributes {
     public struct ModulePreferences {

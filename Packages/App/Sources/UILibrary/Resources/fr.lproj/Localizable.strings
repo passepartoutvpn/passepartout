@@ -35,7 +35,6 @@
 "errors.app.passepartout.missing_provider_entity" = "Aucun serveur sélectionné chez le fournisseur.";
 "errors.app.passepartout.no_active_modules" = "Le profil n'a pas de modules actifs.";
 "errors.app.passepartout.parsing" = "Impossible d'analyser le fichier.";
-"errors.app.passepartout.provider_required" = "Aucun fournisseur sélectionné.";
 "errors.app.passepartout.timeout" = "L'opération a expiré.";
 "errors.app.permission_denied" = "Permission refusée";
 "errors.app.tunnel" = "Impossible d'exécuter l'opération.";
