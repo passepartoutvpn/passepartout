@@ -27,6 +27,7 @@ import CommonLibrary
 import Foundation
 import PartoutNE
 import PartoutOpenVPNOpenSSL
+import PartoutPlatform
 import PartoutWireGuardGo
 
 extension Dependencies {
@@ -68,6 +69,10 @@ private extension Dependencies {
                     return try await OpenVPNConnection(
                         parameters: $0,
                         module: $1,
+                        prng: AppleRandom(),
+                        dns: SimpleDNSResolver {
+                            CFDNSStrategy(hostname: $0)
+                        },
                         options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
