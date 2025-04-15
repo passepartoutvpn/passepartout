@@ -24,10 +24,22 @@
 //
 
 import Foundation
+import PartoutPlatform
 
 extension PartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
         pp_log(.app, .debug, "Log to: \(url)")
+
+        assertsMissingLoggingCategory = true
+        setLogger(OSLogDestination(.api))
+        setLogger(OSLogDestination(.app))
+        setLogger(OSLogDestination(.core))
+        setLogger(OSLogDestination(.ne))
+        setLogger(OSLogDestination(.openvpn))
+        setLogger(OSLogDestination(.wireguard))
+        setLogger(OSLogDestination(.App.iap))
+        setLogger(OSLogDestination(.App.migration))
+        setLogger(OSLogDestination(.App.profiles))
 
         setLocalLogger(
             url: url,

@@ -26,15 +26,15 @@
 @_exported import CommonIAP
 import Foundation
 
-extension LoggerDestination {
-    public static let app = LoggerDestination(category: "app")
+extension LoggerCategory {
+    public static let app = LoggerCategory(rawValue: "app")
 
     public enum App {
-        public static let iap = LoggerDestination(category: "app.iap")
+        public static let iap = LoggerCategory(rawValue: "app.iap")
 
-        public static let migration = LoggerDestination(category: "app.migration")
+        public static let migration = LoggerCategory(rawValue: "app.migration")
 
-        public static let profiles = LoggerDestination(category: "app.profiles")
+        public static let profiles = LoggerCategory(rawValue: "app.profiles")
     }
 }
 
