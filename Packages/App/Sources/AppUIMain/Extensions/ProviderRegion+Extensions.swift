@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import Foundation
 
 extension ProviderServer {
     var region: ProviderRegion {
