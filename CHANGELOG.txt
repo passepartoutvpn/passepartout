@@ -1,2 +1,3 @@
+* Update Partout and refactor logging approach (#1329)
 * Update dependencies on Partout packages (#1328)
 * Move plugins to Partout library (#1323)
