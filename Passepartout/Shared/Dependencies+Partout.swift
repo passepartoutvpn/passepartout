@@ -27,7 +27,7 @@ import CommonLibrary
 import Foundation
 import PartoutNE
 import PartoutOpenVPNOpenSSL
-import PartoutPlatform
+import PartoutSupport
 import PartoutWireGuardGo
 
 extension Dependencies {

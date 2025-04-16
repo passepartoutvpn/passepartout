@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PartoutPlatform
+import PartoutSupport
 
 extension PartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
