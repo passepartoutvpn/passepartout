@@ -1,2 +1,5 @@
 #!/bin/bash
-git push && git push --tags && git push github && git push --tags github
+git push gitlab && \
+    git push --tags gitlab && \
+    git push origin && \
+    git push --tags origin
