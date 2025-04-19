@@ -99,12 +99,12 @@ extension ExtendedTunnel {
                     continuation.finish()
                     return
                 }
-                for await value in tunnel.currentProfileStream {
+                for await current in tunnel.currentProfileStream {
                     guard !Task.isCancelled else {
-                        pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream")
+                        pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (returned)")
                         break
                     }
-                    continuation.yield(value ?? lastUsedProfile)
+                    continuation.yield(current ?? lastUsedProfile)
                 }
                 continuation.finish()
             }
@@ -165,6 +165,10 @@ private extension ExtendedTunnel {
                 return
             }
             for await current in tunnel.currentProfileStream {
+                guard !Task.isCancelled else {
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (observed)")
+                    break
+                }
                 await MainActor.run { [weak self] in
                     guard let self else {
                         return
