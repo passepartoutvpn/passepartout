@@ -24,22 +24,33 @@
 //
 
 import Foundation
+import PartoutCore
 import PartoutSupport
+
+extension PartoutConfiguration {
+    func setOSLog(for categories: [LoggerCategory]) {
+        categories.forEach {
+            setLogger(OSLogDestination($0), for: [$0])
+        }
+    }
+}
 
 extension PartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
         pp_log(.app, .debug, "Log to: \(url)")
 
         assertsMissingLoggingCategory = true
-        setLogger(OSLogDestination(.api))
-        setLogger(OSLogDestination(.app))
-        setLogger(OSLogDestination(.core))
-        setLogger(OSLogDestination(.ne))
-        setLogger(OSLogDestination(.openvpn))
-        setLogger(OSLogDestination(.wireguard))
-        setLogger(OSLogDestination(.App.iap))
-        setLogger(OSLogDestination(.App.migration))
-        setLogger(OSLogDestination(.App.profiles))
+        setOSLog(for: [
+            .api,
+            .app,
+            .core,
+            .ne,
+            .openvpn,
+            .wireguard,
+            .App.iap,
+            .App.migration,
+            .App.profiles
+        ])
 
         setLocalLogger(
             url: url,

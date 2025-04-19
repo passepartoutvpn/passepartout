@@ -35,7 +35,7 @@ public final class NEProfileRepository: ProfileRepository {
 
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
-    private var subscriptions: Set<AnyCancellable>
+    private var subscriptions: [Task<Void, Never>]
 
     public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
         self.repository = repository
@@ -43,12 +43,12 @@ public final class NEProfileRepository: ProfileRepository {
         profilesSubject = CurrentValueSubject([])
         subscriptions = []
 
-        repository
-            .managersPublisher
-            .sink { [weak self] in
-                self?.onUpdatedManagers($0)
+        let managerTask = Task { [weak self] in
+            for await manager in repository.managersStream {
+                self?.onUpdatedManagers(manager)
             }
-            .store(in: &subscriptions)
+        }
+        subscriptions.append(managerTask)
     }
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {
