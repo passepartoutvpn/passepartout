@@ -160,7 +160,7 @@ extension ExtendedTunnel {
 
 private extension ExtendedTunnel {
     func observeObjects() {
-        let tunnelTask = Task { [weak self] in
+        let tunnelSubscription = Task { [weak self] in
             guard let self else {
                 return
             }
@@ -196,7 +196,7 @@ private extension ExtendedTunnel {
             }
         }
 
-        let timerTask = Task { [weak self] in
+        let timerSubscription = Task { [weak self] in
             while true {
                 guard let self else {
                     return
@@ -218,7 +218,7 @@ private extension ExtendedTunnel {
             }
         }
 
-        subscriptions = [tunnelTask, timerTask]
+        subscriptions = [tunnelSubscription, timerSubscription]
     }
 }
 
