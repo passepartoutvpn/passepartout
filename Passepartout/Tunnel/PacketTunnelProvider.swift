@@ -37,6 +37,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     private var fwd: NEPTPForwarder?
 
+    private var verifierSubscription: Task<Void, Error>?
+
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
         CommonLibrary().configure(.tunnel)
 
@@ -76,8 +78,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             // #1070, do not wait for this to start the tunnel. if on-demand is
             // enabled, networking will stall and StoreKit network calls may
             // produce a deadlock
-            Task {
-                try? await Task.sleep(for: .seconds(params.delay))
+            verifierSubscription = Task { [weak self] in
+                guard let self else {
+                    return
+                }
+                try await Task.sleep(for: .seconds(params.delay))
+                guard !Task.isCancelled else {
+                    return
+                }
                 await verifyEligibility(
                     of: fwd.profile,
                     environment: environment,
@@ -92,6 +100,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     }
 
     override func stopTunnel(with reason: NEProviderStopReason) async {
+        verifierSubscription?.cancel()
         await fwd?.stopTunnel(with: reason)
         fwd = nil
         PartoutConfiguration.shared.flushLog()
