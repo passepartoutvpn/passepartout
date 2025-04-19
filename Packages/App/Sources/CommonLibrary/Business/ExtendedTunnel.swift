@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Combine
 import Foundation
 
 @MainActor
@@ -52,7 +51,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     public private(set) var dataCount: DataCount?
 
-    private var subscriptions: Set<AnyCancellable>
+    private var subscriptions: [Task<Void, Never>]
 
     public init(
         defaults: UserDefaults? = nil,
@@ -93,13 +92,23 @@ extension ExtendedTunnel {
         tunnel.currentProfiles
     }
 
-    public var currentProfilePublisher: AnyPublisher<TunnelCurrentProfile?, Never> {
-        tunnel
-            .$currentProfile
-            .map {
-                $0 ?? self.lastUsedProfile
+    public var currentProfileStream: AsyncStream<TunnelCurrentProfile?> {
+        AsyncStream { [weak self] continuation in
+            Task { [weak self] in
+                guard let self else {
+                    continuation.finish()
+                    return
+                }
+                for await current in tunnel.currentProfileStream {
+                    guard !Task.isCancelled else {
+                        pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (returned)")
+                        break
+                    }
+                    continuation.yield(current ?? lastUsedProfile)
+                }
+                continuation.finish()
             }
-            .eraseToAnyPublisher()
+        }
     }
 
     public func install(_ profile: Profile) async throws {
@@ -151,41 +160,50 @@ extension ExtendedTunnel {
 
 private extension ExtendedTunnel {
     func observeObjects() {
-        tunnel
-            .$currentProfile
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                guard let self else {
-                    return
-                }
-
-                // update last used profile
-                if let id = $0?.id {
-                    defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
-                }
-
-                // follow status updates
-                switch $0?.status ?? .inactive {
-                case .active:
-                    break
-                case .activating:
-                    lastErrorCode = nil
-                    dataCount = nil
-                default:
-                    lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
-                    dataCount = nil
-                }
-
-                objectWillChange.send()
+        let tunnelSubscription = Task { [weak self] in
+            guard let self else {
+                return
             }
-            .store(in: &subscriptions)
+            for await current in tunnel.currentProfileStream {
+                guard !Task.isCancelled else {
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (observed)")
+                    break
+                }
+                await MainActor.run { [weak self] in
+                    guard let self else {
+                        return
+                    }
 
-        Timer
-            .publish(every: interval, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
+                    // update last used profile
+                    if let id = current?.id {
+                        defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                    }
+
+                    // follow status updates
+                    switch current?.status ?? .inactive {
+                    case .active:
+                        break
+                    case .activating:
+                        lastErrorCode = nil
+                        dataCount = nil
+                    default:
+                        lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
+                        dataCount = nil
+                    }
+
+                    objectWillChange.send()
+                }
+            }
+        }
+
+        let timerSubscription = Task { [weak self] in
+            while true {
                 guard let self else {
                     return
+                }
+                guard !Task.isCancelled else {
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.timerTask")
+                    break
                 }
                 if let lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode),
                     lastErrorCode != self.lastErrorCode {
@@ -195,8 +213,12 @@ private extension ExtendedTunnel {
                     dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
                 }
                 objectWillChange.send()
+
+                try? await Task.sleep(interval: interval)
             }
-            .store(in: &subscriptions)
+        }
+
+        subscriptions = [tunnelSubscription, timerSubscription]
     }
 }
 

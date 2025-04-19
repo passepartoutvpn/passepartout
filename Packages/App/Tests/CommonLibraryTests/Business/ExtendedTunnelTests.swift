@@ -26,6 +26,7 @@
 import Combine
 @testable import CommonLibrary
 import Foundation
+import PartoutCore
 import XCTest
 
 final class ExtendedTunnelTests: XCTestCase {
@@ -101,8 +102,9 @@ extension ExtendedTunnelTests {
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.install(profile)
 
+        await sut.currentProfileStream.waitForNext()
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
-        //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
+//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
     }
 
@@ -116,8 +118,9 @@ extension ExtendedTunnelTests {
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.install(profile)
 
+        await sut.currentProfileStream.waitForNext()
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
-        //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
+//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
     }
 

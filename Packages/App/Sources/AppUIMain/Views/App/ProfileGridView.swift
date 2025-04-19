@@ -84,8 +84,10 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
             .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.previews, category: .profiles)
         }
-        .onReceive(tunnel.currentProfilePublisher) {
-            currentProfile = $0
+        .task {
+            for await newCurrentProfile in tunnel.currentProfileStream {
+                currentProfile = newCurrentProfile
+            }
         }
     }
 }
