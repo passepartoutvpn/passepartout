@@ -28,14 +28,6 @@ import PartoutCore
 import PartoutSupport
 
 extension PartoutConfiguration {
-    func setOSLog(for categories: [LoggerCategory]) {
-        categories.forEach {
-            setLogger(OSLogDestination($0), for: [$0])
-        }
-    }
-}
-
-extension PartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
         pp_log(.app, .debug, "Log to: \(url)")
 
@@ -82,5 +74,13 @@ extension PartoutConfiguration {
             maxLevel: parameters.options.maxLevel
         )
         .map(parameters.formatter.formattedLine)
+    }
+}
+
+private extension PartoutConfiguration {
+    func setOSLog(for categories: [LoggerCategory]) {
+        categories.forEach {
+            setLogger(OSLogDestination($0), for: [$0])
+        }
     }
 }
