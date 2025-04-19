@@ -201,6 +201,10 @@ private extension ExtendedTunnel {
                 guard let self else {
                     return
                 }
+                guard !Task.isCancelled else {
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.timerTask")
+                    break
+                }
                 if let lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode),
                     lastErrorCode != self.lastErrorCode {
                     self.lastErrorCode = lastErrorCode
