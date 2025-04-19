@@ -83,6 +83,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                     return
                 }
                 try await Task.sleep(for: .seconds(params.delay))
+                guard !Task.isCancelled else {
+                    return
+                }
                 await verifyEligibility(
                     of: fwd.profile,
                     environment: environment,
