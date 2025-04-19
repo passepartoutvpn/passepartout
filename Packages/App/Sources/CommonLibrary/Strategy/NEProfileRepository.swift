@@ -35,20 +35,22 @@ public final class NEProfileRepository: ProfileRepository {
 
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
-    private var subscriptions: [Task<Void, Never>]
+    private var managersSubscription: Task<Void, Never>?
 
     public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
         self.repository = repository
         self.title = title
         profilesSubject = CurrentValueSubject([])
-        subscriptions = []
 
-        let managerTask = Task { [weak self] in
+        managersSubscription = Task { [weak self] in
             for await manager in repository.managersStream {
+                guard !Task.isCancelled else {
+                    pp_log(.App.profiles, .debug, "Cancelled NEProfileRepository.managersStream")
+                    return
+                }
                 self?.onUpdatedManagers(manager)
             }
         }
-        subscriptions.append(managerTask)
     }
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {

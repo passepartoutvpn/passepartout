@@ -93,9 +93,17 @@ extension ExtendedTunnel {
     }
 
     public var currentProfileStream: AsyncStream<TunnelCurrentProfile?> {
-        AsyncStream { continuation in
-            Task {
+        AsyncStream { [weak self] continuation in
+            Task { [weak self] in
+                guard let self else {
+                    continuation.finish()
+                    return
+                }
                 for await value in tunnel.currentProfileStream {
+                    guard !Task.isCancelled else {
+                        pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream")
+                        break
+                    }
                     continuation.yield(value ?? lastUsedProfile)
                 }
                 continuation.finish()
