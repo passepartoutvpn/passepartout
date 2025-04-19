@@ -1,1 +1,1 @@
-* Improve software architecture
+* Adapt to Partout portability (#1330)
