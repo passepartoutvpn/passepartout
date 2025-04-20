@@ -31,7 +31,7 @@ jobs:
           xcode-version: 16.1
       - name: Use remote Core binary
         run: |
-          sed -i '' "s/environment = .production/environment = .onlineBinary/" "Partout/Package.swift"
+          sed -i '' "s/environment = .remoteSource/environment = .remoteBinary/" "Submodules/partout/Package.swift"
       - name: "Run tests"
         run: |
           cd Packages/App
