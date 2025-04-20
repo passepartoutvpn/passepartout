@@ -20,15 +20,10 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: 16.1
       - name: Use remote Core binary
         run: |
           sed -i '' "s/environment = .remoteSource/environment = .remoteBinary/" "Submodules/partout/Package.swift"
