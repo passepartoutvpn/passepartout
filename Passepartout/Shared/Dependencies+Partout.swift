@@ -67,10 +67,8 @@ private extension Dependencies {
                     return try await OpenVPNConnection(
                         parameters: $0,
                         module: $1,
-                        prng: AppleRandom(),
-                        dns: SimpleDNSResolver {
-                            CFDNSStrategy(hostname: $0)
-                        },
+                        prng: PartoutConfiguration.platform.newPRNG(),
+                        dns: PartoutConfiguration.platform.newDNSResolver(),
                         options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
