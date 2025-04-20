@@ -1,3 +1,6 @@
-[submodule "Partout"]
-	path = Partout
+[submodule "Submodules/partout"]
+	path = Submodules/partout
 	url = git@github.com:passepartoutvpn/partout.git
+[submodule "Submodules/partout-core"]
+	path = Submodules/partout-core
+	url = git@github.com:passepartoutvpn/partout-core.git

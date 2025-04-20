@@ -3,6 +3,9 @@
 
 import PackageDescription
 
+var isDevelopment = false
+//isDevelopment = true
+
 let package = Package(
     name: "App",
     defaultLocalization: "en",
@@ -59,9 +62,6 @@ let package = Package(
             name: "UILibrary",
             targets: ["UILibrary"]
         )
-    ],
-    dependencies: [
-        .package(path: "../../Partout")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -149,7 +149,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                "Partout"
+                .product(name: "Partout", package: "partout")
             ],
             resources: [
                 .process("Resources")
@@ -171,8 +171,8 @@ let package = Package(
         .target(
             name: "PassepartoutImplementations",
             dependencies: [
-                .product(name: "PartoutOpenVPN", package: "Partout"),
-                .product(name: "PartoutWireGuard", package: "Partout")
+                .product(name: "PartoutOpenVPN", package: "partout"),
+                .product(name: "PartoutWireGuard", package: "partout")
             ],
             path: "Sources/Empty/PassepartoutImplementations"
         ),
@@ -208,3 +208,12 @@ let package = Package(
         )
     ]
 )
+
+package.dependencies.append(
+    .package(path: "../../Submodules/partout")
+)
+if isDevelopment {
+    package.dependencies.append(
+        .package(path: "../../Submodules/partout-core")
+    )
+}
