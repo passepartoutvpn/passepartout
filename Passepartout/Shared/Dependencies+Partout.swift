@@ -25,10 +25,8 @@
 
 import CommonLibrary
 import Foundation
-import PartoutNE
-import PartoutOpenVPNOpenSSL
-import PartoutSupport
-import PartoutWireGuardGo
+import PartoutOpenVPN
+import PartoutWireGuard
 
 extension Dependencies {
     var registry: Registry {

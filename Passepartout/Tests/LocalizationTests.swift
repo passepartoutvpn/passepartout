@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import _PartoutWireGuardGo
 import Foundation
-@testable import PartoutWireGuardGo
 import UILibrary
 import WireGuardKit
 import XCTest

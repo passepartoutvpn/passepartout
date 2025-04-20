@@ -26,7 +26,6 @@
 import Combine
 @testable import CommonLibrary
 import Foundation
-import PartoutCore
 import XCTest
 
 final class ExtendedTunnelTests: XCTestCase {
