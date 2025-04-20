@@ -21,7 +21,7 @@
     {
       "identity" : "partout-core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/passepartoutvpn/partout-core",
+      "location" : "git@github.com:passepartoutvpn/partout-core.git",
       "state" : {
         "revision" : "4762e0688760a47daad0f3e689363e7f4b337fa2"
       }
