@@ -55,8 +55,8 @@ $ git submodule update --init
 
 Then:
 
-- Edit `Partout/Core/Package.swift`
-- Set `environment = .onlineDevelopment`
+- Edit `Partout/Package.swift`
+- Set `environment = .onlineBinary`
 
 For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 

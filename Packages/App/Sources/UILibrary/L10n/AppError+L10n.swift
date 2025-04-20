@@ -70,7 +70,7 @@ extension PartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         let V = Strings.Errors.App.Passepartout.self
         switch code {
-        case .Support.corruptProviderModule:
+        case .API.corruptProviderModule:
             return V.corruptProviderModule(reason?.localizedDescription ?? "")
 
         case .incompatibleModules:

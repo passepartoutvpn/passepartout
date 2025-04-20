@@ -20,7 +20,7 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-          submodules: recursive
+          submodules: true
       - name: Run Xcode tests
         run: |
           ci/run-xcode-tests.sh

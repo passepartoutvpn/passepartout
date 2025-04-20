@@ -171,7 +171,8 @@ let package = Package(
         .target(
             name: "PassepartoutImplementations",
             dependencies: [
-                .product(name: "PartoutNetworking", package: "Partout")
+                .product(name: "PartoutOpenVPN", package: "Partout"),
+                .product(name: "PartoutWireGuard", package: "Partout")
             ],
             path: "Sources/Empty/PassepartoutImplementations"
         ),
