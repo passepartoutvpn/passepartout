@@ -23,7 +23,7 @@ jobs:
           submodules: true
       - name: Use remote Core source
         run: |
-          sed -i '' "s/^environment = .remoteBinary$/environment = .remoteSource/" "Submodules/partout/Package.swift"
+          ci/use-partout-core-source.sh
       - name: Run Xcode tests
         run: |
           ci/run-xcode-tests.sh

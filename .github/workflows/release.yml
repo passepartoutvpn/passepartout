@@ -38,7 +38,7 @@ jobs:
           scripts/clean-translations.sh
       - name: Use remote Core source
         run: |
-          sed -i '' "s/^environment = .remoteBinary$/environment = .remoteSource/" "Submodules/partout/Package.swift"
+          ci/use-partout-core-source.sh
       - name: Run Xcode tests
         run: |
           ci/run-xcode-tests.sh
@@ -62,6 +62,9 @@ jobs:
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
+      - name: Use remote Core source
+        run: |
+          ci/use-partout-core-source.sh
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 30
