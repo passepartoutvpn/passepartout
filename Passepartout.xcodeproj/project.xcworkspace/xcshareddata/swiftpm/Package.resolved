@@ -19,14 +19,6 @@
       }
     },
     {
-      "identity" : "partout-core",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:passepartoutvpn/partout-core.git",
-      "state" : {
-        "revision" : "c6cb9e27332ddeec2789e04fc9430a1be948b0ed"
-      }
-    },
-    {
       "identity" : "wg-go-apple",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/wg-go-apple",
