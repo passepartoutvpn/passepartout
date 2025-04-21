@@ -36,6 +36,9 @@ jobs:
       - name: Validate translations
         run: |
           scripts/clean-translations.sh
+      - name: Use remote Core source
+        run: |
+          sed -i '' "s/^environment = .remoteBinary$/environment = .remoteSource/" "Submodules/partout/Package.swift"
       - name: Run Xcode tests
         run: |
           ci/run-xcode-tests.sh

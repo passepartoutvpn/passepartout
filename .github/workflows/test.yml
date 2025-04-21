@@ -24,9 +24,6 @@ jobs:
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
-      - name: Use remote Core binary
-        run: |
-          sed -i '' "s/environment = .remoteSource/environment = .remoteBinary/" "Submodules/partout/Package.swift"
       - name: "Run tests"
         run: |
           cd Packages/App
