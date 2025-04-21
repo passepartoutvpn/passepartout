@@ -118,7 +118,8 @@ extension ExtendedTunnelTests {
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.install(profile)
 
-        await stream.waitForNext(2) // include initial nil
+        await stream.waitForNext() // include initial nil
+        await stream.waitForNext()
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
