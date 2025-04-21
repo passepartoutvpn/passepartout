@@ -3,9 +3,6 @@
 
 import PackageDescription
 
-var isDevelopment = false
-//isDevelopment = true
-
 let package = Package(
     name: "App",
     defaultLocalization: "en",
@@ -62,6 +59,9 @@ let package = Package(
             name: "UILibrary",
             targets: ["UILibrary"]
         )
+    ],
+    dependencies: [
+        .package(path: "../../Submodules/partout")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -208,12 +208,3 @@ let package = Package(
         )
     ]
 )
-
-package.dependencies.append(
-    .package(path: "../../Submodules/partout")
-)
-if isDevelopment {
-    package.dependencies.append(
-        .package(path: "../../Submodules/partout-core")
-    )
-}
