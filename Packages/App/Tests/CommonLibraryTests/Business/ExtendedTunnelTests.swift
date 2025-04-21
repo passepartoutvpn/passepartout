@@ -112,12 +112,13 @@ extension ExtendedTunnelTests {
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
         let processor = MockTunnelProcessor()
         let sut = ExtendedTunnel(tunnel: tunnel, environment: env, processor: processor, interval: 0.1)
+        let stream = sut.currentProfileStream
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.install(profile)
 
-        await sut.currentProfileStream.waitForNext()
+        await stream.waitForNext(2) // include initial nil
         XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
