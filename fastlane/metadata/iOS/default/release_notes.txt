@@ -1,1 +1,2 @@
 * Resolve memory leaks in tunnel (#1331)
+* Adapt to Partout portability (#1330)
