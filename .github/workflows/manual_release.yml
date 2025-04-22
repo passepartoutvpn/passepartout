@@ -1,0 +1,54 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "The number in the builds/* tag"
+        required: true
+
+env:
+  APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
+  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish_to_app_store:
+    name: Publish to App Store
+    runs-on: ubuntu-latest
+    environment:
+      name: app_store
+    env:
+      RELEASE_NOTES: CHANGELOG.txt
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Read app version
+        run: |
+          version=`ci/version-number.sh`
+          echo "APP_VERSION=${version}" >> "$GITHUB_ENV"
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_tag_gpgsign: true
+          git_push_gpgsign: false
+      - name: Tag release
+        run: |
+          bundle exec fastlane tag_release version:$APP_VERSION
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ env.APP_VERSION }}"
+          body_path: ${{ env.RELEASE_NOTES }}
