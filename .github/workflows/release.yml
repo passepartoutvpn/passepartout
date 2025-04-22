@@ -137,6 +137,8 @@ jobs:
       RELEASE_NOTES: CHANGELOG.txt
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
