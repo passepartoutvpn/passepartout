@@ -36,6 +36,7 @@ extension PartoutConfiguration {
             .core,
             .ne,
             .openvpn,
+            .providers,
             .wireguard,
             .App.iap,
             .App.migration,

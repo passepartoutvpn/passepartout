@@ -47,7 +47,7 @@ extension AppCoordinatorConforming {
             }
         } catch let ppError as PartoutError {
             switch ppError.code {
-            case .API.missingProviderEntity:
+            case .Providers.missingProviderEntity:
                 onProviderEntityRequired(profile, force: force)
             default:
                 onError(ppError, profile: profile)
