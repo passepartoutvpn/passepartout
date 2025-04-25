@@ -122,9 +122,7 @@ private extension ProfileImporter {
         }
 
         let module = try importer.module(fromURL: url, object: passphrase)
-        var onDemandBuilder = OnDemandModule.Builder()
-        onDemandBuilder.isEnabled = true
-        let onDemandModule = onDemandBuilder.tryBuild()
+        let onDemandModule = OnDemandModule.Builder().tryBuild()
 
         var builder = Profile.Builder()
         builder.name = url.lastPathComponent

@@ -88,7 +88,7 @@ extension MigrationManagerTests {
         XCTAssertEqual(profile.modules.count, 3)
 
         let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
-        XCTAssertTrue(onDemand.isEnabled)
+        XCTAssertTrue(profile.isActiveModule(withId: onDemand.id))
         XCTAssertEqual(onDemand.policy, .excluding)
         XCTAssertEqual(onDemand.withSSIDs, [
             "Safe Wi-Fi": true,
@@ -126,7 +126,7 @@ extension MigrationManagerTests {
         XCTAssertEqual(profile.modules.count, 2)
 
         let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
-        XCTAssertTrue(onDemand.isEnabled)
+        XCTAssertTrue(profile.isActiveModule(withId: onDemand.id))
         XCTAssertEqual(onDemand.policy, .excluding)
         XCTAssertTrue(onDemand.withSSIDs.isEmpty)
         XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
@@ -153,7 +153,7 @@ extension MigrationManagerTests {
         XCTAssertEqual(profile.modules.count, 2)
 
         let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
-        XCTAssertTrue(onDemand.isEnabled)
+        XCTAssertTrue(profile.isActiveModule(withId: onDemand.id))
         XCTAssertEqual(onDemand.policy, .excluding)
         XCTAssertTrue(onDemand.withSSIDs.isEmpty)
         XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
@@ -186,7 +186,7 @@ extension MigrationManagerTests {
         XCTAssertEqual(profile.modules.count, 2)
 
         let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
-        XCTAssertFalse(onDemand.isEnabled)
+        XCTAssertFalse(profile.isActiveModule(withId: onDemand.id))
         XCTAssertEqual(onDemand.policy, .including)
         XCTAssertTrue(onDemand.withSSIDs.isEmpty)
         XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
