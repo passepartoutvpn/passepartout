@@ -41,6 +41,7 @@ extension ProfileManager {
                     var builder = Profile.Builder()
                     builder.name = parameters.name
                     builder.attributes.isAvailableForTV = parameters.isTV
+                    var onDemandIdIfDisabled: UUID?
 
                     for moduleType in parameters.moduleTypes {
                         var moduleBuilder = moduleType.newModule(with: registry)
@@ -56,8 +57,8 @@ extension ProfileManager {
                                 try ovpnBuilder.setOptions(options, for: moduleType)
                                 moduleBuilder = ovpnBuilder
                             } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
-#if !os(tvOS)
-                                onDemandBuilder.isEnabled = true
+#if os(tvOS)
+                                onDemandIdIfDisabled = onDemandBuilder.id
 #endif
                                 onDemandBuilder.policy = .excluding
                                 onDemandBuilder.withSSIDs = [
@@ -85,8 +86,7 @@ extension ProfileManager {
                                 ]
                                 ovpnBuilder.configurationBuilder = cfgBuilder
                                 moduleBuilder = ovpnBuilder
-                            } else if var onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
-                                onDemandBuilder.isEnabled = true
+                            } else if let onDemandBuilder = moduleBuilder as? OnDemandModule.Builder {
                                 moduleBuilder = onDemandBuilder
                             }
                         }
@@ -100,6 +100,10 @@ extension ProfileManager {
                         builder.modules.append(module)
                     }
                     builder.activateAllModules()
+
+                    if let onDemandIdIfDisabled {
+                        builder.activeModulesIds.remove(onDemandIdIfDisabled)
+                    }
 
                     let profile = try builder.tryBuild()
                     try await manager.save(profile, isLocal: true, remotelyShared: parameters.isShared)
