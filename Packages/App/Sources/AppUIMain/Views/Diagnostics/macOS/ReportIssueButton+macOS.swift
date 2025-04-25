@@ -30,15 +30,24 @@ import SwiftUI
 
 extension ReportIssueButton: View {
     var body: some View {
-        Button(title, action: sendEmail)
-            .disabled(isPending)
+        Button(title) {
+            modalRoute = .comment
+        }
+        .disabled(isPending)
+        .themeModal(
+            item: $modalRoute,
+            options: ThemeModalOptions(size: .small),
+            content: { _ in
+                commentInputView()
+            }
+        )
     }
 }
 
-private extension ReportIssueButton {
+extension ReportIssueButton {
 
     @MainActor
-    func sendEmail() {
+    func sendEmail(comment: String) {
         Task {
             isPending = true
             defer {
@@ -56,7 +65,8 @@ private extension ReportIssueButton {
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,
                 urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                parameters: Constants.shared.log
+                parameters: Constants.shared.log,
+                comment: comment
             ))
             service.recipients = [issue.to]
             service.subject = issue.subject

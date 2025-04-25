@@ -29,7 +29,7 @@ extension View {
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
         options: ThemeModalOptions? = nil,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) -> some View where Content: View {
         modifier(ThemeBooleanModalModifier(
             isPresented: isPresented,
@@ -41,7 +41,7 @@ extension View {
     public func themeModal<Content, T>(
         item: Binding<T?>,
         options: ThemeModalOptions? = nil,
-        content: @escaping (T) -> Content
+        @ViewBuilder content: @escaping (T) -> Content
     ) -> some View where Content: View, T: Identifiable {
         modifier(ThemeItemModalModifier(
             item: item,

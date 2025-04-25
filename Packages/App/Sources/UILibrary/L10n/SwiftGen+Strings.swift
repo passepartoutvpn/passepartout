@@ -234,6 +234,8 @@ public enum Strings {
       public static let category = Strings.tr("Localizable", "global.nouns.category", fallback: "Category")
       /// Certificate
       public static let certificate = Strings.tr("Localizable", "global.nouns.certificate", fallback: "Certificate")
+      /// Comment
+      public static let comment = Strings.tr("Localizable", "global.nouns.comment", fallback: "Comment")
       /// Compression
       public static let compression = Strings.tr("Localizable", "global.nouns.compression", fallback: "Compression")
       /// Configuration

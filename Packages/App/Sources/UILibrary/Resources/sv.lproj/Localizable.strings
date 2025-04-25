@@ -78,6 +78,7 @@
 "global.nouns.any" = "Alla";
 "global.nouns.category" = "Kategori";
 "global.nouns.certificate" = "Certifikat";
+"global.nouns.comment" = "Kommentar";
 "global.nouns.compression" = "Kompression";
 "global.nouns.configuration" = "Konfiguration";
 "global.nouns.connection" = "Anslutning";

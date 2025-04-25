@@ -29,6 +29,8 @@ import Foundation
 struct Issue: Identifiable {
     let id: UUID
 
+    let comment: String
+
     let appLine: String?
 
     let purchasedProducts: Set<AppProduct>
@@ -46,6 +48,7 @@ struct Issue: Identifiable {
     let providerLastUpdate: Date?
 
     init(
+        comment: String,
         appLine: String?,
         purchasedProducts: Set<AppProduct>,
         appLog: Data? = nil,
@@ -53,6 +56,7 @@ struct Issue: Identifiable {
         provider: (ProviderID, Date?)? = nil
     ) {
         id = UUID()
+        self.comment = comment
         self.appLine = appLine
         self.purchasedProducts = purchasedProducts
         self.appLog = appLog
@@ -68,6 +72,7 @@ struct Issue: Identifiable {
 
     var body: String {
         template
+            .replacingOccurrences(of: "$comment", with: comment)
             .replacingOccurrences(of: "$appLine", with: appLine ?? "unknown")
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")

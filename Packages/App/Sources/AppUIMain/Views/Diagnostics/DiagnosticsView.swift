@@ -25,6 +25,7 @@
 
 import CommonLibrary
 import SwiftUI
+import UIAccessibility
 
 struct DiagnosticsView: View {
     struct LogEntry: Identifiable, Equatable {
@@ -82,7 +83,7 @@ struct DiagnosticsView: View {
             liveLogSection
             openVPNSection
             tunnelLogsSection
-            if iapManager.isEligibleForFeedback {
+            if AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback {
                 reportIssueSection
             }
         }

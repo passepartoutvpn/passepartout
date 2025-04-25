@@ -78,6 +78,7 @@
 "global.nouns.any" = "Любой";
 "global.nouns.category" = "Категория";
 "global.nouns.certificate" = "Сертификат";
+"global.nouns.comment" = "Комментарий";
 "global.nouns.compression" = "Сжатие";
 "global.nouns.configuration" = "Конфигурация";
 "global.nouns.connection" = "Соединение";

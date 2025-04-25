@@ -33,35 +33,50 @@ import UIKit
 extension ReportIssueButton: View {
     var body: some View {
         HStack {
-            Button(title, action: sendEmail)
+            Button(title) {
+                modalRoute = .comment
+            }
             if isPending {
                 Spacer()
                 ProgressView()
             }
         }
         .disabled(isPending)
-        .themeModal(item: $issueBeingReported) {
-            MailComposerView(
-                isPresented: Binding {
-                    issueBeingReported != nil
-                } set: {
-                    if !$0 {
-                        issueBeingReported = nil
-                    }
-                },
-                toRecipients: [$0.to],
-                subject: $0.subject,
-                messageBody: $0.body,
-                attachments: $0.attachments
-            )
+        .themeModal(item: $modalRoute) {
+            switch $0 {
+            case .comment:
+                commentInputView()
+            case .submit(let issue):
+                emailComposerView(issue: issue)
+            }
         }
     }
 }
 
-private extension ReportIssueButton {
+extension ReportIssueButton {
+    func emailComposerView(issue: Issue) -> some View {
+        MailComposerView(
+            isPresented: Binding {
+                switch modalRoute {
+                case .submit:
+                    return true
+                default:
+                    return false
+                }
+            } set: {
+                if !$0 {
+                    modalRoute = nil
+                }
+            },
+            toRecipients: [issue.to],
+            subject: issue.subject,
+            messageBody: issue.body,
+            attachments: issue.attachments
+        )
+    }
 
     @MainActor
-    func sendEmail() {
+    func sendEmail(comment: String) {
         Task {
             isPending = true
             defer {
@@ -75,13 +90,14 @@ private extension ReportIssueButton {
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,
                 urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                parameters: Constants.shared.log
+                parameters: Constants.shared.log,
+                comment: comment
             ))
             guard MailComposerView.canSendMail() else {
                 openMailTo(with: issue)
                 return
             }
-            issueBeingReported = issue
+            modalRoute = .submit(issue)
         }
     }
 
