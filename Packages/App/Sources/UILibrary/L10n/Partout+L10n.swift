@@ -60,7 +60,7 @@ extension Profile: StyledOptionalLocalizableEntity {
                 .first {
                     primaryCondition(for: $0)
                 }?
-                .effectiveModuleType
+                .primaryModuleType
                 .localizedDescription
 
         case .secondaryTypes:
@@ -81,7 +81,7 @@ extension Profile: StyledOptionalLocalizableEntity {
 }
 
 private extension Module {
-    var effectiveModuleType: ModuleType {
+    var primaryModuleType: ModuleType {
         if let providerModule = self as? ProviderModule {
             return providerModule.providerModuleType
         }
