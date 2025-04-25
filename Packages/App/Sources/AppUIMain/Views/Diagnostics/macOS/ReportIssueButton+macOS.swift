@@ -56,7 +56,8 @@ private extension ReportIssueButton {
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,
                 urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                parameters: Constants.shared.log
+                parameters: Constants.shared.log,
+                comment: comment
             ))
             service.recipients = [issue.to]
             service.subject = issue.subject

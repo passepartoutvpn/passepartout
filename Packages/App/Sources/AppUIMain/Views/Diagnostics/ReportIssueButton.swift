@@ -44,6 +44,9 @@ struct ReportIssueButton {
     var isUnableToEmail: Bool
 
     @State
+    var comment = ""
+
+    @State
     var isPending = false
 
     @State

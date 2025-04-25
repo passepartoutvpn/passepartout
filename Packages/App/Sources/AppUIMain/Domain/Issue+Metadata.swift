@@ -43,6 +43,8 @@ extension Issue {
         let urlForTunnelLog: URL
 
         let parameters: Constants.Log
+
+        let comment: String
     }
 
     @MainActor
@@ -71,6 +73,7 @@ extension Issue {
         }
 
         return Issue(
+            comment: metadata.comment,
             appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
             purchasedProducts: metadata.purchasedProducts,
             appLog: appLog,

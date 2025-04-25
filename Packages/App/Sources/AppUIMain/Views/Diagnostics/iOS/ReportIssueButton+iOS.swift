@@ -75,7 +75,8 @@ private extension ReportIssueButton {
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,
                 urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                parameters: Constants.shared.log
+                parameters: Constants.shared.log,
+                comment: comment
             ))
             guard MailComposerView.canSendMail() else {
                 openMailTo(with: issue)
