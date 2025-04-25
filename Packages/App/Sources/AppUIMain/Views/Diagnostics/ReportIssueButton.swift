@@ -44,13 +44,10 @@ struct ReportIssueButton {
     var isUnableToEmail: Bool
 
     @State
-    var comment = ""
-
-    @State
     var isPending = false
 
     @State
-    var issueBeingReported: Issue?
+    var modalRoute: ModalRoute?
 
     var installedProfile: Profile? {
         guard let id = tunnel.currentProfile?.id else {
@@ -65,5 +62,46 @@ struct ReportIssueButton {
         }
         let lastUpdate = apiManager.cache(for: providerId)?.lastUpdate
         return (providerId, lastUpdate)
+    }
+}
+
+extension ReportIssueButton {
+    enum ModalRoute: Identifiable {
+        case comment
+
+        case submit(Issue)
+
+        var id: Int {
+            switch self {
+            case .comment: return 1
+            case .submit: return 2
+            }
+        }
+    }
+}
+
+extension ReportIssueButton {
+    func commentInputView() -> some View {
+        ThemeTextInputView(
+            Strings.Global.Nouns.comment,
+            isPresented: Binding {
+                switch modalRoute {
+                case .comment:
+                    return true
+                default:
+                    return false
+                }
+            } set: {
+                if !$0 {
+                    modalRoute = nil
+                }
+            },
+            onValidate: {
+                !$0.isEmpty
+            },
+            onSubmit: {
+                sendEmail(comment: $0)
+            }
+        )
     }
 }

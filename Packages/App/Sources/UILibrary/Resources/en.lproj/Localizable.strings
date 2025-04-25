@@ -309,6 +309,7 @@
 "global.nouns.any" = "Any";
 "global.nouns.category" = "Category";
 "global.nouns.certificate" = "Certificate";
+"global.nouns.comment" = "Comment";
 "global.nouns.compression" = "Compression";
 "global.nouns.configuration" = "Configuration";
 "global.nouns.connection" = "Connection";
