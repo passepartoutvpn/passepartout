@@ -49,18 +49,22 @@ struct MapperV2 {
             modules.append($0)
         }
 
-        modules.append(toOnDemandModule(v2.onDemand))
+        let onDemand = toOnDemandModule(v2.onDemand)
+        modules.append(onDemand.module)
 
         builder.modules = modules
         builder.activeModulesIds = Set(modules.map(\.id))
+        if !onDemand.isEnabled {
+            builder.activeModulesIds.remove(onDemand.module.id)
+        }
+
         return try builder.tryBuild()
     }
 }
 
 extension MapperV2 {
-    func toOnDemandModule(_ v2: ProfileV2.OnDemand) -> OnDemandModule {
+    func toOnDemandModule(_ v2: ProfileV2.OnDemand) -> (module: OnDemandModule, isEnabled: Bool) {
         var builder = OnDemandModule.Builder()
-        builder.isEnabled = v2.isEnabled
         switch v2.policy {
         case .any:
             builder.policy = .any
@@ -78,7 +82,7 @@ extension MapperV2 {
                 return .mobile
             }
         })
-        return builder.tryBuild()
+        return (builder.tryBuild(), v2.isEnabled)
     }
 }
 

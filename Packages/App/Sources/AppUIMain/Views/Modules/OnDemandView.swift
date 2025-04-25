@@ -51,7 +51,6 @@ struct OnDemandView: View, ModuleDraftEditing {
 
     var body: some View {
         Group {
-            enabledSection
             rulesArea
         }
         .moduleView(draft: draft)
@@ -66,20 +65,12 @@ private extension OnDemandView {
         .including
     ]
 
-    var enabledSection: some View {
-        Section {
-            Toggle(Strings.Global.Nouns.enabled, isOn: $draft.module.isEnabled)
-        }
-    }
-
     @ViewBuilder
     var rulesArea: some View {
-        if draft.module.isEnabled {
-            policySection
-            if draft.module.policy != .any {
-                networkSection
-                wifiSection
-            }
+        policySection
+        if draft.module.policy != .any {
+            networkSection
+            wifiSection
         }
     }
 
@@ -101,9 +92,6 @@ private extension OnDemandView {
     }
 
     var policyFooterDescription: String {
-        guard draft.module.isEnabled else {
-            return "" // better animation than removing footer completely
-        }
         let suffix: String
         switch draft.module.policy {
         case .any:

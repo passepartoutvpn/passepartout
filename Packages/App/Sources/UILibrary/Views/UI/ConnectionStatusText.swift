@@ -94,8 +94,8 @@ private extension ConnectionStatusText {
 #Preview("On-Demand") {
     var builder = Profile.Builder()
     var onDemand = OnDemandModule.Builder()
-    onDemand.isEnabled = true
     builder.modules = [onDemand.tryBuild()]
+    builder.activeModulesIds = [onDemand.id]
     let profile: Profile
     do {
         profile = try builder.tryBuild()

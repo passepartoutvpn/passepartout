@@ -45,7 +45,7 @@ extension IPModule.Builder: AppFeatureRequiring {
 
 extension OnDemandModule.Builder: AppFeatureRequiring {
     public var features: Set<AppFeature> {
-        guard isEnabled, policy != .any else {
+        guard policy != .any else {
             return []
         }
         // empty rules require no purchase
