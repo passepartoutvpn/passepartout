@@ -31,6 +31,8 @@ public enum AppCommandLine {
 
         case fakeMigration = "-pp_fake_migration"
 
+        case withReportIssue = "-pp_with_report_issue"
+
         case uiTesting = "-pp_ui_testing"
     }
 
