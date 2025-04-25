@@ -93,7 +93,7 @@ private extension ConnectionStatusText {
 
 #Preview("On-Demand") {
     var builder = Profile.Builder()
-    var onDemand = OnDemandModule.Builder()
+    let onDemand = OnDemandModule.Builder()
     builder.modules = [onDemand.tryBuild()]
     builder.activeModulesIds = [onDemand.id]
     let profile: Profile
