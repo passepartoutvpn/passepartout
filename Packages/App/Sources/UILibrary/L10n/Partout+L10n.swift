@@ -57,10 +57,10 @@ extension Profile: StyledOptionalLocalizableEntity {
 
         case .primaryType:
             return activeModules
-                .first {
-                    primaryCondition(for: $0)
-                }?
-                .moduleType
+                .compactMap {
+                    primaryModuleType(for: $0)
+                }
+                .first?
                 .localizedDescription
 
         case .secondaryTypes:
@@ -73,6 +73,13 @@ extension Profile: StyledOptionalLocalizableEntity {
                 .sorted()
                 .joined(separator: ", ")
         }
+    }
+
+    private func primaryModuleType(for module: Module) -> ModuleType? {
+        if let providerModule = module as? ProviderModule {
+            return providerModule.providerModuleType
+        }
+        return module.buildsConnection ? module.moduleType : nil
     }
 
     private func primaryCondition(for module: Module) -> Bool {
