@@ -78,6 +78,7 @@
 "global.nouns.any" = "Jedes";
 "global.nouns.category" = "Kategorie";
 "global.nouns.certificate" = "Zertifikat";
+"global.nouns.comment" = "Kommentar";
 "global.nouns.compression" = "Kompression";
 "global.nouns.configuration" = "Konfiguration";
 "global.nouns.connection" = "Verbindung";

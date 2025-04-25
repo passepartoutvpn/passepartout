@@ -78,6 +78,7 @@
 "global.nouns.any" = "Elk";
 "global.nouns.category" = "Categorie";
 "global.nouns.certificate" = "Certificaat";
+"global.nouns.comment" = "Opmerking";
 "global.nouns.compression" = "Compressie";
 "global.nouns.configuration" = "Configuratie";
 "global.nouns.connection" = "Verbinding";

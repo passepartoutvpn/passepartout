@@ -78,6 +78,7 @@
 "global.nouns.any" = "Cualquier";
 "global.nouns.category" = "Categoría";
 "global.nouns.certificate" = "Certificado";
+"global.nouns.comment" = "Comentario";
 "global.nouns.compression" = "Compresión";
 "global.nouns.configuration" = "Configuración";
 "global.nouns.connection" = "Conexión";

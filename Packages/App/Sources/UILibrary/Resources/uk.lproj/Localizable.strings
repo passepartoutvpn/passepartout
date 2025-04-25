@@ -78,6 +78,7 @@
 "global.nouns.any" = "Будь-який";
 "global.nouns.category" = "Категорія";
 "global.nouns.certificate" = "Сертифікат";
+"global.nouns.comment" = "Коментар";
 "global.nouns.compression" = "Стиснення";
 "global.nouns.configuration" = "Конфігурація";
 "global.nouns.connection" = "Підключення";

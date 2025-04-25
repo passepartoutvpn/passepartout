@@ -78,6 +78,7 @@
 "global.nouns.any" = "任何";
 "global.nouns.category" = "类别";
 "global.nouns.certificate" = "证书";
+"global.nouns.comment" = "评论"
 "global.nouns.compression" = "压缩";
 "global.nouns.configuration" = "配置";
 "global.nouns.connection" = "连接";
