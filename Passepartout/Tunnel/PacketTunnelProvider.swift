@@ -86,7 +86,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                     return
                 }
                 await verifyEligibility(
-                    of: fwd.profile,
+                    of: fwd.originalProfile,
                     environment: environment,
                     interval: params.interval
                 )
