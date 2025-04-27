@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 
 public struct ThemeTextInputView: View {
@@ -92,3 +94,5 @@ public struct ThemeTextInputView: View {
     return Preview()
         .withMockEnvironment()
 }
+
+#endif
