@@ -61,7 +61,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../Submodules/partout")
+        .package(path: "../../submodules/partout")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
