@@ -123,6 +123,7 @@ private extension OpenVPNView.ImportModifier {
                 throw PartoutError(.parsing)
             }
             draft.module.configurationBuilder = module.configuration?.builder()
+            draft.module.credentials = module.credentials
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
             errorHandler.handle(error, title: draft.module.moduleType.localizedDescription)
