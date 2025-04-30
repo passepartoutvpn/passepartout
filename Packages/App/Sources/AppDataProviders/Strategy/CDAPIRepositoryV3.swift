@@ -24,11 +24,11 @@
 //
 
 import AppData
-import Combine
 import CommonLibrary
 import CommonUtils
 import CoreData
 import Foundation
+import Partout
 
 extension AppData {
     public static func cdAPIRepositoryV3(context: NSManagedObjectContext) -> APIRepository {
@@ -39,16 +39,16 @@ extension AppData {
 private final class CDAPIRepositoryV3: NSObject, APIRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    private nonisolated let providersSubject: CurrentValueSubject<[Provider], Never>
+    private nonisolated let providersSubject: CurrentValueStream<[Provider]>
 
-    private nonisolated let cacheSubject: CurrentValueSubject<[ProviderID: ProviderCache], Never>
+    private nonisolated let cacheSubject: CurrentValueStream<[ProviderID: ProviderCache]>
 
     private nonisolated let providersController: NSFetchedResultsController<CDProviderV3>
 
     init(context: NSManagedObjectContext) {
         self.context = context
-        providersSubject = CurrentValueSubject([])
-        cacheSubject = CurrentValueSubject([:])
+        providersSubject = CurrentValueStream([])
+        cacheSubject = CurrentValueStream([:])
 
         let request = CDProviderV3.fetchRequest()
         request.sortDescriptors = [
@@ -71,16 +71,16 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
         }
     }
 
-    nonisolated var indexPublisher: AnyPublisher<[Provider], Never> {
+    nonisolated var indexStream: AsyncStream<[Provider]> {
         providersSubject
+            .subscribe()
             .removeDuplicates()
-            .eraseToAnyPublisher()
     }
 
-    nonisolated var cachePublisher: AnyPublisher<[ProviderID: ProviderCache], Never> {
+    nonisolated var cacheStream: AsyncStream<[ProviderID: ProviderCache]> {
         cacheSubject
+            .subscribe()
             .removeDuplicates()
-            .eraseToAnyPublisher()
     }
 
     func store(_ index: [Provider]) async throws {
