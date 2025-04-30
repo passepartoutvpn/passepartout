@@ -1,2 +1,2 @@
 #!/bin/bash
-cd Submodules/partout && swift test
+cd submodules/partout && swift test

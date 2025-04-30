@@ -1,6 +1,6 @@
 #!/bin/bash
-manifest="Submodules/partout/Package.swift"
-core_status=`git submodule status Submodules/partout-core`
+manifest="submodules/partout/Package.swift"
+core_status=`git submodule status submodules/partout-core`
 sha1=${core_status:1:40}
 
 env_line_old="environment = .remoteBinary"
