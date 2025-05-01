@@ -41,6 +41,7 @@ CFG_COPYRIGHT = Copyright © 2025 Davide De Rosa. All rights reserved.
 CFG_DISPLAY_NAME = Passepartout
 CFG_ENTITLEMENTS = Passepartout/App/App.entitlements
 CFG_INFO_PLIST = Passepartout/App/App.plist
+CFG_TUNNEL_INFO_PLIST = Passepartout/Tunnel/Tunnel.plist
 
 // Extensions
 CFG_INTENTS_ID = $(CFG_APP_ID).Intents

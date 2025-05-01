@@ -1492,7 +1492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
@@ -1517,7 +1517,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
@@ -1556,7 +1556,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1579,7 +1579,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
-				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
@@ -1650,7 +1650,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
@@ -1677,7 +1677,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
 				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
