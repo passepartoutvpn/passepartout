@@ -2,20 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>aps-environment</key>
-	<string>development</string>
-	<key>com.apple.developer.aps-environment</key>
-	<string>development</string>
-	<key>com.apple.developer.icloud-container-identifiers</key>
-	<array>
-		<string>$(CFG_CLOUDKIT_ID)</string>
-		<string>$(CFG_LEGACY_V2_CLOUDKIT_ID)</string>
-		<string>$(CFG_LEGACY_V2_TV_CLOUDKIT_ID)</string>
-	</array>
-	<key>com.apple.developer.icloud-services</key>
-	<array>
-		<string>CloudKit</string>
-	</array>
 	<key>com.apple.developer.networking.networkextension</key>
 	<array>
 		<string>$(CFG_TUNNEL_ENTITLEMENT)</string>
@@ -36,5 +22,7 @@
 	<array>
 		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
 	</array>
+	<key>com.apple.developer.system-extension.install</key>
+	<true/>
 </dict>
 </plist>

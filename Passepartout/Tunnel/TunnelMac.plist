@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfig</key>
+	<dict>
+		<key>groupId</key>
+		<string>$(CFG_GROUP_ID)</string>
+		<key>keychainGroupId</key>
+		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
+		<key>tunnelId</key>
+		<string>$(CFG_TUNNEL_ID)</string>
+	</dict>
+	<key>NetworkExtension</key>
+	<dict>
+		<key>NEMachServiceName</key>
+		<string>$(CFG_GROUP_ID).PassepartoutTunnel</string>
+		<key>NEProviderClasses</key>
+		<dict>
+			<key>com.apple.networkextension.packet-tunnel</key>
+			<string>$(PRODUCT_MODULE_NAME).PacketTunnelProvider</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
