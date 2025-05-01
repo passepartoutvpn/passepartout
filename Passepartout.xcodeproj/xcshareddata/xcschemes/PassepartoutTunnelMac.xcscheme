@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0EE662B32DC2BDDE00A4BB37"
-               BuildableName = "com.algoritmico.ios.Passepartout.Tunnel.systemextension"
+               BuildableName = "com.algoritmico.mac.Passepartout.Tunnel.systemextension"
                BlueprintName = "PassepartoutTunnelMac"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0EE662B32DC2BDDE00A4BB37"
-            BuildableName = "com.algoritmico.ios.Passepartout.Tunnel.systemextension"
+            BuildableName = "com.algoritmico.mac.Passepartout.Tunnel.systemextension"
             BlueprintName = "PassepartoutTunnelMac"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
