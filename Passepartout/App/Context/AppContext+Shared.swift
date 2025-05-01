@@ -61,11 +61,17 @@ extension AppContext {
             author: nil
         )
         let newRemoteStore: (_ cloudKit: Bool) -> CoreDataPersistentStore = {
-            CoreDataPersistentStore(
+            let cloudKitIdentifier: String?
+#if PP_BUILD_MAC
+            cloudKitIdentifier = nil
+#else
+            cloudKitIdentifier = $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil
+#endif
+            return CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: Constants.shared.containers.remote,
                 model: cdRemoteModel,
-                cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
+                cloudKitIdentifier: cloudKitIdentifier,
                 author: nil
             )
         }
@@ -86,7 +92,11 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
+#if PP_BUILD_MAC
+        iapManager.isEnabled = false
+#else
         iapManager.isEnabled = !sharedKVStore.bool(forKey: AppPreference.skipsPurchases.key)
+#endif
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
@@ -131,6 +141,9 @@ extension AppContext {
             interval: Constants.shared.tunnel.refreshInterval
         )
 
+#if PP_BUILD_MAC
+        let migrationManager = MigrationManager()
+#else
         let migrationManager: MigrationManager = {
             let profileStrategy = ProfileV2MigrationStrategy(
                 coreDataLogger: dependencies.coreDataLogger(),
@@ -155,6 +168,7 @@ extension AppContext {
             }
             return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
         }()
+#endif
 
         let onboardingManager = OnboardingManager(kvStore: localKVStore)
         let preferencesManager = PreferencesManager()
