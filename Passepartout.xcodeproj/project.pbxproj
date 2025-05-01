@@ -202,7 +202,7 @@
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
 		0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = PassepartoutIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.algoritmico.ios.Passepartout.Tunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.algoritmico.mac.Passepartout.Tunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -296,7 +296,7 @@
 				0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */,
 				0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */,
 				0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */,
-				0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */,
+				0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -651,7 +651,7 @@
 				0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */,
 			);
 			productName = Tunnel;
-			productReference = 0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */;
+			productReference = 0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */;
 			productType = "com.apple.product-type.system-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1645,8 +1645,11 @@
 		};
 		0EE662C12DC2BDDF00A4BB37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1661,7 +1664,8 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Passepartout DMG Tunnel";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1672,8 +1676,11 @@
 		};
 		0EE662C22DC2BDDF00A4BB37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1688,7 +1695,8 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.algoritmico.ios.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Passepartout DMG Tunnel";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
