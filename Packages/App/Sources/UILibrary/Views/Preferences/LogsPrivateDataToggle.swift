@@ -28,7 +28,10 @@ import SwiftUI
 
 public struct LogsPrivateDataToggle: View {
 
-    @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
+    @EnvironmentObject
+    private var kvStore: KeyValueManager
+
+    @State
     private var logsPrivateData = false
 
     public init() {
@@ -36,6 +39,7 @@ public struct LogsPrivateDataToggle: View {
 
     public var body: some View {
         Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
+            .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
             .onChange(of: logsPrivateData) {
                 PartoutConfiguration.shared.logsAddresses = $0
                 PartoutConfiguration.shared.logsModules = $0

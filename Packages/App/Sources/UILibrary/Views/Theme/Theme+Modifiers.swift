@@ -23,7 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import SwiftUI
+
+// FIXME: ###, sort alphabetically
 
 extension View {
     public func themeModal<Content>(
@@ -269,4 +272,18 @@ extension View {
         ))
     }
 #endif
+
+    public func themeKeyValue<T>(
+        _ store: KeyValueManager,
+        _ key: String,
+        _ value: Binding<T>,
+        default defaultValue: T
+    ) -> some View where T: Equatable {
+        modifier(ThemeKeyValueModifier(
+            store: store,
+            key: key,
+            value: value,
+            defaultValue: defaultValue
+        ))
+    }
 }

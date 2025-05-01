@@ -30,5 +30,7 @@ import Foundation
 struct TunnelContext {
     let iapManager: IAPManager
 
+    let kvStore: KeyValueManager
+
     let processor: PacketTunnelProcessor
 }

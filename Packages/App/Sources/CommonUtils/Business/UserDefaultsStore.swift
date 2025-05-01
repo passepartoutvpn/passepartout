@@ -43,4 +43,8 @@ public final class UserDefaultsStore: KeyValueStore {
         }
         defaults.set(value, forKey: key)
     }
+
+    public func removeValue(for key: String) {
+        defaults.removeObject(forKey: key)
+    }
 }

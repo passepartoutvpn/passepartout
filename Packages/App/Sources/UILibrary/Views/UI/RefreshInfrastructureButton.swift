@@ -31,11 +31,12 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
     @EnvironmentObject
     private var apiManager: APIManager
 
+    @EnvironmentObject
+    private var kvStore: KeyValueManager
+
     private let providerId: ProviderID
 
     private let label: () -> Label
-
-    private let defaults: UserDefaults = .standard
 
     @State
     private var elapsed: TimeInterval = .infinity
@@ -95,7 +96,7 @@ public struct RefreshInfrastructureButtonProgressView: View {
 
 private extension RefreshInfrastructureButton {
     func loadLastUpdate() {
-        guard let map = defaults.object(forKey: AppPreference.lastInfrastructureRefresh.key) as? [String: TimeInterval] else {
+        guard let map = kvStore.object(forKey: AppPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? else {
             elapsed = .infinity
             return
         }
@@ -107,9 +108,9 @@ private extension RefreshInfrastructureButton {
     }
 
     func saveLastUpdate() {
-        var map = defaults.object(forKey: AppPreference.lastInfrastructureRefresh.key) as? [String: TimeInterval] ?? [:]
+        var map = kvStore.object(forKey: AppPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? ?? [:]
         map[providerId.rawValue] = Date.timeIntervalSinceReferenceDate
-        defaults.set(map, forKey: AppPreference.lastInfrastructureRefresh.key)
+        kvStore.set(map, forKey: AppPreference.lastInfrastructureRefresh.key)
         elapsed = .zero
     }
 }

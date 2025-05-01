@@ -37,6 +37,9 @@ public struct PreferencesView: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var kvStore: KeyValueManager
+
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
@@ -45,10 +48,10 @@ public struct PreferencesView: View {
     private var settings: MacSettingsModel
 #endif
 
-    @AppStorage(AppPreference.dnsFallsBack.key, store: .appGroup)
-    private var dnsFallsBack = true
-
     private let profileManager: ProfileManager
+
+    @State
+    private var dnsFallsBack = true
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -74,6 +77,7 @@ public struct PreferencesView: View {
             enablesPurchasesSection
             eraseCloudKitSection
         }
+        .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
         .themeForm()
     }
 }

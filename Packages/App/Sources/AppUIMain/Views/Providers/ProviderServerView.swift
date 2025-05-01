@@ -71,7 +71,9 @@ struct ProviderServerView: View {
     private var providerPreferences = ProviderPreferences()
 
     @StateObject
-    private var filtersViewModel = ProviderFiltersView.Model()
+    private var filtersViewModel = ProviderFiltersView.Model(
+        kvStore: KeyValueManager(store: UserDefaultsStore(.standard))
+    )
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()

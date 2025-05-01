@@ -29,7 +29,7 @@ import Foundation
 public final class ExtendedTunnel: ObservableObject {
     public static nonisolated let isManualKey = "isManual"
 
-    private let defaults: UserDefaults?
+    private let kvStore: KeyValueManager?
 
     private let tunnel: Tunnel
 
@@ -54,13 +54,13 @@ public final class ExtendedTunnel: ObservableObject {
     private var subscriptions: [Task<Void, Never>]
 
     public init(
-        defaults: UserDefaults? = nil,
+        kvStore: KeyValueManager? = nil,
         tunnel: Tunnel,
         environment: TunnelEnvironment,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
-        self.defaults = defaults
+        self.kvStore = kvStore
         self.tunnel = tunnel
         self.environment = environment
         self.processor = processor
@@ -176,7 +176,7 @@ private extension ExtendedTunnel {
 
                     // update last used profile
                     if let id = current?.id {
-                        defaults?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                        kvStore?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
                     }
 
                     // follow status updates
@@ -244,7 +244,7 @@ private extension ExtendedTunnel {
 
 private extension ExtendedTunnel {
     var lastUsedProfile: TunnelCurrentProfile? {
-        guard let uuidString = defaults?.object(forKey: AppPreference.lastUsedProfileId.key) as? String,
+        guard let uuidString = kvStore?.string(forKey: AppPreference.lastUsedProfileId.key),
               let uuid = UUID(uuidString: uuidString) else {
             return nil
         }

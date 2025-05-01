@@ -39,7 +39,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        CommonLibrary().configure(.tunnel)
+        await CommonLibrary(kvStore: context.kvStore)
+            .configure(.tunnel)
 
         pp_log(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
