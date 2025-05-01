@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0E08447C2CF86F2A00ECED7C /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E08447B2CF86F2A00ECED7C /* XCTestCase+Extensions.swift */; };
+		0E2306142DC2BF6B002D70D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2306102DC2BF6B002D70D7 /* main.swift */; };
+		0E2306162DC2C00B002D70D7 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
+		0E2306192DC2C295002D70D7 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2306182DC2C295002D70D7 /* TunnelLibrary */; };
+		0E23061B2DC2C299002D70D7 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */; };
+		0E23061E2DC2C2CB002D70D7 /* Dependencies+Partout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */; };
+		0E23061F2DC2C2CB002D70D7 /* DefaultTunnelProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */; };
+		0E2306202DC2C2CB002D70D7 /* TunnelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD472D05FA7000531CDE /* TunnelContext.swift */; };
+		0E2306212DC2C2CB002D70D7 /* TunnelContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E483E7F2CE64D6B00584B32 /* TunnelContext+Shared.swift */; };
+		0E2306222DC2C2DC002D70D7 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
+		0E2306232DC2C2DC002D70D7 /* Dependencies+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */; };
+		0E2306242DC2C2DC002D70D7 /* Dependencies+IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */; };
 		0E3E22962CE53510005135DF /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E3E22952CE53510005135DF /* AppUIMain */; };
 		0E3E22982CE53510005135DF /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E3E22972CE53510005135DF /* AppUITV */; };
 		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
@@ -51,15 +62,14 @@
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
-		0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EC418D22CF86B7400AC6F2F /* ProfileMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC418D12CF86B7400AC6F2F /* ProfileMenuScreen.swift */; platformFilters = (ios, macos, ); };
 		0EC797422B9378E000C093B7 /* AppContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* AppContext+Shared.swift */; };
 		0ED61CF82CD0418C008FE259 /* App+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF72CD0418C008FE259 /* App+macOS.swift */; platformFilters = (macos, ); };
 		0ED61CFA2CD04192008FE259 /* App+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF92CD04192008FE259 /* App+iOS.swift */; platformFilter = ios; };
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
-		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE254912CE67946007A96F2 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EE254902CE67946007A96F2 /* LegacyV2 */; };
+		0EE662B52DC2BDDF00A4BB37 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; platformFilters = (tvos, ); };
 		0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */; };
 		0EF9E1002CF4811000F4A7DA /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */; };
@@ -67,13 +77,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0ED0C0C62DA513430026DA9B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0EDE56EF2CABE42E0082D21C;
-			remoteInfo = PassepartoutIntents;
-		};
 		0ED0C0C72DA513430026DA9B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
@@ -102,6 +105,13 @@
 			remoteGlobalIDString = 0E06D18E2B87629100176E1D;
 			remoteInfo = Passepartout;
 		};
+		0EE662BD2DC2BDDF00A4BB37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0EE662B32DC2BDDE00A4BB37;
+			remoteInfo = Tunnel;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,28 +126,6 @@
 			name = "Embed Login Item";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EC332D62B8A1808000B9C2F /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0EDE56FE2CABE42E0082D21C /* Embed ExtensionKit Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
-			dstSubfolderSpec = 16;
-			files = (
-				0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */,
-			);
-			name = "Embed ExtensionKit Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -145,6 +133,8 @@
 		0E08447B2CF86F2A00ECED7C /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		0E2267852D0A059B0000B557 /* MainScreenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MainScreenshots.xctestplan; sourceTree = "<group>"; };
 		0E2267872D0A05D20000B557 /* TVScreenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TVScreenshots.xctestplan; sourceTree = "<group>"; };
+		0E23060F2DC2BF6B002D70D7 /* TunnelMac.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TunnelMac.plist; sourceTree = "<group>"; };
+		0E2306102DC2BF6B002D70D7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0E29E7152D0B7A08003294CA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0E29E7162D0B7A11003294CA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0E29E7172D0B7A40003294CA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppPlist.strings; sourceTree = "<group>"; };
@@ -203,6 +193,8 @@
 		0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0EC418D12CF86B7400AC6F2F /* ProfileMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuScreen.swift; sourceTree = "<group>"; };
 		0EC797402B9378E000C093B7 /* AppContext+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppContext+Shared.swift"; sourceTree = "<group>"; };
+		0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.mac.xcconfig; sourceTree = "<group>"; };
+		0ECD965E2DC292FB009BD9F8 /* AppMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppMac.entitlements; sourceTree = "<group>"; };
 		0ED1EFDA2C33059600CBD9BD /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		0ED61CF72CD0418C008FE259 /* App+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+macOS.swift"; sourceTree = "<group>"; };
 		0ED61CF92CD04192008FE259 /* App+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+iOS.swift"; sourceTree = "<group>"; };
@@ -210,6 +202,7 @@
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
 		0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = PassepartoutIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.algoritmico.ios.Passepartout.Tunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +264,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EE662B12DC2BDDE00A4BB37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E2306192DC2C295002D70D7 /* TunnelLibrary in Frameworks */,
+				0E23061B2DC2C299002D70D7 /* PassepartoutImplementations in Frameworks */,
+				0EE662B52DC2BDDF00A4BB37 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -293,6 +296,7 @@
 				0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */,
 				0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */,
 				0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */,
+				0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8D852F2C328CA1005493DE /* Config.xcconfig */,
+				0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */,
 				0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */,
 				0E5DFDDC2CDB8F9100F2DE70 /* Passepartout.storekit */,
 				0E7E3D5A2B9345FD002BBDB4 /* App */,
@@ -367,6 +372,7 @@
 				0ED61CF62CD04174008FE259 /* Platforms */,
 				0ED1EFDA2C33059600CBD9BD /* App.plist */,
 				0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */,
+				0ECD965E2DC292FB009BD9F8 /* AppMac.entitlements */,
 				0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */,
 				0EB08B962CA46F4900A02591 /* AppPlist.strings */,
 				0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */,
@@ -392,7 +398,9 @@
 			children = (
 				0E8DFD452D05F76900531CDE /* Context */,
 				0E94EE5C2B93570600588243 /* Tunnel.plist */,
+				0E23060F2DC2BF6B002D70D7 /* TunnelMac.plist */,
 				0E7E3D662B9345FD002BBDB4 /* Tunnel.entitlements */,
+				0E2306102DC2BF6B002D70D7 /* main.swift */,
 				0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */,
 			);
 			path = Tunnel;
@@ -506,8 +514,7 @@
 				0E06D18B2B87629100176E1D /* Sources */,
 				0ED27CBF2B9331FF0089E26B /* Frameworks */,
 				0E06D18D2B87629100176E1D /* Resources */,
-				0EC332D62B8A1808000B9C2F /* Embed Foundation Extensions */,
-				0EDE56FE2CABE42E0082D21C /* Embed ExtensionKit Extensions */,
+				0EAD6A702DC3AED900419346 /* Embed Extensions */,
 				0E757F1F2CD0D1FB006E13E1 /* Embed Login Item */,
 				0E8D852E2C328C54005493DE /* SwiftLint */,
 			);
@@ -515,9 +522,9 @@
 			);
 			dependencies = (
 				0E6C0A032BF4047100450362 /* PBXTargetDependency */,
-				0EDE56F92CABE42E0082D21C /* PBXTargetDependency */,
 				0E757F252CD0D812006E13E1 /* PBXTargetDependency */,
 				0EC332D12B8A1808000B9C2F /* PBXTargetDependency */,
+				0EE662BE2DC2BDDF00A4BB37 /* PBXTargetDependency */,
 			);
 			name = Passepartout;
 			packageProductDependencies = (
@@ -625,6 +632,28 @@
 			productReference = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */;
 			productType = "com.apple.product-type.extensionkit-extension";
 		};
+		0EE662B32DC2BDDE00A4BB37 /* PassepartoutTunnelMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EE662C52DC2BDDF00A4BB37 /* Build configuration list for PBXNativeTarget "PassepartoutTunnelMac" */;
+			buildPhases = (
+				0EE662B02DC2BDDE00A4BB37 /* Sources */,
+				0EE662B12DC2BDDE00A4BB37 /* Frameworks */,
+				0EE662B22DC2BDDE00A4BB37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E23061D2DC2C2A8002D70D7 /* PBXTargetDependency */,
+			);
+			name = PassepartoutTunnelMac;
+			packageProductDependencies = (
+				0E2306182DC2C295002D70D7 /* TunnelLibrary */,
+				0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */,
+			);
+			productName = Tunnel;
+			productReference = 0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.ios.Passepartout.Tunnel.systemextension */;
+			productType = "com.apple.product-type.system-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -632,7 +661,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					0E06D18E2B87629100176E1D = {
@@ -653,6 +682,9 @@
 					};
 					0EDE56EF2CABE42E0082D21C = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					0EE662B32DC2BDDE00A4BB37 = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -691,6 +723,7 @@
 				0E757F0F2CD0CFFC006E13E1 /* PassepartoutLoginItem */,
 				0E3FF4AD2CE3AF6F00BFF640 /* PassepartoutTests */,
 				0EC332C72B8A1808000B9C2F /* PassepartoutTunnel */,
+				0EE662B32DC2BDDE00A4BB37 /* PassepartoutTunnelMac */,
 				0E78FE4B2CF799F400B0C5BF /* PassepartoutUITests */,
 			);
 		};
@@ -744,6 +777,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EE662B22DC2BDDE00A4BB37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -764,6 +804,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "PATH=$CUSTOM_SCRIPT_PATH\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		0EAD6A702DC3AED900419346 /* Embed Extensions */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Extensions";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/Passepartout/Scripts/embed-extensions.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -849,9 +907,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0EE662B02DC2BDDE00A4BB37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E2306222DC2C2DC002D70D7 /* Dependencies.swift in Sources */,
+				0E2306232DC2C2DC002D70D7 /* Dependencies+CoreData.swift in Sources */,
+				0E2306242DC2C2DC002D70D7 /* Dependencies+IAPManager.swift in Sources */,
+				0E23061E2DC2C2CB002D70D7 /* Dependencies+Partout.swift in Sources */,
+				0E23061F2DC2C2CB002D70D7 /* DefaultTunnelProcessor.swift in Sources */,
+				0E2306202DC2C2CB002D70D7 /* TunnelContext.swift in Sources */,
+				0E2306212DC2C2CB002D70D7 /* TunnelContext+Shared.swift in Sources */,
+				0E2306142DC2BF6B002D70D7 /* main.swift in Sources */,
+				0E2306162DC2C00B002D70D7 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0E23061D2DC2C2A8002D70D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 0E23061C2DC2C2A8002D70D7 /* TunnelLibrary */;
+		};
 		0E3FF4B32CE3AF6F00BFF640 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0E06D18E2B87629100176E1D /* Passepartout */;
@@ -883,14 +961,13 @@
 			target = 0EC332C72B8A1808000B9C2F /* PassepartoutTunnel */;
 			targetProxy = 0ED0C0C82DA513430026DA9B /* PBXContainerItemProxy */;
 		};
-		0EDE56F92CABE42E0082D21C /* PBXTargetDependency */ = {
+		0EE662BE2DC2BDDF00A4BB37 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilters = (
-				ios,
 				macos,
 			);
-			target = 0EDE56EF2CABE42E0082D21C /* PassepartoutIntents */;
-			targetProxy = 0ED0C0C62DA513430026DA9B /* PBXContainerItemProxy */;
+			target = 0EE662B32DC2BDDE00A4BB37 /* PassepartoutTunnelMac */;
+			targetProxy = 0EE662BD2DC2BDDF00A4BB37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -959,7 +1036,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "$(CFG_TEAM_ID)";
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -991,7 +1068,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited) $(CFG_SWIFT_FLAGS)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
@@ -1043,7 +1120,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "$(CFG_TEAM_ID)";
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1068,6 +1145,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(CFG_SWIFT_FLAGS)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
@@ -1083,13 +1161,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(CFG_ENTITLEMENTS)";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Passepartout/App/App.plist;
+				INFOPLIST_FILE = "$(CFG_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -1105,7 +1182,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(CFG_DISPLAY_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match Development com.algoritmico.ios.Passepartout tvos";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.algoritmico.ios.Passepartout";
@@ -1120,13 +1197,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(CFG_ENTITLEMENTS)";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Passepartout/App/App.plist;
+				INFOPLIST_FILE = "$(CFG_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -1142,7 +1218,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(CFG_DISPLAY_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match AppStore com.algoritmico.ios.Passepartout tvos";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.algoritmico.ios.Passepartout";
@@ -1185,7 +1261,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LOGIN_ITEM_ID)";
@@ -1208,7 +1283,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LOGIN_ITEM_ID)";
@@ -1251,13 +1325,239 @@
 			};
 			name = Release;
 		};
+		0EAD6A652DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E8D852F2C328CA1005493DE /* Config.xcconfig */;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(CFG_DISPLAY_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(CFG_SWIFT_FLAGS)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A662DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "$(CFG_ENTITLEMENTS)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "$(CFG_INFO_PLIST)";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
+				PRODUCT_NAME = "$(CFG_DISPLAY_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A682DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Intents/Intents.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_INTENTS_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents tvos";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents macos";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A692DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/LoginItem/LoginItem.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_LSBackgroundOnly = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LOGIN_ITEM_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A6A2DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A6B2DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match AppStore com.algoritmico.ios.Passepartout.Tunnel tvos";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.algoritmico.ios.Passepartout.Tunnel";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match AppStore com.algoritmico.ios.Passepartout.Tunnel macos";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A6C2DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = ReleaseMac;
+		};
+		0EAD6A6D2DC3A7E600419346 /* ReleaseMac */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Passepartout;
+			};
+			name = ReleaseMac;
+		};
 		0EC332D42B8A1808000B9C2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1281,7 +1581,6 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
@@ -1304,22 +1603,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../../Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Intents;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_INTENTS_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match Development com.algoritmico.ios.Passepartout.Intents tvos";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.algoritmico.ios.Passepartout.Intents";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.Intents macos";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1333,20 +1629,71 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Passepartout/Intents/Intents.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Intents;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_INTENTS_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents tvos";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match AppStore com.algoritmico.ios.Passepartout.Intents macos";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0EE662C12DC2BDDF00A4BB37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		0EE662C22DC2BDDF00A4BB37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Passepartout/Tunnel/TunnelMac.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
+				INFOPLIST_KEY_NSSystemExtensionUsageDescription = "";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.algoritmico.ios.Passepartout.Tunnel macos";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -1358,6 +1705,7 @@
 			buildConfigurations = (
 				0E06D19C2B87629200176E1D /* Debug */,
 				0E06D19D2B87629200176E1D /* Release */,
+				0EAD6A652DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1367,6 +1715,7 @@
 			buildConfigurations = (
 				0E06D19F2B87629200176E1D /* Debug */,
 				0E06D1A02B87629200176E1D /* Release */,
+				0EAD6A662DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1376,6 +1725,7 @@
 			buildConfigurations = (
 				0E3FF4B52CE3AF6F00BFF640 /* Debug */,
 				0E3FF4B62CE3AF6F00BFF640 /* Release */,
+				0EAD6A6A2DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1385,6 +1735,7 @@
 			buildConfigurations = (
 				0E757F1C2CD0CFFD006E13E1 /* Debug */,
 				0E757F1D2CD0CFFD006E13E1 /* Release */,
+				0EAD6A692DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1394,6 +1745,7 @@
 			buildConfigurations = (
 				0E78FE542CF799F400B0C5BF /* Debug */,
 				0E78FE552CF799F400B0C5BF /* Release */,
+				0EAD6A6D2DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1403,6 +1755,7 @@
 			buildConfigurations = (
 				0EC332D42B8A1808000B9C2F /* Debug */,
 				0EC332D52B8A1808000B9C2F /* Release */,
+				0EAD6A6B2DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1412,6 +1765,17 @@
 			buildConfigurations = (
 				0EDE56FC2CABE42E0082D21C /* Debug */,
 				0EDE56FD2CABE42E0082D21C /* Release */,
+				0EAD6A682DC3A7E600419346 /* ReleaseMac */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0EE662C52DC2BDDF00A4BB37 /* Build configuration list for PBXNativeTarget "PassepartoutTunnelMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EE662C12DC2BDDF00A4BB37 /* Debug */,
+				0EE662C22DC2BDDF00A4BB37 /* Release */,
+				0EAD6A6C2DC3A7E600419346 /* ReleaseMac */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1419,6 +1783,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E2306182DC2C295002D70D7 /* TunnelLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TunnelLibrary;
+		};
+		0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
+		};
+		0E23061C2DC2C2A8002D70D7 /* TunnelLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TunnelLibrary;
+		};
 		0E3E22952CE53510005135DF /* AppUIMain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppUIMain;
