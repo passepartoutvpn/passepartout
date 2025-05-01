@@ -81,6 +81,7 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 - [lzo][credits-lzo]
 - [SwiftGen][credits-swiftgen]
 - [SwiftLint][credits-swiftlint]
+- [Tejas Mehta][credits-tmthecoder] for the implementation of the [OpenVPN XOR patch][credits-tmthecoder-xor]
 
 The logo is taken from the awesome Circle Icons set by Nick Roach.
 
@@ -147,12 +148,14 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [contrib-cla]: CLA.rst
 [contrib-readme]: CONTRIBUTING.md
 
+[credits-chatgpt]: https://chatgpt.com/
 [credits-fastlane]: https://github.com/fastlane/fastlane
 [credits-genericjson]: https://github.com/iwill/generic-json-swift
 [credits-lzo]: https://www.oberhumer.com/opensource/lzo/
 [credits-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [credits-swiftlint]: https://github.com/realm/SwiftLint
-[credits-chatgpt]: https://chatgpt.com/
+[credits-tmthecoder]: https://github.com/tmthecoder
+[credits-tmthecoder-xor]: https://github.com/passepartoutvpn/tunnelkit/pull/255
 
 [web-home]: https://passepartoutvpn.app
 [web-blog]: https://passepartoutvpn.app/blog/
