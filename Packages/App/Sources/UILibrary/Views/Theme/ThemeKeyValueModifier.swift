@@ -1,8 +1,8 @@
 //
-//  LogsPrivateDataToggle.swift
+//  ThemeKeyValueModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 5/1/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,23 +26,32 @@
 import CommonLibrary
 import SwiftUI
 
-public struct LogsPrivateDataToggle: View {
+public struct ThemeKeyValueModifier<T>: ViewModifier where T: Equatable {
 
-    @EnvironmentObject
-    private var kvStore: KeyValueManager
+    @ObservedObject
+    private var store: KeyValueManager
 
-    @State
-    private var logsPrivateData = false
+    private let key: String
 
-    public init() {
+    @Binding
+    private var value: T
+
+    private let defaultValue: T
+
+    public init(store: KeyValueManager, key: String, value: Binding<T>, defaultValue: T) {
+        self.store = store
+        self.key = key
+        _value = value
+        self.defaultValue = defaultValue
     }
 
-    public var body: some View {
-        Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
-            .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
-            .onChange(of: logsPrivateData) {
-                PartoutConfiguration.shared.logsAddresses = $0
-                PartoutConfiguration.shared.logsModules = $0
+    public func body(content: Content) -> some View {
+        content
+            .onLoad {
+                value = store.object(forKey: key) ?? defaultValue
+            }
+            .onChange(of: value) {
+                store.set($0, forKey: key)
             }
     }
 }

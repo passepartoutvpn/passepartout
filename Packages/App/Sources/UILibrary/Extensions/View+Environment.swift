@@ -32,6 +32,7 @@ extension View {
             .environmentObject(context.apiManager)
             .environmentObject(context.appearanceManager)
             .environmentObject(context.iapManager)
+            .environmentObject(context.kvStore)
             .environmentObject(context.migrationManager)
             .environmentObject(context.onboardingManager)
             .environmentObject(context.preferencesManager)

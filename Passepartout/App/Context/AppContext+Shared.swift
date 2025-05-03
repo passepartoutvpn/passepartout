@@ -72,6 +72,9 @@ extension AppContext {
 
         // MARK: Managers
 
+        let localKVStore = KeyValueManager(store: UserDefaultsStore(.standard))
+        let sharedKVStore = KeyValueManager(store: UserDefaultsStore(.appGroup))
+
         let apiManager: APIManager = {
             let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
             return APIManager(from: API.shared, repository: repository)
@@ -83,7 +86,7 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-        iapManager.isEnabled = !UserDefaults.appGroup.bool(forKey: AppPreference.skipsPurchases.key)
+        iapManager.isEnabled = !sharedKVStore.bool(forKey: AppPreference.skipsPurchases.key)
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
@@ -121,7 +124,7 @@ extension AppContext {
         )
 
         let tunnel = ExtendedTunnel(
-            defaults: .standard,
+            kvStore: localKVStore,
             tunnel: Tunnel(strategy: tunnelStrategy),
             environment: tunnelEnvironment,
             processor: processor,
@@ -153,7 +156,7 @@ extension AppContext {
             return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
         }()
 
-        let onboardingManager = OnboardingManager(defaults: .standard)
+        let onboardingManager = OnboardingManager(kvStore: localKVStore)
         let preferencesManager = PreferencesManager()
 
         // MARK: Eligibility
@@ -213,6 +216,7 @@ extension AppContext {
         return AppContext(
             apiManager: apiManager,
             iapManager: iapManager,
+            kvStore: sharedKVStore,
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,

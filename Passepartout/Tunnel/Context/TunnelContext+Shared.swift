@@ -30,6 +30,7 @@ import Foundation
 extension TunnelContext {
     static let shared: TunnelContext = {
         let dependencies: Dependencies = .shared
+        let kvStore = KeyValueManager(store: UserDefaultsStore(.appGroup))
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
             inAppHelper: dependencies.appProductHelper(),
@@ -40,6 +41,7 @@ extension TunnelContext {
         let processor = DefaultTunnelProcessor()
         return TunnelContext(
             iapManager: iapManager,
+            kvStore: kvStore,
             processor: processor
         )
     }()

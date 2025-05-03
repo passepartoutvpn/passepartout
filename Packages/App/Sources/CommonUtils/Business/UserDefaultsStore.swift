@@ -1,8 +1,8 @@
 //
-//  LogsPrivateDataToggle.swift
+//  UserDefaultsStore.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 5/1/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import SwiftUI
+import Foundation
 
-public struct LogsPrivateDataToggle: View {
+public final class UserDefaultsStore: KeyValueStore {
+    private let defaults: UserDefaults
 
-    @EnvironmentObject
-    private var kvStore: KeyValueManager
-
-    @State
-    private var logsPrivateData = false
-
-    public init() {
+    public init(_ defaults: UserDefaults) {
+        self.defaults = defaults
     }
 
-    public var body: some View {
-        Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
-            .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
-            .onChange(of: logsPrivateData) {
-                PartoutConfiguration.shared.logsAddresses = $0
-                PartoutConfiguration.shared.logsModules = $0
-            }
+    public func value<V>(for key: String) -> V? {
+        defaults.object(forKey: key) as? V
+    }
+
+    public func set<V>(_ value: V?, for key: String) {
+        guard let value else {
+            defaults.removeObject(forKey: key)
+            return
+        }
+        defaults.set(value, forKey: key)
+    }
+
+    public func removeValue(for key: String) {
+        defaults.removeObject(forKey: key)
     }
 }

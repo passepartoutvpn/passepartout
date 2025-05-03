@@ -29,6 +29,7 @@ import Foundation
 
 extension AppContext {
     public static let forPreviews: AppContext = {
+        let kvStore = KeyValueManager()
         let iapManager = IAPManager(
             customUserLevel: .complete,
             inAppHelper: FakeAppProductHelper(),
@@ -58,13 +59,16 @@ extension AppContext {
             repository: InMemoryAPIRepository()
         )
         let migrationManager = MigrationManager()
+        let preferencesManager = PreferencesManager()
+        let registry = Registry()
         return AppContext(
             apiManager: apiManager,
             iapManager: iapManager,
+            kvStore: kvStore,
             migrationManager: migrationManager,
-            preferencesManager: PreferencesManager(),
+            preferencesManager: preferencesManager,
             profileManager: profileManager,
-            registry: Registry(),
+            registry: registry,
             tunnel: tunnel
         )
     }()

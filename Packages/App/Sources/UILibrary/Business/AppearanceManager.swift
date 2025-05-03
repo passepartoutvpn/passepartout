@@ -23,24 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import SwiftUI
 
 @MainActor
 public final class AppearanceManager: ObservableObject {
-    private let defaults: UserDefaults
+    private let kvStore: KeyValueManager
 
     @Published
     public var systemAppearance: SystemAppearance? {
         didSet {
-            defaults.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
+            kvStore.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
             apply()
         }
     }
 
-    public init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
-        systemAppearance = defaults.string(forKey: UIPreference.systemAppearance.key)
+    public init(kvStore: KeyValueManager) {
+        self.kvStore = kvStore
+        systemAppearance = kvStore.string(forKey: UIPreference.systemAppearance.key)
             .flatMap {
                 SystemAppearance(rawValue: $0)
             }

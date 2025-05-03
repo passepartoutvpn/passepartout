@@ -26,6 +26,7 @@
 import Foundation
 @_exported import Partout
 
+@MainActor
 public final class CommonLibrary {
     public enum Target {
         case app
@@ -33,7 +34,10 @@ public final class CommonLibrary {
         case tunnel
     }
 
-    public init() {
+    private let kvStore: KeyValueManager
+
+    public init(kvStore: KeyValueManager) {
+        self.kvStore = kvStore
     }
 
     public func configure(_ target: Target) {
@@ -53,7 +57,7 @@ private extension CommonLibrary {
         PartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForAppLog,
             parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
+            logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         )
     }
 
@@ -63,9 +67,9 @@ private extension CommonLibrary {
         PartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
+            logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        if UserDefaults.appGroup.bool(forKey: AppPreference.dnsFallsBack.key) {
+        if kvStore.bool(forKey: AppPreference.dnsFallsBack.key) {
             let servers = Constants.shared.tunnel.dnsFallbackServers
             PartoutConfiguration.shared.dnsFallbackServers = servers
             pp_log(.app, .info, "Enable DNS fallback servers: \(servers)")
@@ -73,9 +77,9 @@ private extension CommonLibrary {
     }
 
     func configureShared() {
-        UserDefaults.appGroup.register(defaults: [
+        kvStore.fallback = [
             AppPreference.dnsFallsBack.key: true,
             AppPreference.logsPrivateData.key: false
-        ])
+        ]
     }
 }

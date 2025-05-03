@@ -32,6 +32,7 @@ public protocol UILibraryConfiguring {
     func configure(with context: AppContext)
 }
 
+@MainActor
 public final class UILibrary: UILibraryConfiguring {
     private let uiConfiguring: UILibraryConfiguring?
 
@@ -40,7 +41,8 @@ public final class UILibrary: UILibraryConfiguring {
     }
 
     public func configure(with context: AppContext) {
-        CommonLibrary().configure(.app)
+        CommonLibrary(kvStore: context.kvStore)
+            .configure(.app)
 
         assertMissingImplementations(with: context.registry)
         context.appearanceManager.apply()

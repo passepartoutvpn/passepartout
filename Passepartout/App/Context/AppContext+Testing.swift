@@ -31,6 +31,8 @@ import UILibrary
 extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
         let dependencies: Dependencies = .shared
+
+        let kvStore = KeyValueManager()
         let apiManager = APIManager(
             from: API.bundled,
             repository: InMemoryAPIRepository()
@@ -70,6 +72,7 @@ extension AppContext {
         return AppContext(
             apiManager: apiManager,
             iapManager: iapManager,
+            kvStore: kvStore,
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
             profileManager: profileManager,

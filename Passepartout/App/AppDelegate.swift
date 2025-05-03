@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import SwiftUI
 import UIAccessibility
 import UILibrary
@@ -41,7 +42,7 @@ final class AppDelegate: NSObject {
 
 #if os(macOS)
     let settings = MacSettingsModel(
-        defaults: .standard,
+        kvStore: KeyValueManager(store: UserDefaultsStore(.standard)),
         loginItemId: BundleConfiguration.mainString(for: .loginItemId)
     )
 #endif
