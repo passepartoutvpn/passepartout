@@ -38,12 +38,20 @@ extension Dependencies {
     }
 
     func neProtocolCoder() -> NEProtocolCoder {
+#if PP_BUILD_MAC
+        ProviderNEProtocolCoder(
+            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            registry: registry,
+            coder: profileCoder(),
+        )
+#else
         KeychainNEProtocolCoder(
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: registry,
             coder: profileCoder(),
             keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
         )
+#endif
     }
 
     func tunnelEnvironment() -> TunnelEnvironment {
