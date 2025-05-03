@@ -164,7 +164,7 @@ private extension ExtendedTunnel {
             guard let self else {
                 return
             }
-            for await current in tunnel.currentProfileStream {
+            for await current in tunnel.currentProfileStream.removeDuplicates() {
                 guard !Task.isCancelled else {
                     pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (observed)")
                     break
