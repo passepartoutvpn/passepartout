@@ -92,7 +92,7 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-#if PP_BUILD_MAC
+#if PP_BUILD_FREE
         iapManager.isEnabled = false
 #else
         iapManager.isEnabled = !sharedKVStore.bool(forKey: AppPreference.skipsPurchases.key)

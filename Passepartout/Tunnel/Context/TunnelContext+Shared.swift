@@ -38,7 +38,7 @@ extension TunnelContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-#if PP_BUILD_MAC
+#if PP_BUILD_FREE
         iapManager.isEnabled = false
 #else
         iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
