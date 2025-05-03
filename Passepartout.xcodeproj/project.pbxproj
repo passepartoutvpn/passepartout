@@ -773,6 +773,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		0E8D852E2C328C54005493DE /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -791,6 +792,7 @@
 		};
 		0EAD6A702DC3AED900419346 /* Embed Extensions */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
