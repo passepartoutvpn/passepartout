@@ -182,6 +182,7 @@ extension AppContext {
             // toggle CloudKit sync based on .sharing eligibility
             let remoteStore = newRemoteStore(isRemoteImportingEnabled)
 
+#if !PP_BUILD_MAC
             // @Published
             profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
@@ -201,24 +202,25 @@ extension AppContext {
                         }
                     )
                 }())
-
-                pp_log(.app, .info, "\tRefresh modules preferences repository...")
-                preferencesManager.modulesRepositoryFactory = {
-                    try AppData.cdModulePreferencesRepositoryV3(
-                        context: remoteStore.context,
-                        moduleId: $0
-                    )
-                }
-
-                pp_log(.app, .info, "\tRefresh providers preferences repository...")
-                preferencesManager.providersRepositoryFactory = {
-                    try AppData.cdProviderPreferencesRepositoryV3(
-                        context: remoteStore.context,
-                        providerId: $0
-                    )
-                }
             } catch {
                 pp_log(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+            }
+#endif
+
+            pp_log(.app, .info, "\tRefresh modules preferences repository...")
+            preferencesManager.modulesRepositoryFactory = {
+                try AppData.cdModulePreferencesRepositoryV3(
+                    context: remoteStore.context,
+                    moduleId: $0
+                )
+            }
+
+            pp_log(.app, .info, "\tRefresh providers preferences repository...")
+            preferencesManager.providersRepositoryFactory = {
+                try AppData.cdProviderPreferencesRepositoryV3(
+                    context: remoteStore.context,
+                    providerId: $0
+                )
             }
 
             pp_log(.App.profiles, .info, "\tReload profiles required features...")
