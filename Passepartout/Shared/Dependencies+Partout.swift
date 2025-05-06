@@ -42,7 +42,7 @@ extension Dependencies {
         ProviderNEProtocolCoder(
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: registry,
-            coder: profileCoder(),
+            coder: profileCoder()
         )
 #else
         KeychainNEProtocolCoder(
