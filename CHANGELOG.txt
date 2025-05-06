@@ -1,6 +1,1 @@
-* OpenVPN: Support inline auth-user-pass credentials (#1348)
-* OpenVPN: Fix missing network routes to the VPN (#1314)
-* OpenVPN: Fix discarded routes from local .ovpn (#1313)
-* tvOS: Fix "Protocol" field of provider profiles (#1341)
-* Drop redundant "Enabled" from on-demand module (#1344)
-* Require a comment before submitting an issue (#1342)
+* Adjust profile management for Developer ID (#1354)
