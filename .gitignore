@@ -14,7 +14,6 @@ dist/
 /l10n/
 screenshots/html/*/0*.png
 screenshots/results/
-/templates/
 Preview.html
 default.profraw
 .api
