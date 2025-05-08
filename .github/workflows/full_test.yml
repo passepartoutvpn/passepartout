@@ -24,9 +24,9 @@ jobs:
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
-      - name: Run Xcode tests
+      - name: Run App tests
         run: |
-          ci/run-xcode-tests.sh
+          ci/run-app-tests.sh
       - name: Run Partout tests
         run: |
           ci/run-partout-tests.sh
