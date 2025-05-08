@@ -26,6 +26,8 @@ jobs:
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
+          certificates_url: ${{ vars.CERTIFICATES_URL }}
+          certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Save app version
         id: app_version
         run: |
@@ -39,9 +41,9 @@ jobs:
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
-      - name: Run Xcode tests
+      - name: Run App tests
         run: |
-          ci/run-xcode-tests.sh
+          ci/run-app-tests.sh
       - name: Run Partout tests
         run: |
           ci/run-partout-tests.sh
@@ -62,22 +64,25 @@ jobs:
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
+          certificates_url: ${{ vars.CERTIFICATES_URL }}
+          certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
-      - name: Upload ${{ matrix.platform }} app
+      - name: Archive app
+        run: |
+          ci/xcode-archive.sh ${{ matrix.platform }}
+      - name: Export archive
+        run: |
+          ci/xcode-export.sh ${{ matrix.platform }}
+      - name: Upload archive
         id: upload_app
         timeout-minutes: 30
         env:
-          MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-          MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
           PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
           PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
           PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
         run: |
-          ci/recognize-match-hostname.sh
           bundle exec fastlane --env ${{ matrix.platform }} beta
   distribute_public_beta:
     name: Distribute Public Beta

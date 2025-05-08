@@ -7,7 +7,7 @@ platform_mac="macosx"
 sysex_cfg="ReleaseMac"
 
 mkdir_alias="mkdir -p"
-cp_alias="cp -R"
+cp_alias="cp -RL"
 
 if [ "$PLATFORM_NAME" == "$platform_mac" ]; then
     login_dst="${app_root}/Contents/Library/LoginItems"
