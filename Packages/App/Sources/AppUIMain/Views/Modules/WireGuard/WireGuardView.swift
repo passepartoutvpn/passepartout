@@ -41,6 +41,9 @@ struct WireGuardView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     @State
+    private var configurationViewModel = ConfigurationView.ViewModel()
+
+    @State
     private var isImporting = false
 
     @StateObject
@@ -58,7 +61,13 @@ struct WireGuardView: View, ModuleDraftEditing {
                 draft: draft,
                 impl: impl,
                 isImporting: $isImporting,
-                errorHandler: errorHandler
+                errorHandler: errorHandler,
+                onImport: {
+                    guard let configurationBuilder = $0 else {
+                        return
+                    }
+                    configurationViewModel.load(from: configurationBuilder)
+                }
             ))
             .modifier(PaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
@@ -74,11 +83,16 @@ private extension WireGuardView {
         if draft.module.configurationBuilder != nil {
             ModuleImportSection(isImporting: $isImporting)
             ConfigurationView(
-                configuration: $draft.module.configurationBuilder ?? impl.map {
-                    .init(keyGenerator: $0.keyGenerator)
-                } ?? .init(privateKey: ""),
+                draft: draft,
+                viewModel: $configurationViewModel,
                 keyGenerator: impl?.keyGenerator
             )
+            .onLoad {
+                guard let configurationBuilder = draft.module.configurationBuilder else {
+                    return
+                }
+                configurationViewModel.load(from: configurationBuilder)
+            }
         } else {
             ModuleImportSection(isImporting: $isImporting)
         }
