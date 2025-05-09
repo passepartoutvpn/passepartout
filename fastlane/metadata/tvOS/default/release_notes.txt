@@ -1,5 +1,1 @@
-* Archive and export without fastlane match/gym (#1361)
-* Skip tunnel duplicated updates (#1355)
-* Adjust profile management for Developer ID (#1354)
-* Wrap occurrences of UserDefaults/AppStorage (#1352)
-* Add targets/schemes for Developer ID deployment (#1351)
+* OpenVPN: Fix regression in ifconfig parsing
