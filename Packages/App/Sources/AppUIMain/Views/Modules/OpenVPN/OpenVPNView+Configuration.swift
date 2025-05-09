@@ -127,36 +127,37 @@ private extension OpenVPNView.ConfigurationView {
 
     @ViewBuilder
     func ipSection(for ip: IPSettings?, routes: [Route]?) -> some View {
-        if let ip {
-            ip.localizedDescription(optionalStyle: .address).map {
+        ip?.localizedDescription(optionalStyle: .address)
+            .map {
                 ThemeCopiableText(Strings.Global.Nouns.address, value: $0)
             }
-            ip.localizedDescription(optionalStyle: .defaultGateway).map {
+
+        ip?.localizedDescription(optionalStyle: .defaultGateway)
+            .map {
                 ThemeCopiableText(Strings.Global.Nouns.gateway, value: $0)
             }
 
-            (ip.includedRoutes + (routes ?? []))
-                .nilIfEmpty
-                .map {
-                    ThemeTextList(
-                        Strings.Modules.Ip.Routes.included,
-                        withEntries: true,
-                        values: $0.map(\.localizedDescription),
-                        copiable: true
-                    )
-                }
+        ((ip?.includedRoutes ?? []) + (routes ?? []))
+            .nilIfEmpty
+            .map {
+                ThemeTextList(
+                    Strings.Modules.Ip.Routes.included,
+                    withEntries: true,
+                    values: $0.map(\.localizedDescription),
+                    copiable: true
+                )
+            }
 
-            ip.excludedRoutes
-                .nilIfEmpty
-                .map {
-                    ThemeTextList(
-                        Strings.Modules.Ip.Routes.excluded,
-                        withEntries: true,
-                        values: $0.map(\.localizedDescription),
-                        copiable: true
-                    )
-                }
-        }
+        ip?.excludedRoutes
+            .nilIfEmpty
+            .map {
+                ThemeTextList(
+                    Strings.Modules.Ip.Routes.excluded,
+                    withEntries: true,
+                    values: $0.map(\.localizedDescription),
+                    copiable: true
+                )
+            }
     }
 
     var dnsSection: some View {
@@ -379,14 +380,12 @@ private extension OpenVPNView.ConfigurationView {
     }
 
     func ipRows(for ip: IPSettings?, routes: [Route]?) -> [Any?] {
-        guard let ip else {
-            return []
-        }
-        return [
-            ip.subnet,
-            ip.localizedDescription(optionalStyle: .defaultGateway),
-            ip.includedRoutes.nilIfEmpty,
-            ip.excludedRoutes.nilIfEmpty
+        [
+            ip?.subnet,
+            ip?.localizedDescription(optionalStyle: .defaultGateway),
+            ip?.includedRoutes.nilIfEmpty,
+            routes?.nilIfEmpty,
+            ip?.excludedRoutes.nilIfEmpty
         ]
     }
 
