@@ -41,7 +41,7 @@ struct WireGuardView: View, ModuleDraftEditing {
     private var paywallReason: PaywallReason?
 
     @State
-    private var configurationViewModel = WireGuardView.ConfigurationView.ViewModel()
+    private var configurationViewModel = ConfigurationView.ViewModel()
 
     @State
     private var isImporting = false
