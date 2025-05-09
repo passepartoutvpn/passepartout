@@ -41,6 +41,8 @@ extension WireGuardView {
         @ObservedObject
         var errorHandler: ErrorHandler
 
+        let onImport: (WireGuard.Configuration.Builder?) -> Void
+
         @State
         private var importURL: URL?
 
@@ -88,6 +90,7 @@ private extension WireGuardView.ImportModifier {
                 throw PartoutError(.parsing)
             }
             draft.module.configurationBuilder = module.configuration?.builder()
+            onImport(draft.module.configurationBuilder)
         } catch {
             pp_log(.app, .error, "Unable to import WireGuard configuration: \(error)")
             errorHandler.handle(error, title: draft.module.moduleType.localizedDescription)

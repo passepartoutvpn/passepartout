@@ -29,34 +29,45 @@ import SwiftUI
 extension WireGuardView {
     struct ConfigurationView: View {
 
+        @ObservedObject
+        private var draft: ModuleDraft<WireGuardModule.Builder>
+
         @Binding
-        var configuration: WireGuard.Configuration.Builder
+        private var viewModel: ViewModel
 
-        let keyGenerator: WireGuardKeyGenerator?
+        private let keyGenerator: WireGuardKeyGenerator?
 
-        @State
-        private var model = ViewModel()
+        private var configurationBuilder: WireGuard.Configuration.Builder {
+            draft.module.configurationBuilder ?? newConfiguration
+        }
+
+        private let newConfiguration: WireGuard.Configuration.Builder
+
+        init(
+            draft: ModuleDraft<WireGuardModule.Builder>,
+            viewModel: Binding<ViewModel>,
+            keyGenerator: WireGuardKeyGenerator?
+        ) {
+            self.draft = draft
+            _viewModel = viewModel
+            self.keyGenerator = keyGenerator
+            newConfiguration = keyGenerator.map {
+                WireGuard.Configuration.Builder(keyGenerator: $0)
+            } ?? WireGuard.Configuration.Builder(privateKey: "")
+        }
 
         var body: some View {
             Group {
                 privateKeySection
                 interfaceSection
                 dnsSection
-                ForEach(Array(zip(model.peersOrder.indices, model.peersOrder)), id: \.1) { index, publicKey in
-                    peerSection(for: publicKey, at: index)
-                }
+                peerSections
                 Section {
                     ThemeTrailingContent(content: addPeerButton)
                 }
             }
-            .onLoad {
-                model.load(from: configuration)
-            }
-            .onChange(of: configuration) {
-                model.load(from: $0)
-            }
-            .onChange(of: model) {
-                $0.save(to: &configuration)
+            .onChange(of: viewModel) {
+                $0.save(to: draft, fallback: newConfiguration)
             }
         }
     }
@@ -67,15 +78,15 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: Strings.Modules.Wireguard.interface) {
             ThemeLongContentLink(
                 Strings.Global.Nouns.privateKey,
-                text: $model.privateKey
+                text: $viewModel.privateKey
             )
             if let keyGenerator {
                 ThemeCopiableText(
                     Strings.Global.Nouns.publicKey,
-                    value: (try? keyGenerator.publicKey(for: model.privateKey)) ?? ""
+                    value: (try? keyGenerator.publicKey(for: viewModel.privateKey)) ?? ""
                 )
                 Button(Strings.Modules.Wireguard.PrivateKey.generate) {
-                    model.privateKey = keyGenerator.newPrivateKey()
+                    viewModel.privateKey = keyGenerator.newPrivateKey()
                 }
             }
         }
@@ -85,12 +96,12 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: nil) {
             ThemeLongContentLink(
                 Strings.Global.Nouns.addresses,
-                text: $model.addresses,
+                text: $viewModel.addresses,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
                 Strings.Unlocalized.mtu,
-                text: $model.mtu,
+                text: $viewModel.mtu,
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
         }
@@ -100,19 +111,25 @@ private extension WireGuardView.ConfigurationView {
         themeModuleSection(header: Strings.Unlocalized.dns) {
             ThemeLongContentLink(
                 Strings.Global.Nouns.servers,
-                text: $model.dnsServers,
+                text: $viewModel.dnsServers,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
                 Strings.Global.Nouns.domain,
-                text: $model.dnsDomain,
+                text: $viewModel.dnsDomain,
                 placeholder: Strings.Unlocalized.Placeholders.hostname
             )
             ThemeLongContentLink(
                 Strings.Entities.Dns.searchDomains,
-                text: $model.dnsSearchDomains,
+                text: $viewModel.dnsSearchDomains,
                 preview: \.asNumberOfEntries
             )
+        }
+    }
+
+    var peerSections: some View {
+        ForEach(Array(zip(viewModel.peersOrder.indices, viewModel.peersOrder)), id: \.1) { index, publicKey in
+            peerSection(for: publicKey, at: index)
         }
     }
 
@@ -153,18 +170,18 @@ private extension WireGuardView.ConfigurationView {
             let newPeer = ViewModel.Peer()
             assert(newPeer.publicKey == "")
             withAnimation {
-                model.peers[newPeer.publicKey] = newPeer
-                model.peersOrder.append(newPeer.publicKey)
+                viewModel.peers[newPeer.publicKey] = newPeer
+                viewModel.peersOrder.append(newPeer.publicKey)
             }
         }
-        .disabled(model.peers[""] != nil)
+        .disabled(viewModel.peers[""] != nil)
     }
 
     func removePeerButton(at index: Int, publicKey: String) -> some View {
         Button(Strings.Modules.Wireguard.Peer.delete, role: .destructive) {
             withAnimation {
-                model.peersOrder.remove(at: index)
-                model.peers.removeValue(forKey: publicKey)
+                viewModel.peersOrder.remove(at: index)
+                viewModel.peers.removeValue(forKey: publicKey)
             }
         }
     }
@@ -173,16 +190,18 @@ private extension WireGuardView.ConfigurationView {
 private extension WireGuardView.ConfigurationView {
     var dnsRows: [Any?] {
         [
-            configuration.interface.dns.servers.nilIfEmpty,
-            configuration.interface.dns.domainName,
-            configuration.interface.dns.searchDomains?.nilIfEmpty
+            configurationBuilder.interface.dns.servers.nilIfEmpty,
+            configurationBuilder.interface.dns.domainName,
+            configurationBuilder.interface.dns.searchDomains?.nilIfEmpty
         ]
     }
 }
 
 // MARK: - Logic
 
-private extension WireGuardView.ConfigurationView {
+extension WireGuardView.ConfigurationView {
+
+    @MainActor
     struct ViewModel: Equatable {
         struct Peer: Equatable {
             var publicKey = ""
@@ -235,7 +254,11 @@ private extension WireGuardView.ConfigurationView {
             peersOrder = configuration.peers.map(\.publicKey)
         }
 
-        func save(to configuration: inout WireGuard.Configuration.Builder) {
+        func save(
+            to draft: ModuleDraft<WireGuardModule.Builder>,
+            fallback: WireGuard.Configuration.Builder
+        ) {
+            var configuration = draft.module.configurationBuilder ?? fallback
             configuration.interface.privateKey = privateKey
             configuration.interface.addresses = addresses.trimmedSplit(separator: separator)
             configuration.interface.mtu = UInt16(mtu)
@@ -258,14 +281,18 @@ private extension WireGuardView.ConfigurationView {
                     peer.keepAlive = UInt16(model.keepAlive)
                     return peer
                 }
+
+            draft.module.configurationBuilder = configuration
         }
     }
+}
 
+private extension WireGuardView.ConfigurationView {
     func peerBinding(with publicKey: String) -> Binding<ViewModel.Peer> {
         Binding {
-            model.peers[publicKey] ?? ViewModel.Peer()
+            viewModel.peers[publicKey] ?? ViewModel.Peer()
         } set: {
-            model.peers[publicKey] = $0
+            viewModel.peers[publicKey] = $0
         }
     }
 }
@@ -287,15 +314,22 @@ private extension String {
     struct Preview: View {
 
         @State
-        private var configuration: WireGuard.Configuration.Builder = .forPreviews
+        private var module = WireGuardModule.Builder(configurationBuilder: .forPreviews)
+
+        @State
+        private var viewModel = WireGuardView.ConfigurationView.ViewModel()
 
         var body: some View {
             NavigationStack {
                 Form {
                     WireGuardView.ConfigurationView(
-                        configuration: $configuration,
+                        draft: ModuleDraft(module: module),
+                        viewModel: $viewModel,
                         keyGenerator: nil
                     )
+                    .onLoad {
+                        viewModel.load(from: module.configurationBuilder!)
+                    }
                 }
                 .themeForm()
                 .withMockEnvironment()
