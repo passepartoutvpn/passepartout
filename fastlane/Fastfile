@@ -15,15 +15,16 @@
 
 fastlane_require "dotenv"
 fastlane_require "fileutils"
+
 load "xcconfig.rb"
 Dotenv.load ".env.secret"
+logname = "CHANGELOG.txt"
 
 desc "Bump version"
 lane :bump do |options|
     xcconfig = ENV["XCCONFIG_PATH"]
     api = ENV["API_PACKAGE_PATH"]
     metadata = "fastlane/metadata"
-    logname = "CHANGELOG.txt"
 
     unless options[:no_log]
         if options[:since]
