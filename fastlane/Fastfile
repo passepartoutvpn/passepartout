@@ -18,13 +18,13 @@ fastlane_require "fileutils"
 load "xcconfig.rb"
 Dotenv.load ".env.secret"
 
-xcconfig = ENV["XCCONFIG_PATH"]
-api = ENV["API_PACKAGE_PATH"]
-metadata = "fastlane/metadata"
-logname = "CHANGELOG.txt"
-
 desc "Bump version"
 lane :bump do |options|
+    xcconfig = ENV["XCCONFIG_PATH"]
+    api = ENV["API_PACKAGE_PATH"]
+    metadata = "fastlane/metadata"
+    logname = "CHANGELOG.txt"
+
     unless options[:no_log]
         if options[:since]
             between = [options[:since], "HEAD"]
@@ -92,6 +92,8 @@ end
 
 desc "Distribute to Public Beta"
 lane :public_beta do
+    ENV.delete["PILOT_IPA"]
+    ENV.delete["PILOT_PKG"]
     pilot(
         distribute_only: true,
         distribute_external: true,
