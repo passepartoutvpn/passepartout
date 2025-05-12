@@ -56,7 +56,7 @@ struct ActiveProfileView: View {
         VStack(spacing: .zero) {
             VStack {
                 VStack {
-                    currentProfileView
+                    activeProfileView
                     statusView
                 }
                 .padding(.bottom)
@@ -80,7 +80,7 @@ struct ActiveProfileView: View {
 }
 
 private extension ActiveProfileView {
-    var currentProfileView: some View {
+    var activeProfileView: some View {
         Text(profile?.name ?? Strings.Views.App.InstalledProfile.None.name)
             .font(.title)
             .fontWeight(theme.relevantWeight)
@@ -89,7 +89,7 @@ private extension ActiveProfileView {
     }
 
     var statusView: some View {
-        ConnectionStatusText(tunnel: tunnel)
+        ConnectionStatusText(tunnel: tunnel, profileId: profile?.id)
             .font(.title2)
             .frame(maxWidth: .infinity, alignment: .leading)
             .brightness(0.2)

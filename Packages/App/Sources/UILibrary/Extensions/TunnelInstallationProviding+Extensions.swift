@@ -26,24 +26,15 @@
 import CommonLibrary
 import Foundation
 
+// FIXME: #218, installedProfile makes little sense with multiple tunnels
+#if !os(macOS)
 @MainActor
 extension TunnelInstallationProviding {
-    public var installation: TunnelInstallation? {
-        guard let currentProfile = tunnel.currentProfile else {
+    public var installedProfile: Profile? {
+        guard let activeProfile = tunnel.activeProfile else {
             return nil
         }
-        guard let preview = profileManager.previews.first(where: {
-            $0.id == currentProfile.id
-        }) else {
-            return nil
-        }
-        return TunnelInstallation(preview: preview, onDemand: currentProfile.onDemand)
-    }
-
-    public var currentProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
-            return nil
-        }
-        return profileManager.profile(withId: id)
+        return profileManager.profile(withId: activeProfile.id)
     }
 }
+#endif

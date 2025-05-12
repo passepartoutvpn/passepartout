@@ -94,10 +94,10 @@ private extension ProfileListView {
         HStack {
             Text(preview.name)
             Spacer()
-            tunnel.statusImageName
+            tunnel.statusImageName(ofProfileId: preview.id)
                 .map {
                     ThemeImage($0)
-                        .opaque(preview.id == tunnel.currentProfile?.id)
+                        .opaque(tunnel.isActiveProfile(withId: preview.id))
                 }
         }
         .font(.headline)

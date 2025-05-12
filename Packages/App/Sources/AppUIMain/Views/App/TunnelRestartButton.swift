@@ -45,7 +45,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
             guard let profile else {
                 return
             }
-            guard tunnel.status == .active else {
+            guard tunnel.status(ofProfileId: profile.id) == .active else {
                 return
             }
             Task {
@@ -54,6 +54,15 @@ struct TunnelRestartButton<Label>: View where Label: View {
         } label: {
             label()
         }
-        .disabled(profile == nil || tunnel.status != .active)
+        .disabled(isDisabled)
+    }
+}
+
+private extension TunnelRestartButton {
+    var isDisabled: Bool {
+        guard let profile else {
+            return true
+        }
+        return tunnel.status(ofProfileId: profile.id) != .active
     }
 }

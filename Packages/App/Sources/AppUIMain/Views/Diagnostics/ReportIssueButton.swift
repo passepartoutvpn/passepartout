@@ -49,8 +49,9 @@ struct ReportIssueButton {
     @State
     var modalRoute: ModalRoute?
 
+    // FIXME: #1360, diagnostics/logs must be per-tunnel
     var installedProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
+        guard let id = tunnel.activeProfiles.first?.value.id else {
             return nil
         }
         return profileManager.profile(withId: id)

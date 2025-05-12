@@ -71,12 +71,7 @@ private extension ProfileCardView {
 
     @ViewBuilder
     var tunnelView: some View {
-        if tunnel.currentProfile?.id == preview.id {
-            ConnectionStatusText(tunnel: tunnel)
-        } else {
-            Text(Strings.Entities.TunnelStatus.inactive)
-                .foregroundStyle(.secondary)
-        }
+        ConnectionStatusText(tunnel: tunnel, profileId: preview.id)
     }
 }
 

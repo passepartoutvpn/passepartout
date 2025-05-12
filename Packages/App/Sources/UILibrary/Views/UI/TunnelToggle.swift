@@ -97,11 +97,11 @@ private extension TunnelToggle {
 }
 
 private extension TunnelToggle {
-    var tunnelProfile: TunnelCurrentProfile? {
+    var tunnelProfile: TunnelActiveProfile? {
         guard let profile else {
             return nil
         }
-        return tunnel.currentProfiles[profile.id]
+        return tunnel.activeProfiles[profile.id]
     }
 
     var isOn: Bool {
@@ -130,7 +130,7 @@ private extension TunnelToggle {
                 if isOn {
                     await flow?.onConnect(profile)
                 } else {
-                    try await tunnel.disconnect()
+                    try await tunnel.disconnect(from: profile.id)
                 }
             } else {
                 await flow?.onConnect(profile)

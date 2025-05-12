@@ -68,11 +68,11 @@ public struct PreferencesView: View {
             systemAppearanceSection
 #if os(iOS)
             lockInBackgroundSection
+            pinActiveProfileSection
 #elseif os(macOS)
             launchesOnLoginSection
             keepsInMenuSection
 #endif
-            pinActiveProfileSection
             dnsFallsBackSection
             enablesPurchasesSection
             eraseCloudKitSection
@@ -104,6 +104,11 @@ private extension PreferencesView {
         Toggle(Strings.Views.Preferences.locksInBackground, isOn: $locksInBackground)
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.LocksInBackground.footer)
     }
+
+    var pinActiveProfileSection: some View {
+        PinActiveProfileToggle()
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.PinsActiveProfile.footer)
+    }
 #elseif os(macOS)
     var launchesOnLoginSection: some View {
         Toggle(Strings.Views.Preferences.launchesOnLogin, isOn: $settings.launchesOnLogin)
@@ -115,11 +120,6 @@ private extension PreferencesView {
             .themeSectionWithSingleRow(footer: Strings.Views.Preferences.KeepsInMenu.footer)
     }
 #endif
-
-    var pinActiveProfileSection: some View {
-        PinActiveProfileToggle()
-            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.PinsActiveProfile.footer)
-    }
 
     var dnsFallsBackSection: some View {
         Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $dnsFallsBack)

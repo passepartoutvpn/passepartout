@@ -339,7 +339,7 @@ private extension AppCoordinator {
             builder.saveModule(newModule)
             let newProfile = try builder.tryBuild()
 
-            let wasConnected = newProfile.id == tunnel.currentProfile?.id && tunnel.status == .active
+            let wasConnected = tunnel.status(ofProfileId: newProfile.id) == .active
             try await profileManager.save(newProfile, isLocal: true)
 
             guard profile.shouldConnectToProviderServer else {

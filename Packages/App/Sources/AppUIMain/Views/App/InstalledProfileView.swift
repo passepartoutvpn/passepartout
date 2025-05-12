@@ -94,12 +94,21 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerServerButton
-            StatusText(theme: theme, tunnel: tunnel)
+            statusText
         }
     }
 
     var providerServerButton: some View {
         profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
+    }
+
+    @ViewBuilder
+    var statusText: some View {
+        if let profile {
+            StatusDynamicText(theme: theme, tunnel: tunnel, profileId: profile.id)
+        } else {
+            StatusText(theme: theme, status: .inactive)
+        }
     }
 
     var toggleButton: some View {
@@ -132,12 +141,25 @@ private struct StatusText: View {
     @ObservedObject
     var theme: Theme
 
+    let status: TunnelStatus
+
+    var body: some View {
+        ConnectionStatusStaticText(status: status, color: status.color(theme))
+    }
+}
+
+private struct StatusDynamicText: View {
+
+    @ObservedObject
+    var theme: Theme
+
     @ObservedObject
     var tunnel: ExtendedTunnel
 
+    let profileId: Profile.ID
+
     var body: some View {
-        debugChanges()
-        return ConnectionStatusText(tunnel: tunnel)
+        ConnectionStatusText(tunnel: tunnel, profileId: profileId)
     }
 }
 
