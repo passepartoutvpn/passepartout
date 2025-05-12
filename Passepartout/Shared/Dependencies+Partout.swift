@@ -57,7 +57,14 @@ extension Dependencies {
     }
 
     nonisolated func appTunnelEnvironment(strategy: TunnelStrategy, profileId: Profile.ID) -> TunnelEnvironmentReader {
+#if PP_BUILD_MAC
+        guard let neStrategy = strategy as? NETunnelStrategy else {
+            fatalError("Mac build requires NETunnelStrategy")
+        }
+        return NETunnelEnvironment(strategy: neStrategy, profileId: profileId)
+#else
         tunnelEnvironment(profileId: profileId)
+#endif
     }
 
     nonisolated func tunnelEnvironment(profileId: Profile.ID) -> TunnelEnvironment {
