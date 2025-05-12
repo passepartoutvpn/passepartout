@@ -28,7 +28,7 @@ import CommonUtils
 import SwiftUI
 import UILibrary
 
-struct ProfileView: View, Routable, TunnelInstallationProviding {
+struct ProfileView: View, Routable {
     enum Field: Hashable {
         case connect
 

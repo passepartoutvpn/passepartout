@@ -26,8 +26,7 @@
 import CommonLibrary
 import Foundation
 
-// FIXME: #218, installedProfile makes little sense with multiple tunnels
-#if !os(macOS)
+#if os(iOS) || os(tvOS)
 @MainActor
 extension TunnelInstallationProviding {
     public var installedProfile: Profile? {
