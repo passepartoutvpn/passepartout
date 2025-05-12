@@ -49,9 +49,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     var flow: ProfileFlow?
 
-    @State
-    private var activeProfiles: [Profile.ID: TunnelActiveProfile] = [:]
-
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300.0))]
 
     var body: some View {
@@ -85,11 +82,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
             }
             .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.previews, category: .profiles)
-        }
-        .task {
-            for await newActiveProfiles in tunnel.activeProfilesStream {
-                activeProfiles = newActiveProfiles
-            }
         }
     }
 }
