@@ -103,9 +103,8 @@ extension AppContext {
             registry: dependencies.registry
         )
 
-        let tunnelEnvironment = dependencies.tunnelEnvironment()
 #if targetEnvironment(simulator)
-        let tunnelStrategy = FakeTunnelStrategy(environment: tunnelEnvironment, dataCountInterval: 1000)
+        let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
             model: cdRemoteModel,
             observingResults: true
@@ -114,8 +113,7 @@ extension AppContext {
 #else
         let tunnelStrategy = NETunnelStrategy(
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            coder: dependencies.neProtocolCoder(),
-            environment: tunnelEnvironment
+            coder: dependencies.neProtocolCoder()
         )
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
             dependencies.profileTitle($0)
@@ -134,9 +132,9 @@ extension AppContext {
         )
 
         let tunnel = ExtendedTunnel(
-            kvStore: localKVStore,
-            tunnel: Tunnel(strategy: tunnelStrategy),
-            environment: tunnelEnvironment,
+            tunnel: Tunnel(strategy: tunnelStrategy) {
+                dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
+            },
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )

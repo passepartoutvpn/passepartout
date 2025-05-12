@@ -26,6 +26,9 @@
 import CommonLibrary
 @preconcurrency import NetworkExtension
 
+// FIXME: #1360, refactor to handle PTP started multiple times (macOS, desktop)
+// FIXME: #1360, diagnostics/logs must be per-tunnel (optional Profile.ID in pp_log?)
+
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     @MainActor
@@ -44,35 +47,39 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         pp_log(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
-        let environment = await dependencies.tunnelEnvironment()
-
-        // check hold flag
-        if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
-            pp_log(.app, .info, "Tunnel is on hold")
-            guard options?[ExtendedTunnel.isManualKey] == true as NSNumber else {
-                pp_log(.app, .error, "Tunnel was started non-interactively, hang here")
-                return
-            }
-            pp_log(.app, .info, "Tunnel was started interactively, clear hold flag")
-            environment.removeEnvironmentValue(forKey: TunnelEnvironmentKeys.holdFlag)
-        }
-
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
                 decoder: dependencies.neProtocolCoder(),
                 registry: dependencies.registry,
-                environment: environment,
+                environmentFactory: {
+                    self.dependencies.tunnelEnvironment(profileId: $0)
+                },
                 willProcess: context.processor.willProcess
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
 
+            let environment = fwd.environment
+
+            // check hold flag
+            if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
+                pp_log(.app, .info, "Tunnel is on hold")
+                guard options?[ExtendedTunnel.isManualKey] == true as NSNumber else {
+                    pp_log(.app, .error, "Tunnel was started non-interactively, hang here")
+                    return
+                }
+                pp_log(.app, .info, "Tunnel was started interactively, clear hold flag")
+                environment.removeEnvironmentValue(forKey: TunnelEnvironmentKeys.holdFlag)
+            }
+
+            // prepare for receipt verification
             await context.iapManager.fetchLevelIfNeeded()
             let params = await Constants.shared.tunnel.verificationParameters(isBeta: context.iapManager.isBeta)
             pp_log(.app, .info, "Will start profile verification in \(params.delay) seconds")
 
+            // start tunnel
             try await fwd.startTunnel(options: options)
 
             // #1070, do not wait for this to start the tunnel. if on-demand is

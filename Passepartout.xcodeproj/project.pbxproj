@@ -298,8 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				0E3FF4B82CE3AFBC00BFF640 /* Resources */,
-				0E3FF4B92CE3AFBC00BFF640 /* MigrationManagerTests.swift */,
 				0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */,
+				0E3FF4B92CE3AFBC00BFF640 /* MigrationManagerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

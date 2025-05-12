@@ -56,13 +56,10 @@ extension AppContext {
             processor: processor
         )
         profileManager.isRemoteImportingEnabled = true
-        let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: FakeTunnelStrategy(
-                environment: tunnelEnvironment,
-                dataCountDelta: DataCount(2 * 1200000, 1200000)
-            )),
-            environment: tunnelEnvironment,
+            tunnel: Tunnel(strategy: FakeTunnelStrategy()) { _ in
+                SharedTunnelEnvironment()
+            },
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )

@@ -29,40 +29,20 @@ import Foundation
 public final class ExtendedTunnel: ObservableObject {
     public static nonisolated let isManualKey = "isManual"
 
-    private let kvStore: KeyValueManager?
-
     private let tunnel: Tunnel
-
-    private let environment: TunnelEnvironment
 
     private let processor: AppTunnelProcessor?
 
     private let interval: TimeInterval
 
-    public func value<T>(forKey key: TunnelEnvironmentKey<T>) -> T? where T: Decodable {
-        environment.environmentValue(forKey: key)
-    }
-
-    public private(set) var lastErrorCode: PartoutError.Code? {
-        didSet {
-            pp_log(.app, .info, "ExtendedTunnel.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
-        }
-    }
-
-    public private(set) var dataCount: DataCount?
-
     private var subscriptions: [Task<Void, Never>]
 
     public init(
-        kvStore: KeyValueManager? = nil,
         tunnel: Tunnel,
-        environment: TunnelEnvironment,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
-        self.kvStore = kvStore
         self.tunnel = tunnel
-        self.environment = environment
         self.processor = processor
         self.interval = interval
         subscriptions = []
@@ -74,43 +54,6 @@ public final class ExtendedTunnel: ObservableObject {
 // MARK: - Public interface
 
 extension ExtendedTunnel {
-    public var status: TunnelStatus {
-        tunnel.status
-    }
-
-    public var connectionStatus: TunnelStatus {
-        tunnel.status.withEnvironment(environment)
-    }
-}
-
-extension ExtendedTunnel {
-    public var currentProfile: TunnelCurrentProfile? {
-        tunnel.currentProfile ?? lastUsedProfile
-    }
-
-    public var currentProfiles: [Profile.ID: TunnelCurrentProfile] {
-        tunnel.currentProfiles
-    }
-
-    public var currentProfileStream: AsyncStream<TunnelCurrentProfile?> {
-        AsyncStream { [weak self] continuation in
-            Task { [weak self] in
-                guard let self else {
-                    continuation.finish()
-                    return
-                }
-                for await current in tunnel.currentProfileStream {
-                    guard !Task.isCancelled else {
-                        pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (returned)")
-                        break
-                    }
-                    continuation.yield(current ?? lastUsedProfile)
-                }
-                continuation.finish()
-            }
-        }
-    }
-
     public func install(_ profile: Profile) async throws {
         pp_log(.app, .notice, "Install profile \(profile.id)...")
         let newProfile = try await processedProfile(profile)
@@ -136,16 +79,20 @@ extension ExtendedTunnel {
         )
     }
 
-    public func disconnect() async throws {
+    public func disconnect(from profileId: Profile.ID) async throws {
         pp_log(.app, .notice, "Disconnect...")
-        try await tunnel.disconnect()
+        try await tunnel.disconnect(from: profileId)
     }
 
+    // FIXME: #1360, diagnostics/logs must be per-tunnel
     public func currentLog(parameters: Constants.Log) async -> [String] {
-        let output = try? await tunnel.sendMessage(.localLog(
+        guard let anyProfile = tunnel.activeProfiles.first?.value else {
+            return []
+        }
+        let output = try? await tunnel.sendMessage(.debugLog(
             sinceLast: parameters.sinceLast,
             maxLevel: parameters.options.maxLevel
-        ))
+        ), to: anyProfile.id)
         switch output {
         case .debugLog(let log):
             return log.lines.map(parameters.formatter.formattedLine)
@@ -153,6 +100,49 @@ extension ExtendedTunnel {
         default:
             return []
         }
+    }
+}
+
+extension ExtendedTunnel {
+#if os(iOS) || os(tvOS)
+    public var activeProfile: TunnelActiveProfile? {
+        tunnel.activeProfile
+    }
+#endif
+    public var activeProfiles: [Profile.ID: TunnelActiveProfile] {
+        tunnel.activeProfiles
+    }
+
+    public var activeProfilesStream: AsyncStream<[Profile.ID: TunnelActiveProfile]> {
+        tunnel.activeProfilesStream
+    }
+
+    public func isActiveProfile(withId profileId: Profile.ID) -> Bool {
+        tunnel.activeProfiles.keys.contains(profileId)
+    }
+
+    public func status(ofProfileId profileId: Profile.ID) -> TunnelStatus {
+        activeProfiles[profileId]?.status ?? .inactive
+    }
+
+    public func connectionStatus(ofProfileId profileId: Profile.ID) -> TunnelStatus {
+        let status = status(ofProfileId: profileId)
+        guard let environment = tunnel.environment(for: profileId) else {
+            return status
+        }
+        return status.withEnvironment(environment)
+    }
+
+    public func dataCount(ofProfileId profileId: Profile.ID) -> DataCount? {
+        tunnel
+            .environment(for: profileId)?
+            .environmentValue(forKey: TunnelEnvironmentKeys.dataCount)
+    }
+
+    public func lastErrorCode(ofProfileId profileId: Profile.ID) -> PartoutError.Code? {
+        tunnel
+            .environment(for: profileId)?
+            .environmentValue(forKey: TunnelEnvironmentKeys.lastErrorCode)
     }
 }
 
@@ -164,35 +154,12 @@ private extension ExtendedTunnel {
             guard let self else {
                 return
             }
-            for await current in tunnel.currentProfileStream.removeDuplicates() {
+            for await _ in tunnel.activeProfilesStream.removeDuplicates() {
                 guard !Task.isCancelled else {
-                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.currentProfileStream (observed)")
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.tunnelSubscription")
                     break
                 }
-                await MainActor.run { [weak self] in
-                    guard let self else {
-                        return
-                    }
-
-                    // update last used profile
-                    if let id = current?.id {
-                        kvStore?.set(id.uuidString, forKey: AppPreference.lastUsedProfileId.key)
-                    }
-
-                    // follow status updates
-                    switch current?.status ?? .inactive {
-                    case .active:
-                        break
-                    case .activating:
-                        lastErrorCode = nil
-                        dataCount = nil
-                    default:
-                        lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
-                        dataCount = nil
-                    }
-
-                    objectWillChange.send()
-                }
+                objectWillChange.send()
             }
         }
 
@@ -202,15 +169,8 @@ private extension ExtendedTunnel {
                     return
                 }
                 guard !Task.isCancelled else {
-                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.timerTask")
+                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.timerSubscription")
                     break
-                }
-                if let lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode),
-                    lastErrorCode != self.lastErrorCode {
-                    self.lastErrorCode = lastErrorCode
-                }
-                if tunnel.status == .active {
-                    dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
                 }
                 objectWillChange.send()
 
@@ -242,22 +202,8 @@ private extension ExtendedTunnel {
 
 // MARK: - Helpers
 
-private extension ExtendedTunnel {
-    var lastUsedProfile: TunnelCurrentProfile? {
-        guard let uuidString = kvStore?.string(forKey: AppPreference.lastUsedProfileId.key),
-              let uuid = UUID(uuidString: uuidString) else {
-            return nil
-        }
-        return TunnelCurrentProfile(
-            id: uuid,
-            status: .inactive,
-            onDemand: false
-        )
-    }
-}
-
 extension TunnelStatus {
-    func withEnvironment(_ environment: TunnelEnvironment) -> TunnelStatus {
+    func withEnvironment(_ environment: TunnelEnvironmentReader) -> TunnelStatus {
         var status = self
         if status == .active, let connectionStatus = environment.environmentValue(forKey: TunnelEnvironmentKeys.connectionStatus) {
             switch connectionStatus {
