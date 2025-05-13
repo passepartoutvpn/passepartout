@@ -55,7 +55,7 @@ extension Issue {
 
         let tunnelLog: Data?
 
-        // FIXME: #1360, diagnostics/logs must be per-tunnel
+        // FIXME: #1369, diagnostics/logs must be per-tunnel
         // live tunnel log
         if !metadata.tunnel.activeProfiles.isEmpty {
             tunnelLog = await metadata.tunnel.currentLog(parameters: metadata.parameters)

@@ -26,8 +26,8 @@
 import CommonLibrary
 @preconcurrency import NetworkExtension
 
-// FIXME: #1360, refactor to handle PTP started multiple times (macOS, desktop)
-// FIXME: #1360, diagnostics/logs must be per-tunnel (optional Profile.ID in pp_log?)
+// FIXME: #1369, refactor to handle PTP started multiple times (macOS, desktop)
+// FIXME: #1369, diagnostics/logs must be per-tunnel (optional Profile.ID in pp_log?)
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
