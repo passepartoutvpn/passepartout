@@ -69,14 +69,16 @@ extension ExtendedTunnelTests {
             env
         }
         let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
-        let dataCount = DataCount(500, 700)
+        let expectedDataCount = DataCount(500, 700)
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let stream = sut.activeProfilesStream
         try await sut.install(profile)
 
-        env.setEnvironmentValue(dataCount, forKey: TunnelEnvironmentKeys.dataCount)
-        XCTAssertEqual(sut.dataCount(ofProfileId: profile.id), dataCount)
+        env.setEnvironmentValue(expectedDataCount, forKey: TunnelEnvironmentKeys.dataCount)
+        await stream.waitForNext()
+        XCTAssertEqual(sut.dataCount(ofProfileId: profile.id), expectedDataCount)
     }
 
     func test_givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
