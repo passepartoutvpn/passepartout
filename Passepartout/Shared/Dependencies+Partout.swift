@@ -92,7 +92,13 @@ private extension Dependencies {
                         parameters: $0,
                         module: $1,
                         prng: Partout.platform.newPRNG(ctx),
-                        dns: Partout.platform.newDNSResolver(ctx),
+                        dns: SimpleDNSResolver {
+#if PP_BUILD_MAC
+                            POSIXDNSStrategy(hostname: $0)
+#else
+                            CFDNSStrategy(hostname: $0)
+#endif
+                        },
                         options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
