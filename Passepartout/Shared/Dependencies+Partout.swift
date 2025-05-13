@@ -54,11 +54,12 @@ extension Dependencies {
 #endif
     }
 
-    func tunnelEnvironment() -> TunnelEnvironment {
-        AppGroupEnvironment(
-            appGroup: BundleConfiguration.mainString(for: .groupId),
-            prefix: "Partout."
-        )
+    nonisolated func appTunnelEnvironment(strategy: TunnelStrategy, profileId: Profile.ID) -> TunnelEnvironmentReader {
+        tunnelEnvironment(profileId: profileId)
+    }
+
+    nonisolated func tunnelEnvironment(profileId: Profile.ID) -> TunnelEnvironment {
+        UserDefaultsEnvironment(defaults: .appGroup, prefix: "Partout.\(profileId.uuidString).")
     }
 }
 

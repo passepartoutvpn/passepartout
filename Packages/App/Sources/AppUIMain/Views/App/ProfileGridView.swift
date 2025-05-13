@@ -49,9 +49,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     var flow: ProfileFlow?
 
-    @State
-    private var currentProfile: TunnelCurrentProfile?
-
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300.0))]
 
     var body: some View {
@@ -59,11 +56,13 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
         return ScrollViewReader { scrollProxy in
             ScrollView {
                 VStack(spacing: .zero) {
+#if os(iOS)
                     if !isUITesting && !isSearching && pinsActiveProfile {
                         headerView(scrollProxy: scrollProxy)
                             .padding(.bottom)
                             .unanimated()
                     }
+#endif
                     LazyVGrid(columns: columns) {
                         ForEach(allPreviews, content: profileView)
                             .onDelete { offsets in
@@ -84,11 +83,6 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
             .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.previews, category: .profiles)
         }
-        .task {
-            for await newCurrentProfile in tunnel.currentProfileStream {
-                currentProfile = newCurrentProfile
-            }
-        }
     }
 }
 
@@ -99,17 +93,18 @@ private extension ProfileGridView {
         profileManager.previews
     }
 
+#if os(iOS)
     func headerView(scrollProxy: ScrollViewProxy) -> some View {
         InstalledProfileView(
             layout: .grid,
             profileManager: profileManager,
-            profile: currentProfile,
+            profile: installedProfile,
             tunnel: tunnel,
             errorHandler: errorHandler,
             flow: flow
         )
         .contextMenu {
-            currentProfile.map {
+            installedProfile.map {
                 ProfileContextMenu(
                     style: .installedProfile,
                     profileManager: profileManager,
@@ -121,6 +116,7 @@ private extension ProfileGridView {
             }
         }
     }
+#endif
 
     func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(

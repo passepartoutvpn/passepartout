@@ -94,12 +94,16 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerServerButton
-            StatusText(theme: theme, tunnel: tunnel)
+            statusText
         }
     }
 
     var providerServerButton: some View {
         profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
+    }
+
+    var statusText: some View {
+        ConnectionStatusText(tunnel: tunnel, profileId: profile?.id)
     }
 
     var toggleButton: some View {
@@ -126,20 +130,6 @@ private extension InstalledProfileView {
 }
 
 // MARK: - Subviews (observing)
-
-private struct StatusText: View {
-
-    @ObservedObject
-    var theme: Theme
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    var body: some View {
-        debugChanges()
-        return ConnectionStatusText(tunnel: tunnel)
-    }
-}
 
 private struct HeaderModifier: ViewModifier {
 

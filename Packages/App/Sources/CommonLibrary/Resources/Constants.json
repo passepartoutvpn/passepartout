@@ -30,7 +30,7 @@
     },
     "tunnel": {
         "profileTitleFormat": "Passepartout: %@",
-        "refreshInterval": 3.0,
+        "refreshInterval": 1.0,
         "dnsFallbackServers": [
             "1.1.1.1",
             "1.0.0.1"

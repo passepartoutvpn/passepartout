@@ -136,15 +136,22 @@ private extension DiagnosticsView {
     }
 
     var openVPNSection: some View {
-        tunnel.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
-            .map { cfg in
-                Group {
-                    NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
-                        OpenVPNView(serverConfiguration: cfg)
-                            .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
+        // FIXME: #1369, diagnostics/logs must be per-tunnel
+        tunnel.activeProfiles.first
+            .map {
+                tunnel.value(
+                    forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration,
+                    ofProfileId: $0.key
+                )
+                .map { cfg in
+                    Group {
+                        NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
+                            OpenVPNView(serverConfiguration: cfg)
+                                .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
+                        }
                     }
+                    .themeSection(header: Strings.Unlocalized.openVPN)
                 }
-                .themeSection(header: Strings.Unlocalized.openVPN)
             }
     }
 

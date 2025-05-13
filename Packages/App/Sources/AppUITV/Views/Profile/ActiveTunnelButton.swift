@@ -68,9 +68,12 @@ struct ActiveTunnelButton: View {
 
 private extension ActiveTunnelButton {
     var toggleConnectionColor: Color {
-        switch tunnel.status {
+        guard let activeProfile = tunnel.activeProfile else {
+            return theme.enableColor
+        }
+        switch activeProfile.status {
         case .inactive:
-            return tunnel.currentProfile?.onDemand == true ? theme.disableColor : theme.enableColor
+            return activeProfile.onDemand ? theme.disableColor : theme.enableColor
         default:
             return theme.disableColor
         }

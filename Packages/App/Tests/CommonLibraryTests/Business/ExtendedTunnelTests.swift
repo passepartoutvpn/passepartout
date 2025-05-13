@@ -35,9 +35,11 @@ final class ExtendedTunnelTests: XCTestCase {
 @MainActor
 extension ExtendedTunnelTests {
     func test_givenTunnel_whenDisconnectWithError_thenPublishesLastErrorCode() async throws {
-        let env = InMemoryEnvironment()
-        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
-        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
+        let env = SharedTunnelEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy()) { _ in
+            env
+        }
+        let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
@@ -49,70 +51,62 @@ extension ExtendedTunnelTests {
         sut
             .objectWillChange
             .sink {
-                if !didCall, sut.lastErrorCode != nil {
+                if !didCall, sut.lastErrorCode(ofProfileId: profile.id) != nil {
                     didCall = true
                     exp.fulfill()
                 }
             }
             .store(in: &subscriptions)
 
-        try await tunnel.disconnect()
+        try await tunnel.disconnect(from: profile.id)
         await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
-        XCTAssertEqual(sut.lastErrorCode, .crypto)
+        XCTAssertEqual(sut.lastErrorCode(ofProfileId: profile.id), .crypto)
     }
 
-    func test_givenTunnel_whenConnect_thenPublishesDataCount() async throws {
-        let env = InMemoryEnvironment()
-        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
-        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
+    func test_givenTunnel_whenPublishesDataCount_thenIsAvailable() async throws {
+        let env = SharedTunnelEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy()) { _ in
+            env
+        }
+        let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
+        let expectedDataCount = DataCount(500, 700)
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let stream = sut.activeProfilesStream
         try await sut.install(profile)
 
-        let dataCount = DataCount(500, 700)
-        env.setEnvironmentValue(dataCount, forKey: TunnelEnvironmentKeys.dataCount)
-        XCTAssertEqual(sut.dataCount, nil)
-
-        let exp = expectation(description: "Data count")
-        var didCall = false
-        sut
-            .objectWillChange
-            .sink {
-                if !didCall, sut.dataCount != nil {
-                    didCall = true
-                    exp.fulfill()
-                }
-            }
-            .store(in: &subscriptions)
-
-        try await tunnel.install(profile, connect: true, title: \.name)
-        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
-        XCTAssertEqual(sut.dataCount, dataCount)
+        env.setEnvironmentValue(expectedDataCount, forKey: TunnelEnvironmentKeys.dataCount)
+        await stream.waitForNext()
+        XCTAssertEqual(sut.dataCount(ofProfileId: profile.id), expectedDataCount)
     }
 
     func test_givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
-        let env = InMemoryEnvironment()
-        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
+        let env = SharedTunnelEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy()) { _ in
+            env
+        }
         let processor = MockTunnelProcessor()
-        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, processor: processor, interval: 0.1)
+        let sut = ExtendedTunnel(tunnel: tunnel, processor: processor, interval: 0.1)
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.install(profile)
 
-        await sut.currentProfileStream.waitForNext()
-        XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
+        await sut.activeProfilesStream.waitForNext()
+        XCTAssertEqual(tunnel.activeProfiles.first?.key, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
     }
 
     func test_givenTunnel_whenStatusChanges_thenConnectionStatusIsExpected() async throws {
-        let env = InMemoryEnvironment()
-        let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
+        let env = SharedTunnelEnvironment()
+        let tunnel = Tunnel(strategy: FakeTunnelStrategy()) { _ in
+            env
+        }
         let processor = MockTunnelProcessor()
-        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, processor: processor, interval: 0.1)
-        let stream = sut.currentProfileStream
+        let sut = ExtendedTunnel(tunnel: tunnel, processor: processor, interval: 0.1)
+        let stream = sut.activeProfilesStream
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
@@ -120,7 +114,7 @@ extension ExtendedTunnelTests {
 
         await stream.waitForNext() // include initial nil
         await stream.waitForNext()
-        XCTAssertEqual(tunnel.currentProfile?.id, profile.id)
+        XCTAssertEqual(tunnel.activeProfiles.first?.key, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
     }
@@ -139,7 +133,7 @@ extension ExtendedTunnelTests {
             .disconnecting
         ]
 
-        let env = InMemoryEnvironment()
+        let env = SharedTunnelEnvironment()
         let key = TunnelEnvironmentKeys.connectionStatus
 
         // no connection status, tunnel status unaffected

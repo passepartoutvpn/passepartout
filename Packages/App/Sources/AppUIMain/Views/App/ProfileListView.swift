@@ -58,10 +58,12 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     var body: some View {
         debugChanges()
         return Form {
+#if os(iOS)
             if !isUITesting && !isSearching && pinsActiveProfile {
                 headerView
                     .unanimated()
             }
+#endif
             Section {
                 ForEach(allPreviews, content: profileView)
                     .onDelete { offsets in
@@ -84,17 +86,18 @@ private extension ProfileListView {
         profileManager.previews
     }
 
+#if os(iOS)
     var headerView: some View {
         InstalledProfileView(
             layout: .list,
             profileManager: profileManager,
-            profile: currentProfile,
+            profile: installedProfile,
             tunnel: tunnel,
             errorHandler: errorHandler,
             flow: flow
         )
         .contextMenu {
-            currentProfile.map {
+            installedProfile.map {
                 ProfileContextMenu(
                     style: .installedProfile,
                     profileManager: profileManager,
@@ -107,6 +110,7 @@ private extension ProfileListView {
         }
         .modifier(HideActiveProfileModifier())
     }
+#endif
 
     func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(

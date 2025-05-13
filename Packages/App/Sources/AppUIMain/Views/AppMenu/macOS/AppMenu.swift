@@ -123,7 +123,8 @@ private extension AppMenu {
 
 private extension AppMenu {
     var isTunnelActionable: Bool {
-        [.activating, .active].contains(tunnel.status)
+        // FIXME: #218, must be per-tunnel
+        [.activating, .active].contains(tunnelStatus)
     }
 
     func showApp(completion: (() -> Void)? = nil) {
@@ -139,14 +140,16 @@ private extension AppMenu {
 
     func reconnect() {
         Task {
-            guard let currentProfileId = tunnel.currentProfile?.id else {
+            // FIXME: #218, must be per-tunnel
+//            guard let activeProfileId = tunnel.activeProfile?.id else {
+            guard let installedProfile else {
                 return
             }
-            guard let profile = profileManager.profile(withId: currentProfileId) else {
+            guard let profile = profileManager.profile(withId: installedProfile.id) else {
                 return
             }
             do {
-                try await tunnel.disconnect()
+                try await tunnel.disconnect(from: installedProfile.id)
                 try await tunnel.connect(with: profile)
             } catch {
                 pp_log(.app, .error, "Unable to reconnect to profile \(profile.id) from menu: \(error)")
@@ -157,7 +160,11 @@ private extension AppMenu {
     func disconnect() {
         Task {
             do {
-                try await tunnel.disconnect()
+                // FIXME: #218, must be per-tunnel
+                guard let installedProfile else {
+                    return
+                }
+                try await tunnel.disconnect(from: installedProfile.id)
             } catch {
                 pp_log(.app, .error, "Unable to disconnect from menu: \(error)")
             }
@@ -165,7 +172,7 @@ private extension AppMenu {
     }
 
     func isProfileActive(_ preview: ProfilePreview) -> Bool {
-        preview.id == tunnel.currentProfile?.id && tunnel.status != .inactive
+        tunnel.status(ofProfileId: preview.id) != .inactive
     }
 
     func toggleProfile(_ isOn: Bool, for preview: ProfilePreview) {
@@ -177,7 +184,7 @@ private extension AppMenu {
                 if isOn {
                     try await tunnel.connect(with: profile)
                 } else {
-                    try await tunnel.disconnect()
+                    try await tunnel.disconnect(from: profile.id)
                 }
             } catch {
                 pp_log(.app, .error, "Unable to toggle profile \(preview.id) from menu: \(error)")
@@ -193,6 +200,19 @@ private extension AppMenu {
 
     func quit() {
         NSApp.terminate(self)
+    }
+}
+
+private extension AppMenu {
+
+    // FIXME: #218, must be per-tunnel
+    var tunnelStatus: TunnelStatus {
+        installedProfile?.status ?? .inactive
+    }
+
+    // FIXME: #218, must be per-tunnel
+    var installedProfile: TunnelActiveProfile? {
+        tunnel.activeProfiles.first?.value
     }
 }
 

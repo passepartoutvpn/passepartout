@@ -28,7 +28,7 @@ import CommonUtils
 import SwiftUI
 import UILibrary
 
-struct ProfileView: View, Routable, TunnelInstallationProviding {
+struct ProfileView: View, Routable {
     enum Field: Hashable {
         case connect
 
@@ -82,16 +82,15 @@ struct ProfileView: View, Routable, TunnelInstallationProviding {
         .background(theme.primaryGradient)
         .themeAnimation(on: showsSidePanel, category: .profiles)
         .defaultFocus($focusedField, .switchProfile)
-        .onChange(of: tunnel.status, onTunnelStatus)
-        .onChange(of: tunnel.currentProfile, onTunnelCurrentProfile)
+        .onChange(of: tunnel.activeProfile, onTunnelActiveProfile)
         .onChange(of: interactiveManager.isPresented, onInteractivePresented)
         .onChange(of: focusedField, onFocus)
     }
 }
 
 private extension ProfileView {
-    var currentProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
+    var activeProfile: Profile? {
+        guard let id = tunnel.activeProfile?.id else {
             return nil
         }
         return profileManager.profile(withId: id)
@@ -99,7 +98,7 @@ private extension ProfileView {
 
     var activeView: some View {
         ActiveProfileView(
-            profile: currentProfile,
+            profile: activeProfile,
             tunnel: tunnel,
             isSwitching: $showsSidePanel,
             focusedField: $focusedField,
@@ -150,15 +149,17 @@ private extension ProfileView {
 }
 
 private extension ProfileView {
-    func onTunnelStatus(old: TunnelStatus, new: TunnelStatus) {
-        if new == .activating {
+    func onTunnelActiveProfile(
+        old: TunnelActiveProfile?,
+        new: TunnelActiveProfile?
+    ) {
+        // on profile connection, hide side panel and focus on connect button
+        if new?.status == .activating {
             showsSidePanel = false
             focusedField = .connect
         }
-    }
-
-    func onTunnelCurrentProfile(old: TunnelCurrentProfile?, new: TunnelCurrentProfile?) {
-        if focusedField == .connect && new == nil {
+        // if connect button is focused and no profile is active, focus on switch profile
+        if focusedField == .connect && (new == nil || new?.status == .inactive) {
             focusedField = .switchProfile
         }
     }

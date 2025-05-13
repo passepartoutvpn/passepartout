@@ -192,25 +192,25 @@ private extension AppContext {
         try await waitForTasks()
 
         pp_log(.app, .notice, "Application did save profile (\(profile.id))")
-        guard profile.id == tunnel.currentProfile?.id else {
+        guard tunnel.isActiveProfile(withId: profile.id) else {
             pp_log(.app, .debug, "\tProfile \(profile.id) is not current, do nothing")
             return
         }
-        guard [.active, .activating].contains(tunnel.status) else {
-            pp_log(.app, .debug, "\tConnection is not active (\(tunnel.status)), do nothing")
+        let status = tunnel.status(ofProfileId: profile.id)
+        guard [.active, .activating].contains(status) else {
+            pp_log(.app, .debug, "\tConnection is not active (\(status)), do nothing")
             return
         }
         pendingTask = Task {
             do {
+                pp_log(.app, .info, "\tReconnect profile \(profile.id)")
+                try await tunnel.disconnect(from: profile.id)
                 do {
-                    pp_log(.app, .info, "\tReconnect profile \(profile.id)")
                     try await tunnel.connect(with: profile)
                 } catch AppError.interactiveLogin {
-                    pp_log(.app, .info, "\tProfile \(profile.id) is interactive, disconnect")
-                    try await tunnel.disconnect()
+                    pp_log(.app, .info, "\tProfile \(profile.id) is interactive, do not reconnect")
                 } catch {
-                    pp_log(.app, .error, "\tUnable to reconnect profile \(profile.id), disconnect: \(error)")
-                    try await tunnel.disconnect()
+                    pp_log(.app, .error, "\tUnable to reconnect profile \(profile.id): \(error)")
                 }
             } catch {
                 pp_log(.app, .error, "\tUnable to reinstate connection on save profile \(profile.id): \(error)")

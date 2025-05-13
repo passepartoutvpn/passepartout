@@ -47,10 +47,10 @@ extension AppContext {
                 }
             return ProfileManager(profiles: profiles)
         }()
-        let tunnelEnvironment = InMemoryEnvironment()
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: tunnelEnvironment)),
-            environment: tunnelEnvironment,
+            tunnel: Tunnel(strategy: FakeTunnelStrategy()) { _ in
+                SharedTunnelEnvironment()
+            },
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )

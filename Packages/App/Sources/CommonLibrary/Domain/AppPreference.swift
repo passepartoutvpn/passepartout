@@ -33,8 +33,6 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case lastInfrastructureRefresh
 
-    case lastUsedProfileId
-
     case logsPrivateData
 
     public var key: String {
