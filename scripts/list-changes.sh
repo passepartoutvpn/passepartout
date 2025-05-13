@@ -5,6 +5,9 @@ if [[ -z $ref_from ]]; then
     echo "Initial ref required"
     exit 1
 fi
+if [[ -z $ref_to ]]; then
+    ref_to="HEAD"
+fi
 
 old_modules=(`git diff "${ref_from}".."${ref_to}" submodules/ | grep -- "-Subproject" | cut -d ' ' -f 3 | tr "\n" " "`)
 new_modules=(`git diff "${ref_from}".."${ref_to}" submodules/ | grep -- "\+Subproject" | cut -d ' ' -f 3 | tr "\n" " "`)
