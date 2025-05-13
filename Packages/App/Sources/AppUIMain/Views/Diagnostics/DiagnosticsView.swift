@@ -135,19 +135,24 @@ private extension DiagnosticsView {
         .themeAnimation(on: tunnelLogs, category: .diagnostics)
     }
 
-    // FIXME: #1360, diagnostics/logs must be per-tunnel
     var openVPNSection: some View {
-        EmptyView()
-//        tunnel.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
-//            .map { cfg in
-//                Group {
-//                    NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
-//                        OpenVPNView(serverConfiguration: cfg)
-//                            .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
-//                    }
-//                }
-//                .themeSection(header: Strings.Unlocalized.openVPN)
-//            }
+        // FIXME: #1360, diagnostics/logs must be per-tunnel
+        tunnel.activeProfiles.first
+            .map {
+                tunnel.value(
+                    forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration,
+                    ofProfileId: $0.key
+                )
+                .map { cfg in
+                    Group {
+                        NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
+                            OpenVPNView(serverConfiguration: cfg)
+                                .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
+                        }
+                    }
+                    .themeSection(header: Strings.Unlocalized.openVPN)
+                }
+            }
     }
 
     var reportIssueSection: some View {

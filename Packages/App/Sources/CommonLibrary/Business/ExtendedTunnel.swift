@@ -144,6 +144,12 @@ extension ExtendedTunnel {
             .environment(for: profileId)?
             .environmentValue(forKey: TunnelEnvironmentKeys.lastErrorCode)
     }
+
+    public func value<T>(forKey key: TunnelEnvironmentKey<T>, ofProfileId profileId: Profile.ID) -> T? where T: Decodable {
+        tunnel
+            .environment(for: profileId)?
+            .environmentValue(forKey: key)
+    }
 }
 
 // MARK: - Observation
