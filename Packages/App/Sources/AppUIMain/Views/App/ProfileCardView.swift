@@ -55,7 +55,7 @@ struct ProfileCardView: View {
             }
             .uiAccessibility(.App.profileEdit)
 
-            tunnelView
+            statusView
                 .font(.subheadline)
 
             Spacer(minLength: .zero)
@@ -68,9 +68,7 @@ struct ProfileCardView: View {
 }
 
 private extension ProfileCardView {
-
-    @ViewBuilder
-    var tunnelView: some View {
+    var statusView: some View {
         ConnectionStatusText(tunnel: tunnel, profileId: preview.id)
     }
 }
