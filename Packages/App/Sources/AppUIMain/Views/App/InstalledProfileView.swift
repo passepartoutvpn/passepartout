@@ -102,13 +102,8 @@ private extension InstalledProfileView {
         profile?.providerSelectorButton(onSelect: flow?.connectionFlow?.onProviderEntityRequired)
     }
 
-    @ViewBuilder
     var statusText: some View {
-        if let profile {
-            StatusDynamicText(theme: theme, tunnel: tunnel, profileId: profile.id)
-        } else {
-            StatusText(theme: theme, status: .inactive)
-        }
+        ConnectionStatusText(tunnel: tunnel, profileId: profile?.id)
     }
 
     var toggleButton: some View {
@@ -135,33 +130,6 @@ private extension InstalledProfileView {
 }
 
 // MARK: - Subviews (observing)
-
-private struct StatusText: View {
-
-    @ObservedObject
-    var theme: Theme
-
-    let status: TunnelStatus
-
-    var body: some View {
-        ConnectionStatusStaticText(status: status, color: status.color(theme))
-    }
-}
-
-private struct StatusDynamicText: View {
-
-    @ObservedObject
-    var theme: Theme
-
-    @ObservedObject
-    var tunnel: ExtendedTunnel
-
-    let profileId: Profile.ID
-
-    var body: some View {
-        ConnectionStatusText(tunnel: tunnel, profileId: profileId)
-    }
-}
 
 private struct HeaderModifier: ViewModifier {
 

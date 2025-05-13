@@ -51,24 +51,24 @@ public struct ConnectionStatusText: View {
     }
 }
 
-public struct ConnectionStatusStaticText: View {
+private struct ConnectionStatusStaticText: View {
     private let statusDescription: String
 
-    private let color: Color?
+    private let color: Color
 
-    public init(status: TunnelStatus, color: Color?) {
+    init(status: TunnelStatus, color: Color) {
         statusDescription = status.localizedDescription
         self.color = color
     }
 
-    fileprivate init(statusDescription: String, color: Color?) {
+    init(statusDescription: String, color: Color) {
         self.statusDescription = statusDescription
         self.color = color
     }
 
-    public var body: some View {
+    var body: some View {
         Text(statusDescription)
-            .foregroundStyle(color ?? .primary)
+            .foregroundStyle(color)
     }
 }
 
@@ -87,7 +87,7 @@ private struct ConnectionStatusDynamicText: View {
     public var body: some View {
         ConnectionStatusStaticText(
             statusDescription: statusDescription,
-            color: withColors ? tunnel.statusColor(ofProfileId: profileId, theme) : nil
+            color: withColors ? tunnel.statusColor(ofProfileId: profileId, theme) : .primary
         )
     }
 }
