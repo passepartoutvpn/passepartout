@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 
 @MainActor
@@ -31,18 +32,23 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let tunnel: Tunnel
 
+    private let kvStore: KeyValueManager?
+
     private let processor: AppTunnelProcessor?
 
     private let interval: TimeInterval
 
     private var subscriptions: [Task<Void, Never>]
 
+    // FIXME: #218, keep "last used profile" until .multiple
     public init(
         tunnel: Tunnel,
+        kvStore: KeyValueManager? = nil,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
+        self.kvStore = kvStore
         self.processor = processor
         self.interval = interval
         subscriptions = []
@@ -110,7 +116,13 @@ extension ExtendedTunnel {
     }
 #endif
     public var activeProfiles: [Profile.ID: TunnelActiveProfile] {
-        tunnel.activeProfiles
+        guard !tunnel.activeProfiles.isEmpty else {
+            if let last = lastUsedProfile {
+                return [last.id: last]
+            }
+            return [:]
+        }
+        return tunnel.activeProfiles
     }
 
     public var activeProfilesStream: AsyncStream<[Profile.ID: TunnelActiveProfile]> {
@@ -160,12 +172,17 @@ private extension ExtendedTunnel {
             guard let self else {
                 return
             }
-            for await _ in tunnel.activeProfilesStream.removeDuplicates() {
+            for await newActiveProfiles in tunnel.activeProfilesStream.removeDuplicates() {
                 guard !Task.isCancelled else {
                     pp_log(.app, .debug, "Cancelled ExtendedTunnel.tunnelSubscription")
                     break
                 }
                 objectWillChange.send()
+
+                // FIXME: #218, keep "last used profile" until .multiple
+                if let first = newActiveProfiles.first {
+                    kvStore?.set(first.key.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                }
             }
         }
 
@@ -207,6 +224,21 @@ private extension ExtendedTunnel {
 }
 
 // MARK: - Helpers
+
+// FIXME: #218, keep "last used profile" until .multiple
+private extension ExtendedTunnel {
+    var lastUsedProfile: TunnelActiveProfile? {
+        guard let uuidString = kvStore?.string(forKey: AppPreference.lastUsedProfileId.key),
+              let uuid = UUID(uuidString: uuidString) else {
+            return nil
+        }
+        return TunnelActiveProfile(
+            id: uuid,
+            status: .inactive,
+            onDemand: false
+        )
+    }
+}
 
 extension TunnelStatus {
     func withEnvironment(_ environment: TunnelEnvironmentReader) -> TunnelStatus {
