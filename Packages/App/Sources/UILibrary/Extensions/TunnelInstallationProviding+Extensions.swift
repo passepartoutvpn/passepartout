@@ -26,14 +26,13 @@
 import CommonLibrary
 import Foundation
 
-#if os(iOS) || os(tvOS)
 @MainActor
 extension TunnelInstallationProviding {
-    public var installedProfile: Profile? {
-        guard let activeProfile = tunnel.activeProfile else {
-            return nil
-        }
-        return profileManager.profile(withId: activeProfile.id)
+    public var installedProfiles: [Profile] {
+        tunnel
+            .activeProfiles
+            .compactMap {
+                profileManager.profile(withId: $0.key)
+            }
     }
 }
-#endif

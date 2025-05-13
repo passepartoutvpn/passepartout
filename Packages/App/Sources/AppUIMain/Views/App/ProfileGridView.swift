@@ -56,13 +56,11 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
         return ScrollViewReader { scrollProxy in
             ScrollView {
                 VStack(spacing: .zero) {
-#if os(iOS)
                     if !isUITesting && !isSearching && pinsActiveProfile {
                         headerView(scrollProxy: scrollProxy)
                             .padding(.bottom)
                             .unanimated()
                     }
-#endif
                     LazyVGrid(columns: columns) {
                         ForEach(allPreviews, content: profileView)
                             .onDelete { offsets in
@@ -93,30 +91,29 @@ private extension ProfileGridView {
         profileManager.previews
     }
 
-#if os(iOS)
+    // FIXME: #218, move to InstalledProfileView when .multiple
     func headerView(scrollProxy: ScrollViewProxy) -> some View {
-        InstalledProfileView(
-            layout: .grid,
-            profileManager: profileManager,
-            profile: installedProfile,
-            tunnel: tunnel,
-            errorHandler: errorHandler,
-            flow: flow
-        )
-        .contextMenu {
-            installedProfile.map {
+        ForEach(installedProfiles) { profile in
+            InstalledProfileView(
+                layout: .grid,
+                profileManager: profileManager,
+                profile: profile,
+                tunnel: tunnel,
+                errorHandler: errorHandler,
+                flow: flow
+            )
+            .contextMenu {
                 ProfileContextMenu(
                     style: .installedProfile,
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    preview: .init($0),
+                    preview: .init(profile),
                     errorHandler: errorHandler,
                     flow: flow
                 )
             }
         }
     }
-#endif
 
     func profileView(for preview: ProfilePreview) -> some View {
         ProfileRowView(
