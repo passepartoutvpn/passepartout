@@ -135,6 +135,7 @@ extension AppContext {
             tunnel: Tunnel(strategy: tunnelStrategy) {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
+            kvStore: localKVStore,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
