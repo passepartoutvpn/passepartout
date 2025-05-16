@@ -123,7 +123,7 @@ private extension AppMenu {
 
 private extension AppMenu {
     var isTunnelActionable: Bool {
-        // FIXME: #218, must be per-tunnel
+        // TODO: #218, must be per-tunnel
         [.activating, .active].contains(tunnelStatus)
     }
 
@@ -140,7 +140,7 @@ private extension AppMenu {
 
     func reconnect() {
         Task {
-            // FIXME: #218, must be per-tunnel
+            // TODO: #218, must be per-tunnel
 //            guard let activeProfileId = tunnel.activeProfile?.id else {
             guard let installedProfile else {
                 return
@@ -160,7 +160,7 @@ private extension AppMenu {
     func disconnect() {
         Task {
             do {
-                // FIXME: #218, must be per-tunnel
+                // TODO: #218, must be per-tunnel
                 guard let installedProfile else {
                     return
                 }
@@ -205,12 +205,12 @@ private extension AppMenu {
 
 private extension AppMenu {
 
-    // FIXME: #218, must be per-tunnel
+    // TODO: #218, must be per-tunnel
     var tunnelStatus: TunnelStatus {
         installedProfile?.status ?? .inactive
     }
 
-    // FIXME: #218, must be per-tunnel
+    // TODO: #218, must be per-tunnel
     var installedProfile: TunnelActiveProfile? {
         tunnel.activeProfiles.first?.value
     }

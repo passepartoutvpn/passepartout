@@ -84,7 +84,7 @@ private extension ProfileListView {
         profileManager.previews
     }
 
-    // FIXME: #218, move to InstalledProfileView when .multiple
+    // TODO: #218, move to InstalledProfileView when .multiple
     var headerView: some View {
         InstalledProfileView(
             layout: .list,

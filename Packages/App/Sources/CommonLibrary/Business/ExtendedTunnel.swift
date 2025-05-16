@@ -40,7 +40,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     private var subscriptions: [Task<Void, Never>]
 
-    // FIXME: #218, keep "last used profile" until .multiple
+    // TODO: #218, keep "last used profile" until .multiple
     public init(
         tunnel: Tunnel,
         kvStore: KeyValueManager? = nil,
@@ -178,7 +178,7 @@ private extension ExtendedTunnel {
                 }
                 objectWillChange.send()
 
-                // FIXME: #218, keep "last used profile" until .multiple
+                // TODO: #218, keep "last used profile" until .multiple
                 if let first = newActiveProfiles.first {
                     kvStore?.set(first.key.uuidString, forKey: AppPreference.lastUsedProfileId.key)
                 }
@@ -224,7 +224,7 @@ private extension ExtendedTunnel {
 
 // MARK: - Helpers
 
-// FIXME: #218, keep "last used profile" until .multiple
+// TODO: #218, keep "last used profile" until .multiple
 private extension ExtendedTunnel {
     var lastUsedProfile: TunnelActiveProfile? {
         guard let uuidString = kvStore?.string(forKey: AppPreference.lastUsedProfileId.key),

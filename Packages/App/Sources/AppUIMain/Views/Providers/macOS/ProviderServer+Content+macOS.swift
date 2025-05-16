@@ -68,7 +68,7 @@ extension ProviderServerView {
 
 private extension ProviderServerView.ContentView {
     var serversTable: some View {
-        // FIXME: #1263, servers.regions is inefficient, fetch regions directly
+        // TODO: #1263, servers.regions is inefficient, fetch regions directly
         Table(servers.regions) {
             TableColumn("") { region in
                 ThemeImage(.marked)
