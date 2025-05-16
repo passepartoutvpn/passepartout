@@ -191,9 +191,9 @@ extension AppContext {
             profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
             do {
-                pp_log_g(.app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
+                pp_log(partoutContext, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
 
-                pp_log_g(.App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
+                pp_log(partoutContext, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                 try await profileManager.observeRemote(repository: {
                     AppData.cdProfileRepositoryV3(
                         registry: dependencies.registry,
@@ -201,17 +201,17 @@ extension AppContext {
                         context: remoteStore.context,
                         observingResults: true,
                         onResultError: {
-                            pp_log_g(.App.profiles, .error, "Unable to decode remote profile: \($0)")
+                            pp_log(partoutContext, .App.profiles, .error, "Unable to decode remote profile: \($0)")
                             return .ignore
                         }
                     )
                 }())
             } catch {
-                pp_log_g(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+                pp_log(partoutContext, .App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
             }
 #endif
 
-            pp_log_g(.app, .info, "\tRefresh modules preferences repository...")
+            pp_log(partoutContext, .app, .info, "\tRefresh modules preferences repository...")
             preferencesManager.modulesRepositoryFactory = {
                 try AppData.cdModulePreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -219,7 +219,7 @@ extension AppContext {
                 )
             }
 
-            pp_log_g(.app, .info, "\tRefresh providers preferences repository...")
+            pp_log(partoutContext, .app, .info, "\tRefresh providers preferences repository...")
             preferencesManager.providersRepositoryFactory = {
                 try AppData.cdProviderPreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -227,7 +227,7 @@ extension AppContext {
                 )
             }
 
-            pp_log_g(.App.profiles, .info, "\tReload profiles required features...")
+            pp_log(partoutContext, .App.profiles, .info, "\tReload profiles required features...")
             profileManager.reloadRequiredFeatures()
         }
 
@@ -291,7 +291,12 @@ private extension Dependencies {
 #endif
     }
 
-    func backupProfileRepository(model: NSManagedObjectModel, name: String, observingResults: Bool) -> ProfileRepository {
+    func backupProfileRepository(
+        _ ctx: PartoutContext,
+        model: NSManagedObjectModel,
+        name: String,
+        observingResults: Bool
+    ) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger(),
             containerName: name,
@@ -305,7 +310,7 @@ private extension Dependencies {
             context: store.context,
             observingResults: observingResults,
             onResultError: {
-                pp_log_g(.App.profiles, .error, "Unable to decode local profile: \($0)")
+                pp_log(ctx, .App.profiles, .error, "Unable to decode local profile: \($0)")
                 return .ignore
             }
         )
