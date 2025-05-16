@@ -26,7 +26,7 @@
 import CommonLibrary
 @preconcurrency import NetworkExtension
 
-// FIXME: #1369, prevent PTP from starting multiple times (macOS, desktop)
+// FIXME: #1375, prevent PTP from starting multiple times (macOS, desktop)
 // FIXME: #1373, diagnostics/logs must be per-tunnel
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
