@@ -86,21 +86,21 @@ private extension ProfileListView {
 
     // FIXME: #218, move to InstalledProfileView when .multiple
     var headerView: some View {
-        ForEach(installedProfiles) { profile in
-            InstalledProfileView(
-                layout: .list,
-                profileManager: profileManager,
-                profile: profile,
-                tunnel: tunnel,
-                errorHandler: errorHandler,
-                flow: flow
-            )
-            .contextMenu {
+        InstalledProfileView(
+            layout: .list,
+            profileManager: profileManager,
+            profile: installedProfiles.first,
+            tunnel: tunnel,
+            errorHandler: errorHandler,
+            flow: flow
+        )
+        .contextMenu {
+            installedProfiles.first.map {
                 ProfileContextMenu(
                     style: .installedProfile,
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    preview: .init(profile),
+                    preview: .init($0),
                     errorHandler: errorHandler,
                     flow: flow
                 )
