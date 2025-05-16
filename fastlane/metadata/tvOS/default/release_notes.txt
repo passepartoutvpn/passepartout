@@ -1,3 +1,2 @@
-* WireGuard: Fix uneditable module (#1365)
-* OpenVPN: Fix .ovpn routes not shown in module (#1364)
-* OpenVPN: Fix regression in ifconfig parsing (#1363)
+* Update Partout to use PartoutContext (#1372)
+* Drop environments from ExtendedTunnel (#1368)
