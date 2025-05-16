@@ -75,7 +75,7 @@ private extension CommonLibrary {
         // FIXME: #1374, AppPreference not accessible by sysex
         let logsPrivateData = kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         ctxBuilder.configureLogging(
-            to: BundleConfiguration.urlForTunnelLog,
+            to: BundleConfiguration.urlForTunnelLog(profileId),
             parameters: Constants.shared.log,
             logsPrivateData: logsPrivateData
         )

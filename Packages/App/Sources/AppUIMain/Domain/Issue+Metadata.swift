@@ -40,7 +40,7 @@ extension Issue {
 
         let tunnel: ExtendedTunnel
 
-        let urlForTunnelLog: URL
+        let urlForTunnelLog: URL?
 
         let parameters: Constants.Log
 
@@ -63,8 +63,9 @@ extension Issue {
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = LocalLogger.FileStrategy()
-            .availableLogs(at: metadata.urlForTunnelLog)
+        else if let url = metadata.urlForTunnelLog,
+                let latestTunnelEntry = LocalLogger.FileStrategy()
+            .availableLogs(at: url)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)

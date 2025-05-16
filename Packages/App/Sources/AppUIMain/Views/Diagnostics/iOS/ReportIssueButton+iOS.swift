@@ -89,7 +89,9 @@ extension ReportIssueButton {
                 versionString: BundleConfiguration.mainVersionString,
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,
-                urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                urlForTunnelLog: installedProfile.map {
+                    BundleConfiguration.urlForTunnelLog($0.id)
+                },
                 parameters: Constants.shared.log,
                 comment: comment
             ))
