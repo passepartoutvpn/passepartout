@@ -62,6 +62,8 @@ private extension CommonLibrary {
             logsPrivateData: logsPrivateData
         )
         let ctx = ctxBuilder.build()
+        PartoutContext.register(ctx)
+
         ctx.logPreamble(parameters: Constants.shared.log)
         return ctx
     }
@@ -82,10 +84,12 @@ private extension CommonLibrary {
             ctxBuilder.dnsFallbackServers = Constants.shared.tunnel.dnsFallbackServers
         }
         let ctx = ctxBuilder.build()
+        PartoutContext.register(ctx)
+
+        ctx.logPreamble(parameters: Constants.shared.log)
         if let dnsFallbackServers = ctx.dnsFallbackServers {
             pp_log(ctx, .app, .info, "Enable DNS fallback servers: \(dnsFallbackServers)")
         }
-        ctx.logPreamble(parameters: Constants.shared.log)
         return ctx
     }
 
