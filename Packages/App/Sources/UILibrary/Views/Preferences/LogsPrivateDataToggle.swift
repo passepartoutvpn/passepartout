@@ -42,7 +42,7 @@ public struct LogsPrivateDataToggle: View {
             .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
             .onChange(of: logsPrivateData) { _ in
 
-                // FIXME: #1369, these must read from AppPreference, tunnel doesn't use global context
+                // FIXME: #1374, AppPreference not accessible by sysex
 //                PartoutContext.global.logsAddresses = $0
 //                PartoutContext.global.logsModules = $0
             }

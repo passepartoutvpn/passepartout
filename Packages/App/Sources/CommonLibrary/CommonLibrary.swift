@@ -55,10 +55,11 @@ private extension CommonLibrary {
         configureShared()
 
         var ctxBuilder = PartoutContext.Builder()
+        let logsPrivateData = kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         ctxBuilder.configureLogging(
             to: BundleConfiguration.urlForAppLog,
             parameters: Constants.shared.log,
-            logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
+            logsPrivateData: logsPrivateData
         )
         let ctx = ctxBuilder.build()
         ctx.logPreamble(parameters: Constants.shared.log)
@@ -69,14 +70,16 @@ private extension CommonLibrary {
         configureShared()
 
         var ctxBuilder = PartoutContext.Builder(profileId: profileId)
+        // FIXME: #1374, AppPreference not accessible by sysex
+        let logsPrivateData = kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         ctxBuilder.configureLogging(
             to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log,
-            logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
+            logsPrivateData: logsPrivateData
         )
+        // FIXME: #1374, AppPreference not accessible by sysex
         if kvStore.bool(forKey: AppPreference.dnsFallsBack.key) {
-            let servers = Constants.shared.tunnel.dnsFallbackServers
-            ctxBuilder.dnsFallbackServers = servers
+            ctxBuilder.dnsFallbackServers = Constants.shared.tunnel.dnsFallbackServers
         }
         let ctx = ctxBuilder.build()
         if let dnsFallbackServers = ctx.dnsFallbackServers {
