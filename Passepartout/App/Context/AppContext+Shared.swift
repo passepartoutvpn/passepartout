@@ -108,6 +108,7 @@ extension AppContext {
 #if targetEnvironment(simulator)
         let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
+            partoutContext,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: true
@@ -123,6 +124,7 @@ extension AppContext {
             dependencies.profileTitle($0)
         }
         let backupProfileRepository = dependencies.backupProfileRepository(
+            partoutContext,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: false
