@@ -39,11 +39,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        pp_log_g(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+
         let tunnelContext = try await TunnelContext(with: .shared, provider: self)
         let ctx = tunnelContext.partoutContext
         self.ctx = ctx
-
-        pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
         do {
             fwd = try await NEPTPForwarder(ctx, controller: tunnelContext.neTunnelController)

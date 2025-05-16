@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 import NetworkExtension
 
-final class TunnelContext {
+final class TunnelContext: Sendable {
     let iapManager: IAPManager
 
     let neTunnelController: NETunnelController
