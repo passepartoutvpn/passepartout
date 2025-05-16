@@ -137,7 +137,7 @@ private extension DiagnosticsView {
     }
 
     var openVPNSection: some View {
-        // FIXME: #1369, diagnostics/logs must be per-tunnel
+        // FIXME: #1373, diagnostics/logs must be per-tunnel
         tunnel.activeProfiles.first
             .map {
                 tunnel.value(
