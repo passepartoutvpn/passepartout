@@ -61,7 +61,7 @@ public final class ExtendedTunnel: ObservableObject {
 
 extension ExtendedTunnel {
     public func install(_ profile: Profile) async throws {
-        pp_log(.app, .notice, "Install profile \(profile.id)...")
+        pp_log_g(.app, .notice, "Install profile \(profile.id)...")
         let newProfile = try await processedProfile(profile)
         try await tunnel.install(
             newProfile,
@@ -72,7 +72,7 @@ extension ExtendedTunnel {
     }
 
     public func connect(with profile: Profile, force: Bool = false) async throws {
-        pp_log(.app, .notice, "Connect to profile \(profile.id)...")
+        pp_log_g(.app, .notice, "Connect to profile \(profile.id)...")
         let newProfile = try await processedProfile(profile)
         if !force && newProfile.isInteractive {
             throw AppError.interactiveLogin
@@ -86,7 +86,7 @@ extension ExtendedTunnel {
     }
 
     public func disconnect(from profileId: Profile.ID) async throws {
-        pp_log(.app, .notice, "Disconnect...")
+        pp_log_g(.app, .notice, "Disconnect...")
         try await tunnel.disconnect(from: profileId)
     }
 
@@ -102,7 +102,6 @@ extension ExtendedTunnel {
         switch output {
         case .debugLog(let log):
             return log.lines.map(parameters.formatter.formattedLine)
-
         default:
             return []
         }
@@ -174,7 +173,7 @@ private extension ExtendedTunnel {
             }
             for await newActiveProfiles in tunnel.activeProfilesStream.removeDuplicates() {
                 guard !Task.isCancelled else {
-                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.tunnelSubscription")
+                    pp_log_g(.app, .debug, "Cancelled ExtendedTunnel.tunnelSubscription")
                     break
                 }
                 objectWillChange.send()
@@ -192,7 +191,7 @@ private extension ExtendedTunnel {
                     return
                 }
                 guard !Task.isCancelled else {
-                    pp_log(.app, .debug, "Cancelled ExtendedTunnel.timerSubscription")
+                    pp_log_g(.app, .debug, "Cancelled ExtendedTunnel.timerSubscription")
                     break
                 }
                 objectWillChange.send()

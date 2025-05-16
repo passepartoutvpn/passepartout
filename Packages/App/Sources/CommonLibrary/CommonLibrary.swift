@@ -31,7 +31,7 @@ public final class CommonLibrary {
     public enum Target {
         case app
 
-        case tunnel
+        case tunnel(Profile.ID)
     }
 
     private let kvStore: KeyValueManager
@@ -40,40 +40,50 @@ public final class CommonLibrary {
         self.kvStore = kvStore
     }
 
-    public func configure(_ target: Target) {
+    public func configurePartout(forTarget target: Target) -> PartoutContext {
         switch target {
         case .app:
-            configureApp()
-        case .tunnel:
-            configureTunnel()
+            return configureApp()
+        case .tunnel(let profileId):
+            return configureTunnel(profileId: profileId)
         }
     }
 }
 
 private extension CommonLibrary {
-    func configureApp() {
+    func configureApp() -> PartoutContext {
         configureShared()
 
-        PartoutConfiguration.shared.configureLogging(
+        var ctxBuilder = PartoutContext.Builder()
+        ctxBuilder.configureLogging(
             to: BundleConfiguration.urlForAppLog,
             parameters: Constants.shared.log,
             logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         )
+        let ctx = ctxBuilder.build()
+        ctx.logPreamble(parameters: Constants.shared.log)
+        return ctx
     }
 
-    func configureTunnel() {
+    func configureTunnel(profileId: Profile.ID) -> PartoutContext {
         configureShared()
 
-        PartoutConfiguration.shared.configureLogging(
+        var ctxBuilder = PartoutContext.Builder(profileId: profileId)
+        ctxBuilder.configureLogging(
             to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log,
             logsPrivateData: kvStore.bool(forKey: AppPreference.logsPrivateData.key)
         )
         if kvStore.bool(forKey: AppPreference.dnsFallsBack.key) {
             let servers = Constants.shared.tunnel.dnsFallbackServers
-            PartoutConfiguration.shared.dnsFallbackServers = servers
-            pp_log(.app, .info, "Enable DNS fallback servers: \(servers)")
+            ctxBuilder.dnsFallbackServers = servers
         }
+        let ctx = ctxBuilder.build()
+        if let dnsFallbackServers = ctx.dnsFallbackServers {
+            pp_log(ctx, .app, .info, "Enable DNS fallback servers: \(dnsFallbackServers)")
+        }
+        ctx.logPreamble(parameters: Constants.shared.log)
+        return ctx
     }
 
     func configureShared() {
@@ -81,5 +91,21 @@ private extension CommonLibrary {
             AppPreference.dnsFallsBack.key: true,
             AppPreference.logsPrivateData.key: false
         ]
+    }
+}
+
+private extension PartoutContext {
+    func logPreamble(parameters: Constants.Log) {
+        appendLog(parameters.options.maxLevel, message: "")
+        appendLog(parameters.options.maxLevel, message: "--- BEGIN ---")
+        appendLog(parameters.options.maxLevel, message: "")
+
+        let systemInfo = SystemInformation()
+        appendLog(parameters.options.maxLevel, message: "App: \(BundleConfiguration.mainVersionString)")
+        appendLog(parameters.options.maxLevel, message: "OS: \(systemInfo.osString)")
+        if let deviceString = systemInfo.deviceString {
+            appendLog(parameters.options.maxLevel, message: "Device: \(deviceString)")
+        }
+        appendLog(parameters.options.maxLevel, message: "")
     }
 }

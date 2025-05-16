@@ -53,7 +53,8 @@ struct DiagnosticsView: View {
 
     var availableTunnelLogs: () async -> [LogEntry] = {
         await Task.detached {
-            PartoutConfiguration.shared.availableLogs(at: BundleConfiguration.urlForTunnelLog)
+            LocalLogger.FileStrategy()
+                .availableLogs(at: BundleConfiguration.urlForTunnelLog)
                 .sorted {
                     $0.key > $1.key
                 }
@@ -198,7 +199,7 @@ private extension DiagnosticsView {
     }
 
     func removeTunnelLogs() {
-        PartoutConfiguration.shared.purgeLogs(at: BundleConfiguration.urlForTunnelLog)
+        LocalLogger.FileStrategy().purgeLogs(at: BundleConfiguration.urlForTunnelLog)
         Task {
             tunnelLogs = await availableTunnelLogs()
         }

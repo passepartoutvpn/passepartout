@@ -142,7 +142,7 @@ private extension MigrateView {
         }
         do {
             model.step = .fetching
-            pp_log(.App.migration, .notice, "Fetch migratable profiles...")
+            pp_log_g(.App.migration, .notice, "Fetch migratable profiles...")
             let migratable = try await migrationManager.fetchMigratableProfiles()
             let knownIDs = Set(profileManager.previews.map(\.id))
             model.profiles = migratable.filter {
@@ -150,7 +150,7 @@ private extension MigrateView {
             }
             model.step = .fetched(model.profiles)
         } catch {
-            pp_log(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
+            pp_log_g(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
             errorHandler.handle(error, title: title) {
                 dismiss()
             }
@@ -174,37 +174,37 @@ private extension MigrateView {
         let previousStep = model.step
         model.step = .migrating
         do {
-            pp_log(.App.migration, .notice, "Migrate \(profiles.count) profiles...")
+            pp_log_g(.App.migration, .notice, "Migrate \(profiles.count) profiles...")
             let profiles = try await migrationManager.migratedProfiles(profiles) {
                 guard $1 != .done else {
                     return
                 }
                 model.statuses[$0] = $1
             }
-            pp_log(.App.migration, .notice, "Mapped \(profiles.count) profiles to the new format, saving...")
+            pp_log_g(.App.migration, .notice, "Mapped \(profiles.count) profiles to the new format, saving...")
             await migrationManager.importProfiles(profiles, into: profileManager) {
                 model.statuses[$0] = $1
             }
             let migrated = profiles.filter {
                 model.statuses[$0.id] == .done
             }
-            pp_log(.App.migration, .notice, "Migrated \(migrated.count) profiles")
+            pp_log_g(.App.migration, .notice, "Migrated \(migrated.count) profiles")
 
             // TODO: ### restore auto-deletion after stable 3.0.0, otherwise users could not downgrade
 //            if !iapManager.isBeta {
 //                do {
 //                    try await migrationManager.deleteMigratableProfiles(withIds: Set(migrated.map(\.id)))
-//                    pp_log(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
+//                    pp_log_g(.App.migration, .notice, "Discarded \(migrated.count) migrated profiles from old store")
 //                } catch {
-//                    pp_log(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
+//                    pp_log_g(.App.migration, .error, "Unable to discard migrated profiles: \(error)")
 //                }
 //            } else {
-                pp_log(.App.migration, .notice, "Restricted build, do not discard migrated profiles")
+                pp_log_g(.App.migration, .notice, "Restricted build, do not discard migrated profiles")
 //            }
 
             model.step = .migrated(migrated)
         } catch {
-            pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
+            pp_log_g(.App.migration, .error, "Unable to migrate profiles: \(error)")
             errorHandler.handle(error, title: title)
             model.step = previousStep
         }
@@ -227,7 +227,7 @@ private extension MigrateView {
                     model.step = .fetched(model.profiles)
                 }
             } catch {
-                pp_log(.App.migration, .error, "Unable to delete migratable profiles \(deletedIds): \(error)")
+                pp_log_g(.App.migration, .error, "Unable to delete migratable profiles \(deletedIds): \(error)")
             }
             isEditing = false
         }

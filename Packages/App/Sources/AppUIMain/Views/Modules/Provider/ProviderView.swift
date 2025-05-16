@@ -251,7 +251,7 @@ private extension ProviderView {
             let module = try draft.module.tryBuild()
             return try registry.resolvedModule(module, in: nil)
         } catch {
-            pp_log(.app, .debug, "Unable to resolve provider module: \(error)")
+            pp_log_g(.app, .debug, "Unable to resolve provider module: \(error)")
             return nil
         }
     }
@@ -286,7 +286,7 @@ private extension ProviderView {
         do {
             try await apiManager.fetchIndex()
         } catch {
-            pp_log(.app, .error, "Unable to fetch index: \(error)")
+            pp_log_g(.app, .error, "Unable to fetch index: \(error)")
         }
     }
 
@@ -294,7 +294,7 @@ private extension ProviderView {
         do {
             try await apiManager.fetchInfrastructure(for: newProviderId)
         } catch {
-            pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
+            pp_log_g(.app, .error, "Unable to refresh infrastructure: \(error)")
         }
     }
 
@@ -305,7 +305,7 @@ private extension ProviderView {
         do {
             availablePresets = try await apiManager.presets(for: server, moduleType: providerType)
         } catch {
-            pp_log(.app, .error, "Unable to fetch presets for current server: \(error)")
+            pp_log_g(.app, .error, "Unable to fetch presets for current server: \(error)")
             availablePresets = []
         }
     }
@@ -331,11 +331,11 @@ private extension ProviderView {
     func loadPreferences(for newProviderId: ProviderID?) {
         if let newProviderId {
             do {
-                pp_log(.app, .debug, "Load preferences for provider \(newProviderId)")
+                pp_log_g(.app, .debug, "Load preferences for provider \(newProviderId)")
                 let repository = try preferencesManager.preferencesRepository(forProviderWithId: newProviderId)
                 providerPreferences.setRepository(repository)
             } catch {
-                pp_log(.app, .error, "Unable to load preferences for provider \(newProviderId): \(error)")
+                pp_log_g(.app, .error, "Unable to load preferences for provider \(newProviderId): \(error)")
                 providerPreferences.setRepository(nil)
             }
         } else {
@@ -348,10 +348,10 @@ private extension ProviderView {
             return
         }
         do {
-            pp_log(.app, .debug, "Save preferences for provider \(providerId)")
+            pp_log_g(.app, .debug, "Save preferences for provider \(providerId)")
             try providerPreferences.save()
         } catch {
-            pp_log(.app, .error, "Unable to save preferences for provider \(providerId): \(error)")
+            pp_log_g(.app, .error, "Unable to save preferences for provider \(providerId): \(error)")
         }
     }
 }

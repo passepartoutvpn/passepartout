@@ -38,6 +38,8 @@ import UILibrary
 extension AppContext {
     static let shared: AppContext = {
         let dependencies: Dependencies = .shared
+        let constants: Constants = .shared
+        let partoutContext: PartoutContext = .global
 
         // MARK: Core Data
 
@@ -55,7 +57,7 @@ extension AppContext {
 
         let localStore = CoreDataPersistentStore(
             logger: dependencies.coreDataLogger(),
-            containerName: Constants.shared.containers.local,
+            containerName: constants.containers.local,
             model: cdLocalModel,
             cloudKitIdentifier: nil,
             author: nil
@@ -69,7 +71,7 @@ extension AppContext {
 #endif
             return CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
-                containerName: Constants.shared.containers.remote,
+                containerName: constants.containers.remote,
                 model: cdRemoteModel,
                 cloudKitIdentifier: cloudKitIdentifier,
                 author: nil
@@ -83,7 +85,7 @@ extension AppContext {
 
         let apiManager: APIManager = {
             let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
-            return APIManager(from: API.shared, repository: repository)
+            return APIManager(partoutContext, from: API.shared, repository: repository)
         }()
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
@@ -107,19 +109,22 @@ extension AppContext {
         let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
             model: cdRemoteModel,
+            name: constants.containers.backup,
             observingResults: true
         )
         let backupProfileRepository: ProfileRepository? = nil
 #else
         let tunnelStrategy = NETunnelStrategy(
+            partoutContext,
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            coder: dependencies.neProtocolCoder()
+            coder: dependencies.neProtocolCoder(partoutContext)
         )
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
             dependencies.profileTitle($0)
         }
         let backupProfileRepository = dependencies.backupProfileRepository(
             model: cdRemoteModel,
+            name: constants.containers.backup,
             observingResults: false
         )
 #endif
@@ -132,12 +137,12 @@ extension AppContext {
         )
 
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: tunnelStrategy) {
+            tunnel: Tunnel(partoutContext, strategy: tunnelStrategy) {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
             kvStore: localKVStore,
             processor: processor,
-            interval: Constants.shared.tunnel.refreshInterval
+            interval: constants.tunnel.refreshInterval
         )
 
 #if PP_BUILD_MAC
@@ -147,11 +152,11 @@ extension AppContext {
             let profileStrategy = ProfileV2MigrationStrategy(
                 coreDataLogger: dependencies.coreDataLogger(),
                 profilesContainer: .init(
-                    Constants.shared.containers.legacyV2,
+                    constants.containers.legacyV2,
                     BundleConfiguration.mainString(for: .legacyV2CloudKitId)
                 ),
                 tvProfilesContainer: .init(
-                    Constants.shared.containers.legacyV2TV,
+                    constants.containers.legacyV2TV,
                     BundleConfiguration.mainString(for: .legacyV2TVCloudKitId)
                 )
             )
@@ -186,9 +191,9 @@ extension AppContext {
             profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
             do {
-                pp_log(.app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(isCloudKitEnabled))...")
+                pp_log_g(.app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
 
-                pp_log(.App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
+                pp_log_g(.App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                 try await profileManager.observeRemote(repository: {
                     AppData.cdProfileRepositoryV3(
                         registry: dependencies.registry,
@@ -196,17 +201,17 @@ extension AppContext {
                         context: remoteStore.context,
                         observingResults: true,
                         onResultError: {
-                            pp_log(.App.profiles, .error, "Unable to decode remote profile: \($0)")
+                            pp_log_g(.App.profiles, .error, "Unable to decode remote profile: \($0)")
                             return .ignore
                         }
                     )
                 }())
             } catch {
-                pp_log(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+                pp_log_g(.App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
             }
 #endif
 
-            pp_log(.app, .info, "\tRefresh modules preferences repository...")
+            pp_log_g(.app, .info, "\tRefresh modules preferences repository...")
             preferencesManager.modulesRepositoryFactory = {
                 try AppData.cdModulePreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -214,7 +219,7 @@ extension AppContext {
                 )
             }
 
-            pp_log(.app, .info, "\tRefresh providers preferences repository...")
+            pp_log_g(.app, .info, "\tRefresh providers preferences repository...")
             preferencesManager.providersRepositoryFactory = {
                 try AppData.cdProviderPreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -222,7 +227,7 @@ extension AppContext {
                 )
             }
 
-            pp_log(.App.profiles, .info, "\tReload profiles required features...")
+            pp_log_g(.App.profiles, .info, "\tReload profiles required features...")
             profileManager.reloadRequiredFeatures()
         }
 
@@ -286,10 +291,10 @@ private extension Dependencies {
 #endif
     }
 
-    func backupProfileRepository(model: NSManagedObjectModel, observingResults: Bool) -> ProfileRepository {
+    func backupProfileRepository(model: NSManagedObjectModel, name: String, observingResults: Bool) -> ProfileRepository {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger(),
-            containerName: Constants.shared.containers.backup,
+            containerName: name,
             model: model,
             cloudKitIdentifier: nil,
             author: nil
@@ -300,7 +305,7 @@ private extension Dependencies {
             context: store.context,
             observingResults: observingResults,
             onResultError: {
-                pp_log(.App.profiles, .error, "Unable to decode local profile: \($0)")
+                pp_log_g(.App.profiles, .error, "Unable to decode local profile: \($0)")
                 return .ignore
             }
         )

@@ -58,9 +58,9 @@ extension ReportIssueButton {
                 return
             }
             let issue = await Issue.withMetadata(.init(
+                ctx: .global,
                 profile: installedProfile,
                 provider: currentProvider,
-                configuration: .shared,
                 versionString: BundleConfiguration.mainVersionString,
                 purchasedProducts: purchasedProducts,
                 tunnel: tunnel,

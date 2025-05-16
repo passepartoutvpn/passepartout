@@ -78,7 +78,7 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
 
                 return entity
             } catch {
-                pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+                pp_log_g(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
                 throw error
             }
         }

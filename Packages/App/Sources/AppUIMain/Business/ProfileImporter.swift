@@ -62,7 +62,7 @@ final class ProfileImporter: ObservableObject {
                     withPassphrase.append(url)
                     continue
                 }
-                pp_log(.app, .fault, "Unable to import URL: \(error)")
+                pp_log_g(.app, .fault, "Unable to import URL: \(error)")
                 throw error
             }
         }

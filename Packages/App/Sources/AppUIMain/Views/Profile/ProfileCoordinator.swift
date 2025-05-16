@@ -119,7 +119,7 @@ private extension ProfileCoordinator {
         do {
             try await onCommitEditing(verifying: !iapManager.isBeta)
         } catch {
-            pp_log(.App.profiles, .error, "Unable to commit profile: \(error)")
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: \(error)")
             errorHandler.handle(error, title: Strings.Global.Actions.save)
             throw error
         }
@@ -133,7 +133,7 @@ private extension ProfileCoordinator {
                 try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
             } catch AppError.ineligibleProfile(let requiredFeatures) {
                 guard !iapManager.isLoadingReceipt else {
-                    pp_log(.App.profiles, .error, "Unable to commit profile: loading receipt")
+                    pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
                     let V = Strings.Views.Paywall.Alerts.Verification.self
                     errorHandler.handle(
                         title: Strings.Views.Paywall.Alerts.Confirmation.title,
@@ -144,7 +144,7 @@ private extension ProfileCoordinator {
 
                 // present paywall if purchase required
                 guard requiredFeatures.isEmpty else {
-                    pp_log(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
+                    pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
                     setLater(PaywallReason(
                         nil,
                         requiredFeatures: requiredFeatures,

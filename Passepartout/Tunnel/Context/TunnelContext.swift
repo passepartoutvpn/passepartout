@@ -1,8 +1,8 @@
 //
-//  TunnelContext.swift
+//  TunnelContext+Shared.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/8/24.
+//  Created by Davide De Rosa on 11/14/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,13 +24,63 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import Foundation
+import NetworkExtension
 
-@MainActor
-struct TunnelContext {
+final class TunnelContext {
     let iapManager: IAPManager
 
-    let kvStore: KeyValueManager
+    let neTunnelController: NETunnelController
 
-    let processor: PacketTunnelProcessor
+    let partoutContext: PartoutContext
+
+    var profileId: Profile.ID {
+        neTunnelController.originalProfile.id
+    }
+
+    @MainActor
+    init(with dependencies: Dependencies, provider: NEPacketTunnelProvider) async throws {
+        let kvStore = KeyValueManager(store: UserDefaultsStore(.appGroup))
+        let iapManager = IAPManager(
+            customUserLevel: dependencies.customUserLevel,
+            inAppHelper: dependencies.appProductHelper(),
+            receiptReader: dependencies.tunnelReceiptReader(),
+            betaChecker: dependencies.betaChecker(),
+            productsAtBuild: dependencies.productsAtBuild()
+        )
+#if PP_BUILD_FREE
+        iapManager.isEnabled = false
+#else
+        iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+#endif
+        let processor = DefaultTunnelProcessor()
+
+        let neTunnelController = try await NETunnelController(
+            .global,
+            provider: provider,
+            decoder: dependencies.neProtocolCoder(.global),
+            registry: dependencies.registry,
+            environmentFactory: {
+                dependencies.tunnelEnvironment(profileId: $0)
+            },
+            willProcess: processor.willProcess
+        )
+        let partoutContext = CommonLibrary(kvStore: kvStore)
+            .configurePartout(forTarget: .tunnel(neTunnelController.originalProfile.id))
+
+        self.iapManager = iapManager
+        self.neTunnelController = neTunnelController
+        self.partoutContext = partoutContext
+    }
+}
+
+// MARK: - Dependencies
+
+private extension Dependencies {
+    func tunnelReceiptReader() -> AppReceiptReader {
+        SharedReceiptReader(
+            reader: StoreKitReceiptReader(logger: iapLogger())
+        )
+    }
 }

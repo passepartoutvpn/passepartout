@@ -48,15 +48,16 @@ extension AppContext {
             return ProfileManager(profiles: profiles)
         }()
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: FakeTunnelStrategy()) { _ in
-                SharedTunnelEnvironment()
+            tunnel: Tunnel(.global, strategy: FakeTunnelStrategy()) { _ in
+                SharedTunnelEnvironment(profileId: nil)
             },
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
         let apiManager = APIManager(
+            .global,
             from: API.bundled,
-            repository: InMemoryAPIRepository()
+            repository: InMemoryAPIRepository(.global)
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()

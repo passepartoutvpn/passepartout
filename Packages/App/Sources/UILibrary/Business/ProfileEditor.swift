@@ -232,17 +232,17 @@ extension ProfileEditor {
 
             removedModules.keys.forEach {
                 do {
-                    pp_log(.App.profiles, .info, "Erase preferences for removed module \($0)")
+                    pp_log_g(.App.profiles, .info, "Erase preferences for removed module \($0)")
                     let repository = try preferencesManager.preferencesRepository(forModuleWithId: $0)
                     repository.erase()
                     try repository.save()
                 } catch {
-                    pp_log(.App.profiles, .error, "Unable to erase preferences for removed module \($0): \(error)")
+                    pp_log_g(.App.profiles, .error, "Unable to erase preferences for removed module \($0): \(error)")
                 }
             }
             removedModules.removeAll()
         } catch {
-            pp_log(.App.profiles, .fault, "Unable to save edited profile: \(error)")
+            pp_log_g(.App.profiles, .fault, "Unable to save edited profile: \(error)")
             throw error
         }
     }

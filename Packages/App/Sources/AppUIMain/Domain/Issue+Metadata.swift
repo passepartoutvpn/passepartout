@@ -28,11 +28,11 @@ import Foundation
 
 extension Issue {
     struct Metadata {
+        let ctx: PartoutContext
+
         let profile: Profile?
 
         let provider: (ProviderID, Date?)?
-
-        let configuration: PartoutConfiguration
 
         let versionString: String
 
@@ -49,7 +49,7 @@ extension Issue {
 
     @MainActor
     static func withMetadata(_ metadata: Metadata) async -> Issue {
-        let appLog = metadata.configuration.currentLog(parameters: metadata.parameters)
+        let appLog = metadata.ctx.currentLog(parameters: metadata.parameters)
             .joined(separator: "\n")
             .data(using: .utf8)
 
@@ -63,7 +63,8 @@ extension Issue {
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = metadata.configuration.availableLogs(at: metadata.urlForTunnelLog)
+        else if let latestTunnelEntry = LocalLogger.FileStrategy()
+            .availableLogs(at: metadata.urlForTunnelLog)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)

@@ -77,10 +77,10 @@ extension Dependencies {
 
 private struct IAPLogger: LoggerProtocol {
     func debug(_ msg: String) {
-        pp_log(.App.iap, .info, msg)
+        pp_log_g(.App.iap, .info, msg)
     }
 
     func warning(_ msg: String) {
-        pp_log(.App.iap, .error, msg)
+        pp_log_g(.App.iap, .error, msg)
     }
 }

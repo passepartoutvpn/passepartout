@@ -65,7 +65,7 @@ private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository
                 entity.lastUpdate = Date()
                 return entity
             } catch {
-                pp_log(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
+                pp_log_g(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
                 throw error
             }
         }

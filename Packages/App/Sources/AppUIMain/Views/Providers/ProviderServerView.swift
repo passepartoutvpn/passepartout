@@ -151,7 +151,7 @@ private extension ProviderServerView {
             let repository = try preferencesManager.preferencesRepository(forProviderWithId: providerId)
             providerPreferences.setRepository(repository)
         } catch {
-            pp_log(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+            pp_log_g(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
         }
         do {
             let repository = try await apiManager.providerRepository(for: providerId)
@@ -159,7 +159,7 @@ private extension ProviderServerView {
             filtersViewModel.load(options: providerManager.options, initialFilters: initialFilters)
             await reloadServers(filters: filtersViewModel.filters)
         } catch {
-            pp_log(.app, .error, "Unable to load VPN servers for provider \(providerId): \(error)")
+            pp_log_g(.app, .error, "Unable to load VPN servers for provider \(providerId): \(error)")
             errorHandler.handle(error, title: Strings.Global.Nouns.servers)
         }
     }
@@ -173,7 +173,7 @@ private extension ProviderServerView {
                 isFiltering = false
             }.value
         } catch {
-            pp_log(.app, .error, "Unable to fetch filtered servers: \(error)")
+            pp_log_g(.app, .error, "Unable to fetch filtered servers: \(error)")
         }
     }
 
@@ -208,14 +208,14 @@ private extension ProviderServerView {
         do {
             try providerPreferences.save()
         } catch {
-            pp_log(.app, .error, "Unable to save preferences: \(error)")
+            pp_log_g(.app, .error, "Unable to save preferences: \(error)")
         }
     }
 
     func onSelectServer(_ server: ProviderServer, heuristic: ProviderHeuristic?) {
         let presets = compatiblePresets(with: server)
         guard let preset = presets.first else {
-            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.supportedPresetIds?.description ?? "all")")
+            pp_log_g(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.supportedPresetIds?.description ?? "all")")
             assertionFailure("No compatible presets for server \(server.serverId) (provider=\(providerManager.providerId), moduleType=\(providerManager.moduleType), supported=\(server.supportedPresetIds ?? []))")
             return
         }

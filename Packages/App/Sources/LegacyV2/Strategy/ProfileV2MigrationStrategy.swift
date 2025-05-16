@@ -90,7 +90,7 @@ extension ProfileV2MigrationStrategy {
             let tvProfile = try? await tvProfilesRepository.profile(withId: profileId)
             return try mapper.toProfileV3(profile, isTV: tvProfile != nil)
         } catch {
-            pp_log(.App.migration, .error, "Unable to fetch and map migratable profile \(profileId): \(error)")
+            pp_log_g(.App.migration, .error, "Unable to fetch and map migratable profile \(profileId): \(error)")
             return nil
         }
     }

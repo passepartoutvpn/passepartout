@@ -109,7 +109,7 @@ extension ProfileManager {
                     try await manager.save(profile, isLocal: true, remotelyShared: parameters.isShared)
                 }
             } catch {
-                pp_log(.App.profiles, .error, "Unable to build ProfileManager for UI testing: \(error)")
+                pp_log_g(.App.profiles, .error, "Unable to build ProfileManager for UI testing: \(error)")
             }
         }
 

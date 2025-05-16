@@ -50,7 +50,7 @@ extension DefaultTunnelProcessor: PacketTunnelProcessor {
             }
             return try builder.tryBuild()
         } catch {
-            pp_log(.app, .error, "Unable to process profile, revert to original: \(error)")
+            pp_log_id(profile.id, .app, .error, "Unable to process profile, revert to original: \(error)")
             return profile
         }
     }

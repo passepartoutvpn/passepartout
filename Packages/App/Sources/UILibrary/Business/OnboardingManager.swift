@@ -55,9 +55,9 @@ public final class OnboardingManager: ObservableObject {
     }
 
     public func advance() {
-        pp_log(.app, .info, "Current step: \(step)")
+        pp_log_g(.app, .info, "Current step: \(step)")
         step = step.nextStep
-        pp_log(.app, .info, "Next step: \(step)")
+        pp_log_g(.app, .info, "Next step: \(step)")
 
         // skip step about 3.2.3 providers migration for new installs or 2.x.x
         if initialStep < .doneV3 && step == .migrateV3_2_3 {
