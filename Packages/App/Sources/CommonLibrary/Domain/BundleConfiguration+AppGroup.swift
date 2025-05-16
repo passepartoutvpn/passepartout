@@ -32,8 +32,12 @@ extension BundleConfiguration {
         urlForCaches.appending(path: Constants.shared.log.appPath)
     }
 
-    public static var urlForTunnelLog: URL {
+    public static var urlForTunnelLogs: URL {
         urlForCaches.appending(path: Constants.shared.log.tunnelPath)
+    }
+
+    public static func urlForTunnelLog(_ profileId: Profile.ID) -> URL {
+        urlForTunnelLogs.appendingPathExtension(profileId.uuidString)
     }
 }
 
