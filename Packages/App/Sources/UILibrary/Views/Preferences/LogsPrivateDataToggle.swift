@@ -40,9 +40,11 @@ public struct LogsPrivateDataToggle: View {
     public var body: some View {
         Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
             .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
-            .onChange(of: logsPrivateData) {
-                PartoutConfiguration.shared.logsAddresses = $0
-                PartoutConfiguration.shared.logsModules = $0
+            .onChange(of: logsPrivateData) { _ in
+
+                // FIXME: #1374, AppPreference not accessible by sysex
+//                PartoutContext.global.logsAddresses = $0
+//                PartoutContext.global.logsModules = $0
             }
     }
 }

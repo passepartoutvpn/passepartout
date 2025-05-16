@@ -254,7 +254,7 @@ private extension PaywallView {
                 }
             }
 
-            pp_log(.App.iap, .info, "Suggested products: \(products)")
+            pp_log_g(.App.iap, .info, "Suggested products: \(products)")
             guard !products.isEmpty || !completeProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
@@ -262,7 +262,7 @@ private extension PaywallView {
             self.products = products
             self.completeProducts = completeProducts
         } catch {
-            pp_log(.App.iap, .error, "Unable to load purchasable products: \(error)")
+            pp_log_g(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
         }
     }

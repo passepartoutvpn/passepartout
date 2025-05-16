@@ -26,37 +26,27 @@
 import CommonLibrary
 @preconcurrency import NetworkExtension
 
-// FIXME: #1369, refactor to handle PTP started multiple times (macOS, desktop)
-// FIXME: #1369, diagnostics/logs must be per-tunnel (optional Profile.ID in pp_log?)
+// FIXME: #1375, prevent PTP from starting multiple times (macOS, desktop)
+// FIXME: #1373, diagnostics/logs must be per-tunnel
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
+    private var tunnelContext: TunnelContext?
 
-    @MainActor
-    private let context: TunnelContext = .shared
-
-    @MainActor
-    private let dependencies: Dependencies = .shared
+    private var ctx: PartoutContext?
 
     private var fwd: NEPTPForwarder?
 
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        await CommonLibrary(kvStore: context.kvStore)
-            .configure(.tunnel)
+        pp_log_g(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
-        pp_log(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+        let tunnelContext = try await TunnelContext(with: .shared, provider: self)
+        let ctx = tunnelContext.partoutContext
+        self.ctx = ctx
 
         do {
-            fwd = try await NEPTPForwarder(
-                provider: self,
-                decoder: dependencies.neProtocolCoder(),
-                registry: dependencies.registry,
-                environmentFactory: {
-                    self.dependencies.tunnelEnvironment(profileId: $0)
-                },
-                willProcess: context.processor.willProcess
-            )
+            fwd = try await NEPTPForwarder(ctx, controller: tunnelContext.neTunnelController)
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
@@ -65,19 +55,19 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             // check hold flag
             if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
-                pp_log(.app, .info, "Tunnel is on hold")
+                pp_log(ctx, .app, .info, "Tunnel is on hold")
                 guard options?[ExtendedTunnel.isManualKey] == true as NSNumber else {
-                    pp_log(.app, .error, "Tunnel was started non-interactively, hang here")
+                    pp_log(ctx, .app, .error, "Tunnel was started non-interactively, hang here")
                     return
                 }
-                pp_log(.app, .info, "Tunnel was started interactively, clear hold flag")
+                pp_log(ctx, .app, .info, "Tunnel was started interactively, clear hold flag")
                 environment.removeEnvironmentValue(forKey: TunnelEnvironmentKeys.holdFlag)
             }
 
             // prepare for receipt verification
-            await context.iapManager.fetchLevelIfNeeded()
-            let params = await Constants.shared.tunnel.verificationParameters(isBeta: context.iapManager.isBeta)
-            pp_log(.app, .info, "Will start profile verification in \(params.delay) seconds")
+            await tunnelContext.iapManager.fetchLevelIfNeeded()
+            let params = await Constants.shared.tunnel.verificationParameters(isBeta: tunnelContext.iapManager.isBeta)
+            pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
 
             // start tunnel
             try await fwd.startTunnel(options: options)
@@ -100,8 +90,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 )
             }
         } catch {
-            pp_log(.app, .fault, "Unable to start tunnel: \(error)")
-            PartoutConfiguration.shared.flushLog()
+            pp_log(ctx, .app, .fault, "Unable to start tunnel: \(error)")
+            ctx.flushLog()
             throw error
         }
     }
@@ -110,11 +100,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         verifierSubscription?.cancel()
         await fwd?.stopTunnel(with: reason)
         fwd = nil
-        PartoutConfiguration.shared.flushLog()
+        ctx?.flushLog()
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
-        PartoutConfiguration.shared.flushLog()
+        ctx?.flushLog()
         super.cancelTunnelWithError(error)
     }
 
@@ -135,15 +125,18 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
 private extension PacketTunnelProvider {
     func verifyEligibility(of profile: Profile, environment: TunnelEnvironment, interval: TimeInterval) async {
+        guard let tunnelContext else {
+            fatalError("Missing tunnelContext?")
+        }
         while true {
             do {
-                pp_log(.app, .info, "Verify profile, requires: \(profile.features)")
-                await context.iapManager.reloadReceipt()
-                try await context.iapManager.verify(profile)
+                pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
+                await tunnelContext.iapManager.reloadReceipt()
+                try await tunnelContext.iapManager.verify(profile)
             } catch {
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-                pp_log(.app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
+                pp_log(ctx, .app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 
                 // prevent on-demand reconnection
                 environment.setEnvironmentValue(true, forKey: TunnelEnvironmentKeys.holdFlag)
@@ -151,7 +144,7 @@ private extension PacketTunnelProvider {
                 return
             }
 
-            pp_log(.app, .info, "Will verify profile again in \(interval) seconds...")
+            pp_log(ctx, .app, .info, "Will verify profile again in \(interval) seconds...")
             try? await Task.sleep(interval: interval)
         }
     }

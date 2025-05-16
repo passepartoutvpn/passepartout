@@ -124,7 +124,7 @@ private extension ProviderView.OpenVPNCredentialsView {
         do {
             try draft.module.setOptions(options, for: .openVPN)
         } catch {
-            pp_log(.app, .error, "Unable to store OpenVPN credentials into options: \(error)")
+            pp_log_g(.app, .error, "Unable to store OpenVPN credentials into options: \(error)")
         }
     }
 }

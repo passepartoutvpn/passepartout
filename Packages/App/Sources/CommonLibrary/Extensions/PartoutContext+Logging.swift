@@ -1,5 +1,5 @@
 //
-//  PartoutConfiguration+Logging.swift
+//  PartoutContext+Logging.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/4/24.
@@ -25,9 +25,13 @@
 
 import Foundation
 
-extension PartoutConfiguration {
-    public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
-        pp_log(.app, .debug, "Log to: \(url)")
+extension PartoutContext.Builder {
+    public mutating func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
+        if let profileId {
+            pp_log(nil, .app, .debug, "Log profile \(profileId) to: \(url)")
+        } else {
+            pp_log(nil, .app, .debug, "Log globally to: \(url)")
+        }
 
         assertsMissingLoggingCategory = true
         setOSLog(for: [
@@ -53,20 +57,10 @@ extension PartoutConfiguration {
             logsAddresses = true
             logsModules = true
         }
-
-        appendLog(parameters.options.maxLevel, message: "")
-        appendLog(parameters.options.maxLevel, message: "--- BEGIN ---")
-        appendLog(parameters.options.maxLevel, message: "")
-
-        let systemInfo = SystemInformation()
-        appendLog(parameters.options.maxLevel, message: "App: \(BundleConfiguration.mainVersionString)")
-        appendLog(parameters.options.maxLevel, message: "OS: \(systemInfo.osString)")
-        if let deviceString = systemInfo.deviceString {
-            appendLog(parameters.options.maxLevel, message: "Device: \(deviceString)")
-        }
-        appendLog(parameters.options.maxLevel, message: "")
     }
+}
 
+extension PartoutContext {
     public func currentLog(parameters: Constants.Log) -> [String] {
         currentLogLines(
             sinceLast: parameters.sinceLast,
@@ -76,8 +70,8 @@ extension PartoutConfiguration {
     }
 }
 
-private extension PartoutConfiguration {
-    func setOSLog(for categories: [LoggerCategory]) {
+private extension PartoutContext.Builder {
+    mutating func setOSLog(for categories: [LoggerCategory]) {
         categories.forEach {
             setLogger(OSLogDestination($0), for: [$0])
         }

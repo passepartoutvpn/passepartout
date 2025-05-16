@@ -54,13 +54,13 @@ private extension API {
         guard let bundledURL = Bundle.module.url(forResource: "API/v6", withExtension: nil) else {
             fatalError("Unable to find bundled API")
         }
-        return API.V6.Mapper(baseURL: bundledURL)
+        return API.V6.Mapper(.global, baseURL: bundledURL)
     }()
 
     // fetch remote JS (baseURL = remote)
     // fetch remote JSON (URL in scripts)
     static let remoteV6: APIMapper = {
         let remoteURL = Constants.shared.websites.api.appendingPathComponent("v6")
-        return API.V6.Mapper(baseURL: remoteURL)
+        return API.V6.Mapper(.global, baseURL: remoteURL)
     }()
 }

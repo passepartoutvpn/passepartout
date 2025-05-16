@@ -82,10 +82,10 @@ public struct PaywallModifier: ViewModifier {
                 }
                 Task {
                     if !iapManager.isEnabled {
-                        pp_log(.App.iap, .info, "In-app purchases are disabled, enabling...")
+                        pp_log_g(.App.iap, .info, "In-app purchases are disabled, enabling...")
                         await iapManager.enable()
                         guard !iapManager.isEligible(for: reason.requiredFeatures) else {
-                            pp_log(.App.iap, .info, "Skipping paywall because eligible for features: \(reason.requiredFeatures)")
+                            pp_log_g(.App.iap, .info, "Skipping paywall because eligible for features: \(reason.requiredFeatures)")
                             return
                         }
                     }

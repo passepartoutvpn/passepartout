@@ -44,7 +44,7 @@ public struct AppMenuImage: View {
 
 private extension AppMenuImage {
     var connectionStatus: TunnelStatus {
-        // FIXME: #218, must be per-tunnel
+        // TODO: #218, must be per-tunnel
         guard let id = tunnel.activeProfiles.first?.value.id else {
             return .inactive
         }

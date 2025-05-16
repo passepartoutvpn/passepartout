@@ -140,7 +140,7 @@ private extension AppCoordinator {
 
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
-        pp_log(.app, .info, "Present interactive login")
+        pp_log_g(.app, .info, "Present interactive login")
         interactiveManager.present(
             with: profile,
             onComplete: onComplete
@@ -159,10 +159,10 @@ extension AppCoordinator {
         features: Set<AppFeature>,
         onCancel: (() -> Void)?
     ) {
-        pp_log(.app, .info, "Purchase required for features: \(features)")
+        pp_log_g(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
             let V = Strings.Views.Paywall.Alerts.Verification.self
-            pp_log(.app, .info, "Present verification alert")
+            pp_log_g(.app, .info, "Present verification alert")
             errorHandler.handle(
                 title: Strings.Views.Paywall.Alerts.Confirmation.title,
                 message: [
@@ -175,7 +175,7 @@ extension AppCoordinator {
             )
             return
         }
-        pp_log(.app, .info, "Present paywall")
+        pp_log_g(.app, .info, "Present paywall")
         onCancelPaywall = onCancel
 
         setLater(.init(nil, requiredFeatures: features, action: .connect)) {

@@ -53,34 +53,32 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     var body: some View {
         debugChanges()
-        return ScrollViewReader { scrollProxy in
-            ScrollView {
-                VStack(spacing: .zero) {
-                    if !isUITesting && !isSearching && pinsActiveProfile {
-                        headerView(scrollProxy: scrollProxy)
-                            .padding(.bottom)
-                            .unanimated()
-                    }
-                    LazyVGrid(columns: columns) {
-                        ForEach(allPreviews, content: profileView)
-                            .onDelete { offsets in
-                                Task {
-                                    await profileManager.removeProfiles(at: offsets)
-                                }
-                            }
-                    }
-                    .themeGridHeader {
-                        ProfilesHeaderView()
-                    }
+        return ScrollView {
+            VStack(spacing: .zero) {
+                if !isUITesting && !isSearching && pinsActiveProfile {
+                    headerView
+                        .padding(.bottom)
+                        .unanimated()
                 }
-                .padding(.horizontal)
-#if os(macOS)
-                .padding(.top)
-#endif
+                LazyVGrid(columns: columns) {
+                    ForEach(allPreviews, content: profileView)
+                        .onDelete { offsets in
+                            Task {
+                                await profileManager.removeProfiles(at: offsets)
+                            }
+                        }
+                }
+                .themeGridHeader {
+                    ProfilesHeaderView()
+                }
             }
-            .themeAnimation(on: profileManager.isReady, category: .profiles)
-            .themeAnimation(on: profileManager.previews, category: .profiles)
+            .padding(.horizontal)
+#if os(macOS)
+            .padding(.top)
+#endif
         }
+        .themeAnimation(on: profileManager.isReady, category: .profiles)
+        .themeAnimation(on: profileManager.previews, category: .profiles)
     }
 }
 
@@ -91,23 +89,23 @@ private extension ProfileGridView {
         profileManager.previews
     }
 
-    // FIXME: #218, move to InstalledProfileView when .multiple
-    func headerView(scrollProxy: ScrollViewProxy) -> some View {
-        ForEach(installedProfiles) { profile in
-            InstalledProfileView(
-                layout: .grid,
-                profileManager: profileManager,
-                profile: profile,
-                tunnel: tunnel,
-                errorHandler: errorHandler,
-                flow: flow
-            )
-            .contextMenu {
+    // TODO: #218, move to InstalledProfileView when .multiple
+    var headerView: some View {
+        InstalledProfileView(
+            layout: .grid,
+            profileManager: profileManager,
+            profile: installedProfiles.first,
+            tunnel: tunnel,
+            errorHandler: errorHandler,
+            flow: flow
+        )
+        .contextMenu {
+            installedProfiles.first.map {
                 ProfileContextMenu(
                     style: .installedProfile,
                     profileManager: profileManager,
                     tunnel: tunnel,
-                    preview: .init(profile),
+                    preview: .init($0),
                     errorHandler: errorHandler,
                     flow: flow
                 )

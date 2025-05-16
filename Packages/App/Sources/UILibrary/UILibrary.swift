@@ -41,8 +41,8 @@ public final class UILibrary: UILibraryConfiguring {
     }
 
     public func configure(with context: AppContext) {
-        CommonLibrary(kvStore: context.kvStore)
-            .configure(.app)
+        PartoutContext.global = CommonLibrary(kvStore: context.kvStore)
+            .configurePartout(forTarget: .app)
 
         assertMissingImplementations(with: context.registry)
         context.appearanceManager.apply()

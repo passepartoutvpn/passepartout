@@ -275,7 +275,7 @@ private struct ProviderServerCoordinatorIfSupported: View {
 
 extension AppCoordinator {
     public func onInteractiveLogin(_ profile: Profile, _ onComplete: @escaping InteractiveManager.CompletionBlock) {
-        pp_log(.app, .info, "Present interactive login")
+        pp_log_g(.app, .info, "Present interactive login")
         interactiveManager.present(with: profile, onComplete: onComplete)
     }
 
@@ -284,7 +284,7 @@ extension AppCoordinator {
             assertionFailure("Editing provider entity, but profile has no selected provider module")
             return
         }
-        pp_log(.app, .info, "Present provider entity selector")
+        pp_log_g(.app, .info, "Present provider entity selector")
         present(.editProviderEntity(profile, force, module))
     }
 
@@ -293,10 +293,10 @@ extension AppCoordinator {
         features: Set<AppFeature>,
         onCancel: (() -> Void)?
     ) {
-        pp_log(.app, .info, "Purchase required for features: \(features)")
+        pp_log_g(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
             let V = Strings.Views.Paywall.Alerts.Verification.self
-            pp_log(.app, .info, "Present verification alert")
+            pp_log_g(.app, .info, "Present verification alert")
             errorHandler.handle(
                 title: Strings.Views.Paywall.Alerts.Confirmation.title,
                 message: [
@@ -309,7 +309,7 @@ extension AppCoordinator {
             )
             return
         }
-        pp_log(.app, .info, "Present paywall")
+        pp_log_g(.app, .info, "Present paywall")
         onCancelPaywall = onCancel
 
         setLater(.init(profile, requiredFeatures: features, action: .connect)) {
@@ -332,7 +332,7 @@ private extension AppCoordinator {
         // XXX: select entity after dismissing
         try await Task.sleep(for: .milliseconds(500))
 
-        pp_log(.app, .info, "Select new provider entity: (profile=\(profile.id), module=\(newModule.id))")
+        pp_log_g(.app, .info, "Select new provider entity: (profile=\(profile.id), module=\(newModule.id))")
 
         do {
             var builder = profile.builder()
@@ -347,13 +347,13 @@ private extension AppCoordinator {
             }
 
             if !wasConnected {
-                pp_log(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
+                pp_log_g(.app, .info, "Profile \(newProfile.id) was not connected, will connect to new provider entity")
                 await onConnect(newProfile, force: force)
             } else {
-                pp_log(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
+                pp_log_g(.app, .info, "Profile \(newProfile.id) was connected, will reconnect to new provider entity via AppContext observation")
             }
         } catch {
-            pp_log(.app, .error, "Unable to save new provider entity: \(error)")
+            pp_log_g(.app, .error, "Unable to save new provider entity: \(error)")
             throw error
         }
     }

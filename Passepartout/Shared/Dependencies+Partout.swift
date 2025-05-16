@@ -37,19 +37,21 @@ extension Dependencies {
         CodableProfileCoder()
     }
 
-    func neProtocolCoder() -> NEProtocolCoder {
+    func neProtocolCoder(_ ctx: PartoutContext) -> NEProtocolCoder {
 #if PP_BUILD_MAC
         ProviderNEProtocolCoder(
+            ctx,
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: registry,
             coder: profileCoder()
         )
 #else
         KeychainNEProtocolCoder(
+            ctx,
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: registry,
             coder: profileCoder(),
-            keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
+            keychain: AppleKeychain(ctx, group: BundleConfiguration.mainString(for: .keychainGroupId))
         )
 #endif
     }
@@ -59,7 +61,7 @@ extension Dependencies {
     }
 
     nonisolated func tunnelEnvironment(profileId: Profile.ID) -> TunnelEnvironment {
-        UserDefaultsEnvironment(defaults: .appGroup, prefix: "Partout.\(profileId.uuidString).")
+        UserDefaultsEnvironment(profileId: profileId, defaults: .appGroup)
     }
 }
 
@@ -70,14 +72,16 @@ private extension Dependencies {
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
+                    let ctx: PartoutContext = .for($0.controller.profile.id)
                     var options = OpenVPN.ConnectionOptions()
                     options.writeTimeout = TimeInterval($0.options.linkWriteTimeout) / 1000.0
                     options.minDataCountInterval = TimeInterval($0.options.minDataCountInterval) / 1000.0
                     return try await OpenVPNConnection(
+                        ctx,
                         parameters: $0,
                         module: $1,
-                        prng: PartoutConfiguration.platform.newPRNG(),
-                        dns: PartoutConfiguration.platform.newDNSResolver(),
+                        prng: PartoutContext.platform.newPRNG(ctx),
+                        dns: PartoutContext.platform.newDNSResolver(ctx),
                         options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
@@ -88,7 +92,9 @@ private extension Dependencies {
                 importer: StandardWireGuardParser(),
                 validator: StandardWireGuardParser(),
                 connectionBlock: {
-                    try WireGuardConnection(
+                    let ctx: PartoutContext = .for($0.controller.profile.id)
+                    return try WireGuardConnection(
+                        ctx,
                         parameters: $0,
                         module: $1
                     )

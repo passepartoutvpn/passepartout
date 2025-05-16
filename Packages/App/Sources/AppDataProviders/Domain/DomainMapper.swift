@@ -66,7 +66,7 @@ struct DomainMapper {
                     $0[.init(rawValue: id)] = ProviderCache(lastUpdate: lastUpdate, tag: nil)
                 }
             } catch {
-                pp_log(.api, .error, "Unable to decode cache: \(error)")
+                pp_log_g(.api, .error, "Unable to decode cache: \(error)")
             }
         }
     }

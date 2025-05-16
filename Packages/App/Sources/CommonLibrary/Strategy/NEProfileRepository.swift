@@ -44,7 +44,7 @@ public final class NEProfileRepository: ProfileRepository {
         managersSubscription = Task { [weak self] in
             for await manager in repository.managersStream {
                 guard !Task.isCancelled else {
-                    pp_log(.App.profiles, .debug, "Cancelled NEProfileRepository.managersStream")
+                    pp_log_g(.App.profiles, .debug, "Cancelled NEProfileRepository.managersStream")
                     return
                 }
                 self?.onUpdatedManagers(manager)
@@ -62,7 +62,7 @@ public final class NEProfileRepository: ProfileRepository {
             do {
                 return try repository.profile(from: $0)
             } catch {
-                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                pp_log_g(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
             }
         }
@@ -99,11 +99,11 @@ private extension NEProfileRepository {
                 decodingTime += elapsed
                 return profile
             } catch {
-                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                pp_log_g(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
             }
         }
-        pp_log(.App.profiles, .info, "Decoded \(managers.count) managers to \(profiles.count) profiles in \(decodingTime) seconds")
+        pp_log_g(.App.profiles, .info, "Decoded \(managers.count) managers to \(profiles.count) profiles in \(decodingTime) seconds")
         profilesSubject.send(profiles)
     }
 }

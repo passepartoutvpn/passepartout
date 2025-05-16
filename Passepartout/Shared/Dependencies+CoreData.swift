@@ -35,10 +35,10 @@ extension Dependencies {
 
 private struct CoreDataPersistentStoreLogger: LoggerProtocol {
     func debug(_ msg: String) {
-        pp_log(.app, .info, msg)
+        pp_log_g(.app, .info, msg)
     }
 
     func warning(_ msg: String) {
-        pp_log(.app, .error, msg)
+        pp_log_g(.app, .error, msg)
     }
 }

@@ -36,7 +36,7 @@ public final class ProviderPreferences: ObservableObject, ProviderPreferencesRep
         self.repository = repository
     }
 
-    // FIXME: #1263, favorites are now regions, rename accordingly
+    // TODO: #1263, favorites are now regions, rename accordingly
     public func favoriteServers() -> ObservableList<String> {
         ObservableList { [weak self] in
             self?.isFavoriteServer($0) ?? false

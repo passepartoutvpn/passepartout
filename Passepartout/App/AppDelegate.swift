@@ -34,7 +34,7 @@ final class AppDelegate: NSObject {
     let context: AppContext = {
         if AppCommandLine.contains(.uiTesting) {
             let dependencies: Dependencies = .shared
-            pp_log(.app, .info, "UI tests: mock AppContext")
+            pp_log_g(.app, .info, "UI tests: mock AppContext")
             return .forUITesting(withRegistry: dependencies.registry)
         }
         return .shared

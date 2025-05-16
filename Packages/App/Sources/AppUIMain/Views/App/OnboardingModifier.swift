@@ -117,7 +117,7 @@ private extension OnboardingModifier {
 private extension OnboardingModifier {
     func advance() {
         if isUITesting {
-            pp_log(.app, .info, "UI tests: skip onboarding")
+            pp_log_g(.app, .info, "UI tests: skip onboarding")
             return
         }
         Task {

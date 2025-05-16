@@ -30,12 +30,14 @@ import UILibrary
 
 extension AppContext {
     static func forUITesting(withRegistry registry: Registry) -> AppContext {
+        let ctx: PartoutContext = .global
         let dependencies: Dependencies = .shared
 
         let kvStore = KeyValueManager()
         let apiManager = APIManager(
+            ctx,
             from: API.bundled,
-            repository: InMemoryAPIRepository()
+            repository: InMemoryAPIRepository(ctx)
         )
         let iapManager = IAPManager(
             customUserLevel: .complete,
@@ -57,8 +59,8 @@ extension AppContext {
         )
         profileManager.isRemoteImportingEnabled = true
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(strategy: FakeTunnelStrategy()) { _ in
-                SharedTunnelEnvironment()
+            tunnel: Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+                SharedTunnelEnvironment(profileId: nil)
             },
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
