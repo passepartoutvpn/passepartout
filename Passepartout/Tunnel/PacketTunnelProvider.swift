@@ -24,15 +24,14 @@
 //
 
 import CommonLibrary
+import CommonUtils
 @preconcurrency import NetworkExtension
 
 // FIXME: #1375, prevent PTP from starting multiple times (macOS, desktop)
 // FIXME: #1373, diagnostics/logs must be per-tunnel
 
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
-    private var tunnelContext: TunnelContext?
-
-    private var ctx: PartoutContext?
+    private var ctx: PartoutLoggerContext?
 
     private var fwd: NEPTPForwarder?
 
@@ -41,12 +40,73 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
         pp_log_g(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
-        let tunnelContext = try await TunnelContext(with: .shared, provider: self)
-        let ctx = tunnelContext.partoutContext
+        // MARK: Declare globals
+
+        let dependencies: Dependencies = await .shared
+        let constants: Constants = .shared
+
+        // MARK: Fetch shared preferences
+
+        let kvStore = await KeyValueManager(
+            store: UserDefaultsStore(.appGroup),
+            fallback: AppPreferenceValues()
+        )
+        // FIXME: #1374, preferences not accessible by sysex
+        let preferences = await kvStore.preferences
+
+        // MARK: Parse profile
+
+        let processor = DefaultTunnelProcessor()
+        let neTunnelController = try await NETunnelController(
+            provider: self,
+            decoder: dependencies.neProtocolCoder(.global),
+            registry: dependencies.registry,
+            options: {
+                var options = NETunnelController.Options()
+                if preferences.dnsFallsBack {
+                    options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
+                }
+                return options
+            }(),
+            environmentFactory: {
+                dependencies.tunnelEnvironment(profileId: $0)
+            },
+            willProcess: processor.willProcess
+        )
+        let profileId = neTunnelController.originalProfile.id
+
+        // MARK: Create PartoutLoggerContext with profile
+
+        let ctx = PartoutLogger.register(for: .tunnel(profileId), with: preferences)
         self.ctx = ctx
 
+        // MARK: Create IAPManager for verification
+
+        let iapManager = await MainActor.run {
+            let manager = IAPManager(
+                customUserLevel: dependencies.customUserLevel,
+                inAppHelper: dependencies.appProductHelper(),
+                receiptReader: SharedReceiptReader(
+                    reader: StoreKitReceiptReader(logger: dependencies.iapLogger()),
+                ),
+                betaChecker: dependencies.betaChecker(),
+                productsAtBuild: dependencies.productsAtBuild()
+            )
+#if PP_BUILD_FREE
+            manager.isEnabled = false
+#else
+            manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+#endif
+            return manager
+        }
+
+        // MARK: Start with NEPTPForwarder
+
+        guard self.ctx != nil else {
+            fatalError("Do not forget to save ctx locally")
+        }
         do {
-            fwd = try await NEPTPForwarder(ctx, controller: tunnelContext.neTunnelController)
+            fwd = NEPTPForwarder(ctx, controller: neTunnelController)
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
@@ -65,8 +125,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             }
 
             // prepare for receipt verification
-            await tunnelContext.iapManager.fetchLevelIfNeeded()
-            let params = await Constants.shared.tunnel.verificationParameters(isBeta: tunnelContext.iapManager.isBeta)
+            await iapManager.fetchLevelIfNeeded()
+            let isBeta = await iapManager.isBeta
+            let params = constants.tunnel.verificationParameters(isBeta: isBeta)
             pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
 
             // start tunnel
@@ -85,13 +146,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 }
                 await verifyEligibility(
                     of: fwd.originalProfile,
+                    iapManager: iapManager,
                     environment: environment,
                     interval: params.interval
                 )
             }
         } catch {
             pp_log(ctx, .app, .fault, "Unable to start tunnel: \(error)")
-            ctx.flushLog()
+            flushLogs()
             throw error
         }
     }
@@ -100,11 +162,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         verifierSubscription?.cancel()
         await fwd?.stopTunnel(with: reason)
         fwd = nil
-        ctx?.flushLog()
+        flushLogs()
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
-        ctx?.flushLog()
+        flushLogs()
         super.cancelTunnelWithError(error)
     }
 
@@ -121,18 +183,29 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     }
 }
 
+private extension PacketTunnelProvider {
+    func flushLogs() {
+        PartoutLogger.default.flushLog()
+    }
+}
+
 // MARK: - Eligibility
 
 private extension PacketTunnelProvider {
-    func verifyEligibility(of profile: Profile, environment: TunnelEnvironment, interval: TimeInterval) async {
-        guard let tunnelContext else {
-            fatalError("Missing tunnelContext?")
+    func verifyEligibility(
+        of profile: Profile,
+        iapManager: IAPManager,
+        environment: TunnelEnvironment,
+        interval: TimeInterval
+    ) async {
+        guard let ctx else {
+            fatalError("Forgot to set ctx?")
         }
         while true {
             do {
                 pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
-                await tunnelContext.iapManager.reloadReceipt()
-                try await tunnelContext.iapManager.verify(profile)
+                await iapManager.reloadReceipt()
+                try await iapManager.verify(profile)
             } catch {
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)

@@ -51,18 +51,7 @@ struct DiagnosticsView: View {
 
     let tunnel: ExtendedTunnel
 
-    var availableTunnelLogs: () async -> [LogEntry] = {
-        await Task.detached {
-            LocalLogger.FileStrategy()
-                .availableLogs(at: BundleConfiguration.urlForTunnelLog)
-                .sorted {
-                    $0.key > $1.key
-                }
-                .map {
-                    LogEntry(date: $0, url: $1)
-                }
-        }.value
-    }
+    var availableTunnelLogs: (() async -> [LogEntry])?
 
     @State
     private var logsPrivateData = false
@@ -92,7 +81,7 @@ struct DiagnosticsView: View {
             }
         }
         .task {
-            tunnelLogs = await availableTunnelLogs()
+            tunnelLogs = await computedTunnelLogs()
         }
         .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
         .themeForm()
@@ -183,6 +172,24 @@ private extension DiagnosticsView {
 }
 
 private extension DiagnosticsView {
+    func computedTunnelLogs() async -> [LogEntry] {
+        await (availableTunnelLogs ?? defaultTunnelLogs)()
+    }
+
+    func defaultTunnelLogs() async -> [LogEntry] {
+        await Task.detached {
+            // FIXME: #1373, diagnostics/logs must be per-tunnel
+            LocalLogger.FileStrategy()
+                .availableLogs(at: BundleConfiguration.urlForTunnelLog)
+                .sorted {
+                    $0.key > $1.key
+                }
+                .map {
+                    LogEntry(date: $0, url: $1)
+                }
+        }.value
+    }
+
     func removeTunnelLog(at url: URL) {
         guard let firstIndex = tunnelLogs.firstIndex(where: { $0.url == url }) else {
             return
@@ -199,9 +206,11 @@ private extension DiagnosticsView {
     }
 
     func removeTunnelLogs() {
-        LocalLogger.FileStrategy().purgeLogs(at: BundleConfiguration.urlForTunnelLog)
+        // FIXME: #1373, diagnostics/logs must be per-tunnel
+        LocalLogger.FileStrategy()
+            .purgeLogs(at: BundleConfiguration.urlForTunnelLog)
         Task {
-            tunnelLogs = await availableTunnelLogs()
+            tunnelLogs = await computedTunnelLogs()
         }
     }
 }

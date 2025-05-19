@@ -32,12 +32,18 @@ import UILibrary
 @MainActor
 final class AppDelegate: NSObject {
     let context: AppContext = {
+        let localKVStore = KeyValueManager(store: UserDefaultsStore(.standard))
+        // FIXME: #1374, preferences not accessible by sysex
+        let sharedKVStore = KeyValueManager(
+            store: UserDefaultsStore(.appGroup),
+            fallback: AppPreferenceValues()
+        )
+        let ctx = PartoutLogger.register(for: .app, with: sharedKVStore.preferences)
         if AppCommandLine.contains(.uiTesting) {
-            let dependencies: Dependencies = .shared
             pp_log_g(.app, .info, "UI tests: mock AppContext")
-            return .forUITesting(withRegistry: dependencies.registry)
+            return .forUITesting
         }
-        return .shared
+        return AppContext(ctx, localKVStore: localKVStore, sharedKVStore: sharedKVStore)
     }()
 
 #if os(macOS)
@@ -47,8 +53,9 @@ final class AppDelegate: NSObject {
     )
 #endif
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+    func configure(with uiConfiguring: UILibraryConfiguring?) {
+        CommonLibrary.assertMissingImplementations(with: context.registry)
+        context.appearanceManager.apply()
+        uiConfiguring?.configure(with: context)
     }
 }
