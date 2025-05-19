@@ -1,2 +1,1 @@
-* Update Partout to use PartoutContext (#1372)
-* Drop environments from ExtendedTunnel (#1368)
+* Improve app and tunnel initialization (#1376)
