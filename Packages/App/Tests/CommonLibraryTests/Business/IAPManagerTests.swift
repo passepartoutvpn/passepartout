@@ -361,8 +361,26 @@ extension IAPManagerTests {
         ])
     }
 
-    func test_givenNonFree_whenWithComplete_thenSuggestsEssentials() async {
+    func test_givenOldProducts_whenWithComplete_thenSuggestsEssentialsAndComplete() async {
         let sut = await IAPManager(products: [.Features.trustedNetworks])
+        XCTAssertEqual(sut.suggestedProducts(for: .iOS, filter: .includingComplete), [
+            .Essentials.iOS_macOS,
+            .Essentials.iOS,
+            .Complete.OneTime.lifetime,
+            .Complete.Recurring.monthly,
+            .Complete.Recurring.yearly
+        ])
+        XCTAssertEqual(sut.suggestedProducts(for: .macOS, filter: .includingComplete), [
+            .Essentials.iOS_macOS,
+            .Essentials.macOS,
+            .Complete.OneTime.lifetime,
+            .Complete.Recurring.monthly,
+            .Complete.Recurring.yearly
+        ])
+    }
+
+    func test_givenNewProducts_whenWithComplete_thenSuggestsEssentials() async {
+        let sut = await IAPManager(products: [.Features.appleTV])
         XCTAssertEqual(sut.suggestedProducts(for: .iOS, filter: .includingComplete), [
             .Essentials.iOS_macOS,
             .Essentials.iOS
