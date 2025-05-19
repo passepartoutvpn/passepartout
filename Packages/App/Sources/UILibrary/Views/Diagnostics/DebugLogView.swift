@@ -81,7 +81,7 @@ extension DebugLogView {
         content: @escaping ([String]) -> Content
     ) {
         self.init {
-            PartoutContext.global.currentLog(parameters: parameters)
+            PartoutLogger.default.currentLog(parameters: parameters)
         } content: {
             content($0)
         }

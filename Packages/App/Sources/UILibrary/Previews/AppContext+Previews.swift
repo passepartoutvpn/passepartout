@@ -23,12 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonAPI
 import CommonLibrary
 import CommonUtils
 import Foundation
 
 extension AppContext {
     public static let forPreviews: AppContext = {
+        let constants: Constants = .shared
+
         let kvStore = KeyValueManager()
         let iapManager = IAPManager(
             customUserLevel: .complete,
@@ -52,7 +55,7 @@ extension AppContext {
                 SharedTunnelEnvironment(profileId: nil)
             },
             processor: processor,
-            interval: Constants.shared.tunnel.refreshInterval
+            interval: constants.tunnel.refreshInterval
         )
         let apiManager = APIManager(
             .global,

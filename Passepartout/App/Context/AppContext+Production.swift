@@ -1,5 +1,5 @@
 //
-//  AppContext+Shared.swift
+//  AppContext+Production.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/24/24.
@@ -36,10 +36,16 @@ import UIAccessibility
 import UILibrary
 
 extension AppContext {
-    static let shared: AppContext = {
+    convenience init(
+        _ ctx: PartoutLoggerContext,
+        localKVStore: KeyValueManager,
+        sharedKVStore: KeyValueManager
+    ) {
+
+        // MARK: Declare globals
+
         let dependencies: Dependencies = .shared
         let constants: Constants = .shared
-        let partoutContext: PartoutContext = .global
 
         // MARK: Core Data
 
@@ -80,12 +86,9 @@ extension AppContext {
 
         // MARK: Managers
 
-        let localKVStore = KeyValueManager(store: UserDefaultsStore(.standard))
-        let sharedKVStore = KeyValueManager(store: UserDefaultsStore(.appGroup))
-
         let apiManager: APIManager = {
             let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
-            return APIManager(partoutContext, from: API.shared, repository: repository)
+            return APIManager(ctx, from: API.shared, repository: repository)
         }()
         let iapManager = IAPManager(
             customUserLevel: dependencies.customUserLevel,
@@ -108,7 +111,7 @@ extension AppContext {
 #if targetEnvironment(simulator)
         let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
-            partoutContext,
+            ctx,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: true
@@ -116,15 +119,15 @@ extension AppContext {
         let backupProfileRepository: ProfileRepository? = nil
 #else
         let tunnelStrategy = NETunnelStrategy(
-            partoutContext,
+            ctx,
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            coder: dependencies.neProtocolCoder(partoutContext)
+            coder: dependencies.neProtocolCoder(ctx)
         )
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
             dependencies.profileTitle($0)
         }
         let backupProfileRepository = dependencies.backupProfileRepository(
-            partoutContext,
+            ctx,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: false
@@ -139,7 +142,7 @@ extension AppContext {
         )
 
         let tunnel = ExtendedTunnel(
-            tunnel: Tunnel(partoutContext, strategy: tunnelStrategy) {
+            tunnel: Tunnel(ctx, strategy: tunnelStrategy) {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
             kvStore: localKVStore,
@@ -193,9 +196,9 @@ extension AppContext {
             profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
             do {
-                pp_log(partoutContext, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
+                pp_log(ctx, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
 
-                pp_log(partoutContext, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
+                pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                 try await profileManager.observeRemote(repository: {
                     AppData.cdProfileRepositoryV3(
                         registry: dependencies.registry,
@@ -203,17 +206,17 @@ extension AppContext {
                         context: remoteStore.context,
                         observingResults: true,
                         onResultError: {
-                            pp_log(partoutContext, .App.profiles, .error, "Unable to decode remote profile: \($0)")
+                            pp_log(ctx, .App.profiles, .error, "Unable to decode remote profile: \($0)")
                             return .ignore
                         }
                     )
                 }())
             } catch {
-                pp_log(partoutContext, .App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+                pp_log(ctx, .App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
             }
 #endif
 
-            pp_log(partoutContext, .app, .info, "\tRefresh modules preferences repository...")
+            pp_log(ctx, .app, .info, "\tRefresh modules preferences repository...")
             preferencesManager.modulesRepositoryFactory = {
                 try AppData.cdModulePreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -221,7 +224,7 @@ extension AppContext {
                 )
             }
 
-            pp_log(partoutContext, .app, .info, "\tRefresh providers preferences repository...")
+            pp_log(ctx, .app, .info, "\tRefresh providers preferences repository...")
             preferencesManager.providersRepositoryFactory = {
                 try AppData.cdProviderPreferencesRepositoryV3(
                     context: remoteStore.context,
@@ -229,13 +232,13 @@ extension AppContext {
                 )
             }
 
-            pp_log(partoutContext, .App.profiles, .info, "\tReload profiles required features...")
+            pp_log(ctx, .App.profiles, .info, "\tReload profiles required features...")
             profileManager.reloadRequiredFeatures()
         }
 
         // MARK: Build
 
-        return AppContext(
+        self.init(
             apiManager: apiManager,
             iapManager: iapManager,
             kvStore: sharedKVStore,
@@ -247,7 +250,7 @@ extension AppContext {
             tunnel: tunnel,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )
-    }()
+    }
 }
 
 private extension AppContext {
@@ -294,7 +297,7 @@ private extension Dependencies {
     }
 
     func backupProfileRepository(
-        _ ctx: PartoutContext,
+        _ ctx: PartoutLoggerContext,
         model: NSManagedObjectModel,
         name: String,
         observingResults: Bool

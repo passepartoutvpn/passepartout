@@ -54,12 +54,11 @@ extension KeyValueManagerTests {
     }
 
     func test_givenKeyValue_whenSetFallback_thenGetsFallback() {
-        let sut = KeyValueManager()
-        sut.fallback = [
+        let sut = KeyValueManager(fallback: [
             "string": "foobar",
             "boolean": true,
             "number": 123
-        ]
+        ])
         XCTAssertEqual(sut.object(forKey: "string"), "foobar")
         XCTAssertEqual(sut.object(forKey: "boolean"), true)
         XCTAssertEqual(sut.object(forKey: "number"), 123)

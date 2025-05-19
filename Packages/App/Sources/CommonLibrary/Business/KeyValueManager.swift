@@ -30,7 +30,7 @@ import Foundation
 public final class KeyValueManager: ObservableObject {
     private var store: KeyValueStore
 
-    public var fallback: [String: Any]
+    private let fallback: [String: Any]
 
     public init(store: KeyValueStore = InMemoryStore(), fallback: [String: Any] = [:]) {
         self.store = store

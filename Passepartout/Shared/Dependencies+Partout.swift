@@ -37,7 +37,7 @@ extension Dependencies {
         CodableProfileCoder()
     }
 
-    func neProtocolCoder(_ ctx: PartoutContext) -> NEProtocolCoder {
+    func neProtocolCoder(_ ctx: PartoutLoggerContext) -> NEProtocolCoder {
 #if PP_BUILD_MAC
         ProviderNEProtocolCoder(
             ctx,
@@ -72,7 +72,7 @@ private extension Dependencies {
             OpenVPNModule.Implementation(
                 importer: StandardOpenVPNParser(),
                 connectionBlock: {
-                    let ctx: PartoutContext = .for($0.controller.profile.id)
+                    let ctx = PartoutLoggerContext($0.controller.profile.id)
                     var options = OpenVPN.ConnectionOptions()
                     options.writeTimeout = TimeInterval($0.options.linkWriteTimeout) / 1000.0
                     options.minDataCountInterval = TimeInterval($0.options.minDataCountInterval) / 1000.0
@@ -80,8 +80,8 @@ private extension Dependencies {
                         ctx,
                         parameters: $0,
                         module: $1,
-                        prng: PartoutContext.platform.newPRNG(ctx),
-                        dns: PartoutContext.platform.newDNSResolver(ctx),
+                        prng: Partout.platform.newPRNG(ctx),
+                        dns: Partout.platform.newDNSResolver(ctx),
                         options: options,
                         cachesURL: FileManager.default.temporaryDirectory
                     )
@@ -92,7 +92,7 @@ private extension Dependencies {
                 importer: StandardWireGuardParser(),
                 validator: StandardWireGuardParser(),
                 connectionBlock: {
-                    let ctx: PartoutContext = .for($0.controller.profile.id)
+                    let ctx = PartoutLoggerContext($0.controller.profile.id)
                     return try WireGuardConnection(
                         ctx,
                         parameters: $0,

@@ -41,3 +41,18 @@ public enum AppPreference: String, PreferenceProtocol {
         "App.\(rawValue)"
     }
 }
+
+public struct AppPreferenceValues: Sendable {
+    public var dnsFallsBack = false
+
+    public var skipsPurchases = false
+
+    public var lastInfrastructureRefresh: Date?
+
+    public var lastUsedProfileId: Profile.ID?
+
+    public var logsPrivateData = false
+
+    public init() {
+    }
+}
