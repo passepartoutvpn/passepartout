@@ -44,6 +44,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         let dependencies: Dependencies = await .shared
         let constants: Constants = .shared
+        await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
         // MARK: Fetch shared preferences
 
