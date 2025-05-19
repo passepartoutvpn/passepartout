@@ -29,7 +29,7 @@ import Foundation
 import XCTest
 
 final class ExtendedTunnelTests: XCTestCase {
-    private let ctx: PartoutContext = .global
+    private let ctx: PartoutLoggerContext = .global
 
     private var subscriptions: Set<AnyCancellable> = []
 }

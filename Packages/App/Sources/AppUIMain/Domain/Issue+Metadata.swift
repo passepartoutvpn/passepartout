@@ -28,7 +28,7 @@ import Foundation
 
 extension Issue {
     struct Metadata {
-        let ctx: PartoutContext
+        let ctx: PartoutLoggerContext
 
         let profile: Profile?
 
@@ -49,7 +49,7 @@ extension Issue {
 
     @MainActor
     static func withMetadata(_ metadata: Metadata) async -> Issue {
-        let appLog = metadata.ctx.currentLog(parameters: metadata.parameters)
+        let appLog = metadata.ctx.logger.currentLog(parameters: metadata.parameters)
             .joined(separator: "\n")
             .data(using: .utf8)
 

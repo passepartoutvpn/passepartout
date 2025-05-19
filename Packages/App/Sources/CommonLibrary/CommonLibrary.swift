@@ -23,96 +23,34 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 @_exported import Partout
 
-@MainActor
-public final class CommonLibrary {
-    public enum Target {
-        case app
+public enum CommonLibrary {
+    public static func assertMissingImplementations(with registry: Registry) {
+        ModuleType.allCases.forEach { moduleType in
+            let builder = moduleType.newModule(with: registry)
+            do {
+                // ModuleBuilder -> Module
+                let module = try builder.tryBuild()
 
-        case tunnel(Profile.ID)
-    }
+                // Module -> ModuleBuilder
+                guard let moduleBuilder = module.moduleBuilder() else {
+                    fatalError("\(moduleType): does not produce a ModuleBuilder")
+                }
 
-    private let kvStore: KeyValueManager
-
-    public init(kvStore: KeyValueManager) {
-        self.kvStore = kvStore
-    }
-
-    public func configurePartout(forTarget target: Target) -> PartoutContext {
-        switch target {
-        case .app:
-            return configureApp()
-        case .tunnel(let profileId):
-            return configureTunnel(profileId: profileId)
+                // AppFeatureRequiring
+                guard builder is any AppFeatureRequiring else {
+                    fatalError("\(moduleType): #1 is not AppFeatureRequiring")
+                }
+                guard moduleBuilder is any AppFeatureRequiring else {
+                    fatalError("\(moduleType): #2 is not AppFeatureRequiring")
+                }
+            } catch {
+                if (error as? PartoutError)?.code == .incompleteModule {
+                    return
+                }
+                fatalError("\(moduleType): empty module is not buildable: \(error)")
+            }
         }
-    }
-}
-
-private extension CommonLibrary {
-    func configureApp() -> PartoutContext {
-        configureShared()
-
-        var ctxBuilder = PartoutContext.Builder()
-        let logsPrivateData = kvStore.bool(forKey: AppPreference.logsPrivateData.key)
-        ctxBuilder.configureLogging(
-            to: BundleConfiguration.urlForAppLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: logsPrivateData
-        )
-        let ctx = ctxBuilder.build()
-        PartoutContext.register(ctx)
-
-        ctx.logPreamble(parameters: Constants.shared.log)
-        return ctx
-    }
-
-    func configureTunnel(profileId: Profile.ID) -> PartoutContext {
-        configureShared()
-
-        var ctxBuilder = PartoutContext.Builder(profileId: profileId)
-        // FIXME: #1374, AppPreference not accessible by sysex
-        let logsPrivateData = kvStore.bool(forKey: AppPreference.logsPrivateData.key)
-        ctxBuilder.configureLogging(
-            to: BundleConfiguration.urlForTunnelLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: logsPrivateData
-        )
-        // FIXME: #1374, AppPreference not accessible by sysex
-        if kvStore.bool(forKey: AppPreference.dnsFallsBack.key) {
-            ctxBuilder.dnsFallbackServers = Constants.shared.tunnel.dnsFallbackServers
-        }
-        let ctx = ctxBuilder.build()
-        PartoutContext.register(ctx)
-
-        ctx.logPreamble(parameters: Constants.shared.log)
-        if let dnsFallbackServers = ctx.dnsFallbackServers {
-            pp_log(ctx, .app, .info, "Enable DNS fallback servers: \(dnsFallbackServers)")
-        }
-        return ctx
-    }
-
-    func configureShared() {
-        kvStore.fallback = [
-            AppPreference.dnsFallsBack.key: true,
-            AppPreference.logsPrivateData.key: false
-        ]
-    }
-}
-
-private extension PartoutContext {
-    func logPreamble(parameters: Constants.Log) {
-        appendLog(parameters.options.maxLevel, message: "")
-        appendLog(parameters.options.maxLevel, message: "--- BEGIN ---")
-        appendLog(parameters.options.maxLevel, message: "")
-
-        let systemInfo = SystemInformation()
-        appendLog(parameters.options.maxLevel, message: "App: \(BundleConfiguration.mainVersionString)")
-        appendLog(parameters.options.maxLevel, message: "OS: \(systemInfo.osString)")
-        if let deviceString = systemInfo.deviceString {
-            appendLog(parameters.options.maxLevel, message: "Device: \(deviceString)")
-        }
-        appendLog(parameters.options.maxLevel, message: "")
     }
 }

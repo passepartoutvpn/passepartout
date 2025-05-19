@@ -29,9 +29,10 @@ import Foundation
 import UILibrary
 
 extension AppContext {
-    static func forUITesting(withRegistry registry: Registry) -> AppContext {
-        let ctx: PartoutContext = .global
+    static var forUITesting: AppContext {
         let dependencies: Dependencies = .shared
+        let constants: Constants = .shared
+        let ctx: PartoutLoggerContext = .global
 
         let kvStore = KeyValueManager()
         let apiManager = APIManager(
@@ -51,7 +52,7 @@ extension AppContext {
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
-            registry: registry
+            registry: dependencies.registry
         )
         let profileManager: ProfileManager = .forUITesting(
             withRegistry: dependencies.registry,
@@ -63,7 +64,7 @@ extension AppContext {
                 SharedTunnelEnvironment(profileId: nil)
             },
             processor: processor,
-            interval: Constants.shared.tunnel.refreshInterval
+            interval: constants.tunnel.refreshInterval
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
@@ -75,7 +76,7 @@ extension AppContext {
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
             profileManager: profileManager,
-            registry: registry,
+            registry: dependencies.registry,
             tunnel: tunnel
         )
     }

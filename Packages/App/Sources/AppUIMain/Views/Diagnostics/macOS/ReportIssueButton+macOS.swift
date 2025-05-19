@@ -79,10 +79,12 @@ private extension Issue {
     var items: [Any] {
         var list: [Any] = []
         list.append(body)
-        if let appLog, let url = appLog.toTemporaryURL(withFilename: Constants.shared.log.appPath) {
+        if let appLog,
+           let url = appLog.toTemporaryURL(withFilename: Constants.shared.log.appPath) {
             list.append(url)
         }
-        if let tunnelLog, let url = tunnelLog.toTemporaryURL(withFilename: Constants.shared.log.tunnelPath) {
+        if let tunnelLog,
+           let url = tunnelLog.toTemporaryURL(withFilename: Constants.shared.log.tunnelPath) {
             list.append(url)
         }
         return list
