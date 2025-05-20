@@ -62,24 +62,22 @@ public final class ExtendedTunnel: ObservableObject {
 extension ExtendedTunnel {
     public func install(_ profile: Profile) async throws {
         pp_log_g(.app, .notice, "Install profile \(profile.id)...")
-        let newProfile = try await processedProfile(profile)
-        try await tunnel.install(
-            newProfile,
-            connect: false,
-            options: [Self.isManualKey: true as NSNumber],
-            title: processedTitle
-        )
+        try await installAndConnect(false, with: profile, force: false)
     }
 
     public func connect(with profile: Profile, force: Bool = false) async throws {
         pp_log_g(.app, .notice, "Connect to profile \(profile.id)...")
+        try await installAndConnect(true, with: profile, force: force)
+    }
+
+    private func installAndConnect(_ connect: Bool, with profile: Profile, force: Bool) async throws {
         let newProfile = try await processedProfile(profile)
-        if !force && newProfile.isInteractive {
+        if connect && !force && newProfile.isInteractive {
             throw AppError.interactiveLogin
         }
         try await tunnel.install(
             newProfile,
-            connect: true,
+            connect: connect,
             options: [Self.isManualKey: true as NSNumber],
             title: processedTitle
         )
