@@ -32,18 +32,16 @@ import UILibrary
 @MainActor
 final class AppDelegate: NSObject {
     let context: AppContext = {
-        let localKVStore = KeyValueManager(store: UserDefaultsStore(.standard))
-        // FIXME: #1374, preferences not accessible by sysex
-        let sharedKVStore = KeyValueManager(
-            store: UserDefaultsStore(.appGroup),
+        let kvStore = KeyValueManager(
+            store: UserDefaultsStore(.standard),
             fallback: AppPreferenceValues()
         )
-        let ctx = PartoutLogger.register(for: .app, with: sharedKVStore.preferences)
+        let ctx = PartoutLogger.register(for: .app, with: kvStore.preferences)
         if AppCommandLine.contains(.uiTesting) {
             pp_log_g(.app, .info, "UI tests: mock AppContext")
             return .forUITesting
         }
-        return AppContext(ctx, localKVStore: localKVStore, sharedKVStore: sharedKVStore)
+        return AppContext(ctx, kvStore: kvStore)
     }()
 
 #if os(macOS)

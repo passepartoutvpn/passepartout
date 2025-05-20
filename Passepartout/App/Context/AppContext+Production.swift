@@ -36,11 +36,7 @@ import UIAccessibility
 import UILibrary
 
 extension AppContext {
-    convenience init(
-        _ ctx: PartoutLoggerContext,
-        localKVStore: KeyValueManager,
-        sharedKVStore: KeyValueManager
-    ) {
+    convenience init(_ ctx: PartoutLoggerContext, kvStore: KeyValueManager) {
 
         // MARK: Declare globals
 
@@ -100,7 +96,7 @@ extension AppContext {
 #if PP_BUILD_FREE
         iapManager.isEnabled = false
 #else
-        iapManager.isEnabled = !sharedKVStore.bool(forKey: AppPreference.skipsPurchases.key)
+        iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
 #endif
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
@@ -145,7 +141,7 @@ extension AppContext {
             tunnel: Tunnel(ctx, strategy: tunnelStrategy) {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
-            kvStore: localKVStore,
+            kvStore: kvStore,
             processor: processor,
             interval: constants.tunnel.refreshInterval
         )
@@ -179,7 +175,7 @@ extension AppContext {
         }()
 #endif
 
-        let onboardingManager = OnboardingManager(kvStore: localKVStore)
+        let onboardingManager = OnboardingManager(kvStore: kvStore)
         let preferencesManager = PreferencesManager()
 
         // MARK: Eligibility
@@ -241,7 +237,7 @@ extension AppContext {
         self.init(
             apiManager: apiManager,
             iapManager: iapManager,
-            kvStore: sharedKVStore,
+            kvStore: kvStore,
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,

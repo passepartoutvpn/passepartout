@@ -28,13 +28,20 @@ import Foundation
 
 extension KeyValueManager {
     public var preferences: AppPreferenceValues {
-        var values = AppPreferenceValues()
-        values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
-        values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
-        values.lastInfrastructureRefresh = object(forKey: AppPreference.lastInfrastructureRefresh.key)
-        values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
-        values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
-        return values
+        get {
+            var values = AppPreferenceValues()
+            values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
+            values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
+            values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
+            values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
+            return values
+        }
+        set {
+            set(newValue.dnsFallsBack, forKey: AppPreference.dnsFallsBack.key)
+            set(newValue.skipsPurchases, forKey: AppPreference.skipsPurchases.key)
+            set(newValue.lastUsedProfileId, forKey: AppPreference.lastUsedProfileId.key)
+            set(newValue.logsPrivateData, forKey: AppPreference.logsPrivateData.key)
+        }
     }
 
     public convenience init(store: KeyValueStore, fallback: AppPreferenceValues) {

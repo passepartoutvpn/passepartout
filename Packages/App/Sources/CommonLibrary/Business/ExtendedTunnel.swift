@@ -30,6 +30,8 @@ import Foundation
 public final class ExtendedTunnel: ObservableObject {
     public static nonisolated let isManualKey = "isManual"
 
+    public static nonisolated let appPreferences = "appPreferences"
+
     private let tunnel: Tunnel
 
     private let kvStore: KeyValueManager?
@@ -62,25 +64,28 @@ public final class ExtendedTunnel: ObservableObject {
 extension ExtendedTunnel {
     public func install(_ profile: Profile) async throws {
         pp_log_g(.app, .notice, "Install profile \(profile.id)...")
-        let newProfile = try await processedProfile(profile)
-        try await tunnel.install(
-            newProfile,
-            connect: false,
-            options: .init(values: [Self.isManualKey: true as NSNumber]),
-            title: processedTitle
-        )
+        try await installAndConnect(false, with: profile, force: false)
     }
 
     public func connect(with profile: Profile, force: Bool = false) async throws {
         pp_log_g(.app, .notice, "Connect to profile \(profile.id)...")
+        try await installAndConnect(true, with: profile, force: force)
+    }
+
+    private func installAndConnect(_ connect: Bool, with profile: Profile, force: Bool) async throws {
         let newProfile = try await processedProfile(profile)
-        if !force && newProfile.isInteractive {
+        if connect && !force && newProfile.isInteractive {
             throw AppError.interactiveLogin
+        }
+        var options: [String: NSObject] = [Self.isManualKey: true as NSNumber]
+        if let preferences = kvStore?.preferences {
+            let encodedPreferences = try JSONEncoder().encode(preferences)
+            options[Self.appPreferences] = encodedPreferences as NSData
         }
         try await tunnel.install(
             newProfile,
-            connect: true,
-            options: .init(values: [Self.isManualKey: true as NSNumber]),
+            connect: connect,
+            options: options,
             title: processedTitle
         )
     }

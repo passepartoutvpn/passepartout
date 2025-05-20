@@ -96,7 +96,7 @@ public struct RefreshInfrastructureButtonProgressView: View {
 
 private extension RefreshInfrastructureButton {
     func loadLastUpdate() {
-        guard let map = kvStore.object(forKey: AppPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? else {
+        guard let map = kvStore.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? else {
             elapsed = .infinity
             return
         }
@@ -108,9 +108,9 @@ private extension RefreshInfrastructureButton {
     }
 
     func saveLastUpdate() {
-        var map = kvStore.object(forKey: AppPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? ?? [:]
+        var map = kvStore.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? ?? [:]
         map[providerId.rawValue] = Date.timeIntervalSinceReferenceDate
-        kvStore.set(map, forKey: AppPreference.lastInfrastructureRefresh.key)
+        kvStore.set(map, forKey: UIPreference.lastInfrastructureRefresh.key)
         elapsed = .zero
     }
 }

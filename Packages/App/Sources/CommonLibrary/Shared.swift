@@ -38,21 +38,6 @@ extension LoggerCategory {
     }
 }
 
-// TODO: #716, move to Environment
 extension Constants {
     public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
-}
-
-// TODO: #716, move to Environment?
-// BundleConfiguration.shared
-
-// TODO: #716, move to Environment
-extension UserDefaults {
-    public static let appGroup: UserDefaults = {
-        let appGroup = BundleConfiguration.mainString(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
-        }
-        return defaults
-    }()
 }

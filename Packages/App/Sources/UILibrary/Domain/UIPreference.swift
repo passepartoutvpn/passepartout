@@ -29,6 +29,8 @@ import Foundation
 public enum UIPreference: String, PreferenceProtocol {
     case keepsInMenu
 
+    case lastInfrastructureRefresh
+
     case locksInBackground
 
     case onboardingStep

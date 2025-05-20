@@ -29,25 +29,21 @@ public enum AppPreference: String, PreferenceProtocol {
     case dnsFallsBack
 //    case dnsFallbackServers
 
-    case skipsPurchases
-
-    case lastInfrastructureRefresh
-
     case lastUsedProfileId
 
     case logsPrivateData
+
+    case skipsPurchases
 
     public var key: String {
         "App.\(rawValue)"
     }
 }
 
-public struct AppPreferenceValues: Sendable {
+public struct AppPreferenceValues: Codable, Sendable {
     public var dnsFallsBack = true
 
     public var skipsPurchases = false
-
-    public var lastInfrastructureRefresh: Date?
 
     public var lastUsedProfileId: Profile.ID?
 

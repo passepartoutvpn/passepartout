@@ -38,7 +38,18 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        pp_log_g(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+        let appPreferences: AppPreferenceValues?
+        if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
+            do {
+                appPreferences = try JSONDecoder()
+                    .decode(AppPreferenceValues.self, from: encodedPreferences as Data)
+            } catch {
+                pp_log_g(.app, .error, "Unable to decode startTunnel() preferences")
+                appPreferences = nil
+            }
+        } else {
+            appPreferences = nil
+        }
 
         // MARK: Declare globals
 
@@ -46,14 +57,20 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let constants: Constants = .shared
         await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
-        // MARK: Fetch shared preferences
+        // MARK: Update or fetch existing preferences
 
-        let kvStore = await KeyValueManager(
-            store: UserDefaultsStore(.appGroup),
-            fallback: AppPreferenceValues()
-        )
-        // FIXME: #1374, preferences not accessible by sysex
-        let preferences = await kvStore.preferences
+        let (kvStore, preferences) = await MainActor.run {
+            let kvStore = KeyValueManager(
+                store: UserDefaultsStore(.standard),
+                fallback: AppPreferenceValues()
+            )
+            if let appPreferences {
+                kvStore.preferences = appPreferences
+                return (kvStore, appPreferences)
+            } else {
+                return (kvStore, kvStore.preferences)
+            }
+        }
 
         // MARK: Parse profile
 
@@ -80,6 +97,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         let ctx = PartoutLogger.register(for: .tunnel(profileId), with: preferences)
         self.ctx = ctx
+
+        pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+        if let appPreferences {
+            pp_log(ctx, .app, .info, "\tDecoded preferences: \(appPreferences)")
+        } else {
+            pp_log(ctx, .app, .info, "\tExisting preferences: \(preferences)")
+        }
 
         // MARK: Create IAPManager for verification
 
