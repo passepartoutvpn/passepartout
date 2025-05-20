@@ -99,6 +99,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         self.ctx = ctx
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
+        if let appPreferences {
+            pp_log(ctx, .app, .info, "\tDecoded preferences: \(appPreferences)")
+        } else {
+            pp_log(ctx, .app, .info, "\tExisting preferences: \(preferences)")
+        }
 
         // MARK: Create IAPManager for verification
 
