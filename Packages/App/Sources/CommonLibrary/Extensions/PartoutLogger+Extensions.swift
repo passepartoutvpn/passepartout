@@ -70,6 +70,10 @@ private extension PartoutLogger {
             parameters: Constants.shared.log,
             logsPrivateData: preferences.logsPrivateData
         )
+        builder.willPrint = {
+            let prefix = "[\($0.profileId?.uuidString.prefix(8) ?? "global")]"
+            return "\(prefix) \($1)"
+        }
         return builder.build()
     }
 
