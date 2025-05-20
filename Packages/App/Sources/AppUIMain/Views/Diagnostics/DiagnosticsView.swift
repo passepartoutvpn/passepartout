@@ -42,6 +42,9 @@ struct DiagnosticsView: View {
     private var theme: Theme
 
     @EnvironmentObject
+    private var apiManager: APIManager
+
+    @EnvironmentObject
     private var iapManager: IAPManager
 
     @EnvironmentObject
@@ -139,9 +142,9 @@ private extension DiagnosticsView {
     var reportIssueSection: some View {
         Section {
             ReportIssueButton(
-                profileManager: profileManager,
-                tunnel: tunnel,
                 title: Strings.Views.Diagnostics.ReportIssue.title,
+                tunnel: tunnel,
+                apiManager: apiManager,
                 purchasedProducts: iapManager.purchasedProducts,
                 isUnableToEmail: $isPresentingUnableToEmail
             )

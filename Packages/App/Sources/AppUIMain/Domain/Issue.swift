@@ -35,6 +35,8 @@ struct Issue: Identifiable {
 
     let purchasedProducts: Set<AppProduct>
 
+    let providerLastUpdates: [ProviderID: Date]
+
     let appLog: Data?
 
     let tunnelLog: Data?
@@ -43,17 +45,13 @@ struct Issue: Identifiable {
 
     let deviceLine: String?
 
-    let providerName: String?
-
-    let providerLastUpdate: Date?
-
     init(
         comment: String,
         appLine: String?,
         purchasedProducts: Set<AppProduct>,
+        providerLastUpdates: [ProviderID: Date] = [:],
         appLog: Data? = nil,
-        tunnelLog: Data? = nil,
-        provider: (ProviderID, Date?)? = nil
+        tunnelLog: Data? = nil
     ) {
         id = UUID()
         self.comment = comment
@@ -61,23 +59,23 @@ struct Issue: Identifiable {
         self.purchasedProducts = purchasedProducts
         self.appLog = appLog
         self.tunnelLog = tunnelLog
+        self.providerLastUpdates = providerLastUpdates
 
         let systemInfo = SystemInformation()
         osLine = systemInfo.osString
         deviceLine = systemInfo.deviceString
-
-        providerName = provider?.0.rawValue
-        providerLastUpdate = provider?.1
     }
 
     var body: String {
-        template
+        let providers = providerLastUpdates.mapValues {
+            $0.localizedDescription(style: .timestamp)
+        }
+        return template
             .replacingOccurrences(of: "$comment", with: comment)
             .replacingOccurrences(of: "$appLine", with: appLine ?? "unknown")
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
-            .replacingOccurrences(of: "$providerName", with: providerName ?? "none")
-            .replacingOccurrences(of: "$providerLastUpdate", with: providerLastUpdate?.localizedDescription(style: .timestamp) ?? "unknown")
+            .replacingOccurrences(of: "$providerLastUpdates", with: providers.description)
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)
     }
 }

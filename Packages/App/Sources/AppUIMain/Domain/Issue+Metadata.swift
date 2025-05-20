@@ -30,13 +30,11 @@ extension Issue {
     struct Metadata {
         let ctx: PartoutLoggerContext
 
-        let profile: Profile?
-
-        let provider: (ProviderID, Date?)?
-
         let versionString: String
 
         let purchasedProducts: Set<AppProduct>
+
+        let providerLastUpdates: [ProviderID: Date]
 
         let tunnel: ExtendedTunnel
 
@@ -78,9 +76,9 @@ extension Issue {
             comment: metadata.comment,
             appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
             purchasedProducts: metadata.purchasedProducts,
+            providerLastUpdates: metadata.providerLastUpdates,
             appLog: appLog,
-            tunnelLog: tunnelLog,
-            provider: metadata.provider
+            tunnelLog: tunnelLog
         )
     }
 }
