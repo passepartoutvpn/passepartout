@@ -23,10 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 
 enum DiagnosticsRoute: Hashable {
     case appLog(title: String)
+
+    case profile(profile: Profile)
 
     case tunnelLog(title: String, url: URL?)
 }

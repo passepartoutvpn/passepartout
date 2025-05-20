@@ -74,7 +74,7 @@ struct DiagnosticsView: View {
                 BetaSection()
             }
             liveLogSection
-            openVPNSection
+            profilesSection
             tunnelLogsSection
             if AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback {
                 reportIssueSection
@@ -111,6 +111,18 @@ private extension DiagnosticsView {
         .themeSection(header: Strings.Views.Diagnostics.Sections.live)
     }
 
+    // FIXME: #1373, localize
+    var profilesSection: some View {
+        activeProfiles
+            .nilIfEmpty
+            .map {
+                ForEach($0) { profile in
+                    NavigationLink(profile.name, value: DiagnosticsRoute.profile(profile: profile))
+                }
+                .themeSection(header: "Active profiles")
+            }
+    }
+
     var tunnelLogsSection: some View {
         Group {
             Button(Strings.Views.Diagnostics.Rows.removeTunnelLogs) {
@@ -123,26 +135,6 @@ private extension DiagnosticsView {
         }
         .themeSection(header: Strings.Views.Diagnostics.Sections.tunnel)
         .themeAnimation(on: tunnelLogs, category: .diagnostics)
-    }
-
-    var openVPNSection: some View {
-        // FIXME: #1373, diagnostics/logs must be per-tunnel
-        tunnel.activeProfiles.first
-            .map {
-                tunnel.value(
-                    forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration,
-                    ofProfileId: $0.key
-                )
-                .map { cfg in
-                    Group {
-                        NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
-                            OpenVPNView(serverConfiguration: cfg)
-                                .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
-                        }
-                    }
-                    .themeSection(header: Strings.Unlocalized.openVPN)
-                }
-            }
     }
 
     var reportIssueSection: some View {
@@ -172,13 +164,21 @@ private extension DiagnosticsView {
 }
 
 private extension DiagnosticsView {
+    var activeProfiles: [Profile] {
+        tunnel.activeProfiles
+            .values
+            .compactMap {
+                profileManager.profile(withId: $0.id)
+            }
+            .sorted(by: Profile.sorting)
+    }
+
     func computedTunnelLogs() async -> [LogEntry] {
         await (availableTunnelLogs ?? defaultTunnelLogs)()
     }
 
     func defaultTunnelLogs() async -> [LogEntry] {
         await Task.detached {
-            // FIXME: #1373, diagnostics/logs must be per-tunnel
             LocalLogger.FileStrategy()
                 .availableLogs(at: BundleConfiguration.urlForTunnelLog)
                 .sorted {
@@ -206,7 +206,6 @@ private extension DiagnosticsView {
     }
 
     func removeTunnelLogs() {
-        // FIXME: #1373, diagnostics/logs must be per-tunnel
         LocalLogger.FileStrategy()
             .purgeLogs(at: BundleConfiguration.urlForTunnelLog)
         Task {

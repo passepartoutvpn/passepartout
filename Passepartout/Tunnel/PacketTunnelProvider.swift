@@ -27,8 +27,6 @@ import CommonLibrary
 import CommonUtils
 @preconcurrency import NetworkExtension
 
-// FIXME: #1373, diagnostics/logs must be per-tunnel
-
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var ctx: PartoutLoggerContext?
 
