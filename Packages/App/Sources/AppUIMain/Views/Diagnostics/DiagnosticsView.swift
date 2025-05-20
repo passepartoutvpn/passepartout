@@ -111,7 +111,6 @@ private extension DiagnosticsView {
         .themeSection(header: Strings.Views.Diagnostics.Sections.live)
     }
 
-    // FIXME: #1373, localize
     var profilesSection: some View {
         activeProfiles
             .nilIfEmpty
@@ -119,7 +118,7 @@ private extension DiagnosticsView {
                 ForEach($0) { profile in
                     NavigationLink(profile.name, value: DiagnosticsRoute.profile(profile: profile))
                 }
-                .themeSection(header: "Active profiles")
+                .themeSection(header: Strings.Views.Diagnostics.Sections.activeProfiles)
             }
     }
 

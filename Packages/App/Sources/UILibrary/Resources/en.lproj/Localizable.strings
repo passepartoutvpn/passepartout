@@ -59,6 +59,7 @@
 
 "views.diagnostics.title" = "Diagnostics";
 "views.diagnostics.sections.live" = "Live log";
+"views.diagnostics.sections.active_profiles" = "Active profiles";
 "views.diagnostics.sections.tunnel" = "Tunnel logs";
 "views.diagnostics.rows.app" = "App";
 "views.diagnostics.rows.tunnel" = "Tunnel";
