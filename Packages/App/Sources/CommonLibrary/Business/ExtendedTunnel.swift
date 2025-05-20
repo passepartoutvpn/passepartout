@@ -95,7 +95,6 @@ extension ExtendedTunnel {
         try await tunnel.disconnect(from: profileId)
     }
 
-    // FIXME: #1373, diagnostics/logs must be per-tunnel
     public func currentLog(parameters: Constants.Log) async -> [String] {
         guard let anyProfile = tunnel.activeProfiles.first?.value else {
             return []
