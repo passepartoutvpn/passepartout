@@ -66,7 +66,7 @@ extension ExtendedTunnel {
         try await tunnel.install(
             newProfile,
             connect: false,
-            options: .init(values: [Self.isManualKey: true as NSNumber]),
+            options: [Self.isManualKey: true as NSNumber],
             title: processedTitle
         )
     }
@@ -80,7 +80,7 @@ extension ExtendedTunnel {
         try await tunnel.install(
             newProfile,
             connect: true,
-            options: .init(values: [Self.isManualKey: true as NSNumber]),
+            options: [Self.isManualKey: true as NSNumber],
             title: processedTitle
         )
     }

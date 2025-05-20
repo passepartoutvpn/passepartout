@@ -38,7 +38,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        pp_log_g(.app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
         // MARK: Declare globals
 
@@ -80,6 +79,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         let ctx = PartoutLogger.register(for: .tunnel(profileId), with: preferences)
         self.ctx = ctx
+
+        pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
 
         // MARK: Create IAPManager for verification
 
