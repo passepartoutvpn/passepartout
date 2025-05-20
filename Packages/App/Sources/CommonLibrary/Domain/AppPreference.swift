@@ -40,7 +40,7 @@ public enum AppPreference: String, PreferenceProtocol {
     }
 }
 
-public struct AppPreferenceValues: Sendable {
+public struct AppPreferenceValues: Codable, Sendable {
     public var dnsFallsBack = true
 
     public var skipsPurchases = false

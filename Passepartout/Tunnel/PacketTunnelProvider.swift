@@ -38,6 +38,18 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        let appPreferences: AppPreferenceValues?
+        if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
+            do {
+                appPreferences = try JSONDecoder()
+                    .decode(AppPreferenceValues.self, from: encodedPreferences as Data)
+            } catch {
+                pp_log_g(.app, .error, "Unable to decode startTunnel() preferences")
+                appPreferences = nil
+            }
+        } else {
+            appPreferences = nil
+        }
 
         // MARK: Declare globals
 
