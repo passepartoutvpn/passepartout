@@ -32,11 +32,17 @@ extension PartoutLogger {
         case tunnel(Profile.ID)
     }
 
+    private static var isRegistered = false
+
     @discardableResult
     public static func register(
         for target: Target,
         with preferences: AppPreferenceValues
     ) -> PartoutLoggerContext {
+        guard !isRegistered else {
+            fatalError("Registering target multiple times: \(target)")
+        }
+        isRegistered = true
         switch target {
         case .app:
             let logger = appLogger(preferences: preferences)
