@@ -57,13 +57,20 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let constants: Constants = .shared
         await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
-        // MARK: Fetch shared preferences
+        // MARK: Update or fetch existing preferences
 
-        let kvStore = await KeyValueManager(
-            store: UserDefaultsStore(.standard),
-            fallback: AppPreferenceValues()
-        )
-        let preferences = await kvStore.preferences
+        let (kvStore, preferences) = await MainActor.run {
+            let kvStore = KeyValueManager(
+                store: UserDefaultsStore(.standard),
+                fallback: AppPreferenceValues()
+            )
+            if let appPreferences {
+                kvStore.preferences = appPreferences
+                return (kvStore, appPreferences)
+            } else {
+                return (kvStore, kvStore.preferences)
+            }
+        }
 
         // MARK: Parse profile
 
