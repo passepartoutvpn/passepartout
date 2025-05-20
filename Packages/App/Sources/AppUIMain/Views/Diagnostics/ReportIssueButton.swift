@@ -27,16 +27,11 @@ import CommonLibrary
 import SwiftUI
 
 struct ReportIssueButton {
-
-    @EnvironmentObject
-    private var apiManager: APIManager
-
-    @ObservedObject
-    var profileManager: ProfileManager
+    let title: String
 
     let tunnel: ExtendedTunnel
 
-    let title: String
+    let apiManager: APIManager
 
     let purchasedProducts: Set<AppProduct>
 
@@ -48,22 +43,6 @@ struct ReportIssueButton {
 
     @State
     var modalRoute: ModalRoute?
-
-    // FIXME: #1373, diagnostics/logs must be per-tunnel
-    var installedProfile: Profile? {
-        guard let id = tunnel.activeProfiles.first?.value.id else {
-            return nil
-        }
-        return profileManager.profile(withId: id)
-    }
-
-    var currentProvider: (ProviderID, Date?)? {
-        guard let providerId = installedProfile?.activeProviderModule?.providerId else {
-            return nil
-        }
-        let lastUpdate = apiManager.cache(for: providerId)?.lastUpdate
-        return (providerId, lastUpdate)
-    }
 }
 
 extension ReportIssueButton {
@@ -79,9 +58,7 @@ extension ReportIssueButton {
             }
         }
     }
-}
 
-extension ReportIssueButton {
     func commentInputView() -> some View {
         ThemeTextInputView(
             Strings.Global.Nouns.comment,
@@ -104,5 +81,12 @@ extension ReportIssueButton {
                 sendEmail(comment: $0)
             }
         )
+    }
+}
+
+@MainActor
+extension ReportIssueButton {
+    var providerLastUpdates: [ProviderID: Date] {
+        apiManager.cache.compactMapValues(\.lastUpdate)
     }
 }

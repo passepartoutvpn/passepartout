@@ -717,6 +717,8 @@ public enum Strings {
         public static let tunnel = Strings.tr("Localizable", "views.diagnostics.rows.tunnel", fallback: "Tunnel")
       }
       public enum Sections {
+        /// Active profiles
+        public static let activeProfiles = Strings.tr("Localizable", "views.diagnostics.sections.active_profiles", fallback: "Active profiles")
         /// Live log
         public static let live = Strings.tr("Localizable", "views.diagnostics.sections.live", fallback: "Live log")
         /// Tunnel logs

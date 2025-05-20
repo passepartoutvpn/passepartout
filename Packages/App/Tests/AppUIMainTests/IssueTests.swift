@@ -60,8 +60,8 @@ Hi,
 App: \(issue.appLine ?? "unknown")
 OS: \(issue.osLine)
 Device: \(issue.deviceLine ?? "unknown")
-Provider: none (last updated: unknown)
 Purchased: ["\(AppProduct.Features.appleTV.rawValue)"]
+Providers: [:]
 
 --
 

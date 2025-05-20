@@ -496,9 +496,7 @@ private extension ProfileManager {
                 }
                 return true
             }
-            .sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
+            .sorted(by: Profile.sorting)
 
         pp_log_g(.App.profiles, .notice, "Filter profiles with '\(search)' (\(filteredProfiles.count)): \(filteredProfiles.map(\.name))")
     }

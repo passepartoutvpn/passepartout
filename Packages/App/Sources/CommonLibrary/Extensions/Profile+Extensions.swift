@@ -1,8 +1,8 @@
 //
-//  DiagnosticsRoute.swift
+//  Profile+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 5/20/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
 
-enum DiagnosticsRoute: Hashable {
-    case appLog(title: String)
-
-    case profile(profile: Profile)
-
-    case tunnelLog(title: String, url: URL?)
+extension Profile {
+    public static func sorting(lhs: Self, rhs: Self) -> Bool {
+        lhs.name.lowercased() < rhs.name.lowercased()
+    }
 }

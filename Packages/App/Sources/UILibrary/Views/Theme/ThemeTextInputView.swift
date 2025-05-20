@@ -43,8 +43,8 @@ public struct ThemeTextInputView: View {
     public init(
         _ title: String,
         isPresented: Binding<Bool>,
-        onValidate: ((String) -> Bool)? = nil,
-        onSubmit: @escaping (String) -> Void
+        onValidate: (@MainActor (String) -> Bool)? = nil,
+        onSubmit: @escaping @MainActor (String) -> Void
     ) {
         self.title = title
         _isPresented = isPresented

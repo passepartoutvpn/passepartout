@@ -30,13 +30,11 @@ extension Issue {
     struct Metadata {
         let ctx: PartoutLoggerContext
 
-        let profile: Profile?
-
-        let provider: (ProviderID, Date?)?
-
         let versionString: String
 
         let purchasedProducts: Set<AppProduct>
+
+        let providerLastUpdates: [ProviderID: Date]
 
         let tunnel: ExtendedTunnel
 
@@ -55,10 +53,10 @@ extension Issue {
 
         let tunnelLog: Data?
 
-        // FIXME: #1373, diagnostics/logs must be per-tunnel
         // live tunnel log
-        if !metadata.tunnel.activeProfiles.isEmpty {
-            tunnelLog = await metadata.tunnel.currentLog(parameters: metadata.parameters)
+        let rawTunnelLog = await metadata.tunnel.currentLog(parameters: metadata.parameters)
+        if !rawTunnelLog.isEmpty {
+            tunnelLog = rawTunnelLog
                 .joined(separator: "\n")
                 .data(using: .utf8)
         }
@@ -78,9 +76,9 @@ extension Issue {
             comment: metadata.comment,
             appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
             purchasedProducts: metadata.purchasedProducts,
+            providerLastUpdates: metadata.providerLastUpdates,
             appLog: appLog,
-            tunnelLog: tunnelLog,
-            provider: metadata.provider
+            tunnelLog: tunnelLog
         )
     }
 }

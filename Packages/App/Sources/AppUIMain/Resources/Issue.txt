@@ -7,8 +7,8 @@ $comment
 App: $appLine
 OS: $osLine
 Device: $deviceLine
-Provider: $providerName (last updated: $providerLastUpdate)
 Purchased: $purchasedProducts
+Providers: $providerLastUpdates
 
 --
 
