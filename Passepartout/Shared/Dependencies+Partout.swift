@@ -61,7 +61,11 @@ extension Dependencies {
     }
 
     nonisolated func tunnelEnvironment(profileId: Profile.ID) -> TunnelEnvironment {
-        UserDefaultsEnvironment(profileId: profileId, defaults: .appGroup)
+        let appGroup = BundleConfiguration.mainString(for: .groupId)
+        guard let defaults = UserDefaults(suiteName: appGroup) else {
+            fatalError("No access to App Group: \(appGroup)")
+        }
+        return UserDefaultsEnvironment(profileId: profileId, defaults: defaults)
     }
 }
 

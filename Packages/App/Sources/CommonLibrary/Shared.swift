@@ -41,13 +41,3 @@ extension LoggerCategory {
 extension Constants {
     public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
 }
-
-extension UserDefaults {
-    public static let appGroup: UserDefaults = {
-        let appGroup = BundleConfiguration.mainString(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
-        }
-        return defaults
-    }()
-}

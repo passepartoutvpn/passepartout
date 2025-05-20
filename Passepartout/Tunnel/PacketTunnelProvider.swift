@@ -48,10 +48,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // MARK: Fetch shared preferences
 
         let kvStore = await KeyValueManager(
-            store: UserDefaultsStore(.appGroup),
+            store: UserDefaultsStore(.standard),
             fallback: AppPreferenceValues()
         )
-        // FIXME: #1374, preferences not accessible by sysex
         let preferences = await kvStore.preferences
 
         // MARK: Parse profile
