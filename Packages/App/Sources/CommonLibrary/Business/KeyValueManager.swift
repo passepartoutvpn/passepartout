@@ -89,14 +89,26 @@ extension KeyValueManager {
 
 extension KeyValueManager {
     public func bool(forKey key: String) -> Bool {
-        self[key] as Bool? == true
+        var value = self[key] as Bool?
+        if value == nil {
+            value = fallback[key] as? Bool
+        }
+        return value ?? false
     }
 
     public func integer(forKey key: String) -> Int {
-        self[key] as Int? ?? 0
+        var value = self[key] as Int?
+        if value == nil {
+            value = fallback[key] as? Int
+        }
+        return value ?? 0
     }
 
     public func string(forKey key: String) -> String? {
-        self[key] as String?
+        var value = self[key] as String?
+        if value == nil {
+            value = fallback[key] as? String
+        }
+        return value
     }
 }
