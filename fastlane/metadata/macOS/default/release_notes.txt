@@ -1,1 +1,3 @@
-* Improve app and tunnel initialization (#1376)
+* Reorganize Diagnostics and "Report issue" per profile (#1380)
+* Persist tunnel preferences locally (#1379)
+* Fix default value for DNS fallback (#1378)
