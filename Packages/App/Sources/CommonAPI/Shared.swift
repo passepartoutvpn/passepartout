@@ -26,7 +26,6 @@
 import CommonLibrary
 import Foundation
 
-// TODO: #716, move to Environment
 extension API {
     public static var shared: [APIMapper] {
 #if DEBUG
