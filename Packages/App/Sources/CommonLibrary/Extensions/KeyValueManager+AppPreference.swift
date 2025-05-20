@@ -31,7 +31,6 @@ extension KeyValueManager {
         var values = AppPreferenceValues()
         values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
         values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
-        values.lastInfrastructureRefresh = object(forKey: AppPreference.lastInfrastructureRefresh.key)
         values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
         values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
         return values
