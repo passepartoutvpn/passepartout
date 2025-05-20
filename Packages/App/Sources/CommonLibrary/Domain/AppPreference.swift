@@ -43,7 +43,7 @@ public enum AppPreference: String, PreferenceProtocol {
 }
 
 public struct AppPreferenceValues: Sendable {
-    public var dnsFallsBack = false
+    public var dnsFallsBack = true
 
     public var skipsPurchases = false
 
