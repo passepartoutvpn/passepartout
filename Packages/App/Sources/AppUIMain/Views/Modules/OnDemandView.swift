@@ -32,6 +32,9 @@ struct OnDemandView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     @ObservedObject
     var draft: ModuleDraft<OnDemandModule.Builder>
 
@@ -59,11 +62,13 @@ struct OnDemandView: View, ModuleDraftEditing {
 }
 
 private extension OnDemandView {
-    static let allPolicies: [OnDemandModule.Policy] = [
-        .any,
-        .excluding,
-        .including
-    ]
+    var allPolicies: [OnDemandModule.Policy] {
+        if distributionTarget.supportsIAP {
+            return [.any, .excluding, .including]
+        } else {
+            return [.any]
+        }
+    }
 
     @ViewBuilder
     var rulesArea: some View {
@@ -76,7 +81,7 @@ private extension OnDemandView {
 
     var policySection: some View {
         Picker(selection: $draft.module.policy) {
-            ForEach(Self.allPolicies, id: \.self) {
+            ForEach(allPolicies, id: \.self) {
                 Text($0.localizedDescription)
             }
         } label: {
