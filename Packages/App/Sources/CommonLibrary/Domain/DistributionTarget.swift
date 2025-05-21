@@ -32,3 +32,17 @@ public enum DistributionTarget: Sendable {
 
     case enterprise
 }
+
+extension DistributionTarget {
+    public var supportsAppGroups: Bool {
+        self != .developerID
+    }
+
+    public var supportsCloudKit: Bool {
+        self != .developerID
+    }
+
+    public var supportsIAP: Bool {
+        [.standard, .enterprise].contains(self)
+    }
+}
