@@ -51,8 +51,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // MARK: Declare globals
 
         let dependencies: Dependencies = await .shared
+        let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
-        let distributionTarget = dependencies.distributionTarget
         await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
         // MARK: Update or fetch existing preferences
@@ -94,7 +94,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // MARK: Create PartoutLoggerContext with profile
 
         let ctx = PartoutLogger.register(
-            for: .tunnel(profileId, dependencies.distributionTarget),
+            for: .tunnel(profileId, distributionTarget),
             with: preferences
         )
         self.ctx = ctx

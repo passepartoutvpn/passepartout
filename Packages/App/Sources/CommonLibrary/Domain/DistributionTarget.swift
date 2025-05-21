@@ -47,4 +47,12 @@ extension DistributionTarget {
     public var supportsIAP: Bool {
         [.standard, .enterprise].contains(self)
     }
+
+    public var supportsV2Migration: Bool {
+        self == .standard
+    }
+
+    public var usesExperimentalPOSIXResolver: Bool {
+        self == .developerID
+    }
 }

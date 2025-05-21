@@ -32,7 +32,7 @@ struct Dependencies {
 }
 
 extension Dependencies {
-    public nonisolated var distributionTarget: DistributionTarget {
+    public nonisolated static var distributionTarget: DistributionTarget {
 #if PP_BUILD_MAC
         .developerID
 #else

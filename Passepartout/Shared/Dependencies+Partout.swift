@@ -38,33 +38,33 @@ extension Dependencies {
     }
 
     func neProtocolCoder(_ ctx: PartoutLoggerContext) -> NEProtocolCoder {
-#if PP_BUILD_MAC
-        ProviderNEProtocolCoder(
-            ctx,
-            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            registry: registry,
-            coder: profileCoder()
-        )
-#else
-        KeychainNEProtocolCoder(
-            ctx,
-            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            registry: registry,
-            coder: profileCoder(),
-            keychain: AppleKeychain(ctx, group: BundleConfiguration.mainString(for: .keychainGroupId))
-        )
-#endif
+        if Self.distributionTarget.supportsAppGroups {
+            return KeychainNEProtocolCoder(
+                ctx,
+                tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+                registry: registry,
+                coder: profileCoder(),
+                keychain: AppleKeychain(ctx, group: BundleConfiguration.mainString(for: .keychainGroupId))
+            )
+        } else {
+            return ProviderNEProtocolCoder(
+                ctx,
+                tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+                registry: registry,
+                coder: profileCoder()
+            )
+        }
     }
 
     nonisolated func appTunnelEnvironment(strategy: TunnelStrategy, profileId: Profile.ID) -> TunnelEnvironmentReader {
-#if PP_BUILD_MAC
-        guard let neStrategy = strategy as? NETunnelStrategy else {
-            fatalError("Mac build requires NETunnelStrategy")
+        if Self.distributionTarget.supportsAppGroups {
+            return tunnelEnvironment(profileId: profileId)
+        } else {
+            guard let neStrategy = strategy as? NETunnelStrategy else {
+                fatalError("Mac build requires NETunnelStrategy")
+            }
+            return NETunnelEnvironment(strategy: neStrategy, profileId: profileId)
         }
-        return NETunnelEnvironment(strategy: neStrategy, profileId: profileId)
-#else
-        tunnelEnvironment(profileId: profileId)
-#endif
     }
 
     nonisolated func tunnelEnvironment(profileId: Profile.ID) -> TunnelEnvironment {
@@ -93,11 +93,11 @@ private extension Dependencies {
                         module: $1,
                         prng: Partout.platform.newPRNG(ctx),
                         dns: SimpleDNSResolver {
-#if PP_BUILD_MAC
-                            POSIXDNSStrategy(hostname: $0)
-#else
-                            CFDNSStrategy(hostname: $0)
-#endif
+                            if distributionTarget.usesExperimentalPOSIXResolver {
+                                return POSIXDNSStrategy(hostname: $0)
+                            } else {
+                                return CFDNSStrategy(hostname: $0)
+                            }
                         },
                         options: options,
                         // FIXME: #218, this directory must be per-profile
