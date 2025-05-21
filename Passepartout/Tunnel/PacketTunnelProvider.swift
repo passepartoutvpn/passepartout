@@ -222,22 +222,30 @@ private extension PacketTunnelProvider {
 
 @MainActor
 private extension PacketTunnelProvider {
-    static var activeTunnels: Set<Profile.ID> = []
-
-    func trackContext(_ ctx: PartoutLoggerContext) throws {
-        if let profileId = ctx.profileId {
-            // TODO: #218, keep this until supported
-            guard Self.activeTunnels.isEmpty else {
-                throw PartoutError(.App.multipleTunnels)
-            }
-            Self.activeTunnels.insert(profileId)
+    static var activeTunnels: Set<Profile.ID> = [] {
+        didSet {
+            pp_log_g(.app, .info, "Active tunnels: \(activeTunnels)")
         }
     }
 
-    func untrackContext() {
-        if let profileId = ctx?.profileId {
-            Self.activeTunnels.remove(profileId)
+    func trackContext(_ ctx: PartoutLoggerContext) throws {
+        guard let profileId = ctx.profileId else {
+            return
         }
+        // TODO: #218, keep this until supported
+        guard Self.activeTunnels.isEmpty else {
+            throw PartoutError(.App.multipleTunnels)
+        }
+        pp_log_g(.app, .info, "Track context: \(profileId)")
+        Self.activeTunnels.insert(profileId)
+    }
+
+    func untrackContext() {
+        guard let profileId = ctx?.profileId else {
+            return
+        }
+        pp_log_g(.app, .info, "Untrack context: \(profileId)")
+        Self.activeTunnels.remove(profileId)
     }
 }
 
