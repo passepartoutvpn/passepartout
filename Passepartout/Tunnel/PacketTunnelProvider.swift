@@ -98,6 +98,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             with: preferences
         )
         self.ctx = ctx
+        try await trackContext(ctx)
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
         if let appPreferences {
@@ -189,6 +190,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         await fwd?.stopTunnel(with: reason)
         fwd = nil
         flushLogs()
+        await untrackContext()
+        ctx = nil
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
@@ -212,6 +215,29 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 private extension PacketTunnelProvider {
     func flushLogs() {
         PartoutLogger.default.flushLog()
+    }
+}
+
+// MARK: - Tracking
+
+@MainActor
+private extension PacketTunnelProvider {
+    static var activeTunnels: Set<Profile.ID> = []
+
+    func trackContext(_ ctx: PartoutLoggerContext) throws {
+        if let profileId = ctx.profileId {
+            // TODO: #218, keep this until supported
+            guard Self.activeTunnels.isEmpty else {
+                throw PartoutError(.App.multipleTunnels)
+            }
+            Self.activeTunnels.insert(profileId)
+        }
+    }
+
+    func untrackContext() {
+        if let profileId = ctx?.profileId {
+            Self.activeTunnels.remove(profileId)
+        }
     }
 }
 
