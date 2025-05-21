@@ -32,6 +32,8 @@ extension PartoutLogger {
         case tunnel(Profile.ID, DistributionTarget)
     }
 
+    private static var isDefaultLoggerRegistered = false
+
     @discardableResult
     public static func register(
         for target: Target,
@@ -39,14 +41,20 @@ extension PartoutLogger {
     ) -> PartoutLoggerContext {
         switch target {
         case .app:
-            let logger = appLogger(preferences: preferences)
-            PartoutLogger.register(logger)
-            logger.logPreamble(parameters: Constants.shared.log)
+            if !isDefaultLoggerRegistered {
+                isDefaultLoggerRegistered = true
+                let logger = appLogger(preferences: preferences)
+                PartoutLogger.register(logger)
+                logger.logPreamble(parameters: Constants.shared.log)
+            }
             return .global
         case .tunnel(let profileId, let target):
-            let logger = tunnelLogger(preferences: preferences, target: target)
-            PartoutLogger.register(logger)
-            logger.logPreamble(parameters: Constants.shared.log)
+            if !isDefaultLoggerRegistered {
+                isDefaultLoggerRegistered = true
+                let logger = tunnelLogger(preferences: preferences, target: target)
+                PartoutLogger.register(logger)
+                logger.logPreamble(parameters: Constants.shared.log)
+            }
             return PartoutLoggerContext(profileId)
         }
     }
