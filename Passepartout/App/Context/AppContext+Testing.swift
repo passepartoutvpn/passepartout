@@ -71,6 +71,7 @@ extension AppContext {
 
         return AppContext(
             apiManager: apiManager,
+            distributionTarget: dependencies.distributionTarget,
             iapManager: iapManager,
             kvStore: kvStore,
             migrationManager: migrationManager,

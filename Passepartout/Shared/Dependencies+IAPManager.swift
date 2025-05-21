@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 
 extension Dependencies {
-    var customUserLevel: AppUserLevel? {
+    nonisolated var customUserLevel: AppUserLevel? {
         guard let userLevelInteger = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
               let userLevel = AppUserLevel(rawValue: userLevelInteger) else {
             return nil
@@ -46,11 +46,11 @@ extension Dependencies {
         )
     }
 
-    func betaChecker() -> BetaChecker {
+    nonisolated func betaChecker() -> BetaChecker {
         TestFlightChecker()
     }
 
-    func productsAtBuild() -> BuildProducts<AppProduct> {
+    nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
         {
 #if os(iOS)
             if $0 <= 2016 {
@@ -70,7 +70,7 @@ extension Dependencies {
         }
     }
 
-    func iapLogger() -> LoggerProtocol {
+    nonisolated func iapLogger() -> LoggerProtocol {
         IAPLogger()
     }
 }

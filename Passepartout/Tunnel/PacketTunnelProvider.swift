@@ -92,7 +92,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Create PartoutLoggerContext with profile
 
-        let ctx = PartoutLogger.register(for: .tunnel(profileId), with: preferences)
+        let ctx = PartoutLogger.register(
+            for: .tunnel(profileId, dependencies.distributionTarget),
+            with: preferences
+        )
         self.ctx = ctx
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")

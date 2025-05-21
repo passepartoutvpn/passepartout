@@ -88,7 +88,7 @@ extension ReportIssueButton {
                 purchasedProducts: purchasedProducts,
                 providerLastUpdates: providerLastUpdates,
                 tunnel: tunnel,
-                urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                urlForTunnelLog: BundleConfiguration.urlForTunnelLog(in: distributionTarget),
                 parameters: Constants.shared.log,
                 comment: comment
             ))

@@ -29,7 +29,7 @@ extension PartoutLogger {
     public enum Target {
         case app
 
-        case tunnel(Profile.ID)
+        case tunnel(Profile.ID, DistributionTarget)
     }
 
     private static var isRegistered = false
@@ -49,8 +49,8 @@ extension PartoutLogger {
             PartoutLogger.register(logger)
             logger.logPreamble(parameters: Constants.shared.log)
             return .global
-        case .tunnel(let profileId):
-            let logger = tunnelLogger(preferences: preferences)
+        case .tunnel(let profileId, let target):
+            let logger = tunnelLogger(preferences: preferences, target: target)
             PartoutLogger.register(logger)
             logger.logPreamble(parameters: Constants.shared.log)
             return PartoutLoggerContext(profileId)
@@ -69,10 +69,10 @@ private extension PartoutLogger {
         return builder.build()
     }
 
-    static func tunnelLogger(preferences: AppPreferenceValues) -> PartoutLogger {
+    static func tunnelLogger(preferences: AppPreferenceValues, target: DistributionTarget) -> PartoutLogger {
         var builder = PartoutLogger.Builder()
         builder.configureLogging(
-            to: BundleConfiguration.urlForTunnelLog,
+            to: BundleConfiguration.urlForTunnelLog(in: target),
             parameters: Constants.shared.log,
             logsPrivateData: preferences.logsPrivateData
         )

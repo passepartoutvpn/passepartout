@@ -50,6 +50,9 @@ struct DiagnosticsView: View {
     @EnvironmentObject
     private var kvStore: KeyValueManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
@@ -180,9 +183,10 @@ private extension DiagnosticsView {
     }
 
     func defaultTunnelLogs() async -> [LogEntry] {
-        await Task.detached {
+        let target = self.distributionTarget
+        return await Task.detached {
             LocalLogger.FileStrategy()
-                .availableLogs(at: BundleConfiguration.urlForTunnelLog)
+                .availableLogs(at: BundleConfiguration.urlForTunnelLog(in: target))
                 .sorted {
                     $0.key > $1.key
                 }
@@ -209,7 +213,7 @@ private extension DiagnosticsView {
 
     func removeTunnelLogs() {
         LocalLogger.FileStrategy()
-            .purgeLogs(at: BundleConfiguration.urlForTunnelLog)
+            .purgeLogs(at: BundleConfiguration.urlForTunnelLog(in: distributionTarget))
         Task {
             tunnelLogs = await computedTunnelLogs()
         }

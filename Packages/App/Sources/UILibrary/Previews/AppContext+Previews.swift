@@ -65,8 +65,10 @@ extension AppContext {
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let registry = Registry()
+        let distributionTarget: DistributionTarget = .standard
         return AppContext(
             apiManager: apiManager,
+            distributionTarget: distributionTarget,
             iapManager: iapManager,
             kvStore: kvStore,
             migrationManager: migrationManager,

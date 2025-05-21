@@ -33,7 +33,7 @@ extension Dependencies {
         Self.sharedRegistry
     }
 
-    func profileCoder() -> ProfileCoder {
+    nonisolated func profileCoder() -> ProfileCoder {
         CodableProfileCoder()
     }
 
@@ -100,6 +100,7 @@ private extension Dependencies {
 #endif
                         },
                         options: options,
+                        // FIXME: #218, this directory must be per-profile
                         cachesURL: FileManager.default.temporaryDirectory
                     )
                 }

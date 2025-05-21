@@ -236,6 +236,7 @@ extension AppContext {
 
         self.init(
             apiManager: apiManager,
+            distributionTarget: dependencies.distributionTarget,
             iapManager: iapManager,
             kvStore: kvStore,
             migrationManager: migrationManager,

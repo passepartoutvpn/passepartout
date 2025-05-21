@@ -1,8 +1,8 @@
 //
-//  EnvironmentValues+Extensions.swift
+//  DistributionTarget.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 5/21/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,33 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import SwiftUI
+import Foundation
 
-extension EnvironmentValues {
-    var navigationPath: Binding<NavigationPath> {
-        get {
-            self[NavigationPathKey.self]
-        }
-        set {
-            self[NavigationPathKey.self] = newValue
-        }
-    }
+public enum DistributionTarget: Sendable {
+    case standard
 
-    var dismissProfile: () -> Void {
-        get {
-            self[DismissProfileKey.self]
-        }
-        set {
-            self[DismissProfileKey.self] = newValue
-        }
-    }
-}
+    case developerID
 
-private struct NavigationPathKey: EnvironmentKey {
-    static let defaultValue: Binding<NavigationPath> = .constant(NavigationPath())
-}
-
-private struct DismissProfileKey: EnvironmentKey {
-    static let defaultValue: () -> Void = {}
+    case enterprise
 }

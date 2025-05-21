@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 
 extension Dependencies {
-    func coreDataLogger() -> LoggerProtocol {
+    nonisolated func coreDataLogger() -> LoggerProtocol {
         CoreDataPersistentStoreLogger()
     }
 }

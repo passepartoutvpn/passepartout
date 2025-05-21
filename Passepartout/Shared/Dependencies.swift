@@ -23,9 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 
 @MainActor
 struct Dependencies {
     static let shared = Dependencies()
+}
+
+extension Dependencies {
+    public nonisolated var distributionTarget: DistributionTarget {
+#if PP_BUILD_MAC
+        .developerID
+#else
+        .standard
+#endif
+    }
 }

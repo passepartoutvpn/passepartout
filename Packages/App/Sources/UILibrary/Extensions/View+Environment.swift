@@ -31,6 +31,7 @@ extension View {
         environmentObject(theme)
             .environmentObject(context.apiManager)
             .environmentObject(context.appearanceManager)
+            .environment(\.distributionTarget, context.distributionTarget)
             .environmentObject(context.iapManager)
             .environmentObject(context.kvStore)
             .environmentObject(context.migrationManager)
