@@ -29,6 +29,10 @@ import CommonLibrary
 import SwiftUI
 
 struct ProfileGeneralView: View {
+
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     @ObservedObject
@@ -44,10 +48,12 @@ struct ProfileGeneralView: View {
         Form {
             ProfileNameSection(name: $profileEditor.profile.name)
             profileEditor.shortcutsSections(path: $path)
-            ProfileStorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
+            if distributionTarget.supportsCloudKit {
+                ProfileStorageSection(
+                    profileEditor: profileEditor,
+                    paywallReason: $paywallReason
+                )
+            }
             ProfileBehaviorSection(profileEditor: profileEditor)
             ProfileActionsSection(
                 profileManager: profileManager,

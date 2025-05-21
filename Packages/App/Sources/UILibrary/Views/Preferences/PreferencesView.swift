@@ -80,7 +80,9 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
-            eraseCloudKitSection
+            if distributionTarget.supportsCloudKit {
+                eraseCloudKitSection
+            }
         }
         .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
         .themeForm()
