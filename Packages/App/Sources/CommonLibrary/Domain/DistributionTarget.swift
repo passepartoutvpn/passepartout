@@ -51,6 +51,15 @@ extension DistributionTarget {
         self == .appStore
     }
 
+    // differs from !supportsIAP because:
+    //
+    // - .appStore supports paid features and IAP
+    // - .enterprise supports paid features but not IAP
+    // - .developerID supports neither
+    public var supportsPaidFeatures: Bool {
+        self != .developerID
+    }
+
     public var supportsV2Migration: Bool {
         self == .appStore
     }

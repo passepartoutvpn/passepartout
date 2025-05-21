@@ -50,7 +50,7 @@ struct AddProfileMenu: View {
             emptyProfileButton
             importProfileButton
             Divider()
-            if distributionTarget.supportsIAP {
+            if distributionTarget.supportsPaidFeatures {
                 providerProfileMenu
                 Divider()
             }

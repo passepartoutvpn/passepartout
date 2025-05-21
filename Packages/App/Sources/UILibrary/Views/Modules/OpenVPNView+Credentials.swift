@@ -102,7 +102,7 @@ private extension OpenVPNCredentialsGroup {
             }
             .themeRowWithSubtitle(interactiveFooter)
 
-            if distributionTarget.supportsIAP && draft.module.isInteractive && !isAuthenticating {
+            if distributionTarget.supportsPaidFeatures && draft.module.isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
                     ForEach(otpMethods, id: \.self) {
                         Text($0.localizedDescription(style: .entity))

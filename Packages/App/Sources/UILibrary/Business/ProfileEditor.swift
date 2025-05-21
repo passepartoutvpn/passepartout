@@ -70,7 +70,7 @@ extension ProfileEditor {
 
     public func availableModuleTypes(forTarget target: DistributionTarget) -> [ModuleType] {
         let types: [ModuleType]
-        if target.supportsIAP {
+        if target.supportsPaidFeatures {
             types = ModuleType.allCases
         } else {
             types = [.onDemand, .openVPN, .wireGuard]

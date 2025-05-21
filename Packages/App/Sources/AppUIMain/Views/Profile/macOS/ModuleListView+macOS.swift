@@ -126,7 +126,7 @@ private extension ModuleListView {
     var addModuleMenu: some View {
         AddModuleMenu(
             moduleTypes: availableTypes,
-            withProviderType: distributionTarget.supportsIAP
+            withProviderType: distributionTarget.supportsPaidFeatures
         ) {
             flow?.onNewModule($0)
         } label: {
