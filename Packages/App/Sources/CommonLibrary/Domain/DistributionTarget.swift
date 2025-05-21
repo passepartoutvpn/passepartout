@@ -36,6 +36,10 @@ public enum DistributionTarget: Sendable {
 }
 
 extension DistributionTarget {
+    public var canReportIssue: Bool {
+        self == .developerID
+    }
+
     public var supportsAppGroups: Bool {
         self != .developerID
     }

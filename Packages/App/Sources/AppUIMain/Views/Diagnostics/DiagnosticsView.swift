@@ -84,7 +84,7 @@ struct DiagnosticsView: View {
             if distributionTarget.supportsAppGroups {
                 tunnelLogsSection
             }
-            if AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback {
+            if canReportIssue {
                 reportIssueSection
             }
         }
@@ -178,6 +178,11 @@ private extension DiagnosticsView {
                 profileManager.profile(withId: $0.id)
             }
             .sorted(by: Profile.sorting)
+    }
+
+    var canReportIssue: Bool {
+        // TODO: ###, remove after stable Developer ID
+        AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback || distributionTarget.canReportIssue
     }
 
     func computedTunnelLogs() async -> [LogEntry] {
