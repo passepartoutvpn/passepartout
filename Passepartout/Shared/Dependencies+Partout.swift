@@ -100,7 +100,7 @@ private extension Dependencies {
                             }
                         },
                         options: options,
-                        // FIXME: #218, this directory must be per-profile
+                        // TODO: #218, this directory must be per-profile
                         cachesURL: FileManager.default.temporaryDirectory
                     )
                 }
