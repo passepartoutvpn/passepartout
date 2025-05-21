@@ -30,6 +30,10 @@ import CommonUtils
 import SwiftUI
 
 struct ProfileEditView: View, Routable {
+
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     @ObservedObject
@@ -132,7 +136,10 @@ private extension ProfileEditView {
     }
 
     var addModuleMenu: some View {
-        AddModuleMenu(moduleTypes: profileEditor.availableModuleTypes) {
+        AddModuleMenu(
+            moduleTypes: availableTypes,
+            withProviderType: distributionTarget.supportsIAP
+        ) {
             flow?.onNewModule($0)
         } label: {
             Text(Strings.Views.Profile.Rows.addModule)
@@ -141,6 +148,10 @@ private extension ProfileEditView {
 }
 
 private extension ProfileEditView {
+    var availableTypes: [ModuleType] {
+        profileEditor.availableModuleTypes(forTarget: distributionTarget)
+    }
+
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
         profileEditor.moveModules(from: offsets, to: newOffset)
     }

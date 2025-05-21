@@ -68,9 +68,14 @@ extension ProfileEditor {
             .map(\.moduleType)
     }
 
-    public var availableModuleTypes: [ModuleType] {
-        ModuleType
-            .allCases
+    public func availableModuleTypes(forTarget target: DistributionTarget) -> [ModuleType] {
+        let types: [ModuleType]
+        if target.supportsIAP {
+            types = ModuleType.allCases
+        } else {
+            types = [.onDemand, .openVPN, .wireGuard]
+        }
+        return types
             .filter {
                 !moduleTypes.contains($0)
             }

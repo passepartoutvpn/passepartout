@@ -33,6 +33,8 @@ import SwiftUI
 struct AddModuleMenu<Label>: View where Label: View {
     let moduleTypes: [ModuleType]
 
+    let withProviderType: Bool
+
     let action: (ModuleType) -> Void
 
     let label: () -> Label
@@ -43,7 +45,9 @@ struct AddModuleMenu<Label>: View where Label: View {
         let connectionModuleTypes = nonProviderTypes.filter(\.isConnection)
         let otherModuleTypes = nonProviderTypes.filter { !$0.isConnection }
         return Menu {
-            entryView(for: providerType)
+            if withProviderType {
+                entryView(for: providerType)
+            }
             if !connectionModuleTypes.isEmpty {
                 ForEach(connectionModuleTypes.sorted(), id: \.self, content: entryView)
                     .themeSection(header: Strings.Global.Nouns.connection)
@@ -71,6 +75,7 @@ private extension AddModuleMenu {
     List {
         AddModuleMenu(
             moduleTypes: ModuleType.allCases,
+            withProviderType: true,
             action: { _ in },
             label: {
                 Text("Add module")

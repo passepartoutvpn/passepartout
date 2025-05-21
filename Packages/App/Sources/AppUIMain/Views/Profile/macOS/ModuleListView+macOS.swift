@@ -39,6 +39,9 @@ struct ModuleListView: View, Routable {
     @Environment(\.isUITesting)
     private var isUITesting
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     @ObservedObject
     var profileEditor: ProfileEditor
 
@@ -121,7 +124,10 @@ private extension ModuleListView {
     }
 
     var addModuleMenu: some View {
-        AddModuleMenu(moduleTypes: profileEditor.availableModuleTypes) {
+        AddModuleMenu(
+            moduleTypes: availableTypes,
+            withProviderType: distributionTarget.supportsIAP
+        ) {
             flow?.onNewModule($0)
         } label: {
             ThemeImage(.add)
@@ -130,6 +136,10 @@ private extension ModuleListView {
 }
 
 private extension ModuleListView {
+    var availableTypes: [ModuleType] {
+        profileEditor.availableModuleTypes(forTarget: distributionTarget)
+    }
+
     var requiredGeneralFeatures: Set<AppFeature> {
         var features: Set<AppFeature> = []
         if profileEditor.isShared {
