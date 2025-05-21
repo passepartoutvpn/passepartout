@@ -73,7 +73,7 @@ private extension SettingsContentView {
                 linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
-                if !isBeta {
+                if !isBeta && distributionTarget.supportsIAP {
                     linkContent(.donate)
                 }
             }

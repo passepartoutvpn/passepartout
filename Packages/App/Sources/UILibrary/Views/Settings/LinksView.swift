@@ -31,6 +31,9 @@ public struct LinksView: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     public init() {
     }
 
@@ -59,6 +62,9 @@ private extension LinksView {
             Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.github.discussions)
             if iapManager.isPayingUser {
                 Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
+            }
+            if !iapManager.isBeta && !distributionTarget.supportsIAP {
+                WebDonationLink()
             }
         }
         .themeSection(header: Strings.Views.Settings.Links.Sections.support)

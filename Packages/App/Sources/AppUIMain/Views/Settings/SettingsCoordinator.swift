@@ -69,25 +69,18 @@ extension SettingsCoordinator {
         switch route {
         case .changelog:
             Strings.Unlocalized.changelog
-
         case .credits:
             Strings.Views.Settings.Credits.title
-
         case .diagnostics:
             Strings.Views.Diagnostics.title
-
         case .donate:
             Strings.Views.Donate.title
-
         case .links:
             Strings.Views.Settings.Links.title
-
         case .preferences:
             Strings.Global.Nouns.preferences
-
         case .purchased:
             Strings.Global.Nouns.purchases
-
         case .version:
             Strings.Views.Settings.title
         }
