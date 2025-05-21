@@ -81,7 +81,9 @@ struct DiagnosticsView: View {
             }
             liveLogSection
             profilesSection
-            tunnelLogsSection
+            if distributionTarget.supportsAppGroups {
+                tunnelLogsSection
+            }
             if AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback {
                 reportIssueSection
             }

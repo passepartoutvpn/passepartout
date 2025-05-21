@@ -34,10 +34,9 @@ extension BundleConfiguration {
 
     public static func urlForTunnelLog(in target: DistributionTarget) -> URL {
         let baseURL: URL
-        switch target {
-        case .standard, .enterprise:
+        if target.supportsAppGroups {
             baseURL = urlForCaches
-        case .developerID:
+        } else {
             let fm: FileManager = .default
             baseURL = fm.temporaryDirectory
             do {
