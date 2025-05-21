@@ -252,3 +252,9 @@ private extension PacketTunnelProvider {
 private extension TunnelEnvironmentKeys {
     static let holdFlag = TunnelEnvironmentKey<Bool>("Tunnel.onHold")
 }
+
+extension PartoutError: @retroactive LocalizedError {
+    public var errorDescription: String? {
+        debugDescription
+    }
+}
