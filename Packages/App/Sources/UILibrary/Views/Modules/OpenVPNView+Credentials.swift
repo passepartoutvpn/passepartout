@@ -42,6 +42,9 @@ public struct OpenVPNCredentialsGroup: View {
     @EnvironmentObject
     private var apiManager: APIManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     @ObservedObject
     private var draft: ModuleDraft<OpenVPNModule.Builder>
 
@@ -99,7 +102,7 @@ private extension OpenVPNCredentialsGroup {
             }
             .themeRowWithSubtitle(interactiveFooter)
 
-            if draft.module.isInteractive && !isAuthenticating {
+            if distributionTarget.supportsIAP && draft.module.isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
                     ForEach(otpMethods, id: \.self) {
                         Text($0.localizedDescription(style: .entity))
@@ -190,7 +193,6 @@ private extension OpenVPNCredentialsGroup {
             switch builder.otpMethod {
             case .none:
                 focusedField = .username
-
             default:
                 focusedField = .otp
             }
