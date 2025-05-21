@@ -70,7 +70,7 @@ extension ProfileEditorTests {
             DNSModule.Builder(),
             IPModule.Builder()
         ])
-        let moduleTypes = sut.availableModuleTypes
+        let moduleTypes = sut.availableModuleTypes(forTarget: .appStore)
 
         XCTAssertFalse(moduleTypes.contains(.dns))
         XCTAssertTrue(moduleTypes.contains(.httpProxy))

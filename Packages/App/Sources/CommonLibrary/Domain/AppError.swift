@@ -54,5 +54,7 @@ public enum AppError: Error {
 extension PartoutError.Code {
     public enum App {
         public static let ineligibleProfile = PartoutError.Code("App.ineligibleProfile")
+
+        public static let multipleTunnels = PartoutError.Code("App.multipleTunnels")
     }
 }

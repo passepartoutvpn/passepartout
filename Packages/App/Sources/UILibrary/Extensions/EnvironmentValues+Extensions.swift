@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import SwiftUI
 
 extension EnvironmentValues {
@@ -34,8 +35,21 @@ extension EnvironmentValues {
             self[IsUITestingKey.self] = newValue
         }
     }
+
+    public var distributionTarget: DistributionTarget {
+        get {
+            self[DistributionTargetKey.self]
+        }
+        set {
+            self[DistributionTargetKey.self] = newValue
+        }
+    }
 }
 
 private struct IsUITestingKey: EnvironmentKey {
     static let defaultValue = false
+}
+
+private struct DistributionTargetKey: EnvironmentKey {
+    static let defaultValue: DistributionTarget = .appStore
 }

@@ -51,6 +51,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // MARK: Declare globals
 
         let dependencies: Dependencies = await .shared
+        let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
         await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
@@ -92,8 +93,12 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Create PartoutLoggerContext with profile
 
-        let ctx = PartoutLogger.register(for: .tunnel(profileId), with: preferences)
+        let ctx = PartoutLogger.register(
+            for: .tunnel(profileId, distributionTarget),
+            with: preferences
+        )
         self.ctx = ctx
+        try await trackContext(ctx)
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
         if let appPreferences {
@@ -114,11 +119,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 betaChecker: dependencies.betaChecker(),
                 productsAtBuild: dependencies.productsAtBuild()
             )
-#if PP_BUILD_FREE
-            manager.isEnabled = false
-#else
-            manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
-#endif
+            if distributionTarget.supportsIAP {
+                manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+            } else {
+                manager.isEnabled = false
+            }
             return manager
         }
 
@@ -185,6 +190,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         await fwd?.stopTunnel(with: reason)
         fwd = nil
         flushLogs()
+        await untrackContext()
+        ctx = nil
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
@@ -208,6 +215,37 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 private extension PacketTunnelProvider {
     func flushLogs() {
         PartoutLogger.default.flushLog()
+    }
+}
+
+// MARK: - Tracking
+
+@MainActor
+private extension PacketTunnelProvider {
+    static var activeTunnels: Set<Profile.ID> = [] {
+        didSet {
+            pp_log_g(.app, .info, "Active tunnels: \(activeTunnels)")
+        }
+    }
+
+    func trackContext(_ ctx: PartoutLoggerContext) throws {
+        guard let profileId = ctx.profileId else {
+            return
+        }
+        // TODO: #218, keep this until supported
+        guard Self.activeTunnels.isEmpty else {
+            throw PartoutError(.App.multipleTunnels)
+        }
+        pp_log_g(.app, .info, "Track context: \(profileId)")
+        Self.activeTunnels.insert(profileId)
+    }
+
+    func untrackContext() {
+        guard let profileId = ctx?.profileId else {
+            return
+        }
+        pp_log_g(.app, .info, "Untrack context: \(profileId)")
+        Self.activeTunnels.remove(profileId)
     }
 }
 
@@ -247,4 +285,10 @@ private extension PacketTunnelProvider {
 
 private extension TunnelEnvironmentKeys {
     static let holdFlag = TunnelEnvironmentKey<Bool>("Tunnel.onHold")
+}
+
+extension PartoutError: @retroactive LocalizedError {
+    public var errorDescription: String? {
+        debugDescription
+    }
 }

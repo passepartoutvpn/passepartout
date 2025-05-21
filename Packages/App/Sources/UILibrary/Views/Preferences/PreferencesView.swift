@@ -48,6 +48,9 @@ public struct PreferencesView: View {
     private var settings: MacSettingsModel
 #endif
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     private let profileManager: ProfileManager
 
     @State
@@ -74,8 +77,12 @@ public struct PreferencesView: View {
 #endif
             pinActiveProfileSection
             dnsFallsBackSection
-            enablesPurchasesSection
-            eraseCloudKitSection
+            if distributionTarget.supportsIAP {
+                enablesPurchasesSection
+            }
+            if distributionTarget.supportsCloudKit {
+                eraseCloudKitSection
+            }
         }
         .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
         .themeForm()

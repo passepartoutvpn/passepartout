@@ -1,8 +1,8 @@
 //
-//  Dependencies.swift
+//  WebDonationLink.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/2/24.
+//  Created by Davide De Rosa on 5/21/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,19 +24,10 @@
 //
 
 import CommonLibrary
-import Foundation
+import SwiftUI
 
-@MainActor
-struct Dependencies {
-    static let shared = Dependencies()
-}
-
-extension Dependencies {
-    public nonisolated static var distributionTarget: DistributionTarget {
-#if PP_BUILD_MAC
-        .developerID
-#else
-        .appStore
-#endif
+struct WebDonationLink: View {
+    var body: some View {
+        Link(Strings.Views.Donate.title, destination: Constants.shared.websites.donate)
     }
 }

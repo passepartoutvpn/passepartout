@@ -31,6 +31,9 @@ struct AddProfileMenu: View {
     @EnvironmentObject
     private var apiManager: APIManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     let registry: Registry
@@ -47,8 +50,10 @@ struct AddProfileMenu: View {
             emptyProfileButton
             importProfileButton
             Divider()
-            providerProfileMenu
-            Divider()
+            if distributionTarget.supportsPaidFeatures {
+                providerProfileMenu
+                Divider()
+            }
             migrateProfilesButton
         } label: {
             ThemeImage(.add)

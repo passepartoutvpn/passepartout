@@ -35,6 +35,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let appearanceManager: AppearanceManager
 
+    public let distributionTarget: DistributionTarget
+
     public let iapManager: IAPManager
 
     public let kvStore: KeyValueManager
@@ -61,6 +63,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public init(
         apiManager: APIManager,
+        distributionTarget: DistributionTarget,
         iapManager: IAPManager,
         kvStore: KeyValueManager,
         migrationManager: MigrationManager,
@@ -73,6 +76,7 @@ public final class AppContext: ObservableObject, Sendable {
     ) {
         self.apiManager = apiManager
         appearanceManager = AppearanceManager(kvStore: kvStore)
+        self.distributionTarget = distributionTarget
         self.iapManager = iapManager
         self.kvStore = kvStore
         self.migrationManager = migrationManager

@@ -32,8 +32,20 @@ extension BundleConfiguration {
         urlForCaches.appending(path: Constants.shared.log.appPath)
     }
 
-    public static var urlForTunnelLog: URL {
-        urlForCaches.appending(path: Constants.shared.log.tunnelPath)
+    public static func urlForTunnelLog(in target: DistributionTarget) -> URL {
+        let baseURL: URL
+        if target.supportsAppGroups {
+            baseURL = urlForCaches
+        } else {
+            let fm: FileManager = .default
+            baseURL = fm.temporaryDirectory
+            do {
+                try fm.createDirectory(at: baseURL, withIntermediateDirectories: true)
+            } catch {
+                pp_log_g(.app, .error, "Unable to create temporary directory \(baseURL): \(error)")
+            }
+        }
+        return baseURL.appending(path: Constants.shared.log.tunnelPath)
     }
 }
 

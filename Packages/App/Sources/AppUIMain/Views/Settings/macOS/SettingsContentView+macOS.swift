@@ -30,8 +30,8 @@ import SwiftUI
 
 struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestination>: View where LinkContent: View, SettingsDestination: View, DiagnosticsDestination: View {
 
-    @EnvironmentObject
-    private var theme: Theme
+    @Environment(\.distributionTarget)
+    private var distributionTarget
 
     @Environment(\.dismiss)
     private var dismiss
@@ -83,7 +83,7 @@ private extension SettingsContentView {
                 linkContent(.version)
                 linkContent(.links)
                 linkContent(.credits)
-                if !isBeta {
+                if !isBeta && distributionTarget.supportsIAP {
                     linkContent(.donate)
                 }
             }
@@ -91,7 +91,9 @@ private extension SettingsContentView {
 
             Group {
                 linkContent(.diagnostics)
-                linkContent(.purchased)
+                if distributionTarget.supportsIAP {
+                    linkContent(.purchased)
+                }
             }
             .themeSection(header: Strings.Global.Nouns.troubleshooting)
         }

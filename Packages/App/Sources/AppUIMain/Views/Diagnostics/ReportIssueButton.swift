@@ -27,6 +27,10 @@ import CommonLibrary
 import SwiftUI
 
 struct ReportIssueButton {
+
+    @Environment(\.distributionTarget)
+    var distributionTarget: DistributionTarget
+
     let title: String
 
     let tunnel: ExtendedTunnel

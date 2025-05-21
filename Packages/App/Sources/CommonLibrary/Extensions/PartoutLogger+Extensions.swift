@@ -29,30 +29,32 @@ extension PartoutLogger {
     public enum Target {
         case app
 
-        case tunnel(Profile.ID)
+        case tunnel(Profile.ID, DistributionTarget)
     }
 
-    private static var isRegistered = false
+    private static var isDefaultLoggerRegistered = false
 
     @discardableResult
     public static func register(
         for target: Target,
         with preferences: AppPreferenceValues
     ) -> PartoutLoggerContext {
-        guard !isRegistered else {
-            fatalError("Registering target multiple times: \(target)")
-        }
-        isRegistered = true
         switch target {
         case .app:
-            let logger = appLogger(preferences: preferences)
-            PartoutLogger.register(logger)
-            logger.logPreamble(parameters: Constants.shared.log)
+            if !isDefaultLoggerRegistered {
+                isDefaultLoggerRegistered = true
+                let logger = appLogger(preferences: preferences)
+                PartoutLogger.register(logger)
+                logger.logPreamble(parameters: Constants.shared.log)
+            }
             return .global
-        case .tunnel(let profileId):
-            let logger = tunnelLogger(preferences: preferences)
-            PartoutLogger.register(logger)
-            logger.logPreamble(parameters: Constants.shared.log)
+        case .tunnel(let profileId, let target):
+            if !isDefaultLoggerRegistered {
+                isDefaultLoggerRegistered = true
+                let logger = tunnelLogger(preferences: preferences, target: target)
+                PartoutLogger.register(logger)
+                logger.logPreamble(parameters: Constants.shared.log)
+            }
             return PartoutLoggerContext(profileId)
         }
     }
@@ -69,10 +71,10 @@ private extension PartoutLogger {
         return builder.build()
     }
 
-    static func tunnelLogger(preferences: AppPreferenceValues) -> PartoutLogger {
+    static func tunnelLogger(preferences: AppPreferenceValues, target: DistributionTarget) -> PartoutLogger {
         var builder = PartoutLogger.Builder()
         builder.configureLogging(
-            to: BundleConfiguration.urlForTunnelLog,
+            to: BundleConfiguration.urlForTunnelLog(in: target),
             parameters: Constants.shared.log,
             logsPrivateData: preferences.logsPrivateData
         )

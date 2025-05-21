@@ -41,6 +41,7 @@ extension AppContext {
         // MARK: Declare globals
 
         let dependencies: Dependencies = .shared
+        let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
 
         // MARK: Core Data
@@ -64,13 +65,13 @@ extension AppContext {
             cloudKitIdentifier: nil,
             author: nil
         )
-        let newRemoteStore: (_ cloudKit: Bool) -> CoreDataPersistentStore = {
+        let newRemoteStore: (_ cloudKit: Bool) -> CoreDataPersistentStore = { isEnabled in
             let cloudKitIdentifier: String?
-#if PP_BUILD_MAC
-            cloudKitIdentifier = nil
-#else
-            cloudKitIdentifier = $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil
-#endif
+            if isEnabled && distributionTarget.supportsCloudKit {
+                cloudKitIdentifier = BundleConfiguration.mainString(for: .cloudKitId)
+            } else {
+                cloudKitIdentifier = nil
+            }
             return CoreDataPersistentStore(
                 logger: dependencies.coreDataLogger(),
                 containerName: constants.containers.remote,
@@ -93,11 +94,11 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-#if PP_BUILD_FREE
-        iapManager.isEnabled = false
-#else
-        iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
-#endif
+        if distributionTarget.supportsIAP {
+            iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+        } else {
+            iapManager.isEnabled = false
+        }
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
@@ -146,34 +147,35 @@ extension AppContext {
             interval: constants.tunnel.refreshInterval
         )
 
-#if PP_BUILD_MAC
-        let migrationManager = MigrationManager()
-#else
-        let migrationManager: MigrationManager = {
-            let profileStrategy = ProfileV2MigrationStrategy(
-                coreDataLogger: dependencies.coreDataLogger(),
-                profilesContainer: .init(
-                    constants.containers.legacyV2,
-                    BundleConfiguration.mainString(for: .legacyV2CloudKitId)
-                ),
-                tvProfilesContainer: .init(
-                    constants.containers.legacyV2TV,
-                    BundleConfiguration.mainString(for: .legacyV2TVCloudKitId)
+        let migrationManager: MigrationManager
+        if distributionTarget.supportsV2Migration {
+            migrationManager = {
+                let profileStrategy = ProfileV2MigrationStrategy(
+                    coreDataLogger: dependencies.coreDataLogger(),
+                    profilesContainer: .init(
+                        constants.containers.legacyV2,
+                        BundleConfiguration.mainString(for: .legacyV2CloudKitId)
+                    ),
+                    tvProfilesContainer: .init(
+                        constants.containers.legacyV2TV,
+                        BundleConfiguration.mainString(for: .legacyV2TVCloudKitId)
+                    )
                 )
-            )
-            let migrationSimulation: MigrationManager.Simulation?
-            if AppCommandLine.contains(.fakeMigration) {
-                migrationSimulation = MigrationManager.Simulation(
-                    fakeProfiles: true,
-                    maxMigrationTime: 3.0,
-                    randomFailures: true
-                )
-            } else {
-                migrationSimulation = nil
-            }
-            return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
-        }()
-#endif
+                let migrationSimulation: MigrationManager.Simulation?
+                if AppCommandLine.contains(.fakeMigration) {
+                    migrationSimulation = MigrationManager.Simulation(
+                        fakeProfiles: true,
+                        maxMigrationTime: 3.0,
+                        randomFailures: true
+                    )
+                } else {
+                    migrationSimulation = nil
+                }
+                return MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
+            }()
+        } else {
+            migrationManager = MigrationManager()
+        }
 
         let onboardingManager = OnboardingManager(kvStore: kvStore)
         let preferencesManager = PreferencesManager()
@@ -187,30 +189,31 @@ extension AppContext {
             // toggle CloudKit sync based on .sharing eligibility
             let remoteStore = newRemoteStore(isRemoteImportingEnabled)
 
-#if !PP_BUILD_MAC
-            // @Published
-            profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
+            if distributionTarget.supportsCloudKit {
 
-            do {
-                pp_log(ctx, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
+                // @Published
+                profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
-                pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
-                try await profileManager.observeRemote(repository: {
-                    AppData.cdProfileRepositoryV3(
-                        registry: dependencies.registry,
-                        coder: dependencies.profileCoder(),
-                        context: remoteStore.context,
-                        observingResults: true,
-                        onResultError: {
-                            pp_log(ctx, .App.profiles, .error, "Unable to decode remote profile: \($0)")
-                            return .ignore
-                        }
-                    )
-                }())
-            } catch {
-                pp_log(ctx, .App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+                do {
+                    pp_log(ctx, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
+
+                    pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
+                    try await profileManager.observeRemote(repository: {
+                        AppData.cdProfileRepositoryV3(
+                            registry: dependencies.registry,
+                            coder: dependencies.profileCoder(),
+                            context: remoteStore.context,
+                            observingResults: true,
+                            onResultError: {
+                                pp_log(ctx, .App.profiles, .error, "Unable to decode remote profile: \($0)")
+                                return .ignore
+                            }
+                        )
+                    }())
+                } catch {
+                    pp_log(ctx, .App.profiles, .error, "\tUnable to re-observe remote profiles: \(error)")
+                }
             }
-#endif
 
             pp_log(ctx, .app, .info, "\tRefresh modules preferences repository...")
             preferencesManager.modulesRepositoryFactory = {
@@ -236,6 +239,7 @@ extension AppContext {
 
         self.init(
             apiManager: apiManager,
+            distributionTarget: distributionTarget,
             iapManager: iapManager,
             kvStore: kvStore,
             migrationManager: migrationManager,

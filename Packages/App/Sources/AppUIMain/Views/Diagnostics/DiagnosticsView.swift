@@ -50,6 +50,9 @@ struct DiagnosticsView: View {
     @EnvironmentObject
     private var kvStore: KeyValueManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
@@ -78,8 +81,10 @@ struct DiagnosticsView: View {
             }
             liveLogSection
             profilesSection
-            tunnelLogsSection
-            if AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback {
+            if distributionTarget.supportsAppGroups {
+                tunnelLogsSection
+            }
+            if canReportIssue {
                 reportIssueSection
             }
         }
@@ -175,14 +180,20 @@ private extension DiagnosticsView {
             .sorted(by: Profile.sorting)
     }
 
+    var canReportIssue: Bool {
+        // TODO: ###, remove after stable Developer ID
+        AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback || distributionTarget.canAlwaysReportIssue
+    }
+
     func computedTunnelLogs() async -> [LogEntry] {
         await (availableTunnelLogs ?? defaultTunnelLogs)()
     }
 
     func defaultTunnelLogs() async -> [LogEntry] {
-        await Task.detached {
+        let target = self.distributionTarget
+        return await Task.detached {
             LocalLogger.FileStrategy()
-                .availableLogs(at: BundleConfiguration.urlForTunnelLog)
+                .availableLogs(at: BundleConfiguration.urlForTunnelLog(in: target))
                 .sorted {
                     $0.key > $1.key
                 }
@@ -209,7 +220,7 @@ private extension DiagnosticsView {
 
     func removeTunnelLogs() {
         LocalLogger.FileStrategy()
-            .purgeLogs(at: BundleConfiguration.urlForTunnelLog)
+            .purgeLogs(at: BundleConfiguration.urlForTunnelLog(in: distributionTarget))
         Task {
             tunnelLogs = await computedTunnelLogs()
         }
