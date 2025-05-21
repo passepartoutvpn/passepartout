@@ -26,11 +26,13 @@
 import Foundation
 
 public enum DistributionTarget: Sendable {
-    case standard
-
     case developerID
 
     case enterprise
+
+    case free
+
+    case standard
 }
 
 extension DistributionTarget {

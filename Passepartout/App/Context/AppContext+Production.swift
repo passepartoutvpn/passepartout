@@ -42,6 +42,7 @@ extension AppContext {
 
         let dependencies: Dependencies = .shared
         let constants: Constants = .shared
+        let distributionTarget = dependencies.distributionTarget
 
         // MARK: Core Data
 
@@ -93,11 +94,11 @@ extension AppContext {
             betaChecker: dependencies.betaChecker(),
             productsAtBuild: dependencies.productsAtBuild()
         )
-#if PP_BUILD_FREE
-        iapManager.isEnabled = false
-#else
-        iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
-#endif
+        if distributionTarget.supportsIAP {
+            iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+        } else {
+            iapManager.isEnabled = false
+        }
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
@@ -236,7 +237,7 @@ extension AppContext {
 
         self.init(
             apiManager: apiManager,
-            distributionTarget: dependencies.distributionTarget,
+            distributionTarget: distributionTarget,
             iapManager: iapManager,
             kvStore: kvStore,
             migrationManager: migrationManager,

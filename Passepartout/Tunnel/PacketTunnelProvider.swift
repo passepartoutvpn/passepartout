@@ -52,6 +52,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         let dependencies: Dependencies = await .shared
         let constants: Constants = .shared
+        let distributionTarget = dependencies.distributionTarget
         await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
 
         // MARK: Update or fetch existing preferences
@@ -117,11 +118,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 betaChecker: dependencies.betaChecker(),
                 productsAtBuild: dependencies.productsAtBuild()
             )
-#if PP_BUILD_FREE
-            manager.isEnabled = false
-#else
-            manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
-#endif
+            if distributionTarget.supportsIAP {
+                manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+            } else {
+                manager.isEnabled = false
+            }
             return manager
         }
 
