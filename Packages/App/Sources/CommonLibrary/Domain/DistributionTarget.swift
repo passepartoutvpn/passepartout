@@ -26,18 +26,17 @@
 import Foundation
 
 public enum DistributionTarget: Sendable {
+    case appStore
+
     case developerID
 
+    // TODO: ###, behave like .complete when this is implemented
     case enterprise
-
-    case free
-
-    case standard
 }
 
 extension DistributionTarget {
-    public var canReportIssue: Bool {
-        self == .developerID
+    public var canAlwaysReportIssue: Bool {
+        self != .appStore
     }
 
     public var supportsAppGroups: Bool {
@@ -49,11 +48,11 @@ extension DistributionTarget {
     }
 
     public var supportsIAP: Bool {
-        [.standard, .enterprise].contains(self)
+        self == .appStore
     }
 
     public var supportsV2Migration: Bool {
-        self == .standard
+        self == .appStore
     }
 
     public var usesExperimentalPOSIXResolver: Bool {

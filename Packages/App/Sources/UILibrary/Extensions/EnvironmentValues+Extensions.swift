@@ -51,5 +51,5 @@ private struct IsUITestingKey: EnvironmentKey {
 }
 
 private struct DistributionTargetKey: EnvironmentKey {
-    static let defaultValue: DistributionTarget = .standard
+    static let defaultValue: DistributionTarget = .appStore
 }

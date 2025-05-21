@@ -182,7 +182,7 @@ private extension DiagnosticsView {
 
     var canReportIssue: Bool {
         // TODO: ###, remove after stable Developer ID
-        AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback || distributionTarget.canReportIssue
+        AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback || distributionTarget.canAlwaysReportIssue
     }
 
     func computedTunnelLogs() async -> [LogEntry] {

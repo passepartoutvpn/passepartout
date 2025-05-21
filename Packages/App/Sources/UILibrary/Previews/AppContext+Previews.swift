@@ -65,7 +65,7 @@ extension AppContext {
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let registry = Registry()
-        let distributionTarget: DistributionTarget = .standard
+        let distributionTarget: DistributionTarget = .appStore
         return AppContext(
             apiManager: apiManager,
             distributionTarget: distributionTarget,

@@ -36,7 +36,7 @@ extension Dependencies {
 #if PP_BUILD_MAC
         .developerID
 #else
-        .standard
+        .appStore
 #endif
     }
 }
