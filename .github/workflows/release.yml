@@ -164,3 +164,51 @@ jobs:
         with:
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
+  distribute_dmg:
+    name: Distribute Apple Disk Image
+    runs-on: macos-15
+    #needs: [validate_codebase]
+    strategy:
+      fail-fast: true
+      matrix:
+        arch: ["arm64", "x86_64"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import GPG key
+        env:
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+          GPG_KEY_FILE: tmp.key
+        run: |
+          echo "$GPG_KEY" >"$GPG_KEY_FILE"
+          ci/gpg-import.sh "$GPG_KEY_FILE"
+          rm "$GPG_KEY_FILE"
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
+          certificates_url: ${{ vars.CERTIFICATES_URL }}
+          certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
+      - name: Archive app
+        run: |
+          ci/xcode-archive.sh macOS ${{ matrix.arch }} 1
+      - name: Export app
+        run: |
+          ci/xcode-export.sh macOS 1
+      - name: Generate .dmg
+        run: |
+          ci/dmg-generate.sh ${{ matrix.arch }}
+      - name: Sign .dmg
+        env:
+          GPG_FINGERPRINT: ${{ vars.GPG_FINGERPRINT }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-dmg-${{ matrix.arch }}
+          path: |
+            Passepartout.*.dmg
+            Passepartout.*.dmg.asc
+
+      # TODO: notarize/staple, then publish .dmg as GitHub Release
