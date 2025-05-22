@@ -262,6 +262,9 @@ private extension PacketTunnelProvider {
             fatalError("Forgot to set ctx?")
         }
         while true {
+            guard !Task.isCancelled else {
+                return
+            }
             do {
                 pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
                 await iapManager.reloadReceipt()
