@@ -167,7 +167,7 @@ jobs:
   distribute_dmg:
     name: Distribute Apple Disk Image
     runs-on: macos-15
-    #needs: [validate_codebase]
+    needs: [validate_codebase]
     strategy:
       fail-fast: true
       matrix:
