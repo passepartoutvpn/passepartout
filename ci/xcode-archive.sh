@@ -1,8 +1,8 @@
 #!/bin/bash
 cwd=`dirname $0`
 platform=$1
-arch=$2
-developer_id=$3
+developer_id=$2
+arch=$3
 if [[ -z $platform ]]; then
     echo "Missing platform"
     exit 1
