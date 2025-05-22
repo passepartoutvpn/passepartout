@@ -9,4 +9,4 @@ if [[ -z "$2" ]]; then
 fi
 xcconfig="$1"
 setting_key="$2"
-grep $setting_key $xcconfig | sed -E "s/^.*${setting_key} = (.*)$/\1/"
+grep ^$setting_key $xcconfig | sed -E "s/^.*${setting_key} = (.*)$/\1/"
