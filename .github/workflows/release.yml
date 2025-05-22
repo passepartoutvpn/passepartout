@@ -209,8 +209,11 @@ jobs:
         run: |
           ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
       - name: Notarize .dmg
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         run: |
-          ci/dmg-notarize.sh ${{ matrix.arch }} "$FASTLANE_USERNAME" "$FASTLANE_PASSWORD"
+          ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
