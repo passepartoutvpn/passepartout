@@ -34,6 +34,8 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let tunnel: Tunnel
 
+    private let sysex: SystemExtensionManager?
+
     private let kvStore: KeyValueManager?
 
     private let processor: AppTunnelProcessor?
@@ -45,11 +47,13 @@ public final class ExtendedTunnel: ObservableObject {
     // TODO: #218, keep "last used profile" until .multiple
     public init(
         tunnel: Tunnel,
+        sysex: SystemExtensionManager? = nil,
         kvStore: KeyValueManager? = nil,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
+        self.sysex = sysex
         self.kvStore = kvStore
         self.processor = processor
         self.interval = interval
@@ -82,6 +86,29 @@ extension ExtendedTunnel {
             let encodedPreferences = try JSONEncoder().encode(preferences)
             options[Self.appPreferences] = encodedPreferences as NSData
         }
+
+#if os(macOS)
+        if let sysex {
+            if sysex.currentResult == .success {
+                pp_log_g(.app, .info, "System Extension: already installed")
+            } else {
+                pp_log_g(.app, .info, "System Extension: install...")
+                do {
+                    let result = try await sysex.install()
+                    switch result {
+                    case .success:
+                        break
+                    default:
+                        throw AppError.systemExtension(result)
+                    }
+                    pp_log_g(.app, .info, "System Extension: installation result is \(result)")
+                } catch {
+                    pp_log_g(.app, .error, "System Extension: installation error: \(error)")
+                }
+            }
+        }
+#endif
+
         try await tunnel.install(
             newProfile,
             connect: connect,

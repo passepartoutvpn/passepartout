@@ -76,6 +76,8 @@
 "global.nouns.address" = "Adres";
 "global.nouns.addresses" = "Adressen";
 "global.nouns.any" = "Elk";
+"global.nouns.apple.network_extensions" = "Netwerkextensies";
+"global.nouns.apple.system_extension" = "Systeemextensie";
 "global.nouns.category" = "Categorie";
 "global.nouns.certificate" = "Certificaat";
 "global.nouns.comment" = "Opmerking";
@@ -323,6 +325,8 @@
 "views.settings.links.sections.support" = "Ondersteuning";
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Links";
+"views.settings.system_extension.buttons.open" = "Voorkeuren openen";
+"views.settings.system_extension.message" = "Voor een goede werking van de VPN moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";

@@ -76,6 +76,8 @@
 "global.nouns.address" = "Διεύθυνση";
 "global.nouns.addresses" = "Διευθύνσεις";
 "global.nouns.any" = "Οποιοδήποτε";
+"global.nouns.apple.network_extensions" = "Επεκτάσεις δικτύου";
+"global.nouns.apple.system_extension" = "Επέκταση συστήματος";
 "global.nouns.category" = "Κατηγορία";
 "global.nouns.certificate" = "Πιστοποιητικό";
 "global.nouns.comment" = "Σχόλιο";
@@ -323,6 +325,8 @@
 "views.settings.links.sections.support" = "Υποστήριξη";
 "views.settings.links.sections.web" = "Ιστός";
 "views.settings.links.title" = "Σύνδεσμοι";
+"views.settings.system_extension.buttons.open" = "Άνοιγμα προτιμήσεων";
+"views.settings.system_extension.message" = "Για να λειτουργήσει το VPN, το %@ πρέπει να είναι ενεργοποιημένο ως %@.\n\nΆνοιξε τις Προτιμήσεις συστήματος του macOS, κύλησε στο «%@», άνοιξέ το και ενεργοποίησε το %@.";
 "views.settings.title" = "Σχετικά";
 "views.ui.connection_status.on_demand_suffix" = " (κατ' απαίτηση)";
 "views.ui.purchase_required.purchase.help" = "Απαιτείται αγορά";

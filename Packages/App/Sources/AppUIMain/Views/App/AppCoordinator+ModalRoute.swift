@@ -38,6 +38,8 @@ extension AppCoordinator {
 
         case settings
 
+        case systemExtension
+
         var id: Int {
             switch self {
             case .editProfile: return 1
@@ -45,6 +47,7 @@ extension AppCoordinator {
             case .interactiveLogin: return 3
             case .migrateProfiles: return 4
             case .settings: return 5
+            case .systemExtension: return 6
             }
         }
 
@@ -72,6 +75,8 @@ private extension AppCoordinator.ModalRoute {
             return .custom(width: 500, height: 200)
         case .migrateProfiles:
             return .custom(width: 700, height: 400)
+        case .systemExtension:
+            return .small
         default:
             return .large
         }

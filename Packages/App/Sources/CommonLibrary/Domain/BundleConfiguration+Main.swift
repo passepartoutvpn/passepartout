@@ -66,6 +66,13 @@ extension BundleConfiguration {
         return main.versionNumber
     }
 
+    public static var mainBuildNumber: Int {
+        if isPreview {
+            return 12345
+        }
+        return main.buildNumber
+    }
+
     public static var mainVersionString: String {
         if isPreview {
             return "preview-1.2.3-1234"

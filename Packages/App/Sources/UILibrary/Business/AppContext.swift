@@ -51,6 +51,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let registry: Registry
 
+    public let sysexManager: SystemExtensionManager?
+
     public let tunnel: ExtendedTunnel
 
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
@@ -71,6 +73,7 @@ public final class AppContext: ObservableObject, Sendable {
         preferencesManager: PreferencesManager,
         profileManager: ProfileManager,
         registry: Registry,
+        sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
@@ -84,6 +87,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.preferencesManager = preferencesManager
         self.profileManager = profileManager
         self.registry = registry
+        self.sysexManager = sysexManager
         self.tunnel = tunnel
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
@@ -113,9 +117,12 @@ private extension AppContext {
         pp_log_g(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects(withProducts: true)
 
-        // defer load receipt
+        // defer loads
         Task {
             await iapManager.reloadReceipt()
+        }
+        Task {
+            await reloadSystemExtension()
         }
 
         iapManager
@@ -175,6 +182,7 @@ private extension AppContext {
 
         pp_log_g(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
+            await reloadSystemExtension()
             await iapManager.reloadReceipt()
         }
         await pendingTask?.value
@@ -250,5 +258,18 @@ private extension AppContext {
         pendingTask = nil
 
         return didLaunch
+    }
+
+    func reloadSystemExtension() async {
+        guard let sysexManager else {
+            return
+        }
+        pp_log_g(.app, .info, "System Extension: load current status...")
+        do {
+            let result = try await sysexManager.load()
+            pp_log_g(.app, .info, "System Extension: load result is \(result)")
+        } catch {
+            pp_log_g(.app, .error, "System Extension: load error: \(error)")
+        }
     }
 }
