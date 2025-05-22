@@ -22,3 +22,4 @@ default.profraw
 .env.secret
 *.storekit
 *.sqlite-*
+*.dmg*

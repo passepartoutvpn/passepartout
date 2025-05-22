@@ -131,12 +131,66 @@ jobs:
       - name: Submit for App Review
         run: |
           bundle exec fastlane --env ${{ matrix.platform }} asc_review
-  publish_to_app_store:
-    name: Publish to App Store
+  distribute_dmg:
+    name: Distribute Apple Disk Image
+    runs-on: macos-15
+    needs: [validate_codebase]
+    timeout-minutes: 30
+    strategy:
+      fail-fast: true
+      matrix:
+        arch: ["arm64", "x86_64"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import GPG key
+        env:
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+          GPG_KEY_FILE: tmp.key
+        run: |
+          echo "$GPG_KEY" >"$GPG_KEY_FILE"
+          ci/gpg-import.sh "$GPG_KEY_FILE"
+          rm "$GPG_KEY_FILE"
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
+          certificates_url: ${{ vars.CERTIFICATES_URL }}
+          certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
+      - name: Archive app
+        run: |
+          ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
+      - name: Export app
+        run: |
+          ci/xcode-export.sh macOS 1
+      - name: Generate .dmg
+        run: |
+          ci/dmg-generate.sh ${{ matrix.arch }}
+      - name: Sign .dmg
+        env:
+          GPG_FINGERPRINT: ${{ vars.GPG_FINGERPRINT }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
+      - name: Notarize .dmg
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        run: |
+          ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-dmg-${{ needs.validate_codebase.outputs.version }}-${{ matrix.arch }}
+          path: |
+            Passepartout.*.dmg
+            Passepartout.*.dmg.asc
+  publish_release:
+    name: Publish Release
     runs-on: ubuntu-latest
+    #needs: [validate_codebase, build_upload, submit_for_app_review, distribute_dmg]
     needs: [validate_codebase, build_upload, submit_for_app_review]
     environment:
-      name: app_store
+      name: release
     env:
       APP_VERSION: ${{ needs.validate_codebase.outputs.version }}
       RELEASE_NOTES: CHANGELOG.txt
@@ -164,3 +218,5 @@ jobs:
         with:
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
+
+# TODO: include .dmg(s) artifacts in GitHub Release
