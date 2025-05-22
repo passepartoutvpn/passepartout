@@ -203,6 +203,9 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
+      - name: Notarize .dmg
+        run: |
+          ci/dmg-notarize.sh ${{ matrix.arch }} "$FASTLANE_USERNAME" "$FASTLANE_PASSWORD"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
