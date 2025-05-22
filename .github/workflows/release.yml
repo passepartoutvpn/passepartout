@@ -172,6 +172,7 @@ jobs:
     name: Distribute Apple Disk Image
     runs-on: macos-15
     needs: [validate_codebase]
+    timeout-minutes: 30
     strategy:
       fail-fast: true
       matrix:
