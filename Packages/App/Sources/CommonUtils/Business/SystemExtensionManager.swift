@@ -131,7 +131,7 @@ extension SystemExtensionManager: OSSystemExtensionRequestDelegate {
                 $0.matches(self)
             }
             .first // sorting implies that .first is .max
-        guard let matching = sortedProperties.first else {
+        guard let matching else {
             reportResult(.unknown)
             return
         }
