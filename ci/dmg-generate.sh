@@ -6,10 +6,13 @@ if [[ -z "$arch" ]]; then
     echo "Missing arch"
     exit 1
 fi
+
 version=`$cwd/version-number.sh`
 volname="$name $version $arch"
 srcfolder="$cwd/dmg"
 dmg="$name.$arch.dmg"
+
+set -e
 
 echo "Copy .app to .dmg contents..."
 cp -RH "dist/macOS/$name.app" "$srcfolder"

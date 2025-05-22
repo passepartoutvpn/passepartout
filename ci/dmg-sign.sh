@@ -20,8 +20,10 @@ fi
 
 dmg="$name.$arch.dmg"
 gpg_batch_args="--batch --yes --pinentry-mode loopback"
+set -e
 
 echo "Sign .dmg..."
 gpg $gpg_batch_args --armor --sign-with "$gpg_fingerprint" --passphrase "$gpg_passphrase" --detach-sign "$dmg"
+
 echo "Verify .dmg..."
 gpg $gpg_batch_args --verify "$dmg.asc" "$dmg"

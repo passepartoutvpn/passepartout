@@ -20,6 +20,7 @@ if [[ -z "$apple_password" ]]; then
 fi
 
 dmg="$name.$arch.dmg"
+set -e
 
 echo "Notarize .dmg..."
 xcrun notarytool submit "$dmg" \
