@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "builds/*"
+    branches:
+      - "ci/automate-dmg"
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
@@ -53,6 +55,7 @@ jobs:
   build_upload:
     name: Upload to ASC
     runs-on: macos-15
+    if: false
     needs: validate_codebase
     continue-on-error: true
     strategy:
