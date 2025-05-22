@@ -76,6 +76,8 @@
 "global.nouns.address" = "地址";
 "global.nouns.addresses" = "地址";
 "global.nouns.any" = "任何";
+"global.nouns.apple.network_extensions" = "网络扩展"
+"global.nouns.apple.system_extension" = "系统扩展"
 "global.nouns.category" = "类别";
 "global.nouns.certificate" = "证书";
 "global.nouns.comment" = "评论"
@@ -323,6 +325,7 @@
 "views.settings.links.sections.support" = "支持";
 "views.settings.links.sections.web" = "网页";
 "views.settings.links.title" = "链接";
+"views.settings.system_extension.buttons.open" = "打开偏好设置"
 "views.settings.title" = "关于";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";

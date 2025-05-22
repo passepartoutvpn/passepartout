@@ -78,6 +78,7 @@ extension AppContext {
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: dependencies.registry,
+            sysexManager: nil,
             tunnel: tunnel
         )
     }

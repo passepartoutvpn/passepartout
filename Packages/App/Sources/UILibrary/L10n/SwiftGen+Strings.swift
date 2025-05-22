@@ -370,6 +370,12 @@ public enum Strings {
       public static let version = Strings.tr("Localizable", "global.nouns.version", fallback: "Version")
       /// Yes
       public static let yes = Strings.tr("Localizable", "global.nouns.yes", fallback: "Yes")
+      public enum Apple {
+        /// Network Extensions
+        public static let networkExtensions = Strings.tr("Localizable", "global.nouns.apple.network_extensions", fallback: "Network Extensions")
+        /// System Extension
+        public static let systemExtension = Strings.tr("Localizable", "global.nouns.apple.system_extension", fallback: "System Extension")
+      }
     }
   }
   public enum Modules {
@@ -1006,6 +1012,18 @@ public enum Strings {
           public static let support = Strings.tr("Localizable", "views.settings.links.sections.support", fallback: "Support")
           /// Web
           public static let web = Strings.tr("Localizable", "views.settings.links.sections.web", fallback: "Web")
+        }
+      }
+      public enum SystemExtension {
+        /// For the VPN to work, %@ must be enabled as %@.
+        /// 
+        /// Open the macOS Preferences, scroll to '%@', open it and enable %@.
+        public static func message(_ p1: Any, _ p2: Any, _ p3: Any, _ p4: Any) -> String {
+          return Strings.tr("Localizable", "views.settings.system_extension.message", String(describing: p1), String(describing: p2), String(describing: p3), String(describing: p4), fallback: "For the VPN to work, %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.")
+        }
+        public enum Buttons {
+          /// Open Preferences
+          public static let `open` = Strings.tr("Localizable", "views.settings.system_extension.buttons.open", fallback: "Open Preferences")
         }
       }
     }

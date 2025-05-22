@@ -52,6 +52,10 @@ extension AppError: LocalizedError {
         case .permissionDenied:
             return V.permissionDenied
 
+        case .systemExtension(let result):
+            assertionFailure("AppError.systemExtension should be handled in AppCoordinator")
+            return nil
+
         case .generic(let error):
             return error.localizedDescription
         }

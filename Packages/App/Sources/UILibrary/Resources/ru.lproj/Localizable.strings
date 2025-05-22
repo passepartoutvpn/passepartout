@@ -76,6 +76,8 @@
 "global.nouns.address" = "Адрес";
 "global.nouns.addresses" = "Адреса";
 "global.nouns.any" = "Любой";
+"global.nouns.apple.network_extensions" = "Сетевые расширения";
+"global.nouns.apple.system_extension" = "Системное расширение";
 "global.nouns.category" = "Категория";
 "global.nouns.certificate" = "Сертификат";
 "global.nouns.comment" = "Комментарий";
@@ -323,6 +325,7 @@
 "views.settings.links.sections.support" = "Поддержка";
 "views.settings.links.sections.web" = "Веб-сайт";
 "views.settings.links.title" = "Ссылки";
+"views.settings.system_extension.buttons.open" = "Открыть настройки";
 "views.settings.title" = "О программе";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";

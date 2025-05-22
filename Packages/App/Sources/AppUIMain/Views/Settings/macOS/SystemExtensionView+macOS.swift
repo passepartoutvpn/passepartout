@@ -1,8 +1,8 @@
 //
-//  SettingsCoordinatorRoute.swift
+//  SystemExtensionView+macOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 5/22/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if os(macOS)
 
-enum SettingsCoordinatorRoute: Hashable {
-    case changelog
+import CommonUtils
+import SwiftUI
 
-    case credits
-
-    case diagnostics
-
-    case donate
-
-    case links
-
-    case preferences
-
-    case purchased
-
-    case systemExtension
-
-    case version
+struct SystemExtensionView: View {
+    var body: some View {
+        Form {
+            Text(Strings.Views.Settings.SystemExtension.message(
+                Strings.Unlocalized.appName,
+                Strings.Global.Nouns.Apple.systemExtension,
+                Strings.Global.Nouns.Apple.networkExtensions,
+                Strings.Unlocalized.appName
+            ))
+            Link(Strings.Views.Settings.SystemExtension.Buttons.open, destination: SystemExtensionManager.preferencesURL)
+        }
+        .themeForm()
+    }
 }
+
+#Preview {
+    SystemExtensionView()
+}
+
+#endif

@@ -76,6 +76,8 @@
 "global.nouns.address" = "Adresse";
 "global.nouns.addresses" = "Adresses";
 "global.nouns.any" = "Tout";
+"global.nouns.apple.network_extensions" = "Extensions réseau";
+"global.nouns.apple.system_extension" = "Extension système";
 "global.nouns.category" = "Catégorie";
 "global.nouns.certificate" = "Certificat";
 "global.nouns.comment" = "Commentaire";
@@ -323,6 +325,7 @@
 "views.settings.links.sections.support" = "Support";
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Liens";
+"views.settings.system_extension.buttons.open" = "Ouvrir les réglages";
 "views.settings.title" = "À propos";
 "views.ui.connection_status.on_demand_suffix" = " (à la demande)";
 "views.ui.purchase_required.purchase.help" = "Achat requis";

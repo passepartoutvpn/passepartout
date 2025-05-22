@@ -90,6 +90,9 @@ private extension SettingsContentView {
             .themeSection(header: Strings.Global.Nouns.about)
 
             Group {
+                if distributionTarget == .developerID {
+                    linkContent(.systemExtension)
+                }
                 linkContent(.diagnostics)
                 if distributionTarget.supportsIAP {
                     linkContent(.purchased)

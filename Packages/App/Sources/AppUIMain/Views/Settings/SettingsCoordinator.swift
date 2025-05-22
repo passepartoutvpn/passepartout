@@ -81,6 +81,8 @@ extension SettingsCoordinator {
             Strings.Global.Nouns.preferences
         case .purchased:
             Strings.Global.Nouns.purchases
+        case .systemExtension:
+            Strings.Global.Nouns.Apple.systemExtension
         case .version:
             Strings.Views.Settings.title
         }
@@ -130,6 +132,12 @@ extension SettingsCoordinator {
         case .purchased:
             PurchasedView()
                 .navigationTitle(Strings.Global.Nouns.purchases)
+
+#if os(macOS)
+        case .systemExtension:
+            SystemExtensionView()
+                .navigationTitle(Strings.Global.Nouns.Apple.systemExtension)
+#endif
 
         case .version:
             VersionView(changelogRoute: SettingsCoordinatorRoute.changelog)

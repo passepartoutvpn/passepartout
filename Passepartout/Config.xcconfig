@@ -27,7 +27,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 MARKETING_VERSION = 3.4.0
-CURRENT_PROJECT_VERSION = 3838
+CURRENT_PROJECT_VERSION = 3841
 
 // tweak these based on app and team
 CFG_APP_ID = com.algoritmico.ios.Passepartout

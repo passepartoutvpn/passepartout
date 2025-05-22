@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  SystemExtensionManager+UI.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 5/22/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,41 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if os(macOS)
+
+import AppKit
 import CommonUtils
 import Foundation
 
-public enum AppError: Error {
-    case couldNotLaunch(reason: Error)
+extension SystemExtensionManager {
+    public static let preferencesURL = URL(string: "x-apple.systempreferences:com.apple.LoginItems-Settings.extension")!
 
-    case emptyProducts
-
-    case emptyProfileName
-
-    case ineligibleProfile(Set<AppFeature>)
-
-    case interactiveLogin
-
-    case malformedModule(any ModuleBuilder, error: Error)
-
-    case permissionDenied
-
-    case systemExtension(SystemExtensionManager.Result)
-
-    case generic(PartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PartoutError(error))
-        }
+    public func openPreferences() {
+        NSWorkspace.shared.open(Self.preferencesURL)
     }
 }
 
-extension PartoutError.Code {
-    public enum App {
-        public static let ineligibleProfile = PartoutError.Code("App.ineligibleProfile")
-
-        public static let multipleTunnels = PartoutError.Code("App.multipleTunnels")
-    }
-}
+#endif
