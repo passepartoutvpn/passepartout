@@ -326,6 +326,7 @@
 "views.settings.links.sections.web" = "Веб-сайт";
 "views.settings.links.title" = "Ссылки";
 "views.settings.system_extension.buttons.open" = "Открыть настройки";
+"views.settings.system_extension.message" = "Чтобы VPN работал, необходимо включить %@ как %@.\n\nОткройте настройки macOS, прокрутите до «%@», откройте и включите %@.";
 "views.settings.title" = "О программе";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";

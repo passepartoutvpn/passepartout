@@ -326,6 +326,7 @@
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Enlaces";
 "views.settings.system_extension.buttons.open" = "Abrir preferencias";
+"views.settings.system_extension.message" = "Para que funcione la VPN, %@ debe estar activado como %@.\n\nAbre las Preferencias del Sistema de macOS, desplázate hasta «%@», ábrelo y activa %@.";
 "views.settings.title" = "Acerca de";
 "views.ui.connection_status.on_demand_suffix" = " (a demanda)";
 "views.ui.purchase_required.purchase.help" = "Compra requerida";

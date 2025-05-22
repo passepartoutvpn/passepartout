@@ -326,6 +326,7 @@
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Links";
 "views.settings.system_extension.buttons.open" = "Voorkeuren openen";
+"views.settings.system_extension.message" = "Voor een goede werking van de VPN moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";
