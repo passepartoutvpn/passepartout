@@ -193,7 +193,7 @@ jobs:
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Archive app
         run: |
-          ci/xcode-archive.sh macOS ${{ matrix.arch }} 1
+          ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
       - name: Export app
         run: |
           ci/xcode-export.sh macOS 1
