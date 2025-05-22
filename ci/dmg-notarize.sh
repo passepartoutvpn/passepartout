@@ -27,3 +27,6 @@ xcrun notarytool submit "$dmg" \
     --apple-id "$apple_id" \
     --password "$apple_password" \
     --wait
+
+echo "Staple .dmg..."
+xcrun stapler staple "$dmg"
