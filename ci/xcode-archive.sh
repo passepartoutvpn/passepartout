@@ -7,12 +7,12 @@ if [[ -z $platform ]]; then
     echo "Missing platform"
     exit 1
 fi
-project_name=Passepartout
-scheme=Passepartout
-configuration=Release
+project_name="Passepartout"
+scheme="Passepartout"
+configuration="Release"
 if [[ $developer_id == 1 ]]; then
-    scheme=PassepartoutMac
-    configuration=ReleaseMac
+    scheme="PassepartoutMac"
+    configuration="ReleaseMac"
 fi
 dst="build"
 if [[ -n $arch ]]; then
