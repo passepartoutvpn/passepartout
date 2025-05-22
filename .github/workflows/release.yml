@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - "builds/*"
-    branches:
-      - "ci/automate-dmg"
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
@@ -48,15 +46,13 @@ jobs:
           ci/run-app-tests.sh
       - name: Run Partout tests
         run: |
-          exit
-          #ci/run-partout-tests.sh
+          ci/run-partout-tests.sh
     outputs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}
   build_upload:
     name: Upload to ASC
     runs-on: macos-15
-    if: false
     needs: validate_codebase
     continue-on-error: true
     strategy:
@@ -222,4 +218,4 @@ jobs:
             Passepartout.*.dmg
             Passepartout.*.dmg.asc
 
-      # TODO: notarize/staple, then publish .dmg as GitHub Release
+      # TODO: publish .dmg(s) as GitHub Release
