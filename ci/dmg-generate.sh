@@ -11,10 +11,10 @@ volname="$name $version $arch"
 srcfolder="$cwd/dmg"
 dmg="$name.$arch.dmg"
 
-echo "Copying .app to .dmg contents..."
+echo "Copy .app to .dmg contents..."
 cp -RH "dist/macOS/$name.app" "$srcfolder"
 
-echo "Creating $volname..."
+echo "Create $volname..."
 hdiutil create \
     -volname "$volname" \
     -srcfolder "$srcfolder" \
