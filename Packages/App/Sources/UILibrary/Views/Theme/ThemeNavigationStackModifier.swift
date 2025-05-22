@@ -32,6 +32,8 @@ struct ThemeNavigationStackModifier: ViewModifier {
 
     let closable: Bool
 
+    var closeTitle: String?
+
     let onClose: (() -> Void)?
 
     @Binding
@@ -50,7 +52,7 @@ struct ThemeNavigationStackModifier: ViewModifier {
                                     dismiss()
                                 }
                             } label: {
-                                ThemeCloseLabel()
+                                ThemeCloseLabel(title: closeTitle)
                             }
                         }
                     }

@@ -233,6 +233,12 @@ extension AppCoordinator {
             )
             .themeNavigationStack(closable: true, path: $migrationPath)
 
+#if os(macOS)
+        case .systemExtension:
+            SystemExtensionView()
+                .themeNavigationStack(closable: true, closeTitle: Strings.Global.Nouns.ok)
+#endif
+
         default:
             EmptyView()
         }
@@ -318,6 +324,10 @@ extension AppCoordinator {
     }
 
     public func onError(_ error: Error, profile: Profile) {
+        if case AppError.systemExtension(let result) = error, result != .success {
+            modalRoute = .systemExtension
+            return
+        }
         errorHandler.handle(
             error,
             title: profile.name,

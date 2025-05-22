@@ -105,6 +105,7 @@ extension AppContext {
             registry: dependencies.registry
         )
 
+        let tunnelIdentifier = BundleConfiguration.mainString(for: .tunnelId)
 #if targetEnvironment(simulator)
         let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
@@ -117,7 +118,7 @@ extension AppContext {
 #else
         let tunnelStrategy = NETunnelStrategy(
             ctx,
-            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            bundleIdentifier: tunnelIdentifier,
             coder: dependencies.neProtocolCoder(ctx)
         )
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
@@ -138,10 +139,21 @@ extension AppContext {
             mirrorsRemoteRepository: dependencies.mirrorsRemoteRepository
         )
 
+        let sysexManager: SystemExtensionManager?
+        if distributionTarget == .developerID {
+            sysexManager = SystemExtensionManager(
+                identifier: tunnelIdentifier,
+                version: BundleConfiguration.mainVersionNumber,
+                build: BundleConfiguration.mainBuildNumber
+            )
+        } else {
+            sysexManager = nil
+        }
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(ctx, strategy: tunnelStrategy) {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
+            sysex: sysexManager,
             kvStore: kvStore,
             processor: processor,
             interval: constants.tunnel.refreshInterval
@@ -247,6 +259,7 @@ extension AppContext {
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: dependencies.registry,
+            sysexManager: sysexManager,
             tunnel: tunnel,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )

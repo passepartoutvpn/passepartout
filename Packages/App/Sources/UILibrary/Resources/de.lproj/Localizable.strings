@@ -76,6 +76,8 @@
 "global.nouns.address" = "Adresse";
 "global.nouns.addresses" = "Adressen";
 "global.nouns.any" = "Jedes";
+"global.nouns.apple.network_extensions" = "Netzwerkerweiterungen";
+"global.nouns.apple.system_extension" = "Systemerweiterung";
 "global.nouns.category" = "Kategorie";
 "global.nouns.certificate" = "Zertifikat";
 "global.nouns.comment" = "Kommentar";
@@ -323,6 +325,8 @@
 "views.settings.links.sections.support" = "Unterstützung";
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Links";
+"views.settings.system_extension.buttons.open" = "Einstellungen öffnen";
+"views.settings.system_extension.message" = "Damit das VPN funktioniert, muss %@ als %@ aktiviert sein.\n\nÖffne die macOS-Einstellungen, scrolle zu „%@“, öffne es und aktiviere %@.";
 "views.settings.title" = "Über";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";

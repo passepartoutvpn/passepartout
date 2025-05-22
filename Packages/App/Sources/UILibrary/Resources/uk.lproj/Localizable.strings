@@ -76,6 +76,8 @@
 "global.nouns.address" = "Адреса";
 "global.nouns.addresses" = "Адреси";
 "global.nouns.any" = "Будь-який";
+"global.nouns.apple.network_extensions" = "Мережеві розширення";
+"global.nouns.apple.system_extension" = "Системне розширення";
 "global.nouns.category" = "Категорія";
 "global.nouns.certificate" = "Сертифікат";
 "global.nouns.comment" = "Коментар";
@@ -323,6 +325,8 @@
 "views.settings.links.sections.support" = "Підтримка";
 "views.settings.links.sections.web" = "Веб-сторінка";
 "views.settings.links.title" = "Посилання";
+"views.settings.system_extension.buttons.open" = "Відкрити налаштування";
+"views.settings.system_extension.message" = "Щоб VPN працював, %@ має бути увімкнено як %@.\n\nВідкрий налаштування macOS, прокрути до «%@», відкрий його та увімкни %@.";
 "views.settings.title" = "Про програму";
 "views.ui.connection_status.on_demand_suffix" = " (за запитом)";
 "views.ui.purchase_required.purchase.help" = "Потрібна покупка";

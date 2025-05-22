@@ -75,6 +75,7 @@ extension AppContext {
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: registry,
+            sysexManager: nil,
             tunnel: tunnel
         )
     }()

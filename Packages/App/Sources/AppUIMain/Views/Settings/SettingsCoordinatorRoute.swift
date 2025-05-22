@@ -40,5 +40,7 @@ enum SettingsCoordinatorRoute: Hashable {
 
     case purchased
 
+    case systemExtension
+
     case version
 }

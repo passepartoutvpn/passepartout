@@ -71,10 +71,11 @@ extension View {
 
     public func themeNavigationStack(
         closable: Bool = false,
+        closeTitle: String? = nil,
         onClose: (() -> Void)? = nil,
         path: Binding<NavigationPath> = .constant(NavigationPath())
     ) -> some View {
-        modifier(ThemeNavigationStackModifier(closable: closable, onClose: onClose, path: path))
+        modifier(ThemeNavigationStackModifier(closable: closable, closeTitle: closeTitle, onClose: onClose, path: path))
     }
 
     @ViewBuilder

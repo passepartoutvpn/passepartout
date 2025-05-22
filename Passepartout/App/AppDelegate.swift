@@ -36,12 +36,7 @@ final class AppDelegate: NSObject {
             store: UserDefaultsStore(.standard),
             fallback: AppPreferenceValues()
         )
-        let ctx: PartoutLoggerContext
-        do {
-            ctx = try PartoutLogger.register(for: .app, with: kvStore.preferences)
-        } catch {
-            fatalError("Starting multiple app processes? \(error)")
-        }
+        let ctx = PartoutLogger.register(for: .app, with: kvStore.preferences)
         if AppCommandLine.contains(.uiTesting) {
             pp_log_g(.app, .info, "UI tests: mock AppContext")
             return .forUITesting

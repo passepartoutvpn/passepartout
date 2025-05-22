@@ -40,6 +40,8 @@
 "views.settings.credits.licenses" = "Licenses";
 "views.settings.credits.notices" = "Notices";
 "views.settings.credits.translations" = "Translations";
+"views.settings.system_extension.message" = "For the VPN to work, %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.";
+"views.settings.system_extension.buttons.open" = "Open Preferences";
 
 "views.app.installed_profile.none.name" = "No profile";
 "views.app.installed_profile.none.status" = "Tap list to connect";
@@ -308,6 +310,8 @@
 "global.nouns.address" = "Address";
 "global.nouns.addresses" = "Addresses";
 "global.nouns.any" = "Any";
+"global.nouns.apple.network_extensions" = "Network Extensions";
+"global.nouns.apple.system_extension" = "System Extension";
 "global.nouns.category" = "Category";
 "global.nouns.certificate" = "Certificate";
 "global.nouns.comment" = "Comment";
@@ -344,6 +348,7 @@
 "global.nouns.n_seconds" = "%d seconds";
 "global.nouns.name" = "Name";
 "global.nouns.networks" = "Networks";
+
 "global.nouns.no" = "No";
 "global.nouns.no_content" = "No content";
 "global.nouns.no_selection" = "No selection";

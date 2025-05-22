@@ -76,6 +76,8 @@
 "global.nouns.address" = "Adress";
 "global.nouns.addresses" = "Adresser";
 "global.nouns.any" = "Alla";
+"global.nouns.apple.network_extensions" = "Nätverkstillägg";
+"global.nouns.apple.system_extension" = "Systemtillägg";
 "global.nouns.category" = "Kategori";
 "global.nouns.certificate" = "Certifikat";
 "global.nouns.comment" = "Kommentar";
@@ -323,6 +325,8 @@
 "views.settings.links.sections.support" = "Support";
 "views.settings.links.sections.web" = "Webbplats";
 "views.settings.links.title" = "Länkar";
+"views.settings.system_extension.buttons.open" = "Öppna inställningar";
+"views.settings.system_extension.message" = "För att VPN ska fungera måste %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";
