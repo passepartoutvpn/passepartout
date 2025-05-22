@@ -53,8 +53,8 @@ struct AddProfileMenu: View {
             if distributionTarget.supportsPaidFeatures {
                 providerProfileMenu
                 Divider()
+                migrateProfilesButton
             }
-            migrateProfilesButton
         } label: {
             ThemeImage(.add)
         }
