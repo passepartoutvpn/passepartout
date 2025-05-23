@@ -7,8 +7,6 @@ on:
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
-  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
   TESTFLIGHT_PREFACE: ${{ vars.TESTFLIGHT_PREFACE }}
   PLATFORMS: "iOS macOS tvOS"
 
@@ -145,11 +143,8 @@ jobs:
       - name: Import GPG key
         env:
           GPG_KEY: ${{ secrets.GPG_KEY }}
-          GPG_KEY_FILE: tmp.key
         run: |
-          echo "$GPG_KEY" >"$GPG_KEY_FILE"
-          ci/gpg-import.sh "$GPG_KEY_FILE"
-          rm "$GPG_KEY_FILE"
+          ci/gpg-import.sh "$GPG_KEY"
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
@@ -180,15 +175,14 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: mac-dmg-${{ needs.validate_codebase.outputs.version }}-${{ matrix.arch }}
+          name: mac-dmg-${{ matrix.arch }}
           path: |
             Passepartout.*.dmg
             Passepartout.*.dmg.asc
   publish_release:
     name: Publish Release
     runs-on: ubuntu-latest
-    #needs: [validate_codebase, build_upload, submit_for_app_review, distribute_dmg]
-    needs: [validate_codebase, build_upload, submit_for_app_review]
+    needs: [validate_codebase, build_upload, submit_for_app_review, distribute_dmg]
     environment:
       name: release
     env:
@@ -201,6 +195,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Print workspace structure
+        run: |
+          ls -R
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -212,11 +214,13 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          bundle exec fastlane tag_release version:$APP_VERSION
+          git tag -as "v$APP_VERSION"
+          git push --tags
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
+          name: ${{ env.APP_VERSION }}
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
-
-# TODO: include .dmg(s) artifacts in GitHub Release
+          files: |
+            artifacts/*.dmg*
