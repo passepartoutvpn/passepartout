@@ -47,7 +47,8 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          bundle exec fastlane tag_release version:$APP_VERSION
+          git tag -as "v$APP_VERSION"
+          git push --tags
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
