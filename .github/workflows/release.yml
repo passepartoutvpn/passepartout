@@ -145,11 +145,8 @@ jobs:
       - name: Import GPG key
         env:
           GPG_KEY: ${{ secrets.GPG_KEY }}
-          GPG_KEY_FILE: tmp.key
         run: |
-          echo "$GPG_KEY" >"$GPG_KEY_FILE"
-          ci/gpg-import.sh "$GPG_KEY_FILE"
-          rm "$GPG_KEY_FILE"
+          ci/gpg-import.sh "$GPG_KEY"
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
