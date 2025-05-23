@@ -3,10 +3,6 @@ name: Full Tests
 on:
   workflow_dispatch:
 
-env:
-  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
-  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
