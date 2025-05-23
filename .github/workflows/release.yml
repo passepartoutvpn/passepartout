@@ -177,7 +177,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: mac-dmg-${{ needs.validate_codebase.outputs.version }}-${{ matrix.arch }}
+          name: mac-dmg-${{ matrix.arch }}
           path: |
             Passepartout.*.dmg
             Passepartout.*.dmg.asc
