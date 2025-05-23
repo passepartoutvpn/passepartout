@@ -89,12 +89,12 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             },
             willProcess: processor.willProcess
         )
-        let profileId = neTunnelController.originalProfile.id
+        let originalProfile = neTunnelController.originalProfile
 
         // MARK: Create PartoutLoggerContext with profile
 
         let ctx = PartoutLogger.register(
-            for: .tunnel(profileId, distributionTarget),
+            for: .tunnel(originalProfile.id, distributionTarget),
             with: preferences
         )
         self.ctx = ctx
@@ -160,6 +160,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             // start tunnel
             try await fwd.startTunnel(options: options)
 
+            // do not run the verification loop if IAPs are not supported
+            if !distributionTarget.supportsIAP {
+                guard originalProfile.features.isEmpty else {
+                    throw PartoutError(.App.ineligibleProfile)
+                }
+                return
+            }
+
             // #1070, do not wait for this to start the tunnel. if on-demand is
             // enabled, networking will stall and StoreKit network calls may
             // produce a deadlock
@@ -172,7 +180,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                     return
                 }
                 await verifyEligibility(
-                    of: fwd.originalProfile,
+                    of: originalProfile,
                     iapManager: iapManager,
                     environment: environment,
                     interval: params.interval
