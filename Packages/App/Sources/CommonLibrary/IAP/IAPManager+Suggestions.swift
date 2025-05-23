@@ -102,14 +102,20 @@ extension IAPManager {
             }
         }
 
-        // TODO: ###, this condition may be improved by excluding very old products
-        let isEligibleForComplete = purchasedProducts.isEmpty
-        if filter != .excludingComplete && isEligibleForComplete {
+        if filter != .excludingComplete && purchasedProducts.isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
         }
 
         return suggested
+    }
+}
+
+private extension Collection where Element == AppProduct {
+    var isEligibleForComplete: Bool {
+        !contains {
+            $0.isComplete || $0.isEssentials || $0 == .Features.appleTV
+        }
     }
 }

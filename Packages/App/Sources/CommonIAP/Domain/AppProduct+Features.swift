@@ -104,6 +104,17 @@ extension AppProduct {
         }
     }
 
+    public var isEssentials: Bool {
+        switch self {
+        case .Essentials.iOS,
+                .Essentials.macOS,
+                .Essentials.iOS_macOS:
+            return true
+        default:
+            return false
+        }
+    }
+
     public var isRecurring: Bool {
         switch self {
         case .Complete.Recurring.monthly, .Complete.Recurring.yearly:
