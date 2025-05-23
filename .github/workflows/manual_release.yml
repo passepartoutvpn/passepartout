@@ -7,18 +7,13 @@ on:
         description: "The number in the builds/* tag"
         required: true
 
-env:
-  APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
-  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  publish_to_app_store:
-    name: Publish to App Store
+  publish_release:
+    name: Publish Release
     runs-on: ubuntu-latest
     environment:
       name: app_store
