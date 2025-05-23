@@ -195,6 +195,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Print workspace structure
+        run: |
+          ls -R
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -213,5 +221,5 @@ jobs:
         with:
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
-
-# TODO: include .dmg(s) artifacts in GitHub Release
+          files: |
+            artifacts/*.dmg*
