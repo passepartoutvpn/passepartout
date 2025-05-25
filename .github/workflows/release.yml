@@ -49,7 +49,7 @@ jobs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}
   build_upload:
-    name: Upload to ASC
+    name: Upload to App Store Connect
     runs-on: macos-15
     needs: validate_codebase
     continue-on-error: true
@@ -130,7 +130,7 @@ jobs:
         run: |
           bundle exec fastlane --env ${{ matrix.platform }} asc_review
   distribute_dmg:
-    name: Distribute Apple Disk Image
+    name: Distribute Mac .dmg
     runs-on: macos-15
     needs: [validate_codebase]
     timeout-minutes: 30
