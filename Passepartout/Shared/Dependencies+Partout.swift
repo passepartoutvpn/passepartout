@@ -61,7 +61,7 @@ extension Dependencies {
             return tunnelEnvironment(profileId: profileId)
         } else {
             guard let neStrategy = strategy as? NETunnelStrategy else {
-                fatalError("Mac build requires NETunnelStrategy")
+                fatalError("NETunnelEnvironment requires NETunnelStrategy")
             }
             return NETunnelEnvironment(strategy: neStrategy, profileId: profileId)
         }
