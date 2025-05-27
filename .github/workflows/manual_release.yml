@@ -24,9 +24,6 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           ref: "builds/${{ inputs.build }}"
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
       - name: Read app version
         run: |
           version=`ci/version-number.sh`
