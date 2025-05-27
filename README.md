@@ -60,6 +60,14 @@ To test the app on your Mac or iOS/tvOS Simulator:
 - Open `Passepartout.xcodeproj` in Xcode
 - Run the `Passepartout` target
 
+### Binaries
+
+Make sure to verify the signature of binary releases with [my GPG key][gpg-key]. You can also fetch it from the public keyservers:
+
+```
+gpg --recv-keys 28891B14B2635EA11F438034092E0218047A5650
+```
+
 ## License
 
 Copyright (c) 2025 Davide De Rosa. All rights reserved.
@@ -143,6 +151,8 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 
 [dep-brew]: https://brew.sh/
 [dep-openssl]: https://www.openssl.org/
+
+[gpg-key]: ci/gpg.txt
 
 [license-content]: LICENSE
 [contrib-cla]: CLA.rst

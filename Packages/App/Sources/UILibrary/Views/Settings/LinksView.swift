@@ -60,10 +60,10 @@ private extension LinksView {
         Group {
             Link(Strings.Views.Settings.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
             Link(Strings.Views.Settings.Links.Rows.openDiscussion, destination: constants.github.discussions)
-            if iapManager.isPayingUser {
+            if distributionTarget.supportsIAP && iapManager.isPayingUser {
                 Link(Strings.Views.Settings.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
             }
-            if !iapManager.isBeta && !distributionTarget.supportsIAP {
+            if !distributionTarget.supportsIAP && !iapManager.isBeta {
                 WebDonationLink()
             }
         }

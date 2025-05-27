@@ -1,5 +1,6 @@
 #!/bin/bash
 tmp_root=./tmp
+xcconfig_path="Passepartout/Config.xcconfig"
 platforms="iOS macOS tvOS"
 devices="mac iphone ipad appletv"
 changelog="CHANGELOG.txt"
