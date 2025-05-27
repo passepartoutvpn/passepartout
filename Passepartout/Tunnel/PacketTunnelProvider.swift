@@ -161,6 +161,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             try await fwd.startTunnel(options: options)
 
             // do not run the verification loop if IAPs are not supported
+            // just ensure that the profile does not require any paid feature
             if !distributionTarget.supportsIAP {
                 guard originalProfile.features.isEmpty else {
                     throw PartoutError(.App.ineligibleProfile)
