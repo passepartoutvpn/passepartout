@@ -76,11 +76,10 @@ fi
 
 if [[ $opt_no_log != "1" ]]; then
     echo "Generate CHANGELOG..."
-    if [[ -n "$opt_since" ]]; then
-        git_range="$opt_since..HEAD"
-    else
-        git_range=""
+    if [[ -z "$opt_since" ]]; then
+        opt_since=`git describe --abbrev=0 --tags`
     fi
+    git_range="$opt_since..HEAD"
     log=$(git log $git_range --pretty="* %s" --date=short)
     log_path="$changelog.tmp"
     echo "$log" >"$log_path"
