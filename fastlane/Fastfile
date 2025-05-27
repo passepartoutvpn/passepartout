@@ -16,7 +16,7 @@
 desc "Push a new beta build to TestFlight"
 lane :beta do
     preface = ENV["TESTFLIGHT_PREFACE"]
-    log = File.read("../#{logname}")
+    log = File.read("../CHANGELOG.txt")
     changelog = preface + log
     pilot(
         changelog: changelog,
