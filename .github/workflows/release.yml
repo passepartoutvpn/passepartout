@@ -64,6 +64,9 @@ jobs:
           submodules: true
           certificates_url: ${{ vars.CERTIFICATES_URL }}
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
