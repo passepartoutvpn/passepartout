@@ -326,7 +326,7 @@
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Links";
 "views.settings.system_extension.buttons.open" = "Einstellungen öffnen";
-"views.settings.system_extension.message" = "Damit das VPN funktioniert, muss %@ als %@ aktiviert sein.\n\nÖffne die macOS-Einstellungen, scrolle zu „%@“, öffne es und aktiviere %@.";
+"views.settings.system_extension.message" = "Damit das VPN funktioniert, muss sich die App im Verzeichnis /Programme befinden und %@ muss als %@ aktiviert sein.\n\nÖffne die macOS-Einstellungen, scrolle zu „%@“, öffne es und aktiviere %@.";
 "views.settings.title" = "Über";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";

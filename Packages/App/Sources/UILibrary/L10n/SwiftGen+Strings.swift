@@ -1015,11 +1015,11 @@ public enum Strings {
         }
       }
       public enum SystemExtension {
-        /// For the VPN to work, %@ must be enabled as %@.
+        /// For the VPN to work, the app must reside in the /Applications directory, and %@ must be enabled as %@.
         /// 
         /// Open the macOS Preferences, scroll to '%@', open it and enable %@.
         public static func message(_ p1: Any, _ p2: Any, _ p3: Any, _ p4: Any) -> String {
-          return Strings.tr("Localizable", "views.settings.system_extension.message", String(describing: p1), String(describing: p2), String(describing: p3), String(describing: p4), fallback: "For the VPN to work, %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.")
+          return Strings.tr("Localizable", "views.settings.system_extension.message", String(describing: p1), String(describing: p2), String(describing: p3), String(describing: p4), fallback: "For the VPN to work, the app must reside in the /Applications directory, and %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.")
         }
         public enum Buttons {
           /// Open Preferences

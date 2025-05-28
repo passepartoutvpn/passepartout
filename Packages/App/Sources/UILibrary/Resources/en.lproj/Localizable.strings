@@ -40,7 +40,7 @@
 "views.settings.credits.licenses" = "Licenses";
 "views.settings.credits.notices" = "Notices";
 "views.settings.credits.translations" = "Translations";
-"views.settings.system_extension.message" = "For the VPN to work, %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.";
+"views.settings.system_extension.message" = "For the VPN to work, the app must reside in the /Applications directory, and %@ must be enabled as %@.\n\nOpen the macOS Preferences, scroll to '%@', open it and enable %@.";
 "views.settings.system_extension.buttons.open" = "Open Preferences";
 
 "views.app.installed_profile.none.name" = "No profile";

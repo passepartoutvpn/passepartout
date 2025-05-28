@@ -326,7 +326,7 @@
 "views.settings.links.sections.web" = "Webbplats";
 "views.settings.links.title" = "Länkar";
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
-"views.settings.system_extension.message" = "För att VPN ska fungera måste %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
+"views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";

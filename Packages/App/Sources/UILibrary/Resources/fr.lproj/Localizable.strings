@@ -326,7 +326,7 @@
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Liens";
 "views.settings.system_extension.buttons.open" = "Ouvrir les réglages";
-"views.settings.system_extension.message" = "Pour que le VPN fonctionne, %@ doit être activé en tant que %@.\n\nOuvrez les Réglages macOS, faites défiler jusqu’à « %@ », ouvrez-le et activez %@.";
+"views.settings.system_extension.message" = "Pour que le VPN fonctionne, lapp doit se trouver dans le dossier /Applications, et %@ doit être activé en tant que %@.\n\nOuvrez les Réglages macOS, faites défiler jusqu’à « %@ », ouvrez-le et activez %@.";
 "views.settings.title" = "À propos";
 "views.ui.connection_status.on_demand_suffix" = " (à la demande)";
 "views.ui.purchase_required.purchase.help" = "Achat requis";
