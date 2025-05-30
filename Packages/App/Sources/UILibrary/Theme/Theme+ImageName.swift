@@ -37,6 +37,7 @@ extension Theme {
         case disclose
         case editableSectionEdit
         case editableSectionRemove
+        case externalLink
         case failure
         case favoriteOff
         case favoriteOn
@@ -94,6 +95,7 @@ extension Theme.ImageName {
             case .disclose: return "chevron.down"
             case .editableSectionEdit: return "arrow.up.arrow.down"
             case .editableSectionRemove: return "trash"
+            case .externalLink: return "arrow.up.right.square"
             case .failure: return "exclamationmark.triangle"
             case .favoriteOff: return "star"
             case .favoriteOn: return "star.fill"

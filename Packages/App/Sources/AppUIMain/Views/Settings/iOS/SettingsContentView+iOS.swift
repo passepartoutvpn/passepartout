@@ -79,13 +79,15 @@ private extension SettingsContentView {
             }
             .themeSection(header: Strings.Global.Nouns.about)
 
+            FAQLink()
+                .themeSection(header: Strings.Global.Nouns.troubleshooting)
             Group {
                 linkContent(.diagnostics)
                 if distributionTarget.supportsIAP {
                     linkContent(.purchased)
                 }
             }
-            .themeSection(header: Strings.Global.Nouns.troubleshooting)
+            .themeSection()
         }
         .navigationTitle(Strings.Global.Nouns.settings)
     }

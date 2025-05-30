@@ -73,7 +73,6 @@ private extension LinksView {
     var webSection: some View {
         Group {
             Link(Strings.Views.Settings.Links.Rows.homePage, destination: constants.websites.home)
-            Link(Strings.Unlocalized.faq, destination: constants.websites.faq)
             Link(Strings.Views.Settings.Links.Rows.blog, destination: constants.websites.blog)
         }
         .themeSection(header: Strings.Views.Settings.Links.Sections.web)

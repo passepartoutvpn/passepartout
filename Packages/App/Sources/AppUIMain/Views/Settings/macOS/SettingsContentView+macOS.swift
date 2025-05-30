@@ -90,6 +90,7 @@ private extension SettingsContentView {
             .themeSection(header: Strings.Global.Nouns.about)
 
             Group {
+                FAQLink()
                 if distributionTarget == .developerID {
                     linkContent(.systemExtension)
                 }
