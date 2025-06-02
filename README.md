@@ -62,7 +62,7 @@ To test the app on your Mac or iOS/tvOS Simulator:
 
 ### Binaries
 
-Make sure to verify the signature of binary releases with [my GPG key][gpg-key]. You can also fetch it from the public keyservers:
+All the [GitHub Releases][github-releases] come with Mac .dmg images for arm64 and x86_64, though currently limited to free features only. It's recommended that you verify the GPG signatures with [my GPG key][gpg-key], which you can also fetch from the public keyservers:
 
 ```
 gpg --recv-keys 28891B14B2635EA11F438034092E0218047A5650
@@ -152,6 +152,7 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [dep-brew]: https://brew.sh/
 [dep-openssl]: https://www.openssl.org/
 
+[github-releases]: https://github.com/passepartoutvpn/passepartout/releases/latest
 [gpg-key]: ci/gpg.txt
 
 [license-content]: LICENSE
