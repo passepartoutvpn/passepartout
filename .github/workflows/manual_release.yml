@@ -6,6 +6,9 @@ on:
       build:
         description: "The number in the builds/* tag"
         required: true
+      run:
+        description: "The ID of the run including the artifacts"
+        required: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,6 +27,15 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           ref: "builds/${{ inputs.build }}"
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+          run-id: ${{ inputs.run }}
+      - name: Print workspace structure
+        run: |
+          ls -R
       - name: Read app version
         run: |
           version=`ci/version-number.sh`
