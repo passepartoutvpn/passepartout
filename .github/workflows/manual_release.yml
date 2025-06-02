@@ -32,6 +32,7 @@ jobs:
         with:
           path: artifacts
           merge-multiple: true
+          github-token: ${{ secrets.ACCESS_TOKEN }}
           run-id: ${{ inputs.run }}
       - name: Print workspace structure
         run: |
