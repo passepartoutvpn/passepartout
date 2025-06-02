@@ -38,9 +38,8 @@ Tailored for Apple platforms:
 
 - iOS 16+ / macOS 13+ / tvOS 17+
 - Xcode 16+
-- SwiftPM 6.0
-- Git (preinstalled with Xcode Command Line Tools)
-- Ruby (preinstalled with macOS)
+- SwiftPM 5.9
+- Git (preinstalled with the Xcode Command Line Tools)
 
 It's highly recommended that you use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -68,6 +67,14 @@ All the [GitHub Releases][github-releases] come with Mac .dmg images for arm64 a
 gpg --recv-keys 28891B14B2635EA11F438034092E0218047A5650
 ```
 
+### Homebrew
+
+You can install the Mac app with [Homebrew Cask][homebrew-cask] too:
+
+```shell
+brew install passepartout
+```
+
 ## License
 
 Copyright (c) 2025 Davide De Rosa. All rights reserved.
@@ -90,6 +97,7 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 - [SwiftGen][credits-swiftgen]
 - [SwiftLint][credits-swiftlint]
 - [Tejas Mehta][credits-tmthecoder] for the implementation of the [OpenVPN XOR patch][credits-tmthecoder-xor]
+- [vaygr][credits-vaygr] for adding Passepartout to [Homebrew Cask][credits-vaygr-cask]
 
 The logo is taken from the awesome Circle Icons set by Nick Roach.
 
@@ -154,6 +162,7 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 
 [github-releases]: https://github.com/passepartoutvpn/passepartout/releases/latest
 [gpg-key]: ci/gpg.txt
+[homebrew-cask]: https://github.com/Homebrew/homebrew-cask
 
 [license-content]: LICENSE
 [contrib-cla]: CLA.rst
@@ -167,6 +176,8 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [credits-swiftlint]: https://github.com/realm/SwiftLint
 [credits-tmthecoder]: https://github.com/tmthecoder
 [credits-tmthecoder-xor]: https://github.com/passepartoutvpn/tunnelkit/pull/255
+[credits-vaygr]: https://github.com/vaygr
+[credits-vaygr-cask]: https://github.com/Homebrew/homebrew-cask/pull/214696
 
 [web-home]: https://passepartoutvpn.app
 [web-blog]: https://passepartoutvpn.app/blog/

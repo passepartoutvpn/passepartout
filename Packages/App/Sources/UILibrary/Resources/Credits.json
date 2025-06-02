@@ -36,6 +36,12 @@
         }, {
             "name": "WireGuard",
             "message": "© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
+        }, {
+            "name": "Tejas Mehta",
+            "message": "For the implementation of the OpenVPN XOR patch."
+        }, {
+            "name": "vaygr",
+            "message": "For adding Passepartout to Homebrew Cask."
         }
     ],
     "translations": {
