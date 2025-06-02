@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum DistributionTarget: Sendable {
+public enum DistributionTarget: String, Sendable {
     case appStore
 
     case developerID

@@ -59,6 +59,7 @@ extension ReportIssueButton {
             }
             let issue = await Issue.withMetadata(.init(
                 ctx: .global,
+                target: distributionTarget,
                 versionString: BundleConfiguration.mainVersionString,
                 purchasedProducts: purchasedProducts,
                 providerLastUpdates: providerLastUpdates,

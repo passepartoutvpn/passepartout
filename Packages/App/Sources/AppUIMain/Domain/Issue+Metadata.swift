@@ -30,6 +30,8 @@ extension Issue {
     struct Metadata {
         let ctx: PartoutLoggerContext
 
+        let target: DistributionTarget
+
         let versionString: String
 
         let purchasedProducts: Set<AppProduct>
@@ -74,7 +76,7 @@ extension Issue {
 
         return Issue(
             comment: metadata.comment,
-            appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
+            appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString) [\(metadata.target.rawValue)]",
             purchasedProducts: metadata.purchasedProducts,
             providerLastUpdates: metadata.providerLastUpdates,
             appLog: appLog,
