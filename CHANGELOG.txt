@@ -1,3 +1,4 @@
-* Include .dmg in GitHub Release (#1391)
-* Activate and alert about tunnel System Extension (#1389)
-* Automate .dmg distribution in CI (#1385)
+* Append distribution target to app version in report
+* Auto-delete stale keychain entries
+* Restore auto-deletion of migrated v2 profiles
+* Extend the eligibility for the "Forever" product (#1377)
