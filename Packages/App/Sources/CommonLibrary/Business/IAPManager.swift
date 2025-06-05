@@ -107,6 +107,8 @@ extension IAPManager {
             return products.compactMap {
                 inAppProducts[$0]
             }
+        } catch is TaskTimeoutError {
+            throw AppError.timeout
         } catch {
             pp_log_g(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             throw error
@@ -290,6 +292,8 @@ extension IAPManager {
                     let products = try await inAppHelper.fetchProducts(timeout: Constants.shared.iap.productsTimeoutInterval)
                     pp_log_g(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
                 }
+            } catch is TaskTimeoutError {
+                throw AppError.timeout
             } catch {
                 pp_log_g(.App.iap, .error, "Unable to fetch in-app products: \(error)")
             }

@@ -80,7 +80,7 @@ private extension ChangelogView {
             pp_log_g(.app, .info, "CHANGELOG: Fetching \(url)")
             let result = try await URLSession.shared.data(from: url)
             guard let text = String(data: result.0, encoding: .utf8) else {
-                throw PartoutError(.notFound)
+                throw AppError.notFound
             }
             entries = text
                 .split(separator: "\n")

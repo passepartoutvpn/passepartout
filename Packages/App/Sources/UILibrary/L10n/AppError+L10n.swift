@@ -49,22 +49,25 @@ extension AppError: LocalizedError {
         case .malformedModule(let module, let error):
             return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 
+        case .notFound:
+            return nil
+
+        case .partout(let error):
+            return error.localizedDescription
+
         case .permissionDenied:
             return V.permissionDenied
 
-        case .systemExtension(let result):
+        case .systemExtension:
             assertionFailure("AppError.systemExtension should be handled in AppCoordinator")
             return nil
 
-        case .generic(let error):
-            return error.localizedDescription
-        }
-    }
-}
+        case .timeout:
+            return Strings.Errors.App.Passepartout.timeout
 
-extension TaskTimeoutError: PartoutErrorMappable {
-    public var asPartoutError: PartoutError {
-        PartoutError(.timeout)
+        case .unknown:
+            return nil
+        }
     }
 }
 

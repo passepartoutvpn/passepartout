@@ -42,7 +42,7 @@ struct ProfileSaveButton: View {
                     errorModuleIds = []
                 } catch {
                     switch AppError(error) {
-                    case .generic(let ppError):
+                    case .partout(let ppError):
                         switch ppError.code {
                         case .incompatibleModules:
                             guard let modules = ppError.userInfo as? [Module] else {

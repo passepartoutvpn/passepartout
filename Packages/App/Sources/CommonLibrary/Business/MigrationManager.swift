@@ -147,7 +147,7 @@ private extension MigrationManager {
             try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
         }
         if simulation.randomFailures, Bool.random() {
-            throw PartoutError(.unhandled)
+            throw AppError.unknown
         }
     }
 

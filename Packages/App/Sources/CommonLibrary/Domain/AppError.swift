@@ -39,17 +39,23 @@ public enum AppError: Error {
 
     case malformedModule(any ModuleBuilder, error: Error)
 
+    case notFound
+
+    case partout(PartoutError)
+
     case permissionDenied
 
     case systemExtension(SystemExtensionManager.Result)
 
-    case generic(PartoutError)
+    case timeout
+
+    case unknown
 
     public init(_ error: Error) {
         if let spError = error as? AppError {
             self = spError
         } else {
-            self = .generic(PartoutError(error))
+            self = .partout(PartoutError(error))
         }
     }
 }
