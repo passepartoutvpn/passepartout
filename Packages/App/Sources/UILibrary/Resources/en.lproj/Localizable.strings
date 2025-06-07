@@ -53,7 +53,6 @@
 "views.app.toolbar.new_profile.provider" = "Provider";
 "views.app.toolbar.import_profile" = "Import profile";
 "views.app.toolbar.migrate_profiles" = "Migrate profiles";
-"views.app.tv.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.";
 
 "views.app.profile_context.connect_to" = "Connect to";
 
@@ -154,6 +153,12 @@
 
 "views.vpn.category.any" = "All categories";
 "views.vpn.no_servers" = "No servers";
+
+"views.tv.connection_profiles.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.";
+"views.tv.profiles.import_local" = "Import local profile";
+"views.tv.profiles.detail.profiles" = "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.";
+"views.tv.web_uploader.toggle" = "Toggle to import a local profile into your TV with a web browser.";
+"views.tv.web_uploader.qr" = "Scan the QR with your camera to open a web page where to upload your profile.";
 
 // MARK: Views (Modules)
 
@@ -296,6 +301,7 @@
 "global.actions.edit" = "Edit";
 "global.actions.enable" = "Enable";
 "global.actions.hide" = "Hide";
+"global.actions.import" = "Import";
 "global.actions.purchase" = "Purchase";
 "global.actions.remove" = "Delete";
 "global.actions.reconnect" = "Reconnect";
@@ -348,7 +354,6 @@
 "global.nouns.n_seconds" = "%d seconds";
 "global.nouns.name" = "Name";
 "global.nouns.networks" = "Networks";
-
 "global.nouns.no" = "No";
 "global.nouns.no_content" = "No content";
 "global.nouns.no_selection" = "No selection";
@@ -356,12 +361,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "On-demand";
 "global.nouns.other" = "Other";
+"global.nouns.passcode" = "Passcode";
 "global.nouns.password" = "Password";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Preferences";
 "global.nouns.private_key" = "Private key";
 "global.nouns.products" = "Products";
 "global.nouns.profile" = "Profile";
+"global.nouns.profiles" = "Profiles";
 "global.nouns.protocol" = "Protocol";
 "global.nouns.provider" = "Provider";
 "global.nouns.public_key" = "Public key";

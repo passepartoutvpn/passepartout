@@ -65,6 +65,7 @@
 "global.actions.edit" = "Редактировать";
 "global.actions.enable" = "Включить";
 "global.actions.hide" = "Скрыть";
+"global.actions.import" = "Импорт";
 "global.actions.purchase" = "Купить";
 "global.actions.reconnect" = "Переподключение";
 "global.actions.remove" = "Удалить";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "ОК";
 "global.nouns.on_demand" = "По требованию";
 "global.nouns.other" = "Другой";
+"global.nouns.passcode" = "Код";
 "global.nouns.password" = "Пароль";
 "global.nouns.port" = "Порт";
 "global.nouns.preferences" = "Настройки";
 "global.nouns.private_key" = "Приватный ключ";
 "global.nouns.products" = "Продукты"; // Russian
 "global.nouns.profile" = "Профиль";
+"global.nouns.profiles" = "Профили";
 "global.nouns.protocol" = "Протокол";
 "global.nouns.provider" = "Поставщик";
 "global.nouns.public_key" = "Публичный ключ";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Миграция профилей";
 "views.app.toolbar.new_profile.empty" = "Пустой профиль";
 "views.app.toolbar.new_profile.provider" = "Поставщик";
-"views.app.tv.header" = "Откройте %@ на своем устройстве iOS или macOS и включите переключатель \"%@\" в профиле, чтобы он появился здесь. Все устройства должны использовать версию 3.0.0 или новее, чтобы это работало.";
 "views.diagnostics.alerts.report_issue.email" = "Устройство не настроено для отправки электронной почты.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Конфигурация сервера";
 "views.diagnostics.report_issue.title" = "Сообщить о проблеме";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Открыть настройки";
 "views.settings.system_extension.message" = "Чтобы VPN работал, приложение должно находиться в каталоге /Applications, а %@ должно быть включено как %@.\n\nОткройте настройки macOS, прокрутите до «%@», откройте и включите %@.";
 "views.settings.title" = "О программе";
+"views.tv.connection_profiles.header" = "Откройте %@ на устройстве iOS или macOS и включите переключатель \"%@\" у профиля, чтобы он появился здесь. Также вы найдете другие опции на вкладке «Профили».";
+"views.tv.profiles.detail.profiles" = "Используйте длительное нажатие, чтобы показать доступные действия для профиля. Локальные профили можно удалить здесь, а профили iCloud — только из приложений iOS или macOS.";
+"views.tv.profiles.import_local" = "Импорт локального профиля";
+"views.tv.web_uploader.qr" = "Сканируйте QR-код камерой, чтобы открыть веб-страницу для загрузки профиля.";
+"views.tv.web_uploader.toggle" = "Переключите, чтобы импортировать локальный профиль на телевизор через веб-браузер.";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";
 "views.ui.purchase_required.restricted.help" = "Функция ограничена";
@@ -335,3 +342,4 @@
 "views.version.extra" = "%@ — проект, поддерживаемый %@.\n\nИсходный код доступен на GitHub под лицензией GPLv3, ссылки можно найти на домашней странице.";
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
+"views.web_uploader.message" = "Отсканируйте этот QR-код, чтобы открыть веб-страницу для загрузки профиля.";

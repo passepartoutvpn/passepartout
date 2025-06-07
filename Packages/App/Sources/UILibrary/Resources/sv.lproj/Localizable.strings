@@ -65,6 +65,7 @@
 "global.actions.edit" = "Redigera";
 "global.actions.enable" = "Aktivera";
 "global.actions.hide" = "Dölj";
+"global.actions.import" = "Importera";
 "global.actions.purchase" = "Köp";
 "global.actions.reconnect" = "Återanslut";
 "global.actions.remove" = "Ta bort";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "På begäran";
 "global.nouns.other" = "Annan";
+"global.nouns.passcode" = "Lsenkod";
 "global.nouns.password" = "Lösenord";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Inställningar";
 "global.nouns.private_key" = "Privat nyckel";
 "global.nouns.products" = "Produkter"; // Swedish
 "global.nouns.profile" = "Profil";
+"global.nouns.profiles" = "Profiler";
 "global.nouns.protocol" = "Protokoll";
 "global.nouns.provider" = "Leverantör";
 "global.nouns.public_key" = "Offentlig nyckel";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Migrera profiler";
 "views.app.toolbar.new_profile.empty" = "Tom profil";
 "views.app.toolbar.new_profile.provider" = "Leverantör";
-"views.app.tv.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera \"%@\"-växeln i en profil för att den ska visas här. Alla enheter måste köra version 3.0.0 eller senare för att detta ska fungera.";
 "views.diagnostics.alerts.report_issue.email" = "Enheten är inte konfigurerad för att skicka e-post.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Serverkonfiguration";
 "views.diagnostics.report_issue.title" = "Rapportera problem";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
 "views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
+"views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här. Alternativt hittar du andra alternativ i fliken \"Profiler\".";
+"views.tv.profiles.detail.profiles" = "Använd långt tryck för att visa tillgängliga åtgärder för en profil. Lokala profiler kan raderas här, medan iCloud-profiler endast kan tas bort från iOS- eller macOS-appen.";
+"views.tv.profiles.import_local" = "Importera lokal profil";
+"views.tv.web_uploader.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil.";
+"views.tv.web_uploader.toggle" = "Växla för att importera en lokal profil till din TV via en webbläsare.";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";
 "views.ui.purchase_required.restricted.help" = "Funktionen är begränsad";
@@ -335,3 +342,4 @@
 "views.version.extra" = "%@ är ett projekt som underhålls av %@.\n\nKällkoden är offentligt tillgänglig på GitHub under GPLv3-licensen. Du hittar länkar på hemsidan.";
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
+"views.web_uploader.message" = "Skanna denna QR-kod för att öppna en webbsida där du kan ladda upp din profil.";
