@@ -51,6 +51,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
 
     private let registry: Registry
 
+    private let uploadManager: UploadManager
+
     @State
     private var isImporting = false
 
@@ -81,11 +83,13 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     public init(
         profileManager: ProfileManager,
         tunnel: ExtendedTunnel,
-        registry: Registry
+        registry: Registry,
+        uploadManager: UploadManager
     ) {
         self.profileManager = profileManager
         self.tunnel = tunnel
         self.registry = registry
+        self.uploadManager = uploadManager
     }
 
     public var body: some View {
@@ -420,7 +424,8 @@ private extension Profile {
     AppCoordinator(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        registry: Registry()
+        registry: Registry(),
+        uploadManager: UploadManager()
     )
     .withMockEnvironment()
 }

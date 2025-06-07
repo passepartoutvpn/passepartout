@@ -39,6 +39,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     private let registry: Registry
 
+    private let uploadManager: UploadManager
+
     @State
     private var paywallReason: PaywallReason?
 
@@ -204,7 +206,8 @@ extension AppCoordinator {
     AppCoordinator(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        registry: Registry()
+        registry: Registry(),
+        uploadManager: UploadManager()
     )
     .withMockEnvironment()
 }

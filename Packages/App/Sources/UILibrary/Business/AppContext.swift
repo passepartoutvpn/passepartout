@@ -55,6 +55,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
+    public let uploadManager: UploadManager
+
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
 
     private var launchTask: Task<Void, Error>?
@@ -75,6 +77,7 @@ public final class AppContext: ObservableObject, Sendable {
         registry: Registry,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
+        uploadManager: UploadManager,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
@@ -89,6 +92,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registry = registry
         self.sysexManager = sysexManager
         self.tunnel = tunnel
+        self.uploadManager = uploadManager
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
     }
