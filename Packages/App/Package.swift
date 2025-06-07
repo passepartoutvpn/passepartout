@@ -58,10 +58,15 @@ let package = Package(
         .library(
             name: "UILibrary",
             targets: ["UILibrary"]
+        ),
+        .library(
+            name: "WebLibrary",
+            targets: ["WebLibrary"]
         )
     ],
     dependencies: [
-        .package(path: "../../submodules/partout")
+        .package(path: "../../submodules/partout"),
+        .package(url: "https://github.com/apple/swift-nio", from: "2.83.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -124,7 +129,10 @@ let package = Package(
         ),
         .target(
             name: "AppUITV",
-            dependencies: ["UILibrary"]
+            dependencies: [
+                "UILibrary",
+                "WebLibrary"
+            ]
         ),
         .target(
             name: "AppUITVWrapper",
@@ -190,6 +198,17 @@ let package = Package(
                 .process("Resources")
             ]
         ),
+        .target(
+            name: "WebLibrary",
+            dependencies: [
+                "CommonLibrary",
+                .product(name: "NIO", package: "swift-nio"),
+                .product(name: "NIOHTTP1", package: "swift-nio")
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
         .testTarget(
             name: "AppUIMainTests",
             dependencies: ["AppUIMain"]
@@ -205,6 +224,10 @@ let package = Package(
         .testTarget(
             name: "UILibraryTests",
             dependencies: ["UILibrary"]
+        ),
+        .testTarget(
+            name: "WebLibraryTests",
+            dependencies: ["WebLibrary"]
         )
     ]
 )

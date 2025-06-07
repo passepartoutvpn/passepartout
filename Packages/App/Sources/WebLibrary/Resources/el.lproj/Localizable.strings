@@ -1,0 +1,9 @@
+"web_uploader.errors.generic" = "Η αποστολή απέτυχε:";
+"web_uploader.errors.incorrect_passcode" = "Λανθασμένος κωδικός!";
+"web_uploader.file.browse" = "Αναζήτηση";
+"web_uploader.file.no_selection" = "Δεν επιλέχθηκε αρχείο";
+"web_uploader.file.prompt" = "Επιλέξτε ένα αρχείο ρυθμίσεων για αποστολή";
+"web_uploader.passcode.prompt" = "Εισάγετε τον κωδικό που εμφανίζεται στην τηλεόρασή σας";
+"web_uploader.submit" = "Αποστολή";
+"web_uploader.success" = "Η αποστολ ολοκληρώθηκε!";
+"web_uploader.title" = "Αποστολή στο Apple TV";

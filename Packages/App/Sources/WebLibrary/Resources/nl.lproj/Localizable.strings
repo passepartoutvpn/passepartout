@@ -1,0 +1,9 @@
+"web_uploader.errors.generic" = "Upload mislukt:";
+"web_uploader.errors.incorrect_passcode" = "Verkeerde code!";
+"web_uploader.file.browse" = "Bladeren";
+"web_uploader.file.no_selection" = "Geen bestand gekozen";
+"web_uploader.file.prompt" = "Selecteer een configuratiebestand om te verzenden";
+"web_uploader.passcode.prompt" = "Voer de code in die op je tv wordt weergegeven";
+"web_uploader.submit" = "Uploaden";
+"web_uploader.success" = "Upload voltooid!";
+"web_uploader.title" = "Uploaden naar Apple TV";
