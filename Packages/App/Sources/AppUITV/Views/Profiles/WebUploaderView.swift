@@ -90,7 +90,7 @@ private extension WebUploaderView {
             pp_log_g(.App.web, .info, "Uploaded: \(file.name), \(file.contents.count) bytes")
             do {
                 var profile = try registry.profile(
-                    from: file.contents,
+                    fromContents: file.contents,
                     withName: file.name,
                     passphrase: nil
                 )

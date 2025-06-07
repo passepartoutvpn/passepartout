@@ -120,7 +120,7 @@ private extension ProfileImporter {
                 url.stopAccessingSecurityScopedResource()
             }
         }
-        let profile = try importer.profile(from: url, passphrase: passphrase)
+        let profile = try importer.profile(fromURL: url, passphrase: passphrase)
         try await profileManager.save(profile)
     }
 }

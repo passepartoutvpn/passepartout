@@ -26,12 +26,12 @@
 import Foundation
 
 extension ModuleImporter {
-    public func profile(from contents: String, withName name: String, passphrase: String?) throws -> Profile {
+    public func profile(fromContents contents: String, withName name: String, passphrase: String?) throws -> Profile {
         let module = try module(fromContents: contents, object: passphrase)
         return try Profile(withName: name, importedModule: module)
     }
 
-    public func profile(from url: URL, passphrase: String?) throws -> Profile {
+    public func profile(fromURL url: URL, passphrase: String?) throws -> Profile {
         let module = try module(fromURL: url, object: passphrase)
         return try Profile(withName: url.lastPathComponent, importedModule: module)
     }
