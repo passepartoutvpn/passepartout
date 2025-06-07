@@ -52,6 +52,9 @@ extension Dependencies {
 
     nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
         { purchase in
+            guard !purchase.isSandbox else {
+                return []
+            }
 #if os(iOS)
             if purchase.buildNumber <= 2016 {
                 return [.Essentials.iOS]
