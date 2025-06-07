@@ -94,6 +94,7 @@ private extension StoreKitReceiptReader {
 private extension AppTransaction {
     var originalPurchase: OriginalPurchase {
         OriginalPurchase(
+            isSandbox: [.sandbox, .xcode].contains(environment),
             buildNumber: Int(originalAppVersion) ?? .max,
             purchaseDate: originalPurchaseDate
         )
