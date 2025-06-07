@@ -271,6 +271,7 @@ extension AppContext {
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: dependencies.registry,
+            registryCoder: dependencies.registryCoder,
             sysexManager: sysexManager,
             tunnel: tunnel,
             uploadManager: uploadManager,

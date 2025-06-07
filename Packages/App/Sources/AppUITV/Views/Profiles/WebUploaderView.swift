@@ -29,6 +29,9 @@ import SwiftUI
 
 struct WebUploaderView: View {
 
+    @EnvironmentObject
+    private var registryCoder: RegistryCoder
+
     @ObservedObject
     var uploadManager: UploadManager
 
@@ -89,10 +92,10 @@ private extension WebUploaderView {
         for await file in uploadManager.files {
             pp_log_g(.App.web, .info, "Uploaded: \(file.name), \(file.contents.count) bytes")
             do {
-                let input: ModuleImporterInput = .contents(filename: file.name, data: file.contents)
+                let input: RegistryCoder.Input = .contents(filename: file.name, data: file.contents)
 
                 // TODO: ###, import encrypted OpenVPN profiles
-                var profile = try registry.profile(from: input, passphrase: nil)
+                var profile = try registryCoder.profile(from: input, passphrase: nil)
                 pp_log_g(.App.web, .info, "Import uploaded profile: \(profile)")
 
                 var builder = profile.builder()

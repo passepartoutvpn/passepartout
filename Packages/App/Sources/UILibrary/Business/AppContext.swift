@@ -51,6 +51,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let registry: Registry
 
+    public let registryCoder: RegistryCoder
+
     public let sysexManager: SystemExtensionManager?
 
     public let tunnel: ExtendedTunnel
@@ -75,6 +77,7 @@ public final class AppContext: ObservableObject, Sendable {
         preferencesManager: PreferencesManager,
         profileManager: ProfileManager,
         registry: Registry,
+        registryCoder: RegistryCoder,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
         uploadManager: UploadManager,
@@ -90,6 +93,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.preferencesManager = preferencesManager
         self.profileManager = profileManager
         self.registry = registry
+        self.registryCoder = registryCoder
         self.sysexManager = sysexManager
         self.tunnel = tunnel
         self.uploadManager = uploadManager

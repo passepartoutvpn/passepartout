@@ -37,6 +37,7 @@ extension View {
             .environmentObject(context.migrationManager)
             .environmentObject(context.onboardingManager)
             .environmentObject(context.preferencesManager)
+            .environmentObject(context.registryCoder)
     }
 
     public func withMockEnvironment() -> some View {

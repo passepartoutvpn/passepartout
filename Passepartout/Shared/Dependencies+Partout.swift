@@ -33,6 +33,13 @@ extension Dependencies {
         Self.sharedRegistry
     }
 
+    var registryCoder: RegistryCoder {
+        RegistryCoder(
+            registry: registry,
+            coder: profileCoder()
+        )
+    }
+
     nonisolated func profileCoder() -> ProfileCoder {
         CodableProfileCoder()
     }

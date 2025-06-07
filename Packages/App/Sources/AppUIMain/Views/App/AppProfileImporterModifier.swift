@@ -30,7 +30,7 @@ import SwiftUI
 struct AppProfileImporterModifier: ViewModifier {
     let profileManager: ProfileManager
 
-    let registry: Registry
+    let registryCoder: RegistryCoder
 
     @Binding
     var isPresented: Bool
@@ -74,7 +74,7 @@ private extension AppProfileImporterModifier {
                 try await importer.reImport(
                     url: url,
                     profileManager: profileManager,
-                    importer: registry
+                    registryCoder: registryCoder
                 )
             }
         }
@@ -94,7 +94,7 @@ private extension AppProfileImporterModifier {
                 try await importer.tryImport(
                     urls: urls,
                     profileManager: profileManager,
-                    importer: registry
+                    registryCoder: registryCoder
                 )
             } catch {
                 await errorHandler.handle(

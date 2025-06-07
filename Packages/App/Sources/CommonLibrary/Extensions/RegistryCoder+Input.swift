@@ -1,5 +1,5 @@
 //
-//  ModuleImporter+Profile.swift
+//  RegistryCoder+Input.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/5/25.
@@ -25,14 +25,14 @@
 
 import Foundation
 
-public enum ModuleImporterInput {
-    case contents(filename: String, data: String)
+extension RegistryCoder {
+    public enum Input {
+        case contents(filename: String, data: String)
 
-    case file(URL)
-}
+        case file(URL)
+    }
 
-extension ModuleImporter {
-    public func profile(from input: ModuleImporterInput, passphrase: String?) throws -> Profile {
+    public func profile(from input: Input, passphrase: String?) throws -> Profile {
         let name: String
         let contents: String
         switch input {
@@ -44,7 +44,7 @@ extension ModuleImporter {
             contents = try String(contentsOf: url, usedEncoding: &encoding)
             name = url.lastPathComponent
         }
-        let module = try module(fromContents: contents, object: passphrase)
+        let module = try module(from: contents, object: passphrase)
         return try Profile(withName: name, importedModule: module)
     }
 }
