@@ -1,8 +1,8 @@
 //
-//  DonateViewModifier.swift
+//  TopSpacer.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/23/24.
+//  Created by Davide De Rosa on 6/6/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,25 +25,10 @@
 
 import SwiftUI
 
-struct DonateViewModifier: ViewModifier {
-    func body(content: Content) -> some View {
+struct TopSpacer: View {
+    var body: some View {
         VStack {
-            TopSpacer()
-            Text(Strings.Views.Donate.Sections.Main.footer)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom)
-
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    content
-                }
-            }
         }
-    }
-}
-
-private extension DonateViewModifier {
-    var columns: [GridItem] {
-        [GridItem(.adaptive(minimum: 300))]
+        .frame(height: 60)
     }
 }

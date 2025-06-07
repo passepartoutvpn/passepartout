@@ -28,18 +28,6 @@ import CommonUtils
 import SwiftUI
 import UILibrary
 
-enum Detail {
-    case credits
-
-    case donate
-
-    case other
-
-    case purchased
-
-    case version
-}
-
 struct SettingsView: View {
 
     @EnvironmentObject
@@ -82,7 +70,7 @@ private extension SettingsView {
                 BetaSection()
             }
             creditsSection
-            diagnosticsSection
+            troubleshootingSection
         }
         .themeList()
     }
@@ -105,7 +93,7 @@ private extension SettingsView {
         .themeSection(header: Strings.Views.Settings.title)
     }
 
-    var diagnosticsSection: some View {
+    var troubleshootingSection: some View {
         Group {
             NavigationLink(Strings.Views.Diagnostics.Rows.app, value: AppCoordinatorRoute.appLog)
             NavigationLink(Strings.Views.Diagnostics.Rows.tunnel, value: AppCoordinatorRoute.tunnelLog)
@@ -113,8 +101,22 @@ private extension SettingsView {
             Button(Strings.Views.Purchased.title) {}
                 .focused($focus, equals: .purchased)
         }
-        .themeSection(header: Strings.Views.Diagnostics.title)
+        .themeSection(header: Strings.Global.Nouns.troubleshooting)
     }
+}
+
+// MARK: - Detail
+
+private enum Detail {
+    case credits
+
+    case donate
+
+    case other
+
+    case purchased
+
+    case version
 }
 
 private struct DetailView: View {
@@ -142,7 +144,7 @@ private struct DetailView: View {
     }
 }
 
-// MARK: -
+// MARK: - Preview
 
 #Preview {
     SettingsView(tunnel: .forPreviews)
