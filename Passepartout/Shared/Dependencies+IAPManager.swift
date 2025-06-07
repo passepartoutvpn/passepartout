@@ -52,9 +52,6 @@ extension Dependencies {
 
     nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
         { purchase in
-            guard !purchase.isSandbox else {
-                return []
-            }
 #if os(iOS)
             if purchase.isBefore(.freemium) {
                 return [.Essentials.iOS]
