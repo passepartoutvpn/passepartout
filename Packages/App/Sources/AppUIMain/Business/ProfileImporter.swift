@@ -120,16 +120,7 @@ private extension ProfileImporter {
                 url.stopAccessingSecurityScopedResource()
             }
         }
-
-        let module = try importer.module(fromURL: url, object: passphrase)
-        let onDemandModule = OnDemandModule.Builder().tryBuild()
-
-        var builder = Profile.Builder()
-        builder.name = url.lastPathComponent
-        builder.modules = [module, onDemandModule]
-        builder.activeModulesIds = Set(builder.modules.map(\.id))
-        let profile = try builder.tryBuild()
-
+        let profile = try importer.profile(from: url, passphrase: passphrase)
         try await profileManager.save(profile)
     }
 }
