@@ -53,6 +53,10 @@
     "iap": {
         "productsTimeoutInterval": 10.0
     },
+    "webUploader": {
+        "port": 10000,
+        "passcodeLength": 6
+    },
     "log": {
         "appPath": "app.log",
         "tunnelPath": "tunnel.log",

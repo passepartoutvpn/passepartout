@@ -67,6 +67,9 @@ extension AppError: LocalizedError {
 
         case .unknown:
             return nil
+
+        case .webUploader:
+            return nil
         }
     }
 }

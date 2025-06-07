@@ -35,6 +35,8 @@ extension LoggerCategory {
         public static let migration = LoggerCategory(rawValue: "app.migration")
 
         public static let profiles = LoggerCategory(rawValue: "app.profiles")
+
+        public static let web = LoggerCategory(rawValue: "app.web")
     }
 }
 
