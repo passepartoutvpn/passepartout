@@ -1,5 +1,5 @@
 //
-//  AppRelease.swift
+//  AppRelease+Eligibility.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/7/25.
@@ -23,29 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
+import CommonLibrary
 import Foundation
 
-struct AppRelease {
+extension AppRelease {
     static let freemium = AppRelease("freemium", on: "2019-09-05")
 
     static let v2 = AppRelease("v2", on: "2022-10-02")
-
-    private let name: String
-
-    fileprivate let date: Date
-
-    private init(_ name: String, on string: String) {
-        guard let date = string.asISO8601Date else {
-            fatalError("Unable to parse ISO date for \(name)")
-        }
-        self.name = name
-        self.date = date
-    }
-}
-
-extension OriginalPurchase {
-    func isBefore(_ release: AppRelease) -> Bool {
-        purchaseDate < release.date
-    }
 }
