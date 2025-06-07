@@ -32,8 +32,7 @@ import Foundation
 
 extension AppData {
     public static func cdProfileRepositoryV3(
-        registry: Registry,
-        coder: ProfileCoder,
+        registryCoder: RegistryCoder,
         context: NSManagedObjectContext,
         observingResults: Bool,
         onResultError: ((Error) -> CoreDataResultAction)?
@@ -48,10 +47,10 @@ extension AppData {
                 ]
             },
             fromMapper: {
-                try fromMapper($0, registry: registry, coder: coder)
+                try fromMapper($0, registryCoder: registryCoder)
             },
             toMapper: {
-                try toMapper($0, $1, registry: registry, coder: coder)
+                try toMapper($0, $1, registryCoder: registryCoder)
             },
             onResultError: {
                 onResultError?($0) ?? .ignore
@@ -64,23 +63,21 @@ extension AppData {
 private extension AppData {
     static func fromMapper(
         _ cdEntity: CDProfileV3,
-        registry: Registry,
-        coder: ProfileCoder
+        registryCoder: RegistryCoder
     ) throws -> Profile? {
         guard let encoded = cdEntity.encoded else {
             return nil
         }
-        let profile = try registry.decodedProfile(from: encoded, with: coder)
+        let profile = try registryCoder.profile(from: encoded)
         return profile
     }
 
     static func toMapper(
         _ profile: Profile,
         _ context: NSManagedObjectContext,
-        registry: Registry,
-        coder: ProfileCoder
+        registryCoder: RegistryCoder
     ) throws -> CDProfileV3 {
-        let encoded = try registry.encodedProfile(profile, with: coder)
+        let encoded = try registryCoder.string(from: profile)
 
         let cdProfile = CDProfileV3(context: context)
         cdProfile.uuid = profile.id

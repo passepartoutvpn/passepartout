@@ -35,13 +35,9 @@ extension Dependencies {
 
     var registryCoder: RegistryCoder {
         RegistryCoder(
-            registry: registry,
-            coder: profileCoder()
+            registry: Self.sharedRegistry,
+            coder: Self.sharedProfileCoder
         )
-    }
-
-    nonisolated func profileCoder() -> ProfileCoder {
-        CodableProfileCoder()
     }
 
     func neProtocolCoder(_ ctx: PartoutLoggerContext) -> NEProtocolCoder {
@@ -50,7 +46,7 @@ extension Dependencies {
                 ctx,
                 tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
                 registry: registry,
-                coder: profileCoder(),
+                coder: Self.sharedProfileCoder,
                 keychain: AppleKeychain(ctx, group: BundleConfiguration.mainString(for: .keychainGroupId))
             )
         } else {
@@ -58,7 +54,7 @@ extension Dependencies {
                 ctx,
                 tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
                 registry: registry,
-                coder: profileCoder()
+                coder: Self.sharedProfileCoder
             )
         }
     }
@@ -127,4 +123,6 @@ private extension Dependencies {
             )
         ]
     )
+
+    static let sharedProfileCoder = CodableProfileCoder()
 }

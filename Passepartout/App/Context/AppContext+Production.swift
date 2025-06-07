@@ -224,8 +224,7 @@ extension AppContext {
                     pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                     try await profileManager.observeRemote(repository: {
                         AppData.cdProfileRepositoryV3(
-                            registry: dependencies.registry,
-                            coder: dependencies.profileCoder(),
+                            registryCoder: dependencies.registryCoder,
                             context: remoteStore.context,
                             observingResults: true,
                             onResultError: {
@@ -331,8 +330,7 @@ private extension Dependencies {
             author: nil
         )
         return AppData.cdProfileRepositoryV3(
-            registry: registry,
-            coder: profileCoder(),
+            registryCoder: registryCoder,
             context: store.context,
             observingResults: observingResults,
             onResultError: {
