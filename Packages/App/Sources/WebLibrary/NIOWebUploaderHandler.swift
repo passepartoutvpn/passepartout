@@ -33,19 +33,18 @@ final class NIOWebUploaderHandler {
 
     typealias OutboundOut = HTTPServerResponsePart
 
-    private static let htmlTemplate: HTMLTemplate = {
+    private static let html: String = {
         do {
             guard let path = Bundle.module.path(forResource: "web_uploader", ofType: "html") else {
                 throw AppError.notFound
             }
-            let html = try String(contentsOfFile: path)
-            return HTMLTemplate(html: html)
+            let contents = try String(contentsOfFile: path)
+            let template = HTMLTemplate(html: contents)
+            return template.withLocalizedKeys(in: .module)
         } catch {
             fatalError("Unable to load web uploader HTML template")
         }
     }()
-
-    private let html: String
 
     private let passcode: String?
 
@@ -56,7 +55,6 @@ final class NIOWebUploaderHandler {
     private var bodyBuffer: ByteBuffer?
 
     init(passcode: String?, onReceive: @escaping (String, String) -> Void) {
-        html = Self.htmlTemplate.withLocalizedKeys(in: .module)
         self.passcode = passcode
         self.onReceive = onReceive
     }
@@ -102,7 +100,7 @@ private extension NIOWebUploaderHandler {
         guard uri == "/" else {
             return false
         }
-        sendHTMLResponse(context, html: html)
+        sendHTMLResponse(context, html: Self.html)
         return true
     }
 
