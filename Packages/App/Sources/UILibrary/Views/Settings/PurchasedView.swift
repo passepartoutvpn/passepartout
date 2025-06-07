@@ -108,8 +108,8 @@ private extension PurchasedView {
             Group {
                 ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: purchase.buildNumber.description)
                     .scrollableOnTV()
-//                ThemeRow(Strings.Views.Purchased.Rows.purchaseDate, value: purchase.purchaseDate)
-//                    .scrollableOnTV()
+                ThemeRow(Strings.Views.Purchased.Rows.downloadDate, value: purchase.purchaseDate.description)
+                    .scrollableOnTV()
             }
             .themeSection(header: Strings.Views.Purchased.Sections.Download.header)
         }
