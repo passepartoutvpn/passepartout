@@ -1,5 +1,5 @@
 //
-//  ProfileImporterTests.swift
+//  AppProfileImporterTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/12/24.
@@ -29,16 +29,16 @@ import CommonLibrary
 import Foundation
 import XCTest
 
-final class ProfileImporterTests: XCTestCase {
+final class AppProfileImporterTests: XCTestCase {
     private let moduleImporter = SomeModule.Implementation()
 
     private var subscriptions: Set<AnyCancellable> = []
 }
 
 @MainActor
-extension ProfileImporterTests {
+extension AppProfileImporterTests {
     func test_givenNoURLs_whenImport_thenNothingIsImported() async throws {
-        let sut = ProfileImporter()
+        let sut = AppProfileImporter()
         let profileManager = ProfileManager(profiles: [])
 
         try await sut.tryImport(urls: [], profileManager: profileManager, importer: moduleImporter)
@@ -47,7 +47,7 @@ extension ProfileImporterTests {
     }
 
     func test_givenURL_whenImport_thenOneProfileIsImported() async throws {
-        let sut = ProfileImporter()
+        let sut = AppProfileImporter()
         let profileManager = ProfileManager(profiles: [])
         let url = URL(string: "file:///filename.txt")!
 
@@ -79,7 +79,7 @@ extension ProfileImporterTests {
     }
 
     func test_givenURLRequiringPassphrase_whenImportWithPassphrase_thenProfileIsImported() async throws {
-        let sut = ProfileImporter()
+        let sut = AppProfileImporter()
         let profileManager = ProfileManager(profiles: [])
         let url = URL(string: "file:///filename.encrypted")!
 
@@ -115,7 +115,7 @@ extension ProfileImporterTests {
     }
 
     func test_givenURLsRequiringPassphrase_whenImport_thenURLsArePending() async throws {
-        let sut = ProfileImporter()
+        let sut = AppProfileImporter()
         let profileManager = ProfileManager(profiles: [])
         let url = URL(string: "file:///filename.encrypted")!
 

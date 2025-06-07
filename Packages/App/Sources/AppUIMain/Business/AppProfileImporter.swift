@@ -1,5 +1,5 @@
 //
-//  ProfileImporter.swift
+//  AppProfileImporter.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/8/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 
 @MainActor
-final class ProfileImporter: ObservableObject {
+final class AppProfileImporter: ObservableObject {
 
     @Published
     var isPresentingPassphrase = false
@@ -95,7 +95,7 @@ final class ProfileImporter: ObservableObject {
     }
 }
 
-private extension ProfileImporter {
+private extension AppProfileImporter {
     func scheduleNextImport() {
         guard !urlsRequiringPassphrase.isEmpty else {
             return

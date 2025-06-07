@@ -55,7 +55,7 @@ struct ProfileContainerView: View, Routable {
                 profileManager: profileManager,
                 flow: flow
             ))
-            .modifier(ProfileImporterModifier(
+            .modifier(AppProfileImporterModifier(
                 profileManager: profileManager,
                 registry: registry,
                 isPresented: $isImporting,
