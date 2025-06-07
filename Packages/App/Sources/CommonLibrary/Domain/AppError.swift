@@ -51,6 +51,8 @@ public enum AppError: Error {
 
     case unknown
 
+    case webUploader(Error? = nil)
+
     public init(_ error: Error) {
         if let spError = error as? AppError {
             self = spError

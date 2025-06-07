@@ -1,0 +1,9 @@
+"web_uploader.errors.generic" = "Caricamento non riuscito:";
+"web_uploader.errors.incorrect_passcode" = "Codice errato!";
+"web_uploader.file.browse" = "Sfoglia";
+"web_uploader.file.no_selection" = "Nessun file selezionato";
+"web_uploader.file.prompt" = "Seleziona un file di configurazione da inviare";
+"web_uploader.passcode.prompt" = "Inserisci il codice visualizzato sulla tua TV";
+"web_uploader.submit" = "Carica";
+"web_uploader.success" = "Caricamento completato!";
+"web_uploader.title" = "Carica su Apple TV";

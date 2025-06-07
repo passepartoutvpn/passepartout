@@ -1,0 +1,9 @@
+"web_uploader.errors.generic" = "上传失败：";
+"web_uploader.errors.incorrect_passcode" = "验证码错误！";
+"web_uploader.file.browse" = "浏览";
+"web_uploader.file.no_selection" = "未选择文件";
+"web_uploader.file.prompt" = "选择一个配置文件进行发送";
+"web_uploader.passcode.prompt" = "请输入您电视上显示的验证码";
+"web_uploader.submit" = "上传";
+"web_uploader.success" = "上传完成！";
+"web_uploader.title" = "上传到 Apple TV";

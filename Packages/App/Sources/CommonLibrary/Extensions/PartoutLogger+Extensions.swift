@@ -127,7 +127,8 @@ private extension PartoutLogger.Builder {
             .wireguard,
             .App.iap,
             .App.migration,
-            .App.profiles
+            .App.profiles,
+            .App.web
         ])
 
         setLocalLogger(

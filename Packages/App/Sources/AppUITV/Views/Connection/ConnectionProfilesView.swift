@@ -1,5 +1,5 @@
 //
-//  ProfileListView.swift
+//  ConnectionProfilesView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/1/24.
@@ -27,8 +27,9 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 import UIAccessibility
+import WebLibrary
 
-struct ProfileListView: View {
+struct ConnectionProfilesView: View {
 
     @ObservedObject
     var profileManager: ProfileManager
@@ -37,7 +38,7 @@ struct ProfileListView: View {
     var tunnel: ExtendedTunnel
 
     @FocusState.Binding
-    var focusedField: ProfileView.Field?
+    var focusedField: ConnectionView.Field?
 
     @ObservedObject
     var errorHandler: ErrorHandler
@@ -60,13 +61,13 @@ struct ProfileListView: View {
     }
 }
 
-private extension ProfileListView {
+private extension ConnectionProfilesView {
     var allPreviews: [ProfilePreview] {
         profileManager.previews
     }
 
     var headerView: some View {
-        Text(Strings.Views.App.Tv.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
+        Text(Strings.Views.Tv.ConnectionProfiles.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
             .textCase(.none)
             .foregroundStyle(.primary)
             .font(.body)
@@ -118,10 +119,10 @@ private struct ContentPreview: View {
     let profileManager: ProfileManager
 
     @FocusState
-    var focusedField: ProfileView.Field?
+    var focusedField: ConnectionView.Field?
 
     var body: some View {
-        ProfileListView(
+        ConnectionProfilesView(
             profileManager: profileManager,
             tunnel: .forPreviews,
             focusedField: $focusedField,

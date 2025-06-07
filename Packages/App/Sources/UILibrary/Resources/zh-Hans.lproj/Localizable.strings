@@ -65,6 +65,7 @@
 "global.actions.edit" = "编辑";
 "global.actions.enable" = "启用";
 "global.actions.hide" = "隐藏";
+"global.actions.import" = "导入";
 "global.actions.purchase" = "购买";
 "global.actions.reconnect" = "重新连接";
 "global.actions.remove" = "删除";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "确定";
 "global.nouns.on_demand" = "按需";
 "global.nouns.other" = "其他";
+"global.nouns.passcode" = "验证码";
 "global.nouns.password" = "密码";
 "global.nouns.port" = "端口";
 "global.nouns.preferences" = "偏好设置";
 "global.nouns.private_key" = "私钥";
 "global.nouns.products" = "产品"; // Chinese (Simplified)
 "global.nouns.profile" = "配置文件";
+"global.nouns.profiles" = "配置文件";
 "global.nouns.protocol" = "协议";
 "global.nouns.provider" = "提供商";
 "global.nouns.public_key" = "公钥";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "迁移配置文件";
 "views.app.toolbar.new_profile.empty" = "空配置文件";
 "views.app.toolbar.new_profile.provider" = "提供商";
-"views.app.tv.header" = "在您的 iOS 或 macOS 设备上打开 %@，并启用配置文件的“%@”开关，使其显示在此处。所有设备必须运行 3.0.0 或更高版本才能正常工作。";
 "views.diagnostics.alerts.report_issue.email" = "设备未配置为发送电子邮件。";
 "views.diagnostics.openvpn.rows.server_configuration" = "服务器配置";
 "views.diagnostics.report_issue.title" = "报告问题";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "打开偏好设置"
 "views.settings.system_extension.message" = "要使 VPN 正常工作，应用程序必须位于 /Applications 目录中，并且必须将 %@ 启用为 %@。\n\n打开 macOS 偏好设置，滚动到“%@”，打开并启用 %@。"
 "views.settings.title" = "关于";
+"views.tv.connection_profiles.header" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。或者，你可以在“配置文件”标签页找到其他选项。";
+"views.tv.profiles.detail.profiles" = "长按以显示可用的配置文件操作。本地配置文件可以在这里删除，而 iCloud 配置文件只能在 iOS 或 macOS 应用中删除。";
+"views.tv.profiles.import_local" = "导入本地配置文件";
+"views.tv.web_uploader.qr" = "使用相机扫描此二维码，打开网页以上传你的配置文件。";
+"views.tv.web_uploader.toggle" = "切换以通过网页浏览器将本地配置文件导入电视。";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";
 "views.ui.purchase_required.restricted.help" = "功能受限";
@@ -335,3 +342,4 @@
 "views.version.extra" = "%@ 是由 %@ 维护的项目。\n\n源代码在 GitHub 上公开提供，遵循 GPLv3 许可协议，您可以在主页找到相关链接。";
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
+"views.web_uploader.message" = "扫描此二维码，打开网页上传您的配置文件。";

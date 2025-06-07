@@ -1,0 +1,9 @@
+"web_uploader.errors.generic" = "Помилка завантаження:";
+"web_uploader.errors.incorrect_passcode" = "Неправильний код!";
+"web_uploader.file.browse" = "Огляд";
+"web_uploader.file.no_selection" = "Файл не вибрано";
+"web_uploader.file.prompt" = "Виберіть файл конфігурації для надсилання";
+"web_uploader.passcode.prompt" = "Введіть код, що відображається на телевізорі";
+"web_uploader.submit" = "Завантажити";
+"web_uploader.success" = "Завантаження завершено!";
+"web_uploader.title" = "Завантажити на Apple TV";

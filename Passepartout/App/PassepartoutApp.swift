@@ -76,7 +76,8 @@ extension PassepartoutApp {
         AppCoordinator(
             profileManager: context.profileManager,
             tunnel: context.tunnel,
-            registry: context.registry
+            registry: context.registry,
+            uploadManager: context.uploadManager
         )
     }
 }

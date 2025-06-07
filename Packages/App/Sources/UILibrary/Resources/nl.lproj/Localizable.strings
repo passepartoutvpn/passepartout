@@ -65,6 +65,7 @@
 "global.actions.edit" = "Bewerken";
 "global.actions.enable" = "Inschakelen";
 "global.actions.hide" = "Verbergen";
+"global.actions.import" = "Importeren";
 "global.actions.purchase" = "Aankopen";
 "global.actions.reconnect" = "Opnieuw verbinden";
 "global.actions.remove" = "Verwijderen";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Op aanvraag";
 "global.nouns.other" = "Anders";
+"global.nouns.passcode" = "Toegangscode";
 "global.nouns.password" = "Wachtwoord";
 "global.nouns.port" = "Poort";
 "global.nouns.preferences" = "Voorkeuren";
 "global.nouns.private_key" = "Privésleutel";
 "global.nouns.products" = "Producten"; // Dutch
 "global.nouns.profile" = "Profiel";
+"global.nouns.profiles" = "Profielen";
 "global.nouns.protocol" = "Protocol";
 "global.nouns.provider" = "Provider";
 "global.nouns.public_key" = "Publieke sleutel";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Profielen migreren";
 "views.app.toolbar.new_profile.empty" = "Leeg profiel";
 "views.app.toolbar.new_profile.provider" = "Provider";
-"views.app.tv.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-schakelaar van een profiel in om het hier te laten verschijnen. Alle apparaten moeten versie 3.0.0 of nieuwer draaien om dit te laten werken.";
 "views.diagnostics.alerts.report_issue.email" = "Het apparaat is niet geconfigureerd om e-mails te verzenden.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Serverconfiguratie";
 "views.diagnostics.report_issue.title" = "Probleem melden";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Voorkeuren openen";
 "views.settings.system_extension.message" = "Voor een goede werking van de VPN moet de app in de map /Applications staan en moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
+"views.tv.connection_profiles.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen. Alternatief vind je andere opties in het tabblad \"Profielen\".";
+"views.tv.profiles.detail.profiles" = "Gebruik de lange druk om beschikbare acties voor een profiel te tonen. Lokale profielen kunnen hier worden verwijderd, terwijl iCloud-profielen alleen in de iOS- of macOS-app kunnen worden verwijderd.";
+"views.tv.profiles.import_local" = "Lokaal profiel importeren";
+"views.tv.web_uploader.qr" = "Scan de QR-code met je camera om een webpagina te openen waarop je je profiel kunt uploaden.";
+"views.tv.web_uploader.toggle" = "Schakel om een lokaal profiel via een webbrowser op je TV te importeren.";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";
 "views.ui.purchase_required.restricted.help" = "Functie is beperkt";
@@ -335,3 +342,4 @@
 "views.version.extra" = "%@ is een project onderhouden door %@.\n\nDe broncode is openbaar beschikbaar op GitHub onder de GPLv3-licentie. Je kunt links vinden op de startpagina.";
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
+"views.web_uploader.message" = "Scan deze QR-code om een webpagina te openen om je profiel te uploaden.";

@@ -206,6 +206,8 @@ public enum Strings {
       public static let enable = Strings.tr("Localizable", "global.actions.enable", fallback: "Enable")
       /// Hide
       public static let hide = Strings.tr("Localizable", "global.actions.hide", fallback: "Hide")
+      /// Import
+      public static let `import` = Strings.tr("Localizable", "global.actions.import", fallback: "Import")
       /// Purchase
       public static let purchase = Strings.tr("Localizable", "global.actions.purchase", fallback: "Purchase")
       /// Reconnect
@@ -320,6 +322,8 @@ public enum Strings {
       public static let onDemand = Strings.tr("Localizable", "global.nouns.on_demand", fallback: "On-demand")
       /// Other
       public static let other = Strings.tr("Localizable", "global.nouns.other", fallback: "Other")
+      /// Passcode
+      public static let passcode = Strings.tr("Localizable", "global.nouns.passcode", fallback: "Passcode")
       /// Password
       public static let password = Strings.tr("Localizable", "global.nouns.password", fallback: "Password")
       /// Port
@@ -332,6 +336,8 @@ public enum Strings {
       public static let products = Strings.tr("Localizable", "global.nouns.products", fallback: "Products")
       /// Profile
       public static let profile = Strings.tr("Localizable", "global.nouns.profile", fallback: "Profile")
+      /// Profiles
+      public static let profiles = Strings.tr("Localizable", "global.nouns.profiles", fallback: "Profiles")
       /// Protocol
       public static let `protocol` = Strings.tr("Localizable", "global.nouns.protocol", fallback: "Protocol")
       /// Provider
@@ -678,12 +684,6 @@ public enum Strings {
           public static let provider = Strings.tr("Localizable", "views.app.toolbar.new_profile.provider", fallback: "Provider")
         }
       }
-      public enum Tv {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.
-        public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.app.tv.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. All devices must be running version 3.0.0 or later for this to work.")
-        }
-      }
     }
     public enum AppMenu {
       public enum Items {
@@ -1025,6 +1025,28 @@ public enum Strings {
           /// Open Preferences
           public static let `open` = Strings.tr("Localizable", "views.settings.system_extension.buttons.open", fallback: "Open Preferences")
         }
+      }
+    }
+    public enum Tv {
+      public enum ConnectionProfiles {
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. Alternatively, you will find other options in the "Profiles" tab.
+        public static func header(_ p1: Any, _ p2: Any) -> String {
+          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.")
+        }
+      }
+      public enum Profiles {
+        /// Import local profile
+        public static let importLocal = Strings.tr("Localizable", "views.tv.profiles.import_local", fallback: "Import local profile")
+        public enum Detail {
+          /// Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.
+          public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.")
+        }
+      }
+      public enum WebUploader {
+        /// Scan the QR with your camera to open a web page where to upload your profile.
+        public static let qr = Strings.tr("Localizable", "views.tv.web_uploader.qr", fallback: "Scan the QR with your camera to open a web page where to upload your profile.")
+        /// Toggle to import a local profile into your TV with a web browser.
+        public static let toggle = Strings.tr("Localizable", "views.tv.web_uploader.toggle", fallback: "Toggle to import a local profile into your TV with a web browser.")
       }
     }
     public enum Ui {

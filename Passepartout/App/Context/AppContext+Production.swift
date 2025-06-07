@@ -34,6 +34,9 @@ import Foundation
 import LegacyV2
 import UIAccessibility
 import UILibrary
+#if os(tvOS)
+import WebLibrary
+#endif
 
 extension AppContext {
     convenience init(_ ctx: PartoutLoggerContext, kvStore: KeyValueManager) {
@@ -192,6 +195,15 @@ extension AppContext {
         let onboardingManager = OnboardingManager(kvStore: kvStore)
         let preferencesManager = PreferencesManager()
 
+#if os(tvOS)
+        let webUploader = NIOWebUploader(port: constants.webUploader.port)
+        let uploadManager = UploadManager(webUploader: webUploader) {
+            dependencies.webPasscodeGenerator(length: constants.webUploader.passcodeLength)
+        }
+#else
+        let uploadManager = UploadManager()
+#endif
+
         // MARK: Eligibility
 
         let onEligibleFeaturesBlock: (Set<AppFeature>) async -> Void = { @MainActor features in
@@ -207,7 +219,7 @@ extension AppContext {
                 profileManager.isRemoteImportingEnabled = isRemoteImportingEnabled
 
                 do {
-                    pp_log(ctx, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(AppContext.isCloudKitEnabled))...")
+                    pp_log(ctx, .app, .info, "\tRefresh remote sync (eligible=\(isEligibleForSharing), CloudKit=\(dependencies.isCloudKitEnabled))...")
 
                     pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                     try await profileManager.observeRemote(repository: {
@@ -261,13 +273,16 @@ extension AppContext {
             registry: dependencies.registry,
             sysexManager: sysexManager,
             tunnel: tunnel,
+            uploadManager: uploadManager,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )
     }
 }
 
-private extension AppContext {
-    static var isCloudKitEnabled: Bool {
+// MARK: - Dependencies
+
+private extension Dependencies {
+    var isCloudKitEnabled: Bool {
 #if os(tvOS)
         true
 #else
@@ -277,11 +292,7 @@ private extension AppContext {
         return FileManager.default.ubiquityIdentityToken != nil
 #endif
     }
-}
 
-// MARK: - Dependencies
-
-private extension Dependencies {
     func simulatedAppProductHelper() -> any AppProductHelper {
         if AppCommandLine.contains(.fakeIAP) {
             return FakeAppProductHelper()
@@ -302,11 +313,7 @@ private extension Dependencies {
     }
 
     var mirrorsRemoteRepository: Bool {
-#if os(tvOS)
-        true
-#else
         false
-#endif
     }
 
     func backupProfileRepository(
@@ -332,5 +339,14 @@ private extension Dependencies {
                 return .ignore
             }
         )
+    }
+
+    func webPasscodeGenerator(length: Int) -> String {
+        (0..<length)
+            .map { _ in
+                let ascii: Int = .random(in: 65...90) // A–Z
+                return String(UnicodeScalar(ascii)!)
+            }
+            .joined()
     }
 }

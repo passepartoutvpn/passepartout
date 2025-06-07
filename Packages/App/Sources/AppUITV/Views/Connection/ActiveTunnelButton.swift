@@ -39,7 +39,7 @@ struct ActiveTunnelButton: View {
     let profile: Profile?
 
     @FocusState.Binding
-    var focusedField: ProfileView.Field?
+    var focusedField: ConnectionView.Field?
 
     let errorHandler: ErrorHandler
 

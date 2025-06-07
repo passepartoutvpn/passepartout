@@ -33,16 +33,17 @@ struct ThemeEmptyMessageModifier: ViewModifier {
     let fullScreen: Bool
 
     func body(content: Content) -> some View {
-        VStack {
-            if fullScreen {
-                Spacer()
-            }
-            content
-                .font(theme.emptyMessageFont)
-                .foregroundStyle(theme.emptyMessageColor)
-            if fullScreen {
-                Spacer()
-            }
+        if fullScreen {
+            innerView(content: content)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            innerView(content: content)
         }
+    }
+
+    private func innerView(content: Content) -> some View {
+        content
+            .font(theme.emptyMessageFont)
+            .foregroundStyle(theme.emptyMessageColor)
     }
 }

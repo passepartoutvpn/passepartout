@@ -65,6 +65,7 @@
 "global.actions.edit" = "Επεξεργασία";
 "global.actions.enable" = "Ενεργοποίηση";
 "global.actions.hide" = "Απόκρυψη";
+"global.actions.import" = "Εισαγωγή";
 "global.actions.purchase" = "Αγορά";
 "global.actions.reconnect" = "Επανασύνδεση";
 "global.actions.remove" = "Κατάργηση";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Κατ' απαίτηση";
 "global.nouns.other" = "Άλλο";
+"global.nouns.passcode" = "Κωδικός";
 "global.nouns.password" = "Κωδικός πρόσβασης";
 "global.nouns.port" = "Θύρα";
 "global.nouns.preferences" = "Προτιμήσεις";
 "global.nouns.private_key" = "Ιδιωτικό κλειδί";
 "global.nouns.products" = "Προϊόντα"; // Greek
 "global.nouns.profile" = "Προφίλ";
+"global.nouns.profiles" = "Προφίλ";
 "global.nouns.protocol" = "Πρωτόκολλο";
 "global.nouns.provider" = "Πάροχος";
 "global.nouns.public_key" = "Δημόσιο κλειδί";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Μεταφορά προφίλ";
 "views.app.toolbar.new_profile.empty" = "Κενό προφίλ";
 "views.app.toolbar.new_profile.provider" = "Πάροχος";
-"views.app.tv.header" = "Ανοίξτε το %@ στη συσκευή σας iOS ή macOS και ενεργοποιήστε τον διακόπτη \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ. Όλες οι συσκευές πρέπει να εκτελούν την έκδοση 3.0.0 ή νεότερη για να λειτουργήσει.";
 "views.diagnostics.alerts.report_issue.email" = "Η συσκευή δεν είναι ρυθμισμένη για αποστολή email.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Διαμόρφωση διακομιστή";
 "views.diagnostics.report_issue.title" = "Αναφορά προβλήματος";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Άνοιγμα προτιμήσεων";
 "views.settings.system_extension.message" = "Για να λειτουργήσει το VPN, η εφαρμογή πρέπει να βρίσκεται στον φάκελο /Applications και το %@ πρέπει να είναι ενεργοποιημένο ως %@.\n\nΆνοιξε τις Προτιμήσεις του macOS, κύλησε στο «%@», άνοιξέ το και ενεργοποίησε το %@.";
 "views.settings.title" = "Σχετικά";
+"views.tv.connection_profiles.header" = "Άνοιξε το %@ στη συσκευή σου iOS ή macOS και ενεργοποίησε την εναλλαγή \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ. Εναλλακτικά, θα βρεις άλλες επιλογές στην καρτέλα \"Προφίλ\".";
+"views.tv.profiles.detail.profiles" = "Χρησιμοποίησε παρατεταμένο πάτημα για να εμφανίσεις τις διαθέσιμες ενέργειες για ένα προφίλ. Τα τοπικά προφίλ μπορούν να διαγραφούν εδώ, ενώ τα iCloud προφίλ μόνο από την εφαρμογ iOS ή macOS.";
+"views.tv.profiles.import_local" = "Εισαγωγή τοπικού προφίλ";
+"views.tv.web_uploader.qr" = "Σάρωσε το QR με την κάμερά σου για να ανοίξεις μια σελίδα όπου μπορείς να ανεβάσεις το προφίλ σου.";
+"views.tv.web_uploader.toggle" = "Εναλλαγή για εισαγωγή τοπικού προφίλ στην τηλεόρασή σου μέσω web browser.";
 "views.ui.connection_status.on_demand_suffix" = " (κατ' απαίτηση)";
 "views.ui.purchase_required.purchase.help" = "Απαιτείται αγορά";
 "views.ui.purchase_required.restricted.help" = "Η λειτουργία είναι περιορισμένη";
@@ -335,3 +342,4 @@
 "views.version.extra" = "Το %@ είναι ένα έργο που συντηρείται από τον/την %@.\n\nΟ πηγαίος κώδικας είναι διαθέσιμος δημόσια στο GitHub υπό την άδεια GPLv3. Μπορείτε να βρείτε τους συνδέσμους στην αρχική σελίδα.";
 "views.vpn.category.any" = "Όλες οι κατηγορίες";
 "views.vpn.no_servers" = "Δεν υπάρχουν διακομιστές";
+"views.web_uploader.message" = "Σάρωσε αυτόν τον QR για να ανοίξεις μια σελίδα αποστολής του προφίλ σου.";

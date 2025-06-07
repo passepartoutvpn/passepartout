@@ -65,6 +65,7 @@
 "global.actions.edit" = "Edytuj";
 "global.actions.enable" = "Włącz";
 "global.actions.hide" = "Ukryj";
+"global.actions.import" = "Importuj";
 "global.actions.purchase" = "Zakup";
 "global.actions.reconnect" = "Ponowne połączenie";
 "global.actions.remove" = "Usuń";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Na żądanie";
 "global.nouns.other" = "Inne";
+"global.nouns.passcode" = "Kod dostępu";
 "global.nouns.password" = "Hasło";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Preferencje";
 "global.nouns.private_key" = "Klucz prywatny";
 "global.nouns.products" = "Produkty"; // Polish
 "global.nouns.profile" = "Profil";
+"global.nouns.profiles" = "Profile";
 "global.nouns.protocol" = "Protokół";
 "global.nouns.provider" = "Dostawca";
 "global.nouns.public_key" = "Klucz publiczny";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Przenieś profile";
 "views.app.toolbar.new_profile.empty" = "Pusty profil";
 "views.app.toolbar.new_profile.provider" = "Dostawca";
-"views.app.tv.header" = "Otwórz %@ na swoim urządzeniu iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj. Wszystkie urządzenia muszą mieć wersję 3.0.0 lub nowszą, aby to działało.";
 "views.diagnostics.alerts.report_issue.email" = "Urządzenie nie jest skonfigurowane do wysyłania wiadomości e-mail.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Konfiguracja serwera";
 "views.diagnostics.report_issue.title" = "Zgłoś problem";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Otwórz preferencje";
 "views.settings.system_extension.message" = "Aby VPN działało, aplikacja musi znajdować się w katalogu /Applications, a %@ musi być włączone jako %@.\n\nOtwórz Preferencje systemowe macOS, przewiń do „%@”, otwórz je i włącz %@.";
 "views.settings.title" = "O aplikacji";
+"views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj. Alternatywnie znajdziesz inne opcje na karcie „Profile”.";
+"views.tv.profiles.detail.profiles" = "Użyj długiego naciśnięcia, aby wyświetlić dostępne akcje dla profilu. Lokalne profile można usuwać tutaj, natomiast profile iCloud tylko z aplikacji iOS lub macOS.";
+"views.tv.profiles.import_local" = "Importuj lokalny profil";
+"views.tv.web_uploader.qr" = "Zeskanuj kod QR aparatem, aby otworzyć stronę, na której możesz przesłać swój profil.";
+"views.tv.web_uploader.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";
 "views.ui.connection_status.on_demand_suffix" = " (na żądanie)";
 "views.ui.purchase_required.purchase.help" = "Wymagana zakup";
 "views.ui.purchase_required.restricted.help" = "Funkcja jest ograniczona";
@@ -335,3 +342,4 @@
 "views.version.extra" = "%@ to projekt utrzymywany przez %@.\n\nKod źródłowy jest dostępny publicznie na GitHub pod licencją GPLv3. Linki można znaleźć na stronie głównej.";
 "views.vpn.category.any" = "Wszystkie kategorie";
 "views.vpn.no_servers" = "Brak serwerów";
+"views.web_uploader.message" = "Zeskanuj ten kod QR, aby otworzyć stronę do przesłania profilu.";

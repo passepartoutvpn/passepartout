@@ -39,6 +39,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     private let registry: Registry
 
+    private let uploadManager: UploadManager
+
     @State
     private var paywallReason: PaywallReason?
 
@@ -51,19 +53,30 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    public init(profileManager: ProfileManager, tunnel: ExtendedTunnel, registry: Registry) {
+    public init(
+        profileManager: ProfileManager,
+        tunnel: ExtendedTunnel,
+        registry: Registry,
+        uploadManager: UploadManager
+    ) {
         self.profileManager = profileManager
         self.tunnel = tunnel
         self.registry = registry
+        self.uploadManager = uploadManager
     }
 
     public var body: some View {
         debugChanges()
         return NavigationStack {
             TabView {
-                profileView
+                connectionView
                     .tabItem {
-                        Text(Strings.Global.Nouns.profile)
+                        Text(Strings.Global.Nouns.connection)
+                    }
+
+                profilesView
+                    .tabItem {
+                        Text(Strings.Global.Nouns.profiles)
                     }
 
 //                searchView
@@ -87,8 +100,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 }
 
 private extension AppCoordinator {
-    var profileView: some View {
-        ProfileView(
+    var connectionView: some View {
+        ConnectionView(
             profileManager: profileManager,
             tunnel: tunnel,
             interactiveManager: interactiveManager,
@@ -101,6 +114,14 @@ private extension AppCoordinator {
                     onProviderEntityRequired($0, force: false)
                 }
             )
+        )
+    }
+
+    var profilesView: some View {
+        ProfilesView(
+            profileManager: profileManager,
+            uploadManager: uploadManager,
+            registry: registry
         )
     }
 
@@ -198,7 +219,8 @@ extension AppCoordinator {
     AppCoordinator(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
-        registry: Registry()
+        registry: Registry(),
+        uploadManager: UploadManager()
     )
     .withMockEnvironment()
 }

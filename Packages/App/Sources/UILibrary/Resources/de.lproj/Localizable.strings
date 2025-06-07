@@ -65,6 +65,7 @@
 "global.actions.edit" = "Bearbeiten";
 "global.actions.enable" = "Aktivieren";
 "global.actions.hide" = "Verbergen";
+"global.actions.import" = "Importieren";
 "global.actions.purchase" = "Kaufen";
 "global.actions.reconnect" = "Erneut verbinden";
 "global.actions.remove" = "Löschen";
@@ -121,12 +122,14 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "On-Demand";
 "global.nouns.other" = "Andere";
+"global.nouns.passcode" = "Code";
 "global.nouns.password" = "Passwort";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Einstellungen";
 "global.nouns.private_key" = "Privater Schlüssel";
 "global.nouns.products" = "Produkte"; // German
 "global.nouns.profile" = "Profil";
+"global.nouns.profiles" = "Profile";
 "global.nouns.protocol" = "Protokoll";
 "global.nouns.provider" = "Anbieter";
 "global.nouns.public_key" = "Öffentlicher Schlüssel";
@@ -233,7 +236,6 @@
 "views.app.toolbar.migrate_profiles" = "Profile migrieren";
 "views.app.toolbar.new_profile.empty" = "Leeres Profil";
 "views.app.toolbar.new_profile.provider" = "Anbieter";
-"views.app.tv.header" = "Öffnen Sie %@ auf Ihrem iOS- oder macOS-Gerät und aktivieren Sie den Schalter \"%@\" in einem Profil, damit es hier angezeigt wird. Alle Geräte müssen Version 3.0.0 oder neuer ausführen, damit dies funktioniert.";
 "views.diagnostics.alerts.report_issue.email" = "Das Gerät ist nicht zum Senden von E-Mails konfiguriert.";
 "views.diagnostics.openvpn.rows.server_configuration" = "Serverkonfiguration";
 "views.diagnostics.report_issue.title" = "Problem melden";
@@ -328,6 +330,11 @@
 "views.settings.system_extension.buttons.open" = "Einstellungen öffnen";
 "views.settings.system_extension.message" = "Damit das VPN funktioniert, muss sich die App im Verzeichnis /Programme befinden und %@ muss als %@ aktiviert sein.\n\nÖffne die macOS-Einstellungen, scrolle zu „%@“, öffne es und aktiviere %@.";
 "views.settings.title" = "Über";
+"views.tv.connection_profiles.header" = "Öffne %@ auf deinem iOS- oder macOS-Gerät und aktiviere den „%@“-Schalter eines Profils, damit es hier erscheint. Alternativ findest du weitere Optionen im Tab „Profile“.";
+"views.tv.profiles.detail.profiles" = "Nutze den Langdruck, um die verfügbaren Aktionen für ein Profil anzuzeigen. Lokale Profile können hier gelöscht werden, iCloud-Profile jedoch nur in der iOS- oder macOS-App.";
+"views.tv.profiles.import_local" = "Lokales Profil importieren";
+"views.tv.web_uploader.qr" = "Scanne den QR-Code mit deiner Kamera, um eine Webseite zu öffnen, auf der du dein Profil hochladen kannst.";
+"views.tv.web_uploader.toggle" = "Umschalten, um ein lokales Profil über einen Webbrowser auf deinen Fernseher zu importieren.";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";
 "views.ui.purchase_required.restricted.help" = "Funktion eingeschränkt";

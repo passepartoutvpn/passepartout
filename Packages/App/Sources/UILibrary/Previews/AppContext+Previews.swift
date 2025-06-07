@@ -65,7 +65,12 @@ extension AppContext {
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let registry = Registry()
+
+        let dummyUploader = DummyWebUploader(url: URL(string: "http://127.0.0.1:9000")!)
+        let uploadManager = UploadManager(webUploader: dummyUploader, passcodeGenerator: { "123456" })
+
         let distributionTarget: DistributionTarget = .appStore
+
         return AppContext(
             apiManager: apiManager,
             distributionTarget: distributionTarget,
@@ -76,7 +81,8 @@ extension AppContext {
             profileManager: profileManager,
             registry: registry,
             sysexManager: nil,
-            tunnel: tunnel
+            tunnel: tunnel,
+            uploadManager: uploadManager
         )
     }()
 }
@@ -104,5 +110,11 @@ extension ExtendedTunnel {
 extension APIManager {
     public static var forPreviews: APIManager {
         AppContext.forPreviews.apiManager
+    }
+}
+
+extension UploadManager {
+    public static var forPreviews: UploadManager {
+        AppContext.forPreviews.uploadManager
     }
 }

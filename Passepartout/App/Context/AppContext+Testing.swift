@@ -68,6 +68,7 @@ extension AppContext {
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
+        let uploadManager = UploadManager()
 
         return AppContext(
             apiManager: apiManager,
@@ -79,7 +80,8 @@ extension AppContext {
             profileManager: profileManager,
             registry: dependencies.registry,
             sysexManager: nil,
-            tunnel: tunnel
+            tunnel: tunnel,
+            uploadManager: uploadManager
         )
     }
 }
