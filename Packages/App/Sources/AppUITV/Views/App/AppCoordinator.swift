@@ -51,19 +51,25 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
-    public init(profileManager: ProfileManager, tunnel: ExtendedTunnel, registry: Registry) {
+    public init(
+        profileManager: ProfileManager,
+        tunnel: ExtendedTunnel,
+        registry: Registry,
+        uploadManager: UploadManager
+    ) {
         self.profileManager = profileManager
         self.tunnel = tunnel
         self.registry = registry
+        self.uploadManager = uploadManager
     }
 
     public var body: some View {
         debugChanges()
         return NavigationStack {
             TabView {
-                profileView
+                connectionView
                     .tabItem {
-                        Text(Strings.Global.Nouns.profile)
+                        Text(Strings.Global.Nouns.connection)
                     }
 
 //                searchView
@@ -87,8 +93,8 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 }
 
 private extension AppCoordinator {
-    var profileView: some View {
-        ProfileView(
+    var connectionView: some View {
+        ConnectionView(
             profileManager: profileManager,
             tunnel: tunnel,
             interactiveManager: interactiveManager,

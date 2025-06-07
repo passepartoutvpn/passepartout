@@ -45,7 +45,7 @@ struct ActiveProfileView: View {
     var isSwitching: Bool
 
     @FocusState.Binding
-    var focusedField: ProfileView.Field?
+    var focusedField: ConnectionView.Field?
 
     @ObservedObject
     var errorHandler: ErrorHandler
@@ -219,7 +219,7 @@ private struct ContentPreview: View {
     private var isSwitching = false
 
     @FocusState
-    private var focusedField: ProfileView.Field?
+    private var focusedField: ConnectionView.Field?
 
     var body: some View {
         ActiveProfileView(

@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  ConnectionView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/31/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import SwiftUI
 import UILibrary
 
-struct ProfileView: View, Routable {
+struct ConnectionView: View, Routable {
     enum Field: Hashable {
         case connect
 
@@ -88,7 +88,7 @@ struct ProfileView: View, Routable {
     }
 }
 
-private extension ProfileView {
+private extension ConnectionView {
     var activeProfile: Profile? {
         guard let id = tunnel.activeProfile?.id else {
             return nil
@@ -109,7 +109,7 @@ private extension ProfileView {
 
     var sidePanelView: some View {
         ZStack {
-            listView
+            profilesListView
                 .padding(.horizontal)
                 .opaque(!interactiveManager.isPresented)
 
@@ -137,8 +137,8 @@ private extension ProfileView {
         }
     }
 
-    var listView: some View {
-        ProfileListView(
+    var profilesListView: some View {
+        ConnectionProfilesView(
             profileManager: profileManager,
             tunnel: tunnel,
             focusedField: $focusedField,
@@ -148,7 +148,7 @@ private extension ProfileView {
     }
 }
 
-private extension ProfileView {
+private extension ConnectionView {
     func onTunnelActiveProfile(
         old: TunnelActiveProfile?,
         new: TunnelActiveProfile?
@@ -187,7 +187,7 @@ private extension ProfileView {
 // MARK: -
 
 #Preview("List") {
-    ProfileView(
+    ConnectionView(
         profileManager: .forPreviews,
         tunnel: .forPreviews,
         interactiveManager: InteractiveManager(),
@@ -198,7 +198,7 @@ private extension ProfileView {
 }
 
 #Preview("Empty") {
-    ProfileView(
+    ConnectionView(
         profileManager: ProfileManager(profiles: []),
         tunnel: .forPreviews,
         interactiveManager: InteractiveManager(),
