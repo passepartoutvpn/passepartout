@@ -59,6 +59,7 @@ private extension StoreKitReceiptReader {
             do {
                 switch try await AppTransaction.shared {
                 case .verified(let tx):
+                    logger.debug("Fetched AppTransaction: \(tx)")
                     originalBuildNumber = Int(tx.originalAppVersion)
                 default:
                     originalBuildNumber = nil
