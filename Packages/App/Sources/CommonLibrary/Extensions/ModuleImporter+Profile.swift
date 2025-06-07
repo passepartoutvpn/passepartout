@@ -25,15 +25,27 @@
 
 import Foundation
 
+public enum ModuleImporterInput {
+    case contents(filename: String, data: String)
+
+    case file(URL)
+}
+
 extension ModuleImporter {
-    public func profile(fromContents contents: String, withName name: String, passphrase: String?) throws -> Profile {
+    public func profile(from input: ModuleImporterInput, passphrase: String?) throws -> Profile {
+        let name: String
+        let contents: String
+        switch input {
+        case .contents(let filename, let data):
+            name = filename
+            contents = data
+        case .file(let url):
+            var encoding: String.Encoding = .utf8
+            contents = try String(contentsOf: url, usedEncoding: &encoding)
+            name = url.lastPathComponent
+        }
         let module = try module(fromContents: contents, object: passphrase)
         return try Profile(withName: name, importedModule: module)
-    }
-
-    public func profile(fromURL url: URL, passphrase: String?) throws -> Profile {
-        let module = try module(fromURL: url, object: passphrase)
-        return try Profile(withName: url.lastPathComponent, importedModule: module)
     }
 }
 
