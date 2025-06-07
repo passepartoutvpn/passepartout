@@ -49,26 +49,27 @@ extension AppProduct: AppFeatureProviding {
 #endif
 
         case .Features.appleTV:
-            var eligible: [AppFeature] = [.appleTV, .sharing]
-#if os(tvOS)
-            // include "Essentials" to cope with BuildProducts
-            // limitations
+
             //
-            // some old iOS users are acknowledged certain
-            // purchases based on the build number of their first
-            // download, e.g. "Essentials iOS". unfortunately,
-            // that build number is not the same on tvOS, so
-            // those purchases do not exist and the TV may complain
-            // about missing features other than .appleTV
+            // some old iOS users were acknowledged certain
+            // purchases, e.g. "Essentials iOS", based on the build
+            // number of their first download, because the app used
+            // to be paid rather than freemium in the past. those
+            // conditions appeared in Dependencies.productsAtBuild()
             //
-            // we avoid this by relying on iOS/macOS eligibility
-            // alone while only requiring .appleTV on tvOS
+            // unfortunately, the build number is not unique across
+            // platforms, so those features artificially made available
+            // on iOS via the build number were not eligible on other
+            // platforms. this led the tvOS app to complain about
+            // unpaid features
             //
-            // this is a solid workaround as long as profiles are
-            // not editable on tvOS
-            eligible.append(contentsOf: AppProduct.Essentials.iOS_macOS.features)
-#endif
-            return eligible
+            // now that .productsAtBuild() uses the original purchase
+            // date as condition, which is cross-platform, there should
+            // be no need for workarounds. those old iOS purchasers
+            // should now see their artificial in-app purchase propagated
+            // to the tvOS app
+            //
+            return [.appleTV, .sharing]
 
         case .Complete.OneTime.lifetime, .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return AppFeature.allCases

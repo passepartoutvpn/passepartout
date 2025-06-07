@@ -69,7 +69,7 @@ public struct PurchasedView: View {
 
 private extension PurchasedView {
     var isEmpty: Bool {
-        iapManager.purchasedAppBuild == nil && iapManager.purchasedProducts.isEmpty && iapManager.eligibleFeatures.isEmpty
+        iapManager.originalPurchase == nil && iapManager.purchasedProducts.isEmpty && iapManager.eligibleFeatures.isEmpty
     }
 
     var allFeatures: [AppFeature] {
@@ -104,9 +104,11 @@ private extension PurchasedView {
     }
 
     var downloadSection: some View {
-        iapManager.purchasedAppBuild.map { build in
+        iapManager.originalPurchase.map { purchase in
             Group {
-                ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: build.description)
+                ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: purchase.buildNumber.description)
+                    .scrollableOnTV()
+                ThemeRow(Strings.Views.Purchased.Rows.downloadDate, value: purchase.purchaseDate.description)
                     .scrollableOnTV()
             }
             .themeSection(header: Strings.Views.Purchased.Sections.Download.header)

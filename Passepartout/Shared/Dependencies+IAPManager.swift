@@ -51,16 +51,19 @@ extension Dependencies {
     }
 
     nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
-        {
+        { purchase in
+            guard !purchase.isSandbox else {
+                return []
+            }
 #if os(iOS)
-            if $0 <= 2016 {
+            if purchase.isBefore(.freemium) {
                 return [.Essentials.iOS]
-            } else if $0 <= 3000 {
+            } else if purchase.isBefore(.v2) {
                 return [.Features.networkSettings]
             }
             return []
 #elseif os(macOS)
-            if $0 <= 3000 {
+            if purchase.isBefore(.v2) {
                 return [.Features.networkSettings]
             }
             return []

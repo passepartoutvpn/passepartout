@@ -41,6 +41,10 @@ final class IAPManagerTests: XCTestCase {
     private var subscriptions: Set<AnyCancellable> = []
 }
 
+extension AppRelease {
+    static let target = AppRelease("older", on: "2020-04-04")
+}
+
 // MARK: - Actions
 
 extension IAPManagerTests {
@@ -86,8 +90,8 @@ extension IAPManagerTests {
     func test_givenBuildProducts_whenOlder_thenEssentialsVersion() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
-        let sut = IAPManager(receiptReader: reader) { build in
-            if build <= self.defaultBuildNumber {
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.buildNumber <= self.defaultBuildNumber {
                 return [.Essentials.iOS_macOS]
             }
             return []
@@ -99,14 +103,42 @@ extension IAPManagerTests {
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
-        let sut = IAPManager(receiptReader: reader) { build in
-            if build <= self.defaultBuildNumber {
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.buildNumber <= self.defaultBuildNumber {
                 return [.Essentials.iOS_macOS]
             }
             return []
         }
         await sut.reloadReceipt()
         XCTAssertFalse(sut.isEligible(for: AppFeature.essentialFeatures))
+    }
+
+    func test_givenBuildProducts_whenFutureRelease_thenFreeVersion() async {
+        let reader = FakeAppReceiptReader()
+        let purchase = OriginalPurchase(buildNumber: 0, purchaseDate: .distantFuture)
+        await reader.setReceipt(withPurchase: purchase, products: [])
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.isBefore(.target) {
+                return [.Features.appleTV]
+            }
+            return []
+        }
+        await sut.reloadReceipt()
+        XCTAssertFalse(sut.isEligible(for: .appleTV))
+    }
+
+    func test_givenBuildProducts_whenPastRelease_thenFreeVersion() async {
+        let reader = FakeAppReceiptReader()
+        let purchase = OriginalPurchase(buildNumber: 0, purchaseDate: .distantPast)
+        await reader.setReceipt(withPurchase: purchase, products: [])
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.isBefore(.target) {
+                return [.Features.appleTV]
+            }
+            return []
+        }
+        await sut.reloadReceipt()
+        XCTAssertTrue(sut.isEligible(for: .appleTV))
     }
 }
 

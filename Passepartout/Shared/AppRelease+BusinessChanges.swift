@@ -1,8 +1,8 @@
 //
-//  BuildProducts.swift
+//  AppRelease+BusinessChanges.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/26/22.
+//  Created by Davide De Rosa on 6/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,6 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 
-public typealias BuildProducts<ProductType> = @Sendable (_ purchase: OriginalPurchase) -> Set<ProductType> where ProductType: Hashable
+extension AppRelease {
+    static let freemium = AppRelease("freemium", on: "2019-09-05")
+
+    static let v2 = AppRelease("v2", on: "2022-10-02")
+}

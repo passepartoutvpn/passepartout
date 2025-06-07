@@ -46,29 +46,30 @@ public final class StoreKitReceiptReader: InAppReceiptReader, Sendable {
                 )
             }
 
-        return InAppReceipt(originalBuildNumber: result.build, purchaseReceipts: purchaseReceipts)
+        return InAppReceipt(originalPurchase: result.purchase, purchaseReceipts: purchaseReceipts)
     }
 }
 
 private extension StoreKitReceiptReader {
-    func entitlements() async -> (build: Int?, txs: [Transaction]) {
+    func entitlements() async -> (purchase: OriginalPurchase?, txs: [Transaction]) {
         async let build = Task {
             let startDate = Date()
             logger.debug("Start fetching original build number...")
-            let originalBuildNumber: Int?
+            let originalPurchase: OriginalPurchase?
             do {
                 switch try await AppTransaction.shared {
                 case .verified(let tx):
-                    originalBuildNumber = Int(tx.originalAppVersion)
+                    logger.debug("Fetched AppTransaction: \(tx)")
+                    originalPurchase = tx.originalPurchase
                 default:
-                    originalBuildNumber = nil
+                    originalPurchase = nil
                 }
             } catch {
-                originalBuildNumber = nil
+                originalPurchase = nil
             }
             let elapsed = -startDate.timeIntervalSinceNow
             logger.debug("Fetched original build number: \(elapsed)")
-            return originalBuildNumber
+            return originalPurchase
         }
         async let txs = Task {
             let startDate = Date()
@@ -87,5 +88,15 @@ private extension StoreKitReceiptReader {
             return transactions
         }
         return await (build.value, txs.value)
+    }
+}
+
+private extension AppTransaction {
+    var originalPurchase: OriginalPurchase {
+        OriginalPurchase(
+            isSandbox: [.sandbox, .xcode].contains(environment),
+            buildNumber: Int(originalAppVersion) ?? .max,
+            purchaseDate: originalPurchaseDate
+        )
     }
 }

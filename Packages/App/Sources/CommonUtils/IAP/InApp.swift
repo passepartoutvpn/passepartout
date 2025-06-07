@@ -89,17 +89,20 @@ public struct InAppReceipt: Sendable {
         }
     }
 
-    public let originalBuildNumber: Int?
+    public let originalPurchase: OriginalPurchase?
 
     public let purchaseReceipts: [PurchaseReceipt]?
 
-    public init(originalBuildNumber: Int?, purchaseReceipts: [PurchaseReceipt]?) {
-        self.originalBuildNumber = originalBuildNumber
+    public init(originalPurchase: OriginalPurchase?, purchaseReceipts: [PurchaseReceipt]?) {
+        self.originalPurchase = originalPurchase
         self.purchaseReceipts = purchaseReceipts
     }
 
-    public func withBuildNumber(_ buildNumber: Int) -> Self {
-        .init(originalBuildNumber: buildNumber, purchaseReceipts: purchaseReceipts)
+    public func withOriginalPurchase(_ purchase: OriginalPurchase) -> Self {
+        .init(
+            originalPurchase: purchase,
+            purchaseReceipts: purchaseReceipts
+        )
     }
 }
 

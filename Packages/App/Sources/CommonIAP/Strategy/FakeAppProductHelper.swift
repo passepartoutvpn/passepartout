@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 
 public actor FakeAppProductHelper: AppProductHelper {
-    private let build: Int
+    private let purchase: OriginalPurchase
 
     public private(set) var products: [AppProduct: InAppProduct]
 
@@ -38,7 +38,7 @@ public actor FakeAppProductHelper: AppProductHelper {
 
     // set .max to skip entitled products
     public init(build: Int = .max) {
-        self.build = build
+        purchase = OriginalPurchase(buildNumber: build)
         products = [:]
         receiptReader = FakeAppReceiptReader()
         didUpdateSubject = PassthroughSubject()
@@ -61,7 +61,7 @@ public actor FakeAppProductHelper: AppProductHelper {
                 native: $1
             )
         }
-        await receiptReader.setReceipt(withBuild: build, identifiers: [])
+        await receiptReader.setReceipt(withPurchase: purchase, identifiers: [])
         didUpdateSubject.send()
         return products
     }

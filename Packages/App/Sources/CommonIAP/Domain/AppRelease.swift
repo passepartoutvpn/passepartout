@@ -1,8 +1,8 @@
 //
-//  BuildProducts.swift
+//  AppRelease.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/26/22.
+//  Created by Davide De Rosa on 6/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,6 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 
-public typealias BuildProducts<ProductType> = @Sendable (_ purchase: OriginalPurchase) -> Set<ProductType> where ProductType: Hashable
+public struct AppRelease: Sendable {
+    private let name: String
+
+    fileprivate let date: Date
+
+    public init(_ name: String, on string: String) {
+        guard let date = string.asISO8601Date else {
+            fatalError("Unable to parse ISO date for \(name)")
+        }
+        self.name = name
+        self.date = date
+    }
+}
+
+extension OriginalPurchase {
+    public func isBefore(_ release: AppRelease) -> Bool {
+        purchaseDate < release.date
+    }
+}
