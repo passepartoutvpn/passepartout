@@ -13,6 +13,31 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Passepartout.xcodeproj",
+        "identifier" : "0E3FF4AD2CE3AF6F00BFF640",
+        "name" : "PassepartoutTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "WebLibraryTests",
+        "name" : "WebLibraryTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "AppUIMainTests",
+        "name" : "AppUIMainTests"
+      }
+    },
+    {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
         "identifier" : "CommonLibraryTests",
@@ -22,30 +47,17 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Passepartout.xcodeproj",
-        "identifier" : "0E3FF4AD2CE3AF6F00BFF640",
-        "name" : "PassepartoutTests"
-      }
-    },
-    {
-      "target" : {
         "containerPath" : "container:Packages\/App",
-        "identifier" : "AppUIMainTests",
-        "name" : "AppUIMainTests"
+        "identifier" : "LegacyV2Tests",
+        "name" : "LegacyV2Tests"
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
         "identifier" : "UILibraryTests",
         "name" : "UILibraryTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "LegacyV2Tests",
-        "name" : "LegacyV2Tests"
       }
     }
   ],
