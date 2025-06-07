@@ -74,6 +74,11 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                         Text(Strings.Global.Nouns.connection)
                     }
 
+                profilesView
+                    .tabItem {
+                        Text(Strings.Global.Nouns.profiles)
+                    }
+
 //                searchView
 //                    .tabItem {
 //                        ThemeImage(.search)
@@ -109,6 +114,14 @@ private extension AppCoordinator {
                     onProviderEntityRequired($0, force: false)
                 }
             )
+        )
+    }
+
+    var profilesView: some View {
+        ProfilesView(
+            profileManager: profileManager,
+            uploadManager: uploadManager,
+            registry: registry
         )
     }
 
