@@ -34,15 +34,23 @@ public actor FakeAppReceiptReader: AppReceiptReader {
     }
 
     public func setReceipt(withBuild build: Int, products: Set<AppProduct>, cancelledProducts: Set<AppProduct> = []) {
+        setReceipt(withPurchase: OriginalPurchase(buildNumber: build), products: products, cancelledProducts: cancelledProducts)
+    }
+
+    public func setReceipt(withPurchase purchase: OriginalPurchase, products: Set<AppProduct>, cancelledProducts: Set<AppProduct> = []) {
         setReceipt(
-            withBuild: build,
+            withPurchase: purchase,
             identifiers: Set(products.map(\.rawValue)),
             cancelledIdentifiers: Set(cancelledProducts.map(\.rawValue))
         )
     }
 
     public func setReceipt(withBuild build: Int, identifiers: Set<String>, cancelledIdentifiers: Set<String> = []) {
-        localReceipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: identifiers.map {
+        setReceipt(withPurchase: OriginalPurchase(buildNumber: build), identifiers: identifiers, cancelledIdentifiers: cancelledIdentifiers)
+    }
+
+    public func setReceipt(withPurchase purchase: OriginalPurchase, identifiers: Set<String>, cancelledIdentifiers: Set<String> = []) {
+        localReceipt = InAppReceipt(originalPurchase: purchase, purchaseReceipts: identifiers.map {
             .init(
                 productIdentifier: $0,
                 expirationDate: nil,
@@ -90,7 +98,7 @@ extension FakeAppReceiptReader {
             originalPurchaseDate: nil
         ))
         let newReceipt = InAppReceipt(
-            originalBuildNumber: localReceipt.originalBuildNumber,
+            originalPurchase: localReceipt.originalPurchase,
             purchaseReceipts: purchaseReceipts
         )
         self.localReceipt = newReceipt

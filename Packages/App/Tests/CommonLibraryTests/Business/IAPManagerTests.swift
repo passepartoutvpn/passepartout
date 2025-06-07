@@ -86,8 +86,8 @@ extension IAPManagerTests {
     func test_givenBuildProducts_whenOlder_thenEssentialsVersion() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
-        let sut = IAPManager(receiptReader: reader) { build in
-            if build <= self.defaultBuildNumber {
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.buildNumber <= self.defaultBuildNumber {
                 return [.Essentials.iOS_macOS]
             }
             return []
@@ -99,8 +99,8 @@ extension IAPManagerTests {
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
         let reader = FakeAppReceiptReader()
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
-        let sut = IAPManager(receiptReader: reader) { build in
-            if build <= self.defaultBuildNumber {
+        let sut = IAPManager(receiptReader: reader) { purchase in
+            if purchase.buildNumber <= self.defaultBuildNumber {
                 return [.Essentials.iOS_macOS]
             }
             return []

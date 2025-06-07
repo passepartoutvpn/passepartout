@@ -50,7 +50,7 @@ public final class IAPManager: ObservableObject {
 
     private(set) var userLevel: AppUserLevel
 
-    public private(set) var purchasedAppBuild: Int?
+    public private(set) var originalPurchase: OriginalPurchase?
 
     public private(set) var purchasedProducts: Set<AppProduct>
 
@@ -190,20 +190,18 @@ private extension IAPManager {
     func asyncReloadReceipt() async {
         pp_log_g(.App.iap, .notice, "Start reloading in-app receipt...")
 
-        var purchasedAppBuild: Int?
+        var originalPurchase: OriginalPurchase?
         var purchasedProducts: Set<AppProduct> = []
         var eligibleFeatures: Set<AppFeature> = []
 
         if let receipt = await receiptReader.receipt(at: userLevel) {
-            if let originalBuildNumber = receipt.originalBuildNumber {
-                purchasedAppBuild = originalBuildNumber
-            }
+            originalPurchase = receipt.originalPurchase
 
-            if let purchasedAppBuild {
-                pp_log_g(.App.iap, .info, "Original purchased build: \(purchasedAppBuild)")
+            if let originalPurchase {
+                pp_log_g(.App.iap, .info, "Original purchase: \(originalPurchase)")
 
                 // assume some purchases by build number
-                let entitled = productsAtBuild?(purchasedAppBuild) ?? []
+                let entitled = productsAtBuild?(originalPurchase) ?? []
                 pp_log_g(.App.iap, .notice, "Entitled features: \(entitled.map(\.rawValue))")
 
                 entitled.forEach {
@@ -261,11 +259,11 @@ private extension IAPManager {
         }
 
         pp_log_g(.App.iap, .notice, "Finished reloading in-app receipt for user level \(userLevel)")
-        pp_log_g(.App.iap, .notice, "\tPurchased build number: \(purchasedAppBuild?.description ?? "unknown")")
+        pp_log_g(.App.iap, .notice, "\tOriginal purchase: \(String(describing: originalPurchase))")
         pp_log_g(.App.iap, .notice, "\tPurchased products: \(purchasedProducts.map(\.rawValue))")
         pp_log_g(.App.iap, .notice, "\tEligible features: \(eligibleFeatures)")
 
-        self.purchasedAppBuild = purchasedAppBuild
+        self.originalPurchase = originalPurchase
         self.purchasedProducts = purchasedProducts
         self.eligibleFeatures = eligibleFeatures // @Published -> objectWillChange.send()
     }

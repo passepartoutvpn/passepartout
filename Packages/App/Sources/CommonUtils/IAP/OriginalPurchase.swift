@@ -1,8 +1,8 @@
 //
-//  BuildProducts.swift
+//  OriginalPurchase.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/26/22.
+//  Created by Davide De Rosa on 6/7/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,4 +25,13 @@
 
 import Foundation
 
-public typealias BuildProducts<ProductType> = @Sendable (_ purchase: OriginalPurchase) -> Set<ProductType> where ProductType: Hashable
+public struct OriginalPurchase: Sendable {
+    public let buildNumber: Int
+
+    public let purchaseDate: Date
+
+    public init(buildNumber: Int, purchaseDate: Date = .distantFuture) {
+        self.buildNumber = buildNumber
+        self.purchaseDate = purchaseDate
+    }
+}

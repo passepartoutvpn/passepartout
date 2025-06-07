@@ -51,16 +51,16 @@ extension Dependencies {
     }
 
     nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
-        {
+        { purchase in
 #if os(iOS)
-            if $0 <= 2016 {
+            if purchase.buildNumber <= 2016 {
                 return [.Essentials.iOS]
-            } else if $0 <= 3000 {
+            } else if purchase.buildNumber <= 3000 {
                 return [.Features.networkSettings]
             }
             return []
 #elseif os(macOS)
-            if $0 <= 3000 {
+            if purchase.buildNumber <= 3000 {
                 return [.Features.networkSettings]
             }
             return []

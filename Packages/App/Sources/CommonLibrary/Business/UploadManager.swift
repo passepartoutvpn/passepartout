@@ -38,11 +38,6 @@ public final class UploadManager: ObservableObject {
         public let name: String
 
         public let contents: String
-
-        init(name: String, contents: String) {
-            self.name = name
-            self.contents = contents
-        }
     }
 
     public typealias PasscodeGenerator = () -> String
