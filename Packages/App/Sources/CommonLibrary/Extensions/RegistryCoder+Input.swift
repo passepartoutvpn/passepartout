@@ -44,11 +44,15 @@ extension RegistryCoder {
             contents = try String(contentsOf: url, usedEncoding: &encoding)
             name = url.lastPathComponent
         }
+
+        // try to decode a full Partout profile first
         do {
             return try profile(from: contents)
         } catch {
             pp_log_g(.app, .debug, "Unable to decode profile for import: \(error)")
         }
+
+        // fall back to parsing a single module
         let module = try module(from: contents, object: passphrase)
         return try Profile(withName: name, importedModule: module)
     }
