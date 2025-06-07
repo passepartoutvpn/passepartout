@@ -1,5 +1,5 @@
 //
-//  AppRelease+Eligibility.swift
+//  AppRelease+BusinessChanges.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/7/25.
