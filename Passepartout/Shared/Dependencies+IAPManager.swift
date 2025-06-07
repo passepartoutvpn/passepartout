@@ -56,14 +56,14 @@ extension Dependencies {
                 return []
             }
 #if os(iOS)
-            if purchase.buildNumber <= 2016 {
+            if purchase.isBefore(.freemium) {
                 return [.Essentials.iOS]
-            } else if purchase.buildNumber <= 3000 {
+            } else if purchase.isBefore(.v2) {
                 return [.Features.networkSettings]
             }
             return []
 #elseif os(macOS)
-            if purchase.buildNumber <= 3000 {
+            if purchase.isBefore(.v2) {
                 return [.Features.networkSettings]
             }
             return []

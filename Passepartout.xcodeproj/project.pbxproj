@@ -17,6 +17,9 @@
 		0E2306222DC2C2DC002D70D7 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8195592CFDA75200CC8FFD /* Dependencies.swift */; };
 		0E2306232DC2C2DC002D70D7 /* Dependencies+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */; };
 		0E2306242DC2C2DC002D70D7 /* Dependencies+IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */; };
+		0E2BA91D2DF46C0C0000F169 /* AppRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BA91C2DF46C0C0000F169 /* AppRelease.swift */; };
+		0E2BA91E2DF46C0C0000F169 /* AppRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BA91C2DF46C0C0000F169 /* AppRelease.swift */; };
+		0E2BA91F2DF46C0C0000F169 /* AppRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BA91C2DF46C0C0000F169 /* AppRelease.swift */; };
 		0E3E22962CE53510005135DF /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E3E22952CE53510005135DF /* AppUIMain */; };
 		0E3E22982CE53510005135DF /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E3E22972CE53510005135DF /* AppUITV */; };
 		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
@@ -128,6 +131,7 @@
 		0E29E7202D0B7D06003294CA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0E29E7212D0B7D09003294CA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppPlist.strings; sourceTree = "<group>"; };
 		0E29E7262D0B7D75003294CA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0E2BA91C2DF46C0C0000F169 /* AppRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRelease.swift; sourceTree = "<group>"; };
 		0E3DC7CF2D347FAA003F1C4B /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
 		0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Profiles.sqlite; sourceTree = "<group>"; };
@@ -364,6 +368,7 @@
 		0E7E3D612B9345FD002BBDB4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0E2BA91C2DF46C0C0000F169 /* AppRelease.swift */,
 				0E8195592CFDA75200CC8FFD /* Dependencies.swift */,
 				0E8DFD492D05FE5A00531CDE /* Dependencies+CoreData.swift */,
 				0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */,
@@ -806,6 +811,7 @@
 				0E8DFD502D05FE5A00531CDE /* Dependencies+Processors.swift in Sources */,
 				0E8DFD512D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */,
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
+				0E2BA91D2DF46C0C0000F169 /* AppRelease.swift in Sources */,
 				0ED61CFA2CD04192008FE259 /* App+iOS.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
 				0EAEC8A92D05DB8D001AA50C /* DefaultAppProcessor.swift in Sources */,
@@ -858,6 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2BA91F2DF46C0C0000F169 /* AppRelease.swift in Sources */,
 				0E81955B2CFDA7BF00CC8FFD /* Dependencies.swift in Sources */,
 				0EAEC8AA2D05DB8D001AA50C /* DefaultTunnelProcessor.swift in Sources */,
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
@@ -884,6 +891,7 @@
 				0E2306242DC2C2DC002D70D7 /* Dependencies+IAPManager.swift in Sources */,
 				0E23061E2DC2C2CB002D70D7 /* Dependencies+Partout.swift in Sources */,
 				0E23061F2DC2C2CB002D70D7 /* DefaultTunnelProcessor.swift in Sources */,
+				0E2BA91E2DF46C0C0000F169 /* AppRelease.swift in Sources */,
 				0E2306142DC2BF6B002D70D7 /* main.swift in Sources */,
 				0E2306162DC2C00B002D70D7 /* PacketTunnelProvider.swift in Sources */,
 			);
