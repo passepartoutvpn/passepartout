@@ -1,3 +1,4 @@
+* tvOS: Import profiles via QR (#1411)
 * Append distribution target to app version in report
 * Auto-delete stale keychain entries
 * Restore auto-deletion of migrated v2 profiles
