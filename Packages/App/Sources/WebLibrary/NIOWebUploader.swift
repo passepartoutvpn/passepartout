@@ -111,32 +111,29 @@ private extension NIOWebUploader {
 
         while let cIfName = ptr.pointee.ifa_name {
             let addr = ptr.pointee.ifa_addr.pointee
-            if addr.sa_family == UInt8(AF_INET) {
-                let ifName = String(cString: cIfName)
+            let flags = ptr.pointee.ifa_flags
 
-                // exclude loopback and down interfaces
-                let flags = ptr.pointee.ifa_flags
-                let isUp = (flags & UInt32(IFF_UP)) != 0
-                let isLoopback = (flags & UInt32(IFF_LOOPBACK)) != 0
+            let isIPv4 = addr.sa_family == UInt8(AF_INET)
+            let isUp = (flags & UInt32(IFF_UP)) != 0
+            let isLoopback = (flags & UInt32(IFF_LOOPBACK)) != 0
+            let ifName = String(cString: cIfName)
 
-                if isUp && !isLoopback {
-                    var cIPAddress = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    var addrCopy = ptr.pointee.ifa_addr.pointee
-                    getnameinfo(
-                        &addrCopy,
-                        socklen_t(ptr.pointee.ifa_addr.pointee.sa_len),
-                        &cIPAddress,
-                        socklen_t(cIPAddress.count),
-                        nil,
-                        0,
-                        NI_NUMERICHOST
-                    )
-                    if ifName.hasPrefix(prefix) {
-                        ipAddress = String(cString: cIPAddress)
-                        break
-                    }
-                }
+            if isIPv4, !isLoopback, isUp, ifName.hasPrefix(prefix) {
+                var addrCopy = ptr.pointee.ifa_addr.pointee
+                var cIPAddress = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                getnameinfo(
+                    &addrCopy,
+                    socklen_t(ptr.pointee.ifa_addr.pointee.sa_len),
+                    &cIPAddress,
+                    socklen_t(cIPAddress.count),
+                    nil,
+                    0,
+                    NI_NUMERICHOST
+                )
+                ipAddress = String(cString: cIPAddress)
+                break
             }
+
             guard let next = ptr.pointee.ifa_next else {
                 break
             }

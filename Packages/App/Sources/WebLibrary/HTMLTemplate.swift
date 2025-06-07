@@ -62,7 +62,6 @@ struct HTMLTemplate {
         }
 
         result += html[lastRangeEnd...]
-
         return result
     }
 }
