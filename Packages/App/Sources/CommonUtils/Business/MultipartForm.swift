@@ -117,7 +117,7 @@ extension MultipartForm {
     }
 
     public func toWebData() -> (boundary: String, body: Data) {
-        let boundary = UUID().uuidString
+        let boundary = newBoundary()
         var body = Data()
         fields.forEach {
             let filenameDisposition = $0.value.filename.map {
@@ -133,6 +133,16 @@ extension MultipartForm {
         }
         body.append("--\(boundary)--\r\n")
         return (boundary, body)
+    }
+}
+
+private extension MultipartForm {
+    func newBoundary() -> String {
+        let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let suffix = (0..<30).map { _ in
+            charset.randomElement()!
+        }
+        return "MultipartForm-\(String(suffix))"
     }
 }
 
