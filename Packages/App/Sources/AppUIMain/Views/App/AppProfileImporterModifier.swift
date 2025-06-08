@@ -74,7 +74,7 @@ private extension AppProfileImporterModifier {
                 try await importer.reImport(
                     url: url,
                     profileManager: profileManager,
-                    registryCoder: registryCoder
+                    importer: registryCoder
                 )
             }
         }
@@ -94,7 +94,7 @@ private extension AppProfileImporterModifier {
                 try await importer.tryImport(
                     urls: urls,
                     profileManager: profileManager,
-                    registryCoder: registryCoder
+                    importer: registryCoder
                 )
             } catch {
                 await errorHandler.handle(

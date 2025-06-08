@@ -1,5 +1,5 @@
 //
-//  RegistryCoder+Input.swift
+//  RegistryCoder+ProfileImporter.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/5/25.
@@ -25,14 +25,8 @@
 
 import Foundation
 
-extension RegistryCoder {
-    public enum Input {
-        case contents(filename: String, data: String)
-
-        case file(URL)
-    }
-
-    public func profile(from input: Input, passphrase: String?) throws -> Profile {
+extension RegistryCoder: ProfileImporter {
+    public func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
         let name: String
         let contents: String
         switch input {

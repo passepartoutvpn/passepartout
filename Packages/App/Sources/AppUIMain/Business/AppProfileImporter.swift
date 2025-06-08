@@ -45,7 +45,7 @@ final class AppProfileImporter: ObservableObject {
     func tryImport(
         urls: [URL],
         profileManager: ProfileManager,
-        registryCoder: RegistryCoder
+        importer: ProfileImporter
     ) async throws {
         var withPassphrase: [URL] = []
 
@@ -55,7 +55,7 @@ final class AppProfileImporter: ObservableObject {
                     url,
                     withPassphrase: nil,
                     profileManager: profileManager,
-                    registryCoder: registryCoder
+                    importer: importer
                 )
             } catch {
                 if let error = error as? PartoutError, error.code == .OpenVPN.passphraseRequired {
@@ -73,13 +73,13 @@ final class AppProfileImporter: ObservableObject {
         }
     }
 
-    func reImport(url: URL, profileManager: ProfileManager, registryCoder: RegistryCoder) async throws {
+    func reImport(url: URL, profileManager: ProfileManager, importer: ProfileImporter) async throws {
         do {
             try await importURL(
                 url,
                 withPassphrase: currentPassphrase,
                 profileManager: profileManager,
-                registryCoder: registryCoder
+                importer: importer
             )
             urlsRequiringPassphrase.removeFirst()
             scheduleNextImport()
@@ -112,7 +112,7 @@ private extension AppProfileImporter {
         _ url: URL,
         withPassphrase passphrase: String?,
         profileManager: ProfileManager,
-        registryCoder: RegistryCoder
+        importer: ProfileImporter
     ) async throws {
         let didStartAccess = url.startAccessingSecurityScopedResource()
         defer {
@@ -120,7 +120,7 @@ private extension AppProfileImporter {
                 url.stopAccessingSecurityScopedResource()
             }
         }
-        let profile = try registryCoder.profile(from: .file(url), passphrase: passphrase)
+        let profile = try importer.profile(from: .file(url), passphrase: passphrase)
         try await profileManager.save(profile)
     }
 }

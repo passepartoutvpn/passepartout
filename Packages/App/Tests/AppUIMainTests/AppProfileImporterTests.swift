@@ -30,7 +30,7 @@ import Foundation
 import XCTest
 
 final class AppProfileImporterTests: XCTestCase {
-    private let moduleImporter = SomeModule.Implementation()
+    private let importer = SomeModule.Implementation()
 
     private var subscriptions: Set<AnyCancellable> = []
 }
@@ -41,7 +41,7 @@ extension AppProfileImporterTests {
         let sut = AppProfileImporter()
         let profileManager = ProfileManager(profiles: [])
 
-        try await sut.tryImport(urls: [], profileManager: profileManager, importer: moduleImporter)
+        try await sut.tryImport(urls: [], profileManager: profileManager, importer: importer)
         XCTAssertEqual(sut.nextURL, nil)
         XCTAssertTrue(profileManager.previews.isEmpty)
     }
@@ -71,7 +71,7 @@ extension AppProfileImporterTests {
         try await sut.tryImport(
             urls: [url],
             profileManager: profileManager,
-            importer: moduleImporter
+            importer: importer
         )
         XCTAssertEqual(sut.nextURL, nil)
 
@@ -103,12 +103,12 @@ extension AppProfileImporterTests {
         try await sut.tryImport(
             urls: [url],
             profileManager: profileManager,
-            importer: moduleImporter
+            importer: importer
         )
         XCTAssertEqual(sut.nextURL, url)
 
         sut.currentPassphrase = "passphrase"
-        try await sut.reImport(url: url, profileManager: profileManager, importer: moduleImporter)
+        try await sut.reImport(url: url, profileManager: profileManager, importer: importer)
         XCTAssertEqual(sut.nextURL, nil)
 
         await fulfillment(of: [exp])
@@ -122,7 +122,7 @@ extension AppProfileImporterTests {
         try await sut.tryImport(
             urls: [url, url, url],
             profileManager: profileManager,
-            importer: moduleImporter
+            importer: importer
         )
         XCTAssertEqual(sut.nextURL, url)
         XCTAssertEqual(sut.urlsRequiringPassphrase.count, 3)
@@ -154,5 +154,13 @@ extension SomeModule.Implementation: ModuleImporter {
             }
         }
         return SomeModule()
+    }
+}
+
+extension SomeModule.Implementation: ProfileImporter {
+
+    // throw to ignore full profile imports
+    func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
+        throw AppError.unknown
     }
 }
