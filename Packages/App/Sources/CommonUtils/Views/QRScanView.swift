@@ -30,6 +30,7 @@ import SwiftUI
 import UIKit
 import Vision
 
+// FIXME: ###, instructions
 public struct QRScanView: UIViewControllerRepresentable {
     private let onDetect: (String) -> Void
 

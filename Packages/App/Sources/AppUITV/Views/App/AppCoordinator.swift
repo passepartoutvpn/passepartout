@@ -139,7 +139,7 @@ private extension AppCoordinator {
 private extension AppCoordinator {
 
     @ViewBuilder
-    func pushDestination(_ item: AppCoordinatorRoute?) -> some View {
+    func pushDestination(for item: AppCoordinatorRoute?) -> some View {
         switch item {
         case .appLog:
             DebugLogView(withAppParameters: Constants.shared.log) {
