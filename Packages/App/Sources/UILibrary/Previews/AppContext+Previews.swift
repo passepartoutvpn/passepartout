@@ -65,6 +65,7 @@ extension AppContext {
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let registry = Registry()
+        let registryCoder = RegistryCoder(registry: registry, coder: CodableProfileCoder())
 
         let dummyUploader = DummyWebUploader(url: URL(string: "http://127.0.0.1:9000")!)
         let uploadManager = UploadManager(webUploader: dummyUploader, passcodeGenerator: { "123456" })
@@ -80,6 +81,7 @@ extension AppContext {
             preferencesManager: preferencesManager,
             profileManager: profileManager,
             registry: registry,
+            registryCoder: registryCoder,
             sysexManager: nil,
             tunnel: tunnel,
             uploadManager: uploadManager

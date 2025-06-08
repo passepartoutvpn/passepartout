@@ -32,6 +32,9 @@ struct ProfileContainerView: View, Routable {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var registryCoder: RegistryCoder
+
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -55,9 +58,9 @@ struct ProfileContainerView: View, Routable {
                 profileManager: profileManager,
                 flow: flow
             ))
-            .modifier(ProfileImporterModifier(
+            .modifier(AppProfileImporterModifier(
                 profileManager: profileManager,
-                registry: registry,
+                registryCoder: registryCoder,
                 isPresented: $isImporting,
                 errorHandler: errorHandler
             ))

@@ -1,5 +1,5 @@
 //
-//  ProfileImporterModifier.swift
+//  AppProfileImporterModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/3/24.
@@ -27,10 +27,10 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-struct ProfileImporterModifier: ViewModifier {
+struct AppProfileImporterModifier: ViewModifier {
     let profileManager: ProfileManager
 
-    let registry: Registry
+    let registryCoder: RegistryCoder
 
     @Binding
     var isPresented: Bool
@@ -38,7 +38,7 @@ struct ProfileImporterModifier: ViewModifier {
     let errorHandler: ErrorHandler
 
     @StateObject
-    private var importer = ProfileImporter()
+    private var importer = AppProfileImporter()
 
     func body(content: Content) -> some View {
         content
@@ -61,7 +61,7 @@ struct ProfileImporterModifier: ViewModifier {
     }
 }
 
-private extension ProfileImporterModifier {
+private extension AppProfileImporterModifier {
 
     @ViewBuilder
     func actions(for url: URL) -> some View {
@@ -74,7 +74,7 @@ private extension ProfileImporterModifier {
                 try await importer.reImport(
                     url: url,
                     profileManager: profileManager,
-                    importer: registry
+                    importer: registryCoder
                 )
             }
         }
@@ -94,7 +94,7 @@ private extension ProfileImporterModifier {
                 try await importer.tryImport(
                     urls: urls,
                     profileManager: profileManager,
-                    importer: registry
+                    importer: registryCoder
                 )
             } catch {
                 await errorHandler.handle(

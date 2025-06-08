@@ -1,8 +1,8 @@
 //
-//  ModuleImporter+Profile.swift
+//  ProfileImporter+SingleModule.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/5/25.
+//  Created by Davide De Rosa on 6/8/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,24 +25,18 @@
 
 import Foundation
 
-extension ModuleImporter {
-    public func profile(from contents: String, withName name: String, passphrase: String?) throws -> Profile {
-        let module = try module(fromContents: contents, object: passphrase)
-        return try Profile(withName: name, importedModule: module)
-    }
-
-    public func profile(from url: URL, passphrase: String?) throws -> Profile {
-        let module = try module(fromURL: url, object: passphrase)
-        return try Profile(withName: url.lastPathComponent, importedModule: module)
+extension ProfileImporter {
+    public func profile(withName name: String, singleModule module: Module) throws -> Profile {
+        try Profile(withName: name, singleModule: module)
     }
 }
 
 private extension Profile {
-    init(withName name: String, importedModule: Module) throws {
+    init(withName name: String, singleModule: Module) throws {
         let onDemandModule = OnDemandModule.Builder().tryBuild()
         var builder = Profile.Builder()
         builder.name = name
-        builder.modules = [importedModule, onDemandModule]
+        builder.modules = [singleModule, onDemandModule]
         builder.activeModulesIds = Set(builder.modules.map(\.id))
         self = try builder.tryBuild()
     }

@@ -1,5 +1,5 @@
 //
-//  ProfileImporter.swift
+//  AppProfileImporter.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/8/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 
 @MainActor
-final class ProfileImporter: ObservableObject {
+final class AppProfileImporter: ObservableObject {
 
     @Published
     var isPresentingPassphrase = false
@@ -45,7 +45,7 @@ final class ProfileImporter: ObservableObject {
     func tryImport(
         urls: [URL],
         profileManager: ProfileManager,
-        importer: ModuleImporter
+        importer: ProfileImporter
     ) async throws {
         var withPassphrase: [URL] = []
 
@@ -73,7 +73,7 @@ final class ProfileImporter: ObservableObject {
         }
     }
 
-    func reImport(url: URL, profileManager: ProfileManager, importer: ModuleImporter) async throws {
+    func reImport(url: URL, profileManager: ProfileManager, importer: ProfileImporter) async throws {
         do {
             try await importURL(
                 url,
@@ -95,7 +95,7 @@ final class ProfileImporter: ObservableObject {
     }
 }
 
-private extension ProfileImporter {
+private extension AppProfileImporter {
     func scheduleNextImport() {
         guard !urlsRequiringPassphrase.isEmpty else {
             return
@@ -112,7 +112,7 @@ private extension ProfileImporter {
         _ url: URL,
         withPassphrase passphrase: String?,
         profileManager: ProfileManager,
-        importer: ModuleImporter
+        importer: ProfileImporter
     ) async throws {
         let didStartAccess = url.startAccessingSecurityScopedResource()
         defer {
@@ -120,7 +120,7 @@ private extension ProfileImporter {
                 url.stopAccessingSecurityScopedResource()
             }
         }
-        let profile = try importer.profile(from: url, passphrase: passphrase)
+        let profile = try importer.profile(from: .file(url), passphrase: passphrase)
         try await profileManager.save(profile)
     }
 }
