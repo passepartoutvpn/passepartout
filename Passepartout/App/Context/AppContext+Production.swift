@@ -341,11 +341,7 @@ private extension Dependencies {
     }
 
     func webPasscodeGenerator(length: Int) -> String {
-        (0..<length)
-            .map { _ in
-                let ascii: Int = .random(in: 65...90) // A–Z
-                return String(UnicodeScalar(ascii)!)
-            }
-            .joined()
+        let upperBound = Int(pow(10, Double(length)))
+        return String(format: "%0\(length)d", Int.random(in: 0..<upperBound))
     }
 }
