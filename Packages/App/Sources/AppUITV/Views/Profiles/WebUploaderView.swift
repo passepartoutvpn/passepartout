@@ -92,7 +92,7 @@ private extension WebUploaderView {
         for await file in uploadManager.files {
             pp_log_g(.App.web, .info, "Uploaded: \(file.name), \(file.contents.count) bytes")
             do {
-                let input: RegistryCoder.Input = .contents(filename: file.name, data: file.contents)
+                let input: ProfileImporterInput = .contents(filename: file.name, data: file.contents)
 
                 // TODO: ###, import encrypted OpenVPN profiles
                 var profile = try registryCoder.profile(from: input, passphrase: nil)
