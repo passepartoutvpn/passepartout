@@ -105,7 +105,7 @@ private extension NIOWebUploaderHandler {
     }
 
     func handlePOST(_ context: ChannelHandlerContext, uri: String) -> Bool {
-        guard uri == "/upload" else {
+        guard uri == "/" else {
             return false
         }
         guard let buffer = bodyBuffer,
