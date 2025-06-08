@@ -139,7 +139,7 @@ private struct SomeModule: Module {
     }
 }
 
-extension SomeModule.Implementation: ModuleImporter {
+extension SomeModule.Implementation: ModuleImporter, ProfileImporter {
     func module(fromContents contents: String, object: Any?) throws -> Module {
         fatalError()
     }
@@ -155,12 +155,15 @@ extension SomeModule.Implementation: ModuleImporter {
         }
         return SomeModule()
     }
-}
 
-extension SomeModule.Implementation: ProfileImporter {
-
-    // throw to ignore full profile imports
     func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
-        throw AppError.unknown
+        let importedModule: Module
+        switch input {
+        case .contents(_, let data):
+            importedModule = try module(fromContents: data, object: passphrase)
+        case .file(let url):
+            importedModule = try module(fromURL: url, object: passphrase)
+        }
+        return try profile(withName: "foobar", importedModule: importedModule)
     }
 }

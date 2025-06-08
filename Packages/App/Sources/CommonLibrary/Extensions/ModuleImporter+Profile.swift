@@ -1,8 +1,8 @@
 //
-//  RegistryCoder.swift
+//  ModuleImporter+Profile.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/7/25.
+//  Created by Davide De Rosa on 6/8/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,25 +25,19 @@
 
 import Foundation
 
-public final class RegistryCoder: ObservableObject, Sendable {
-    let registry: Registry
-
-    private let coder: ProfileCoder
-
-    public init(registry: Registry, coder: ProfileCoder) {
-        self.registry = registry
-        self.coder = coder
+extension ModuleImporter {
+    public func profile(withName name: String, importedModule module: Module) throws -> Profile {
+        try Profile(withName: name, importedModule: module)
     }
+}
 
-    public func string(from profile: Profile) throws -> String {
-        try registry.encodedProfile(profile, with: coder)
-    }
-
-    public func profile(from string: String) throws -> Profile {
-        try registry.decodedProfile(from: string, with: coder)
-    }
-
-    public func module(from string: String, object: Any?) throws -> Module {
-        try registry.module(fromContents: string, object: object)
+private extension Profile {
+    init(withName name: String, importedModule: Module) throws {
+        let onDemandModule = OnDemandModule.Builder().tryBuild()
+        var builder = Profile.Builder()
+        builder.name = name
+        builder.modules = [importedModule, onDemandModule]
+        builder.activeModulesIds = Set(builder.modules.map(\.id))
+        self = try builder.tryBuild()
     }
 }

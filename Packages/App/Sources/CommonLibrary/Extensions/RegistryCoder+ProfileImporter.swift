@@ -47,18 +47,7 @@ extension RegistryCoder: ProfileImporter {
         }
 
         // fall back to parsing a single module
-        let module = try module(from: contents, object: passphrase)
-        return try Profile(withName: name, importedModule: module)
-    }
-}
-
-private extension Profile {
-    init(withName name: String, importedModule: Module) throws {
-        let onDemandModule = OnDemandModule.Builder().tryBuild()
-        var builder = Profile.Builder()
-        builder.name = name
-        builder.modules = [importedModule, onDemandModule]
-        builder.activeModulesIds = Set(builder.modules.map(\.id))
-        self = try builder.tryBuild()
+        let importedModule = try module(from: contents, object: passphrase)
+        return try registry.profile(withName: name, importedModule: importedModule)
     }
 }
