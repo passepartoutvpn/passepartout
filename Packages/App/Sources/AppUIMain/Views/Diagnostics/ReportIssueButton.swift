@@ -66,16 +66,12 @@ extension ReportIssueButton {
     func commentInputView() -> some View {
         ThemeTextInputView(
             Strings.Global.Nouns.comment,
-            isPresented: Binding {
-                switch modalRoute {
+            isPresented: Binding(presenting: $modalRoute) {
+                switch $0 {
                 case .comment:
                     return true
                 default:
                     return false
-                }
-            } set: {
-                if !$0 {
-                    modalRoute = nil
                 }
             },
             onValidate: {

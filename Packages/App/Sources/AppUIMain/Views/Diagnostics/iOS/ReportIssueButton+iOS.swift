@@ -56,16 +56,12 @@ extension ReportIssueButton: View {
 extension ReportIssueButton {
     func emailComposerView(issue: Issue) -> some View {
         MailComposerView(
-            isPresented: Binding {
-                switch modalRoute {
+            isPresented: Binding(presenting: $modalRoute) {
+                switch $0 {
                 case .submit:
                     return true
                 default:
                     return false
-                }
-            } set: {
-                if !$0 {
-                    modalRoute = nil
                 }
             },
             toRecipients: [issue.to],
