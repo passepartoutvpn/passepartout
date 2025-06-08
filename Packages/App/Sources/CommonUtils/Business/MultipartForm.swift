@@ -25,16 +25,39 @@
 
 import Foundation
 
-final class MultipartForm: Sendable {
-    struct Field: Sendable {
-        let filename: String?
+extension MultipartForm {
+    public struct Builder {
+        public var fields: [String: Field]
 
-        let value: String
+        public init() {
+            fields = [:]
+        }
+
+        public func build() -> MultipartForm {
+            MultipartForm(fields: fields)
+        }
+    }
+}
+
+public struct MultipartForm: Sendable {
+    public struct Field: Sendable {
+        public let value: String
+
+        public let filename: String?
+
+        public init(_ value: String, filename: String? = nil) {
+            self.value = value
+            self.filename = filename
+        }
     }
 
-    let fields: [String: Field]
+    public let fields: [String: Field]
+}
 
-    init?(body: String) {
+// MARK: - Web
+
+extension MultipartForm {
+    public init?(body: String) {
         guard let boundaryLine = body.components(separatedBy: "\r\n").first,
               boundaryLine.starts(with: "--") else {
             return nil
@@ -76,8 +99,48 @@ final class MultipartForm: Sendable {
             guard let value = String(bodyText.utf8) else {
                 continue
             }
-            fields[name] = Field(filename: filename, value: value)
+            fields[name] = Field(value, filename: filename)
         }
         self.fields = fields
+    }
+
+    public func toURLRequest(url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        let webData = toWebData()
+        request.httpBody = webData.body
+        return request
+    }
+
+    public func toWebData() -> (boundary: String, body: Data) {
+        let boundary = UUID().uuidString
+        var body = Data()
+        fields.forEach {
+            let filenameDisposition = $0.value.filename.map {
+                "; filename=\"\($0)\""
+            }
+            body.append("--\(boundary)\r\n")
+            body.append("Content-Disposition: form-data; name=\"\($0.key)\"\(filenameDisposition ?? "")\r\n")
+            if filenameDisposition != nil {
+                body.append("Content-Type: application/octet-stream\r\n")
+            }
+            body.append("\r\n")
+            body.append("\($0.value.value)\r\n")
+        }
+        body.append("--\(boundary)--\r\n")
+        return (boundary, body)
+    }
+}
+
+private extension Data {
+    mutating func append(_ string: String) {
+        guard let data = string.data(using: .utf8) else {
+            return
+        }
+        append(data)
     }
 }

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
-@testable import WebLibrary
 import XCTest
 
 final class MultipartFormTests: XCTestCase {

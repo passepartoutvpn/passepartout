@@ -218,6 +218,10 @@ let package = Package(
             dependencies: ["CommonLibrary"]
         ),
         .testTarget(
+            name: "CommonUtilsTests",
+            dependencies: ["CommonUtils"]
+        ),
+        .testTarget(
             name: "LegacyV2Tests",
             dependencies: ["LegacyV2"]
         ),
