@@ -139,31 +139,25 @@ private struct SomeModule: Module {
     }
 }
 
-extension SomeModule.Implementation: ModuleImporter, ProfileImporter {
-    func module(fromContents contents: String, object: Any?) throws -> Module {
-        fatalError()
-    }
-
-    func module(fromURL url: URL, object: Any?) throws -> Module {
-        if url.absoluteString.hasSuffix(".encrypted") {
-            guard let passphrase = object as? String else {
-                throw PartoutError(.OpenVPN.passphraseRequired)
-            }
-            guard passphrase == "passphrase" else {
-                throw PartoutError(.crypto)
-            }
-        }
-        return SomeModule()
-    }
-
+extension SomeModule.Implementation: ProfileImporter {
     func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
         let importedModule: Module
         switch input {
-        case .contents(_, let data):
-            importedModule = try module(fromContents: data, object: passphrase)
+        case .contents:
+            fatalError()
         case .file(let url):
-            importedModule = try module(fromURL: url, object: passphrase)
+            importedModule = try {
+                if url.absoluteString.hasSuffix(".encrypted") {
+                    guard let passphrase else {
+                        throw PartoutError(.OpenVPN.passphraseRequired)
+                    }
+                    guard passphrase == "passphrase" else {
+                        throw PartoutError(.crypto)
+                    }
+                }
+                return SomeModule()
+            }()
         }
-        return try profile(withName: "foobar", importedModule: importedModule)
+        return try profile(withName: "foobar", singleModule: importedModule)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ModuleImporter+Profile.swift
+//  ProfileImporter+SingleModule.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/8/25.
@@ -25,18 +25,18 @@
 
 import Foundation
 
-extension ModuleImporter {
-    public func profile(withName name: String, importedModule module: Module) throws -> Profile {
-        try Profile(withName: name, importedModule: module)
+extension ProfileImporter {
+    public func profile(withName name: String, singleModule module: Module) throws -> Profile {
+        try Profile(withName: name, singleModule: module)
     }
 }
 
 private extension Profile {
-    init(withName name: String, importedModule: Module) throws {
+    init(withName name: String, singleModule: Module) throws {
         let onDemandModule = OnDemandModule.Builder().tryBuild()
         var builder = Profile.Builder()
         builder.name = name
-        builder.modules = [importedModule, onDemandModule]
+        builder.modules = [singleModule, onDemandModule]
         builder.activeModulesIds = Set(builder.modules.map(\.id))
         self = try builder.tryBuild()
     }

@@ -26,7 +26,7 @@
 import Foundation
 
 public final class RegistryCoder: ObservableObject, Sendable {
-    let registry: Registry
+    private let registry: Registry
 
     private let coder: ProfileCoder
 

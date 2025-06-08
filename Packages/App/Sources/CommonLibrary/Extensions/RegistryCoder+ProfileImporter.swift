@@ -49,6 +49,6 @@ extension RegistryCoder: ProfileImporter {
 
         // fall back to parsing a single module
         let importedModule = try module(from: contents, object: passphrase)
-        return try registry.profile(withName: name, importedModule: importedModule)
+        return try profile(withName: name, singleModule: importedModule)
     }
 }
