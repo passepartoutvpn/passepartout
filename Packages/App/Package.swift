@@ -40,6 +40,10 @@ let package = Package(
             targets: ["CommonLibrary"]
         ),
         .library(
+            name: "CommonUtils",
+            targets: ["CommonUtils"]
+        ),
+        .library(
             name: "LegacyV2",
             targets: ["LegacyV2"]
         ),
