@@ -103,8 +103,7 @@ private extension WebUploaderView {
                 profile = try builder.tryBuild()
                 try await profileManager.save(profile, isLocal: true)
 
-                // upload once
-                uploadManager.stop()
+                uploadManager.renewPasscode()
             } catch {
                 pp_log_g(.App.web, .error, "Unable to import uploaded profile: \(error)")
                 errorHandler.handle(error)

@@ -76,6 +76,11 @@ public final class UploadManager: ObservableObject {
         website = Website(url: url, passcode: passcode)
     }
 
+    public func renewPasscode() {
+        stop()
+        try? start()
+    }
+
     public func stop() {
         webUploader.stop()
         website = nil
