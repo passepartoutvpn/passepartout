@@ -122,15 +122,21 @@
                     return;
                 }
                 alert("#{web_uploader.success}");
+                this.reset();
+                refreshUploadFilename();
             });
             document.getElementById("upload-passcode").addEventListener("input", function (e) {
                 e.target.value = e.target.value.toUpperCase();
             });
 
-            let uploadFile = document.getElementById("upload-file");
-            uploadFile.addEventListener("change", function(e) {
+            function refreshUploadFilename() {
                 let uploadFileName = document.getElementById("upload-file-name");
                 uploadFileName.textContent = uploadFile.files.length ? uploadFile.files[0].name : "#{web_uploader.file.no_selection}";
+            }
+
+            let uploadFile = document.getElementById("upload-file");
+            uploadFile.addEventListener("change", function(e) {
+                refreshUploadFilename();
             });
         </script>
     </body>
