@@ -25,13 +25,53 @@
 
 #if os(iOS)
 
+import CommonLibrary
+import CommonUtils
 import SwiftUI
 
-// FIXME: ###, send to TV
+// FIXME: ###, upload iOS
 extension SendToTVView {
     var body: some View {
-        EmptyView()
-            .themeNavigationStack(closable: true)
+        QRScanView { string in
+            guard let url = URL(string: string) else {
+                return
+            }
+            path.append(NavigationRoute.enterPasscode(url))
+        } onClose: {
+#if targetEnvironment(simulator)
+//            path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
+            path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
+#else
+            isPresented = false
+#endif
+        }
+        .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+        .themeNavigationStack(
+            closable: true,
+            onClose: {
+                isPresented = false
+            },
+            path: $path
+        )
+    }
+}
+
+private extension SendToTVView {
+    enum NavigationRoute: Hashable {
+        case enterPasscode(URL)
+    }
+
+    @ViewBuilder
+    func pushDestination(for item: NavigationRoute) -> some View {
+        switch item {
+        case .enterPasscode(let url):
+            PasscodeInputView(length: Constants.shared.webUploader.passcodeLength) { passcode in
+                let client = WebUploaderClient(registryCoder: registryCoder, profile: profile)
+                Task {
+                    try await client.send(to: url, passcode: passcode)
+                }
+            }
+        }
     }
 }
 

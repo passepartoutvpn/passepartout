@@ -27,11 +27,22 @@
 
 import SwiftUI
 
-// FIXME: ###, send to TV
+// FIXME: ###, upload macOS
 extension SendToTVView {
     var body: some View {
         EmptyView()
-            .themeNavigationStack(closable: true)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(Strings.Global.Actions.cancel, role: .cancel) {
+                        isPresented = false
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Upload") {
+                    }
+                }
+            }
+            .themeNavigationStack()
     }
 }
 
