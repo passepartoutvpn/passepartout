@@ -46,8 +46,6 @@ struct SendToTVPasscodeView: View {
 }
 
 private extension SendToTVPasscodeView {
-
-    // FIXME: ###, l10n
     var messageView: some View {
         Text(Strings.Views.Profile.SendTv.Passcode.message)
     }

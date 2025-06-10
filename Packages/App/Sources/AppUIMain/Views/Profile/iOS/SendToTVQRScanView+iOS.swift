@@ -42,8 +42,6 @@ struct SendToTVQRScanView: View {
 }
 
 private extension SendToTVQRScanView {
-
-    // FIXME: ###, l10n
     var messageView: some View {
         Text(Strings.Views.Profile.SendTv.Qr.message(
             Strings.Global.Nouns.profiles,

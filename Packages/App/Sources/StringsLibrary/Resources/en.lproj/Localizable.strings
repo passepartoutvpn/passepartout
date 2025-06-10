@@ -322,6 +322,7 @@
 "global.actions.reconnect" = "Reconnect";
 "global.actions.save" = "Save";
 "global.actions.select" = "Select";
+"global.actions.send" = "Send";
 "global.actions.show" = "Show";
 
 // MARK: Global (Nouns)

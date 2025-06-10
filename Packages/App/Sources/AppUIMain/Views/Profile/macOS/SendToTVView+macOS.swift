@@ -75,8 +75,7 @@ private extension SendToTVView {
     }
 
     func confirmButton() -> some View {
-        // FIXME: ###, l10n
-        Button("Send", action: performSend)
+        Button(Strings.Global.Actions.send, action: performSend)
             .disabled(isSending)
     }
 }
