@@ -37,6 +37,8 @@ struct ProfileStorageSection: View {
     @Binding
     var paywallReason: PaywallReason?
 
+    var flow: ProfileCoordinator.Flow?
+
     var body: some View {
         debugChanges()
         return Group {

@@ -246,8 +246,12 @@ extension ProfileEditorTests {
             }
             .store(in: &subscriptions)
 
-        let target = try sut.build()
-        try await sut.save(target, to: manager, preferencesManager: PreferencesManager())
+        _ = try await sut.save(
+            to: manager,
+            buildingWith: Registry(),
+            verifyingWith: nil,
+            preferencesManager: PreferencesManager()
+        )
         await fulfillment(of: [exp])
     }
 }

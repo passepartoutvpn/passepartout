@@ -123,7 +123,8 @@ private extension ProfileSplitView {
                 profileManager: profileManager,
                 profileEditor: profileEditor,
                 path: $detailPath,
-                paywallReason: $paywallReason
+                paywallReason: $paywallReason,
+                flow: flow
             )
 
         case .module(let id):

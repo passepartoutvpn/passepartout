@@ -33,6 +33,28 @@ public func ?? <T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
     }
 }
 
+extension Binding where Value == Bool {
+    public init<T: Equatable>(presenting other: Binding<T?>, equal value: T) {
+        self.init {
+            other.wrappedValue == value
+        } set: {
+            if !$0 {
+                other.wrappedValue = nil
+            }
+        }
+    }
+
+    public init<T>(presenting other: Binding<T?>, if block: @escaping (T?) -> Bool) {
+        self.init {
+            block(other.wrappedValue)
+        } set: {
+            if !$0 {
+                other.wrappedValue = nil
+            }
+        }
+    }
+}
+
 extension Binding {
     public func toString() -> Binding<String> where Value == URL? {
         .init {

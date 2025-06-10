@@ -196,12 +196,12 @@ extension AppContext {
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
-        let webUploader = NIOWebUploader(port: constants.webUploader.port)
-        let uploadManager = UploadManager(webUploader: webUploader) {
-            dependencies.webPasscodeGenerator(length: constants.webUploader.passcodeLength)
+        let webReceiver = NIOWebReceiver(port: constants.webReceiver.port)
+        let webReceiverManager = WebReceiverManager(webReceiver: webReceiver) {
+            dependencies.webPasscodeGenerator(length: constants.webReceiver.passcodeLength)
         }
 #else
-        let uploadManager = UploadManager()
+        let webReceiverManager = WebReceiverManager()
 #endif
 
         // MARK: Eligibility
@@ -273,7 +273,7 @@ extension AppContext {
             registryCoder: dependencies.registryCoder,
             sysexManager: sysexManager,
             tunnel: tunnel,
-            uploadManager: uploadManager,
+            webReceiverManager: webReceiverManager,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )
     }
@@ -341,11 +341,7 @@ private extension Dependencies {
     }
 
     func webPasscodeGenerator(length: Int) -> String {
-        (0..<length)
-            .map { _ in
-                let ascii: Int = .random(in: 65...90) // A–Z
-                return String(UnicodeScalar(ascii)!)
-            }
-            .joined()
+        let upperBound = Int(pow(10, Double(length)))
+        return String(format: "%0\(length)d", Int.random(in: 0..<upperBound))
     }
 }

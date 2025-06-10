@@ -155,7 +155,7 @@ public struct Constants: Decodable, Sendable {
         public let productsTimeoutInterval: Int
     }
 
-    public struct WebUploader: Decodable, Sendable {
+    public struct WebReceiver: Decodable, Sendable {
         public let port: Int
 
         public let passcodeLength: Int
@@ -216,7 +216,7 @@ public struct Constants: Decodable, Sendable {
 
     public let iap: IAP
 
-    public let webUploader: WebUploader
+    public let webReceiver: WebReceiver
 
     public let log: Log
 }

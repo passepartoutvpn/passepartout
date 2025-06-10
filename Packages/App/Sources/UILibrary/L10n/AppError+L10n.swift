@@ -68,8 +68,22 @@ extension AppError: LocalizedError {
         case .unknown:
             return nil
 
-        case .webUploader:
+        // handled manually
+        case .verificationReceiptIsLoading, .verificationRequiredFeatures:
             return nil
+
+        case .webReceiver:
+            return nil
+
+        case .webUploader(let status, let error):
+            switch status {
+            case 403:
+                return Strings.WebUploader.Errors.incorrectPasscode
+            case 404:
+                return Strings.WebUploader.Errors.urlNotFound
+            default:
+                return error?.localizedDescription
+            }
         }
     }
 }

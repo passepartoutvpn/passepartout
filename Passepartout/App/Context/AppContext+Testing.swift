@@ -68,7 +68,7 @@ extension AppContext {
         )
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
-        let uploadManager = UploadManager()
+        let webReceiverManager = WebReceiverManager()
 
         return AppContext(
             apiManager: apiManager,
@@ -82,7 +82,7 @@ extension AppContext {
             registryCoder: dependencies.registryCoder,
             sysexManager: nil,
             tunnel: tunnel,
-            uploadManager: uploadManager
+            webReceiverManager: webReceiverManager
         )
     }
 }

@@ -44,6 +44,8 @@ struct ProfileGeneralView: View {
     @Binding
     var paywallReason: PaywallReason?
 
+    var flow: ProfileCoordinator.Flow?
+
     var body: some View {
         Form {
             ProfileNameSection(name: $profileEditor.profile.name)
@@ -51,7 +53,8 @@ struct ProfileGeneralView: View {
             if distributionTarget.supportsCloudKit {
                 ProfileStorageSection(
                     profileEditor: profileEditor,
-                    paywallReason: $paywallReason
+                    paywallReason: $paywallReason,
+                    flow: flow
                 )
             }
             ProfileBehaviorSection(profileEditor: profileEditor)

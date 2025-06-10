@@ -25,6 +25,7 @@
 
 import CommonLibrary
 import Foundation
+@_exported import StringsLibrary
 
 @MainActor
 public protocol UILibraryConfiguring {

@@ -40,6 +40,10 @@ let package = Package(
             targets: ["CommonLibrary"]
         ),
         .library(
+            name: "CommonUtils",
+            targets: ["CommonUtils"]
+        ),
+        .library(
             name: "LegacyV2",
             targets: ["LegacyV2"]
         ),
@@ -185,6 +189,12 @@ let package = Package(
             path: "Sources/Empty/PassepartoutImplementations"
         ),
         .target(
+            name: "StringsLibrary",
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
             name: "UIAccessibility"
         ),
         .target(
@@ -192,6 +202,7 @@ let package = Package(
             dependencies: [
                 "CommonAPI",
                 "CommonLibrary",
+                "StringsLibrary",
                 "UIAccessibility"
             ],
             resources: [
@@ -202,6 +213,7 @@ let package = Package(
             name: "WebLibrary",
             dependencies: [
                 "CommonLibrary",
+                "StringsLibrary",
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOHTTP1", package: "swift-nio")
             ],
@@ -216,6 +228,10 @@ let package = Package(
         .testTarget(
             name: "CommonLibraryTests",
             dependencies: ["CommonLibrary"]
+        ),
+        .testTarget(
+            name: "CommonUtilsTests",
+            dependencies: ["CommonUtils"]
         ),
         .testTarget(
             name: "LegacyV2Tests",

@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Uppladdning misslyckades:";
-"web_uploader.errors.incorrect_passcode" = "Fel kod!";
-"web_uploader.file.browse" = "Bläddra";
-"web_uploader.file.no_selection" = "Ingen fil vald";
-"web_uploader.file.prompt" = "Välj en konfigurationsfil att skicka";
-"web_uploader.passcode.prompt" = "Ange koden som visas på din TV";
-"web_uploader.submit" = "Ladda upp";
-"web_uploader.success" = "Uppladdningen klar!";
-"web_uploader.title" = "Ladda upp till Apple TV";

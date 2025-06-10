@@ -53,7 +53,7 @@
     "iap": {
         "productsTimeoutInterval": 10.0
     },
-    "webUploader": {
+    "webReceiver": {
         "port": 10000,
         "passcodeLength": 6
     },

@@ -34,6 +34,8 @@ struct ProfileCoordinator: View {
         let onCommitEditing: () async throws -> Void
 
         let onCancelEditing: () -> Void
+
+        let onSendToTV: () -> Void
     }
 
     @EnvironmentObject
@@ -59,6 +61,9 @@ struct ProfileCoordinator: View {
     let onDismiss: () -> Void
 
     @State
+    private var modalRoute: ModalRoute?
+
+    @State
     private var paywallReason: PaywallReason?
 
     @StateObject
@@ -67,6 +72,7 @@ struct ProfileCoordinator: View {
     var body: some View {
         contentView
             .modifier(PaywallModifier(reason: $paywallReason))
+            .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
             .withErrorHandler(errorHandler)
     }
@@ -83,11 +89,7 @@ private extension ProfileCoordinator {
             moduleViewFactory: moduleViewFactory,
             path: $path,
             paywallReason: $paywallReason,
-            flow: .init(
-                onNewModule: onNewModule,
-                onCommitEditing: onCommitEditing,
-                onCancelEditing: onCancelEditing
-            )
+            flow: flow
         )
         .themeNavigationDetail()
         .themeNavigationStack(path: $path)
@@ -97,27 +99,69 @@ private extension ProfileCoordinator {
             profileEditor: profileEditor,
             moduleViewFactory: moduleViewFactory,
             paywallReason: $paywallReason,
-            flow: .init(
-                onNewModule: onNewModule,
-                onCommitEditing: onCommitEditing,
-                onCancelEditing: onCancelEditing
-            )
+            flow: flow
         )
 #endif
     }
 }
 
 private extension ProfileCoordinator {
-    func onNewModule(_ moduleType: ModuleType) {
+    enum ModalRoute: Identifiable {
+        case sendToTV(Profile)
+
+        var id: Int {
+            switch self {
+            case .sendToTV: 1
+            }
+        }
+    }
+
+    @ViewBuilder
+    func modalDestination(for item: ModalRoute) -> some View {
+        switch item {
+        case .sendToTV(let profile):
+            SendToTVCoordinator(
+                profile: profile,
+                isPresented: Binding(presenting: $modalRoute) {
+                    switch $0 {
+                    case .sendToTV:
+                        return true
+                    default:
+                        return false
+                    }
+                }
+            )
+        }
+    }
+
+    var flow: Flow {
+        Flow(
+            onNewModule: addNewModule,
+            onCommitEditing: {
+                try await commitEditing(dismissing: true)
+            },
+            onCancelEditing: {
+                cancelEditing()
+            },
+            onSendToTV: sendProfileToTV
+        )
+    }
+}
+
+// MARK: - Actions
+
+private extension ProfileCoordinator {
+    func addNewModule(_ moduleType: ModuleType) {
         let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
             profileEditor.saveModule(module, activating: true)
         }
     }
 
-    func onCommitEditing() async throws {
+    @discardableResult
+    func commitEditing(dismissing: Bool) async throws -> Profile? {
         do {
-            try await onCommitEditing(verifying: !iapManager.isBeta)
+            return try await commitEditing(verifying: !iapManager.isBeta, dismissing: dismissing)
         } catch {
             pp_log_g(.App.profiles, .error, "Unable to commit profile: \(error)")
             errorHandler.handle(error, title: Strings.Global.Actions.save)
@@ -125,63 +169,60 @@ private extension ProfileCoordinator {
         }
     }
 
-    func onCommitEditing(verifying: Bool) async throws {
-        let profileToSave = try profileEditor.build(with: registry)
-
-        if verifying {
-            do {
-                try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-            } catch AppError.ineligibleProfile(let requiredFeatures) {
-                guard !iapManager.isLoadingReceipt else {
-                    pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
-                    let V = Strings.Views.Paywall.Alerts.Verification.self
-                    errorHandler.handle(
-                        title: Strings.Views.Paywall.Alerts.Confirmation.title,
-                        message: [V.edit, V.boot].joined(separator: "\n\n")
-                    )
-                    return
-                }
-
-                // present paywall if purchase required
-                guard requiredFeatures.isEmpty else {
-                    pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-                    setLater(PaywallReason(
-                        nil,
-                        requiredFeatures: requiredFeatures,
-                        suggestedProducts: nil,
-                        action: .save
-                    )) {
-                        paywallReason = $0
-                    }
-                    return
-                }
+    @discardableResult
+    func commitEditing(verifying: Bool, dismissing: Bool) async throws -> Profile? {
+        do {
+            let savedProfile = try await profileEditor.save(
+                to: profileManager,
+                buildingWith: registry,
+                verifyingWith: verifying ? iapManager : nil,
+                preferencesManager: preferencesManager
+            )
+            if dismissing {
+                onDismiss()
             }
+            return savedProfile
+        } catch AppError.verificationReceiptIsLoading {
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
+            let V = Strings.Views.Paywall.Alerts.self
+            errorHandler.handle(
+                title: V.Confirmation.title,
+                message: [V.Verification.edit, V.Verification.boot].joined(separator: "\n\n")
+            )
+            return nil
+        } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
+            setLater(PaywallReason(
+                nil,
+                requiredFeatures: requiredFeatures,
+                suggestedProducts: nil,
+                action: .save
+            )) {
+                paywallReason = $0
+            }
+            return nil
+        } catch {
+            pp_log_g(.App.profiles, .fault, "Unable to commit profile: \(error)")
+            throw error
         }
-
-        try await profileEditor.save(
-            profileToSave,
-            to: profileManager,
-            preferencesManager: preferencesManager
-        )
-        onDismiss()
     }
 
-    func onCancelEditing() {
+    func cancelEditing() {
         profileEditor.discard()
         onDismiss()
     }
-}
 
-private extension ProfileEditor {
-    var extraFeatures: Set<AppFeature> {
-        var list: Set<AppFeature> = []
-        if isShared {
-            list.insert(.sharing)
-            if isAvailableForTV {
-                list.insert(.appleTV)
+    func sendProfileToTV() {
+        Task {
+            do {
+                guard let profile = try await commitEditing(dismissing: false) else {
+                    return
+                }
+                modalRoute = .sendToTV(profile)
+            } catch {
+                errorHandler.handle(error)
             }
         }
-        return list
     }
 }
 

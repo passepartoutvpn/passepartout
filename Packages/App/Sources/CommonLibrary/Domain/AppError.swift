@@ -51,7 +51,13 @@ public enum AppError: Error {
 
     case unknown
 
-    case webUploader(Error? = nil)
+    case verificationReceiptIsLoading
+
+    case verificationRequiredFeatures(Set<AppFeature>)
+
+    case webReceiver(Error? = nil)
+
+    case webUploader(Int?, Error?)
 
     public init(_ error: Error) {
         if let spError = error as? AppError {

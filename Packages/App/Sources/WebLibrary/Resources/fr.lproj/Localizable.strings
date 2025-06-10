@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Échec du téléversement :";
-"web_uploader.errors.incorrect_passcode" = "Code incorrect !";
-"web_uploader.file.browse" = "Parcourir";
-"web_uploader.file.no_selection" = "Aucun fichier sélectionné";
-"web_uploader.file.prompt" = "Sélectionnez un fichier de configuration à envoyer";
-"web_uploader.passcode.prompt" = "Saisissez le code affiché sur votre téléviseur";
-"web_uploader.submit" = "Téléverser";
-"web_uploader.success" = "Téléversement terminé !";
-"web_uploader.title" = "Téléverser vers Apple TV";

@@ -62,7 +62,8 @@ struct ProfileEditView: View, Routable {
             profileEditor.shortcutsSections(path: $path)
             ProfileStorageSection(
                 profileEditor: profileEditor,
-                paywallReason: $paywallReason
+                paywallReason: $paywallReason,
+                flow: flow
             )
             ProfileBehaviorSection(profileEditor: profileEditor)
             ProfileActionsSection(
