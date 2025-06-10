@@ -37,6 +37,9 @@ struct SendToTVView: View {
     let onComplete: (URL, String) async throws -> Void
 
     @State
+    private var isSending = false
+
+    @State
     private var path = NavigationPath()
 
     var body: some View {
@@ -88,8 +91,16 @@ private extension SendToTVView {
 
     func passcodeView(url: URL) -> some View {
         SendToTVPasscodeView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
-            try await onComplete(url, passcode)
+            do {
+                isSending = true
+                try await onComplete(url, passcode)
+                isSending = false
+            } catch {
+                isSending = false
+                throw error
+            }
         }
+        .disabled(isSending)
         .themeNavigationDetail()
         .navigationTitle(Strings.Global.Nouns.passcode)
     }

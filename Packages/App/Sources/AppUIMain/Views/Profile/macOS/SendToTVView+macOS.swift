@@ -45,11 +45,15 @@ struct SendToTVView: View {
     @State
     private var passcode = ""
 
+    @State
+    private var isSending = false
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         formView
+            .disabled(isSending)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction, content: cancelButton)
                 ToolbarItem(placement: .confirmationAction, content: confirmButton)
@@ -72,7 +76,8 @@ private extension SendToTVView {
 
     func confirmButton() -> some View {
         // FIXME: ###, l10n
-        Button("Upload", action: performUpload)
+        Button("Send", action: performSend)
+            .disabled(isSending)
     }
 }
 
@@ -84,18 +89,21 @@ private extension SendToTVView {
         return URL(httpAddress: address, port: port)
     }
 
-    var canUpload: Bool {
+    var canSend: Bool {
         url != nil
     }
 
-    func performUpload() {
+    func performSend() {
         guard let url else {
             return
         }
         Task {
             do {
+                isSending = true
                 try await onComplete(url, passcode)
+                isSending = false
             } catch {
+                isSending = false
                 errorHandler.handle(error)
             }
         }
