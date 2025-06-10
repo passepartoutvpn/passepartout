@@ -42,10 +42,6 @@ public final class URLSessionUploaderStrategy: WebUploaderStrategy {
                 switch statusCode {
                 case 400:
                     assertionFailure("WebUploader: invalid form, bug in MultipartForm")
-                case 403:
-                    assertionFailure("WebUploader: passcode is missing or incorrect")
-                case 404:
-                    assertionFailure("WebUploader: URL not found")
                 default:
                     break
                 }
