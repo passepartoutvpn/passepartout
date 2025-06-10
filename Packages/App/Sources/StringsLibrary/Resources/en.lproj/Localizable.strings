@@ -171,8 +171,8 @@
 "web_uploader.file.no_selection" = "No file chosen";
 "web_uploader.success" = "Upload complete!";
 "web_uploader.errors.generic" = "Upload failed:";
-"web_uploader.errors.incorrect_passcode" = "Incorrect passcode!";
-"web_uploader.errors.url_not_found" = "Page not found!";
+"web_uploader.errors.incorrect_passcode" = "The passcode is incorrect.";
+"web_uploader.errors.url_not_found" = "No web page exists at the given URL.";
 "web_uploader.submit" = "Upload";
 
 // MARK: Views (Modules)

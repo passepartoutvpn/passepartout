@@ -1116,10 +1116,10 @@ public enum Strings {
     public enum Errors {
       /// Upload failed:
       public static let generic = Strings.tr("Localizable", "web_uploader.errors.generic", fallback: "Upload failed:")
-      /// Incorrect passcode!
-      public static let incorrectPasscode = Strings.tr("Localizable", "web_uploader.errors.incorrect_passcode", fallback: "Incorrect passcode!")
-      /// Page not found!
-      public static let urlNotFound = Strings.tr("Localizable", "web_uploader.errors.url_not_found", fallback: "Page not found!")
+      /// The passcode is incorrect.
+      public static let incorrectPasscode = Strings.tr("Localizable", "web_uploader.errors.incorrect_passcode", fallback: "The passcode is incorrect.")
+      /// No web page exists at the given URL.
+      public static let urlNotFound = Strings.tr("Localizable", "web_uploader.errors.url_not_found", fallback: "No web page exists at the given URL.")
     }
     public enum File {
       /// Browse
