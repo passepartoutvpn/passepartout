@@ -74,7 +74,6 @@ private extension SendToTVQRScanView {
 
 // MARK: -
 
-
 #Preview {
     SendToTVQRScanView(
         onDetect: { _ in },

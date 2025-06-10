@@ -58,12 +58,6 @@ public final class SystemExtensionManager: NSObject {
         result = .unknown
         isPending = false
     }
-
-    public var currentResult: Result {
-        queue.sync {
-            result
-        }
-    }
 }
 
 #if os(macOS)
@@ -71,6 +65,12 @@ public final class SystemExtensionManager: NSObject {
 import SystemExtensions
 
 extension SystemExtensionManager {
+    public var currentResult: Result {
+        queue.sync {
+            result
+        }
+    }
+
     public func load() async throws -> Result {
         queue.sync {
             guard !isPending else {
@@ -80,7 +80,10 @@ extension SystemExtensionManager {
             isPending = true
         }
 
-        let request: OSSystemExtensionRequest = .propertiesRequest(forExtensionWithIdentifier: identifier, queue: .main)
+        let request: OSSystemExtensionRequest = .propertiesRequest(
+            forExtensionWithIdentifier: identifier,
+            queue: .main
+        )
         request.delegate = self
 
         let result = try await withCheckedThrowingContinuation { continuation in
@@ -103,7 +106,10 @@ extension SystemExtensionManager {
             isPending = true
         }
 
-        let request: OSSystemExtensionRequest = .activationRequest(forExtensionWithIdentifier: identifier, queue: .main)
+        let request: OSSystemExtensionRequest = .activationRequest(
+            forExtensionWithIdentifier: identifier,
+            queue: .main
+        )
         request.delegate = self
 
         let result = try await withCheckedThrowingContinuation { continuation in
