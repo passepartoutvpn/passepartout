@@ -72,6 +72,9 @@ extension AppError: LocalizedError {
         case .verificationReceiptIsLoading, .verificationRequiredFeatures:
             return nil
 
+        case .webReceiver:
+            return nil
+
         case .webUploader:
             return nil
         }

@@ -49,10 +49,11 @@ public final class WebUploader: ObservableObject, Sendable {
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw AppError.webUploader()
+                throw AppError.webUploader(nil, nil)
             }
-            guard httpResponse.statusCode == 200 else {
-                switch httpResponse.statusCode {
+            let statusCode = httpResponse.statusCode
+            guard statusCode == 200 else {
+                switch statusCode {
                 case 400:
                     assertionFailure("WebUploader: invalid form, bug in MultipartForm")
                 case 403:
@@ -62,10 +63,10 @@ public final class WebUploader: ObservableObject, Sendable {
                 default:
                     break
                 }
-                throw AppError.webUploader()
+                throw AppError.webUploader(statusCode, nil)
             }
         } catch {
-            throw AppError.webUploader(error)
+            throw AppError.webUploader(nil, error)
         }
     }
 }

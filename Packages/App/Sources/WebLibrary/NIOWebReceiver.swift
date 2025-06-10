@@ -42,7 +42,7 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
     public func start(passcode: String?, onReceive: @escaping (String, String) -> Void) throws -> URL {
         guard group == nil, channel == nil else {
             pp_log_g(.App.web, .error, "Web server is already started")
-            throw AppError.webUploader()
+            throw AppError.webReceiver()
         }
 
         group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
@@ -60,7 +60,7 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
 
         guard let host = firstIPv4Address(withInterfacePrefix: "en") else {
             pp_log_g(.App.web, .error, "Web server has no IPv4 Ethernet addresses to listen on")
-            throw AppError.webUploader()
+            throw AppError.webReceiver()
         }
         do {
             channel = try bootstrap.bind(host: host, port: port).wait()
@@ -68,15 +68,15 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
             pp_log_g(.App.web, .error, "Web server could not bind: \(error)")
             group = nil
             channel = nil
-            throw AppError.webUploader(error)
+            throw AppError.webReceiver(error)
         }
         guard let address = channel?.localAddress?.ipAddress else {
             pp_log_g(.App.web, .error, "Web server has no bound IP address")
-            throw AppError.webUploader()
+            throw AppError.webReceiver()
         }
         guard let url = URL(string: "http://\(address):\(port)") else {
             pp_log_g(.App.web, .error, "Web server URL could not be built")
-            throw AppError.webUploader()
+            throw AppError.webReceiver()
         }
         pp_log_g(.App.web, .notice, "Web server did start: \(url)")
         return url
