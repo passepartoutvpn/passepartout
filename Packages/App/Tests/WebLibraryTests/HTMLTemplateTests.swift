@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import StringsLibrary
 @testable import WebLibrary
 import XCTest
 
@@ -33,7 +34,7 @@ final class HTMLTemplateTests: XCTestCase {
 Hey show some #{web_uploader.success}
 """
         let sut = HTMLTemplate(html: html)
-        let localized = sut.withLocalizedKeys(in: .module)
+        let localized = sut.withLocalizedKeys(in: StringsLibrary.bundle)
         XCTAssertEqual(localized, "Hey show some Upload complete!")
     }
 }

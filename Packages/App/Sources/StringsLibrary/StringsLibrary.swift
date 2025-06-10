@@ -1,8 +1,8 @@
 //
-//  UILibrary.swift
+//  StringsLibrary.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 7/31/24.
+//  Created by Davide De Rosa on 6/10/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import Foundation
-@_exported import StringsLibrary
 
-@MainActor
-public protocol UILibraryConfiguring {
-    func configure(with context: AppContext)
+public enum StringsLibrary {
+    public static let bundle: Bundle = .module
 }

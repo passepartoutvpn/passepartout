@@ -76,12 +76,11 @@ extension AppError: LocalizedError {
             return nil
 
         case .webUploader(let status, let error):
-            // FIXME: ###, localize upload errors
             switch status {
             case 403:
-                return "Incorrect passcode"
+                return Strings.WebUploader.Errors.incorrectPasscode
             case 404:
-                return "Incorrect URL"
+                return Strings.WebUploader.Errors.urlNotFound
             default:
                 return error?.localizedDescription
             }

@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Error al subir:";
-"web_uploader.errors.incorrect_passcode" = "¡Código incorrecto!";
-"web_uploader.file.browse" = "Examinar";
-"web_uploader.file.no_selection" = "Ningún archivo seleccionado";
-"web_uploader.file.prompt" = "Selecciona un archivo de configuración para enviar";
-"web_uploader.passcode.prompt" = "Introduce el código que aparece en tu TV";
-"web_uploader.submit" = "Subir";
-"web_uploader.success" = "¡Subida completada!";
-"web_uploader.title" = "Subir a Apple TV";

@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Falha no envio:";
-"web_uploader.errors.incorrect_passcode" = "Código incorreto!";
-"web_uploader.file.browse" = "Procurar";
-"web_uploader.file.no_selection" = "Nenhum arquivo selecionado";
-"web_uploader.file.prompt" = "Selecione um arquivo de configuração para enviar";
-"web_uploader.passcode.prompt" = "Digite o código exibido na sua TV";
-"web_uploader.submit" = "Enviar";
-"web_uploader.success" = "Envio concluído!";
-"web_uploader.title" = "Enviar para Apple TV";

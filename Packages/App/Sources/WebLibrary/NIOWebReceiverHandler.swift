@@ -28,6 +28,7 @@ import CommonUtils
 import Foundation
 import NIO
 import NIOHTTP1
+import StringsLibrary
 
 final class NIOWebReceiverHandler {
     typealias InboundIn = HTTPServerRequestPart
@@ -41,7 +42,7 @@ final class NIOWebReceiverHandler {
             }
             let contents = try String(contentsOfFile: path)
             let template = HTMLTemplate(html: contents)
-            return template.withLocalizedKeys(in: .module)
+            return template.withLocalizedKeys(in: StringsLibrary.bundle)
         } catch {
             fatalError("Unable to load web uploader HTML template")
         }

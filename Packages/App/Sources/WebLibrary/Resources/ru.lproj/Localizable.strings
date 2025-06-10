@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Ошибка загрузки:";
-"web_uploader.errors.incorrect_passcode" = "Неверный код!";
-"web_uploader.file.browse" = "Обзор";
-"web_uploader.file.no_selection" = "Файл не выбран";
-"web_uploader.file.prompt" = "Выберите файл конфигурации для отправки";
-"web_uploader.passcode.prompt" = "Введите код, отображаемый на вашем телевизоре";
-"web_uploader.submit" = "Загрузить";
-"web_uploader.success" = "Загрузка завершена!";
-"web_uploader.title" = "Загрузить на Apple TV";

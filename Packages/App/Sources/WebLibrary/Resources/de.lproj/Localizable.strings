@@ -1,9 +1,0 @@
-"web_uploader.errors.generic" = "Upload fehlgeschlagen:";
-"web_uploader.errors.incorrect_passcode" = "Falscher Code!";
-"web_uploader.file.browse" = "Durchsuchen";
-"web_uploader.file.no_selection" = "Keine Datei ausgewählt";
-"web_uploader.file.prompt" = "Wähle eine Konfigurationsdatei zum Senden aus";
-"web_uploader.passcode.prompt" = "Gib den auf deinem Fernseher angezeigten Code ein";
-"web_uploader.submit" = "Hochladen";
-"web_uploader.success" = "Upload abgeschlossen!";
-"web_uploader.title" = "Auf Apple TV hochladen";
