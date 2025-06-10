@@ -119,7 +119,7 @@ private struct HandleErrorsByShowingAlertViewModifier: ViewModifier {
 
 private extension String {
     var withTrailingDot: String {
-        guard !hasSuffix(".") else {
+        guard !hasSuffix(".") && !hasSuffix("!") else {
             return self
         }
         return "\(self)."

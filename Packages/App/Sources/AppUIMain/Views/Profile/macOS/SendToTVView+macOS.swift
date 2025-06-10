@@ -28,7 +28,6 @@
 import CommonLibrary
 import SwiftUI
 
-// FIXME: ###, macOS upload
 struct SendToTVView: View {
     let profile: Profile
 
