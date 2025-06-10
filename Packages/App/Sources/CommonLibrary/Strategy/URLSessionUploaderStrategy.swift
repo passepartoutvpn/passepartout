@@ -27,11 +27,15 @@ import CommonUtils
 import Foundation
 
 public final class URLSessionUploaderStrategy: WebUploaderStrategy {
-    public init() {
+    private let timeout: TimeInterval
+
+    public init(timeout: TimeInterval) {
+        self.timeout = timeout
     }
 
     public func upload(_ form: MultipartForm, to url: URL) async throws {
-        let request = form.toURLRequest(url: url)
+        var request = form.toURLRequest(url: url)
+        request.timeoutInterval = timeout
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse else {

@@ -36,7 +36,7 @@ public final class WebUploader: ObservableObject, Sendable {
     public init(
         registryCoder: RegistryCoder,
         profile: Profile,
-        strategy: WebUploaderStrategy = URLSessionUploaderStrategy()
+        strategy: WebUploaderStrategy
     ) {
         self.registryCoder = registryCoder
         self.profile = profile

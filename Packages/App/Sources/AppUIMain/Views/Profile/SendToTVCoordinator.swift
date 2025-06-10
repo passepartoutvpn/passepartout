@@ -46,7 +46,11 @@ struct SendToTVCoordinator: View {
 
 private extension SendToTVCoordinator {
     func upload(_ profile: Profile, to url: URL, with passcode: String) async throws {
-        let client = WebUploader(registryCoder: registryCoder, profile: profile)
+        let client = WebUploader(
+            registryCoder: registryCoder,
+            profile: profile,
+            strategy: URLSessionUploaderStrategy(timeout: Constants.shared.api.timeoutInterval)
+        )
         do {
             try await client.send(to: url, passcode: passcode)
             isPresented = false
