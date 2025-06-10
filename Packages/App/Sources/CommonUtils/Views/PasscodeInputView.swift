@@ -52,6 +52,7 @@ public struct PasscodeInputView: View {
                     .focused($focusedIndex, equals: i)
                     .frame(width: 40, height: 60)
                     .font(.title)
+                    .border(.secondary)
                     .onChange(of: digit(at: i)) {
                         handleDigit($0, at: i)
                     }
