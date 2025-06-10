@@ -93,9 +93,10 @@ extension ExtendedTunnelTests {
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let stream = sut.activeProfilesStream
         try await sut.install(profile)
 
-        await sut.activeProfilesStream.waitForNext()
+        await stream.waitForNext()
         XCTAssertEqual(tunnel.activeProfiles.first?.key, profile.id)
 //        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
         XCTAssertEqual(processor.willInstallCount, 1)
