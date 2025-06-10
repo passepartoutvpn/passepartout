@@ -51,6 +51,10 @@ public enum AppError: Error {
 
     case unknown
 
+    case verificationReceiptIsLoading
+
+    case verificationRequiredFeatures(Set<AppFeature>)
+
     case webUploader(Error? = nil)
 
     public init(_ error: Error) {

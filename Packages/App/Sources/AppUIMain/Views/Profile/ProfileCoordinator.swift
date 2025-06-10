@@ -171,49 +171,40 @@ private extension ProfileCoordinator {
 
     @discardableResult
     func commitEditing(verifying: Bool, dismissing: Bool) async throws -> Profile? {
-        let profileToSave = try profileEditor.build(with: registry)
-
-        if verifying {
-            do {
-                try iapManager.verify(profileToSave, extra: profileEditor.extraFeatures)
-            } catch AppError.ineligibleProfile(let requiredFeatures) {
-
-                // still loading receipt
-                guard !iapManager.isLoadingReceipt else {
-                    pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
-                    let V = Strings.Views.Paywall.Alerts.Verification.self
-                    errorHandler.handle(
-                        title: Strings.Views.Paywall.Alerts.Confirmation.title,
-                        message: [V.edit, V.boot].joined(separator: "\n\n")
-                    )
-                    return nil
-                }
-
-                // present paywall if purchase required
-                guard requiredFeatures.isEmpty else {
-                    pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-                    setLater(PaywallReason(
-                        nil,
-                        requiredFeatures: requiredFeatures,
-                        suggestedProducts: nil,
-                        action: .save
-                    )) {
-                        paywallReason = $0
-                    }
-                    return nil
-                }
+        do {
+            let savedProfile = try await profileEditor.save(
+                to: profileManager,
+                buildingWith: registry,
+                verifyingWith: verifying ? iapManager : nil,
+                preferencesManager: preferencesManager
+            )
+            if dismissing {
+                onDismiss()
             }
+            return savedProfile
+        } catch AppError.verificationReceiptIsLoading {
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
+            let V = Strings.Views.Paywall.Alerts.self
+            errorHandler.handle(
+                title: V.Confirmation.title,
+                message: [V.Verification.edit, V.Verification.boot].joined(separator: "\n\n")
+            )
+            return nil
+        } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
+            setLater(PaywallReason(
+                nil,
+                requiredFeatures: requiredFeatures,
+                suggestedProducts: nil,
+                action: .save
+            )) {
+                paywallReason = $0
+            }
+            return nil
+        } catch {
+            pp_log_g(.App.profiles, .fault, "Unable to commit profile: \(error)")
+            throw error
         }
-
-        try await profileEditor.save(
-            profileToSave,
-            to: profileManager,
-            preferencesManager: preferencesManager
-        )
-        if dismissing {
-            onDismiss()
-        }
-        return profileToSave
     }
 
     func cancelEditing() {
@@ -232,21 +223,6 @@ private extension ProfileCoordinator {
                 errorHandler.handle(error)
             }
         }
-    }
-}
-
-// MARK: - Helpers
-
-private extension ProfileEditor {
-    var extraFeatures: Set<AppFeature> {
-        var list: Set<AppFeature> = []
-        if isShared {
-            list.insert(.sharing)
-            if isAvailableForTV {
-                list.insert(.appleTV)
-            }
-        }
-        return list
     }
 }
 

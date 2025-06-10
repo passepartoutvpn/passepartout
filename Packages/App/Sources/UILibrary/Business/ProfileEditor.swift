@@ -31,12 +31,12 @@ import Foundation
 public final class ProfileEditor: ObservableObject {
 
     @Published
-    private var editableProfile: EditableProfile
+    var editableProfile: EditableProfile
 
     @Published
     public var isShared: Bool
 
-    private(set) var removedModules: [UUID: any ModuleBuilder]
+    var removedModules: [UUID: any ModuleBuilder]
 
     public convenience init() {
         self.init(modules: [])
@@ -178,6 +178,9 @@ extension ProfileEditor {
             activateModule(module)
         }
     }
+
+    public func discard() {
+    }
 }
 
 private extension ProfileEditor {
@@ -219,40 +222,6 @@ extension ProfileEditor {
         editableProfile.modules = profile.modulesBuilders()
 
         return profile
-    }
-}
-
-// MARK: - Load/Save
-
-extension ProfileEditor {
-    public func load(_ profile: EditableProfile, isShared: Bool) {
-        editableProfile = profile
-        self.isShared = isShared
-        removedModules = [:]
-    }
-
-    public func save(_ profileToSave: Profile, to profileManager: ProfileManager, preferencesManager: PreferencesManager) async throws {
-        do {
-            try await profileManager.save(profileToSave, isLocal: true, remotelyShared: isShared)
-
-            removedModules.keys.forEach {
-                do {
-                    pp_log_g(.App.profiles, .info, "Erase preferences for removed module \($0)")
-                    let repository = try preferencesManager.preferencesRepository(forModuleWithId: $0)
-                    repository.erase()
-                    try repository.save()
-                } catch {
-                    pp_log_g(.App.profiles, .error, "Unable to erase preferences for removed module \($0): \(error)")
-                }
-            }
-            removedModules.removeAll()
-        } catch {
-            pp_log_g(.App.profiles, .fault, "Unable to save edited profile: \(error)")
-            throw error
-        }
-    }
-
-    public func discard() {
     }
 }
 

@@ -68,6 +68,10 @@ extension AppError: LocalizedError {
         case .unknown:
             return nil
 
+        // handled manually
+        case .verificationReceiptIsLoading, .verificationRequiredFeatures:
+            return nil
+
         case .webUploader:
             return nil
         }
