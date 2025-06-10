@@ -31,43 +31,41 @@ import NIOHTTP1
 public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
     private let port: Int
 
-    private var group: MultiThreadedEventLoopGroup?
-
     private var channel: Channel?
+
+    private var group: EventLoopGroup?
 
     public init(port: Int) {
         self.port = port
     }
 
     public func start(passcode: String?, onReceive: @escaping (String, String) -> Void) throws -> URL {
-        guard group == nil, channel == nil else {
+        guard channel == nil else {
             pp_log_g(.App.web, .error, "Web server is already started")
             throw AppError.webReceiver()
         }
-
-        group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
-        let bootstrap = ServerBootstrap(group: group!)
-            .serverChannelOption(.backlog, value: 256)
-            .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)
-            .childChannelInitializer { channel in
-                channel.pipeline.configureHTTPServerPipeline().flatMap {
-                    channel.pipeline.addHandler(NIOWebReceiverHandler(passcode: passcode) {
-                        onReceive($0, $1)
-                    })
-                }
-            }
-            .childChannelOption(.socketOption(.so_reuseaddr), value: 1)
-
         guard let host = firstIPv4Address(withInterfacePrefix: "en") else {
             pp_log_g(.App.web, .error, "Web server has no IPv4 Ethernet addresses to listen on")
             throw AppError.webReceiver()
         }
         do {
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
+            let bootstrap = ServerBootstrap(group: group)
+                .serverChannelOption(.backlog, value: 256)
+                .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)
+                .childChannelInitializer { channel in
+                    channel.pipeline.configureHTTPServerPipeline().flatMap {
+                        channel.pipeline.addHandler(NIOWebReceiverHandler(passcode: passcode) {
+                            onReceive($0, $1)
+                        })
+                    }
+                }
+                .childChannelOption(.socketOption(.so_reuseaddr), value: 1)
+
             channel = try bootstrap.bind(host: host, port: port).wait()
+            self.group = group
         } catch {
             pp_log_g(.App.web, .error, "Web server could not bind: \(error)")
-            group = nil
-            channel = nil
             throw AppError.webReceiver(error)
         }
         guard let address = channel?.localAddress?.ipAddress else {
@@ -83,15 +81,17 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
     }
 
     public func stop() {
-        guard let channel, let group else {
+        guard let channel else {
             pp_log_g(.App.web, .error, "Web server is not started")
             return
         }
-        do {
-            try channel.close().wait()
-            try group.syncShutdownGracefully()
+        defer {
             self.channel = nil
             self.group = nil
+        }
+        do {
+            try channel.close().wait()
+            try group?.syncShutdownGracefully()
             pp_log_g(.App.web, .notice, "Web server did stop")
         } catch {
             pp_log_g(.App.web, .error, "Unable to stop web server: \(error)")
