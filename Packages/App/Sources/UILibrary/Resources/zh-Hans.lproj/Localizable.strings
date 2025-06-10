@@ -333,8 +333,8 @@
 "views.tv.connection_profiles.header" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。或者，你可以在“配置文件”标签页找到其他选项。";
 "views.tv.profiles.detail.profiles" = "长按以显示可用的配置文件操作。本地配置文件可以在这里删除，而 iCloud 配置文件只能在 iOS 或 macOS 应用中删除。";
 "views.tv.profiles.import_local" = "导入本地配置文件";
-"views.tv.web_uploader.qr" = "使用相机扫描此二维码，打开网页以上传你的配置文件。";
-"views.tv.web_uploader.toggle" = "切换以通过网页浏览器将本地配置文件导入电视。";
+"views.tv.web_receiver.qr" = "使用相机扫描此二维码，打开网页以上传你的配置文件。";
+"views.tv.web_receiver.toggle" = "切换以通过网页浏览器将本地配置文件导入电视。";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";
 "views.ui.purchase_required.restricted.help" = "功能受限";
@@ -342,4 +342,3 @@
 "views.version.extra" = "%@ 是由 %@ 维护的项目。\n\n源代码在 GitHub 上公开提供，遵循 GPLv3 许可协议，您可以在主页找到相关链接。";
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
-"views.web_uploader.message" = "扫描此二维码，打开网页上传您的配置文件。";

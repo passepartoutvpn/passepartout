@@ -1,5 +1,5 @@
 //
-//  WebUploaderClient.swift
+//  WebUploader.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/9/25.
@@ -26,7 +26,7 @@
 import CommonUtils
 import Foundation
 
-public final class WebUploaderClient: ObservableObject, Sendable {
+public final class WebUploader: ObservableObject, Sendable {
     private let registryCoder: RegistryCoder
 
     private let profile: Profile
@@ -37,7 +37,7 @@ public final class WebUploaderClient: ObservableObject, Sendable {
     }
 
     public func send(to url: URL, passcode: String) async throws {
-        pp_log_g(.app, .info, "WebUploaderClient: sending to \(url) with passcode \(passcode)")
+        pp_log_g(.app, .info, "WebUploader: sending to \(url) with passcode \(passcode)")
         let encodedProfile = try registryCoder.string(from: profile)
 
         var formBuilder = MultipartForm.Builder()
@@ -54,11 +54,11 @@ public final class WebUploaderClient: ObservableObject, Sendable {
             guard httpResponse.statusCode == 200 else {
                 switch httpResponse.statusCode {
                 case 400:
-                    assertionFailure("WebUploaderClient: invalid form, bug in MultipartForm")
+                    assertionFailure("WebUploader: invalid form, bug in MultipartForm")
                 case 403:
-                    assertionFailure("WebUploaderClient: passcode is missing or incorrect")
+                    assertionFailure("WebUploader: passcode is missing or incorrect")
                 case 404:
-                    assertionFailure("WebUploaderClient: URL not found")
+                    assertionFailure("WebUploader: URL not found")
                 default:
                     break
                 }

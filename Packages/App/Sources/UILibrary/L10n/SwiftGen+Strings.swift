@@ -1042,11 +1042,11 @@ public enum Strings {
           public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.")
         }
       }
-      public enum WebUploader {
+      public enum WebReceiver {
         /// Scan the QR with your camera to open a web page where to upload your profile.
-        public static let qr = Strings.tr("Localizable", "views.tv.web_uploader.qr", fallback: "Scan the QR with your camera to open a web page where to upload your profile.")
+        public static let qr = Strings.tr("Localizable", "views.tv.web_receiver.qr", fallback: "Scan the QR with your camera to open a web page where to upload your profile.")
         /// Toggle to import a local profile into your TV with a web browser.
-        public static let toggle = Strings.tr("Localizable", "views.tv.web_uploader.toggle", fallback: "Toggle to import a local profile into your TV with a web browser.")
+        public static let toggle = Strings.tr("Localizable", "views.tv.web_receiver.toggle", fallback: "Toggle to import a local profile into your TV with a web browser.")
       }
     }
     public enum Ui {

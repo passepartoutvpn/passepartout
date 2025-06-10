@@ -1,5 +1,5 @@
 //
-//  UploadManagerTests.swift
+//  WebReceiverManagerTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/4/25.
@@ -27,14 +27,14 @@
 import Foundation
 import XCTest
 
-final class UploadManagerTests: XCTestCase {
+final class WebReceiverManagerTests: XCTestCase {
 }
 
 @MainActor
-extension UploadManagerTests {
+extension WebReceiverManagerTests {
     func test_givenUploader_whenStart_thenReceivesFiles() async throws {
-        let webUploader = MockWebUploader(file: UploadManager.File(name: "name", contents: "contents"))
-        let sut = UploadManager(webUploader: webUploader)
+        let webReceiver = MockWebReceiver(file: WebReceiverManager.File(name: "name", contents: "contents"))
+        let sut = WebReceiverManager(webReceiver: webReceiver)
         let stream = sut.files
         let expReceive = expectation(description: "UploadReceive")
         let expEnd = expectation(description: "UploadEnd")
@@ -53,10 +53,10 @@ extension UploadManagerTests {
     }
 }
 
-private final class MockWebUploader: WebUploader {
-    private let file: UploadManager.File
+private final class MockWebReceiver: WebReceiver {
+    private let file: WebReceiverManager.File
 
-    init(file: UploadManager.File) {
+    init(file: WebReceiverManager.File) {
         self.file = file
     }
 

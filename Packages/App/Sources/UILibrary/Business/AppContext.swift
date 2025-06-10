@@ -57,7 +57,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
-    public let uploadManager: UploadManager
+    public let webReceiverManager: WebReceiverManager
 
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
 
@@ -80,7 +80,7 @@ public final class AppContext: ObservableObject, Sendable {
         registryCoder: RegistryCoder,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
-        uploadManager: UploadManager,
+        webReceiverManager: WebReceiverManager,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
@@ -96,7 +96,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registryCoder = registryCoder
         self.sysexManager = sysexManager
         self.tunnel = tunnel
-        self.uploadManager = uploadManager
+        self.webReceiverManager = webReceiverManager
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
     }

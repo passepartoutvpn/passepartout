@@ -67,8 +67,8 @@ extension AppContext {
         let registry = Registry()
         let registryCoder = RegistryCoder(registry: registry, coder: CodableProfileCoder())
 
-        let dummyUploader = DummyWebUploader(url: URL(string: "http://127.0.0.1:9000")!)
-        let uploadManager = UploadManager(webUploader: dummyUploader, passcodeGenerator: { "123456" })
+        let dummyReceiver = DummyWebReceiver(url: URL(string: "http://127.0.0.1:9000")!)
+        let webReceiverManager = WebReceiverManager(webReceiver: dummyReceiver, passcodeGenerator: { "123456" })
 
         let distributionTarget: DistributionTarget = .appStore
 
@@ -84,7 +84,7 @@ extension AppContext {
             registryCoder: registryCoder,
             sysexManager: nil,
             tunnel: tunnel,
-            uploadManager: uploadManager
+            webReceiverManager: webReceiverManager
         )
     }()
 }
@@ -115,8 +115,8 @@ extension APIManager {
     }
 }
 
-extension UploadManager {
-    public static var forPreviews: UploadManager {
-        AppContext.forPreviews.uploadManager
+extension WebReceiverManager {
+    public static var forPreviews: WebReceiverManager {
+        AppContext.forPreviews.webReceiverManager
     }
 }

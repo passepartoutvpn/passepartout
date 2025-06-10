@@ -333,8 +333,8 @@
 "views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här. Alternativt hittar du andra alternativ i fliken \"Profiler\".";
 "views.tv.profiles.detail.profiles" = "Använd långt tryck för att visa tillgängliga åtgärder för en profil. Lokala profiler kan raderas här, medan iCloud-profiler endast kan tas bort från iOS- eller macOS-appen.";
 "views.tv.profiles.import_local" = "Importera lokal profil";
-"views.tv.web_uploader.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil.";
-"views.tv.web_uploader.toggle" = "Växla för att importera en lokal profil till din TV via en webbläsare.";
+"views.tv.web_receiver.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil.";
+"views.tv.web_receiver.toggle" = "Växla för att importera en lokal profil till din TV via en webbläsare.";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";
 "views.ui.purchase_required.restricted.help" = "Funktionen är begränsad";
@@ -342,4 +342,3 @@
 "views.version.extra" = "%@ är ett projekt som underhålls av %@.\n\nKällkoden är offentligt tillgänglig på GitHub under GPLv3-licensen. Du hittar länkar på hemsidan.";
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
-"views.web_uploader.message" = "Skanna denna QR-kod för att öppna en webbsida där du kan ladda upp din profil.";

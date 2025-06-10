@@ -333,8 +333,8 @@
 "views.tv.connection_profiles.header" = "Abra o %@ no seu dispositivo iOS ou macOS e ative a opção \"%@\" de um perfil para que ele apareça aqui. Alternativamente, você encontrará outras opções na aba \"Perfis\".";
 "views.tv.profiles.detail.profiles" = "Use a pressão prolongada para apresentar as ações disponíveis para um perfil. Perfis locais podem ser excluídos aqui, enquanto perfis do iCloud só podem ser excluídos pelo app iOS ou macOS.";
 "views.tv.profiles.import_local" = "Importar perfil local";
-"views.tv.web_uploader.qr" = "Digitalize o QR com a câmera para abrir uma página da web onde enviar seu perfil.";
-"views.tv.web_uploader.toggle" = "Alterne para importar um perfil local na sua TV via navegador web.";
+"views.tv.web_receiver.qr" = "Digitalize o QR com a câmera para abrir uma página da web onde enviar seu perfil.";
+"views.tv.web_receiver.toggle" = "Alterne para importar um perfil local na sua TV via navegador web.";
 "views.ui.connection_status.on_demand_suffix" = " (sob demanda)";
 "views.ui.purchase_required.purchase.help" = "Compra necessária";
 "views.ui.purchase_required.restricted.help" = "Recurso restrito";
@@ -342,4 +342,3 @@
 "views.version.extra" = "%@ é um projeto mantido por %@.\n\nO código-fonte está disponível publicamente no GitHub sob a licença GPLv3, você pode encontrar os links na página inicial.";
 "views.vpn.category.any" = "Todas as categorias";
 "views.vpn.no_servers" = "Nenhum servidor";
-"views.web_uploader.message" = "Escaneie este QR para abrir uma página da web onde carregar seu perfil.";

@@ -1,5 +1,5 @@
 //
-//  WebUploaderView.swift
+//  WebReceiverView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/5/25.
@@ -27,13 +27,13 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-struct WebUploaderView: View {
+struct WebReceiverView: View {
 
     @EnvironmentObject
     private var registryCoder: RegistryCoder
 
     @ObservedObject
-    var uploadManager: UploadManager
+    var webReceiverManager: WebReceiverManager
 
     let registry: Registry
 
@@ -45,23 +45,23 @@ struct WebUploaderView: View {
 
     var body: some View {
         VStack {
-            if let website = uploadManager.website {
+            if let website = webReceiverManager.website {
                 view(forWebsite: website)
             } else {
-                Text(Strings.Views.Tv.WebUploader.toggle)
+                Text(Strings.Views.Tv.WebReceiver.toggle)
             }
         }
         .task(handleUploadedFile)
         .onDisappear {
-            uploadManager.stop()
+            webReceiverManager.stop()
         }
     }
 }
 
-private extension WebUploaderView {
-    func view(forWebsite website: UploadManager.Website) -> some View {
+private extension WebReceiverView {
+    func view(forWebsite website: WebReceiverManager.Website) -> some View {
         VStack {
-            Text(Strings.Views.Tv.WebUploader.qr)
+            Text(Strings.Views.Tv.WebReceiver.qr)
             QRCodeView(text: website.url.absoluteString)
                 .frame(width: 400)
                 .padding(.vertical)
@@ -85,11 +85,11 @@ private extension WebUploaderView {
     }
 }
 
-private extension WebUploaderView {
+private extension WebReceiverView {
 
     @Sendable
     func handleUploadedFile() async {
-        for await file in uploadManager.files {
+        for await file in webReceiverManager.files {
             pp_log_g(.App.web, .info, "Uploaded: \(file.name), \(file.contents.count) bytes")
             do {
                 let input: ProfileImporterInput = .contents(filename: file.name, data: file.contents)
@@ -103,7 +103,7 @@ private extension WebUploaderView {
                 profile = try builder.tryBuild()
                 try await profileManager.save(profile, isLocal: true)
 
-                uploadManager.renewPasscode()
+                webReceiverManager.renewPasscode()
             } catch {
                 pp_log_g(.App.web, .error, "Unable to import uploaded profile: \(error)")
                 errorHandler.handle(error)
@@ -115,13 +115,13 @@ private extension WebUploaderView {
 // MARK: -
 
 #Preview {
-    WebUploaderView(
-        uploadManager: .forPreviews,
+    WebReceiverView(
+        webReceiverManager: .forPreviews,
         registry: Registry(),
         profileManager: .forPreviews,
         errorHandler: .default()
     )
     .task {
-        try? UploadManager.forPreviews.start()
+        try? WebReceiverManager.forPreviews.start()
     }
 }

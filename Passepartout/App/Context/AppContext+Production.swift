@@ -196,12 +196,12 @@ extension AppContext {
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
-        let webUploader = NIOWebUploader(port: constants.webUploader.port)
-        let uploadManager = UploadManager(webUploader: webUploader) {
-            dependencies.webPasscodeGenerator(length: constants.webUploader.passcodeLength)
+        let webReceiver = NIOWebReceiver(port: constants.webReceiver.port)
+        let webReceiverManager = WebReceiverManager(webReceiver: webReceiver) {
+            dependencies.webPasscodeGenerator(length: constants.webReceiver.passcodeLength)
         }
 #else
-        let uploadManager = UploadManager()
+        let webReceiverManager = WebReceiverManager()
 #endif
 
         // MARK: Eligibility
@@ -273,7 +273,7 @@ extension AppContext {
             registryCoder: dependencies.registryCoder,
             sysexManager: sysexManager,
             tunnel: tunnel,
-            uploadManager: uploadManager,
+            webReceiverManager: webReceiverManager,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )
     }

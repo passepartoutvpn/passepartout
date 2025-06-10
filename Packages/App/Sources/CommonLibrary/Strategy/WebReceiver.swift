@@ -1,5 +1,5 @@
 //
-//  WebUploader.swift
+//  WebReceiver.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/3/25.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public protocol WebUploader {
+public protocol WebReceiver {
     func start(passcode: String?, onReceive: @escaping (String, String) -> Void) throws -> URL
 
     func stop()

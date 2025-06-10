@@ -333,8 +333,8 @@
 "views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj. Alternatywnie znajdziesz inne opcje na karcie „Profile”.";
 "views.tv.profiles.detail.profiles" = "Użyj długiego naciśnięcia, aby wyświetlić dostępne akcje dla profilu. Lokalne profile można usuwać tutaj, natomiast profile iCloud tylko z aplikacji iOS lub macOS.";
 "views.tv.profiles.import_local" = "Importuj lokalny profil";
-"views.tv.web_uploader.qr" = "Zeskanuj kod QR aparatem, aby otworzyć stronę, na której możesz przesłać swój profil.";
-"views.tv.web_uploader.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";
+"views.tv.web_receiver.qr" = "Zeskanuj kod QR aparatem, aby otworzyć stronę, na której możesz przesłać swój profil.";
+"views.tv.web_receiver.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";
 "views.ui.connection_status.on_demand_suffix" = " (na żądanie)";
 "views.ui.purchase_required.purchase.help" = "Wymagana zakup";
 "views.ui.purchase_required.restricted.help" = "Funkcja jest ograniczona";
@@ -342,4 +342,3 @@
 "views.version.extra" = "%@ to projekt utrzymywany przez %@.\n\nKod źródłowy jest dostępny publicznie na GitHub pod licencją GPLv3. Linki można znaleźć na stronie głównej.";
 "views.vpn.category.any" = "Wszystkie kategorie";
 "views.vpn.no_servers" = "Brak serwerów";
-"views.web_uploader.message" = "Zeskanuj ten kod QR, aby otworzyć stronę do przesłania profilu.";

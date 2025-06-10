@@ -77,7 +77,7 @@ extension PassepartoutApp {
             profileManager: context.profileManager,
             tunnel: context.tunnel,
             registry: context.registry,
-            uploadManager: context.uploadManager
+            webReceiverManager: context.webReceiverManager
         )
     }
 }

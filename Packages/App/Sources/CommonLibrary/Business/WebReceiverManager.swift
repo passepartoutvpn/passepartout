@@ -1,5 +1,5 @@
 //
-//  UploadManager.swift
+//  WebReceiverManager.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/4/25.
@@ -27,7 +27,7 @@ import CommonUtils
 import Foundation
 
 @MainActor
-public final class UploadManager: ObservableObject {
+public final class WebReceiverManager: ObservableObject {
     public struct Website: Sendable {
         public let url: URL
 
@@ -42,7 +42,7 @@ public final class UploadManager: ObservableObject {
 
     public typealias PasscodeGenerator = () -> String
 
-    private let webUploader: WebUploader
+    private let webReceiver: WebReceiver
 
     private let passcodeGenerator: PasscodeGenerator?
 
@@ -60,17 +60,17 @@ public final class UploadManager: ObservableObject {
     }
 
     public init(
-        webUploader: WebUploader,
+        webReceiver: WebReceiver,
         passcodeGenerator: PasscodeGenerator? = nil
     ) {
-        self.webUploader = webUploader
+        self.webReceiver = webReceiver
         self.passcodeGenerator = passcodeGenerator
         filesStream = PassthroughStream()
     }
 
     public func start() throws {
         let passcode = passcodeGenerator?()
-        let url = try webUploader.start(passcode: passcode) { [weak self] in
+        let url = try webReceiver.start(passcode: passcode) { [weak self] in
             self?.filesStream.send(File(name: $0, contents: $1))
         }
         website = Website(url: url, passcode: passcode)
@@ -82,7 +82,7 @@ public final class UploadManager: ObservableObject {
     }
 
     public func stop() {
-        webUploader.stop()
+        webReceiver.stop()
         website = nil
     }
 

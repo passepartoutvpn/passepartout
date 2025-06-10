@@ -1,5 +1,5 @@
 //
-//  NIOWebUploader.swift
+//  NIOWebReceiver.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/3/25.
@@ -28,7 +28,7 @@ import Foundation
 import NIO
 import NIOHTTP1
 
-public final class NIOWebUploader: WebUploader, @unchecked Sendable {
+public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
     private let port: Int
 
     private var group: MultiThreadedEventLoopGroup?
@@ -51,7 +51,7 @@ public final class NIOWebUploader: WebUploader, @unchecked Sendable {
             .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)
             .childChannelInitializer { channel in
                 channel.pipeline.configureHTTPServerPipeline().flatMap {
-                    channel.pipeline.addHandler(NIOWebUploaderHandler(passcode: passcode) {
+                    channel.pipeline.addHandler(NIOWebReceiverHandler(passcode: passcode) {
                         onReceive($0, $1)
                     })
                 }
@@ -99,7 +99,7 @@ public final class NIOWebUploader: WebUploader, @unchecked Sendable {
     }
 }
 
-private extension NIOWebUploader {
+private extension NIOWebReceiver {
     func firstIPv4Address(withInterfacePrefix prefix: String) -> String? {
         var firstAddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&firstAddr) == 0, let firstAddr else {

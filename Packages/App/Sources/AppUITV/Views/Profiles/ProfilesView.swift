@@ -36,7 +36,7 @@ struct ProfilesView: View {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var uploadManager: UploadManager
+    var webReceiverManager: WebReceiverManager
 
     let registry: Registry
 
@@ -71,7 +71,7 @@ private extension ProfilesView {
     var detailView: some View {
         DetailView(
             detail: detail,
-            uploadManager: uploadManager,
+            webReceiverManager: webReceiverManager,
             registry: registry,
             profileManager: profileManager,
             errorHandler: errorHandler
@@ -80,11 +80,11 @@ private extension ProfilesView {
     }
 
     var importSection: some View {
-        webUploaderButton
+        webReceiverButton
             .themeSection(header: Strings.Global.Actions.import)
     }
 
-    var webUploaderButton: some View {
+    var webReceiverButton: some View {
         Toggle(Strings.Views.Tv.Profiles.importLocal, isOn: isUploaderEnabled)
             .focused($detail, equals: .import)
     }
@@ -120,17 +120,17 @@ private extension ProfilesView {
 private extension ProfilesView {
     var isUploaderEnabled: Binding<Bool> {
         Binding {
-            uploadManager.isStarted
+            webReceiverManager.isStarted
         } set: {
             if $0 {
                 do {
-                    try uploadManager.start()
+                    try webReceiverManager.start()
                 } catch {
                     pp_log_g(.app, .error, "Unable to start web uploader: \(error)")
                     errorHandler.handle(error)
                 }
             } else {
-                uploadManager.stop()
+                webReceiverManager.stop()
             }
        }
     }
@@ -154,7 +154,7 @@ private struct DetailView: View {
     let detail: Detail?
 
     @ObservedObject
-    var uploadManager: UploadManager
+    var webReceiverManager: WebReceiverManager
 
     let registry: Registry
 
@@ -182,8 +182,8 @@ private struct DetailView: View {
 
 private extension DetailView {
     var importView: some View {
-        WebUploaderView(
-            uploadManager: uploadManager,
+        WebReceiverView(
+            webReceiverManager: webReceiverManager,
             registry: registry,
             profileManager: profileManager,
             errorHandler: errorHandler
@@ -196,7 +196,7 @@ private extension DetailView {
 #Preview {
     ProfilesView(
         profileManager: .forPreviews,
-        uploadManager: .forPreviews,
+        webReceiverManager: .forPreviews,
         registry: Registry()
     )
     .withMockEnvironment()

@@ -1,5 +1,5 @@
 //
-//  DummyWebUploader.swift
+//  DummyWebReceiver.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/5/25.
@@ -25,7 +25,7 @@
 
 import Foundation
 
-public final class DummyWebUploader: WebUploader {
+public final class DummyWebReceiver: WebReceiver {
     private let url: URL
 
     public init(url: URL) {
@@ -33,17 +33,17 @@ public final class DummyWebUploader: WebUploader {
     }
 
     public func start(passcode: String?, onReceive: @escaping (String, String) -> Void) throws -> URL {
-//        assertionFailure("DummyWebUploader: start()")
+//        assertionFailure("DummyWebReceiver: start()")
         return url
     }
 
     public func stop() {
-//        assertionFailure("DummyWebUploader: stop()")
+//        assertionFailure("DummyWebReceiver: stop()")
     }
 }
 
-extension UploadManager {
+extension WebReceiverManager {
     public convenience init() {
-        self.init(webUploader: DummyWebUploader(url: URL(fileURLWithPath: "")))
+        self.init(webReceiver: DummyWebReceiver(url: URL(fileURLWithPath: "")))
     }
 }

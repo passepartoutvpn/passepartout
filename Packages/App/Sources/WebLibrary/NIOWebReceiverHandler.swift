@@ -1,5 +1,5 @@
 //
-//  NIOWebUploaderHandler.swift
+//  NIOWebReceiverHandler.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/6/25.
@@ -29,7 +29,7 @@ import Foundation
 import NIO
 import NIOHTTP1
 
-final class NIOWebUploaderHandler {
+final class NIOWebReceiverHandler {
     typealias InboundIn = HTTPServerRequestPart
 
     typealias OutboundOut = HTTPServerResponsePart
@@ -63,7 +63,7 @@ final class NIOWebUploaderHandler {
 
 // MARK: - ChannelInboundHandler
 
-extension NIOWebUploaderHandler: ChannelInboundHandler {
+extension NIOWebReceiverHandler: ChannelInboundHandler {
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let reqPart = unwrapInboundIn(data)
         switch reqPart {
@@ -96,7 +96,7 @@ extension NIOWebUploaderHandler: ChannelInboundHandler {
 
 // MARK: - Routes
 
-private extension NIOWebUploaderHandler {
+private extension NIOWebReceiverHandler {
     func handleGET(_ context: ChannelHandlerContext, uri: String) -> Bool {
         guard uri == "/" else {
             return false
@@ -134,7 +134,7 @@ private extension NIOWebUploaderHandler {
 
 // MARK: - Helpers
 
-extension NIOWebUploaderHandler {
+extension NIOWebReceiverHandler {
     func sendTextResponse(
         _ context: ChannelHandlerContext,
         with status: HTTPResponseStatus,

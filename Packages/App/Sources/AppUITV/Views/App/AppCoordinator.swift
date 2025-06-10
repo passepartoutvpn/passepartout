@@ -39,7 +39,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     private let registry: Registry
 
-    private let uploadManager: UploadManager
+    private let webReceiverManager: WebReceiverManager
 
     @State
     private var paywallReason: PaywallReason?
@@ -57,12 +57,12 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
         profileManager: ProfileManager,
         tunnel: ExtendedTunnel,
         registry: Registry,
-        uploadManager: UploadManager
+        webReceiverManager: WebReceiverManager
     ) {
         self.profileManager = profileManager
         self.tunnel = tunnel
         self.registry = registry
-        self.uploadManager = uploadManager
+        self.webReceiverManager = webReceiverManager
     }
 
     public var body: some View {
@@ -120,7 +120,7 @@ private extension AppCoordinator {
     var profilesView: some View {
         ProfilesView(
             profileManager: profileManager,
-            uploadManager: uploadManager,
+            webReceiverManager: webReceiverManager,
             registry: registry
         )
     }
@@ -220,7 +220,7 @@ extension AppCoordinator {
         profileManager: .forPreviews,
         tunnel: .forPreviews,
         registry: Registry(),
-        uploadManager: UploadManager()
+        webReceiverManager: WebReceiverManager()
     )
     .withMockEnvironment()
 }

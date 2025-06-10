@@ -70,8 +70,8 @@ private struct TVPasscodeView: View {
     var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        PasscodeInputView(length: Constants.shared.webUploader.passcodeLength) { passcode in
-            let client = WebUploaderClient(registryCoder: registryCoder, profile: profile)
+        PasscodeInputView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
+            let client = WebUploader(registryCoder: registryCoder, profile: profile)
             do {
                 try await client.send(to: url, passcode: passcode)
                 isPresented = false
