@@ -333,7 +333,7 @@
 "views.tv.connection_profiles.header" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。或者，你可以在“配置文件”标签页找到其他选项。";
 "views.tv.profiles.detail.profiles" = "长按以显示可用的配置文件操作。本地配置文件可以在这里删除，而 iCloud 配置文件只能在 iOS 或 macOS 应用中删除。";
 "views.tv.profiles.import_local" = "导入本地配置文件";
-"views.tv.web_receiver.qr" = "使用相机扫描此二维码，打开网页以上传你的配置文件。";
+"views.tv.web_receiver.qr" = "使用相机扫描二维码以打开网页，上传您的配置文件。确保您连接到同一网络。";
 "views.tv.web_receiver.toggle" = "切换以通过网页浏览器将本地配置文件导入电视。";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";

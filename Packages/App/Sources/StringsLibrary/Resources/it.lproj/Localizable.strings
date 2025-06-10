@@ -333,7 +333,7 @@
 "views.tv.connection_profiles.header" = "Apri %@ sul tuo dispositivo iOS o macOS e attiva l'interruttore \"%@\" di un profilo per farlo comparire qui. In alternativa, troverai altre opzioni nella scheda \"Profili\".";
 "views.tv.profiles.detail.profiles" = "Usa la pressione prolungata per mostrare le azioni disponibili per un profilo. I profili locali possono essere eliminati qui, mentre i profili iCloud solo dall’app iOS o macOS.";
 "views.tv.profiles.import_local" = "Importa profilo locale";
-"views.tv.web_receiver.qr" = "Scansiona il QR con la fotocamera per aprire una pagina web dove caricare il tuo profilo.";
+"views.tv.web_receiver.qr" = "Inquadra il QR con la fotocamera per aprire una pagina web dove caricare il tuo profilo. Assicurati di essere connesso alla stessa rete.";
 "views.tv.web_receiver.toggle" = "Attiva per importare un profilo locale sulla tua TV tramite browser web.";
 "views.ui.connection_status.on_demand_suffix" = " (on-demand)";
 "views.ui.purchase_required.purchase.help" = "Acquisto richiesto";

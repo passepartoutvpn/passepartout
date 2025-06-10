@@ -333,7 +333,7 @@
 "views.tv.connection_profiles.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen. Alternatief vind je andere opties in het tabblad \"Profielen\".";
 "views.tv.profiles.detail.profiles" = "Gebruik de lange druk om beschikbare acties voor een profiel te tonen. Lokale profielen kunnen hier worden verwijderd, terwijl iCloud-profielen alleen in de iOS- of macOS-app kunnen worden verwijderd.";
 "views.tv.profiles.import_local" = "Lokaal profiel importeren";
-"views.tv.web_receiver.qr" = "Scan de QR-code met je camera om een webpagina te openen waarop je je profiel kunt uploaden.";
+"views.tv.web_receiver.qr" = "Scan de QR-code met je camera om een webpagina te openen waar je je profiel kunt uploaden. Zorg dat je verbonden bent met hetzelfde netwerk.";
 "views.tv.web_receiver.toggle" = "Schakel om een lokaal profiel via een webbrowser op je TV te importeren.";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";

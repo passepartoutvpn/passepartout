@@ -333,7 +333,7 @@
 "views.tv.connection_profiles.header" = "Öffne %@ auf deinem iOS- oder macOS-Gerät und aktiviere den „%@“-Schalter eines Profils, damit es hier erscheint. Alternativ findest du weitere Optionen im Tab „Profile“.";
 "views.tv.profiles.detail.profiles" = "Nutze den Langdruck, um die verfügbaren Aktionen für ein Profil anzuzeigen. Lokale Profile können hier gelöscht werden, iCloud-Profile jedoch nur in der iOS- oder macOS-App.";
 "views.tv.profiles.import_local" = "Lokales Profil importieren";
-"views.tv.web_receiver.qr" = "Scanne den QR-Code mit deiner Kamera, um eine Webseite zu öffnen, auf der du dein Profil hochladen kannst.";
+"views.tv.web_receiver.qr" = "Scannen Sie den QR-Code mit Ihrer Kamera, um eine Webseite zu öffnen, auf der Sie Ihr Profil hochladen können. Stellen Sie sicher, dass Sie mit demselben Netzwerk verbunden sind.";
 "views.tv.web_receiver.toggle" = "Umschalten, um ein lokales Profil über einen Webbrowser auf deinen Fernseher zu importieren.";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";
