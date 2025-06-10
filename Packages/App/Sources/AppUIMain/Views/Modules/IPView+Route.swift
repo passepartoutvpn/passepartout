@@ -53,7 +53,7 @@ extension IPView {
                 if !isDefault {
                     Section {
                         ThemeTextField(Strings.Global.Nouns.destination, text: $destinationString, placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family))
-                        ThemeTextField(Strings.Global.Nouns.gateway, text: $gatewayString, placeholder: Strings.Unlocalized.Placeholders.ipGateway(forFamily: family))
+                        ThemeTextField(Strings.Global.Nouns.gateway, text: $gatewayString, placeholder: Strings.Unlocalized.Placeholders.ipAddress(forFamily: family))
                     }
                 }
             }
