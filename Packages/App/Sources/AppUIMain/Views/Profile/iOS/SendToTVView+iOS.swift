@@ -42,7 +42,6 @@ struct SendToTVView: View {
     var body: some View {
         qrScanView
             .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-            .themeNavigationDetail()
             .themeNavigationStack(
                 closable: true,
                 onClose: {
@@ -83,6 +82,7 @@ private extension SendToTVView {
             isPresented = false
 #endif
         }
+        .themeNavigationDetail()
         .navigationTitle(Strings.Views.Profile.SendTv.title)
     }
 
@@ -90,8 +90,17 @@ private extension SendToTVView {
         SendToTVPasscodeView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
             try await onComplete(url, passcode)
         }
+        .themeNavigationDetail()
         .navigationTitle(Strings.Global.Nouns.passcode)
     }
+}
+
+#Preview {
+    SendToTVView(
+        isPresented: .constant(true),
+        onComplete: { _, _ in }
+    )
+    .withMockEnvironment()
 }
 
 #endif

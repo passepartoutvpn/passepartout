@@ -26,6 +26,10 @@
 import SwiftUI
 
 extension URL {
+    public init?(httpAddress: String, port: Int) {
+        self.init(string: "http://\(httpAddress):\(port)")
+    }
+
     public var filename: String {
         deletingPathExtension()
             .lastPathComponent

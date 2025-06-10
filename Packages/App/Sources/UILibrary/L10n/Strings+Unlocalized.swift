@@ -86,6 +86,10 @@ extension Strings {
             public static let pacURL = "http://proxy.com/pac.url"
 
             public static let keepAlive = "30"
+
+            public static let webUploaderPort = "5000"
+
+            public static let webUploaderPasscode = "123456"
         }
 
         public enum Issues {

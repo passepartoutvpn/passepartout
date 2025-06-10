@@ -26,6 +26,7 @@
 #if os(macOS)
 
 import CommonLibrary
+import CommonUtils
 import SwiftUI
 
 struct SendToTVView: View {
@@ -35,27 +36,78 @@ struct SendToTVView: View {
 
     let onComplete: (URL, String) async throws -> Void
 
+    @State
+    private var address = ""
+
+    @State
+    private var port = String(Constants.shared.webReceiver.port)
+
+    @State
+    private var passcode = ""
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
+
     var body: some View {
         formView
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(Strings.Global.Actions.cancel, role: .cancel) {
-                        isPresented = false
-                    }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Upload") {
-                    }
-                }
+                ToolbarItem(placement: .cancellationAction, content: cancelButton)
+                ToolbarItem(placement: .confirmationAction, content: confirmButton)
             }
             .themeNavigationStack()
+            .withErrorHandler(errorHandler)
     }
 }
 
 private extension SendToTVView {
     var formView: some View {
-        SendToTVFormView()
+        SendToTVFormView(address: $address, port: $port, passcode: $passcode)
     }
+
+    func cancelButton() -> some View {
+        Button(Strings.Global.Actions.cancel, role: .cancel) {
+            isPresented = false
+        }
+    }
+
+    func confirmButton() -> some View {
+        // FIXME: ###, l10n
+        Button("Upload", action: performUpload)
+    }
+}
+
+private extension SendToTVView {
+    var url: URL? {
+        guard let port = Int(port) else {
+            return nil
+        }
+        return URL(httpAddress: address, port: port)
+    }
+
+    var canUpload: Bool {
+        url != nil
+    }
+
+    func performUpload() {
+        guard let url else {
+            return
+        }
+        Task {
+            do {
+                try await onComplete(url, passcode)
+            } catch {
+                errorHandler.handle(error)
+            }
+        }
+    }
+}
+
+#Preview {
+    SendToTVView(
+        isPresented: .constant(true),
+        onComplete: { _, _ in }
+    )
+    .withMockEnvironment()
 }
 
 #endif
