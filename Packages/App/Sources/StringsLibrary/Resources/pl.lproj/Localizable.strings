@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "Operacja przekroczyła limit czasu.";
 "errors.app.permission_denied" = "Brak uprawnień";
 "errors.app.tunnel" = "Nie można wykonać operacji.";
+"errors.app.web_receiver" = "Nie można rozpocząć importu. Upewnij się, że Twój telewizor jest prawidłowo podłączony do sieci lokalnej.";
 "errors.tunnel.auth" = "Błąd uwierzytelniania";
 "errors.tunnel.compression" = "Kompresja nieobsługiwana";
 "errors.tunnel.dns" = "Błąd DNS";

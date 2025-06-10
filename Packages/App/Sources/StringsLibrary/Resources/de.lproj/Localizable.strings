@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "Die Operation hat das Zeitlimit überschritten.";
 "errors.app.permission_denied" = "Zugriff verweigert";
 "errors.app.tunnel" = "Aktion konnte nicht ausgeführt werden.";
+"errors.app.web_receiver" = "Import kann nicht gestartet werden. Stellen Sie sicher, dass Ihr Fernseher ordnungsgemäß mit dem lokalen Netzwerk verbunden ist.";
 "errors.tunnel.auth" = "Authentifizierung fehlgeschlagen";
 "errors.tunnel.compression" = "Kompression wird nicht unterstützt";
 "errors.tunnel.dns" = "DNS fehlgeschlagen";
