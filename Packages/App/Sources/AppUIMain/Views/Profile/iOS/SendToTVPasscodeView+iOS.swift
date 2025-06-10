@@ -29,8 +29,11 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
+// FIXME: ###, iOS passcode instructions
 struct SendToTVPasscodeView: View {
-    let registryCoder: RegistryCoder
+
+    @EnvironmentObject
+    private var registryCoder: RegistryCoder
 
     let profile: Profile
 

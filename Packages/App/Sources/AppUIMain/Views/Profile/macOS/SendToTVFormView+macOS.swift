@@ -1,5 +1,5 @@
 //
-//  SendToTVView.swift
+//  SendToTVView+macOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/8/25.
@@ -23,20 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import CommonUtils
+#if os(macOS)
+
 import SwiftUI
 
-struct SendToTVView: View {
-
-    @EnvironmentObject
-    var registryCoder: RegistryCoder
-
-    let profile: Profile
-
-    @Binding
-    var isPresented: Bool
-
-    @Binding
-    var path: NavigationPath
+// FIXME: ###, macOS form
+struct SendToTVFormView: View {
+    var body: some View {
+        EmptyView()
+    }
 }
+
+#endif

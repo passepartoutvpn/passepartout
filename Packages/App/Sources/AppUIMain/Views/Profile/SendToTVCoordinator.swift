@@ -33,10 +33,7 @@ struct SendToTVCoordinator: View {
     @Binding
     var isPresented: Bool
 
-    @State
-    private var path = NavigationPath()
-
     var body: some View {
-        SendToTVView(profile: profile, isPresented: $isPresented, path: $path)
+        SendToTVView(profile: profile, isPresented: $isPresented)
     }
 }

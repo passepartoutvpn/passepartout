@@ -25,12 +25,18 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import SwiftUI
 
-// FIXME: ###, upload macOS
-extension SendToTVView {
+// FIXME: ###, macOS upload
+struct SendToTVView: View {
+    let profile: Profile
+
+    @Binding
+    var isPresented: Bool
+
     var body: some View {
-        EmptyView()
+        formView
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(Strings.Global.Actions.cancel, role: .cancel) {
@@ -43,6 +49,12 @@ extension SendToTVView {
                 }
             }
             .themeNavigationStack()
+    }
+}
+
+private extension SendToTVView {
+    var formView: some View {
+        SendToTVFormView()
     }
 }
 

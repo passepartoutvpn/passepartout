@@ -29,8 +29,15 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-// FIXME: ###, upload iOS
-extension SendToTVView {
+struct SendToTVView: View {
+    let profile: Profile
+
+    @Binding
+    var isPresented: Bool
+
+    @State
+    private var path = NavigationPath()
+
     var body: some View {
         qrScanView
             .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
@@ -77,7 +84,6 @@ private extension SendToTVView {
 
     func passcodeView(url: URL) -> some View {
         SendToTVPasscodeView(
-            registryCoder: registryCoder,
             profile: profile,
             url: url,
             isPresented: $isPresented

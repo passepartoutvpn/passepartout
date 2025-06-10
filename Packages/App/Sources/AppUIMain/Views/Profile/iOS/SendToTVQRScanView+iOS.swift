@@ -28,6 +28,7 @@
 import CommonUtils
 import SwiftUI
 
+// FIXME: ###, iOS QR instructions
 struct SendToTVQRScanView: View {
     let onDetect: (String) -> Void
 
