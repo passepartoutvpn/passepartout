@@ -64,8 +64,7 @@ struct ModuleListView: View, Routable {
                         Text(Strings.Global.Nouns.general)
                         PurchaseRequiredView(
                             requiring: requiredGeneralFeatures,
-                            reason: $paywallReason,
-                            suggesting: suggestedGeneralProducts
+                            reason: $paywallReason
                         )
                     }
                 }

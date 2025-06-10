@@ -43,19 +43,15 @@ extension PaywallModifier {
 
         public let requiredFeatures: Set<AppFeature>
 
-        public let suggestedProducts: Set<AppProduct>?
-
         public let action: Action
 
         public init(
             _ profile: Profile?,
             requiredFeatures: Set<AppFeature>,
-            suggestedProducts: Set<AppProduct>? = nil,
             action: Action
         ) {
             self.profile = profile
             self.requiredFeatures = requiredFeatures
-            self.suggestedProducts = suggestedProducts
             self.action = action
         }
 

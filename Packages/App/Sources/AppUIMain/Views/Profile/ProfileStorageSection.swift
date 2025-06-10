@@ -73,12 +73,7 @@ private extension ProfileStorageSection {
     var sharingPurchaseButton: some View {
         PurchaseRequiredView(
             requiring: sharingRequirements,
-            reason: $paywallReason,
-            suggesting: {
-                var products = iapManager.suggestedProducts()
-                products.insert(.Features.appleTV)
-                return products
-            }()
+            reason: $paywallReason
         )
     }
 
@@ -96,12 +91,7 @@ private extension ProfileStorageSection {
     var tvPurchaseButton: some View {
         PurchaseRequiredView(
             requiring: tvRequirements,
-            reason: $paywallReason,
-            suggesting: {
-                var products = iapManager.suggestedProducts(filter: .onlyComplete)
-                products.insert(.Features.appleTV)
-                return products
-            }()
+            reason: $paywallReason
         )
     }
 }

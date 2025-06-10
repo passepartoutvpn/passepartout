@@ -43,9 +43,6 @@ struct PaywallView: View {
 
     let requiredFeatures: Set<AppFeature>
 
-    // nil = essentials
-    let suggestedProducts: Set<AppProduct>?
-
     @State
     private var isFetchingProducts = true
 
@@ -74,7 +71,7 @@ struct PaywallView: View {
                 actions: pendingActions,
                 message: pendingMessage
             )
-            .task(id: suggestedProducts) {
+            .task(id: requiredFeatures) {
                 await fetchAvailableProducts()
             }
             .withErrorHandler(errorHandler)
@@ -230,7 +227,7 @@ private extension PaywallView {
             isFetchingProducts = false
         }
         do {
-            let rawProducts = suggestedProducts ?? iapManager.suggestedProducts()
+            let rawProducts = iapManager.suggestedProducts()
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
@@ -323,8 +320,7 @@ private extension AppProduct {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        requiredFeatures: [.appleTV],
-        suggestedProducts: [.Features.appleTV, .Complete.OneTime.lifetime]
+        requiredFeatures: [.appleTV]
     )
     .withMockEnvironment()
 }

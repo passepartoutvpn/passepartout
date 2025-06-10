@@ -195,7 +195,6 @@ private extension ProfileCoordinator {
             setLater(PaywallReason(
                 nil,
                 requiredFeatures: requiredFeatures,
-                suggestedProducts: nil,
                 action: .save
             )) {
                 paywallReason = $0

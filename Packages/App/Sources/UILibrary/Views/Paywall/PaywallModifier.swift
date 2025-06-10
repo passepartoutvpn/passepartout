@@ -191,8 +191,7 @@ private extension PaywallModifier {
         reason.map {
             PaywallView(
                 isPresented: $isPurchasing,
-                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures),
-                suggestedProducts: $0.suggestedProducts
+                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures)
             )
             .themeNavigationStack()
         }
