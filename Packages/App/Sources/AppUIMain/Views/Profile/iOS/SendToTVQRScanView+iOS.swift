@@ -45,9 +45,13 @@ private extension SendToTVQRScanView {
 
     // FIXME: ###, l10n
     var messageView: some View {
-        Text(Strings.Views.Profile.SendTv.Qr.message(Strings.Unlocalized.appleTV))
-            .multilineTextAlignment(.center)
-            .foregroundStyle(.white)
+        Text(Strings.Views.Profile.SendTv.Qr.message(
+            Strings.Global.Nouns.profiles,
+            Strings.Views.Tv.Profiles.importLocal,
+            Strings.Unlocalized.appleTV
+        ))
+        .multilineTextAlignment(.center)
+        .foregroundStyle(.white)
     }
 
     var videoView: some View {

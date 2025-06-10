@@ -56,7 +56,11 @@ private extension SendToTVFormView {
             Text(Strings.Unlocalized.url)
                 .themeTrailingValue(currentURLString)
         }
-        .themeSection(footer: Strings.Views.Profile.SendTv.Form.message(Strings.Unlocalized.appleTV), forcesFooter: true)
+        .themeSection(footer: Strings.Views.Profile.SendTv.Form.message(
+            Strings.Global.Nouns.profiles,
+            Strings.Views.Tv.Profiles.importLocal,
+            Strings.Unlocalized.appleTV
+        ), forcesFooter: true)
     }
 
     var passcodeSection: some View {

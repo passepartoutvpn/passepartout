@@ -930,9 +930,9 @@ public enum Strings {
         /// Send to TV
         public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
         public enum Form {
-          /// These compose the URL seen on your %@. Make sure to be on the same network.
-          public static func message(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "views.profile.send_tv.form.message", String(describing: p1), fallback: "These compose the URL seen on your %@. Make sure to be on the same network.")
+          /// Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.
+          public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+            return Strings.tr("Localizable", "views.profile.send_tv.form.message", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.")
           }
         }
         public enum Passcode {
@@ -940,9 +940,9 @@ public enum Strings {
           public static let message = Strings.tr("Localizable", "views.profile.send_tv.passcode.message", fallback: "Enter the passcode")
         }
         public enum Qr {
-          /// Scan the QR on your %@, making sure to be on the same network
-          public static func message(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), fallback: "Scan the QR on your %@, making sure to be on the same network")
+          /// Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network
+          public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+            return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network")
           }
         }
       }
