@@ -131,9 +131,14 @@ private extension NIOWebReceiver {
                     NI_NUMERICHOST
                 )
                 ipAddress = String(cString: cIPAddress)
+                guard let ipAddress, !ipAddress.starts(with: "169.254") else {
+                    continue
+                }
+                // success
                 break
             }
 
+            // leave if no more addresses
             guard let next = ptr.pointee.ifa_next else {
                 break
             }
