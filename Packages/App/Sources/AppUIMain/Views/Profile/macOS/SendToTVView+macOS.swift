@@ -29,10 +29,11 @@ import CommonLibrary
 import SwiftUI
 
 struct SendToTVView: View {
-    let profile: Profile
 
     @Binding
     var isPresented: Bool
+
+    let onComplete: (URL, String) async throws -> Void
 
     var body: some View {
         formView

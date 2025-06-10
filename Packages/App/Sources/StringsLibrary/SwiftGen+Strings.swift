@@ -926,6 +926,20 @@ public enum Strings {
           public static let footer = Strings.tr("Localizable", "views.profile.sections.name.footer", fallback: "Use this name to create your VPN automations from the Shortcuts app.")
         }
       }
+      public enum SendTv {
+        /// Send to TV
+        public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
+        public enum Passcode {
+          /// Enter the passcode
+          public static let message = Strings.tr("Localizable", "views.profile.send_tv.passcode.message", fallback: "Enter the passcode")
+        }
+        public enum Qr {
+          /// Scan the QR on your %@, making sure to be on the same network
+          public static func message(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), fallback: "Scan the QR on your %@, making sure to be on the same network")
+          }
+        }
+      }
     }
     public enum Providers {
       /// Clear filters
@@ -1043,8 +1057,8 @@ public enum Strings {
         }
       }
       public enum WebReceiver {
-        /// Scan the QR with your camera to open a web page where to upload your profile.
-        public static let qr = Strings.tr("Localizable", "views.tv.web_receiver.qr", fallback: "Scan the QR with your camera to open a web page where to upload your profile.")
+        /// Scan the QR with your camera to open a web page where to upload your profile. Make sure that you are connected to the same network.
+        public static let qr = Strings.tr("Localizable", "views.tv.web_receiver.qr", fallback: "Scan the QR with your camera to open a web page where to upload your profile. Make sure that you are connected to the same network.")
         /// Toggle to import a local profile into your TV with a web browser.
         public static let toggle = Strings.tr("Localizable", "views.tv.web_receiver.toggle", fallback: "Toggle to import a local profile into your TV with a web browser.")
       }

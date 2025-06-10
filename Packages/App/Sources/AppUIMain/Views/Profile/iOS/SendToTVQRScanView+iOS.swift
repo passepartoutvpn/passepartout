@@ -28,15 +28,56 @@
 import CommonUtils
 import SwiftUI
 
-// FIXME: ###, iOS QR instructions
 struct SendToTVQRScanView: View {
     let onDetect: (String) -> Void
 
-    let onClose: () -> Void
+    let onError: (Error) -> Void
 
     var body: some View {
-        QRScanView(onDetect: onDetect, onClose: onClose)
+        ZStack {
+            videoView
+            overlayView
+        }
     }
+}
+
+private extension SendToTVQRScanView {
+
+    // FIXME: ###, l10n
+    var messageView: some View {
+        Text(Strings.Views.Profile.SendTv.Qr.message(Strings.Unlocalized.appleTV))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.white)
+    }
+
+    var videoView: some View {
+        QRScanView(
+            onDetect: onDetect,
+            onError: onError
+        )
+    }
+
+    var overlayView: some View {
+        VStack {
+            messageView
+                .padding(15.0)
+                .background(.black)
+                .cornerRadius(15.0)
+                .padding()
+
+            Spacer()
+        }
+    }
+}
+
+// MARK: -
+
+
+#Preview {
+    SendToTVQRScanView(
+        onDetect: { _ in },
+        onError: { _ in }
+    )
 }
 
 #endif

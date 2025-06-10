@@ -33,18 +33,18 @@ import Vision
 public struct QRScanView: UIViewControllerRepresentable {
     private let onDetect: (String) -> Void
 
-    private let onClose: () -> Void
+    private let onError: (Error) -> Void
 
     public init(
         onDetect: @escaping (String) -> Void,
-        onClose: @escaping () -> Void
+        onError: @escaping (Error) -> Void
     ) {
         self.onDetect = onDetect
-        self.onClose = onClose
+        self.onError = onError
     }
 
     public func makeUIViewController(context: Context) -> UIViewController {
-        QRScanViewController(onDetect: onDetect, onClose: onClose)
+        QRScanViewController(onDetect: onDetect, onError: onError)
     }
 
     public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
@@ -52,6 +52,9 @@ public struct QRScanView: UIViewControllerRepresentable {
 }
 
 class QRScanViewController: UIViewController {
+    private struct QRScanError: Error {
+    }
+
     private let queue = DispatchQueue(label: "QRScanViewController")
 
     private let session = AVCaptureSession()
@@ -60,7 +63,7 @@ class QRScanViewController: UIViewController {
 
     private var onDetect: ((String) -> Void)?
 
-    private let onClose: (() -> Void)?
+    private let onError: ((Error) -> Void)?
 
     required init?(coder: NSCoder) {
         fatalError()
@@ -69,11 +72,11 @@ class QRScanViewController: UIViewController {
     init(
         once: Bool = true,
         onDetect: @escaping (String) -> Void,
-        onClose: (() -> Void)? = nil
+        onError: ((Error) -> Void)? = nil
     ) {
         self.once = once
         self.onDetect = onDetect
-        self.onClose = onClose
+        self.onError = onError
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -84,30 +87,28 @@ class QRScanViewController: UIViewController {
         do {
             guard let device = AVCaptureDevice.default(for: .video) else {
                 NSLog("QR: Unable to get video device")
-                onClose?()
-                return
+                throw QRScanError()
             }
             input = try AVCaptureDeviceInput(device: device)
+            session.beginConfiguration()
+            session.sessionPreset = .high
+            session.addInput(input)
+
+            let output = AVCaptureVideoDataOutput()
+            output.setSampleBufferDelegate(self, queue: queue)
+            session.addOutput(output)
+
+            let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+            previewLayer.frame = view.bounds
+            previewLayer.videoGravity = .resizeAspectFill
+            view.layer.addSublayer(previewLayer)
+
+            session.commitConfiguration()
+            queue.async { [weak self] in
+                self?.session.startRunning()
+            }
         } catch {
-            return
-        }
-
-        session.beginConfiguration()
-        session.sessionPreset = .high
-        session.addInput(input)
-
-        let output = AVCaptureVideoDataOutput()
-        output.setSampleBufferDelegate(self, queue: queue)
-        session.addOutput(output)
-
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = view.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-
-        session.commitConfiguration()
-        queue.async { [weak self] in
-            self?.session.startRunning()
+            onError?(error)
         }
     }
 }
@@ -153,6 +154,13 @@ extension QRScanViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
             NSLog("QR: Unable to perform image request: \(error)")
         }
     }
+}
+
+#Preview {
+    QRScanView(
+        onDetect: { _ in },
+        onError: { _ in }
+    )
 }
 
 #endif

@@ -30,10 +30,11 @@ import CommonUtils
 import SwiftUI
 
 struct SendToTVView: View {
-    let profile: Profile
 
     @Binding
     var isPresented: Bool
+
+    let onComplete: (URL, String) async throws -> Void
 
     @State
     private var path = NavigationPath()
@@ -41,6 +42,7 @@ struct SendToTVView: View {
     var body: some View {
         qrScanView
             .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+            .themeNavigationDetail()
             .themeNavigationStack(
                 closable: true,
                 onClose: {
@@ -72,22 +74,23 @@ private extension SendToTVView {
                 return
             }
             path.append(NavigationRoute.enterPasscode(url))
-        } onClose: {
+        } onError: { error in
 #if targetEnvironment(simulator)
 //            path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
             path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
 #else
+            pp_log_g(.app, .error, "Unable to open QR scanner: \(error)")
             isPresented = false
 #endif
         }
+        .navigationTitle(Strings.Views.Profile.SendTv.title)
     }
 
     func passcodeView(url: URL) -> some View {
-        SendToTVPasscodeView(
-            profile: profile,
-            url: url,
-            isPresented: $isPresented
-        )
+        SendToTVPasscodeView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
+            try await onComplete(url, passcode)
+        }
+        .navigationTitle(Strings.Global.Nouns.passcode)
     }
 }
 

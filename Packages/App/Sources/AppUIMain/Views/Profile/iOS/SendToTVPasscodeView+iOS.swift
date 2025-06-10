@@ -25,39 +25,53 @@
 
 #if os(iOS)
 
-import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-// FIXME: ###, iOS passcode instructions
 struct SendToTVPasscodeView: View {
+    let length: Int
 
-    @EnvironmentObject
-    private var registryCoder: RegistryCoder
-
-    let profile: Profile
-
-    let url: URL
-
-    @Binding
-    var isPresented: Bool
+    let onEnter: (String) async throws -> Void
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        PasscodeInputView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
-            let client = WebUploader(registryCoder: registryCoder, profile: profile)
-            do {
-                try await client.send(to: url, passcode: passcode)
-                isPresented = false
-            } catch {
-                errorHandler.handle(error)
-                throw error
-            }
+        VStack {
+            messageView
+            passcodeView
         }
         .withErrorHandler(errorHandler)
     }
+}
+
+private extension SendToTVPasscodeView {
+
+    // FIXME: ###, l10n
+    var messageView: some View {
+        Text(Strings.Views.Profile.SendTv.Passcode.message)
+    }
+
+    var passcodeView: some View {
+        PasscodeInputView(
+            length: length,
+            onEnter: {
+                do {
+                    try await onEnter($0)
+                } catch {
+                    errorHandler.handle(error)
+                    throw error
+                }
+            }
+        )
+    }
+}
+
+#Preview {
+    SendToTVPasscodeView(
+        length: 4,
+        onEnter: { _ in }
+    )
 }
 
 #endif
