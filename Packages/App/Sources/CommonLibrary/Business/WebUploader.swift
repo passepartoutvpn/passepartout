@@ -31,9 +31,16 @@ public final class WebUploader: ObservableObject, Sendable {
 
     private let profile: Profile
 
-    public init(registryCoder: RegistryCoder, profile: Profile) {
+    private let strategy: WebUploaderStrategy
+
+    public init(
+        registryCoder: RegistryCoder,
+        profile: Profile,
+        strategy: WebUploaderStrategy = URLSessionUploaderStrategy()
+    ) {
         self.registryCoder = registryCoder
         self.profile = profile
+        self.strategy = strategy
     }
 
     public func send(to url: URL, passcode: String) async throws {
@@ -44,29 +51,6 @@ public final class WebUploader: ObservableObject, Sendable {
         formBuilder.fields["passcode"] = MultipartForm.Field(passcode)
         formBuilder.fields["file"] = MultipartForm.Field(encodedProfile, filename: profile.name)
         let form = formBuilder.build()
-        let request = form.toURLRequest(url: url)
-
-        do {
-            let (_, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw AppError.webUploader(nil, nil)
-            }
-            let statusCode = httpResponse.statusCode
-            guard statusCode == 200 else {
-                switch statusCode {
-                case 400:
-                    assertionFailure("WebUploader: invalid form, bug in MultipartForm")
-                case 403:
-                    assertionFailure("WebUploader: passcode is missing or incorrect")
-                case 404:
-                    assertionFailure("WebUploader: URL not found")
-                default:
-                    break
-                }
-                throw AppError.webUploader(statusCode, nil)
-            }
-        } catch {
-            throw AppError.webUploader(nil, error)
-        }
+        try await strategy.upload(form, to: url)
     }
 }
