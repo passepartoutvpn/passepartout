@@ -32,55 +32,15 @@ import SwiftUI
 // FIXME: ###, upload iOS
 extension SendToTVView {
     var body: some View {
-        QRScanView { string in
-            guard let url = URL(string: string) else {
-                return
-            }
-            path.append(NavigationRoute.enterPasscode(url))
-        } onClose: {
-#if targetEnvironment(simulator)
-//            path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
-            path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
-#else
-            isPresented = false
-#endif
-        }
-        .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-        .themeNavigationStack(
-            closable: true,
-            onClose: {
-                isPresented = false
-            },
-            path: $path
-        )
-    }
-}
-
-private struct TVPasscodeView: View {
-    let registryCoder: RegistryCoder
-
-    let profile: Profile
-
-    let url: URL
-
-    @Binding
-    var isPresented: Bool
-
-    @StateObject
-    var errorHandler: ErrorHandler = .default()
-
-    var body: some View {
-        PasscodeInputView(length: Constants.shared.webReceiver.passcodeLength) { passcode in
-            let client = WebUploader(registryCoder: registryCoder, profile: profile)
-            do {
-                try await client.send(to: url, passcode: passcode)
-                isPresented = false
-            } catch {
-                errorHandler.handle(error)
-                throw error
-            }
-        }
-        .withErrorHandler(errorHandler)
+        qrScanView
+            .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+            .themeNavigationStack(
+                closable: true,
+                onClose: {
+                    isPresented = false
+                },
+                path: $path
+            )
     }
 }
 
@@ -93,13 +53,35 @@ private extension SendToTVView {
     func pushDestination(for item: NavigationRoute) -> some View {
         switch item {
         case .enterPasscode(let url):
-            TVPasscodeView(
-                registryCoder: registryCoder,
-                profile: profile,
-                url: url,
-                isPresented: $isPresented
-            )
+            passcodeView(url: url)
         }
+    }
+}
+
+private extension SendToTVView {
+    var qrScanView: some View {
+        SendToTVQRScanView { string in
+            guard let url = URL(string: string) else {
+                return
+            }
+            path.append(NavigationRoute.enterPasscode(url))
+        } onClose: {
+#if targetEnvironment(simulator)
+//            path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
+            path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
+#else
+            isPresented = false
+#endif
+        }
+    }
+
+    func passcodeView(url: URL) -> some View {
+        SendToTVPasscodeView(
+            registryCoder: registryCoder,
+            profile: profile,
+            url: url,
+            isPresented: $isPresented
+        )
     }
 }
 
