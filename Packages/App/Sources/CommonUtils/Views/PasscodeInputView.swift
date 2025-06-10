@@ -29,7 +29,7 @@ import SwiftUI
 public struct PasscodeInputView: View {
     private let length: Int
 
-    private let onEnter: (String) -> Void
+    private let onEnter: (String) async throws -> Void
 
     @FocusState
     private var focusedIndex: Int?
@@ -37,7 +37,7 @@ public struct PasscodeInputView: View {
     @State
     private var passcode: [String] = []
 
-    public init(length: Int, onEnter: @escaping (String) -> Void) {
+    public init(length: Int, onEnter: @escaping (String) async throws -> Void) {
         self.length = length
         self.onEnter = onEnter
     }
@@ -66,22 +66,6 @@ public struct PasscodeInputView: View {
 }
 
 private extension PasscodeInputView {
-    func handleDigit(_ digit: String, at i: Int) {
-        guard i < passcode.count else {
-            return
-        }
-        passcode[i] = String(digit.prefix(1))
-        if !digit.isEmpty && i < length - 1 {
-            focusedIndex = i + 1
-        } else {
-            focusedIndex = nil
-        }
-        if passcode.count == length,
-           passcode.allSatisfy({ !$0.isEmpty }) {
-            onEnter(passcode.joined())
-        }
-    }
-
     func digit(at i: Int) -> String {
         i < passcode.count ? passcode[i] : ""
     }
@@ -95,6 +79,29 @@ private extension PasscodeInputView {
                 passcode.append(contentsOf: padding)
             }
             passcode[i] = $0
+        }
+    }
+
+    func handleDigit(_ digit: String, at i: Int) {
+        guard i < passcode.count else {
+            return
+        }
+        passcode[i] = String(digit.prefix(1))
+        if !digit.isEmpty && i < length - 1 {
+            focusedIndex = i + 1
+        } else {
+            focusedIndex = nil
+        }
+        if passcode.count == length,
+           passcode.allSatisfy({ !$0.isEmpty }) {
+            Task {
+                do {
+                    try await onEnter(passcode.joined())
+                } catch {
+                    passcode = []
+                    focusedIndex = 0
+                }
+            }
         }
     }
 }

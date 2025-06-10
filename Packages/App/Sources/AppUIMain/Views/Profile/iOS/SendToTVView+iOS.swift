@@ -56,6 +56,34 @@ extension SendToTVView {
     }
 }
 
+private struct TVPasscodeView: View {
+    let registryCoder: RegistryCoder
+
+    let profile: Profile
+
+    let url: URL
+
+    @Binding
+    var isPresented: Bool
+
+    @StateObject
+    var errorHandler: ErrorHandler = .default()
+
+    var body: some View {
+        PasscodeInputView(length: Constants.shared.webUploader.passcodeLength) { passcode in
+            let client = WebUploaderClient(registryCoder: registryCoder, profile: profile)
+            do {
+                try await client.send(to: url, passcode: passcode)
+                isPresented = false
+            } catch {
+                errorHandler.handle(error)
+                throw error
+            }
+        }
+        .withErrorHandler(errorHandler)
+    }
+}
+
 private extension SendToTVView {
     enum NavigationRoute: Hashable {
         case enterPasscode(URL)
@@ -65,12 +93,12 @@ private extension SendToTVView {
     func pushDestination(for item: NavigationRoute) -> some View {
         switch item {
         case .enterPasscode(let url):
-            PasscodeInputView(length: Constants.shared.webUploader.passcodeLength) { passcode in
-                let client = WebUploaderClient(registryCoder: registryCoder, profile: profile)
-                Task {
-                    try await client.send(to: url, passcode: passcode)
-                }
-            }
+            TVPasscodeView(
+                registryCoder: registryCoder,
+                profile: profile,
+                url: url,
+                isPresented: $isPresented
+            )
         }
     }
 }
