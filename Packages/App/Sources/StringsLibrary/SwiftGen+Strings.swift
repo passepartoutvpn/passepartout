@@ -929,6 +929,12 @@ public enum Strings {
       public enum SendTv {
         /// Send to TV
         public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
+        public enum Form {
+          /// These compose the URL seen on your %@. Make sure to be on the same network.
+          public static func message(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "views.profile.send_tv.form.message", String(describing: p1), fallback: "These compose the URL seen on your %@. Make sure to be on the same network.")
+          }
+        }
         public enum Passcode {
           /// Enter the passcode
           public static let message = Strings.tr("Localizable", "views.profile.send_tv.passcode.message", fallback: "Enter the passcode")

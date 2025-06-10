@@ -40,7 +40,7 @@ struct SendToTVFormView: View {
 
     var body: some View {
         Form {
-            urlSection
+            addressPortSection
             passcodeSection
         }
         .themeForm()
@@ -49,18 +49,18 @@ struct SendToTVFormView: View {
 }
 
 private extension SendToTVFormView {
-    var urlSection: some View {
+    var addressPortSection: some View {
         Group {
             ThemeTextField(Strings.Global.Nouns.address, text: $address, placeholder: Strings.Unlocalized.Placeholders.ipAddress(forFamily: .v4))
             ThemeTextField(Strings.Global.Nouns.port, text: $port, placeholder: Strings.Unlocalized.Placeholders.webUploaderPort)
-            Text(Strings.Unlocalized.url)
-                .themeTrailingValue(currentURLString)
         }
-        .themeSection()
+        .themeSection(footer: Strings.Views.Profile.SendTv.Form.message(Strings.Unlocalized.appleTV), forcesFooter: true)
     }
 
     var passcodeSection: some View {
         Section {
+            Text(Strings.Unlocalized.url)
+                .themeTrailingValue(currentURLString)
             ThemeTextField(Strings.Global.Nouns.passcode, text: $passcode, placeholder: Strings.Unlocalized.Placeholders.webUploaderPasscode)
         }
     }
