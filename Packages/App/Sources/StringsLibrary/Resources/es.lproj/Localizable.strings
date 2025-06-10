@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "La operación agotó el tiempo de espera.";
 "errors.app.permission_denied" = "Permiso denegado";
 "errors.app.tunnel" = "No se pudo ejecutar la operación.";
+"errors.app.web_receiver" = "No se puede iniciar la importación. Asegúrate de que tu TV esté correctamente conectada a la red local.";
 "errors.tunnel.auth" = "Autenticación fallida";
 "errors.tunnel.compression" = "Compresión no soportada";
 "errors.tunnel.dns" = "Falló DNS";

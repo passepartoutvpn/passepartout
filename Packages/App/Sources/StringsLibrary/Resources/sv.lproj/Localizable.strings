@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "Åtgärden tog för lång tid.";
 "errors.app.permission_denied" = "Åtkomst nekad";
 "errors.app.tunnel" = "Kunde inte utföra åtgärden.";
+"errors.app.web_receiver" = "Kan inte starta importen. Se till att din TV är korrekt ansluten till det lokala nätverket.";
 "errors.tunnel.auth" = "Autentisering misslyckades";
 "errors.tunnel.compression" = "Kompression stöds inte";
 "errors.tunnel.dns" = "DNS misslyckades";

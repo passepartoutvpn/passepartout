@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "Время операции истекло.";
 "errors.app.permission_denied" = "Доступ запрещен";
 "errors.app.tunnel" = "Не удалось выполнить операцию.";
+"errors.app.web_receiver" = "Не удается запустить импорт. Убедитесь, что ваш телевизор правильно подключен к локальной сети.";
 "errors.tunnel.auth" = "Ошибка аутентификации";
 "errors.tunnel.compression" = "Сжатие не поддерживается";
 "errors.tunnel.dns" = "Ошибка DNS";

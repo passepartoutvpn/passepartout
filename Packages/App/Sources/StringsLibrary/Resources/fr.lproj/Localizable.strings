@@ -38,6 +38,7 @@
 "errors.app.passepartout.timeout" = "L'opération a expiré.";
 "errors.app.permission_denied" = "Permission refusée";
 "errors.app.tunnel" = "Impossible d'exécuter l'opération.";
+"errors.app.web_receiver" = "Impossible de démarrer l'importation. Assurez-vous que votre téléviseur est correctement connecté au réseau local.";
 "errors.tunnel.auth" = "Échec de l'authentification";
 "errors.tunnel.compression" = "Compression non supportée";
 "errors.tunnel.dns" = "Échec du DNS";

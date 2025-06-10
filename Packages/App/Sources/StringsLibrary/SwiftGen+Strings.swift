@@ -114,6 +114,8 @@ public enum Strings {
       public static let permissionDenied = Strings.tr("Localizable", "errors.app.permission_denied", fallback: "Permission denied")
       /// Unable to execute operation.
       public static let tunnel = Strings.tr("Localizable", "errors.app.tunnel", fallback: "Unable to execute operation.")
+      /// Unable to start the import. Make sure that your TV is properly connected to the local network.
+      public static let webReceiver = Strings.tr("Localizable", "errors.app.web_receiver", fallback: "Unable to start the import. Make sure that your TV is properly connected to the local network.")
       public enum Passepartout {
         /// Unable to connect to provider server (reason=%@).
         public static func corruptProviderModule(_ p1: Any) -> String {
