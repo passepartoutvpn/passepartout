@@ -99,7 +99,9 @@ private extension PasscodeInputView {
                     try await onEnter(passcode.joined())
                 } catch {
                     passcode = []
-                    focusedIndex = 0
+                    setLater(0, millis: 200) {
+                        focusedIndex = $0
+                    }
                 }
             }
         }
