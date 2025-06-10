@@ -54,12 +54,6 @@ struct ProfileStorageSection: View {
             }
             .themeSection(footer: tvDescription)
             .disabled(!profileEditor.isShared)
-
-            // FIXME: ###, layout of "Send to TV"
-            // FIXME: ###, l10n
-            Button(Strings.Views.Profile.SendTv.title) {
-                flow?.onSendToTV()
-            }
         }
     }
 }
