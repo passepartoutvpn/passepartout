@@ -428,6 +428,7 @@
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.permission_denied" = "Permission denied";
 "errors.app.tunnel" = "Unable to execute operation.";
+"errors.app.web_receiver" = "Unable to start web receiver. Make sure that your TV is properly connected to the local network.";
 
 // MARK: Global (Partout errors)
 

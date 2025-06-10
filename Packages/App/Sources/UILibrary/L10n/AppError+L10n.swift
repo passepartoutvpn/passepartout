@@ -73,7 +73,7 @@ extension AppError: LocalizedError {
             return nil
 
         case .webReceiver:
-            return nil
+            return Strings.WebReceiver
 
         case .webUploader(let status, let error):
             switch status {
