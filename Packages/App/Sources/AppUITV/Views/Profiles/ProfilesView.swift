@@ -85,7 +85,7 @@ private extension ProfilesView {
     }
 
     var webReceiverButton: some View {
-        Toggle(Strings.Views.Tv.Profiles.importLocal, isOn: isUploaderEnabled)
+        Toggle(Strings.Views.Tv.Profiles.importLocal, isOn: isImporterEnabled)
             .focused($detail, equals: .import)
     }
 
@@ -118,7 +118,7 @@ private extension ProfilesView {
 }
 
 private extension ProfilesView {
-    var isUploaderEnabled: Binding<Bool> {
+    var isImporterEnabled: Binding<Bool> {
         Binding {
             webReceiverManager.isStarted
         } set: {
@@ -126,7 +126,7 @@ private extension ProfilesView {
                 do {
                     try webReceiverManager.start()
                 } catch {
-                    pp_log_g(.app, .error, "Unable to start web uploader: \(error)")
+                    pp_log_g(.app, .error, "Unable to start web receiver: \(error)")
                     errorHandler.handle(error)
                 }
             } else {
