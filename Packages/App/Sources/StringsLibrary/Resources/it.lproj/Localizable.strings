@@ -71,6 +71,7 @@
 "global.actions.remove" = "Elimina";
 "global.actions.save" = "Salva";
 "global.actions.select" = "Seleziona";
+"global.actions.send" = "Invia";
 "global.actions.show" = "Mostra";
 "global.nouns.about" = "Informazioni";
 "global.nouns.account" = "Account";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "On-demand";
 "global.nouns.other" = "Altro";
-"global.nouns.passcode" = "Codice";
+"global.nouns.passcode" = "Codice di accesso";
 "global.nouns.password" = "Password";
 "global.nouns.port" = "Porta";
 "global.nouns.preferences" = "Preferenze";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Aggiungi modulo";
 "views.profile.rows.delete_profile" = "Elimina profilo";
 "views.profile.sections.name.footer" = "Usa questo nome per creare le automazioni VPN nell'app Comandi Rapidi.";
+"views.profile.send_tv.form.message" = "Abbina l'URL trovato in '%@ > %@' sul tuo %@, assicurandoti di essere sulla stessa rete.";
+"views.profile.send_tv.passcode.message" = "Inserisci il codice di accesso";
+"views.profile.send_tv.qr.message" = "Scansiona il QR trovato in '%@ > %@' sul tuo %@, assicurandoti di essere sulla stessa rete";
+"views.profile.send_tv.title" = "Invia alla TV";
 "views.providers.clear_filters" = "Cancella filtri";
 "views.providers.last_updated.loading" = "Caricamento...";
 "views.providers.last_updated" = "Ultimo aggiornamento il %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Tutte le categorie";
 "views.vpn.no_servers" = "Nessun server";
 "web_uploader.errors.generic" = "Caricamento non riuscito:";
-"web_uploader.errors.incorrect_passcode" = "Codice errato!";
-"web_uploader.errors.url_not_found" = "Pagina non trovata!";
+"web_uploader.errors.incorrect_passcode" = "Il codice di accesso è errato.";
+"web_uploader.errors.url_not_found" = "Nessuna pagina web esiste all'URL fornito.";
 "web_uploader.file.browse" = "Sfoglia";
 "web_uploader.file.no_selection" = "Nessun file selezionato";
 "web_uploader.file.prompt" = "Seleziona un file di configurazione da inviare";

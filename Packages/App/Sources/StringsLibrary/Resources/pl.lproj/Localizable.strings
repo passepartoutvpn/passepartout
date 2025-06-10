@@ -71,6 +71,7 @@
 "global.actions.remove" = "Usuń";
 "global.actions.save" = "Zapisz";
 "global.actions.select" = "Wybierz";
+"global.actions.send" = "Wyślij";
 "global.actions.show" = "Pokaż";
 "global.nouns.about" = "O";
 "global.nouns.account" = "Konto";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Dodaj moduł";
 "views.profile.rows.delete_profile" = "Usuń profil";
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
+"views.profile.send_tv.form.message" = "Dopasuj adres URL znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci.";
+"views.profile.send_tv.passcode.message" = "Wprowadź kod dostępu";
+"views.profile.send_tv.qr.message" = "Zeskanuj kod QR znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci";
+"views.profile.send_tv.title" = "Wyślij do TV";
 "views.providers.clear_filters" = "Wyczyść filtry";
 "views.providers.last_updated.loading" = "Ładowanie...";
 "views.providers.last_updated" = "Ostatnia aktualizacja: %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Wszystkie kategorie";
 "views.vpn.no_servers" = "Brak serwerów";
 "web_uploader.errors.generic" = "Nie udało się przesłać:";
-"web_uploader.errors.incorrect_passcode" = "Nieprawidłowy kod!";
-"web_uploader.errors.url_not_found" = "Strona nie znaleziona!";
+"web_uploader.errors.incorrect_passcode" = "Kod dostępu jest nieprawidłowy.";
+"web_uploader.errors.url_not_found" = "Strona internetowa o podanym adresie URL nie istnieje.";
 "web_uploader.file.browse" = "Przeglądaj";
 "web_uploader.file.no_selection" = "Nie wybrano pliku";
 "web_uploader.file.prompt" = "Wybierz plik konfiguracyjny do wysłania";

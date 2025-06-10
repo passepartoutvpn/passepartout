@@ -71,6 +71,7 @@
 "global.actions.remove" = "Eliminar";
 "global.actions.save" = "Guardar";
 "global.actions.select" = "Seleccionar";
+"global.actions.send" = "Enviar";
 "global.actions.show" = "Mostrar";
 "global.nouns.about" = "Acerca de";
 "global.nouns.account" = "Cuenta";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Bajo demanda";
 "global.nouns.other" = "Otro";
-"global.nouns.passcode" = "Código";
+"global.nouns.passcode" = "Código de acceso";
 "global.nouns.password" = "Contraseña";
 "global.nouns.port" = "Puerto";
 "global.nouns.preferences" = "Preferencias";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Añadir módulo";
 "views.profile.rows.delete_profile" = "Eliminar perfil";
 "views.profile.sections.name.footer" = "Usa este nombre para crear automatizaciones VPN en la app Atajos.";
+"views.profile.send_tv.form.message" = "Haz coincidir la URL que se encuentra en '%@ > %@' en tu %@, asegurándote de estar en la misma red.";
+"views.profile.send_tv.passcode.message" = "Introduce el código de acceso";
+"views.profile.send_tv.qr.message" = "Escanea el código QR que se encuentra en '%@ > %@' en tu %@, asegurándote de estar en la misma red";
+"views.profile.send_tv.title" = "Enviar a TV";
 "views.providers.clear_filters" = "Borrar filtros";
 "views.providers.last_updated.loading" = "Cargando...";
 "views.providers.last_updated" = "Última actualización el %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Todas las categorías";
 "views.vpn.no_servers" = "No hay servidores";
 "web_uploader.errors.generic" = "Error al subir:";
-"web_uploader.errors.incorrect_passcode" = "¡Código incorrecto!";
-"web_uploader.errors.url_not_found" = "¡Página no encontrada!";
+"web_uploader.errors.incorrect_passcode" = "El código de acceso es incorrecto.";
+"web_uploader.errors.url_not_found" = "No existe ninguna página web en la URL proporcionada.";
 "web_uploader.file.browse" = "Examinar";
 "web_uploader.file.no_selection" = "Ningún archivo seleccionado";
 "web_uploader.file.prompt" = "Selecciona un archivo de configuración para enviar";

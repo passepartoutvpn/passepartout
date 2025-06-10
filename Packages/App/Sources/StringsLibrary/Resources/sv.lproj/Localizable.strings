@@ -71,6 +71,7 @@
 "global.actions.remove" = "Ta bort";
 "global.actions.save" = "Spara";
 "global.actions.select" = "Välj";
+"global.actions.send" = "Skicka";
 "global.actions.show" = "Visa";
 "global.nouns.about" = "Om";
 "global.nouns.account" = "Konto";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "På begäran";
 "global.nouns.other" = "Annan";
-"global.nouns.passcode" = "Lsenkod";
+"global.nouns.passcode" = "Åtkomstkod";
 "global.nouns.password" = "Lösenord";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Inställningar";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Lägg till modul";
 "views.profile.rows.delete_profile" = "Ta bort profil";
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
+"views.profile.send_tv.form.message" = "Matcha URL:en som finns i '%@ > %@' på din %@, se till att vara på samma nätverk.";
+"views.profile.send_tv.passcode.message" = "Ange åtkomstkoden";
+"views.profile.send_tv.qr.message" = "Skanna QR-koden som finns i '%@ > %@' på din %@, se till att vara på samma nätverk";
+"views.profile.send_tv.title" = "Skicka till TV";
 "views.providers.clear_filters" = "Rensa filter";
 "views.providers.last_updated.loading" = "Laddar...";
 "views.providers.last_updated" = "Senast uppdaterad %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Alla kategorier";
 "views.vpn.no_servers" = "Inga servrar";
 "web_uploader.errors.generic" = "Uppladdning misslyckades:";
-"web_uploader.errors.incorrect_passcode" = "Fel kod!";
-"web_uploader.errors.url_not_found" = "Sidan hittades inte!";
+"web_uploader.errors.incorrect_passcode" = "Åtkomstkoden är felaktig.";
+"web_uploader.errors.url_not_found" = "Ingen webbsida finns på den angivna URL:en.";
 "web_uploader.file.browse" = "Bläddra";
 "web_uploader.file.no_selection" = "Ingen fil vald";
 "web_uploader.file.prompt" = "Välj en konfigurationsfil att skicka";

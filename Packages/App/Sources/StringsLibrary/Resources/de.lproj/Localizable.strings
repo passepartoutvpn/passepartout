@@ -71,6 +71,7 @@
 "global.actions.remove" = "Löschen";
 "global.actions.save" = "Speichern";
 "global.actions.select" = "Auswählen";
+"global.actions.send" = "Senden";
 "global.actions.show" = "Anzeigen";
 "global.nouns.about" = "Über";
 "global.nouns.account" = "Konto";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "On-Demand";
 "global.nouns.other" = "Andere";
-"global.nouns.passcode" = "Code";
+"global.nouns.passcode" = "Zugangscode";
 "global.nouns.password" = "Passwort";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Einstellungen";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Modul hinzufügen";
 "views.profile.rows.delete_profile" = "Profil löschen";
 "views.profile.sections.name.footer" = "Verwenden Sie diesen Namen, um Ihre VPN-Automationen in der Kurzbefehle-App zu erstellen.";
+"views.profile.send_tv.form.message" = "Stimmen Sie die URL überein, die Sie unter '%@ > %@' auf Ihrem %@ finden, und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden.";
+"views.profile.send_tv.passcode.message" = "Geben Sie den Zugangscode ein";
+"views.profile.send_tv.qr.message" = "Scannen Sie den QR-Code unter '%@ > %@' auf Ihrem %@ und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden";
+"views.profile.send_tv.title" = "An TV senden";
 "views.providers.clear_filters" = "Filter löschen";
 "views.providers.last_updated.loading" = "Lädt...";
 "views.providers.last_updated" = "Zuletzt aktualisiert am %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Alle Kategorien";
 "views.vpn.no_servers" = "Keine Server";
 "web_uploader.errors.generic" = "Upload fehlgeschlagen:";
-"web_uploader.errors.incorrect_passcode" = "Falscher Code!";
-"web_uploader.errors.url_not_found" = "Seite nicht gefunden!";
+"web_uploader.errors.incorrect_passcode" = "Der Zugangscode ist falsch.";
+"web_uploader.errors.url_not_found" = "Unter der angegebenen URL existiert keine Webseite.";
 "web_uploader.file.browse" = "Durchsuchen";
 "web_uploader.file.no_selection" = "Keine Datei ausgewählt";
 "web_uploader.file.prompt" = "Wähle eine Konfigurationsdatei zum Senden aus";

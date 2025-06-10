@@ -71,6 +71,7 @@
 "global.actions.remove" = "Видалити";
 "global.actions.save" = "Зберегти";
 "global.actions.select" = "Вибрати";
+"global.actions.send" = "Надіслати";
 "global.actions.show" = "Показати";
 "global.nouns.about" = "Про";
 "global.nouns.account" = "Обліковий запис";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "ОК";
 "global.nouns.on_demand" = "За запитом";
 "global.nouns.other" = "Інше";
-"global.nouns.passcode" = "Код";
+"global.nouns.passcode" = "Код доступу";
 "global.nouns.password" = "Пароль";
 "global.nouns.port" = "Порт";
 "global.nouns.preferences" = "Налаштування";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Додати модуль";
 "views.profile.rows.delete_profile" = "Видалити профіль";
 "views.profile.sections.name.footer" = "Використовуйте цю назву для створення автоматизацій VPN у додатку Команди.";
+"views.profile.send_tv.form.message" = "Співставте URL-адресу, знайдену в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі.";
+"views.profile.send_tv.passcode.message" = "Введіть код доступу";
+"views.profile.send_tv.qr.message" = "Відскануйте QR-код, знайдений в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі";
+"views.profile.send_tv.title" = "Надіслати на ТБ";
 "views.providers.clear_filters" = "Очистити фільтри";
 "views.providers.last_updated.loading" = "Завантаження...";
 "views.providers.last_updated" = "Останнє оновлення %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Усі категорії";
 "views.vpn.no_servers" = "Немає серверів";
 "web_uploader.errors.generic" = "Помилка завантаження:";
-"web_uploader.errors.incorrect_passcode" = "Неправильний код!";
-"web_uploader.errors.url_not_found" = "Сторінку не знайдено!";
+"web_uploader.errors.incorrect_passcode" = "Код доступу неправильний.";
+"web_uploader.errors.url_not_found" = "За вказаною URL-адресою веб-сторінка не існує.";
 "web_uploader.file.browse" = "Огляд";
 "web_uploader.file.no_selection" = "Файл не вибрано";
 "web_uploader.file.prompt" = "Виберіть файл конфігурації для надсилання";

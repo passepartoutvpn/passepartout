@@ -71,6 +71,7 @@
 "global.actions.remove" = "Supprimer";
 "global.actions.save" = "Sauvegarder";
 "global.actions.select" = "Sélectionner";
+"global.actions.send" = "Envoyer";
 "global.actions.show" = "Montrer";
 "global.nouns.about" = "À propos";
 "global.nouns.account" = "Compte";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "À la demande";
 "global.nouns.other" = "Autre";
-"global.nouns.passcode" = "Code";
+"global.nouns.passcode" = "Code d'accès";
 "global.nouns.password" = "Mot de passe";
 "global.nouns.port" = "Port";
 "global.nouns.preferences" = "Préférences";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Ajouter un module";
 "views.profile.rows.delete_profile" = "Supprimer le profil";
 "views.profile.sections.name.footer" = "Utilisez ce nom pour créer vos automatisations VPN dans l'app Raccourcis.";
+"views.profile.send_tv.form.message" = "Faites correspondre l'URL trouvée dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau.";
+"views.profile.send_tv.passcode.message" = "Saisissez le code d'accès";
+"views.profile.send_tv.qr.message" = "Scannez le QR trouvé dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau";
+"views.profile.send_tv.title" = "Envoyer vers la TV";
 "views.providers.clear_filters" = "Effacer les filtres";
 "views.providers.last_updated.loading" = "Chargement...";
 "views.providers.last_updated" = "Dernière mise à jour le %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Toutes les catégories";
 "views.vpn.no_servers" = "Aucun serveur";
 "web_uploader.errors.generic" = "Échec du téléversement :";
-"web_uploader.errors.incorrect_passcode" = "Code incorrect !";
-"web_uploader.errors.url_not_found" = "Page non trouvée !";
+"web_uploader.errors.incorrect_passcode" = "Le code d'accès est incorrect.";
+"web_uploader.errors.url_not_found" = "Aucune page web n'existe à l'URL donnée.";
 "web_uploader.file.browse" = "Parcourir";
 "web_uploader.file.no_selection" = "Aucun fichier sélectionné";
 "web_uploader.file.prompt" = "Sélectionnez un fichier de configuration à envoyer";

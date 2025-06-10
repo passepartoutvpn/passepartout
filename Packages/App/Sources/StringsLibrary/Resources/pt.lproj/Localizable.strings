@@ -71,6 +71,7 @@
 "global.actions.remove" = "Remover";
 "global.actions.save" = "Salvar";
 "global.actions.select" = "Selecionar";
+"global.actions.send" = "Enviar";
 "global.actions.show" = "Mostrar";
 "global.nouns.about" = "Sobre";
 "global.nouns.account" = "Conta";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Sob demanda";
 "global.nouns.other" = "Outro";
-"global.nouns.passcode" = "Código";
+"global.nouns.passcode" = "Código de acesso";
 "global.nouns.password" = "Senha";
 "global.nouns.port" = "Porta";
 "global.nouns.preferences" = "Preferências";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Adicionar módulo";
 "views.profile.rows.delete_profile" = "Excluir perfil";
 "views.profile.sections.name.footer" = "Use este nome para criar automações VPN no app Atalhos.";
+"views.profile.send_tv.form.message" = "Combine o URL encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede.";
+"views.profile.send_tv.passcode.message" = "Digite o código de acesso";
+"views.profile.send_tv.qr.message" = "Escaneie o QR encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede";
+"views.profile.send_tv.title" = "Enviar para TV";
 "views.providers.clear_filters" = "Limpar filtros";
 "views.providers.last_updated.loading" = "Carregando...";
 "views.providers.last_updated" = "Última atualização em %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Todas as categorias";
 "views.vpn.no_servers" = "Nenhum servidor";
 "web_uploader.errors.generic" = "Falha no envio:";
-"web_uploader.errors.incorrect_passcode" = "Código incorreto!";
-"web_uploader.errors.url_not_found" = "Página não encontrada!";
+"web_uploader.errors.incorrect_passcode" = "O código de acesso está incorreto.";
+"web_uploader.errors.url_not_found" = "Nenhuma página web existe na URL fornecida.";
 "web_uploader.file.browse" = "Procurar";
 "web_uploader.file.no_selection" = "Nenhum arquivo selecionado";
 "web_uploader.file.prompt" = "Selecione um arquivo de configuração para enviar";

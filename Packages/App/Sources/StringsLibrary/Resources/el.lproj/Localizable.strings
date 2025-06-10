@@ -71,6 +71,7 @@
 "global.actions.remove" = "Κατάργηση";
 "global.actions.save" = "Αποθήκευση";
 "global.actions.select" = "Επιλογή";
+"global.actions.send" = "Αποστολή";
 "global.actions.show" = "Εμφάνιση";
 "global.nouns.about" = "Σχετικά";
 "global.nouns.account" = "Λογαριασμός";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "OK";
 "global.nouns.on_demand" = "Κατ' απαίτηση";
 "global.nouns.other" = "Άλλο";
-"global.nouns.passcode" = "Κωδικός";
+"global.nouns.passcode" = "Κωδικός πρόσβασης";
 "global.nouns.password" = "Κωδικός πρόσβασης";
 "global.nouns.port" = "Θύρα";
 "global.nouns.preferences" = "Προτιμήσεις";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";
 "views.profile.rows.delete_profile" = "Διαγραφή προφίλ";
 "views.profile.sections.name.footer" = "Χρησιμοποιήστε αυτό το όνομα για να δημιουργήσετε αυτοματισμούς VPN στην εφαρμογή Συντομεύσεις.";
+"views.profile.send_tv.form.message" = "Ταιριάξτε τη διεύθυνση URL που βρίσκεται στο '%@ > %@' στο %@ σας, φροντίζοντας να είστε στο ίδιο δίκτυο.";
+"views.profile.send_tv.passcode.message" = "Εισάγετε τον κωδικό πρόσβασης";
+"views.profile.send_tv.qr.message" = "Σαρώστε τον κωδικό QR που βρίσκεται στο '%@ > %@' στο %@ σας, φροντίζοντας να είστε στο ίδιο δίκτυο";
+"views.profile.send_tv.title" = "Αποστολή στην TV";
 "views.providers.clear_filters" = "Καθαρισμός φίλτρων";
 "views.providers.last_updated.loading" = "Φόρτωση...";
 "views.providers.last_updated" = "Τελευταία ενημέρωση στις %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Όλες οι κατηγορίες";
 "views.vpn.no_servers" = "Δεν υπάρχουν διακομιστές";
 "web_uploader.errors.generic" = "Η αποστολή απέτυχε:";
-"web_uploader.errors.incorrect_passcode" = "Λανθασμένος κωδικός!";
-"web_uploader.errors.url_not_found" = "Η σελίδα δεν βρέθηκε!";
+"web_uploader.errors.incorrect_passcode" = "Ο κωδικός πρόσβασης είναι λανθασμένος.";
+"web_uploader.errors.url_not_found" = "Δεν υπάρχει ιστοσελίδα στη δεδομένη διεύθυνση URL.";
 "web_uploader.file.browse" = "Αναζήτηση";
 "web_uploader.file.no_selection" = "Δεν επιλέχθηκε αρχείο";
 "web_uploader.file.prompt" = "Επιλέξτε ένα αρχείο ρυθμίσεων για αποστολή";

@@ -71,6 +71,7 @@
 "global.actions.remove" = "删除";
 "global.actions.save" = "保存";
 "global.actions.select" = "选择";
+"global.actions.send" = "发送";
 "global.actions.show" = "显示";
 "global.nouns.about" = "关于";
 "global.nouns.account" = "账户";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "确定";
 "global.nouns.on_demand" = "按需";
 "global.nouns.other" = "其他";
-"global.nouns.passcode" = "验证码";
+"global.nouns.passcode" = "访问码";
 "global.nouns.password" = "密码";
 "global.nouns.port" = "端口";
 "global.nouns.preferences" = "偏好设置";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "添加模块";
 "views.profile.rows.delete_profile" = "删除配置文件";
 "views.profile.sections.name.footer" = "使用此名称在快捷指令应用中创建您的 VPN 自动化。";
+"views.profile.send_tv.form.message" = "匹配在您的%@上'%@ > %@'中找到的URL，确保在同一网络中。";
+"views.profile.send_tv.passcode.message" = "输入访问码";
+"views.profile.send_tv.qr.message" = "扫描在您的%@上'%@ > %@'中找到的二维码，确保在同一网络中";
+"views.profile.send_tv.title" = "发送到电视";
 "views.providers.clear_filters" = "清除筛选";
 "views.providers.last_updated.loading" = "加载中...";
 "views.providers.last_updated" = "最近更新于 %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "所有类别";
 "views.vpn.no_servers" = "无服务器";
 "web_uploader.errors.generic" = "上传失败：";
-"web_uploader.errors.incorrect_passcode" = "验证码错误！";
-"web_uploader.errors.url_not_found" = "页面未找到！";
+"web_uploader.errors.incorrect_passcode" = "访问码不正确。";
+"web_uploader.errors.url_not_found" = "给定的URL上不存在网页。";
 "web_uploader.file.browse" = "浏览";
 "web_uploader.file.no_selection" = "未选择文件";
 "web_uploader.file.prompt" = "选择一个配置文件进行发送";

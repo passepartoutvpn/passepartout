@@ -71,6 +71,7 @@
 "global.actions.remove" = "Удалить";
 "global.actions.save" = "Сохранить";
 "global.actions.select" = "Выбрать";
+"global.actions.send" = "Отправить";
 "global.actions.show" = "Показать";
 "global.nouns.about" = "О";
 "global.nouns.account" = "Аккаунт";
@@ -122,7 +123,7 @@
 "global.nouns.ok" = "ОК";
 "global.nouns.on_demand" = "По требованию";
 "global.nouns.other" = "Другой";
-"global.nouns.passcode" = "Код";
+"global.nouns.passcode" = "Код доступа";
 "global.nouns.password" = "Пароль";
 "global.nouns.port" = "Порт";
 "global.nouns.preferences" = "Настройки";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Добавить модуль";
 "views.profile.rows.delete_profile" = "Удалить профиль";
 "views.profile.sections.name.footer" = "Используйте это имя для создания автоматизаций VPN в приложении Команды.";
+"views.profile.send_tv.form.message" = "Сопоставьте URL-адрес, найденный в '%@ > %@' на вашем %@, убедившись, что вы находитесь в той же сети.";
+"views.profile.send_tv.passcode.message" = "Введите код доступа";
+"views.profile.send_tv.qr.message" = "Отсканируйте QR-код, найденный в '%@ > %@' на вашем %@, убедившись, что вы находитесь в той же сети";
+"views.profile.send_tv.title" = "Отправить на ТВ";
 "views.providers.clear_filters" = "Очистить фильтры";
 "views.providers.last_updated.loading" = "Загрузка...";
 "views.providers.last_updated" = "Последнее обновление %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Все категории";
 "views.vpn.no_servers" = "Нет серверов";
 "web_uploader.errors.generic" = "Ошибка загрузки:";
-"web_uploader.errors.incorrect_passcode" = "Неверный код!";
-"web_uploader.errors.url_not_found" = "Страница не найдена!";
+"web_uploader.errors.incorrect_passcode" = "Код доступа неверен.";
+"web_uploader.errors.url_not_found" = "По указанному URL-адресу веб-страница не найдена.";
 "web_uploader.file.browse" = "Обзор";
 "web_uploader.file.no_selection" = "Файл не выбран";
 "web_uploader.file.prompt" = "Выберите файл конфигурации для отправки";

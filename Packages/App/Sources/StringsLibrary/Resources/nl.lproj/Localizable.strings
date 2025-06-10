@@ -71,6 +71,7 @@
 "global.actions.remove" = "Verwijderen";
 "global.actions.save" = "Opslaan";
 "global.actions.select" = "Selecteren";
+"global.actions.send" = "Verzenden";
 "global.actions.show" = "Weergeven";
 "global.nouns.about" = "Over";
 "global.nouns.account" = "Account";
@@ -297,6 +298,10 @@
 "views.profile.rows.add_module" = "Module toevoegen";
 "views.profile.rows.delete_profile" = "Verwijder profiel";
 "views.profile.sections.name.footer" = "Gebruik deze naam om uw VPN-automatiseringen in de app Opdrachten te maken.";
+"views.profile.send_tv.form.message" = "Match de URL die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent.";
+"views.profile.send_tv.passcode.message" = "Voer de toegangscode in";
+"views.profile.send_tv.qr.message" = "Scan de QR die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent";
+"views.profile.send_tv.title" = "Naar TV verzenden";
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated.loading" = "Laden...";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";
@@ -343,8 +348,8 @@
 "views.vpn.category.any" = "Alle categorieën";
 "views.vpn.no_servers" = "Geen servers";
 "web_uploader.errors.generic" = "Upload mislukt:";
-"web_uploader.errors.incorrect_passcode" = "Verkeerde code!";
-"web_uploader.errors.url_not_found" = "Pagina niet gevonden!";
+"web_uploader.errors.incorrect_passcode" = "De toegangscode is onjuist.";
+"web_uploader.errors.url_not_found" = "Er bestaat geen webpagina op de opgegeven URL.";
 "web_uploader.file.browse" = "Bladeren";
 "web_uploader.file.no_selection" = "Geen bestand gekozen";
 "web_uploader.file.prompt" = "Selecteer een configuratiebestand om te verzenden";
