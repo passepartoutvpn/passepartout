@@ -100,6 +100,18 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
 }
 
 private extension NIOWebReceiver {
+    enum InvalidIPv4Error: Error {
+        case wrongFamily
+
+        case interfaceDown
+
+        case loopbackInterface
+
+        case interfaceName(String)
+
+        case notPrivate
+    }
+
     func firstIPv4Address(withInterfacePrefix prefix: String) -> String? {
         var firstAddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&firstAddr) == 0, let firstAddr else {
@@ -113,13 +125,34 @@ private extension NIOWebReceiver {
             let addr = ptr.pointee.ifa_addr.pointee
             let flags = ptr.pointee.ifa_flags
 
-            let isIPv4 = addr.sa_family == UInt8(AF_INET)
-            let isUp = (flags & UInt32(IFF_UP)) != 0
-            let isLoopback = (flags & UInt32(IFF_LOOPBACK)) != 0
-            let ifName = String(cString: cIfName)
+            do {
+                // IPv4
+                guard addr.sa_family == UInt8(AF_INET) else {
+                    throw InvalidIPv4Error.wrongFamily
+                }
+                // interface up
+                guard (flags & UInt32(IFF_UP)) != 0 else {
+                    throw InvalidIPv4Error.interfaceDown
+                }
+                // not loopback
+                guard (flags & UInt32(IFF_LOOPBACK)) == 0 else {
+                    throw InvalidIPv4Error.loopbackInterface
+                }
+                // matching prefix
+                let ifName = String(cString: cIfName)
+                guard ifName.hasPrefix(prefix) else {
+                    throw InvalidIPv4Error.interfaceName(ifName)
+                }
+                // A/B/C class
+                let sinPtr = UnsafeRawPointer(ptr.pointee.ifa_addr)
+                    .assumingMemoryBound(to: sockaddr_in.self)
+                let sinAddr = sinPtr.pointee.sin_addr
+                let ipV4 = CFSwapInt32BigToHost(sinAddr.s_addr)
+                guard ipV4.isPrivateNetwork else {
+                    throw InvalidIPv4Error.notPrivate
+                }
 
-            if isIPv4, !isLoopback, isUp, ifName.hasPrefix(prefix) {
-                var addrCopy = ptr.pointee.ifa_addr.pointee
+                var addrCopy = addr
                 var cIPAddress = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                 getnameinfo(
                     &addrCopy,
@@ -131,11 +164,15 @@ private extension NIOWebReceiver {
                     NI_NUMERICHOST
                 )
                 ipAddress = String(cString: cIPAddress)
-                guard let ipAddress, !ipAddress.starts(with: "169.254") else {
-                    continue
-                }
-                // success
+                assert(
+                    !ipAddress!.starts(with: "169.254"),
+                    "Link-local IPv4 address should have failed at .isPrivateNetwork"
+                )
+
+                // stop at first success
                 break
+            } catch {
+                pp_log_g(.App.web, .debug, "Skip invalid interface: \(error)")
             }
 
             // leave if no more addresses
@@ -147,5 +184,17 @@ private extension NIOWebReceiver {
 
         freeifaddrs(firstAddr)
         return ipAddress
+    }
+}
+
+private extension UInt32 {
+    var isPrivateNetwork: Bool {
+        // 10.0.0.0/8
+        if (self & 0xFF000000) == 0x0A000000 { return true }
+        // 172.16.0.0/12
+        if (self & 0xFFF00000) == 0xAC100000 { return true }
+        // 192.168.0.0/16
+        if (self & 0xFFFF0000) == 0xC0A80000 { return true }
+        return false
     }
 }
