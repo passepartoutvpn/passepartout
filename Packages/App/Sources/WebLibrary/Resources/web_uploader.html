@@ -82,7 +82,7 @@
         <h2>#{web_uploader.title}</h2>
         <form id="upload-form" method="POST" action="/" enctype="multipart/form-data">
             <label for="upload-passcode">#{web_uploader.passcode.prompt}:</label>
-            <input id="upload-passcode" name="passcode" type="text" /><br />
+            <input id="upload-passcode" name="passcode" type="text" inputmode="numeric" /><br />
             <label for="upload-file">#{web_uploader.file.prompt}:</label>
             <div id="upload-file-box">
                 <input id="upload-file" name="file" type="file" />
