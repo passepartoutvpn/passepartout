@@ -27,15 +27,15 @@ import CommonIAP
 import Foundation
 
 extension AppFeature {
+
+    // some non-essential features can only be purchased individually
+    // here we suggest the products entitling for such features
     public var nonEssentialProducts: Set<AppProduct> {
-        guard !isEssential else {
-            return []
-        }
         switch self {
         case .appleTV:
             return [.Features.appleTV]
         default:
-            assertionFailure("Feature \(rawValue) is outdated or not purchasable individually")
+            assert(isEssential, "Non-essential feature \(rawValue) must be purchasable individually")
             return []
         }
     }
