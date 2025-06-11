@@ -87,7 +87,9 @@ private extension PaywallView {
             productsView
             completeProductsView
             restoreView
+#if !os(tvOS)
             linksView
+#endif
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
