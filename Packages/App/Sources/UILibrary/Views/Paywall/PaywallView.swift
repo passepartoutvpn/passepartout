@@ -145,6 +145,7 @@ private extension PaywallView {
                     }
                 }
                 .themeSection(
+                    header: Strings.Views.Paywall.Sections.FullProducts.header,
                     footer: [
                         Strings.Views.Paywall.Sections.FullProducts.footer,
                         Strings.Views.Paywall.Sections.Products.footer
