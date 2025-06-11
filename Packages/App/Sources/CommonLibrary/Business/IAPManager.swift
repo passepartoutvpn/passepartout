@@ -182,6 +182,17 @@ extension IAPManager {
     public var isPayingUser: Bool {
         !purchasedProducts.isEmpty
     }
+
+    public var didPurchaseComplete: Bool {
+        purchasedProducts.contains(where: \.isComplete)
+    }
+
+    public func didPurchase(_ purchasable: [InAppProduct]) -> Bool {
+        let products = purchasable.compactMap {
+            AppProduct(rawValue: $0.productIdentifier)
+        }
+        return purchasedProducts.contains(products)
+    }
 }
 
 // MARK: - Receipt

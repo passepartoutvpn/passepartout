@@ -159,14 +159,19 @@ private extension PaywallCoordinator {
         }
     }
 
+    var didPurchaseRequired: Bool {
+        iapManager.didPurchaseComplete || iapManager.didPurchase(state.individualPurchasable)
+    }
+
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
         switch result {
         case .done:
             Task {
                 await iapManager.reloadReceipt()
+                if didPurchaseRequired {
+                    isPresented = false
+                }
             }
-            // FIXME: ###, dismiss if purchased complete or all individuals
-            isPresented = false
         case .pending:
             state.isPurchasePendingConfirmation = true
         case .cancelled:
