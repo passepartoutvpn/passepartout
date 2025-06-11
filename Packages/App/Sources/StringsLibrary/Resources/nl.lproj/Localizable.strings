@@ -259,6 +259,7 @@
 "views.migration.no_profiles" = "Niets om te migreren";
 "views.migration.sections.main.header" = "Selecteer hieronder de profielen van oudere versies van %@ die je wilt importeren. Als je profielen zijn opgeslagen in iCloud, kan het even duren voordat ze worden gesynchroniseerd. Als je ze nu niet ziet, kom dan later terug.";
 "views.migration.title" = "Migreren";
+"views.paywall.alerts.actions.save" = "Toch opslaan";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
@@ -274,7 +275,7 @@
 "views.paywall.sections.full_products.footer" = "Deze producten bevatten huidige en toekomstige functies.";
 "views.paywall.sections.full_products.header" = "Alle functies";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
-"views.paywall.sections.products.header" = "Voorgestelde producten";
+"views.paywall.sections.products.header" = "Individueel kopen";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je eerder aankopen hebt gedaan, kun je ze hier herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";
@@ -293,7 +294,6 @@
 "views.preferences.pins_active_profile.footer" = "Toont ook het actieve profiel bovenaan voor snelle toegang.";
 "views.preferences.pins_active_profile" = "Actief profiel vastzetten";
 "views.preferences.system_appearance" = "Uiterlijk";
-"views.paywall.alerts.actions.save" = "Toch opslaan";
 "views.profile.module_list.section.footer" = "Tik op modules om hun instellingen te bewerken. Modules kunnen worden versleept om de prioriteit te bepalen.";
 "views.profile.rows.add_module" = "Module toevoegen";
 "views.profile.rows.delete_profile" = "Verwijder profiel";

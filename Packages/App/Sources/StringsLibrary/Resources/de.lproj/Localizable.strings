@@ -275,7 +275,7 @@
 "views.paywall.sections.full_products.footer" = "Diese Produkte enthalten aktuelle und zukünftige Funktionen.";
 "views.paywall.sections.full_products.header" = "Alle Funktionen";
 "views.paywall.sections.products.footer" = "Alle Käufe unterstützen die Familienfreigabe.";
-"views.paywall.sections.products.header" = "Empfohlene Produkte";
+"views.paywall.sections.products.header" = "Einzeln kaufen";
 "views.paywall.sections.required_features.header" = "Erforderliche Funktionen";
 "views.paywall.sections.restore.footer" = "Wenn Sie in der Vergangenheit Einkäufe getätigt haben, können Sie sie hier wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";

@@ -259,6 +259,7 @@
 "views.migration.no_profiles" = "Немає профілів для перенесення";
 "views.migration.sections.main.header" = "Виберіть нижче профілі зі старих версій %@, які ви хочете імпортувати. Якщо ваші профілі зберігаються в iCloud, може знадобитися час для їх синхронізації. Якщо ви не бачите їх зараз, поверніться пізніше.";
 "views.migration.title" = "Перенесення";
+"views.paywall.alerts.actions.save" = "Зберегти все одно";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
@@ -274,7 +275,7 @@
 "views.paywall.sections.full_products.footer" = "Ці продукти містять поточні та майбутні функції.";
 "views.paywall.sections.full_products.header" = "Усі функції";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
-"views.paywall.sections.products.header" = "Рекомендовані продукти";
+"views.paywall.sections.products.header" = "Придбати окремо";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше здійснювали покупки, ви можете відновити їх тут.";
 "views.paywall.sections.restore.header" = "Відновлення";
@@ -293,7 +294,6 @@
 "views.preferences.pins_active_profile.footer" = "Також показує активний профіль зверху для швидкого доступу.";
 "views.preferences.pins_active_profile" = "Закріпити активний профіль";
 "views.preferences.system_appearance" = "Зовнішній вигляд";
-"views.paywall.alerts.actions.save" = "Зберегти все одно";
 "views.profile.module_list.section.footer" = "Торкніться модулів, щоб змінити їхні налаштування. Їх можна перетягувати для визначення пріоритету.";
 "views.profile.rows.add_module" = "Додати модуль";
 "views.profile.rows.delete_profile" = "Видалити профіль";

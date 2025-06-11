@@ -259,6 +259,7 @@
 "views.migration.no_profiles" = "Rien à migrer";
 "views.migration.sections.main.header" = "Sélectionnez ci-dessous les profils des anciennes versions de %@ que vous souhaitez importer. Si vos profils sont stockés sur iCloud, ils peuvent mettre un certain temps à se synchroniser. Si vous ne les voyez pas maintenant, revenez plus tard.";
 "views.migration.title" = "Migrer";
+"views.paywall.alerts.actions.save" = "Enregistrer quand même";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
 "views.paywall.alerts.confirmation.title" = "Achat requis";
@@ -274,7 +275,7 @@
 "views.paywall.sections.full_products.footer" = "Ces produits incluent les fonctionnalités actuelles et futures.";
 "views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
-"views.paywall.sections.products.header" = "Produits suggérés";
+"views.paywall.sections.products.header" = "Acheter individuellement";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
 "views.paywall.sections.restore.footer" = "Si vous avez effectué des achats par le passé, vous pouvez les restaurer ici.";
 "views.paywall.sections.restore.header" = "Restaurer";
@@ -293,7 +294,6 @@
 "views.preferences.pins_active_profile.footer" = "Affiche également le profil actif en haut pour un accès rapide.";
 "views.preferences.pins_active_profile" = "Épingler le profil actif";
 "views.preferences.system_appearance" = "Apparence";
-"views.paywall.alerts.actions.save" = "Enregistrer quand même";
 "views.profile.module_list.section.footer" = "Touchez les modules pour modifier leurs paramètres. Ils peuvent être glissés pour définir leur priorité.";
 "views.profile.rows.add_module" = "Ajouter un module";
 "views.profile.rows.delete_profile" = "Supprimer le profil";
