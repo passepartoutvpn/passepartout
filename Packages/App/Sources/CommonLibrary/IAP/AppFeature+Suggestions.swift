@@ -27,7 +27,7 @@ import CommonIAP
 import Foundation
 
 extension AppFeature {
-    public func individualProducts(for platform: IAPManager.Platform) -> Set<AppProduct> {
+    public func individualProducts(on platform: IAPManager.Platform) -> Set<AppProduct> {
         if isEssential {
             var list: Set<AppProduct> = [.Essentials.iOS_macOS]
             switch platform {

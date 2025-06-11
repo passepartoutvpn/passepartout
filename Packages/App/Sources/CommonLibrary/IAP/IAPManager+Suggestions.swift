@@ -81,7 +81,7 @@ extension IAPManager {
 
         // prioritize non-essential products
         let nonEssentialProducts = nonEssential.reduce(into: Set<AppProduct>()) { group, element in
-            element.individualProducts(for: platform).forEach {
+            element.individualProducts(on: platform).forEach {
                 group.insert($0)
             }
         }
