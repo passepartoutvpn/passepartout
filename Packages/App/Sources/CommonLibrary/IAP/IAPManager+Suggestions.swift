@@ -29,21 +29,17 @@ import Foundation
 
 extension IAPManager {
     public enum SuggestionFilter {
-        case excludingComplete
-
-        case includingComplete
-
-        case onlyComplete
+        case complete
     }
 
-    public func suggestedProducts(filter: SuggestionFilter = .includingComplete) -> Set<AppProduct> {
+    public func suggestedProducts(filters: Set<SuggestionFilter> = [.complete]) -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: .iOS, filter: filter)
+        suggestedProducts(for: .iOS, filters: filters)
 #elseif os(macOS)
-        suggestedProducts(for: .macOS, filter: filter)
+        suggestedProducts(for: .macOS, filters: filters)
 #elseif os(tvOS)
         // FIXME: ###, TV paywall
-        fatalError("tvOS: Do not suggest products, paywall unsupported")
+        []
 #endif
     }
 }
@@ -58,7 +54,7 @@ extension IAPManager {
 
     func suggestedProducts(
         for platform: Platform,
-        filter: SuggestionFilter,
+        filters: Set<SuggestionFilter>,
         asserting: Bool = false
     ) -> Set<AppProduct> {
         guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
@@ -76,34 +72,32 @@ extension IAPManager {
 
         var suggested: Set<AppProduct> = []
 
-        if filter != .onlyComplete {
-            switch platform {
-            case .iOS:
-                guard !purchasedProducts.contains(.Essentials.iOS) else {
-                    if asserting {
-                        assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
-                    }
-                    return []
+        switch platform {
+        case .iOS:
+            guard !purchasedProducts.contains(.Essentials.iOS) else {
+                if asserting {
+                    assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
                 }
-                if !purchasedProducts.contains(.Essentials.macOS) {
-                    suggested.insert(.Essentials.iOS_macOS)
-                }
-                suggested.insert(.Essentials.iOS)
-            case .macOS:
-                guard !purchasedProducts.contains(.Essentials.macOS) else {
-                    if asserting {
-                        assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
-                    }
-                    return []
-                }
-                if !purchasedProducts.contains(.Essentials.iOS) {
-                    suggested.insert(.Essentials.iOS_macOS)
-                }
-                suggested.insert(.Essentials.macOS)
+                return []
             }
+            if !purchasedProducts.contains(.Essentials.macOS) {
+                suggested.insert(.Essentials.iOS_macOS)
+            }
+            suggested.insert(.Essentials.iOS)
+        case .macOS:
+            guard !purchasedProducts.contains(.Essentials.macOS) else {
+                if asserting {
+                    assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
+                }
+                return []
+            }
+            if !purchasedProducts.contains(.Essentials.iOS) {
+                suggested.insert(.Essentials.iOS_macOS)
+            }
+            suggested.insert(.Essentials.macOS)
         }
 
-        if filter != .excludingComplete && purchasedProducts.isEligibleForComplete {
+        if filters.contains(.complete) && purchasedProducts.isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
