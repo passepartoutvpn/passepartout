@@ -44,7 +44,7 @@ public enum AppFeature: String, CaseIterable {
 }
 
 extension AppFeature {
-    public static let essentialFeatures: [AppFeature] = [
+    public static let essentialFeatures: Set<AppFeature> = [
         .dns,
         .httpProxy,
         .onDemand,

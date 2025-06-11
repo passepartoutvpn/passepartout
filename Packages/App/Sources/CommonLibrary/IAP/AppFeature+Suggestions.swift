@@ -35,6 +35,8 @@ extension AppFeature {
                 list.append(AppProduct.Essentials.iOS)
             case .macOS:
                 list.append(AppProduct.Essentials.macOS)
+            case .tvOS:
+                break
             }
             return list
         }

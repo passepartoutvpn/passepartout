@@ -148,9 +148,7 @@ private extension ModuleListView {
     }
 
     var suggestedGeneralProducts: Set<AppProduct> {
-        var products = iapManager.suggestedProducts()
-        products.insert(.Features.appleTV)
-        return products
+        iapManager.suggestedProducts(for: [.appleTV])
     }
 
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
