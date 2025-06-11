@@ -147,10 +147,6 @@ private extension ModuleListView {
         return features
     }
 
-    var suggestedGeneralProducts: Set<AppProduct> {
-        iapManager.suggestedProducts(for: [.appleTV])
-    }
-
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
         profileEditor.moveModules(from: offsets, to: newOffset)
         // XXX: selection is lost after move, reset as a workaround
