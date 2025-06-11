@@ -28,45 +28,6 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-struct PaywallState {
-    var isFetchingProducts = true
-
-    private(set) var suggestedProducts: Set<AppProduct> = []
-
-    private(set) var completePurchasable: [InAppProduct] = []
-
-    private(set) var individualPurchasable: [InAppProduct] = []
-
-    var purchasingIdentifier: String?
-
-    var isPurchasePendingConfirmation = false
-
-    mutating func setSuggestedProducts(_ suggestedProducts: Set<AppProduct>, purchasable: [InAppProduct]) throws {
-        let completeProducts = suggestedProducts.filter(\.isComplete)
-
-        var completePurchasable: [InAppProduct] = []
-        var individualPurchasable: [InAppProduct] = []
-        purchasable.forEach {
-            guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
-                return
-            }
-            if completeProducts.contains(raw) {
-                completePurchasable.append($0)
-            } else {
-                individualPurchasable.append($0)
-            }
-        }
-        pp_log_g(.App.iap, .info, "Individual products: \(individualPurchasable)")
-        guard !completePurchasable.isEmpty || !individualPurchasable.isEmpty else {
-            throw AppError.emptyProducts
-        }
-
-        self.suggestedProducts = suggestedProducts
-        self.completePurchasable = completePurchasable
-        self.individualPurchasable = individualPurchasable
-    }
-}
-
 struct PaywallCoordinator: View {
 
     @EnvironmentObject
@@ -78,29 +39,34 @@ struct PaywallCoordinator: View {
     let requiredFeatures: Set<AppFeature>
 
     @State
-    private var state = PaywallState()
+    private var model = Model()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         contentView
-            .themeProgress(if: state.isFetchingProducts)
-            .disabled(state.purchasingIdentifier != nil)
+            .themeProgress(if: model.isFetchingProducts)
+            .disabled(model.purchasingIdentifier != nil)
             .alert(
                 Strings.Global.Actions.purchase,
-                isPresented: $state.isPurchasePendingConfirmation,
+                isPresented: $model.isPurchasePendingConfirmation,
                 actions: pendingActions,
                 message: pendingMessage
             )
             .task(id: requiredFeatures) {
-                await fetchAvailableProducts()
+                do {
+                    try await model.fetchAvailableProducts(
+                        for: requiredFeatures,
+                        with: iapManager
+                    )
+                } catch {
+                    onError(error, dismissing: true)
+                }
             }
             .withErrorHandler(errorHandler)
     }
 }
-
-// MARK: -
 
 private extension PaywallCoordinator {
     var contentView: some View {
@@ -115,7 +81,7 @@ private extension PaywallCoordinator {
             isPresented: $isPresented,
             iapManager: iapManager,
             requiredFeatures: requiredFeatures,
-            state: $state,
+            model: $model,
             errorHandler: errorHandler,
             onComplete: onComplete,
             onError: onError
@@ -135,32 +101,9 @@ private extension PaywallCoordinator {
     }
 }
 
-// MARK: -
-
 private extension PaywallCoordinator {
-    func fetchAvailableProducts() async {
-        state.isFetchingProducts = true
-        defer {
-            state.isFetchingProducts = false
-        }
-        do {
-            let rawProducts = iapManager.suggestedProducts(for: requiredFeatures)
-            guard !rawProducts.isEmpty else {
-                throw AppError.emptyProducts
-            }
-            let rawSortedProducts = rawProducts.sorted {
-                $0.productRank < $1.productRank
-            }
-            let purchasable = try await iapManager.purchasableProducts(for: rawSortedProducts)
-            try state.setSuggestedProducts(rawProducts, purchasable: purchasable)
-        } catch {
-            pp_log_g(.App.iap, .error, "Unable to load purchasable products: \(error)")
-            onError(error, dismissing: true)
-        }
-    }
-
     var didPurchaseRequired: Bool {
-        iapManager.didPurchaseComplete || iapManager.didPurchase(state.individualPurchasable)
+        iapManager.didPurchaseComplete || iapManager.didPurchase(model.individualPurchasable)
     }
 
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
@@ -173,7 +116,7 @@ private extension PaywallCoordinator {
                 }
             }
         case .pending:
-            state.isPurchasePendingConfirmation = true
+            model.isPurchasePendingConfirmation = true
         case .cancelled:
             break
         case .notFound:
@@ -194,47 +137,7 @@ private extension PaywallCoordinator {
     }
 }
 
-private extension AppProduct {
-    var productRank: Int {
-        switch self {
-        case .Essentials.iOS_macOS:
-            return .min
-        case .Essentials.iOS:
-            return 1
-        case .Essentials.macOS:
-            return 2
-        case .Complete.Recurring.yearly:
-            return 3
-        case .Complete.Recurring.monthly:
-            return 4
-        default:
-            return .max
-        }
-    }
-}
-
 // MARK: - Previews
-
-extension PaywallState {
-
-    @MainActor
-    static func forPreviews(
-        _ features: Set<AppFeature>,
-        including: Set<IAPManager.SuggestionInclusion>
-    ) -> Self {
-        var state = PaywallState()
-        state.isFetchingProducts = false
-        let suggested = IAPManager.forPreviews.suggestedProducts(
-            for: features,
-            including: including
-        )
-        try? state.setSuggestedProducts(
-            suggested,
-            purchasable: suggested.map(\.asFakeIAP)
-        )
-        return state
-    }
-}
 
 #Preview {
     PaywallCoordinator(

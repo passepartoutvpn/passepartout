@@ -31,7 +31,7 @@ import SwiftUI
 struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
-    let state: PaywallState
+    let model: PaywallCoordinator.Model
 
     var body: some View {
         fatalError("FIXME: ###, TV paywall")
@@ -43,9 +43,10 @@ struct PaywallView: View {
 // MARK: - Previews
 
 #Preview {
+    let features: Set<AppFeature> = [.appleTV, .dns, .sharing]
     PaywallView(
-        requiredFeatures: [.appleTV, .dns, .sharing],
-        state: PaywallState()
+        requiredFeatures: features,
+        model: .forPreviews(features, including: [])
     )
     .withMockEnvironment()
 }

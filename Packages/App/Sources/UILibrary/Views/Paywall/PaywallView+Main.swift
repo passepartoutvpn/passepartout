@@ -41,7 +41,7 @@ struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
     @Binding
-    var state: PaywallState
+    var model: PaywallCoordinator.Model
 
     @ObservedObject
     var errorHandler: ErrorHandler
@@ -53,9 +53,9 @@ struct PaywallView: View {
     var body: some View {
         Form {
             completeProductsView
-                .if(!state.completePurchasable.isEmpty)
+                .if(!model.completePurchasable.isEmpty)
             individualProductsView
-                .if(!state.individualPurchasable.isEmpty)
+                .if(!model.individualPurchasable.isEmpty)
             restoreView
             linksView
         }
@@ -66,14 +66,14 @@ struct PaywallView: View {
 private extension PaywallView {
     var completeProductsView: some View {
         Group {
-            ForEach(state.completePurchasable, id: \.productIdentifier) {
+            ForEach(model.completePurchasable, id: \.productIdentifier) {
                 PaywallProductView(
                     iapManager: iapManager,
                     style: .paywall,
                     product: $0,
                     withIncludedFeatures: false,
                     highlightedFeatures: requiredFeatures,
-                    purchasingIdentifier: $state.purchasingIdentifier,
+                    purchasingIdentifier: $model.purchasingIdentifier,
                     onComplete: onComplete,
                     onError: onError
                 )
@@ -99,14 +99,14 @@ private extension PaywallView {
     }
 
     var individualProductsView: some View {
-        ForEach(state.individualPurchasable, id: \.productIdentifier) {
+        ForEach(model.individualPurchasable, id: \.productIdentifier) {
             PaywallProductView(
                 iapManager: iapManager,
                 style: .paywall,
                 product: $0,
                 withIncludedFeatures: true,
                 highlightedFeatures: requiredFeatures,
-                purchasingIdentifier: $state.purchasingIdentifier,
+                purchasingIdentifier: $model.purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
             )
@@ -143,7 +143,7 @@ private extension PaywallView {
         isPresented: .constant(true),
         iapManager: .forPreviews,
         requiredFeatures: features,
-        state: .constant(.forPreviews(features, including: [.complete])),
+        model: .constant(.forPreviews(features, including: [.complete])),
         errorHandler: .default(),
         onComplete: { _, _ in },
         onError: { _ in }
