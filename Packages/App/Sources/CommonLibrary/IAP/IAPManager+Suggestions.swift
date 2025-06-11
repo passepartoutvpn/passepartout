@@ -80,21 +80,15 @@ extension IAPManager {
         suggested.formUnion(nonEssentialProducts)
         let nonEssentialEligibleFeatures = nonEssentialProducts.flatMap(\.features)
 
-        // did purchase essentials for this platform?
-        let didPurchaseEssentials = {
-            switch platform {
-            case .iOS:
-                return purchasedProducts.contains(.Essentials.iOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
-            case .macOS:
-                return purchasedProducts.contains(.Essentials.macOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
-            case .tvOS:
-                return purchasedProducts.contains(where: \.isEssentials)
-            }
-        }()
-
-        // suggest essential packages if non-essential don't include required essential features
+        //
+        // suggest essential packages if:
+        //
+        // - never purchased any
+        // - non-essential eligible features don't include required essential features
+        //
         let essentialFeatures = features.filter(\.isEssential)
-        if !didPurchaseEssentials && !nonEssentialEligibleFeatures.contains(essentialFeatures) {
+        if !didPurchaseEssentials(on: platform) &&
+            !nonEssentialEligibleFeatures.contains(essentialFeatures) {
             switch platform {
             case .iOS:
                 // suggest both platforms if never purchased
@@ -151,6 +145,17 @@ extension IAPManager {
         suggested.subtract(purchasedProducts)
 
         return suggested
+    }
+
+    func didPurchaseEssentials(on platform: Platform) -> Bool {
+        switch platform {
+        case .iOS:
+            return purchasedProducts.contains(.Essentials.iOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
+        case .macOS:
+            return purchasedProducts.contains(.Essentials.macOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
+        case .tvOS:
+            return purchasedProducts.contains(where: \.isEssentials)
+        }
     }
 }
 
