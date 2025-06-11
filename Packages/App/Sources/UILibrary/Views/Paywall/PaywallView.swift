@@ -298,7 +298,7 @@ private extension AppProduct {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        requiredFeatures: [.appleTV]
+        requiredFeatures: [.appleTV, .dns, .sharing]
     )
     .withMockEnvironment()
 }
