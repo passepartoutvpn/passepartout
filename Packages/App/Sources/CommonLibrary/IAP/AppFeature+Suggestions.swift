@@ -1,8 +1,8 @@
 //
-//  AppFeature.swift
+//  AppFeature+Suggestions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 6/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,50 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonIAP
 import Foundation
 
-public enum AppFeature: String, CaseIterable {
-    case appleTV
-
-    case dns
-
-    case httpProxy
-
-    case onDemand
-
-    case otp
-
-    case providers
-
-    case routing
-
-    case sharing
-}
-
 extension AppFeature {
-    public static let essentialFeatures: [AppFeature] = [
-        .dns,
-        .httpProxy,
-        .onDemand,
-        .otp,
-        .providers,
-        .routing,
-        .sharing
-    ]
-
-    public var isEssential: Bool {
-        Self.essentialFeatures.contains(self)
-    }
-}
-
-extension AppFeature: Identifiable {
-    public var id: String {
-        rawValue
-    }
-}
-
-extension AppFeature: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        rawValue
+    public func individualProducts(for platform: IAPManager.Platform) -> [AppProduct] {
+        if isEssential {
+            var list = [AppProduct.Essentials.iOS_macOS]
+            switch platform {
+            case .iOS:
+                list.append(AppProduct.Essentials.iOS)
+            case .macOS:
+                list.append(AppProduct.Essentials.macOS)
+            }
+            return list
+        }
+        switch self {
+        case .appleTV:
+            return [.Features.appleTV]
+        default:
+            assertionFailure("Feature \(rawValue) is outdated or not purchasable individually")
+            return []
+        }
     }
 }

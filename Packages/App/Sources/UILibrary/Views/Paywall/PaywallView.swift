@@ -184,10 +184,6 @@ private extension PaywallView {
 // MARK: -
 
 private extension PaywallView {
-    var essentialFeatures: [AppFeature] {
-        AppProduct.Essentials.iOS_macOS.features
-    }
-
     func fetchAvailableProducts() async {
         isFetchingProducts = true
         defer {

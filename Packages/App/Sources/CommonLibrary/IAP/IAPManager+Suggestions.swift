@@ -28,6 +28,12 @@ import CommonUtils
 import Foundation
 
 extension IAPManager {
+    public enum Platform {
+        case iOS
+
+        case macOS
+    }
+
     public enum SuggestionFilter {
         case complete
     }
@@ -46,12 +52,6 @@ extension IAPManager {
 
 // for testing
 extension IAPManager {
-    enum Platform {
-        case iOS
-
-        case macOS
-    }
-
     func suggestedProducts(
         for platform: Platform,
         filters: Set<SuggestionFilter>,
