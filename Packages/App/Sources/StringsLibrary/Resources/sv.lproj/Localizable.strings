@@ -337,7 +337,7 @@
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
 "views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
-"views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här.";
+"views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här. Alternativt hittar du andra alternativ i fliken \"Profiler\".";
 "views.tv.profiles.detail.profiles" = "Använd långt tryck för att visa tillgängliga åtgärder för en profil. Lokala profiler kan raderas här, medan iCloud-profiler endast kan tas bort från iOS- eller macOS-appen.";
 "views.tv.profiles.import_local" = "Importera lokal profil";
 "views.tv.web_receiver.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil. Se till att du är ansluten till samma nätverk.";
