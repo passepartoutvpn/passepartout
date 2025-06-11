@@ -84,7 +84,6 @@ private extension PaywallView {
 
     var contentView: some View {
         Form {
-            requiredFeaturesView
             productsView
             completeProductsView
             restoreView
@@ -92,22 +91,6 @@ private extension PaywallView {
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
-    }
-
-    var requiredFeaturesView: some View {
-        requiredFeatures
-            .nilIfEmpty
-            .map { features in
-                FeatureListView(
-                    style: .list,
-                    header: Strings.Views.Paywall.Sections.RequiredFeatures.header,
-                    features: features.sorted(),
-                    content: {
-                        featureView(for: $0)
-                            .fontWeight(theme.relevantWeight)
-                    }
-                )
-            }
     }
 
     var productsView: some View {
@@ -176,11 +159,6 @@ private extension PaywallView {
             Link(Strings.Unlocalized.eula, destination: Constants.shared.websites.eula)
             Link(Strings.Views.Settings.Links.Rows.privacyPolicy, destination: Constants.shared.websites.privacyPolicy)
         }
-    }
-
-    func featureView(for feature: AppFeature) -> some View {
-        Text(feature.localizedDescription)
-            .scrollableOnTV()
     }
 
     var restoreView: some View {
