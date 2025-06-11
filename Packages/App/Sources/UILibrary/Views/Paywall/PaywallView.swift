@@ -141,6 +141,7 @@ private extension PaywallView {
                         iapManager: iapManager,
                         style: .paywall,
                         product: $0,
+                        withIncludedFeatures: true,
                         highlightedFeatures: requiredFeatures,
                         purchasingIdentifier: $purchasingIdentifier,
                         onComplete: onComplete,
