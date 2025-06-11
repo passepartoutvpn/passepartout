@@ -69,7 +69,11 @@ extension AppProduct: AppFeatureProviding {
             // should now see their artificial in-app purchase propagated
             // to the tvOS app
             //
-            return [.appleTV, .sharing]
+            var eligible: [AppFeature] = [.appleTV, .sharing]
+#if os(tvOS)
+            eligible.append(contentsOf: AppFeature.essentialFeatures)
+#endif
+            return eligible
 
         case .Complete.OneTime.lifetime, .Complete.Recurring.monthly, .Complete.Recurring.yearly:
             return AppFeature.allCases

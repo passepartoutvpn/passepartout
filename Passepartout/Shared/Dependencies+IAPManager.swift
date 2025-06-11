@@ -53,14 +53,14 @@ extension Dependencies {
     nonisolated func productsAtBuild() -> BuildProducts<AppProduct> {
         { purchase in
 #if os(iOS)
-            if purchase.isBefore(.freemium) {
+            if purchase.buildNumber <= 2016 {
                 return [.Essentials.iOS]
-            } else if purchase.isBefore(.v2) {
+            } else if purchase.buildNumber <= 3000 {
                 return [.Features.networkSettings]
             }
             return []
 #elseif os(macOS)
-            if purchase.isBefore(.v2) {
+            if purchase.buildNumber <= 3000 {
                 return [.Features.networkSettings]
             }
             return []
