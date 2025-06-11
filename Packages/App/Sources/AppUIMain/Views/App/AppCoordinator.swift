@@ -60,7 +60,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     private var paywallReason: PaywallReason?
 
     @State
-    private var onCancelPaywall: (() -> Void)?
+    private var paywallContinuation: (() -> Void)?
 
     @State
     private var modalRoute: ModalRoute?
@@ -102,14 +102,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         ))
         .modifier(PaywallModifier(
             reason: $paywallReason,
-            onAction: { profile in
-                // FIXME: ###, connect anyway
-//                guard let profile else {
-//                    return
-//                }
-//                onEditProfile(profile.localizedPreview)
-            },
-            onCancel: onCancelPaywall
+            onAction: { _ in
+                paywallContinuation?()
+            }
         ))
         .themeModal(
             item: $modalRoute,
@@ -301,7 +296,7 @@ extension AppCoordinator {
     public func onPurchaseRequired(
         for profile: Profile,
         features: Set<AppFeature>,
-        onCancel: (() -> Void)?
+        continuation: (() -> Void)?
     ) {
         pp_log_g(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
@@ -315,12 +310,12 @@ extension AppCoordinator {
                     "\n\n",
                     V.Connect._2(iapManager.verificationDelayMinutes)
                 ].joined(separator: " "),
-                onDismiss: onCancel
+                onDismiss: continuation
             )
             return
         }
         pp_log_g(.app, .info, "Present paywall")
-        onCancelPaywall = onCancel
+        paywallContinuation = continuation
 
         setLater(.init(profile, requiredFeatures: features, action: .connect)) {
             paywallReason = $0
