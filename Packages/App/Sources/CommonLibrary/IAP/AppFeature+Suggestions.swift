@@ -27,14 +27,14 @@ import CommonIAP
 import Foundation
 
 extension AppFeature {
-    public func individualProducts(for platform: IAPManager.Platform) -> [AppProduct] {
+    public func individualProducts(for platform: IAPManager.Platform) -> Set<AppProduct> {
         if isEssential {
-            var list = [AppProduct.Essentials.iOS_macOS]
+            var list: Set<AppProduct> = [.Essentials.iOS_macOS]
             switch platform {
             case .iOS:
-                list.append(AppProduct.Essentials.iOS)
+                list.insert(.Essentials.iOS)
             case .macOS:
-                list.append(AppProduct.Essentials.macOS)
+                list.insert(.Essentials.macOS)
             case .tvOS:
                 break
             }
