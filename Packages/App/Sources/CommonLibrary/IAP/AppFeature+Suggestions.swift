@@ -35,7 +35,7 @@ extension AppFeature {
         case .appleTV:
             return [.Features.appleTV]
         default:
-            assert(isEssential, "Non-essential feature \(rawValue) must be purchasable individually")
+            assert(isEssential, "Non-essential feature \(rawValue) must suggest a purchasable product")
             return []
         }
     }
