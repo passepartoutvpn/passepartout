@@ -196,7 +196,11 @@ private extension PaywallModifier {
                 isPresented: $isPurchasing,
                 requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures)
             )
+#if os(tvOS)
             .themeNavigationStack()
+#else
+            .themeNavigationStack(closable: true)
+#endif
         }
     }
 }

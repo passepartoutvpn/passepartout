@@ -63,7 +63,6 @@ struct PaywallView: View {
     var body: some View {
         contentView
             .themeProgress(if: isFetchingProducts)
-            .toolbar(content: toolbarContent)
             .alert(
                 Strings.Global.Actions.purchase,
                 isPresented: $isPurchasePendingConfirmation,
@@ -169,16 +168,6 @@ private extension PaywallView {
                 footer: Strings.Views.Paywall.Sections.Restore.footer,
                 above: true
             )
-    }
-
-    func toolbarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button {
-                isPresented = false
-            } label: {
-                ThemeCloseLabel()
-            }
-        }
     }
 
     func pendingActions() -> some View {
