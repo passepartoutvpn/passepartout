@@ -74,11 +74,11 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                         Text(Strings.Global.Nouns.connection)
                     }
 
-                profilesView
-                    .tabItem {
-                        Text(Strings.Global.Nouns.profiles)
-                    }
-
+//                profilesView
+//                    .tabItem {
+//                        Text(Strings.Global.Nouns.profiles)
+//                    }
+//
 //                searchView
 //                    .tabItem {
 //                        ThemeImage(.search)
@@ -117,14 +117,14 @@ private extension AppCoordinator {
         )
     }
 
-    var profilesView: some View {
-        ProfilesView(
-            profileManager: profileManager,
-            webReceiverManager: webReceiverManager,
-            registry: registry
-        )
-    }
-
+//    var profilesView: some View {
+//        ProfilesView(
+//            profileManager: profileManager,
+//            webReceiverManager: webReceiverManager,
+//            registry: registry
+//        )
+//    }
+//
 //    var searchView: some View {
 //        VStack {
 //            Text("Search")
