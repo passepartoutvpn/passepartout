@@ -53,7 +53,9 @@ struct PaywallView: View {
     var body: some View {
         Form {
             completeProductsView
+                .if(!state.completeProducts.isEmpty)
             individualProductsView
+                .if(!state.individualProducts.isEmpty)
             restoreView
             linksView
         }
@@ -63,65 +65,57 @@ struct PaywallView: View {
 
 private extension PaywallView {
     var completeProductsView: some View {
-        state.completeProducts
-            .nilIfEmpty
-            .map { products in
-                Group {
-                    ForEach(products, id: \.productIdentifier) {
-                        PaywallProductView(
-                            iapManager: iapManager,
-                            style: .paywall,
-                            product: $0,
-                            withIncludedFeatures: false,
-                            highlightedFeatures: requiredFeatures,
-                            purchasingIdentifier: $state.purchasingIdentifier,
-                            onComplete: onComplete,
-                            onError: onError
-                        )
-                    }
-                    VStack(alignment: .leading) {
-                        ForEach(AppFeature.allCases.sorted()) {
-                            IncludedFeatureRow(
-                                feature: $0,
-                                isHighlighted: requiredFeatures.contains($0)
-                            )
-                            .font(.subheadline)
-                        }
-                    }
-                }
-                .themeSection(
-                    header: Strings.Views.Paywall.Sections.FullProducts.header,
-                    footer: [
-                        Strings.Views.Paywall.Sections.FullProducts.footer,
-                        Strings.Views.Paywall.Sections.Products.footer
-                    ].joined(separator: " "),
-                    forcesFooter: true
+        Group {
+            ForEach(state.completeProducts, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .paywall,
+                    product: $0,
+                    withIncludedFeatures: false,
+                    highlightedFeatures: requiredFeatures,
+                    purchasingIdentifier: $state.purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
                 )
             }
+            VStack(alignment: .leading) {
+                ForEach(AppFeature.allCases.sorted()) {
+                    IncludedFeatureRow(
+                        feature: $0,
+                        isHighlighted: requiredFeatures.contains($0)
+                    )
+                    .font(.subheadline)
+                }
+            }
+        }
+        .themeSection(
+            header: Strings.Views.Paywall.Sections.FullProducts.header,
+            footer: [
+                Strings.Views.Paywall.Sections.FullProducts.footer,
+                Strings.Views.Paywall.Sections.Products.footer
+            ].joined(separator: " "),
+            forcesFooter: true
+        )
     }
 
     var individualProductsView: some View {
-        state.individualProducts
-            .nilIfEmpty
-            .map { products in
-                ForEach(products, id: \.productIdentifier) {
-                    PaywallProductView(
-                        iapManager: iapManager,
-                        style: .paywall,
-                        product: $0,
-                        withIncludedFeatures: true,
-                        highlightedFeatures: requiredFeatures,
-                        purchasingIdentifier: $state.purchasingIdentifier,
-                        onComplete: onComplete,
-                        onError: onError
-                    )
-                }
-                .themeSection(
-                    header: Strings.Views.Paywall.Sections.Products.header,
-                    footer: Strings.Views.Paywall.Sections.Products.footer,
-                    forcesFooter: true
-                )
-            }
+        ForEach(state.individualProducts, id: \.productIdentifier) {
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .paywall,
+                product: $0,
+                withIncludedFeatures: true,
+                highlightedFeatures: requiredFeatures,
+                purchasingIdentifier: $state.purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
+        }
+        .themeSection(
+            header: Strings.Views.Paywall.Sections.Products.header,
+            footer: Strings.Views.Paywall.Sections.Products.footer,
+            forcesFooter: true
+        )
     }
 
     var linksView: some View {
