@@ -214,8 +214,9 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          git tag -as "v$APP_VERSION" -m "v$APP_VERSION"
-          git push --tags
+          tag="v$APP_VERSION"
+          git tag -as "$tag" -m "$tag"
+          git push origin "$tag"
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
