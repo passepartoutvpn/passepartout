@@ -148,7 +148,7 @@ private extension PaywallView {
         isPresented: .constant(true),
         iapManager: .forPreviews,
         requiredFeatures: [.appleTV, .dns, .sharing],
-        state: .constant(PaywallState()),
+        state: .constant(.forPreviews),
         errorHandler: .default(),
         onComplete: { _, _ in },
         onError: { _ in }

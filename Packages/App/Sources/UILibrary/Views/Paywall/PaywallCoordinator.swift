@@ -205,6 +205,18 @@ private extension AppProduct {
 
 // MARK: - Previews
 
+extension PaywallState {
+    static var forPreviews: Self {
+        var state = PaywallState()
+        state.isFetchingProducts = false
+        state.completeProducts = [AppProduct.Complete.OneTime.lifetime]
+            .map(\.asFakeIAP)
+        state.individualProducts = [AppProduct.Features.appleTV]
+            .map(\.asFakeIAP)
+        return state
+    }
+}
+
 #Preview {
     PaywallCoordinator(
         isPresented: .constant(true),
