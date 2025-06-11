@@ -84,8 +84,8 @@ private extension PaywallView {
 
     var contentView: some View {
         Form {
-            productsView
             completeProductsView
+            productsView
             restoreView
 #if !os(tvOS)
             linksView
@@ -146,7 +146,6 @@ private extension PaywallView {
                     }
                 }
                 .themeSection(
-                    header: Strings.Views.Paywall.Sections.FullProducts.header,
                     footer: [
                         Strings.Views.Paywall.Sections.FullProducts.footer,
                         Strings.Views.Paywall.Sections.Products.footer
