@@ -143,7 +143,7 @@ private extension PaywallView {
         isPresented: .constant(true),
         iapManager: .forPreviews,
         requiredFeatures: features,
-        state: .constant(.forPreviews(features, filters: [.complete])),
+        state: .constant(.forPreviews(features, including: [.complete])),
         errorHandler: .default(),
         onComplete: { _, _ in },
         onError: { _ in }

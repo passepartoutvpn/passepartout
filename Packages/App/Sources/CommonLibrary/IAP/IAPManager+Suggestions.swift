@@ -36,7 +36,7 @@ extension IAPManager {
         case tvOS
     }
 
-    public enum SuggestionFilter {
+    public enum SuggestionInclusion {
         case complete
 
         case singlePlatformEssentials
@@ -44,14 +44,14 @@ extension IAPManager {
 
     public func suggestedProducts(
         for features: Set<AppFeature>,
-        filters: Set<SuggestionFilter> = [.complete]
+        including: Set<SuggestionInclusion> = [.complete]
     ) -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: features, on: .iOS, filters: filters)
+        suggestedProducts(for: features, on: .iOS, including: including)
 #elseif os(macOS)
-        suggestedProducts(for: features, on: .macOS, filters: filters)
+        suggestedProducts(for: features, on: .macOS, including: including)
 #elseif os(tvOS)
-        suggestedProducts(for: features, on: .tvOS, filters: filters)
+        suggestedProducts(for: features, on: .tvOS, including: including)
 #endif
     }
 }
@@ -63,7 +63,7 @@ extension IAPManager {
     func suggestedProducts(
         for features: Set<AppFeature>,
         on platform: Platform,
-        filters: Set<SuggestionFilter>,
+        including: Set<SuggestionInclusion>,
         asserting: Bool = false
     ) -> Set<AppProduct> {
         guard !purchasedProducts.contains(where: \.isComplete) else {
@@ -111,7 +111,7 @@ extension IAPManager {
                 if !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                let suggestsSinglePlatform = filters.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.macOS)
+                let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.macOS)
                 if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS)
                 }
@@ -119,7 +119,7 @@ extension IAPManager {
                 if !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                let suggestsSinglePlatform = filters.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.iOS)
+                let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.iOS)
                 if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.macOS)
                 }
@@ -146,7 +146,7 @@ extension IAPManager {
         }
 
         // suggest complete packages if eligible
-        if filters.contains(.complete) && suggestsComplete && purchasedProducts.isEligibleForComplete {
+        if including.contains(.complete) && suggestsComplete && purchasedProducts.isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)

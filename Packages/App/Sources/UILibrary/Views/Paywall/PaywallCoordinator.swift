@@ -215,13 +215,13 @@ extension PaywallState {
     @MainActor
     static func forPreviews(
         _ features: Set<AppFeature>,
-        filters: Set<IAPManager.SuggestionFilter>
+        including: Set<IAPManager.SuggestionInclusion>
     ) -> Self {
         var state = PaywallState()
         state.isFetchingProducts = false
         let suggested = IAPManager.forPreviews.suggestedProducts(
             for: features,
-            filters: filters
+            including: including
         )
         try? state.setSuggestedProducts(
             suggested,
