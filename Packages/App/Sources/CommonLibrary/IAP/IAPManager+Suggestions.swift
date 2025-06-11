@@ -42,6 +42,7 @@ extension IAPManager {
 #elseif os(macOS)
         suggestedProducts(for: .macOS, filter: filter)
 #elseif os(tvOS)
+        // FIXME: ###, TV paywall
         fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
     }

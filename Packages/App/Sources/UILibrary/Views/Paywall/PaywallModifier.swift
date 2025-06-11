@@ -120,7 +120,6 @@ private extension PaywallModifier {
     }
 
     func confirmationActions() -> some View {
-#if !os(tvOS)
         reason.map { reason in
             Group {
                 if !iapManager.isBeta, let onAction {
@@ -133,9 +132,6 @@ private extension PaywallModifier {
                 }
             }
         }
-#else
-        EmptyView()
-#endif
     }
 
     var confirmationTitle: String {
@@ -195,7 +191,6 @@ private extension PaywallModifier {
 
 private extension PaywallModifier {
     func modalDestination() -> some View {
-#if !os(tvOS)
         reason.map {
             PaywallView(
                 isPresented: $isPurchasing,
@@ -203,10 +198,6 @@ private extension PaywallModifier {
             )
             .themeNavigationStack()
         }
-#else
-        // FIXME: ###
-        fatalError("tvOS: Paywall unsupported")
-#endif
     }
 }
 

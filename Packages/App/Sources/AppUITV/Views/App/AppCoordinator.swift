@@ -201,7 +201,7 @@ extension AppCoordinator {
         pp_log_g(.app, .info, "Present paywall")
         paywallContinuation = continuation
 
-        setLater(.init(nil, requiredFeatures: features, action: .connect)) {
+        setLater(.init(profile, requiredFeatures: features, action: .connect)) {
             paywallReason = $0
         }
     }

@@ -28,8 +28,7 @@ import CommonUtils
 import StoreKit
 import SwiftUI
 
-#if !os(tvOS)
-
+// FIXME: ###, purchase multiple products in sequence
 struct PaywallView: View {
 
     @EnvironmentObject
@@ -324,5 +323,3 @@ private extension AppProduct {
     )
     .withMockEnvironment()
 }
-
-#endif
