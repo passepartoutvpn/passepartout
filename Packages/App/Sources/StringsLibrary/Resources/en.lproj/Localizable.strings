@@ -82,7 +82,7 @@
 "views.migration.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.paywall.sections.required_features.header" = "Required features";
-"views.paywall.sections.products.header" = "Suggested products";
+"views.paywall.sections.products.header" = "Purchase individually";
 "views.paywall.sections.products.footer" = "All purchases support Family Sharing.";
 "views.paywall.sections.full_products.header" = "All features";
 "views.paywall.sections.full_products.footer" = "These products include current and future features.";

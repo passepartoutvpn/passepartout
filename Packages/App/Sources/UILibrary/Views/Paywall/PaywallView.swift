@@ -46,10 +46,10 @@ struct PaywallView: View {
     private var isFetchingProducts = true
 
     @State
-    private var products: [InAppProduct] = []
+    private var completeProducts: [InAppProduct] = []
 
     @State
-    private var completeProducts: [InAppProduct] = []
+    private var individualProducts: [InAppProduct] = []
 
     @State
     private var purchasingIdentifier: String?
@@ -84,7 +84,7 @@ private extension PaywallView {
     var contentView: some View {
         Form {
             completeProductsView
-            productsView
+            individualProductsView
             restoreView
 #if !os(tvOS)
             linksView
@@ -92,29 +92,6 @@ private extension PaywallView {
         }
         .themeForm()
         .disabled(purchasingIdentifier != nil)
-    }
-
-    var productsView: some View {
-        products
-            .nilIfEmpty
-            .map { products in
-                ForEach(products, id: \.productIdentifier) {
-                    PaywallProductView(
-                        iapManager: iapManager,
-                        style: .paywall,
-                        product: $0,
-                        highlightedFeatures: requiredFeatures,
-                        purchasingIdentifier: $purchasingIdentifier,
-                        onComplete: onComplete,
-                        onError: onError
-                    )
-                }
-                .themeSection(
-                    header: Strings.Views.Paywall.Sections.Products.header,
-                    footer: Strings.Views.Paywall.Sections.Products.footer,
-                    forcesFooter: true
-                )
-            }
     }
 
     var completeProductsView: some View {
@@ -150,6 +127,29 @@ private extension PaywallView {
                         Strings.Views.Paywall.Sections.FullProducts.footer,
                         Strings.Views.Paywall.Sections.Products.footer
                     ].joined(separator: " "),
+                    forcesFooter: true
+                )
+            }
+    }
+
+    var individualProductsView: some View {
+        individualProducts
+            .nilIfEmpty
+            .map { products in
+                ForEach(products, id: \.productIdentifier) {
+                    PaywallProductView(
+                        iapManager: iapManager,
+                        style: .paywall,
+                        product: $0,
+                        highlightedFeatures: requiredFeatures,
+                        purchasingIdentifier: $purchasingIdentifier,
+                        onComplete: onComplete,
+                        onError: onError
+                    )
+                }
+                .themeSection(
+                    header: Strings.Views.Paywall.Sections.Products.header,
+                    footer: Strings.Views.Paywall.Sections.Products.footer,
                     forcesFooter: true
                 )
             }
@@ -202,8 +202,8 @@ private extension PaywallView {
                     $0.productRank < $1.productRank
                 }
             )
-            var products: [InAppProduct] = []
             var completeProducts: [InAppProduct] = []
+            var individualProducts: [InAppProduct] = []
             allProducts.forEach {
                 guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
                     return
@@ -211,17 +211,17 @@ private extension PaywallView {
                 if rawCompleteProducts.contains(raw) {
                     completeProducts.append($0)
                 } else {
-                    products.append($0)
+                    individualProducts.append($0)
                 }
             }
 
-            pp_log_g(.App.iap, .info, "Suggested products: \(products)")
-            guard !products.isEmpty || !completeProducts.isEmpty else {
+            pp_log_g(.App.iap, .info, "Individual products: \(individualProducts)")
+            guard !completeProducts.isEmpty || !individualProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
 
-            self.products = products
             self.completeProducts = completeProducts
+            self.individualProducts = individualProducts
         } catch {
             pp_log_g(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
