@@ -32,6 +32,8 @@ extension PaywallCoordinator {
 
     @MainActor
     final class Model: ObservableObject {
+
+        @Published
         var isFetchingProducts = true
 
         private(set) var suggestedProducts: Set<AppProduct> = []
@@ -40,8 +42,10 @@ extension PaywallCoordinator {
 
         private(set) var individualPurchasable: [InAppProduct] = []
 
+        @Published
         var purchasingIdentifier: String?
 
+        @Published
         var isPurchasePendingConfirmation = false
     }
 }
@@ -94,6 +98,7 @@ extension PaywallCoordinator.Model {
             throw AppError.emptyProducts
         }
 
+        objectWillChange.send()
         self.suggestedProducts = suggestedProducts
         self.completePurchasable = completePurchasable
         self.individualPurchasable = individualPurchasable

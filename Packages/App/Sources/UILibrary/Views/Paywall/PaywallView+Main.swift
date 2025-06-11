@@ -40,7 +40,7 @@ struct PaywallView: View {
 
     let requiredFeatures: Set<AppFeature>
 
-    @Binding
+    @ObservedObject
     var model: PaywallCoordinator.Model
 
     @ObservedObject
@@ -143,7 +143,7 @@ private extension PaywallView {
         isPresented: .constant(true),
         iapManager: .forPreviews,
         requiredFeatures: features,
-        model: .constant(.forPreviews(features, including: [.complete])),
+        model: .forPreviews(features, including: [.complete]),
         errorHandler: .default(),
         onComplete: { _, _ in },
         onError: { _ in }

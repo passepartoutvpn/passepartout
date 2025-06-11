@@ -38,7 +38,7 @@ struct PaywallCoordinator: View {
 
     let requiredFeatures: Set<AppFeature>
 
-    @State
+    @StateObject
     private var model = Model()
 
     @StateObject
@@ -73,7 +73,10 @@ private extension PaywallCoordinator {
 #if os(tvOS)
         PaywallView(
             requiredFeatures: requiredFeatures,
-            state: state
+            model: model
+            // errorHandler
+            // onComplete
+            // onError
         )
         .themeNavigationStack()
 #else
@@ -81,7 +84,7 @@ private extension PaywallCoordinator {
             isPresented: $isPresented,
             iapManager: iapManager,
             requiredFeatures: requiredFeatures,
-            model: $model,
+            model: model,
             errorHandler: errorHandler,
             onComplete: onComplete,
             onError: onError
