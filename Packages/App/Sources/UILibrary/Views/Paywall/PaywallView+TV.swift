@@ -32,6 +32,8 @@ import SwiftUI
 struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
+    let state: PaywallState
+
     var body: some View {
         EmptyView()
             .themeNavigationStack()
@@ -42,7 +44,8 @@ struct PaywallView: View {
 
 #Preview {
     PaywallView(
-        requiredFeatures: [.appleTV, .dns, .sharing]
+        requiredFeatures: [.appleTV, .dns, .sharing],
+        state: PaywallState()
     )
     .withMockEnvironment()
 }

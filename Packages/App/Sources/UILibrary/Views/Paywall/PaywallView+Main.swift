@@ -32,71 +32,38 @@ import SwiftUI
 
 struct PaywallView: View {
 
-    @EnvironmentObject
-    private var theme: Theme
-
-    @EnvironmentObject
-    private var iapManager: IAPManager
-
     @Binding
     var isPresented: Bool
 
+    @ObservedObject
+    var iapManager: IAPManager
+
     let requiredFeatures: Set<AppFeature>
 
-    @State
-    private var isFetchingProducts = true
+    @Binding
+    var state: PaywallState
 
-    @State
-    private var completeProducts: [InAppProduct] = []
+    @ObservedObject
+    var errorHandler: ErrorHandler
 
-    @State
-    private var individualProducts: [InAppProduct] = []
+    let onComplete: (String, InAppPurchaseResult) -> Void
 
-    @State
-    private var purchasingIdentifier: String?
-
-    @State
-    private var isPurchasePendingConfirmation = false
-
-    @StateObject
-    private var errorHandler: ErrorHandler = .default()
+    let onError: (Error) -> Void
 
     var body: some View {
-        contentView
-            .themeProgress(if: isFetchingProducts)
-            .alert(
-                Strings.Global.Actions.purchase,
-                isPresented: $isPurchasePendingConfirmation,
-                actions: pendingActions,
-                message: pendingMessage
-            )
-            .task(id: requiredFeatures) {
-                await fetchAvailableProducts()
-            }
-            .withErrorHandler(errorHandler)
-    }
-}
-
-private extension PaywallView {
-    var title: String {
-        Strings.Global.Actions.purchase
-    }
-
-    var contentView: some View {
         Form {
             completeProductsView
             individualProductsView
             restoreView
-#if !os(tvOS)
             linksView
-#endif
         }
         .themeForm()
-        .disabled(purchasingIdentifier != nil)
     }
+}
 
+private extension PaywallView {
     var completeProductsView: some View {
-        completeProducts
+        state.completeProducts
             .nilIfEmpty
             .map { products in
                 Group {
@@ -107,7 +74,7 @@ private extension PaywallView {
                             product: $0,
                             withIncludedFeatures: false,
                             highlightedFeatures: requiredFeatures,
-                            purchasingIdentifier: $purchasingIdentifier,
+                            purchasingIdentifier: $state.purchasingIdentifier,
                             onComplete: onComplete,
                             onError: onError
                         )
@@ -134,7 +101,7 @@ private extension PaywallView {
     }
 
     var individualProductsView: some View {
-        individualProducts
+        state.individualProducts
             .nilIfEmpty
             .map { products in
                 ForEach(products, id: \.productIdentifier) {
@@ -144,7 +111,7 @@ private extension PaywallView {
                         product: $0,
                         withIncludedFeatures: true,
                         highlightedFeatures: requiredFeatures,
-                        purchasingIdentifier: $purchasingIdentifier,
+                        purchasingIdentifier: $state.purchasingIdentifier,
                         onComplete: onComplete,
                         onError: onError
                     )
@@ -172,113 +139,6 @@ private extension PaywallView {
                 above: true
             )
     }
-
-    func pendingActions() -> some View {
-        Button(Strings.Global.Nouns.ok) {
-            isPresented = false
-        }
-    }
-
-    func pendingMessage() -> some View {
-        Text(Strings.Views.Paywall.Alerts.Pending.message)
-    }
-}
-
-// MARK: -
-
-private extension PaywallView {
-    func fetchAvailableProducts() async {
-        isFetchingProducts = true
-        defer {
-            isFetchingProducts = false
-        }
-        do {
-            let rawProducts = iapManager.suggestedProducts(for: requiredFeatures)
-            guard !rawProducts.isEmpty else {
-                throw AppError.emptyProducts
-            }
-            let rawCompleteProducts = rawProducts.filter(\.isComplete)
-
-            let allProducts = try await iapManager.purchasableProducts(for: rawProducts
-                .sorted {
-                    $0.productRank < $1.productRank
-                }
-            )
-            var completeProducts: [InAppProduct] = []
-            var individualProducts: [InAppProduct] = []
-            allProducts.forEach {
-                guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
-                    return
-                }
-                if rawCompleteProducts.contains(raw) {
-                    completeProducts.append($0)
-                } else {
-                    individualProducts.append($0)
-                }
-            }
-
-            pp_log_g(.App.iap, .info, "Individual products: \(individualProducts)")
-            guard !completeProducts.isEmpty || !individualProducts.isEmpty else {
-                throw AppError.emptyProducts
-            }
-
-            self.completeProducts = completeProducts
-            self.individualProducts = individualProducts
-        } catch {
-            pp_log_g(.App.iap, .error, "Unable to load purchasable products: \(error)")
-            onError(error, dismissing: true)
-        }
-    }
-
-    func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
-        switch result {
-        case .done:
-            Task {
-                await iapManager.reloadReceipt()
-            }
-            isPresented = false
-
-        case .pending:
-            isPurchasePendingConfirmation = true
-
-        case .cancelled:
-            break
-
-        case .notFound:
-            fatalError("Product not found: \(productIdentifier)")
-        }
-    }
-
-    func onError(_ error: Error) {
-        onError(error, dismissing: false)
-    }
-
-    func onError(_ error: Error, dismissing: Bool) {
-        errorHandler.handle(error, title: Strings.Global.Actions.purchase) {
-            if dismissing {
-                isPresented = false
-            }
-        }
-    }
-}
-
-private extension AppProduct {
-    var productRank: Int {
-        switch self {
-        case .Essentials.iOS_macOS:
-            return .min
-        case .Essentials.iOS:
-            return 1
-        case .Essentials.macOS:
-            return 2
-        case .Complete.Recurring.yearly:
-            return 3
-        case .Complete.Recurring.monthly:
-            return 4
-        default:
-            return .max
-        }
-    }
 }
 
 // MARK: - Previews
@@ -286,7 +146,12 @@ private extension AppProduct {
 #Preview {
     PaywallView(
         isPresented: .constant(true),
-        requiredFeatures: [.appleTV, .dns, .sharing]
+        iapManager: .forPreviews,
+        requiredFeatures: [.appleTV, .dns, .sharing],
+        state: .constant(PaywallState()),
+        errorHandler: .default(),
+        onComplete: { _, _ in },
+        onError: { _ in }
     )
     .withMockEnvironment()
 }
