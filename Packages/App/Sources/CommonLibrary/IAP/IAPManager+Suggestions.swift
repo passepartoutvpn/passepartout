@@ -130,8 +130,23 @@ extension IAPManager {
             }
         }
 
+        let suggestsComplete: Bool
+        switch platform {
+        case .tvOS:
+            //
+            // "essential" features are not accessible from the
+            // TV, therefore selling the "complete" packages is misleading
+            // for TV-only customers. only offer them if some "essential"
+            // feature is required, because it means that the iOS/macOS app
+            // is also installed
+            //
+            suggestsComplete = !essential.isEmpty
+        default:
+            suggestsComplete = true
+        }
+
         // suggest complete packages if eligible
-        if filters.contains(.complete) && purchasedProducts.isEligibleForComplete {
+        if filters.contains(.complete) && suggestsComplete && purchasedProducts.isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
