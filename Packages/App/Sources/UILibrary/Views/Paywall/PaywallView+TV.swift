@@ -28,15 +28,15 @@
 import CommonIAP
 import SwiftUI
 
-// FIXME: ###, TV paywall
 struct PaywallView: View {
     let requiredFeatures: Set<AppFeature>
 
     let state: PaywallState
 
     var body: some View {
-        EmptyView()
-            .themeNavigationStack()
+        fatalError("FIXME: ###, TV paywall")
+//        EmptyView()
+//            .themeNavigationStack()
     }
 }
 
