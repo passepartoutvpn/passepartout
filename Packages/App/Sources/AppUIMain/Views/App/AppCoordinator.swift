@@ -102,12 +102,12 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         ))
         .modifier(PaywallModifier(
             reason: $paywallReason,
-            otherTitle: Strings.Views.Paywall.Alerts.Confirmation.editProfile,
-            onOtherAction: { profile in
-                guard let profile else {
-                    return
-                }
-                onEditProfile(profile.localizedPreview)
+            onAction: { profile in
+                // FIXME: ###, connect anyway
+//                guard let profile else {
+//                    return
+//                }
+//                onEditProfile(profile.localizedPreview)
             },
             onCancel: onCancelPaywall
         ))

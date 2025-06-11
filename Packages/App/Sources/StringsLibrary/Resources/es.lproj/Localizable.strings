@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "Nada que migrar";
 "views.migration.sections.main.header" = "Selecciona a continuación los perfiles de versiones antiguas de %@ que deseas importar. Si tus perfiles están almacenados en iCloud, pueden tardar un poco en sincronizarse. Si no los ves ahora, por favor regresa más tarde.";
 "views.migration.title" = "Migrar";
-"views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
 "views.paywall.alerts.confirmation.message.connect" = "Puedes probar la conexión durante %d minutos.";
-"views.paywall.alerts.confirmation.message.save" = "Toca los iconos de candado para comprar las funciones faltantes.";
 "views.paywall.alerts.confirmation.message" = "Este perfil requiere características de pago para funcionar.";
 "views.paywall.alerts.confirmation.title" = "Compra requerida";
 "views.paywall.alerts.pending.message" = "La compra está pendiente de confirmación externa. La característica será acreditada tras la aprobación.";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "También muestra el perfil activo en la parte superior para un acceso rápido.";
 "views.preferences.pins_active_profile" = "Fijar perfil activo";
 "views.preferences.system_appearance" = "Apariencia";
-"views.profile.alerts.purchase.buttons.ok" = "Guardar de todos modos";
+"views.paywall.alerts.actions.save" = "Guardar de todos modos";
 "views.profile.module_list.section.footer" = "Toca los módulos para editar su configuración. Se pueden arrastrar para establecer la prioridad.";
 "views.profile.rows.add_module" = "Añadir módulo";
 "views.profile.rows.delete_profile" = "Eliminar perfil";

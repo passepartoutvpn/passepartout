@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "Inget att migrera";
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
-"views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
-"views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
 "views.paywall.alerts.confirmation.title" = "Köp krävs";
 "views.paywall.alerts.pending.message" = "Köpet väntar på extern bekräftelse. Funktionen aktiveras efter godkännande.";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "Visar även den aktiva profilen överst för snabb åtkomst.";
 "views.preferences.pins_active_profile" = "Fäst aktiv profil";
 "views.preferences.system_appearance" = "Utseende";
-"views.profile.alerts.purchase.buttons.ok" = "Spara ändå";
+"views.paywall.alerts.actions.save" = "Spara ändå";
 "views.profile.module_list.section.footer" = "Tryck på moduler för att redigera inställningarna. Moduler kan dras för att bestämma prioritet.";
 "views.profile.rows.add_module" = "Lägg till modul";
 "views.profile.rows.delete_profile" = "Ta bort profil";

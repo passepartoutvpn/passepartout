@@ -93,8 +93,9 @@
 "views.paywall.alerts.confirmation.title" = "Purchase required";
 "views.paywall.alerts.confirmation.message" = "This profile requires paid features to work.";
 "views.paywall.alerts.confirmation.message.connect" = "You may test the connection for %d minutes.";
-"views.paywall.alerts.confirmation.message.save" = "Tap the lock icons to purchase the missing features.";
-"views.paywall.alerts.confirmation.edit_profile" = "Edit profile";
+//"views.paywall.alerts.actions.connect" = "Test connection";
+//"views.paywall.alerts.actions.purchase" = "Purchase";
+"views.paywall.alerts.actions.save" = "Save anyway";
 "views.paywall.alerts.verification.connect.1" = "Your purchases are being verified.";
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
@@ -127,7 +128,6 @@
 "views.profile.send_tv.form.message" = "Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.";
 "views.profile.send_tv.qr.message" = "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network";
 "views.profile.send_tv.passcode.message" = "Enter the passcode";
-"views.profile.alerts.purchase.buttons.ok" = "Save anyway";
 
 "views.providers.module" = "Type";
 "views.providers.preset" = "Preset";

@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "Нечего мигрировать";
 "views.migration.sections.main.header" = "Выберите ниже профили из старых версий %@, которые вы хотите импортировать. Если ваши профили хранятся в iCloud, синхронизация может занять некоторое время. Если вы их сейчас не видите, вернитесь позже.";
 "views.migration.title" = "Миграция";
-"views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
-"views.paywall.alerts.confirmation.message.save" = "Нажмите на значки замка, чтобы приобрести недостающие функции.";
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
 "views.paywall.alerts.confirmation.title" = "Требуется покупка";
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "Также отображает активный профиль сверху для быстрого доступа.";
 "views.preferences.pins_active_profile" = "Закрепить активный профиль";
 "views.preferences.system_appearance" = "Внешний вид";
-"views.profile.alerts.purchase.buttons.ok" = "Сохранить в любом случае";
+"views.paywall.alerts.actions.save" = "Сохранить в любом случае";
 "views.profile.module_list.section.footer" = "Нажмите на модули, чтобы изменить их настройки. Их можно перетаскивать для установки приоритета.";
 "views.profile.rows.add_module" = "Добавить модуль";
 "views.profile.rows.delete_profile" = "Удалить профиль";

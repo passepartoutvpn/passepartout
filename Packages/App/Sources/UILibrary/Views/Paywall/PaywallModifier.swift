@@ -34,9 +34,7 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let otherTitle: String?
-
-    private let onOtherAction: ((Profile?) -> Void)?
+    private let onAction: ((Profile?) -> Void)?
 
     private let onCancel: (() -> Void)?
 
@@ -48,13 +46,11 @@ public struct PaywallModifier: ViewModifier {
 
     public init(
         reason: Binding<PaywallReason?>,
-        otherTitle: String? = nil,
-        onOtherAction: ((Profile?) -> Void)? = nil,
+        onAction: ((Profile?) -> Void)? = nil,
         onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
-        self.otherTitle = otherTitle
-        self.onOtherAction = onOtherAction
+        self.onAction = onAction
         self.onCancel = onCancel
     }
 
@@ -112,20 +108,34 @@ private extension PaywallModifier {
 // MARK: - Confirmation alert
 
 private extension PaywallModifier {
+    func title(forAction action: Action) -> String {
+        switch action {
+        case .connect:
+            return Strings.Global.Actions.connect
+        case .purchase:
+            return Strings.Global.Actions.purchase
+        case .save:
+            return Strings.Views.Paywall.Alerts.Actions.save
+        }
+    }
 
-    @ViewBuilder
     func confirmationActions() -> some View {
 #if !os(tvOS)
-        if !iapManager.isBeta, let otherTitle, let onOtherAction {
-            Button(otherTitle) {
-                onOtherAction(reason?.profile)
+        reason.map { reason in
+            Group {
+                if !iapManager.isBeta, let onAction {
+                    Button(title(forAction: reason.action), role: .cancel) {
+                        onAction(reason.profile)
+                    }
+                }
+                Button(Strings.Global.Actions.purchase) {
+                    isPurchasing = true
+                }
             }
         }
+#else
+        EmptyView()
 #endif
-        Button(Strings.Global.Nouns.ok, role: .cancel) {
-            reason = nil
-            onCancel?()
-        }
     }
 
     var confirmationTitle: String {
@@ -145,8 +155,6 @@ private extension PaywallModifier {
         switch reason?.action {
         case .connect:
             messages.append(V.Message.connect(limitedMinutes))
-        case .save:
-            messages.append(V.Message.save)
         default:
             break
         }
@@ -196,6 +204,7 @@ private extension PaywallModifier {
             .themeNavigationStack()
         }
 #else
+        // FIXME: ###
         fatalError("tvOS: Paywall unsupported")
 #endif
     }

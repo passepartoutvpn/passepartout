@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "没有可迁移的内容";
 "views.migration.sections.main.header" = "选择以下来自 %@ 的旧版本配置文件进行导入。如果您的配置文件存储在 iCloud 中，可能需要一些时间进行同步。如果现在没有看到，请稍后再试。";
 "views.migration.title" = "迁移";
-"views.paywall.alerts.confirmation.edit_profile" = "编辑配置文件";
 "views.paywall.alerts.confirmation.message.connect" = "您可以试用连接 %d 分钟。";
-"views.paywall.alerts.confirmation.message.save" = "点击锁定图标以购买缺失的功能。";
 "views.paywall.alerts.confirmation.message" = "此配置文件需要付费功能才能工作。";
 "views.paywall.alerts.confirmation.title" = "需要购买";
 "views.paywall.alerts.pending.message" = "购买正在等待外部确认。功能将在获得批准后被授予。";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "还会在顶部显示活动配置文件，以便快速访问。";
 "views.preferences.pins_active_profile" = "固定活动配置文件";
 "views.preferences.system_appearance" = "外观";
-"views.profile.alerts.purchase.buttons.ok" = "仍然保存";
+"views.paywall.alerts.actions.save" = "仍然保存";
 "views.profile.module_list.section.footer" = "点击模块以编辑其设置。可以拖动模块来确定优先级。";
 "views.profile.rows.add_module" = "添加模块";
 "views.profile.rows.delete_profile" = "删除配置文件";

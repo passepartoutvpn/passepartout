@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "Δεν υπάρχει τίποτα για μεταφορά";
 "views.migration.sections.main.header" = "Επιλέξτε παρακάτω τα προφίλ από τις παλιές εκδόσεις του %@ που θέλετε να εισάγετε. Εάν τα προφίλ σας είναι αποθηκευμένα στο iCloud, μπορεί να χρειαστεί λίγος χρόνος για να συγχρονιστούν. Εάν δεν τα βλέπετε τώρα, επιστρέψτε αργότερα.";
 "views.migration.title" = "Μεταφορά";
-"views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
-"views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια κλειδώματος για να αγοράσετε τις ελλείπουσες λειτουργίες.";
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";
 "views.paywall.alerts.confirmation.title" = "Απαιτείται αγορά";
 "views.paywall.alerts.pending.message" = "Η αγορά εκκρεμεί για εξωτερική επιβεβαίωση. Η λειτουργία θα πιστωθεί μετά την έγκριση.";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "Εμφανίζει επίσης το ενεργό προφίλ στην κορυφή για γρήγορη πρόσβαση.";
 "views.preferences.pins_active_profile" = "Καρφίτσωμα ενεργού προφίλ";
 "views.preferences.system_appearance" = "Εμφάνιση";
-"views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
+"views.paywall.alerts.actions.save" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";
 "views.profile.rows.add_module" = "Προσθήκη μονάδας";
 "views.profile.rows.delete_profile" = "Διαγραφή προφίλ";

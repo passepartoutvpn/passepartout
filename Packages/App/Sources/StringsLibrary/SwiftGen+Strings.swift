@@ -785,9 +785,11 @@ public enum Strings {
     }
     public enum Paywall {
       public enum Alerts {
+        public enum Actions {
+          /// Save anyway
+          public static let save = Strings.tr("Localizable", "views.paywall.alerts.actions.save", fallback: "Save anyway")
+        }
         public enum Confirmation {
-          /// Edit profile
-          public static let editProfile = Strings.tr("Localizable", "views.paywall.alerts.confirmation.edit_profile", fallback: "Edit profile")
           /// This profile requires paid features to work.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message", fallback: "This profile requires paid features to work.")
           /// Purchase required
@@ -797,8 +799,6 @@ public enum Strings {
             public static func connect(_ p1: Int) -> String {
               return Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.connect", p1, fallback: "You may test the connection for %d minutes.")
             }
-            /// Tap the lock icons to purchase the missing features.
-            public static let save = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.save", fallback: "Tap the lock icons to purchase the missing features.")
           }
         }
         public enum Pending {
@@ -906,14 +906,6 @@ public enum Strings {
       }
     }
     public enum Profile {
-      public enum Alerts {
-        public enum Purchase {
-          public enum Buttons {
-            /// Save anyway
-            public static let ok = Strings.tr("Localizable", "views.profile.alerts.purchase.buttons.ok", fallback: "Save anyway")
-          }
-        }
-      }
       public enum ModuleList {
         public enum Section {
           /// Tap modules to edit their settings. Modules may be dragged to determine priority.

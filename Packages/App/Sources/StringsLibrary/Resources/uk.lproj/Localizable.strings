@@ -259,9 +259,7 @@
 "views.migration.no_profiles" = "Немає профілів для перенесення";
 "views.migration.sections.main.header" = "Виберіть нижче профілі зі старих версій %@, які ви хочете імпортувати. Якщо ваші профілі зберігаються в iCloud, може знадобитися час для їх синхронізації. Якщо ви не бачите їх зараз, поверніться пізніше.";
 "views.migration.title" = "Перенесення";
-"views.paywall.alerts.confirmation.edit_profile" = "Редагувати профіль";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
-"views.paywall.alerts.confirmation.message.save" = "Торкніться значків замка, щоб придбати відсутні функції.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
 "views.paywall.alerts.pending.message" = "Покупка очікує зовнішнього підтвердження. Функція буде увімкнена після схвалення.";
@@ -295,7 +293,7 @@
 "views.preferences.pins_active_profile.footer" = "Також показує активний профіль зверху для швидкого доступу.";
 "views.preferences.pins_active_profile" = "Закріпити активний профіль";
 "views.preferences.system_appearance" = "Зовнішній вигляд";
-"views.profile.alerts.purchase.buttons.ok" = "Зберегти все одно";
+"views.paywall.alerts.actions.save" = "Зберегти все одно";
 "views.profile.module_list.section.footer" = "Торкніться модулів, щоб змінити їхні налаштування. Їх можна перетягувати для визначення пріоритету.";
 "views.profile.rows.add_module" = "Додати модуль";
 "views.profile.rows.delete_profile" = "Видалити профіль";
