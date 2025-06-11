@@ -424,18 +424,18 @@ extension IAPManagerTests {
     }
 }
 
-// MARK: - Suggestions (Individual)
+// MARK: - Suggestions (Non-essential)
 
 extension IAPManagerTests {
     func test_givenFree_whenSuggestMixedFeatures_thenSuggestsEssentials() async {
         let sut = await IAPManager(products: [])
         let features: Set<AppFeature> = [.appleTV, .dns]
-        XCTAssertEqual(sut.individualProducts(for: features, on: .iOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .iOS), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Features.appleTV
         ])
-        XCTAssertEqual(sut.individualProducts(for: features, on: .macOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .macOS), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
             .Features.appleTV
@@ -445,10 +445,10 @@ extension IAPManagerTests {
     func test_givenFree_whenSuggestNonEssentialFeature_thenDoesNotSuggestEssentials() async {
         let sut = await IAPManager(products: [])
         let features: Set<AppFeature> = [.appleTV]
-        XCTAssertEqual(sut.individualProducts(for: features, on: .iOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .iOS), [
             .Features.appleTV
         ])
-        XCTAssertEqual(sut.individualProducts(for: features, on: .macOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .macOS), [
             .Features.appleTV
         ])
     }
@@ -456,10 +456,10 @@ extension IAPManagerTests {
     func test_givenFree_whenSuggestNonEssentialImplyingEssentialFeature_thenDoesNotSuggestEssentials() async {
         let sut = await IAPManager(products: [])
         let features: Set<AppFeature> = [.appleTV, .sharing]
-        XCTAssertEqual(sut.individualProducts(for: features, on: .iOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .iOS), [
             .Features.appleTV
         ])
-        XCTAssertEqual(sut.individualProducts(for: features, on: .macOS), [
+        XCTAssertEqual(sut.mixedProducts(for: features, on: .macOS), [
             .Features.appleTV
         ])
     }
@@ -664,7 +664,7 @@ private extension IAPManager {
         suggestedProducts(for: AppFeature.essentialFeatures, on: platform, filters: filters)
     }
 
-    func individualProducts(
+    func mixedProducts(
         for features: Set<AppFeature>,
         on platform: Platform,
         filters: Set<SuggestionFilter> = [.singlePlatformEssentials]
