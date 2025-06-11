@@ -1,5 +1,5 @@
 //
-//  PaywallView.swift
+//  PaywallView+Main.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/10/24.
@@ -23,12 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import CommonLibrary
 import CommonUtils
 import StoreKit
 import SwiftUI
 
-// FIXME: ###, purchase multiple products in sequence
 struct PaywallView: View {
 
     @EnvironmentObject
@@ -289,3 +290,5 @@ private extension AppProduct {
     )
     .withMockEnvironment()
 }
+
+#endif

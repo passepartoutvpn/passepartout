@@ -192,15 +192,10 @@ private extension PaywallModifier {
 private extension PaywallModifier {
     func modalDestination() -> some View {
         reason.map {
-            PaywallView(
+            PaywallCoordinator(
                 isPresented: $isPurchasing,
                 requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures)
             )
-#if os(tvOS)
-            .themeNavigationStack()
-#else
-            .themeNavigationStack(closable: true)
-#endif
         }
     }
 }
