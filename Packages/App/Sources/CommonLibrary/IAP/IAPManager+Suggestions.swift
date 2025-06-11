@@ -75,22 +75,10 @@ extension IAPManager {
 
         var suggested: Set<AppProduct> = []
 
-        // partition features
-        let essential = features.filter(\.isEssential)
-        let nonEssential = features.subtracting(essential)
-
-        // prioritize non-essential products
-        let nonEssentialProducts = nonEssential.reduce(into: Set<AppProduct>()) { group, element in
-            element.individualProducts(on: platform).forEach {
-                group.insert($0)
-            }
-        }
+        // prioritize eligible features from non-essential products
+        let nonEssentialProducts = features.flatMap(\.nonEssentialProducts)
         suggested.formUnion(nonEssentialProducts)
-
-        // infer eligible features so far
-        let nonEssentialEligibleFeatures = nonEssentialProducts.flatMap {
-            $0.features
-        }
+        let nonEssentialEligibleFeatures = nonEssentialProducts.flatMap(\.features)
 
         // did purchase essentials for this platform?
         let didPurchaseEssentials = {
@@ -105,25 +93,31 @@ extension IAPManager {
         }()
 
         // suggest essential packages if non-essential don't include required essential features
-        if !didPurchaseEssentials && !nonEssentialEligibleFeatures.contains(essential) {
+        let essentialFeatures = features.filter(\.isEssential)
+        if !didPurchaseEssentials && !nonEssentialEligibleFeatures.contains(essentialFeatures) {
             switch platform {
             case .iOS:
+                // suggest both platforms if never purchased
                 if !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
+                // suggest iOS to former macOS purchasers
                 let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.macOS)
                 if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS)
                 }
             case .macOS:
+                // suggest both platforms if never purchased
                 if !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
+                // suggest macOS to former iOS purchasers
                 let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.iOS)
                 if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.macOS)
                 }
             case .tvOS:
+                // suggest both platforms if never purchased
                 if !purchasedProducts.contains(where: \.isEssentials) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
@@ -140,7 +134,8 @@ extension IAPManager {
             // feature is required, because it means that the iOS/macOS app
             // is also installed
             //
-            suggestsComplete = !essential.isEmpty
+            // TODO: ###, this is somewhat possible with .json import
+            suggestsComplete = !essentialFeatures.isEmpty
         default:
             suggestsComplete = true
         }
@@ -151,6 +146,9 @@ extension IAPManager {
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
         }
+
+        // strip purchased (paranoid check)
+        suggested.subtract(purchasedProducts)
 
         return suggested
     }

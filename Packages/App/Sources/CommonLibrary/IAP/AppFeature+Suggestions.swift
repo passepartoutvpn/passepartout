@@ -27,18 +27,9 @@ import CommonIAP
 import Foundation
 
 extension AppFeature {
-    public func individualProducts(on platform: IAPManager.Platform) -> Set<AppProduct> {
-        if isEssential {
-            var list: Set<AppProduct> = [.Essentials.iOS_macOS]
-            switch platform {
-            case .iOS:
-                list.insert(.Essentials.iOS)
-            case .macOS:
-                list.insert(.Essentials.macOS)
-            case .tvOS:
-                break
-            }
-            return list
+    public var nonEssentialProducts: Set<AppProduct> {
+        guard !isEssential else {
+            return []
         }
         switch self {
         case .appleTV:
