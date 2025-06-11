@@ -31,13 +31,40 @@ import SwiftUI
 struct PaywallState {
     var isFetchingProducts = true
 
-    var completeProducts: [InAppProduct] = []
+    private(set) var suggestedProducts: Set<AppProduct> = []
 
-    var individualProducts: [InAppProduct] = []
+    private(set) var completePurchasable: [InAppProduct] = []
+
+    private(set) var individualPurchasable: [InAppProduct] = []
 
     var purchasingIdentifier: String?
 
     var isPurchasePendingConfirmation = false
+
+    mutating func setSuggestedProducts(_ suggestedProducts: Set<AppProduct>, purchasable: [InAppProduct]) throws {
+        let completeProducts = suggestedProducts.filter(\.isComplete)
+
+        var completePurchasable: [InAppProduct] = []
+        var individualPurchasable: [InAppProduct] = []
+        purchasable.forEach {
+            guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
+                return
+            }
+            if completeProducts.contains(raw) {
+                completePurchasable.append($0)
+            } else {
+                individualPurchasable.append($0)
+            }
+        }
+        pp_log_g(.App.iap, .info, "Individual products: \(individualPurchasable)")
+        guard !completePurchasable.isEmpty || !individualPurchasable.isEmpty else {
+            throw AppError.emptyProducts
+        }
+
+        self.suggestedProducts = suggestedProducts
+        self.completePurchasable = completePurchasable
+        self.individualPurchasable = individualPurchasable
+    }
 }
 
 struct PaywallCoordinator: View {
@@ -121,33 +148,11 @@ private extension PaywallCoordinator {
             guard !rawProducts.isEmpty else {
                 throw AppError.emptyProducts
             }
-            let rawCompleteProducts = rawProducts.filter(\.isComplete)
-
-            let allProducts = try await iapManager.purchasableProducts(for: rawProducts
-                .sorted {
-                    $0.productRank < $1.productRank
-                }
-            )
-            var completeProducts: [InAppProduct] = []
-            var individualProducts: [InAppProduct] = []
-            allProducts.forEach {
-                guard let raw = AppProduct(rawValue: $0.productIdentifier) else {
-                    return
-                }
-                if rawCompleteProducts.contains(raw) {
-                    completeProducts.append($0)
-                } else {
-                    individualProducts.append($0)
-                }
+            let rawSortedProducts = rawProducts.sorted {
+                $0.productRank < $1.productRank
             }
-
-            pp_log_g(.App.iap, .info, "Individual products: \(individualProducts)")
-            guard !completeProducts.isEmpty || !individualProducts.isEmpty else {
-                throw AppError.emptyProducts
-            }
-
-            state.completeProducts = completeProducts
-            state.individualProducts = individualProducts
+            let purchasable = try await iapManager.purchasableProducts(for: rawSortedProducts)
+            try state.setSuggestedProducts(rawProducts, purchasable: purchasable)
         } catch {
             pp_log_g(.App.iap, .error, "Unable to load purchasable products: \(error)")
             onError(error, dismissing: true)
@@ -206,13 +211,22 @@ private extension AppProduct {
 // MARK: - Previews
 
 extension PaywallState {
-    static var forPreviews: Self {
+
+    @MainActor
+    static func forPreviews(
+        _ features: Set<AppFeature>,
+        filters: Set<IAPManager.SuggestionFilter>
+    ) -> Self {
         var state = PaywallState()
         state.isFetchingProducts = false
-        state.completeProducts = [AppProduct.Complete.OneTime.lifetime]
-            .map(\.asFakeIAP)
-        state.individualProducts = [AppProduct.Features.appleTV]
-            .map(\.asFakeIAP)
+        let suggested = IAPManager.forPreviews.suggestedProducts(
+            for: features,
+            filters: filters
+        )
+        try? state.setSuggestedProducts(
+            suggested,
+            purchasable: suggested.map(\.asFakeIAP)
+        )
         return state
     }
 }

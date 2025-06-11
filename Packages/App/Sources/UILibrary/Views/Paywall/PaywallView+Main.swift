@@ -53,9 +53,9 @@ struct PaywallView: View {
     var body: some View {
         Form {
             completeProductsView
-                .if(!state.completeProducts.isEmpty)
+                .if(!state.completePurchasable.isEmpty)
             individualProductsView
-                .if(!state.individualProducts.isEmpty)
+                .if(!state.individualPurchasable.isEmpty)
             restoreView
             linksView
         }
@@ -66,7 +66,7 @@ struct PaywallView: View {
 private extension PaywallView {
     var completeProductsView: some View {
         Group {
-            ForEach(state.completeProducts, id: \.productIdentifier) {
+            ForEach(state.completePurchasable, id: \.productIdentifier) {
                 PaywallProductView(
                     iapManager: iapManager,
                     style: .paywall,
@@ -99,7 +99,7 @@ private extension PaywallView {
     }
 
     var individualProductsView: some View {
-        ForEach(state.individualProducts, id: \.productIdentifier) {
+        ForEach(state.individualPurchasable, id: \.productIdentifier) {
             PaywallProductView(
                 iapManager: iapManager,
                 style: .paywall,
@@ -138,11 +138,12 @@ private extension PaywallView {
 // MARK: - Previews
 
 #Preview {
+    let features: Set<AppFeature> = [.appleTV, .dns, .sharing]
     PaywallView(
         isPresented: .constant(true),
         iapManager: .forPreviews,
-        requiredFeatures: [.appleTV, .dns, .sharing],
-        state: .constant(.forPreviews),
+        requiredFeatures: features,
+        state: .constant(.forPreviews(features, filters: [.complete])),
         errorHandler: .default(),
         onComplete: { _, _ in },
         onError: { _ in }
