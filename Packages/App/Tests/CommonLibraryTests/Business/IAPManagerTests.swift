@@ -377,14 +377,14 @@ extension IAPManagerTests {
 
     func test_givenFree_whenWithComplete_thenSuggestsEssentialsAndComplete() async {
         let sut = await IAPManager(products: [])
-        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Complete.Recurring.yearly,
             .Complete.Recurring.monthly,
             .Complete.OneTime.lifetime
         ])
-        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
             .Complete.Recurring.yearly,
@@ -395,14 +395,14 @@ extension IAPManagerTests {
 
     func test_givenOldProducts_whenWithComplete_thenSuggestsEssentialsAndComplete() async {
         let sut = await IAPManager(products: [.Features.trustedNetworks])
-        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.iOS,
             .Complete.OneTime.lifetime,
             .Complete.Recurring.monthly,
             .Complete.Recurring.yearly
         ])
-        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.macOS,
             .Complete.OneTime.lifetime,
@@ -413,11 +413,11 @@ extension IAPManagerTests {
 
     func test_givenNewProducts_whenWithComplete_thenSuggestsEssentials() async {
         let sut = await IAPManager(products: [.Features.appleTV])
-        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .iOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.iOS
         ])
-        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete]), [
+        XCTAssertEqual(sut.essentialProducts(on: .macOS, filters: [.complete, .singlePlatformEssentials]), [
             .Essentials.iOS_macOS,
             .Essentials.macOS
         ])
@@ -659,7 +659,7 @@ private extension IAPManager {
 
     func essentialProducts(
         on platform: Platform,
-        filters: Set<SuggestionFilter> = []
+        filters: Set<SuggestionFilter> = [.singlePlatformEssentials]
     ) -> Set<AppProduct> {
         suggestedProducts(for: AppFeature.essentialFeatures, on: platform, filters: filters)
     }
@@ -667,7 +667,7 @@ private extension IAPManager {
     func individualProducts(
         for features: Set<AppFeature>,
         on platform: Platform,
-        filters: Set<SuggestionFilter> = []
+        filters: Set<SuggestionFilter> = [.singlePlatformEssentials]
     ) -> Set<AppProduct> {
         suggestedProducts(for: features, on: platform, filters: filters)
     }

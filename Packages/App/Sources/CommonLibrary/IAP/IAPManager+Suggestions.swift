@@ -38,6 +38,8 @@ extension IAPManager {
 
     public enum SuggestionFilter {
         case complete
+
+        case singlePlatformEssentials
     }
 
     public func suggestedProducts(
@@ -109,14 +111,14 @@ extension IAPManager {
                 if !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                if !purchasedProducts.contains(.Essentials.iOS) {
+                if filters.contains(.singlePlatformEssentials) && !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS)
                 }
             case .macOS:
                 if !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                if !purchasedProducts.contains(.Essentials.macOS) {
+                if filters.contains(.singlePlatformEssentials) && !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.macOS)
                 }
             case .tvOS:
