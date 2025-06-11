@@ -126,7 +126,7 @@ extension PaywallCoordinator.Model {
         _ features: Set<AppFeature>,
         including: Set<IAPManager.SuggestionInclusion>
     ) -> PaywallCoordinator.Model {
-        var state = PaywallCoordinator.Model()
+        let state = PaywallCoordinator.Model()
         state.isFetchingProducts = false
         let suggested = IAPManager.forPreviews.suggestedProducts(
             for: features,
