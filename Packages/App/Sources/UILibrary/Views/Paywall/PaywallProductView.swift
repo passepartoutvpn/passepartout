@@ -54,7 +54,7 @@ public struct PaywallProductView: View {
         iapManager: IAPManager,
         style: PaywallProductViewStyle,
         product: InAppProduct,
-        withIncludedFeatures: Bool = true,
+        withIncludedFeatures: Bool,
         highlightedFeatures: Set<AppFeature> = [],
         purchasingIdentifier: Binding<String?>,
         onComplete: @escaping (String, InAppPurchaseResult) -> Void,
@@ -91,7 +91,7 @@ private extension PaywallProductView {
 
     @ViewBuilder
     var productView: some View {
-        if #available(iOS 17, macOS 14, tvOS 17, *) {
+        if !isPreview, #available(iOS 17, macOS 14, tvOS 17, *) {
             StoreKitProductView(
                 style: style,
                 product: product,
@@ -123,6 +123,7 @@ private extension PaywallProductView {
                 localizedPrice: "$10",
                 native: nil
             ),
+            withIncludedFeatures: true,
             highlightedFeatures: [.appleTV],
             purchasingIdentifier: .constant(nil),
             onComplete: { _, _ in },

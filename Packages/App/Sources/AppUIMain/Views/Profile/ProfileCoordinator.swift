@@ -71,7 +71,12 @@ struct ProfileCoordinator: View {
 
     var body: some View {
         contentView
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(PaywallModifier(
+                reason: $paywallReason,
+                onAction: { _ in
+                    saveAnyway()
+                }
+            ))
             .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
             .withErrorHandler(errorHandler)
@@ -151,6 +156,12 @@ private extension ProfileCoordinator {
 // MARK: - Actions
 
 private extension ProfileCoordinator {
+    func saveAnyway() {
+        Task {
+            try await commitEditing(verifying: false, dismissing: true)
+        }
+    }
+
     func addNewModule(_ moduleType: ModuleType) {
         let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
@@ -195,7 +206,6 @@ private extension ProfileCoordinator {
             setLater(PaywallReason(
                 nil,
                 requiredFeatures: requiredFeatures,
-                suggestedProducts: nil,
                 action: .save
             )) {
                 paywallReason = $0

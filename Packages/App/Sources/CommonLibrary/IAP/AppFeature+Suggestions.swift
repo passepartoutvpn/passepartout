@@ -1,8 +1,8 @@
 //
-//  PaywallModifier+Reason.swift
+//  AppFeature+Suggestions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/14/24.
+//  Created by Davide De Rosa on 6/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,39 +24,19 @@
 //
 
 import CommonIAP
-import CommonLibrary
 import Foundation
 
-public typealias PaywallReason = PaywallModifier.Reason
+extension AppFeature {
 
-extension PaywallModifier {
-    public enum Action {
-        case connect
-
-        case save
-
-        case purchase
-    }
-
-    public struct Reason: Hashable {
-        public let profile: Profile?
-
-        public let requiredFeatures: Set<AppFeature>
-
-        public let action: Action
-
-        public init(
-            _ profile: Profile?,
-            requiredFeatures: Set<AppFeature>,
-            action: Action
-        ) {
-            self.profile = profile
-            self.requiredFeatures = requiredFeatures
-            self.action = action
-        }
-
-        public var needsConfirmation: Bool {
-            action != .purchase
+    // some non-essential features can only be purchased individually
+    // here we suggest the products entitling for such features
+    public var nonEssentialProducts: Set<AppProduct> {
+        switch self {
+        case .appleTV:
+            return [.Features.appleTV]
+        default:
+            assert(isEssential, "Non-essential feature \(rawValue) must suggest a purchasable product")
+            return []
         }
     }
 }

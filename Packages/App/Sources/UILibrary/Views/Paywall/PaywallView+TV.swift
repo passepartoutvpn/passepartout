@@ -1,8 +1,8 @@
 //
-//  PaywallModifier+Reason.swift
+//  PaywallView+TV.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/14/24.
+//  Created by Davide De Rosa on 9/10/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,40 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if os(tvOS)
+
 import CommonIAP
-import CommonLibrary
-import Foundation
+import SwiftUI
 
-public typealias PaywallReason = PaywallModifier.Reason
+struct PaywallView: View {
+    let requiredFeatures: Set<AppFeature>
 
-extension PaywallModifier {
-    public enum Action {
-        case connect
+    let model: PaywallCoordinator.Model
 
-        case save
-
-        case purchase
-    }
-
-    public struct Reason: Hashable {
-        public let profile: Profile?
-
-        public let requiredFeatures: Set<AppFeature>
-
-        public let action: Action
-
-        public init(
-            _ profile: Profile?,
-            requiredFeatures: Set<AppFeature>,
-            action: Action
-        ) {
-            self.profile = profile
-            self.requiredFeatures = requiredFeatures
-            self.action = action
-        }
-
-        public var needsConfirmation: Bool {
-            action != .purchase
-        }
+    var body: some View {
+        fatalError("FIXME: ###, TV paywall")
+//        EmptyView()
+//            .themeNavigationStack()
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    let features: Set<AppFeature> = [.appleTV, .dns, .sharing]
+    PaywallView(
+        requiredFeatures: features,
+        model: .forPreviews(features, including: [])
+    )
+    .withMockEnvironment()
+}
+
+#endif
