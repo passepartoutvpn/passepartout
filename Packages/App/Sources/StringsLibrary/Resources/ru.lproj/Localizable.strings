@@ -88,6 +88,7 @@
 "global.nouns.configuration" = "Конфигурация";
 "global.nouns.connection" = "Соединение";
 "global.nouns.country" = "Страна";
+"global.nouns.date" = "Дата";
 "global.nouns.default" = "По умолчанию";
 "global.nouns.destination" = "Назначение";
 "global.nouns.disabled" = "Отключено";

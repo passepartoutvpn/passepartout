@@ -88,6 +88,7 @@
 "global.nouns.configuration" = "Конфігурація";
 "global.nouns.connection" = "Підключення";
 "global.nouns.country" = "Країна";
+"global.nouns.date" = "Дата";
 "global.nouns.default" = "Типовий";
 "global.nouns.destination" = "Призначення";
 "global.nouns.disabled" = "Вимкнено";

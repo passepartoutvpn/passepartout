@@ -250,6 +250,8 @@ public enum Strings {
       public static let connection = Strings.tr("Localizable", "global.nouns.connection", fallback: "Connection")
       /// Country
       public static let country = Strings.tr("Localizable", "global.nouns.country", fallback: "Country")
+      /// Date
+      public static let date = Strings.tr("Localizable", "global.nouns.date", fallback: "Date")
       /// Default
       public static let `default` = Strings.tr("Localizable", "global.nouns.default", fallback: "Default")
       /// Destination
@@ -989,8 +991,6 @@ public enum Strings {
       public enum Rows {
         /// Build number
         public static let buildNumber = Strings.tr("Localizable", "views.purchased.rows.build_number", fallback: "Build number")
-        /// Download date
-        public static let downloadDate = Strings.tr("Localizable", "views.purchased.rows.download_date", fallback: "Download date")
       }
       public enum Sections {
         public enum Download {

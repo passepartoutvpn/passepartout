@@ -88,6 +88,7 @@
 "global.nouns.configuration" = "Configuration";
 "global.nouns.connection" = "Connexion";
 "global.nouns.country" = "Pays";
+"global.nouns.date" = "Date";
 "global.nouns.default" = "Par défaut";
 "global.nouns.destination" = "Destination";
 "global.nouns.disabled" = "Désactivé";

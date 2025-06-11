@@ -88,6 +88,7 @@
 "global.nouns.configuration" = "配置";
 "global.nouns.connection" = "连接";
 "global.nouns.country" = "国家";
+"global.nouns.date" = "日期";
 "global.nouns.default" = "默认";
 "global.nouns.destination" = "目标";
 "global.nouns.disabled" = "已禁用";
