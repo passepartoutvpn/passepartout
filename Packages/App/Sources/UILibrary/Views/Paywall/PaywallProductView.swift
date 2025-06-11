@@ -91,7 +91,7 @@ private extension PaywallProductView {
 
     @ViewBuilder
     var productView: some View {
-        if #available(iOS 17, macOS 14, tvOS 17, *) {
+        if !isPreview, #available(iOS 17, macOS 14, tvOS 17, *) {
             StoreKitProductView(
                 style: style,
                 product: product,
