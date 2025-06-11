@@ -111,18 +111,20 @@ extension IAPManager {
                 if !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                if filters.contains(.singlePlatformEssentials) && !purchasedProducts.contains(.Essentials.iOS) {
+                let suggestsSinglePlatform = filters.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.macOS)
+                if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS)
                 }
             case .macOS:
                 if !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                if filters.contains(.singlePlatformEssentials) && !purchasedProducts.contains(.Essentials.macOS) {
+                let suggestsSinglePlatform = filters.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.iOS)
+                if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.macOS)
                 }
             case .tvOS:
-                if !purchasedProducts.contains(.Essentials.iOS_macOS) {
+                if !purchasedProducts.contains(where: \.isEssentials) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
             }
