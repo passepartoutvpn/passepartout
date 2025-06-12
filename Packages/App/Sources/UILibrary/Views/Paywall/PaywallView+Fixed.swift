@@ -56,13 +56,12 @@ struct PaywallFixedView: View {
             HStack {
                 VStack {
                     completeProductsView
+                        .if(showsComplete)
                     individualProductsView
                 }
-                .frame(maxHeight: .infinity)
-
                 featuresView
                     .padding(.leading, 100)
-                    .frame(maxWidth: 0.4 * geo.size.width, maxHeight: .infinity)
+                    .frame(maxWidth: 0.4 * geo.size.width)
 
                 // TODO: ###, add bottom links if !os(tvOS)
             }
@@ -70,8 +69,6 @@ struct PaywallFixedView: View {
             .themeAnimation(on: iapManager.purchasedProducts, category: .paywall)
 #if os(tvOS)
             .themeGradient()
-#else
-            .padding()
 #endif
         }
     }
@@ -110,9 +107,8 @@ private extension PaywallFixedView {
                 .foregroundStyle(.tertiary)
                 .padding(.bottom)
         }
-        .disabled(!iapManager.isEligibleForComplete)
         .opacity(iapManager.isEligibleForComplete ? 1.0 : blurOpacity)
-        .if(showsComplete)
+        .disabled(!iapManager.isEligibleForComplete)
     }
 
     var individualProductsView: some View {
