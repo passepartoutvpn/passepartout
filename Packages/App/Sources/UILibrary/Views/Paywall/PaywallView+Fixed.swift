@@ -146,7 +146,7 @@ private extension PaywallFixedView {
 
     var featuresView: some View {
         VStack {
-            IncludedFeaturesView(
+            AllFeaturesView(
                 features: Set(selectedProduct?.features ?? []),
                 requiredFeatures: requiredFeatures,
                 font: .headline

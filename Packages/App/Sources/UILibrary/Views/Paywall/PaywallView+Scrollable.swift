@@ -76,7 +76,7 @@ private extension PaywallScrollableView {
                     onError: onError
                 )
             }
-            IncludedFeaturesView(
+            AllFeaturesView(
                 features: [],
                 requiredFeatures: requiredFeatures
             )

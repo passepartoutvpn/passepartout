@@ -1,5 +1,5 @@
 //
-//  IncludedFeaturesView.swift
+//  AllFeaturesView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/11/25.
@@ -26,7 +26,7 @@
 import CommonIAP
 import SwiftUI
 
-struct IncludedFeaturesView: View {
+struct AllFeaturesView: View {
     let features: Set<AppFeature>
 
     let requiredFeatures: Set<AppFeature>
@@ -47,7 +47,7 @@ struct IncludedFeaturesView: View {
     }
 }
 
-private extension IncludedFeaturesView {
+private extension AllFeaturesView {
     func flags(for feature: AppFeature) -> Set<FeatureRow.Flag> {
         var flags: Set<FeatureRow.Flag> = []
         if features.contains(feature) {
