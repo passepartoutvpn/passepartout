@@ -28,7 +28,6 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-// FIXME: ###, clean up fixed-size paywall
 struct PaywallFixedView: View {
 
     @Binding
@@ -64,6 +63,8 @@ struct PaywallFixedView: View {
                 featuresView
                     .padding(.leading, 100)
                     .frame(maxWidth: 0.4 * geo.size.width, maxHeight: .infinity)
+
+                // TODO: ###, add bottom links if !os(tvOS)
             }
             .frame(maxHeight: .infinity)
             .themeAnimation(on: iapManager.purchasedProducts, category: .paywall)
