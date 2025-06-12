@@ -118,6 +118,7 @@ extension IAPManager {
             }
         }
 
+        // FIXME: ###, not 100% sure about this
         let suggestsComplete: Bool
         switch platform {
         case .tvOS:
@@ -135,7 +136,7 @@ extension IAPManager {
         }
 
         // suggest complete packages if eligible
-        if including.contains(.complete) && suggestsComplete && purchasedProducts.isEligibleForComplete {
+        if including.contains(.complete) && suggestsComplete && isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
@@ -155,22 +156,6 @@ extension IAPManager {
             return purchasedProducts.contains(.Essentials.macOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
         case .tvOS:
             return purchasedProducts.contains(where: \.isEssentials)
-        }
-    }
-}
-
-private extension Collection where Element == AppProduct {
-
-    //
-    // allow purchasing complete products only if:
-    //
-    // - never bought complete products ('Forever', subscriptions)
-    // - never bought 'Essentials' products (suggest individual features instead)
-    // - never bought 'Apple TV' product (suggest 'Essentials' instead)
-    //
-    var isEligibleForComplete: Bool {
-        !contains {
-            $0.isComplete || $0.isEssentials || $0 == .Features.appleTV
         }
     }
 }
