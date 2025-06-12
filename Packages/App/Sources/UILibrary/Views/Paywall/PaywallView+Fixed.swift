@@ -56,8 +56,8 @@ struct PaywallFixedView: View {
         GeometryReader { geo in
             HStack {
                 VStack {
-                    completeView
-                    individualView
+                    completeProductsView
+                    individualProductsView
                 }
                 .frame(maxHeight: .infinity)
 
@@ -85,7 +85,7 @@ private extension PaywallFixedView {
         !model.completePurchasable.isEmpty
     }
 
-    var completeView: some View {
+    var completeProductsView: some View {
         VStack {
             Text(Strings.Views.Paywall.Sections.FullProducts.header)
                 .font(.title2)
@@ -114,7 +114,7 @@ private extension PaywallFixedView {
         .if(showsComplete)
     }
 
-    var individualView: some View {
+    var individualProductsView: some View {
         VStack {
             if showsComplete {
                 Text(Strings.Views.Paywall.Sections.Products.header)
