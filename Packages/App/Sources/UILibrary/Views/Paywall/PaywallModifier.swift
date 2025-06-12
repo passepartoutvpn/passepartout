@@ -122,13 +122,15 @@ private extension PaywallModifier {
     func confirmationActions() -> some View {
         reason.map { reason in
             Group {
-                if !iapManager.isBeta, let onAction {
+                if let onAction {
                     Button(title(forAction: reason.action), role: .cancel) {
                         onAction(reason.profile)
                     }
                 }
-                Button(Strings.Global.Actions.purchase) {
-                    isPurchasing = true
+                if !iapManager.isBeta {
+                    Button(Strings.Global.Actions.purchase) {
+                        isPurchasing = true
+                    }
                 }
             }
         }
