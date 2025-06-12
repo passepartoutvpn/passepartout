@@ -1039,9 +1039,9 @@ public enum Strings {
     }
     public enum Tv {
       public enum ConnectionProfiles {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. Alternatively, you will find other options in the "Profiles" tab.
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
         public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.")
+          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
         }
       }
       public enum Profiles {
