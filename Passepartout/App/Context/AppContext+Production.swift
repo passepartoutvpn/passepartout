@@ -313,12 +313,7 @@ private extension Dependencies {
     }
 
     var mirrorsRemoteRepository: Bool {
-        // FIXME: #1411, restore "false" in 3.5.0
-#if os(tvOS)
-        true
-#else
         false
-#endif
     }
 
     func backupProfileRepository(
