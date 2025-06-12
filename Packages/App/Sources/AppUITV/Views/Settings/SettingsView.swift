@@ -33,9 +33,6 @@ struct SettingsView: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    @EnvironmentObject
-    private var theme: Theme
-
     let tunnel: ExtendedTunnel
 
     @FocusState
@@ -53,7 +50,7 @@ struct SettingsView: View {
             DetailView(detail: detail)
                 .frame(maxWidth: .infinity)
         }
-        .background(theme.primaryGradient)
+        .themeGradient()
         .onChange(of: focus) {
             guard focus != nil else {
                 return
