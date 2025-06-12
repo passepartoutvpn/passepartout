@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Comportamento";
 "modules.general.sections.storage.header" = "Sincronização";
 "modules.general.sections.storage.sharing.footer" = "Os perfis são armazenados no %@ de forma criptografada.";
-"modules.general.sections.storage.tv.footer.purchase" = "Compre para remover a restrição.";
-"modules.general.sections.storage.tv.footer" = "O iCloud é necessário para compartilhar seus perfis com a Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "A TV pode exigir uma compra adicional.";
+"modules.general.sections.storage.tv.icloud.footer" = "É necessário iCloud para sincronizar seus perfis com a TV.";
+"modules.general.sections.storage.tv.web.footer" = "Pode enviar o perfil para a TV pela internet.";
 "modules.http_proxy.bypass_domains.add" = "Adicionar domínio a ignorar";
 "modules.ip.address.footer" = "Deixe em branco para atribuir automaticamente.";
 "modules.ip.routes.add_family" = "Adicionar %@";
@@ -296,6 +297,8 @@
 "views.migration.sections.main.header" = "Selecione abaixo os perfis de versões antigas de %@ que você deseja importar. Caso seus perfis estejam armazenados no iCloud, pode levar um tempo para sincronizá-los. Se não os vir agora, volte mais tarde.";
 "views.migration.title" = "Migrar";
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
+"views.paywall.alerts.actions.save" = "Salvar assim mesmo";
+"views.paywall.alerts.actions.send_to_tv" = "Enviar assim mesmo";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
 "views.paywall.alerts.confirmation.message.save" = "Toque nos ícones de cadeado para comprar os recursos ausentes.";
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";
@@ -340,8 +343,9 @@
 "views.profile.sections.name.footer" = "Use este nome para criar automações VPN no app Atalhos.";
 "views.profile.send_tv.form.message" = "Combine o URL encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede.";
 "views.profile.send_tv.passcode.message" = "Digite o código de acesso";
+"views.profile.send_tv.qr.buttons.manual" = "Inserir URL manualmente";
 "views.profile.send_tv.qr.message" = "Escaneie o QR encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede";
-"views.profile.send_tv.title" = "Enviar para TV";
+"views.profile.send_tv.title" = "Enviar para %@";
 "views.providers.clear_filters" = "Limpar filtros";
 "views.providers.last_updated.loading" = "Carregando...";
 "views.providers.last_updated" = "Última atualização em %@";
@@ -375,8 +379,8 @@
 "views.settings.system_extension.buttons.open" = "Abrir preferências";
 "views.settings.system_extension.message" = "Para que o VPN funcione, o app deve estar no diretório /Applications e %@ deve estar ativado como %@.\n\nAbra as Preferências do macOS, role até “%@”, abra e ative %@.";
 "views.settings.title" = "Sobre";
-"views.tv.connection_profiles.header" = "Abra o %@ no seu dispositivo iOS ou macOS e ative a opção \"%@\" de um perfil para que ele apareça aqui.";
-"views.tv.profiles.detail.profiles" = "Use a pressão prolongada para apresentar as ações disponíveis para um perfil. Perfis locais podem ser excluídos aqui, enquanto perfis do iCloud só podem ser excluídos pelo app iOS ou macOS.";
+"views.tv.connection_profiles.header" = "Abra o %@ no seu dispositivo iOS ou macOS e ative a opção \"%@\" de um perfil para que ele apareça aqui. Alternativamente, você encontrará outras opções na aba \"Perfis\".";
+"views.tv.profiles.detail.profiles" = "Pressione e segure para ver as ações disponíveis para um perfil.";
 "views.tv.profiles.import_local" = "Importar perfil local";
 "views.tv.web_receiver.qr" = "Escaneie o QR com sua câmera para abrir uma página web onde você pode enviar seu perfil. Certifique-se de que está conectado à mesma rede.";
 "views.tv.web_receiver.toggle" = "Alterne para importar um perfil local na sua TV via navegador web.";

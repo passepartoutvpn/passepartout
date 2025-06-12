@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Zachowanie";
 "modules.general.sections.storage.header" = "Synchronizacja";
 "modules.general.sections.storage.sharing.footer" = "Profile są przechowywane w %@ i szyfrowane.";
-"modules.general.sections.storage.tv.footer.purchase" = "Zakup, aby usunąć ograniczenie.";
-"modules.general.sections.storage.tv.footer" = "iCloud jest wymagany do udostępniania profili na Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Telewizor może wymagać dodatkowego zakupu.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud jest wymagany do synchronizacji profili z telewizorem.";
+"modules.general.sections.storage.tv.web.footer" = "Możesz wysłać profil do telewizora przez sieć.";
 "modules.http_proxy.bypass_domains.add" = "Dodaj domenę wykluczającą";
 "modules.ip.address.footer" = "Pozostaw puste, aby przypisać automatycznie.";
 "modules.ip.routes.add_family" = "Dodaj %@";
@@ -296,6 +297,8 @@
 "views.migration.sections.main.header" = "Wybierz poniżej profile ze starszych wersji %@, które chcesz zaimportować. Jeśli Twoje profile są przechowywane w iCloud, synchronizacja może zająć trochę czasu. Jeśli ich teraz nie widzisz, wróć później.";
 "views.migration.title" = "Migracja";
 "views.paywall.alerts.confirmation.edit_profile" = "Edytuj profil";
+"views.paywall.alerts.actions.save" = "Zapisz mimo to";
+"views.paywall.alerts.actions.send_to_tv" = "Wyślij mimo to";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
 "views.paywall.alerts.confirmation.message.save" = "Stuknij ikony kłódki, aby kupić brakujące funkcje.";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
@@ -340,8 +343,9 @@
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
 "views.profile.send_tv.form.message" = "Dopasuj adres URL znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci.";
 "views.profile.send_tv.passcode.message" = "Wprowadź kod dostępu";
+"views.profile.send_tv.qr.buttons.manual" = "Wpisz adres URL ręcznie";
 "views.profile.send_tv.qr.message" = "Zeskanuj kod QR znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci";
-"views.profile.send_tv.title" = "Wyślij do TV";
+"views.profile.send_tv.title" = "Wyślij do %@";
 "views.providers.clear_filters" = "Wyczyść filtry";
 "views.providers.last_updated.loading" = "Ładowanie...";
 "views.providers.last_updated" = "Ostatnia aktualizacja: %@";
@@ -375,8 +379,8 @@
 "views.settings.system_extension.buttons.open" = "Otwórz preferencje";
 "views.settings.system_extension.message" = "Aby VPN działało, aplikacja musi znajdować się w katalogu /Applications, a %@ musi być włączone jako %@.\n\nOtwórz Preferencje systemowe macOS, przewiń do „%@”, otwórz je i włącz %@.";
 "views.settings.title" = "O aplikacji";
-"views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj.";
-"views.tv.profiles.detail.profiles" = "Użyj długiego naciśnięcia, aby wyświetlić dostępne akcje dla profilu. Lokalne profile można usuwać tutaj, natomiast profile iCloud tylko z aplikacji iOS lub macOS.";
+"views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj. Alternatywnie znajdziesz inne opcje na karcie „Profile”.";
+"views.tv.profiles.detail.profiles" = "Przytrzymaj, aby wyświetlić dostępne akcje dla profilu.";
 "views.tv.profiles.import_local" = "Importuj lokalny profil";
 "views.tv.web_receiver.qr" = "Zeskanuj kod QR aparatem, aby otworzyć stronę internetową, na której możesz przesłać swój profil. Upewnij się, że jesteś połączony z tą samą siecią.";
 "views.tv.web_receiver.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";

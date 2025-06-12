@@ -2,21 +2,28 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
+import CommonLibrary
 import SwiftUI
 
-struct ProfileAttributesView: View {
-    enum Attribute {
-        case shared
+public struct ProfileSharingView: View {
+    private let flags: [ProfileSharingFlag]
 
-        case tv
+    private let isRemoteImportingEnabled: Bool
+
+    public init(flags: [ProfileSharingFlag], isRemoteImportingEnabled: Bool) {
+        self.flags = flags
+        self.isRemoteImportingEnabled = isRemoteImportingEnabled
     }
 
-    let attributes: [Attribute]
+    public init(profileManager: ProfileManager, profileId: Profile.ID) {
+        self.init(
+            flags: profileManager.sharingFlags(for: profileId),
+            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+        )
+    }
 
-    let isRemoteImportingEnabled: Bool
-
-    var body: some View {
-        if !attributes.isEmpty {
+    public var body: some View {
+        if !flags.isEmpty {
             ZStack(alignment: .centerFirstTextBaseline) {
                 Group {
                     ThemeImage(.cloudOn)
@@ -36,9 +43,11 @@ struct ProfileAttributesView: View {
             .foregroundStyle(.secondary)
         }
     }
+}
 
+private extension ProfileSharingView {
     var imageModels: [(name: Theme.ImageName, help: String)] {
-        attributes.map {
+        flags.map {
             switch $0 {
             case .shared:
                 return (
@@ -66,8 +75,8 @@ struct ProfileAttributesView: View {
             .autoconnect()
 
         var body: some View {
-            ProfileAttributesView(
-                attributes: [.shared, .tv],
+            ProfileSharingView(
+                flags: [.shared, .tv],
                 isRemoteImportingEnabled: isRemoteImportingEnabled
             )
             .onReceive(timer) { _ in
@@ -87,7 +96,7 @@ struct ProfileAttributesView: View {
         .withMockEnvironment()
 }
 
-struct IconsPreview: View {
+private struct IconsPreview: View {
     var body: some View {
         Form {
             HStack(alignment: .firstTextBaseline) {

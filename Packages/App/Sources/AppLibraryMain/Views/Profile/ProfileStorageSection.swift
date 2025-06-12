@@ -8,7 +8,13 @@ import SwiftUI
 struct ProfileStorageSection: View {
 
     @EnvironmentObject
+    private var configManager: ConfigManager
+
+    @EnvironmentObject
     private var iapManager: IAPManager
+
+    @Environment(\.distributionTarget)
+    private var distributionTarget
 
     @ObservedObject
     var profileEditor: ProfileEditor
@@ -19,42 +25,57 @@ struct ProfileStorageSection: View {
     var flow: ProfileCoordinator.Flow?
 
     var body: some View {
-        debugChanges()
-        return Group {
-            sharingToggle
-                .themeContainerEntry(
-                    header: header,
-                    subtitle: sharingDescription
-                )
-            tvToggle
-                .themeContainerEntry(subtitle: tvDescription)
-                .disabled(!profileEditor.isShared)
+        if showsSharing {
+            sharingSection
         }
-        .themeContainer(header: header)
+        if configManager.canSendToTV {
+            tvSection
+        }
     }
 }
 
 private extension ProfileStorageSection {
+    var sharingSection: some View {
+        Group {
+            sharingToggle
+                .themeContainerEntry(
+                    header: sharingHeader,
+                    subtitle: sharingDescription
+                )
+
+            tvToggle
+                .themeContainerEntry(
+                    subtitle: sharingTVDescription
+                )
+                .disabled(!profileEditor.isShared)
+        }
+        .themeContainer(header: sharingHeader)
+    }
+
     var sharingToggle: some View {
         Toggle(isOn: $profileEditor.isShared) {
             ThemeImageLabel(.cloudOn, inForm: true) {
                 HStack {
                     Text(Strings.Unlocalized.iCloud)
-                    sharingPurchaseButton
+                    PurchaseRequiredView(
+                        requiring: sharingRequirements,
+                        reason: $paywallReason
+                    )
                 }
             }
         }
     }
+}
 
-    var sharingPurchaseButton: some View {
-        PurchaseRequiredView(
-            requiring: sharingRequirements,
-            reason: $paywallReason,
-            suggesting: { // TODO: #1489, delete suggesting after deleting old paywall
-                var products = iapManager.suggestedProducts()
-                products.insert(.Features.appleTV)
-                return products
-            }()
+private extension ProfileStorageSection {
+    var tvSection: some View {
+        Button(Strings.Views.Profile.SendTv.title_compound) {
+            flow?.onSendToTV()
+        }
+        .themeContainerWithSingleEntry(
+            header: !showsSharing ? Strings.Unlocalized.appleTV : nil,
+            footer: tvDescription,
+            isAction: true
         )
     }
 
@@ -62,8 +83,11 @@ private extension ProfileStorageSection {
         Toggle(isOn: $profileEditor.isAvailableForTV) {
             ThemeImageLabel(.tvOn, inForm: true) {
                 HStack {
-                    Text(Strings.Modules.General.Rows.appletv(Strings.Unlocalized.appleTV))
-                    tvPurchaseButton
+                    Text(Strings.Modules.General.Rows.appletv_compound)
+                    PurchaseRequiredView(
+                        requiring: tvRequirements,
+                        reason: $paywallReason
+                    )
                 }
             }
         }
@@ -83,30 +107,33 @@ private extension ProfileStorageSection {
 }
 
 private extension ProfileStorageSection {
-    var header: String {
-        Strings.Modules.General.Sections.Storage.header
+    var showsSharing: Bool {
+        distributionTarget.supportsCloudKit
     }
 
     var sharingRequirements: Set<AppFeature> {
         profileEditor.isShared ? [.sharing] : []
     }
 
-    var tvRequirements: Set<AppFeature> {
-        profileEditor.isShared && profileEditor.isAvailableForTV ? [.appleTV, .sharing] : []
+    var sharingHeader: String {
+        Strings.Modules.General.Sections.Storage.header
     }
 
     var sharingDescription: String {
         Strings.Modules.General.Sections.Storage.Sharing.footer(Strings.Unlocalized.iCloud)
     }
 
-    var tvDescription: String? {
-        var desc: [String] = [Strings.Modules.General.Sections.Storage.Tv.footer]
-        if !iapManager.isEligible(for: .appleTV) {
-            desc.append(Strings.Views.Paywall.Alerts.Confirmation.Message.connect(iapManager.verificationDelayMinutes))
-            if !iapManager.isBeta {
-                desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchase)
-            }
-        }
+    var sharingTVDescription: String {
+        Strings.Modules.General.Sections.Storage.Tv.Icloud.footer
+    }
+
+    var tvRequirements: Set<AppFeature> {
+        profileEditor.isShared && profileEditor.isAvailableForTV ? [.appleTV, .sharing] : []
+    }
+
+    var tvDescription: String {
+        var desc = [Strings.Modules.General.Sections.Storage.Tv.Web.footer]
+        desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchaseUnsupported)
         return desc.joined(separator: " ")
     }
 }

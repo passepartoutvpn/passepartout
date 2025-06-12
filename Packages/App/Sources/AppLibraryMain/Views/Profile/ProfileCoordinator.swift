@@ -10,7 +10,7 @@ struct ProfileCoordinator: View {
     struct Flow {
         let onNewModule: (ModuleType) -> Void
 
-        let onCommitEditing: () async throws -> Void
+        let onSaveProfile: () async throws -> Void
 
         let onCancelEditing: () -> Void
 
@@ -28,6 +28,9 @@ struct ProfileCoordinator: View {
 
     @EnvironmentObject
     private var configManager: ConfigManager
+
+    @Environment(\.distributionTarget)
+    private var distributionTarget
 
     let profileManager: ProfileManager
 
@@ -55,7 +58,9 @@ struct ProfileCoordinator: View {
         contentView
             .modifier(DynamicPaywallModifier(
                 configManager: configManager,
-                paywallReason: $paywallReason
+                paywallReason: $paywallReason,
+                saveProfileAnyway: saveProfileAnyway,
+                sendProfileToTV: sendProfileToTV(verifying:)
             ))
             .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
@@ -122,13 +127,15 @@ private extension ProfileCoordinator {
     var flow: Flow {
         Flow(
             onNewModule: addNewModule,
-            onCommitEditing: {
-                try await commitEditing(dismissing: true)
+            onSaveProfile: {
+                try await saveProfile(verifying: true)
             },
             onCancelEditing: {
                 cancelEditing()
             },
-            onSendToTV: sendProfileToTV
+            onSendToTV: {
+                sendProfileToTV(verifying: false)
+            }
         )
     }
 }
@@ -144,23 +151,17 @@ private extension ProfileCoordinator {
     }
 
     @discardableResult
-    func commitEditing(dismissing: Bool) async throws -> Profile? {
-        do {
-            return try await commitEditing(verifying: !iapManager.isBeta, dismissing: dismissing)
-        } catch {
-            pp_log_g(.App.profiles, .error, "Unable to commit profile: \(error)")
-            errorHandler.handle(error, title: Strings.Global.Actions.save)
-            throw error
-        }
-    }
-
-    @discardableResult
-    func commitEditing(verifying: Bool, dismissing: Bool) async throws -> Profile? {
+    func commitEditing(
+        action: PaywallModifier.Action?,
+        additionalFeatures: Set<AppFeature>? = nil,
+        dismissing: Bool
+    ) async throws -> Profile? {
         do {
             let savedProfile = try await profileEditor.save(
                 to: profileManager,
                 buildingWith: registry,
-                verifyingWith: verifying ? iapManager : nil,
+                verifyingWith: action != nil ? iapManager : nil,
+                additionalFeatures: additionalFeatures,
                 preferencesManager: preferencesManager
             )
             if dismissing {
@@ -168,6 +169,8 @@ private extension ProfileCoordinator {
             }
             return savedProfile
         } catch AppError.verificationReceiptIsLoading {
+            assert(action != nil, "Verification error despite nil action (loading)")
+
             pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
             let V = Strings.Views.Paywall.Alerts.self
             errorHandler.handle(
@@ -176,9 +179,13 @@ private extension ProfileCoordinator {
             )
             return nil
         } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
+            assert(action != nil, "Verification error despite nil action (required)")
+
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-            setLater(nextPaywallReason(requiredFeatures: requiredFeatures)) {
-                paywallReason = $0
+            if action != nil {
+                setLater(nextPaywallReason(requiredFeatures: requiredFeatures)) {
+                    paywallReason = $0
+                }
             }
             return nil
         } catch {
@@ -191,16 +198,39 @@ private extension ProfileCoordinator {
         profileEditor.discard()
         onDismiss()
     }
+}
 
-    func sendProfileToTV() {
+private extension ProfileCoordinator {
+    func saveProfile(verifying: Bool) async throws {
+        do {
+            try await commitEditing(
+                action: verifying ? .save : nil,
+                dismissing: true
+            )
+        } catch {
+            errorHandler.handle(error, title: Strings.Global.Actions.save)
+            throw error
+        }
+    }
+
+    func saveProfileAnyway() {
+        Task {
+            try await saveProfile(verifying: false)
+        }
+    }
+
+    func sendProfileToTV(verifying: Bool) {
         Task {
             do {
-                guard let profile = try await commitEditing(dismissing: false) else {
+                guard let profile = try await commitEditing(
+                    action: verifying ? .sendToTV : nil,
+                    dismissing: false
+                ) else {
                     return
                 }
                 modalRoute = .sendToTV(profile)
             } catch {
-                errorHandler.handle(error)
+                errorHandler.handle(error, title: Strings.Global.Actions.save)
             }
         }
     }
@@ -216,6 +246,10 @@ private struct DynamicPaywallModifier: ViewModifier {
     @Binding
     var paywallReason: PaywallReason?
 
+    let saveProfileAnyway: () -> Void
+
+    let sendProfileToTV: (_ verifying: Bool) -> Void
+
     func body(content: Content) -> some View {
         if configManager.isActive(.newPaywall) {
             content.modifier(newModifier)
@@ -227,8 +261,17 @@ private struct DynamicPaywallModifier: ViewModifier {
     var newModifier: some ViewModifier {
         NewPaywallModifier(
             reason: $paywallReason,
-            onAction: { _ in
-                // paywall cancelled, do nothing
+            onAction: { action, _ in
+                switch action {
+                case .cancel:
+                    break
+                case .save:
+                    saveProfileAnyway()
+                case .sendToTV:
+                    sendProfileToTV(false)
+                default:
+                    assertionFailure("Unhandled paywall action \(action)")
+                }
             }
         )
     }

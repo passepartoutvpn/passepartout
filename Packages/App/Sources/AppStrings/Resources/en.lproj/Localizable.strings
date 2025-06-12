@@ -71,6 +71,10 @@
 "views.paywall.alerts.confirmation.message.connect" = "You may test the connection for %d minutes.";
 "views.paywall.alerts.confirmation.message.save" = "Tap the lock icons to purchase the missing features.";
 "views.paywall.alerts.confirmation.edit_profile" = "Edit profile";
+//"views.paywall.alerts.actions.connect" = "Test connection";
+//"views.paywall.alerts.actions.purchase" = "Purchase";
+"views.paywall.alerts.actions.save" = "Save anyway";
+"views.paywall.alerts.actions.send_to_tv" = "Send anyway";
 "views.paywall.alerts.verification.connect.1" = "Your purchases are being verified.";
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
@@ -105,9 +109,10 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.rows.delete_profile" = "Delete profile";
 "views.profile.module_list.section.footer" = "Tap modules to edit their settings. Modules may be dragged to determine priority.";
-"views.profile.send_tv.title" = "Send to TV";
+"views.profile.send_tv.title" = "Send to %@";
 "views.profile.send_tv.form.message" = "Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.";
 "views.profile.send_tv.qr.message" = "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network";
+"views.profile.send_tv.qr.buttons.manual" = "Enter URL manually";
 "views.profile.send_tv.passcode.message" = "Enter the passcode";
 "views.profile.alerts.purchase.buttons.ok" = "Save anyway";
 
@@ -138,9 +143,9 @@
 "views.vpn.category.any" = "All categories";
 "views.vpn.no_servers" = "No servers";
 
-"views.tv.connection_profiles.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.";
+"views.tv.connection_profiles.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.";
 "views.tv.profiles.import_local" = "Import local profile";
-"views.tv.profiles.detail.profiles" = "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.";
+"views.tv.profiles.detail.profiles" = "Use the long press to present the available actions for a profile.";
 "views.tv.web_receiver.toggle" = "Toggle to import a local profile into your TV with a web browser.";
 "views.tv.web_receiver.qr" = "Scan the QR with your camera to open a web page where to upload your profile. Make sure that you are connected to the same network.";
 
@@ -159,8 +164,9 @@
 
 "modules.general.sections.storage.header" = "Synchronization";
 "modules.general.sections.storage.sharing.footer" = "Profiles are stored to %@ encrypted.";
-"modules.general.sections.storage.tv.footer" = "iCloud is required to share your profiles with your Apple TV.";
-"modules.general.sections.storage.tv.footer.purchase" = "Purchase to drop the restriction.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud is required to synchronize your profiles with your TV.";
+"modules.general.sections.storage.tv.web.footer" = "You can send the profile to your TV over the web.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "The TV may require an additional purchase.";
 "modules.general.sections.behavior.header" = "Behavior";
 "modules.general.rows.shared" = "Enabled";
 "modules.general.rows.shared.purchase" = "Share on iCloud";

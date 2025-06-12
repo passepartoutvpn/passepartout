@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Verhalten";
 "modules.general.sections.storage.header" = "Synchronisierung";
 "modules.general.sections.storage.sharing.footer" = "Profile werden in %@ verschlüsselt gespeichert.";
-"modules.general.sections.storage.tv.footer.purchase" = "Kaufen Sie, um die Einschränkung aufzuheben.";
-"modules.general.sections.storage.tv.footer" = "iCloud ist erforderlich, um Ihre Profile mit Ihrem Apple TV zu teilen.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Der Fernseher erfordert möglicherweise einen zusätzlichen Kauf.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud ist erforderlich, um deine Profile mit dem Fernseher zu synchronisieren.";
+"modules.general.sections.storage.tv.web.footer" = "Du kannst das Profil über das Web an deinen Fernseher senden.";
 "modules.http_proxy.bypass_domains.add" = "Domain zum Umgehen hinzufügen";
 "modules.ip.address.footer" = "Leer lassen, um automatisch zuzuweisen.";
 "modules.ip.routes.add_family" = "Hinzufügen %@";
@@ -296,6 +297,8 @@
 "views.migration.sections.main.header" = "Wähle unten die Profile aus alten Versionen von %@ aus, die du importieren möchtest. Wenn deine Profile in iCloud gespeichert sind, kann es eine Weile dauern, bis sie synchronisiert sind. Wenn du sie jetzt nicht siehst, komm später zurück.";
 "views.migration.title" = "Migrieren";
 "views.paywall.alerts.confirmation.edit_profile" = "Profil bearbeiten";
+"views.paywall.alerts.actions.save" = "Trotzdem speichern";
+"views.paywall.alerts.actions.send_to_tv" = "Trotzdem senden";
 "views.paywall.alerts.confirmation.message.connect" = "Sie können die Verbindung für %d Minuten testen.";
 "views.paywall.alerts.confirmation.message.save" = "Tippen Sie auf die Schlosssymbole, um die fehlenden Funktionen zu kaufen.";
 "views.paywall.alerts.confirmation.message" = "Dieses Profil erfordert kostenpflichtige Funktionen, um zu funktionieren.";
@@ -340,8 +343,9 @@
 "views.profile.sections.name.footer" = "Verwenden Sie diesen Namen, um Ihre VPN-Automationen in der Kurzbefehle-App zu erstellen.";
 "views.profile.send_tv.form.message" = "Stimmen Sie die URL überein, die Sie unter '%@ > %@' auf Ihrem %@ finden, und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden.";
 "views.profile.send_tv.passcode.message" = "Geben Sie den Zugangscode ein";
+"views.profile.send_tv.qr.buttons.manual" = "URL manuell eingeben";
 "views.profile.send_tv.qr.message" = "Scannen Sie den QR-Code unter '%@ > %@' auf Ihrem %@ und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden";
-"views.profile.send_tv.title" = "An TV senden";
+"views.profile.send_tv.title" = "An %@ senden";
 "views.providers.clear_filters" = "Filter löschen";
 "views.providers.last_updated.loading" = "Lädt...";
 "views.providers.last_updated" = "Zuletzt aktualisiert am %@";
@@ -375,8 +379,8 @@
 "views.settings.system_extension.buttons.open" = "Einstellungen öffnen";
 "views.settings.system_extension.message" = "Damit das VPN funktioniert, muss sich die App im Verzeichnis /Programme befinden und %@ muss als %@ aktiviert sein.\n\nÖffne die macOS-Einstellungen, scrolle zu „%@“, öffne es und aktiviere %@.";
 "views.settings.title" = "Über";
-"views.tv.connection_profiles.header" = "Öffne %@ auf deinem iOS- oder macOS-Gerät und aktiviere den „%@“-Schalter eines Profils, damit es hier erscheint.";
-"views.tv.profiles.detail.profiles" = "Nutze den Langdruck, um die verfügbaren Aktionen für ein Profil anzuzeigen. Lokale Profile können hier gelöscht werden, iCloud-Profile jedoch nur in der iOS- oder macOS-App.";
+"views.tv.connection_profiles.header" = "Öffne %@ auf deinem iOS- oder macOS-Gerät und aktiviere den „%@“-Schalter eines Profils, damit es hier erscheint. Alternativ findest du weitere Optionen im Tab „Profile“.";
+"views.tv.profiles.detail.profiles" = "Verwenden Sie den langen Druck, um die verfügbaren Aktionen für ein Profil anzuzeigen.";
 "views.tv.profiles.import_local" = "Lokales Profil importieren";
 "views.tv.web_receiver.qr" = "Scannen Sie den QR-Code mit Ihrer Kamera, um eine Webseite zu öffnen, auf der Sie Ihr Profil hochladen können. Stellen Sie sicher, dass Sie mit demselben Netzwerk verbunden sind.";
 "views.tv.web_receiver.toggle" = "Umschalten, um ein lokales Profil über einen Webbrowser auf deinen Fernseher zu importieren.";

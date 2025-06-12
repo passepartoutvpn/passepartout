@@ -47,25 +47,18 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
         debugChanges()
         return NavigationStack {
             TabView {
-                connectionView
-                    .tabItem {
-                        Text(Strings.Global.Nouns.connection)
-                    }
-
-//                profilesView
-//                    .tabItem {
-//                        Text(Strings.Global.Nouns.profiles)
-//                    }
-//
-//                searchView
-//                    .tabItem {
-//                        ThemeImage(.search)
-//                    }
-
-                settingsView
-                    .tabItem {
-                        ThemeImage(.settings)
-                    }
+                connectionView.tabItem {
+                    Text(Strings.Global.Nouns.connection)
+                }
+                profilesView.tabItem {
+                    Text(Strings.Global.Nouns.profiles)
+                }
+//                searchView.tabItem {
+//                    ThemeImage(.search)
+//                }
+                settingsView.tabItem {
+                    ThemeImage(.settings)
+                }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
             .modifier(DynamicPaywallModifier(
@@ -95,14 +88,14 @@ private extension AppCoordinator {
         )
     }
 
-//    var profilesView: some View {
-//        ProfilesView(
-//            profileManager: profileManager,
-//            webReceiverManager: webReceiverManager,
-//            registry: registry
-//        )
-//    }
-//
+    var profilesView: some View {
+        ProfilesView(
+            profileManager: profileManager,
+            webReceiverManager: webReceiverManager,
+            registry: registry
+        )
+    }
+
 //    var searchView: some View {
 //        VStack {
 //            Text("Search")
@@ -217,7 +210,7 @@ private struct DynamicPaywallModifier: ViewModifier {
     var newModifier: some ViewModifier {
         NewPaywallModifier(
             reason: $paywallReason,
-            onAction: { _ in
+            onAction: { _, _ in
                 paywallContinuation?()
             }
         )

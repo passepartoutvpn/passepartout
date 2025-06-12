@@ -8,6 +8,9 @@ import SwiftUI
 
 struct ProfilesView: View {
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -35,9 +38,16 @@ struct ProfilesView: View {
 private extension ProfilesView {
     var masterView: some View {
         List {
-            importSection
+            if configManager.canSendToTV {
+                importSection
+            }
             if profileManager.hasProfiles {
                 profilesSection
+            } else {
+                // FIXME: #1453, improve layout when empty profiles
+                Text(Strings.Views.App.Folders.noProfiles)
+                    .themeEmptyMessage()
+                    .frame(maxHeight: .infinity)
             }
         }
         .themeList()
@@ -77,16 +87,15 @@ private extension ProfilesView {
             HStack {
                 Text(preview.name)
                 Spacer()
-                if profileManager.isRemotelyShared(profileWithId: preview.id) {
-                    ThemeImage(.cloudOn)
-                }
+                ProfileSharingView(
+                    profileManager: profileManager,
+                    profileId: preview.id
+                )
             }
         }
         .contextMenu {
-            if !profileManager.isRemotelyShared(profileWithId: preview.id) {
-                Button(Strings.Global.Actions.delete, role: .destructive) {
-                    deleteProfile(withId: preview.id)
-                }
+            Button(Strings.Global.Actions.delete, role: .destructive) {
+                deleteProfile(withId: preview.id)
             }
         }
         .focused($detail, equals: .profiles)

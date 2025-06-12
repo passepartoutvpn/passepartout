@@ -10,27 +10,56 @@ import UIKit
 import Vision
 
 public struct QRScanView: UIViewControllerRepresentable {
+    public final class Coordinator: NSObject {
+
+        @Binding
+        private var isAvailable: Bool
+
+        fileprivate init(_ view: QRScanView) {
+            _isAvailable = view._isAvailable
+        }
+
+        fileprivate func didLoad(withError error: Error?) {
+            isAvailable = error == nil
+        }
+    }
+
+    @Binding
+    private var isAvailable: Bool
+
+    private let onLoad: (Error?) -> Void
+
     private let onDetect: (String) -> Void
 
-    private let onError: (Error) -> Void
-
     public init(
-        onDetect: @escaping (String) -> Void,
-        onError: @escaping (Error) -> Void
+        isAvailable: Binding<Bool>,
+        onLoad: @escaping (Error?) -> Void,
+        onDetect: @escaping (String) -> Void
     ) {
+        _isAvailable = isAvailable
+        self.onLoad = onLoad
         self.onDetect = onDetect
-        self.onError = onError
     }
 
     public func makeUIViewController(context: Context) -> UIViewController {
-        QRScanViewController(onDetect: onDetect, onError: onError)
+        let vc = QRScanViewController(
+            onLoad: {
+                context.coordinator.didLoad(withError: $0)
+            },
+            onDetect: onDetect
+        )
+        return vc
     }
 
     public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
     }
+
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 }
 
-class QRScanViewController: UIViewController {
+final class QRScanViewController: UIViewController {
     private struct QRScanError: Error {
     }
 
@@ -40,9 +69,11 @@ class QRScanViewController: UIViewController {
 
     private let once: Bool
 
+    private let onLoad: ((Error?) -> Void)?
+
     private var onDetect: ((String) -> Void)?
 
-    private let onError: ((Error) -> Void)?
+    private var didLoad = false
 
     required init?(coder: NSCoder) {
         fatalError()
@@ -50,17 +81,22 @@ class QRScanViewController: UIViewController {
 
     init(
         once: Bool = true,
-        onDetect: @escaping (String) -> Void,
-        onError: ((Error) -> Void)? = nil
+        onLoad: ((Error?) -> Void)? = nil,
+        onDetect: @escaping (String) -> Void
     ) {
         self.once = once
+        self.onLoad = onLoad
         self.onDetect = onDetect
-        self.onError = onError
         super.init(nibName: nil, bundle: nil)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard !didLoad else {
+            return
+        }
+        didLoad = true
 
         let input: AVCaptureDeviceInput
         do {
@@ -86,8 +122,9 @@ class QRScanViewController: UIViewController {
             queue.async { [weak self] in
                 self?.session.startRunning()
             }
+            onLoad?(nil)
         } catch {
-            onError?(error)
+            onLoad?(error)
         }
     }
 }
@@ -137,8 +174,9 @@ extension QRScanViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 #Preview {
     QRScanView(
-        onDetect: { _ in },
-        onError: { _ in }
+        isAvailable: .constant(true),
+        onLoad: { _ in },
+        onDetect: { _ in }
     )
 }
 

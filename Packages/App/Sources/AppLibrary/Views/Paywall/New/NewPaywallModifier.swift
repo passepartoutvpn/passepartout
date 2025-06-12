@@ -13,7 +13,7 @@ public struct NewPaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let onAction: ((Profile?) -> Void)?
+    private let onAction: ((PaywallModifier.Action, Profile?) -> Void)?
 
     private let onCancel: (() -> Void)?
 
@@ -25,7 +25,7 @@ public struct NewPaywallModifier: ViewModifier {
 
     public init(
         reason: Binding<PaywallReason?>,
-        onAction: ((Profile?) -> Void)? = nil,
+        onAction: ((PaywallModifier.Action, Profile?) -> Void)? = nil,
         onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
@@ -89,15 +89,16 @@ private extension NewPaywallModifier {
 private extension NewPaywallModifier {
     func title(forAction action: PaywallModifier.Action) -> String {
         switch action {
+        case .cancel:
+            return Strings.Global.Actions.cancel
         case .connect:
             return Strings.Global.Actions.connect
         case .purchase:
             return Strings.Global.Actions.purchase
         case .save:
-            fatalError("Save action not handled")
-//            return Strings.Views.Paywall.Alerts.Actions.save
-        case .cancel:
-            return Strings.Global.Actions.cancel
+            return Strings.Views.Paywall.Alerts.Actions.save
+        case .sendToTV:
+            return Strings.Views.Paywall.Alerts.Actions.sendToTv
         }
     }
 
@@ -106,7 +107,7 @@ private extension NewPaywallModifier {
             Group {
                 if let onAction {
                     Button(title(forAction: reason.action), role: .cancel) {
-                        onAction(reason.profile)
+                        onAction(reason.action, reason.profile)
                     }
                 }
                 if !iapManager.isBeta {
