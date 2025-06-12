@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "此配置文件需要付费功能才能工作。";
 "views.paywall.alerts.confirmation.title" = "需要购买";
 "views.paywall.alerts.pending.message" = "购买正在等待外部确认。功能将在获得批准后被授予。";
-"views.paywall.alerts.restricted.message" = "某些功能在此版本中不可用。";
-"views.paywall.alerts.restricted.title" = "受限";
 "views.paywall.alerts.verification.boot" = "如果您的设备刚刚启动，这可能需要更长时间。";
 "views.paywall.alerts.verification.connect.1" = "您的购买正在验证中。";
 "views.paywall.alerts.verification.connect.2" = "如果无法完成验证，连接将在 %d 分钟后断开。";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "无提供商";
 "views.purchased.no_purchases" = "无购买记录";
 "views.purchased.rows.build_number" = "构建编号";
-"views.purchased.rows.download_date" = "下载日期";
 "views.purchased.sections.download.header" = "首次下载";
 "views.purchased.title" = "已购买";
 "views.settings.credits.licenses" = "许可证";

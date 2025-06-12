@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
 "views.paywall.alerts.pending.message" = "De aankoop wacht op externe bevestiging. De functie wordt na goedkeuring gecrediteerd.";
-"views.paywall.alerts.restricted.message" = "Sommige functies zijn niet beschikbaar in deze versie.";
-"views.paywall.alerts.restricted.title" = "Beperkt";
 "views.paywall.alerts.verification.boot" = "Dit kan iets langer duren als je apparaat net is opgestart.";
 "views.paywall.alerts.verification.connect.1" = "Je aankopen worden geverifieerd.";
 "views.paywall.alerts.verification.connect.2" = "Als de verificatie niet kan worden voltooid, wordt de verbinding over %d minuten beëindigd.";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "Geen provider";
 "views.purchased.no_purchases" = "Geen aankopen";
 "views.purchased.rows.build_number" = "Buildnummer";
-"views.purchased.rows.download_date" = "Downloaddatum";
 "views.purchased.sections.download.header" = "Eerste download";
 "views.purchased.title" = "Aangekocht";
 "views.settings.credits.licenses" = "Licenties";

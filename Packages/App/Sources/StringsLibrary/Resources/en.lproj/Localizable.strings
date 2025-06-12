@@ -100,8 +100,6 @@
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
 "views.paywall.alerts.verification.boot" = "This may take a little longer if your device was just started.";
-"views.paywall.alerts.restricted.title" = "Restricted";
-"views.paywall.alerts.restricted.message" = "Some features are unavailable in this build.";
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
 
 "views.preferences.system_appearance" = "Appearance";

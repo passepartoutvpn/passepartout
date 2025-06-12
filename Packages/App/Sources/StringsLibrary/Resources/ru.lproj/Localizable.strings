@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
 "views.paywall.alerts.confirmation.title" = "Требуется покупка";
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
-"views.paywall.alerts.restricted.message" = "Некоторые функции недоступны в этой версии.";
-"views.paywall.alerts.restricted.title" = "Ограничено";
 "views.paywall.alerts.verification.boot" = "Это может занять немного больше времени, если ваше устройство только что было включено.";
 "views.paywall.alerts.verification.connect.1" = "Ваши покупки проверяются.";
 "views.paywall.alerts.verification.connect.2" = "Если проверка не будет завершена, соединение завершится через %d минут.";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "Нет провайдера";
 "views.purchased.no_purchases" = "Нет покупок";
 "views.purchased.rows.build_number" = "Номер сборки";
-"views.purchased.rows.download_date" = "Дата скачивания";
 "views.purchased.sections.download.header" = "Первое скачивание";
 "views.purchased.title" = "Куплено";
 "views.settings.credits.licenses" = "Лицензии";

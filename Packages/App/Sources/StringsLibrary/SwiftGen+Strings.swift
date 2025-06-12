@@ -805,12 +805,6 @@ public enum Strings {
           /// The purchase is pending external confirmation. The feature will be credited upon approval.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
         }
-        public enum Restricted {
-          /// Some features are unavailable in this build.
-          public static let message = Strings.tr("Localizable", "views.paywall.alerts.restricted.message", fallback: "Some features are unavailable in this build.")
-          /// Restricted
-          public static let title = Strings.tr("Localizable", "views.paywall.alerts.restricted.title", fallback: "Restricted")
-        }
         public enum Verification {
           /// This may take a little longer if your device was just started.
           public static let boot = Strings.tr("Localizable", "views.paywall.alerts.verification.boot", fallback: "This may take a little longer if your device was just started.")

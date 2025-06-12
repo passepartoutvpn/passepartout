@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";
 "views.paywall.alerts.confirmation.title" = "Compra necessária";
 "views.paywall.alerts.pending.message" = "A compra está pendente de confirmação externa. O recurso será creditado após a aprovação.";
-"views.paywall.alerts.restricted.message" = "Alguns recursos estão indisponíveis nesta versão.";
-"views.paywall.alerts.restricted.title" = "Restrito";
 "views.paywall.alerts.verification.boot" = "Isso pode levar um pouco mais de tempo se seu dispositivo acabou de ser iniciado.";
 "views.paywall.alerts.verification.connect.1" = "Suas compras estão sendo verificadas.";
 "views.paywall.alerts.verification.connect.2" = "Se a verificação não for concluída, a conexão será encerrada em %d minutos.";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "Nenhum provedor";
 "views.purchased.no_purchases" = "Nenhuma compra";
 "views.purchased.rows.build_number" = "Número da compilação";
-"views.purchased.rows.download_date" = "Data do download";
 "views.purchased.sections.download.header" = "Primeiro download";
 "views.purchased.title" = "Comprado";
 "views.settings.credits.licenses" = "Licenças";

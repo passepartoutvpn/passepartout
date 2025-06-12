@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "Questo profilo richiede funzionalità a pagamento per funzionare.";
 "views.paywall.alerts.confirmation.title" = "Acquisto richiesto";
 "views.paywall.alerts.pending.message" = "L'acquisto è in attesa di conferma esterna. La funzionalità verrà accreditata dopo l'approvazione.";
-"views.paywall.alerts.restricted.message" = "Alcune funzionalità non sono disponibili in questa versione.";
-"views.paywall.alerts.restricted.title" = "Ristretto";
 "views.paywall.alerts.verification.boot" = "Questo potrebbe richiedere più tempo se il dispositivo è stato appena avviato.";
 "views.paywall.alerts.verification.connect.1" = "I tuoi acquisti sono in fase di verifica.";
 "views.paywall.alerts.verification.connect.2" = "Se la verifica non può essere completata, la connessione terminerà tra %d minuti.";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "Nessun provider";
 "views.purchased.no_purchases" = "Nessun acquisto";
 "views.purchased.rows.build_number" = "Numero di build";
-"views.purchased.rows.download_date" = "Data di download";
 "views.purchased.sections.download.header" = "Primo download";
 "views.purchased.title" = "Acquistato";
 "views.settings.credits.licenses" = "Licenze";

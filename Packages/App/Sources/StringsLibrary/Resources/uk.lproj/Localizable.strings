@@ -264,8 +264,6 @@
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
 "views.paywall.alerts.pending.message" = "Покупка очікує зовнішнього підтвердження. Функція буде увімкнена після схвалення.";
-"views.paywall.alerts.restricted.message" = "Деякі функції недоступні в цій версії.";
-"views.paywall.alerts.restricted.title" = "Обмежено";
 "views.paywall.alerts.verification.boot" = "Це може зайняти трохи більше часу, якщо ваш пристрій щойно запустився.";
 "views.paywall.alerts.verification.connect.1" = "Ваші покупки перевіряються.";
 "views.paywall.alerts.verification.connect.2" = "Якщо перевірку не вдасться завершити, підключення завершиться через %d хвилин.";
@@ -315,7 +313,6 @@
 "views.providers.select_provider" = "Немає провайдера";
 "views.purchased.no_purchases" = "Немає покупок";
 "views.purchased.rows.build_number" = "Номер збірки";
-"views.purchased.rows.download_date" = "Дата завантаження";
 "views.purchased.sections.download.header" = "Перший завантаження";
 "views.purchased.title" = "Придбано";
 "views.settings.credits.licenses" = "Ліцензії";

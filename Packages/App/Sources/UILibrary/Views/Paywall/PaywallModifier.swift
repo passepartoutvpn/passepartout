@@ -137,10 +137,7 @@ private extension PaywallModifier {
     }
 
     var confirmationTitle: String {
-        guard !iapManager.isBeta else {
-            return Strings.Views.Paywall.Alerts.Restricted.title
-        }
-        return Strings.Views.Paywall.Alerts.Confirmation.title
+        Strings.Views.Paywall.Alerts.Confirmation.title
     }
 
     func confirmationMessage() -> some View {
@@ -155,32 +152,6 @@ private extension PaywallModifier {
             messages.append(V.Message.connect(limitedMinutes))
         default:
             break
-        }
-        return alertMessage(
-            startingWith: messages.joined(separator: " "),
-            features: ineligibleFeatures
-        )
-    }
-}
-
-// MARK: - Restricted alert
-
-private extension PaywallModifier {
-    func restrictedActions() -> some View {
-        Button(Strings.Global.Nouns.ok) {
-            onCancel?()
-        }
-    }
-
-    func restrictedMessage() -> some View {
-        Text(restrictedMessageString)
-    }
-
-    var restrictedMessageString: String {
-        let V = Strings.Views.Paywall.Alerts.self
-        var messages = [V.Restricted.message]
-        if reason?.action == .connect {
-            messages.append(V.Confirmation.Message.connect(limitedMinutes))
         }
         return alertMessage(
             startingWith: messages.joined(separator: " "),
