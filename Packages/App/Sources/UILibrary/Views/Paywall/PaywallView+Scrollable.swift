@@ -1,5 +1,5 @@
 //
-//  PaywallView+Main.swift
+//  PaywallView+Scrollable.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/10/24.
@@ -23,14 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if !os(tvOS)
-
 import CommonLibrary
 import CommonUtils
 import StoreKit
 import SwiftUI
 
-struct PaywallView: View {
+struct PaywallScrollableView: View {
 
     @Binding
     var isPresented: Bool
@@ -63,30 +61,25 @@ struct PaywallView: View {
     }
 }
 
-private extension PaywallView {
+private extension PaywallScrollableView {
     var completeProductsView: some View {
         Group {
             ForEach(model.completePurchasable, id: \.productIdentifier) {
                 PaywallProductView(
                     iapManager: iapManager,
-                    style: .paywall,
+                    style: .paywall(primary: true),
                     product: $0,
                     withIncludedFeatures: false,
-                    highlightedFeatures: requiredFeatures,
+                    requiredFeatures: requiredFeatures,
                     purchasingIdentifier: $model.purchasingIdentifier,
                     onComplete: onComplete,
                     onError: onError
                 )
             }
-            VStack(alignment: .leading) {
-                ForEach(AppFeature.allCases.sorted()) {
-                    IncludedFeatureRow(
-                        feature: $0,
-                        isHighlighted: requiredFeatures.contains($0)
-                    )
-                    .font(.subheadline)
-                }
-            }
+            IncludedFeaturesView(
+                features: [],
+                requiredFeatures: requiredFeatures
+            )
         }
         .themeSection(
             header: Strings.Views.Paywall.Sections.FullProducts.header,
@@ -96,16 +89,17 @@ private extension PaywallView {
             ].joined(separator: " "),
             forcesFooter: true
         )
+        .disabled(!iapManager.isEligibleForComplete)
     }
 
     var individualProductsView: some View {
         ForEach(model.individualPurchasable, id: \.productIdentifier) {
             PaywallProductView(
                 iapManager: iapManager,
-                style: .paywall,
+                style: .paywall(primary: false),
                 product: $0,
                 withIncludedFeatures: true,
-                highlightedFeatures: requiredFeatures,
+                requiredFeatures: requiredFeatures,
                 purchasingIdentifier: $model.purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
@@ -139,7 +133,7 @@ private extension PaywallView {
 
 #Preview {
     let features: Set<AppFeature> = [.appleTV, .dns, .sharing]
-    PaywallView(
+    PaywallScrollableView(
         isPresented: .constant(true),
         iapManager: .forPreviews,
         requiredFeatures: features,
@@ -150,5 +144,3 @@ private extension PaywallView {
     )
     .withMockEnvironment()
 }
-
-#endif

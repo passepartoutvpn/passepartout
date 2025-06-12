@@ -2,7 +2,7 @@
 //  IncludedFeaturesView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/18/25.
+//  Created by Davide De Rosa on 6/11/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,57 +24,38 @@
 //
 
 import CommonIAP
-import CommonLibrary
-import CommonUtils
 import SwiftUI
 
-public struct IncludedFeaturesView: View {
-    private let product: AppProduct
+struct IncludedFeaturesView: View {
+    let features: Set<AppFeature>
 
-    private let highlightedFeatures: Set<AppFeature>
+    let requiredFeatures: Set<AppFeature>
 
-    @Binding
-    private var isDisclosing: Bool
+    var font: Font?
 
-    public init(
-        product: AppProduct,
-        highlightedFeatures: Set<AppFeature>,
-        isDisclosing: Binding<Bool>
-    ) {
-        self.product = product
-        self.highlightedFeatures = highlightedFeatures
-        _isDisclosing = isDisclosing
-    }
-
-    public var body: some View {
-        Group {
-            discloseButton
-                .padding(.top, 8)
-            featuresList
-                .if(isDisclosing)
+    var body: some View {
+        VStack(alignment: .leading) {
+            ForEach(AppFeature.allCases.sorted()) {
+                FeatureRow(
+                    feature: $0,
+                    flags: flags(for: $0)
+                )
+                .font(font ?? .subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
-        .font(.subheadline)
     }
 }
 
 private extension IncludedFeaturesView {
-    var discloseButton: some View {
-        Button {
-            isDisclosing.toggle()
-        } label: {
-            HStack {
-                Text(Strings.Views.Paywall.Product.includedFeatures)
-                ThemeImage(isDisclosing ? .undisclose : .disclose)
-            }
-            .contentShape(.rect)
+    func flags(for feature: AppFeature) -> Set<FeatureRow.Flag> {
+        var flags: Set<FeatureRow.Flag> = []
+        if features.contains(feature) {
+            flags.insert(.marked)
         }
-        .buttonStyle(.plain)
-        .cursor(.hand)
-    }
-
-    var featuresList: some View {
-        FeatureListView(style: .list, features: product.features) {
-            IncludedFeatureRow(feature: $0, isHighlighted: highlightedFeatures.contains($0))
+        if requiredFeatures.contains(feature) {
+            flags.insert(.highlighted)
         }
+        return flags
     }
 }

@@ -1,8 +1,8 @@
 //
-//  FeatureListView.swift
+//  FeatureRow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/18/24.
+//  Created by Davide De Rosa on 2/18/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,50 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import CommonIAP
 import SwiftUI
 
-enum FeatureListViewStyle {
-    case list
+public struct FeatureRow: View {
+    public enum Flag {
+        case highlighted
 
-#if !os(tvOS)
-    case table
-#endif
-}
+        case marked
+    }
 
-struct FeatureListView<Content>: View where Content: View {
-    let style: FeatureListViewStyle
+    private let feature: AppFeature
 
-    var header: String?
+    private let flags: Set<Flag>
 
-    let features: [AppFeature]
+    public init(feature: AppFeature, flags: Set<Flag>) {
+        self.feature = feature
+        self.flags = flags
+    }
 
-    let content: (AppFeature) -> Content
-
-    var body: some View {
-        switch style {
-        case .list:
-            listView
-
-#if !os(tvOS)
-        case .table:
-            tableView
-#endif
+    public var body: some View {
+        HStack {
+            ThemeImage(.marked)
+                .opaque(flags.contains(.marked))
+            Text(feature.localizedDescription)
+                .fontWeight(flags.contains(.highlighted) ? .bold : .regular)
         }
+        .foregroundStyle(flags.contains(.highlighted) ? .primary : .secondary)
     }
-}
-
-private extension FeatureListView {
-    var listView: some View {
-        ForEach(features.sorted(), id: \.id, content: content)
-            .themeSection(header: header)
-    }
-
-#if !os(tvOS)
-    var tableView: some View {
-        Table(features.sorted()) {
-            TableColumn(header ?? "", content: content)
-        }
-    }
-#endif
 }

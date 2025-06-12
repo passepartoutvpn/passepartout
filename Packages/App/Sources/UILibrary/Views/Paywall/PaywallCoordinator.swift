@@ -70,16 +70,6 @@ struct PaywallCoordinator: View {
 
 private extension PaywallCoordinator {
     var contentView: some View {
-#if os(tvOS)
-        PaywallView(
-            requiredFeatures: requiredFeatures,
-            model: model
-            // errorHandler
-            // onComplete
-            // onError
-        )
-        .themeNavigationStack()
-#else
         PaywallView(
             isPresented: $isPresented,
             iapManager: iapManager,
@@ -89,7 +79,14 @@ private extension PaywallCoordinator {
             onComplete: onComplete,
             onError: onError
         )
-        .themeNavigationStack(closable: true)
+        .themeNavigationStack(closable: isPaywallClosable)
+    }
+
+    var isPaywallClosable: Bool {
+#if os(tvOS)
+        false
+#else
+        true
 #endif
     }
 
