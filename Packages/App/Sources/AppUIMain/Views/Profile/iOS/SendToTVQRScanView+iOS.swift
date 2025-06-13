@@ -34,7 +34,7 @@ struct SendToTVQRScanView: View {
     let onDetect: (String) -> Void
 
     @State
-    private var isScannerAvailable = true
+    private var usingScanner = true
 
     @State
     private var addressPort: HTTPAddressPort = .forWebReceiver
@@ -42,7 +42,7 @@ struct SendToTVQRScanView: View {
     var body: some View {
         ZStack {
             videoView
-            if isScannerAvailable {
+            if usingScanner {
                 overlayView
             } else {
                 formView
@@ -52,6 +52,29 @@ struct SendToTVQRScanView: View {
 }
 
 private extension SendToTVQRScanView {
+    var videoView: some View {
+        QRScanView(
+            isAvailable: $usingScanner,
+            onLoad: onLoad,
+            onDetect: onDetect
+        )
+    }
+
+    var overlayView: some View {
+        VStack {
+            VStack(spacing: 10) {
+                messageView
+                enterManuallyButton
+            }
+            .padding(15.0)
+            .background(.black.opacity(0.8))
+            .cornerRadius(15.0)
+            .padding()
+
+            Spacer()
+        }
+    }
+
     var messageView: some View {
         Text(Strings.Views.Profile.SendTv.Qr.message(
             Strings.Global.Nouns.profiles,
@@ -62,23 +85,12 @@ private extension SendToTVQRScanView {
         .foregroundStyle(.white)
     }
 
-    var videoView: some View {
-        QRScanView(
-            isAvailable: $isScannerAvailable,
-            onLoad: onLoad,
-            onDetect: onDetect
-        )
-    }
-
-    var overlayView: some View {
-        VStack {
-            messageView
-                .padding(15.0)
-                .background(.black.opacity(0.8))
-                .cornerRadius(15.0)
-                .padding()
-
-            Spacer()
+    var enterManuallyButton: some View {
+        // FIXME: ###, l10n
+        Button("Enter manually") {
+            withAnimation {
+                usingScanner = false
+            }
         }
     }
 
