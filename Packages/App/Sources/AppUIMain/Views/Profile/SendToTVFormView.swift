@@ -46,6 +46,9 @@ private extension SendToTVFormView {
     var urlSection: some View {
         Group {
             ThemeTextField(Strings.Global.Nouns.address, text: $addressPort.address, placeholder: Strings.Unlocalized.Placeholders.ipAddress(forFamily: .v4))
+#if os(iOS)
+                .keyboardType(.numbersAndPunctuation)
+#endif
             ThemeTextField(Strings.Global.Nouns.port, text: $addressPort.port, placeholder: Strings.Unlocalized.Placeholders.webUploaderPort)
             Text(Strings.Unlocalized.url)
                 .themeTrailingValue(addressPort.urlDescription)
