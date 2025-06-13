@@ -29,14 +29,21 @@ import CommonUtils
 import SwiftUI
 
 struct SendToTVQRScanView: View {
+    let onLoad: (Error?) -> Void
+
     let onDetect: (String) -> Void
 
-    let onError: (Error) -> Void
+    @State
+    private var isScannerAvailable = true
 
     var body: some View {
         ZStack {
             videoView
-            overlayView
+            if isScannerAvailable {
+                overlayView
+            } else {
+                Text("FIXME: ###, scanner unavailable")
+            }
         }
     }
 }
@@ -54,8 +61,9 @@ private extension SendToTVQRScanView {
 
     var videoView: some View {
         QRScanView(
-            onDetect: onDetect,
-            onError: onError
+            isAvailable: $isScannerAvailable,
+            onLoad: onLoad,
+            onDetect: onDetect
         )
     }
 
@@ -76,8 +84,8 @@ private extension SendToTVQRScanView {
 
 #Preview {
     SendToTVQRScanView(
-        onDetect: { _ in },
-        onError: { _ in }
+        onLoad: { _ in },
+        onDetect: { _ in }
     )
 }
 
