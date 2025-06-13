@@ -31,7 +31,7 @@ import SwiftUI
 struct SendToTVQRScanView: View {
     let onLoad: (Error?) -> Void
 
-    let onDetect: (String) -> Void
+    let onDetect: (URL) -> Void
 
     @State
     private var usingScanner = true
@@ -56,7 +56,12 @@ private extension SendToTVQRScanView {
         QRScanView(
             isAvailable: $usingScanner,
             onLoad: onLoad,
-            onDetect: onDetect
+            onDetect: {
+                guard let url = URL(string: $0) else {
+                    return
+                }
+                onDetect(url)
+            }
         )
     }
 
@@ -103,7 +108,7 @@ private extension SendToTVQRScanView {
                             assertionFailure("Button should be disabled")
                             return
                         }
-                        onDetect(url.absoluteString)
+                        onDetect(url)
                     }
                     .disabled(addressPort.url == nil)
                 }

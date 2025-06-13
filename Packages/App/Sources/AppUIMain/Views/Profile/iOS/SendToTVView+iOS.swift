@@ -81,10 +81,7 @@ private extension SendToTVView {
                 isPresented = false
 #endif
             }
-        } onDetect: { string in
-            guard let url = URL(string: string) else {
-                return
-            }
+        } onDetect: { url in
             path.append(NavigationRoute.enterPasscode(url))
         }
         .themeNavigationDetail()
