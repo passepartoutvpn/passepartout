@@ -92,7 +92,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
             .modifier(PaywallModifier(
                 reason: $paywallReason,
-                onAction: { _ in
+                onAction: { _, _ in
                     paywallContinuation?()
                 }
             ))

@@ -102,7 +102,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         ))
         .modifier(PaywallModifier(
             reason: $paywallReason,
-            onAction: { _ in
+            onAction: { _, _ in
                 paywallContinuation?()
             }
         ))

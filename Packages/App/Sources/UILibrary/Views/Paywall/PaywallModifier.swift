@@ -34,7 +34,7 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let onAction: ((Profile?) -> Void)?
+    private let onAction: ((Action, Profile?) -> Void)?
 
     private let onCancel: (() -> Void)?
 
@@ -46,7 +46,7 @@ public struct PaywallModifier: ViewModifier {
 
     public init(
         reason: Binding<PaywallReason?>,
-        onAction: ((Profile?) -> Void)? = nil,
+        onAction: ((Action, Profile?) -> Void)? = nil,
         onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
@@ -124,7 +124,7 @@ private extension PaywallModifier {
             Group {
                 if let onAction {
                     Button(title(forAction: reason.action), role: .cancel) {
-                        onAction(reason.profile)
+                        onAction(reason.action, reason.profile)
                     }
                 }
                 if !iapManager.isBeta {

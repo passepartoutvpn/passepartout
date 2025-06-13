@@ -73,7 +73,7 @@ struct ProfileCoordinator: View {
         contentView
             .modifier(PaywallModifier(
                 reason: $paywallReason,
-                onAction: { _ in
+                onAction: { action, _ in
                     saveAnyway()
                 }
             ))
