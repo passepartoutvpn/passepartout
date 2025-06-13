@@ -132,11 +132,11 @@ extension View {
     }
 
     public func themeContainerWithSingleEntry(header: String? = nil, footer: String? = nil, isAction: Bool = false) -> some View {
-        themeContainerEntry(subtitle: footer, isAction: isAction)
 #if os(macOS)
+        themeContainerEntry(subtitle: footer, isAction: isAction)
             .themeContainer(header: header)
 #else
-            .themeContainer(header: header, footer: footer)
+        themeContainerEntry(header: header, subtitle: footer, isAction: isAction)
 #endif
     }
 
