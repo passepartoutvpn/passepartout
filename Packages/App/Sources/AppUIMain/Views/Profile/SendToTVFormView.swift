@@ -1,5 +1,5 @@
 //
-//  SendToTVView+macOS.swift
+//  SendToTVView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/8/25.
