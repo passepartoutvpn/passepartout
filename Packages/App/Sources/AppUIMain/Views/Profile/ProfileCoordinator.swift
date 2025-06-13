@@ -194,6 +194,8 @@ private extension ProfileCoordinator {
             }
             return savedProfile
         } catch AppError.verificationReceiptIsLoading {
+            assert(action != nil, "Verification error despite nil action (loading)")
+
             pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
             let V = Strings.Views.Paywall.Alerts.self
             errorHandler.handle(
@@ -202,6 +204,8 @@ private extension ProfileCoordinator {
             )
             return nil
         } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
+            assert(action != nil, "Verification error despite nil action (required)")
+
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
             if let action {
                 setLater(PaywallReason(
