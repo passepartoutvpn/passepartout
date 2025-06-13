@@ -63,7 +63,7 @@ private extension SendToTVQRScanView {
         VStack {
             messageView
                 .padding(15.0)
-                .background(.black)
+                .background(.black.opacity(0.8))
                 .cornerRadius(15.0)
                 .padding()
 
