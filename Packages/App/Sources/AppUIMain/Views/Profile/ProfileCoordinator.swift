@@ -47,6 +47,9 @@ struct ProfileCoordinator: View {
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor
@@ -183,6 +186,7 @@ private extension ProfileCoordinator {
     @discardableResult
     func commitEditing(
         action: PaywallModifier.Action?,
+        additionalFeatures: Set<AppFeature>? = nil,
         dismissing: Bool
     ) async throws -> Profile? {
         do {
@@ -190,6 +194,7 @@ private extension ProfileCoordinator {
                 to: profileManager,
                 buildingWith: registry,
                 verifyingWith: action != nil ? iapManager : nil,
+                additionalFeatures: additionalFeatures,
                 preferencesManager: preferencesManager
             )
             if dismissing {
@@ -240,6 +245,7 @@ private extension ProfileCoordinator {
             do {
                 guard let profile = try await commitEditing(
                     action: verifying ? .sendToTV : nil,
+                    additionalFeatures: distributionTarget.supportsIAP ? [.appleTV] : nil,
                     dismissing: false
                 ) else {
                     return
