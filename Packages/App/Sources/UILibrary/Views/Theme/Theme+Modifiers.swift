@@ -109,33 +109,31 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
-    public func themeSection(header: String? = nil, footer: String? = nil, forcesFooter: Bool = false) -> some View {
-        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer, forcesFooter: forcesFooter))
-    }
-
-    public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
-        Group {
-            if above {
-                EmptyView()
-                    .themeRowWithSubtitle(footer) // macOS
-
-                self
-            } else {
-                themeRowWithSubtitle(footer) // macOS
-            }
-        }
-        .themeSection(header: header, footer: footer) // iOS/tvOS
-    }
-
-    // subtitle is hidden on iOS/tvOS
-    public func themeRowWithSubtitle(_ subtitle: String?) -> some View {
-        themeRowWithSubtitle {
-            subtitle.map(Text.init)
+    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+        Section {
+            self
+        } header: {
+            header.map(Text.init)
+        } footer: {
+            footer.map(Text.init)
         }
     }
 
-    public func themeRowWithSubtitle<Subtitle>(_ subtitle: () -> Subtitle) -> some View where Subtitle: View {
-        modifier(ThemeRowWithSubtitleModifier(subtitle: subtitle))
+    public func themeContainer(header: String? = nil, footer: String? = nil) -> some View {
+        modifier(ThemeContainerModifier(header: header, footer: footer))
+    }
+
+    public func themeContainerEntry(header: String? = nil, subtitle: String? = nil, isAction: Bool = false) -> some View {
+        modifier(ThemeContainerEntryModifier(header: header, subtitle: subtitle, isAction: isAction))
+    }
+
+    public func themeContainerWithSingleEntry(header: String? = nil, footer: String? = nil, isAction: Bool = false) -> some View {
+        themeContainerEntry(subtitle: footer, isAction: isAction)
+#if os(macOS)
+            .themeContainer(header: header)
+#else
+            .themeContainer(header: header, footer: footer)
+#endif
     }
 
     public func themeSubtitle() -> some View {
