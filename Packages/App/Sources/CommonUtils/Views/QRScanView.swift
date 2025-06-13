@@ -94,6 +94,8 @@ final class QRScanViewController: UIViewController {
 
     private var onDetect: ((String) -> Void)?
 
+    private var didLoad = false
+
     required init?(coder: NSCoder) {
         fatalError()
     }
@@ -111,6 +113,11 @@ final class QRScanViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        guard !didLoad else {
+            return
+        }
+        didLoad = true
 
         let input: AVCaptureDeviceInput
         do {
