@@ -454,8 +454,8 @@ public enum Strings {
               public static let purchaseUnsupported = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase_unsupported", fallback: "The TV may require an additional purchase.")
             }
             public enum Icloud {
-              /// iCloud is required to synchronize your profiles with your Apple TV.
-              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.icloud.footer", fallback: "iCloud is required to synchronize your profiles with your Apple TV.")
+              /// iCloud is required to synchronize your profiles with your TV.
+              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.icloud.footer", fallback: "iCloud is required to synchronize your profiles with your TV.")
             }
             public enum Web {
               /// You can send the profile to your TV over the web.
