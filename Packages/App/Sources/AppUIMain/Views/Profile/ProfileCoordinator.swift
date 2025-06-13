@@ -31,7 +31,7 @@ struct ProfileCoordinator: View {
     struct Flow {
         let onNewModule: (ModuleType) -> Void
 
-        let onCommitEditing: () async throws -> Void
+        let onSaveProfile: () async throws -> Void
 
         let onCancelEditing: () -> Void
 
@@ -152,7 +152,7 @@ private extension ProfileCoordinator {
     var flow: Flow {
         Flow(
             onNewModule: addNewModule,
-            onCommitEditing: {
+            onSaveProfile: {
                 try await saveProfile(verifying: true)
             },
             onCancelEditing: {
