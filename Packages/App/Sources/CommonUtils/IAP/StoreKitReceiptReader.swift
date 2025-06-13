@@ -97,7 +97,7 @@ private extension AppTransaction {
             return nil
         }
         return OriginalPurchase(
-            buildNumber: Int(originalAppVersion) ?? .max,
+            buildNumber: Int(originalAppVersion),
             purchaseDate: originalPurchaseDate
         )
     }
