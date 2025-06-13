@@ -49,9 +49,9 @@ struct ProfileStorageSection: View {
                 )
             tvToggle
                 .themeContainerEntry(subtitle: tvDescription)
+                .disabled(!profileEditor.isShared)
         }
         .themeContainer(header: header)
-        .disabled(!profileEditor.isShared)
     }
 }
 
