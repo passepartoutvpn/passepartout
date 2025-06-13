@@ -110,6 +110,9 @@ extension View {
     }
 
     public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+#if os(macOS)
+        modifier(ThemeContainerModifier(header: header, footer: footer))
+#else
         Section {
             self
         } header: {
@@ -117,6 +120,7 @@ extension View {
         } footer: {
             footer.map(Text.init)
         }
+#endif
     }
 
     public func themeContainer(header: String? = nil, footer: String? = nil) -> some View {
