@@ -106,8 +106,10 @@ private extension PurchasedView {
     var downloadSection: some View {
         iapManager.originalPurchase.map { purchase in
             Group {
-                ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: purchase.buildNumber.description)
-                    .scrollableOnTV()
+                purchase.buildNumber.map {
+                    ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: $0.description)
+                        .scrollableOnTV()
+                }
                 ThemeRow(Strings.Global.Nouns.date, value: purchase.purchaseDate.description)
                     .scrollableOnTV()
             }
