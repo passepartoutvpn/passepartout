@@ -79,7 +79,7 @@ struct ProfileCoordinator: View {
                 onAction: { action, _ in
                     switch action {
                     case .save:
-                        saveAnyway()
+                        saveProfileAnyway()
                     case .sendToTV:
                         sendProfileToTV(verifying: false)
                     default:
@@ -153,10 +153,7 @@ private extension ProfileCoordinator {
         Flow(
             onNewModule: addNewModule,
             onCommitEditing: {
-                try await commitEditing(
-                    action: .save,
-                    dismissing: true
-                )
+                try await saveProfile(verifying: true)
             },
             onCancelEditing: {
                 cancelEditing()
@@ -176,11 +173,6 @@ private extension ProfileCoordinator {
         withAnimation(theme.animation(for: .modules)) {
             profileEditor.saveModule(module, activating: true)
         }
-    }
-
-    @discardableResult
-    func commitEditing(dismissing: Bool) async throws -> Profile? {
-        try await commitEditing(action: nil, dismissing: dismissing)
     }
 
     @discardableResult
@@ -234,25 +226,41 @@ private extension ProfileCoordinator {
 }
 
 private extension ProfileCoordinator {
-    func saveAnyway() {
+    func saveProfile(verifying: Bool) async throws {
+        do {
+            try await commitEditing(
+                action: verifying ? .save : nil,
+                dismissing: true
+            )
+        } catch {
+            errorHandler.handle(error, title: Strings.Global.Actions.save)
+            throw error
+        }
+    }
+
+    func saveProfileAnyway() {
         Task {
-            try await commitEditing(dismissing: true)
+            try await saveProfile(verifying: false)
         }
     }
 
     func sendProfileToTV(verifying: Bool) {
         Task {
             do {
+                // the profile itself doesn't require the .appleTV
+                // feature locally, but it will be required by the TV
+                let additionalFeatures: Set<AppFeature>? = distributionTarget.supportsIAP ? [.appleTV] : nil
+
                 guard let profile = try await commitEditing(
                     action: verifying ? .sendToTV : nil,
-                    additionalFeatures: distributionTarget.supportsIAP ? [.appleTV] : nil,
+                    additionalFeatures: additionalFeatures,
                     dismissing: false
                 ) else {
                     return
                 }
                 modalRoute = .sendToTV(profile)
             } catch {
-                errorHandler.handle(error)
+                errorHandler.handle(error, title: Strings.Global.Actions.save)
             }
         }
     }
