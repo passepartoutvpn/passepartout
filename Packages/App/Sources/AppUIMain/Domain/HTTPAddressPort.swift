@@ -43,6 +43,9 @@ struct HTTPAddressPort {
         guard let port = Int(port) else {
             return nil
         }
+        guard !address.isEmpty else {
+            return nil
+        }
         return URL(string: "\(scheme)://\(address):\(port)")
     }
 
