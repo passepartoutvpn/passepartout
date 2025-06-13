@@ -43,7 +43,9 @@ struct ProfileStorageSection: View {
     var flow: ProfileCoordinator.Flow?
 
     var body: some View {
-        sharingSection
+        if showsSharing {
+            sharingSection
+        }
         tvSection
     }
 }
@@ -58,7 +60,9 @@ private extension ProfileStorageSection {
                 )
 
             tvToggle
-                .themeContainerEntry(subtitle: sharingTVDescription)
+                .themeContainerEntry(
+                    subtitle: sharingTVDescription
+                )
                 .disabled(!profileEditor.isShared)
         }
         .themeContainer(header: sharingHeader)
@@ -81,12 +85,14 @@ private extension ProfileStorageSection {
 
 private extension ProfileStorageSection {
     var tvSection: some View {
-
-        // FIXME: ###, l10n
         Button(Strings.Views.Profile.SendTv.title_compound) {
             flow?.onSendToTV()
         }
-        .themeContainerWithSingleEntry(footer: tvDescription, isAction: true)
+        .themeContainerWithSingleEntry(
+            header: !showsSharing ? Strings.Unlocalized.appleTV : nil,
+            footer: tvDescription,
+            isAction: true
+        )
     }
 
     var tvToggle: some View {
@@ -105,6 +111,10 @@ private extension ProfileStorageSection {
 }
 
 private extension ProfileStorageSection {
+    var showsSharing: Bool {
+        distributionTarget.supportsCloudKit
+    }
+
     var sharingRequirements: Set<AppFeature> {
         profileEditor.isShared ? [.sharing] : []
     }
