@@ -80,7 +80,6 @@ private extension ProfileStorageSection {
     var tvSection: some View {
 
         // FIXME: ###, l10n
-        // FIXME: ###, add paywall action .sendToTV
         Button(Strings.Views.Profile.SendTv.title_compound) {
             flow?.onSendToTV()
         }

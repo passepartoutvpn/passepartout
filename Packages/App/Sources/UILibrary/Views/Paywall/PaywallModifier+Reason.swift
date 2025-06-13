@@ -35,6 +35,8 @@ extension PaywallModifier {
 
         case save
 
+        case sendToTV
+
         case purchase
     }
 

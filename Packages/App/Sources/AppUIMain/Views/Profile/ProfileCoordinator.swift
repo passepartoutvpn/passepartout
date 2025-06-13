@@ -74,7 +74,14 @@ struct ProfileCoordinator: View {
             .modifier(PaywallModifier(
                 reason: $paywallReason,
                 onAction: { action, _ in
-                    saveAnyway()
+                    switch action {
+                    case .save:
+                        saveAnyway()
+                    case .sendToTV:
+                        sendProfileToTV(verifying: false)
+                    default:
+                        assertionFailure("Unhandled paywall action \(action)")
+                    }
                 }
             ))
             .themeModal(item: $modalRoute, content: modalDestination)
@@ -143,12 +150,17 @@ private extension ProfileCoordinator {
         Flow(
             onNewModule: addNewModule,
             onCommitEditing: {
-                try await commitEditing(dismissing: true)
+                try await commitEditing(
+                    action: .save,
+                    dismissing: true
+                )
             },
             onCancelEditing: {
                 cancelEditing()
             },
-            onSendToTV: sendProfileToTV
+            onSendToTV: {
+                sendProfileToTV(verifying: true)
+            }
         )
     }
 }
@@ -156,12 +168,6 @@ private extension ProfileCoordinator {
 // MARK: - Actions
 
 private extension ProfileCoordinator {
-    func saveAnyway() {
-        Task {
-            try await commitEditing(verifying: false, dismissing: true)
-        }
-    }
-
     func addNewModule(_ moduleType: ModuleType) {
         let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
@@ -171,22 +177,19 @@ private extension ProfileCoordinator {
 
     @discardableResult
     func commitEditing(dismissing: Bool) async throws -> Profile? {
-        do {
-            return try await commitEditing(verifying: !iapManager.isBeta, dismissing: dismissing)
-        } catch {
-            pp_log_g(.App.profiles, .error, "Unable to commit profile: \(error)")
-            errorHandler.handle(error, title: Strings.Global.Actions.save)
-            throw error
-        }
+        try await commitEditing(action: nil, dismissing: dismissing)
     }
 
     @discardableResult
-    func commitEditing(verifying: Bool, dismissing: Bool) async throws -> Profile? {
+    func commitEditing(
+        action: PaywallModifier.Action?,
+        dismissing: Bool
+    ) async throws -> Profile? {
         do {
             let savedProfile = try await profileEditor.save(
                 to: profileManager,
                 buildingWith: registry,
-                verifyingWith: verifying ? iapManager : nil,
+                verifyingWith: !iapManager.isBeta && action != nil ? iapManager : nil,
                 preferencesManager: preferencesManager
             )
             if dismissing {
@@ -203,12 +206,14 @@ private extension ProfileCoordinator {
             return nil
         } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-            setLater(PaywallReason(
-                nil,
-                requiredFeatures: requiredFeatures,
-                action: .save
-            )) {
-                paywallReason = $0
+            if let action {
+                setLater(PaywallReason(
+                    nil,
+                    requiredFeatures: requiredFeatures,
+                    action: action
+                )) {
+                    paywallReason = $0
+                }
             }
             return nil
         } catch {
@@ -221,11 +226,22 @@ private extension ProfileCoordinator {
         profileEditor.discard()
         onDismiss()
     }
+}
 
-    func sendProfileToTV() {
+private extension ProfileCoordinator {
+    func saveAnyway() {
+        Task {
+            try await commitEditing(dismissing: true)
+        }
+    }
+
+    func sendProfileToTV(verifying: Bool) {
         Task {
             do {
-                guard let profile = try await commitEditing(dismissing: false) else {
+                guard let profile = try await commitEditing(
+                    action: verifying ? .sendToTV : nil,
+                    dismissing: false
+                ) else {
                     return
                 }
                 modalRoute = .sendToTV(profile)

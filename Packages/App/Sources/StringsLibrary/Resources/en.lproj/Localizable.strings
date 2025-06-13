@@ -96,6 +96,7 @@
 //"views.paywall.alerts.actions.connect" = "Test connection";
 //"views.paywall.alerts.actions.purchase" = "Purchase";
 "views.paywall.alerts.actions.save" = "Save anyway";
+"views.paywall.alerts.actions.send_to_tv" = "Send anyway";
 "views.paywall.alerts.verification.connect.1" = "Your purchases are being verified.";
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
