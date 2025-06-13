@@ -332,7 +332,7 @@
 "views.settings.system_extension.buttons.open" = "Ouvrir les réglages";
 "views.settings.system_extension.message" = "Pour que le VPN fonctionne, lapp doit se trouver dans le dossier /Applications, et %@ doit être activé en tant que %@.\n\nOuvrez les Réglages macOS, faites défiler jusqu’à « %@ », ouvrez-le et activez %@.";
 "views.settings.title" = "À propos";
-"views.tv.connection_profiles.header" = "Ouvre %@ sur ton appareil iOS ou macOS et active l’option \"%@\" d’un profil pour qu’il apparaisse ici.";
+"views.tv.connection_profiles.header" = "Ouvre %@ sur ton appareil iOS ou macOS et active l’option \"%@\" d’un profil pour qu’il apparaisse ici. Sinon, tu trouveras d’autres options dans l’onglet « Profils ».";
 "views.tv.profiles.detail.profiles" = "Utilisez la pression longue pour afficher les actions disponibles pour un profil. Les profils locaux peuvent être supprimés ici, tandis que les profils iCloud uniquement depuis l’application iOS ou macOS.";
 "views.tv.profiles.import_local" = "Importer un profil local";
 "views.tv.web_receiver.qr" = "Scannez le QR avec votre caméra pour ouvrir une page web où télécharger votre profil. Assurez-vous d'être connecté au même réseau.";
