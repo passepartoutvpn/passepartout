@@ -167,7 +167,6 @@
 "modules.general.sections.storage.header" = "Синхронизация";
 "modules.general.sections.storage.sharing.footer" = "Профили хранятся в %@ и зашифрованы.";
 "modules.general.sections.storage.tv.footer.purchase_unsupported" = "Для телевизора может потребоваться дополнительная покупка.";
-"modules.general.sections.storage.tv.footer.purchase" = "Купите, чтобы снять ограничение.";
 "modules.general.sections.storage.tv.icloud.footer" = "Для синхронизации профилей с телевизором требуется iCloud.";
 "modules.general.sections.storage.tv.web.footer" = "Вы можете отправить профиль на телевизор через веб.";
 "modules.http_proxy.bypass_domains.add" = "Добавить исключаемый домен";
