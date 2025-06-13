@@ -166,8 +166,9 @@
 "modules.general.sections.behavior.header" = "Beteende";
 "modules.general.sections.storage.header" = "Synkronisering";
 "modules.general.sections.storage.sharing.footer" = "Profiler sparas i %@ och är krypterade.";
-"modules.general.sections.storage.tv.footer.purchase" = "Köp för att ta bort begränsningen.";
-"modules.general.sections.storage.tv.footer" = "iCloud krävs för att dela dina profiler med din Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "TV:n kan kräva ett extra köp.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud krävs för att synkronisera dina profiler med TV:n.";
+"modules.general.sections.storage.tv.web.footer" = "Du kan skicka profilen till din TV via webben.";
 "modules.http_proxy.bypass_domains.add" = "Lägg till kringgående domän";
 "modules.ip.address.footer" = "Lämna tomt för att tilldela automatiskt.";
 "modules.ip.routes.add_family" = "Lägg till %@";
@@ -260,6 +261,7 @@
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
 "views.paywall.alerts.actions.save" = "Spara ändå";
+"views.paywall.alerts.actions.send_to_tv" = "Skicka ändå";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
 "views.paywall.alerts.confirmation.title" = "Köp krävs";
@@ -298,8 +300,9 @@
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
 "views.profile.send_tv.form.message" = "Matcha URL:en som finns i '%@ > %@' på din %@, se till att vara på samma nätverk.";
 "views.profile.send_tv.passcode.message" = "Ange åtkomstkoden";
+"views.profile.send_tv.qr.buttons.manual" = "Ange URL manuellt";
 "views.profile.send_tv.qr.message" = "Skanna QR-koden som finns i '%@ > %@' på din %@, se till att vara på samma nätverk";
-"views.profile.send_tv.title" = "Skicka till TV";
+"views.profile.send_tv.title" = "Skicka till %@";
 "views.providers.clear_filters" = "Rensa filter";
 "views.providers.last_updated.loading" = "Laddar...";
 "views.providers.last_updated" = "Senast uppdaterad %@";

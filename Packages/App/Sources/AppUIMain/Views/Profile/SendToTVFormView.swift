@@ -1,5 +1,5 @@
 //
-//  SendToTVView+macOS.swift
+//  SendToTVView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/8/25.
@@ -23,20 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
 import SwiftUI
 
 struct SendToTVFormView: View {
 
     @Binding
-    var address: String
+    var addressPort: HTTPAddressPort
 
-    @Binding
-    var port: String
-
-    @Binding
-    var passcode: String
+    var passcode: Binding<String>?
 
     var body: some View {
         Form {
@@ -44,17 +38,20 @@ struct SendToTVFormView: View {
             passcodeSection
         }
         .themeForm()
-        .navigationTitle(Strings.Views.Profile.SendTv.title)
+        .navigationTitle(Strings.Views.Profile.SendTv.title_compound)
     }
 }
 
 private extension SendToTVFormView {
     var urlSection: some View {
         Group {
-            ThemeTextField(Strings.Global.Nouns.address, text: $address, placeholder: Strings.Unlocalized.Placeholders.ipAddress(forFamily: .v4))
-            ThemeTextField(Strings.Global.Nouns.port, text: $port, placeholder: Strings.Unlocalized.Placeholders.webUploaderPort)
+            ThemeTextField(Strings.Global.Nouns.address, text: $addressPort.address, placeholder: Strings.Unlocalized.Placeholders.ipAddress(forFamily: .v4))
+#if os(iOS)
+                .keyboardType(.numbersAndPunctuation)
+#endif
+            ThemeTextField(Strings.Global.Nouns.port, text: $addressPort.port, placeholder: Strings.Unlocalized.Placeholders.webUploaderPort)
             Text(Strings.Unlocalized.url)
-                .themeTrailingValue(currentURLString)
+                .themeTrailingValue(addressPort.urlDescription)
         }
         .themeSection(footer: Strings.Views.Profile.SendTv.Form.message(
             Strings.Global.Nouns.profiles,
@@ -64,25 +61,12 @@ private extension SendToTVFormView {
     }
 
     var passcodeSection: some View {
-        Group {
-            ThemeTextField(Strings.Global.Nouns.passcode, text: $passcode, placeholder: Strings.Unlocalized.Placeholders.webUploaderPasscode)
+        passcode.map { text in
+            Group {
+                ThemeTextField(Strings.Global.Nouns.passcode, text: text, placeholder: Strings.Unlocalized.Placeholders.webUploaderPasscode)
+            }
+            .themeSection()
         }
-        .themeSection()
-    }
-
-    var addressDescription: String {
-        !address.isEmpty ? address : "<\(Strings.Global.Nouns.address.lowercased())>"
-    }
-
-    var currentURLString: String? {
-        guard let port = Int(port) else {
-            let portDescription = "<\(Strings.Global.Nouns.port.lowercased())>"
-            return "http://\(addressDescription):\(portDescription)"
-        }
-        guard !address.isEmpty else {
-            return "http://\(addressDescription):\(port)"
-        }
-        return URL(httpAddress: address, port: port)?.absoluteString
     }
 }
 
@@ -90,18 +74,14 @@ private extension SendToTVFormView {
     struct FormPreview: View {
 
         @State
-        private var address = ""
-
-        @State
-        private var port = ""
+        private var addressPort = HTTPAddressPort()
 
         @State
         private var passcode = ""
 
         var body: some View {
             SendToTVFormView(
-                address: $address,
-                port: $port,
+                addressPort: $addressPort,
                 passcode: $passcode
             )
         }
@@ -109,5 +89,3 @@ private extension SendToTVFormView {
 
     return FormPreview()
 }
-
-#endif

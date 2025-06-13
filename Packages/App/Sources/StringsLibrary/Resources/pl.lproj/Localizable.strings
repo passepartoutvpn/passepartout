@@ -166,8 +166,9 @@
 "modules.general.sections.behavior.header" = "Zachowanie";
 "modules.general.sections.storage.header" = "Synchronizacja";
 "modules.general.sections.storage.sharing.footer" = "Profile są przechowywane w %@ i szyfrowane.";
-"modules.general.sections.storage.tv.footer.purchase" = "Zakup, aby usunąć ograniczenie.";
-"modules.general.sections.storage.tv.footer" = "iCloud jest wymagany do udostępniania profili na Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Telewizor może wymagać dodatkowego zakupu.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud jest wymagany do synchronizacji profili z telewizorem.";
+"modules.general.sections.storage.tv.web.footer" = "Możesz wysłać profil do telewizora przez sieć.";
 "modules.http_proxy.bypass_domains.add" = "Dodaj domenę wykluczającą";
 "modules.ip.address.footer" = "Pozostaw puste, aby przypisać automatycznie.";
 "modules.ip.routes.add_family" = "Dodaj %@";
@@ -260,6 +261,7 @@
 "views.migration.sections.main.header" = "Wybierz poniżej profile ze starszych wersji %@, które chcesz zaimportować. Jeśli Twoje profile są przechowywane w iCloud, synchronizacja może zająć trochę czasu. Jeśli ich teraz nie widzisz, wróć później.";
 "views.migration.title" = "Migracja";
 "views.paywall.alerts.actions.save" = "Zapisz mimo to";
+"views.paywall.alerts.actions.send_to_tv" = "Wyślij mimo to";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
 "views.paywall.alerts.confirmation.title" = "Wymagana zakup";
@@ -298,8 +300,9 @@
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
 "views.profile.send_tv.form.message" = "Dopasuj adres URL znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci.";
 "views.profile.send_tv.passcode.message" = "Wprowadź kod dostępu";
+"views.profile.send_tv.qr.buttons.manual" = "Wpisz adres URL ręcznie";
 "views.profile.send_tv.qr.message" = "Zeskanuj kod QR znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci";
-"views.profile.send_tv.title" = "Wyślij do TV";
+"views.profile.send_tv.title" = "Wyślij do %@";
 "views.providers.clear_filters" = "Wyczyść filtry";
 "views.providers.last_updated.loading" = "Ładowanie...";
 "views.providers.last_updated" = "Ostatnia aktualizacja: %@";

@@ -166,8 +166,9 @@
 "modules.general.sections.behavior.header" = "Comportement";
 "modules.general.sections.storage.header" = "Synchronisation";
 "modules.general.sections.storage.sharing.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
-"modules.general.sections.storage.tv.footer.purchase" = "Achetez pour supprimer la restriction.";
-"modules.general.sections.storage.tv.footer" = "iCloud est requis pour partager vos profils avec votre Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Le téléviseur peut nécessiter un achat supplémentaire.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud est requis pour synchroniser vos profils avec la TV.";
+"modules.general.sections.storage.tv.web.footer" = "Vous pouvez envoyer le profil à votre TV via le web.";
 "modules.http_proxy.bypass_domains.add" = "Ajouter un domaine à contourner";
 "modules.ip.address.footer" = "Laissez vide pour attribuer automatiquement.";
 "modules.ip.routes.add_family" = "Ajouter %@";
@@ -260,6 +261,7 @@
 "views.migration.sections.main.header" = "Sélectionnez ci-dessous les profils des anciennes versions de %@ que vous souhaitez importer. Si vos profils sont stockés sur iCloud, ils peuvent mettre un certain temps à se synchroniser. Si vous ne les voyez pas maintenant, revenez plus tard.";
 "views.migration.title" = "Migrer";
 "views.paywall.alerts.actions.save" = "Enregistrer quand même";
+"views.paywall.alerts.actions.send_to_tv" = "Envoyer quand même";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
 "views.paywall.alerts.confirmation.title" = "Achat requis";
@@ -298,8 +300,9 @@
 "views.profile.sections.name.footer" = "Utilisez ce nom pour créer vos automatisations VPN dans l'app Raccourcis.";
 "views.profile.send_tv.form.message" = "Faites correspondre l'URL trouvée dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau.";
 "views.profile.send_tv.passcode.message" = "Saisissez le code d'accès";
+"views.profile.send_tv.qr.buttons.manual" = "Saisir l’URL manuellement";
 "views.profile.send_tv.qr.message" = "Scannez le QR trouvé dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau";
-"views.profile.send_tv.title" = "Envoyer vers la TV";
+"views.profile.send_tv.title" = "Envoyer à %@";
 "views.providers.clear_filters" = "Effacer les filtres";
 "views.providers.last_updated.loading" = "Chargement...";
 "views.providers.last_updated" = "Dernière mise à jour le %@";

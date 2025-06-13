@@ -1,8 +1,8 @@
 //
-//  URL+Extensions.swift
+//  Strings+Compound.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/16/18.
+//  Created by Davide De Rosa on 6/13/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
 
-extension URL {
-    public var filename: String {
-        deletingPathExtension()
-            .lastPathComponent
+extension Strings.Views.Profile.SendTv {
+    public static var title_compound: String {
+        title(Strings.Unlocalized.appleTV)
     }
+}
 
-    public func open() {
-#if os(iOS)
-        UIApplication.shared.open(self)
-#elseif os(macOS)
-        NSWorkspace.shared.open(self)
-#else
-        fatalError("Unsupported")
-#endif
-    }
-
-    public static func mailto(to: String, subject: String, body: String) -> URL? {
-        guard let escapedSubject = subject.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
-            return nil
-        }
-        guard let escapedBody = body.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else {
-            return nil
-        }
-        return URL(string: "mailto:\(to)?subject=\(escapedSubject)&body=\(escapedBody)")
+extension Strings.Modules.General.Rows {
+    public static var appletv_compound: String {
+        appletv(Strings.Unlocalized.appleTV)
     }
 }
