@@ -100,7 +100,7 @@ private extension OpenVPNCredentialsGroup {
                     )
                 }
             }
-            .themeContainerEntry(subtitle: interactiveFooter)
+            .themeContainerEntry(subtitle: Strings.Modules.Openvpn.Credentials.Interactive.footer)
 
             if distributionTarget.supportsPaidFeatures && draft.module.isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
@@ -108,19 +108,10 @@ private extension OpenVPNCredentialsGroup {
                         Text($0.localizedDescription(style: .entity))
                     }
                 }
+                .themeContainerEntry(subtitle: builder.otpMethod.localizedDescription(style: .approachDescription).nilIfEmpty)
             }
         }
-        .themeContainer(footer: interactiveFooter)
-    }
-
-    var interactiveFooter: String? {
-        if draft.module.isInteractive {
-            return [
-                Strings.Modules.Openvpn.Credentials.Interactive.footer,
-                builder.otpMethod.localizedDescription(style: .approachDescription)
-            ].joined(separator: " ")
-        }
-        return nil
+        .themeContainer()
     }
 
     var inputSection: some View {
