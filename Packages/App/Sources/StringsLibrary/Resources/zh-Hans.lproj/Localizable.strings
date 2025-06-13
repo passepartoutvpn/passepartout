@@ -167,7 +167,7 @@
 "modules.general.sections.storage.header" = "同步";
 "modules.general.sections.storage.sharing.footer" = "配置文件加密存储于 %@。";
 "modules.general.sections.storage.tv.footer.purchase" = "购买以移除限制。";
-"modules.general.sections.storage.tv.footer" = "需要 iCloud 才能与 Apple TV 共享您的配置文件。";
+"modules.general.sections.storage.tv.icloud.footer" = "需要 iCloud 才能与 Apple TV 共享您的配置文件。";
 "modules.http_proxy.bypass_domains.add" = "添加绕过域名";
 "modules.ip.address.footer" = "留空以自动分配。";
 "modules.ip.routes.add_family" = "添加 %@";

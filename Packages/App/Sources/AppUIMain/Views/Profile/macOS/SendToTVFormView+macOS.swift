@@ -44,7 +44,7 @@ struct SendToTVFormView: View {
             passcodeSection
         }
         .themeForm()
-        .navigationTitle(Strings.Views.Profile.SendTv.title)
+        .navigationTitle(Strings.Views.Profile.SendTv.title_compound)
     }
 }
 

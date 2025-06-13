@@ -447,11 +447,17 @@ public enum Strings {
             }
           }
           public enum Tv {
-            /// iCloud is required to share your profiles with your Apple TV.
-            public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer", fallback: "iCloud is required to share your profiles with your Apple TV.")
             public enum Footer {
               /// Purchase to drop the restriction.
               public static let purchase = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase", fallback: "Purchase to drop the restriction.")
+            }
+            public enum Icloud {
+              /// iCloud is required to synchronize your profiles with your Apple TV.
+              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.icloud.footer", fallback: "iCloud is required to synchronize your profiles with your Apple TV.")
+            }
+            public enum Web {
+              /// You can send the profile to your TV over the web.
+              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.web.footer", fallback: "You can send the profile to your TV over the web.")
             }
           }
         }
@@ -919,8 +925,10 @@ public enum Strings {
         }
       }
       public enum SendTv {
-        /// Send to TV
-        public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
+        /// Send to %@
+        public static func title(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.profile.send_tv.title", String(describing: p1), fallback: "Send to %@")
+        }
         public enum Form {
           /// Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {

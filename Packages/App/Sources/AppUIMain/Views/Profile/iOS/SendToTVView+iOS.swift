@@ -86,7 +86,7 @@ private extension SendToTVView {
 #endif
         }
         .themeNavigationDetail()
-        .navigationTitle(Strings.Views.Profile.SendTv.title)
+        .navigationTitle(Strings.Views.Profile.SendTv.title_compound)
     }
 
     func passcodeView(url: URL) -> some View {

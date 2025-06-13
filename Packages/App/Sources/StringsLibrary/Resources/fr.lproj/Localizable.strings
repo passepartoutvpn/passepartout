@@ -167,7 +167,7 @@
 "modules.general.sections.storage.header" = "Synchronisation";
 "modules.general.sections.storage.sharing.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
 "modules.general.sections.storage.tv.footer.purchase" = "Achetez pour supprimer la restriction.";
-"modules.general.sections.storage.tv.footer" = "iCloud est requis pour partager vos profils avec votre Apple TV.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud est requis pour partager vos profils avec votre Apple TV.";
 "modules.http_proxy.bypass_domains.add" = "Ajouter un domaine à contourner";
 "modules.ip.address.footer" = "Laissez vide pour attribuer automatiquement.";
 "modules.ip.routes.add_family" = "Ajouter %@";
