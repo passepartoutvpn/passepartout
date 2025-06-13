@@ -77,6 +77,7 @@ extension AppProduct {
         InAppProduct(
             productIdentifier: rawValue,
             localizedTitle: rawValue,
+            localizedDescription: rawValue,
             localizedPrice: "€10.0",
             native: self
         )

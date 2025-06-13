@@ -26,6 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import SwiftUI
+import UIAccessibility
 
 public struct PaywallProductView: View {
 
@@ -38,7 +39,7 @@ public struct PaywallProductView: View {
 
     private let withIncludedFeatures: Bool
 
-    private let highlightedFeatures: Set<AppFeature>
+    private let requiredFeatures: Set<AppFeature>
 
     @Binding
     private var purchasingIdentifier: String?
@@ -55,7 +56,7 @@ public struct PaywallProductView: View {
         style: PaywallProductViewStyle,
         product: InAppProduct,
         withIncludedFeatures: Bool,
-        highlightedFeatures: Set<AppFeature> = [],
+        requiredFeatures: Set<AppFeature> = [],
         purchasingIdentifier: Binding<String?>,
         onComplete: @escaping (String, InAppPurchaseResult) -> Void,
         onError: @escaping (Error) -> Void
@@ -64,7 +65,7 @@ public struct PaywallProductView: View {
         self.style = style
         self.product = product
         self.withIncludedFeatures = withIncludedFeatures
-        self.highlightedFeatures = highlightedFeatures
+        self.requiredFeatures = requiredFeatures
         _purchasingIdentifier = purchasingIdentifier
         self.onComplete = onComplete
         self.onError = onError
@@ -73,25 +74,32 @@ public struct PaywallProductView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             productView
-            if withIncludedFeatures {
-                AppProduct(rawValue: product.productIdentifier)
-                    .map {
-                        IncludedFeaturesView(
-                            product: $0,
-                            highlightedFeatures: highlightedFeatures,
-                            isDisclosing: $isPresentingFeatures
-                        )
-                    }
+            if withIncludedFeatures,
+               let product = AppProduct(rawValue: product.productIdentifier) {
+                DisclosingFeaturesView(
+                    product: product,
+                    requiredFeatures: requiredFeatures,
+                    isDisclosing: $isPresentingFeatures
+                )
             }
         }
+        .disabled(iapManager.didPurchase(product))
     }
 }
 
 private extension PaywallProductView {
+    var shouldUseStoreKit: Bool {
+#if os(tvOS)
+        if case .donation = style {
+            return true
+        }
+#endif
+        return false
+    }
 
     @ViewBuilder
     var productView: some View {
-        if !isPreview, #available(iOS 17, macOS 14, tvOS 17, *) {
+        if shouldUseStoreKit {
             StoreKitProductView(
                 style: style,
                 product: product,
@@ -116,15 +124,16 @@ private extension PaywallProductView {
     List {
         PaywallProductView(
             iapManager: .forPreviews,
-            style: .paywall,
+            style: .paywall(primary: true),
             product: InAppProduct(
                 productIdentifier: AppProduct.Features.appleTV.rawValue,
                 localizedTitle: "Foo",
+                localizedDescription: "Bar",
                 localizedPrice: "$10",
                 native: nil
             ),
             withIncludedFeatures: true,
-            highlightedFeatures: [.appleTV],
+            requiredFeatures: [.appleTV],
             purchasingIdentifier: .constant(nil),
             onComplete: { _, _ in },
             onError: { _ in }

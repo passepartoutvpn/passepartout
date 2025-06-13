@@ -1,5 +1,5 @@
 //
-//  IncludedFeaturesView.swift
+//  DisclosingFeaturesView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/18/25.
@@ -28,28 +28,27 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-public struct IncludedFeaturesView: View {
+public struct DisclosingFeaturesView: View {
     private let product: AppProduct
 
-    private let highlightedFeatures: Set<AppFeature>
+    private let requiredFeatures: Set<AppFeature>
 
     @Binding
     private var isDisclosing: Bool
 
     public init(
         product: AppProduct,
-        highlightedFeatures: Set<AppFeature>,
+        requiredFeatures: Set<AppFeature>,
         isDisclosing: Binding<Bool>
     ) {
         self.product = product
-        self.highlightedFeatures = highlightedFeatures
+        self.requiredFeatures = requiredFeatures
         _isDisclosing = isDisclosing
     }
 
     public var body: some View {
         Group {
             discloseButton
-                .padding(.top, 8)
             featuresList
                 .if(isDisclosing)
         }
@@ -57,7 +56,7 @@ public struct IncludedFeaturesView: View {
     }
 }
 
-private extension IncludedFeaturesView {
+private extension DisclosingFeaturesView {
     var discloseButton: some View {
         Button {
             isDisclosing.toggle()
@@ -73,8 +72,12 @@ private extension IncludedFeaturesView {
     }
 
     var featuresList: some View {
-        FeatureListView(style: .list, features: product.features) {
-            IncludedFeatureRow(feature: $0, isHighlighted: highlightedFeatures.contains($0))
+        ForEach(product.features.sorted(), id: \.id) {
+            FeatureRow(
+                feature: $0,
+                flags: requiredFeatures.contains($0) ? [.highlighted] : []
+            )
         }
+        .themeSection()
     }
 }

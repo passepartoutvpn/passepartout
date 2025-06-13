@@ -55,6 +55,9 @@ extension PaywallCoordinator.Model {
         for requiredFeatures: Set<AppFeature>,
         with iapManager: IAPManager
     ) async throws {
+        guard isFetchingProducts else {
+            return
+        }
         isFetchingProducts = true
         defer {
             isFetchingProducts = false
