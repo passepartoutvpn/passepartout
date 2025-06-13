@@ -36,13 +36,16 @@ struct SendToTVQRScanView: View {
     @State
     private var isScannerAvailable = true
 
+    @State
+    private var addressPort: HTTPAddressPort = .forWebReceiver
+
     var body: some View {
         ZStack {
             videoView
             if isScannerAvailable {
                 overlayView
             } else {
-                Text("FIXME: ###, scanner unavailable")
+                formView
             }
         }
     }
@@ -78,6 +81,22 @@ private extension SendToTVQRScanView {
             Spacer()
         }
     }
+
+    var formView: some View {
+        SendToTVFormView(addressPort: $addressPort)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(Strings.Global.Nouns.ok) {
+                        guard let url = addressPort.url else {
+                            assertionFailure("Button should be disabled")
+                            return
+                        }
+                        onDetect(url.absoluteString)
+                    }
+                    .disabled(addressPort.url == nil)
+                }
+            }
+    }
 }
 
 // MARK: -
@@ -87,6 +106,7 @@ private extension SendToTVQRScanView {
         onLoad: { _ in },
         onDetect: { _ in }
     )
+    .themeNavigationStack()
 }
 
 #endif
