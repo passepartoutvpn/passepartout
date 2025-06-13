@@ -62,13 +62,13 @@ private extension SendToTVQRScanView {
 
     var overlayView: some View {
         VStack {
-            VStack(spacing: 10) {
+            VStack(spacing: 20) {
                 messageView
                 enterManuallyButton
             }
-            .padding(15.0)
+            .padding(15)
             .background(.black.opacity(0.8))
-            .cornerRadius(15.0)
+            .cornerRadius(15)
             .padding()
 
             Spacer()
@@ -86,12 +86,12 @@ private extension SendToTVQRScanView {
     }
 
     var enterManuallyButton: some View {
-        // FIXME: ###, l10n
-        Button("Enter manually") {
+        Button(Strings.Views.Profile.SendTv.Qr.Buttons.manual) {
             withAnimation {
                 usingScanner = false
             }
         }
+        .font(.headline)
     }
 
     var formView: some View {

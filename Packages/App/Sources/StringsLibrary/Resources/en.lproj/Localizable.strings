@@ -126,6 +126,7 @@
 "views.profile.send_tv.title" = "Send to %@";
 "views.profile.send_tv.form.message" = "Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.";
 "views.profile.send_tv.qr.message" = "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network";
+"views.profile.send_tv.qr.buttons.manual" = "Enter URL manually";
 "views.profile.send_tv.passcode.message" = "Enter the passcode";
 
 "views.providers.module" = "Type";

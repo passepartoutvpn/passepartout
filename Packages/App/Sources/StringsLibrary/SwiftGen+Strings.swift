@@ -946,6 +946,10 @@ public enum Strings {
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
             return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network")
           }
+          public enum Buttons {
+            /// Enter URL manually
+            public static let manual = Strings.tr("Localizable", "views.profile.send_tv.qr.buttons.manual", fallback: "Enter URL manually")
+          }
         }
       }
     }
