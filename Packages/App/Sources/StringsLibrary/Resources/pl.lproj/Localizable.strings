@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Użyj tej nazwy, aby tworzyć automatyzacje VPN w aplikacji Skróty.";
 "views.profile.send_tv.form.message" = "Dopasuj adres URL znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci.";
 "views.profile.send_tv.passcode.message" = "Wprowadź kod dostępu";
+"views.profile.send_tv.qr.buttons.manual" = "Wpisz adres URL ręcznie";
 "views.profile.send_tv.qr.message" = "Zeskanuj kod QR znaleziony w '%@ > %@' na Twoim %@, upewniając się, że jesteś w tej samej sieci";
 "views.profile.send_tv.title" = "Wyślij do %@";
 "views.providers.clear_filters" = "Wyczyść filtry";

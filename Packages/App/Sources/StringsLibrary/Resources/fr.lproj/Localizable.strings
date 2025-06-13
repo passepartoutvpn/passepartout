@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Utilisez ce nom pour créer vos automatisations VPN dans l'app Raccourcis.";
 "views.profile.send_tv.form.message" = "Faites correspondre l'URL trouvée dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau.";
 "views.profile.send_tv.passcode.message" = "Saisissez le code d'accès";
+"views.profile.send_tv.qr.buttons.manual" = "Saisir l’URL manuellement";
 "views.profile.send_tv.qr.message" = "Scannez le QR trouvé dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau";
 "views.profile.send_tv.title" = "Envoyer à %@";
 "views.providers.clear_filters" = "Effacer les filtres";

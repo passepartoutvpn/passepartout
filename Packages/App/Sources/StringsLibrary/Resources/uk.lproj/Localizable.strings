@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Використовуйте цю назву для створення автоматизацій VPN у додатку Команди.";
 "views.profile.send_tv.form.message" = "Співставте URL-адресу, знайдену в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі.";
 "views.profile.send_tv.passcode.message" = "Введіть код доступу";
+"views.profile.send_tv.qr.buttons.manual" = "Ввести URL вручну";
 "views.profile.send_tv.qr.message" = "Відскануйте QR-код, знайдений в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі";
 "views.profile.send_tv.title" = "Надіслати на %@";
 "views.providers.clear_filters" = "Очистити фільтри";

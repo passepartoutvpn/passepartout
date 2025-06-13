@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "使用此名称在快捷指令应用中创建您的 VPN 自动化。";
 "views.profile.send_tv.form.message" = "匹配在您的%@上'%@ > %@'中找到的URL，确保在同一网络中。";
 "views.profile.send_tv.passcode.message" = "输入访问码";
+"views.profile.send_tv.qr.buttons.manual" = "手动输入网址";
 "views.profile.send_tv.qr.message" = "扫描在您的%@上'%@ > %@'中找到的二维码，确保在同一网络中";
 "views.profile.send_tv.title" = "发送到%@";
 "views.providers.clear_filters" = "清除筛选";

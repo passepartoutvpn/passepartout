@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Usa este nombre para crear automatizaciones VPN en la app Atajos.";
 "views.profile.send_tv.form.message" = "Haz coincidir la URL que se encuentra en '%@ > %@' en tu %@, asegurándote de estar en la misma red.";
 "views.profile.send_tv.passcode.message" = "Introduce el código de acceso";
+"views.profile.send_tv.qr.buttons.manual" = "Introducir URL manualmente";
 "views.profile.send_tv.qr.message" = "Escanea el código QR que se encuentra en '%@ > %@' en tu %@, asegurándote de estar en la misma red";
 "views.profile.send_tv.title" = "Enviar a %@";
 "views.providers.clear_filters" = "Borrar filtros";

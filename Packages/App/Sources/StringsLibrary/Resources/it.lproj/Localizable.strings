@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Usa questo nome per creare le automazioni VPN nell'app Comandi Rapidi.";
 "views.profile.send_tv.form.message" = "Abbina l'URL trovato in '%@ > %@' sul tuo %@, assicurandoti di essere sulla stessa rete.";
 "views.profile.send_tv.passcode.message" = "Inserisci il codice di accesso";
+"views.profile.send_tv.qr.buttons.manual" = "Inserisci URL manualmente";
 "views.profile.send_tv.qr.message" = "Scansiona il QR trovato in '%@ > %@' sul tuo %@, assicurandoti di essere sulla stessa rete";
 "views.profile.send_tv.title" = "Invia a %@";
 "views.providers.clear_filters" = "Cancella filtri";

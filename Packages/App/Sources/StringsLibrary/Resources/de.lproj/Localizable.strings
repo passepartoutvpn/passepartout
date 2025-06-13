@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Verwenden Sie diesen Namen, um Ihre VPN-Automationen in der Kurzbefehle-App zu erstellen.";
 "views.profile.send_tv.form.message" = "Stimmen Sie die URL überein, die Sie unter '%@ > %@' auf Ihrem %@ finden, und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden.";
 "views.profile.send_tv.passcode.message" = "Geben Sie den Zugangscode ein";
+"views.profile.send_tv.qr.buttons.manual" = "URL manuell eingeben";
 "views.profile.send_tv.qr.message" = "Scannen Sie den QR-Code unter '%@ > %@' auf Ihrem %@ und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden";
 "views.profile.send_tv.title" = "An %@ senden";
 "views.providers.clear_filters" = "Filter löschen";

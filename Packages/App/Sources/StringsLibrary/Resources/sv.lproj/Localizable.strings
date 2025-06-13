@@ -300,6 +300,7 @@
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
 "views.profile.send_tv.form.message" = "Matcha URL:en som finns i '%@ > %@' på din %@, se till att vara på samma nätverk.";
 "views.profile.send_tv.passcode.message" = "Ange åtkomstkoden";
+"views.profile.send_tv.qr.buttons.manual" = "Ange URL manuellt";
 "views.profile.send_tv.qr.message" = "Skanna QR-koden som finns i '%@ > %@' på din %@, se till att vara på samma nätverk";
 "views.profile.send_tv.title" = "Skicka till %@";
 "views.providers.clear_filters" = "Rensa filter";
