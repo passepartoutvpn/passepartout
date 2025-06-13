@@ -60,7 +60,7 @@ private extension SendToTVFormView {
             Strings.Global.Nouns.profiles,
             Strings.Views.Tv.Profiles.importLocal,
             Strings.Unlocalized.appleTV
-        ), forcesFooter: true)
+        ))
     }
 
     var passcodeSection: some View {

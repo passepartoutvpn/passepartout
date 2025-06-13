@@ -100,7 +100,7 @@ private extension OpenVPNCredentialsGroup {
                     )
                 }
             }
-            .themeRowWithSubtitle(interactiveFooter)
+            .themeContainerEntry(subtitle: interactiveFooter)
 
             if distributionTarget.supportsPaidFeatures && draft.module.isInteractive && !isAuthenticating {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
@@ -110,7 +110,7 @@ private extension OpenVPNCredentialsGroup {
                 }
             }
         }
-        .themeSection(footer: interactiveFooter)
+        .themeContainer(footer: interactiveFooter)
     }
 
     var interactiveFooter: String? {
@@ -133,7 +133,7 @@ private extension OpenVPNCredentialsGroup {
                 otpField
             }
         }
-        .themeSection(footer: inputFooter, forcesFooter: true)
+        .themeSection(footer: inputFooter)
     }
 
     var inputFooter: String? {
