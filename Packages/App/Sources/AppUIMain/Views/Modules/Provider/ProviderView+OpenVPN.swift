@@ -79,7 +79,7 @@ private extension ProviderView.OpenVPNCredentialsView {
                     .onSubmit(saveCredentials)
             }
         }
-        .themeSection(footer: guidanceString, forcesFooter: true)
+        .themeSection(footer: guidanceString)
     }
 
     var guidanceSection: some View {

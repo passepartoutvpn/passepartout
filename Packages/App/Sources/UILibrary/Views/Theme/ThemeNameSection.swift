@@ -47,7 +47,7 @@ public struct ThemeNameSection: View {
                 .labelsHidden()
                 .themeManualInput()
         }
-        .themeSection(header: Strings.Global.Nouns.name, footer: footer, forcesFooter: true)
+        .themeSection(header: Strings.Global.Nouns.name, footer: footer)
     }
 }
 
@@ -63,7 +63,8 @@ public struct ThemeNameSection: View {
             Form {
                 ThemeNameSection(
                     name: $name,
-                    placeholder: "My name"
+                    placeholder: "My name",
+                    footer: "Some footer description."
                 )
             }
             .themeForm()
