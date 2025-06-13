@@ -43,18 +43,15 @@ struct ProfileStorageSection: View {
         debugChanges()
         return Group {
             sharingToggle
-                .themeSectionWithSingleRow(
+                .themeContainerEntry(
                     header: header,
-                    footer: sharingDescription
+                    subtitle: sharingDescription
                 )
-
-            Group {
-                tvToggle
-                    .themeRowWithSubtitle(tvDescription)
-            }
-            .themeSection(footer: tvDescription)
-            .disabled(!profileEditor.isShared)
+            tvToggle
+                .themeContainerEntry(subtitle: tvDescription)
+                .disabled(!profileEditor.isShared)
         }
+        .themeContainer(header: header)
     }
 }
 

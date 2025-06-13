@@ -90,18 +90,16 @@ private extension DNSView {
     }
 
     var routingSection: some View {
-        Group {
-            Picker(Strings.Modules.Dns.routeThroughVpn, selection: $draft.module.routesThroughVPN) {
-                Text(Strings.Global.Nouns.default)
-                    .tag(nil as Bool?)
-                Text(Strings.Global.Nouns.yes)
-                    .tag(true as Bool?)
-                Text(Strings.Global.Nouns.no)
-                    .tag(false as Bool?)
-            }
-            .themeRowWithSubtitle(Strings.Modules.Dns.RouteThroughVpn.footer)
+        Picker(Strings.Modules.Dns.routeThroughVpn, selection: $draft.module.routesThroughVPN) {
+            Text(Strings.Global.Nouns.default)
+                .tag(nil as Bool?)
+            Text(Strings.Global.Nouns.yes)
+                .tag(true as Bool?)
+            Text(Strings.Global.Nouns.no)
+                .tag(false as Bool?)
         }
-        .themeSection(footer: Strings.Modules.Dns.RouteThroughVpn.footer)
+        .themeContainerWithSingleEntry(
+            footer: Strings.Modules.Dns.RouteThroughVpn.footer)
     }
 
     var domainSection: some View {

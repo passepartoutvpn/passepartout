@@ -1,5 +1,5 @@
 //
-//  ThemeRowWithSubtitleModifier.swift
+//  ThemeContainerModifier.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/25.
@@ -25,8 +25,16 @@
 
 import SwiftUI
 
-struct ThemeRowWithSubtitleModifier<Subtitle>: ViewModifier where Subtitle: View {
+struct ThemeContainerModifier: ViewModifier {
+    let header: String?
 
-    @ViewBuilder
-    let subtitle: Subtitle
+    let footer: String?
+}
+
+struct ThemeContainerEntryModifier: ViewModifier {
+    let header: String?
+
+    let subtitle: String?
+
+    let isAction: Bool
 }

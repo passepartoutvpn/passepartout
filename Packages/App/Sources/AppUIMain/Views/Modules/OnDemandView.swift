@@ -93,7 +93,7 @@ private extension OnDemandView {
                 )
             }
         }
-        .themeSectionWithSingleRow(footer: policyFooterDescription)
+        .themeContainerWithSingleEntry(footer: policyFooterDescription)
     }
 
     var policyFooterDescription: String {
@@ -122,8 +122,7 @@ private extension OnDemandView {
         }
         .themeSection(
             header: Strings.Global.Nouns.networks,
-            footer: Strings.Modules.OnDemand.Networks.footer,
-            forcesFooter: true
+            footer: Strings.Modules.OnDemand.Networks.footer
         )
     }
 
@@ -233,17 +232,18 @@ private extension OnDemandView {
         "Two": false,
         "Three": false
     ]
-    return module.preview {
-        OnDemandView(
-            draft: $1[$0],
-            parameters: .init(
-                registry: Registry(),
-                editor: $1,
-                impl: nil
-            ),
-            observer: MockWifi()
-        )
-    }
+    return module.preview()
+//    return module.preview {
+//        OnDemandView(
+//            draft: $1[$0],
+//            parameters: .init(
+//                registry: Registry(),
+//                editor: $1,
+//                impl: nil
+//            ),
+//            observer: MockWifi()
+//        )
+//    }
 }
 
 private class MockWifi: WifiObserver {
