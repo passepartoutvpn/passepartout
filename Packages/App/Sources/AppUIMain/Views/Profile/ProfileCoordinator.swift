@@ -189,7 +189,7 @@ private extension ProfileCoordinator {
             let savedProfile = try await profileEditor.save(
                 to: profileManager,
                 buildingWith: registry,
-                verifyingWith: !iapManager.isBeta && action != nil ? iapManager : nil,
+                verifyingWith: action != nil ? iapManager : nil,
                 preferencesManager: preferencesManager
             )
             if dismissing {

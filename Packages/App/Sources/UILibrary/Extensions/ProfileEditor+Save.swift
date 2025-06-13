@@ -42,7 +42,7 @@ extension ProfileEditor {
         let profileToSave = try build(with: registry)
 
         // verify profile (optional)
-        if let iapManager {
+        if let iapManager, !iapManager.isBeta {
             do {
                 try iapManager.verify(profileToSave, extra: extraFeatures)
             } catch AppError.ineligibleProfile(let requiredFeatures) {
