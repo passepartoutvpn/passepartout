@@ -138,8 +138,12 @@ private extension ProfileStorageSection {
     var tvDescription: String {
         var desc = [Strings.Modules.General.Sections.Storage.Tv.Web.footer]
         if distributionTarget.supportsPaidFeatures && !iapManager.isBeta {
-            desc.append(Strings.Views.Paywall.Alerts.Confirmation.Message.connect(iapManager.verificationDelayMinutes))
-            desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchase)
+            if !iapManager.isEligible(for: .appleTV) {
+                desc.append(Strings.Views.Paywall.Alerts.Confirmation.Message.connect(iapManager.verificationDelayMinutes))
+                desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchase)
+            }
+        } else {
+            desc.append(Strings.Modules.General.Sections.Storage.Tv.Footer.purchaseUnsupported)
         }
         return desc.joined(separator: " ")
     }
