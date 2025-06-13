@@ -448,8 +448,6 @@ public enum Strings {
           }
           public enum Tv {
             public enum Footer {
-              /// Purchase to drop the restriction.
-              public static let purchase = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase", fallback: "Purchase to drop the restriction.")
               /// The TV may require an additional purchase.
               public static let purchaseUnsupported = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase_unsupported", fallback: "The TV may require an additional purchase.")
             }

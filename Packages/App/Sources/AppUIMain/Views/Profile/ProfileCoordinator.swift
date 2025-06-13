@@ -247,13 +247,8 @@ private extension ProfileCoordinator {
     func sendProfileToTV(verifying: Bool) {
         Task {
             do {
-                // the profile itself doesn't require the .appleTV
-                // feature locally, but it will be required by the TV
-                let additionalFeatures: Set<AppFeature>? = distributionTarget.supportsIAP ? [.appleTV] : nil
-
                 guard let profile = try await commitEditing(
                     action: verifying ? .sendToTV : nil,
-                    additionalFeatures: additionalFeatures,
                     dismissing: false
                 ) else {
                     return
