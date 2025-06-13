@@ -166,8 +166,9 @@
 "modules.general.sections.behavior.header" = "Verhalten";
 "modules.general.sections.storage.header" = "Synchronisierung";
 "modules.general.sections.storage.sharing.footer" = "Profile werden in %@ verschlüsselt gespeichert.";
-"modules.general.sections.storage.tv.footer.purchase" = "Kaufen Sie, um die Einschränkung aufzuheben.";
-"modules.general.sections.storage.tv.icloud.footer" = "iCloud ist erforderlich, um Ihre Profile mit Ihrem Apple TV zu teilen.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Der Fernseher erfordert möglicherweise einen zusätzlichen Kauf.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud ist erforderlich, um deine Profile mit dem Fernseher zu synchronisieren.";
+"modules.general.sections.storage.tv.web.footer" = "Du kannst das Profil über das Web an deinen Fernseher senden.";
 "modules.http_proxy.bypass_domains.add" = "Domain zum Umgehen hinzufügen";
 "modules.ip.address.footer" = "Leer lassen, um automatisch zuzuweisen.";
 "modules.ip.routes.add_family" = "Hinzufügen %@";
@@ -260,6 +261,7 @@
 "views.migration.sections.main.header" = "Wähle unten die Profile aus alten Versionen von %@ aus, die du importieren möchtest. Wenn deine Profile in iCloud gespeichert sind, kann es eine Weile dauern, bis sie synchronisiert sind. Wenn du sie jetzt nicht siehst, komm später zurück.";
 "views.migration.title" = "Migrieren";
 "views.paywall.alerts.actions.save" = "Trotzdem speichern";
+"views.paywall.alerts.actions.send_to_tv" = "Trotzdem senden";
 "views.paywall.alerts.confirmation.message.connect" = "Sie können die Verbindung für %d Minuten testen.";
 "views.paywall.alerts.confirmation.message" = "Dieses Profil erfordert kostenpflichtige Funktionen, um zu funktionieren.";
 "views.paywall.alerts.confirmation.title" = "Kauf erforderlich";
@@ -299,7 +301,7 @@
 "views.profile.send_tv.form.message" = "Stimmen Sie die URL überein, die Sie unter '%@ > %@' auf Ihrem %@ finden, und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden.";
 "views.profile.send_tv.passcode.message" = "Geben Sie den Zugangscode ein";
 "views.profile.send_tv.qr.message" = "Scannen Sie den QR-Code unter '%@ > %@' auf Ihrem %@ und stellen Sie sicher, dass Sie sich im selben Netzwerk befinden";
-"views.profile.send_tv.title" = "An TV senden";
+"views.profile.send_tv.title" = "An %@ senden";
 "views.providers.clear_filters" = "Filter löschen";
 "views.providers.last_updated.loading" = "Lädt...";
 "views.providers.last_updated" = "Zuletzt aktualisiert am %@";

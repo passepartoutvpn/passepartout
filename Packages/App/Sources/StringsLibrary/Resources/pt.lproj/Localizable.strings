@@ -166,8 +166,10 @@
 "modules.general.sections.behavior.header" = "Comportamento";
 "modules.general.sections.storage.header" = "Sincronização";
 "modules.general.sections.storage.sharing.footer" = "Os perfis são armazenados no %@ de forma criptografada.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "A TV pode exigir uma compra adicional.";
 "modules.general.sections.storage.tv.footer.purchase" = "Compre para remover a restrição.";
-"modules.general.sections.storage.tv.icloud.footer" = "O iCloud é necessário para compartilhar seus perfis com a Apple TV.";
+"modules.general.sections.storage.tv.icloud.footer" = "É necessário iCloud para sincronizar seus perfis com a TV.";
+"modules.general.sections.storage.tv.web.footer" = "Pode enviar o perfil para a TV pela internet.";
 "modules.http_proxy.bypass_domains.add" = "Adicionar domínio a ignorar";
 "modules.ip.address.footer" = "Deixe em branco para atribuir automaticamente.";
 "modules.ip.routes.add_family" = "Adicionar %@";
@@ -260,6 +262,7 @@
 "views.migration.sections.main.header" = "Selecione abaixo os perfis de versões antigas de %@ que você deseja importar. Caso seus perfis estejam armazenados no iCloud, pode levar um tempo para sincronizá-los. Se não os vir agora, volte mais tarde.";
 "views.migration.title" = "Migrar";
 "views.paywall.alerts.actions.save" = "Salvar assim mesmo";
+"views.paywall.alerts.actions.send_to_tv" = "Enviar assim mesmo";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";
 "views.paywall.alerts.confirmation.title" = "Compra necessária";
@@ -299,7 +302,7 @@
 "views.profile.send_tv.form.message" = "Combine o URL encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede.";
 "views.profile.send_tv.passcode.message" = "Digite o código de acesso";
 "views.profile.send_tv.qr.message" = "Escaneie o QR encontrado em '%@ > %@' no seu %@, certificando-se de estar na mesma rede";
-"views.profile.send_tv.title" = "Enviar para TV";
+"views.profile.send_tv.title" = "Enviar para %@";
 "views.providers.clear_filters" = "Limpar filtros";
 "views.providers.last_updated.loading" = "Carregando...";
 "views.providers.last_updated" = "Última atualização em %@";

@@ -166,8 +166,10 @@
 "modules.general.sections.behavior.header" = "Gedrag";
 "modules.general.sections.storage.header" = "Synchronisatie";
 "modules.general.sections.storage.sharing.footer" = "Profielen worden versleuteld opgeslagen in %@.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "De tv vereist mogelijk een extra aankoop.";
 "modules.general.sections.storage.tv.footer.purchase" = "Koop om de beperking op te heffen.";
-"modules.general.sections.storage.tv.icloud.footer" = "iCloud is vereist om je profielen met je Apple TV te delen.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud is vereist om je profielen met de tv te synchroniseren.";
+"modules.general.sections.storage.tv.web.footer" = "Je kunt het profiel via het web naar je tv sturen.";
 "modules.http_proxy.bypass_domains.add" = "Bypass-domein toevoegen";
 "modules.ip.address.footer" = "Leeg laten om automatisch toe te wijzen.";
 "modules.ip.routes.add_family" = "Voeg %@ toe";
@@ -260,6 +262,7 @@
 "views.migration.sections.main.header" = "Selecteer hieronder de profielen van oudere versies van %@ die je wilt importeren. Als je profielen zijn opgeslagen in iCloud, kan het even duren voordat ze worden gesynchroniseerd. Als je ze nu niet ziet, kom dan later terug.";
 "views.migration.title" = "Migreren";
 "views.paywall.alerts.actions.save" = "Toch opslaan";
+"views.paywall.alerts.actions.send_to_tv" = "Toch verzenden";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
@@ -299,7 +302,7 @@
 "views.profile.send_tv.form.message" = "Match de URL die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent.";
 "views.profile.send_tv.passcode.message" = "Voer de toegangscode in";
 "views.profile.send_tv.qr.message" = "Scan de QR die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent";
-"views.profile.send_tv.title" = "Naar TV verzenden";
+"views.profile.send_tv.title" = "Verstuur naar %@";
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated.loading" = "Laden...";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";

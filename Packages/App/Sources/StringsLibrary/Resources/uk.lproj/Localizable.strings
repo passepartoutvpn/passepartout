@@ -166,8 +166,10 @@
 "modules.general.sections.behavior.header" = "Поведінка";
 "modules.general.sections.storage.header" = "Синхронізація";
 "modules.general.sections.storage.sharing.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Телевізор може вимагати додаткову покупку.";
 "modules.general.sections.storage.tv.footer.purchase" = "Придбайте, щоб зняти обмеження.";
-"modules.general.sections.storage.tv.icloud.footer" = "Для спільного використання профілів з Apple TV потрібен iCloud.";
+"modules.general.sections.storage.tv.icloud.footer" = "Для синхронізації профілів із телевізором потрібен iCloud.";
+"modules.general.sections.storage.tv.web.footer" = "Ви можете надіслати профіль на телевізор через веб.";
 "modules.http_proxy.bypass_domains.add" = "Додати домен у винятки";
 "modules.ip.address.footer" = "Залиште порожнім для автоматичного призначення.";
 "modules.ip.routes.add_family" = "Додати %@";
@@ -260,6 +262,7 @@
 "views.migration.sections.main.header" = "Виберіть нижче профілі зі старих версій %@, які ви хочете імпортувати. Якщо ваші профілі зберігаються в iCloud, може знадобитися час для їх синхронізації. Якщо ви не бачите їх зараз, поверніться пізніше.";
 "views.migration.title" = "Перенесення";
 "views.paywall.alerts.actions.save" = "Зберегти все одно";
+"views.paywall.alerts.actions.send_to_tv" = "Надіслти все одно";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
@@ -299,7 +302,7 @@
 "views.profile.send_tv.form.message" = "Співставте URL-адресу, знайдену в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі.";
 "views.profile.send_tv.passcode.message" = "Введіть код доступу";
 "views.profile.send_tv.qr.message" = "Відскануйте QR-код, знайдений в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі";
-"views.profile.send_tv.title" = "Надіслати на ТБ";
+"views.profile.send_tv.title" = "Надіслати на %@";
 "views.providers.clear_filters" = "Очистити фільтри";
 "views.providers.last_updated.loading" = "Завантаження...";
 "views.providers.last_updated" = "Останнє оновлення %@";

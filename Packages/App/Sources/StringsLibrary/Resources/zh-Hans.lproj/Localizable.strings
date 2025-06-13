@@ -166,8 +166,10 @@
 "modules.general.sections.behavior.header" = "行为";
 "modules.general.sections.storage.header" = "同步";
 "modules.general.sections.storage.sharing.footer" = "配置文件加密存储于 %@。";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "电视可能需要额外购买。";
 "modules.general.sections.storage.tv.footer.purchase" = "购买以移除限制。";
-"modules.general.sections.storage.tv.icloud.footer" = "需要 iCloud 才能与 Apple TV 共享您的配置文件。";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud 是同步配置文件到电视所必需的。";
+"modules.general.sections.storage.tv.web.footer" = "你可以通过网页将配置文件发送到电视。";
 "modules.http_proxy.bypass_domains.add" = "添加绕过域名";
 "modules.ip.address.footer" = "留空以自动分配。";
 "modules.ip.routes.add_family" = "添加 %@";
@@ -260,6 +262,7 @@
 "views.migration.sections.main.header" = "选择以下来自 %@ 的旧版本配置文件进行导入。如果您的配置文件存储在 iCloud 中，可能需要一些时间进行同步。如果现在没有看到，请稍后再试。";
 "views.migration.title" = "迁移";
 "views.paywall.alerts.actions.save" = "仍然保存";
+"views.paywall.alerts.actions.send_to_tv" = "仍然发送";
 "views.paywall.alerts.confirmation.message.connect" = "您可以试用连接 %d 分钟。";
 "views.paywall.alerts.confirmation.message" = "此配置文件需要付费功能才能工作。";
 "views.paywall.alerts.confirmation.title" = "需要购买";
@@ -299,7 +302,7 @@
 "views.profile.send_tv.form.message" = "匹配在您的%@上'%@ > %@'中找到的URL，确保在同一网络中。";
 "views.profile.send_tv.passcode.message" = "输入访问码";
 "views.profile.send_tv.qr.message" = "扫描在您的%@上'%@ > %@'中找到的二维码，确保在同一网络中";
-"views.profile.send_tv.title" = "发送到电视";
+"views.profile.send_tv.title" = "发送到%@";
 "views.providers.clear_filters" = "清除筛选";
 "views.providers.last_updated.loading" = "加载中...";
 "views.providers.last_updated" = "最近更新于 %@";
