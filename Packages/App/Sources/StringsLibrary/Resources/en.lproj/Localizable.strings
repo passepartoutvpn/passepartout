@@ -159,7 +159,7 @@
 
 "views.tv.connection_profiles.header" = "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.";
 "views.tv.profiles.import_local" = "Import local profile";
-"views.tv.profiles.detail.profiles" = "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.";
+"views.tv.profiles.detail.profiles" = "Use the long press to present the available actions for a profile.";
 "views.tv.web_receiver.toggle" = "Toggle to import a local profile into your TV with a web browser.";
 "views.tv.web_receiver.qr" = "Scan the QR with your camera to open a web page where to upload your profile. Make sure that you are connected to the same network.";
 

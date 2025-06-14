@@ -98,16 +98,15 @@ private extension ProfilesView {
             HStack {
                 Text(preview.name)
                 Spacer()
-                if profileManager.isRemotelyShared(profileWithId: preview.id) {
-                    ThemeImage(.cloudOn)
-                }
+                ProfileSharingView(
+                    profileManager: profileManager,
+                    profileId: preview.id
+                )
             }
         }
         .contextMenu {
-            if !profileManager.isRemotelyShared(profileWithId: preview.id) {
-                Button(Strings.Global.Actions.delete, role: .destructive) {
-                    deleteProfile(withId: preview.id)
-                }
+            Button(Strings.Global.Actions.delete, role: .destructive) {
+                deleteProfile(withId: preview.id)
             }
         }
         .focused($detail, equals: .profiles)
