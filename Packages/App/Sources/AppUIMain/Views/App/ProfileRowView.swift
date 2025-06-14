@@ -55,7 +55,7 @@ struct ProfileRowView: View, Routable, SizeClassProviding {
         HStack {
             cardView
             Spacer()
-            attributesView
+            sharingView
             tunnelToggle
         }
         .unanimated()
@@ -74,10 +74,10 @@ private extension ProfileRowView {
         .foregroundStyle(.primary)
     }
 
-    var attributesView: some View {
-        ProfileAttributesView(
-            attributes: attributes,
-            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+    var sharingView: some View {
+        ProfileSharingView(
+            profileManager: profileManager,
+            profileId: preview.id
         )
         .imageScale(isBigDevice ? .large : .medium)
     }
@@ -99,25 +99,8 @@ private extension ProfileRowView {
         profileManager.profile(withId: preview.id)
     }
 
-    var attributes: [ProfileAttributesView.Attribute] {
-        if isTV {
-            return [.tv]
-        } else if isShared {
-            return [.shared]
-        }
-        return []
-    }
-
     var requiredFeatures: Set<AppFeature>? {
         profileManager.requiredFeatures(forProfileWithId: preview.id)
-    }
-
-    var isShared: Bool {
-        profileManager.isRemotelyShared(profileWithId: preview.id)
-    }
-
-    var isTV: Bool {
-        isShared && profileManager.isAvailableForTV(profileWithId: preview.id)
     }
 }
 
