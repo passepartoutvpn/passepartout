@@ -336,7 +336,7 @@
 "views.settings.system_extension.message" = "Voor een goede werking van de VPN moet de app in de map /Applications staan en moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
 "views.tv.connection_profiles.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen. Alternatief vind je andere opties in het tabblad \"Profielen\".";
-"views.tv.profiles.detail.profiles" = "Gebruik de lange druk om beschikbare acties voor een profiel te tonen. Lokale profielen kunnen hier worden verwijderd, terwijl iCloud-profielen alleen in de iOS- of macOS-app kunnen worden verwijderd.";
+"views.tv.profiles.detail.profiles" = "Houd lang ingedrukt om de beschikbare acties voor een profiel weer te geven.";
 "views.tv.profiles.import_local" = "Lokaal profiel importeren";
 "views.tv.web_receiver.qr" = "Scan de QR-code met je camera om een webpagina te openen waar je je profiel kunt uploaden. Zorg dat je verbonden bent met hetzelfde netwerk.";
 "views.tv.web_receiver.toggle" = "Schakel om een lokaal profiel via een webbrowser op je TV te importeren.";
