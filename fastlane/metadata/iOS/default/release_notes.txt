@@ -1,1 +1,1 @@
-* Send profile to TV without iCloud (#1427)
+* Core products may be suggested unnecessarily (#1434)

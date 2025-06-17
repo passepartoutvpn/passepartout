@@ -1,2 +1,1 @@
-* Send profile to TV without iCloud (#1427)
-* tvOS: Import profiles via QR (#1411)
+* Core products may be suggested unnecessarily (#1434)
