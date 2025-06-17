@@ -78,7 +78,7 @@ extension IAPManager {
         // prioritize eligible features from non-essential products
         let nonEssentialProducts = features.flatMap(\.nonEssentialProducts)
         suggested.formUnion(nonEssentialProducts)
-        let nonEssentialEligibleFeatures = nonEssentialProducts.flatMap(\.features)
+        let nonEssentialEligibleFeatures = Set(nonEssentialProducts.flatMap(\.features))
 
         //
         // suggest essential packages if:
@@ -88,7 +88,7 @@ extension IAPManager {
         //
         let essentialFeatures = features.filter(\.isEssential)
         if !didPurchaseEssentials(on: platform) &&
-            !nonEssentialEligibleFeatures.contains(essentialFeatures) {
+            !nonEssentialEligibleFeatures.isSuperset(of: essentialFeatures) {
             switch platform {
             case .iOS:
                 // suggest both platforms if never purchased
