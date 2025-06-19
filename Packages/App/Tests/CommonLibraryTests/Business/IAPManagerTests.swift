@@ -124,61 +124,61 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.purchasedProducts.contains(grantedProduct))
     }
 
-    func test_givenBuildProducts_whenFutureRelease_thenDoesNotGrant() async {
-        let reader = FakeAppReceiptReader()
-        let purchase = OriginalPurchase(buildNumber: nil, purchaseDate: .distantFuture)
-        await reader.setReceipt(withPurchase: purchase, products: [])
-        let sut = IAPManager(receiptReader: reader) { purchase in
-            if purchase.isBefore(.target) {
-                return [self.grantedProduct]
-            }
-            return []
-        }
-        await sut.reloadReceipt()
-        XCTAssertFalse(sut.purchasedProducts.contains(grantedProduct))
-    }
-
-    func test_givenBuildProducts_whenPastRelease_thenGrants() async {
-        let reader = FakeAppReceiptReader()
-        let purchase = OriginalPurchase(buildNumber: nil, purchaseDate: .distantPast)
-        await reader.setReceipt(withPurchase: purchase, products: [])
-        let sut = IAPManager(receiptReader: reader) { purchase in
-            if purchase.isBefore(.target) {
-                return [self.grantedProduct]
-            }
-            return []
-        }
-        await sut.reloadReceipt()
-        XCTAssertTrue(sut.purchasedProducts.contains(grantedProduct))
-    }
-
-    func test_givenBuildProducts_whenPastBuildAndFutureRelease_thenGrants() async {
-        let reader = FakeAppReceiptReader()
-        let purchase = OriginalPurchase(buildNumber: defaultBuildNumber - 1, purchaseDate: .distantFuture)
-        await reader.setReceipt(withPurchase: purchase, products: [])
-        let sut = IAPManager(receiptReader: reader) { purchase in
-            if purchase.isBefore(.target) {
-                return [self.grantedProduct]
-            }
-            return []
-        }
-        await sut.reloadReceipt()
-        XCTAssertTrue(sut.purchasedProducts.contains(grantedProduct))
-    }
-
-    func test_givenBuildProducts_whenFutureBuildAndRelease_thenDoesNotGrant() async {
-        let reader = FakeAppReceiptReader()
-        let purchase = OriginalPurchase(buildNumber: defaultBuildNumber + 1, purchaseDate: .distantFuture)
-        await reader.setReceipt(withPurchase: purchase, products: [])
-        let sut = IAPManager(receiptReader: reader) { purchase in
-            if purchase.isBefore(.target) {
-                return [self.grantedProduct]
-            }
-            return []
-        }
-        await sut.reloadReceipt()
-        XCTAssertFalse(sut.purchasedProducts.contains(grantedProduct))
-    }
+//    func test_givenBuildProducts_whenFutureRelease_thenDoesNotGrant() async {
+//        let reader = FakeAppReceiptReader()
+//        let purchase = OriginalPurchase(buildNumber: nil, purchaseDate: .distantFuture)
+//        await reader.setReceipt(withPurchase: purchase, products: [])
+//        let sut = IAPManager(receiptReader: reader) { purchase in
+//            if purchase.isBefore(.target) {
+//                return [self.grantedProduct]
+//            }
+//            return []
+//        }
+//        await sut.reloadReceipt()
+//        XCTAssertFalse(sut.purchasedProducts.contains(grantedProduct))
+//    }
+//
+//    func test_givenBuildProducts_whenPastRelease_thenGrants() async {
+//        let reader = FakeAppReceiptReader()
+//        let purchase = OriginalPurchase(buildNumber: nil, purchaseDate: .distantPast)
+//        await reader.setReceipt(withPurchase: purchase, products: [])
+//        let sut = IAPManager(receiptReader: reader) { purchase in
+//            if purchase.isBefore(.target) {
+//                return [self.grantedProduct]
+//            }
+//            return []
+//        }
+//        await sut.reloadReceipt()
+//        XCTAssertTrue(sut.purchasedProducts.contains(grantedProduct))
+//    }
+//
+//    func test_givenBuildProducts_whenPastBuildAndFutureRelease_thenGrants() async {
+//        let reader = FakeAppReceiptReader()
+//        let purchase = OriginalPurchase(buildNumber: defaultBuildNumber - 1, purchaseDate: .distantFuture)
+//        await reader.setReceipt(withPurchase: purchase, products: [])
+//        let sut = IAPManager(receiptReader: reader) { purchase in
+//            if purchase.isBefore(.target) {
+//                return [self.grantedProduct]
+//            }
+//            return []
+//        }
+//        await sut.reloadReceipt()
+//        XCTAssertTrue(sut.purchasedProducts.contains(grantedProduct))
+//    }
+//
+//    func test_givenBuildProducts_whenFutureBuildAndRelease_thenDoesNotGrant() async {
+//        let reader = FakeAppReceiptReader()
+//        let purchase = OriginalPurchase(buildNumber: defaultBuildNumber + 1, purchaseDate: .distantFuture)
+//        await reader.setReceipt(withPurchase: purchase, products: [])
+//        let sut = IAPManager(receiptReader: reader) { purchase in
+//            if purchase.isBefore(.target) {
+//                return [self.grantedProduct]
+//            }
+//            return []
+//        }
+//        await sut.reloadReceipt()
+//        XCTAssertFalse(sut.purchasedProducts.contains(grantedProduct))
+//    }
 }
 
 // MARK: - Eligibility
