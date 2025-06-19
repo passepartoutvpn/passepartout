@@ -103,7 +103,7 @@ private extension PaywallCoordinator {
 
 private extension PaywallCoordinator {
     var didPurchaseRequired: Bool {
-        iapManager.didPurchaseComplete || iapManager.didPurchase(model.individualPurchasable)
+        iapManager.isEligible(for: requiredFeatures)
     }
 
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
