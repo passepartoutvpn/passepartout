@@ -1,1 +1,1 @@
-* Core products may be suggested unnecessarily (#1434)
+* Revert "Send to TV" and TV QR
