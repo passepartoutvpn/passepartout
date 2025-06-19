@@ -46,7 +46,8 @@ struct ProfileStorageSection: View {
         if showsSharing {
             sharingSection
         }
-        tvSection
+        // FIXME: #1411, restore "Send to Apple TV"
+//        tvSection
     }
 }
 

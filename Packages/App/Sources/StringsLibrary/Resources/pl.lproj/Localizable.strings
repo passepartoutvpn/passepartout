@@ -335,8 +335,8 @@
 "views.settings.system_extension.buttons.open" = "Otwórz preferencje";
 "views.settings.system_extension.message" = "Aby VPN działało, aplikacja musi znajdować się w katalogu /Applications, a %@ musi być włączone jako %@.\n\nOtwórz Preferencje systemowe macOS, przewiń do „%@”, otwórz je i włącz %@.";
 "views.settings.title" = "O aplikacji";
-"views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj. Alternatywnie znajdziesz inne opcje na karcie „Profile”.";
 "views.tv.profiles.detail.profiles" = "Przytrzymaj, aby wyświetlić dostępne akcje dla profilu.";
+"views.tv.connection_profiles.header" = "Otwórz %@ na swoim urządzeniu z iOS lub macOS i włącz przełącznik \"%@\" w profilu, aby pojawił się tutaj.";
 "views.tv.profiles.import_local" = "Importuj lokalny profil";
 "views.tv.web_receiver.qr" = "Zeskanuj kod QR aparatem, aby otworzyć stronę internetową, na której możesz przesłać swój profil. Upewnij się, że jesteś połączony z tą samą siecią.";
 "views.tv.web_receiver.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";

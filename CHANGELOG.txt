@@ -1,1 +1,0 @@
-* Core products may be suggested unnecessarily (#1434)
