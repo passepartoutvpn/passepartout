@@ -45,6 +45,6 @@ public struct AppRelease: Sendable {
 
 extension OriginalPurchase {
     public func isBefore(_ release: AppRelease) -> Bool {
-        purchaseDate <= release.date || (buildNumber ?? .max) <= release.build
+        (buildNumber ?? .max) <= release.build
     }
 }
