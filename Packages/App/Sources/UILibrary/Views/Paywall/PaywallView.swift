@@ -131,8 +131,7 @@ private extension PaywallView {
                 }
                 .themeSection(
                     header: Strings.Views.Paywall.Sections.Products.header,
-                    footer: Strings.Views.Paywall.Sections.Products.footer,
-                    forcesFooter: true
+                    footer: Strings.Views.Paywall.Sections.Products.footer
                 )
             }
     }
@@ -169,8 +168,7 @@ private extension PaywallView {
                     footer: [
                         Strings.Views.Paywall.Sections.FullProducts.footer,
                         Strings.Views.Paywall.Sections.Products.footer
-                    ].joined(separator: " "),
-                    forcesFooter: true
+                    ].joined(separator: " ")
                 )
             }
     }
@@ -189,10 +187,10 @@ private extension PaywallView {
 
     var restoreView: some View {
         RestorePurchasesButton(errorHandler: errorHandler)
-            .themeSectionWithSingleRow(
+            .themeContainerWithSingleEntry(
                 header: Strings.Views.Paywall.Sections.Restore.header,
                 footer: Strings.Views.Paywall.Sections.Restore.footer,
-                above: true
+                isAction: true
             )
     }
 
