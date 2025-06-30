@@ -11,8 +11,8 @@ if ! grep -q "^${env_line_new}$" "$manifest"; then
     exit 1
 fi
 
-sha1_line_pattern="let sha1 = .*"
-sha1_line_new="let sha1 = \"${sha1}\""
+sha1_line_pattern="let coreSHA1 = .*"
+sha1_line_new="let coreSHA1 = \"${sha1}\""
 sed -i '' "s/^${sha1_line_pattern}$/${sha1_line_new}/" "$manifest"
 if ! grep -q "^${sha1_line_new}$" "$manifest"; then
     echo "Unable to set SHA-1"
