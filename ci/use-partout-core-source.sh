@@ -3,8 +3,8 @@ manifest="submodules/partout/Package.swift"
 core_status=`git submodule status submodules/partout-core`
 sha1=${core_status:1:40}
 
-env_line_old="environment = .remoteBinary"
-env_line_new="environment = .remoteSource"
+env_line_old="let environment: Environment = .remoteBinary"
+env_line_new="let environment: Environment = .remoteSource"
 sed -i '' "s/^${env_line_old}$/${env_line_new}/" "$manifest"
 if ! grep -q "^${env_line_new}$" "$manifest"; then
     echo "Unable to set environment"
