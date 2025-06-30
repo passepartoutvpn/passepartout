@@ -3,6 +3,9 @@ name: SwiftPM Tests
 on:
   pull_request:
     types: [ opened, synchronize ]
+    branches:
+      - "master"
+      - "hotfix/*"
     paths-ignore:
       - "README.md"
       - ".env.*"

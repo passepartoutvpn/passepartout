@@ -93,7 +93,7 @@ extension OpenVPN.CompressionAlgorithm: LocalizableEntity {
     }
 }
 
-extension OpenVPN.XORMethod: StyledLocalizableEntity {
+extension OpenVPN.ObfuscationMethod: StyledLocalizableEntity {
     public enum Style {
         case short
 
