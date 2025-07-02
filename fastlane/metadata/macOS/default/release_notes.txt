@@ -1,2 +1,1 @@
-* Update Partout with new OpenSSL/WireGuard versions (#1449)
-* OpenVPN: Improve poor XOR performance by 30x
+* Update Partout to drop wireguard-apple dependency (#1451)
