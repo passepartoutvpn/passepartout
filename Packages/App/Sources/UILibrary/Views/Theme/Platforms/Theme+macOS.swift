@@ -58,15 +58,13 @@ extension ThemeManualInputModifier {
     }
 }
 
-extension ThemeSectionWithHeaderFooterModifier {
+extension ThemeContainerModifier {
     func body(content: Content) -> some View {
         Section {
             content
-            if forcesFooter {
-                footer.map {
-                    Text($0)
-                        .themeSubtitle()
-                }
+            footer.map {
+                Text($0)
+                    .themeSubtitle()
             }
         } header: {
             header.map(Text.init)
@@ -74,15 +72,25 @@ extension ThemeSectionWithHeaderFooterModifier {
     }
 }
 
-extension ThemeRowWithSubtitleModifier {
+extension ThemeContainerEntryModifier {
     func body(content: Content) -> some View {
         VStack {
-            content
+            if !isAction {
+                content
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            subtitle.map {
+                Text($0)
+                    .themeSubtitle()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            if isAction {
+                HStack {
+                    Spacer()
+                    content
+                }
                 .frame(maxWidth: .infinity, alignment: .leading)
-
-            subtitle
-                .themeSubtitle()
-                .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
     }
 }

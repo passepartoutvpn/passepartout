@@ -141,10 +141,10 @@ private extension PurchasedView {
 
     var restoreSection: some View {
         RestorePurchasesButton(errorHandler: errorHandler)
-            .themeSectionWithSingleRow(
+            .themeContainerWithSingleEntry(
                 header: Strings.Views.Paywall.Sections.Restore.header,
                 footer: Strings.Views.Paywall.Sections.Restore.footer,
-                above: true
+                isAction: true
             )
     }
 }
