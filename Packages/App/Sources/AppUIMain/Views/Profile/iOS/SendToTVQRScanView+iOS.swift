@@ -29,57 +29,19 @@ import CommonUtils
 import SwiftUI
 
 struct SendToTVQRScanView: View {
-    let onLoad: (Error?) -> Void
+    let onDetect: (String) -> Void
 
-    let onDetect: (URL) -> Void
-
-    @State
-    private var usingScanner = true
-
-    @State
-    private var addressPort: HTTPAddressPort = .forWebReceiver
+    let onError: (Error) -> Void
 
     var body: some View {
         ZStack {
             videoView
-            if usingScanner {
-                overlayView
-            } else {
-                formView
-            }
+            overlayView
         }
     }
 }
 
 private extension SendToTVQRScanView {
-    var videoView: some View {
-        QRScanView(
-            isAvailable: $usingScanner,
-            onLoad: onLoad,
-            onDetect: {
-                guard let url = URL(string: $0) else {
-                    return
-                }
-                onDetect(url)
-            }
-        )
-    }
-
-    var overlayView: some View {
-        VStack {
-            VStack(spacing: 20) {
-                messageView
-                enterManuallyButton
-            }
-            .padding(15)
-            .background(.black.opacity(0.8))
-            .cornerRadius(15)
-            .padding()
-
-            Spacer()
-        }
-    }
-
     var messageView: some View {
         Text(Strings.Views.Profile.SendTv.Qr.message(
             Strings.Global.Nouns.profiles,
@@ -90,29 +52,23 @@ private extension SendToTVQRScanView {
         .foregroundStyle(.white)
     }
 
-    var enterManuallyButton: some View {
-        Button(Strings.Views.Profile.SendTv.Qr.Buttons.manual) {
-            withAnimation {
-                usingScanner = false
-            }
-        }
-        .font(.headline)
+    var videoView: some View {
+        QRScanView(
+            onDetect: onDetect,
+            onError: onError
+        )
     }
 
-    var formView: some View {
-        SendToTVFormView(addressPort: $addressPort)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(Strings.Global.Nouns.ok) {
-                        guard let url = addressPort.url else {
-                            assertionFailure("Button should be disabled")
-                            return
-                        }
-                        onDetect(url)
-                    }
-                    .disabled(addressPort.url == nil)
-                }
-            }
+    var overlayView: some View {
+        VStack {
+            messageView
+                .padding(15.0)
+                .background(.black)
+                .cornerRadius(15.0)
+                .padding()
+
+            Spacer()
+        }
     }
 }
 
@@ -120,10 +76,9 @@ private extension SendToTVQRScanView {
 
 #Preview {
     SendToTVQRScanView(
-        onLoad: { _ in },
-        onDetect: { _ in }
+        onDetect: { _ in },
+        onError: { _ in }
     )
-    .themeNavigationStack()
 }
 
 #endif

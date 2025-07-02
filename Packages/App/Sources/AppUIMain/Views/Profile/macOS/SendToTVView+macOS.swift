@@ -37,7 +37,10 @@ struct SendToTVView: View {
     let onComplete: (URL, String) async throws -> Void
 
     @State
-    private var addressPort: HTTPAddressPort = .forWebReceiver
+    private var address = ""
+
+    @State
+    private var port = String(Constants.shared.webReceiver.port)
 
     @State
     private var passcode = ""
@@ -62,7 +65,7 @@ struct SendToTVView: View {
 
 private extension SendToTVView {
     var formView: some View {
-        SendToTVFormView(addressPort: $addressPort, passcode: $passcode)
+        SendToTVFormView(address: $address, port: $port, passcode: $passcode)
     }
 
     func cancelButton() -> some View {
@@ -78,12 +81,19 @@ private extension SendToTVView {
 }
 
 private extension SendToTVView {
+    var url: URL? {
+        guard let port = Int(port) else {
+            return nil
+        }
+        return URL(httpAddress: address, port: port)
+    }
+
     var canSend: Bool {
-        addressPort.url != nil
+        url != nil
     }
 
     func performSend() {
-        guard let url = addressPort.url else {
+        guard let url else {
             return
         }
         Task {

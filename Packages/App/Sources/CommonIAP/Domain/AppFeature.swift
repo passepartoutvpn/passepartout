@@ -44,7 +44,7 @@ public enum AppFeature: String, CaseIterable {
 }
 
 extension AppFeature {
-    public static let essentialFeatures: Set<AppFeature> = [
+    public static let essentialFeatures: [AppFeature] = [
         .dns,
         .httpProxy,
         .onDemand,
@@ -53,10 +53,6 @@ extension AppFeature {
         .routing,
         .sharing
     ]
-
-    public var isEssential: Bool {
-        Self.essentialFeatures.contains(self)
-    }
 }
 
 extension AppFeature: Identifiable {

@@ -44,102 +44,12 @@ struct CustomProductView: View {
     let onError: (Error) -> Void
 
     var body: some View {
-        contentView
-            .disabled(isPurchasing)
-    }
-}
-
-private extension CustomProductView {
-    var contentView: some View {
-#if os(tvOS)
-        Button(action: purchase) {
-            VStack(alignment: .leading) {
-                Text(verbatim: product.localizedTitle)
-                    .themeTrailingValue(product.localizedPrice)
-                    .font(withDescription ? .headline : .footnote)
-
-                if withDescription {
-                    Text(verbatim: product.localizedDescription)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-#else
         HStack {
-            VStack(alignment: .leading) {
-                Text(verbatim: product.localizedTitle)
-                    .font(isPrimary ? .title2 : withFooter ? .headline : nil)
-                    .fontWeight(isPrimary ? .bold : nil)
-
-                if withDescription {
-                    Text(verbatim: product.localizedDescription)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-            }
+            Text(verbatim: product.localizedTitle)
             Spacer()
             Button(action: purchase) {
-                Text(product.localizedPrice)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 5)
-                    .background(.quinary)
-                    .clipShape(.capsule)
-                    .foregroundStyle(Color.accentColor)
-                    .opacity(!isPurchasing ? 1.0 : 0.3)
-                    .cursor(.hand)
+                Text(verbatim: product.localizedPrice)
             }
-            .buttonStyle(.borderless)
-        }
-        .padding(withPadding ? 10 : .zero)
-#endif
-    }
-}
-
-private extension CustomProductView {
-    var isPurchasing: Bool {
-        purchasingIdentifier != nil
-    }
-
-    var isPrimary: Bool {
-        switch style {
-        case .donation:
-            false
-        case .paywall(let primary):
-            primary
-        }
-    }
-
-    var withDescription: Bool {
-        switch style {
-        case .donation:
-            false
-        case .paywall(let primary):
-            primary
-        }
-    }
-
-    var withFooter: Bool {
-        switch style {
-        case .donation:
-            false
-        case .paywall(let primary):
-#if os(tvOS)
-            primary
-#else
-            true // disclosing features
-#endif
-        }
-    }
-
-    var withPadding: Bool {
-        switch style {
-        case .donation:
-            true
-        case .paywall:
-            false
         }
     }
 }
@@ -158,18 +68,5 @@ private extension CustomProductView {
                 onError(error)
             }
         }
-    }
-}
-
-#Preview {
-    List {
-        CustomProductView(
-            style: .paywall(primary: true),
-            iapManager: .forPreviews,
-            product: AppProduct.Complete.OneTime.lifetime.asFakeIAP,
-            purchasingIdentifier: .constant(nil),
-            onComplete: { _, _ in },
-            onError: { _ in }
-        )
     }
 }

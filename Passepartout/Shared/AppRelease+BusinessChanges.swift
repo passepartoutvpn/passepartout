@@ -27,7 +27,7 @@ import CommonLibrary
 import Foundation
 
 extension AppRelease {
-    static let freemium = AppRelease("freemium", build: 2016, on: "2019-09-05")
+    static let freemium = AppRelease("freemium", on: "2019-09-05")
 
-    static let v2 = AppRelease("v2", build: 3340, on: "2022-10-02")
+    static let v2 = AppRelease("v2", on: "2022-10-02")
 }

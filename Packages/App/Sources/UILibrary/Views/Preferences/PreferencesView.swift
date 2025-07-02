@@ -109,34 +109,34 @@ private extension PreferencesView {
 #if os(iOS)
     var lockInBackgroundSection: some View {
         Toggle(Strings.Views.Preferences.locksInBackground, isOn: $locksInBackground)
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.LocksInBackground.footer)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.LocksInBackground.footer)
     }
 
 #elseif os(macOS)
     var launchesOnLoginSection: some View {
         Toggle(Strings.Views.Preferences.launchesOnLogin, isOn: $settings.launchesOnLogin)
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.LaunchesOnLogin.footer)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.LaunchesOnLogin.footer)
     }
 
     var keepsInMenuSection: some View {
         Toggle(Strings.Views.Preferences.keepsInMenu, isOn: $settings.keepsInMenu)
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.KeepsInMenu.footer)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.KeepsInMenu.footer)
     }
 #endif
 
     var pinActiveProfileSection: some View {
         PinActiveProfileToggle()
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.PinsActiveProfile.footer)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.PinsActiveProfile.footer)
     }
 
     var dnsFallsBackSection: some View {
         Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $dnsFallsBack)
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.DnsFallsBack.footer)
+            .themeSectionWithSingleRow(footer: Strings.Views.Preferences.DnsFallsBack.footer)
     }
 
     var enablesPurchasesSection: some View {
         Toggle(Strings.Views.Preferences.enablesIap, isOn: $iapManager.isEnabled)
-            .themeContainerEntry(subtitle: Strings.Views.Preferences.EnablesIap.footer)
+            .themeRowWithSubtitle(Strings.Views.Preferences.EnablesIap.footer)
     }
 
     var eraseCloudKitSection: some View {
@@ -159,10 +159,10 @@ private extension PreferencesView {
                 isErasingiCloud = false
             }
         }
-        .themeContainerWithSingleEntry(
+        .themeSectionWithSingleRow(
             header: Strings.Unlocalized.iCloud,
             footer: Strings.Views.Preferences.EraseIcloud.footer,
-            isAction: true
+            above: true
         )
         .disabled(isErasingiCloud)
     }

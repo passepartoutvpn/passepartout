@@ -26,10 +26,6 @@
 import SwiftUI
 
 extension View {
-    public var isPreview: Bool {
-        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-
     public func debugChanges(condition: Bool = false) {
         if condition {
             Self._printChanges()

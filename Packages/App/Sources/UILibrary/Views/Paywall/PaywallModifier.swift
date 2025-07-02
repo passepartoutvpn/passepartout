@@ -34,7 +34,9 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let onAction: ((Action, Profile?) -> Void)?
+    private let otherTitle: String?
+
+    private let onOtherAction: ((Profile?) -> Void)?
 
     private let onCancel: (() -> Void)?
 
@@ -46,11 +48,13 @@ public struct PaywallModifier: ViewModifier {
 
     public init(
         reason: Binding<PaywallReason?>,
-        onAction: ((Action, Profile?) -> Void)? = nil,
+        otherTitle: String? = nil,
+        onOtherAction: ((Profile?) -> Void)? = nil,
         onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
-        self.onAction = onAction
+        self.otherTitle = otherTitle
+        self.onOtherAction = onOtherAction
         self.onCancel = onCancel
     }
 
@@ -108,38 +112,27 @@ private extension PaywallModifier {
 // MARK: - Confirmation alert
 
 private extension PaywallModifier {
-    func title(forAction action: Action) -> String {
-        switch action {
-        case .connect:
-            return Strings.Global.Actions.connect
-        case .purchase:
-            return Strings.Global.Actions.purchase
-        case .save:
-            return Strings.Views.Paywall.Alerts.Actions.save
-        case .sendToTV:
-            return Strings.Views.Paywall.Alerts.Actions.sendToTv
-        }
-    }
 
+    @ViewBuilder
     func confirmationActions() -> some View {
-        reason.map { reason in
-            Group {
-                if let onAction {
-                    Button(title(forAction: reason.action), role: .cancel) {
-                        onAction(reason.action, reason.profile)
-                    }
-                }
-                if !iapManager.isBeta {
-                    Button(Strings.Global.Actions.purchase) {
-                        isPurchasing = true
-                    }
-                }
+#if !os(tvOS)
+        if !iapManager.isBeta, let otherTitle, let onOtherAction {
+            Button(otherTitle) {
+                onOtherAction(reason?.profile)
             }
+        }
+#endif
+        Button(Strings.Global.Nouns.ok, role: .cancel) {
+            reason = nil
+            onCancel?()
         }
     }
 
     var confirmationTitle: String {
-        Strings.Views.Paywall.Alerts.Confirmation.title
+        guard !iapManager.isBeta else {
+            return Strings.Views.Paywall.Alerts.Restricted.title
+        }
+        return Strings.Views.Paywall.Alerts.Confirmation.title
     }
 
     func confirmationMessage() -> some View {
@@ -152,8 +145,36 @@ private extension PaywallModifier {
         switch reason?.action {
         case .connect:
             messages.append(V.Message.connect(limitedMinutes))
+        case .save:
+            messages.append(V.Message.save)
         default:
             break
+        }
+        return alertMessage(
+            startingWith: messages.joined(separator: " "),
+            features: ineligibleFeatures
+        )
+    }
+}
+
+// MARK: - Restricted alert
+
+private extension PaywallModifier {
+    func restrictedActions() -> some View {
+        Button(Strings.Global.Nouns.ok) {
+            onCancel?()
+        }
+    }
+
+    func restrictedMessage() -> some View {
+        Text(restrictedMessageString)
+    }
+
+    var restrictedMessageString: String {
+        let V = Strings.Views.Paywall.Alerts.self
+        var messages = [V.Restricted.message]
+        if reason?.action == .connect {
+            messages.append(V.Confirmation.Message.connect(limitedMinutes))
         }
         return alertMessage(
             startingWith: messages.joined(separator: " "),
@@ -166,12 +187,18 @@ private extension PaywallModifier {
 
 private extension PaywallModifier {
     func modalDestination() -> some View {
+#if !os(tvOS)
         reason.map {
-            PaywallCoordinator(
+            PaywallView(
                 isPresented: $isPurchasing,
-                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures)
+                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures),
+                suggestedProducts: $0.suggestedProducts
             )
+            .themeNavigationStack()
         }
+#else
+        fatalError("tvOS: Paywall unsupported")
+#endif
     }
 }
 

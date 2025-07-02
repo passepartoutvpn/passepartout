@@ -1,5 +1,5 @@
 //
-//  ProfileSharingView.swift
+//  ProfileAttributesView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/10/24.
@@ -23,28 +23,21 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import SwiftUI
 
-public struct ProfileSharingView: View {
-    private let flags: [ProfileSharingFlag]
+struct ProfileAttributesView: View {
+    enum Attribute {
+        case shared
 
-    private let isRemoteImportingEnabled: Bool
-
-    public init(flags: [ProfileSharingFlag], isRemoteImportingEnabled: Bool) {
-        self.flags = flags
-        self.isRemoteImportingEnabled = isRemoteImportingEnabled
+        case tv
     }
 
-    public init(profileManager: ProfileManager, profileId: Profile.ID) {
-        self.init(
-            flags: profileManager.sharingFlags(for: profileId),
-            isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
-        )
-    }
+    let attributes: [Attribute]
 
-    public var body: some View {
-        if !flags.isEmpty {
+    let isRemoteImportingEnabled: Bool
+
+    var body: some View {
+        if !attributes.isEmpty {
             ZStack(alignment: .centerFirstTextBaseline) {
                 Group {
                     ThemeImage(.cloudOn)
@@ -64,11 +57,9 @@ public struct ProfileSharingView: View {
             .foregroundStyle(.secondary)
         }
     }
-}
 
-private extension ProfileSharingView {
     var imageModels: [(name: Theme.ImageName, help: String)] {
-        flags.map {
+        attributes.map {
             switch $0 {
             case .shared:
                 return (
@@ -96,8 +87,8 @@ private extension ProfileSharingView {
             .autoconnect()
 
         var body: some View {
-            ProfileSharingView(
-                flags: [.shared, .tv],
+            ProfileAttributesView(
+                attributes: [.shared, .tv],
                 isRemoteImportingEnabled: isRemoteImportingEnabled
             )
             .onReceive(timer) { _ in
@@ -117,7 +108,7 @@ private extension ProfileSharingView {
         .withMockEnvironment()
 }
 
-private struct IconsPreview: View {
+struct IconsPreview: View {
     var body: some View {
         Form {
             HStack(alignment: .firstTextBaseline) {

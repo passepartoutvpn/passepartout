@@ -37,6 +37,9 @@ struct ConnectionView: View, Routable {
         case profile(Profile.ID)
     }
 
+    @EnvironmentObject
+    private var theme: Theme
+
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -76,7 +79,7 @@ struct ConnectionView: View, Routable {
             }
         }
         .ignoresSafeArea(edges: .horizontal)
-        .themeGradient()
+        .background(theme.primaryGradient)
         .themeAnimation(on: showsSidePanel, category: .profiles)
         .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.activeProfile, onTunnelActiveProfile)

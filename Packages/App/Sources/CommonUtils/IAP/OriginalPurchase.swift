@@ -26,11 +26,11 @@
 import Foundation
 
 public struct OriginalPurchase: Sendable {
-    public let buildNumber: Int?
+    public let buildNumber: Int
 
     public let purchaseDate: Date
 
-    public init(buildNumber: Int?, purchaseDate: Date = .distantFuture) {
+    public init(buildNumber: Int, purchaseDate: Date = .distantFuture) {
         self.buildNumber = buildNumber
         self.purchaseDate = purchaseDate
     }

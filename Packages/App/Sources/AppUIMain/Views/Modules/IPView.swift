@@ -94,12 +94,15 @@ private extension IPView {
 
     @ViewBuilder
     func ipSections(for ip: Binding<IPSettings>, family: Address.Family) -> some View {
-        ThemeTextField(
-            Strings.Global.Nouns.address,
-            text: $subnets[family] ?? "",
-            placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
-        )
-        .themeContainerWithSingleEntry(
+        Group {
+            ThemeTextField(
+                Strings.Global.Nouns.address,
+                text: $subnets[family] ?? "",
+                placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
+            )
+            .themeRowWithSubtitle(Strings.Modules.Ip.Address.footer)
+        }
+        .themeSection(
             header: family.localizedDescription,
             footer: Strings.Modules.Ip.Address.footer
         )

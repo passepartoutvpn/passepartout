@@ -106,10 +106,8 @@ private extension PurchasedView {
     var downloadSection: some View {
         iapManager.originalPurchase.map { purchase in
             Group {
-                purchase.buildNumber.map {
-                    ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: $0.description)
-                        .scrollableOnTV()
-                }
+                ThemeRow(Strings.Views.Purchased.Rows.buildNumber, value: purchase.buildNumber.description)
+                    .scrollableOnTV()
                 ThemeRow(Strings.Global.Nouns.date, value: purchase.purchaseDate.description)
                     .scrollableOnTV()
             }
@@ -143,10 +141,10 @@ private extension PurchasedView {
 
     var restoreSection: some View {
         RestorePurchasesButton(errorHandler: errorHandler)
-            .themeContainerWithSingleEntry(
+            .themeSectionWithSingleRow(
                 header: Strings.Views.Paywall.Sections.Restore.header,
                 footer: Strings.Views.Paywall.Sections.Restore.footer,
-                isAction: true
+                above: true
             )
     }
 }

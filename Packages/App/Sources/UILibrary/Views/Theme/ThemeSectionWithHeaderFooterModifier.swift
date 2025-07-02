@@ -1,8 +1,8 @@
 //
-//  AppFeature+Suggestions.swift
+//  ThemeSectionWithHeaderFooterModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/11/25.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonIAP
-import Foundation
+import SwiftUI
 
-extension AppFeature {
+struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
+    let header: String?
 
-    // some non-essential features can only be purchased individually
-    // here we suggest the products entitling for such features
-    public var nonEssentialProducts: Set<AppProduct> {
-        switch self {
-        case .appleTV:
-            return [.Features.appleTV]
-        default:
-            assert(isEssential, "Non-essential feature \(rawValue) must suggest a purchasable product")
-            return []
-        }
-    }
+    let footer: String?
+
+    let forcesFooter: Bool
 }

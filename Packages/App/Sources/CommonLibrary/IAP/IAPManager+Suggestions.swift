@@ -28,134 +28,94 @@ import CommonUtils
 import Foundation
 
 extension IAPManager {
-    public enum Platform {
-        case iOS
+    public enum SuggestionFilter {
+        case excludingComplete
 
-        case macOS
+        case includingComplete
 
-        case tvOS
+        case onlyComplete
     }
 
-    public enum SuggestionInclusion {
-        case complete
-
-        case singlePlatformEssentials
-    }
-
-    public func suggestedProducts(
-        for features: Set<AppFeature>,
-        including: Set<SuggestionInclusion> = [.complete, .singlePlatformEssentials]
-    ) -> Set<AppProduct> {
+    public func suggestedProducts(filter: SuggestionFilter = .includingComplete) -> Set<AppProduct> {
 #if os(iOS)
-        suggestedProducts(for: features, on: .iOS, including: including)
+        suggestedProducts(for: .iOS, filter: filter)
 #elseif os(macOS)
-        suggestedProducts(for: features, on: .macOS, including: including)
+        suggestedProducts(for: .macOS, filter: filter)
 #elseif os(tvOS)
-        suggestedProducts(for: features, on: .tvOS, including: including)
+        fatalError("tvOS: Do not suggest products, paywall unsupported")
 #endif
     }
 }
 
 // for testing
 extension IAPManager {
+    enum Platform {
+        case iOS
 
-    // suggest the minimum set of products for the given required features
+        case macOS
+    }
+
     func suggestedProducts(
-        for features: Set<AppFeature>,
-        on platform: Platform,
-        including: Set<SuggestionInclusion>,
+        for platform: Platform,
+        filter: SuggestionFilter,
         asserting: Bool = false
     ) -> Set<AppProduct> {
+        guard !purchasedProducts.contains(.Essentials.iOS_macOS) else {
+            if asserting {
+                assertionFailure("Suggesting 'Essentials' to former all platforms purchaser?")
+            }
+            return []
+        }
         guard !purchasedProducts.contains(where: \.isComplete) else {
             if asserting {
-                assertionFailure("Suggesting products to complete version purchaser?")
+                assertionFailure("Suggesting 'Essentials' to complete version purchaser?")
             }
             return []
         }
 
         var suggested: Set<AppProduct> = []
 
-        // prioritize eligible features from non-essential products
-        let nonEssentialProducts = features.flatMap(\.nonEssentialProducts)
-        suggested.formUnion(nonEssentialProducts)
-        let nonEssentialEligibleFeatures = Set(nonEssentialProducts.flatMap(\.features))
-
-        //
-        // suggest essential packages if:
-        //
-        // - never purchased any
-        // - non-essential eligible features don't include required essential features
-        //
-        let essentialFeatures = features.filter(\.isEssential)
-        if !didPurchaseEssentials(on: platform) &&
-            !nonEssentialEligibleFeatures.isSuperset(of: essentialFeatures) {
+        if filter != .onlyComplete {
             switch platform {
             case .iOS:
-                // suggest both platforms if never purchased
+                guard !purchasedProducts.contains(.Essentials.iOS) else {
+                    if asserting {
+                        assertionFailure("Suggesting 'Essentials iOS' to former iOS purchaser?")
+                    }
+                    return []
+                }
                 if !purchasedProducts.contains(.Essentials.macOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                // suggest iOS to former macOS purchasers
-                let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.macOS)
-                if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.iOS) {
-                    suggested.insert(.Essentials.iOS)
-                }
+                suggested.insert(.Essentials.iOS)
             case .macOS:
-                // suggest both platforms if never purchased
+                guard !purchasedProducts.contains(.Essentials.macOS) else {
+                    if asserting {
+                        assertionFailure("Suggesting 'Essentials macOS' to former macOS purchaser?")
+                    }
+                    return []
+                }
                 if !purchasedProducts.contains(.Essentials.iOS) {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
-                // suggest macOS to former iOS purchasers
-                let suggestsSinglePlatform = including.contains(.singlePlatformEssentials) || purchasedProducts.contains(.Essentials.iOS)
-                if suggestsSinglePlatform && !purchasedProducts.contains(.Essentials.macOS) {
-                    suggested.insert(.Essentials.macOS)
-                }
-            case .tvOS:
-                // suggest both platforms if never purchased
-                if !purchasedProducts.contains(where: \.isEssentials) {
-                    suggested.insert(.Essentials.iOS_macOS)
-                }
+                suggested.insert(.Essentials.macOS)
             }
         }
 
-        // FIXME: ###, not 100% sure about this
-        let suggestsComplete: Bool
-        switch platform {
-        case .tvOS:
-            //
-            // "essential" features are not accessible from the
-            // TV, therefore selling the "complete" packages is misleading
-            // for TV-only customers. only offer them if some "essential"
-            // feature is required, because it means that the iOS/macOS app
-            // is also installed
-            //
-            // TODO: ###, this is somewhat possible with .json import
-            suggestsComplete = !essentialFeatures.isEmpty
-        default:
-            suggestsComplete = true
-        }
-
-        // suggest complete packages if eligible
-        if including.contains(.complete) && suggestsComplete && isEligibleForComplete {
+        if filter != .excludingComplete && purchasedProducts.isEligibleForComplete {
             suggested.insert(.Complete.Recurring.yearly)
             suggested.insert(.Complete.Recurring.monthly)
             suggested.insert(.Complete.OneTime.lifetime)
         }
 
-        // strip purchased (paranoid check)
-        suggested.subtract(purchasedProducts)
-
         return suggested
     }
+}
 
-    func didPurchaseEssentials(on platform: Platform) -> Bool {
-        switch platform {
-        case .iOS:
-            return purchasedProducts.contains(.Essentials.iOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
-        case .macOS:
-            return purchasedProducts.contains(.Essentials.macOS) || purchasedProducts.contains(.Essentials.iOS_macOS)
-        case .tvOS:
-            return purchasedProducts.contains(where: \.isEssentials)
+private extension Collection where Element == AppProduct {
+    var isEligibleForComplete: Bool {
+        !contains {
+            $0.isComplete || $0.isEssentials || $0 == .Features.appleTV
         }
     }
 }

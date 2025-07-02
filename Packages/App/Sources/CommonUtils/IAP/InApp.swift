@@ -45,16 +45,13 @@ public struct InAppProduct: Sendable {
 
     public let localizedTitle: String
 
-    public let localizedDescription: String
-
     public let localizedPrice: String
 
     public let native: Sendable?
 
-    public init(productIdentifier: String, localizedTitle: String, localizedDescription: String, localizedPrice: String, native: Sendable?) {
+    public init(productIdentifier: String, localizedTitle: String, localizedPrice: String, native: Sendable?) {
         self.productIdentifier = productIdentifier
         self.localizedTitle = localizedTitle
-        self.localizedDescription = localizedDescription
         self.localizedPrice = localizedPrice
         self.native = native
     }

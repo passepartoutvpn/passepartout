@@ -87,7 +87,10 @@ extension FakeAppReceiptReader {
         expirationDate: Date? = nil,
         cancellationDate: Date? = nil
     ) async {
-        var purchaseReceipts = localReceipt?.purchaseReceipts ?? []
+        guard let localReceipt else {
+            fatalError("Call setReceipt() first")
+        }
+        var purchaseReceipts = localReceipt.purchaseReceipts ?? []
         purchaseReceipts.append(.init(
             productIdentifier: identifier,
             expirationDate: expirationDate,
@@ -95,7 +98,7 @@ extension FakeAppReceiptReader {
             originalPurchaseDate: nil
         ))
         let newReceipt = InAppReceipt(
-            originalPurchase: localReceipt?.originalPurchase,
+            originalPurchase: localReceipt.originalPurchase,
             purchaseReceipts: purchaseReceipts
         )
         self.localReceipt = newReceipt

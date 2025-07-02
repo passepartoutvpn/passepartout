@@ -27,6 +27,7 @@ import CommonUtils
 import StoreKit
 import SwiftUI
 
+@available(iOS 17, macOS 14, tvOS 17, *)
 struct StoreKitProductView: View {
     let style: PaywallProductViewStyle
 
@@ -40,24 +41,20 @@ struct StoreKitProductView: View {
     let onError: (Error) -> Void
 
     var body: some View {
-        if #available(iOS 17, macOS 14, tvOS 17, *) {
-            ProductView(id: product.productIdentifier)
-                .withPaywallStyle(style)
-                .onInAppPurchaseStart { _ in
-                    purchasingIdentifier = product.productIdentifier
+        ProductView(id: product.productIdentifier)
+            .withPaywallStyle(style)
+            .onInAppPurchaseStart { _ in
+                purchasingIdentifier = product.productIdentifier
+            }
+            .onInAppPurchaseCompletion { skProduct, result in
+                do {
+                    let skResult = try result.get()
+                    onComplete(skProduct.id, skResult.toResult)
+                } catch {
+                    onError(error)
                 }
-                .onInAppPurchaseCompletion { skProduct, result in
-                    do {
-                        let skResult = try result.get()
-                        onComplete(skProduct.id, skResult.toResult)
-                    } catch {
-                        onError(error)
-                    }
-                    purchasingIdentifier = nil
-                }
-        } else {
-            fatalError("Unsupported ProductView")
-        }
+                purchasingIdentifier = nil
+            }
     }
 }
 
@@ -71,6 +68,7 @@ private extension ProductView {
         case .donation:
             productViewStyle(.compact)
                 .padding()
+
         case .paywall:
             productViewStyle(.regular)
                 .listRowBackground(Color.clear)
@@ -87,10 +85,13 @@ private extension Product.PurchaseResult {
         switch self {
         case .success:
             return .done
+
         case .pending:
             return .pending
+
         case .userCancelled:
             return .cancelled
+
         default:
             return .cancelled
         }

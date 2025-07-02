@@ -447,17 +447,11 @@ public enum Strings {
             }
           }
           public enum Tv {
+            /// iCloud is required to share your profiles with your Apple TV.
+            public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer", fallback: "iCloud is required to share your profiles with your Apple TV.")
             public enum Footer {
-              /// The TV may require an additional purchase.
-              public static let purchaseUnsupported = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase_unsupported", fallback: "The TV may require an additional purchase.")
-            }
-            public enum Icloud {
-              /// iCloud is required to synchronize your profiles with your TV.
-              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.icloud.footer", fallback: "iCloud is required to synchronize your profiles with your TV.")
-            }
-            public enum Web {
-              /// You can send the profile to your TV over the web.
-              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.web.footer", fallback: "You can send the profile to your TV over the web.")
+              /// Purchase to drop the restriction.
+              public static let purchase = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase", fallback: "Purchase to drop the restriction.")
             }
           }
         }
@@ -791,13 +785,9 @@ public enum Strings {
     }
     public enum Paywall {
       public enum Alerts {
-        public enum Actions {
-          /// Save anyway
-          public static let save = Strings.tr("Localizable", "views.paywall.alerts.actions.save", fallback: "Save anyway")
-          /// Send anyway
-          public static let sendToTv = Strings.tr("Localizable", "views.paywall.alerts.actions.send_to_tv", fallback: "Send anyway")
-        }
         public enum Confirmation {
+          /// Edit profile
+          public static let editProfile = Strings.tr("Localizable", "views.paywall.alerts.confirmation.edit_profile", fallback: "Edit profile")
           /// This profile requires paid features to work.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message", fallback: "This profile requires paid features to work.")
           /// Purchase required
@@ -807,11 +797,19 @@ public enum Strings {
             public static func connect(_ p1: Int) -> String {
               return Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.connect", p1, fallback: "You may test the connection for %d minutes.")
             }
+            /// Tap the lock icons to purchase the missing features.
+            public static let save = Strings.tr("Localizable", "views.paywall.alerts.confirmation.message.save", fallback: "Tap the lock icons to purchase the missing features.")
           }
         }
         public enum Pending {
           /// The purchase is pending external confirmation. The feature will be credited upon approval.
           public static let message = Strings.tr("Localizable", "views.paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
+        }
+        public enum Restricted {
+          /// Some features are unavailable in this build.
+          public static let message = Strings.tr("Localizable", "views.paywall.alerts.restricted.message", fallback: "Some features are unavailable in this build.")
+          /// Restricted
+          public static let title = Strings.tr("Localizable", "views.paywall.alerts.restricted.title", fallback: "Restricted")
         }
         public enum Verification {
           /// This may take a little longer if your device was just started.
@@ -846,8 +844,8 @@ public enum Strings {
         public enum Products {
           /// All purchases support Family Sharing.
           public static let footer = Strings.tr("Localizable", "views.paywall.sections.products.footer", fallback: "All purchases support Family Sharing.")
-          /// Purchase individually
-          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Purchase individually")
+          /// Suggested products
+          public static let header = Strings.tr("Localizable", "views.paywall.sections.products.header", fallback: "Suggested products")
         }
         public enum RequiredFeatures {
           /// Required features
@@ -908,6 +906,14 @@ public enum Strings {
       }
     }
     public enum Profile {
+      public enum Alerts {
+        public enum Purchase {
+          public enum Buttons {
+            /// Save anyway
+            public static let ok = Strings.tr("Localizable", "views.profile.alerts.purchase.buttons.ok", fallback: "Save anyway")
+          }
+        }
+      }
       public enum ModuleList {
         public enum Section {
           /// Tap modules to edit their settings. Modules may be dragged to determine priority.
@@ -927,10 +933,8 @@ public enum Strings {
         }
       }
       public enum SendTv {
-        /// Send to %@
-        public static func title(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "views.profile.send_tv.title", String(describing: p1), fallback: "Send to %@")
-        }
+        /// Send to TV
+        public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
         public enum Form {
           /// Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
@@ -945,10 +949,6 @@ public enum Strings {
           /// Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
             return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network")
-          }
-          public enum Buttons {
-            /// Enter URL manually
-            public static let manual = Strings.tr("Localizable", "views.profile.send_tv.qr.buttons.manual", fallback: "Enter URL manually")
           }
         }
       }
@@ -1062,8 +1062,8 @@ public enum Strings {
         /// Import local profile
         public static let importLocal = Strings.tr("Localizable", "views.tv.profiles.import_local", fallback: "Import local profile")
         public enum Detail {
-          /// Use the long press to present the available actions for a profile.
-          public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile.")
+          /// Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.
+          public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.")
         }
       }
       public enum WebReceiver {

@@ -75,7 +75,6 @@ extension StoreKitHelper {
             $0[pid] = InAppProduct(
                 productIdentifier: $1.id,
                 localizedTitle: $1.displayName,
-                localizedDescription: $1.description,
                 localizedPrice: $1.displayPrice,
                 native: $1
             )

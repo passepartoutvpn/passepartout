@@ -31,7 +31,7 @@ struct ProfileCoordinator: View {
     struct Flow {
         let onNewModule: (ModuleType) -> Void
 
-        let onSaveProfile: () async throws -> Void
+        let onCommitEditing: () async throws -> Void
 
         let onCancelEditing: () -> Void
 
@@ -46,9 +46,6 @@ struct ProfileCoordinator: View {
 
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
-
-    @Environment(\.distributionTarget)
-    private var distributionTarget
 
     let profileManager: ProfileManager
 
@@ -74,19 +71,7 @@ struct ProfileCoordinator: View {
 
     var body: some View {
         contentView
-            .modifier(PaywallModifier(
-                reason: $paywallReason,
-                onAction: { action, _ in
-                    switch action {
-                    case .save:
-                        saveProfileAnyway()
-                    case .sendToTV:
-                        sendProfileToTV(verifying: false)
-                    default:
-                        assertionFailure("Unhandled paywall action \(action)")
-                    }
-                }
-            ))
+            .modifier(PaywallModifier(reason: $paywallReason))
             .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
             .withErrorHandler(errorHandler)
@@ -152,15 +137,13 @@ private extension ProfileCoordinator {
     var flow: Flow {
         Flow(
             onNewModule: addNewModule,
-            onSaveProfile: {
-                try await saveProfile(verifying: true)
+            onCommitEditing: {
+                try await commitEditing(dismissing: true)
             },
             onCancelEditing: {
                 cancelEditing()
             },
-            onSendToTV: {
-                sendProfileToTV(verifying: true)
-            }
+            onSendToTV: sendProfileToTV
         )
     }
 }
@@ -176,17 +159,23 @@ private extension ProfileCoordinator {
     }
 
     @discardableResult
-    func commitEditing(
-        action: PaywallModifier.Action?,
-        additionalFeatures: Set<AppFeature>? = nil,
-        dismissing: Bool
-    ) async throws -> Profile? {
+    func commitEditing(dismissing: Bool) async throws -> Profile? {
+        do {
+            return try await commitEditing(verifying: !iapManager.isBeta, dismissing: dismissing)
+        } catch {
+            pp_log_g(.App.profiles, .error, "Unable to commit profile: \(error)")
+            errorHandler.handle(error, title: Strings.Global.Actions.save)
+            throw error
+        }
+    }
+
+    @discardableResult
+    func commitEditing(verifying: Bool, dismissing: Bool) async throws -> Profile? {
         do {
             let savedProfile = try await profileEditor.save(
                 to: profileManager,
                 buildingWith: registry,
-                verifyingWith: action != nil ? iapManager : nil,
-                additionalFeatures: additionalFeatures,
+                verifyingWith: verifying ? iapManager : nil,
                 preferencesManager: preferencesManager
             )
             if dismissing {
@@ -194,8 +183,6 @@ private extension ProfileCoordinator {
             }
             return savedProfile
         } catch AppError.verificationReceiptIsLoading {
-            assert(action != nil, "Verification error despite nil action (loading)")
-
             pp_log_g(.App.profiles, .error, "Unable to commit profile: loading receipt")
             let V = Strings.Views.Paywall.Alerts.self
             errorHandler.handle(
@@ -204,17 +191,14 @@ private extension ProfileCoordinator {
             )
             return nil
         } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
-            assert(action != nil, "Verification error despite nil action (required)")
-
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-            if let action {
-                setLater(PaywallReason(
-                    nil,
-                    requiredFeatures: requiredFeatures,
-                    action: action
-                )) {
-                    paywallReason = $0
-                }
+            setLater(PaywallReason(
+                nil,
+                requiredFeatures: requiredFeatures,
+                suggestedProducts: nil,
+                action: .save
+            )) {
+                paywallReason = $0
             }
             return nil
         } catch {
@@ -227,39 +211,16 @@ private extension ProfileCoordinator {
         profileEditor.discard()
         onDismiss()
     }
-}
 
-private extension ProfileCoordinator {
-    func saveProfile(verifying: Bool) async throws {
-        do {
-            try await commitEditing(
-                action: verifying ? .save : nil,
-                dismissing: true
-            )
-        } catch {
-            errorHandler.handle(error, title: Strings.Global.Actions.save)
-            throw error
-        }
-    }
-
-    func saveProfileAnyway() {
-        Task {
-            try await saveProfile(verifying: false)
-        }
-    }
-
-    func sendProfileToTV(verifying: Bool) {
+    func sendProfileToTV() {
         Task {
             do {
-                guard let profile = try await commitEditing(
-                    action: verifying ? .sendToTV : nil,
-                    dismissing: false
-                ) else {
+                guard let profile = try await commitEditing(dismissing: false) else {
                     return
                 }
                 modalRoute = .sendToTV(profile)
             } catch {
-                errorHandler.handle(error, title: Strings.Global.Actions.save)
+                errorHandler.handle(error)
             }
         }
     }

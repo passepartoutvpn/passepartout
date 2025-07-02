@@ -32,7 +32,7 @@ struct ProfileBehaviorSection: View {
 
     var body: some View {
         keepAliveToggle
-            .themeContainerWithSingleEntry(
+            .themeSectionWithSingleRow(
                 header: Strings.Modules.General.Sections.Behavior.header,
                 footer: Strings.Modules.General.Rows.KeepAliveOnSleep.footer
             )

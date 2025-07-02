@@ -1,8 +1,8 @@
 //
-//  ThemeContainerModifier.swift
+//  IncludedFeatureRow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/24/25.
+//  Created by Davide De Rosa on 2/18/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonIAP
 import SwiftUI
 
-struct ThemeContainerModifier: ViewModifier {
-    let header: String?
+public struct IncludedFeatureRow: View {
+    private let feature: AppFeature
 
-    let footer: String?
-}
+    private let isHighlighted: Bool
 
-struct ThemeContainerEntryModifier: ViewModifier {
-    let header: String?
+    public init(feature: AppFeature, isHighlighted: Bool) {
+        self.feature = feature
+        self.isHighlighted = isHighlighted
+    }
 
-    let subtitle: String?
+    public var body: some View {
+        HStack {
+            ThemeImage(.marked)
+                .opaque(isHighlighted)
 
-    let isAction: Bool
+            Text(feature.localizedDescription)
+                .fontWeight(isHighlighted ? .bold : .regular)
+                .scrollableOnTV()
+        }
+    }
 }

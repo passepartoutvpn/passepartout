@@ -115,21 +115,22 @@ extension ThemeManualInputModifier {
     }
 }
 
-extension ThemeContainerModifier {
-    func body(content: Content) -> some View {
-        content
-    }
-}
-
-extension ThemeContainerEntryModifier {
+extension ThemeSectionWithHeaderFooterModifier {
     func body(content: Content) -> some View {
         Section {
             content
         } header: {
             header.map(Text.init)
         } footer: {
-            subtitle.map(Text.init)
+            footer.map(Text.init)
         }
+    }
+}
+
+extension ThemeRowWithSubtitleModifier {
+    func body(content: Content) -> some View {
+        content
+        // omit subtitle on iOS/tvOS, use ThemeSectionWithHeaderFooterModifier
     }
 }
 

@@ -45,7 +45,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     private var paywallReason: PaywallReason?
 
     @State
-    private var paywallContinuation: (() -> Void)?
+    private var onCancelPaywall: (() -> Void)?
 
     @StateObject
     private var interactiveManager = InteractiveManager()
@@ -92,9 +92,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
             .modifier(PaywallModifier(
                 reason: $paywallReason,
-                onAction: { _, _ in
-                    paywallContinuation?()
-                }
+                onCancel: onCancelPaywall
             ))
             .withErrorHandler(errorHandler)
         }
@@ -180,7 +178,7 @@ extension AppCoordinator {
     public func onPurchaseRequired(
         for profile: Profile,
         features: Set<AppFeature>,
-        continuation: (() -> Void)?
+        onCancel: (() -> Void)?
     ) {
         pp_log_g(.app, .info, "Purchase required for features: \(features)")
         guard !iapManager.isLoadingReceipt else {
@@ -194,14 +192,14 @@ extension AppCoordinator {
                     "\n\n",
                     V.Connect._2(iapManager.verificationDelayMinutes)
                 ].joined(separator: " "),
-                onDismiss: continuation
+                onDismiss: onCancel
             )
             return
         }
         pp_log_g(.app, .info, "Present paywall")
-        paywallContinuation = continuation
+        onCancelPaywall = onCancel
 
-        setLater(.init(profile, requiredFeatures: features, action: .connect)) {
+        setLater(.init(nil, requiredFeatures: features, action: .connect)) {
             paywallReason = $0
         }
     }

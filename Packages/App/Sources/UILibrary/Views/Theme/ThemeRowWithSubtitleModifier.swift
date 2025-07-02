@@ -1,8 +1,8 @@
 //
-//  ProfileSharingFlag.swift
+//  ThemeRowWithSubtitleModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/14/25.
+//  Created by Davide De Rosa on 3/24/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import Foundation
+import SwiftUI
 
-public enum ProfileSharingFlag {
-    case shared
+struct ThemeRowWithSubtitleModifier<Subtitle>: ViewModifier where Subtitle: View {
 
-    case tv
-}
-
-extension ProfileManager {
-    public func sharingFlags(for profileId: Profile.ID) -> [ProfileSharingFlag] {
-        if isRemotelyShared(profileWithId: profileId) {
-            if isAvailableForTV(profileWithId: profileId) {
-                return [.tv]
-            } else {
-                return [.shared]
-            }
-        }
-        return []
-    }
+    @ViewBuilder
+    let subtitle: Subtitle
 }

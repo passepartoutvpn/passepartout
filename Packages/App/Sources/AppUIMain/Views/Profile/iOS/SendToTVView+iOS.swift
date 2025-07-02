@@ -71,21 +71,22 @@ private extension SendToTVView {
 
 private extension SendToTVView {
     var qrScanView: some View {
-        SendToTVQRScanView { error in
-            if let error {
-#if targetEnvironment(simulator)
-//                path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
-                path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
-#else
-                pp_log_g(.app, .error, "Unable to open QR scanner: \(error)")
-                isPresented = false
-#endif
+        SendToTVQRScanView { string in
+            guard let url = URL(string: string) else {
+                return
             }
-        } onDetect: { url in
             path.append(NavigationRoute.enterPasscode(url))
+        } onError: { error in
+#if targetEnvironment(simulator)
+//            path.append(NavigationRoute.enterPasscode(URL(string: "http://10.42.0.132:10000")!))
+            path.append(NavigationRoute.enterPasscode(URL(string: "http://172.20.10.14:10000")!))
+#else
+            pp_log_g(.app, .error, "Unable to open QR scanner: \(error)")
+            isPresented = false
+#endif
         }
         .themeNavigationDetail()
-        .navigationTitle(Strings.Views.Profile.SendTv.title_compound)
+        .navigationTitle(Strings.Views.Profile.SendTv.title)
     }
 
     func passcodeView(url: URL) -> some View {

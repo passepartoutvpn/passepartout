@@ -33,6 +33,12 @@ extension Theme {
         relevantWeight = .bold
         secondaryWeight = .light
     }
+
+    public var primaryGradient: AnyGradient {
+        darkAccentColor
+            .opacity(0.6)
+            .gradient
+    }
 }
 
 // MARK: - Shortcuts
@@ -41,24 +47,9 @@ extension View {
     public func themeLockScreen() -> some View {
         self
     }
-
-    public func themeGradient() -> some View {
-        modifier(ThemeGradientModifier())
-    }
 }
 
 // MARK: - Modifiers
-
-private struct ThemeGradientModifier: ViewModifier {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    func body(content: Content) -> some View {
-        content
-            .background(theme.darkAccentColor.opacity(0.6).gradient)
-    }
-}
 
 extension ThemeManualInputModifier {
     func body(content: Content) -> some View {
@@ -68,7 +59,7 @@ extension ThemeManualInputModifier {
     }
 }
 
-extension ThemeContainerModifier {
+extension ThemeSectionWithHeaderFooterModifier {
     func body(content: Content) -> some View {
         Section {
             content
@@ -80,15 +71,10 @@ extension ThemeContainerModifier {
     }
 }
 
-extension ThemeContainerEntryModifier {
+extension ThemeRowWithSubtitleModifier {
     func body(content: Content) -> some View {
-        Section {
-            content
-        } header: {
-            header.map(Text.init)
-        } footer: {
-            subtitle.map(Text.init)
-        }
+        content
+        // omit subtitle on iOS/tvOS, use ThemeSectionWithHeaderFooterModifier
     }
 }
 

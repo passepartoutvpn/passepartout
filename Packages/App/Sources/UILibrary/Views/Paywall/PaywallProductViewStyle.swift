@@ -28,5 +28,5 @@ import Foundation
 public enum PaywallProductViewStyle {
     case donation
 
-    case paywall(primary: Bool)
+    case paywall
 }

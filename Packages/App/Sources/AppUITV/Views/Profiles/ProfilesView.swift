@@ -29,6 +29,9 @@ import SwiftUI
 
 struct ProfilesView: View {
 
+    @EnvironmentObject
+    private var theme: Theme
+
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -48,7 +51,7 @@ struct ProfilesView: View {
             masterView
             detailView
         }
-        .themeGradient()
+        .background(theme.primaryGradient)
         .withErrorHandler(errorHandler)
     }
 }
@@ -98,15 +101,16 @@ private extension ProfilesView {
             HStack {
                 Text(preview.name)
                 Spacer()
-                ProfileSharingView(
-                    profileManager: profileManager,
-                    profileId: preview.id
-                )
+                if profileManager.isRemotelyShared(profileWithId: preview.id) {
+                    ThemeImage(.cloudOn)
+                }
             }
         }
         .contextMenu {
-            Button(Strings.Global.Actions.delete, role: .destructive) {
-                deleteProfile(withId: preview.id)
+            if !profileManager.isRemotelyShared(profileWithId: preview.id) {
+                Button(Strings.Global.Actions.delete, role: .destructive) {
+                    deleteProfile(withId: preview.id)
+                }
             }
         }
         .focused($detail, equals: .profiles)

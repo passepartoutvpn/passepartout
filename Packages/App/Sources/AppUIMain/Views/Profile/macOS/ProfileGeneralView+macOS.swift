@@ -50,11 +50,13 @@ struct ProfileGeneralView: View {
         Form {
             ProfileNameSection(name: $profileEditor.profile.name)
             profileEditor.shortcutsSections(path: $path)
-            ProfileStorageSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason,
-                flow: flow
-            )
+            if distributionTarget.supportsCloudKit {
+                ProfileStorageSection(
+                    profileEditor: profileEditor,
+                    paywallReason: $paywallReason,
+                    flow: flow
+                )
+            }
             ProfileBehaviorSection(profileEditor: profileEditor)
             ProfileActionsSection(
                 profileManager: profileManager,

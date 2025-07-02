@@ -29,22 +29,19 @@ import Foundation
 public struct AppRelease: Sendable {
     private let name: String
 
-    fileprivate let build: Int
-
     fileprivate let date: Date
 
-    public init(_ name: String, build: Int, on string: String) {
+    public init(_ name: String, on string: String) {
         guard let date = string.asISO8601Date else {
             fatalError("Unable to parse ISO date for \(name)")
         }
         self.name = name
-        self.build = build
         self.date = date
     }
 }
 
 extension OriginalPurchase {
     public func isBefore(_ release: AppRelease) -> Bool {
-        (buildNumber ?? .max) <= release.build
+        purchaseDate < release.date
     }
 }
