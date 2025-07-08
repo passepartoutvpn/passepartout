@@ -57,6 +57,9 @@ public struct PreferencesView: View {
     private var dnsFallsBack = true
 
     @State
+    private var usesModernCrypto = false
+
+    @State
     private var isConfirmingEraseiCloud = false
 
     @State
@@ -80,11 +83,13 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
+            experimentalSection
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
         }
         .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
+        .themeKeyValue(kvStore, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
         .themeForm()
     }
 }
@@ -137,6 +142,18 @@ private extension PreferencesView {
     var enablesPurchasesSection: some View {
         Toggle(Strings.Views.Preferences.enablesIap, isOn: $iapManager.isEnabled)
             .themeContainerEntry(subtitle: Strings.Views.Preferences.EnablesIap.footer)
+    }
+
+    var experimentalSection: some View {
+        Group {
+            Toggle("Modern cryptography", isOn: $usesModernCrypto)
+                .themeContainerEntry(
+                    header: "Experimental",
+                    subtitle: "Use modern and faster implementations of cryptographic algorithms, though potentially unstable."
+                )
+        }
+        .themeContainer(header: "Experimental")
+
     }
 
     var eraseCloudKitSection: some View {
