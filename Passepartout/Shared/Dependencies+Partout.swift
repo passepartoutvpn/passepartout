@@ -87,19 +87,9 @@ private extension Dependencies {
                 distributionTarget: distributionTarget,
                 usesExperimentalCrypto: { false }
             ).build(),
-            WireGuardModule.Implementation(
-                keyGenerator: StandardWireGuardKeyGenerator(),
-                importer: StandardWireGuardParser(),
-                validator: StandardWireGuardParser(),
-                connectionBlock: {
-                    let ctx = PartoutLoggerContext($0.controller.profile.id)
-                    return try WireGuardConnection(
-                        ctx,
-                        parameters: $0,
-                        module: $1
-                    )
-                }
-            )
+            WireGuardImplementationBuilder(
+                usesExperimentalCrypto: { false }
+            ).build()
         ]
     )
 

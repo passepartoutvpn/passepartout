@@ -50,6 +50,9 @@
 		0E9805992E1D291500808635 /* OpenVPNImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9805982E1D291500808635 /* OpenVPNImplementationBuilder.swift */; };
 		0E98059A2E1D291500808635 /* OpenVPNImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9805982E1D291500808635 /* OpenVPNImplementationBuilder.swift */; };
 		0E98059B2E1D291500808635 /* OpenVPNImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9805982E1D291500808635 /* OpenVPNImplementationBuilder.swift */; };
+		0E98059D2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E98059C2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift */; };
+		0E98059E2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E98059C2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift */; };
+		0E98059F2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E98059C2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift */; };
 		0EA6340C2D088C8200180D7C /* UIAccessibility in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA6340B2D088C8200180D7C /* UIAccessibility */; };
 		0EA6340E2D08995800180D7C /* TVScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA6340D2D08995800180D7C /* TVScreenshotTests.swift */; platformFilters = (tvos, ); };
 		0EA634122D08997300180D7C /* TVFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA634112D08997300180D7C /* TVFlowTests.swift */; platformFilters = (tvos, ); };
@@ -168,6 +171,7 @@
 		0E916B7B2CF811EB0072921A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		0E94EE5C2B93570600588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
 		0E9805982E1D291500808635 /* OpenVPNImplementationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenVPNImplementationBuilder.swift; sourceTree = "<group>"; };
+		0E98059C2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireGuardImplementationBuilder.swift; sourceTree = "<group>"; };
 		0EA6340D2D08995800180D7C /* TVScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVScreenshotTests.swift; sourceTree = "<group>"; };
 		0EA634112D08997300180D7C /* TVFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVFlowTests.swift; sourceTree = "<group>"; };
 		0EA634132D08998700180D7C /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 				0E8DFD4B2D05FE5A00531CDE /* Dependencies+IAPManager.swift */,
 				0E8DFD4C2D05FE5A00531CDE /* Dependencies+Partout.swift */,
 				0E9805982E1D291500808635 /* OpenVPNImplementationBuilder.swift */,
+				0E98059C2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -826,6 +831,7 @@
 				0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */,
 				0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */,
 				0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */,
+				0E98059D2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +881,7 @@
 				0EAEC8AA2D05DB8D001AA50C /* DefaultTunnelProcessor.swift in Sources */,
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
 				0E8DFD532D05FE5A00531CDE /* Dependencies+Partout.swift in Sources */,
+				0E98059E2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */,
 				0E9805992E1D291500808635 /* OpenVPNImplementationBuilder.swift in Sources */,
 				0E8DFD542D05FE5A00531CDE /* Dependencies+IAPManager.swift in Sources */,
 				0E8DFD562D05FE5A00531CDE /* Dependencies+CoreData.swift in Sources */,
@@ -900,6 +907,7 @@
 				0E23061F2DC2C2CB002D70D7 /* DefaultTunnelProcessor.swift in Sources */,
 				0E98059B2E1D291500808635 /* OpenVPNImplementationBuilder.swift in Sources */,
 				0E2BA91E2DF46C0C0000F169 /* AppRelease+BusinessChanges.swift in Sources */,
+				0E98059F2E1D2D1D00808635 /* WireGuardImplementationBuilder.swift in Sources */,
 				0E2306142DC2BF6B002D70D7 /* main.swift in Sources */,
 				0E2306162DC2C00B002D70D7 /* PacketTunnelProvider.swift in Sources */,
 			);
