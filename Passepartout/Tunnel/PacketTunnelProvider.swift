@@ -57,13 +57,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Update or fetch existing preferences
 
-        let (kvStore, preferences) = await MainActor.run {
-            let kvStore = dependencies.kvStore
+        let (kvManager, preferences) = await MainActor.run {
+            let kvManager = dependencies.kvManager
             if let appPreferences {
-                kvStore.preferences = appPreferences
-                return (kvStore, appPreferences)
+                kvManager.preferences = appPreferences
+                return (kvManager, appPreferences)
             } else {
-                return (kvStore, kvStore.preferences)
+                return (kvManager, kvManager.preferences)
             }
         }
 
@@ -117,7 +117,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 productsAtBuild: dependencies.productsAtBuild()
             )
             if distributionTarget.supportsIAP {
-                manager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+                manager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
             } else {
                 manager.isEnabled = false
             }

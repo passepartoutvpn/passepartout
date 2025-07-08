@@ -117,7 +117,7 @@ private extension ProviderFiltersView {
     NavigationStack {
         ProviderFiltersView(
             providerId: .mullvad,
-            model: .init(kvStore: KeyValueManager()),
+            model: .init(kvManager: KeyValueManager()),
             heuristic: .constant(nil)
         )
     }

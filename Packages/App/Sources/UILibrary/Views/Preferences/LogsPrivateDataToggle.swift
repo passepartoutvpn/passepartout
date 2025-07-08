@@ -29,7 +29,7 @@ import SwiftUI
 public struct LogsPrivateDataToggle: View {
 
     @EnvironmentObject
-    private var kvStore: KeyValueManager
+    private var kvManager: KeyValueManager
 
     @State
     private var logsPrivateData = false
@@ -39,9 +39,9 @@ public struct LogsPrivateDataToggle: View {
 
     public var body: some View {
         Toggle(Strings.Views.Diagnostics.Rows.includePrivateData, isOn: $logsPrivateData)
-            .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
+            .themeKeyValue(kvManager, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
             .onChange(of: logsPrivateData) {
-                kvStore.set($0, forKey: AppPreference.logsPrivateData.key)
+                kvManager.set($0, forKey: AppPreference.logsPrivateData.key)
             }
     }
 }

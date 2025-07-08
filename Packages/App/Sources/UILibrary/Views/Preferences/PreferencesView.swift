@@ -38,7 +38,7 @@ public struct PreferencesView: View {
     private var iapManager: IAPManager
 
     @EnvironmentObject
-    private var kvStore: KeyValueManager
+    private var kvManager: KeyValueManager
 
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
@@ -88,8 +88,8 @@ public struct PreferencesView: View {
                 eraseCloudKitSection
             }
         }
-        .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
-        .themeKeyValue(kvStore, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
+        .themeKeyValue(kvManager, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
+        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
         .themeForm()
     }
 }
@@ -190,7 +190,7 @@ private extension PreferencesView {
 public struct PreferencesView: View {
 
     @EnvironmentObject
-    private var kvStore: KeyValueManager
+    private var kvManager: KeyValueManager
 
     private let profileManager: ProfileManager
 

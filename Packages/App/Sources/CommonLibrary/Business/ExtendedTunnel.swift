@@ -36,7 +36,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let sysex: SystemExtensionManager?
 
-    private let kvStore: KeyValueManager?
+    private let kvManager: KeyValueManager?
 
     private let processor: AppTunnelProcessor?
 
@@ -48,13 +48,13 @@ public final class ExtendedTunnel: ObservableObject {
     public init(
         tunnel: Tunnel,
         sysex: SystemExtensionManager? = nil,
-        kvStore: KeyValueManager? = nil,
+        kvManager: KeyValueManager? = nil,
         processor: AppTunnelProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
         self.sysex = sysex
-        self.kvStore = kvStore
+        self.kvManager = kvManager
         self.processor = processor
         self.interval = interval
         subscriptions = []
@@ -82,7 +82,7 @@ extension ExtendedTunnel {
             throw AppError.interactiveLogin
         }
         var options: [String: NSObject] = [Self.isManualKey: true as NSNumber]
-        if let preferences = kvStore?.preferences {
+        if let preferences = kvManager?.preferences {
             let encodedPreferences = try JSONEncoder().encode(preferences)
             options[Self.appPreferences] = encodedPreferences as NSData
         }
@@ -211,7 +211,7 @@ private extension ExtendedTunnel {
 
                 // TODO: #218, keep "last used profile" until .multiple
                 if let first = newActiveProfiles.first {
-                    kvStore?.set(first.key.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                    kvManager?.set(first.key.uuidString, forKey: AppPreference.lastUsedProfileId.key)
                 }
             }
         }
@@ -258,7 +258,7 @@ private extension ExtendedTunnel {
 // TODO: #218, keep "last used profile" until .multiple
 private extension ExtendedTunnel {
     var lastUsedProfile: TunnelActiveProfile? {
-        guard let uuidString = kvStore?.string(forKey: AppPreference.lastUsedProfileId.key),
+        guard let uuidString = kvManager?.string(forKey: AppPreference.lastUsedProfileId.key),
               let uuid = UUID(uuidString: uuidString) else {
             return nil
         }

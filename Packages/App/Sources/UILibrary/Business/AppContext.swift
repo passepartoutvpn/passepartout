@@ -39,7 +39,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let iapManager: IAPManager
 
-    public let kvStore: KeyValueManager
+    public let kvManager: KeyValueManager
 
     public let migrationManager: MigrationManager
 
@@ -71,7 +71,7 @@ public final class AppContext: ObservableObject, Sendable {
         apiManager: APIManager,
         distributionTarget: DistributionTarget,
         iapManager: IAPManager,
-        kvStore: KeyValueManager,
+        kvManager: KeyValueManager,
         migrationManager: MigrationManager,
         onboardingManager: OnboardingManager? = nil,
         preferencesManager: PreferencesManager,
@@ -84,10 +84,10 @@ public final class AppContext: ObservableObject, Sendable {
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
-        appearanceManager = AppearanceManager(kvStore: kvStore)
+        appearanceManager = AppearanceManager(kvManager: kvManager)
         self.distributionTarget = distributionTarget
         self.iapManager = iapManager
-        self.kvStore = kvStore
+        self.kvManager = kvManager
         self.migrationManager = migrationManager
         self.onboardingManager = onboardingManager ?? OnboardingManager()
         self.preferencesManager = preferencesManager
@@ -139,7 +139,7 @@ private extension AppContext {
             .removeDuplicates()
             .sink { [weak self] in
                 pp_log_g(.App.iap, .info, "IAPManager.isEnabled -> \($0)")
-                self?.kvStore.set(!$0, forKey: AppPreference.skipsPurchases.key)
+                self?.kvManager.set(!$0, forKey: AppPreference.skipsPurchases.key)
                 Task {
                     await self?.iapManager.reloadReceipt()
                 }

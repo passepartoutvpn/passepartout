@@ -41,7 +41,7 @@ final class AppDelegate: NSObject {
 
 #if os(macOS)
     let settings = MacSettingsModel(
-        kvStore: Dependencies.shared.kvStore,
+        kvManager: Dependencies.shared.kvManager,
         loginItemId: BundleConfiguration.mainString(for: .loginItemId)
     )
 #endif

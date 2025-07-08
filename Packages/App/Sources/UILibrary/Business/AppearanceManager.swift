@@ -29,19 +29,19 @@ import SwiftUI
 
 @MainActor
 public final class AppearanceManager: ObservableObject {
-    private let kvStore: KeyValueManager
+    private let kvManager: KeyValueManager
 
     @Published
     public var systemAppearance: SystemAppearance? {
         didSet {
-            kvStore.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
+            kvManager.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
             apply()
         }
     }
 
-    public init(kvStore: KeyValueManager) {
-        self.kvStore = kvStore
-        systemAppearance = kvStore.string(forKey: UIPreference.systemAppearance.key)
+    public init(kvManager: KeyValueManager) {
+        self.kvManager = kvManager
+        systemAppearance = kvManager.string(forKey: UIPreference.systemAppearance.key)
             .flatMap {
                 SystemAppearance(rawValue: $0)
             }
