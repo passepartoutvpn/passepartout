@@ -83,31 +83,10 @@ private extension Dependencies {
     static let sharedRegistry = Registry(
         withKnown: true,
         allImplementations: [
-            OpenVPNModule.Implementation(
-                importer: StandardOpenVPNParser(),
-                connectionBlock: {
-                    let ctx = PartoutLoggerContext($0.controller.profile.id)
-                    var options = OpenVPN.ConnectionOptions()
-                    options.writeTimeout = TimeInterval($0.options.linkWriteTimeout) / 1000.0
-                    options.minDataCountInterval = TimeInterval($0.options.minDataCountInterval) / 1000.0
-                    return try await OpenVPNConnection(
-                        ctx,
-                        parameters: $0,
-                        module: $1,
-                        prng: AppleRandom(),
-                        dns: SimpleDNSResolver {
-                            if distributionTarget.usesExperimentalPOSIXResolver {
-                                return POSIXDNSStrategy(hostname: $0)
-                            } else {
-                                return CFDNSStrategy(hostname: $0)
-                            }
-                        },
-                        options: options,
-                        // TODO: #218, this directory must be per-profile
-                        cachesURL: FileManager.default.temporaryDirectory
-                    )
-                }
-            ),
+            OpenVPNImplementationBuilder(
+                distributionTarget: distributionTarget,
+                usesExperimentalCrypto: { false }
+            ).build(),
             WireGuardModule.Implementation(
                 keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
