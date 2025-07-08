@@ -146,13 +146,13 @@ private extension PreferencesView {
 
     var experimentalSection: some View {
         Group {
-            Toggle("Modern cryptography", isOn: $usesModernCrypto)
+            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
                 .themeContainerEntry(
-                    header: "Experimental",
-                    subtitle: "Use modern and faster implementations of cryptographic algorithms, though potentially unstable."
+                    header: Strings.Views.Preferences.Experimental.header,
+                    subtitle: Strings.Views.Preferences.ModernCrypto.footer
                 )
         }
-        .themeContainer(header: "Experimental")
+        .themeContainer(header: Strings.Views.Preferences.Experimental.header)
 
     }
 
