@@ -28,12 +28,12 @@ import Partout
 import PartoutWireGuard
 
 struct WireGuardImplementationBuilder: Sendable {
-    private let usesExperimentalCrypto: @Sendable () async -> Bool
+    private let usesModernCrypto: @Sendable () async -> Bool
 
     init(
-        usesExperimentalCrypto: @escaping @Sendable () async -> Bool
+        usesModernCrypto: @escaping @Sendable () async -> Bool
     ) {
-        self.usesExperimentalCrypto = usesExperimentalCrypto
+        self.usesModernCrypto = usesModernCrypto
     }
 
     func build() -> WireGuardModule.Implementation {

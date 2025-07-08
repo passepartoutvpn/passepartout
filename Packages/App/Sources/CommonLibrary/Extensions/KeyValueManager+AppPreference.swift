@@ -34,7 +34,7 @@ extension KeyValueManager {
             values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
             values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
             values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
-            values.usesExperimentalCrypto = bool(forKey: AppPreference.usesExperimentalCrypto.key)
+            values.usesModernCrypto = bool(forKey: AppPreference.usesModernCrypto.key)
             return values
         }
         set {
@@ -42,7 +42,7 @@ extension KeyValueManager {
             set(newValue.lastUsedProfileId, forKey: AppPreference.lastUsedProfileId.key)
             set(newValue.logsPrivateData, forKey: AppPreference.logsPrivateData.key)
             set(newValue.skipsPurchases, forKey: AppPreference.skipsPurchases.key)
-            set(newValue.usesExperimentalCrypto, forKey: AppPreference.usesExperimentalCrypto.key)
+            set(newValue.usesModernCrypto, forKey: AppPreference.usesModernCrypto.key)
         }
     }
 
@@ -50,7 +50,7 @@ extension KeyValueManager {
         let values = [
             AppPreference.dnsFallsBack.key: fallback.dnsFallsBack,
             AppPreference.logsPrivateData.key: fallback.logsPrivateData,
-            AppPreference.usesExperimentalCrypto.key: fallback.usesExperimentalCrypto
+            AppPreference.usesModernCrypto.key: fallback.usesModernCrypto
         ]
         self.init(store: store, fallback: values)
     }

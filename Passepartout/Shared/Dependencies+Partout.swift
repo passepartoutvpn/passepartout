@@ -95,13 +95,13 @@ private extension Dependencies {
         allImplementations: [
             OpenVPNImplementationBuilder(
                 distributionTarget: distributionTarget,
-                usesExperimentalCrypto: {
-                    await sharedKVStore.bool(forKey: AppPreference.usesExperimentalCrypto.key)
+                usesModernCrypto: {
+                    await sharedKVStore.bool(forKey: AppPreference.usesModernCrypto.key)
                 }
             ).build(),
             WireGuardImplementationBuilder(
-                usesExperimentalCrypto: {
-                    await sharedKVStore.bool(forKey: AppPreference.usesExperimentalCrypto.key)
+                usesModernCrypto: {
+                    await sharedKVStore.bool(forKey: AppPreference.usesModernCrypto.key)
                 }
             ).build()
         ]

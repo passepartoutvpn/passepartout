@@ -31,21 +31,21 @@ import PartoutOpenVPN
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget
 
-    private let usesExperimentalCrypto: @Sendable () async -> Bool
+    private let usesModernCrypto: @Sendable () async -> Bool
 
     init(
         distributionTarget: DistributionTarget,
-        usesExperimentalCrypto: @escaping @Sendable () async -> Bool
+        usesModernCrypto: @escaping @Sendable () async -> Bool
     ) {
         self.distributionTarget = distributionTarget
-        self.usesExperimentalCrypto = usesExperimentalCrypto
+        self.usesModernCrypto = usesModernCrypto
     }
 
     func build() -> OpenVPNModule.Implementation {
         OpenVPNModule.Implementation(
             importer: StandardOpenVPNParser(),
             connectionBlock: {
-                if await usesExperimentalCrypto() {
+                if await usesModernCrypto() {
                     pp_log_g(.app, .notice, "OpenVPN: Using cross-platform connection")
                     return try await crossConnection(with: $0, module: $1)
                 } else {

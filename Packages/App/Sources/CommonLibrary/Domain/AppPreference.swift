@@ -35,7 +35,7 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case skipsPurchases
 
-    case usesExperimentalCrypto
+    case usesModernCrypto
 
     public var key: String {
         "App.\(rawValue)"
@@ -51,7 +51,7 @@ public struct AppPreferenceValues: Codable, Sendable {
 
     public var skipsPurchases = false
 
-    public var usesExperimentalCrypto = false
+    public var usesModernCrypto = false
 
     public init() {
     }
