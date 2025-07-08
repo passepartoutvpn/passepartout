@@ -35,6 +35,8 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case skipsPurchases
 
+    case usesExperimentalCrypto
+
     public var key: String {
         "App.\(rawValue)"
     }
@@ -43,11 +45,13 @@ public enum AppPreference: String, PreferenceProtocol {
 public struct AppPreferenceValues: Codable, Sendable {
     public var dnsFallsBack = true
 
-    public var skipsPurchases = false
-
     public var lastUsedProfileId: Profile.ID?
 
     public var logsPrivateData = false
+
+    public var skipsPurchases = false
+
+    public var usesExperimentalCrypto = false
 
     public init() {
     }

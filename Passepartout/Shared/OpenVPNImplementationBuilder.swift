@@ -31,11 +31,11 @@ import PartoutOpenVPN
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget
 
-    private let usesExperimentalCrypto: @Sendable () -> Bool
+    private let usesExperimentalCrypto: @Sendable () async -> Bool
 
     init(
         distributionTarget: DistributionTarget,
-        usesExperimentalCrypto: @escaping @Sendable () -> Bool
+        usesExperimentalCrypto: @escaping @Sendable () async -> Bool
     ) {
         self.distributionTarget = distributionTarget
         self.usesExperimentalCrypto = usesExperimentalCrypto
@@ -45,9 +45,11 @@ struct OpenVPNImplementationBuilder: Sendable {
         OpenVPNModule.Implementation(
             importer: StandardOpenVPNParser(),
             connectionBlock: {
-                if usesExperimentalCrypto() {
+                if await usesExperimentalCrypto() {
+                    pp_log_g(.app, .notice, "OpenVPN: Using cross-platform connection")
                     return try await crossConnection(with: $0, module: $1)
                 } else {
+                    pp_log_g(.app, .notice, "OpenVPN: Using legacy connection")
                     return try await legacyConnection(with: $0, module: $1)
                 }
             }
