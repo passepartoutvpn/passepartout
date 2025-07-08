@@ -354,7 +354,6 @@
 "views.providers.select_provider" = "Ingen leverantör";
 "views.purchased.no_purchases" = "Inga köp";
 "views.purchased.rows.build_number" = "Byggnummer";
-"views.purchased.rows.download_date" = "Nedladdningsdatum";
 "views.purchased.sections.download.header" = "Första nedladdning";
 "views.purchased.title" = "Köpt";
 "views.settings.credits.licenses" = "Licenser";

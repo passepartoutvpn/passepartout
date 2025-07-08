@@ -354,7 +354,6 @@
 "views.providers.select_provider" = "Kein Anbieter";
 "views.purchased.no_purchases" = "Keine Käufe";
 "views.purchased.rows.build_number" = "Build-Nummer";
-"views.purchased.rows.download_date" = "Download-Datum";
 "views.purchased.sections.download.header" = "Erster Download";
 "views.purchased.title" = "Gekauft";
 "views.settings.credits.licenses" = "Lizenzen";

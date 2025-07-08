@@ -354,7 +354,6 @@
 "views.providers.select_provider" = "Нет провайдера";
 "views.purchased.no_purchases" = "Нет покупок";
 "views.purchased.rows.build_number" = "Номер сборки";
-"views.purchased.rows.download_date" = "Дата скачивания";
 "views.purchased.sections.download.header" = "Первое скачивание";
 "views.purchased.title" = "Куплено";
 "views.settings.credits.licenses" = "Лицензии";

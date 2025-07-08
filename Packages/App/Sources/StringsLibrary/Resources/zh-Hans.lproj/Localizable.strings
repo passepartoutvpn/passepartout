@@ -354,7 +354,6 @@
 "views.providers.select_provider" = "无提供商";
 "views.purchased.no_purchases" = "无购买记录";
 "views.purchased.rows.build_number" = "构建编号";
-"views.purchased.rows.download_date" = "下载日期";
 "views.purchased.sections.download.header" = "首次下载";
 "views.purchased.title" = "已购买";
 "views.settings.credits.licenses" = "许可证";

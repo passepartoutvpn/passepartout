@@ -354,7 +354,6 @@
 "views.providers.select_provider" = "Κανένας πάροχος";
 "views.purchased.no_purchases" = "Δεν υπάρχουν αγορές";
 "views.purchased.rows.build_number" = "Αριθμός κατασκευής";
-"views.purchased.rows.download_date" = "Ημερομηνία λήψης";
 "views.purchased.sections.download.header" = "Πρώτη λήψη";
 "views.purchased.title" = "Αγορασμένα";
 "views.settings.credits.licenses" = "Άδειες";
