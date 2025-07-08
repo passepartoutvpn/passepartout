@@ -24,11 +24,16 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import Foundation
 import PartoutOpenVPN
 import PartoutWireGuard
 
 extension Dependencies {
+    var kvStore: KeyValueManager {
+        Self.sharedKVStore
+    }
+
     var registry: Registry {
         Self.sharedRegistry
     }
@@ -80,6 +85,11 @@ extension Dependencies {
 }
 
 private extension Dependencies {
+    static let sharedKVStore: KeyValueManager = KeyValueManager(
+        store: UserDefaultsStore(.standard),
+        fallback: AppPreferenceValues()
+    )
+
     static let sharedRegistry = Registry(
         withKnown: true,
         allImplementations: [
