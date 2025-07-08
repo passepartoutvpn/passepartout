@@ -36,6 +36,9 @@ struct SettingsView: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @ObservedObject
+    var profileManager: ProfileManager
+
     let tunnel: ExtendedTunnel
 
     @FocusState
@@ -70,6 +73,7 @@ private extension SettingsView {
                 BetaSection()
             }
             creditsSection
+            preferencesSection
             troubleshootingSection
         }
         .themeList()
@@ -93,6 +97,10 @@ private extension SettingsView {
         .themeSection(header: Strings.Views.Settings.title)
     }
 
+    var preferencesSection: some View {
+        PreferencesView(profileManager: profileManager)
+    }
+
     var troubleshootingSection: some View {
         Group {
             NavigationLink(Strings.Views.Diagnostics.Rows.app, value: AppCoordinatorRoute.appLog)
@@ -113,6 +121,8 @@ private enum Detail {
     case donate
 
     case other
+
+    case preferences
 
     case purchased
 
@@ -147,7 +157,10 @@ private struct DetailView: View {
 // MARK: - Preview
 
 #Preview {
-    SettingsView(tunnel: .forPreviews)
-        .themeNavigationStack()
-        .withMockEnvironment()
+    SettingsView(
+        profileManager: .forPreviews,
+        tunnel: .forPreviews
+    )
+    .themeNavigationStack()
+    .withMockEnvironment()
 }

@@ -185,6 +185,39 @@ private extension PreferencesView {
     }
 }
 
+#else
+
+public struct PreferencesView: View {
+
+    @EnvironmentObject
+    private var kvStore: KeyValueManager
+
+    private let profileManager: ProfileManager
+
+    @State
+    private var usesModernCrypto = false
+
+    public init(profileManager: ProfileManager) {
+        self.profileManager = profileManager
+    }
+
+    public var body: some View {
+        experimentalSection
+    }
+}
+
+private extension PreferencesView {
+    var experimentalSection: some View {
+        Group {
+            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
+        }
+        .themeSection(header: Strings.Views.Preferences.Experimental.header)
+
+    }
+}
+
+#endif
+
 #Preview {
     PreferencesView(profileManager: .forPreviews)
         .withMockEnvironment()
@@ -192,5 +225,3 @@ private extension PreferencesView {
         .environmentObject(MacSettingsModel())
 #endif
 }
-
-#endif
