@@ -94,7 +94,7 @@ private extension Dependencies {
                         ctx,
                         parameters: $0,
                         module: $1,
-                        prng: Partout.platform.newPRNG(ctx),
+                        prng: AppleRandom(),
                         dns: SimpleDNSResolver {
                             if distributionTarget.usesExperimentalPOSIXResolver {
                                 return POSIXDNSStrategy(hostname: $0)
