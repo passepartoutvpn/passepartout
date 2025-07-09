@@ -1,8 +1,8 @@
 //
-//  ___FILEBASENAMEASIDENTIFIER___.swift
+//  SemanticVersionTests.swift
 //  Passepartout
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
+//  Created by Davide De Rosa on 7/9/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -22,3 +22,23 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
+
+import CommonLibrary
+import Testing
+
+struct SemanticVersionTests {
+
+    @Test
+    func comparison() throws {
+        let ref = try #require(SemanticVersion("1.10.10"))
+        let newerPatch = try #require(SemanticVersion("1.10.11"))
+        let newerPatchOlderMinor = try #require(SemanticVersion("1.9.11"))
+        let newerMinorOlderPatch = try #require(SemanticVersion("1.11.0"))
+        let newerMajorOlderMinorPatch = try #require(SemanticVersion("2.0.0"))
+
+        #expect(newerPatch > ref)
+        #expect(newerPatchOlderMinor < ref)
+        #expect(newerMinorOlderPatch > ref)
+        #expect(newerMajorOlderMinorPatch > ref)
+    }
+}
