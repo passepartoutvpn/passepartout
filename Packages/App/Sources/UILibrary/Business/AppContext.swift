@@ -117,7 +117,7 @@ extension AppContext {
 
             // check for updates
             do {
-                guard let updateURL = try await versionChecker?.check() else {
+                guard let updateURL = try await versionChecker?.checkLatest() else {
                     pp_log_g(.app, .debug, "Version: current is latest version")
                     return
                 }

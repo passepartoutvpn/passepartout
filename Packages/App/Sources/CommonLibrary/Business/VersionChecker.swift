@@ -50,19 +50,18 @@ public final class VersionChecker: ObservableObject {
         self.downloadURL = downloadURL
     }
 
-    public func check() async throws -> URL? {
-        let latestVersion = try await strategy.latestVersion()
-        pp_log_g(.app, .info, "GitHub: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
+    public var latestDownloadURL: URL? {
+        guard let latestVersionDescription = kvManager.string(forKey: AppPreference.lastCheckedVersion.key),
+              let latestVersion = SemanticVersion(latestVersionDescription) else {
+            return nil
+        }
+        return latestVersion > currentVersion ? downloadURL : nil
+    }
 
-        // is remote newer?
-        guard latestVersion > currentVersion else {
-            return nil
-        }
-        // already checked
-        guard latestVersion.description != kvManager.string(forKey: AppPreference.lastCheckedVersion.key) else {
-            return nil
-        }
+    public func checkLatest() async throws -> URL? {
+        let latestVersion = try await strategy.latestVersion()
         kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
-        return downloadURL
+        pp_log_g(.app, .info, "GitHub: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
+        return latestDownloadURL
     }
 }
