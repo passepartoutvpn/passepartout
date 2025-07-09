@@ -212,7 +212,7 @@ private extension PreferencesView {
             Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
         }
         .themeSection(header: Strings.Views.Preferences.Experimental.header)
-
+        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
     }
 }
 
