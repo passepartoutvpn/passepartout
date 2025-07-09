@@ -61,7 +61,7 @@ public final class VersionChecker: ObservableObject {
     public func checkLatest() async throws -> URL? {
         let latestVersion = try await strategy.latestVersion()
         kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
-        pp_log_g(.app, .info, "GitHub: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
+        pp_log_g(.app, .info, "Version: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
         return latestDownloadURL
     }
 }
