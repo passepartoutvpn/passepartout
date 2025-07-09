@@ -371,6 +371,7 @@
 "views.settings.links.sections.support" = "Υποστήριξη";
 "views.settings.links.sections.web" = "Ιστός";
 "views.settings.links.title" = "Σύνδεσμοι";
+"views.settings.links.update" = "Ενημέρωση σε %@";
 "views.settings.system_extension.buttons.open" = "Άνοιγμα προτιμήσεων";
 "views.settings.system_extension.message" = "Για να λειτουργήσει το VPN, η εφαρμογή πρέπει να βρίσκεται στον φάκελο /Applications και το %@ πρέπει να είναι ενεργοποιημένο ως %@.\n\nΆνοιξε τις Προτιμήσεις του macOS, κύλησε στο «%@», άνοιξέ το και ενεργοποίησε το %@.";
 "views.settings.title" = "Σχετικά";
