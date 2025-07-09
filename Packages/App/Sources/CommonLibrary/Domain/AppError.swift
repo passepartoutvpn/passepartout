@@ -45,6 +45,8 @@ public enum AppError: Error {
 
     case permissionDenied
 
+    case rateLimit
+
     case systemExtension(SystemExtensionManager.Result)
 
     case timeout

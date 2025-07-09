@@ -11,12 +11,15 @@
     "websites": {
         "home": "https://passepartoutvpn.app",
         "subreddit": "https://www.reddit.com/r/passepartout/",
-        "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+        "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+        "appStoreDownload": "https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8",
+        "macDownload": "https://passepartoutvpn.app/#app-mac"
     },
     "github": {
         "discussions": "http://github.com/passepartoutvpn/discussions",
         "issues": "https://github.com/passepartoutvpn/passepartout/issues",
-        "raw": "https://raw.githubusercontent.com/passepartoutvpn/passepartout"
+        "raw": "https://raw.githubusercontent.com/passepartoutvpn/passepartout",
+        "latestRelease": "https://api.github.com/repos/passepartoutvpn/passepartout/releases/latest"
     },
     "emails": {
         "domain": "passepartoutvpn.app",
@@ -48,6 +51,7 @@
     },
     "api": {
         "timeoutInterval": 5.0,
+        "versionRateLimit": 86400.0,
         "refreshInfrastructureRateLimit": 86400.0
     },
     "iap": {
