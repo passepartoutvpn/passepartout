@@ -58,6 +58,7 @@ extension AppError: LocalizedError {
         case .permissionDenied:
             return V.permissionDenied
 
+        // handled manually
         case .rateLimit:
             return nil
 
