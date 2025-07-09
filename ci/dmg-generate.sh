@@ -10,16 +10,37 @@ fi
 version=`$cwd/version-number.sh`
 volname="$name $version $arch"
 srcfolder="$cwd/dmg"
-dmg="$name.$arch.dmg"
+dmg="$name.$arch"
 
 set -e
 
 echo "Copy .app to .dmg contents..."
 cp -RH "dist/macOS/$name.app" "$srcfolder"
 
-echo "Create $volname..."
+echo "Create temporary $volname..."
 hdiutil create \
     -volname "$volname" \
     -srcfolder "$srcfolder" \
-    -ov -format UDZO \
-    "$dmg"
+    -fs HFS+ \
+    -format UDRW \
+    -ov \
+    "$dmg.tmp"
+
+echo "Mount temporary $volname..."
+mnt="/Volumes/$volname"
+hdiutil attach "$dmg.tmp.dmg" \
+    -mountpoint "$mnt" \
+    -readwrite -noautoopen
+
+echo "Reapply .DS_Store..."
+cp "$srcfolder/.DS_Store" "$mnt"
+chmod 644 "$mnt/.DS_Store"
+
+echo "Finalize $volname..."
+hdiutil detach "$mnt"
+hdiutil convert "$dmg.tmp.dmg" \
+    -format UDZO \
+    -imagekey zlib-level=9 \
+    -ov \
+    -o "$dmg"
+rm "$dmg.tmp.dmg"
