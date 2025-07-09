@@ -122,7 +122,6 @@ extension AppContext {
                     return
                 }
                 pp_log_g(.app, .info, "Version: new version available at \(updateURL)")
-                // FIXME: #1437, present alert
             } catch AppError.rateLimit {
                 //
             } catch {
