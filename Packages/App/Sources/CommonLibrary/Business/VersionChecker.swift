@@ -65,3 +65,20 @@ public final class VersionChecker: ObservableObject {
         return latestDownloadURL
     }
 }
+
+extension VersionChecker {
+    private final class DummyStrategy: VersionCheckerStrategy {
+        func latestVersion() async throws -> SemanticVersion {
+            SemanticVersion("255.255.255")!
+        }
+    }
+
+    public convenience init() {
+        self.init(
+            kvManager: KeyValueManager(),
+            strategy: DummyStrategy(),
+            currentVersion: "0.0.0", // an update is always available
+            downloadURL: URL(string: "http://")!
+        )
+    }
+}

@@ -57,7 +57,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
-    public let versionChecker: VersionChecker?
+    public let versionChecker: VersionChecker
 
     public let webReceiverManager: WebReceiverManager
 
@@ -99,7 +99,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registryCoder = registryCoder
         self.sysexManager = sysexManager
         self.tunnel = tunnel
-        self.versionChecker = versionChecker
+        self.versionChecker = versionChecker ?? VersionChecker()
         self.webReceiverManager = webReceiverManager
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
@@ -117,7 +117,7 @@ extension AppContext {
 
             // check for updates
             do {
-                guard let updateURL = try await versionChecker?.checkLatest() else {
+                guard let updateURL = try await versionChecker.checkLatest() else {
                     pp_log_g(.app, .debug, "Version: current is latest version")
                     return
                 }
