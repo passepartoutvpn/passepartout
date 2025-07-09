@@ -2,6 +2,7 @@
 *.swp
 *.pbxuser
 **/xcuserdata
+Packages/**/Package.resolved
 fastlane/README.md
 fastlane/report.xml
 fastlane/**/*.html

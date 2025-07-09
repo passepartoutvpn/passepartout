@@ -72,7 +72,7 @@ struct ProviderServerView: View {
 
     @StateObject
     private var filtersViewModel = ProviderFiltersView.Model(
-        kvStore: KeyValueManager(store: UserDefaultsStore(.standard))
+        kvManager: KeyValueManager(store: UserDefaultsStore(.standard))
     )
 
     @StateObject

@@ -108,6 +108,7 @@
 "global.actions.select" = "Επιλογή";
 "global.actions.send" = "Αποστολή";
 "global.actions.show" = "Εμφάνιση";
+"global.actions.update" = "Ενημέρωση";
 "global.nouns.about" = "Σχετικά";
 "global.nouns.account" = "Λογαριασμός";
 "global.nouns.address" = "Διεύθυνση";

@@ -30,6 +30,9 @@ import SwiftUI
 
 struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestination>: View where LinkContent: View, SettingsDestination: View, DiagnosticsDestination: View {
 
+    @EnvironmentObject
+    private var versionChecker: VersionChecker
+
     @Environment(\.distributionTarget)
     private var distributionTarget
 
@@ -77,8 +80,12 @@ struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestinat
 private extension SettingsContentView {
     var listView: some View {
         List(selection: $navigationRoute) {
-            linkContent(.preferences)
-
+            Group {
+                linkContent(.preferences)
+                if let url = versionChecker.latestDownloadURL {
+                    ExternalLink(Strings.Global.Actions.update, url: url)
+                }
+            }
             Group {
                 linkContent(.version)
                 linkContent(.links)
@@ -90,7 +97,7 @@ private extension SettingsContentView {
             .themeSection(header: Strings.Global.Nouns.about)
 
             Group {
-                FAQLink()
+                ExternalLink(Strings.Unlocalized.faq, url: Constants.shared.websites.faq)
                 if distributionTarget == .developerID {
                     linkContent(.systemExtension)
                 }

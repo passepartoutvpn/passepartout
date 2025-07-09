@@ -108,6 +108,7 @@
 "global.actions.select" = "Selecteren";
 "global.actions.send" = "Verzenden";
 "global.actions.show" = "Weergeven";
+"global.actions.update" = "Bijwerken";
 "global.nouns.about" = "Over";
 "global.nouns.account" = "Account";
 "global.nouns.address" = "Adres";

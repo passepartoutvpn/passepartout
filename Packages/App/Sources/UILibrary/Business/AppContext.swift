@@ -39,7 +39,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let iapManager: IAPManager
 
-    public let kvStore: KeyValueManager
+    public let kvManager: KeyValueManager
 
     public let migrationManager: MigrationManager
 
@@ -57,6 +57,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
+    public let versionChecker: VersionChecker
+
     public let webReceiverManager: WebReceiverManager
 
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
@@ -71,7 +73,7 @@ public final class AppContext: ObservableObject, Sendable {
         apiManager: APIManager,
         distributionTarget: DistributionTarget,
         iapManager: IAPManager,
-        kvStore: KeyValueManager,
+        kvManager: KeyValueManager,
         migrationManager: MigrationManager,
         onboardingManager: OnboardingManager? = nil,
         preferencesManager: PreferencesManager,
@@ -80,14 +82,15 @@ public final class AppContext: ObservableObject, Sendable {
         registryCoder: RegistryCoder,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
+        versionChecker: VersionChecker? = nil,
         webReceiverManager: WebReceiverManager,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
-        appearanceManager = AppearanceManager(kvStore: kvStore)
+        appearanceManager = AppearanceManager(kvManager: kvManager)
         self.distributionTarget = distributionTarget
         self.iapManager = iapManager
-        self.kvStore = kvStore
+        self.kvManager = kvManager
         self.migrationManager = migrationManager
         self.onboardingManager = onboardingManager ?? OnboardingManager()
         self.preferencesManager = preferencesManager
@@ -96,6 +99,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registryCoder = registryCoder
         self.sysexManager = sysexManager
         self.tunnel = tunnel
+        self.versionChecker = versionChecker ?? VersionChecker()
         self.webReceiverManager = webReceiverManager
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
@@ -110,6 +114,19 @@ extension AppContext {
         Task {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
+
+            // check for updates
+            do {
+                guard let updateURL = try await versionChecker.checkLatest() else {
+                    pp_log_g(.app, .debug, "Version: current is latest version")
+                    return
+                }
+                pp_log_g(.app, .info, "Version: new version available at \(updateURL)")
+            } catch AppError.rateLimit {
+                //
+            } catch {
+                pp_log_g(.app, .error, "Unable to check version: \(error)")
+            }
         }
     }
 }
@@ -139,7 +156,7 @@ private extension AppContext {
             .removeDuplicates()
             .sink { [weak self] in
                 pp_log_g(.App.iap, .info, "IAPManager.isEnabled -> \($0)")
-                self?.kvStore.set(!$0, forKey: AppPreference.skipsPurchases.key)
+                self?.kvManager.set(!$0, forKey: AppPreference.skipsPurchases.key)
                 Task {
                     await self?.iapManager.reloadReceipt()
                 }

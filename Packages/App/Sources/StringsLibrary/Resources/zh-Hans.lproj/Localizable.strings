@@ -108,6 +108,7 @@
 "global.actions.select" = "选择";
 "global.actions.send" = "发送";
 "global.actions.show" = "显示";
+"global.actions.update" = "更新";
 "global.nouns.about" = "关于";
 "global.nouns.account" = "账户";
 "global.nouns.address" = "地址";

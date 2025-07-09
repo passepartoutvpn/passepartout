@@ -48,7 +48,7 @@ struct DiagnosticsView: View {
     private var iapManager: IAPManager
 
     @EnvironmentObject
-    private var kvStore: KeyValueManager
+    private var kvManager: KeyValueManager
 
     @Environment(\.distributionTarget)
     private var distributionTarget
@@ -91,7 +91,7 @@ struct DiagnosticsView: View {
         .task {
             tunnelLogs = await computedTunnelLogs()
         }
-        .themeKeyValue(kvStore, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
+        .themeKeyValue(kvManager, AppPreference.logsPrivateData.key, $logsPrivateData, default: false)
         .themeForm()
         .alert(Strings.Views.Diagnostics.ReportIssue.title, isPresented: $isPresentingUnableToEmail) {
             Button(Strings.Global.Nouns.ok, role: .cancel) {

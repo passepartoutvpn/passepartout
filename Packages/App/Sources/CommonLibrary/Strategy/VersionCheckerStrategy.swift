@@ -1,8 +1,8 @@
 //
-//  ___FILEBASENAMEASIDENTIFIER___.swift
+//  VersionCheckerStrategy.swift
 //  Passepartout
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
+//  Created by Davide De Rosa on 7/8/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -22,3 +22,9 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
+
+import Foundation
+
+public protocol VersionCheckerStrategy {
+    func latestVersion(since: Date) async throws -> SemanticVersion
+}

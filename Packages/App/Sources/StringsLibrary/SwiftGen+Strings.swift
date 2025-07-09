@@ -322,6 +322,8 @@ public enum Strings {
       public static let send = Strings.tr("Localizable", "global.actions.send", fallback: "Send")
       /// Show
       public static let show = Strings.tr("Localizable", "global.actions.show", fallback: "Show")
+      /// Update
+      public static let update = Strings.tr("Localizable", "global.actions.update", fallback: "Update")
     }
     public enum Nouns {
       /// About

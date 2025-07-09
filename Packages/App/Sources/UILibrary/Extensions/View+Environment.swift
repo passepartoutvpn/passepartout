@@ -33,11 +33,12 @@ extension View {
             .environmentObject(context.appearanceManager)
             .environment(\.distributionTarget, context.distributionTarget)
             .environmentObject(context.iapManager)
-            .environmentObject(context.kvStore)
+            .environmentObject(context.kvManager)
             .environmentObject(context.migrationManager)
             .environmentObject(context.onboardingManager)
             .environmentObject(context.preferencesManager)
             .environmentObject(context.registryCoder)
+            .environmentObject(context.versionChecker)
     }
 
     public func withMockEnvironment() -> some View {

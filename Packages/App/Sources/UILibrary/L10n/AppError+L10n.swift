@@ -58,12 +58,20 @@ extension AppError: LocalizedError {
         case .permissionDenied:
             return V.permissionDenied
 
+        // handled manually
+        case .rateLimit:
+            return nil
+
         case .systemExtension:
             assertionFailure("AppError.systemExtension should be handled in AppCoordinator")
             return nil
 
         case .timeout:
             return Strings.Errors.App.Passepartout.timeout
+
+        // handled manually
+        case .unexpectedResponse:
+            return nil
 
         case .unknown:
             return nil

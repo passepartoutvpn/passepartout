@@ -108,6 +108,7 @@
 "global.actions.select" = "Вибрати";
 "global.actions.send" = "Надіслати";
 "global.actions.show" = "Показати";
+"global.actions.update" = "Оновити";
 "global.nouns.about" = "Про";
 "global.nouns.account" = "Обліковий запис";
 "global.nouns.address" = "Адреса";

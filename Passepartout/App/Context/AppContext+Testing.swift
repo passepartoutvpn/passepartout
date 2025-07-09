@@ -34,7 +34,7 @@ extension AppContext {
         let constants: Constants = .shared
         let ctx: PartoutLoggerContext = .global
 
-        let kvStore = KeyValueManager()
+        let kvManager = KeyValueManager()
         let apiManager = APIManager(
             ctx,
             from: API.bundled,
@@ -74,7 +74,7 @@ extension AppContext {
             apiManager: apiManager,
             distributionTarget: Dependencies.distributionTarget,
             iapManager: iapManager,
-            kvStore: kvStore,
+            kvManager: kvManager,
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
             profileManager: profileManager,

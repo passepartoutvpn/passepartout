@@ -30,7 +30,7 @@ import PartoutOpenVPN
 import PartoutWireGuard
 
 extension Dependencies {
-    var kvStore: KeyValueManager {
+    var kvManager: KeyValueManager {
         Self.sharedKVStore
     }
 

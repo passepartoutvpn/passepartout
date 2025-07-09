@@ -32,7 +32,7 @@ import ServiceManagement
 
 @MainActor
 public final class MacSettingsModel: ObservableObject {
-    private let kvStore: KeyValueManager?
+    private let kvManager: KeyValueManager?
 
     private let appService: SMAppService?
 
@@ -63,21 +63,21 @@ public final class MacSettingsModel: ObservableObject {
 
     public var keepsInMenu: Bool {
         get {
-            kvStore?.bool(forKey: UIPreference.keepsInMenu.key) ?? false
+            kvManager?.bool(forKey: UIPreference.keepsInMenu.key) ?? false
         }
         set {
             objectWillChange.send()
-            kvStore?.set(newValue, forKey: UIPreference.keepsInMenu.key)
+            kvManager?.set(newValue, forKey: UIPreference.keepsInMenu.key)
         }
     }
 
     public init() {
-        kvStore = nil
+        kvManager = nil
         appService = nil
     }
 
-    public init(kvStore: KeyValueManager, loginItemId: String) {
-        self.kvStore = kvStore
+    public init(kvManager: KeyValueManager, loginItemId: String) {
+        self.kvManager = kvManager
         appService = SMAppService.loginItem(identifier: loginItemId)
     }
 }

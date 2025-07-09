@@ -104,6 +104,14 @@ extension KeyValueManager {
         return value ?? 0
     }
 
+    public func double(forKey key: String) -> Double {
+        var value = self[key] as Double?
+        if value == nil {
+            value = fallback[key] as? Double
+        }
+        return value ?? 0.0
+    }
+
     public func string(forKey key: String) -> String? {
         var value = self[key] as String?
         if value == nil {

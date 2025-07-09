@@ -68,6 +68,10 @@ public struct Constants: Decodable, Sendable {
         public let subreddit: URL
 
         public let eula: URL
+
+        public let appStoreDownload: URL
+
+        public let macDownload: URL
     }
 
     public struct GitHub: Decodable, Sendable {
@@ -84,6 +88,8 @@ public struct Constants: Decodable, Sendable {
         public let issues: URL
 
         public let raw: URL
+
+        public let latestRelease: URL
     }
 
     public struct Emails: Decodable, Sendable {
@@ -147,6 +153,8 @@ public struct Constants: Decodable, Sendable {
 
     public struct API: Decodable, Sendable {
         public let timeoutInterval: TimeInterval
+
+        public let versionRateLimit: TimeInterval
 
         public let refreshInfrastructureRateLimit: TimeInterval
     }

@@ -32,7 +32,7 @@ extension AppContext {
     public static let forPreviews: AppContext = {
         let constants: Constants = .shared
 
-        let kvStore = KeyValueManager()
+        let kvManager = KeyValueManager()
         let iapManager = IAPManager(
             customUserLevel: .complete,
             inAppHelper: FakeAppProductHelper(),
@@ -76,7 +76,7 @@ extension AppContext {
             apiManager: apiManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
-            kvStore: kvStore,
+            kvManager: kvManager,
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
             profileManager: profileManager,

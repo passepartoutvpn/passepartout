@@ -46,8 +46,9 @@ extension AppContext {
         let dependencies: Dependencies = .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
+        let kvManager = dependencies.kvManager
 
-        let ctx = PartoutLogger.register(for: .app, with: dependencies.kvStore.preferences)
+        let ctx = PartoutLogger.register(for: .app, with: kvManager.preferences)
 
         // MARK: Core Data
 
@@ -100,7 +101,7 @@ extension AppContext {
             productsAtBuild: dependencies.productsAtBuild()
         )
         if distributionTarget.supportsIAP {
-            iapManager.isEnabled = !dependencies.kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+            iapManager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
         } else {
             iapManager.isEnabled = false
         }
@@ -159,7 +160,7 @@ extension AppContext {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
             sysex: sysexManager,
-            kvStore: dependencies.kvStore,
+            kvManager: kvManager,
             processor: processor,
             interval: constants.tunnel.refreshInterval
         )
@@ -194,7 +195,7 @@ extension AppContext {
             migrationManager = MigrationManager()
         }
 
-        let onboardingManager = OnboardingManager(kvStore: dependencies.kvStore)
+        let onboardingManager = OnboardingManager(kvManager: kvManager)
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
@@ -260,13 +261,35 @@ extension AppContext {
             profileManager.reloadRequiredFeatures()
         }
 
+        // MARK: Version
+
+        let versionStrategy = GitHubReleaseStrategy(
+            releaseURL: Constants.shared.github.latestRelease,
+            rateLimit: Constants.shared.api.versionRateLimit
+        )
+        let versionChecker = VersionChecker(
+            kvManager: kvManager,
+            strategy: versionStrategy,
+            currentVersion: BundleConfiguration.mainVersionNumber,
+            downloadURL: {
+                switch distributionTarget {
+                case .appStore:
+                    return Constants.shared.websites.appStoreDownload
+                case .developerID:
+                    return Constants.shared.websites.macDownload
+                case .enterprise:
+                    fatalError("No URL for enterprise distribution")
+                }
+            }()
+        )
+
         // MARK: Build
 
         self.init(
             apiManager: apiManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
-            kvStore: dependencies.kvStore,
+            kvManager: kvManager,
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,
@@ -275,6 +298,7 @@ extension AppContext {
             registryCoder: dependencies.registryCoder,
             sysexManager: sysexManager,
             tunnel: tunnel,
+            versionChecker: versionChecker,
             webReceiverManager: webReceiverManager,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )

@@ -28,30 +28,30 @@ import Foundation
 
 @MainActor
 public final class OnboardingManager: ObservableObject {
-    private let kvStore: KeyValueManager?
+    private let kvManager: KeyValueManager?
 
     private let initialStep: OnboardingStep
 
     public private(set) var step: OnboardingStep {
         didSet {
-            kvStore?.set(step.rawValue, forKey: UIPreference.onboardingStep.key)
+            kvManager?.set(step.rawValue, forKey: UIPreference.onboardingStep.key)
         }
     }
 
-    public init(kvStore: KeyValueManager? = nil, initialStep: OnboardingStep? = nil) {
-        self.kvStore = kvStore
+    public init(kvManager: KeyValueManager? = nil, initialStep: OnboardingStep? = nil) {
+        self.kvManager = kvManager
         self.initialStep = initialStep ?? .doneV2
         step = self.initialStep
     }
 
-    public convenience init(kvStore: KeyValueManager) {
+    public convenience init(kvManager: KeyValueManager) {
         let initialStep: OnboardingStep?
-        if let rawStep = kvStore.string(forKey: UIPreference.onboardingStep.key) {
+        if let rawStep = kvManager.string(forKey: UIPreference.onboardingStep.key) {
             initialStep = OnboardingStep(rawValue: rawStep)
         } else {
             initialStep = nil
         }
-        self.init(kvStore: kvStore, initialStep: initialStep)
+        self.init(kvManager: kvManager, initialStep: initialStep)
     }
 
     public func advance() {

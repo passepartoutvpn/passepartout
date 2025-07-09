@@ -31,6 +31,9 @@ import UILibrary
 
 struct SettingsContentView<LinkContent, SettingsDestination, LogDestination>: View where LinkContent: View, SettingsDestination: View, LogDestination: View {
 
+    @EnvironmentObject
+    private var versionChecker: VersionChecker
+
     @Environment(\.distributionTarget)
     private var distributionTarget
 
@@ -65,12 +68,15 @@ struct SettingsContentView<LinkContent, SettingsDestination, LogDestination>: Vi
 private extension SettingsContentView {
     var listView: some View {
         List {
-            Section {
-                linkContent(.preferences)
-            }
-
             Group {
+                linkContent(.preferences)
                 linkContent(.version)
+                if let url = versionChecker.latestDownloadURL {
+                    ExternalLink(Strings.Global.Actions.update, url: url)
+                }
+            }
+            .themeSection(header: Strings.Global.Nouns.about)
+            Group {
                 linkContent(.links)
                 linkContent(.credits)
                 if !isBeta && distributionTarget.supportsIAP {
@@ -79,8 +85,9 @@ private extension SettingsContentView {
             }
             .themeSection(header: Strings.Global.Nouns.about)
 
-            FAQLink()
+            ExternalLink(Strings.Unlocalized.faq, url: Constants.shared.websites.faq)
                 .themeSection(header: Strings.Global.Nouns.troubleshooting)
+
             Group {
                 linkContent(.diagnostics)
                 if distributionTarget.supportsIAP {
