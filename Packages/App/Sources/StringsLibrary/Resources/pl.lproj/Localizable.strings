@@ -371,6 +371,7 @@
 "views.settings.links.sections.support" = "Wsparcie";
 "views.settings.links.sections.web" = "Strona internetowa";
 "views.settings.links.title" = "Linki";
+"views.settings.links.update" = "Zaktualizuj do %@";
 "views.settings.system_extension.buttons.open" = "Otwórz preferencje";
 "views.settings.system_extension.message" = "Aby VPN działało, aplikacja musi znajdować się w katalogu /Applications, a %@ musi być włączone jako %@.\n\nOtwórz Preferencje systemowe macOS, przewiń do „%@”, otwórz je i włącz %@.";
 "views.settings.title" = "O aplikacji";

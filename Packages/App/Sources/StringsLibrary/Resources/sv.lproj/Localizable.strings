@@ -371,6 +371,7 @@
 "views.settings.links.sections.support" = "Support";
 "views.settings.links.sections.web" = "Webbplats";
 "views.settings.links.title" = "Länkar";
+"views.settings.links.update" = "Uppdatera till %@";
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
 "views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";

@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-public struct SemanticVersion: Sendable {
+public struct SemanticVersion: Hashable, Sendable {
     public let major: Int
 
     public let minor: Int

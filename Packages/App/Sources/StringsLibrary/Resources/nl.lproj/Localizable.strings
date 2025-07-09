@@ -371,6 +371,7 @@
 "views.settings.links.sections.support" = "Ondersteuning";
 "views.settings.links.sections.web" = "Web";
 "views.settings.links.title" = "Links";
+"views.settings.links.update" = "Bijwerken naar %@";
 "views.settings.system_extension.buttons.open" = "Voorkeuren openen";
 "views.settings.system_extension.message" = "Voor een goede werking van de VPN moet de app in de map /Applications staan en moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
