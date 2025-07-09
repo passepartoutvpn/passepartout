@@ -82,8 +82,8 @@ private extension SettingsContentView {
         List(selection: $navigationRoute) {
             Group {
                 linkContent(.preferences)
-                if let url = versionChecker.latestDownloadURL {
-                    ExternalLink(Strings.Global.Actions.update, url: url)
+                if let latest = versionChecker.latestVersion {
+                    ExternalLink(Strings.Views.Settings.Links.update(latest.0), url: latest.1)
                 }
             }
             Group {

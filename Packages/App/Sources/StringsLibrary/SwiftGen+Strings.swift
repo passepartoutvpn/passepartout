@@ -1125,6 +1125,10 @@ public enum Strings {
       public enum Links {
         /// Links
         public static let title = Strings.tr("Localizable", "views.settings.links.title", fallback: "Links")
+        /// Update to %@
+        public static func update(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.settings.links.update", String(describing: p1), fallback: "Update to %@")
+        }
         public enum Rows {
           /// Blog
           public static let blog = Strings.tr("Localizable", "views.settings.links.rows.blog", fallback: "Blog")

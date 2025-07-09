@@ -26,6 +26,7 @@
 // MARK: Views
 
 "views.settings.title" = "Settings";
+"views.settings.links.update" = "Update to %@";
 "views.settings.links.title" = "Links";
 "views.settings.links.sections.support" = "Support";
 "views.settings.links.sections.web" = "Web";

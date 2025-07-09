@@ -50,15 +50,15 @@ public final class VersionChecker: ObservableObject {
         self.downloadURL = downloadURL
     }
 
-    public var latestDownloadURL: URL? {
+    public var latestVersion: (SemanticVersion, URL)? {
         guard let latestVersionDescription = kvManager.string(forKey: AppPreference.lastCheckedVersion.key),
               let latestVersion = SemanticVersion(latestVersionDescription) else {
             return nil
         }
-        return latestVersion > currentVersion ? downloadURL : nil
+        return latestVersion > currentVersion ? (latestVersion, downloadURL) : nil
     }
 
-    public func checkLatest() async throws -> URL? {
+    public func checkLatest() async throws -> (SemanticVersion, URL)? {
         let now = Date()
         do {
             let lastCheckedInterval = kvManager.double(forKey: AppPreference.lastCheckedVersionDate.key)
@@ -68,7 +68,7 @@ public final class VersionChecker: ObservableObject {
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
             kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
             pp_log_g(.app, .info, "Version: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
-            return latestDownloadURL
+            return (latestVersion, downloadURL)
         } catch AppError.unexpectedResponse {
             // save the check date regardless because the service call succeeded
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
@@ -86,12 +86,12 @@ extension VersionChecker {
         }
     }
 
-    public convenience init() {
+    public convenience init(downloadURL: URL = URL(string: "http://")!) {
         self.init(
             kvManager: KeyValueManager(),
             strategy: DummyStrategy(),
             currentVersion: "0.0.0", // an update is always available
-            downloadURL: URL(string: "http://")!
+            downloadURL: downloadURL
         )
     }
 }

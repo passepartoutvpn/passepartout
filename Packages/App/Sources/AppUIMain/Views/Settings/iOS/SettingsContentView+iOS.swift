@@ -71,8 +71,8 @@ private extension SettingsContentView {
             Group {
                 linkContent(.preferences)
                 linkContent(.version)
-                if let url = versionChecker.latestDownloadURL {
-                    ExternalLink(Strings.Global.Actions.update, url: url)
+                if let latest = versionChecker.latestVersion {
+                    ExternalLink(Strings.Views.Settings.Links.update(latest.0), url: latest.1)
                 }
             }
             .themeSection(header: Strings.Global.Nouns.about)
