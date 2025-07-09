@@ -31,6 +31,7 @@ extension KeyValueManager {
         get {
             var values = AppPreferenceValues()
             values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
+            values.lastCheckedVersionDate = double(forKey: AppPreference.lastCheckedVersionDate.key)
             values.lastCheckedVersion = object(forKey: AppPreference.lastCheckedVersion.key)
             values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
             values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
@@ -40,6 +41,7 @@ extension KeyValueManager {
         }
         set {
             set(newValue.dnsFallsBack, forKey: AppPreference.dnsFallsBack.key)
+            set(newValue.lastCheckedVersionDate, forKey: AppPreference.lastCheckedVersionDate.key)
             set(newValue.lastCheckedVersion, forKey: AppPreference.lastCheckedVersion.key)
             set(newValue.lastUsedProfileId, forKey: AppPreference.lastUsedProfileId.key)
             set(newValue.logsPrivateData, forKey: AppPreference.logsPrivateData.key)

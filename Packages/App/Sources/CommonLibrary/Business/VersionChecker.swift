@@ -59,16 +59,29 @@ public final class VersionChecker: ObservableObject {
     }
 
     public func checkLatest() async throws -> URL? {
-        let latestVersion = try await strategy.latestVersion()
-        kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
-        pp_log_g(.app, .info, "Version: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
-        return latestDownloadURL
+        let now = Date()
+        do {
+            let lastCheckedInterval = kvManager.double(forKey: AppPreference.lastCheckedVersionDate.key)
+            let lastCheckedDate = lastCheckedInterval > 0.0 ? Date(timeIntervalSinceReferenceDate: lastCheckedInterval) : .distantPast
+
+            let latestVersion = try await strategy.latestVersion(since: lastCheckedDate)
+            kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
+            kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
+            pp_log_g(.app, .info, "Version: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
+            return latestDownloadURL
+        } catch AppError.unexpectedResponse {
+            // save the check date regardless because the service call succeeded
+            kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
+            throw AppError.unexpectedResponse
+        } catch {
+            throw error
+        }
     }
 }
 
 extension VersionChecker {
     private final class DummyStrategy: VersionCheckerStrategy {
-        func latestVersion() async throws -> SemanticVersion {
+        func latestVersion(since: Date) async throws -> SemanticVersion {
             SemanticVersion("255.255.255")!
         }
     }

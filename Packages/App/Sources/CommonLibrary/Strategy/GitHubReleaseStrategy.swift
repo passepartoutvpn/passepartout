@@ -31,16 +31,16 @@ public final class GitHubReleaseStrategy: VersionCheckerStrategy {
 
     private let rateLimit: TimeInterval
 
-    private var lastCheckDate: Date?
-
     public init(releaseURL: URL, rateLimit: TimeInterval) {
         self.releaseURL = releaseURL
         self.rateLimit = rateLimit
     }
 
-    public func latestVersion() async throws -> SemanticVersion {
-        if let lastCheckDate {
-            guard -lastCheckDate.timeIntervalSinceNow > rateLimit else {
+    public func latestVersion(since: Date) async throws -> SemanticVersion {
+        if since > .distantPast {
+            let elapsed = -since.timeIntervalSinceNow
+            guard elapsed >= rateLimit else {
+                pp_log_g(.app, .debug, "GitHub: elapsed \(elapsed) < \(rateLimit)")
                 throw AppError.rateLimit
             }
         }
@@ -48,7 +48,6 @@ public final class GitHubReleaseStrategy: VersionCheckerStrategy {
         var request = URLRequest(url: releaseURL)
         request.cachePolicy = .useProtocolCachePolicy
         let result = try await URLSession.shared.data(for: request)
-        lastCheckDate = Date()
 
         let json = try JSONDecoder().decode(VersionJSON.self, from: result.0)
         let newVersion = json.name

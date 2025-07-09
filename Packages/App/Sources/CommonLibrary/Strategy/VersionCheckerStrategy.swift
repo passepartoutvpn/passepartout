@@ -26,5 +26,5 @@
 import Foundation
 
 public protocol VersionCheckerStrategy {
-    func latestVersion() async throws -> SemanticVersion
+    func latestVersion(since: Date) async throws -> SemanticVersion
 }

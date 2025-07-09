@@ -29,6 +29,8 @@ public enum AppPreference: String, PreferenceProtocol {
     case dnsFallsBack
 //    case dnsFallbackServers
 
+    case lastCheckedVersionDate
+
     case lastCheckedVersion
 
     case lastUsedProfileId
@@ -46,6 +48,8 @@ public enum AppPreference: String, PreferenceProtocol {
 
 public struct AppPreferenceValues: Codable, Sendable {
     public var dnsFallsBack = true
+
+    public var lastCheckedVersionDate: TimeInterval?
 
     public var lastCheckedVersion: String?
 
