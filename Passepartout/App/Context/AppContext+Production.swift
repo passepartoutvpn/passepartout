@@ -39,13 +39,15 @@ import WebLibrary
 #endif
 
 extension AppContext {
-    convenience init(_ ctx: PartoutLoggerContext, kvStore: KeyValueManager) {
+    convenience init() {
 
         // MARK: Declare globals
 
         let dependencies: Dependencies = .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
+
+        let ctx = PartoutLogger.register(for: .app, with: dependencies.kvStore.preferences)
 
         // MARK: Core Data
 
@@ -98,7 +100,7 @@ extension AppContext {
             productsAtBuild: dependencies.productsAtBuild()
         )
         if distributionTarget.supportsIAP {
-            iapManager.isEnabled = !kvStore.bool(forKey: AppPreference.skipsPurchases.key)
+            iapManager.isEnabled = !dependencies.kvStore.bool(forKey: AppPreference.skipsPurchases.key)
         } else {
             iapManager.isEnabled = false
         }
@@ -157,7 +159,7 @@ extension AppContext {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
             sysex: sysexManager,
-            kvStore: kvStore,
+            kvStore: dependencies.kvStore,
             processor: processor,
             interval: constants.tunnel.refreshInterval
         )
@@ -192,7 +194,7 @@ extension AppContext {
             migrationManager = MigrationManager()
         }
 
-        let onboardingManager = OnboardingManager(kvStore: kvStore)
+        let onboardingManager = OnboardingManager(kvStore: dependencies.kvStore)
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
@@ -264,7 +266,7 @@ extension AppContext {
             apiManager: apiManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
-            kvStore: kvStore,
+            kvStore: dependencies.kvStore,
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,

@@ -57,6 +57,9 @@ public struct PreferencesView: View {
     private var dnsFallsBack = true
 
     @State
+    private var usesModernCrypto = false
+
+    @State
     private var isConfirmingEraseiCloud = false
 
     @State
@@ -80,11 +83,13 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
+            experimentalSection
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
         }
         .themeKeyValue(kvStore, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
+        .themeKeyValue(kvStore, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
         .themeForm()
     }
 }
@@ -139,6 +144,18 @@ private extension PreferencesView {
             .themeContainerEntry(subtitle: Strings.Views.Preferences.EnablesIap.footer)
     }
 
+    var experimentalSection: some View {
+        Group {
+            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
+                .themeContainerEntry(
+                    header: Strings.Views.Preferences.Experimental.header,
+                    subtitle: Strings.Views.Preferences.ModernCrypto.footer
+                )
+        }
+        .themeContainer(header: Strings.Views.Preferences.Experimental.header)
+
+    }
+
     var eraseCloudKitSection: some View {
         Button(Strings.Views.Preferences.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
@@ -168,6 +185,39 @@ private extension PreferencesView {
     }
 }
 
+#else
+
+public struct PreferencesView: View {
+
+    @EnvironmentObject
+    private var kvStore: KeyValueManager
+
+    private let profileManager: ProfileManager
+
+    @State
+    private var usesModernCrypto = false
+
+    public init(profileManager: ProfileManager) {
+        self.profileManager = profileManager
+    }
+
+    public var body: some View {
+        experimentalSection
+    }
+}
+
+private extension PreferencesView {
+    var experimentalSection: some View {
+        Group {
+            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
+        }
+        .themeSection(header: Strings.Views.Preferences.Experimental.header)
+
+    }
+}
+
+#endif
+
 #Preview {
     PreferencesView(profileManager: .forPreviews)
         .withMockEnvironment()
@@ -175,5 +225,3 @@ private extension PreferencesView {
         .environmentObject(MacSettingsModel())
 #endif
 }
-
-#endif

@@ -58,10 +58,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // MARK: Update or fetch existing preferences
 
         let (kvStore, preferences) = await MainActor.run {
-            let kvStore = KeyValueManager(
-                store: UserDefaultsStore(.standard),
-                fallback: AppPreferenceValues()
-            )
+            let kvStore = dependencies.kvStore
             if let appPreferences {
                 kvStore.preferences = appPreferences
                 return (kvStore, appPreferences)
