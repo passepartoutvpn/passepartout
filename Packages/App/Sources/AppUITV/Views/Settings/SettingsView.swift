@@ -34,6 +34,9 @@ struct SettingsView: View {
     private var iapManager: IAPManager
 
     @EnvironmentObject
+    private var versionChecker: VersionChecker
+
+    @EnvironmentObject
     private var theme: Theme
 
     @ObservedObject
@@ -71,6 +74,8 @@ private extension SettingsView {
         List {
             if iapManager.isBeta {
                 BetaSection()
+            } else if let url = versionChecker.latestDownloadURL {
+                ExternalLink(Strings.Global.Actions.update, url: url)
             }
             creditsSection
             preferencesSection
