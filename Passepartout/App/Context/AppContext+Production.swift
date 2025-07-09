@@ -46,8 +46,9 @@ extension AppContext {
         let dependencies: Dependencies = .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
+        let kvManager = dependencies.kvManager
 
-        let ctx = PartoutLogger.register(for: .app, with: dependencies.kvManager.preferences)
+        let ctx = PartoutLogger.register(for: .app, with: kvManager.preferences)
 
         // MARK: Core Data
 
@@ -100,7 +101,7 @@ extension AppContext {
             productsAtBuild: dependencies.productsAtBuild()
         )
         if distributionTarget.supportsIAP {
-            iapManager.isEnabled = !dependencies.kvManager.bool(forKey: AppPreference.skipsPurchases.key)
+            iapManager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
         } else {
             iapManager.isEnabled = false
         }
@@ -159,7 +160,7 @@ extension AppContext {
                 dependencies.appTunnelEnvironment(strategy: tunnelStrategy, profileId: $0)
             },
             sysex: sysexManager,
-            kvManager: dependencies.kvManager,
+            kvManager: kvManager,
             processor: processor,
             interval: constants.tunnel.refreshInterval
         )
@@ -194,7 +195,7 @@ extension AppContext {
             migrationManager = MigrationManager()
         }
 
-        let onboardingManager = OnboardingManager(kvManager: dependencies.kvManager)
+        let onboardingManager = OnboardingManager(kvManager: kvManager)
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
@@ -266,7 +267,7 @@ extension AppContext {
             apiManager: apiManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
-            kvManager: dependencies.kvManager,
+            kvManager: kvManager,
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,
