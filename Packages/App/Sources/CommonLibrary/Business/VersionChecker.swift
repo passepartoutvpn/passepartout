@@ -27,6 +27,12 @@ import Foundation
 
 @MainActor
 public final class VersionChecker: ObservableObject {
+    public struct Release: Hashable, Sendable {
+        public let version: SemanticVersion
+
+        public let url: URL
+    }
+
     private let kvManager: KeyValueManager
 
     private let strategy: VersionCheckerStrategy
@@ -50,25 +56,25 @@ public final class VersionChecker: ObservableObject {
         self.downloadURL = downloadURL
     }
 
-    public var latestVersion: (SemanticVersion, URL)? {
+    public var latestRelease: Release? {
         guard let latestVersionDescription = kvManager.string(forKey: AppPreference.lastCheckedVersion.key),
               let latestVersion = SemanticVersion(latestVersionDescription) else {
             return nil
         }
-        return latestVersion > currentVersion ? (latestVersion, downloadURL) : nil
+        return latestVersion > currentVersion ? Release(version: latestVersion, url: downloadURL) : nil
     }
 
-    public func checkLatest() async throws -> (SemanticVersion, URL)? {
+    public func checkLatestRelease() async throws -> Release? {
         let now = Date()
         do {
             let lastCheckedInterval = kvManager.double(forKey: AppPreference.lastCheckedVersionDate.key)
             let lastCheckedDate = lastCheckedInterval > 0.0 ? Date(timeIntervalSinceReferenceDate: lastCheckedInterval) : .distantPast
 
-            let latestVersion = try await strategy.latestVersion(since: lastCheckedDate)
+            let fetchedLatestVersion = try await strategy.latestVersion(since: lastCheckedDate)
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
-            kvManager.set(latestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
-            pp_log_g(.app, .info, "Version: \(latestVersion) > \(currentVersion) = \(latestVersion > currentVersion)")
-            return (latestVersion, downloadURL)
+            kvManager.set(fetchedLatestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
+            pp_log_g(.app, .info, "Version: \(fetchedLatestVersion) > \(currentVersion) = \(fetchedLatestVersion > currentVersion)")
+            return latestRelease
         } catch AppError.unexpectedResponse {
             // save the check date regardless because the service call succeeded
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)

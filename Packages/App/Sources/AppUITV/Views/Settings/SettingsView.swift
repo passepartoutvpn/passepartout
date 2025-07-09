@@ -74,8 +74,8 @@ private extension SettingsView {
         List {
             if iapManager.isBeta {
                 BetaSection()
-            } else if let latest = versionChecker.latestVersion {
-                ExternalLink(Strings.Views.Settings.Links.update(latest.0), url: latest.1)
+            } else if let latest = versionChecker.latestRelease {
+                ExternalLink(Strings.Views.Settings.Links.update(latest.version), url: latest.url)
             }
             creditsSection
             preferencesSection

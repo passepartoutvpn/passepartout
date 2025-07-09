@@ -117,11 +117,11 @@ extension AppContext {
 
             // check for updates
             do {
-                guard let updateURL = try await versionChecker.checkLatest() else {
+                guard let release = try await versionChecker.checkLatestRelease() else {
                     pp_log_g(.app, .debug, "Version: current is latest version")
                     return
                 }
-                pp_log_g(.app, .info, "Version: new version available at \(updateURL)")
+                pp_log_g(.app, .info, "Version: new version available at \(release.url)")
             } catch AppError.rateLimit {
                 //
             } catch {
