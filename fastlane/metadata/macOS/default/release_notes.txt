@@ -1,1 +1,2 @@
-* Update Partout to drop wireguard-apple dependency (#1451)
+* Check GitHub Releases for updates (#1460)
+* Opt into modern cryptography from preferences (#1459)
