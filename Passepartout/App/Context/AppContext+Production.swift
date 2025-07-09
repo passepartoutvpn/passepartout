@@ -263,9 +263,6 @@ extension AppContext {
 
         // MARK: Version
 
-#if DEBUG
-        let versionChecker = VersionChecker()
-#else
         let versionStrategy = GitHubReleaseStrategy(
             releaseURL: Constants.shared.github.latestRelease,
             rateLimit: Constants.shared.api.versionRateLimit
@@ -285,7 +282,6 @@ extension AppContext {
                 }
             }()
         )
-#endif
 
         // MARK: Build
 
