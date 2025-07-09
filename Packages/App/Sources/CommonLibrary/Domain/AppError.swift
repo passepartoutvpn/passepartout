@@ -51,6 +51,8 @@ public enum AppError: Error {
 
     case timeout
 
+    case unexpectedResponse
+
     case unknown
 
     case verificationReceiptIsLoading

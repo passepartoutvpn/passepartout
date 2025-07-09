@@ -68,6 +68,10 @@ extension AppError: LocalizedError {
         case .timeout:
             return Strings.Errors.App.Passepartout.timeout
 
+        // handled manually
+        case .unexpectedResponse:
+            return nil
+
         case .unknown:
             return nil
 

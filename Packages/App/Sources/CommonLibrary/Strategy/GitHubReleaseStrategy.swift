@@ -54,8 +54,7 @@ public final class GitHubReleaseStrategy: VersionCheckerStrategy {
         let newVersion = json.name
         guard let semNew = SemanticVersion(newVersion) else {
             pp_log_g(.app, .error, "GitHub: unparsable release name '\(newVersion)'")
-            // FIXME: #1437, proper error code
-            throw AppError.unknown
+            throw AppError.unexpectedResponse
         }
         return semNew
     }
