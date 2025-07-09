@@ -182,7 +182,10 @@ private extension DiagnosticsView {
 
     var canReportIssue: Bool {
         // TODO: ###, remove after stable Developer ID
-        AppCommandLine.contains(.withReportIssue) || iapManager.isEligibleForFeedback || distributionTarget.canAlwaysReportIssue
+        AppCommandLine.contains(.withReportIssue) ||
+            iapManager.isEligibleForFeedback ||
+            distributionTarget.canAlwaysReportIssue ||
+            kvManager.bool(forKey: AppPreference.usesModernCrypto.key)
     }
 
     func computedTunnelLogs() async -> [LogEntry] {
