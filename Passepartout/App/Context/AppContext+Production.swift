@@ -261,6 +261,28 @@ extension AppContext {
             profileManager.reloadRequiredFeatures()
         }
 
+        // MARK: Version
+
+        let versionStrategy = GitHubReleaseStrategy(
+            releaseURL: Constants.shared.github.latestRelease,
+            rateLimit: Constants.shared.api.versionRateLimit
+        )
+        let versionChecker = VersionChecker(
+            kvManager: kvManager,
+            strategy: versionStrategy,
+            currentVersion: BundleConfiguration.mainVersionNumber,
+            downloadURL: {
+                switch distributionTarget {
+                case .appStore:
+                    return Constants.shared.websites.appStoreDownload
+                case .developerID:
+                    return Constants.shared.websites.macDownload
+                case .enterprise:
+                    fatalError("No URL for enterprise distribution")
+                }
+            }()
+        )
+
         // MARK: Build
 
         self.init(
@@ -276,6 +298,7 @@ extension AppContext {
             registryCoder: dependencies.registryCoder,
             sysexManager: sysexManager,
             tunnel: tunnel,
+            versionChecker: versionChecker,
             webReceiverManager: webReceiverManager,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )

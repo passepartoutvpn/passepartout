@@ -57,6 +57,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let tunnel: ExtendedTunnel
 
+    public let versionChecker: VersionChecker?
+
     public let webReceiverManager: WebReceiverManager
 
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
@@ -80,6 +82,7 @@ public final class AppContext: ObservableObject, Sendable {
         registryCoder: RegistryCoder,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
+        versionChecker: VersionChecker? = nil,
         webReceiverManager: WebReceiverManager,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
@@ -96,6 +99,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registryCoder = registryCoder
         self.sysexManager = sysexManager
         self.tunnel = tunnel
+        self.versionChecker = versionChecker
         self.webReceiverManager = webReceiverManager
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
         subscriptions = []
@@ -110,6 +114,20 @@ extension AppContext {
         Task {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
+
+            // check for updates
+            do {
+                guard let updateURL = try await versionChecker?.check() else {
+                    pp_log_g(.app, .debug, "Version: current is latest version")
+                    return
+                }
+                pp_log_g(.app, .info, "Version: new version available at \(updateURL)")
+                // FIXME: #1437, present alert
+            } catch AppError.rateLimit {
+                //
+            } catch {
+                pp_log_g(.app, .error, "Unable to check version: \(error)")
+            }
         }
     }
 }
