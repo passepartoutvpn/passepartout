@@ -1,5 +1,5 @@
 //
-//  FAQLink.swift
+//  ExternalLink.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/30/25.
@@ -26,14 +26,20 @@
 import CommonLibrary
 import SwiftUI
 
-public struct FAQLink: View {
-    public init() {
+public struct ExternalLink: View {
+    private let title: String
+
+    private let url: URL
+
+    public init(_ title: String, url: URL) {
+        self.title = title
+        self.url = url
     }
 
     public var body: some View {
-        Link(destination: Constants.shared.websites.faq) {
+        Link(destination: url) {
             HStack {
-                Text(Strings.Unlocalized.faq)
+                Text(title)
                 Spacer()
 #if os(macOS)
                 ThemeImage(.externalLink)

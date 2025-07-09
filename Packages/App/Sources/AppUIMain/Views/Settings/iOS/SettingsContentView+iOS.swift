@@ -79,8 +79,9 @@ private extension SettingsContentView {
             }
             .themeSection(header: Strings.Global.Nouns.about)
 
-            FAQLink()
+            ExternalLink(Strings.Unlocalized.faq, url: Constants.shared.websites.faq)
                 .themeSection(header: Strings.Global.Nouns.troubleshooting)
+
             Group {
                 linkContent(.diagnostics)
                 if distributionTarget.supportsIAP {

@@ -90,7 +90,7 @@ private extension SettingsContentView {
             .themeSection(header: Strings.Global.Nouns.about)
 
             Group {
-                FAQLink()
+                ExternalLink(Strings.Unlocalized.faq, url: Constants.shared.websites.faq)
                 if distributionTarget == .developerID {
                     linkContent(.systemExtension)
                 }
