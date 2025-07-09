@@ -108,6 +108,7 @@
 "global.actions.select" = "Sélectionner";
 "global.actions.send" = "Envoyer";
 "global.actions.show" = "Montrer";
+"global.actions.update" = "Mettre à jour";
 "global.nouns.about" = "À propos";
 "global.nouns.account" = "Compte";
 "global.nouns.address" = "Adresse";

@@ -108,6 +108,7 @@
 "global.actions.select" = "Выбрать";
 "global.actions.send" = "Отправить";
 "global.actions.show" = "Показать";
+"global.actions.update" = "Обновить";
 "global.nouns.about" = "О";
 "global.nouns.account" = "Аккаунт";
 "global.nouns.address" = "Адрес";
