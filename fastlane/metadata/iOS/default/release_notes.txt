@@ -1,2 +1,1 @@
-* Check GitHub Releases for updates (#1460)
-* Opt into modern cryptography from preferences (#1459)
+* OpenVPN: Fix memory leaks in modern crypto (#1463)
