@@ -122,6 +122,7 @@ extension ExtendedTunnelTests {
         XCTAssertEqual(processor.willInstallCount, 1)
     }
 
+    // FIXME: #1445, flaky test
     func test_givenTunnelStatus_thenConnectionStatusIsExpected() async throws {
         let allTunnelStatuses: [TunnelStatus] = [
             .inactive,
