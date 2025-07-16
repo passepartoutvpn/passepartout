@@ -11,7 +11,6 @@ Passepartout stöder förinställningar för populära VPN-leverantörer, vilket
 - NordVPN  
 - Oeck  
 - PIA  
-- ProtonVPN  
 - Surfshark  
 - TorGuard  
 - TunnelBear  
