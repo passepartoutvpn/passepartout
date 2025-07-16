@@ -260,7 +260,7 @@ private extension ProviderView {
         guard let providerId else {
             return nil
         }
-        return apiManager.cache(for: providerId)?.lastUpdate
+        return apiManager.cache(for: providerId)?.lastUpdate.map(\.date)
     }
 
     var lastUpdatedString: String? {

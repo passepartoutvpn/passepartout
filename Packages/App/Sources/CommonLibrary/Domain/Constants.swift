@@ -208,6 +208,8 @@ public struct Constants: Decodable, Sendable {
 
     public let bundleKey: String
 
+    public let deviceIdLength: Int
+
     public let containers: Containers
 
     public let websites: Websites

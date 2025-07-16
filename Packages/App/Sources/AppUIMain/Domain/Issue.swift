@@ -35,7 +35,7 @@ struct Issue: Identifiable {
 
     let purchasedProducts: Set<AppProduct>
 
-    let providerLastUpdates: [ProviderID: Date]
+    let providerLastUpdates: [ProviderID: Timestamp]
 
     let appLog: Data?
 
@@ -49,7 +49,7 @@ struct Issue: Identifiable {
         comment: String,
         appLine: String?,
         purchasedProducts: Set<AppProduct>,
-        providerLastUpdates: [ProviderID: Date] = [:],
+        providerLastUpdates: [ProviderID: Timestamp] = [:],
         appLog: Data? = nil,
         tunnelLog: Data? = nil
     ) {
@@ -68,7 +68,7 @@ struct Issue: Identifiable {
 
     var body: String {
         let providers = providerLastUpdates.mapValues {
-            $0.localizedDescription(style: .timestamp)
+            $0.date.localizedDescription(style: .timestamp)
         }
         return template
             .replacingOccurrences(of: "$comment", with: comment)

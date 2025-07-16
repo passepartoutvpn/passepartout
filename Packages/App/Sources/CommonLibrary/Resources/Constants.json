@@ -1,5 +1,6 @@
 {
     "bundleKey": "AppConfig",
+    "deviceIdLength": 64,
     "containers": {
         "local": "Local",
         "remote": "Remote",
