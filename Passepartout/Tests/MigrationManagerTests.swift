@@ -99,7 +99,7 @@ extension MigrationManagerTests {
         let provider = try XCTUnwrap(profile.firstModule(ofType: ProviderModule.self))
         XCTAssertEqual(provider.providerId, .hideme)
         XCTAssertEqual(provider.providerModuleType, .openVPN)
-        let options: OpenVPNProviderTemplate.Options? = provider.options(for: .openVPN)
+        let options: OpenVPNProviderTemplate.Options? = try provider.options(for: .openVPN)
         XCTAssertEqual(options?.credentials?.username, "foo")
         XCTAssertEqual(options?.credentials?.password, "bar")
 
@@ -110,33 +110,6 @@ extension MigrationManagerTests {
             Address(rawValue: "1.1.1.1"),
             Address(rawValue: "1.0.0.1")
         ])
-    }
-
-    func test_givenManager_whenMigrateProtonVPN_thenIsExpected() async throws {
-        let sut = newManager()
-
-        let id = try XCTUnwrap(UUID(uuidString: "981E7CBD-7733-4CF3-9A51-2777614ED5D4"))
-        let migrated = try await sut.migratedProfile(withId: id)
-        let profile = try XCTUnwrap(migrated)
-
-        XCTAssertEqual(profile.id, id)
-        XCTAssertEqual(profile.name, "ProtonVPN")
-        XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 724509584.854822))
-
-        XCTAssertEqual(profile.modules.count, 2)
-
-        let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
-        XCTAssertTrue(profile.isActiveModule(withId: onDemand.id))
-        XCTAssertEqual(onDemand.policy, .excluding)
-        XCTAssertTrue(onDemand.withSSIDs.isEmpty)
-        XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
-
-        let provider = try XCTUnwrap(profile.firstModule(ofType: ProviderModule.self))
-        XCTAssertEqual(provider.providerId, .protonvpn)
-        XCTAssertEqual(provider.providerModuleType, .openVPN)
-        let options: OpenVPNProviderTemplate.Options? = provider.options(for: .openVPN)
-        XCTAssertEqual(options?.credentials?.username, "foo")
-        XCTAssertEqual(options?.credentials?.password, "bar")
     }
 
     func test_givenManager_whenMigrateVPSOpenVPN_thenIsExpected() async throws {
