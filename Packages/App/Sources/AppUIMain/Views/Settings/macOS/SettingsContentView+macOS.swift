@@ -30,9 +30,6 @@ import SwiftUI
 
 struct SettingsContentView<LinkContent, SettingsDestination, DiagnosticsDestination>: View where LinkContent: View, SettingsDestination: View, DiagnosticsDestination: View {
 
-    @EnvironmentObject
-    private var versionChecker: VersionChecker
-
     @Environment(\.distributionTarget)
     private var distributionTarget
 
@@ -82,9 +79,7 @@ private extension SettingsContentView {
         List(selection: $navigationRoute) {
             Group {
                 linkContent(.preferences)
-                if let latest = versionChecker.latestRelease {
-                    ExternalLink(Strings.Views.Settings.Links.update(latest.version), url: latest.url)
-                }
+                VersionUpdateLink()
             }
             Group {
                 linkContent(.version)
