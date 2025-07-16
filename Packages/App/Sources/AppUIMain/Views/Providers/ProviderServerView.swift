@@ -228,7 +228,7 @@ private extension ProviderServerView {
 #Preview {
     NavigationStack {
         ProviderServerView(
-            providerId: .protonvpn,
+            providerId: .hideme,
             moduleType: .openVPN,
             selectedEntity: nil as ProviderEntity?,
             selectTitle: "Select",
