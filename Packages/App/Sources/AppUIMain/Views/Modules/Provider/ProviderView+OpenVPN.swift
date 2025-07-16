@@ -111,20 +111,24 @@ private extension ProviderView.OpenVPNCredentialsView {
               let provider = apiManager.provider(withId: providerId) else {
             return
         }
-        if let options: OpenVPNProviderTemplate.Options = draft.module.options(for: .openVPN),
-           let credentials = options.credentials {
-            builder = credentials.builder()
+        do {
+            if let options: OpenVPNProviderTemplate.Options = try draft.module.options(for: .openVPN),
+               let credentials = options.credentials {
+                builder = credentials.builder()
+            }
+        } catch {
+            pp_log_g(.app, .error, "Unable to load OpenVPN credentials from options: \(error)")
         }
         providerCustomization = provider.customization(for: OpenVPNModule.self)
     }
 
     func saveCredentials() {
-        var options: OpenVPNProviderTemplate.Options = draft.module.options(for: .openVPN) ?? .init()
-        options.credentials = builder.build()
         do {
+            var options: OpenVPNProviderTemplate.Options = try draft.module.options(for: .openVPN) ?? .init()
+            options.credentials = builder.build()
             try draft.module.setOptions(options, for: .openVPN)
         } catch {
-            pp_log_g(.app, .error, "Unable to store OpenVPN credentials into options: \(error)")
+            pp_log_g(.app, .error, "Unable to store OpenVPN credentials to options: \(error)")
         }
     }
 }

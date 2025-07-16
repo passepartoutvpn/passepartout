@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonAPI
 import CommonLibrary
 import CommonUtils
 import Foundation

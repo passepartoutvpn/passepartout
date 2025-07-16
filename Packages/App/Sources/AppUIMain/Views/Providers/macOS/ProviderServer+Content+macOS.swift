@@ -25,7 +25,6 @@
 
 #if os(macOS)
 
-import CommonAPI
 import CommonLibrary
 import SwiftUI
 

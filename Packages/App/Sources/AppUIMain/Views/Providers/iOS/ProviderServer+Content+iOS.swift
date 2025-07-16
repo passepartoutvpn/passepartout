@@ -25,7 +25,6 @@
 
 #if os(iOS)
 
-import CommonAPI
 import CommonLibrary
 import SwiftUI
 import UIAccessibility

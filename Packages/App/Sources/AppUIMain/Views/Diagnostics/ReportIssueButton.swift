@@ -86,7 +86,7 @@ extension ReportIssueButton {
 
 @MainActor
 extension ReportIssueButton {
-    var providerLastUpdates: [ProviderID: Date] {
+    var providerLastUpdates: [ProviderID: Timestamp] {
         apiManager.cache.compactMapValues(\.lastUpdate)
     }
 }

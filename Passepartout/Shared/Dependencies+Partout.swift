@@ -91,6 +91,17 @@ private extension Dependencies {
     )
 
     static let sharedRegistry = Registry(
+        deviceId: {
+            let store = UserDefaultsStore(.standard)
+            let deviceId: String
+            if let existing: String = store.value(for: AppPreference.deviceId.key) {
+                deviceId = existing
+            } else {
+                deviceId = String.random(count: Constants.shared.deviceIdLength)
+                store.set(deviceId, for: AppPreference.deviceId.key)
+            }
+            return deviceId
+        }(),
         withKnown: true,
         allImplementations: [
             OpenVPNImplementationBuilder(

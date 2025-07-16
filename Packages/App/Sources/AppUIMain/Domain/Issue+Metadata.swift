@@ -36,7 +36,7 @@ extension Issue {
 
         let purchasedProducts: Set<AppProduct>
 
-        let providerLastUpdates: [ProviderID: Date]
+        let providerLastUpdates: [ProviderID: Timestamp]
 
         let tunnel: ExtendedTunnel
 

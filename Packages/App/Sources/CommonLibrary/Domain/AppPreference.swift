@@ -26,6 +26,8 @@
 import Foundation
 
 public enum AppPreference: String, PreferenceProtocol {
+    case deviceId
+
     case dnsFallsBack
 //    case dnsFallbackServers
 

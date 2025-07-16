@@ -146,13 +146,6 @@ let package = Package(
             path: "Sources/Empty/AppUITVWrapper"
         ),
         .target(
-            name: "CommonAPI",
-            dependencies: ["CommonLibrary"],
-            resources: [
-                .copy("API")
-            ]
-        ),
-        .target(
             name: "CommonIAP",
             dependencies: ["CommonUtils"]
         ),
@@ -200,7 +193,6 @@ let package = Package(
         .target(
             name: "UILibrary",
             dependencies: [
-                "CommonAPI",
                 "CommonLibrary",
                 "StringsLibrary",
                 "UIAccessibility"

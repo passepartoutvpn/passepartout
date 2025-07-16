@@ -1,5 +1,5 @@
 //
-//  Shared.swift
+//  Shared+API.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/1/24.
@@ -23,8 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import Foundation
+import PartoutAPIBundle
 
 extension API {
     public static var shared: [APIMapper] {
@@ -36,30 +35,31 @@ extension API {
     }
 
     public static let bundled: [APIMapper] = [
-        Self.bundledV6
+        Self.bundledV7
     ]
 
     private static let remoteThenBundled: [APIMapper] = [
-        Self.remoteV6,
-        Self.bundledV6
+        Self.remoteV7,
+        Self.bundledV7
     ]
 }
 
 private extension API {
+    static let version = 7
 
     // use local JS (baseURL = local)
     // fetch remote JSON (URL in scripts)
-    static let bundledV6: APIMapper = {
-        guard let bundledURL = Bundle.module.url(forResource: "API/v6", withExtension: nil) else {
+    static let bundledV7: APIMapper = {
+        guard let bundledURL = API.url(forVersion: version) else {
             fatalError("Unable to find bundled API")
         }
-        return API.V6.Mapper(.global, baseURL: bundledURL)
+        return DefaultAPIMapper(.global, baseURL: bundledURL, timeout: Constants.shared.api.timeoutInterval)
     }()
 
     // fetch remote JS (baseURL = remote)
     // fetch remote JSON (URL in scripts)
-    static let remoteV6: APIMapper = {
-        let remoteURL = Constants.shared.websites.api.appendingPathComponent("v6")
-        return API.V6.Mapper(.global, baseURL: remoteURL)
+    static let remoteV7: APIMapper = {
+        let remoteURL = Constants.shared.websites.api.appendingPathComponent("v\(version)")
+        return DefaultAPIMapper(.global, baseURL: remoteURL, timeout: Constants.shared.api.timeoutInterval)
     }()
 }

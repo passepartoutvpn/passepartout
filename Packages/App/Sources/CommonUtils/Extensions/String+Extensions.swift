@@ -51,6 +51,24 @@ extension String {
 }
 
 extension String {
+    private static let alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+    public static func random(count: Int) -> String {
+        precondition(count > 0)
+        var chars = [Character](repeating: " ", count: count)
+        for charIndex in 0..<count {
+            let alphabetIndex = alphabet.index(
+                alphabet.startIndex,
+                offsetBy: .random(in: 0..<alphabet.count)
+            )
+            let ch = alphabet[alphabetIndex]
+            chars[charIndex] = ch
+        }
+        return String(chars)
+    }
+}
+
+extension String {
     public var localizedAsRegionCode: String? {
         Locale
             .current

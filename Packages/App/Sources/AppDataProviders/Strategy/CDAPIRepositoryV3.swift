@@ -123,8 +123,8 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
                 let providerRequest = CDProviderV3.fetchRequest()
                 providerRequest.predicate = predicate
                 let providers = try providerRequest.execute()
-                if let provider = providers.first {
-                    provider.cache = try JSONEncoder().encode(infrastructure.cache)
+                if let provider = providers.first, let cache = infrastructure.cache {
+                    provider.cache = try JSONEncoder().encode(cache)
                 }
 
                 // delete all provider entities
@@ -169,7 +169,7 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
             }
             let providers = try providerRequest.execute()
             providers.forEach {
-                $0.lastUpdate = nil
+                $0.cache = nil
             }
             try context.save()
         }
@@ -210,6 +210,8 @@ extension CDAPIRepositoryV3: NSFetchedResultsControllerDelegate {
         }
         let mapper = DomainMapper()
         providersSubject.send(entities.compactMap(mapper.provider(from:)))
-        cacheSubject.send(mapper.cache(from: entities))
+        let cache = mapper.cache(from: entities)
+        pp_log_g(.app, .debug, "Cache metadata: \(cache)")
+        cacheSubject.send(cache)
     }
 }
