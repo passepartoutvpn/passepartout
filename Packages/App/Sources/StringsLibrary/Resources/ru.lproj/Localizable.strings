@@ -109,7 +109,7 @@
 "global.actions.send" = "Отправить";
 "global.actions.show" = "Показать";
 "global.actions.update" = "Обновить";
-"global.nouns.about" = "О";
+"global.nouns.about" = "О программе";
 "global.nouns.account" = "Аккаунт";
 "global.nouns.address" = "Адрес";
 "global.nouns.addresses" = "Адреса";

@@ -109,7 +109,7 @@
 "global.actions.send" = "Invia";
 "global.actions.show" = "Mostra";
 "global.actions.update" = "Aggiorna";
-"global.nouns.about" = "Informazioni";
+"global.nouns.about" = "Informazioni su";
 "global.nouns.account" = "Account";
 "global.nouns.address" = "Indirizzo";
 "global.nouns.addresses" = "Indirizzi";
