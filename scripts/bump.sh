@@ -24,10 +24,6 @@ while [[ $# -gt 0 ]]; do
       shift # past argument
       shift # past value
       ;;
-    -na)
-      opt_no_api=1
-      shift # past argument
-      ;;
     -nl)
       opt_no_log=1
       shift # past argument
@@ -55,23 +51,14 @@ set -- "${positional_args[@]}" # restore positional parameters
 set -e
 
 cwd=`dirname $0`
-cmd_api="$cwd/update-bundled-api.sh"
 
 if [[ -n $opt_dry_run ]]; then
     echo "version = $opt_version"
     echo "build   = $opt_build"
     echo "since   = $opt_since"
-    echo "no_api  = $opt_no_api"
     echo "no_log  = $opt_no_log"
     echo "no_tag  = $opt_no_tag"
-    if [[ -z $opt_no_api ]]; then
-        echo "$cmd_api"
-    fi
     exit 0
-fi
-
-if [[ -z $opt_no_api ]]; then
-    eval "$cmd_api"
 fi
 
 if [[ $opt_no_log != "1" ]]; then
@@ -120,7 +107,6 @@ fi
 echo "Commit changes to repository..."
 git add \
     "$xcconfig_path" \
-    "$api_package_path" \
     "$metadata_root" \
     "$changelog"
 
