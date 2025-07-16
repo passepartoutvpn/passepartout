@@ -132,7 +132,7 @@ extension AppProfileImporterTests {
 // MARK: -
 
 private struct SomeModule: Module {
-    struct Implementation: ModuleImplementation {
+    final class Implementation: ModuleImplementation {
         var moduleHandlerId: ModuleType {
             moduleHandler.id
         }
