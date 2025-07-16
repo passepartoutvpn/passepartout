@@ -40,6 +40,7 @@ public struct ExternalLink: View {
         Link(destination: url) {
             HStack {
                 Text(title)
+                    .themeMultiLine(true)
                 Spacer()
 #if os(macOS)
                 ThemeImage(.externalLink)
@@ -50,4 +51,12 @@ public struct ExternalLink: View {
         .foregroundStyle(.primary)
 #endif
     }
+}
+
+#Preview {
+    ExternalLink(
+        "A very long line and more more and more",
+        url: URL(string: "https://")!
+    )
+    .withMockEnvironment()
 }
