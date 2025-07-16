@@ -31,9 +31,16 @@ public struct ExternalLink: View {
 
     private let url: URL
 
-    public init(_ title: String, url: URL) {
+    private let withIcon: Bool
+
+    public init(_ title: String, url: URL, withIcon: Bool? = nil) {
         self.title = title
         self.url = url
+#if os(macOS)
+        self.withIcon = withIcon ?? true
+#else
+        self.withIcon = withIcon ?? false
+#endif
     }
 
     public var body: some View {
@@ -42,9 +49,9 @@ public struct ExternalLink: View {
                 Text(title)
                     .themeMultiLine(true)
                 Spacer()
-#if os(macOS)
-                ThemeImage(.externalLink)
-#endif
+                if withIcon {
+                    ThemeImage(.externalLink)
+                }
             }
         }
 #if os(macOS)
@@ -56,7 +63,8 @@ public struct ExternalLink: View {
 #Preview {
     ExternalLink(
         "A very long line and more more and more",
-        url: URL(string: "https://")!
+        url: URL(string: "https://")!,
+        withIcon: true
     )
     .withMockEnvironment()
 }

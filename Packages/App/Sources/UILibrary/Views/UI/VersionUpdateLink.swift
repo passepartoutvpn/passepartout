@@ -31,7 +31,10 @@ public struct VersionUpdateLink: View {
     @EnvironmentObject
     private var versionChecker: VersionChecker
 
-    public init() {
+    private let withIcon: Bool?
+
+    public init(withIcon: Bool? = nil) {
+        self.withIcon = withIcon
     }
 
     public var body: some View {
@@ -39,7 +42,8 @@ public struct VersionUpdateLink: View {
             .map { latest in
                 ExternalLink(
                     Strings.Views.Settings.Links.update(latest.version),
-                    url: latest.url
+                    url: latest.url,
+                    withIcon: withIcon
                 )
             }
     }
