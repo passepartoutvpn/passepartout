@@ -127,7 +127,6 @@ extension AppProduct {
 
 // MARK: - Discontinued
 
-@available(*, deprecated)
 extension AppProduct.Features {
     public static let allProviders = AppProduct(featureId: "all_providers")
 
