@@ -31,9 +31,6 @@ import UILibrary
 
 struct SettingsContentView<LinkContent, SettingsDestination, LogDestination>: View where LinkContent: View, SettingsDestination: View, LogDestination: View {
 
-    @EnvironmentObject
-    private var versionChecker: VersionChecker
-
     @Environment(\.distributionTarget)
     private var distributionTarget
 
@@ -71,9 +68,7 @@ private extension SettingsContentView {
             Group {
                 linkContent(.preferences)
                 linkContent(.version)
-                if let latest = versionChecker.latestRelease {
-                    ExternalLink(Strings.Views.Settings.Links.update(latest.version), url: latest.url)
-                }
+                VersionUpdateLink()
             }
             .themeSection(header: Strings.Global.Nouns.about)
             Group {

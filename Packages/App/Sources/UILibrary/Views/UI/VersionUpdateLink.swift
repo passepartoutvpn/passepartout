@@ -1,8 +1,8 @@
 //
-//  ExternalLink.swift
+//  VersionUpdateLink.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 5/30/25.
+//  Created by Davide De Rosa on 7/16/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,45 +26,25 @@
 import CommonLibrary
 import SwiftUI
 
-public struct ExternalLink: View {
-    private let title: String
+public struct VersionUpdateLink: View {
 
-    private let url: URL
+    @EnvironmentObject
+    private var versionChecker: VersionChecker
 
-    private let withIcon: Bool
+    private let withIcon: Bool?
 
-    public init(_ title: String, url: URL, withIcon: Bool? = nil) {
-        self.title = title
-        self.url = url
-#if os(macOS)
-        self.withIcon = withIcon ?? true
-#else
-        self.withIcon = withIcon ?? false
-#endif
+    public init(withIcon: Bool? = nil) {
+        self.withIcon = withIcon
     }
 
     public var body: some View {
-        Link(destination: url) {
-            HStack {
-                Text(title)
-                    .themeMultiLine(true)
-                Spacer()
-                if withIcon {
-                    ThemeImage(.externalLink)
-                }
+        versionChecker.latestRelease
+            .map { latest in
+                ExternalLink(
+                    Strings.Views.Settings.Links.update(latest.version),
+                    url: latest.url,
+                    withIcon: withIcon
+                )
             }
-        }
-#if os(macOS)
-        .foregroundStyle(.primary)
-#endif
     }
-}
-
-#Preview {
-    ExternalLink(
-        "A very long line and more more and more",
-        url: URL(string: "https://")!,
-        withIcon: true
-    )
-    .withMockEnvironment()
 }

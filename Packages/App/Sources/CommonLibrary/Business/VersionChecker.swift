@@ -74,6 +74,9 @@ public final class VersionChecker: ObservableObject {
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
             kvManager.set(fetchedLatestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
             pp_log_g(.app, .info, "Version: \(fetchedLatestVersion) > \(currentVersion) = \(fetchedLatestVersion > currentVersion)")
+
+            objectWillChange.send()
+
             return latestRelease
         } catch AppError.unexpectedResponse {
             // save the check date regardless because the service call succeeded
