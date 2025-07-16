@@ -48,6 +48,7 @@ public struct AppMenu: View {
 
     public var body: some View {
         versionItem
+        updateButton
         Divider()
         showButton
         loginToggle
@@ -71,6 +72,10 @@ public struct AppMenu: View {
 private extension AppMenu {
     var versionItem: some View {
         Text(BundleConfiguration.mainVersionString)
+    }
+
+    var updateButton: some View {
+        VersionUpdateLink(withIcon: false)
     }
 
     var showButton: some View {
