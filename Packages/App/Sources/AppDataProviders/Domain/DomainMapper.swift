@@ -59,15 +59,11 @@ struct DomainMapper {
             guard let id = $1.providerId else {
                 return
             }
+            guard let cache = $1.cache else {
+                return
+            }
             do {
-                if let cache = $1.cache {
-                    $0[.init(rawValue: id)] = try decoder.decode(ProviderCache.self, from: cache)
-                } else if let lastUpdate = $1.lastUpdate {
-                    $0[.init(rawValue: id)] = ProviderCache(
-                        lastUpdate: lastUpdate.timestamp,
-                        tag: nil
-                    )
-                }
+                $0[.init(rawValue: id)] = try decoder.decode(ProviderCache.self, from: cache)
             } catch {
                 pp_log_g(.api, .error, "Unable to decode cache: \(error)")
             }

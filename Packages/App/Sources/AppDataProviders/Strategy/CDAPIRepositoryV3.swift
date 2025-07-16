@@ -169,7 +169,7 @@ private final class CDAPIRepositoryV3: NSObject, APIRepository {
             }
             let providers = try providerRequest.execute()
             providers.forEach {
-                $0.lastUpdate = nil
+                $0.cache = nil
             }
             try context.save()
         }
