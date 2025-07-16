@@ -1,2 +1,1 @@
-* Check GitHub Releases for updates (#1460)
-* Opt into modern cryptography from preferences (#1459)
+* Integrate with new Partout API (#1467)
