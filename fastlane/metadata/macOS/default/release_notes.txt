@@ -1,1 +1,3 @@
-* Integrate with new Partout API (#1467)
+* API: Remove ProtonVPN after discontinued public API (#1469)
+* Add update link to Mac menu (#1468)
+* Fix translations of "About"
