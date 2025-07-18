@@ -78,7 +78,6 @@ private struct DestinationView: View {
                 module.map {
                     ProviderServerView(
                         module: $0,
-                        selectedEntity: draft.module.entity,
                         onSelect: {
                             draft.module.entity = $0
                             path.removeLast()

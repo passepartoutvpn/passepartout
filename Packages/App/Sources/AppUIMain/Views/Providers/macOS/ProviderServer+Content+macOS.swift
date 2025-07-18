@@ -39,8 +39,6 @@ extension ProviderServerView {
 
         let servers: [ProviderServer]
 
-        let selectedServer: ProviderServer?
-
         @Binding
         var heuristic: ProviderHeuristic?
 

@@ -38,9 +38,6 @@ struct ProviderServerView: View {
     // FIXME: #1470, heavy data copy in SwiftUI
     let module: ProviderModule
 
-    // FIXME: #1470, heavy data copy in SwiftUI
-    let selectedEntity: ProviderEntity?
-
     var selectTitle = Strings.Views.Providers.selectEntity
 
     let onSelect: (ProviderEntity) -> Void
@@ -94,7 +91,6 @@ extension ProviderServerView {
         ContentView(
             module: module,
             servers: filteredServers,
-            selectedServer: selectedEntity?.server,
             heuristic: $heuristic,
             isFiltering: isFiltering,
             filtersViewModel: filtersViewModel,
@@ -103,7 +99,7 @@ extension ProviderServerView {
             onSelect: onSelectServer
         )
         .onLoad {
-            heuristic = selectedEntity?.heuristic
+            heuristic = module.entity?.heuristic
         }
         .task {
             await loadInitialServers()
@@ -145,7 +141,7 @@ private extension ProviderServerView {
     }
 
     var initialFilters: ProviderFilters? {
-        guard let selectedEntity else {
+        guard let selectedEntity = module.entity else {
             return nil
         }
         var filters = ProviderFilters()
@@ -247,7 +243,6 @@ extension ProviderID {
     NavigationStack {
         ProviderServerView(
             module: ProviderID.hideme.asPreviewModule,
-            selectedEntity: nil as ProviderEntity?,
             selectTitle: "Select",
             onSelect: { _ in }
         )

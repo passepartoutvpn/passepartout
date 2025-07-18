@@ -35,9 +35,6 @@ struct ProviderServerCoordinator: View {
     // FIXME: #1470, heavy data copy in SwiftUI
     let module: ProviderModule
 
-    // FIXME: #1470, heavy data copy in SwiftUI
-    let selectedEntity: ProviderEntity?
-
     let selectTitle: String
 
     let onSelect: (ProviderEntity) async throws -> Void
@@ -48,7 +45,6 @@ struct ProviderServerCoordinator: View {
     var body: some View {
         ProviderServerView(
             module: module,
-            selectedEntity: selectedEntity,
             selectTitle: selectTitle,
             onSelect: onSelect
         )

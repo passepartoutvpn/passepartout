@@ -37,8 +37,6 @@ extension ProviderServerView {
 
         let servers: [ProviderServer]
 
-        let selectedServer: ProviderServer?
-
         @Binding
         var heuristic: ProviderHeuristic?
 
@@ -92,7 +90,7 @@ private extension ProviderServerView.ContentView {
                 header: filtersViewModel.filters.categoryName ?? Strings.Views.Vpn.Category.any
             )
             .onLoad {
-                if let selectedServer {
+                if let selectedServer = module.entity?.server {
                     expandedCodes.insert(selectedServer.metadata.countryCode)
                 }
             }
