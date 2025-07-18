@@ -31,11 +31,11 @@ import UIAccessibility
 
 extension ProviderServerView {
     struct ContentView: View {
-        let providerId: ProviderID
+
+        // FIXME: #1470, heavy data copy in SwiftUI
+        let module: ProviderModule
 
         let servers: [ProviderServer]
-
-        let selectedServer: ProviderServer?
 
         @Binding
         var heuristic: ProviderHeuristic?
@@ -72,7 +72,7 @@ private extension ProviderServerView.ContentView {
         List {
             Section {
                 Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
-                RefreshInfrastructureButton(providerId: providerId)
+                RefreshInfrastructureButton(module: module)
             }
             Group {
                 if isFiltering || !servers.isEmpty {
@@ -90,7 +90,7 @@ private extension ProviderServerView.ContentView {
                 header: filtersViewModel.filters.categoryName ?? Strings.Views.Vpn.Category.any
             )
             .onLoad {
-                if let selectedServer {
+                if let selectedServer = module.entity?.server {
                     expandedCodes.insert(selectedServer.metadata.countryCode)
                 }
             }

@@ -139,7 +139,8 @@ private extension ProviderModule.Builder {
         guard let providerId, let providerModuleType, let entity else {
             return
         }
-        let repo = try await apiManager.providerRepository(for: providerId)
+        let module = try ProviderModule.Builder(providerId: providerId, providerModuleType: providerModuleType).tryBuild()
+        let repo = try await apiManager.providerRepository(for: module)
         let providerManager = ProviderManager()
         try await providerManager.setRepository(repo, for: providerModuleType)
 

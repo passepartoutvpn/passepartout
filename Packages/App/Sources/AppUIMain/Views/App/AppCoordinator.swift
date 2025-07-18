@@ -263,9 +263,7 @@ private struct ProviderServerCoordinatorIfSupported: View {
     var body: some View {
         if let supporting = module as? ProviderModule {
             ProviderServerCoordinator(
-                providerId: supporting.providerId,
-                moduleType: supporting.providerModuleType,
-                selectedEntity: supporting.entity,
+                module: supporting,
                 selectTitle: selectTitle,
                 onSelect: {
                     var newBuilder = supporting.builder()

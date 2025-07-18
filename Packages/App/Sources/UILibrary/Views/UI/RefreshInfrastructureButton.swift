@@ -34,22 +34,22 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
     @EnvironmentObject
     private var kvManager: KeyValueManager
 
-    private let providerId: ProviderID
+    private let module: ProviderModule
 
     private let label: () -> Label
 
     @State
     private var elapsed: TimeInterval = .infinity
 
-    public init(providerId: ProviderID, label: @escaping () -> Label) {
-        self.providerId = providerId
+    public init(module: ProviderModule, label: @escaping () -> Label) {
+        self.module = module
         self.label = label
     }
 
     public var body: some View {
         Button {
             Task {
-                try await apiManager.fetchInfrastructure(for: providerId)
+                try await apiManager.fetchInfrastructure(for: module)
                 saveLastUpdate()
             }
         } label: {
@@ -60,14 +60,14 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
             loadLastUpdate()
         }
         .onChange(of: elapsed) {
-            pp_log_g(.app, .info, "Elapsed since last update of \(providerId): \($0)")
+            pp_log_g(.app, .info, "Elapsed since last update of \(module.providerId): \($0)")
         }
     }
 }
 
 extension RefreshInfrastructureButton where Label == RefreshInfrastructureButtonProgressView {
-    public init(providerId: ProviderID) {
-        self.providerId = providerId
+    public init(module: ProviderModule) {
+        self.module = module
         label = {
             RefreshInfrastructureButtonProgressView()
         }
@@ -100,7 +100,7 @@ private extension RefreshInfrastructureButton {
             elapsed = .infinity
             return
         }
-        guard let lastUpdate = map[providerId.rawValue] else {
+        guard let lastUpdate = map[module.providerId.rawValue] else {
             elapsed = .infinity
             return
         }
@@ -109,7 +109,7 @@ private extension RefreshInfrastructureButton {
 
     func saveLastUpdate() {
         var map = kvManager.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? ?? [:]
-        map[providerId.rawValue] = Date.timeIntervalSinceReferenceDate
+        map[module.providerId.rawValue] = Date.timeIntervalSinceReferenceDate
         kvManager.set(map, forKey: UIPreference.lastInfrastructureRefresh.key)
         elapsed = .zero
     }
