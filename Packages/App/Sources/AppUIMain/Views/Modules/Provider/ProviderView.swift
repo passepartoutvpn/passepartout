@@ -98,8 +98,8 @@ private extension ProviderView {
         Group {
             serverLink
             presetPicker
-            if let providerId {
-                RefreshInfrastructureButton(providerId: providerId)
+            module.map { module in
+                RefreshInfrastructureButton(module: module)
             }
         }
         .themeSection(footer: lastUpdatedString)
@@ -109,14 +109,14 @@ private extension ProviderView {
         Group {
             serverLink
             presetPicker
-            if let providerId {
+            module.map { module in
                 HStack {
                     lastUpdatedString.map {
                         Text($0)
                             .themeSubtitle()
                     }
                     Spacer()
-                    RefreshInfrastructureButton(providerId: providerId)
+                    RefreshInfrastructureButton(module: module)
                 }
             }
         }
@@ -203,6 +203,12 @@ private extension ProviderView {
 }
 
 private extension ProviderView {
+
+    // FIXME: #1470, heavy data copy in SwiftUI
+    var module: ProviderModule? {
+        try? draft.module.tryBuild()
+    }
+
     var providerId: ProviderID? {
         draft.module.providerId
     }
@@ -217,6 +223,7 @@ private extension ProviderView {
         draft.module.providerModuleType
     }
 
+    // FIXME: #1470, heavy data copy in SwiftUI
     var providerEntity: ProviderEntity? {
         draft.module.entity
     }
@@ -290,9 +297,9 @@ private extension ProviderView {
         }
     }
 
-    func refreshInfrastructure(for newProviderId: ProviderID) async {
+    func refreshInfrastructure(for newProviderModule: ProviderModule) async {
         do {
-            try await apiManager.fetchInfrastructure(for: newProviderId)
+            try await apiManager.fetchInfrastructure(for: newProviderModule)
         } catch {
             pp_log_g(.app, .error, "Unable to refresh infrastructure: \(error)")
         }
@@ -310,12 +317,14 @@ private extension ProviderView {
         }
     }
 
-    func onChangeProvider(_ newProviderId: ProviderID?) {
+    func onChangeProvider(_: ProviderID?) {
        Task {
-           if let newProviderId {
-               await refreshInfrastructure(for: newProviderId)
+           if let module {
+               await refreshInfrastructure(for: module)
+               loadPreferences(for: module.providerId)
+           } else {
+               loadPreferences(for: nil)
            }
-           loadPreferences(for: newProviderId)
        }
     }
 

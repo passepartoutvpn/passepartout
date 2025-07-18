@@ -75,11 +75,9 @@ private struct DestinationView: View {
         Group {
             switch route {
             case .server:
-                if let providerId = draft.module.providerId,
-                   let providerModuleType = draft.module.providerModuleType {
+                module.map {
                     ProviderServerView(
-                        providerId: providerId,
-                        moduleType: providerModuleType,
+                        module: $0,
                         selectedEntity: draft.module.entity,
                         onSelect: {
                             draft.module.entity = $0
@@ -92,6 +90,11 @@ private struct DestinationView: View {
                 ProviderView.OpenVPNCredentialsView(draft: draft)
             }
         }
+    }
+
+    // FIXME: #1470, heavy data copy in SwiftUI
+    private var module: ProviderModule? {
+        try? draft.module.tryBuild()
     }
 }
 

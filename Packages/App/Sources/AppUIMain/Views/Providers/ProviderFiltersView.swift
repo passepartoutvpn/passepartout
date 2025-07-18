@@ -28,7 +28,9 @@ import CommonLibrary
 import SwiftUI
 
 struct ProviderFiltersView: View {
-    let providerId: ProviderID
+
+    // FIXME: #1470, heavy data copy in SwiftUI
+    let module: ProviderModule
 
     @ObservedObject
     var model: Model
@@ -50,7 +52,7 @@ struct ProviderFiltersView: View {
                 HStack {
                     favoritesToggle
                     Spacer()
-                    RefreshInfrastructureButton(providerId: providerId)
+                    RefreshInfrastructureButton(module: module)
                     clearFiltersButton
                 }
 #endif
@@ -113,10 +115,12 @@ private extension ProviderFiltersView {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     NavigationStack {
         ProviderFiltersView(
-            providerId: .mullvad,
+            module: ProviderID.mullvad.asPreviewModule,
             model: .init(kvManager: KeyValueManager()),
             heuristic: .constant(nil)
         )

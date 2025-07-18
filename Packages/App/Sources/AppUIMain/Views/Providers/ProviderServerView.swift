@@ -35,10 +35,10 @@ struct ProviderServerView: View {
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
-    let providerId: ProviderID
+    // FIXME: #1470, heavy data copy in SwiftUI
+    let module: ProviderModule
 
-    let moduleType: ModuleType
-
+    // FIXME: #1470, heavy data copy in SwiftUI
     let selectedEntity: ProviderEntity?
 
     var selectTitle = Strings.Views.Providers.selectEntity
@@ -92,7 +92,7 @@ struct ProviderServerView: View {
 extension ProviderServerView {
     func contentView() -> some View {
         ContentView(
-            providerId: providerId,
+            module: module,
             servers: filteredServers,
             selectedServer: selectedEntity?.server,
             heuristic: $heuristic,
@@ -115,7 +115,7 @@ extension ProviderServerView {
 
     func filtersView() -> some View {
         ProviderFiltersView(
-            providerId: providerId,
+            module: module,
             model: filtersViewModel,
             heuristic: $heuristic
         )
@@ -123,6 +123,14 @@ extension ProviderServerView {
 }
 
 private extension ProviderServerView {
+    var providerId: ProviderID {
+        module.providerId
+    }
+
+    var moduleType: ModuleType {
+        module.providerModuleType
+    }
+
     var title: String {
         apiManager.provider(withId: providerId)?.description ?? Strings.Global.Nouns.servers
     }
@@ -153,7 +161,7 @@ private extension ProviderServerView {
             pp_log_g(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
         }
         do {
-            let repository = try await apiManager.providerRepository(for: providerId)
+            let repository = try await apiManager.providerRepository(for: module)
             try await providerManager.setRepository(repository, for: moduleType)
             filtersViewModel.load(options: providerManager.options, initialFilters: initialFilters)
             await reloadServers(filters: filtersViewModel.filters)
@@ -225,11 +233,20 @@ private extension ProviderServerView {
 
 // MARK: - Preview
 
+extension ProviderID {
+    var asPreviewModule: ProviderModule {
+        do {
+            return try ProviderModule.Builder(providerId: self).tryBuild()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+}
+
 #Preview {
     NavigationStack {
         ProviderServerView(
-            providerId: .hideme,
-            moduleType: .openVPN,
+            module: ProviderID.hideme.asPreviewModule,
             selectedEntity: nil as ProviderEntity?,
             selectTitle: "Select",
             onSelect: { _ in }

@@ -34,7 +34,8 @@ extension ProviderServerView {
         @EnvironmentObject
         private var theme: Theme
 
-        let providerId: ProviderID
+        // FIXME: #1470, heavy data copy in SwiftUI
+        let module: ProviderModule
 
         let servers: [ProviderServer]
 

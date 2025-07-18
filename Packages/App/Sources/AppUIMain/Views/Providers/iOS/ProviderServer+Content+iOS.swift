@@ -31,7 +31,9 @@ import UIAccessibility
 
 extension ProviderServerView {
     struct ContentView: View {
-        let providerId: ProviderID
+
+        // FIXME: #1470, heavy data copy in SwiftUI
+        let module: ProviderModule
 
         let servers: [ProviderServer]
 
@@ -72,7 +74,7 @@ private extension ProviderServerView.ContentView {
         List {
             Section {
                 Toggle(Strings.Views.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
-                RefreshInfrastructureButton(providerId: providerId)
+                RefreshInfrastructureButton(module: module)
             }
             Group {
                 if isFiltering || !servers.isEmpty {

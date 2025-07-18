@@ -32,10 +32,10 @@ struct ProviderServerCoordinator: View {
     @Environment(\.dismiss)
     private var dismiss
 
-    let providerId: ProviderID
+    // FIXME: #1470, heavy data copy in SwiftUI
+    let module: ProviderModule
 
-    let moduleType: ModuleType
-
+    // FIXME: #1470, heavy data copy in SwiftUI
     let selectedEntity: ProviderEntity?
 
     let selectTitle: String
@@ -47,8 +47,7 @@ struct ProviderServerCoordinator: View {
 
     var body: some View {
         ProviderServerView(
-            providerId: providerId,
-            moduleType: moduleType,
+            module: module,
             selectedEntity: selectedEntity,
             selectTitle: selectTitle,
             onSelect: onSelect
