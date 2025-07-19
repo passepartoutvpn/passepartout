@@ -26,7 +26,7 @@ let package = Package(
                 "CommonDataPreferences",
                 "CommonDataProfiles",
                 "CommonDataProviders",
-                "AppLibraryMain"
+                "AppLibraryMainWrapper"
             ]
         ),
         .library(
@@ -35,7 +35,7 @@ let package = Package(
                 "CommonDataPreferences",
                 "CommonDataProfiles",
                 "CommonDataProviders",
-                "AppLibraryTV"
+                "AppLibraryTVWrapper"
             ]
         ),
         .library(
@@ -94,11 +94,25 @@ let package = Package(
             ]
         ),
         .target(
+            name: "AppLibraryMainWrapper",
+            dependencies: [
+                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS]))
+            ],
+            path: "Sources/Empty/AppLibraryMainWrapper"
+        ),
+        .target(
             name: "AppLibraryTV",
             dependencies: [
                 "AppLibrary",
                 "CommonWeb"
             ]
+        ),
+        .target(
+            name: "AppLibraryTVWrapper",
+            dependencies: [
+                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
+            ],
+            path: "Sources/Empty/AppLibraryTVWrapper"
         ),
         .target(
             name: "AppStrings",
