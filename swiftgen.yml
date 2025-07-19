@@ -1,9 +1,9 @@
 strings:
   inputs:
-    - Packages/App/Sources/StringsLibrary/Resources/en.lproj/Localizable.strings
+    - Packages/App/Sources/AppStrings/Resources/en.lproj/Localizable.strings
   outputs:
     - templateName: structured-swift5
-      output: Packages/App/Sources/StringsLibrary/SwiftGen+Strings.swift
+      output: Packages/App/Sources/AppStrings/SwiftGen+Strings.swift
       params:
         bundle: Bundle.module
         enumName: Strings
