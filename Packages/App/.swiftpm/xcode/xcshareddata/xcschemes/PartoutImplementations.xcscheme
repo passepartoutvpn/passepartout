@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AppUITV"
-               BuildableName = "AppUITV"
-               BlueprintName = "AppUITV"
+               BlueprintIdentifier = "PartoutImplementations"
+               BuildableName = "PartoutImplementations"
+               BlueprintName = "PartoutImplementations"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AppUITV"
-            BuildableName = "AppUITV"
-            BlueprintName = "AppUITV"
+            BlueprintIdentifier = "PartoutImplementations"
+            BuildableName = "PartoutImplementations"
+            BlueprintName = "PartoutImplementations"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>
