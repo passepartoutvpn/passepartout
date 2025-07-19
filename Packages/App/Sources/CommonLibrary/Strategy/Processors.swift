@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-
 @MainActor
 public protocol ProfileProcessor: Sendable {
     func isIncluded(_ profile: Profile) -> Bool

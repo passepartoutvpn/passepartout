@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-
 extension IAPManager {
     public func verify(_ profile: Profile, extra: Set<AppFeature>? = nil) throws {
         var features = profile.features

@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import Foundation
 
 extension AppRelease {
     static let freemium = AppRelease("freemium", on: "2019-09-05")
