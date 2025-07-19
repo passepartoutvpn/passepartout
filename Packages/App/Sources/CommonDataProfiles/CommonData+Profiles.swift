@@ -1,5 +1,5 @@
 //
-//  AppData.swift
+//  CommonData+Profiles.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/11/24.
@@ -23,7 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonData
 import Foundation
 
-public enum AppData {
+extension CommonData {
+    public static let profilesBundle: Bundle = .module
 }

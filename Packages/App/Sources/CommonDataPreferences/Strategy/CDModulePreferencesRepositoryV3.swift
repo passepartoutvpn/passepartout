@@ -1,5 +1,5 @@
 //
-//  CDProviderPreferencesRepositoryV3.swift
+//  CDModulePreferencesRepositoryV3.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/5/24.
@@ -23,30 +23,30 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
+import CommonData
 import CommonLibrary
 import CoreData
 import Foundation
 
-extension AppData {
+extension CommonData {
 
     @MainActor
-    public static func cdProviderPreferencesRepositoryV3(context: NSManagedObjectContext, providerId: ProviderID) throws -> ProviderPreferencesRepository {
-        try CDProviderPreferencesRepositoryV3(context: context, providerId: providerId)
+    public static func cdModulePreferencesRepositoryV3(context: NSManagedObjectContext, moduleId: UUID) throws -> ModulePreferencesRepository {
+        try CDModulePreferencesRepositoryV3(context: context, moduleId: moduleId)
     }
 }
 
-private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesRepository {
+private final class CDModulePreferencesRepositoryV3: ModulePreferencesRepository {
     private nonisolated let context: NSManagedObjectContext
 
-    private let entity: CDProviderPreferencesV3
+    private let entity: CDModulePreferencesV3
 
-    init(context: NSManagedObjectContext, providerId: ProviderID) throws {
+    init(context: NSManagedObjectContext, moduleId: UUID) throws {
         self.context = context
 
         entity = try context.performAndWait {
-            let request = CDProviderPreferencesV3.fetchRequest()
-            request.predicate = NSPredicate(format: "providerId == %@", providerId.rawValue)
+            let request = CDModulePreferencesV3.fetchRequest()
+            request.predicate = NSPredicate(format: "moduleId == %@", moduleId.uuidString)
             request.sortDescriptors = [.init(key: "lastUpdate", ascending: false)]
             do {
                 let entities = try request.execute()
@@ -56,65 +56,59 @@ private final class CDProviderPreferencesRepositoryV3: ProviderPreferencesReposi
                     guard $0.offset > 0 else {
                         return
                     }
-                    $0.element.favoriteServers?.forEach(context.delete(_:))
+                    $0.element.excludedEndpoints?.forEach(context.delete(_:))
                     context.delete($0.element)
                 }
 
-                let entity = entities.first ?? CDProviderPreferencesV3(context: context)
-                entity.providerId = providerId.rawValue
+                let entity = entities.first ?? CDModulePreferencesV3(context: context)
+                entity.moduleId = moduleId
                 entity.lastUpdate = Date()
-
-                // migrate favorite server ids
-                if let favoriteServerIds = entity.favoriteServerIds {
-                    let mapper = CoreDataMapper(context: context)
-                    let ids = try? JSONDecoder().decode(Set<String>.self, from: favoriteServerIds)
-                    var favoriteServers: Set<CDFavoriteServer> = []
-                    ids?.forEach {
-                        favoriteServers.insert(mapper.cdFavoriteServer(from: $0))
-                    }
-                    entity.favoriteServers = favoriteServers
-                    entity.favoriteServerIds = nil
-                }
-
                 return entity
             } catch {
-                pp_log_g(.app, .error, "Unable to load preferences for provider \(providerId): \(error)")
+                pp_log_g(.app, .error, "Unable to load preferences for module \(moduleId): \(error)")
                 throw error
             }
         }
     }
 
-    func isFavoriteServer(_ serverId: String) -> Bool {
+    func isExcludedEndpoint(_ endpoint: ExtendedEndpoint) -> Bool {
         context.performAndWait {
-            entity.favoriteServers?.contains {
-                $0.serverId == serverId
+            entity.excludedEndpoints?.contains {
+                $0.endpoint == endpoint.rawValue
             } ?? false
         }
     }
 
-    func addFavoriteServer(_ serverId: String) {
+    func addExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
         context.performAndWait {
-            guard entity.favoriteServers?.contains(where: {
-                $0.serverId == serverId
+            guard entity.excludedEndpoints?.contains(where: {
+                $0.endpoint == endpoint.rawValue
             }) != true else {
                 return
             }
             let mapper = CoreDataMapper(context: context)
-            let cdFavorite = mapper.cdFavoriteServer(from: serverId)
-            cdFavorite.providerPreferences = entity
-            entity.favoriteServers?.insert(cdFavorite)
+            let cdEndpoint = mapper.cdExcludedEndpoint(from: endpoint)
+            cdEndpoint.modulePreferences = entity
+            entity.excludedEndpoints?.insert(cdEndpoint)
         }
     }
 
-    func removeFavoriteServer(_ serverId: String) {
+    func removeExcludedEndpoint(_ endpoint: ExtendedEndpoint) {
         context.performAndWait {
-            guard let found = entity.favoriteServers?.first(where: {
-                $0.serverId == serverId
+            guard let found = entity.excludedEndpoints?.first(where: {
+                $0.endpoint == endpoint.rawValue
             }) else {
                 return
             }
-            entity.favoriteServers?.remove(found)
+            entity.excludedEndpoints?.remove(found)
             context.delete(found)
+        }
+    }
+
+    func erase() {
+        context.performAndWait {
+            entity.excludedEndpoints?.forEach(context.delete)
+            context.delete(entity)
         }
     }
 

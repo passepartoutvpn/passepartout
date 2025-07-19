@@ -23,13 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
+import CommonData
 import CommonLibrary
 import CommonUtils
 import CoreData
 import Foundation
 
-extension AppData {
+extension CommonData {
     public static func cdAPIRepositoryV3(context: NSManagedObjectContext) -> APIRepository {
         CDAPIRepositoryV3(context: context)
     }

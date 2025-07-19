@@ -23,14 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
+import CommonData
 import Combine
 import CommonLibrary
 import CommonUtils
 import CoreData
 import Foundation
 
-extension AppData {
+extension CommonData {
     public static func cdProfileRepositoryV3(
         registryCoder: RegistryCoder,
         context: NSManagedObjectContext,
@@ -60,7 +60,7 @@ extension AppData {
     }
 }
 
-private extension AppData {
+private extension CommonData {
     static func fromMapper(
         _ cdEntity: CDProfileV3,
         registryCoder: RegistryCoder

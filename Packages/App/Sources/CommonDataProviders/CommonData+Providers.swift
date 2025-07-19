@@ -1,8 +1,8 @@
 //
-//  AppData+Preferences.swift
+//  CommonData+Providers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/6/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
+import CommonData
 import Foundation
 
-extension AppData {
-    public static let preferencesBundle: Bundle = .module
+extension CommonData {
+    public static let providersBundle: Bundle = .module
 }

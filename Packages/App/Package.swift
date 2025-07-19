@@ -16,18 +16,18 @@ let package = Package(
         .library(
             name: "AppLibraryMain",
             targets: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
+                "CommonDataPreferences",
+                "CommonDataProfiles",
+                "CommonDataProviders",
                 "AppLibraryMainWrapper"
             ]
         ),
         .library(
             name: "AppLibraryTV",
             targets: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
+                "CommonDataPreferences",
+                "CommonDataProfiles",
+                "CommonDataProviders",
                 "AppLibraryTVWrapper"
             ]
         ),
@@ -76,13 +76,13 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "AppData",
+            name: "CommonData",
             dependencies: []
         ),
         .target(
-            name: "AppDataPreferences",
+            name: "CommonDataPreferences",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
@@ -90,9 +90,9 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppDataProfiles",
+            name: "CommonDataProfiles",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
@@ -100,9 +100,9 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppDataProviders",
+            name: "CommonDataProviders",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
