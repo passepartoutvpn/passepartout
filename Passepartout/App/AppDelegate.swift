@@ -26,8 +26,8 @@
 import CommonLibrary
 import CommonUtils
 import SwiftUI
-import UIAccessibility
-import UILibrary
+import AppAccessibility
+import AppLibrary
 
 @MainActor
 final class AppDelegate: NSObject {
@@ -46,7 +46,7 @@ final class AppDelegate: NSObject {
     )
 #endif
 
-    func configure(with uiConfiguring: UILibraryConfiguring?) {
+    func configure(with uiConfiguring: AppLibraryConfiguring?) {
         CommonLibrary.assertMissingImplementations(with: context.registry)
         context.appearanceManager.apply()
         uiConfiguring?.configure(with: context)

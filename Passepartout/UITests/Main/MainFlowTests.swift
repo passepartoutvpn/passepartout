@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UIAccessibility
+import AppAccessibility
 import XCTest
 
 @MainActor

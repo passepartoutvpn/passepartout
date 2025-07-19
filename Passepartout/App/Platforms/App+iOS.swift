@@ -23,13 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppUIMain
+import AppLibraryMain
 import SwiftUI
-import UIAccessibility
+import AppAccessibility
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure(with: AppUIMain())
+        configure(with: AppLibraryMain())
         return true
     }
 }

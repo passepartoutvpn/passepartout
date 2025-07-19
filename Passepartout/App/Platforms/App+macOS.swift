@@ -23,16 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppUIMain
+import AppAccessibility
+import AppLibraryMain
 import Combine
 import CommonLibrary
 import CommonUtils
 import SwiftUI
-import UIAccessibility
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        configure(with: AppUIMain())
+        configure(with: AppLibraryMain())
         context.onApplicationActive()
         if settings.isStartedFromLoginItem {
             AppWindow.shared.isVisible = false

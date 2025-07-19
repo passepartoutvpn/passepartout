@@ -26,7 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import UILibrary
+import AppLibrary
 
 extension AppContext {
     static var forUITesting: AppContext {

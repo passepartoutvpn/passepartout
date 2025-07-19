@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-import UILibrary
+import AppLibrary
 
 extension Dependencies {
     func appProcessor(

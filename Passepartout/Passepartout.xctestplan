@@ -13,27 +13,17 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonLibraryTests",
-        "name" : "CommonLibraryTests"
+        "identifier" : "CommonUtilsTests",
+        "name" : "CommonUtilsTests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
-        "identifier" : "WebLibraryTests",
-        "name" : "WebLibraryTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "UILibraryTests",
-        "name" : "UILibraryTests"
+        "identifier" : "AppLibraryMainTests",
+        "name" : "AppLibraryMainTests"
       }
     },
     {
@@ -45,26 +35,32 @@
       }
     },
     {
-      "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonUtilsTests",
-        "name" : "CommonUtilsTests"
-      }
-    },
-    {
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
-        "identifier" : "LegacyV2Tests",
-        "name" : "LegacyV2Tests"
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Packages\/App",
-        "identifier" : "AppUIMainTests",
-        "name" : "AppUIMainTests"
+        "identifier" : "AppLibraryTests",
+        "name" : "AppLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonWebTests",
+        "name" : "CommonWebTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonLegacyV2Tests",
+        "name" : "CommonLegacyV2Tests"
       }
     }
   ],
