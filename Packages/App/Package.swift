@@ -12,14 +12,13 @@ let package = Package(
         .tvOS(.v17)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppLibraryMain",
             targets: [
                 "CommonDataPreferences",
                 "CommonDataProfiles",
                 "CommonDataProviders",
-                "AppLibraryMainWrapper"
+                "AppLibraryMain"
             ]
         ),
         .library(
@@ -28,7 +27,7 @@ let package = Package(
                 "CommonDataPreferences",
                 "CommonDataProfiles",
                 "CommonDataProviders",
-                "AppLibraryTVWrapper"
+                "AppLibraryTV"
             ]
         ),
         .library(
@@ -88,14 +87,6 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppLibraryWrapper",
-            dependencies: [
-                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
-            ],
-            path: "Sources/Empty/AppLibraryWrapper"
-        ),
-        .target(
             name: "AppLibraryMain",
             dependencies: ["AppLibrary"],
             resources: [
@@ -103,25 +94,11 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppLibraryMainWrapper",
-            dependencies: [
-                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS]))
-            ],
-            path: "Sources/Empty/AppLibraryMainWrapper"
-        ),
-        .target(
             name: "AppLibraryTV",
             dependencies: [
                 "AppLibrary",
                 "CommonWeb"
             ]
-        ),
-        .target(
-            name: "AppLibraryTVWrapper",
-            dependencies: [
-                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
-            ],
-            path: "Sources/Empty/AppLibraryTVWrapper"
         ),
         .target(
             name: "AppStrings",
