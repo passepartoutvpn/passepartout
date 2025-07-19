@@ -13,6 +13,14 @@ let package = Package(
     ],
     products: [
         .library(
+            name: "AppAccessibility",
+            targets: ["AppAccessibility"]
+        ),
+        .library(
+            name: "AppLibrary",
+            targets: ["AppLibrary"]
+        ),
+        .library(
             name: "AppLibraryMain",
             targets: [
                 "CommonDataPreferences",
@@ -35,6 +43,10 @@ let package = Package(
             targets: ["CommonIAP"]
         ),
         .library(
+            name: "CommonLegacyV2",
+            targets: ["CommonLegacyV2"]
+        ),
+        .library(
             name: "CommonLibrary",
             targets: ["CommonLibrary"]
         ),
@@ -43,8 +55,8 @@ let package = Package(
             targets: ["CommonUtils"]
         ),
         .library(
-            name: "CommonLegacyV2",
-            targets: ["CommonLegacyV2"]
+            name: "CommonWeb",
+            targets: ["CommonWeb"]
         ),
         .library(
             name: "PartoutImplementations",
@@ -53,18 +65,6 @@ let package = Package(
         .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
-        ),
-        .library(
-            name: "AppAccessibility",
-            targets: ["AppAccessibility"]
-        ),
-        .library(
-            name: "AppLibrary",
-            targets: ["AppLibrary"]
-        ),
-        .library(
-            name: "CommonWeb",
-            targets: ["CommonWeb"]
         )
     ],
     dependencies: [
