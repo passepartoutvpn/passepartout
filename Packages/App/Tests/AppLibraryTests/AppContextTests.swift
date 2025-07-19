@@ -1,5 +1,5 @@
 //
-//  HTMLTemplateTests.swift
+//  AppContextTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/12/24.
@@ -24,17 +24,10 @@
 //
 
 import Foundation
-import AppStrings
-@testable import WebLibrary
+@testable import AppLibrary
 import XCTest
 
-final class HTMLTemplateTests: XCTestCase {
-    func test_givenTemplate_whenInjectKey_thenReturnsLocalizedHTML() throws {
-        let html = """
-Hey show some #{web_uploader.success}
-"""
-        let sut = HTMLTemplate(html: html)
-        let localized = sut.withLocalizedKeys(in: AppStrings.bundle)
-        XCTAssertEqual(localized, "Hey show some Upload complete!")
+final class AppContextTests: XCTestCase {
+    func test_given_when_then() async {
     }
 }

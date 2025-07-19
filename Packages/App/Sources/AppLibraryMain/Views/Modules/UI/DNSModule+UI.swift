@@ -1,8 +1,8 @@
 //
-//  HTMLTemplateTests.swift
+//  DNSModule+UI.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/12/24.
+//  Created by Davide De Rosa on 2/17/24.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import AppStrings
-@testable import WebLibrary
-import XCTest
+import CommonLibrary
+import SwiftUI
+import AppLibrary
 
-final class HTMLTemplateTests: XCTestCase {
-    func test_givenTemplate_whenInjectKey_thenReturnsLocalizedHTML() throws {
-        let html = """
-Hey show some #{web_uploader.success}
-"""
-        let sut = HTMLTemplate(html: html)
-        let localized = sut.withLocalizedKeys(in: AppStrings.bundle)
-        XCTAssertEqual(localized, "Hey show some Upload complete!")
+extension DNSModule.Builder: ModuleViewProviding {
+    public func moduleView(with parameters: ModuleViewParameters) -> some View {
+        DNSView(draft: parameters.editor[self], parameters: parameters)
     }
 }

@@ -1,8 +1,8 @@
 //
-//  HTMLTemplateTests.swift
+//  AppStrings.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/12/24.
+//  Created by Davide De Rosa on 6/10/25.
 //  Copyright (c) 2025 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,17 +24,7 @@
 //
 
 import Foundation
-import AppStrings
-@testable import WebLibrary
-import XCTest
 
-final class HTMLTemplateTests: XCTestCase {
-    func test_givenTemplate_whenInjectKey_thenReturnsLocalizedHTML() throws {
-        let html = """
-Hey show some #{web_uploader.success}
-"""
-        let sut = HTMLTemplate(html: html)
-        let localized = sut.withLocalizedKeys(in: AppStrings.bundle)
-        XCTAssertEqual(localized, "Hey show some Upload complete!")
-    }
+public enum AppStrings {
+    public static let bundle: Bundle = .module
 }

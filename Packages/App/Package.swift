@@ -14,21 +14,21 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppUIMain",
+            name: "AppLibraryMain",
             targets: [
                 "AppDataPreferences",
                 "AppDataProfiles",
                 "AppDataProviders",
-                "AppUIMainWrapper"
+                "AppLibraryMainWrapper"
             ]
         ),
         .library(
-            name: "AppUITV",
+            name: "AppLibraryTV",
             targets: [
                 "AppDataPreferences",
                 "AppDataProfiles",
                 "AppDataProviders",
-                "AppUITVWrapper"
+                "AppLibraryTVWrapper"
             ]
         ),
         .library(
@@ -56,12 +56,12 @@ let package = Package(
             targets: ["CommonLibrary"]
         ),
         .library(
-            name: "UIAccessibility",
-            targets: ["UIAccessibility"]
+            name: "AppAccessibility",
+            targets: ["AppAccessibility"]
         ),
         .library(
-            name: "UILibrary",
-            targets: ["UILibrary"]
+            name: "AppLibrary",
+            targets: ["AppLibrary"]
         ),
         .library(
             name: "WebLibrary",
@@ -110,40 +110,40 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppUI",
+            name: "AppLibraryWrapper",
             dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
+                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
             ],
-            path: "Sources/Empty/AppUI"
+            path: "Sources/Empty/AppLibraryWrapper"
         ),
         .target(
-            name: "AppUIMain",
-            dependencies: ["UILibrary"],
+            name: "AppLibraryMain",
+            dependencies: ["AppLibrary"],
             resources: [
                 .process("Resources")
             ]
         ),
         .target(
-            name: "AppUIMainWrapper",
+            name: "AppLibraryMainWrapper",
             dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
+                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS]))
             ],
-            path: "Sources/Empty/AppUIMainWrapper"
+            path: "Sources/Empty/AppLibraryMainWrapper"
         ),
         .target(
-            name: "AppUITV",
+            name: "AppLibraryTV",
             dependencies: [
-                "UILibrary",
+                "AppLibrary",
                 "WebLibrary"
             ]
         ),
         .target(
-            name: "AppUITVWrapper",
+            name: "AppLibraryTVWrapper",
             dependencies: [
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
+                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
             ],
-            path: "Sources/Empty/AppUITVWrapper"
+            path: "Sources/Empty/AppLibraryTVWrapper"
         ),
         .target(
             name: "CommonIAP",
@@ -182,20 +182,20 @@ let package = Package(
             path: "Sources/Empty/PassepartoutImplementations"
         ),
         .target(
-            name: "StringsLibrary",
+            name: "AppStrings",
             resources: [
                 .process("Resources")
             ]
         ),
         .target(
-            name: "UIAccessibility"
+            name: "AppAccessibility"
         ),
         .target(
-            name: "UILibrary",
+            name: "AppLibrary",
             dependencies: [
                 "CommonLibrary",
-                "StringsLibrary",
-                "UIAccessibility"
+                "AppStrings",
+                "AppAccessibility"
             ],
             resources: [
                 .process("Resources")
@@ -205,7 +205,7 @@ let package = Package(
             name: "WebLibrary",
             dependencies: [
                 "CommonLibrary",
-                "StringsLibrary",
+                "AppStrings",
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOHTTP1", package: "swift-nio")
             ],
@@ -214,8 +214,8 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "AppUIMainTests",
-            dependencies: ["AppUIMain"]
+            name: "AppLibraryMainTests",
+            dependencies: ["AppLibraryMain"]
         ),
         .testTarget(
             name: "CommonLibraryTests",
@@ -230,8 +230,8 @@ let package = Package(
             dependencies: ["LegacyV2"]
         ),
         .testTarget(
-            name: "UILibraryTests",
-            dependencies: ["UILibrary"]
+            name: "AppLibraryTests",
+            dependencies: ["AppLibrary"]
         ),
         .testTarget(
             name: "WebLibraryTests",
