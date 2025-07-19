@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppStrings
 @testable import CommonWeb
 import Foundation
 import XCTest
@@ -34,7 +33,7 @@ final class HTMLTemplateTests: XCTestCase {
 Hey show some #{web_uploader.success}
 """
         let sut = HTMLTemplate(html: html)
-        let localized = sut.withLocalizedKeys(in: AppStrings.bundle)
+        let localized = sut.withLocalizedKeys(in: .module)
         XCTAssertEqual(localized, "Hey show some Upload complete!")
     }
 }

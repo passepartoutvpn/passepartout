@@ -180,7 +180,6 @@ let package = Package(
             name: "CommonWeb",
             dependencies: [
                 "CommonLibrary",
-                "AppStrings",
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOHTTP1", package: "swift-nio")
             ],
@@ -210,7 +209,10 @@ let package = Package(
         ),
         .testTarget(
             name: "CommonWebTests",
-            dependencies: ["CommonWeb"]
+            dependencies: ["CommonWeb"],
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )

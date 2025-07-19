@@ -29,13 +29,27 @@ import NIO
 import NIOHTTP1
 
 public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
+    private let html: String
+
     private let port: Int
 
     private var channel: Channel?
 
     private var group: EventLoopGroup?
 
-    public init(port: Int) {
+    public init(stringsBundle: Bundle, port: Int) {
+        html = {
+            do {
+                guard let path = Bundle.module.path(forResource: "web_uploader", ofType: "html") else {
+                    throw AppError.notFound
+                }
+                let contents = try String(contentsOfFile: path)
+                let template = HTMLTemplate(html: contents)
+                return template.withLocalizedKeys(in: stringsBundle)
+            } catch {
+                fatalError("Unable to load web uploader HTML template")
+            }
+        }()
         self.port = port
     }
 
@@ -55,7 +69,7 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
                 .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)
                 .childChannelInitializer { channel in
                     channel.pipeline.configureHTTPServerPipeline().flatMap {
-                        channel.pipeline.addHandler(NIOWebReceiverHandler(passcode: passcode) {
+                        channel.pipeline.addHandler(NIOWebReceiverHandler(html: self.html, passcode: passcode) {
                             onReceive($0, $1)
                         })
                     }

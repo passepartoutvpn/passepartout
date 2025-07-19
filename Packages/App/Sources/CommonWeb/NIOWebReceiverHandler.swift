@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppStrings
 import CommonLibrary
 import CommonUtils
 import Foundation
@@ -35,18 +34,7 @@ final class NIOWebReceiverHandler {
 
     typealias OutboundOut = HTTPServerResponsePart
 
-    private static let html: String = {
-        do {
-            guard let path = Bundle.module.path(forResource: "web_uploader", ofType: "html") else {
-                throw AppError.notFound
-            }
-            let contents = try String(contentsOfFile: path)
-            let template = HTMLTemplate(html: contents)
-            return template.withLocalizedKeys(in: AppStrings.bundle)
-        } catch {
-            fatalError("Unable to load web uploader HTML template")
-        }
-    }()
+    private let html: String
 
     private let passcode: String?
 
@@ -56,7 +44,8 @@ final class NIOWebReceiverHandler {
 
     private var bodyBuffer: ByteBuffer?
 
-    init(passcode: String?, onReceive: @escaping (String, String) -> Void) {
+    init(html: String, passcode: String?, onReceive: @escaping (String, String) -> Void) {
+        self.html = html
         self.passcode = passcode
         self.onReceive = onReceive
     }
@@ -102,7 +91,7 @@ private extension NIOWebReceiverHandler {
         guard uri == "/" else {
             return false
         }
-        sendHTMLResponse(context, html: Self.html)
+        sendHTMLResponse(context, html: html)
         return true
     }
 

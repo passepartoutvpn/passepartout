@@ -199,7 +199,7 @@ extension AppContext {
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
-        let webReceiver = NIOWebReceiver(port: constants.webReceiver.port)
+        let webReceiver = NIOWebReceiver(stringsBundle: AppStrings.bundle, port: constants.webReceiver.port)
         let webReceiverManager = WebReceiverManager(webReceiver: webReceiver) {
             dependencies.webPasscodeGenerator(length: constants.webReceiver.passcodeLength)
         }
