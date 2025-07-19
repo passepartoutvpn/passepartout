@@ -31,7 +31,6 @@
 		0E46A7AC2E2B9292009AC46C /* CommonLegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0E46A7AB2E2B9292009AC46C /* CommonLegacyV2 */; };
 		0E46A7AE2E2B9299009AC46C /* AppLibraryMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E46A7AD2E2B9299009AC46C /* AppLibraryMain */; };
 		0E46A7B02E2B929B009AC46C /* AppLibraryTV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E46A7AF2E2B929B009AC46C /* AppLibraryTV */; };
-		0E46A7B82E2B94AC009AC46C /* UIAccessibility in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA6340B2D088C8200180D7C /* UIAccessibility */; };
 		0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EEEE12CF8CABA0076E2B0 /* AppContext+Testing.swift */; };
 		0E6EEEE42CF8CABA0076E2B0 /* ProfileManager+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6EEEE22CF8CABA0076E2B0 /* ProfileManager+Testing.swift */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
@@ -224,7 +223,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E46A7B82E2B94AC009AC46C /* UIAccessibility in Frameworks */,
 				0E46A7A82E2B927B009AC46C /* AppAccessibility in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,7 +570,6 @@
 			);
 			name = PassepartoutUITests;
 			packageProductDependencies = (
-				0EA6340B2D088C8200180D7C /* UIAccessibility */,
 				0E46A7A72E2B927B009AC46C /* AppAccessibility */,
 			);
 			productName = PassepartoutUITests;
@@ -595,7 +592,6 @@
 			name = PassepartoutTunnel;
 			packageProductDependencies = (
 				0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */,
-				0EB847E92D35807400B5B205 /* PassepartoutImplementations */,
 				0E46A79F2E2B924E009AC46C /* PartoutImplementations */,
 			);
 			productName = Tunnel;
@@ -635,7 +631,6 @@
 			name = PassepartoutTunnelMac;
 			packageProductDependencies = (
 				0E2306182DC2C295002D70D7 /* TunnelLibrary */,
-				0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */,
 				0E46A7A52E2B9271009AC46C /* PartoutImplementations */,
 			);
 			productName = Tunnel;
@@ -1759,10 +1754,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
 		};
-		0E23061A2DC2C299002D70D7 /* PassepartoutImplementations */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutImplementations;
-		};
 		0E23061C2DC2C2A8002D70D7 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
@@ -1810,14 +1801,6 @@
 		0E6C0A042BF4047600450362 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
-		};
-		0EA6340B2D088C8200180D7C /* UIAccessibility */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = UIAccessibility;
-		};
-		0EB847E92D35807400B5B205 /* PassepartoutImplementations */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutImplementations;
 		};
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
