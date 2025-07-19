@@ -12,28 +12,39 @@ let package = Package(
         .tvOS(.v17)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppUIMain",
+            name: "AppAccessibility",
+            targets: ["AppAccessibility"]
+        ),
+        .library(
+            name: "AppLibrary",
+            targets: ["AppLibrary"]
+        ),
+        .library(
+            name: "AppLibraryMain",
             targets: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
-                "AppUIMainWrapper"
+                "CommonDataPreferences",
+                "CommonDataProfiles",
+                "CommonDataProviders",
+                "AppLibraryMainWrapper"
             ]
         ),
         .library(
-            name: "AppUITV",
+            name: "AppLibraryTV",
             targets: [
-                "AppDataPreferences",
-                "AppDataProfiles",
-                "AppDataProviders",
-                "AppUITVWrapper"
+                "CommonDataPreferences",
+                "CommonDataProfiles",
+                "CommonDataProviders",
+                "AppLibraryTVWrapper"
             ]
         ),
         .library(
             name: "CommonIAP",
             targets: ["CommonIAP"]
+        ),
+        .library(
+            name: "CommonLegacyV2",
+            targets: ["CommonLegacyV2"]
         ),
         .library(
             name: "CommonLibrary",
@@ -44,28 +55,16 @@ let package = Package(
             targets: ["CommonUtils"]
         ),
         .library(
-            name: "LegacyV2",
-            targets: ["LegacyV2"]
+            name: "CommonWeb",
+            targets: ["CommonWeb"]
         ),
         .library(
-            name: "PassepartoutImplementations",
-            targets: ["PassepartoutImplementations"]
+            name: "PartoutImplementations",
+            targets: ["PartoutImplementations"]
         ),
         .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
-        ),
-        .library(
-            name: "UIAccessibility",
-            targets: ["UIAccessibility"]
-        ),
-        .library(
-            name: "UILibrary",
-            targets: ["UILibrary"]
-        ),
-        .library(
-            name: "WebLibrary",
-            targets: ["WebLibrary"]
         )
     ],
     dependencies: [
@@ -73,16 +72,62 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio", from: "2.83.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "AppData",
+            name: "AppAccessibility"
+        ),
+        .target(
+            name: "AppLibrary",
+            dependencies: [
+                "CommonLibrary",
+                "AppStrings",
+                "AppAccessibility"
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "AppLibraryMain",
+            dependencies: ["AppLibrary"],
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "AppLibraryMainWrapper",
+            dependencies: [
+                .target(name: "AppLibraryMain", condition: .when(platforms: [.iOS, .macOS]))
+            ],
+            path: "Sources/Empty/AppLibraryMainWrapper"
+        ),
+        .target(
+            name: "AppLibraryTV",
+            dependencies: [
+                "AppLibrary",
+                "CommonWeb"
+            ]
+        ),
+        .target(
+            name: "AppLibraryTVWrapper",
+            dependencies: [
+                .target(name: "AppLibraryTV", condition: .when(platforms: [.tvOS]))
+            ],
+            path: "Sources/Empty/AppLibraryTVWrapper"
+        ),
+        .target(
+            name: "AppStrings",
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "CommonData",
             dependencies: []
         ),
         .target(
-            name: "AppDataPreferences",
+            name: "CommonDataPreferences",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
@@ -90,9 +135,9 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppDataProfiles",
+            name: "CommonDataProfiles",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
@@ -100,9 +145,9 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppDataProviders",
+            name: "CommonDataProviders",
             dependencies: [
-                "AppData",
+                "CommonData",
                 "CommonLibrary"
             ],
             resources: [
@@ -110,44 +155,18 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppUI",
-            dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
-            ],
-            path: "Sources/Empty/AppUI"
-        ),
-        .target(
-            name: "AppUIMain",
-            dependencies: ["UILibrary"],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "AppUIMainWrapper",
-            dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS]))
-            ],
-            path: "Sources/Empty/AppUIMainWrapper"
-        ),
-        .target(
-            name: "AppUITV",
-            dependencies: [
-                "UILibrary",
-                "WebLibrary"
-            ]
-        ),
-        .target(
-            name: "AppUITVWrapper",
-            dependencies: [
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
-            ],
-            path: "Sources/Empty/AppUITVWrapper"
-        ),
-        .target(
             name: "CommonIAP",
             dependencies: ["CommonUtils"]
+        ),
+        .target(
+            name: "CommonLegacyV2",
+            dependencies: [
+                "CommonLibrary",
+                "PartoutImplementations"
+            ],
+            resources: [
+                .process("Profiles.xcdatamodeld")
+            ]
         ),
         .target(
             name: "CommonLibrary",
@@ -164,48 +183,17 @@ let package = Package(
             name: "CommonUtils"
         ),
         .target(
-            name: "LegacyV2",
-            dependencies: [
-                "CommonLibrary",
-                "PassepartoutImplementations"
-            ],
-            resources: [
-                .process("Profiles.xcdatamodeld")
-            ]
-        ),
-        .target(
-            name: "PassepartoutImplementations",
+            name: "PartoutImplementations",
             dependencies: [
                 .product(name: "PartoutOpenVPN", package: "partout"),
                 .product(name: "PartoutWireGuard", package: "partout")
             ],
-            path: "Sources/Empty/PassepartoutImplementations"
+            path: "Sources/Empty/PartoutImplementations"
         ),
         .target(
-            name: "StringsLibrary",
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "UIAccessibility"
-        ),
-        .target(
-            name: "UILibrary",
+            name: "CommonWeb",
             dependencies: [
                 "CommonLibrary",
-                "StringsLibrary",
-                "UIAccessibility"
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "WebLibrary",
-            dependencies: [
-                "CommonLibrary",
-                "StringsLibrary",
                 .product(name: "NIO", package: "swift-nio"),
                 .product(name: "NIOHTTP1", package: "swift-nio")
             ],
@@ -214,8 +202,16 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "AppUIMainTests",
-            dependencies: ["AppUIMain"]
+            name: "AppLibraryTests",
+            dependencies: ["AppLibrary"]
+        ),
+        .testTarget(
+            name: "AppLibraryMainTests",
+            dependencies: ["AppLibraryMain"]
+        ),
+        .testTarget(
+            name: "CommonLegacyV2Tests",
+            dependencies: ["CommonLegacyV2"]
         ),
         .testTarget(
             name: "CommonLibraryTests",
@@ -226,16 +222,11 @@ let package = Package(
             dependencies: ["CommonUtils"]
         ),
         .testTarget(
-            name: "LegacyV2Tests",
-            dependencies: ["LegacyV2"]
-        ),
-        .testTarget(
-            name: "UILibraryTests",
-            dependencies: ["UILibrary"]
-        ),
-        .testTarget(
-            name: "WebLibraryTests",
-            dependencies: ["WebLibrary"]
+            name: "CommonWebTests",
+            dependencies: ["CommonWeb"],
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )

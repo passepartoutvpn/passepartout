@@ -24,7 +24,6 @@
 //
 
 import Combine
-@testable import CommonIAP
 @testable import CommonLibrary
 import CommonUtils
 import Foundation

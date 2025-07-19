@@ -23,20 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
-import AppDataPreferences
-import AppDataProfiles
-import AppDataProviders
+import AppAccessibility
+import AppLibrary
+import CommonData
+import CommonDataPreferences
+import CommonDataProfiles
+import CommonDataProviders
+import CommonLegacyV2
 import CommonLibrary
 import CommonUtils
+#if os(tvOS)
+import CommonWeb
+#endif
 import CoreData
 import Foundation
-import LegacyV2
-import UIAccessibility
-import UILibrary
-#if os(tvOS)
-import WebLibrary
-#endif
 
 extension AppContext {
     convenience init() {
@@ -53,13 +53,13 @@ extension AppContext {
         // MARK: Core Data
 
         guard let cdLocalModel = NSManagedObjectModel.mergedModel(from: [
-            AppData.providersBundle
+            CommonData.providersBundle
         ]) else {
             fatalError("Unable to load local model")
         }
         guard let cdRemoteModel = NSManagedObjectModel.mergedModel(from: [
-            AppData.profilesBundle,
-            AppData.preferencesBundle
+            CommonData.profilesBundle,
+            CommonData.preferencesBundle
         ]) else {
             fatalError("Unable to load remote model")
         }
@@ -90,7 +90,7 @@ extension AppContext {
         // MARK: Managers
 
         let apiManager: APIManager = {
-            let repository = AppData.cdAPIRepositoryV3(context: localStore.backgroundContext())
+            let repository = CommonData.cdAPIRepositoryV3(context: localStore.backgroundContext())
             return APIManager(ctx, from: API.shared, repository: repository)
         }()
         let iapManager = IAPManager(
@@ -199,7 +199,7 @@ extension AppContext {
         let preferencesManager = PreferencesManager()
 
 #if os(tvOS)
-        let webReceiver = NIOWebReceiver(port: constants.webReceiver.port)
+        let webReceiver = NIOWebReceiver(stringsBundle: AppStrings.bundle, port: constants.webReceiver.port)
         let webReceiverManager = WebReceiverManager(webReceiver: webReceiver) {
             dependencies.webPasscodeGenerator(length: constants.webReceiver.passcodeLength)
         }
@@ -226,7 +226,7 @@ extension AppContext {
 
                     pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                     try await profileManager.observeRemote(repository: {
-                        AppData.cdProfileRepositoryV3(
+                        CommonData.cdProfileRepositoryV3(
                             registryCoder: dependencies.registryCoder,
                             context: remoteStore.context,
                             observingResults: true,
@@ -243,7 +243,7 @@ extension AppContext {
 
             pp_log(ctx, .app, .info, "\tRefresh modules preferences repository...")
             preferencesManager.modulesRepositoryFactory = {
-                try AppData.cdModulePreferencesRepositoryV3(
+                try CommonData.cdModulePreferencesRepositoryV3(
                     context: remoteStore.context,
                     moduleId: $0
                 )
@@ -251,7 +251,7 @@ extension AppContext {
 
             pp_log(ctx, .app, .info, "\tRefresh providers preferences repository...")
             preferencesManager.providersRepositoryFactory = {
-                try AppData.cdProviderPreferencesRepositoryV3(
+                try CommonData.cdProviderPreferencesRepositoryV3(
                     context: remoteStore.context,
                     providerId: $0
                 )
@@ -360,7 +360,7 @@ private extension Dependencies {
             cloudKitIdentifier: nil,
             author: nil
         )
-        return AppData.cdProfileRepositoryV3(
+        return CommonData.cdProfileRepositoryV3(
             registryCoder: registryCoder,
             context: store.context,
             observingResults: observingResults,

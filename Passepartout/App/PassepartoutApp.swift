@@ -24,9 +24,9 @@
 //
 
 #if os(iOS) || os(macOS)
-import AppUIMain
+import AppLibraryMain
 #elseif os(tvOS)
-import AppUITV
+import AppLibraryTV
 #endif
 
 import CommonLibrary

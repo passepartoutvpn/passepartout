@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-
 extension AppProduct: AppFeatureProviding {
     public var features: [AppFeature] {
         switch self {

@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import CommonLegacyV2
 import CommonLibrary
 import Foundation
-@testable import LegacyV2
 import XCTest
 
 @MainActor

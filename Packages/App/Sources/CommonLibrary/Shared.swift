@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@_exported import CommonIAP
 import Foundation
+import Partout
 
 extension LoggerCategory {
     public static let app = LoggerCategory(rawValue: "app")

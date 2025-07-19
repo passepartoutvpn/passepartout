@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-
 extension ProviderID: AppFeatureRequiring {
     public var features: Set<AppFeature> {
         self != .oeck ? [.providers] : []
