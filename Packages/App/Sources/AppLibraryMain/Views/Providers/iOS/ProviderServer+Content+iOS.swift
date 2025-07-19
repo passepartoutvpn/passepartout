@@ -25,9 +25,9 @@
 
 #if os(iOS)
 
+import AppAccessibility
 import CommonLibrary
 import SwiftUI
-import AppAccessibility
 
 extension ProviderServerView {
     struct ContentView: View {

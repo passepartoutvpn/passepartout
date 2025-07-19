@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 @testable import AppLibrary
+import Foundation
 import XCTest
 
 final class AppContextTests: XCTestCase {

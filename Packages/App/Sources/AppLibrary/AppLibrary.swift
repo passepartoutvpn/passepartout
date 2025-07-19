@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@_exported import AppStrings
 import CommonLibrary
 import Foundation
-@_exported import AppStrings
 
 @MainActor
 public protocol AppLibraryConfiguring {

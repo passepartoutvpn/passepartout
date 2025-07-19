@@ -24,8 +24,8 @@
 //
 
 import _PartoutWireGuardCore
-import Foundation
 import AppLibrary
+import Foundation
 import XCTest
 
 final class LocalizationTests: XCTestCase {

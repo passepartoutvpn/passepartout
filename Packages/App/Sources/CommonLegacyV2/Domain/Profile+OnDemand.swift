@@ -48,8 +48,5 @@ extension ProfileV2 {
         var withSSIDs: [String: Bool] = [:]
 
         var withOtherNetworks: Set<OtherNetwork> = []
-
-        init() {
-        }
     }
 }

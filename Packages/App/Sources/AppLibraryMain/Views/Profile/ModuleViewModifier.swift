@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
 import CommonLibrary
 import SwiftUI
-import AppAccessibility
 
 struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 

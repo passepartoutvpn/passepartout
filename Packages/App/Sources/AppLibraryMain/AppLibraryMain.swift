@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
+@_exported import AppLibrary
 import CommonLibrary
 import Foundation
 import TipKit
-import AppAccessibility
-@_exported import AppLibrary
 
 public final class AppLibraryMain: AppLibraryConfiguring {
     public init() {

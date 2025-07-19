@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
 import Combine
 import CommonLibrary
 import Foundation
-import AppAccessibility
 
 extension ProviderFiltersView {
 

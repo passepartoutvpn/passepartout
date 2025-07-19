@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
 import SwiftUI
-import AppLibrary
 
 extension Profile {
     func providerSelectorButton(onSelect: ((Profile) -> Void)?) -> some View {

@@ -25,9 +25,9 @@
 
 #if os(iOS)
 
+import AppLibrary
 import CommonLibrary
 import SwiftUI
-import AppLibrary
 
 struct SettingsContentView<LinkContent, SettingsDestination, LogDestination>: View where LinkContent: View, SettingsDestination: View, LogDestination: View {
 

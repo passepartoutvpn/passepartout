@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import AppAccessibility
+import Foundation
 import XCTest
 
 extension XCUIElement {

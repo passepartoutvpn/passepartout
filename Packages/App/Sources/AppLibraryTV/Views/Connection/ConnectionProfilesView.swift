@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
 import CommonLibrary
 import CommonUtils
-import SwiftUI
-import AppAccessibility
 import CommonWeb
+import SwiftUI
 
 struct ConnectionProfilesView: View {
 

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import AppLibrary
+import SwiftUI
 
 struct ProfileNameSection: View {
 

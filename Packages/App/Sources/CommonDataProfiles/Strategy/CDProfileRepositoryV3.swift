@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonData
 import Combine
+import CommonData
 import CommonLibrary
 import CommonUtils
 import CoreData

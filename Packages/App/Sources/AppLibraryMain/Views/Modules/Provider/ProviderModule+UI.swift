@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
 import SwiftUI
-import AppLibrary
 
 extension ProviderModule.Builder: ModuleViewProviding {
     public func moduleView(with parameters: ModuleViewParameters) -> some View {

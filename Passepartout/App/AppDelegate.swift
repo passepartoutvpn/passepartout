@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
+import AppLibrary
 import CommonLibrary
 import CommonUtils
 import SwiftUI
-import AppAccessibility
-import AppLibrary
 
 @MainActor
 final class AppDelegate: NSObject {

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 @_exported import AppLibrary
+import Foundation
 
 public final class AppLibraryTV: AppLibraryConfiguring {
     public init() {

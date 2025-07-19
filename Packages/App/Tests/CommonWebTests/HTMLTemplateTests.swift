@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import AppStrings
 @testable import CommonWeb
+import Foundation
 import XCTest
 
 final class HTMLTemplateTests: XCTestCase {

@@ -25,10 +25,10 @@
 
 #if os(macOS)
 
+import AppAccessibility
 import CommonLibrary
 import CommonUtils
 import SwiftUI
-import AppAccessibility
 
 struct ModuleListView: View, Routable {
     static let generalModuleId = UUID()

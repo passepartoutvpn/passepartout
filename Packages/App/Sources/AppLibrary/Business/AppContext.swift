@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppAccessibility
 import Combine
 import CommonLibrary
 import CommonUtils
 import Foundation
-import AppAccessibility
 
 @MainActor
 public final class AppContext: ObservableObject, Sendable {

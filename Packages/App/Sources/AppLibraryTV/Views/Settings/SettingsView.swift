@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
 import CommonUtils
 import SwiftUI
-import AppLibrary
 
 struct SettingsView: View {
 
