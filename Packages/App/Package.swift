@@ -188,7 +188,7 @@ let package = Package(
                 .product(name: "PartoutOpenVPN", package: "partout"),
                 .product(name: "PartoutWireGuard", package: "partout")
             ],
-            path: "Sources/PartoutImplementations"
+            path: "Sources/Empty/PartoutImplementations"
         ),
         .target(
             name: "CommonWeb",
