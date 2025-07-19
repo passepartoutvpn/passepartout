@@ -32,11 +32,11 @@ import CommonDataProviders
 import CommonLegacyV2
 import CommonLibrary
 import CommonUtils
+#if os(tvOS)
+import CommonWeb
+#endif
 import CoreData
 import Foundation
-#if os(tvOS)
-import WebLibrary
-#endif
 
 extension AppContext {
     convenience init() {
