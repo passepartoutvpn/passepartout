@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@_exported import CommonIAP
+import CommonIAP
 @_exported import Partout
 
 public enum CommonLibrary {
