@@ -24,7 +24,6 @@
 //
 
 @_exported import AppLibrary
-import Foundation
 
 public final class AppLibraryTV: AppLibraryConfiguring {
     public init() {

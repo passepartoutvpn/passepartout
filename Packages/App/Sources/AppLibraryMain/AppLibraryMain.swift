@@ -26,7 +26,6 @@
 import AppAccessibility
 @_exported import AppLibrary
 import CommonLibrary
-import Foundation
 import TipKit
 
 public final class AppLibraryMain: AppLibraryConfiguring {
