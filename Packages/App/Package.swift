@@ -73,40 +73,18 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio", from: "2.83.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "CommonData",
-            dependencies: []
+            name: "AppAccessibility"
         ),
         .target(
-            name: "CommonDataPreferences",
+            name: "AppLibrary",
             dependencies: [
-                "CommonData",
-                "CommonLibrary"
+                "CommonLibrary",
+                "AppStrings",
+                "AppAccessibility"
             ],
             resources: [
-                .process("Preferences.xcdatamodeld")
-            ]
-        ),
-        .target(
-            name: "CommonDataProfiles",
-            dependencies: [
-                "CommonData",
-                "CommonLibrary"
-            ],
-            resources: [
-                .process("Profiles.xcdatamodeld")
-            ]
-        ),
-        .target(
-            name: "CommonDataProviders",
-            dependencies: [
-                "CommonData",
-                "CommonLibrary"
-            ],
-            resources: [
-                .process("Providers.xcdatamodeld")
+                .process("Resources")
             ]
         ),
         .target(
@@ -146,8 +124,58 @@ let package = Package(
             path: "Sources/Empty/AppLibraryTVWrapper"
         ),
         .target(
+            name: "AppStrings",
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "CommonData",
+            dependencies: []
+        ),
+        .target(
+            name: "CommonDataPreferences",
+            dependencies: [
+                "CommonData",
+                "CommonLibrary"
+            ],
+            resources: [
+                .process("Preferences.xcdatamodeld")
+            ]
+        ),
+        .target(
+            name: "CommonDataProfiles",
+            dependencies: [
+                "CommonData",
+                "CommonLibrary"
+            ],
+            resources: [
+                .process("Profiles.xcdatamodeld")
+            ]
+        ),
+        .target(
+            name: "CommonDataProviders",
+            dependencies: [
+                "CommonData",
+                "CommonLibrary"
+            ],
+            resources: [
+                .process("Providers.xcdatamodeld")
+            ]
+        ),
+        .target(
             name: "CommonIAP",
             dependencies: ["CommonUtils"]
+        ),
+        .target(
+            name: "CommonLegacyV2",
+            dependencies: [
+                "CommonLibrary",
+                "PartoutImplementations"
+            ],
+            resources: [
+                .process("Profiles.xcdatamodeld")
+            ]
         ),
         .target(
             name: "CommonLibrary",
@@ -164,42 +192,12 @@ let package = Package(
             name: "CommonUtils"
         ),
         .target(
-            name: "CommonLegacyV2",
-            dependencies: [
-                "CommonLibrary",
-                "PartoutImplementations"
-            ],
-            resources: [
-                .process("Profiles.xcdatamodeld")
-            ]
-        ),
-        .target(
             name: "PartoutImplementations",
             dependencies: [
                 .product(name: "PartoutOpenVPN", package: "partout"),
                 .product(name: "PartoutWireGuard", package: "partout")
             ],
-            path: "Sources/Empty/PartoutImplementations"
-        ),
-        .target(
-            name: "AppStrings",
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "AppAccessibility"
-        ),
-        .target(
-            name: "AppLibrary",
-            dependencies: [
-                "CommonLibrary",
-                "AppStrings",
-                "AppAccessibility"
-            ],
-            resources: [
-                .process("Resources")
-            ]
+            path: "Sources/PartoutImplementations"
         ),
         .target(
             name: "CommonWeb",
@@ -214,8 +212,16 @@ let package = Package(
             ]
         ),
         .testTarget(
+            name: "AppLibraryTests",
+            dependencies: ["AppLibrary"]
+        ),
+        .testTarget(
             name: "AppLibraryMainTests",
             dependencies: ["AppLibraryMain"]
+        ),
+        .testTarget(
+            name: "CommonLegacyV2Tests",
+            dependencies: ["CommonLegacyV2"]
         ),
         .testTarget(
             name: "CommonLibraryTests",
@@ -224,14 +230,6 @@ let package = Package(
         .testTarget(
             name: "CommonUtilsTests",
             dependencies: ["CommonUtils"]
-        ),
-        .testTarget(
-            name: "CommonLegacyV2Tests",
-            dependencies: ["CommonLegacyV2"]
-        ),
-        .testTarget(
-            name: "AppLibraryTests",
-            dependencies: ["AppLibrary"]
         ),
         .testTarget(
             name: "CommonWebTests",
