@@ -53,6 +53,7 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
         self.port = port
     }
 
+    // onReceive(filename, content)
     public func start(passcode: String?, onReceive: @escaping (String, String) -> Void) throws -> URL {
         guard channel == nil else {
             pp_log_g(.App.web, .error, "Web server is already started")
@@ -68,10 +69,17 @@ public final class NIOWebReceiver: WebReceiver, @unchecked Sendable {
                 .serverChannelOption(.backlog, value: 256)
                 .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)
                 .childChannelInitializer { channel in
-                    channel.pipeline.configureHTTPServerPipeline().flatMap {
-                        channel.pipeline.addHandler(NIOWebReceiverHandler(html: self.html, passcode: passcode) {
-                            onReceive($0, $1)
-                        })
+                    channel.pipeline.configureHTTPServerPipeline().flatMap { [weak self] in
+                        guard let self else {
+                            return channel.eventLoop.makeSucceededFuture(())
+                        }
+                        return channel.pipeline.addHandler(
+                            NIOWebReceiverHandler(
+                                html: html,
+                                passcode: passcode,
+                                onReceive: onReceive
+                            )
+                        )
                     }
                 }
                 .childChannelOption(.socketOption(.so_reuseaddr), value: 1)
