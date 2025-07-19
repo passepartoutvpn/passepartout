@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Foundation
-@testable import LegacyV2
+@testable import CommonLegacyV2
 import XCTest
 
 final class MapperV2Tests: XCTestCase {

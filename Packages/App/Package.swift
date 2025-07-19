@@ -44,8 +44,8 @@ let package = Package(
             targets: ["CommonUtils"]
         ),
         .library(
-            name: "LegacyV2",
-            targets: ["LegacyV2"]
+            name: "CommonLegacyV2",
+            targets: ["CommonLegacyV2"]
         ),
         .library(
             name: "PassepartoutImplementations",
@@ -164,7 +164,7 @@ let package = Package(
             name: "CommonUtils"
         ),
         .target(
-            name: "LegacyV2",
+            name: "CommonLegacyV2",
             dependencies: [
                 "CommonLibrary",
                 "PassepartoutImplementations"
@@ -226,8 +226,8 @@ let package = Package(
             dependencies: ["CommonUtils"]
         ),
         .testTarget(
-            name: "LegacyV2Tests",
-            dependencies: ["LegacyV2"]
+            name: "CommonLegacyV2Tests",
+            dependencies: ["CommonLegacyV2"]
         ),
         .testTarget(
             name: "AppLibraryTests",
