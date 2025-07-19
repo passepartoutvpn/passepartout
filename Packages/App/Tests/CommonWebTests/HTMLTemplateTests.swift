@@ -25,7 +25,7 @@
 
 import Foundation
 import AppStrings
-@testable import WebLibrary
+@testable import CommonWeb
 import XCTest
 
 final class HTMLTemplateTests: XCTestCase {

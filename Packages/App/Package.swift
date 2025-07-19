@@ -64,8 +64,8 @@ let package = Package(
             targets: ["AppLibrary"]
         ),
         .library(
-            name: "WebLibrary",
-            targets: ["WebLibrary"]
+            name: "CommonWeb",
+            targets: ["CommonWeb"]
         )
     ],
     dependencies: [
@@ -135,7 +135,7 @@ let package = Package(
             name: "AppLibraryTV",
             dependencies: [
                 "AppLibrary",
-                "WebLibrary"
+                "CommonWeb"
             ]
         ),
         .target(
@@ -202,7 +202,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "WebLibrary",
+            name: "CommonWeb",
             dependencies: [
                 "CommonLibrary",
                 "AppStrings",
@@ -234,8 +234,8 @@ let package = Package(
             dependencies: ["AppLibrary"]
         ),
         .testTarget(
-            name: "WebLibraryTests",
-            dependencies: ["WebLibrary"]
+            name: "CommonWebTests",
+            dependencies: ["CommonWeb"]
         )
     ]
 )

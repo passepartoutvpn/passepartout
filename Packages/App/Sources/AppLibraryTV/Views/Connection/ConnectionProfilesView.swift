@@ -27,7 +27,7 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 import AppAccessibility
-import WebLibrary
+import CommonWeb
 
 struct ConnectionProfilesView: View {
 
