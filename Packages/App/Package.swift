@@ -48,8 +48,8 @@ let package = Package(
             targets: ["CommonLegacyV2"]
         ),
         .library(
-            name: "PassepartoutImplementations",
-            targets: ["PassepartoutImplementations"]
+            name: "PartoutImplementations",
+            targets: ["PartoutImplementations"]
         ),
         .library(
             name: "TunnelLibrary",
@@ -167,19 +167,19 @@ let package = Package(
             name: "CommonLegacyV2",
             dependencies: [
                 "CommonLibrary",
-                "PassepartoutImplementations"
+                "PartoutImplementations"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
             ]
         ),
         .target(
-            name: "PassepartoutImplementations",
+            name: "PartoutImplementations",
             dependencies: [
                 .product(name: "PartoutOpenVPN", package: "partout"),
                 .product(name: "PartoutWireGuard", package: "partout")
             ],
-            path: "Sources/Empty/PassepartoutImplementations"
+            path: "Sources/Empty/PartoutImplementations"
         ),
         .target(
             name: "AppStrings",
