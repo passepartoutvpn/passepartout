@@ -23,8 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import _PartoutWireGuardCore
-import PartoutCore
+import Partout
 import XCTest
 
 final class WireGuardParseErrorTests: XCTestCase {

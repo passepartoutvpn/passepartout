@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PartoutAPIBundle
+import Partout
 
 extension API {
     public static var shared: [APIMapper] {
