@@ -83,6 +83,8 @@ public final class VersionChecker: ObservableObject {
                 return
             }
             pp_log_g(.app, .info, "Version: new version available at \(latestRelease.url)")
+        } catch AppError.rateLimit {
+            pp_log_g(.app, .debug, "Version: rate limit")
         } catch AppError.unexpectedResponse {
             // save the check date regardless because the service call succeeded
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
