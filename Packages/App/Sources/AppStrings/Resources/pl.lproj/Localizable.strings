@@ -27,6 +27,7 @@
 "errors.app.empty_profile_name" = "Nazwa profilu jest pusta.";
 "errors.app.import" = "Nie można zaimportować profili.";
 "errors.app.malformed_module" = "Moduł %@ jest uszkodzony. %@";
+"errors.app.module_requires_connection" = "Moduł %@ wymaga aktywnego połączenia jednego z następujących typów: %@";
 "errors.app.passepartout.corrupt_provider_module" = "Nie można połączyć się z serwerem dostawcy (powód=%@).";
 "errors.app.passepartout.default" = "Nie można ukończyć operacji (kod=%@).";
 "errors.app.passepartout.incompatible_modules" = "Niektóre aktywne moduły są niekompatybilne. Spróbuj aktywować tylko jeden.";

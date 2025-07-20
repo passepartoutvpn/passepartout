@@ -27,6 +27,7 @@
 "errors.app.empty_profile_name" = "Le nom du profil est vide.";
 "errors.app.import" = "Impossible d'importer les profils.";
 "errors.app.malformed_module" = "Le module %@ est mal formé. %@";
+"errors.app.module_requires_connection" = "Le module %@ nécessite une connexion active parmi les types suivants : %@";
 "errors.app.passepartout.corrupt_provider_module" = "Impossible de se connecter au serveur du fournisseur (raison=%@).";
 "errors.app.passepartout.default" = "Impossible de terminer l'opération (code=%@).";
 "errors.app.passepartout.incompatible_modules" = "Certains modules actifs sont incompatibles, essayez d'en activer un seul.";

@@ -27,6 +27,7 @@
 "errors.app.empty_profile_name" = "Το όνομα του προφίλ είναι κενό.";
 "errors.app.import" = "Δεν ήταν δυνατή η εισαγωγή προφίλ.";
 "errors.app.malformed_module" = "Το μονάδα %@ είναι εσφαλμένη. %@";
+"errors.app.module_requires_connection" = "Η μονάδα %@ απαιτεί ενεργή σύνδεση ενός από τους παρακάτω τύπους: %@";
 "errors.app.passepartout.corrupt_provider_module" = "Δεν ήταν δυνατή η σύνδεση στον διακομιστή παρόχου (λόγος=%@).";
 "errors.app.passepartout.default" = "Δεν ήταν δυνατή η ολοκλήρωση της λειτουργίας (κωδικός=%@).";
 "errors.app.passepartout.incompatible_modules" = "Μερικές ενεργές μονάδες είναι ασύμβατες, δοκιμάστε να ενεργοποιήσετε μόνο μία.";
