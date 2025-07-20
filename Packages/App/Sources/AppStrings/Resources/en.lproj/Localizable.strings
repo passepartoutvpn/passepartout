@@ -254,6 +254,11 @@
 "onboarding.community.dismiss" = "No, thanks";
 "onboarding.migrate_3_2_3.message" = "Version 3.2.3 changed the way providers are stored, make sure to upgrade all your devices to the latest version to use the new profiles.";
 
+// MARK: Views (Report)
+
+"app_not_working.title" = "Is the app not working?";
+"app_not_working.message" = "I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.";
+
 // MARK: - Entities
 
 "entities.tunnel_status.inactive" = "Inactive";

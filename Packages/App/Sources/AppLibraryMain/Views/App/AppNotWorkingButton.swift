@@ -42,8 +42,8 @@ struct AppNotWorkingButton: View {
 
     var body: some View {
         ReportIssueButton(
-            title: "Is the app not working?",
-            message: "I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.",
+            title: Strings.AppNotWorking.title,
+            message: Strings.AppNotWorking.message,
             tunnel: tunnel,
             apiManager: apiManager,
             purchasedProducts: iapManager.purchasedProducts,
