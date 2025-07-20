@@ -1,8 +1,6 @@
 "alerts.import.passphrase.message" = "Wprowadź hasło dla '%@'.";
 "alerts.import.passphrase.ok" = "Odszyfruj";
 "alerts.providers.missing_server.message" = "Nie wybrano serwera dostawcy. Wybierz serwer docelowy na swoim urządzeniu iOS/macOS.";
-"app_not_working.message" = "Próbuję naprawić problem, który dotyczy nowych użytkowników. Jeśli zauważysz coś dziwnego, opisz to poniżej. Bardzo mi pomożesz — i tak, najbardziej pomocne zgłoszenia zostaną nagrodzone.";
-"app_not_working.title" = "Aplikacja nie działa?";
 "entities.dns_protocol.cleartext" = "Nieszyfrowane";
 "entities.dns_protocol.https" = "Przez HTTPS";
 "entities.dns_protocol.tls" = "Przez TLS";

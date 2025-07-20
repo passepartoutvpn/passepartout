@@ -1,8 +1,6 @@
 "alerts.import.passphrase.message" = "Введіть пароль для '%@'.";
 "alerts.import.passphrase.ok" = "Розшифрувати";
 "alerts.providers.missing_server.message" = "Не вибрано сервер постачальника. Будь ласка, виберіть сервер призначення на вашому пристрої iOS/macOS.";
-"app_not_working.message" = "Я намагаюся виправити проблему, що впливає на нових користувачів. Якщо помітите щось дивне — будь ласка, опишіть це нижче. Це дуже мені допоможе — і так, найкорисніші звіти будуть винагороджені.";
-"app_not_working.title" = "Програма не працює?";
 "entities.dns_protocol.cleartext" = "Відкритий текст";
 "entities.dns_protocol.https" = "Через HTTPS";
 "entities.dns_protocol.tls" = "Через TLS";
