@@ -261,6 +261,12 @@ extension AppContext {
             profileManager.reloadRequiredFeatures()
         }
 
+        // MARK: Config
+
+        let configManager = ConfigManager(
+            strategy: WebConfigStrategy(url: Constants.shared.configURL)
+        )
+
         // MARK: Version
 
         let versionStrategy = GitHubReleaseStrategy(
@@ -287,6 +293,7 @@ extension AppContext {
 
         self.init(
             apiManager: apiManager,
+            configManager: configManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
             kvManager: kvManager,

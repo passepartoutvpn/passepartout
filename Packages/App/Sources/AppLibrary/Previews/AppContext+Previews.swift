@@ -61,6 +61,7 @@ extension AppContext {
             from: API.bundled,
             repository: InMemoryAPIRepository(.global)
         )
+        let configManager = ConfigManager()
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let registry = Registry()
@@ -73,6 +74,7 @@ extension AppContext {
 
         return AppContext(
             apiManager: apiManager,
+            configManager: configManager,
             distributionTarget: distributionTarget,
             iapManager: iapManager,
             kvManager: kvManager,

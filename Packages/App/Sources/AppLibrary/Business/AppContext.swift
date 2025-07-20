@@ -35,6 +35,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let appearanceManager: AppearanceManager
 
+    public let configManager: ConfigManager
+
     public let distributionTarget: DistributionTarget
 
     public let iapManager: IAPManager
@@ -71,6 +73,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public init(
         apiManager: APIManager,
+        configManager: ConfigManager,
         distributionTarget: DistributionTarget,
         iapManager: IAPManager,
         kvManager: KeyValueManager,
@@ -88,6 +91,7 @@ public final class AppContext: ObservableObject, Sendable {
     ) {
         self.apiManager = apiManager
         appearanceManager = AppearanceManager(kvManager: kvManager)
+        self.configManager = configManager
         self.distributionTarget = distributionTarget
         self.iapManager = iapManager
         self.kvManager = kvManager
@@ -209,6 +213,7 @@ private extension AppContext {
         pendingTask = Task {
             await reloadSystemExtension()
             await iapManager.reloadReceipt()
+            await configManager.refreshFlags()
         }
         await pendingTask?.value
         pendingTask = nil

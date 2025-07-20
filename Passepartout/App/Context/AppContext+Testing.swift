@@ -66,12 +66,14 @@ extension AppContext {
             processor: processor,
             interval: constants.tunnel.refreshInterval
         )
+        let configManager = ConfigManager()
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let webReceiverManager = WebReceiverManager()
 
         return AppContext(
             apiManager: apiManager,
+            configManager: configManager,
             distributionTarget: Dependencies.distributionTarget,
             iapManager: iapManager,
             kvManager: kvManager,

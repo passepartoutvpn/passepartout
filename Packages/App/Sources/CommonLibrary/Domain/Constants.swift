@@ -206,6 +206,10 @@ public struct Constants: Decodable, Sendable {
         public let options: LocalLogger.Options
     }
 
+    public var configURL: URL {
+        github.raw.appending(path: "config/config.json")
+    }
+
     public let bundleKey: String
 
     public let deviceIdLength: Int
