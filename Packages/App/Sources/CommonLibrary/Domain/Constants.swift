@@ -75,7 +75,7 @@ public struct Constants: Decodable, Sendable {
 
         public let config: URL
 
-        public let configRateLimit: TimeInterval
+        public let configTTL: TimeInterval
     }
 
     public struct GitHub: Decodable, Sendable {

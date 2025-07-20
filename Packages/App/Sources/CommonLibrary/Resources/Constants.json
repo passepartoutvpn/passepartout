@@ -16,7 +16,7 @@
         "appStoreDownload": "https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8",
         "macDownload": "https://passepartoutvpn.app/#app-mac",
         "config": "https://raw.githubusercontent.com/passepartoutvpn/config/refs/heads/master/flags.json",
-        "configRateLimit": 600.0
+        "configTTL": 3600.0
     },
     "github": {
         "discussions": "http://github.com/passepartoutvpn/discussions",

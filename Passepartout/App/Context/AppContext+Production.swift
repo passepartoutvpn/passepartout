@@ -266,7 +266,7 @@ extension AppContext {
         let configManager = ConfigManager(
             strategy: WebConfigStrategy(
                 url: Constants.shared.websites.config,
-                ttl: Constants.shared.websites.configRateLimit
+                ttl: Constants.shared.websites.configTTL
             )
         )
 
