@@ -5,6 +5,7 @@
             "title": {
                 "de": "Funktioniert die App nicht?",
                 "el": "Η εφαρμογή δεν λειτουργεί;",
+                "en": "Is the app not working?",
                 "es": "¿La app no funciona?",
                 "fr": "L'app ne fonctionne pas ?",
                 "it": "L'app non funziona?",
@@ -19,6 +20,7 @@
             "message": {
                 "de": "Ich versuche gerade, ein Problem zu beheben, das neue Nutzer betrifft. Falls dir etwas Seltsames auffällt, beschreibe bitte dein Problem unten. Du würdest mir sehr helfen – und ja, die hilfreichsten Berichte werden belohnt.",
                 "el": "Προσπαθώ να διορθώσω ένα πρόβλημα που επηρεάζει νέους χρήστες. Αν παρατηρήσεις κάτι περίεργο, περιέγραψέ το παρακάτω. Θα με βοηθήσεις πολύ — και ναι, οι πιο χρήσιμες αναφορές θα ανταμειφθούν.",
+                "en": "I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.",
                 "es": "Estoy intentando solucionar un problema que afecta a los nuevos usuarios. Si notas algo extraño, describe el problema a continuación. Me ayudarás mucho — y sí, los informes más útiles serán recompensados.",
                 "fr": "J'essaie de corriger un problème qui affecte les nouveaux utilisateurs. Si vous remarquez quelque chose d'étrange, décrivez-le ci-dessous. Cela m'aidera énormément — et oui, les rapports les plus utiles seront récompensés.",
                 "it": "Sto cercando di risolvere un problema che riguarda i nuovi utenti. Se noti qualcosa di strano, descrivilo qui sotto. Mi aiuteresti moltissimo — e sì, le segnalazioni più utili saranno ricompensate.",
