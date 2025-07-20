@@ -48,6 +48,6 @@ public struct ConfigBundle: Decodable {
     }
 
     public var activeFlags: Set<ConfigFlag> {
-        Set(map.keys)
+        Set(map.filter { $0.value.rate == 100 }.keys)
     }
 }
