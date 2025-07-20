@@ -72,6 +72,8 @@ public struct Constants: Decodable, Sendable {
         public let appStoreDownload: URL
 
         public let macDownload: URL
+
+        public let config: URL
     }
 
     public struct GitHub: Decodable, Sendable {
@@ -204,10 +206,6 @@ public struct Constants: Decodable, Sendable {
         public let sinceLast: TimeInterval
 
         public let options: LocalLogger.Options
-    }
-
-    public var configURL: URL {
-        github.raw.appending(path: "config/config.json")
     }
 
     public let bundleKey: String
