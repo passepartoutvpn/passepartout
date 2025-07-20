@@ -46,4 +46,8 @@ public struct ConfigBundle: Decodable {
                 $0[flag] = $1.value
             }
     }
+
+    public var activeFlags: Set<ConfigFlag> {
+        Set(map.keys)
+    }
 }

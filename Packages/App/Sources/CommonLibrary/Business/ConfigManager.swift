@@ -54,7 +54,8 @@ public final class ConfigManager: ObservableObject {
             pp_log_g(.app, .debug, "Config: refreshing bundle...")
             let newBundle = try await strategy.bundle()
             bundle = newBundle
-            pp_log_g(.app, .info, "Config: \(newBundle)")
+            pp_log_g(.app, .info, "Config: active flags = \(newBundle.activeFlags)")
+            pp_log_g(.app, .debug, "Config: \(newBundle)")
         } catch AppError.rateLimit {
             pp_log_g(.app, .debug, "Config: TTL")
         } catch {
