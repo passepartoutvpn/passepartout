@@ -119,15 +119,8 @@ extension AppContext {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
-            // check for flags and updates
-            do {
-                await configManager.refreshFlags()
-                try await versionChecker.checkLatestRelease()
-            } catch AppError.rateLimit {
-                //
-            } catch {
-                pp_log_g(.app, .error, "Unable to check version: \(error)")
-            }
+            await configManager.refreshFlags()
+            await versionChecker.checkLatestRelease()
         }
     }
 }
