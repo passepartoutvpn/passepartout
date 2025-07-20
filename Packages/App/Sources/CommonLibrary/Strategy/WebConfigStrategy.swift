@@ -36,7 +36,7 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
     public init(url: URL, ttl: TimeInterval) {
         self.url = url
         self.ttl = ttl
-        lastUpdated = Date()
+        lastUpdated = .distantPast
     }
 
     public func flags() async throws -> [ConfigFlag: Int] {
