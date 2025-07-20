@@ -74,7 +74,7 @@ public final class VersionChecker: ObservableObject {
             let fetchedLatestVersion = try await strategy.latestVersion(since: lastCheckedDate)
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
             kvManager.set(fetchedLatestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
-            pp_log_g(.app, .debug, "Version: \(fetchedLatestVersion) > \(currentVersion) = \(fetchedLatestVersion > currentVersion)")
+            pp_log_g(.app, .info, "Version: \(fetchedLatestVersion) > \(currentVersion) = \(fetchedLatestVersion > currentVersion)")
 
             objectWillChange.send()
 
