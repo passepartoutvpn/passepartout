@@ -55,8 +55,8 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     var flow: ProfileFlow?
 
     var body: some View {
-        debugChanges()
-        return Form {
+        Form {
+            AppNotWorkingButton(tunnel: tunnel)
             if !isUITesting && !isSearching && pinsActiveProfile {
                 headerView
                     .unanimated()

@@ -51,9 +51,10 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300.0))]
 
     var body: some View {
-        debugChanges()
-        return ScrollView {
+        ScrollView {
             VStack(spacing: .zero) {
+                AppNotWorkingButton(tunnel: tunnel)
+                    .padding(.bottom)
                 if !isUITesting && !isSearching && pinsActiveProfile {
                     headerView
                         .padding(.bottom)
