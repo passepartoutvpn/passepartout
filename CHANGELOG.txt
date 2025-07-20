@@ -1,1 +1,4 @@
-* Update Core (just tests)
+* Prevent save if a module requires a connection (#1473)
+* API: Remove ProtonVPN after discontinued public API (#1469)
+* Add update link to Mac menu (#1468)
+* Fix translations of "About"
