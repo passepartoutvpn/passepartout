@@ -115,11 +115,11 @@
 "global.nouns.address" = "地址";
 "global.nouns.addresses" = "地址";
 "global.nouns.any" = "任何";
-"global.nouns.apple.network_extensions" = "网络扩展"
-"global.nouns.apple.system_extension" = "系统扩展"
+"global.nouns.apple.network_extensions" = "网络扩展";
+"global.nouns.apple.system_extension" = "系统扩展";
 "global.nouns.category" = "类别";
 "global.nouns.certificate" = "证书";
-"global.nouns.comment" = "评论"
+"global.nouns.comment" = "评论";
 "global.nouns.compression" = "压缩";
 "global.nouns.configuration" = "配置";
 "global.nouns.connection" = "连接";
@@ -166,7 +166,7 @@
 "global.nouns.port" = "端口";
 "global.nouns.preferences" = "偏好设置";
 "global.nouns.private_key" = "私钥";
-"global.nouns.products" = "产品"; // Chinese (Simplified)
+"global.nouns.products" = "产品";
 "global.nouns.profile" = "配置文件";
 "global.nouns.profiles" = "配置文件";
 "global.nouns.protocol" = "协议";
@@ -282,7 +282,7 @@
 "views.diagnostics.rows.include_private_data" = "包含私人数据";
 "views.diagnostics.rows.remove_tunnel_logs" = "删除所有日志";
 "views.diagnostics.rows.tunnel" = "隧道";
-"views.diagnostics.sections.active_profiles" = "活动配置文件"
+"views.diagnostics.sections.active_profiles" = "活动配置文件";
 "views.diagnostics.sections.live" = "实时日志";
 "views.diagnostics.sections.tunnel" = "隧道日志";
 "views.diagnostics.title" = "诊断";
@@ -314,7 +314,7 @@
 "views.paywall.sections.products.footer" = "所有购买均支持“家人共享”。";
 "views.paywall.sections.products.header" = "推荐产品";
 "views.paywall.sections.required_features.header" = "必需功能";
-"views.paywall.sections.restore.footer" = "如果您过去有购买记录，可以在此恢复。"
+"views.paywall.sections.restore.footer" = "如果您过去有购买记录，可以在此恢复。";
 "views.paywall.sections.restore.header" = "恢复";
 "views.preferences.dns_falls_back.footer" = "当 VPN 不提供 DNS 设置时，回退到 CloudFlare 服务器。";
 "views.preferences.dns_falls_back" = "DNS 备用";
@@ -329,7 +329,7 @@
 "views.preferences.launches_on_login" = "登录时启动";
 "views.preferences.locks_in_background.footer" = "当应用切换到后台时，使用 FaceID 锁定它。";
 "views.preferences.locks_in_background" = "后台锁定";
-"views.preferences.modern_crypto.footer" = "使用现代且更快速的加密算法实现，但可能不稳定。"
+"views.preferences.modern_crypto.footer" = "使用现代且更快速的加密算法实现，但可能不稳定。";
 "views.preferences.modern_crypto" = "现代加密技术";
 "views.preferences.pins_active_profile.footer" = "还会在顶部显示活动配置文件，以便快速访问。";
 "views.preferences.pins_active_profile" = "固定活动配置文件";
@@ -373,8 +373,8 @@
 "views.settings.links.sections.web" = "网页";
 "views.settings.links.title" = "链接";
 "views.settings.links.update" = "更新到%@";
-"views.settings.system_extension.buttons.open" = "打开偏好设置"
-"views.settings.system_extension.message" = "要使 VPN 正常工作，应用程序必须位于 /Applications 目录中，并且必须将 %@ 启用为 %@。\n\n打开 macOS 偏好设置，滚动到“%@”，打开并启用 %@。"
+//"views.settings.system_extension.buttons.open" = "打开偏好设置";
+"views.settings.system_extension.message" = "要使 VPN 正常工作，应用程序必须位于 /Applications 目录中，并且必须将 %@ 启用为 %@。\n\n打开 macOS 偏好设置，滚动到“%@”，打开并启用 %@。";
 "views.settings.title" = "关于";
 "views.tv.connection_profiles.header" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。";
 "views.tv.profiles.detail.profiles" = "长按以显示可用的配置文件操作。本地配置文件可以在这里删除，而 iCloud 配置文件只能在 iOS 或 macOS 应用中删除。";
