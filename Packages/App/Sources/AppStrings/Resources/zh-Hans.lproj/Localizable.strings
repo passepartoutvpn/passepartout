@@ -1,6 +1,8 @@
 "alerts.import.passphrase.message" = "输入 \"%@\" 的密码短语。";
 "alerts.import.passphrase.ok" = "解密";
 "alerts.providers.missing_server.message" = "未选择提供商服务器。请在您的 iOS/macOS 设备上选择目标服务器。";
+"app_not_working.message" = "我正在尝试修复一个影响新用户的问题。如果你发现了什么异常，请在下方描述你的问题。你的帮助对我意义重大 — 是的，最有价值的反馈将获得奖励。";
+"app_not_working.title" = "应用无法使用？";
 "entities.dns_protocol.cleartext" = "明文";
 "entities.dns_protocol.https" = "HTTPS";
 "entities.dns_protocol.tls" = "TLS";
