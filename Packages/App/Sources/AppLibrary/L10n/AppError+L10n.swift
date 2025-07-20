@@ -49,6 +49,15 @@ extension AppError: LocalizedError {
         case .malformedModule(let module, let error):
             return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 
+        case .moduleRequiresConnection(let module):
+            let connectionTypes = ModuleType.allCases.filter(\.isConnection)
+            return V.moduleRequiresConnection(
+                module.moduleType.localizedDescription,
+                connectionTypes
+                    .map(\.localizedDescription)
+                    .joined(separator: ", ")
+            )
+
         case .notFound:
             return nil
 

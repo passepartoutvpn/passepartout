@@ -75,6 +75,13 @@ public struct EditableProfile: MutableProfileType {
         builder.behavior = behavior
         builder.userInfo = userInfo
 
+        // some modules may require an active connection module (VPN)
+        // for example, IP and HTTP Proxy modules require a VPN in NE
+        if builder.activeConnectionModule == nil,
+           let requiringConnection = builder.activeModules.first(where: \.requiresConnection) {
+            throw AppError.moduleRequiresConnection(requiringConnection)
+        }
+
         return builder
     }
 }

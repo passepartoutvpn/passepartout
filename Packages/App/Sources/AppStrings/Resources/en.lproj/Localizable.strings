@@ -431,6 +431,7 @@
 "errors.app.empty_profile_name" = "Profile name is empty.";
 "errors.app.import" = "Unable to import profiles.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
+"errors.app.module_requires_connection" = "The %@ module requires an active connection among the following types: %@";
 "errors.app.permission_denied" = "Permission denied";
 "errors.app.tunnel" = "Unable to execute operation.";
 "errors.app.web_receiver" = "Unable to start the import. Make sure that your TV is properly connected to the local network.";

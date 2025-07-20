@@ -110,6 +110,10 @@ public enum Strings {
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
       }
+      /// The %@ module requires an active connection among the following types: %@
+      public static func moduleRequiresConnection(_ p1: Any, _ p2: Any) -> String {
+        return Strings.tr("Localizable", "errors.app.module_requires_connection", String(describing: p1), String(describing: p2), fallback: "The %@ module requires an active connection among the following types: %@")
+      }
       /// Permission denied
       public static let permissionDenied = Strings.tr("Localizable", "errors.app.permission_denied", fallback: "Permission denied")
       /// Unable to execute operation.

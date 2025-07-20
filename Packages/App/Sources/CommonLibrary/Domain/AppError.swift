@@ -39,6 +39,8 @@ public enum AppError: Error {
 
     case malformedModule(any ModuleBuilder, error: Error)
 
+    case moduleRequiresConnection(any Module)
+
     case notFound
 
     case partout(PartoutError)
