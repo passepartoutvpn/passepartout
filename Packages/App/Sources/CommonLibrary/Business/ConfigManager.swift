@@ -53,12 +53,13 @@ public final class ConfigManager: ObservableObject {
             return
         }
         do {
-            pp_log_g(.app, .debug, "Refreshing config flags...")
+            pp_log_g(.app, .debug, "Config: refreshing flags...")
             let deployment = try await strategy.flags()
             let active = deployment.filter {
                 $0.value == 100
             }
             flags = Set(active.map(\.key))
+            pp_log_g(.app, .info, "Config: \(flags)")
         } catch {
             pp_log_g(.app, .error, "Unable to refresh config flags: \(error)")
         }

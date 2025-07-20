@@ -119,13 +119,10 @@ extension AppContext {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
-            // check for updates
+            // check for flags and updates
             do {
-                guard let release = try await versionChecker.checkLatestRelease() else {
-                    pp_log_g(.app, .debug, "Version: current is latest version")
-                    return
-                }
-                pp_log_g(.app, .info, "Version: new version available at \(release.url)")
+                await configManager.refreshFlags()
+                try await versionChecker.checkLatestRelease()
             } catch AppError.rateLimit {
                 //
             } catch {
@@ -213,7 +210,6 @@ private extension AppContext {
         pendingTask = Task {
             await reloadSystemExtension()
             await iapManager.reloadReceipt()
-            await configManager.refreshFlags()
         }
         await pendingTask?.value
         pendingTask = nil
