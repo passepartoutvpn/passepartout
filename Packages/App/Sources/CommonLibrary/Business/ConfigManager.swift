@@ -65,6 +65,8 @@ public final class ConfigManager: ObservableObject {
             }
             flags = newFlags
             pp_log_g(.app, .info, "Config: \(newFlags)")
+        } catch AppError.rateLimit {
+            pp_log_g(.app, .debug, "Config: TTL")
         } catch {
             pp_log_g(.app, .error, "Unable to refresh config flags: \(error)")
         }

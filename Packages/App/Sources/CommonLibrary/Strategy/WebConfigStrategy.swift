@@ -40,8 +40,12 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
     }
 
     public func flags() async throws -> [ConfigFlag: Int] {
-        guard elapsed >= ttl else {
-            return [:]
+        if lastUpdated > .distantPast {
+            let elapsed = -lastUpdated.timeIntervalSinceNow
+            guard elapsed >= ttl else {
+                pp_log_g(.app, .debug, "Config: elapsed \(elapsed) < \(ttl)")
+                throw AppError.rateLimit
+            }
         }
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringCacheData
@@ -49,10 +53,6 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
         lastUpdated = Date()
         let values = try JSONDecoder().decode(ConfigFlagValues.self, from: result.0)
         return values.mapped
-    }
-
-    private var elapsed: TimeInterval {
-        -lastUpdated.timeIntervalSinceNow
     }
 }
 
