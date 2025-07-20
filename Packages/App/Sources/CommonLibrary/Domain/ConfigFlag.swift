@@ -23,9 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-public enum ConfigFlag: String, RawRepresentable, Codable, Sendable, CustomStringConvertible {
+public enum ConfigFlag: String, RawRepresentable, Codable, Sendable {
     case appNotWorking
+}
 
+extension ConfigFlag: CustomStringConvertible {
     public var description: String {
         rawValue
     }
