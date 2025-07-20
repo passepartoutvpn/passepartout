@@ -1,4 +1,4 @@
-* Add temporary "App not working" button in home (#1475)
+* Fix missing Chinese translations (#1477)
 * Prevent save if a module requires a connection (#1473)
 * API: Remove ProtonVPN after discontinued public API (#1469)
 * Add update link to Mac menu (#1468)

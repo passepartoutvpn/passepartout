@@ -1,3 +1,4 @@
+* Fix missing Chinese translations (#1477)
 * Prevent save if a module requires a connection (#1473)
 * API: Remove ProtonVPN after discontinued public API (#1469)
 * Fix translations of "About"
