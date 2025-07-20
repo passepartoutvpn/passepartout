@@ -1,8 +1,6 @@
 "alerts.import.passphrase.message" = "Εισάγετε το μυστικό κλειδί για '%@'.";
 "alerts.import.passphrase.ok" = "Αποκρυπτογράφηση";
 "alerts.providers.missing_server.message" = "Δεν έχει επιλεγεί διακομιστής παρόχου. Επιλέξτε έναν διακομιστή προορισμού στη συσκευή σας iOS/macOS.";
-"app_not_working.message" = "Προσπαθώ να διορθώσω ένα πρόβλημα που επηρεάζει νέους χρήστες. Αν παρατηρήσεις κάτι περίεργο, περιέγραψέ το παρακάτω. Θα με βοηθήσεις πολύ — και ναι, οι πιο χρήσιμες αναφορές θα ανταμειφθούν.";
-"app_not_working.title" = "Η εφαρμογή δεν λειτουργεί;";
 "entities.dns_protocol.cleartext" = "Απλό κείμενο";
 "entities.dns_protocol.https" = "Μέσω HTTPS";
 "entities.dns_protocol.tls" = "Μέσω TLS";

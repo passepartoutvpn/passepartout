@@ -119,7 +119,7 @@ extension AppContext {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
-            await configManager.refreshFlags()
+            await configManager.refreshBundle()
             await versionChecker.checkLatestRelease()
         }
     }

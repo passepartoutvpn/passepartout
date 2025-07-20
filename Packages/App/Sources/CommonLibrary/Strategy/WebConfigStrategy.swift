@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import GenericJSON
 
 @MainActor
 public final class WebConfigStrategy: ConfigManagerStrategy {
@@ -39,7 +40,7 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
         lastUpdated = .distantPast
     }
 
-    public func flags() async throws -> [ConfigFlag: Int] {
+    public func bundle() async throws -> ConfigBundle {
         if lastUpdated > .distantPast {
             let elapsed = -lastUpdated.timeIntervalSinceNow
             guard elapsed >= ttl else {
@@ -51,22 +52,6 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
         request.cachePolicy = .reloadIgnoringCacheData
         let result = try await URLSession.shared.data(for: request)
         lastUpdated = Date()
-        let values = try JSONDecoder().decode(ConfigFlagValues.self, from: result.0)
-        return values.mapped
-    }
-}
-
-private struct ConfigFlagValues: Decodable {
-    let mapped: [ConfigFlag: Int]
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let map = try container.decode([String: Int].self)
-        mapped = map.reduce(into: [:]) {
-            guard let flag = ConfigFlag(rawValue: $1.key) else {
-                return
-            }
-            $0[flag] = $1.value
-        }
+        return try JSONDecoder().decode(ConfigBundle.self, from: result.0)
     }
 }

@@ -44,10 +44,10 @@ struct AppNotWorkingButton: View {
     private var isUnableToEmail = false
 
     var body: some View {
-        if configManager.flags.contains(.appNotWorking) {
+        if let data = configManager.data(for: .appNotWorking) {
             ReportIssueButton(
-                title: Strings.AppNotWorking.title,
-                message: Strings.AppNotWorking.message,
+                title: data.string(forKey: "title"),
+                message: data.string(forKey: "message"),
                 tunnel: tunnel,
                 apiManager: apiManager,
                 purchasedProducts: iapManager.purchasedProducts,

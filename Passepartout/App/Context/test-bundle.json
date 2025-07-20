@@ -1,0 +1,37 @@
+{
+    "appNotWorking": {
+        "rate": 100,
+        "data": {
+            "title": {
+                "de": "Funktioniert die App nicht?",
+                "el": "Η εφαρμογή δεν λειτουργεί;",
+                "en": "Is the app not working?",
+                "es": "¿La app no funciona?",
+                "fr": "L'app ne fonctionne pas ?",
+                "it": "L'app non funziona?",
+                "nl": "Werkt de app niet?",
+                "pl": "Aplikacja nie działa?",
+                "pt": "O app não está funcionando?",
+                "ru": "Приложение не работает?",
+                "sv": "Fungerar inte appen?",
+                "uk": "Програма не працює?",
+                "zh-Hans": "应用无法使用？"
+            },
+            "message": {
+                "de": "Ich versuche gerade, ein Problem zu beheben, das neue Nutzer betrifft. Falls dir etwas Seltsames auffällt, beschreibe bitte dein Problem unten. Du würdest mir sehr helfen – und ja, die hilfreichsten Berichte werden belohnt.",
+                "el": "Προσπαθώ να διορθώσω ένα πρόβλημα που επηρεάζει νέους χρήστες. Αν παρατηρήσεις κάτι περίεργο, περιέγραψέ το παρακάτω. Θα με βοηθήσεις πολύ — και ναι, οι πιο χρήσιμες αναφορές θα ανταμειφθούν.",
+                "en": "I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.",
+                "es": "Estoy intentando solucionar un problema que afecta a los nuevos usuarios. Si notas algo extraño, describe el problema a continuación. Me ayudarás mucho — y sí, los informes más útiles serán recompensados.",
+                "fr": "J'essaie de corriger un problème qui affecte les nouveaux utilisateurs. Si vous remarquez quelque chose d'étrange, décrivez-le ci-dessous. Cela m'aidera énormément — et oui, les rapports les plus utiles seront récompensés.",
+                "it": "Sto cercando di risolvere un problema che riguarda i nuovi utenti. Se noti qualcosa di strano, descrivilo qui sotto. Mi aiuteresti moltissimo — e sì, le segnalazioni più utili saranno ricompensate.",
+                "nl": "Ik probeer een probleem op te lossen dat nieuwe gebruikers treft. Als je iets vreemds opmerkt, beschrijf het dan hieronder. Je helpt me enorm — en ja, de meest bruikbare meldingen worden beloond.",
+                "pl": "Próbuję naprawić problem, który dotyczy nowych użytkowników. Jeśli zauważysz coś dziwnego, opisz to poniżej. Bardzo mi pomożesz — i tak, najbardziej pomocne zgłoszenia zostaną nagrodzone.",
+                "pt": "Estou tentando corrigir um problema que afeta novos usuários. Se notar algo estranho, descreva abaixo. Você vai me ajudar muito — e sim, os relatos mais úteis serão recompensados.",
+                "ru": "Я пытаюсь исправить проблему, затрагивающую новых пользователей. Если вы заметили что-то странное, пожалуйста, опишите это ниже. Вы очень поможете — и да, самые полезные отчёты будут вознаграждены.",
+                "sv": "Jag försöker åtgärda ett problem som påverkar nya användare. Om du märker något konstigt, beskriv problemet nedan. Det skulle hjälpa mig mycket — och ja, de mest hjälpsamma rapporterna belönas.",
+                "uk": "Я намагаюся виправити проблему, що впливає на нових користувачів. Якщо помітите щось дивне — будь ласка, опишіть це нижче. Це дуже мені допоможе — і так, найкорисніші звіти будуть винагороджені.",
+                "zh-Hans": "我正在尝试修复一个影响新用户的问题。如果你发现了什么异常，请在下方描述你的问题。你的帮助对我意义重大 — 是的，最有价值的反馈将获得奖励。"
+            }
+        }
+    }
+}

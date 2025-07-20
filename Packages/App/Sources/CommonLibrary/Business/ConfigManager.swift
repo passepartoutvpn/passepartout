@@ -24,10 +24,10 @@
 //
 
 import Foundation
+import GenericJSON
 
 public protocol ConfigManagerStrategy {
-    // flag -> deployment (0-100)
-    func flags() async throws -> [ConfigFlag: Int]
+    func bundle() async throws -> ConfigBundle
 }
 
 @MainActor
@@ -35,40 +35,38 @@ public final class ConfigManager: ObservableObject {
     private let strategy: ConfigManagerStrategy?
 
     @Published
-    public private(set) var flags: Set<ConfigFlag>
+    private var bundle: ConfigBundle?
 
     public init() {
         strategy = nil
-        flags = []
     }
 
     public init(strategy: ConfigManagerStrategy) {
         self.strategy = strategy
-        flags = []
     }
 
     // TODO: #1447, handle 0-100 deployment values with local random value
-    public func refreshFlags() async {
+    public func refreshBundle() async {
         guard let strategy else {
             return
         }
         do {
-            pp_log_g(.app, .debug, "Config: refreshing flags...")
-            let deployment = try await strategy.flags()
-            let active = deployment.filter {
-                $0.value == 100
-            }
-            let newFlags = Set(active.map(\.key))
-            guard newFlags != flags else {
-                pp_log_g(.app, .debug, "Config: flags unchanged")
-                return
-            }
-            flags = newFlags
-            pp_log_g(.app, .info, "Config: \(newFlags)")
+            pp_log_g(.app, .debug, "Config: refreshing bundle...")
+            let newBundle = try await strategy.bundle()
+            bundle = newBundle
+            pp_log_g(.app, .info, "Config: active flags = \(newBundle.activeFlags)")
+            pp_log_g(.app, .debug, "Config: \(newBundle)")
         } catch AppError.rateLimit {
             pp_log_g(.app, .debug, "Config: TTL")
         } catch {
             pp_log_g(.app, .error, "Unable to refresh config flags: \(error)")
         }
+    }
+
+    public func data(for flag: ConfigFlag) -> JSON? {
+        guard let bundle, let map = bundle.map[flag], map.rate == 100 else {
+            return nil
+        }
+        return map.data
     }
 }
