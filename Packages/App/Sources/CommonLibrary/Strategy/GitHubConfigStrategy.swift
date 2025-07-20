@@ -1,5 +1,5 @@
 //
-//  WebConfigStrategy.swift
+//  GitHubConfigStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/8/25.
@@ -27,7 +27,7 @@ import Foundation
 import GenericJSON
 
 @MainActor
-public final class WebConfigStrategy: ConfigManagerStrategy {
+public final class GitHubConfigStrategy: ConfigManagerStrategy {
     private let url: URL
 
     private let ttl: TimeInterval
@@ -44,11 +44,11 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
         if lastUpdated > .distantPast {
             let elapsed = -lastUpdated.timeIntervalSinceNow
             guard elapsed >= ttl else {
-                pp_log_g(.app, .debug, "Config: elapsed \(elapsed) < \(ttl)")
+                pp_log_g(.app, .debug, "Config (GitHub): elapsed \(elapsed) < \(ttl)")
                 throw AppError.rateLimit
             }
         }
-        pp_log_g(.app, .debug, "Config: fetching bundle from \(url)")
+        pp_log_g(.app, .debug, "Config (GitHub): fetching bundle from \(url)")
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringCacheData
         let result = try await URLSession.shared.data(for: request)

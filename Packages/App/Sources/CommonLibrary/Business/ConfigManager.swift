@@ -37,6 +37,8 @@ public final class ConfigManager: ObservableObject {
     @Published
     private var bundle: ConfigBundle?
 
+    private var isPending = false
+
     public init() {
         strategy = nil
     }
@@ -49,6 +51,13 @@ public final class ConfigManager: ObservableObject {
     public func refreshBundle() async {
         guard let strategy else {
             return
+        }
+        guard !isPending else {
+            return
+        }
+        isPending = true
+        defer {
+            isPending = false
         }
         do {
             pp_log_g(.app, .debug, "Config: refreshing bundle...")

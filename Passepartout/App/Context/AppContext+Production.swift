@@ -269,7 +269,7 @@ extension AppContext {
         let configURL = Constants.shared.websites.config
 #endif
         let configManager = ConfigManager(
-            strategy: WebConfigStrategy(
+            strategy: GitHubConfigStrategy(
                 url: configURL,
                 ttl: Constants.shared.websites.configTTL
             )

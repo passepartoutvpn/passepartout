@@ -41,6 +41,8 @@ public final class VersionChecker: ObservableObject {
 
     private let downloadURL: URL
 
+    private var isPending = false
+
     public init(
         kvManager: KeyValueManager,
         strategy: VersionCheckerStrategy,
@@ -65,6 +67,13 @@ public final class VersionChecker: ObservableObject {
     }
 
     public func checkLatestRelease() async {
+        guard !isPending else {
+            return
+        }
+        isPending = true
+        defer {
+            isPending = false
+        }
         let now = Date()
         do {
             let lastCheckedInterval = kvManager.double(forKey: AppPreference.lastCheckedVersionDate.key)
@@ -78,11 +87,11 @@ public final class VersionChecker: ObservableObject {
 
             objectWillChange.send()
 
-            guard let latestRelease else {
+            if let latestRelease {
+                pp_log_g(.app, .info, "Version: new version available at \(latestRelease.url)")
+            } else {
                 pp_log_g(.app, .debug, "Version: current is latest version")
-                return
             }
-            pp_log_g(.app, .info, "Version: new version available at \(latestRelease.url)")
         } catch AppError.rateLimit {
             pp_log_g(.app, .debug, "Version: rate limit")
         } catch AppError.unexpectedResponse {
