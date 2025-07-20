@@ -264,7 +264,7 @@ extension AppContext {
         // MARK: Config
 
         let configManager = ConfigManager(
-            strategy: WebConfigStrategy(url: Constants.shared.configURL)
+            strategy: WebConfigStrategy(url: Constants.shared.websites.config)
         )
 
         // MARK: Version

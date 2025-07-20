@@ -37,6 +37,22 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
         var request = URLRequest(url: url)
         request.cachePolicy = .useProtocolCachePolicy
         let result = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode([ConfigFlag: Int].self, from: result.0)
+        let values = try JSONDecoder().decode(ConfigFlagValues.self, from: result.0)
+        return values.mapped
+    }
+}
+
+private struct ConfigFlagValues: Decodable {
+    let mapped: [ConfigFlag: Int]
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let map = try container.decode([String: Int].self)
+        mapped = map.reduce(into: [:]) {
+            guard let flag = ConfigFlag(rawValue: $1.key) else {
+                return
+            }
+            $0[flag] = $1.value
+        }
     }
 }
