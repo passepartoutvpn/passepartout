@@ -27,6 +27,7 @@
 "errors.app.empty_profile_name" = "O nome do perfil está vazio.";
 "errors.app.import" = "Não foi possível importar os perfis.";
 "errors.app.malformed_module" = "O módulo %@ está corrompido. %@";
+"errors.app.module_requires_connection" = "O módulo %@ requer uma conexão ativa de um dos seguintes tipos: %@";
 "errors.app.passepartout.corrupt_provider_module" = "Não foi possível conectar ao servidor do provedor (motivo=%@).";
 "errors.app.passepartout.default" = "Não foi possível concluir a operação (código=%@).";
 "errors.app.passepartout.incompatible_modules" = "Alguns módulos ativos são incompatíveis, tente ativar apenas um.";

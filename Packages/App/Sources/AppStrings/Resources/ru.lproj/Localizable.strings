@@ -27,6 +27,7 @@
 "errors.app.empty_profile_name" = "Имя профиля пустое.";
 "errors.app.import" = "Не удалось импортировать профили.";
 "errors.app.malformed_module" = "Модуль %@ поврежден. %@";
+"errors.app.module_requires_connection" = "Модуль %@ требует активного подключения одного из следующих типов: %@";
 "errors.app.passepartout.corrupt_provider_module" = "Не удалось подключиться к серверу поставщика (причина=%@).";
 "errors.app.passepartout.default" = "Не удалось выполнить операцию (код=%@).";
 "errors.app.passepartout.incompatible_modules" = "Некоторые активные модули несовместимы, попробуйте активировать только один.";
