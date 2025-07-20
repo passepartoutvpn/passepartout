@@ -1,0 +1,9 @@
+{
+    "appNotWorking": {
+        "rate": 100,
+        "data": {
+            "title": "Report title",
+            "message": "Some localized message"
+        }
+    }
+}

@@ -263,9 +263,14 @@ extension AppContext {
 
         // MARK: Config
 
+#if DEBUG
+        let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
+#else
+        let configURL = Constants.shared.websites.config
+#endif
         let configManager = ConfigManager(
             strategy: WebConfigStrategy(
-                url: Constants.shared.websites.config,
+                url: configURL,
                 ttl: Constants.shared.websites.configTTL
             )
         )

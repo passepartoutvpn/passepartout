@@ -77,6 +77,8 @@
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE662B52DC2BDDF00A4BB37 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; platformFilters = (tvos, ); };
+		0EF74A782E2D774600AF7614 /* test-bundle.json in Sources */ = {isa = PBXBuildFile; fileRef = 0EF74A772E2D774600AF7614 /* test-bundle.json */; };
+		0EF74A7B2E2D7BF400AF7614 /* test-bundle.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EF74A772E2D774600AF7614 /* test-bundle.json */; };
 		0EF9E1002CF4811000F4A7DA /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -195,6 +197,7 @@
 		0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = PassepartoutIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.algoritmico.mac.Passepartout.Tunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
+		0EF74A772E2D774600AF7614 /* test-bundle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "test-bundle.json"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -415,6 +418,7 @@
 		0E8DFD462D05F77200531CDE /* Context */ = {
 			isa = PBXGroup;
 			children = (
+				0EF74A772E2D774600AF7614 /* test-bundle.json */,
 				0EC797402B9378E000C093B7 /* AppContext+Production.swift */,
 				0E6EEEE12CF8CABA0076E2B0 /* AppContext+Testing.swift */,
 				0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */,
@@ -717,6 +721,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF74A7B2E2D7BF400AF7614 /* test-bundle.json in Resources */,
 				0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */,
 				0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */,
 				0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */,
@@ -827,6 +832,7 @@
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
 				0EAEC8A92D05DB8D001AA50C /* DefaultAppProcessor.swift in Sources */,
 				0EC797422B9378E000C093B7 /* AppContext+Production.swift in Sources */,
+				0EF74A782E2D774600AF7614 /* test-bundle.json in Sources */,
 				0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */,
 				0E81955A2CFDA75200CC8FFD /* Dependencies.swift in Sources */,
 				0E6EEEE32CF8CABA0076E2B0 /* AppContext+Testing.swift in Sources */,
