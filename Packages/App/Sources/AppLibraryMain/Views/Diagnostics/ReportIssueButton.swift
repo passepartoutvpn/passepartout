@@ -33,6 +33,8 @@ struct ReportIssueButton {
 
     let title: String
 
+    var message: String?
+
     let tunnel: ExtendedTunnel
 
     let apiManager: APIManager
@@ -65,7 +67,8 @@ extension ReportIssueButton {
 
     func commentInputView() -> some View {
         ThemeTextInputView(
-            Strings.Global.Nouns.comment,
+            Strings.Views.Diagnostics.ReportIssue.title,
+            message: message,
             isPresented: Binding(presenting: $modalRoute) {
                 switch $0 {
                 case .comment:

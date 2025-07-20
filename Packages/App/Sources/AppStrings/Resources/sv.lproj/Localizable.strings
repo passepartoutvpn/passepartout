@@ -1,6 +1,8 @@
 "alerts.import.passphrase.message" = "Ange lösenfras för '%@'.";
 "alerts.import.passphrase.ok" = "Dekryptera";
 "alerts.providers.missing_server.message" = "Ingen leverantörsserver vald. Välj en målserver på din iOS/macOS-enhet.";
+"app_not_working.message" = "Jag försöker åtgärda ett problem som påverkar nya användare. Om du märker något konstigt, beskriv problemet nedan. Det skulle hjälpa mig mycket — och ja, de mest hjälpsamma rapporterna belönas.";
+"app_not_working.title" = "Fungerar inte appen?";
 "entities.dns_protocol.cleartext" = "Okrypterat";
 "entities.dns_protocol.https" = "Via HTTPS";
 "entities.dns_protocol.tls" = "Via TLS";

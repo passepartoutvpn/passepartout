@@ -28,6 +28,12 @@ public enum Strings {
       }
     }
   }
+  public enum AppNotWorking {
+    /// I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.
+    public static let message = Strings.tr("Localizable", "app_not_working.message", fallback: "I'm trying to fix an issue affecting new users. If you spot something strange, please describe your issue below. You'll help me a ton — and yes, the most helpful reports will be rewarded.")
+    /// Is the app not working?
+    public static let title = Strings.tr("Localizable", "app_not_working.title", fallback: "Is the app not working?")
+  }
   public enum Entities {
     public enum Dns {
       /// Search domains

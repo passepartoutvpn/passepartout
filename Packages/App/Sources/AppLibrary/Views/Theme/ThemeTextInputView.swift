@@ -30,6 +30,8 @@ import SwiftUI
 public struct ThemeTextInputView: View {
     private let title: String
 
+    private let message: String?
+
     @Binding
     private var isPresented: Bool
 
@@ -42,32 +44,40 @@ public struct ThemeTextInputView: View {
 
     public init(
         _ title: String,
+        message: String? = nil,
         isPresented: Binding<Bool>,
         onValidate: (@MainActor (String) -> Bool)? = nil,
         onSubmit: @escaping @MainActor (String) -> Void
     ) {
         self.title = title
+        self.message = message
         _isPresented = isPresented
         self.onValidate = onValidate
         self.onSubmit = onSubmit
     }
 
     public var body: some View {
-        TextEditor(text: $text)
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(Strings.Global.Nouns.ok) {
-                        isPresented = false
-                        onSubmit(text)
-                    }
-                    .disabled(onValidate?(text) == false)
-                }
+        VStack {
+            if let message {
+                Text(message)
+                    .padding(.bottom)
             }
-            .themeForm()
-            .navigationTitle(title)
-            .themeNavigationDetail()
-            .themeNavigationStack(closable: true)
+            TextEditor(text: $text)
+        }
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button(Strings.Global.Nouns.ok) {
+                    isPresented = false
+                    onSubmit(text)
+                }
+                .disabled(onValidate?(text) == false)
+            }
+        }
+        .padding()
+        .themeForm()
+        .navigationTitle(title)
+        .themeNavigationDetail()
+        .themeNavigationStack(closable: true)
     }
 }
 
@@ -83,6 +93,7 @@ public struct ThemeTextInputView: View {
             .sheet(isPresented: $isPresented) {
                 ThemeTextInputView(
                     "Comment",
+                    message: "Message",
                     isPresented: $isPresented,
                     onValidate: { $0.count >= 10 },
                     onSubmit: { _ in }
