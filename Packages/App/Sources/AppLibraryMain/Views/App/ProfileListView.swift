@@ -56,7 +56,9 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
     var body: some View {
         Form {
-            AppNotWorkingButton(tunnel: tunnel)
+            Section {
+                AppNotWorkingButton(tunnel: tunnel)
+            }
             if !isUITesting && !isSearching && pinsActiveProfile {
                 headerView
                     .unanimated()

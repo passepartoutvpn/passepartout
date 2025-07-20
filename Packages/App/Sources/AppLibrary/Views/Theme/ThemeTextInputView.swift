@@ -42,6 +42,9 @@ public struct ThemeTextInputView: View {
     @State
     private var text = ""
 
+    @FocusState
+    private var isFocused: Bool
+
     public init(
         _ title: String,
         message: String? = nil,
@@ -65,6 +68,10 @@ public struct ThemeTextInputView: View {
                     .padding(.bottom)
             }
             TextEditor(text: $text)
+                .focused($isFocused)
+                .onAppear {
+                    isFocused = true
+                }
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
