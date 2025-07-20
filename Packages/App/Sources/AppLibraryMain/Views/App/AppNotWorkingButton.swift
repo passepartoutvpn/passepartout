@@ -34,6 +34,9 @@ struct AppNotWorkingButton: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     @ObservedObject
     var tunnel: ExtendedTunnel
 
@@ -41,14 +44,16 @@ struct AppNotWorkingButton: View {
     private var isUnableToEmail = false
 
     var body: some View {
-        ReportIssueButton(
-            title: Strings.AppNotWorking.title,
-            message: Strings.AppNotWorking.message,
-            tunnel: tunnel,
-            apiManager: apiManager,
-            purchasedProducts: iapManager.purchasedProducts,
-            isUnableToEmail: $isUnableToEmail
-        )
+        if configManager.flags.contains(.appNotWorking) {
+            ReportIssueButton(
+                title: Strings.AppNotWorking.title,
+                message: Strings.AppNotWorking.message,
+                tunnel: tunnel,
+                apiManager: apiManager,
+                purchasedProducts: iapManager.purchasedProducts,
+                isUnableToEmail: $isUnableToEmail
+            )
+        }
     }
 }
 
