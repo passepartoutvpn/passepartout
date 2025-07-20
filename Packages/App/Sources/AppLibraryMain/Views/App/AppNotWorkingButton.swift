@@ -46,8 +46,8 @@ struct AppNotWorkingButton: View {
     var body: some View {
         if let data = configManager.data(for: .appNotWorking) {
             ReportIssueButton(
-                title: data.string(forKey: "title"),
-                message: data.string(forKey: "message"),
+                title: data.localizedString(forKey: "title"),
+                message: data.localizedString(forKey: "message"),
                 tunnel: tunnel,
                 apiManager: apiManager,
                 purchasedProducts: iapManager.purchasedProducts,
