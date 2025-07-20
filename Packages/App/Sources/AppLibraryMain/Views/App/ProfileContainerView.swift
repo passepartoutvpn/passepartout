@@ -56,6 +56,7 @@ struct ProfileContainerView: View, Routable {
         return innerView
             .modifier(ContainerModifier(
                 profileManager: profileManager,
+                tunnel: tunnel,
                 flow: flow
             ))
             .modifier(AppProfileImporterModifier(
@@ -97,6 +98,9 @@ private struct ContainerModifier: ViewModifier {
     @ObservedObject
     var profileManager: ProfileManager
 
+    @ObservedObject
+    var tunnel: ExtendedTunnel
+
     let flow: ProfileFlow?
 
     @State
@@ -117,12 +121,18 @@ private struct ContainerModifier: ViewModifier {
     }
 
     private func emptyView() -> some View {
-        VStack(spacing: 16) {
-            Text(Strings.Views.App.Folders.noProfiles)
-                .themeEmptyMessage(fullScreen: false)
+        ZStack {
+            VStack(spacing: 16) {
+                Text(Strings.Views.App.Folders.noProfiles)
+                    .themeEmptyMessage(fullScreen: false)
 
-            Button(Strings.Views.App.Folders.NoProfiles.migrate) {
-                flow?.onMigrateProfiles()
+                Button(Strings.Views.App.Folders.NoProfiles.migrate) {
+                    flow?.onMigrateProfiles()
+                }
+            }
+            VStack {
+                AppNotWorkingButton(tunnel: tunnel)
+                Spacer()
             }
         }
     }
