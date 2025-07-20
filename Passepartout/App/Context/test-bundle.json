@@ -15,7 +15,7 @@
                 "ru": "Приложение не работает?",
                 "sv": "Fungerar inte appen?",
                 "uk": "Програма не працює?",
-                "zh-Hans": "应用无法使用？"
+                "zh": "应用无法使用？"
             },
             "message": {
                 "de": "Ich versuche gerade, ein Problem zu beheben, das neue Nutzer betrifft. Falls dir etwas Seltsames auffällt, beschreibe bitte dein Problem unten. Du würdest mir sehr helfen – und ja, die hilfreichsten Berichte werden belohnt.",
@@ -30,7 +30,7 @@
                 "ru": "Я пытаюсь исправить проблему, затрагивающую новых пользователей. Если вы заметили что-то странное, пожалуйста, опишите это ниже. Вы очень поможете — и да, самые полезные отчёты будут вознаграждены.",
                 "sv": "Jag försöker åtgärda ett problem som påverkar nya användare. Om du märker något konstigt, beskriv problemet nedan. Det skulle hjälpa mig mycket — och ja, de mest hjälpsamma rapporterna belönas.",
                 "uk": "Я намагаюся виправити проблему, що впливає на нових користувачів. Якщо помітите щось дивне — будь ласка, опишіть це нижче. Це дуже мені допоможе — і так, найкорисніші звіти будуть винагороджені.",
-                "zh-Hans": "我正在尝试修复一个影响新用户的问题。如果你发现了什么异常，请在下方描述你的问题。你的帮助对我意义重大 — 是的，最有价值的反馈将获得奖励。"
+                "zh": "我正在尝试修复一个影响新用户的问题。如果你发现了什么异常，请在下方描述你的问题。你的帮助对我意义重大 — 是的，最有价值的反馈将获得奖励。"
             }
         }
     }
