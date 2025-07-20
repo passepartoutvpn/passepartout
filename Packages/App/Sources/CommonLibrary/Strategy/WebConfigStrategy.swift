@@ -29,16 +29,30 @@ import Foundation
 public final class WebConfigStrategy: ConfigManagerStrategy {
     private let url: URL
 
-    public init(url: URL) {
+    private let ttl: TimeInterval
+
+    private var lastUpdated: Date
+
+    public init(url: URL, ttl: TimeInterval) {
         self.url = url
+        self.ttl = ttl
+        lastUpdated = Date()
     }
 
     public func flags() async throws -> [ConfigFlag: Int] {
+        guard elapsed >= ttl else {
+            return [:]
+        }
         var request = URLRequest(url: url)
-        request.cachePolicy = .useProtocolCachePolicy
+        request.cachePolicy = .reloadIgnoringCacheData
         let result = try await URLSession.shared.data(for: request)
+        lastUpdated = Date()
         let values = try JSONDecoder().decode(ConfigFlagValues.self, from: result.0)
         return values.mapped
+    }
+
+    private var elapsed: TimeInterval {
+        -lastUpdated.timeIntervalSinceNow
     }
 }
 

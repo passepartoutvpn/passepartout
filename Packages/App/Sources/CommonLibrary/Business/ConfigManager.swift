@@ -58,8 +58,13 @@ public final class ConfigManager: ObservableObject {
             let active = deployment.filter {
                 $0.value == 100
             }
-            flags = Set(active.map(\.key))
-            pp_log_g(.app, .info, "Config: \(flags)")
+            let newFlags = Set(active.map(\.key))
+            guard newFlags != flags else {
+                pp_log_g(.app, .debug, "Config: flags unchanged")
+                return
+            }
+            flags = newFlags
+            pp_log_g(.app, .info, "Config: \(newFlags)")
         } catch {
             pp_log_g(.app, .error, "Unable to refresh config flags: \(error)")
         }

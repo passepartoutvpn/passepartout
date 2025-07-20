@@ -74,6 +74,8 @@ public struct Constants: Decodable, Sendable {
         public let macDownload: URL
 
         public let config: URL
+
+        public let configRateLimit: TimeInterval
     }
 
     public struct GitHub: Decodable, Sendable {
