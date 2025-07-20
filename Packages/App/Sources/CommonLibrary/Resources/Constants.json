@@ -14,7 +14,9 @@
         "subreddit": "https://www.reddit.com/r/passepartout/",
         "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
         "appStoreDownload": "https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8",
-        "macDownload": "https://passepartoutvpn.app/#app-mac"
+        "macDownload": "https://passepartoutvpn.app/#app-mac",
+        "config": "https://raw.githubusercontent.com/passepartoutvpn/config/refs/heads/master/flags.json",
+        "configTTL": 3600.0
     },
     "github": {
         "discussions": "http://github.com/passepartoutvpn/discussions",

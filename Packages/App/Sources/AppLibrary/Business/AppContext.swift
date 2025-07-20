@@ -35,6 +35,8 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let appearanceManager: AppearanceManager
 
+    public let configManager: ConfigManager
+
     public let distributionTarget: DistributionTarget
 
     public let iapManager: IAPManager
@@ -71,6 +73,7 @@ public final class AppContext: ObservableObject, Sendable {
 
     public init(
         apiManager: APIManager,
+        configManager: ConfigManager,
         distributionTarget: DistributionTarget,
         iapManager: IAPManager,
         kvManager: KeyValueManager,
@@ -88,6 +91,7 @@ public final class AppContext: ObservableObject, Sendable {
     ) {
         self.apiManager = apiManager
         appearanceManager = AppearanceManager(kvManager: kvManager)
+        self.configManager = configManager
         self.distributionTarget = distributionTarget
         self.iapManager = iapManager
         self.kvManager = kvManager
@@ -115,18 +119,8 @@ extension AppContext {
             // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
-            // check for updates
-            do {
-                guard let release = try await versionChecker.checkLatestRelease() else {
-                    pp_log_g(.app, .debug, "Version: current is latest version")
-                    return
-                }
-                pp_log_g(.app, .info, "Version: new version available at \(release.url)")
-            } catch AppError.rateLimit {
-                //
-            } catch {
-                pp_log_g(.app, .error, "Unable to check version: \(error)")
-            }
+            await configManager.refreshFlags()
+            await versionChecker.checkLatestRelease()
         }
     }
 }

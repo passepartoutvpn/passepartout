@@ -64,12 +64,13 @@ public final class VersionChecker: ObservableObject {
         return latestVersion > currentVersion ? Release(version: latestVersion, url: downloadURL) : nil
     }
 
-    public func checkLatestRelease() async throws -> Release? {
+    public func checkLatestRelease() async {
         let now = Date()
         do {
             let lastCheckedInterval = kvManager.double(forKey: AppPreference.lastCheckedVersionDate.key)
             let lastCheckedDate = lastCheckedInterval > 0.0 ? Date(timeIntervalSinceReferenceDate: lastCheckedInterval) : .distantPast
 
+            pp_log_g(.app, .debug, "Version: checking for updates...")
             let fetchedLatestVersion = try await strategy.latestVersion(since: lastCheckedDate)
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
             kvManager.set(fetchedLatestVersion.description, forKey: AppPreference.lastCheckedVersion.key)
@@ -77,13 +78,18 @@ public final class VersionChecker: ObservableObject {
 
             objectWillChange.send()
 
-            return latestRelease
+            guard let latestRelease else {
+                pp_log_g(.app, .debug, "Version: current is latest version")
+                return
+            }
+            pp_log_g(.app, .info, "Version: new version available at \(latestRelease.url)")
         } catch AppError.unexpectedResponse {
             // save the check date regardless because the service call succeeded
             kvManager.set(now.timeIntervalSinceReferenceDate, forKey: AppPreference.lastCheckedVersionDate.key)
-            throw AppError.unexpectedResponse
+
+            pp_log_g(.app, .error, "Unable to check version: \(AppError.unexpectedResponse)")
         } catch {
-            throw error
+            pp_log_g(.app, .error, "Unable to check version: \(error)")
         }
     }
 }
