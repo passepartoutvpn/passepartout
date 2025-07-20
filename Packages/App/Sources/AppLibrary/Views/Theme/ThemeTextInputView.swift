@@ -60,6 +60,8 @@ public struct ThemeTextInputView: View {
         VStack {
             if let message {
                 Text(message)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .themeMultiLine(true)
                     .padding(.bottom)
             }
             TextEditor(text: $text)
