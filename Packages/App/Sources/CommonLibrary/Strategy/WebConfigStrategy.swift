@@ -48,6 +48,7 @@ public final class WebConfigStrategy: ConfigManagerStrategy {
                 throw AppError.rateLimit
             }
         }
+        pp_log_g(.app, .debug, "Config: fetching bundle from \(url)")
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringCacheData
         let result = try await URLSession.shared.data(for: request)

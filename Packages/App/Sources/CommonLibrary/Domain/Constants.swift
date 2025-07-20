@@ -65,6 +65,10 @@ public struct Constants: Decodable, Sendable {
             home.appendingPathComponent("donate/")
         }
 
+        public var config: URL {
+            home.appendingPathComponent("config/v1/bundle.json")
+        }
+
         public let subreddit: URL
 
         public let eula: URL
@@ -72,8 +76,6 @@ public struct Constants: Decodable, Sendable {
         public let appStoreDownload: URL
 
         public let macDownload: URL
-
-        public let config: URL
 
         public let configTTL: TimeInterval
     }

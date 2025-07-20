@@ -15,7 +15,6 @@
         "eula": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
         "appStoreDownload": "https://apps.apple.com/us/app/passepartout-vpn-client/id1433648537?mt=8",
         "macDownload": "https://passepartoutvpn.app/#app-mac",
-        "config": "https://raw.githubusercontent.com/passepartoutvpn/config/refs/heads/master/v1/bundle.json",
         "configTTL": 3600.0
     },
     "github": {
