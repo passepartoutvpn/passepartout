@@ -23,10 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import GenericJSON
 
 extension JSON {
     public func string(forKey key: String) -> String {
-        objectValue?[key]?.stringValue ?? key
+        let dict = objectValue?[key]
+        let code = Locale.current.language.languageCode?.identifier ?? "en"
+        return dict?[code]?.stringValue ?? key
     }
 }
