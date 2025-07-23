@@ -31,26 +31,21 @@ import PartoutOpenVPN
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget
 
-    private let usesModernCrypto: @Sendable () async -> Bool
-
-    init(
-        distributionTarget: DistributionTarget,
-        usesModernCrypto: @escaping @Sendable () async -> Bool
-    ) {
+    init(distributionTarget: DistributionTarget) {
         self.distributionTarget = distributionTarget
-        self.usesModernCrypto = usesModernCrypto
     }
 
     func build() -> OpenVPNModule.Implementation {
         OpenVPNModule.Implementation(
             importer: StandardOpenVPNParser(),
             connectionBlock: {
-                if await usesModernCrypto() {
+                let preferences = $0.options.userInfo as? AppPreferenceValues
+                if preferences?.usesModernCrypto == true {
                     pp_log_g(.app, .notice, "OpenVPN: Using cross-platform connection")
-                    return try await crossConnection(with: $0, module: $1)
+                    return try crossConnection(with: $0, module: $1)
                 } else {
                     pp_log_g(.app, .notice, "OpenVPN: Using legacy connection")
-                    return try await legacyConnection(with: $0, module: $1)
+                    return try legacyConnection(with: $0, module: $1)
                 }
             }
         )
@@ -67,12 +62,12 @@ private extension OpenVPNImplementationBuilder {
     func legacyConnection(
         with parameters: ConnectionParameters,
         module: OpenVPNModule
-    ) async throws -> Connection {
+    ) throws -> Connection {
         let ctx = PartoutLoggerContext(parameters.controller.profile.id)
         var options = OpenVPN.ConnectionOptions()
         options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
         options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
-        return try await OpenVPNConnection(
+        return try LegacyOpenVPNConnection(
             ctx,
             parameters: parameters,
             module: module,
@@ -92,12 +87,12 @@ private extension OpenVPNImplementationBuilder {
     func crossConnection(
         with parameters: ConnectionParameters,
         module: OpenVPNModule
-    ) async throws -> Connection {
+    ) throws -> Connection {
         let ctx = PartoutLoggerContext(parameters.controller.profile.id)
         var options = OpenVPN.ConnectionOptions()
         options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
         options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
-        return try await CrossOpenVPNConnection(
+        return try OpenVPNConnection(
             ctx,
             parameters: parameters,
             module: module,
