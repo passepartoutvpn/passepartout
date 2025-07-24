@@ -41,7 +41,7 @@ struct VersionCheckerTests {
             downloadURL: downloadURL
         )
         #expect(sut.latestRelease == nil)
-        try await sut.checkLatestRelease()
+        await sut.checkLatestRelease()
         let latest = try #require(sut.latestRelease)
         #expect(latest.url == downloadURL)
         #expect(latest == sut.latestRelease)
@@ -58,7 +58,7 @@ struct VersionCheckerTests {
             downloadURL: downloadURL
         )
         #expect(sut.latestRelease == nil)
-        try await sut.checkLatestRelease()
+        await sut.checkLatestRelease()
         let latest = sut.latestRelease
         #expect(latest == nil)
         #expect(sut.latestRelease == nil)
@@ -79,12 +79,12 @@ struct VersionCheckerTests {
         var lastChecked = kv.double(forKey: AppPreference.lastCheckedVersionDate.key)
         #expect(lastChecked == 0.0)
 
-        _ = try await sut.checkLatestRelease()
+        _ = await sut.checkLatestRelease()
         lastChecked = kv.double(forKey: AppPreference.lastCheckedVersionDate.key)
         #expect(lastChecked > 0.0)
         #expect(!strategy.didHitRateLimit)
 
-        _ = try await sut.checkLatestRelease()
+        _ = await sut.checkLatestRelease()
         #expect(strategy.didHitRateLimit)
     }
 }

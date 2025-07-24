@@ -130,7 +130,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             fatalError("Do not forget to save ctx locally")
         }
         do {
-            fwd = NEPTPForwarder(ctx, controller: neTunnelController)
+            var connectionOptions = ConnectionParameters.Options()
+            connectionOptions.userInfo = appPreferences
+            fwd = try await NEPTPForwarder(
+                ctx,
+                controller: neTunnelController,
+                connectionOptions: connectionOptions
+            )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
