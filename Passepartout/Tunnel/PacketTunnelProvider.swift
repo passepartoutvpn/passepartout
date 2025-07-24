@@ -132,7 +132,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         do {
             var connectionOptions = ConnectionParameters.Options()
             connectionOptions.userInfo = appPreferences
-            fwd = try await NEPTPForwarder(
+            fwd = try NEPTPForwarder(
                 ctx,
                 controller: neTunnelController,
                 connectionOptions: connectionOptions

@@ -26,85 +26,78 @@
 import Combine
 @testable import CommonLibrary
 import Foundation
-import XCTest
+import Testing
 
-final class ExtendedTunnelTests: XCTestCase {
+struct ExtendedTunnelTests {
     private let ctx: PartoutLoggerContext = .global
 
-    private var subscriptions: Set<AnyCancellable> = []
+    private func newStrategy() -> TunnelObservableStrategy {
+        FakeTunnelStrategy(delay: 100)
+    }
 }
 
 @MainActor
 extension ExtendedTunnelTests {
-    func test_givenTunnel_whenDisconnectWithError_thenPublishesLastErrorCode() async throws {
+
+    @Test
+    func givenTunnel_whenDisconnectWithError_thenPublishesLastErrorCode() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
+        var subscriptions: Set<AnyCancellable> = []
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await sut.connect(with: profile)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
-        let exp = expectation(description: "Last error code")
+        let exp = Expectation()
         var didCall = false
         sut
             .objectWillChange
             .sink {
                 if !didCall, sut.lastErrorCode(ofProfileId: profile.id) != nil {
                     didCall = true
-                    exp.fulfill()
+                    Task {
+                        await exp.fulfill()
+                    }
                 }
             }
             .store(in: &subscriptions)
 
         try await tunnel.disconnect(from: profile.id)
-        await fulfillment(of: [exp], timeout: CommonLibraryTests.timeout)
-        XCTAssertEqual(sut.lastErrorCode(ofProfileId: profile.id), .crypto)
+        try await exp.waitForMillis(500)
+        #expect(sut.lastErrorCode(ofProfileId: profile.id) == .crypto)
     }
 
-    func test_givenTunnel_whenPublishesDataCount_thenIsAvailable() async throws {
+    @Test
+    func givenTunnel_whenPublishesDataCount_thenIsAvailable() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
+        let stream = sut.activeProfilesStream
         let expectedDataCount = DataCount(500, 700)
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
-        let stream = sut.activeProfilesStream
-        try await sut.install(profile)
 
+        try await sut.install(profile)
+        #expect(await stream.nextElement() == [:])
+        let active = await stream.nextElement()
+
+        #expect(active?.first?.key == profile.id)
         env.setEnvironmentValue(expectedDataCount, forKey: TunnelEnvironmentKeys.dataCount)
-        await stream.waitForNext()
-        XCTAssertEqual(sut.dataCount(ofProfileId: profile.id), expectedDataCount)
+        #expect(sut.dataCount(ofProfileId: profile.id) == expectedDataCount)
     }
 
-    func test_givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
+    @Test
+    func givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
-            env
-        }
-        let processor = MockTunnelProcessor()
-        let sut = ExtendedTunnel(tunnel: tunnel, processor: processor, interval: 0.1)
-
-        let module = try DNSModule.Builder().tryBuild()
-        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
-        let stream = sut.activeProfilesStream
-        try await sut.install(profile)
-
-        await stream.waitForNext()
-        XCTAssertEqual(tunnel.activeProfiles.first?.key, profile.id)
-//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
-        XCTAssertEqual(processor.willInstallCount, 1)
-    }
-
-    func test_givenTunnel_whenStatusChanges_thenConnectionStatusIsExpected() async throws {
-        let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let processor = MockTunnelProcessor()
@@ -113,17 +106,40 @@ extension ExtendedTunnelTests {
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
-        try await sut.install(profile)
 
-        await stream.waitForNext() // include initial nil
-        await stream.waitForNext()
-        XCTAssertEqual(tunnel.activeProfiles.first?.key, profile.id)
-//        XCTAssertEqual(processor.titleCount, 1) // unused by FakeTunnelStrategy
-        XCTAssertEqual(processor.willInstallCount, 1)
+        try await sut.install(profile)
+        #expect(await stream.nextElement() == [:])
+        let active = await stream.nextElement()
+
+        #expect(active?.first?.key == profile.id)
+//        #expect(processor.titleCount == 1) // unused by FakeTunnelStrategy
+        #expect(processor.willInstallCount == 1)
     }
 
-    // FIXME: #1445, flaky test
-    func test_givenTunnelStatus_thenConnectionStatusIsExpected() async throws {
+    @Test
+    func givenTunnel_whenStatusChanges_thenConnectionStatusIsExpected() async throws {
+        let env = SharedTunnelEnvironment(profileId: nil)
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
+            env
+        }
+        let processor = MockTunnelProcessor()
+        let sut = ExtendedTunnel(tunnel: tunnel, processor: processor, interval: 0.1)
+        let stream = sut.activeProfilesStream
+
+        let module = try DNSModule.Builder().tryBuild()
+        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+
+        try await sut.install(profile)
+        #expect(await stream.nextElement() == [:])
+        let pulled = await stream.nextElement()
+
+        #expect(pulled?.first?.key == profile.id)
+//        #expect(processor.titleCount == 1) // unused by FakeTunnelStrategy
+        #expect(processor.willInstallCount == 1)
+    }
+
+    @Test
+    func givenTunnelStatus_thenConnectionStatusIsExpected() async throws {
         let allTunnelStatuses: [TunnelStatus] = [
             .inactive,
             .activating,
@@ -142,7 +158,7 @@ extension ExtendedTunnelTests {
 
         // no connection status, tunnel status unaffected
         allTunnelStatuses.forEach {
-            XCTAssertEqual($0.withEnvironment(env), $0)
+            #expect($0.withEnvironment(env) == $0)
         }
 
         // has connection status
@@ -150,20 +166,20 @@ extension ExtendedTunnelTests {
         // affected if .active
         let tunnelActive: TunnelStatus = .active
         env.setEnvironmentValue(ConnectionStatus.connected, forKey: key)
-        XCTAssertEqual(tunnelActive.withEnvironment(env), .active)
+        #expect(tunnelActive.withEnvironment(env) == .active)
         allConnectionStatuses
             .forEach {
                 env.setEnvironmentValue($0, forKey: key)
                 let statusWithEnv = tunnelActive.withEnvironment(env)
                 switch $0 {
                 case .connecting:
-                    XCTAssertEqual(statusWithEnv, .activating)
+                    #expect(statusWithEnv == .activating)
                 case .connected:
-                    XCTAssertEqual(statusWithEnv, .active)
+                    #expect(statusWithEnv == .active)
                 case .disconnecting:
-                    XCTAssertEqual(statusWithEnv, .deactivating)
+                    #expect(statusWithEnv == .deactivating)
                 case .disconnected:
-                    XCTAssertEqual(statusWithEnv, .inactive)
+                    #expect(statusWithEnv == .inactive)
                 }
             }
 
@@ -173,7 +189,7 @@ extension ExtendedTunnelTests {
                 $0 != .active
             }
             .forEach {
-                XCTAssertEqual($0.withEnvironment(env), $0)
+                #expect($0.withEnvironment(env) == $0)
             }
     }
 }
