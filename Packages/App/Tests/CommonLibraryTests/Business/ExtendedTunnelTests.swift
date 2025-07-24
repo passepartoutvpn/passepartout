@@ -31,6 +31,10 @@ import XCTest
 final class ExtendedTunnelTests: XCTestCase {
     private let ctx: PartoutLoggerContext = .global
 
+    private func newStrategy() -> TunnelObservableStrategy {
+        FakeTunnelStrategy(delay: 100)
+    }
+
     private var subscriptions: Set<AnyCancellable> = []
 }
 
@@ -38,7 +42,7 @@ final class ExtendedTunnelTests: XCTestCase {
 extension ExtendedTunnelTests {
     func test_givenTunnel_whenDisconnectWithError_thenPublishesLastErrorCode() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
@@ -67,7 +71,7 @@ extension ExtendedTunnelTests {
 
     func test_givenTunnel_whenPublishesDataCount_thenIsAvailable() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let sut = ExtendedTunnel(tunnel: tunnel, interval: 0.1)
@@ -85,7 +89,7 @@ extension ExtendedTunnelTests {
 
     func test_givenTunnelAndProcessor_whenInstall_thenProcessesProfile() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let processor = MockTunnelProcessor()
@@ -104,7 +108,7 @@ extension ExtendedTunnelTests {
 
     func test_givenTunnel_whenStatusChanges_thenConnectionStatusIsExpected() async throws {
         let env = SharedTunnelEnvironment(profileId: nil)
-        let tunnel = Tunnel(ctx, strategy: FakeTunnelStrategy()) { _ in
+        let tunnel = Tunnel(ctx, strategy: newStrategy()) { _ in
             env
         }
         let processor = MockTunnelProcessor()
