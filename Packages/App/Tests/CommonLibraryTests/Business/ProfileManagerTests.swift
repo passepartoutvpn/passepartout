@@ -288,6 +288,7 @@ extension ProfileManagerTests {
         XCTAssertTrue(sut.isRemotelyShared(profileWithId: profile.id))
     }
 
+    // FIXME: #1445, flaky tests
     func test_givenRemoteRepository_whenSaveNotRemotelyShared_thenIsRemovedFromRemoteRepository() async throws {
         let profile = newProfile()
         let repository = InMemoryProfileRepository(profiles: [profile])
