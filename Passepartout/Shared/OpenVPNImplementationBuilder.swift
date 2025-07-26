@@ -26,7 +26,7 @@
 import CommonLibrary
 import Foundation
 import Partout
-import PartoutOpenVPN
+import PartoutImplementations
 
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget
