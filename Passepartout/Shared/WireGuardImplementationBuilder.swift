@@ -25,7 +25,7 @@
 
 import CommonLibrary
 import Partout
-import PartoutWireGuard
+import PartoutImplementations
 
 struct WireGuardImplementationBuilder: Sendable {
     func build() -> WireGuardModule.Implementation {

@@ -26,8 +26,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import PartoutOpenVPN
-import PartoutWireGuard
+import PartoutImplementations
 
 extension Dependencies {
     var kvManager: KeyValueManager {

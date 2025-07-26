@@ -68,7 +68,7 @@ extension ExtendedTunnelTests {
             .store(in: &subscriptions)
 
         try await tunnel.disconnect(from: profile.id)
-        try await exp.waitForMillis(500)
+        try await exp.fulfillment(timeout: 500)
         #expect(sut.lastErrorCode(ofProfileId: profile.id) == .crypto)
     }
 
