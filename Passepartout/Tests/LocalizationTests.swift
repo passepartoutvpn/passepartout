@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import _PartoutWireGuardCore
 import AppLibrary
 import Foundation
+import PartoutWireGuard
 import XCTest
 
 final class LocalizationTests: XCTestCase {
