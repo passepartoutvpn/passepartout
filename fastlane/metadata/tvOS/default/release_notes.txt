@@ -1,1 +1,3 @@
+* OpenVPN: Resolve inconsistencies in server configuration (#1486)
+* Update Partout to improve daemon architecture (#1481)
 * Update OpenSSL to 3.5.1
