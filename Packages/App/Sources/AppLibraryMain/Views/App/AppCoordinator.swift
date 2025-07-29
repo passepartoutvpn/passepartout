@@ -100,6 +100,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         .themeConfirmation(
             isPresented: Binding(presenting: $profileBeingDeleted, if: { $0 != nil }),
             title: Strings.Global.Actions.remove,
+            isDestructive: true,
             action: confirmDeleteProfile
         )
         .withErrorHandler(errorHandler)
