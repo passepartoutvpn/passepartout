@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
 "views.paywall.alerts.confirmation.title" = "Требуется покупка";
 "views.paywall.alerts.pending.message" = "Покупка ожидает внешнего подтверждения. Функция будет активирована после одобрения.";
-"views.paywall.alerts.restricted.message" = "Некоторые функции недоступны в этой версии.";
-"views.paywall.alerts.restricted.title" = "Ограничено";
 "views.paywall.alerts.verification.boot" = "Это может занять немного больше времени, если ваше устройство только что было включено.";
 "views.paywall.alerts.verification.connect.1" = "Ваши покупки проверяются.";
 "views.paywall.alerts.verification.connect.2" = "Если проверка не будет завершена, соединение завершится через %d минут.";
@@ -383,7 +381,6 @@
 "views.tv.web_receiver.toggle" = "Переключите, чтобы импортировать локальный профиль на телевизор через веб-браузер.";
 "views.ui.connection_status.on_demand_suffix" = " (по требованию)";
 "views.ui.purchase_required.purchase.help" = "Требуется покупка";
-"views.ui.purchase_required.restricted.help" = "Функция ограничена";
 "views.verification.message" = "Проверка";
 "views.version.extra" = "%@ — проект, поддерживаемый %@.\n\nИсходный код доступен на GitHub под лицензией GPLv3, ссылки можно найти на домашней странице.";
 "views.vpn.category.any" = "Все категории";

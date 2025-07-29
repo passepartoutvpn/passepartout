@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
 "views.paywall.alerts.confirmation.title" = "Aankoop vereist";
 "views.paywall.alerts.pending.message" = "De aankoop wacht op externe bevestiging. De functie wordt na goedkeuring gecrediteerd.";
-"views.paywall.alerts.restricted.message" = "Sommige functies zijn niet beschikbaar in deze versie.";
-"views.paywall.alerts.restricted.title" = "Beperkt";
 "views.paywall.alerts.verification.boot" = "Dit kan iets langer duren als je apparaat net is opgestart.";
 "views.paywall.alerts.verification.connect.1" = "Je aankopen worden geverifieerd.";
 "views.paywall.alerts.verification.connect.2" = "Als de verificatie niet kan worden voltooid, wordt de verbinding over %d minuten beëindigd.";
@@ -383,7 +381,6 @@
 "views.tv.web_receiver.toggle" = "Schakel om een lokaal profiel via een webbrowser op je TV te importeren.";
 "views.ui.connection_status.on_demand_suffix" = " (op aanvraag)";
 "views.ui.purchase_required.purchase.help" = "Aankoop vereist";
-"views.ui.purchase_required.restricted.help" = "Functie is beperkt";
 "views.verification.message" = "Verifiëren";
 "views.version.extra" = "%@ is een project onderhouden door %@.\n\nDe broncode is openbaar beschikbaar op GitHub onder de GPLv3-licentie. Je kunt links vinden op de startpagina.";
 "views.vpn.category.any" = "Alle categorieën";

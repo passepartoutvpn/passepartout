@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";
 "views.paywall.alerts.confirmation.title" = "Απαιτείται αγορά";
 "views.paywall.alerts.pending.message" = "Η αγορά εκκρεμεί για εξωτερική επιβεβαίωση. Η λειτουργία θα πιστωθεί μετά την έγκριση.";
-"views.paywall.alerts.restricted.message" = "Ορισμένες λειτουργίες δεν είναι διαθέσιμες σε αυτήν την έκδοση.";
-"views.paywall.alerts.restricted.title" = "Περιορισμένο";
 "views.paywall.alerts.verification.boot" = "Αυτό μπορεί να διαρκέσει λίγο περισσότερο αν η συσκευή σας μόλις ξεκίνησε.";
 "views.paywall.alerts.verification.connect.1" = "Οι αγορές σας επαληθεύονται.";
 "views.paywall.alerts.verification.connect.2" = "Αν η επαλήθευση δεν ολοκληρωθεί, η σύνδεση θα τερματιστεί σε %d λεπτά.";
@@ -383,7 +381,6 @@
 "views.tv.web_receiver.toggle" = "Εναλλαγή για εισαγωγή τοπικού προφίλ στην τηλεόρασή σου μέσω web browser.";
 "views.ui.connection_status.on_demand_suffix" = " (κατ' απαίτηση)";
 "views.ui.purchase_required.purchase.help" = "Απαιτείται αγορά";
-"views.ui.purchase_required.restricted.help" = "Η λειτουργία είναι περιορισμένη";
 "views.verification.message" = "Επαλήθευση";
 "views.version.extra" = "Το %@ είναι ένα έργο που συντηρείται από τον/την %@.\n\nΟ πηγαίος κώδικας είναι διαθέσιμος δημόσια στο GitHub υπό την άδεια GPLv3. Μπορείτε να βρείτε τους συνδέσμους στην αρχική σελίδα.";
 "views.vpn.category.any" = "Όλες οι κατηγορίες";

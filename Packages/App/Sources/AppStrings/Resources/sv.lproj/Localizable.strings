@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
 "views.paywall.alerts.confirmation.title" = "Köp krävs";
 "views.paywall.alerts.pending.message" = "Köpet väntar på extern bekräftelse. Funktionen aktiveras efter godkännande.";
-"views.paywall.alerts.restricted.message" = "Vissa funktioner är inte tillgängliga i denna version.";
-"views.paywall.alerts.restricted.title" = "Begränsad";
 "views.paywall.alerts.verification.boot" = "Det kan ta lite längre tid om din enhet just startades.";
 "views.paywall.alerts.verification.connect.1" = "Dina köp verifieras.";
 "views.paywall.alerts.verification.connect.2" = "Om verifieringen inte kan slutföras kommer anslutningen att avslutas om %d minuter.";
@@ -383,7 +381,6 @@
 "views.tv.web_receiver.toggle" = "Växla för att importera en lokal profil till din TV via en webbläsare.";
 "views.ui.connection_status.on_demand_suffix" = " (på begäran)";
 "views.ui.purchase_required.purchase.help" = "Köp krävs";
-"views.ui.purchase_required.restricted.help" = "Funktionen är begränsad";
 "views.verification.message" = "Verifiering";
 "views.version.extra" = "%@ är ett projekt som underhålls av %@.\n\nKällkoden är offentligt tillgänglig på GitHub under GPLv3-licensen. Du hittar länkar på hemsidan.";
 "views.vpn.category.any" = "Alla kategorier";
