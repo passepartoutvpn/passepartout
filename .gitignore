@@ -21,6 +21,7 @@ default.profraw
 .build
 .bundle
 .env.secret
+.swiftpm
 *.storekit
 *.sqlite-*
 *.dmg*
