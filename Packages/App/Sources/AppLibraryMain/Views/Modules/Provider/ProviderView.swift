@@ -36,7 +36,7 @@ struct ProviderView: View, ModuleDraftEditing {
         debugChanges()
         return contentView
             .moduleView(draft: draft)
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(ModuleDynamicPaywallModifier(reason: $paywallReason))
             .onLoad(perform: loadCurrentProvider)
             .onChange(of: providerId, perform: onChangeProvider)
             .onChange(of: providerEntity, perform: onChangeEntity)

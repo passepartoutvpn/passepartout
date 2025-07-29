@@ -50,7 +50,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 isImporting: $isImporting,
                 errorHandler: errorHandler
             ))
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(ModuleDynamicPaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
 }
