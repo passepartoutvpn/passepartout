@@ -94,7 +94,8 @@ private extension NewPaywallModifier {
         case .purchase:
             return Strings.Global.Actions.purchase
         case .save:
-            return Strings.Views.Paywall.Alerts.Actions.save
+            fatalError("Save action not handled")
+//            return Strings.Views.Paywall.Alerts.Actions.save
         case .cancel:
             return Strings.Global.Actions.cancel
         }
