@@ -8,7 +8,7 @@ public struct ConfigBundle: Decodable {
     public struct Config: Codable {
         public let rate: Int
 
-        public let data: JSON
+        public let data: JSON?
     }
 
     // flag -> deployment (0-100)

@@ -206,9 +206,8 @@ private struct DynamicPaywallModifier: ViewModifier {
 
     let paywallContinuation: (() -> Void)?
 
-    // FIXME: #1446, use feature flag
     func body(content: Content) -> some View {
-        if false {
+        if configManager.isActive(.newPaywall) {
             content.modifier(newModifier)
         } else {
             content.modifier(oldModifier)

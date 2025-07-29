@@ -216,9 +216,8 @@ private struct DynamicPaywallModifier: ViewModifier {
     @Binding
     var paywallReason: PaywallReason?
 
-    // FIXME: #1446, use feature flag
     func body(content: Content) -> some View {
-        if false {
+        if configManager.isActive(.newPaywall) {
             content.modifier(newModifier)
         } else {
             content.modifier(oldModifier)
@@ -244,8 +243,7 @@ private extension ProfileCoordinator {
         PaywallReason(
             nil,
             requiredFeatures: requiredFeatures,
-            // FIXME: #1446, use feature flag
-            action: false ? .cancel : .save
+            action: configManager.isActive(.newPaywall) ? .cancel : .save
         )
     }
 }
