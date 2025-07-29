@@ -50,7 +50,7 @@ private extension ProfileStorageSection {
         PurchaseRequiredView(
             requiring: sharingRequirements,
             reason: $paywallReason,
-            suggesting: {
+            suggesting: { // FIXME: #1446, delete suggesting after deleting old paywall
                 var products = iapManager.suggestedProducts()
                 products.insert(.Features.appleTV)
                 return products
@@ -73,7 +73,7 @@ private extension ProfileStorageSection {
         PurchaseRequiredView(
             requiring: tvRequirements,
             reason: $paywallReason,
-            suggesting: {
+            suggesting: { // FIXME: #1446, delete suggesting after deleting old paywall
                 var products = iapManager.suggestedProducts(filter: .onlyComplete)
                 products.insert(.Features.appleTV)
                 return products
