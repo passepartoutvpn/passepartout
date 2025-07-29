@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-import Foundation
+import PartoutCore
 
 extension Strings {
     public enum Unlocalized {
@@ -112,4 +112,26 @@ extension Strings {
 
         public static let xor = "XOR"
     }
+}
+
+extension Strings.Unlocalized.Placeholders {
+    public static func ipDestination(forFamily family: Address.Family) -> String {
+        switch family {
+        case .v4:
+            return "192.168.15.0/24"
+        case .v6:
+            return "fdbd:dcf8:d811:af73::/64"
+        }
+    }
+
+    public static func ipAddress(forFamily family: Address.Family) -> String {
+        switch family {
+        case .v4:
+            return "192.168.15.1"
+        case .v6:
+            return "fdbd:dcf8:d811:af73::1"
+        }
+    }
+
+    public static let proxyIPv4Address = ipAddress(forFamily: .v4)
 }
