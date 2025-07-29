@@ -118,8 +118,8 @@ private extension PaywallFixedView {
     var featuresView: some View {
         VStack {
             AllFeaturesView(
-                features: Set(selectedProduct?.features ?? []),
-                requiredFeatures: requiredFeatures,
+                marked: Set(selectedProduct?.features ?? []),
+                highlighted: requiredFeatures,
                 font: .headline
             )
             .frame(maxHeight: .infinity)

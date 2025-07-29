@@ -51,7 +51,7 @@ private extension NewCustomProductView {
         HStack {
             VStack(alignment: .leading) {
                 Text(verbatim: product.localizedTitle)
-                    .font(isPrimary ? .title2 : withDescription ? .headline : nil)
+                    .font(isPrimary ? .title2 : withFooter ? .headline : nil)
                     .fontWeight(isPrimary ? .bold : nil)
 
                 if withDescription {
@@ -99,6 +99,19 @@ private extension NewCustomProductView {
             false
         case .paywall(let primary):
             primary
+        }
+    }
+
+    var withFooter: Bool {
+        switch style {
+        case .donation:
+            false
+        case .paywall(let primary):
+#if os(tvOS)
+            primary
+#else
+            true // disclosing features
+#endif
         }
     }
 

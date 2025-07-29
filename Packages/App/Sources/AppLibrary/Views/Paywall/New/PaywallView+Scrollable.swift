@@ -56,8 +56,8 @@ private extension PaywallScrollableView {
                 )
             }
             AllFeaturesView(
-                features: [],
-                requiredFeatures: requiredFeatures
+                marked: [],
+                highlighted: requiredFeatures
             )
         }
         .themeSection(

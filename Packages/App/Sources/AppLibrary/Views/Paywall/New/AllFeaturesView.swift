@@ -6,9 +6,9 @@ import CommonLibrary
 import SwiftUI
 
 struct AllFeaturesView: View {
-    let features: Set<AppFeature>
+    let marked: Set<AppFeature>
 
-    let requiredFeatures: Set<AppFeature>
+    let highlighted: Set<AppFeature>
 
     var font: Font?
 
@@ -29,10 +29,10 @@ struct AllFeaturesView: View {
 private extension AllFeaturesView {
     func flags(for feature: AppFeature) -> Set<FeatureRow.Flag> {
         var flags: Set<FeatureRow.Flag> = []
-        if features.contains(feature) {
+        if marked.contains(feature) {
             flags.insert(.marked)
         }
-        if requiredFeatures.contains(feature) {
+        if highlighted.contains(feature) {
             flags.insert(.highlighted)
         }
         return flags
