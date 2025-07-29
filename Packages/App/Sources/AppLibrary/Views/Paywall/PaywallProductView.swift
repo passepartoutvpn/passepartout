@@ -95,7 +95,7 @@ private extension PaywallProductView {
     List {
         PaywallProductView(
             iapManager: .forPreviews,
-            style: .paywall,
+            style: .paywall(),
             product: InAppProduct(
                 productIdentifier: AppProduct.Features.appleTV.rawValue,
                 localizedTitle: "Foo",

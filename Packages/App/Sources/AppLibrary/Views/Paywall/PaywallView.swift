@@ -100,7 +100,7 @@ private extension PaywallView {
                 ForEach(products, id: \.productIdentifier) {
                     PaywallProductView(
                         iapManager: iapManager,
-                        style: .paywall,
+                        style: .paywall(),
                         product: $0,
                         highlightedFeatures: requiredFeatures,
                         purchasingIdentifier: $purchasingIdentifier,
@@ -123,7 +123,7 @@ private extension PaywallView {
                     ForEach(products, id: \.productIdentifier) {
                         PaywallProductView(
                             iapManager: iapManager,
-                            style: .paywall,
+                            style: .paywall(),
                             product: $0,
                             withIncludedFeatures: false,
                             highlightedFeatures: requiredFeatures,
