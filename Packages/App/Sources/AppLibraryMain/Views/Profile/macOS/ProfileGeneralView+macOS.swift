@@ -8,10 +8,6 @@ import CommonLibrary
 import SwiftUI
 
 struct ProfileGeneralView: View {
-
-    @Environment(\.distributionTarget)
-    private var distributionTarget
-
     let profileManager: ProfileManager
 
     @ObservedObject
