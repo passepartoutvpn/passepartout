@@ -167,7 +167,8 @@ extension ProfileEditorTests {
     // MARK: Building
 
     func test_givenProfile_whenBuild_thenSucceeds() throws {
-        let wg = WireGuardModule.Builder(configurationBuilder: .default)
+        var wg = WireGuardModule.Builder(configurationBuilder: .default)
+        wg.configurationBuilder?.peers = [.init(publicKey: "")]
         let sut = ProfileEditor(modules: [wg])
         sut.profile.name = "hello"
 
