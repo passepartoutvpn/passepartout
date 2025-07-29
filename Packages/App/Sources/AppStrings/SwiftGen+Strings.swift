@@ -957,6 +957,14 @@ public enum Strings {
         }
       }
     }
+    public enum PaywallNew {
+      public enum Sections {
+        public enum Products {
+          /// Purchase individually
+          public static let header = Strings.tr("Localizable", "views.paywall_new.sections.products.header", fallback: "Purchase individually")
+        }
+      }
+    }
     public enum Preferences {
       /// DNS fallback
       public static let dnsFallsBack = Strings.tr("Localizable", "views.preferences.dns_falls_back", fallback: "DNS fallback")

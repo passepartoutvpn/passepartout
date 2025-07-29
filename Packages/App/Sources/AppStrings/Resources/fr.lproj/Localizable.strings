@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Ces produits incluent les fonctionnalités actuelles et futures.";
 "views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
+"views.paywall_new.sections.products.header" = "Acheter individuellement";
 "views.paywall.sections.products.header" = "Produits suggérés";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
 "views.paywall.sections.restore.footer" = "Si vous avez effectué des achats par le passé, vous pouvez les restaurer ici.";

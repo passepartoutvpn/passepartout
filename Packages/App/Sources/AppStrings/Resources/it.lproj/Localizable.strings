@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Questi prodotti includono funzionalità attuali e future.";
 "views.paywall.sections.full_products.header" = "Tutte le funzionalità";
 "views.paywall.sections.products.footer" = "Tutti gli acquisti supportano “In famiglia”.";
+"views.paywall_new.sections.products.header" = "Acquista singolarmente";
 "views.paywall.sections.products.header" = "Prodotti suggeriti";
 "views.paywall.sections.required_features.header" = "Funzionalità richieste";
 "views.paywall.sections.restore.footer" = "Se hai effettuato acquisti in passato, puoi ripristinarli qui.";

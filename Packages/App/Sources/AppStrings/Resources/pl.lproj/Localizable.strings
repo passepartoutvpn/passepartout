@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Te produkty zawierają obecne i przyszłe funkcje.";
 "views.paywall.sections.full_products.header" = "Wszystkie funkcje";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
+"views.paywall_new.sections.products.header" = "Kup osobno";
 "views.paywall.sections.products.header" = "Sugerowane produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej dokonałeś zakupów, możesz je tutaj przywrócić.";

@@ -86,7 +86,7 @@ private extension PaywallScrollableView {
             )
         }
         .themeSection(
-            header: Strings.Views.Paywall.Sections.Products.header,
+            header: Strings.Views.PaywallNew.Sections.Products.header,
             footer: Strings.Views.Paywall.Sections.Products.footer
         )
     }

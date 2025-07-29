@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Эти продукты включают текущие и будущие функции.";
 "views.paywall.sections.full_products.header" = "Все функции";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
+"views.paywall_new.sections.products.header" = "Купить отдельно";
 "views.paywall.sections.products.header" = "Рекомендуемые продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
 "views.paywall.sections.restore.footer" = "Если вы совершали покупки ранее, вы можете восстановить их здесь.";

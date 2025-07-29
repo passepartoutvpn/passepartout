@@ -314,6 +314,7 @@
 "views.paywall.sections.required_features.header" = "Erforderliche Funktionen";
 "views.paywall.sections.restore.footer" = "Wenn Sie in der Vergangenheit Einkäufe getätigt haben, können Sie sie hier wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";
+"views.paywall_new.sections.products.header" = "Einzeln kaufen";
 "views.preferences.dns_falls_back.footer" = "Fällt auf CloudFlare-Server zurück, wenn das VPN keine DNS-Einstellungen bereitstellt.";
 "views.preferences.dns_falls_back" = "DNS-Fallback";
 "views.preferences.enables_iap.footer" = "Aktivieren Sie die Unterstützung für kostenpflichtige Funktionen. Deaktivieren Sie dies, wenn Sie kein Apple ID haben.";

@@ -93,7 +93,7 @@ private extension PaywallFixedView {
     var individualProductsView: some View {
         VStack {
             if showsComplete {
-                Text(Strings.Views.Paywall.Sections.Products.header)
+                Text(Strings.Views.PaywallNew.Sections.Products.header)
                     .font(.headline)
                     .padding(.bottom, 1)
             } else {

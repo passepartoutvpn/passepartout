@@ -77,6 +77,11 @@
 "views.paywall.alerts.verification.boot" = "This may take a little longer if your device was just started.";
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
 
+"views.paywall_new.sections.products.header" = "Purchase individually";
+//"views.paywall_new.alerts.actions.connect" = "Test connection";
+//"views.paywall_new.alerts.actions.purchase" = "Purchase";
+//"views.paywall_new.alerts.actions.save" = "Save anyway";
+
 "views.preferences.system_appearance" = "Appearance";
 "views.preferences.launches_on_login" = "Launch on login";
 "views.preferences.launches_on_login.footer" = "Open the app in background after login.";

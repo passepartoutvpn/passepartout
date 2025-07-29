@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Estes produtos incluem recursos atuais e futuros.";
 "views.paywall.sections.full_products.header" = "Todos os recursos";
 "views.paywall.sections.products.footer" = "Todas as compras são compatíveis com Compartilhamento Familiar.";
+"views.paywall_new.sections.products.header" = "Comprar individualmente";
 "views.paywall.sections.products.header" = "Produtos sugeridos";
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você fez compras anteriormente, pode restaurá-las aqui.";

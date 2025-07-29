@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Dessa produkter inkluderar nuvarande och framtida funktioner.";
 "views.paywall.sections.full_products.header" = "Alla funktioner";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
+"views.paywall_new.sections.products.header" = "Köp individuellt";
 "views.paywall.sections.products.header" = "Föreslagna produkter";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har gjort köp tidigare kan du återställa dem här.";

@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "这些产品包含当前和未来的功能。";
 "views.paywall.sections.full_products.header" = "所有功能";
 "views.paywall.sections.products.footer" = "所有购买均支持“家人共享”。";
+"views.paywall_new.sections.products.header" = "单独购买";
 "views.paywall.sections.products.header" = "推荐产品";
 "views.paywall.sections.required_features.header" = "必需功能";
 "views.paywall.sections.restore.footer" = "如果您过去有购买记录，可以在此恢复。";

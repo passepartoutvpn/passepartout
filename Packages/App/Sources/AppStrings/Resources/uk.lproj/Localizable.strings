@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Ці продукти містять поточні та майбутні функції.";
 "views.paywall.sections.full_products.header" = "Усі функції";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
+"views.paywall_new.sections.products.header" = "Придбати окремо";
 "views.paywall.sections.products.header" = "Рекомендовані продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше здійснювали покупки, ви можете відновити їх тут.";

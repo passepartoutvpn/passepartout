@@ -310,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Deze producten bevatten huidige en toekomstige functies.";
 "views.paywall.sections.full_products.header" = "Alle functies";
 "views.paywall.sections.products.footer" = "Alle aankopen ondersteunen Delen met gezin.";
+"views.paywall_new.sections.products.header" = "Individueel kopen";
 "views.paywall.sections.products.header" = "Voorgestelde producten";
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je eerder aankopen hebt gedaan, kun je ze hier herstellen.";
