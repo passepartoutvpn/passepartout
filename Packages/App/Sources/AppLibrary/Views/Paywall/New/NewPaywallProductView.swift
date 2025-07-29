@@ -90,6 +90,9 @@ private extension NewPaywallProductView {
         guard let rawProduct else {
             return false
         }
+        guard !rawProduct.isDonation else {
+            return false
+        }
         return Set(rawProduct.features).isDisjoint(with: requiredFeatures)
     }
 
