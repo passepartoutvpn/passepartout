@@ -15,7 +15,7 @@ public protocol AppCoordinatorConforming {
 
     func onProviderEntityRequired(_ profile: Profile, force: Bool)
 
-    func onPurchaseRequired(for profile: Profile, features: Set<AppFeature>, onCancel: (() -> Void)?)
+    func onPurchaseRequired(for profile: Profile, features: Set<AppFeature>, continuation: (() -> Void)?)
 
     func onError(_ error: Error, profile: Profile)
 }
