@@ -2,8 +2,6 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-import AppStrings
-
 extension Strings.Views.Profile.SendTv {
     public static var title_compound: String {
         title(Strings.Unlocalized.appleTV)
