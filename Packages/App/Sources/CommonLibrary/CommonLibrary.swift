@@ -26,10 +26,12 @@ public enum CommonLibrary {
                     fatalError("\(moduleType): #2 is not AppFeatureRequiring")
                 }
             } catch {
-                if (error as? PartoutError)?.code == .incompleteModule {
+                switch (error as? PartoutError)?.code {
+                case .incompleteModule, .WireGuard.emptyPeers:
                     return
+                default:
+                    fatalError("\(moduleType): empty module is not buildable: \(error)")
                 }
-                fatalError("\(moduleType): empty module is not buildable: \(error)")
             }
         }
     }
