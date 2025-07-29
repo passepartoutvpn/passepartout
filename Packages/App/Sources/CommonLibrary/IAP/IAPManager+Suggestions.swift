@@ -4,7 +4,7 @@
 
 import CommonUtils
 
-@available(*, deprecated, message: "FIXME: #1446, delete old paywall")
+@available(*, deprecated, message: "TODO: #1489, delete old paywall")
 extension IAPManager {
     public enum SuggestionFilter {
         case excludingComplete
@@ -26,7 +26,7 @@ extension IAPManager {
 }
 
 // for testing
-@available(*, deprecated, message: "FIXME: #1446, delete old paywall")
+@available(*, deprecated, message: "TODO: #1489, delete old paywall")
 extension IAPManager {
     func suggestedProducts(
         for platform: Platform,

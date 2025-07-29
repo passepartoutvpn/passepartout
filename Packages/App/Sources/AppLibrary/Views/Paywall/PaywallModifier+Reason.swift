@@ -23,7 +23,7 @@ extension PaywallModifier {
 
         public let requiredFeatures: Set<AppFeature>
 
-        @available(*, deprecated, message: "FIXME: #1446, unused in new paywall")
+        @available(*, deprecated, message: "TODO: #1489, unused in new paywall")
         public let suggestedProducts: Set<AppProduct>?
 
         public let action: Action
