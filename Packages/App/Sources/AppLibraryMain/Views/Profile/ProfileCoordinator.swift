@@ -128,12 +128,8 @@ private extension ProfileCoordinator {
             onSaveProfile: {
                 try await saveProfile(verifying: true)
             },
-            onCancelEditing: {
-                cancelEditing()
-            },
-            onSendToTV: {
-                sendProfileToTV()
-            }
+            onCancelEditing: cancelEditing,
+            onSendToTV: sendProfileToTV
         )
     }
 }
