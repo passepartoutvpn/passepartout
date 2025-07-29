@@ -6,7 +6,7 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-public struct DisclosingFeaturesView: View {
+struct DisclosingFeaturesView: View {
     private let product: AppProduct
 
     private let requiredFeatures: Set<AppFeature>
@@ -14,7 +14,7 @@ public struct DisclosingFeaturesView: View {
     @Binding
     private var isDisclosing: Bool
 
-    public init(
+    init(
         product: AppProduct,
         requiredFeatures: Set<AppFeature>,
         isDisclosing: Binding<Bool>
@@ -24,7 +24,7 @@ public struct DisclosingFeaturesView: View {
         _isDisclosing = isDisclosing
     }
 
-    public var body: some View {
+    var body: some View {
         Group {
             discloseButton
             featuresList
