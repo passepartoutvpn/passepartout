@@ -174,8 +174,13 @@ private extension ProfileCoordinator {
             assert(action != nil, "Verification error despite nil action (required)")
 
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-            if action != nil {
-                setLater(nextPaywallReason(requiredFeatures: requiredFeatures)) {
+            if let action {
+                let nextReason = PaywallReason(
+                    nil,
+                    requiredFeatures: requiredFeatures,
+                    action: action
+                )
+                setLater(nextReason) {
                     paywallReason = $0
                 }
             }
@@ -196,7 +201,7 @@ private extension ProfileCoordinator {
     func saveProfile(verifying: Bool) async throws {
         do {
             try await commitEditing(
-                action: verifying ? .save : nil,
+                action: verifying ? paywallSaveAction : nil,
                 dismissing: true
             )
         } catch {
@@ -260,12 +265,8 @@ private struct DynamicPaywallModifier: ViewModifier {
 }
 
 private extension ProfileCoordinator {
-    func nextPaywallReason(requiredFeatures: Set<AppFeature>) -> PaywallReason {
-        PaywallReason(
-            nil,
-            requiredFeatures: requiredFeatures,
-            action: configManager.isActive(.newPaywall) ? .cancel : .save
-        )
+    var paywallSaveAction: PaywallModifier.Action {
+        configManager.isActive(.newPaywall) ? .cancel : .save
     }
 }
 
