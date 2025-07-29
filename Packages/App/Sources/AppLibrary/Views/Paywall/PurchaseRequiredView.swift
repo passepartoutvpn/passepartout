@@ -6,6 +6,8 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
+// FIXME: #1446, "suggesting" unused in new paywall
+
 public struct PurchaseRequiredView<Content>: View where Content: View {
 
     @EnvironmentObject
