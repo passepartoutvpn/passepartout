@@ -333,7 +333,7 @@ private extension Dependencies {
     }
 
     var mirrorsRemoteRepository: Bool {
-        // FIXME: #1411, restore "false" in 3.5.0
+        // FIXME: #1453, restore "false" for "Send to TV"
 #if os(tvOS)
         true
 #else
