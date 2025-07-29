@@ -133,6 +133,14 @@ private extension DonateView {
 // MARK: - Previews
 
 #Preview {
-    DonateView(modifier: EmptyModifier())
+    struct PreviewModifier: ViewModifier {
+        func body(content: Content) -> some View {
+            List {
+                content
+            }
+        }
+    }
+
+    return DonateView(modifier: PreviewModifier())
         .withMockEnvironment()
 }
