@@ -5,7 +5,7 @@
 import CommonLibrary
 import SwiftUI
 
-public struct PaywallModifier: ViewModifier {
+public struct NewPaywallModifier: ViewModifier {
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -78,7 +78,7 @@ public struct PaywallModifier: ViewModifier {
     }
 }
 
-private extension PaywallModifier {
+private extension NewPaywallModifier {
     func alertMessage(startingWith header: String, features: [String]) -> String {
         header + "\n\n" + features.joined(separator: "\n")
     }
@@ -86,7 +86,7 @@ private extension PaywallModifier {
 
 // MARK: - Confirmation alert
 
-private extension PaywallModifier {
+private extension NewPaywallModifier {
     func title(forAction action: PaywallModifier.Action) -> String {
         switch action {
         case .connect:
@@ -143,7 +143,7 @@ private extension PaywallModifier {
 
 // MARK: - Paywall
 
-private extension PaywallModifier {
+private extension NewPaywallModifier {
     func modalDestination() -> some View {
         reason.map {
             PaywallCoordinator(
@@ -156,7 +156,7 @@ private extension PaywallModifier {
 
 // MARK: - Logic
 
-private extension PaywallModifier {
+private extension NewPaywallModifier {
     var ineligibleFeatures: [String] {
         guard let reason else {
             return []

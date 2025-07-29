@@ -67,7 +67,7 @@ private extension PaywallFixedView {
                 .font(.title2)
                 .padding(.bottom, 1)
             ForEach(model.completePurchasable, id: \.productIdentifier) { iap in
-                PaywallProductView(
+                NewPaywallProductView(
                     iapManager: iapManager,
                     style: .paywall(primary: true),
                     product: iap,
@@ -102,7 +102,7 @@ private extension PaywallFixedView {
                     .padding(.bottom, 1)
             }
             ForEach(model.individualPurchasable, id: \.productIdentifier) { iap in
-                PaywallProductView(
+                NewPaywallProductView(
                     iapManager: iapManager,
                     style: .paywall(primary: !showsComplete),
                     product: iap,

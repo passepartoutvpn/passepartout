@@ -7,7 +7,7 @@ import CommonUtils
 import StoreKit
 import SwiftUI
 
-struct CustomProductView: View {
+struct NewCustomProductView: View {
 
     @Environment(\.isEnabled)
     private var isEnabled
@@ -31,7 +31,7 @@ struct CustomProductView: View {
     }
 }
 
-private extension CustomProductView {
+private extension NewCustomProductView {
     var contentView: some View {
 #if os(tvOS)
         Button(action: purchase) {
@@ -79,7 +79,7 @@ private extension CustomProductView {
     }
 }
 
-private extension CustomProductView {
+private extension NewCustomProductView {
     var isPurchasing: Bool {
         purchasingIdentifier != nil
     }
@@ -112,7 +112,7 @@ private extension CustomProductView {
     }
 }
 
-private extension CustomProductView {
+private extension NewCustomProductView {
     func purchase() {
         purchasingIdentifier = product.productIdentifier
         Task {
@@ -131,7 +131,7 @@ private extension CustomProductView {
 
 #Preview {
     List {
-        CustomProductView(
+        NewCustomProductView(
             style: .paywall(primary: true),
             iapManager: .forPreviews,
             product: AppProduct.Complete.OneTime.lifetime.asFakeIAP,

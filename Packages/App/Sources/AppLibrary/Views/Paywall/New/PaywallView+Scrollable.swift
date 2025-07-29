@@ -44,7 +44,7 @@ private extension PaywallScrollableView {
     var completeProductsView: some View {
         Group {
             ForEach(model.completePurchasable, id: \.productIdentifier) {
-                PaywallProductView(
+                NewPaywallProductView(
                     iapManager: iapManager,
                     style: .paywall(primary: true),
                     product: $0,
@@ -74,7 +74,7 @@ private extension PaywallScrollableView {
 
     var individualProductsView: some View {
         ForEach(model.individualPurchasable, id: \.productIdentifier) {
-            PaywallProductView(
+            NewPaywallProductView(
                 iapManager: iapManager,
                 style: .paywall(primary: false),
                 product: $0,

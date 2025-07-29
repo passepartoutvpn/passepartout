@@ -7,7 +7,7 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-public struct PaywallProductView: View {
+public struct NewPaywallProductView: View {
 
     @ObservedObject
     private var iapManager: IAPManager
@@ -68,7 +68,7 @@ public struct PaywallProductView: View {
     }
 }
 
-private extension PaywallProductView {
+private extension NewPaywallProductView {
     var shouldUseStoreKit: Bool {
 #if os(tvOS)
         if case .donation = style {
@@ -108,7 +108,7 @@ private extension PaywallProductView {
                 onError: onError
             )
         } else {
-            CustomProductView(
+            NewCustomProductView(
                 style: style,
                 iapManager: iapManager,
                 product: product,
@@ -122,7 +122,7 @@ private extension PaywallProductView {
 
 #Preview {
     List {
-        PaywallProductView(
+        NewPaywallProductView(
             iapManager: .forPreviews,
             style: .paywall(primary: true),
             product: InAppProduct(
