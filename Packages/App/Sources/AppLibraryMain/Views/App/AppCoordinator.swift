@@ -81,16 +81,10 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
         .modifier(OnboardingModifier(
             modalRoute: $modalRoute
         ))
-        .modifier(PaywallModifier(
-            reason: $paywallReason,
-            otherTitle: Strings.Views.Paywall.Alerts.Confirmation.editProfile,
-            onOtherAction: { profile in
-                guard let profile else {
-                    return
-                }
-                onEditProfile(profile.localizedPreview)
-            },
-            onCancel: paywallContinuation
+        .modifier(DynamicPaywallModifier(
+            paywallReason: $paywallReason,
+            onEditProfile: onEditProfile,
+            paywallContinuation: paywallContinuation
         ))
         .themeModal(
             item: $modalRoute,
@@ -415,6 +409,53 @@ private extension Profile {
         // do not connect TV profiles on server selection
         attributes.isAvailableForTV != true
 #endif
+    }
+}
+
+// MARK: - Paywall
+
+private struct DynamicPaywallModifier: ViewModifier {
+
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
+    @Binding
+    var paywallReason: PaywallReason?
+
+    let onEditProfile: (ProfilePreview) -> Void
+
+    let paywallContinuation: (() -> Void)?
+
+    // FIXME: #1446, use feature flag
+    func body(content: Content) -> some View {
+        if false {
+            content.modifier(newModifier)
+        } else {
+            content.modifier(oldModifier)
+        }
+    }
+
+    var newModifier: some ViewModifier {
+        NewPaywallModifier(
+            reason: $paywallReason,
+            onAction: { _ in
+                paywallContinuation?()
+            }
+        )
+    }
+
+    var oldModifier: some ViewModifier {
+        PaywallModifier(
+            reason: $paywallReason,
+            otherTitle: Strings.Views.Paywall.Alerts.Confirmation.editProfile,
+            onOtherAction: { profile in
+                guard let profile else {
+                    return
+                }
+                onEditProfile(profile.localizedPreview)
+            },
+            onCancel: paywallContinuation
+        )
     }
 }
 

@@ -26,6 +26,9 @@ struct ProfileCoordinator: View {
     @EnvironmentObject
     private var preferencesManager: PreferencesManager
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor
@@ -50,7 +53,10 @@ struct ProfileCoordinator: View {
 
     var body: some View {
         contentView
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(DynamicPaywallModifier(
+                configManager: configManager,
+                paywallReason: $paywallReason
+            ))
             .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
             .withErrorHandler(errorHandler)
@@ -171,12 +177,7 @@ private extension ProfileCoordinator {
             return nil
         } catch AppError.verificationRequiredFeatures(let requiredFeatures) {
             pp_log_g(.App.profiles, .error, "Unable to commit profile: required features \(requiredFeatures)")
-            setLater(PaywallReason(
-                nil,
-                requiredFeatures: requiredFeatures,
-                suggestedProducts: nil,
-                action: .save
-            )) {
+            setLater(nextPaywallReason(requiredFeatures: requiredFeatures)) {
                 paywallReason = $0
             }
             return nil
@@ -202,6 +203,50 @@ private extension ProfileCoordinator {
                 errorHandler.handle(error)
             }
         }
+    }
+}
+
+// MARK: - Paywall
+
+private struct DynamicPaywallModifier: ViewModifier {
+
+    @ObservedObject
+    var configManager: ConfigManager
+
+    @Binding
+    var paywallReason: PaywallReason?
+
+    // FIXME: #1446, use feature flag
+    func body(content: Content) -> some View {
+        if false {
+            content.modifier(newModifier)
+        } else {
+            content.modifier(oldModifier)
+        }
+    }
+
+    var newModifier: some ViewModifier {
+        NewPaywallModifier(
+            reason: $paywallReason,
+            onAction: { _ in
+                // paywall cancelled, do nothing
+            }
+        )
+    }
+
+    var oldModifier: some ViewModifier {
+        PaywallModifier(reason: $paywallReason)
+    }
+}
+
+private extension ProfileCoordinator {
+    func nextPaywallReason(requiredFeatures: Set<AppFeature>) -> PaywallReason {
+        PaywallReason(
+            nil,
+            requiredFeatures: requiredFeatures,
+            // FIXME: #1446, use feature flag
+            action: false ? .cancel : .save
+        )
     }
 }
 

@@ -68,9 +68,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     }
             }
             .navigationDestination(for: AppCoordinatorRoute.self, destination: pushDestination)
-            .modifier(PaywallModifier(
-                reason: $paywallReason,
-                onCancel: paywallContinuation
+            .modifier(DynamicPaywallModifier(
+                paywallReason: $paywallReason,
+                paywallContinuation: paywallContinuation
             ))
             .withErrorHandler(errorHandler)
         }
@@ -190,6 +190,44 @@ extension AppCoordinator {
             error,
             title: profile.name,
             message: Strings.Errors.App.tunnel
+        )
+    }
+}
+
+// MARK: - Paywall
+
+private struct DynamicPaywallModifier: ViewModifier {
+
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
+    @Binding
+    var paywallReason: PaywallReason?
+
+    let paywallContinuation: (() -> Void)?
+
+    // FIXME: #1446, use feature flag
+    func body(content: Content) -> some View {
+        if false {
+            content.modifier(newModifier)
+        } else {
+            content.modifier(oldModifier)
+        }
+    }
+
+    var newModifier: some ViewModifier {
+        NewPaywallModifier(
+            reason: $paywallReason,
+            onAction: { _ in
+                paywallContinuation?()
+            }
+        )
+    }
+
+    var oldModifier: some ViewModifier {
+        PaywallModifier(
+            reason: $paywallReason,
+            onCancel: paywallContinuation
         )
     }
 }
