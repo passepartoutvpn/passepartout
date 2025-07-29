@@ -29,9 +29,6 @@ struct ProfileCoordinator: View {
     @EnvironmentObject
     private var configManager: ConfigManager
 
-    @Environment(\.distributionTarget)
-    private var distributionTarget
-
     let profileManager: ProfileManager
 
     let profileEditor: ProfileEditor
