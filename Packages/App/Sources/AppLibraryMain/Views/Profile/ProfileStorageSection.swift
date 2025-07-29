@@ -59,7 +59,12 @@ private extension ProfileStorageSection {
                     Text(Strings.Unlocalized.iCloud)
                     PurchaseRequiredView(
                         requiring: sharingRequirements,
-                        reason: $paywallReason
+                        reason: $paywallReason,
+                        suggesting: { // TODO: #1489, delete suggesting after deleting old paywall
+                            var products = iapManager.suggestedProducts()
+                            products.insert(.Features.appleTV)
+                            return products
+                        }()
                     )
                 }
             }
@@ -86,23 +91,16 @@ private extension ProfileStorageSection {
                     Text(Strings.Modules.General.Rows.appletv_compound)
                     PurchaseRequiredView(
                         requiring: tvRequirements,
-                        reason: $paywallReason
+                        reason: $paywallReason,
+                        suggesting: { // TODO: #1489, delete suggesting after deleting old paywall
+                            var products = iapManager.suggestedProducts(filter: .onlyComplete)
+                            products.insert(.Features.appleTV)
+                            return products
+                        }()
                     )
                 }
             }
         }
-    }
-
-    var tvPurchaseButton: some View {
-        PurchaseRequiredView(
-            requiring: tvRequirements,
-            reason: $paywallReason,
-            suggesting: { // TODO: #1489, delete suggesting after deleting old paywall
-                var products = iapManager.suggestedProducts(filter: .onlyComplete)
-                products.insert(.Features.appleTV)
-                return products
-            }()
-        )
     }
 }
 
