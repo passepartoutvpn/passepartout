@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0
 
 import CommonUtils
-import Foundation
 
+@available(*, deprecated)
 extension IAPManager {
     public enum SuggestionFilter {
         case excludingComplete
@@ -26,13 +26,8 @@ extension IAPManager {
 }
 
 // for testing
+@available(*, deprecated)
 extension IAPManager {
-    enum Platform {
-        case iOS
-
-        case macOS
-    }
-
     func suggestedProducts(
         for platform: Platform,
         filter: SuggestionFilter,
@@ -77,6 +72,8 @@ extension IAPManager {
                     suggested.insert(.Essentials.iOS_macOS)
                 }
                 suggested.insert(.Essentials.macOS)
+            case .tvOS:
+                fatalError("Do not present paywall on tvOS")
             }
         }
 

@@ -150,6 +150,23 @@ extension IAPManager {
         return features.allSatisfy(eligibleFeatures.contains)
     }
 
+    public var isEligibleForComplete: Bool {
+        let rawProducts = purchasedProducts.compactMap {
+            AppProduct(rawValue: $0.rawValue)
+        }
+
+        //
+        // allow purchasing complete products only if:
+        //
+        // - never bought complete products ('Forever', subscriptions)
+        // - never bought 'Essentials' products (suggest individual features instead)
+        // - never bought 'Apple TV' product (suggest 'Essentials' instead)
+        //
+        return !rawProducts.contains {
+            $0.isComplete || $0.isEssentials || $0 == .Features.appleTV
+        }
+    }
+
     public var isEligibleForFeedback: Bool {
 #if os(tvOS)
         false
@@ -160,6 +177,23 @@ extension IAPManager {
 
     public var isPayingUser: Bool {
         !purchasedProducts.isEmpty
+    }
+
+    public var didPurchaseComplete: Bool {
+        purchasedProducts.contains(where: \.isComplete)
+    }
+
+    public func didPurchase(_ purchasable: InAppProduct) -> Bool {
+        guard let product = AppProduct(rawValue: purchasable.productIdentifier) else {
+            return false
+        }
+        return purchasedProducts.contains(product)
+    }
+
+    public func didPurchase(_ purchasable: [InAppProduct]) -> Bool {
+        purchasable.allSatisfy {
+            didPurchase($0)
+        }
     }
 }
 

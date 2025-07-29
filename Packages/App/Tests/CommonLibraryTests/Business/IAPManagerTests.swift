@@ -568,7 +568,7 @@ extension IAPManagerTests {
 
 // MARK: -
 
-private extension IAPManager {
+extension IAPManager {
     convenience init(
         customUserLevel: AppUserLevel? = nil,
         inAppHelper: (any AppProductHelper)? = nil,
@@ -593,7 +593,9 @@ private extension IAPManager {
         self.init(receiptReader: reader)
         await reloadReceipt()
     }
+}
 
+private extension IAPManager {
     func suggestedProducts(for platform: Platform) -> Set<AppProduct> {
         suggestedProducts(for: platform, filter: .excludingComplete)
     }

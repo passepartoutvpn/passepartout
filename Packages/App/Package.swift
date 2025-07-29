@@ -83,6 +83,13 @@ let package = Package(
             ]
         ),
         .target(
+            name: "AppLibraryNewPaywall",
+            dependencies: [
+                "CommonLibrary",
+                "AppStrings"
+            ]
+        ),
+        .target(
             name: "AppLibraryMain",
             dependencies: ["AppLibrary"],
             resources: [

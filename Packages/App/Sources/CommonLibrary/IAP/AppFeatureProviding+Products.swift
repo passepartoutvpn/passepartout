@@ -9,7 +9,7 @@ extension AppProduct: AppFeatureProviding {
         // MARK: Current
 
         case .Essentials.iOS_macOS:
-            return AppFeature.essentialFeatures
+            return Array(AppFeature.essentialFeatures)
 
         case .Essentials.iOS:
 #if os(iOS) || os(tvOS)
