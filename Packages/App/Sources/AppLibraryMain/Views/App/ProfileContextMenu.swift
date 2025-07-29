@@ -98,9 +98,7 @@ private extension ProfileContextMenu {
 
     var profileRemoveButton: some View {
         Button(role: .destructive) {
-            Task {
-                await profileManager.remove(withId: preview.id)
-            }
+            flow?.onDeleteProfile(preview)
         } label: {
             ThemeImageLabel(Strings.Global.Actions.remove, .contextRemove)
         }
