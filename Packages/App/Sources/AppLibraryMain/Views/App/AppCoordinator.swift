@@ -44,6 +44,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     private var modalRoute: ModalRoute?
 
     @State
+    private var profileBeingDeleted: ProfilePreview?
+
+    @State
     private var profilePath = NavigationPath()
 
     @State
@@ -94,6 +97,11 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
             options: modalRoute?.options(),
             content: modalDestination
         )
+        .themeConfirmation(
+            isPresented: Binding(presenting: $profileBeingDeleted, if: { $0 != nil }),
+            title: Strings.Global.Actions.remove,
+            action: confirmDeleteProfile
+        )
         .withErrorHandler(errorHandler)
         .onChange(of: interactiveManager.isPresented) {
             modalRoute = $0 ? .interactiveLogin : nil
@@ -120,6 +128,7 @@ extension AppCoordinator {
             errorHandler: errorHandler,
             flow: .init(
                 onEditProfile: onEditProfile,
+                onDeleteProfile: onDeleteProfile,
                 onMigrateProfiles: {
                     modalRoute = .migrateProfiles
                 },
@@ -357,6 +366,20 @@ private extension AppCoordinator {
             return
         }
         editProfile(profile.editable())
+    }
+
+    func onDeleteProfile(_ preview: ProfilePreview) {
+        profileBeingDeleted = preview
+    }
+
+    func confirmDeleteProfile() {
+        guard let profileBeingDeleted else {
+            assertionFailure("No profile is being deleted")
+            return
+        }
+        Task {
+            await profileManager.remove(withId: profileBeingDeleted.id)
+        }
     }
 
     func editProfile(_ profile: EditableProfile) {
