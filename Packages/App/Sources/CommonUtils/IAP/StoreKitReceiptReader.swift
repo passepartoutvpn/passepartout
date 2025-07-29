@@ -40,7 +40,9 @@ private extension StoreKitReceiptReader {
                 case .verified(let tx):
                     logger.debug("Fetched AppTransaction: \(tx)")
                     originalPurchase = tx.originalPurchase
-                default:
+                case .unverified(let tx, let error):
+                    let json = String(data: tx.jsonRepresentation, encoding: .utf8)
+                    logger.warning("Unable to process transaction: \(error), json=\(json ?? "")")
                     originalPurchase = nil
                 }
             } catch {
@@ -58,8 +60,9 @@ private extension StoreKitReceiptReader {
                 switch entitlement {
                 case .verified(let tx):
                     transactions.append(tx)
-                default:
-                    break
+                case .unverified(let tx, let error):
+                    let json = String(data: tx.jsonRepresentation, encoding: .utf8)
+                    logger.warning("Unable to process transaction: \(error), json=\(json ?? "")")
                 }
             }
             let elapsed = -startDate.timeIntervalSinceNow
