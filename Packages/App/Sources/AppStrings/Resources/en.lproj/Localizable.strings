@@ -71,9 +71,6 @@
 "views.paywall.alerts.confirmation.message.connect" = "You may test the connection for %d minutes.";
 "views.paywall.alerts.confirmation.message.save" = "Tap the lock icons to purchase the missing features.";
 "views.paywall.alerts.confirmation.edit_profile" = "Edit profile";
-//"views.paywall.alerts.actions.connect" = "Test connection";
-//"views.paywall.alerts.actions.purchase" = "Purchase";
-"views.paywall.alerts.actions.save" = "Save anyway";
 "views.paywall.alerts.verification.connect.1" = "Your purchases are being verified.";
 "views.paywall.alerts.verification.connect.2" = "If verification cannot be completed, the connection will end in %d minutes.";
 "views.paywall.alerts.verification.edit" = "Please wait while your purchases are being verified.";
@@ -81,9 +78,6 @@
 "views.paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
 
 "views.paywall_new.sections.products.header" = "Purchase individually";
-//"views.paywall_new.alerts.actions.connect" = "Test connection";
-//"views.paywall_new.alerts.actions.purchase" = "Purchase";
-//"views.paywall_new.alerts.actions.save" = "Save anyway";
 
 "views.preferences.system_appearance" = "Appearance";
 "views.preferences.launches_on_login" = "Launch on login";

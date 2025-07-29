@@ -895,10 +895,6 @@ public enum Strings {
     }
     public enum Paywall {
       public enum Alerts {
-        public enum Actions {
-          /// Save anyway
-          public static let save = Strings.tr("Localizable", "views.paywall.alerts.actions.save", fallback: "Save anyway")
-        }
         public enum Confirmation {
           /// Edit profile
           public static let editProfile = Strings.tr("Localizable", "views.paywall.alerts.confirmation.edit_profile", fallback: "Edit profile")
