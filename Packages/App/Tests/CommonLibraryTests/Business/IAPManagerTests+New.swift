@@ -2,13 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-import Combine
 @testable import CommonLibrary
-import CommonUtils
-import Foundation
 import XCTest
-
-// MARK: - Suggestions (New)
 
 @MainActor
 final class IAPManagerNewSuggestionsTests: XCTestCase {
