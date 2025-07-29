@@ -298,7 +298,6 @@
 "views.migration.title" = "Migracja";
 "views.paywall.alerts.confirmation.edit_profile" = "Edytuj profil";
 "views.paywall.alerts.actions.save" = "Zapisz mimo to";
-"views.paywall.alerts.actions.send_to_tv" = "Wyślij mimo to";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
 "views.paywall.alerts.confirmation.message.save" = "Stuknij ikony kłódki, aby kupić brakujące funkcje.";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";

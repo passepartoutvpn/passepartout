@@ -17,8 +17,6 @@ extension PaywallModifier {
         case purchase
 
         case save
-
-        case sendToTV
     }
 
     public struct Reason: Hashable {

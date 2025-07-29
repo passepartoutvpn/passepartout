@@ -97,8 +97,6 @@ private extension NewPaywallModifier {
             return Strings.Global.Actions.purchase
         case .save:
             return Strings.Views.Paywall.Alerts.Actions.save
-        case .sendToTV:
-            return Strings.Views.Paywall.Alerts.Actions.sendToTv
         }
     }
 

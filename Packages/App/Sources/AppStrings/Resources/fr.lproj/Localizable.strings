@@ -298,7 +298,6 @@
 "views.migration.title" = "Migrer";
 "views.paywall.alerts.confirmation.edit_profile" = "Modifier le profil";
 "views.paywall.alerts.actions.save" = "Enregistrer quand même";
-"views.paywall.alerts.actions.send_to_tv" = "Envoyer quand même";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
 "views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de cadenas pour acheter les fonctionnalités manquantes.";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";

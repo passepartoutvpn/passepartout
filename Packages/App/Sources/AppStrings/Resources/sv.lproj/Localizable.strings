@@ -298,7 +298,6 @@
 "views.migration.title" = "Migrera";
 "views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
 "views.paywall.alerts.actions.save" = "Spara ändå";
-"views.paywall.alerts.actions.send_to_tv" = "Skicka ändå";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";

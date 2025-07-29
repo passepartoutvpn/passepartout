@@ -298,7 +298,6 @@
 "views.migration.title" = "Перенесення";
 "views.paywall.alerts.confirmation.edit_profile" = "Редагувати профіль";
 "views.paywall.alerts.actions.save" = "Зберегти все одно";
-"views.paywall.alerts.actions.send_to_tv" = "Надіслти все одно";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
 "views.paywall.alerts.confirmation.message.save" = "Торкніться значків замка, щоб придбати відсутні функції.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";

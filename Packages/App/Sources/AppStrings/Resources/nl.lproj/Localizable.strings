@@ -298,7 +298,6 @@
 "views.migration.title" = "Migreren";
 "views.paywall.alerts.confirmation.edit_profile" = "Profiel bewerken";
 "views.paywall.alerts.actions.save" = "Toch opslaan";
-"views.paywall.alerts.actions.send_to_tv" = "Toch verzenden";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
 "views.paywall.alerts.confirmation.message.save" = "Tik op de slotpictogrammen om de ontbrekende functies te kopen.";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";

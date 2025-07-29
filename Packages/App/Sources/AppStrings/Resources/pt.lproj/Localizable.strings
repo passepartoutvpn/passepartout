@@ -298,7 +298,6 @@
 "views.migration.title" = "Migrar";
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
 "views.paywall.alerts.actions.save" = "Salvar assim mesmo";
-"views.paywall.alerts.actions.send_to_tv" = "Enviar assim mesmo";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
 "views.paywall.alerts.confirmation.message.save" = "Toque nos ícones de cadeado para comprar os recursos ausentes.";
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";

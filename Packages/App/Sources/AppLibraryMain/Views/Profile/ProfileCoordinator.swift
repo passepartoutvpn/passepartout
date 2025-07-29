@@ -59,8 +59,7 @@ struct ProfileCoordinator: View {
             .modifier(DynamicPaywallModifier(
                 configManager: configManager,
                 paywallReason: $paywallReason,
-                saveProfileAnyway: saveProfileAnyway,
-                sendProfileToTV: sendProfileToTV(verifying:)
+                saveProfileAnyway: saveProfileAnyway
             ))
             .themeModal(item: $modalRoute, content: modalDestination)
             .environment(\.dismissProfile, onDismiss)
@@ -134,7 +133,7 @@ private extension ProfileCoordinator {
                 cancelEditing()
             },
             onSendToTV: {
-                sendProfileToTV(verifying: false)
+                sendProfileToTV()
             }
         )
     }
@@ -219,11 +218,11 @@ private extension ProfileCoordinator {
         }
     }
 
-    func sendProfileToTV(verifying: Bool) {
+    func sendProfileToTV() {
         Task {
             do {
                 guard let profile = try await commitEditing(
-                    action: verifying ? .sendToTV : nil,
+                    action: nil, // skip profile verification and thus paywall
                     dismissing: false
                 ) else {
                     return
@@ -248,8 +247,6 @@ private struct DynamicPaywallModifier: ViewModifier {
 
     let saveProfileAnyway: () -> Void
 
-    let sendProfileToTV: (_ verifying: Bool) -> Void
-
     func body(content: Content) -> some View {
         if configManager.isActive(.newPaywall) {
             content.modifier(newModifier)
@@ -267,8 +264,6 @@ private struct DynamicPaywallModifier: ViewModifier {
                     break
                 case .save:
                     saveProfileAnyway()
-                case .sendToTV:
-                    sendProfileToTV(false)
                 default:
                     assertionFailure("Unhandled paywall action \(action)")
                 }

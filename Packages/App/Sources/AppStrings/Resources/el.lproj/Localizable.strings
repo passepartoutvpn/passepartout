@@ -298,7 +298,6 @@
 "views.migration.title" = "Μεταφορά";
 "views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
 "views.paywall.alerts.actions.save" = "Αποθήκευση ούτως ή άλλως";
-"views.paywall.alerts.actions.send_to_tv" = "Αποστολή ούτως ή άλλως";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
 "views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια κλειδώματος για να αγοράσετε τις ελλείπουσες λειτουργίες.";
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";

@@ -298,7 +298,6 @@
 "views.migration.title" = "Миграция";
 "views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
 "views.paywall.alerts.actions.save" = "Сохранить в любом случае";
-"views.paywall.alerts.actions.send_to_tv" = "Отправить в любом случае";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
 "views.paywall.alerts.confirmation.message.save" = "Нажмите на значки замка, чтобы приобрести недостающие функции.";
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";
