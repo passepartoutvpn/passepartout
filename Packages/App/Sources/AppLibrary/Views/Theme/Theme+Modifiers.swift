@@ -268,4 +268,8 @@ extension View {
             defaultValue: defaultValue
         ))
     }
+
+    public func themeBlurred(if condition: Bool) -> some View {
+        opacity(condition ? 0.3 : 1.0)
+    }
 }

@@ -53,10 +53,6 @@ struct PaywallFixedView: View {
 }
 
 private extension PaywallFixedView {
-    var blurOpacity: CGFloat {
-        0.2
-    }
-
     var showsComplete: Bool {
         !model.completePurchasable.isEmpty
     }
@@ -85,8 +81,7 @@ private extension PaywallFixedView {
                 .foregroundStyle(.tertiary)
                 .padding(.bottom)
         }
-        // FIXME: #1446
-        .opacity(iapManager.isEligibleForComplete ? 1.0 : blurOpacity)
+        .themeBlurred(if: !iapManager.isEligibleForComplete)
         .disabled(!iapManager.isEligibleForComplete)
     }
 
@@ -114,8 +109,7 @@ private extension PaywallFixedView {
                 )
                 .focused($selectedProduct, equals: AppProduct(rawValue: iap.productIdentifier))
                 .frame(maxWidth: .infinity)
-                // FIXME: #1446
-                .opacity(!iapManager.didPurchase(iap) ? 1.0 : blurOpacity)
+                .themeBlurred(if: iapManager.didPurchase(iap))
                 .disabled(iapManager.didPurchase(iap))
             }
         }

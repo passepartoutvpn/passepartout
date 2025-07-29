@@ -67,8 +67,7 @@ private extension PaywallScrollableView {
                 Strings.Views.Paywall.Sections.Products.footer
             ].joined(separator: " ")
         )
-        // FIXME: #1446
-        .opacity(iapManager.isEligibleForComplete ? 1.0 : 0.3)
+        .themeBlurred(if: !iapManager.isEligibleForComplete)
         .disabled(!iapManager.isEligibleForComplete)
     }
 

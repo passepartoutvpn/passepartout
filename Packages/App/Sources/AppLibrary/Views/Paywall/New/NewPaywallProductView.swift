@@ -62,8 +62,7 @@ public struct NewPaywallProductView: View {
                 )
             }
         }
-        // FIXME: #1446
-        .opacity(!shouldDisable ? 1.0 : 0.3)
+        .themeBlurred(if: shouldDisable)
         .disabled(shouldDisable)
     }
 }
