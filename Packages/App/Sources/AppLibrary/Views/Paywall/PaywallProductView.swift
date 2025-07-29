@@ -99,6 +99,7 @@ private extension PaywallProductView {
             product: InAppProduct(
                 productIdentifier: AppProduct.Features.appleTV.rawValue,
                 localizedTitle: "Foo",
+                localizedDescription: "Bar",
                 localizedPrice: "$10",
                 native: nil
             ),

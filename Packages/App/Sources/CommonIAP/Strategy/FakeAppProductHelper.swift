@@ -33,12 +33,7 @@ public actor FakeAppProductHelper: AppProductHelper {
 
     public func fetchProducts(timeout: Int) async throws -> [AppProduct: InAppProduct] {
         products = AppProduct.all.reduce(into: [:]) {
-            $0[$1] = InAppProduct(
-                productIdentifier: $1.rawValue,
-                localizedTitle: $1.rawValue,
-                localizedPrice: "€10.0",
-                native: $1
-            )
+            $0[$1] = $1.asFakeIAP
         }
         await receiptReader.setReceipt(withPurchase: purchase, identifiers: [])
         didUpdateSubject.send()
@@ -53,5 +48,17 @@ public actor FakeAppProductHelper: AppProductHelper {
 
     public func restorePurchases() async throws {
         didUpdateSubject.send()
+    }
+}
+
+extension AppProduct {
+    public var asFakeIAP: InAppProduct {
+        InAppProduct(
+            productIdentifier: rawValue,
+            localizedTitle: rawValue,
+            localizedDescription: rawValue,
+            localizedPrice: "€10.0",
+            native: self
+        )
     }
 }
