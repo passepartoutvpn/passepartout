@@ -34,7 +34,7 @@ extension AppProduct {
         self.init(rawValue: "\(Self.donationPrefix)\(donationId)")!
     }
 
-    var isDonation: Bool {
+    public var isDonation: Bool {
         rawValue.hasPrefix(Self.donationPrefix)
     }
 }

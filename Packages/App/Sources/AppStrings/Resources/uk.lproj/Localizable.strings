@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
 "views.paywall.alerts.confirmation.title" = "Потрібна покупка";
 "views.paywall.alerts.pending.message" = "Покупка очікує зовнішнього підтвердження. Функція буде увімкнена після схвалення.";
-"views.paywall.alerts.restricted.message" = "Деякі функції недоступні в цій версії.";
-"views.paywall.alerts.restricted.title" = "Обмежено";
 "views.paywall.alerts.verification.boot" = "Це може зайняти трохи більше часу, якщо ваш пристрій щойно запустився.";
 "views.paywall.alerts.verification.connect.1" = "Ваші покупки перевіряються.";
 "views.paywall.alerts.verification.connect.2" = "Якщо перевірку не вдасться завершити, підключення завершиться через %d хвилин.";
@@ -312,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Ці продукти містять поточні та майбутні функції.";
 "views.paywall.sections.full_products.header" = "Усі функції";
 "views.paywall.sections.products.footer" = "Усі покупки підтримують “Сімейний доступ”.";
+"views.paywall_new.sections.products.header" = "Придбати окремо";
 "views.paywall.sections.products.header" = "Рекомендовані продукти";
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше здійснювали покупки, ви можете відновити їх тут.";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "Перемикач для імпорту локального профілю на телевізор через веб-браузер.";
 "views.ui.connection_status.on_demand_suffix" = " (за запитом)";
 "views.ui.purchase_required.purchase.help" = "Потрібна покупка";
-"views.ui.purchase_required.restricted.help" = "Функція обмежена";
 "views.verification.message" = "Перевірка";
 "views.version.extra" = "%@ є проектом, який підтримується %@.\n\nВихідний код доступний публічно на GitHub під ліцензією GPLv3. Посилання можна знайти на домашній сторінці.";
 "views.vpn.category.any" = "Усі категорії";

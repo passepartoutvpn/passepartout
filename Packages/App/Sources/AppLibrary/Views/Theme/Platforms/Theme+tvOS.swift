@@ -12,12 +12,6 @@ extension Theme {
         relevantWeight = .bold
         secondaryWeight = .light
     }
-
-    public var primaryGradient: AnyGradient {
-        darkAccentColor
-            .opacity(0.6)
-            .gradient
-    }
 }
 
 // MARK: - Shortcuts
@@ -26,9 +20,24 @@ extension View {
     public func themeLockScreen() -> some View {
         self
     }
+
+    public func themeGradient() -> some View {
+        modifier(ThemeGradientModifier())
+    }
 }
 
 // MARK: - Modifiers
+
+private struct ThemeGradientModifier: ViewModifier {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    func body(content: Content) -> some View {
+        content
+            .background(theme.darkAccentColor.opacity(0.6).gradient)
+    }
+}
 
 extension ThemeManualInputModifier {
     func body(content: Content) -> some View {

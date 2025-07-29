@@ -44,6 +44,7 @@ struct ModuleListView: View, Routable {
                         PurchaseRequiredView(
                             requiring: requiredGeneralFeatures,
                             reason: $paywallReason,
+                            // TODO: #1489, delete old paywall
                             suggesting: suggestedGeneralProducts
                         )
                     }

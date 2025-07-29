@@ -8,9 +8,6 @@ import SwiftUI
 
 struct ProfilesView: View {
 
-    @EnvironmentObject
-    private var theme: Theme
-
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -30,7 +27,7 @@ struct ProfilesView: View {
             masterView
             detailView
         }
-        .background(theme.primaryGradient)
+        .themeGradient()
         .withErrorHandler(errorHandler)
     }
 }

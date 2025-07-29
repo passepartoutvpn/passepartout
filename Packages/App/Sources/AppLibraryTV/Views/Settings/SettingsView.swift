@@ -11,9 +11,6 @@ struct SettingsView: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    @EnvironmentObject
-    private var theme: Theme
-
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -34,7 +31,7 @@ struct SettingsView: View {
             DetailView(detail: detail)
                 .frame(maxWidth: .infinity)
         }
-        .background(theme.primaryGradient)
+        .themeGradient()
         .onChange(of: focus) {
             guard focus != nil else {
                 return

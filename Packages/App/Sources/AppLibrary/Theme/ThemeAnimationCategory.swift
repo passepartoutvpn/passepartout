@@ -9,6 +9,8 @@ public enum ThemeAnimationCategory: CaseIterable {
 
     case modules
 
+    case paywall
+
     case profiles
 
     case profilesLayout

@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Dieses Profil erfordert kostenpflichtige Funktionen, um zu funktionieren.";
 "views.paywall.alerts.confirmation.title" = "Kauf erforderlich";
 "views.paywall.alerts.pending.message" = "Der Kauf wartet auf eine externe Bestätigung. Die Funktion wird nach Genehmigung gutgeschrieben.";
-"views.paywall.alerts.restricted.message" = "Einige Funktionen sind in dieser Version nicht verfügbar.";
-"views.paywall.alerts.restricted.title" = "Eingeschränkt";
 "views.paywall.alerts.verification.boot" = "Dies kann etwas länger dauern, wenn Ihr Gerät gerade gestartet wurde.";
 "views.paywall.alerts.verification.connect.1" = "Ihre Käufe werden überprüft.";
 "views.paywall.alerts.verification.connect.2" = "Falls die Überprüfung nicht abgeschlossen werden kann, wird die Verbindung in %d Minuten beendet.";
@@ -316,6 +314,7 @@
 "views.paywall.sections.required_features.header" = "Erforderliche Funktionen";
 "views.paywall.sections.restore.footer" = "Wenn Sie in der Vergangenheit Einkäufe getätigt haben, können Sie sie hier wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";
+"views.paywall_new.sections.products.header" = "Einzeln kaufen";
 "views.preferences.dns_falls_back.footer" = "Fällt auf CloudFlare-Server zurück, wenn das VPN keine DNS-Einstellungen bereitstellt.";
 "views.preferences.dns_falls_back" = "DNS-Fallback";
 "views.preferences.enables_iap.footer" = "Aktivieren Sie die Unterstützung für kostenpflichtige Funktionen. Deaktivieren Sie dies, wenn Sie kein Apple ID haben.";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "Umschalten, um ein lokales Profil über einen Webbrowser auf deinen Fernseher zu importieren.";
 "views.ui.connection_status.on_demand_suffix" = " (auf Anfrage)";
 "views.ui.purchase_required.purchase.help" = "Kauf erforderlich";
-"views.ui.purchase_required.restricted.help" = "Funktion eingeschränkt";
 "views.verification.message" = "Überprüfung";
 "views.version.extra" = "%@ ist ein Projekt, das von %@ gepflegt wird.\n\nDer Quellcode ist öffentlich auf GitHub unter der GPLv3-Lizenz verfügbar. Du findest die Links auf der Startseite.";
 "views.vpn.category.any" = "Alle Kategorien";

@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
 "views.paywall.alerts.confirmation.title" = "Achat requis";
 "views.paywall.alerts.pending.message" = "L'achat est en attente de confirmation externe. La fonctionnalité sera créditée une fois approuvée.";
-"views.paywall.alerts.restricted.message" = "Certaines fonctionnalités ne sont pas disponibles dans cette version.";
-"views.paywall.alerts.restricted.title" = "Restreint";
 "views.paywall.alerts.verification.boot" = "Cela peut prendre un peu plus de temps si votre appareil vient d’être démarré.";
 "views.paywall.alerts.verification.connect.1" = "Vos achats sont en cours de vérification.";
 "views.paywall.alerts.verification.connect.2" = "Si la vérification ne peut être complétée, la connexion s’arrêtera dans %d minutes.";
@@ -312,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Ces produits incluent les fonctionnalités actuelles et futures.";
 "views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
+"views.paywall_new.sections.products.header" = "Acheter individuellement";
 "views.paywall.sections.products.header" = "Produits suggérés";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
 "views.paywall.sections.restore.footer" = "Si vous avez effectué des achats par le passé, vous pouvez les restaurer ici.";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "Basculez pour importer un profil local sur votre TV via un navigateur web.";
 "views.ui.connection_status.on_demand_suffix" = " (à la demande)";
 "views.ui.purchase_required.purchase.help" = "Achat requis";
-"views.ui.purchase_required.restricted.help" = "Fonction restreinte";
 "views.verification.message" = "Vérification";
 "views.version.extra" = "%@ est un projet maintenu par %@.\n\nLe code source est disponible publiquement sur GitHub sous la licence GPLv3, vous pouvez trouver les liens sur la page d'accueil.";
 "views.vpn.category.any" = "Toutes les catégories";

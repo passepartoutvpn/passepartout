@@ -51,6 +51,10 @@ public final class ConfigManager: ObservableObject {
         }
     }
 
+    public func isActive(_ flag: ConfigFlag) -> Bool {
+        bundle?.map[flag]?.rate == 100
+    }
+
     public func data(for flag: ConfigFlag) -> JSON? {
         guard let bundle, let map = bundle.map[flag], map.rate == 100 else {
             return nil

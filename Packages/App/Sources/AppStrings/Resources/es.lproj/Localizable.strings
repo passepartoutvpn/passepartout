@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Este perfil requiere características de pago para funcionar.";
 "views.paywall.alerts.confirmation.title" = "Compra requerida";
 "views.paywall.alerts.pending.message" = "La compra está pendiente de confirmación externa. La característica será acreditada tras la aprobación.";
-"views.paywall.alerts.restricted.message" = "Algunas características no están disponibles en esta versión.";
-"views.paywall.alerts.restricted.title" = "Restringido";
 "views.paywall.alerts.verification.boot" = "Esto puede tardar un poco más si tu dispositivo acaba de iniciarse.";
 "views.paywall.alerts.verification.connect.1" = "Tus compras están siendo verificadas.";
 "views.paywall.alerts.verification.connect.2" = "Si la verificación no se completa, la conexión finalizará en %d minutos.";
@@ -312,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Estos productos incluyen características actuales y futuras.";
 "views.paywall.sections.full_products.header" = "Todas las funciones";
 "views.paywall.sections.products.footer" = "Todas las compras admiten En Familia.";
+"views.paywall_new.sections.products.header" = "Comprar por separado";
 "views.paywall.sections.products.header" = "Productos sugeridos";
 "views.paywall.sections.required_features.header" = "Características requeridas";
 "views.paywall.sections.restore.footer" = "Si has realizado compras en el pasado, puedes restaurarlas aquí.";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "Activa para importar un perfil local a tu TV mediante un navegador web.";
 "views.ui.connection_status.on_demand_suffix" = " (a demanda)";
 "views.ui.purchase_required.purchase.help" = "Compra requerida";
-"views.ui.purchase_required.restricted.help" = "Función restringida";
 "views.verification.message" = "Verificación";
 "views.version.extra" = "%@ es un proyecto mantenido por %@.\n\nEl código fuente está disponible públicamente en GitHub bajo la GPLv3, puedes encontrar los enlaces en la página principal.";
 "views.vpn.category.any" = "Todas las categorías";

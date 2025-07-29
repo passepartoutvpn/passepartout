@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
 "views.paywall.alerts.confirmation.title" = "Wymagana zakup";
 "views.paywall.alerts.pending.message" = "Zakup oczekuje na zewnętrzne potwierdzenie. Funkcja zostanie przypisana po zatwierdzeniu.";
-"views.paywall.alerts.restricted.message" = "Niektóre funkcje są niedostępne w tej wersji.";
-"views.paywall.alerts.restricted.title" = "Ograniczone";
 "views.paywall.alerts.verification.boot" = "Może to potrwać nieco dłużej, jeśli urządzenie zostało właśnie uruchomione.";
 "views.paywall.alerts.verification.connect.1" = "Twoje zakupy są weryfikowane.";
 "views.paywall.alerts.verification.connect.2" = "Jeśli weryfikacja nie zostanie zakończona, połączenie zostanie zakończone za %d minut.";
@@ -312,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "Te produkty zawierają obecne i przyszłe funkcje.";
 "views.paywall.sections.full_products.header" = "Wszystkie funkcje";
 "views.paywall.sections.products.footer" = "Wszystkie zakupy obsługują Chmurę rodzinną.";
+"views.paywall_new.sections.products.header" = "Kup osobno";
 "views.paywall.sections.products.header" = "Sugerowane produkty";
 "views.paywall.sections.required_features.header" = "Wymagane funkcje";
 "views.paywall.sections.restore.footer" = "Jeśli wcześniej dokonałeś zakupów, możesz je tutaj przywrócić.";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "Przełącz, aby zaimportować lokalny profil na swój telewizor za pomocą przeglądarki internetowej.";
 "views.ui.connection_status.on_demand_suffix" = " (na żądanie)";
 "views.ui.purchase_required.purchase.help" = "Wymagana zakup";
-"views.ui.purchase_required.restricted.help" = "Funkcja jest ograniczona";
 "views.verification.message" = "Weryfikacja";
 "views.version.extra" = "%@ to projekt utrzymywany przez %@.\n\nKod źródłowy jest dostępny publicznie na GitHub pod licencją GPLv3. Linki można znaleźć na stronie głównej.";
 "views.vpn.category.any" = "Wszystkie kategorie";

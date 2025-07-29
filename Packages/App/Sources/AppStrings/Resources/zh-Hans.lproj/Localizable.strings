@@ -301,8 +301,6 @@
 "views.paywall.alerts.confirmation.message" = "此配置文件需要付费功能才能工作。";
 "views.paywall.alerts.confirmation.title" = "需要购买";
 "views.paywall.alerts.pending.message" = "购买正在等待外部确认。功能将在获得批准后被授予。";
-"views.paywall.alerts.restricted.message" = "某些功能在此版本中不可用。";
-"views.paywall.alerts.restricted.title" = "受限";
 "views.paywall.alerts.verification.boot" = "如果您的设备刚刚启动，这可能需要更长时间。";
 "views.paywall.alerts.verification.connect.1" = "您的购买正在验证中。";
 "views.paywall.alerts.verification.connect.2" = "如果无法完成验证，连接将在 %d 分钟后断开。";
@@ -312,6 +310,7 @@
 "views.paywall.sections.full_products.footer" = "这些产品包含当前和未来的功能。";
 "views.paywall.sections.full_products.header" = "所有功能";
 "views.paywall.sections.products.footer" = "所有购买均支持“家人共享”。";
+"views.paywall_new.sections.products.header" = "单独购买";
 "views.paywall.sections.products.header" = "推荐产品";
 "views.paywall.sections.required_features.header" = "必需功能";
 "views.paywall.sections.restore.footer" = "如果您过去有购买记录，可以在此恢复。";
@@ -383,7 +382,6 @@
 "views.tv.web_receiver.toggle" = "切换以通过网页浏览器将本地配置文件导入电视。";
 "views.ui.connection_status.on_demand_suffix" = "（按需）";
 "views.ui.purchase_required.purchase.help" = "需要购买";
-"views.ui.purchase_required.restricted.help" = "功能受限";
 "views.verification.message" = "验证";
 "views.version.extra" = "%@ 是由 %@ 维护的项目。\n\n源代码在 GitHub 上公开提供，遵循 GPLv3 许可协议，您可以在主页找到相关链接。";
 "views.vpn.category.any" = "所有类别";
