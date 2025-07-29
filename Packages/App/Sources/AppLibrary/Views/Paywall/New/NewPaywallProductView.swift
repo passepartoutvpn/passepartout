@@ -93,7 +93,7 @@ private extension NewPaywallProductView {
         guard !rawProduct.isDonation else {
             return false
         }
-        return Set(rawProduct.features).isDisjoint(with: requiredFeatures)
+        return rawProduct.isRedundant(forRequiredFeatures: requiredFeatures)
     }
 
     var isPurchasing: Bool {
