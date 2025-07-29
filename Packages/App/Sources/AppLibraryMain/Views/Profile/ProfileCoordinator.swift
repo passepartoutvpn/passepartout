@@ -151,7 +151,6 @@ private extension ProfileCoordinator {
     @discardableResult
     func commitEditing(
         action: PaywallModifier.Action?,
-        additionalFeatures: Set<AppFeature>? = nil,
         dismissing: Bool
     ) async throws -> Profile? {
         do {
@@ -159,7 +158,6 @@ private extension ProfileCoordinator {
                 to: profileManager,
                 buildingWith: registry,
                 verifyingWith: action != nil ? iapManager : nil,
-                additionalFeatures: additionalFeatures,
                 preferencesManager: preferencesManager
             )
             if dismissing {

@@ -16,7 +16,6 @@ extension ProfileEditor {
         to profileManager: ProfileManager,
         buildingWith registry: Registry,
         verifyingWith iapManager: IAPManager?,
-        additionalFeatures: Set<AppFeature>? = nil,
         preferencesManager: PreferencesManager
     ) async throws -> Profile {
         let profileToSave = try build(with: registry)
@@ -24,7 +23,7 @@ extension ProfileEditor {
         // verify profile (optional)
         if let iapManager, !iapManager.isBeta {
             do {
-                try iapManager.verify(profileToSave, extra: extraFeatures.union(additionalFeatures ?? []))
+                try iapManager.verify(profileToSave, extra: extraFeatures)
             } catch AppError.ineligibleProfile(let requiredFeatures) {
 
                 // still loading receipt
