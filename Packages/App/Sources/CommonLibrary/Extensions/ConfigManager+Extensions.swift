@@ -3,7 +3,11 @@
 // SPDX-License-Identifier: GPL-3.0
 
 extension ConfigManager {
+    public var canImportToTV: Bool {
+        isActive(.newPaywall) && isActive(.tvWebImport)
+    }
+
     public var canSendToTV: Bool {
-        isActive(.newPaywall) && isActive(.sendToTV)
+        isActive(.newPaywall) && isActive(.tvSendTo)
     }
 }
