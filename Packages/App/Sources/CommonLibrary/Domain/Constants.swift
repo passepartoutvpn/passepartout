@@ -48,6 +48,10 @@ public struct Constants: Decodable, Sendable {
             home.appendingPathComponent("config/v1/bundle.json")
         }
 
+        public var betaConfig: URL {
+            home.appendingPathComponent("config/v1/bundle-beta.json")
+        }
+
         public let subreddit: URL
 
         public let eula: URL

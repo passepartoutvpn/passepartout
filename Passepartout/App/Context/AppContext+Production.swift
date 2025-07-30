@@ -244,13 +244,21 @@ extension AppContext {
 
 #if DEBUG
         let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
+        let betaConfigURL = configURL
 #else
         let configURL = Constants.shared.websites.config
+        let betaConfigURL = Constants.shared.websites.betaConfig
 #endif
         let configManager = ConfigManager(
             strategy: GitHubConfigStrategy(
                 url: configURL,
-                ttl: Constants.shared.websites.configTTL
+                betaURL: betaConfigURL,
+                ttl: Constants.shared.websites.configTTL,
+                isBeta: { [weak iapManager] in
+                    let isBeta = iapManager?.isBeta == true
+                    pp_log_g(.app, .info, "Fetching config, beta? \(isBeta)")
+                    return isBeta
+                }
             )
         )
 
