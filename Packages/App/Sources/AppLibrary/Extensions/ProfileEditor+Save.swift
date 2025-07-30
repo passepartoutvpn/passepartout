@@ -13,7 +13,7 @@ extension ProfileEditor {
     }
 
     public func save(
-        to profileManager: ProfileManager,
+        to profileManager: ProfileManager?,
         buildingWith registry: Registry,
         verifyingWith iapManager: IAPManager?,
         preferencesManager: PreferencesManager
@@ -38,8 +38,8 @@ extension ProfileEditor {
             }
         }
 
-        // persist
-        try await profileManager.save(profileToSave, isLocal: true, remotelyShared: isShared)
+        // persist (optional)
+        try await profileManager?.save(profileToSave, isLocal: true, remotelyShared: isShared)
 
         // clean up module preferences
         removedModules.keys.forEach {
