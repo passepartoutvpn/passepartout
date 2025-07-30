@@ -41,7 +41,9 @@ private extension ProfilesView {
             if configManager.canSendToTV {
                 importSection
             }
-            profilesSection
+            if profileManager.hasProfiles {
+                profilesSection
+            }
         }
         .themeList()
         .frame(maxWidth: .infinity)
@@ -75,7 +77,6 @@ private extension ProfilesView {
     var profilesSection: some View {
         ForEach(profileManager.previews, id: \.id, content: row(forProfilePreview:))
             .themeSection(header: Strings.Global.Nouns.profiles)
-            .if(profileManager.hasProfiles)
     }
 
     func row(forProfilePreview preview: ProfilePreview) -> some View {
