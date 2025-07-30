@@ -5,6 +5,7 @@
 public enum ConfigFlag: String, RawRepresentable, Codable, Sendable {
     case appNotWorking
     case newPaywall
+    case sendToTV
 }
 
 extension ConfigFlag: CustomStringConvertible {

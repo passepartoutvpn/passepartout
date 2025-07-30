@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Comportement";
 "modules.general.sections.storage.header" = "Synchronisation";
 "modules.general.sections.storage.sharing.footer" = "Les profils sont stockés dans %@ de manière cryptée.";
-"modules.general.sections.storage.tv.footer.purchase" = "Achetez pour supprimer la restriction.";
-"modules.general.sections.storage.tv.footer" = "iCloud est requis pour partager vos profils avec votre Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Le téléviseur peut nécessiter un achat supplémentaire.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud est requis pour synchroniser vos profils avec la TV.";
+"modules.general.sections.storage.tv.web.footer" = "Vous pouvez envoyer le profil à votre TV via le web.";
 "modules.http_proxy.bypass_domains.add" = "Ajouter un domaine à contourner";
 "modules.ip.address.footer" = "Laissez vide pour attribuer automatiquement.";
 "modules.ip.routes.add_family" = "Ajouter %@";
@@ -296,6 +297,7 @@
 "views.migration.sections.main.header" = "Sélectionnez ci-dessous les profils des anciennes versions de %@ que vous souhaitez importer. Si vos profils sont stockés sur iCloud, ils peuvent mettre un certain temps à se synchroniser. Si vous ne les voyez pas maintenant, revenez plus tard.";
 "views.migration.title" = "Migrer";
 "views.paywall.alerts.confirmation.edit_profile" = "Modifier le profil";
+"views.paywall.alerts.actions.save" = "Enregistrer quand même";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
 "views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de cadenas pour acheter les fonctionnalités manquantes.";
 "views.paywall.alerts.confirmation.message" = "Ce profil nécessite des fonctionnalités payantes pour fonctionner.";
@@ -340,8 +342,9 @@
 "views.profile.sections.name.footer" = "Utilisez ce nom pour créer vos automatisations VPN dans l'app Raccourcis.";
 "views.profile.send_tv.form.message" = "Faites correspondre l'URL trouvée dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau.";
 "views.profile.send_tv.passcode.message" = "Saisissez le code d'accès";
+"views.profile.send_tv.qr.buttons.manual" = "Saisir l’URL manuellement";
 "views.profile.send_tv.qr.message" = "Scannez le QR trouvé dans '%@ > %@' sur votre %@, en vous assurant d'être sur le même réseau";
-"views.profile.send_tv.title" = "Envoyer vers la TV";
+"views.profile.send_tv.title" = "Envoyer à %@";
 "views.providers.clear_filters" = "Effacer les filtres";
 "views.providers.last_updated.loading" = "Chargement...";
 "views.providers.last_updated" = "Dernière mise à jour le %@";
@@ -375,8 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Ouvrir les réglages";
 "views.settings.system_extension.message" = "Pour que le VPN fonctionne, lapp doit se trouver dans le dossier /Applications, et %@ doit être activé en tant que %@.\n\nOuvrez les Réglages macOS, faites défiler jusqu’à « %@ », ouvrez-le et activez %@.";
 "views.settings.title" = "À propos";
-"views.tv.connection_profiles.header" = "Ouvre %@ sur ton appareil iOS ou macOS et active l’option \"%@\" d’un profil pour qu’il apparaisse ici.";
-"views.tv.profiles.detail.profiles" = "Utilisez la pression longue pour afficher les actions disponibles pour un profil. Les profils locaux peuvent être supprimés ici, tandis que les profils iCloud uniquement depuis l’application iOS ou macOS.";
+"views.tv.connection_profiles.header" = "Ouvre %@ sur ton appareil iOS ou macOS et active l’option \"%@\" d’un profil pour qu’il apparaisse ici. Sinon, tu trouveras d’autres options dans l’onglet « Profils ».";
+"views.tv.profiles.detail.profiles" = "Appuyez longuement pour afficher les actions disponibles pour un profil.";
 "views.tv.profiles.import_local" = "Importer un profil local";
 "views.tv.web_receiver.qr" = "Scannez le QR avec votre caméra pour ouvrir une page web où télécharger votre profil. Assurez-vous d'être connecté au même réseau.";
 "views.tv.web_receiver.toggle" = "Basculez pour importer un profil local sur votre TV via un navigateur web.";

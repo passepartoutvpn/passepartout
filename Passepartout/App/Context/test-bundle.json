@@ -2,6 +2,9 @@
     "newPaywall": {
         "rate": 100
     },
+    "sendToTV": {
+        "rate": 100
+    },
     "appNotWorking": {
         "rate": 100,
         "data": {

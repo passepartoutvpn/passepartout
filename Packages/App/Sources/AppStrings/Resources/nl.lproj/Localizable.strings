@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Gedrag";
 "modules.general.sections.storage.header" = "Synchronisatie";
 "modules.general.sections.storage.sharing.footer" = "Profielen worden versleuteld opgeslagen in %@.";
-"modules.general.sections.storage.tv.footer.purchase" = "Koop om de beperking op te heffen.";
-"modules.general.sections.storage.tv.footer" = "iCloud is vereist om je profielen met je Apple TV te delen.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "De tv vereist mogelijk een extra aankoop.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud is vereist om je profielen met de tv te synchroniseren.";
+"modules.general.sections.storage.tv.web.footer" = "Je kunt het profiel via het web naar je tv sturen.";
 "modules.http_proxy.bypass_domains.add" = "Bypass-domein toevoegen";
 "modules.ip.address.footer" = "Leeg laten om automatisch toe te wijzen.";
 "modules.ip.routes.add_family" = "Voeg %@ toe";
@@ -296,6 +297,7 @@
 "views.migration.sections.main.header" = "Selecteer hieronder de profielen van oudere versies van %@ die je wilt importeren. Als je profielen zijn opgeslagen in iCloud, kan het even duren voordat ze worden gesynchroniseerd. Als je ze nu niet ziet, kom dan later terug.";
 "views.migration.title" = "Migreren";
 "views.paywall.alerts.confirmation.edit_profile" = "Profiel bewerken";
+"views.paywall.alerts.actions.save" = "Toch opslaan";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
 "views.paywall.alerts.confirmation.message.save" = "Tik op de slotpictogrammen om de ontbrekende functies te kopen.";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
@@ -340,8 +342,9 @@
 "views.profile.sections.name.footer" = "Gebruik deze naam om uw VPN-automatiseringen in de app Opdrachten te maken.";
 "views.profile.send_tv.form.message" = "Match de URL die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent.";
 "views.profile.send_tv.passcode.message" = "Voer de toegangscode in";
+"views.profile.send_tv.qr.buttons.manual" = "URL handmatig invoeren";
 "views.profile.send_tv.qr.message" = "Scan de QR die te vinden is in '%@ > %@' op je %@, zorg ervoor dat je op hetzelfde netwerk bent";
-"views.profile.send_tv.title" = "Naar TV verzenden";
+"views.profile.send_tv.title" = "Verstuur naar %@";
 "views.providers.clear_filters" = "Filters wissen";
 "views.providers.last_updated.loading" = "Laden...";
 "views.providers.last_updated" = "Laatst bijgewerkt op %@";
@@ -375,8 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Voorkeuren openen";
 "views.settings.system_extension.message" = "Voor een goede werking van de VPN moet de app in de map /Applications staan en moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
-"views.tv.connection_profiles.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen.";
-"views.tv.profiles.detail.profiles" = "Gebruik de lange druk om beschikbare acties voor een profiel te tonen. Lokale profielen kunnen hier worden verwijderd, terwijl iCloud-profielen alleen in de iOS- of macOS-app kunnen worden verwijderd.";
+"views.tv.connection_profiles.header" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen. Alternatief vind je andere opties in het tabblad \"Profielen\".";
+"views.tv.profiles.detail.profiles" = "Houd lang ingedrukt om de beschikbare acties voor een profiel weer te geven.";
 "views.tv.profiles.import_local" = "Lokaal profiel importeren";
 "views.tv.web_receiver.qr" = "Scan de QR-code met je camera om een webpagina te openen waar je je profiel kunt uploaden. Zorg dat je verbonden bent met hetzelfde netwerk.";
 "views.tv.web_receiver.toggle" = "Schakel om een lokaal profiel via een webbrowser op je TV te importeren.";

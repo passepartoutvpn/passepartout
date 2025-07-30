@@ -69,7 +69,7 @@ private extension ProfileEditView {
                 title: Strings.Global.Actions.save,
                 errorModuleIds: $errorModuleIds
             ) {
-                try await flow?.onCommitEditing()
+                try await flow?.onSaveProfile()
             }
         }
         ToolbarItem(placement: .cancellationAction) {

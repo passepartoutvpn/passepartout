@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Поведінка";
 "modules.general.sections.storage.header" = "Синхронізація";
 "modules.general.sections.storage.sharing.footer" = "Профілі зберігаються в %@ у зашифрованому вигляді.";
-"modules.general.sections.storage.tv.footer.purchase" = "Придбайте, щоб зняти обмеження.";
-"modules.general.sections.storage.tv.footer" = "Для спільного використання профілів з Apple TV потрібен iCloud.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Телевізор може вимагати додаткову покупку.";
+"modules.general.sections.storage.tv.icloud.footer" = "Для синхронізації профілів із телевізором потрібен iCloud.";
+"modules.general.sections.storage.tv.web.footer" = "Ви можете надіслати профіль на телевізор через веб.";
 "modules.http_proxy.bypass_domains.add" = "Додати домен у винятки";
 "modules.ip.address.footer" = "Залиште порожнім для автоматичного призначення.";
 "modules.ip.routes.add_family" = "Додати %@";
@@ -296,6 +297,7 @@
 "views.migration.sections.main.header" = "Виберіть нижче профілі зі старих версій %@, які ви хочете імпортувати. Якщо ваші профілі зберігаються в iCloud, може знадобитися час для їх синхронізації. Якщо ви не бачите їх зараз, поверніться пізніше.";
 "views.migration.title" = "Перенесення";
 "views.paywall.alerts.confirmation.edit_profile" = "Редагувати профіль";
+"views.paywall.alerts.actions.save" = "Зберегти все одно";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
 "views.paywall.alerts.confirmation.message.save" = "Торкніться значків замка, щоб придбати відсутні функції.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";
@@ -340,8 +342,9 @@
 "views.profile.sections.name.footer" = "Використовуйте цю назву для створення автоматизацій VPN у додатку Команди.";
 "views.profile.send_tv.form.message" = "Співставте URL-адресу, знайдену в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі.";
 "views.profile.send_tv.passcode.message" = "Введіть код доступу";
+"views.profile.send_tv.qr.buttons.manual" = "Ввести URL вручну";
 "views.profile.send_tv.qr.message" = "Відскануйте QR-код, знайдений в '%@ > %@' на вашому %@, переконавшись, що ви знаходитесь у тій самій мережі";
-"views.profile.send_tv.title" = "Надіслати на ТБ";
+"views.profile.send_tv.title" = "Надіслати на %@";
 "views.providers.clear_filters" = "Очистити фільтри";
 "views.providers.last_updated.loading" = "Завантаження...";
 "views.providers.last_updated" = "Останнє оновлення %@";
@@ -375,8 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Відкрити налаштування";
 "views.settings.system_extension.message" = "Щоб VPN працював, програма має бути в каталозі /Applications, а %@ має бути увімкнено як %@.\n\nВідкрий налаштування macOS, прокрути до «%@», ідкрий його та увімкни %@.";
 "views.settings.title" = "Про програму";
-"views.tv.connection_profiles.header" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут.";
-"views.tv.profiles.detail.profiles" = "Використовуйте тривале натискання, щоб показати доступні дії для профілю. Локальні профілі можна видалити тут, тоді як профілі iCloud — лише в додатку iOS або macOS.";
+"views.tv.connection_profiles.header" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут. Або знайдеш інші опції на вкладці «Профілі».";
+"views.tv.profiles.detail.profiles" = "Утримуйте, щоб побачити доступні дії для профілю.";
 "views.tv.profiles.import_local" = "Імпортувати локальний профіль";
 "views.tv.web_receiver.qr" = "Скануйте QR-код камерою, щоб відкрити веб-сторінку для завантаження вашого профілю. Переконайтеся, що ви підключені до тієї ж мережі.";
 "views.tv.web_receiver.toggle" = "Перемикач для імпорту локального профілю на телевізор через веб-браузер.";

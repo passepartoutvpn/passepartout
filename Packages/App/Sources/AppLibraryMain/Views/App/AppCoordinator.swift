@@ -437,7 +437,7 @@ private struct DynamicPaywallModifier: ViewModifier {
     var newModifier: some ViewModifier {
         NewPaywallModifier(
             reason: $paywallReason,
-            onAction: { _ in
+            onAction: { _, _ in
                 paywallContinuation?()
             }
         )

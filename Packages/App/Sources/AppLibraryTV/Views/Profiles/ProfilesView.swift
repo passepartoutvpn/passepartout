@@ -8,6 +8,9 @@ import SwiftUI
 
 struct ProfilesView: View {
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -35,13 +38,19 @@ struct ProfilesView: View {
 private extension ProfilesView {
     var masterView: some View {
         List {
-            importSection
+            if configManager.canSendToTV {
+                importSection
+            }
             if profileManager.hasProfiles {
                 profilesSection
             }
         }
         .themeList()
         .frame(maxWidth: .infinity)
+        .themeEmpty(
+            if: !configManager.canSendToTV && !profileManager.hasProfiles,
+            message: Strings.Views.App.Folders.noProfiles
+        )
     }
 
     var detailView: some View {
@@ -77,16 +86,15 @@ private extension ProfilesView {
             HStack {
                 Text(preview.name)
                 Spacer()
-                if profileManager.isRemotelyShared(profileWithId: preview.id) {
-                    ThemeImage(.cloudOn)
-                }
+                ProfileSharingView(
+                    profileManager: profileManager,
+                    profileId: preview.id
+                )
             }
         }
         .contextMenu {
-            if !profileManager.isRemotelyShared(profileWithId: preview.id) {
-                Button(Strings.Global.Actions.delete, role: .destructive) {
-                    deleteProfile(withId: preview.id)
-                }
+            Button(Strings.Global.Actions.delete, role: .destructive) {
+                deleteProfile(withId: preview.id)
             }
         }
         .focused($detail, equals: .profiles)
@@ -169,7 +177,16 @@ private extension DetailView {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Empty") {
+    ProfilesView(
+        profileManager: ProfileManager(profiles: []),
+        webReceiverManager: .forPreviews,
+        registry: Registry()
+    )
+    .withMockEnvironment()
+}
+
+#Preview("Profiles") {
     ProfilesView(
         profileManager: .forPreviews,
         webReceiverManager: .forPreviews,

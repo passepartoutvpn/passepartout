@@ -333,12 +333,7 @@ private extension Dependencies {
     }
 
     var mirrorsRemoteRepository: Bool {
-        // FIXME: #1453, restore "false" for "Send to TV"
-#if os(tvOS)
-        true
-#else
         false
-#endif
     }
 
     func backupProfileRepository(

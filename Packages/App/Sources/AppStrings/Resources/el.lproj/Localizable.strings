@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Συμπεριφορά";
 "modules.general.sections.storage.header" = "Συγχρονισμός";
 "modules.general.sections.storage.sharing.footer" = "Τα προφίλ αποθηκεύονται κρυπτογραφημένα στο %@.";
-"modules.general.sections.storage.tv.footer.purchase" = "Αγοράστε για να καταργήσετε τον περιορισμό.";
-"modules.general.sections.storage.tv.footer" = "Απαιτείται iCloud για να μοιραστείτε τα προφίλ σας με το Apple TV σας.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "Η τηλεόραση μπορεί να απαιτεί επιπλέον αγορά.";
+"modules.general.sections.storage.tv.icloud.footer" = "Απαιτείται το iCloud για τον συγχρονισμό των προφίλ με την τηλεόραση.";
+"modules.general.sections.storage.tv.web.footer" = "Μπορείς να στείλεις το προφίλ στην τηλεόραση μέσω διαδικτύου.";
 "modules.http_proxy.bypass_domains.add" = "Προσθήκη τομέα παράκαμψης";
 "modules.ip.address.footer" = "Αφήστε το κενό για αυτόματη ανάθεση.";
 "modules.ip.routes.add_family" = "Προσθήκη %@";
@@ -296,6 +297,7 @@
 "views.migration.sections.main.header" = "Επιλέξτε παρακάτω τα προφίλ από τις παλιές εκδόσεις του %@ που θέλετε να εισάγετε. Εάν τα προφίλ σας είναι αποθηκευμένα στο iCloud, μπορεί να χρειαστεί λίγος χρόνος για να συγχρονιστούν. Εάν δεν τα βλέπετε τώρα, επιστρέψτε αργότερα.";
 "views.migration.title" = "Μεταφορά";
 "views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
+"views.paywall.alerts.actions.save" = "Αποθήκευση ούτως ή άλλως";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
 "views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια κλειδώματος για να αγοράσετε τις ελλείπουσες λειτουργίες.";
 "views.paywall.alerts.confirmation.message" = "Αυτό το προφίλ απαιτεί επί πληρωμή λειτουργίες για να λειτουργήσει.";
@@ -340,8 +342,9 @@
 "views.profile.sections.name.footer" = "Χρησιμοποιήστε αυτό το όνομα για να δημιουργήσετε αυτοματισμούς VPN στην εφαρμογή Συντομεύσεις.";
 "views.profile.send_tv.form.message" = "Ταιριάξτε τη διεύθυνση URL που βρίσκεται στο '%@ > %@' στο %@ σας, φροντίζοντας να είστε στο ίδιο δίκτυο.";
 "views.profile.send_tv.passcode.message" = "Εισάγετε τον κωδικό πρόσβασης";
+"views.profile.send_tv.qr.buttons.manual" = "Εισαγωγή URL με μη αυτόματο τρόπο";
 "views.profile.send_tv.qr.message" = "Σαρώστε τον κωδικό QR που βρίσκεται στο '%@ > %@' στο %@ σας, φροντίζοντας να είστε στο ίδιο δίκτυο";
-"views.profile.send_tv.title" = "Αποστολή στην TV";
+"views.profile.send_tv.title" = "Αποστολή στο %@";
 "views.providers.clear_filters" = "Καθαρισμός φίλτρων";
 "views.providers.last_updated.loading" = "Φόρτωση...";
 "views.providers.last_updated" = "Τελευταία ενημέρωση στις %@";
@@ -375,8 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Άνοιγμα προτιμήσεων";
 "views.settings.system_extension.message" = "Για να λειτουργήσει το VPN, η εφαρμογή πρέπει να βρίσκεται στον φάκελο /Applications και το %@ πρέπει να είναι ενεργοποιημένο ως %@.\n\nΆνοιξε τις Προτιμήσεις του macOS, κύλησε στο «%@», άνοιξέ το και ενεργοποίησε το %@.";
 "views.settings.title" = "Σχετικά";
-"views.tv.connection_profiles.header" = "Άνοιξε το %@ στη συσκευή σου iOS ή macOS και ενεργοποίησε την εναλλαγή \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ.";
-"views.tv.profiles.detail.profiles" = "Χρησιμοποίησε παρατεταμένο πάτημα για να εμφανίσεις τις διαθέσιμες ενέργειες για ένα προφίλ. Τα τοπικά προφίλ μπορούν να διαγραφούν εδώ, ενώ τα iCloud προφίλ μόνο από την εφαρμογ iOS ή macOS.";
+"views.tv.connection_profiles.header" = "Άνοιξε το %@ στη συσκευή σου iOS ή macOS και ενεργοποίησε την εναλλαγή \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ. Εναλλακτικά, θα βρεις άλλες επιλογές στην καρτέλα \"Προφίλ\".";
+"views.tv.profiles.detail.profiles" = "Πατήστε παρατεταμένα για να εμφανίσετε τις διαθέσιμες ενέργειες για ένα προφίλ.";
 "views.tv.profiles.import_local" = "Εισαγωγή τοπικού προφίλ";
 "views.tv.web_receiver.qr" = "Σαρώστε το QR με την κάμερά σας για να ανοίξετε μια ιστοσελίδα όπου μπορείτε να ανεβάσετε το προφίλ σας. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο ίδιο δίκτυο.";
 "views.tv.web_receiver.toggle" = "Εναλλαγή για εισαγωγή τοπικού προφίλ στην τηλεόρασή σου μέσω web browser.";

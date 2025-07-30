@@ -76,7 +76,7 @@ extension ProfileSplitView {
                 title: Strings.Global.Actions.save,
                 errorModuleIds: $errorModuleIds
             ) {
-                try await flow?.onCommitEditing()
+                try await flow?.onSaveProfile()
             }
         }
     }

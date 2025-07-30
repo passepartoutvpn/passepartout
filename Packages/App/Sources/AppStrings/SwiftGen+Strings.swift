@@ -551,11 +551,17 @@ public enum Strings {
             }
           }
           public enum Tv {
-            /// iCloud is required to share your profiles with your Apple TV.
-            public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer", fallback: "iCloud is required to share your profiles with your Apple TV.")
             public enum Footer {
-              /// Purchase to drop the restriction.
-              public static let purchase = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase", fallback: "Purchase to drop the restriction.")
+              /// The TV may require an additional purchase.
+              public static let purchaseUnsupported = Strings.tr("Localizable", "modules.general.sections.storage.tv.footer.purchase_unsupported", fallback: "The TV may require an additional purchase.")
+            }
+            public enum Icloud {
+              /// iCloud is required to synchronize your profiles with your TV.
+              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.icloud.footer", fallback: "iCloud is required to synchronize your profiles with your TV.")
+            }
+            public enum Web {
+              /// You can send the profile to your TV over the web.
+              public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.tv.web.footer", fallback: "You can send the profile to your TV over the web.")
             }
           }
         }
@@ -1049,8 +1055,10 @@ public enum Strings {
         }
       }
       public enum SendTv {
-        /// Send to TV
-        public static let title = Strings.tr("Localizable", "views.profile.send_tv.title", fallback: "Send to TV")
+        /// Send to %@
+        public static func title(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.profile.send_tv.title", String(describing: p1), fallback: "Send to %@")
+        }
         public enum Form {
           /// Match the URL found in '%@ > %@' on your %@, making sure to be on the same network.
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
@@ -1065,6 +1073,10 @@ public enum Strings {
           /// Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network
           public static func message(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
             return Strings.tr("Localizable", "views.profile.send_tv.qr.message", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Scan the QR found in '%@ > %@' on your %@, making sure to be on the same network")
+          }
+          public enum Buttons {
+            /// Enter URL manually
+            public static let manual = Strings.tr("Localizable", "views.profile.send_tv.qr.buttons.manual", fallback: "Enter URL manually")
           }
         }
       }
@@ -1173,17 +1185,17 @@ public enum Strings {
     }
     public enum Tv {
       public enum ConnectionProfiles {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
+        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. Alternatively, you will find other options in the "Profiles" tab.
         public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.")
         }
       }
       public enum Profiles {
         /// Import local profile
         public static let importLocal = Strings.tr("Localizable", "views.tv.profiles.import_local", fallback: "Import local profile")
         public enum Detail {
-          /// Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.
-          public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile. Local profiles can be deleted here, whereas iCloud profiles can only be deleted from the iOS or macOS app.")
+          /// Use the long press to present the available actions for a profile.
+          public static let profiles = Strings.tr("Localizable", "views.tv.profiles.detail.profiles", fallback: "Use the long press to present the available actions for a profile.")
         }
       }
       public enum WebReceiver {

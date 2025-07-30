@@ -202,8 +202,9 @@
 "modules.general.sections.behavior.header" = "Beteende";
 "modules.general.sections.storage.header" = "Synkronisering";
 "modules.general.sections.storage.sharing.footer" = "Profiler sparas i %@ och är krypterade.";
-"modules.general.sections.storage.tv.footer.purchase" = "Köp för att ta bort begränsningen.";
-"modules.general.sections.storage.tv.footer" = "iCloud krävs för att dela dina profiler med din Apple TV.";
+"modules.general.sections.storage.tv.footer.purchase_unsupported" = "TV:n kan kräva ett extra köp.";
+"modules.general.sections.storage.tv.icloud.footer" = "iCloud krävs för att synkronisera dina profiler med TV:n.";
+"modules.general.sections.storage.tv.web.footer" = "Du kan skicka profilen till din TV via webben.";
 "modules.http_proxy.bypass_domains.add" = "Lägg till kringgående domän";
 "modules.ip.address.footer" = "Lämna tomt för att tilldela automatiskt.";
 "modules.ip.routes.add_family" = "Lägg till %@";
@@ -296,6 +297,7 @@
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
 "views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
+"views.paywall.alerts.actions.save" = "Spara ändå";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";
@@ -340,8 +342,9 @@
 "views.profile.sections.name.footer" = "Använd detta namn för att skapa VPN-automatiseringar i appen Genvägar.";
 "views.profile.send_tv.form.message" = "Matcha URL:en som finns i '%@ > %@' på din %@, se till att vara på samma nätverk.";
 "views.profile.send_tv.passcode.message" = "Ange åtkomstkoden";
+"views.profile.send_tv.qr.buttons.manual" = "Ange URL manuellt";
 "views.profile.send_tv.qr.message" = "Skanna QR-koden som finns i '%@ > %@' på din %@, se till att vara på samma nätverk";
-"views.profile.send_tv.title" = "Skicka till TV";
+"views.profile.send_tv.title" = "Skicka till %@";
 "views.providers.clear_filters" = "Rensa filter";
 "views.providers.last_updated.loading" = "Laddar...";
 "views.providers.last_updated" = "Senast uppdaterad %@";
@@ -375,8 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
 "views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
-"views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här.";
-"views.tv.profiles.detail.profiles" = "Använd långt tryck för att visa tillgängliga åtgärder för en profil. Lokala profiler kan raderas här, medan iCloud-profiler endast kan tas bort från iOS- eller macOS-appen.";
+"views.tv.connection_profiles.header" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här. Alternativt hittar du andra alternativ i fliken \"Profiler\".";
+"views.tv.profiles.detail.profiles" = "Tryck länge för att visa tillgängliga åtgärder för en profil.";
 "views.tv.profiles.import_local" = "Importera lokal profil";
 "views.tv.web_receiver.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil. Se till att du är ansluten till samma nätverk.";
 "views.tv.web_receiver.toggle" = "Växla för att importera en lokal profil till din TV via en webbläsare.";

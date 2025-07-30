@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
+import CommonIAP
 import CommonLibrary
 import Foundation
 
@@ -9,13 +10,13 @@ public typealias PaywallReason = PaywallModifier.Reason
 
 extension PaywallModifier {
     public enum Action {
-        case connect
+        case cancel
 
-        case save
+        case connect
 
         case purchase
 
-        case cancel
+        case save
     }
 
     public struct Reason: Hashable {
