@@ -210,12 +210,12 @@ private extension ProfileCoordinator {
     func sendProfileToTV() {
         Task {
             do {
-                guard let profile = try await commitEditing(
-                    action: nil, // skip profile verification and thus paywall
-                    dismissing: false
-                ) else {
-                    return
-                }
+                let profile = try await profileEditor.save(
+                    to: nil,
+                    buildingWith: registry,
+                    verifyingWith: nil,
+                    preferencesManager: preferencesManager
+                )
                 modalRoute = .sendToTV(profile)
             } catch {
                 errorHandler.handle(error, title: Strings.Global.Actions.save)
