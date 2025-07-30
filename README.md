@@ -188,4 +188,4 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [about-twitter]: https://twitter.com/keeshux
 [about-github-discussions]: https://github.com/orgs/passepartoutvpn/discussions
 [about-reddit]: https://www.reddit.com/r/passepartout
-[about-testflight]: https://testflight.apple.com/join/K71mtLjZ
+[about-testflight]: https://testflight.apple.com/join/dnA4CXFJ

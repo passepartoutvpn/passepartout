@@ -34,6 +34,7 @@ struct NewPaywallView: View, SizeClassProviding {
 
     var body: some View {
 #if os(tvOS)
+        // use isBigDevice to also use fixed layout on macOS and iPad?
 //        if isBigDevice {
             PaywallFixedView(
                 isPresented: $isPresented,

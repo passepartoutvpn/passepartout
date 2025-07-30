@@ -63,7 +63,7 @@ public struct OpenVPNCredentialsGroup: View {
         .themeAnimation(on: builder, category: .modules)
         .onLoad(perform: onLoad)
         .onChange(of: builder, perform: onChange)
-        .modifier(PaywallModifier(reason: $paywallReason))
+        .modifier(ModuleDynamicPaywallModifier(reason: $paywallReason))
     }
 }
 

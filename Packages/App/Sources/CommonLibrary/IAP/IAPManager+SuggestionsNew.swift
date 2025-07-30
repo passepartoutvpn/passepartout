@@ -95,7 +95,6 @@ extension IAPManager {
             }
         }
 
-        // FIXME: #1446, not 100% sure about this
         let suggestsComplete: Bool
         switch platform {
         case .tvOS:
@@ -106,7 +105,7 @@ extension IAPManager {
             // feature is required, because it means that the iOS/macOS app
             // is also installed
             //
-            // TODO: ###, this is somewhat possible with .json import
+            // TODO: partout#103, set always true because all features will be accessible on TV by importing a .json created elsewhere
             suggestsComplete = !essentialFeatures.isEmpty
         default:
             suggestsComplete = true

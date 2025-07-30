@@ -36,7 +36,7 @@ struct OnDemandView: View, ModuleDraftEditing {
             rulesArea
         }
         .moduleView(draft: draft)
-        .modifier(PaywallModifier(reason: $paywallReason))
+        .modifier(ModuleDynamicPaywallModifier(reason: $paywallReason))
     }
 }
 

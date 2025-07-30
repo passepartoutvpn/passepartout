@@ -48,7 +48,7 @@ struct WireGuardView: View, ModuleDraftEditing {
                     configurationViewModel.load(from: configurationBuilder)
                 }
             ))
-            .modifier(PaywallModifier(reason: $paywallReason))
+            .modifier(ModuleDynamicPaywallModifier(reason: $paywallReason))
             .withErrorHandler(errorHandler)
     }
 }
