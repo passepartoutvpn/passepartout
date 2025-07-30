@@ -41,17 +41,14 @@ private extension ProfilesView {
             if configManager.canSendToTV {
                 importSection
             }
-            if profileManager.hasProfiles {
-                profilesSection
-            } else {
-                // FIXME: #1453, improve layout when empty profiles
-                Text(Strings.Views.App.Folders.noProfiles)
-                    .themeEmptyMessage()
-                    .frame(maxHeight: .infinity)
-            }
+            profilesSection
         }
         .themeList()
         .frame(maxWidth: .infinity)
+        .themeEmpty(
+            if: !configManager.canSendToTV && !profileManager.hasProfiles,
+            message: Strings.Views.App.Folders.noProfiles
+        )
     }
 
     var detailView: some View {
@@ -78,6 +75,7 @@ private extension ProfilesView {
     var profilesSection: some View {
         ForEach(profileManager.previews, id: \.id, content: row(forProfilePreview:))
             .themeSection(header: Strings.Global.Nouns.profiles)
+            .if(profileManager.hasProfiles)
     }
 
     func row(forProfilePreview preview: ProfilePreview) -> some View {
@@ -178,7 +176,16 @@ private extension DetailView {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("Empty") {
+    ProfilesView(
+        profileManager: ProfileManager(profiles: []),
+        webReceiverManager: .forPreviews,
+        registry: Registry()
+    )
+    .withMockEnvironment()
+}
+
+#Preview("Profiles") {
     ProfilesView(
         profileManager: .forPreviews,
         webReceiverManager: .forPreviews,
