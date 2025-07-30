@@ -9,13 +9,24 @@ import GenericJSON
 public final class GitHubConfigStrategy: ConfigManagerStrategy {
     private let url: URL
 
+    private let betaURL: URL
+
     private let ttl: TimeInterval
+
+    private let isBeta: @MainActor () -> Bool
 
     private var lastUpdated: Date
 
-    public init(url: URL, ttl: TimeInterval) {
+    public init(
+        url: URL,
+        betaURL: URL,
+        ttl: TimeInterval,
+        isBeta: @escaping () -> Bool
+    ) {
         self.url = url
+        self.betaURL = betaURL
         self.ttl = ttl
+        self.isBeta = isBeta
         lastUpdated = .distantPast
     }
 
@@ -27,8 +38,9 @@ public final class GitHubConfigStrategy: ConfigManagerStrategy {
                 throw AppError.rateLimit
             }
         }
-        pp_log_g(.app, .debug, "Config (GitHub): fetching bundle from \(url)")
-        var request = URLRequest(url: url)
+        let targetURL = isBeta() ? betaURL : url
+        pp_log_g(.app, .debug, "Config (GitHub): fetching bundle from \(targetURL)")
+        var request = URLRequest(url: targetURL)
         request.cachePolicy = .reloadIgnoringCacheData
         let result = try await URLSession.shared.data(for: request)
         lastUpdated = Date()
