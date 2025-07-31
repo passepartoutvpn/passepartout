@@ -16,7 +16,7 @@ public final class ProfileManager: ObservableObject {
     public enum Event: Equatable {
         case ready
 
-        case save(Profile)
+        case save(Profile, previous: Profile?)
 
         case remove([Profile.ID])
 
@@ -202,7 +202,7 @@ extension ProfileManager {
                         try await backupRepository.saveProfile(profile)
                     }
                 }
-                didChange.send(.save(profile))
+                didChange.send(.save(profile, previous: existingProfile))
             } else {
                 pp_log_g(.App.profiles, .notice, "\tProfile \(profile.id) not modified, not saving")
             }
