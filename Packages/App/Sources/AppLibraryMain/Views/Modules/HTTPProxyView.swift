@@ -26,7 +26,6 @@ struct HTTPProxyView: View, ModuleDraftEditing {
             bypassSection
         }
         .labelsHidden()
-        .themeManualInput()
         .moduleView(draft: draft)
     }
 }

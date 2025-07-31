@@ -28,7 +28,6 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 #endif
         }
         .themeForm()
-        .themeManualInput()
         .themeAnimation(on: draft.module, category: .modules)
     }
 }

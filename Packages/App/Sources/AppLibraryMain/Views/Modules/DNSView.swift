@@ -31,7 +31,6 @@ struct DNSView: View, ModuleDraftEditing {
             }
             .labelsHidden()
         }
-        .themeManualInput()
         .moduleView(draft: draft)
     }
 }

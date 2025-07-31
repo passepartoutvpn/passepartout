@@ -58,7 +58,6 @@ public struct OpenVPNCredentialsGroup: View {
 #endif
             inputSection
         }
-        .themeManualInput()
         .themeAnimation(on: draft.module.isInteractive, category: .modules)
         .themeAnimation(on: builder, category: .modules)
         .onLoad(perform: onLoad)

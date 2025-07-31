@@ -33,5 +33,6 @@ public struct ThemeTextField: View {
 
     var fieldView: some View {
         TextField(title ?? "", text: $text, prompt: Text(placeholder))
+            .themeManualInput()
     }
 }

@@ -124,7 +124,6 @@ private extension OnDemandView {
                     HStack {
                         ThemeTextField("", text: binding, placeholder: Strings.Placeholders.OnDemand.ssid)
                             .frame(maxWidth: .infinity)
-                            .themeManualInput()
                         Spacer()
                         Toggle("", isOn: isSSIDOn(binding.wrappedValue))
                     }
