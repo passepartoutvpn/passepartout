@@ -35,7 +35,7 @@ extension AppProfileImporterTests {
             .didChange
             .sink {
                 switch $0 {
-                case .save(let profile):
+                case .save(let profile, _):
                     XCTAssertEqual(profile.modules.count, 2)
                     XCTAssertTrue(profile.modules.first is SomeModule)
                     XCTAssertTrue(profile.modules.last is OnDemandModule)
@@ -67,7 +67,7 @@ extension AppProfileImporterTests {
             .didChange
             .sink {
                 switch $0 {
-                case .save(let profile):
+                case .save(let profile, _):
                     XCTAssertEqual(profile.modules.count, 2)
                     XCTAssertTrue(profile.modules.first is SomeModule)
                     XCTAssertTrue(profile.modules.last is OnDemandModule)

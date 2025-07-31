@@ -210,7 +210,7 @@ extension ProfileEditorTests {
             .didChange
             .sink {
                 switch $0 {
-                case .save(let savedProfile):
+                case .save(let savedProfile, _):
                     do {
                         let lhs = try savedProfile.withoutUserInfo()
                         let rhs = try profile.withoutUserInfo()
