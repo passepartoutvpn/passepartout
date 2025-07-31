@@ -153,9 +153,9 @@ private extension AppContext {
             .didChange
             .sink { [weak self] event in
                 switch event {
-                case .save(let profile):
+                case .save(let profile, let previousProfile):
                     Task {
-                        try await self?.onSaveProfile(profile)
+                        try await self?.onSaveProfile(profile, previous: previousProfile)
                     }
 
                 default:
@@ -198,7 +198,7 @@ private extension AppContext {
         pendingTask = nil
     }
 
-    func onSaveProfile(_ profile: Profile) async throws {
+    func onSaveProfile(_ profile: Profile, previous: Profile?) async throws {
         try await waitForTasks()
 
         pp_log_g(.app, .notice, "Application did save profile (\(profile.id))")
