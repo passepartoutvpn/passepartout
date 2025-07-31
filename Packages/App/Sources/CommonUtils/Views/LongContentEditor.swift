@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-public struct LongContentView: View {
+public struct LongContentEditor: View {
 
     @Binding
     private var content: String
