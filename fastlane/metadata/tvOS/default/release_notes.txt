@@ -1,3 +1,3 @@
-* OpenVPN: Throw error on use of tls-crypt-v2
-* WireGuard: Require non-empty peers
-* Confirm profile deletion from menu (#1488)
+* OpenVPN: Fix ineffective local redirect-gateway option (#1503)
+* Do not reconnect on minor profile changes (#1500)
+* Send profile to TV without iCloud (#1493)
