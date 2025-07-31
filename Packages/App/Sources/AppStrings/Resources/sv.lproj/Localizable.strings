@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
 "views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
-"views.paywall.alerts.actions.save" = "Spara ändå";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
 "views.paywall.alerts.confirmation.message" = "Den här profilen kräver betalda funktioner för att fungera.";

@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Selecione abaixo os perfis de versões antigas de %@ que você deseja importar. Caso seus perfis estejam armazenados no iCloud, pode levar um tempo para sincronizá-los. Se não os vir agora, volte mais tarde.";
 "views.migration.title" = "Migrar";
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
-"views.paywall.alerts.actions.save" = "Salvar assim mesmo";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
 "views.paywall.alerts.confirmation.message.save" = "Toque nos ícones de cadeado para comprar os recursos ausentes.";
 "views.paywall.alerts.confirmation.message" = "Este perfil requer recursos pagos para funcionar.";

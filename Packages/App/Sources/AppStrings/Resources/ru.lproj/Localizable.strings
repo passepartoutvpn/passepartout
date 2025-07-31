@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Выберите ниже профили из старых версий %@, которые вы хотите импортировать. Если ваши профили хранятся в iCloud, синхронизация может занять некоторое время. Если вы их сейчас не видите, вернитесь позже.";
 "views.migration.title" = "Миграция";
 "views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
-"views.paywall.alerts.actions.save" = "Сохранить в любом случае";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
 "views.paywall.alerts.confirmation.message.save" = "Нажмите на значки замка, чтобы приобрести недостающие функции.";
 "views.paywall.alerts.confirmation.message" = "Этот профиль требует платных функций для работы.";

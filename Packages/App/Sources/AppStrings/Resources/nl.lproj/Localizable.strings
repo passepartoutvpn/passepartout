@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Selecteer hieronder de profielen van oudere versies van %@ die je wilt importeren. Als je profielen zijn opgeslagen in iCloud, kan het even duren voordat ze worden gesynchroniseerd. Als je ze nu niet ziet, kom dan later terug.";
 "views.migration.title" = "Migreren";
 "views.paywall.alerts.confirmation.edit_profile" = "Profiel bewerken";
-"views.paywall.alerts.actions.save" = "Toch opslaan";
 "views.paywall.alerts.confirmation.message.connect" = "Je kunt de verbinding %d minuten testen.";
 "views.paywall.alerts.confirmation.message.save" = "Tik op de slotpictogrammen om de ontbrekende functies te kopen.";
 "views.paywall.alerts.confirmation.message" = "Dit profiel vereist betaalde functies om te werken.";
