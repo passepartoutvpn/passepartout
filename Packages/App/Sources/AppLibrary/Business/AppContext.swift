@@ -202,6 +202,10 @@ private extension AppContext {
         try await waitForTasks()
 
         pp_log_g(.app, .notice, "Application did save profile (\(profile.id))")
+        guard let previous else {
+            pp_log_g(.app, .debug, "\tProfile \(profile.id) is new, do nothing")
+            return
+        }
         guard tunnel.isActiveProfile(withId: profile.id) else {
             pp_log_g(.app, .debug, "\tProfile \(profile.id) is not current, do nothing")
             return
@@ -211,6 +215,7 @@ private extension AppContext {
             pp_log_g(.app, .debug, "\tConnection is not active (\(status)), do nothing")
             return
         }
+
         pendingTask = Task {
             do {
                 pp_log_g(.app, .info, "\tReconnect profile \(profile.id)")
