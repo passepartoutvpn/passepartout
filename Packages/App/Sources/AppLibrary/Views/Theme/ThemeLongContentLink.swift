@@ -30,6 +30,7 @@ public struct ThemeLongContentLink: View {
     public var body: some View {
         ContentPreviewLink(title, content: $text, preview: preview) {
             LongContentView(content: $0)
+                .themeManualInput()
                 .font(.body)
                 .monospaced()
                 .navigationTitle(title)
