@@ -206,6 +206,11 @@ private extension AppContext {
             pp_log_g(.app, .debug, "\tProfile \(profile.id) is new, do nothing")
             return
         }
+        let diff = profile.differences(from: previous)
+        guard diff.isRelevantForReconnecting(to: profile) else {
+            pp_log_g(.app, .debug, "\tProfile \(profile.id) changes are not relevant, do nothing")
+            return
+        }
         guard tunnel.isActiveProfile(withId: profile.id) else {
             pp_log_g(.app, .debug, "\tProfile \(profile.id) is not current, do nothing")
             return
@@ -273,6 +278,27 @@ private extension AppContext {
             pp_log_g(.app, .info, "System Extension: load result is \(result)")
         } catch {
             pp_log_g(.app, .error, "System Extension: load error: \(error)")
+        }
+    }
+}
+
+extension Collection where Element == Profile.DiffResult {
+    func isRelevantForReconnecting(to profile: Profile) -> Bool {
+        contains {
+            switch $0 {
+            case .changedName:
+                // profile renamed
+                return false
+            case .changedModules(let ids):
+                // only changed on-demand module
+                if ids.count == 1, let onlyID = ids.first,
+                   profile.module(withId: onlyID) is OnDemandModule {
+                    return false
+                }
+                return true
+            default:
+                return true
+            }
         }
     }
 }
