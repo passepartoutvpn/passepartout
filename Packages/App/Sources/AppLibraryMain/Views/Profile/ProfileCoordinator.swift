@@ -212,7 +212,7 @@ private extension ProfileCoordinator {
                 )
                 modalRoute = .sendToTV(profile)
             } catch {
-                errorHandler.handle(error, title: Strings.Global.Actions.save)
+                errorHandler.handle(error, title: Strings.Views.Profile.SendTv.title_compound)
             }
         }
     }

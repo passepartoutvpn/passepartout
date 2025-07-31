@@ -8,21 +8,17 @@ import Foundation
 public final class WebUploader: ObservableObject, Sendable {
     private let registryCoder: RegistryCoder
 
-    private let profile: Profile
-
     private let strategy: WebUploaderStrategy
 
     public init(
         registryCoder: RegistryCoder,
-        profile: Profile,
         strategy: WebUploaderStrategy
     ) {
         self.registryCoder = registryCoder
-        self.profile = profile
         self.strategy = strategy
     }
 
-    public func send(to url: URL, passcode: String) async throws {
+    public func send(_ profile: Profile, to url: URL, passcode: String) async throws {
         pp_log_g(.app, .info, "WebUploader: sending to \(url) with passcode \(passcode)")
         let encodedProfile = try registryCoder.string(from: profile)
 

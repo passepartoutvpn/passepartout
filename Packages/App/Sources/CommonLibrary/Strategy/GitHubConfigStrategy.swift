@@ -37,7 +37,7 @@ public final class GitHubConfigStrategy: ConfigManagerStrategy {
             let elapsed = -lastUpdated.timeIntervalSinceNow
             let ttl = isBeta ? ttl / 10.0 : ttl
             guard elapsed >= ttl else {
-                pp_log_g(.app, .debug, "Config (GitHub): elapsed \(elapsed) < \(ttl))")
+                pp_log_g(.app, .debug, "Config (GitHub): elapsed \(elapsed) < \(ttl)")
                 throw AppError.rateLimit
             }
         }

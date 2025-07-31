@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Виберіть нижче профілі зі старих версій %@, які ви хочете імпортувати. Якщо ваші профілі зберігаються в iCloud, може знадобитися час для їх синхронізації. Якщо ви не бачите їх зараз, поверніться пізніше.";
 "views.migration.title" = "Перенесення";
 "views.paywall.alerts.confirmation.edit_profile" = "Редагувати профіль";
-"views.paywall.alerts.actions.save" = "Зберегти все одно";
 "views.paywall.alerts.confirmation.message.connect" = "Ви можете протестувати підключення протягом %d хвилин.";
 "views.paywall.alerts.confirmation.message.save" = "Торкніться значків замка, щоб придбати відсутні функції.";
 "views.paywall.alerts.confirmation.message" = "Цей профіль потребує платних функцій для роботи.";

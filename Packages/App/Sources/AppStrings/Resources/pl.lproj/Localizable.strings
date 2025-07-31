@@ -297,7 +297,6 @@
 "views.migration.sections.main.header" = "Wybierz poniżej profile ze starszych wersji %@, które chcesz zaimportować. Jeśli Twoje profile są przechowywane w iCloud, synchronizacja może zająć trochę czasu. Jeśli ich teraz nie widzisz, wróć później.";
 "views.migration.title" = "Migracja";
 "views.paywall.alerts.confirmation.edit_profile" = "Edytuj profil";
-"views.paywall.alerts.actions.save" = "Zapisz mimo to";
 "views.paywall.alerts.confirmation.message.connect" = "Możesz przetestować połączenie przez %d minut.";
 "views.paywall.alerts.confirmation.message.save" = "Stuknij ikony kłódki, aby kupić brakujące funkcje.";
 "views.paywall.alerts.confirmation.message" = "Ten profil wymaga płatnych funkcji do działania.";
