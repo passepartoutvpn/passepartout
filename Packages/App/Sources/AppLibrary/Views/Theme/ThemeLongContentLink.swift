@@ -57,11 +57,9 @@ public struct ThemeLongContentLink: View {
         switch contentType {
         case .ipAddress:
             LongContentEditor(content: text)
-                .themeManualInput()
                 .themeIPAddress()
         case .number:
             LongContentEditor(content: text)
-                .themeManualInput()
                 .themeNumericInput()
         case .text:
             LongContentEditor(content: text)
