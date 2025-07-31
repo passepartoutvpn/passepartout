@@ -28,7 +28,15 @@ public struct ThemeLongContentLink: View {
     }
 
     public var body: some View {
-        LongContentLink(title, content: $text, preview: preview) {
+        ContentPreviewLink(title, content: $text, preview: preview) {
+            LongContentView(content: $0)
+                .font(.body)
+                .monospaced()
+                .navigationTitle(title)
+#if os(iOS)
+                .navigationBarTitleDisplayMode(.inline)
+#endif
+        } previewLabel: {
             Text(preview != nil ? $0 : "")
                 .foregroundColor(.secondary)
         }
