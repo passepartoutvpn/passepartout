@@ -76,6 +76,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Global.Nouns.addresses,
                 text: $viewModel.addresses,
+                contentType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
@@ -92,6 +93,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Global.Nouns.servers,
                 text: $viewModel.dnsServers,
+                contentType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
@@ -132,6 +134,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Modules.Wireguard.allowedIps,
                 text: peerBinding.allowedIPs,
+                contentType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
