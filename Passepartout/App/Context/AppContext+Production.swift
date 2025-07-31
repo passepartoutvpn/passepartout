@@ -255,9 +255,7 @@ extension AppContext {
                 betaURL: betaConfigURL,
                 ttl: Constants.shared.websites.configTTL,
                 isBeta: { [weak iapManager] in
-                    let isBeta = iapManager?.isBeta == true
-                    pp_log_g(.app, .info, "Fetching config, beta? \(isBeta)")
-                    return isBeta
+                    iapManager?.isBeta == true
                 }
             )
         )
