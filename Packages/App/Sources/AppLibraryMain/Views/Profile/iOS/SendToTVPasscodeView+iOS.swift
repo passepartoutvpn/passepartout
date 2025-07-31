@@ -19,6 +19,8 @@ struct SendToTVPasscodeView: View {
         VStack {
             messageView
             passcodeView
+                .frame(height: 80)
+                .padding(.horizontal)
         }
         .withErrorHandler(errorHandler)
     }

@@ -67,24 +67,22 @@ final class QRScanViewController: UIViewController {
 
     private let session = AVCaptureSession()
 
-    private let once: Bool
-
     private let onLoad: ((Error?) -> Void)?
 
     private var onDetect: ((String) -> Void)?
 
     private var didLoad = false
 
+    private var isPaused = false
+
     required init?(coder: NSCoder) {
         fatalError()
     }
 
     init(
-        once: Bool = true,
         onLoad: ((Error?) -> Void)? = nil,
         onDetect: @escaping (String) -> Void
     ) {
-        self.once = once
         self.onLoad = onLoad
         self.onDetect = onDetect
         super.init(nibName: nil, bundle: nil)
@@ -93,6 +91,7 @@ final class QRScanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        isPaused = false
         guard !didLoad else {
             return
         }
@@ -127,6 +126,11 @@ final class QRScanViewController: UIViewController {
             onLoad?(error)
         }
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isPaused = true
+    }
 }
 
 extension QRScanViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
@@ -150,16 +154,10 @@ extension QRScanViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
                     continue
                 }
                 DispatchQueue.main.sync { [weak self] in
-                    guard let self else {
+                    guard let self, !isPaused else {
                         return
                     }
                     onDetect?(payload)
-                    if once {
-                        onDetect = nil
-                    }
-                }
-                self?.queue.async { [weak self] in
-                    self?.session.stopRunning()
                 }
             }
         }
