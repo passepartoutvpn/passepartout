@@ -91,15 +91,7 @@ extension ThemeManualInputModifier {
         content
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
-    }
-}
-
-extension ThemeNumericInputModifier {
-    func body(content: Content) -> some View {
-        content
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(.never)
-            .keyboardType(withPunctuation ? .numbersAndPunctuation : .numberPad)
+            .keyboardType(inputType.keyboardType)
     }
 }
 

@@ -84,16 +84,8 @@ extension View {
         formStyle(.grouped)
     }
 
-    public func themeManualInput() -> some View {
-        modifier(ThemeManualInputModifier())
-    }
-
-    public func themeIPAddress() -> some View {
-        themeNumericInput(withPunctuation: true)
-    }
-
-    public func themeNumericInput(withPunctuation: Bool = false) -> some View {
-        modifier(ThemeNumericInputModifier(withPunctuation: withPunctuation))
+    public func themeManualInput(_ inputType: ThemeInputType = .text) -> some View {
+        modifier(ThemeManualInputModifier(inputType: inputType))
     }
 
     public func themeSection(header: String? = nil, footer: String? = nil) -> some View {

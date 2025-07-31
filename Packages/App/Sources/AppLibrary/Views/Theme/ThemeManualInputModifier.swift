@@ -5,4 +5,5 @@
 import SwiftUI
 
 struct ThemeManualInputModifier: ViewModifier {
+    let inputType: ThemeInputType
 }

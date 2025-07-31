@@ -34,9 +34,9 @@ private extension HTTPProxyView {
     var httpSection: some View {
         Group {
             ThemeTextField(Strings.Global.Nouns.address, text: $draft.module.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-                .themeIPAddress()
+                .themeManualInput(.ipAddress)
             ThemeTextField(Strings.Global.Nouns.port, text: $draft.module.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
-                .themeNumericInput()
+                .themeManualInput(.number)
         }
         .themeSection(header: Strings.Unlocalized.http)
     }
@@ -44,9 +44,9 @@ private extension HTTPProxyView {
     var httpsSection: some View {
         Group {
             ThemeTextField(Strings.Global.Nouns.address, text: $draft.module.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-                .themeIPAddress()
+                .themeManualInput(.ipAddress)
             ThemeTextField(Strings.Global.Nouns.port, text: $draft.module.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
-                .themeNumericInput()
+                .themeManualInput(.number)
         }
         .themeSection(header: Strings.Unlocalized.https)
     }

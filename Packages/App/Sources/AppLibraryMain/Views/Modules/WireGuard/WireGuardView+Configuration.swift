@@ -76,7 +76,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Global.Nouns.addresses,
                 text: $viewModel.addresses,
-                contentType: .ipAddress,
+                inputType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
@@ -84,7 +84,7 @@ private extension WireGuardView.ConfigurationView {
                 text: $viewModel.mtu,
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
-            .themeNumericInput()
+            .themeManualInput(.number)
         }
     }
 
@@ -93,7 +93,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Global.Nouns.servers,
                 text: $viewModel.dnsServers,
-                contentType: .ipAddress,
+                inputType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
@@ -134,7 +134,7 @@ private extension WireGuardView.ConfigurationView {
             ThemeLongContentLink(
                 Strings.Modules.Wireguard.allowedIps,
                 text: peerBinding.allowedIPs,
-                contentType: .ipAddress,
+                inputType: .ipAddress,
                 preview: \.asNumberOfEntries
             )
             ThemeTextField(
@@ -142,7 +142,7 @@ private extension WireGuardView.ConfigurationView {
                 text: peerBinding.keepAlive,
                 placeholder: Strings.Unlocalized.Placeholders.keepAlive
             )
-            .themeNumericInput()
+            .themeManualInput(.number)
             ThemeTrailingContent {
                 removePeerButton(at: index, publicKey: publicKey)
             }

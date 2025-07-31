@@ -97,7 +97,7 @@ private extension DNSView {
                     Text($1.wrappedValue)
                 } else {
                     ThemeTextField("", text: $1, placeholder: Strings.Unlocalized.Placeholders.ipV4DNS)
-                        .themeIPAddress()
+                        .themeManualInput(.ipAddress)
                 }
             }
         )
