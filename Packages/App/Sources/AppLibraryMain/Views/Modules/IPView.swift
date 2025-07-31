@@ -78,6 +78,7 @@ private extension IPView {
             text: $subnets[family] ?? "",
             placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
         )
+        .themeIPAddress()
         .themeContainerWithSingleEntry(
             header: family.localizedDescription,
             footer: Strings.Modules.Ip.Address.footer
@@ -139,6 +140,7 @@ private extension IPView {
                 },
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
+            .themeNumericInput()
         }
         .themeSection(header: Strings.Global.Nouns.interface)
     }

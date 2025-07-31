@@ -94,6 +94,14 @@ extension ThemeManualInputModifier {
     }
 }
 
+extension ThemeNumericInputModifier {
+    func body(content: Content) -> some View {
+        content
+            .keyboardType(withPunctuation ? .numbersAndPunctuation : .numberPad)
+            .textInputAutocapitalization(.never)
+    }
+}
+
 extension ThemeContainerModifier {
     func body(content: Content) -> some View {
         content

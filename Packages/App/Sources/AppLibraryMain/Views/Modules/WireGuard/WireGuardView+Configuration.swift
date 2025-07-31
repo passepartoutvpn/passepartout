@@ -83,6 +83,7 @@ private extension WireGuardView.ConfigurationView {
                 text: $viewModel.mtu,
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
+            .themeNumericInput()
         }
     }
 
@@ -138,6 +139,7 @@ private extension WireGuardView.ConfigurationView {
                 text: peerBinding.keepAlive,
                 placeholder: Strings.Unlocalized.Placeholders.keepAlive
             )
+            .themeNumericInput()
             ThemeTrailingContent {
                 removePeerButton(at: index, publicKey: publicKey)
             }

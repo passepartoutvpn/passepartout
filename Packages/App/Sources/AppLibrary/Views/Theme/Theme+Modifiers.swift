@@ -88,6 +88,14 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
+    public func themeIPAddress() -> some View {
+        themeNumericInput(withPunctuation: true)
+    }
+
+    public func themeNumericInput(withPunctuation: Bool = false) -> some View {
+        modifier(ThemeNumericInputModifier(withPunctuation: withPunctuation))
+    }
+
     public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
 #if os(macOS)
         modifier(ThemeContainerModifier(header: header, footer: footer))
