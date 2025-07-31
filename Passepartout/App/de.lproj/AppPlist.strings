@@ -1,3 +1,4 @@
 "NSCameraUsageDescription" = "QR-Codes scannen";
 "NSFaceIDUsageDescription" = "App mit Face ID entsperren";
+"NSLocalNetworkUsageDescription" = "Mit lokalem Netzwerk verbinden";
 "NSLocationWhenInUseUsageDescription" = "Zugangsname des aktuellen WLAN";
