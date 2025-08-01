@@ -91,6 +91,7 @@ extension ThemeManualInputModifier {
         content
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
+            .keyboardType(inputType.keyboardType)
     }
 }
 

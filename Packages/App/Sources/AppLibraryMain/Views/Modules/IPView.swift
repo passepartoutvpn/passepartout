@@ -76,7 +76,8 @@ private extension IPView {
         ThemeTextField(
             Strings.Global.Nouns.address,
             text: $subnets[family] ?? "",
-            placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family)
+            placeholder: Strings.Unlocalized.Placeholders.ipDestination(forFamily: family),
+            inputType: .ipAddress
         )
         .themeContainerWithSingleEntry(
             header: family.localizedDescription,
@@ -137,7 +138,8 @@ private extension IPView {
                 } set: {
                     draft.module.mtu = Int($0)
                 },
-                placeholder: Strings.Unlocalized.Placeholders.mtu
+                placeholder: Strings.Unlocalized.Placeholders.mtu,
+                inputType: .number
             )
         }
         .themeSection(header: Strings.Global.Nouns.interface)

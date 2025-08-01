@@ -15,20 +15,43 @@ public struct ThemeLongContentLink: View {
 
     private let preview: String?
 
-    public init(_ title: String, text: Binding<String>, preview: String? = nil) {
+    private let inputType: ThemeInputType
+
+    public init(
+        _ title: String,
+        text: Binding<String>,
+        inputType: ThemeInputType = .text,
+        preview: String? = nil
+    ) {
         self.title = title
         _text = text
+        self.inputType = inputType
         self.preview = preview ?? text.wrappedValue
     }
 
-    public init(_ title: String, text: Binding<String>, preview: (String) -> String?) {
+    public init(
+        _ title: String,
+        text: Binding<String>,
+        inputType: ThemeInputType = .text,
+        preview: (String) -> String?
+    ) {
         self.title = title
         _text = text
+        self.inputType = inputType
         self.preview = preview(text.wrappedValue)
     }
 
     public var body: some View {
-        LongContentLink(title, content: $text, preview: preview) {
+        ContentPreviewLink(title, content: $text, preview: preview) {
+            LongContentEditor(content: $0)
+                .themeManualInput(inputType)
+                .font(.body)
+                .monospaced()
+                .navigationTitle(title)
+#if os(iOS)
+                .navigationBarTitleDisplayMode(.inline)
+#endif
+        } previewLabel: {
             Text(preview != nil ? $0 : "")
                 .foregroundColor(.secondary)
         }

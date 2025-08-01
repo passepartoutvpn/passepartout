@@ -44,6 +44,7 @@ extension ThemeManualInputModifier {
         content
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
+            .keyboardType(inputType.keyboardType)
     }
 }
 
@@ -76,6 +77,7 @@ extension ThemeContainerEntryModifier {
 extension ThemeTextField {
     public var body: some View {
         TextField(title ?? "", text: $text)
+            .themeManualInput(inputType)
     }
 }
 

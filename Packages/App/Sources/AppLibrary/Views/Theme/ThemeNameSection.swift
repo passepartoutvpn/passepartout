@@ -24,7 +24,6 @@ public struct ThemeNameSection: View {
         return Group {
             ThemeTextField(Strings.Global.Nouns.name, text: $name, placeholder: placeholder)
                 .labelsHidden()
-                .themeManualInput()
         }
         .themeSection(header: Strings.Global.Nouns.name, footer: footer)
     }
