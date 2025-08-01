@@ -12,10 +12,18 @@ public struct ThemeTextField: View {
 
     let placeholder: String
 
-    public init(_ title: String?, text: Binding<String>, placeholder: String) {
+    let inputType: ThemeInputType
+
+    public init(
+        _ title: String?,
+        text: Binding<String>,
+        placeholder: String,
+        inputType: ThemeInputType = .text
+    ) {
         self.title = title
         _text = text
         self.placeholder = placeholder
+        self.inputType = inputType
     }
 
     @ViewBuilder
@@ -33,6 +41,6 @@ public struct ThemeTextField: View {
 
     var fieldView: some View {
         TextField(title ?? "", text: $text, prompt: Text(placeholder))
-            .themeManualInput()
+            .themeManualInput(inputType)
     }
 }

@@ -82,9 +82,9 @@ private extension WireGuardView.ConfigurationView {
             ThemeTextField(
                 Strings.Unlocalized.mtu,
                 text: $viewModel.mtu,
-                placeholder: Strings.Unlocalized.Placeholders.mtu
+                placeholder: Strings.Unlocalized.Placeholders.mtu,
+                inputType: .number
             )
-            .themeManualInput(.number)
         }
     }
 
@@ -140,9 +140,9 @@ private extension WireGuardView.ConfigurationView {
             ThemeTextField(
                 Strings.Global.Nouns.keepAlive,
                 text: peerBinding.keepAlive,
-                placeholder: Strings.Unlocalized.Placeholders.keepAlive
+                placeholder: Strings.Unlocalized.Placeholders.keepAlive,
+                inputType: .number
             )
-            .themeManualInput(.number)
             ThemeTrailingContent {
                 removePeerButton(at: index, publicKey: publicKey)
             }

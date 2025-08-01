@@ -96,8 +96,12 @@ private extension DNSView {
                 if $0 {
                     Text($1.wrappedValue)
                 } else {
-                    ThemeTextField("", text: $1, placeholder: Strings.Unlocalized.Placeholders.ipV4DNS)
-                        .themeManualInput(.ipAddress)
+                    ThemeTextField(
+                        "",
+                        text: $1,
+                        placeholder: Strings.Unlocalized.Placeholders.ipV4DNS,
+                        inputType: .ipAddress
+                    )
                 }
             }
         )
@@ -112,7 +116,11 @@ private extension DNSView {
                 if $0 {
                     Text($1.wrappedValue)
                 } else {
-                    ThemeTextField("", text: $1, placeholder: Strings.Unlocalized.Placeholders.hostname)
+                    ThemeTextField(
+                        "",
+                        text: $1,
+                        placeholder: Strings.Unlocalized.Placeholders.hostname
+                    )
                 }
             }
         )
