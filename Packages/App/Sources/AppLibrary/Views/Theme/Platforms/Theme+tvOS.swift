@@ -77,6 +77,7 @@ extension ThemeContainerEntryModifier {
 extension ThemeTextField {
     public var body: some View {
         TextField(title ?? "", text: $text)
+            .themeManualInput(inputType)
     }
 }
 

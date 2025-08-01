@@ -25,6 +25,9 @@ public struct ThemeTextField: View {
         self.placeholder = placeholder
         self.inputType = inputType
     }
+}
+
+extension ThemeTextField {
 
     @ViewBuilder
     var labeledView: some View {
