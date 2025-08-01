@@ -17,14 +17,24 @@ public struct ThemeLongContentLink: View {
 
     private let inputType: ThemeInputType
 
-    public init(_ title: String, text: Binding<String>, inputType: ThemeInputType = .text, preview: String? = nil) {
+    public init(
+        _ title: String,
+        text: Binding<String>,
+        inputType: ThemeInputType = .text,
+        preview: String? = nil
+    ) {
         self.title = title
         _text = text
         self.inputType = inputType
         self.preview = preview ?? text.wrappedValue
     }
 
-    public init(_ title: String, text: Binding<String>, inputType: ThemeInputType = .text, preview: (String) -> String?) {
+    public init(
+        _ title: String,
+        text: Binding<String>,
+        inputType: ThemeInputType = .text,
+        preview: (String) -> String?
+    ) {
         self.title = title
         _text = text
         self.inputType = inputType

@@ -4,9 +4,7 @@
 
 public enum ThemeInputType {
     case ipAddress
-
     case number
-
     case text
 }
 

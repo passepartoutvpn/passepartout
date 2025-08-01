@@ -84,7 +84,7 @@ extension View {
         formStyle(.grouped)
     }
 
-    public func themeManualInput(_ inputType: ThemeInputType = .text) -> some View {
+    public func themeManualInput(_ inputType: ThemeInputType) -> some View {
         modifier(ThemeManualInputModifier(inputType: inputType))
     }
 
