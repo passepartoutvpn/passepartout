@@ -5,7 +5,7 @@
 import Foundation
 
 extension RegistryCoder: ProfileImporter {
-    public func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
+    public nonisolated func profile(from input: ProfileImporterInput, passphrase: String?) throws -> Profile {
         let name: String
         let contents: String
         switch input {

@@ -66,6 +66,16 @@ extension AppContext {
             )
         }
 
+        // MARK: Registry
+
+        let deviceId = kvManager.string(forKey: AppPreference.deviceId.key)
+        pp_log_g(.app, .info, "Device ID: \(deviceId ?? "not set")")
+        let registry = dependencies.newRegistry(
+            distributionTarget: distributionTarget,
+            deviceId: deviceId
+        )
+        let registryCoder = registry.with(coder: dependencies.sharedProfileCoder)
+
         // MARK: Managers
 
         let apiManager: APIManager = {
@@ -87,7 +97,7 @@ extension AppContext {
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
-            registry: dependencies.registry
+            registry: registry
         )
 
         let tunnelIdentifier = BundleConfiguration.mainString(for: .tunnelId)
@@ -95,6 +105,7 @@ extension AppContext {
         let tunnelStrategy = FakeTunnelStrategy()
         let mainProfileRepository = dependencies.backupProfileRepository(
             ctx,
+            registryCoder: registryCoder,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: true
@@ -104,13 +115,14 @@ extension AppContext {
         let tunnelStrategy = NETunnelStrategy(
             ctx,
             bundleIdentifier: tunnelIdentifier,
-            coder: dependencies.neProtocolCoder(ctx)
+            coder: dependencies.neProtocolCoder(ctx, registry: registry)
         )
         let mainProfileRepository = NEProfileRepository(repository: tunnelStrategy) {
             dependencies.profileTitle($0)
         }
         let backupProfileRepository = dependencies.backupProfileRepository(
             ctx,
+            registryCoder: registryCoder,
             model: cdRemoteModel,
             name: constants.containers.backup,
             observingResults: false
@@ -206,7 +218,7 @@ extension AppContext {
                     pp_log(ctx, .App.profiles, .info, "\tRefresh remote profiles repository (sync=\(isRemoteImportingEnabled))...")
                     try await profileManager.observeRemote(repository: {
                         CommonData.cdProfileRepositoryV3(
-                            registryCoder: dependencies.registryCoder,
+                            registryCoder: registryCoder,
                             context: remoteStore.context,
                             observingResults: true,
                             onResultError: {
@@ -293,9 +305,9 @@ extension AppContext {
             migrationManager: migrationManager,
             onboardingManager: onboardingManager,
             preferencesManager: preferencesManager,
+            profileCoder: dependencies.sharedProfileCoder,
             profileManager: profileManager,
-            registry: dependencies.registry,
-            registryCoder: dependencies.registryCoder,
+            registry: registry,
             sysexManager: sysexManager,
             tunnel: tunnel,
             versionChecker: versionChecker,
@@ -344,6 +356,7 @@ private extension Dependencies {
 
     func backupProfileRepository(
         _ ctx: PartoutLoggerContext,
+        registryCoder: RegistryCoder,
         model: NSManagedObjectModel,
         name: String,
         observingResults: Bool

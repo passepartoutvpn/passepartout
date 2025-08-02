@@ -32,7 +32,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let dependencies: Dependencies = await .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
-        await CommonLibrary.assertMissingImplementations(with: dependencies.registry)
+
+        // FIXME: ###, register global logger here
 
         // MARK: Update or fetch existing preferences
 
@@ -46,13 +47,22 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             }
         }
 
+        // MARK: Registry
+
+        let registry = dependencies.newRegistry(
+            distributionTarget: distributionTarget,
+            deviceId: preferences.deviceId
+        )
+        pp_log_g(.app, .info, "Device ID: \(preferences.deviceId ?? "not set")")
+        CommonLibrary.assertMissingImplementations(with: registry)
+
         // MARK: Parse profile
 
         let processor = DefaultTunnelProcessor()
         let neTunnelController = try await NETunnelController(
             provider: self,
-            decoder: dependencies.neProtocolCoder(.global),
-            registry: dependencies.registry,
+            decoder: dependencies.neProtocolCoder(.global, registry: registry),
+            registry: registry,
             options: {
                 var options = NETunnelController.Options()
                 if preferences.dnsFallsBack {
@@ -140,7 +150,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
 
             // start tunnel
-            try await fwd.startTunnel(options: options)
+            try await fwd.startTunnel(options: [:])
 
             // do not run the verification loop if IAPs are not supported
             // just ensure that the profile does not require any paid feature

@@ -6,9 +6,12 @@ import CommonUtils
 import Foundation
 
 extension KeyValueManager {
+
+    // TODO: ###, can automate keeping 1:1 with AppPreference?
     public var preferences: AppPreferenceValues {
         get {
             var values = AppPreferenceValues()
+            values.deviceId = string(forKey: AppPreference.deviceId.key)
             values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
             values.lastCheckedVersionDate = double(forKey: AppPreference.lastCheckedVersionDate.key)
             values.lastCheckedVersion = object(forKey: AppPreference.lastCheckedVersion.key)
@@ -19,6 +22,7 @@ extension KeyValueManager {
             return values
         }
         set {
+            set(newValue.deviceId, forKey: AppPreference.dnsFallsBack.key)
             set(newValue.dnsFallsBack, forKey: AppPreference.dnsFallsBack.key)
             set(newValue.lastCheckedVersionDate, forKey: AppPreference.lastCheckedVersionDate.key)
             set(newValue.lastCheckedVersion, forKey: AppPreference.lastCheckedVersion.key)

@@ -4,6 +4,7 @@
 
 import Foundation
 
+@MainActor
 public final class RegistryCoder: ObservableObject, Sendable {
     private let registry: Registry
 
@@ -14,15 +15,22 @@ public final class RegistryCoder: ObservableObject, Sendable {
         self.coder = coder
     }
 
-    public func string(from profile: Profile) throws -> String {
+    public nonisolated func string(from profile: Profile) throws -> String {
         try registry.encodedProfile(profile, with: coder)
     }
 
-    public func profile(from string: String) throws -> Profile {
+    public nonisolated func profile(from string: String) throws -> Profile {
         try registry.decodedProfile(from: string, with: coder)
     }
 
-    public func module(from string: String, object: Any?) throws -> Module {
+    public nonisolated func module(from string: String, object: Any?) throws -> Module {
         try registry.module(fromContents: string, object: object)
+    }
+}
+
+@MainActor
+extension Registry {
+    public func with(coder: ProfileCoder) -> RegistryCoder {
+        RegistryCoder(registry: self, coder: coder)
     }
 }

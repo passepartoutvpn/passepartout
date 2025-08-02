@@ -43,8 +43,8 @@ extension AppContext {
         let configManager = ConfigManager()
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
+        let profileCoder = CodableProfileCoder()
         let registry = Registry()
-        let registryCoder = RegistryCoder(registry: registry, coder: CodableProfileCoder())
 
         let dummyReceiver = DummyWebReceiver(url: URL(string: "http://127.0.0.1:9000")!)
         let webReceiverManager = WebReceiverManager(webReceiver: dummyReceiver, passcodeGenerator: { "123456" })
@@ -59,9 +59,9 @@ extension AppContext {
             kvManager: kvManager,
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
+            profileCoder: profileCoder,
             profileManager: profileManager,
             registry: registry,
-            registryCoder: registryCoder,
             sysexManager: nil,
             tunnel: tunnel,
             webReceiverManager: webReceiverManager
