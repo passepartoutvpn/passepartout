@@ -150,7 +150,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
 
             // start tunnel
-            try await fwd.startTunnel(options: options)
+            try await fwd.startTunnel(options: [:])
 
             // do not run the verification loop if IAPs are not supported
             // just ensure that the profile does not require any paid feature
