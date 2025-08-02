@@ -5,6 +5,7 @@
 import CommonUtils
 import Foundation
 
+@MainActor
 public final class WebUploader: ObservableObject, Sendable {
     private let registryCoder: RegistryCoder
 

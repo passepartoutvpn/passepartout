@@ -28,13 +28,14 @@ extension AppContext {
                 []
             }
         )
+        let registry = dependencies.newRegistry(distributionTarget: .appStore, deviceId: nil)
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
-            registry: dependencies.registry
+            registry: registry
         )
         let profileManager: ProfileManager = .forUITesting(
-            withRegistry: dependencies.registry,
+            withRegistry: registry,
             processor: processor
         )
         profileManager.isRemoteImportingEnabled = true
@@ -58,9 +59,9 @@ extension AppContext {
             kvManager: kvManager,
             migrationManager: migrationManager,
             preferencesManager: preferencesManager,
+            profileCoder: dependencies.sharedProfileCoder,
             profileManager: profileManager,
-            registry: dependencies.registry,
-            registryCoder: dependencies.registryCoder,
+            registry: registry,
             sysexManager: nil,
             tunnel: tunnel,
             webReceiverManager: webReceiverManager

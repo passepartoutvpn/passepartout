@@ -12,18 +12,34 @@ extension Dependencies {
         Self.sharedKVStore
     }
 
-    var registry: Registry {
-        Self.sharedRegistry
+    nonisolated var sharedProfileCoder: ProfileCoder {
+        Self.sharedProfileCoder
     }
 
-    var registryCoder: RegistryCoder {
-        RegistryCoder(
-            registry: Self.sharedRegistry,
-            coder: Self.sharedProfileCoder
+    nonisolated func newRegistry(
+        distributionTarget: DistributionTarget,
+        deviceId: String?
+    ) -> Registry {
+        Registry(
+            withKnown: true,
+            providerResolvers: {
+                var resolvers: [ProviderModuleResolver] = []
+                resolvers.append(OpenVPNProviderResolver(.global))
+                if let deviceId {
+                    resolvers.append(WireGuardProviderResolver(.global, deviceId: deviceId))
+                } else {
+                    assertionFailure("Missing deviceId, cannot resolve WireGuard providers")
+                }
+                return resolvers
+            }(),
+            allImplementations: [
+                OpenVPNImplementationBuilder(distributionTarget: distributionTarget).build(),
+                WireGuardImplementationBuilder().build()
+            ]
         )
     }
 
-    func neProtocolCoder(_ ctx: PartoutLoggerContext) -> NEProtocolCoder {
+    func neProtocolCoder(_ ctx: PartoutLoggerContext, registry: Registry) -> NEProtocolCoder {
         if Self.distributionTarget.supportsAppGroups {
             return KeychainNEProtocolCoder(
                 ctx,
@@ -68,24 +84,5 @@ private extension Dependencies {
         fallback: AppPreferenceValues()
     )
 
-    static let sharedRegistry = Registry(
-        deviceId: {
-            let store = UserDefaultsStore(.standard)
-            let deviceId: String
-            if let existing: String = store.value(for: AppPreference.deviceId.key) {
-                deviceId = existing
-            } else {
-                deviceId = String.random(count: Constants.shared.deviceIdLength)
-                store.set(deviceId, for: AppPreference.deviceId.key)
-            }
-            return deviceId
-        }(),
-        withKnown: true,
-        allImplementations: [
-            OpenVPNImplementationBuilder(distributionTarget: distributionTarget).build(),
-            WireGuardImplementationBuilder().build()
-        ]
-    )
-
-    static let sharedProfileCoder = CodableProfileCoder()
+    static nonisolated let sharedProfileCoder = CodableProfileCoder()
 }

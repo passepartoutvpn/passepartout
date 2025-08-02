@@ -28,6 +28,8 @@ public enum AppPreference: String, PreferenceProtocol {
 }
 
 public struct AppPreferenceValues: Codable, Sendable {
+    public var deviceId: String?
+
     public var dnsFallsBack = true
 
     public var lastCheckedVersionDate: TimeInterval?
