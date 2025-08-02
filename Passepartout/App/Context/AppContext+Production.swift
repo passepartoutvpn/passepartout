@@ -68,8 +68,17 @@ extension AppContext {
 
         // MARK: Registry
 
-        let deviceId = kvManager.string(forKey: AppPreference.deviceId.key)
-        pp_log_g(.app, .info, "Device ID: \(deviceId ?? "not set")")
+        let deviceId = {
+            if let existingId = kvManager.string(forKey: AppPreference.deviceId.key) {
+                pp_log_g(.app, .info, "Device ID: \(existingId)")
+                return existingId
+            }
+            let newId = String.random(count: Constants.shared.deviceIdLength)
+            kvManager.set(newId, forKey: AppPreference.deviceId.key)
+            pp_log_g(.app, .info, "Device ID (new): \(newId)")
+            return newId
+        }()
+
         let registry = dependencies.newRegistry(
             distributionTarget: distributionTarget,
             deviceId: deviceId
