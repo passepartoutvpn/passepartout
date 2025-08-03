@@ -45,7 +45,7 @@ extension AppProduct {
 
 extension AppProduct.Essentials {
 
-    // TODO: ###, iOS/macOS/tvOS bundle
+    // TODO: #128/notes, "Essentials" (Core) iOS/macOS/tvOS bundle (< Complete)
 //    public static let allPlatforms = AppProduct(featureId: "essentials")
 
     public static let iOS_macOS = AppProduct(featureId: "full_multi_version")
