@@ -148,7 +148,7 @@ private extension ProviderView {
                 OpenVPNCredentialsLink()
                 resolvedModuleLink
             case .wireGuard:
-                // TODO: ###, WireGuard provider private key
+                // TODO: #507, WireGuard provider private key
                 EmptyView()
             default:
                 EmptyView()
