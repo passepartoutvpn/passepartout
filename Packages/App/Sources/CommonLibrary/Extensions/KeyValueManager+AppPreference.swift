@@ -7,7 +7,7 @@ import Foundation
 
 extension KeyValueManager {
 
-    // TODO: ###, can automate keeping 1:1 with AppPreference?
+    // TODO: #1513, refactor to keep automatically in sync with AppPreference
     public var preferences: AppPreferenceValues {
         get {
             var values = AppPreferenceValues()
