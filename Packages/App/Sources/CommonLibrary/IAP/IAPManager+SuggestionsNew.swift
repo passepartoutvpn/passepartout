@@ -105,7 +105,7 @@ extension IAPManager {
             // feature is required, because it means that the iOS/macOS app
             // is also installed
             //
-            // TODO: partout#103, set always true because all features will be accessible on TV by importing a .json created elsewhere
+            // TODO: #103/partout, set always true because all features will be accessible on TV by importing a .json created elsewhere
             suggestsComplete = !essentialFeatures.isEmpty
         default:
             suggestsComplete = true
