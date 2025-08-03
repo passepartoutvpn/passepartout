@@ -10,6 +10,8 @@ public enum AppCommandLine {
 
         case fakeMigration = "-pp_fake_migration"
 
+        case withoutRateLimits = "-pp_without_rate_limits"
+
         case withReportIssue = "-pp_with_report_issue"
 
         case uiTesting = "-pp_ui_testing"

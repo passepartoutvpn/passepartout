@@ -9,13 +9,13 @@ public enum DistributionTarget: String, Sendable {
 
     case developerID
 
-    // TODO: ###, behave like .complete when this is implemented
+    // TODO: #13, behave like .complete when this is implemented
     case enterprise
 }
 
 extension DistributionTarget {
     public var canAlwaysReportIssue: Bool {
-        self != .appStore
+        self == .enterprise
     }
 
     public var supportsAppGroups: Bool {

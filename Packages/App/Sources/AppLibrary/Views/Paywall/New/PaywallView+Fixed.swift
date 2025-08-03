@@ -41,7 +41,7 @@ struct PaywallFixedView: View {
                     .padding(.leading, 100)
                     .frame(maxWidth: 0.4 * geo.size.width)
 
-                // TODO: ###, add bottom links if !os(tvOS)
+                // TODO: #1511, add bottom links if !os(tvOS)
             }
             .frame(maxHeight: .infinity)
             .themeAnimation(on: iapManager.purchasedProducts, category: .paywall)

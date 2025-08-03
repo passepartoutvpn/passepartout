@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
+import AppAccessibility
 import CommonLibrary
 import SwiftUI
 
@@ -34,7 +35,7 @@ public struct RefreshInfrastructureButton<Label>: View where Label: View {
         } label: {
             label()
         }
-        .disabled(elapsed <= Constants.shared.api.refreshInfrastructureRateLimit)
+        .disabled(!isEnabled)
         .task {
             loadLastUpdate()
         }
@@ -74,6 +75,10 @@ public struct RefreshInfrastructureButtonProgressView: View {
 }
 
 private extension RefreshInfrastructureButton {
+    var isEnabled: Bool {
+        AppCommandLine.contains(.withoutRateLimits) || elapsed >= Constants.shared.api.refreshInfrastructureRateLimit
+    }
+
     func loadLastUpdate() {
         guard let map = kvManager.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? else {
             elapsed = .infinity
