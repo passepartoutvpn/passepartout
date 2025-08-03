@@ -14,7 +14,7 @@ extension RegistryCoder: ProfileImporter {
             contents = data
         case .file(let url):
             var encoding: String.Encoding = .utf8
-            // TODO: ###, this may be very inefficient
+            // XXX: this may be very inefficient
             contents = try String(contentsOf: url, usedEncoding: &encoding)
             name = url.lastPathComponent
         }

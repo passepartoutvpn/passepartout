@@ -95,7 +95,7 @@ public final class AppContext: ObservableObject, Sendable {
 extension AppContext {
     public func onApplicationActive() {
         Task {
-            // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
+            // XXX: should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
             await configManager.refreshBundle()
