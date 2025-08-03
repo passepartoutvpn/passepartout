@@ -33,7 +33,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
 
-        // FIXME: ###, register global logger here
+        // FIXME: #1508, register global logger here
 
         // MARK: Update or fetch existing preferences
 
