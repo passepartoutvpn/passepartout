@@ -160,7 +160,6 @@ private extension DiagnosticsView {
     }
 
     var canReportIssue: Bool {
-        // TODO: ###, remove after stable Developer ID
         AppCommandLine.contains(.withReportIssue) ||
             iapManager.isEligibleForFeedback ||
             distributionTarget.canAlwaysReportIssue ||

@@ -15,7 +15,7 @@ public enum DistributionTarget: String, Sendable {
 
 extension DistributionTarget {
     public var canAlwaysReportIssue: Bool {
-        self != .appStore
+        self == .enterprise
     }
 
     public var supportsAppGroups: Bool {
