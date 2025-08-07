@@ -49,9 +49,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Registry
 
+        assert(preferences.deviceId != nil, "No Device ID found in preferences")
         let registry = dependencies.newRegistry(
             distributionTarget: distributionTarget,
-            deviceId: preferences.deviceId
+            deviceId: preferences.deviceId ?? "MissingDeviceID"
         )
         pp_log_g(.app, .info, "Device ID: \(preferences.deviceId ?? "not set")")
         CommonLibrary.assertMissingImplementations(with: registry)

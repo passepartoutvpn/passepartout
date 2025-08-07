@@ -18,18 +18,14 @@ extension Dependencies {
 
     nonisolated func newRegistry(
         distributionTarget: DistributionTarget,
-        deviceId: String?
+        deviceId: String
     ) -> Registry {
         Registry(
             withKnown: true,
             providerResolvers: {
                 var resolvers: [ProviderModuleResolver] = []
                 resolvers.append(OpenVPNProviderResolver(.global))
-                if let deviceId {
-                    resolvers.append(WireGuardProviderResolver(.global, deviceId: deviceId))
-                } else {
-                    assertionFailure("Missing deviceId, cannot resolve WireGuard providers")
-                }
+                resolvers.append(WireGuardProviderResolver(.global, deviceId: deviceId))
                 return resolvers
             }(),
             allImplementations: [

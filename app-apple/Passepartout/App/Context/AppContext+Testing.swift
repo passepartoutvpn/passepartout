@@ -28,7 +28,10 @@ extension AppContext {
                 []
             }
         )
-        let registry = dependencies.newRegistry(distributionTarget: .appStore, deviceId: nil)
+        let registry = dependencies.newRegistry(
+            distributionTarget: .appStore,
+            deviceId: "TestDeviceID"
+        )
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
