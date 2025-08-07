@@ -13,6 +13,10 @@ extension AppContext {
         let constants: Constants = .shared
         let ctx: PartoutLoggerContext = .global
 
+        var logger = PartoutLogger.Builder()
+        logger.setDestination(NSLogDestination(), for: [.app, .App.profiles])
+        PartoutLogger.register(logger.build())
+
         let kvManager = KeyValueManager()
         let apiManager = APIManager(
             ctx,
