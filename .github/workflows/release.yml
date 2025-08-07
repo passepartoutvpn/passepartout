@@ -29,21 +29,21 @@ jobs:
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Save app version
         id: app_version
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           VERSION=`ci/version-number.sh`
           BUILD=`ci/build-number.sh`
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "build=$BUILD" >> $GITHUB_OUTPUT
       - name: Validate translations
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           scripts/clean-translations.sh
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
       - name: Run App tests
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/run-app-tests.sh
       - name: Run Partout tests
@@ -75,11 +75,11 @@ jobs:
         run: |
           ci/use-partout-core-source.sh
       - name: Archive app
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-archive.sh ${{ matrix.platform }}
       - name: Export archive
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-export.sh ${{ matrix.platform }}
       - name: Upload archive
@@ -161,26 +161,26 @@ jobs:
           certificates_url: ${{ vars.CERTIFICATES_URL }}
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Archive app
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
       - name: Export app
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-export.sh macOS 1
       - name: Generate .dmg
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/dmg-generate.sh ${{ matrix.arch }}
       - name: Notarize .dmg
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         run: |
           ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
       - name: Sign .dmg
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         env:
           GPG_FINGERPRINT: ${{ vars.GPG_FINGERPRINT }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

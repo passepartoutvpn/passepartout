@@ -24,7 +24,7 @@ jobs:
         run: |
           ci/use-partout-core-source.sh
       - name: Run App tests
-        working-directory: $APPLE_ROOT
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/run-app-tests.sh
       - name: Run Partout tests

@@ -31,6 +31,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
       - name: "Run tests"
-        working-directory: ${{ env.APPLE_ROOT }}/Package
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
-          swift test
+          ci/run-app-tests.sh
