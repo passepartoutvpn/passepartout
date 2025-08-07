@@ -9,5 +9,4 @@ fastlane/**/trade_representative_contact_information
 build/
 dist/
 tmp/
-scripts/env.secrets.sh
-.env.secret
+**/*secret*
