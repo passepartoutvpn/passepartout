@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -180,6 +180,7 @@
 		0EAEC8A62D05DB8D001AA50C /* DefaultAppProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppProcessor.swift; sourceTree = "<group>"; };
 		0EAEC8A72D05DB8D001AA50C /* DefaultTunnelProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTunnelProcessor.swift; sourceTree = "<group>"; };
 		0EB08B972CA46F4900A02591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppPlist.strings; sourceTree = "<group>"; };
+		0EB2862D2E44A2B100A1CAA6 /* Package */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Package; sourceTree = SOURCE_ROOT; };
 		0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -199,10 +200,6 @@
 		0EF74A772E2D774600AF7614 /* test-bundle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "test-bundle.json"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		0E3D7F242D347A41003F1C4B /* Packages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Packages; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0E3FF4AB2CE3AF6F00BFF640 /* Frameworks */ = {
@@ -274,7 +271,6 @@
 			isa = PBXGroup;
 			children = (
 				0E7E3D592B9345FD002BBDB4 /* Passepartout */,
-				0E3D7F242D347A41003F1C4B /* Packages */,
 				0E06D1902B87629100176E1D /* Products */,
 				0E06D1A32B8762AD00176E1D /* Frameworks */,
 			);
@@ -347,6 +343,7 @@
 				0ECD96172DC2738B009BD9F8 /* Config.mac.xcconfig */,
 				0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */,
 				0E5DFDDC2CDB8F9100F2DE70 /* Passepartout.storekit */,
+				0EB2862D2E44A2B100A1CAA6 /* Package */,
 				0E7E3D5A2B9345FD002BBDB4 /* App */,
 				0EDE56E82CABE40D0082D21C /* Intents */,
 				0E757F112CD0CFFC006E13E1 /* LoginItem */,

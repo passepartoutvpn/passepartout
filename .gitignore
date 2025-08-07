@@ -13,8 +13,8 @@ build/
 dist/
 /l10n/
 tmp/
-screenshots/html/*/0*.png
-screenshots/results/
+app-apple/screenshots/html/*/0*.png
+app-apple/screenshots/results/
 scripts/env.secrets.sh
 default.profraw
 .api
