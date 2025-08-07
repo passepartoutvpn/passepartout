@@ -13,6 +13,9 @@ on:
       - "**/*.sh"
       - "fastlane/**"
 
+env:
+  APPLE_ROOT: app-apple
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -28,6 +31,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
       - name: "Run tests"
+        working-directory: ${{ env.APPLE_ROOT }}/Package
         run: |
-          cd Packages/App
           swift test
