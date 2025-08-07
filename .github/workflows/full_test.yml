@@ -3,6 +3,9 @@ name: Full Tests
 on:
   workflow_dispatch:
 
+env:
+  APPLE_ROOT: "app-apple"
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -21,6 +24,7 @@ jobs:
         run: |
           ci/use-partout-core-source.sh
       - name: Run App tests
+        working-directory: $APPLE_ROOT
         run: |
           ci/run-app-tests.sh
       - name: Run Partout tests

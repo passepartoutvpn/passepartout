@@ -87,17 +87,26 @@ if [[ $opt_no_log != "1" ]]; then
     mv "$log_path" "$changelog"
 fi
 
+# Apple
+
+pushd "app-apple"
+
+source "scripts/env.sh"
 if [[ -z "$opt_build" ]]; then
     current_build=`ci/xcconfig-get.sh "$xcconfig_path" CURRENT_PROJECT_VERSION`
     opt_build=$((current_build + 1))
 fi
 echo "Set build number to $opt_build..."
 ci/xcconfig-set.sh "$xcconfig_path" CURRENT_PROJECT_VERSION "$opt_build"
-
 if [[ -n "$opt_version" ]]; then
     echo "Set version number to $opt_version..."
     ci/xcconfig-set.sh $xcconfig_path MARKETING_VERSION "$opt_version"
 fi
+git add "$xcconfig_path"
+
+popd
+
+# Cross
 
 if [[ $opt_no_log != "1" ]]; then
     echo "Copy CHANGELOG to release notes..."
@@ -106,7 +115,6 @@ fi
 
 echo "Commit changes to repository..."
 git add \
-    "$xcconfig_path" \
     "$metadata_root" \
     "$changelog"
 
