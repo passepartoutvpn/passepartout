@@ -52,7 +52,7 @@ $ git clone https://github.com/passepartoutvpn/passepartout
 $ git submodule update --init submodules/partout
 ```
 
-For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
+then find the Xcode project in `app-apple`. For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
 To test the app on your Mac or iOS/tvOS Simulator:
 
