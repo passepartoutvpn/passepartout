@@ -1,8 +1,5 @@
 .DS_Store
 *.swp
-*.pbxuser
-**/xcuserdata
-Packages/**/Package.resolved
 fastlane/README.md
 fastlane/report.xml
 fastlane/**/*.html
@@ -11,17 +8,6 @@ fastlane/**/review_information
 fastlane/**/trade_representative_contact_information
 build/
 dist/
-/l10n/
 tmp/
-app-apple/screenshots/html/*/0*.png
-app-apple/screenshots/results/
 scripts/env.secrets.sh
-default.profraw
-.api
-.build
-.bundle
 .env.secret
-.swiftpm
-*.storekit
-*.sqlite-*
-*.dmg*
