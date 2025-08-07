@@ -13,6 +13,10 @@ extension AppContext {
         let constants: Constants = .shared
         let ctx: PartoutLoggerContext = .global
 
+        var logger = PartoutLogger.Builder()
+        logger.setDestination(NSLogDestination(), for: [.app, .App.profiles])
+        PartoutLogger.register(logger.build())
+
         let kvManager = KeyValueManager()
         let apiManager = APIManager(
             ctx,
@@ -28,7 +32,10 @@ extension AppContext {
                 []
             }
         )
-        let registry = dependencies.newRegistry(distributionTarget: .appStore, deviceId: nil)
+        let registry = dependencies.newRegistry(
+            distributionTarget: .appStore,
+            deviceId: "TestDeviceID"
+        )
         let processor = dependencies.appProcessor(
             apiManager: apiManager,
             iapManager: iapManager,
