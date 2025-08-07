@@ -71,7 +71,9 @@ extension ProfileManager {
                         }
 
                         if var wgBuilder = moduleBuilder as? WireGuardModule.Builder {
-                            wgBuilder.configurationBuilder = WireGuard.Configuration.Builder(privateKey: "")
+                            var cfgBuilder = WireGuard.Configuration.Builder(privateKey: "")
+                            cfgBuilder.peers = [.init(publicKey: "")]
+                            wgBuilder.configurationBuilder = cfgBuilder
                             moduleBuilder = wgBuilder
                         }
 
