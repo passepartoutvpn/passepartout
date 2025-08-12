@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
 import Foundation
-import GenericJSON
 
 public protocol ConfigManagerStrategy {
     func bundle() async throws -> ConfigBundle
