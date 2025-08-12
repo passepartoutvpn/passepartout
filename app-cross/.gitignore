@@ -8,4 +8,4 @@ DerivedData/
 .netrc
 Sources/wxWidgets/include/
 vendors/**/include/
-ppapp
+bin/**/ppapp
