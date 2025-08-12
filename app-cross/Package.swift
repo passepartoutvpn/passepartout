@@ -106,6 +106,16 @@ let arch = "arm64"
 let arch = "x86_64"
 #endif
 
+#if os(Linux)
+let mappedArch = arch == "arm64" ? "aarch64" : arch
+#elseif os(Windows)
+let mappedArch = arch == "x86_64" ? "x64" : arch
+#else
+let mappedArch = arch
+#endif
+
+// FIXME: ###, arch is hardcoded because unsafeFlags doesn't tolerate interpolation, at least on Windows
+
 enum Wx {
     case system
     case vendored
@@ -131,7 +141,25 @@ enum Wx {
             .define("_FILE_OFFSET_BITS=64")
         ]
 #elseif os(Windows)
-        // FIXME: ###
+        [
+            .unsafeFlags({
+                var list: [String] = []
+                switch self {
+                case .system:
+                    list.append("-IC:/wxWidgets-3.2.8/include")
+                    list.append("-IC:/wxWidgets-3.2.8/arm64/lib/mswu")
+                case .vendored:
+                    list.append("-Ivendors/include")
+                    list.append("-Ivendors/include/msvc")
+                }
+                return list
+            }()),
+            .define("__WXMSW__"),
+            .define("_FILE_OFFSET_BITS=64"),
+            .define("_UNICODE"),
+            .define("NDEBUG"),
+            .define("wxDEBUG_LEVEL=0")
+        ]
 #else
         [
             .unsafeFlags({
@@ -159,14 +187,15 @@ enum Wx {
     var linkerSettings: [LinkerSetting] {
 #if os(Linux)
         [
-            .linkedLibrary("pthread"),
             .unsafeFlags({
+                var list: [String] = []
                 switch self {
                 case .system:
-                    return ["-L/usr/lib/aarch64-linux-gnu"]
+                    list.append("-L/usr/lib/aarch64-linux-gnu")
                 case .vendored:
-                    return ["-Lvendors/lib/linux/\(arch)"]
+                    list.append("-Lvendors/lib/linux/\(arch)")
                 }
+                return list
             }()),
             .linkedLibrary("pthread"),
             .linkedLibrary("wx_baseu-3.2"),
@@ -174,16 +203,41 @@ enum Wx {
             .linkedLibrary("wx_gtk3u_core-3.2")
         ]
 #elseif os(Windows)
-        // FIXME: ###
+        [
+            .unsafeFlags({
+                var list: [String] = []
+                switch self {
+                case .system:
+                    list.append("-LC:/wxWidgets-3.2.8/arm64/lib")
+                case .vendored:
+                    list.append("-Lvendors/lib/windows/\(arch)")
+                }
+                let otherLibs = "wxtiff wxjpeg wxpng wxzlib wxregexu wxexpat"
+                otherLibs.split(separator: " ").forEach {
+                    list.append("-l\($0)")
+                }
+                let winLibs = "advapi32 comctl32 comdlg32 gdi32 gdiplus imm32 kernel32 msimg32 ole32 oleacc oleaut32 opengl32 rpcrt4 shell32 shlwapi user32 uuid uxtheme version wininet winmm winspool ws2_32"
+                winLibs.split(separator: " ").forEach {
+                    list.append("-l\($0)")
+                }
+                return list
+            }()),
+            .linkedLibrary("wxbase32u"),
+            .linkedLibrary("wxbase32u_net"),
+            .linkedLibrary("wxmsw32u_core"),
+            .linkedLibrary("swiftCore") // complains about swift_addNewDSOImage
+        ]
 #else
         [
             .unsafeFlags({
+                var list: [String] = []
                 switch self {
                 case .system:
-                    return ["-L/opt/homebrew/lib"]
+                    list.append("-L/opt/homebrew/lib")
                 case .vendored:
-                    return ["-Lvendors/lib/mac/\(arch)"]
+                    list.append("-Lvendors/lib/mac/\(arch)")
                 }
+                return list
             }()),
             .linkedLibrary("pthread"),
             .linkedLibrary("wx_baseu-3.3"),

@@ -4,13 +4,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "partout.h"
+#include "passepartout/tunnel.h"
+
 #include <string.h>
 #include <fcntl.h>
 #include <linux/if_tun.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
 #include <sys/unistd.h>
-#include "passepartout/tunnel.h"
 
 int tun_alloc(const char *devname) {
     struct ifreq ifr = {};
@@ -35,6 +37,10 @@ int tun_alloc(const char *devname) {
 
 void ppt_start() {
     puts("PPT Linux here");
+    const char *ver = partout_version();
+    printf(">>> %s\n", ver);
+    free((char *)ver);
+
     int fd0 = tun_alloc("tun0");
     if (system("ip addr add 10.100.2.3/24 dev tun0") != 0) {
         perror("ip addr");
