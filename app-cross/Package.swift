@@ -225,7 +225,10 @@ enum Wx {
             .linkedLibrary("wxbase32u"),
             .linkedLibrary("wxbase32u_net"),
             .linkedLibrary("wxmsw32u_core"),
-            .linkedLibrary("swiftCore") // complains about swift_addNewDSOImage
+            // Add manually in light of a C++/Swift app, because as long as
+            // this target is C++ only SwiftPM does not include the Swift
+            // runtime automatically (linker complains about swift_addNewDSOImage).
+            .linkedLibrary("swiftCore")
         ]
 #else
         [
