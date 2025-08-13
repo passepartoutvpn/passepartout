@@ -10,3 +10,7 @@ build/
 dist/
 tmp/
 **/*secret*
+*.a
+*.so
+*.lib
+*.dll
