@@ -1,4 +1,4 @@
-![Passepartout logo](Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
+![Passepartout logo](app-apple/Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
 
 # [Passepartout][web-home]
 
