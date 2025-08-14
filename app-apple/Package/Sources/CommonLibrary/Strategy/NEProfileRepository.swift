@@ -9,13 +9,13 @@ import NetworkExtension
 public final class NEProfileRepository: ProfileRepository {
     private let repository: NETunnelManagerRepository
 
-    private let title: (Profile) -> String
+    private let title: @Sendable (Profile) -> String
 
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
     private var managersSubscription: Task<Void, Never>?
 
-    public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
+    public init(repository: NETunnelManagerRepository, title: @escaping @Sendable (Profile) -> String) {
         self.repository = repository
         self.title = title
         profilesSubject = CurrentValueSubject([])
@@ -50,7 +50,12 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func saveProfile(_ profile: Profile) async throws {
-        try await repository.save(profile, forConnecting: false, options: nil, title: title)
+        try await repository.save(
+            profile,
+            forConnecting: false,
+            options: nil as [String: NSObject]?,
+            title: title
+        )
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
