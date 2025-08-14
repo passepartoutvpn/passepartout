@@ -57,11 +57,11 @@ extension DefaultAppProcessor: ProfileProcessor {
 }
 
 extension DefaultAppProcessor: AppTunnelProcessor {
-    func title(for profile: Profile) -> String {
+    nonisolated func title(for profile: Profile) -> String {
         title(profile)
     }
 
-    func willInstall(_ profile: Profile) async throws -> Profile {
+    nonisolated func willInstall(_ profile: Profile) async throws -> Profile {
 
         // apply connection heuristic
         var newProfile = profile

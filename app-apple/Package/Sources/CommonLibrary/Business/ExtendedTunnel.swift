@@ -217,9 +217,11 @@ private extension ExtendedTunnel {
 // MARK: - Processing
 
 private extension ExtendedTunnel {
-    var processedTitle: (Profile) -> String {
+    var processedTitle: @Sendable (Profile) -> String {
         if let processor {
-            return processor.title
+            return {
+                processor.title(for: $0)
+            }
         }
         return \.name
     }

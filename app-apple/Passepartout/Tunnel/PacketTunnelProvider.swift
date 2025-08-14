@@ -120,11 +120,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             fatalError("Do not forget to save ctx locally")
         }
         do {
+            var factoryOptions = NEInterfaceFactory.Options()
+            factoryOptions.usesNetworkFramework = preferences.usesModernCrypto
             var connectionOptions = ConnectionParameters.Options()
             connectionOptions.userInfo = appPreferences
             fwd = try NEPTPForwarder(
                 ctx,
                 controller: neTunnelController,
+                factoryOptions: factoryOptions,
                 connectionOptions: connectionOptions
             )
             guard let fwd else {
