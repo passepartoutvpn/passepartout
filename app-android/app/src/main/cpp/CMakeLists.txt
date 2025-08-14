@@ -44,9 +44,9 @@ foreach(SO_FILE ${SWIFT_RUNTIME_SOS})
 endforeach()
 
 # Native library for JNI
-add_library(native-lib SHARED wrapper.c)
+add_library(PassepartoutNative SHARED wrapper.c)
 target_link_libraries(
-    native-lib
+    PassepartoutNative
     Partout
     PartoutImplementations
     openssl_crypto
