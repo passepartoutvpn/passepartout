@@ -13,11 +13,10 @@ public protocol ProfileProcessor: Sendable {
     func willRebuild(_ builder: Profile.Builder) throws -> Profile.Builder
 }
 
-@MainActor
 public protocol AppTunnelProcessor: Sendable {
-    func title(for profile: Profile) -> String
+    nonisolated func title(for profile: Profile) -> String
 
-    func willInstall(_ profile: Profile) async throws -> Profile
+    nonisolated func willInstall(_ profile: Profile) async throws -> Profile
 }
 
 public protocol PacketTunnelProcessor: Sendable {
