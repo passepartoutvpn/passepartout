@@ -3,6 +3,7 @@
 .idea
 .externalNativeBuild
 .cxx
+.kotlin
 build
 captures
 local.properties
