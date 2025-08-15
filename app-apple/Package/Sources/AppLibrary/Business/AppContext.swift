@@ -95,13 +95,13 @@ public final class AppContext: ObservableObject, Sendable {
 extension AppContext {
     public func onApplicationActive() {
         Task {
-            // XXX: should handle AppError.couldNotLaunch (although extremely rare)
+            // XXX: Should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
             await configManager.refreshBundle()
             await versionChecker.checkLatestRelease()
 
-            // use NESocket in tunnel
+            // Use NESocket in tunnel if .neSocket ConfigFlag is active
             let shouldUseNESocket = configManager.isActive(.neSocket)
             kvManager.set(shouldUseNESocket, forKey: AppPreference.usesNESocket.key)
         }
@@ -119,7 +119,7 @@ private extension AppContext {
         pp_log_g(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects(withProducts: true)
 
-        // defer loads
+        // Defer loads to not block app launch
         Task {
             await iapManager.reloadReceipt()
         }
@@ -177,14 +177,20 @@ private extension AppContext {
     }
 
     func onForeground() async throws {
+
+        // onForeground() is redundant after launch
         let didLaunch = try await waitForTasks()
         guard !didLaunch else {
-            return // foreground is redundant after launch
+            return
         }
 
         pp_log_g(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
             await reloadSystemExtension()
+
+            // FIXME: #1358
+            // If the receipt was loaded once, do not invalidate it
+            // before a minimum interval (10/30/60 minutes)
             await iapManager.reloadReceipt()
         }
         await pendingTask?.value
@@ -248,24 +254,24 @@ private extension AppContext {
     func waitForTasks() async throws -> Bool {
         var didLaunch = false
 
-        // must launch once before anything else
+        // Require launch task to complete before performing anything else
         if launchTask == nil {
             launchTask = Task {
                 do {
                     try await onLaunch()
                 } catch {
-                    launchTask = nil // redo launch
+                    launchTask = nil // Redo the launch task
                     throw AppError.couldNotLaunch(reason: error)
                 }
             }
             didLaunch = true
         }
 
-        // will throw on .couldNotLaunch
-        // next wait will re-attempt launch (launchTask == nil)
+        // Will throw on .couldNotLaunch, and the next await
+        // will re-attempt launch because launchTask == nil
         try await launchTask?.value
 
-        // wait for pending task if any
+        // Wait for pending task if any
         await pendingTask?.value
         pendingTask = nil
 
@@ -291,10 +297,10 @@ extension Collection where Element == Profile.DiffResult {
         contains {
             switch $0 {
             case .changedName:
-                // profile renamed
+                // Do not reconnect on profile rename
                 return false
             case .changedModules(let ids):
-                // only changed on-demand module
+                // Do not reconnect if only an on-demand module was changed
                 if ids.count == 1, let onlyID = ids.first,
                    profile.module(withId: onlyID) is OnDemandModule {
                     return false
