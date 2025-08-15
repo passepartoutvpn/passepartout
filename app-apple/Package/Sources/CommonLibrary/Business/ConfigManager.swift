@@ -21,7 +21,7 @@ public final class ConfigManager: ObservableObject {
 
     public init() {
         strategy = nil
-        buildNumber = .max
+        buildNumber = .max // activate flags regardless of .minBuild
     }
 
     public init(strategy: ConfigManagerStrategy, buildNumber: Int) {
