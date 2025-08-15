@@ -1,0 +1,19 @@
+// SPDX-FileCopyrightText: 2025 Davide De Rosa
+//
+// SPDX-License-Identifier: GPL-3.0
+
+@testable import CommonLibrary
+import Testing
+
+struct ConfigBundleTests {
+    @Test(arguments: [
+        ([ConfigFlag.newPaywall: ConfigBundle.Config(rate: 10, minBuild: nil, data: nil)], false),
+        ([ConfigFlag.newPaywall: ConfigBundle.Config(rate: 100, minBuild: nil, data: nil)], true),
+        ([ConfigFlag.newPaywall: ConfigBundle.Config(rate: 200, minBuild: nil, data: nil)], false)
+    ])
+    func givenBundle_whenRate100_thenIsActive(map: [ConfigFlag: ConfigBundle.Config], isActive: Bool) {
+        let sut = ConfigBundle(map: map)
+        let activeFlags: Set<ConfigFlag> = isActive ? [.newPaywall] : []
+        #expect(sut.activeFlags(withBuild: 1) == activeFlags)
+    }
+}
