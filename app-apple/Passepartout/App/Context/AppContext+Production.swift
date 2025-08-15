@@ -278,7 +278,8 @@ extension AppContext {
                 isBeta: { [weak iapManager] in
                     iapManager?.isBeta == true
                 }
-            )
+            ),
+            buildNumber: BundleConfiguration.mainBuildNumber
         )
 
         // MARK: Version

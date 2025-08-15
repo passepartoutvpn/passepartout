@@ -12,6 +12,8 @@ public protocol ConfigManagerStrategy {
 public final class ConfigManager: ObservableObject {
     private let strategy: ConfigManagerStrategy?
 
+    private let buildNumber: Int
+
     @Published
     private var bundle: ConfigBundle?
 
@@ -19,10 +21,12 @@ public final class ConfigManager: ObservableObject {
 
     public init() {
         strategy = nil
+        buildNumber = .max
     }
 
-    public init(strategy: ConfigManagerStrategy) {
+    public init(strategy: ConfigManagerStrategy, buildNumber: Int) {
         self.strategy = strategy
+        self.buildNumber = buildNumber
     }
 
     // TODO: #1447, handle 0-100 deployment values with local random value
@@ -51,13 +55,24 @@ public final class ConfigManager: ObservableObject {
     }
 
     public func isActive(_ flag: ConfigFlag) -> Bool {
-        bundle?.map[flag]?.rate == 100
+        activeMap(for: flag) != nil
     }
 
     public func data(for flag: ConfigFlag) -> JSON? {
-        guard let bundle, let map = bundle.map[flag], map.rate == 100 else {
+        activeMap(for: flag)?.data
+    }
+}
+
+private extension ConfigManager {
+    func activeMap(for flag: ConfigFlag) -> ConfigBundle.Config? {
+        guard let map = bundle?.map[flag] else {
             return nil
         }
-        return map.data
+        if let minBuild = map.minBuild {
+            guard buildNumber >= minBuild else {
+                return nil
+            }
+        }
+        return map
     }
 }

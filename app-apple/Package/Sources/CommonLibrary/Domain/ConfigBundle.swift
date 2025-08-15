@@ -6,6 +6,8 @@ public struct ConfigBundle: Decodable {
     public struct Config: Codable {
         public let rate: Int
 
+        public let minBuild: Int?
+
         public let data: JSON?
     }
 
