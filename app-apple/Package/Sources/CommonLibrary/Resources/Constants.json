@@ -43,9 +43,9 @@
         "verification": {
             "production": {
                 "delay": 120.0,
-                "interval": 3600.0,
+                "interval": 21600.0,
                 "attempts": 3,
-                "retryInterval": 20.0
+                "retryInterval": 300.0
             },
             "beta": {
                 "delay": 600.0,
