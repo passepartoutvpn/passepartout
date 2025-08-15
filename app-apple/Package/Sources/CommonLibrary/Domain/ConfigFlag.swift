@@ -4,6 +4,7 @@
 
 public enum ConfigFlag: String, RawRepresentable, Codable, Sendable {
     case appNotWorking
+    case neSocket
     case newPaywall
     case tvSendTo
     case tvWebImport

@@ -121,7 +121,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         }
         do {
             var factoryOptions = NEInterfaceFactory.Options()
-            factoryOptions.usesNetworkFramework = preferences.usesModernCrypto
+            factoryOptions.usesNetworkFramework = preferences.usesNESocket || preferences.usesModernCrypto
 
             // OpenVPNImplementationBuilder will retrieve the
             // preferences in the connectionBlock
