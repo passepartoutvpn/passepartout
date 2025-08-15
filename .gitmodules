@@ -3,4 +3,4 @@
 	url = https://github.com/passepartoutvpn/partout
 [submodule "submodules/partout-core"]
 	path = submodules/partout-core
-	url = git@github.com:passepartoutvpn/partout-core.git
+	url = https://github.com/passepartoutvpn/partout-core

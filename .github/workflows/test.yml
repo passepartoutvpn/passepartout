@@ -3,12 +3,18 @@ name: SwiftPM Tests
 on:
   pull_request:
     types: [ opened, synchronize ]
+    branches:
+      - "master"
+      - "hotfix/*"
     paths-ignore:
       - "README.md"
       - ".env.*"
       - "**/*.md"
       - "**/*.sh"
       - "fastlane/**"
+
+env:
+  APPLE_ROOT: app-apple
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,6 +31,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
       - name: "Run tests"
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
-          cd Packages/App
-          swift test
+          ci/run-app-tests.sh

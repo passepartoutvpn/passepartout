@@ -1,0 +1,68 @@
+{
+  "configurations" : [
+    {
+      "id" : "880EB747-73AE-45F8-B6D3-95D06B161AB1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonUtilsTests",
+        "name" : "CommonUtilsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "AppLibraryMainTests",
+        "name" : "AppLibraryMainTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Passepartout.xcodeproj",
+        "identifier" : "0E3FF4AD2CE3AF6F00BFF640",
+        "name" : "PassepartoutTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "AppLibraryTests",
+        "name" : "AppLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonWebTests",
+        "name" : "CommonWebTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Packages\/App",
+        "identifier" : "CommonLegacyV2Tests",
+        "name" : "CommonLegacyV2Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

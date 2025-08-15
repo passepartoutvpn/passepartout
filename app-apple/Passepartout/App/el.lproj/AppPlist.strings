@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Σάρωση κωδικών QR";
+"NSFaceIDUsageDescription" = "Ξεκλείδωμα εφαρμογής με Face ID";
+"NSLocalNetworkUsageDescription" = "Σύνδεση με το τοπικό δίκτυο";
+"NSLocationWhenInUseUsageDescription" = "Πρόσβαση στο όνομα του τρέχοντος Wi-Fi";

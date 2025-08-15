@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Escanear códigos QR";
+"NSFaceIDUsageDescription" = "Desbloquear aplicación con Face ID";
+"NSLocalNetworkUsageDescription" = "Conectar a la red local";
+"NSLocationWhenInUseUsageDescription" = "Acceder al nombre de la red Wi-Fi corriente";

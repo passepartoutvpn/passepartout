@@ -1,0 +1,15 @@
+Hi,
+
+$comment
+
+--
+
+App: $appLine
+OS: $osLine
+Device: $deviceLine
+Purchased: $purchasedProducts
+Providers: $providerLastUpdates
+
+--
+
+Regards

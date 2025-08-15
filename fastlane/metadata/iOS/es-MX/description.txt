@@ -11,7 +11,6 @@ Passepartout admite configuraciones para los proveedores de VPN más populares, 
 - NordVPN  
 - Oeck  
 - PIA  
-- ProtonVPN  
 - Surfshark  
 - TorGuard  
 - TunnelBear  

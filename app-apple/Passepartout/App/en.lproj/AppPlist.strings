@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Scan QR codes";
+"NSFaceIDUsageDescription" = "Unlock app with Face ID";
+"NSLocalNetworkUsageDescription" = "Connect to local network";
+"NSLocationWhenInUseUsageDescription" = "Access name of current Wi-Fi";

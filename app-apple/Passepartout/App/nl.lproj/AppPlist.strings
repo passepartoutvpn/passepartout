@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "QR-codes scannen";
+"NSFaceIDUsageDescription" = "Ontgrendel app met gezichtsherkenning";
+"NSLocalNetworkUsageDescription" = "Verbinden met lokaal netwerk";
+"NSLocationWhenInUseUsageDescription" = "Toegangsnaam van huidig Wi-Fi-netwerk";

@@ -7,10 +7,9 @@ on:
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
-  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
   TESTFLIGHT_PREFACE: ${{ vars.TESTFLIGHT_PREFACE }}
   PLATFORMS: "iOS macOS tvOS"
+  APPLE_ROOT: app-apple
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -30,18 +29,21 @@ jobs:
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
       - name: Save app version
         id: app_version
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           VERSION=`ci/version-number.sh`
           BUILD=`ci/build-number.sh`
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "build=$BUILD" >> $GITHUB_OUTPUT
       - name: Validate translations
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           scripts/clean-translations.sh
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
       - name: Run App tests
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/run-app-tests.sh
       - name: Run Partout tests
@@ -51,7 +53,7 @@ jobs:
       version: ${{ steps.app_version.outputs.version }}
       build: ${{ steps.app_version.outputs.build }}
   build_upload:
-    name: Upload to ASC
+    name: Upload to App Store Connect
     runs-on: macos-15
     needs: validate_codebase
     continue-on-error: true
@@ -66,13 +68,18 @@ jobs:
           submodules: true
           certificates_url: ${{ vars.CERTIFICATES_URL }}
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - name: Use remote Core source
         run: |
           ci/use-partout-core-source.sh
       - name: Archive app
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-archive.sh ${{ matrix.platform }}
       - name: Export archive
+        working-directory: ${{ env.APPLE_ROOT }}
         run: |
           ci/xcode-export.sh ${{ matrix.platform }}
       - name: Upload archive
@@ -131,12 +138,67 @@ jobs:
       - name: Submit for App Review
         run: |
           bundle exec fastlane --env ${{ matrix.platform }} asc_review
-  publish_to_app_store:
-    name: Publish to App Store
+  distribute_dmg:
+    name: Distribute Mac .dmg
+    runs-on: macos-15
+    needs: [validate_codebase]
+    timeout-minutes: 30
+    strategy:
+      fail-fast: true
+      matrix:
+        arch: ["arm64", "x86_64"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import GPG key
+        env:
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+        run: |
+          ci/gpg-import.sh "$GPG_KEY"
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
+          certificates_url: ${{ vars.CERTIFICATES_URL }}
+          certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
+      - name: Archive app
+        working-directory: ${{ env.APPLE_ROOT }}
+        run: |
+          ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
+      - name: Export app
+        working-directory: ${{ env.APPLE_ROOT }}
+        run: |
+          ci/xcode-export.sh macOS 1
+      - name: Generate .dmg
+        working-directory: ${{ env.APPLE_ROOT }}
+        run: |
+          ci/dmg-generate.sh ${{ matrix.arch }}
+      - name: Notarize .dmg
+        working-directory: ${{ env.APPLE_ROOT }}
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        run: |
+          ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
+      - name: Sign .dmg
+        working-directory: ${{ env.APPLE_ROOT }}
+        env:
+          GPG_FINGERPRINT: ${{ vars.GPG_FINGERPRINT }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-dmg-${{ matrix.arch }}
+          path: |
+            Passepartout.*.dmg
+            Passepartout.*.dmg.asc
+  publish_release:
+    name: Publish Release
     runs-on: ubuntu-latest
-    needs: [validate_codebase, build_upload, submit_for_app_review]
+    needs: [validate_codebase, build_upload, submit_for_app_review, distribute_dmg]
     environment:
-      name: app_store
+      name: release
     env:
       APP_VERSION: ${{ needs.validate_codebase.outputs.version }}
       RELEASE_NOTES: CHANGELOG.txt
@@ -144,9 +206,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-      - uses: ruby/setup-ruby@v1
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
         with:
-          bundler-cache: true
+          path: artifacts
+          merge-multiple: true
+      - name: Print workspace structure
+        run: |
+          ls -R
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
         with:
@@ -158,9 +225,14 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          bundle exec fastlane tag_release version:$APP_VERSION
+          tag="v$APP_VERSION"
+          git tag -as "$tag" -m "$tag"
+          git push origin "$tag"
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
+          name: ${{ env.APP_VERSION }}
           tag_name: "v${{ env.APP_VERSION }}"
           body_path: ${{ env.RELEASE_NOTES }}
+          files: |
+            artifacts/*.dmg*

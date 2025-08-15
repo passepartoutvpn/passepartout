@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfig</key>
+	<dict>
+		<key>appStoreId</key>
+		<string>$(CFG_APP_STORE_ID)</string>
+		<key>cloudKitId</key>
+		<string>$(CFG_CLOUDKIT_ID)</string>
+		<key>groupId</key>
+		<string>$(CFG_GROUP_ID)</string>
+		<key>iapBundlePrefix</key>
+		<string>$(CFG_IAP_BUNDLE_PREFIX)</string>
+		<key>keychainGroupId</key>
+		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
+		<key>legacyV2CloudKitId</key>
+		<string>$(CFG_LEGACY_V2_CLOUDKIT_ID)</string>
+		<key>legacyV2TVCloudKitId</key>
+		<string>$(CFG_LEGACY_V2_TV_CLOUDKIT_ID)</string>
+		<key>loginItemId</key>
+		<string>$(CFG_LOGIN_ITEM_ID)</string>
+		<key>tunnelId</key>
+		<string>$(CFG_TUNNEL_ID)</string>
+	</dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>All files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.item</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ovpn</string>
+				<string>conf</string>
+				<string>zip</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Extensions</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+</dict>
+</plist>

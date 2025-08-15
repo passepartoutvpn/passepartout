@@ -11,7 +11,6 @@ Passepartout supports presets for popular VPN providers, making it easy to conne
 - NordVPN
 - Oeck
 - PIA
-- ProtonVPN
 - Surfshark
 - TorGuard
 - TunnelBear

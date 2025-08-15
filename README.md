@@ -1,4 +1,4 @@
-![Passepartout logo](Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
+![Passepartout logo](app-apple/Passepartout/App/Assets.xcassets/Logo.imageset/Logo@2x.png)
 
 # [Passepartout][web-home]
 
@@ -38,9 +38,8 @@ Tailored for Apple platforms:
 
 - iOS 16+ / macOS 13+ / tvOS 17+
 - Xcode 16+
-- SwiftPM 6.0
-- Git (preinstalled with Xcode Command Line Tools)
-- Ruby (preinstalled with macOS)
+- SwiftPM 5.9
+- Git (preinstalled with the Xcode Command Line Tools)
 
 It's highly recommended that you use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -53,12 +52,28 @@ $ git clone https://github.com/passepartoutvpn/passepartout
 $ git submodule update --init submodules/partout
 ```
 
-For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
+then find the Xcode project in `app-apple`. For everything to work properly, you must comply with all the capabilities and entitlements in the main app and the tunnel extension target. Therefore, you must update the `Config.xcconfig` file according to your developer account.
 
 To test the app on your Mac or iOS/tvOS Simulator:
 
 - Open `Passepartout.xcodeproj` in Xcode
 - Run the `Passepartout` target
+
+### Binaries
+
+All the [GitHub Releases][github-releases] come with Mac .dmg images for arm64 and x86_64, though currently limited to free features only. It's recommended that you verify the GPG signatures with [my GPG key][gpg-key], which you can also fetch from the public keyservers:
+
+```
+gpg --recv-keys 28891B14B2635EA11F438034092E0218047A5650
+```
+
+### Homebrew
+
+You can install the Mac app with [Homebrew Cask][homebrew-cask] too:
+
+```shell
+brew install passepartout
+```
 
 ## License
 
@@ -82,6 +97,7 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 - [SwiftGen][credits-swiftgen]
 - [SwiftLint][credits-swiftlint]
 - [Tejas Mehta][credits-tmthecoder] for the implementation of the [OpenVPN XOR patch][credits-tmthecoder-xor]
+- [vaygr][credits-vaygr] for adding Passepartout to [Homebrew Cask][credits-vaygr-cask]
 
 The logo is taken from the awesome Circle Icons set by Nick Roach.
 
@@ -144,6 +160,10 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [dep-brew]: https://brew.sh/
 [dep-openssl]: https://www.openssl.org/
 
+[github-releases]: https://github.com/passepartoutvpn/passepartout/releases/latest
+[gpg-key]: ci/gpg.txt
+[homebrew-cask]: https://github.com/Homebrew/homebrew-cask
+
 [license-content]: LICENSE
 [contrib-cla]: CLA.rst
 [contrib-readme]: CONTRIBUTING.md
@@ -156,6 +176,8 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [credits-swiftlint]: https://github.com/realm/SwiftLint
 [credits-tmthecoder]: https://github.com/tmthecoder
 [credits-tmthecoder-xor]: https://github.com/passepartoutvpn/tunnelkit/pull/255
+[credits-vaygr]: https://github.com/vaygr
+[credits-vaygr-cask]: https://github.com/Homebrew/homebrew-cask/pull/214696
 
 [web-home]: https://passepartoutvpn.app
 [web-blog]: https://passepartoutvpn.app/blog/
@@ -166,4 +188,4 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [about-twitter]: https://twitter.com/keeshux
 [about-github-discussions]: https://github.com/orgs/passepartoutvpn/discussions
 [about-reddit]: https://www.reddit.com/r/passepartout
-[about-testflight]: https://testflight.apple.com/join/K71mtLjZ
+[about-testflight]: https://testflight.apple.com/join/dnA4CXFJ

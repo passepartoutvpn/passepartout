@@ -13,76 +13,10 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-fastlane_require "dotenv"
-fastlane_require "fileutils"
-
-load "xcconfig.rb"
-Dotenv.load ".env.secret"
-logname = "CHANGELOG.txt"
-
-desc "Bump version"
-lane :bump do |options|
-    xcconfig = ENV["XCCONFIG_PATH"]
-    api = ENV["API_PACKAGE_PATH"]
-    metadata = "fastlane/metadata"
-
-    unless options[:no_log]
-        if options[:since]
-            between = [options[:since], "HEAD"]
-        else
-            between = nil
-        end
-        log = changelog_from_git_commits(
-            between: between,
-            pretty: "* %s",
-            date_format: "short"
-        )
-        path = "../#{logname}"
-        path_tmp = "#{path}.tmp"
-        File.open(path_tmp, "w") { |file|
-            file.write(log)
-        }
-        if system("vim", path_tmp)
-            FileUtils.mv(path_tmp, path)
-        else
-            File.delete(path_tmp)
-            UI.user_error!("CHANGELOG editor cancelled")
-        end
-    end
-    build = options[:build]
-    version = options[:version]
-    if build.nil? || build.empty?
-        build = xcconfig_get("../#{xcconfig}", "CURRENT_PROJECT_VERSION").to_i + 1
-    end
-    xcconfig_set("../#{xcconfig}", "CURRENT_PROJECT_VERSION", build)
-    unless version.nil? || version.empty?
-        xcconfig_set("../#{xcconfig}", "MARKETING_VERSION", version)
-    end
-    unless options[:no_log]
-        system("../scripts/copy-release-notes.sh")
-    end
-    git_commit(
-        path: [
-            xcconfig,
-            api,
-            metadata,
-            logname
-        ],
-        message: "Bump version"
-    )
-    unless options[:no_tag]
-        add_git_tag(
-            includes_lane: false,
-            sign: true,
-            build_number: build
-        )
-    end
-end
-
 desc "Push a new beta build to TestFlight"
 lane :beta do
     preface = ENV["TESTFLIGHT_PREFACE"]
-    log = File.read("../#{logname}")
+    log = File.read("../CHANGELOG.txt")
     changelog = preface + log
     pilot(
         changelog: changelog,
@@ -93,8 +27,8 @@ end
 
 desc "Distribute to Public Beta"
 lane :public_beta do
-    ENV.delete["PILOT_IPA"]
-    ENV.delete["PILOT_PKG"]
+    ENV.delete("PILOT_IPA")
+    ENV.delete("PILOT_PKG")
     pilot(
         distribute_only: true,
         distribute_external: true,
@@ -129,18 +63,5 @@ lane :asc_review do |options|
             add_id_info_uses_idfa: false,
             export_compliance_uses_encryption: false
         }
-    )
-end
-
-desc "Tag release"
-lane :tag_release do |options|
-    version = options[:version]
-    tag = "v#{version}"
-    add_git_tag(
-        tag: tag,
-        sign: true
-    )
-    push_git_tags(
-        tag: tag
     )
 end

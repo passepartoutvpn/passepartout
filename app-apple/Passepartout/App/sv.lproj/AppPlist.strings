@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Skanna QR-koder";
+"NSFaceIDUsageDescription" = "Lås upp appen med Face ID";
+"NSLocalNetworkUsageDescription" = "Anslut till lokalt nätverk";
+"NSLocationWhenInUseUsageDescription" = "Åtkomstnamn för aktuellt Wi-Fi";

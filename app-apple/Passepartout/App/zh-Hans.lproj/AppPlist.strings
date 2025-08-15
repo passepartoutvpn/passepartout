@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "扫描二维码";
+"NSFaceIDUsageDescription" = "用面容ID解锁应用";
+"NSLocalNetworkUsageDescription" = "连接本地网络";
+"NSLocationWhenInUseUsageDescription" = "当前Wi-Fi的访问名称";
