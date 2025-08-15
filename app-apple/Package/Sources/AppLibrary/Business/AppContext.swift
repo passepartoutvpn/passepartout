@@ -197,8 +197,7 @@ private extension AppContext {
         pendingTask = Task {
             await reloadSystemExtension()
 
-            // If the receipt was loaded once, do not invalidate it
-            // before a minimum interval (10/30/60 minutes)
+            // Do not reload the receipt unconditionally
             if shouldInvalidateReceipt {
                 await iapManager.reloadReceipt()
                 self.didLoadReceiptDate = Date()
