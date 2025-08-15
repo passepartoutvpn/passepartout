@@ -61,8 +61,8 @@
         "refreshInfrastructureRateLimit": 86400.0
     },
     "iap": {
-        "productsTimeoutInterval": 10,
-        "receiptInvalidationInterval": 600
+        "productsTimeoutInterval": 10.0,
+        "receiptInvalidationInterval": 600.0
     },
     "webReceiver": {
         "port": 10000,
