@@ -14,17 +14,17 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        let appPreferences: AppPreferenceValues?
+        let startPreferences: AppPreferenceValues?
         if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
             do {
-                appPreferences = try JSONDecoder()
+                startPreferences = try JSONDecoder()
                     .decode(AppPreferenceValues.self, from: encodedPreferences as Data)
             } catch {
                 pp_log_g(.app, .error, "Unable to decode startTunnel() preferences")
-                appPreferences = nil
+                startPreferences = nil
             }
         } else {
-            appPreferences = nil
+            startPreferences = nil
         }
 
         // MARK: Declare globals
@@ -39,9 +39,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         let (kvManager, preferences) = await MainActor.run {
             let kvManager = dependencies.kvManager
-            if let appPreferences {
-                kvManager.preferences = appPreferences
-                return (kvManager, appPreferences)
+            if let startPreferences {
+                kvManager.preferences = startPreferences
+                return (kvManager, startPreferences)
             } else {
                 return (kvManager, kvManager.preferences)
             }
@@ -88,8 +88,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         try await trackContext(ctx)
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
-        if let appPreferences {
-            pp_log(ctx, .app, .info, "\tDecoded preferences: \(appPreferences)")
+        if let startPreferences {
+            pp_log(ctx, .app, .info, "\tDecoded preferences: \(startPreferences)")
         } else {
             pp_log(ctx, .app, .info, "\tExisting preferences: \(preferences)")
         }
@@ -122,8 +122,12 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         do {
             var factoryOptions = NEInterfaceFactory.Options()
             factoryOptions.usesNetworkFramework = preferences.usesModernCrypto
+
+            // OpenVPNImplementationBuilder will retrieve the
+            // preferences in the connectionBlock
             var connectionOptions = ConnectionParameters.Options()
-            connectionOptions.userInfo = appPreferences
+            connectionOptions.userInfo = preferences
+
             fwd = try NEPTPForwarder(
                 ctx,
                 controller: neTunnelController,
