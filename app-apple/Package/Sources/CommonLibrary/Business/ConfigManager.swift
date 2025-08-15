@@ -45,7 +45,8 @@ public final class ConfigManager: ObservableObject {
             pp_log_g(.app, .debug, "Config: refreshing bundle...")
             let newBundle = try await strategy.bundle()
             bundle = newBundle
-            pp_log_g(.app, .info, "Config: active flags = \(newBundle.activeFlags)")
+            let activeFlags = newBundle.activeFlags(withBuild: buildNumber)
+            pp_log_g(.app, .info, "Config: active flags = \(activeFlags)")
             pp_log_g(.app, .debug, "Config: \(newBundle)")
         } catch AppError.rateLimit {
             pp_log_g(.app, .debug, "Config: TTL")
@@ -68,10 +69,8 @@ private extension ConfigManager {
         guard let map = bundle?.map[flag] else {
             return nil
         }
-        if let minBuild = map.minBuild {
-            guard buildNumber >= minBuild else {
-                return nil
-            }
+        guard map.isActive(withBuild: buildNumber) else {
+            return nil
         }
         return map
     }

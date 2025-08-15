@@ -9,6 +9,15 @@ public struct ConfigBundle: Decodable {
         public let minBuild: Int?
 
         public let data: JSON?
+
+        public func isActive(withBuild buildNumber: Int) -> Bool {
+            if let minBuild {
+                guard buildNumber >= minBuild else {
+                    return false
+                }
+            }
+            return rate == 100
+        }
     }
 
     // flag -> deployment (0-100)
@@ -26,7 +35,10 @@ public struct ConfigBundle: Decodable {
             }
     }
 
-    public var activeFlags: Set<ConfigFlag> {
-        Set(map.filter { $0.value.rate == 100 }.keys)
+    public func activeFlags(withBuild buildNumber: Int) -> Set<ConfigFlag> {
+        let flags = map.filter {
+            $0.value.isActive(withBuild: buildNumber)
+        }
+        return Set(flags.keys)
     }
 }
