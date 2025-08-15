@@ -307,6 +307,11 @@ private extension AppContext {
         guard let didLoadReceiptDate else {
             return true
         }
+        // Always force a reload if purchased products are
+        // empty, because StoreKit may fail silently at times
+        if iapManager.purchasedProducts.isEmpty {
+            return true
+        }
         // Must have elapsed more than invalidation period
         let elapsed = -didLoadReceiptDate.timeIntervalSinceNow
         return elapsed >= receiptInvalidationInterval
