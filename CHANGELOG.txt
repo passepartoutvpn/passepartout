@@ -1,1 +1,2 @@
-* Organize repository as cross-platform app (#1516)
+* Retry in-app verification before failing (#1358)
+* Opt into modern NE sockets (#1522)
