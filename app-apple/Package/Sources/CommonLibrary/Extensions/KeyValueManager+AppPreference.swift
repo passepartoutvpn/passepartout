@@ -19,6 +19,7 @@ extension KeyValueManager {
             values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
             values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
             values.usesModernCrypto = bool(forKey: AppPreference.usesModernCrypto.key)
+            values.usesNESocket = bool(forKey: AppPreference.usesNESocket.key)
             return values
         }
         set {
@@ -30,6 +31,7 @@ extension KeyValueManager {
             set(newValue.logsPrivateData, forKey: AppPreference.logsPrivateData.key)
             set(newValue.skipsPurchases, forKey: AppPreference.skipsPurchases.key)
             set(newValue.usesModernCrypto, forKey: AppPreference.usesModernCrypto.key)
+            set(newValue.usesNESocket, forKey: AppPreference.usesNESocket.key)
         }
     }
 
