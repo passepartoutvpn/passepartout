@@ -14,14 +14,21 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonUtilsTests",
-        "name" : "CommonUtilsTests"
+        "containerPath" : "container:Package",
+        "identifier" : "AppLibraryTests",
+        "name" : "AppLibraryTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/App",
+        "containerPath" : "container:Package",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Package",
         "identifier" : "AppLibraryMainTests",
         "name" : "AppLibraryMainTests"
       }
@@ -35,30 +42,22 @@
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "CommonLibraryTests",
-        "name" : "CommonLibraryTests"
+        "containerPath" : "container:Package",
+        "identifier" : "CommonUtilsTests",
+        "name" : "CommonUtilsTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/App",
-        "identifier" : "AppLibraryTests",
-        "name" : "AppLibraryTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Packages\/App",
+        "containerPath" : "container:Package",
         "identifier" : "CommonWebTests",
         "name" : "CommonWebTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:Packages\/App",
+        "containerPath" : "container:Package",
         "identifier" : "CommonLegacyV2Tests",
         "name" : "CommonLegacyV2Tests"
       }
