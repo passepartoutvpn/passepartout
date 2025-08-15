@@ -42,11 +42,15 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let webReceiverManager: WebReceiverManager
 
+    private let receiptInvalidationInterval: TimeInterval
+
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
 
     private var launchTask: Task<Void, Error>?
 
     private var pendingTask: Task<Void, Never>?
+
+    private var didLoadReceiptDate: Date?
 
     private var subscriptions: Set<AnyCancellable>
 
@@ -66,6 +70,7 @@ public final class AppContext: ObservableObject, Sendable {
         tunnel: ExtendedTunnel,
         versionChecker: VersionChecker? = nil,
         webReceiverManager: WebReceiverManager,
+        receiptInvalidationInterval: TimeInterval = 30.0,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
@@ -84,7 +89,9 @@ public final class AppContext: ObservableObject, Sendable {
         self.tunnel = tunnel
         self.versionChecker = versionChecker ?? VersionChecker()
         self.webReceiverManager = webReceiverManager
+        self.receiptInvalidationInterval = receiptInvalidationInterval
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
+        didLoadReceiptDate = nil
         subscriptions = []
     }
 }
@@ -122,6 +129,7 @@ private extension AppContext {
         // Defer loads to not block app launch
         Task {
             await iapManager.reloadReceipt()
+            didLoadReceiptDate = Date()
         }
         Task {
             await reloadSystemExtension()
@@ -136,6 +144,7 @@ private extension AppContext {
                 self?.kvManager.set(!$0, forKey: AppPreference.skipsPurchases.key)
                 Task {
                     await self?.iapManager.reloadReceipt()
+                    self?.didLoadReceiptDate = Date()
                 }
             }
             .store(in: &subscriptions)
@@ -188,10 +197,12 @@ private extension AppContext {
         pendingTask = Task {
             await reloadSystemExtension()
 
-            // FIXME: #1358
             // If the receipt was loaded once, do not invalidate it
             // before a minimum interval (10/30/60 minutes)
-            await iapManager.reloadReceipt()
+            if shouldInvalidateReceipt {
+                await iapManager.reloadReceipt()
+                self.didLoadReceiptDate = Date()
+            }
         }
         await pendingTask?.value
         pendingTask = nil
@@ -289,6 +300,16 @@ private extension AppContext {
         } catch {
             pp_log_g(.app, .error, "System Extension: load error: \(error)")
         }
+    }
+
+    var shouldInvalidateReceipt: Bool {
+        // Receipt never loaded, force load
+        guard let didLoadReceiptDate else {
+            return true
+        }
+        // Must have elapsed more than invalidation period
+        let elapsed = -didLoadReceiptDate.timeIntervalSinceNow
+        return elapsed >= receiptInvalidationInterval
     }
 }
 

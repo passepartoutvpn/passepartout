@@ -154,6 +154,8 @@ public struct Constants: Decodable, Sendable {
 
     public struct IAP: Decodable, Sendable {
         public let productsTimeoutInterval: Int
+
+        public let receiptInvalidationInterval: Int
     }
 
     public struct WebReceiver: Decodable, Sendable {
