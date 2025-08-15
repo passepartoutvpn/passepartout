@@ -22,6 +22,8 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case usesModernCrypto
 
+    case usesNESocket // not directly accessible
+
     public var key: String {
         "App.\(rawValue)"
     }
@@ -43,6 +45,8 @@ public struct AppPreferenceValues: Codable, Sendable {
     public var skipsPurchases = false
 
     public var usesModernCrypto = false
+
+    public var usesNESocket = false
 
     public init() {
     }

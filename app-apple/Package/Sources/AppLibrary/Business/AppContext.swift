@@ -100,6 +100,10 @@ extension AppContext {
 
             await configManager.refreshBundle()
             await versionChecker.checkLatestRelease()
+
+            // use NESocket in tunnel
+            let shouldUseNESocket = configManager.isActive(.neSocket)
+            kvManager.set(shouldUseNESocket, forKey: AppPreference.usesNESocket.key)
         }
     }
 }
