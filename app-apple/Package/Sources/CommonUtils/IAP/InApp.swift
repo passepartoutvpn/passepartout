@@ -46,7 +46,7 @@ public protocol InAppHelper {
 
     var didUpdate: AnyPublisher<Void, Never> { get }
 
-    func fetchProducts(timeout: Int) async throws -> [ProductType: InAppProduct]
+    func fetchProducts(timeout: TimeInterval) async throws -> [ProductType: InAppProduct]
 
     func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult
 

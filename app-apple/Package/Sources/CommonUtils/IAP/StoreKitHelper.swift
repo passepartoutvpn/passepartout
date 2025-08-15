@@ -43,7 +43,7 @@ extension StoreKitHelper {
         didUpdateSubject.eraseToAnyPublisher()
     }
 
-    public func fetchProducts(timeout: Int) async throws -> [ProductType: InAppProduct] {
+    public func fetchProducts(timeout: TimeInterval) async throws -> [ProductType: InAppProduct] {
         let skProducts = try await performTask(withTimeout: timeout) {
             try await Product.products(for: self.products.map(self.inAppIdentifier))
         }

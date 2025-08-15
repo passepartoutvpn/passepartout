@@ -184,7 +184,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                     of: originalProfile,
                     iapManager: iapManager,
                     environment: environment,
-                    interval: params.interval
+                    params: params
                 )
             }
         } catch {
@@ -261,15 +261,18 @@ private extension PacketTunnelProvider {
 // MARK: - Eligibility
 
 private extension PacketTunnelProvider {
+
+    @MainActor
     func verifyEligibility(
         of profile: Profile,
         iapManager: IAPManager,
         environment: TunnelEnvironment,
-        interval: TimeInterval
+        params: Constants.Tunnel.Verification.Parameters
     ) async {
         guard let ctx else {
             fatalError("Forgot to set ctx?")
         }
+        var attempts = params.attempts
         while true {
             guard !Task.isCancelled else {
                 return
@@ -277,8 +280,19 @@ private extension PacketTunnelProvider {
             do {
                 pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
                 await iapManager.reloadReceipt()
-                try await iapManager.verify(profile)
+                try iapManager.verify(profile)
             } catch {
+
+                // mitigate the StoreKit inability to report errors, sometimes it
+                // would just return empty products, e.g. on network failure. in those
+                // cases, retry a few times before failing
+                if attempts > 0 {
+                    attempts -= 1
+                    pp_log(ctx, .app, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
+                    try? await Task.sleep(interval: params.retryInterval)
+                    continue
+                }
+
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
                 pp_log(ctx, .app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
@@ -289,8 +303,11 @@ private extension PacketTunnelProvider {
                 return
             }
 
-            pp_log(ctx, .app, .info, "Will verify profile again in \(interval) seconds...")
-            try? await Task.sleep(interval: interval)
+            pp_log(ctx, .app, .info, "Will verify profile again in \(params.interval) seconds...")
+            try? await Task.sleep(interval: params.interval)
+
+            // reset attempts for next verification
+            attempts = params.attempts
         }
     }
 }

@@ -322,6 +322,7 @@ extension AppContext {
             tunnel: tunnel,
             versionChecker: versionChecker,
             webReceiverManager: webReceiverManager,
+            receiptInvalidationInterval: constants.iap.receiptInvalidationInterval,
             onEligibleFeaturesBlock: onEligibleFeaturesBlock
         )
     }

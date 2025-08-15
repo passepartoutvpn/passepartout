@@ -42,11 +42,15 @@ public final class AppContext: ObservableObject, Sendable {
 
     public let webReceiverManager: WebReceiverManager
 
+    private let receiptInvalidationInterval: TimeInterval
+
     private let onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)?
 
     private var launchTask: Task<Void, Error>?
 
     private var pendingTask: Task<Void, Never>?
+
+    private var didLoadReceiptDate: Date?
 
     private var subscriptions: Set<AnyCancellable>
 
@@ -66,6 +70,7 @@ public final class AppContext: ObservableObject, Sendable {
         tunnel: ExtendedTunnel,
         versionChecker: VersionChecker? = nil,
         webReceiverManager: WebReceiverManager,
+        receiptInvalidationInterval: TimeInterval = 30.0,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
     ) {
         self.apiManager = apiManager
@@ -84,7 +89,9 @@ public final class AppContext: ObservableObject, Sendable {
         self.tunnel = tunnel
         self.versionChecker = versionChecker ?? VersionChecker()
         self.webReceiverManager = webReceiverManager
+        self.receiptInvalidationInterval = receiptInvalidationInterval
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock
+        didLoadReceiptDate = nil
         subscriptions = []
     }
 }
@@ -95,13 +102,13 @@ public final class AppContext: ObservableObject, Sendable {
 extension AppContext {
     public func onApplicationActive() {
         Task {
-            // XXX: should handle AppError.couldNotLaunch (although extremely rare)
+            // XXX: Should handle AppError.couldNotLaunch (although extremely rare)
             try await onForeground()
 
             await configManager.refreshBundle()
             await versionChecker.checkLatestRelease()
 
-            // use NESocket in tunnel
+            // Use NESocket in tunnel if .neSocket ConfigFlag is active
             let shouldUseNESocket = configManager.isActive(.neSocket)
             kvManager.set(shouldUseNESocket, forKey: AppPreference.usesNESocket.key)
         }
@@ -119,9 +126,10 @@ private extension AppContext {
         pp_log_g(.App.profiles, .info, "\tObserve in-app events...")
         iapManager.observeObjects(withProducts: true)
 
-        // defer loads
+        // Defer loads to not block app launch
         Task {
             await iapManager.reloadReceipt()
+            didLoadReceiptDate = Date()
         }
         Task {
             await reloadSystemExtension()
@@ -136,6 +144,7 @@ private extension AppContext {
                 self?.kvManager.set(!$0, forKey: AppPreference.skipsPurchases.key)
                 Task {
                     await self?.iapManager.reloadReceipt()
+                    self?.didLoadReceiptDate = Date()
                 }
             }
             .store(in: &subscriptions)
@@ -177,15 +186,22 @@ private extension AppContext {
     }
 
     func onForeground() async throws {
+
+        // onForeground() is redundant after launch
         let didLaunch = try await waitForTasks()
         guard !didLaunch else {
-            return // foreground is redundant after launch
+            return
         }
 
         pp_log_g(.app, .notice, "Application did enter foreground")
         pendingTask = Task {
             await reloadSystemExtension()
-            await iapManager.reloadReceipt()
+
+            // Do not reload the receipt unconditionally
+            if shouldInvalidateReceipt {
+                await iapManager.reloadReceipt()
+                self.didLoadReceiptDate = Date()
+            }
         }
         await pendingTask?.value
         pendingTask = nil
@@ -248,24 +264,24 @@ private extension AppContext {
     func waitForTasks() async throws -> Bool {
         var didLaunch = false
 
-        // must launch once before anything else
+        // Require launch task to complete before performing anything else
         if launchTask == nil {
             launchTask = Task {
                 do {
                     try await onLaunch()
                 } catch {
-                    launchTask = nil // redo launch
+                    launchTask = nil // Redo the launch task
                     throw AppError.couldNotLaunch(reason: error)
                 }
             }
             didLaunch = true
         }
 
-        // will throw on .couldNotLaunch
-        // next wait will re-attempt launch (launchTask == nil)
+        // Will throw on .couldNotLaunch, and the next await
+        // will re-attempt launch because launchTask == nil
         try await launchTask?.value
 
-        // wait for pending task if any
+        // Wait for pending task if any
         await pendingTask?.value
         pendingTask = nil
 
@@ -284,6 +300,21 @@ private extension AppContext {
             pp_log_g(.app, .error, "System Extension: load error: \(error)")
         }
     }
+
+    var shouldInvalidateReceipt: Bool {
+        // Receipt never loaded, force load
+        guard let didLoadReceiptDate else {
+            return true
+        }
+        // Always force a reload if purchased products are
+        // empty, because StoreKit may fail silently at times
+        if iapManager.purchasedProducts.isEmpty {
+            return true
+        }
+        // Must have elapsed more than invalidation period
+        let elapsed = -didLoadReceiptDate.timeIntervalSinceNow
+        return elapsed >= receiptInvalidationInterval
+    }
 }
 
 extension Collection where Element == Profile.DiffResult {
@@ -291,10 +322,10 @@ extension Collection where Element == Profile.DiffResult {
         contains {
             switch $0 {
             case .changedName:
-                // profile renamed
+                // Do not reconnect on profile rename
                 return false
             case .changedModules(let ids):
-                // only changed on-demand module
+                // Do not reconnect if only an on-demand module was changed
                 if ids.count == 1, let onlyID = ids.first,
                    profile.module(withId: onlyID) is OnDemandModule {
                     return false

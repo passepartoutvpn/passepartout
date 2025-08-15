@@ -31,7 +31,7 @@ public actor FakeAppProductHelper: AppProductHelper {
         didUpdateSubject.eraseToAnyPublisher()
     }
 
-    public func fetchProducts(timeout: Int) async throws -> [AppProduct: InAppProduct] {
+    public func fetchProducts(timeout: TimeInterval) async throws -> [AppProduct: InAppProduct] {
         products = AppProduct.all.reduce(into: [:]) {
             $0[$1] = $1.asFakeIAP
         }
