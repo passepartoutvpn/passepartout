@@ -12,6 +12,8 @@ public protocol ConfigManagerStrategy {
 public final class ConfigManager: ObservableObject {
     private let strategy: ConfigManagerStrategy?
 
+    private let buildNumber: Int
+
     @Published
     private var bundle: ConfigBundle?
 
@@ -19,10 +21,12 @@ public final class ConfigManager: ObservableObject {
 
     public init() {
         strategy = nil
+        buildNumber = .max // activate flags regardless of .minBuild
     }
 
-    public init(strategy: ConfigManagerStrategy) {
+    public init(strategy: ConfigManagerStrategy, buildNumber: Int) {
         self.strategy = strategy
+        self.buildNumber = buildNumber
     }
 
     // TODO: #1447, handle 0-100 deployment values with local random value
@@ -41,7 +45,8 @@ public final class ConfigManager: ObservableObject {
             pp_log_g(.app, .debug, "Config: refreshing bundle...")
             let newBundle = try await strategy.bundle()
             bundle = newBundle
-            pp_log_g(.app, .info, "Config: active flags = \(newBundle.activeFlags)")
+            let activeFlags = newBundle.activeFlags(withBuild: buildNumber)
+            pp_log_g(.app, .info, "Config: active flags = \(activeFlags)")
             pp_log_g(.app, .debug, "Config: \(newBundle)")
         } catch AppError.rateLimit {
             pp_log_g(.app, .debug, "Config: TTL")
@@ -51,13 +56,22 @@ public final class ConfigManager: ObservableObject {
     }
 
     public func isActive(_ flag: ConfigFlag) -> Bool {
-        bundle?.map[flag]?.rate == 100
+        activeMap(for: flag) != nil
     }
 
     public func data(for flag: ConfigFlag) -> JSON? {
-        guard let bundle, let map = bundle.map[flag], map.rate == 100 else {
+        activeMap(for: flag)?.data
+    }
+}
+
+private extension ConfigManager {
+    func activeMap(for flag: ConfigFlag) -> ConfigBundle.Config? {
+        guard let map = bundle?.map[flag] else {
             return nil
         }
-        return map.data
+        guard map.isActive(withBuild: buildNumber) else {
+            return nil
+        }
+        return map
     }
 }
