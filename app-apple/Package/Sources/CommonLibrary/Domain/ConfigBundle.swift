@@ -11,10 +11,8 @@ public struct ConfigBundle: Decodable {
         public let data: JSON?
 
         public func isActive(withBuild buildNumber: Int) -> Bool {
-            if let minBuild {
-                guard buildNumber >= minBuild else {
-                    return false
-                }
+            if let minBuild, buildNumber < minBuild {
+                return false
             }
             return rate == 100
         }
