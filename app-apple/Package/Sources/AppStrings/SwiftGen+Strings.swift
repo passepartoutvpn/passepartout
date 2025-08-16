@@ -988,6 +988,8 @@ public enum Strings {
       public static let modernCrypto = Strings.tr("Localizable", "views.preferences.modern_crypto", fallback: "Modern cryptography")
       /// Pin active profile
       public static let pinsActiveProfile = Strings.tr("Localizable", "views.preferences.pins_active_profile", fallback: "Pin active profile")
+      /// Relaxed verification
+      public static let relaxedVerification = Strings.tr("Localizable", "views.preferences.relaxed_verification", fallback: "Relaxed verification")
       /// Appearance
       public static let systemAppearance = Strings.tr("Localizable", "views.preferences.system_appearance", fallback: "Appearance")
       public enum DnsFallsBack {

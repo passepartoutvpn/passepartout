@@ -39,6 +39,9 @@ public struct PreferencesView: View {
     private var usesModernCrypto = false
 
     @State
+    private var relaxedVerification = false
+
+    @State
     private var isConfirmingEraseiCloud = false
 
     @State
@@ -69,6 +72,7 @@ public struct PreferencesView: View {
         }
         .themeKeyValue(kvManager, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
         .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
+        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
         .themeForm()
     }
 }
@@ -130,6 +134,8 @@ private extension PreferencesView {
                     header: Strings.Views.Preferences.Experimental.header,
                     subtitle: Strings.Views.Preferences.ModernCrypto.footer
                 )
+            Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
+                .themeContainerEntry()
         }
         .themeContainer(header: Strings.Views.Preferences.Experimental.header)
 
@@ -176,6 +182,9 @@ public struct PreferencesView: View {
     @State
     private var usesModernCrypto = false
 
+    @State
+    private var relaxedVerification = false
+
     public init(profileManager: ProfileManager) {
         self.profileManager = profileManager
     }
@@ -189,9 +198,11 @@ private extension PreferencesView {
     var experimentalSection: some View {
         Group {
             Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
+            Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
         }
         .themeSection(header: Strings.Views.Preferences.Experimental.header)
         .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
+        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
     }
 }
 
