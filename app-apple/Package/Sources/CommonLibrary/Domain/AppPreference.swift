@@ -18,6 +18,8 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case logsPrivateData
 
+    case relaxedVerification
+
     case skipsPurchases
 
     case usesModernCrypto
@@ -41,6 +43,8 @@ public struct AppPreferenceValues: Codable, Sendable {
     public var lastUsedProfileId: Profile.ID?
 
     public var logsPrivateData = false
+
+    public var relaxedVerification = false
 
     public var skipsPurchases = false
 
