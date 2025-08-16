@@ -137,7 +137,7 @@ private extension PreferencesView {
                     header: Strings.Views.Preferences.Experimental.header,
                     subtitle: Strings.Views.Preferences.ModernCrypto.footer
                 )
-            if configManager.isActive(.allowsRelaxedVerification) {
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
                 Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
                     .themeContainerEntry()
             }
@@ -182,6 +182,12 @@ public struct PreferencesView: View {
     @EnvironmentObject
     private var kvManager: KeyValueManager
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
+    @Environment(\.distributionTarget)
+    private var distributionTarget
+
     private let profileManager: ProfileManager
 
     @State
@@ -203,7 +209,7 @@ private extension PreferencesView {
     var experimentalSection: some View {
         Group {
             Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
-            if configManager.isActive(.allowsRelaxedVerification) {
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
                 Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
             }
         }
