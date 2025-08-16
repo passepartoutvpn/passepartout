@@ -265,11 +265,10 @@ extension AppContext {
 
 #if DEBUG
         let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
-        let betaConfigURL = configURL
 #else
         let configURL = Constants.shared.websites.config
-        let betaConfigURL = Constants.shared.websites.betaConfig
 #endif
+        let betaConfigURL = Constants.shared.websites.betaConfig
         let configManager = ConfigManager(
             strategy: GitHubConfigStrategy(
                 url: configURL,
