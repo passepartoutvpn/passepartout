@@ -302,6 +302,10 @@ private extension AppContext {
     }
 
     var shouldInvalidateReceipt: Bool {
+        // Always invalidate if "old" verification strategy
+        guard kvManager.bool(forAppPreference: .relaxedVerification) else {
+            return true
+        }
         // Receipt never loaded, force load
         guard let didLoadReceiptDate else {
             return true
