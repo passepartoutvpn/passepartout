@@ -190,7 +190,7 @@ private extension ExtendedTunnel {
 
                 // TODO: #218, keep "last used profile" until .multiple
                 if let first = newActiveProfiles.first {
-                    kvManager?.set(first.key.uuidString, forKey: AppPreference.lastUsedProfileId.key)
+                    kvManager?.set(first.key.uuidString, forAppPreference: .lastUsedProfileId)
                 }
             }
         }
@@ -239,7 +239,7 @@ private extension ExtendedTunnel {
 // TODO: #218, keep "last used profile" until .multiple
 private extension ExtendedTunnel {
     var lastUsedProfile: TunnelActiveProfile? {
-        guard let uuidString = kvManager?.string(forKey: AppPreference.lastUsedProfileId.key),
+        guard let uuidString = kvManager?.string(forAppPreference: .lastUsedProfileId),
               let uuid = UUID(uuidString: uuidString) else {
             return nil
         }

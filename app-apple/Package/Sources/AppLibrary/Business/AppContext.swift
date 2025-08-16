@@ -110,7 +110,7 @@ extension AppContext {
 
             // Use NESocket in tunnel if .neSocket ConfigFlag is active
             let shouldUseNESocket = configManager.isActive(.neSocket)
-            kvManager.set(shouldUseNESocket, forKey: AppPreference.usesNESocket.key)
+            kvManager.set(shouldUseNESocket, forAppPreference: .usesNESocket)
         }
     }
 }
@@ -141,7 +141,7 @@ private extension AppContext {
             .removeDuplicates()
             .sink { [weak self] in
                 pp_log_g(.App.iap, .info, "IAPManager.isEnabled -> \($0)")
-                self?.kvManager.set(!$0, forKey: AppPreference.skipsPurchases.key)
+                self?.kvManager.set(!$0, forAppPreference: .skipsPurchases)
                 Task {
                     await self?.iapManager.reloadReceipt()
                     self?.didLoadReceiptDate = Date()

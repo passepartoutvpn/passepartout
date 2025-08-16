@@ -13,14 +13,14 @@ public final class AppearanceManager: ObservableObject {
     @Published
     public var systemAppearance: SystemAppearance? {
         didSet {
-            kvManager.set(systemAppearance?.rawValue, forKey: UIPreference.systemAppearance.key)
+            kvManager.set(systemAppearance?.rawValue, forUIPreference: .systemAppearance)
             apply()
         }
     }
 
     public init(kvManager: KeyValueManager) {
         self.kvManager = kvManager
-        systemAppearance = kvManager.string(forKey: UIPreference.systemAppearance.key)
+        systemAppearance = kvManager.string(forUIPreference: .systemAppearance)
             .flatMap {
                 SystemAppearance(rawValue: $0)
             }

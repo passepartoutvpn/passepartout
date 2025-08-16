@@ -80,7 +80,7 @@ private extension RefreshInfrastructureButton {
     }
 
     func loadLastUpdate() {
-        guard let map = kvManager.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? else {
+        guard let map = kvManager.object(forUIPreference: .lastInfrastructureRefresh) as [String: TimeInterval]? else {
             elapsed = .infinity
             return
         }
@@ -92,9 +92,9 @@ private extension RefreshInfrastructureButton {
     }
 
     func saveLastUpdate() {
-        var map = kvManager.object(forKey: UIPreference.lastInfrastructureRefresh.key) as [String: TimeInterval]? ?? [:]
+        var map = kvManager.object(forUIPreference: .lastInfrastructureRefresh) as [String: TimeInterval]? ?? [:]
         map[module.providerId.rawValue] = Date.timeIntervalSinceReferenceDate
-        kvManager.set(map, forKey: UIPreference.lastInfrastructureRefresh.key)
+        kvManager.set(map, forUIPreference: .lastInfrastructureRefresh)
         elapsed = .zero
     }
 }

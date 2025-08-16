@@ -107,7 +107,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 productsAtBuild: dependencies.productsAtBuild()
             )
             if distributionTarget.supportsIAP {
-                manager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
+                manager.isEnabled = !kvManager.bool(forAppPreference: .skipsPurchases)
             } else {
                 manager.isEnabled = false
             }
