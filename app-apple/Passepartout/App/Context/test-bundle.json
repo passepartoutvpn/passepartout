@@ -2,6 +2,9 @@
     "newPaywall": {
         "rate": 100
     },
+    "allowsRelaxedVerification": {
+        "rate": 100
+    },
     "neSocket": {
         "rate": 100,
         "minBuild": 3903
