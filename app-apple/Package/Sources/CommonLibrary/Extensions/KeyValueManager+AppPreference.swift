@@ -44,3 +44,33 @@ extension KeyValueManager {
         self.init(store: store, fallback: values)
     }
 }
+
+// MARK: - Shortcuts
+
+extension KeyValueManager {
+    public func object<T>(for pref: AppPreference) -> T? {
+        object(forKey: pref.key)
+    }
+
+    public func set<T>(_ value: T?, for pref: AppPreference) {
+        set(value, forKey: pref.key)
+    }
+}
+
+extension KeyValueManager {
+    public func bool(for pref: AppPreference) -> Bool {
+        bool(forKey: pref.key)
+    }
+
+    public func integer(for pref: AppPreference) -> Int {
+        integer(forKey: pref.key)
+    }
+
+    public func double(for pref: AppPreference) -> Double {
+        double(forKey: pref.key)
+    }
+
+    public func string(for pref: AppPreference) -> String? {
+        string(forKey: pref.key)
+    }
+}
