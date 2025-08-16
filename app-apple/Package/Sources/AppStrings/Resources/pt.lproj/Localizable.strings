@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Nada para migrar";
 "views.migration.sections.main.header" = "Selecione abaixo os perfis de versões antigas de %@ que você deseja importar. Caso seus perfis estejam armazenados no iCloud, pode levar um tempo para sincronizá-los. Se não os vir agora, volte mais tarde.";
 "views.migration.title" = "Migrar";
+"views.paywall_new.sections.products.header" = "Comprar individualmente";
 "views.paywall.alerts.confirmation.edit_profile" = "Editar perfil";
 "views.paywall.alerts.confirmation.message.connect" = "Você pode testar a conexão por %d minutos.";
 "views.paywall.alerts.confirmation.message.save" = "Toque nos ícones de cadeado para comprar os recursos ausentes.";
@@ -311,7 +312,6 @@
 "views.paywall.sections.full_products.footer" = "Estes produtos incluem recursos atuais e futuros.";
 "views.paywall.sections.full_products.header" = "Todos os recursos";
 "views.paywall.sections.products.footer" = "Todas as compras são compatíveis com Compartilhamento Familiar.";
-"views.paywall_new.sections.products.header" = "Comprar individualmente";
 "views.paywall.sections.products.header" = "Produtos sugeridos";
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você fez compras anteriormente, pode restaurá-las aqui.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Criptografia moderna";
 "views.preferences.pins_active_profile.footer" = "Também exibe o perfil ativo no topo para acesso rápido.";
 "views.preferences.pins_active_profile" = "Fixar perfil ativo";
+"views.preferences.relaxed_verification" = "Verificação alternativa";
 "views.preferences.system_appearance" = "Aparência";
 "views.profile.alerts.purchase.buttons.ok" = "Salvar assim mesmo";
 "views.profile.module_list.section.footer" = "Toque nos módulos para editar suas configurações. Eles podem ser arrastados para definir a prioridade.";
