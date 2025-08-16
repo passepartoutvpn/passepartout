@@ -19,6 +19,9 @@ public struct PreferencesView: View {
     @EnvironmentObject
     private var kvManager: KeyValueManager
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
 #if os(iOS)
     @AppStorage(UIPreference.locksInBackground.key)
     private var locksInBackground = false
@@ -134,8 +137,10 @@ private extension PreferencesView {
                     header: Strings.Views.Preferences.Experimental.header,
                     subtitle: Strings.Views.Preferences.ModernCrypto.footer
                 )
-            Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
-                .themeContainerEntry()
+            if configManager.isActive(.allowsRelaxedVerification) {
+                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
+                    .themeContainerEntry()
+            }
         }
         .themeContainer(header: Strings.Views.Preferences.Experimental.header)
 
@@ -198,7 +203,9 @@ private extension PreferencesView {
     var experimentalSection: some View {
         Group {
             Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
-            Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
+            if configManager.isActive(.allowsRelaxedVerification) {
+                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
+            }
         }
         .themeSection(header: Strings.Views.Preferences.Experimental.header)
         .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)

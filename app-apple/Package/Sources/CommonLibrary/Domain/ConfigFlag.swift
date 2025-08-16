@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
 public enum ConfigFlag: String, RawRepresentable, Codable, Sendable {
+    case allowsRelaxedVerification
     case appNotWorking
     case neSocket
     case newPaywall

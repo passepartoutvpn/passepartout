@@ -111,6 +111,11 @@ extension AppContext {
             // Use NESocket in tunnel if .neSocket ConfigFlag is active
             let shouldUseNESocket = configManager.isActive(.neSocket)
             kvManager.set(shouldUseNESocket, forAppPreference: .usesNESocket)
+
+            // Disable .relaxedVerification if ConfigFlag disallows it
+            if !configManager.isActive(.allowsRelaxedVerification) {
+                kvManager.set(false, forAppPreference: .relaxedVerification)
+            }
         }
     }
 }
