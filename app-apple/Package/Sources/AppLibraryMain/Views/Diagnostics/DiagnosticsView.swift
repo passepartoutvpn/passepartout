@@ -163,7 +163,7 @@ private extension DiagnosticsView {
         AppCommandLine.contains(.withReportIssue) ||
             iapManager.isEligibleForFeedback ||
             distributionTarget.canAlwaysReportIssue ||
-            kvManager.bool(forKey: AppPreference.usesModernCrypto.key)
+            kvManager.bool(forAppPreference: .usesModernCrypto)
     }
 
     func computedTunnelLogs() async -> [LogEntry] {

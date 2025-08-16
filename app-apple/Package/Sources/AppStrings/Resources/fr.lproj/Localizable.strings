@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Rien à migrer";
 "views.migration.sections.main.header" = "Sélectionnez ci-dessous les profils des anciennes versions de %@ que vous souhaitez importer. Si vos profils sont stockés sur iCloud, ils peuvent mettre un certain temps à se synchroniser. Si vous ne les voyez pas maintenant, revenez plus tard.";
 "views.migration.title" = "Migrer";
+"views.paywall_new.sections.products.header" = "Acheter individuellement";
 "views.paywall.alerts.confirmation.edit_profile" = "Modifier le profil";
 "views.paywall.alerts.confirmation.message.connect" = "Vous pouvez tester la connexion pendant %d minutes.";
 "views.paywall.alerts.confirmation.message.save" = "Touchez les icônes de cadenas pour acheter les fonctionnalités manquantes.";
@@ -311,7 +312,6 @@
 "views.paywall.sections.full_products.footer" = "Ces produits incluent les fonctionnalités actuelles et futures.";
 "views.paywall.sections.full_products.header" = "Toutes les fonctionnalités";
 "views.paywall.sections.products.footer" = "Tous les achats prennent en charge le Partage familial.";
-"views.paywall_new.sections.products.header" = "Acheter individuellement";
 "views.paywall.sections.products.header" = "Produits suggérés";
 "views.paywall.sections.required_features.header" = "Fonctionnalités requises";
 "views.paywall.sections.restore.footer" = "Si vous avez effectué des achats par le passé, vous pouvez les restaurer ici.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Cryptographie moderne";
 "views.preferences.pins_active_profile.footer" = "Affiche également le profil actif en haut pour un accès rapide.";
 "views.preferences.pins_active_profile" = "Épingler le profil actif";
+"views.preferences.relaxed_verification" = "Vérification alternative";
 "views.preferences.system_appearance" = "Apparence";
 "views.profile.alerts.purchase.buttons.ok" = "Enregistrer quand même";
 "views.profile.module_list.section.footer" = "Touchez les modules pour modifier leurs paramètres. Ils peuvent être glissés pour définir leur priorité.";

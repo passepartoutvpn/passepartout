@@ -11,27 +11,29 @@ extension KeyValueManager {
     public var preferences: AppPreferenceValues {
         get {
             var values = AppPreferenceValues()
-            values.deviceId = string(forKey: AppPreference.deviceId.key)
-            values.dnsFallsBack = bool(forKey: AppPreference.dnsFallsBack.key)
-            values.lastCheckedVersionDate = double(forKey: AppPreference.lastCheckedVersionDate.key)
-            values.lastCheckedVersion = object(forKey: AppPreference.lastCheckedVersion.key)
-            values.lastUsedProfileId = object(forKey: AppPreference.lastUsedProfileId.key)
-            values.logsPrivateData = bool(forKey: AppPreference.logsPrivateData.key)
-            values.skipsPurchases = bool(forKey: AppPreference.skipsPurchases.key)
-            values.usesModernCrypto = bool(forKey: AppPreference.usesModernCrypto.key)
-            values.usesNESocket = bool(forKey: AppPreference.usesNESocket.key)
+            values.deviceId = string(forAppPreference: .deviceId)
+            values.dnsFallsBack = bool(forAppPreference: .dnsFallsBack)
+            values.lastCheckedVersionDate = double(forAppPreference: .lastCheckedVersionDate)
+            values.lastCheckedVersion = object(forAppPreference: .lastCheckedVersion)
+            values.lastUsedProfileId = object(forAppPreference: .lastUsedProfileId)
+            values.logsPrivateData = bool(forAppPreference: .logsPrivateData)
+            values.relaxedVerification = bool(forAppPreference: .relaxedVerification)
+            values.skipsPurchases = bool(forAppPreference: .skipsPurchases)
+            values.usesModernCrypto = bool(forAppPreference: .usesModernCrypto)
+            values.usesNESocket = bool(forAppPreference: .usesNESocket)
             return values
         }
         set {
-            set(newValue.deviceId, forKey: AppPreference.dnsFallsBack.key)
-            set(newValue.dnsFallsBack, forKey: AppPreference.dnsFallsBack.key)
-            set(newValue.lastCheckedVersionDate, forKey: AppPreference.lastCheckedVersionDate.key)
-            set(newValue.lastCheckedVersion, forKey: AppPreference.lastCheckedVersion.key)
-            set(newValue.lastUsedProfileId, forKey: AppPreference.lastUsedProfileId.key)
-            set(newValue.logsPrivateData, forKey: AppPreference.logsPrivateData.key)
-            set(newValue.skipsPurchases, forKey: AppPreference.skipsPurchases.key)
-            set(newValue.usesModernCrypto, forKey: AppPreference.usesModernCrypto.key)
-            set(newValue.usesNESocket, forKey: AppPreference.usesNESocket.key)
+            set(newValue.deviceId, forAppPreference: .dnsFallsBack)
+            set(newValue.dnsFallsBack, forAppPreference: .dnsFallsBack)
+            set(newValue.lastCheckedVersionDate, forAppPreference: .lastCheckedVersionDate)
+            set(newValue.lastCheckedVersion, forAppPreference: .lastCheckedVersion)
+            set(newValue.lastUsedProfileId, forAppPreference: .lastUsedProfileId)
+            set(newValue.logsPrivateData, forAppPreference: .logsPrivateData)
+            set(newValue.relaxedVerification, forAppPreference: .relaxedVerification)
+            set(newValue.skipsPurchases, forAppPreference: .skipsPurchases)
+            set(newValue.usesModernCrypto, forAppPreference: .usesModernCrypto)
+            set(newValue.usesNESocket, forAppPreference: .usesNESocket)
         }
     }
 
@@ -42,5 +44,35 @@ extension KeyValueManager {
             AppPreference.usesModernCrypto.key: fallback.usesModernCrypto
         ]
         self.init(store: store, fallback: values)
+    }
+}
+
+// MARK: - Shortcuts
+
+extension KeyValueManager {
+    public func object<T>(forAppPreference pref: AppPreference) -> T? {
+        object(forKey: pref.key)
+    }
+
+    public func set<T>(_ value: T?, forAppPreference pref: AppPreference) {
+        set(value, forKey: pref.key)
+    }
+}
+
+extension KeyValueManager {
+    public func bool(forAppPreference pref: AppPreference) -> Bool {
+        bool(forKey: pref.key)
+    }
+
+    public func integer(forAppPreference pref: AppPreference) -> Int {
+        integer(forKey: pref.key)
+    }
+
+    public func double(forAppPreference pref: AppPreference) -> Double {
+        double(forKey: pref.key)
+    }
+
+    public func string(forAppPreference pref: AppPreference) -> String? {
+        string(forKey: pref.key)
     }
 }

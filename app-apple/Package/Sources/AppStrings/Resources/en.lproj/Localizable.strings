@@ -95,6 +95,7 @@
 "views.preferences.experimental.header" = "Experimental";
 "views.preferences.modern_crypto" = "Modern cryptography";
 "views.preferences.modern_crypto.footer" = "Use modern and faster implementations of cryptographic algorithms, though potentially unstable.";
+"views.preferences.relaxed_verification" = "Alternative verification";
 "views.preferences.erase_icloud" = "Erase profiles from iCloud";
 "views.preferences.erase_icloud.footer" = "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 

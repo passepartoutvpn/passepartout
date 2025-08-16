@@ -42,11 +42,11 @@ public final class MacSettingsModel: ObservableObject {
 
     public var keepsInMenu: Bool {
         get {
-            kvManager?.bool(forKey: UIPreference.keepsInMenu.key) ?? false
+            kvManager?.bool(forUIPreference: .keepsInMenu) ?? false
         }
         set {
             objectWillChange.send()
-            kvManager?.set(newValue, forKey: UIPreference.keepsInMenu.key)
+            kvManager?.set(newValue, forUIPreference: .keepsInMenu)
         }
     }
 

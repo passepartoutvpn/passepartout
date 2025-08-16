@@ -107,7 +107,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 productsAtBuild: dependencies.productsAtBuild()
             )
             if distributionTarget.supportsIAP {
-                manager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
+                manager.isEnabled = !kvManager.bool(forAppPreference: .skipsPurchases)
             } else {
                 manager.isEnabled = false
             }
@@ -140,7 +140,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             let environment = fwd.environment
 
-            // check hold flag
+            // Check hold flag and hang the tunnel if set
             if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
                 pp_log(ctx, .app, .info, "Tunnel is on hold")
                 guard options?[ExtendedTunnel.isManualKey] == true as NSNumber else {
@@ -151,16 +151,16 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 environment.removeEnvironmentValue(forKey: TunnelEnvironmentKeys.holdFlag)
             }
 
-            // prepare for receipt verification
+            // Prepare for receipt verification
             await iapManager.fetchLevelIfNeeded()
             let isBeta = await iapManager.isBeta
             let params = constants.tunnel.verificationParameters(isBeta: isBeta)
             pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
 
-            // start tunnel
+            // Start the tunnel (ignore all start options)
             try await fwd.startTunnel(options: [:])
 
-            // do not run the verification loop if IAPs are not supported
+            // Do not run the verification loop if IAPs are not supported
             // just ensure that the profile does not require any paid feature
             if !distributionTarget.supportsIAP {
                 guard originalProfile.features.isEmpty else {
@@ -169,9 +169,12 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 return
             }
 
-            // #1070, do not wait for this to start the tunnel. if on-demand is
+            // Relax verification strategy based on AppPreference
+            let isRelaxedVerification = await kvManager.bool(forAppPreference: .relaxedVerification)
+
+            // Do not wait for this to start the tunnel. If on-demand is
             // enabled, networking will stall and StoreKit network calls may
-            // produce a deadlock
+            // produce a deadlock (see #1070)
             verifierSubscription = Task { [weak self] in
                 guard let self else {
                     return
@@ -184,7 +187,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                     of: originalProfile,
                     iapManager: iapManager,
                     environment: environment,
-                    params: params
+                    params: params,
+                    isRelaxed: isRelaxedVerification
                 )
             }
         } catch {
@@ -267,7 +271,8 @@ private extension PacketTunnelProvider {
         of profile: Profile,
         iapManager: IAPManager,
         environment: TunnelEnvironment,
-        params: Constants.Tunnel.Verification.Parameters
+        params: Constants.Tunnel.Verification.Parameters,
+        isRelaxed: Bool
     ) async {
         guard let ctx else {
             fatalError("Forgot to set ctx?")
@@ -282,22 +287,23 @@ private extension PacketTunnelProvider {
                 await iapManager.reloadReceipt()
                 try iapManager.verify(profile)
             } catch {
-
-                // mitigate the StoreKit inability to report errors, sometimes it
-                // would just return empty products, e.g. on network failure. in those
-                // cases, retry a few times before failing
-                if attempts > 0 {
-                    attempts -= 1
-                    pp_log(ctx, .app, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
-                    try? await Task.sleep(interval: params.retryInterval)
-                    continue
+                if isRelaxed {
+                    // Mitigate the StoreKit inability to report errors, sometimes it
+                    // would just return empty products, e.g. on network failure. In those
+                    // cases, retry a few times before failing
+                    if attempts > 0 {
+                        attempts -= 1
+                        pp_log(ctx, .app, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
+                        try? await Task.sleep(interval: params.retryInterval)
+                        continue
+                    }
                 }
 
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
                 pp_log(ctx, .app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 
-                // prevent on-demand reconnection
+                // Hold on failure to prevent on-demand reconnection
                 environment.setEnvironmentValue(true, forKey: TunnelEnvironmentKeys.holdFlag)
                 await fwd?.holdTunnel()
                 return
@@ -306,7 +312,7 @@ private extension PacketTunnelProvider {
             pp_log(ctx, .app, .info, "Will verify profile again in \(params.interval) seconds...")
             try? await Task.sleep(interval: params.interval)
 
-            // reset attempts for next verification
+            // On successful verification, reset attempts for the next verification
             attempts = params.attempts
         }
     }

@@ -13,7 +13,7 @@ public final class OnboardingManager: ObservableObject {
 
     public private(set) var step: OnboardingStep {
         didSet {
-            kvManager?.set(step.rawValue, forKey: UIPreference.onboardingStep.key)
+            kvManager?.set(step.rawValue, forUIPreference: .onboardingStep)
         }
     }
 
@@ -25,7 +25,7 @@ public final class OnboardingManager: ObservableObject {
 
     public convenience init(kvManager: KeyValueManager) {
         let initialStep: OnboardingStep?
-        if let rawStep = kvManager.string(forKey: UIPreference.onboardingStep.key) {
+        if let rawStep = kvManager.string(forUIPreference: .onboardingStep) {
             initialStep = OnboardingStep(rawValue: rawStep)
         } else {
             initialStep = nil

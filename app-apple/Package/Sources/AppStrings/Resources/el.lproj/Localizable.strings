@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Δεν υπάρχει τίποτα για μεταφορά";
 "views.migration.sections.main.header" = "Επιλέξτε παρακάτω τα προφίλ από τις παλιές εκδόσεις του %@ που θέλετε να εισάγετε. Εάν τα προφίλ σας είναι αποθηκευμένα στο iCloud, μπορεί να χρειαστεί λίγος χρόνος για να συγχρονιστούν. Εάν δεν τα βλέπετε τώρα, επιστρέψτε αργότερα.";
 "views.migration.title" = "Μεταφορά";
+"views.paywall_new.sections.products.header" = "Αγορά μεμονωμένα";
 "views.paywall.alerts.confirmation.edit_profile" = "Επεξεργασία προφίλ";
 "views.paywall.alerts.confirmation.message.connect" = "Μπορείτε να δοκιμάσετε τη σύνδεση για %d λεπτά.";
 "views.paywall.alerts.confirmation.message.save" = "Πατήστε στα εικονίδια κλειδώματος για να αγοράσετε τις ελλείπουσες λειτουργίες.";
@@ -311,7 +312,6 @@
 "views.paywall.sections.full_products.footer" = "Αυτά τα προϊόντα περιλαμβάνουν τρέχουσες και μελλοντικές δυνατότητες.";
 "views.paywall.sections.full_products.header" = "Όλες οι λειτουργίες";
 "views.paywall.sections.products.footer" = "Όλες οι αγορές υποστηρίζουν την Οικογενειακή Κοινή Χρήση.";
-"views.paywall_new.sections.products.header" = "Αγορά μεμονωμένα";
 "views.paywall.sections.products.header" = "Προτεινόμενα προϊόντα";
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
 "views.paywall.sections.restore.footer" = "Αν έχετε πραγματοποιήσει αγορές στο παρελθόν, μπορείτε να τις επαναφέρετε εδώ.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Σύγχρονη κρυπτογραφία";
 "views.preferences.pins_active_profile.footer" = "Εμφανίζει επίσης το ενεργό προφίλ στην κορυφή για γρήγορη πρόσβαση.";
 "views.preferences.pins_active_profile" = "Καρφίτσωμα ενεργού προφίλ";
+"views.preferences.relaxed_verification" = "Εναλλακτική επαλήθευση";
 "views.preferences.system_appearance" = "Εμφάνιση";
 "views.profile.alerts.purchase.buttons.ok" = "Αποθήκευση ούτως ή άλλως";
 "views.profile.module_list.section.footer" = "Πατήστε σε ένα module για να επεξεργαστείτε τις ρυθμίσεις του. Τα modules μπορούν να μετακινηθούν για να καθορίσετε την προτεραιότητά τους.";

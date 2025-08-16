@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Inget att migrera";
 "views.migration.sections.main.header" = "Välj nedan de profiler från äldre versioner av %@ som du vill importera. Om dina profiler är lagrade på iCloud kan det ta en stund att synkronisera. Om du inte ser dem nu, kom tillbaka senare.";
 "views.migration.title" = "Migrera";
+"views.paywall_new.sections.products.header" = "Köp individuellt";
 "views.paywall.alerts.confirmation.edit_profile" = "Redigera profil";
 "views.paywall.alerts.confirmation.message.connect" = "Du kan testa anslutningen i %d minuter.";
 "views.paywall.alerts.confirmation.message.save" = "Tryck på låsikonerna för att köpa de saknade funktionerna.";
@@ -311,7 +312,6 @@
 "views.paywall.sections.full_products.footer" = "Dessa produkter inkluderar nuvarande och framtida funktioner.";
 "views.paywall.sections.full_products.header" = "Alla funktioner";
 "views.paywall.sections.products.footer" = "Alla köp stöder Familjedelning.";
-"views.paywall_new.sections.products.header" = "Köp individuellt";
 "views.paywall.sections.products.header" = "Föreslagna produkter";
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har gjort köp tidigare kan du återställa dem här.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Modern kryptografi";
 "views.preferences.pins_active_profile.footer" = "Visar även den aktiva profilen överst för snabb åtkomst.";
 "views.preferences.pins_active_profile" = "Fäst aktiv profil";
+"views.preferences.relaxed_verification" = "Alternativ verifiering";
 "views.preferences.system_appearance" = "Utseende";
 "views.profile.alerts.purchase.buttons.ok" = "Spara ändå";
 "views.profile.module_list.section.footer" = "Tryck på moduler för att redigera inställningarna. Moduler kan dras för att bestämma prioritet.";

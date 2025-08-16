@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Nichts zu migrieren";
 "views.migration.sections.main.header" = "Wähle unten die Profile aus alten Versionen von %@ aus, die du importieren möchtest. Wenn deine Profile in iCloud gespeichert sind, kann es eine Weile dauern, bis sie synchronisiert sind. Wenn du sie jetzt nicht siehst, komm später zurück.";
 "views.migration.title" = "Migrieren";
+"views.paywall_new.sections.products.header" = "Einzeln kaufen";
 "views.paywall.alerts.confirmation.edit_profile" = "Profil bearbeiten";
 "views.paywall.alerts.confirmation.message.connect" = "Sie können die Verbindung für %d Minuten testen.";
 "views.paywall.alerts.confirmation.message.save" = "Tippen Sie auf die Schlosssymbole, um die fehlenden Funktionen zu kaufen.";
@@ -315,7 +316,6 @@
 "views.paywall.sections.required_features.header" = "Erforderliche Funktionen";
 "views.paywall.sections.restore.footer" = "Wenn Sie in der Vergangenheit Einkäufe getätigt haben, können Sie sie hier wiederherstellen.";
 "views.paywall.sections.restore.header" = "Wiederherstellen";
-"views.paywall_new.sections.products.header" = "Einzeln kaufen";
 "views.preferences.dns_falls_back.footer" = "Fällt auf CloudFlare-Server zurück, wenn das VPN keine DNS-Einstellungen bereitstellt.";
 "views.preferences.dns_falls_back" = "DNS-Fallback";
 "views.preferences.enables_iap.footer" = "Aktivieren Sie die Unterstützung für kostenpflichtige Funktionen. Deaktivieren Sie dies, wenn Sie kein Apple ID haben.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Moderne Kryptografie";
 "views.preferences.pins_active_profile.footer" = "Zeigt das aktive Profil auch oben für schnellen Zugriff an.";
 "views.preferences.pins_active_profile" = "Aktives Profil anheften";
+"views.preferences.relaxed_verification" = "Alternative Überprüfung";
 "views.preferences.system_appearance" = "Erscheinungsbild";
 "views.profile.alerts.purchase.buttons.ok" = "Trotzdem speichern";
 "views.profile.module_list.section.footer" = "Tippen Sie auf Module, um ihre Einstellungen zu bearbeiten. Module können gezogen werden, um die Priorität festzulegen.";

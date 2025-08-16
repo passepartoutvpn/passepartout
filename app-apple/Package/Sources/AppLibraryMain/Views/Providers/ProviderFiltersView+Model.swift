@@ -129,10 +129,10 @@ private extension ProviderFiltersView.Model {
 private extension KeyValueManager {
     var onlyShowsFavorites: Bool {
         get {
-            bool(forKey: UIPreference.onlyShowsFavorites.key)
+            bool(forUIPreference: .onlyShowsFavorites)
         }
         set {
-            set(newValue, forKey: UIPreference.onlyShowsFavorites.key)
+            set(newValue, forUIPreference: .onlyShowsFavorites)
         }
     }
 }

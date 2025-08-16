@@ -69,12 +69,12 @@ extension AppContext {
         // MARK: Registry
 
         let deviceId = {
-            if let existingId = kvManager.string(forKey: AppPreference.deviceId.key) {
+            if let existingId = kvManager.string(forAppPreference: .deviceId) {
                 pp_log_g(.app, .info, "Device ID: \(existingId)")
                 return existingId
             }
             let newId = String.random(count: Constants.shared.deviceIdLength)
-            kvManager.set(newId, forKey: AppPreference.deviceId.key)
+            kvManager.set(newId, forAppPreference: .deviceId)
             pp_log_g(.app, .info, "Device ID (new): \(newId)")
             return newId
         }()
@@ -99,7 +99,7 @@ extension AppContext {
             productsAtBuild: dependencies.productsAtBuild()
         )
         if distributionTarget.supportsIAP {
-            iapManager.isEnabled = !kvManager.bool(forKey: AppPreference.skipsPurchases.key)
+            iapManager.isEnabled = !kvManager.bool(forAppPreference: .skipsPurchases)
         } else {
             iapManager.isEnabled = false
         }
@@ -265,11 +265,10 @@ extension AppContext {
 
 #if DEBUG
         let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
-        let betaConfigURL = configURL
 #else
         let configURL = Constants.shared.websites.config
-        let betaConfigURL = Constants.shared.websites.betaConfig
 #endif
+        let betaConfigURL = Constants.shared.websites.betaConfig
         let configManager = ConfigManager(
             strategy: GitHubConfigStrategy(
                 url: configURL,

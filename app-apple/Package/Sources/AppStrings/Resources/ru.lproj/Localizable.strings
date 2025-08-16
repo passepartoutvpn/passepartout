@@ -296,6 +296,7 @@
 "views.migration.no_profiles" = "Нечего мигрировать";
 "views.migration.sections.main.header" = "Выберите ниже профили из старых версий %@, которые вы хотите импортировать. Если ваши профили хранятся в iCloud, синхронизация может занять некоторое время. Если вы их сейчас не видите, вернитесь позже.";
 "views.migration.title" = "Миграция";
+"views.paywall_new.sections.products.header" = "Купить отдельно";
 "views.paywall.alerts.confirmation.edit_profile" = "Редактировать профиль";
 "views.paywall.alerts.confirmation.message.connect" = "Вы можете протестировать подключение в течение %d минут.";
 "views.paywall.alerts.confirmation.message.save" = "Нажмите на значки замка, чтобы приобрести недостающие функции.";
@@ -311,7 +312,6 @@
 "views.paywall.sections.full_products.footer" = "Эти продукты включают текущие и будущие функции.";
 "views.paywall.sections.full_products.header" = "Все функции";
 "views.paywall.sections.products.footer" = "Все покупки поддерживают Семейный доступ.";
-"views.paywall_new.sections.products.header" = "Купить отдельно";
 "views.paywall.sections.products.header" = "Рекомендуемые продукты";
 "views.paywall.sections.required_features.header" = "Необходимые функции";
 "views.paywall.sections.restore.footer" = "Если вы совершали покупки ранее, вы можете восстановить их здесь.";
@@ -333,6 +333,7 @@
 "views.preferences.modern_crypto" = "Современная криптография";
 "views.preferences.pins_active_profile.footer" = "Также отображает активный профиль сверху для быстрого доступа.";
 "views.preferences.pins_active_profile" = "Закрепить активный профиль";
+"views.preferences.relaxed_verification" = "Альтернативная проверка";
 "views.preferences.system_appearance" = "Внешний вид";
 "views.profile.alerts.purchase.buttons.ok" = "Сохранить в любом случае";
 "views.profile.module_list.section.footer" = "Нажмите на модули, чтобы изменить их настройки. Их можно перетаскивать для установки приоритета.";
