@@ -5,40 +5,28 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 # Include headers
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Library versions
-set(PARTOUT_SHA1 1875122d)
+set(PARTOUT_SHA1 7b5db3b8)
+set(JNI_DIR ${CMAKE_SOURCE_DIR}/libs)
 
-# Swift static lib
-add_library(Partout STATIC IMPORTED)
-set_target_properties(Partout PROPERTIES
-    IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/libPartout-${PARTOUT_SHA1}.a
-)
-add_library(PartoutImplementations STATIC IMPORTED)
-set_target_properties(PartoutImplementations PROPERTIES
-    IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/libPartoutImplementations-${PARTOUT_SHA1}.a
-)
+# Partout + Swift runtime libs (dynamic, will be loaded at runtime)
+file(GLOB PARTOUT_SOS "${JNI_DIR}/partout/${ANDROID_ABI}/lib*.so")
+file(GLOB SWIFT_SOS "${JNI_DIR}/swift-6.1/${ANDROID_ABI}/lib*.so")
+set(ALL_SOS ${PARTOUT_SOS} ${SWIFT_SOS})
 
-# Runtime Swift libs (dynamic, will be loaded at runtime)
-set(SWIFT_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/6.1)
-file(GLOB SWIFT_RUNTIME_SOS "${SWIFT_LIB_DIR}/lib*.so")
-
-foreach(SO_FILE ${SWIFT_RUNTIME_SOS})
+foreach(SO_FILE ${ALL_SOS})
     get_filename_component(SO_NAME ${SO_FILE} NAME_WE)
     string(REPLACE "lib" "" lib ${SO_NAME})
     add_library(${lib} SHARED IMPORTED)
     set_target_properties(${lib} PROPERTIES
         IMPORTED_LOCATION ${SO_FILE}
+        IMPORTED_NO_SONAME 1
     )
-    list(APPEND AUTO_SWIFT_LIBS ${lib})
+    list(APPEND AUTO_LIBS ${lib})
 endforeach()
 
 # Native library for JNI
 add_library(PassepartoutNative SHARED wrapper.c)
-target_link_libraries(
-    PassepartoutNative
-    Partout
-    PartoutImplementations
-    ${AUTO_SWIFT_LIBS}
-)
+target_link_libraries(PassepartoutNative ${AUTO_LIBS})
