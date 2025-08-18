@@ -48,7 +48,7 @@ android {
     }
     sourceSets {
         getByName("main") {
-            jniLibs.srcDirs("src/main/jniLibs")
+            jniLibs.srcDirs("src/main/cpp/libs")
         }
     }
     buildToolsVersion = "36.0.0"
