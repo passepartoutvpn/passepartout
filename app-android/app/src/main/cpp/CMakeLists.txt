@@ -9,7 +9,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Library versions
 set(PARTOUT_SHA1 1875122d)
-set(OPENSSL_VERSION 3.5.2)
 
 # Swift static lib
 add_library(Partout STATIC IMPORTED)
@@ -19,14 +18,6 @@ set_target_properties(Partout PROPERTIES
 add_library(PartoutImplementations STATIC IMPORTED)
 set_target_properties(PartoutImplementations PROPERTIES
     IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/libPartoutImplementations-${PARTOUT_SHA1}.a
-)
-add_library(openssl_crypto STATIC IMPORTED)
-set_target_properties(openssl_crypto PROPERTIES
-        IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/openssl/libcrypto-${OPENSSL_VERSION}.a
-)
-add_library(openssl_ssl STATIC IMPORTED)
-set_target_properties(openssl_ssl PROPERTIES
-        IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/libs/${ANDROID_ABI}/openssl/libssl-${OPENSSL_VERSION}.a
 )
 
 # Runtime Swift libs (dynamic, will be loaded at runtime)
@@ -49,7 +40,5 @@ target_link_libraries(
     PassepartoutNative
     Partout
     PartoutImplementations
-    openssl_crypto
-    openssl_ssl
     ${AUTO_SWIFT_LIBS}
 )
