@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 
 final class CDProviderRepositoryV3: ProviderRepository {
-    private let context: NSManagedObjectContext
+    private nonisolated let context: NSManagedObjectContext
 
     let providerId: ProviderID
 

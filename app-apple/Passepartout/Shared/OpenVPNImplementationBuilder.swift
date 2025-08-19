@@ -5,7 +5,6 @@
 import CommonLibrary
 import Foundation
 import Partout
-import PartoutImplementations
 
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget

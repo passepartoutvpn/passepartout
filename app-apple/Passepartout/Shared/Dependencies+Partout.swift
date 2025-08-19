@@ -5,7 +5,7 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
-import PartoutImplementations
+import Partout
 
 extension Dependencies {
     var kvManager: KeyValueManager {

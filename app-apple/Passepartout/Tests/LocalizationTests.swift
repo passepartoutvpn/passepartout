@@ -4,7 +4,7 @@
 
 import AppLibrary
 import Foundation
-import PartoutWireGuard
+import PartoutInterfaces
 import XCTest
 
 final class LocalizationTests: XCTestCase {
