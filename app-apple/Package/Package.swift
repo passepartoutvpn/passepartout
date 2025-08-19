@@ -59,6 +59,10 @@ let package = Package(
             targets: ["CommonWeb"]
         ),
         .library(
+            name: "PartoutLibrary",
+            targets: ["PartoutLibrary"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
         )
@@ -158,7 +162,8 @@ let package = Package(
             name: "CommonLegacyV2",
             dependencies: [
                 "CommonLibrary",
-                .product(name: "PartoutImplementations", package: "partout")
+                // FIXME: #93/partout, drop after moving WireGuard parser to Core
+                .product(name: "Partout", package: "partout")
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -169,7 +174,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                .product(name: "Partout", package: "partout")
+                .product(name: "PartoutInterfaces", package: "partout")
             ],
             resources: [
                 .process("Resources")
@@ -188,6 +193,13 @@ let package = Package(
             resources: [
                 .process("Resources")
             ]
+        ),
+        .target(
+            name: "PartoutLibrary",
+            dependencies: [
+                .product(name: "Partout", package: "partout")
+            ],
+            path: "Sources/Empty/PartoutLibrary"
         ),
         .testTarget(
             name: "AppLibraryTests",

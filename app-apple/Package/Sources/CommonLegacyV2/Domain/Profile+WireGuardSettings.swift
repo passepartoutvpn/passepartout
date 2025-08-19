@@ -4,7 +4,9 @@
 
 import CommonLibrary
 import Foundation
-import PartoutImplementations
+import Partout
+// FIXME: #93/partout, only import interfaces after moving WireGuard parser to Core
+//import PartoutInterfaces
 
 extension ProfileV2 {
     struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {
