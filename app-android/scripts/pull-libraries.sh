@@ -22,4 +22,4 @@ rm -rf $cpp_path/libs/partout-*
 libs_path="$cpp_path/libs/partout-${partout_sha1}/arm64-v8a"
 mkdir -p $libs_path
 cp $partout_path/Sources/Partout_C/include/partout.h $headers_path
-cp $partout_so_path/libPartout.so $libs_path/libPartout.so
+cp $partout_so_path/libPartout.so $libs_path
