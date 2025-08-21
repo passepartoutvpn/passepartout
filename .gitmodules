@@ -1,6 +1,3 @@
 [submodule "submodules/partout"]
 	path = submodules/partout
 	url = https://github.com/passepartoutvpn/partout
-[submodule "submodules/partout-core"]
-	path = submodules/partout-core
-	url = https://github.com/passepartoutvpn/partout-core
