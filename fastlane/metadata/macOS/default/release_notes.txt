@@ -1,1 +1,4 @@
-* Opt into modern NE sockets (#1522)
+* Fix workdir of generated .dmg files
+* Update Partout with new Core deployment (#1534)
+* Update Partout with single-output targets (#1533)
+* Update Partout as dynamic library in Android NDK target (#1531)
