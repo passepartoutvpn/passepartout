@@ -378,7 +378,8 @@
 "views.settings.system_extension.buttons.open" = "打开偏好设置";
 "views.settings.system_extension.message" = "要使 VPN 正常工作，应用程序必须位于 /Applications 目录中，并且必须将 %@ 启用为 %@。\n\n打开 macOS 偏好设置，滚动到“%@”，打开并启用 %@。";
 "views.settings.title" = "关于";
-"views.tv.connection_profiles.header" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。或者，你可以在“配置文件”标签页找到其他选项。";
+"views.tv.connection_profiles.header.share" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。";
+"views.tv.connection_profiles.header.import" = "或者，你可以在“配置文件”标签页找到其他选项。";
 "views.tv.profiles.detail.profiles" = "长按以显示配置文件的可用操作。"
 "views.tv.profiles.import_local" = "导入本地配置文件";
 "views.tv.web_receiver.qr" = "使用相机扫描二维码以打开网页，上传您的配置文件。确保您连接到同一网络。";
