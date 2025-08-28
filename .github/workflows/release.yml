@@ -188,12 +188,11 @@ jobs:
           ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
-        working-directory: ${{ env.APPLE_ROOT }}
         with:
           name: mac-dmg-${{ matrix.arch }}
           path: |
-            Passepartout.*.dmg
-            Passepartout.*.dmg.asc
+            ${APPLE_ROOT}/Passepartout.*.dmg
+            ${APPLE_ROOT}/Passepartout.*.dmg.asc
   publish_release:
     name: Publish Release
     runs-on: ubuntu-latest
