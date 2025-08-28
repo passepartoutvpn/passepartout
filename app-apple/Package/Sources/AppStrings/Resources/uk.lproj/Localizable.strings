@@ -378,7 +378,8 @@
 "views.settings.system_extension.buttons.open" = "Відкрити налаштування";
 "views.settings.system_extension.message" = "Щоб VPN працював, програма має бути в каталозі /Applications, а %@ має бути увімкнено як %@.\n\nВідкрий налаштування macOS, прокрути до «%@», ідкрий його та увімкни %@.";
 "views.settings.title" = "Про програму";
-"views.tv.connection_profiles.header" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут. Або знайдеш інші опції на вкладці «Профілі».";
+"views.tv.connection_profiles.header.share" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут.";
+"views.tv.connection_profiles.header.import" = "Або знайдеш інші опції на вкладці «Профілі».";
 "views.tv.profiles.detail.profiles" = "Утримуйте, щоб побачити доступні дії для профілю.";
 "views.tv.profiles.import_local" = "Імпортувати локальний профіль";
 "views.tv.web_receiver.qr" = "Скануйте QR-код камерою, щоб відкрити веб-сторінку для завантаження вашого профілю. Переконайтеся, що ви підключені до тієї ж мережі.";

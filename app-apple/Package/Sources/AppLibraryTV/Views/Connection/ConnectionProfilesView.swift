@@ -10,6 +10,9 @@ import SwiftUI
 
 struct ConnectionProfilesView: View {
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     @ObservedObject
     var profileManager: ProfileManager
 
@@ -45,8 +48,16 @@ private extension ConnectionProfilesView {
         profileManager.previews
     }
 
+    var headerString: String {
+        var list: [String] = [Strings.Views.Tv.ConnectionProfiles.Header.share(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV)]
+        if configManager.canImportToTV {
+            list.append(Strings.Views.Tv.ConnectionProfiles.Header.import)
+        }
+        return list.joined(separator: " ")
+    }
+
     var headerView: some View {
-        Text(Strings.Views.Tv.ConnectionProfiles.header(Strings.Unlocalized.appName, Strings.Unlocalized.appleTV))
+        Text(headerString)
             .textCase(.none)
             .foregroundStyle(.primary)
             .font(.body)

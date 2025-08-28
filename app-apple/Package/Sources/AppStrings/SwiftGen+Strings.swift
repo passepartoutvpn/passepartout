@@ -1187,9 +1187,13 @@ public enum Strings {
     }
     public enum Tv {
       public enum ConnectionProfiles {
-        /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here. Alternatively, you will find other options in the "Profiles" tab.
-        public static func header(_ p1: Any, _ p2: Any) -> String {
-          return Strings.tr("Localizable", "views.tv.connection_profiles.header", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here. Alternatively, you will find other options in the \"Profiles\" tab.")
+        public enum Header {
+          /// Alternatively, you will find other options in the "Profiles" tab.
+          public static let `import` = Strings.tr("Localizable", "views.tv.connection_profiles.header.import", fallback: "Alternatively, you will find other options in the \"Profiles\" tab.")
+          /// Open %@ on your iOS or macOS device and enable the "%@" toggle of a profile to make it appear here.
+          public static func share(_ p1: Any, _ p2: Any) -> String {
+            return Strings.tr("Localizable", "views.tv.connection_profiles.header.share", String(describing: p1), String(describing: p2), fallback: "Open %@ on your iOS or macOS device and enable the \"%@\" toggle of a profile to make it appear here.")
+          }
         }
       }
       public enum Profiles {
