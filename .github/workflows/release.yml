@@ -188,6 +188,7 @@ jobs:
           ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
+        working-directory: ${{ env.APPLE_ROOT }}
         with:
           name: mac-dmg-${{ matrix.arch }}
           path: |
