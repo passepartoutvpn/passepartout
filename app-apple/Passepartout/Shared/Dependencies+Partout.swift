@@ -35,7 +35,7 @@ extension Dependencies {
         )
     }
 
-    func neProtocolCoder(_ ctx: PartoutLoggerContext, registry: Registry) -> NEProtocolCoder {
+    nonisolated func neProtocolCoder(_ ctx: PartoutLoggerContext, registry: Registry) -> NEProtocolCoder {
         if Self.distributionTarget.supportsAppGroups {
             return KeychainNEProtocolCoder(
                 ctx,

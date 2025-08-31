@@ -59,33 +59,35 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Parse profile
 
-        let processor = DefaultTunnelProcessor()
-        let neTunnelController = try await NETunnelController(
-            provider: self,
-            decoder: dependencies.neProtocolCoder(.global, registry: registry),
-            registry: registry,
-            options: {
-                var options = NETunnelController.Options()
-                if preferences.dnsFallsBack {
-                    options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
-                }
-                return options
-            }(),
-            environmentFactory: {
-                dependencies.tunnelEnvironment(profileId: $0)
-            },
-            willProcess: processor.willProcess
-        )
-        let originalProfile = neTunnelController.originalProfile
+        // Decode profile from NE provider
+        let decoder = dependencies.neProtocolCoder(.global, registry: registry)
+        let originalProfile = try Profile(withNEProvider: self, decoder: decoder)
 
-        // MARK: Create PartoutLoggerContext with profile
-
+        // Create PartoutLoggerContext with profile
         let ctx = PartoutLogger.register(
             for: .tunnel(originalProfile.id, distributionTarget),
             with: preferences
         )
         self.ctx = ctx
         try await trackContext(ctx)
+
+        // Post-process profile (e.g. resolve and apply local preferences)
+        let resolvedProfile = try registry.resolvedProfile(originalProfile)
+        let processor = DefaultTunnelProcessor()
+        let profile = try processor.willProcess(resolvedProfile)
+        let environment = dependencies.tunnelEnvironment(profileId: originalProfile.id)
+
+        let neTunnelController = try await NETunnelController(
+            provider: self,
+            profile: profile,
+            options: {
+                var options = NETunnelController.Options()
+                if preferences.dnsFallsBack {
+                    options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
+                }
+                return options
+            }()
+        )
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
         if let startPreferences {
@@ -130,7 +132,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             fwd = try NEPTPForwarder(
                 ctx,
+                profile: profile,
+                registry: registry,
                 controller: neTunnelController,
+                environment: environment,
                 factoryOptions: factoryOptions,
                 connectionOptions: connectionOptions
             )
