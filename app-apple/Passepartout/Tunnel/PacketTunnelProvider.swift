@@ -61,7 +61,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // Decode profile from NE provider
         let decoder = dependencies.neProtocolCoder(.global, registry: registry)
-        let originalProfile = try Profile(withNEProvider: self, decoder: decoder)
+        let originalProfile: Profile
+        do {
+            originalProfile = try Profile(withNEProvider: self, decoder: decoder)
+        } catch {
+            pp_log_g(.App.profiles, .fault, "Unable to decode profile: \(error)")
+            throw error
+        }
 
         // Create PartoutLoggerContext with profile
         let ctx = PartoutLogger.register(
@@ -72,10 +78,17 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         try await trackContext(ctx)
 
         // Post-process profile (e.g. resolve and apply local preferences)
-        let resolvedProfile = try registry.resolvedProfile(originalProfile)
-        let processor = DefaultTunnelProcessor()
-        let processedProfile = try processor.willProcess(resolvedProfile)
-        assert(processedProfile.id == originalProfile.id)
+        let resolvedProfile: Profile
+        let processedProfile: Profile
+        do {
+            resolvedProfile = try registry.resolvedProfile(originalProfile)
+            let processor = DefaultTunnelProcessor()
+            processedProfile = try processor.willProcess(resolvedProfile)
+            assert(processedProfile.id == originalProfile.id)
+        } catch {
+            pp_log(ctx, .App.profiles, .fault, "Unable to process profile: \(error)")
+            throw error
+        }
         let environment = dependencies.tunnelEnvironment(profileId: processedProfile.id)
 
         let neTunnelController = try await NETunnelController(
