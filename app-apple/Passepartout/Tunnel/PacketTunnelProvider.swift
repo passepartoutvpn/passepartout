@@ -74,12 +74,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         // Post-process profile (e.g. resolve and apply local preferences)
         let resolvedProfile = try registry.resolvedProfile(originalProfile)
         let processor = DefaultTunnelProcessor()
-        let profile = try processor.willProcess(resolvedProfile)
-        let environment = dependencies.tunnelEnvironment(profileId: originalProfile.id)
+        let processedProfile = try processor.willProcess(resolvedProfile)
+        assert(processedProfile.id == originalProfile.id)
+        let environment = dependencies.tunnelEnvironment(profileId: processedProfile.id)
 
         let neTunnelController = try await NETunnelController(
             provider: self,
-            profile: profile,
+            profile: processedProfile,
             options: {
                 var options = NETunnelController.Options()
                 if preferences.dnsFallsBack {
@@ -132,7 +133,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             fwd = try NEPTPForwarder(
                 ctx,
-                profile: profile,
+                profile: processedProfile,
                 registry: registry,
                 controller: neTunnelController,
                 environment: environment,
