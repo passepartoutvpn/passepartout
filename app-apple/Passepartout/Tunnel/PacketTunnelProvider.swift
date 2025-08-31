@@ -174,7 +174,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             await iapManager.fetchLevelIfNeeded()
             let isBeta = await iapManager.isBeta
             let params = constants.tunnel.verificationParameters(isBeta: isBeta)
-            pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
+            pp_log(ctx, .App.iap, .info, "Will start profile verification in \(params.delay) seconds")
 
             // Start the tunnel (ignore all start options)
             try await fwd.startTunnel(options: [:])
@@ -302,7 +302,7 @@ private extension PacketTunnelProvider {
                 return
             }
             do {
-                pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
+                pp_log(ctx, .App.iap, .info, "Verify profile, requires: \(profile.features)")
                 await iapManager.reloadReceipt()
                 try iapManager.verify(profile)
             } catch {
@@ -312,7 +312,7 @@ private extension PacketTunnelProvider {
                     // cases, retry a few times before failing
                     if attempts > 0 {
                         attempts -= 1
-                        pp_log(ctx, .app, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
+                        pp_log(ctx, .App.iap, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
                         try? await Task.sleep(interval: params.retryInterval)
                         continue
                     }
@@ -320,7 +320,7 @@ private extension PacketTunnelProvider {
 
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-                pp_log(ctx, .app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
+                pp_log(ctx, .App.iap, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 
                 // Hold on failure to prevent on-demand reconnection
                 environment.setEnvironmentValue(true, forKey: TunnelEnvironmentKeys.holdFlag)
@@ -328,7 +328,7 @@ private extension PacketTunnelProvider {
                 return
             }
 
-            pp_log(ctx, .app, .info, "Will verify profile again in \(params.interval) seconds...")
+            pp_log(ctx, .App.iap, .info, "Will verify profile again in \(params.interval) seconds...")
             try? await Task.sleep(interval: params.interval)
 
             // On successful verification, reset attempts for the next verification
