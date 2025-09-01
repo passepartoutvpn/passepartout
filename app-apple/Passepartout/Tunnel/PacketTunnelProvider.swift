@@ -89,19 +89,26 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             pp_log(ctx, .App.profiles, .fault, "Unable to process profile: \(error)")
             throw error
         }
-        let environment = dependencies.tunnelEnvironment(profileId: processedProfile.id)
 
-        let neTunnelController = try await NETunnelController(
-            provider: self,
-            profile: processedProfile,
-            options: {
-                var options = NETunnelController.Options()
-                if preferences.dnsFallsBack {
-                    options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
-                }
-                return options
-            }()
-        )
+        // MARK: Create TunnelController for connnection management
+
+        let neTunnelController: NETunnelController
+        do {
+            neTunnelController = try await NETunnelController(
+                provider: self,
+                profile: processedProfile,
+                options: {
+                    var options = NETunnelController.Options()
+                    if preferences.dnsFallsBack {
+                        options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
+                    }
+                    return options
+                }()
+            )
+        } catch {
+            pp_log(ctx, .app, .fault, "Unable to create NETunnelController: \(error)")
+            throw error
+        }
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
         if let startPreferences {
@@ -136,6 +143,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             fatalError("Do not forget to save ctx locally")
         }
         do {
+            // Environment for app/tunnel IPC
+            let environment = dependencies.tunnelEnvironment(profileId: processedProfile.id)
+
+            // Pick socket and crypto strategy from preferences
             var factoryOptions = NEInterfaceFactory.Options()
             factoryOptions.usesNetworkFramework = preferences.usesNESocket || preferences.usesModernCrypto
 
@@ -156,8 +167,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
-
-            let environment = fwd.environment
 
             // Check hold flag and hang the tunnel if set
             if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
