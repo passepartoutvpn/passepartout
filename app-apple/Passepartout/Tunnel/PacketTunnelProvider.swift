@@ -14,6 +14,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+
+        // FIXME: #1508, register global logger ASAP (logs before registration are lost)
+
         let startPreferences: AppPreferenceValues?
         if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
             do {
@@ -32,8 +35,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let dependencies: Dependencies = await .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
-
-        // FIXME: #1508, register global logger here
 
         // MARK: Update or fetch existing preferences
 
@@ -66,6 +67,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             originalProfile = try Profile(withNEProvider: self, decoder: decoder)
         } catch {
             pp_log_g(.App.profiles, .fault, "Unable to decode profile: \(error)")
+            flushLogs()
             throw error
         }
 
@@ -87,6 +89,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             assert(processedProfile.id == originalProfile.id)
         } catch {
             pp_log(ctx, .App.profiles, .fault, "Unable to process profile: \(error)")
+            flushLogs()
             throw error
         }
 
@@ -107,6 +110,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             )
         } catch {
             pp_log(ctx, .app, .fault, "Unable to create NETunnelController: \(error)")
+            flushLogs()
             throw error
         }
 
