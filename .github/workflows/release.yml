@@ -191,8 +191,8 @@ jobs:
         with:
           name: mac-dmg-${{ matrix.arch }}
           path: |
-            Passepartout.*.dmg
-            Passepartout.*.dmg.asc
+            ${{ env.APPLE_ROOT }}/Passepartout.*.dmg
+            ${{ env.APPLE_ROOT }}/Passepartout.*.dmg.asc
   publish_release:
     name: Publish Release
     runs-on: ubuntu-latest

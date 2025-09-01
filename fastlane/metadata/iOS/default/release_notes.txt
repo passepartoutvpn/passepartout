@@ -1,1 +1,1 @@
-* Opt into modern NE sockets (#1522)
+* Fix misleading profiles header (#1538)

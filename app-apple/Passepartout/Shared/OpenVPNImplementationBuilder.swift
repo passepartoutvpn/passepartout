@@ -41,7 +41,7 @@ private extension OpenVPNImplementationBuilder {
         with parameters: ConnectionParameters,
         module: OpenVPNModule
     ) throws -> Connection {
-        let ctx = PartoutLoggerContext(parameters.controller.profile.id)
+        let ctx = PartoutLoggerContext(parameters.profile.id)
         var options = OpenVPN.ConnectionOptions()
         options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
         options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0
@@ -66,7 +66,7 @@ private extension OpenVPNImplementationBuilder {
         with parameters: ConnectionParameters,
         module: OpenVPNModule
     ) throws -> Connection {
-        let ctx = PartoutLoggerContext(parameters.controller.profile.id)
+        let ctx = PartoutLoggerContext(parameters.profile.id)
         var options = OpenVPN.ConnectionOptions()
         options.writeTimeout = TimeInterval(parameters.options.linkWriteTimeout) / 1000.0
         options.minDataCountInterval = TimeInterval(parameters.options.minDataCountInterval) / 1000.0

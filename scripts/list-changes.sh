@@ -29,4 +29,3 @@ function git_cmd() {
 
 git_cmd $ref_from $ref_to
 (cd submodules/partout && git_cmd ${old_modules[0]} ${new_modules[0]})
-(cd submodules/partout-core && git_cmd ${old_modules[1]} ${new_modules[1]})
