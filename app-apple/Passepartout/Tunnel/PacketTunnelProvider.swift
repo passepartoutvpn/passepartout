@@ -14,6 +14,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+
+        // FIXME: #1508, register global logger ASAP (logs before registration are lost)
+
         let startPreferences: AppPreferenceValues?
         if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
             do {
@@ -32,8 +35,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         let dependencies: Dependencies = await .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
-
-        // FIXME: #1508, register global logger here
 
         // MARK: Update or fetch existing preferences
 
@@ -59,33 +60,59 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Parse profile
 
-        let processor = DefaultTunnelProcessor()
-        let neTunnelController = try await NETunnelController(
-            provider: self,
-            decoder: dependencies.neProtocolCoder(.global, registry: registry),
-            registry: registry,
-            options: {
-                var options = NETunnelController.Options()
-                if preferences.dnsFallsBack {
-                    options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
-                }
-                return options
-            }(),
-            environmentFactory: {
-                dependencies.tunnelEnvironment(profileId: $0)
-            },
-            willProcess: processor.willProcess
-        )
-        let originalProfile = neTunnelController.originalProfile
+        // Decode profile from NE provider
+        let decoder = dependencies.neProtocolCoder(.global, registry: registry)
+        let originalProfile: Profile
+        do {
+            originalProfile = try Profile(withNEProvider: self, decoder: decoder)
+        } catch {
+            pp_log_g(.App.profiles, .fault, "Unable to decode profile: \(error)")
+            flushLogs()
+            throw error
+        }
 
-        // MARK: Create PartoutLoggerContext with profile
-
+        // Create PartoutLoggerContext with profile
         let ctx = PartoutLogger.register(
             for: .tunnel(originalProfile.id, distributionTarget),
             with: preferences
         )
         self.ctx = ctx
         try await trackContext(ctx)
+
+        // Post-process profile (e.g. resolve and apply local preferences)
+        let resolvedProfile: Profile
+        let processedProfile: Profile
+        do {
+            resolvedProfile = try registry.resolvedProfile(originalProfile)
+            let processor = DefaultTunnelProcessor()
+            processedProfile = try processor.willProcess(resolvedProfile)
+            assert(processedProfile.id == originalProfile.id)
+        } catch {
+            pp_log(ctx, .App.profiles, .fault, "Unable to process profile: \(error)")
+            flushLogs()
+            throw error
+        }
+
+        // MARK: Create TunnelController for connnection management
+
+        let neTunnelController: NETunnelController
+        do {
+            neTunnelController = try await NETunnelController(
+                provider: self,
+                profile: processedProfile,
+                options: {
+                    var options = NETunnelController.Options()
+                    if preferences.dnsFallsBack {
+                        options.dnsFallbackServers = constants.tunnel.dnsFallbackServers
+                    }
+                    return options
+                }()
+            )
+        } catch {
+            pp_log(ctx, .app, .fault, "Unable to create NETunnelController: \(error)")
+            flushLogs()
+            throw error
+        }
 
         pp_log(ctx, .app, .info, "Tunnel started with options: \(options?.description ?? "nil")")
         if let startPreferences {
@@ -120,6 +147,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             fatalError("Do not forget to save ctx locally")
         }
         do {
+            // Environment for app/tunnel IPC
+            let environment = dependencies.tunnelEnvironment(profileId: processedProfile.id)
+
+            // Pick socket and crypto strategy from preferences
             var factoryOptions = NEInterfaceFactory.Options()
             factoryOptions.usesNetworkFramework = preferences.usesNESocket || preferences.usesModernCrypto
 
@@ -130,15 +161,16 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             fwd = try NEPTPForwarder(
                 ctx,
+                profile: processedProfile,
+                registry: registry,
                 controller: neTunnelController,
+                environment: environment,
                 factoryOptions: factoryOptions,
                 connectionOptions: connectionOptions
             )
             guard let fwd else {
                 fatalError("NEPTPForwarder nil without throwing error?")
             }
-
-            let environment = fwd.environment
 
             // Check hold flag and hang the tunnel if set
             if environment.environmentValue(forKey: TunnelEnvironmentKeys.holdFlag) == true {
@@ -155,7 +187,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             await iapManager.fetchLevelIfNeeded()
             let isBeta = await iapManager.isBeta
             let params = constants.tunnel.verificationParameters(isBeta: isBeta)
-            pp_log(ctx, .app, .info, "Will start profile verification in \(params.delay) seconds")
+            pp_log(ctx, .App.iap, .info, "Will start profile verification in \(params.delay) seconds")
 
             // Start the tunnel (ignore all start options)
             try await fwd.startTunnel(options: [:])
@@ -283,7 +315,7 @@ private extension PacketTunnelProvider {
                 return
             }
             do {
-                pp_log(ctx, .app, .info, "Verify profile, requires: \(profile.features)")
+                pp_log(ctx, .App.iap, .info, "Verify profile, requires: \(profile.features)")
                 await iapManager.reloadReceipt()
                 try iapManager.verify(profile)
             } catch {
@@ -293,7 +325,7 @@ private extension PacketTunnelProvider {
                     // cases, retry a few times before failing
                     if attempts > 0 {
                         attempts -= 1
-                        pp_log(ctx, .app, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
+                        pp_log(ctx, .App.iap, .error, "Verification failed for profile \(profile.id), next attempt in \(params.retryInterval) seconds... (remaining: \(attempts), products: \(iapManager.purchasedProducts))")
                         try? await Task.sleep(interval: params.retryInterval)
                         continue
                     }
@@ -301,7 +333,7 @@ private extension PacketTunnelProvider {
 
                 let error = PartoutError(.App.ineligibleProfile)
                 environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-                pp_log(ctx, .app, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
+                pp_log(ctx, .App.iap, .fault, "Verification failed for profile \(profile.id), shutting down: \(error)")
 
                 // Hold on failure to prevent on-demand reconnection
                 environment.setEnvironmentValue(true, forKey: TunnelEnvironmentKeys.holdFlag)
@@ -309,7 +341,7 @@ private extension PacketTunnelProvider {
                 return
             }
 
-            pp_log(ctx, .app, .info, "Will verify profile again in \(params.interval) seconds...")
+            pp_log(ctx, .App.iap, .info, "Will verify profile again in \(params.interval) seconds...")
             try? await Task.sleep(interval: params.interval)
 
             // On successful verification, reset attempts for the next verification

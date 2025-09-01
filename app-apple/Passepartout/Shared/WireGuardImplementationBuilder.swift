@@ -12,7 +12,7 @@ struct WireGuardImplementationBuilder: Sendable {
             importer: StandardWireGuardParser(),
             validator: StandardWireGuardParser(),
             connectionBlock: {
-                let ctx = PartoutLoggerContext($0.controller.profile.id)
+                let ctx = PartoutLoggerContext($0.profile.id)
                 return try WireGuardConnection(
                     ctx,
                     parameters: $0,

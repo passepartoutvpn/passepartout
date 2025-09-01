@@ -5,7 +5,7 @@
 import CommonLibrary
 import Foundation
 
-final class MockTunnelProcessor: AppTunnelProcessor {
+final class MockTunnelProcessor: AppTunnelProcessor, @unchecked Sendable {
     var titleCount = 0
 
     var willInstallCount = 0
