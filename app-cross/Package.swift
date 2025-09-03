@@ -55,42 +55,14 @@ package.targets.append(contentsOf: [
         name: "pptunnel",
         dependencies: [
             "Tunnel_C",
-            .target(name: "TunnelLinux", condition: .when(platforms: [.linux])),
-            .target(name: "TunnelMock_C", condition: .when(platforms: [.macOS])),
-            .target(name: "TunnelWindows", condition: .when(platforms: [.windows]))
+            "TunnelMock_C"
         ]
     ),
     .target(
         name: "Tunnel_C"
     ),
     .target(
-        name: "TunnelLinux",
-        dependencies: [
-            .target(name: "TunnelLinux_C", condition: .when(platforms: [.linux])),
-        ]
-    ),
-    .target(
-        name: "TunnelLinux_C",
-        dependencies: [
-            "Tunnel_C",
-            .product(name: "Partout", package: "partout")
-        ]
-    ),
-    .target(
         name: "TunnelMock_C",
-        dependencies: [
-            "Tunnel_C",
-            .product(name: "Partout", package: "partout")
-        ]
-    ),
-    .target(
-        name: "TunnelWindows",
-        dependencies: [
-            .target(name: "TunnelWindows_C", condition: .when(platforms: [.windows])),
-        ]
-    ),
-    .target(
-        name: "TunnelWindows_C",
         dependencies: [
             "Tunnel_C",
             .product(name: "Partout", package: "partout")

@@ -2,7 +2,7 @@
 is_release=$1  # 1 for Release
 partout_path="../submodules/partout"
 cpp_path="app/src/main/cpp"
-headers_path="$cpp_path"
+headers_path="$cpp_path/src"
 
 if [ "$is_release" == 1 ]; then
     partout_so_path="${partout_path}/.build/release"
@@ -23,3 +23,4 @@ libs_path="$cpp_path/libs/partout-${partout_sha1}/arm64-v8a"
 mkdir -p $libs_path
 cp $partout_path/Sources/Partout_C/include/partout.h $headers_path
 cp $partout_so_path/libPartout.so $libs_path
+sed -E -i '' "s/set\(PARTOUT_SHA1 ([0-9a-f]+)\)/set(PARTOUT_SHA1 ${partout_sha1})/" $cpp_path/CMakeLists.txt
