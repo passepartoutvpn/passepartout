@@ -40,7 +40,8 @@ class VpnWrapper: AutoCloseable {
             .addRoute("0.0.0.0", 0)
             .addDnsServer("1.1.1.1")
 
-        // IMPORTANT: this is a requirement for POSIXBlockingSocket
+        // IMPORTANT: this is a requirement for VirtualTunnelInterface
+        //
         // The effect of not doing this is the tun connection dying
         // on the first 0, because the fd is non-blocking by
         // default (EAGAIN).
