@@ -30,9 +30,8 @@ endforeach()
 
 # Native library for JNI
 add_library(PassepartoutNative SHARED
-        src/util.c
-        src/vpn.c
-        src/wrapper.c
+    src/vpn.c
+    src/wrapper.c
 )
 target_link_libraries(
     PassepartoutNative
