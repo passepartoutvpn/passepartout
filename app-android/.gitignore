@@ -7,3 +7,5 @@
 build
 captures
 local.properties
+*.ovpn
+*.conf

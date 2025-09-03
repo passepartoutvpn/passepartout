@@ -5,8 +5,12 @@
 package com.algoritmico.passepartout
 import android.util.Log
 
-class NativeWrapper {
+class NativeLibraryWrapper {
     external fun partoutVersion(): String
+    external fun partoutInitialize(cacheDir: String): Long
+    external fun partoutDeinitialize(ctx: Long)
+    external fun partoutDaemonStart(ctx: Long, profile: String, vpnBuilder: VpnWrapper): Int
+    external fun partoutDaemonStop(ctx: Long): Unit
 
     companion object {
         init {
