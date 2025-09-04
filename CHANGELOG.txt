@@ -1,1 +1,1 @@
-* Fix misleading profiles header (#1538)
+* Bump version
