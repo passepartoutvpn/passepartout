@@ -12,4 +12,5 @@ void vpn_test_callback();
 void vpn_test_working_wrapper(void *jniRef);
 
 void *vpn_set_tunnel(void *jniRef, const partout_tun_ctrl_info *info);
+void vpn_configure_sockets(void *jniRef, const int *fds, size_t fds_len);
 void vpn_clear_tunnel(void *jniRef, void *tunImpl);

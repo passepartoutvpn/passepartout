@@ -44,15 +44,24 @@ void *vpn_set_tunnel(void *jniRef, const partout_tun_ctrl_info *info) {
     assert(jniRef);
     __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "vpn_set_tunnel()");
 
-    // FIXME: #188/partout, info must include remote endpoint, remote fd, and modules
-    const int remoteFd = info->remote_fd;
-
-    // Call VpnWrapper.build(), returns optional fd (Int?)
     JNIEnv *env;
     (*jvm)->AttachCurrentThread(jvm, &env, NULL);
+
+    // Build input array with remote fds
+    jclass integerCls = (*env)->FindClass(env, "java/lang/Integer");
+    jmethodID integerCtor = (*env)->GetMethodID(env, integerCls, "<init>", "(I)V");
+    const jsize len = info->remote_fds_len;
+    jobjectArray remoteFdsObj = (*env)->NewObjectArray(env, len, integerCls, NULL);
+    for (jsize i = 0; i < len; i++) {
+        jobject elem = (*env)->NewObject(env, integerCls, integerCtor, (jint)(info->remote_fds[i]));
+        (*env)->SetObjectArrayElement(env, remoteFdsObj, i, elem);
+        (*env)->DeleteLocalRef(env, elem);
+    }
+
+    // Call VpnWrapper.build(), returns optional fd (Int?)
     jclass cls = (*env)->GetObjectClass(env, jniRef);
-    jmethodID buildMethod = (*env)->GetMethodID(env, cls, "build", "(I)Ljava/lang/Integer;");
-    jobject fdObj = (*env)->CallObjectMethod(env, jniRef, buildMethod, remoteFd);
+    jmethodID buildMethod = (*env)->GetMethodID(env, cls, "build", "([Ljava/lang/Integer;)Ljava/lang/Integer;");
+    jobject fdObj = (*env)->CallObjectMethod(env, jniRef, buildMethod, remoteFdsObj);
     if (fdObj == NULL) {
         return NULL;
     }
@@ -66,6 +75,25 @@ void *vpn_set_tunnel(void *jniRef, const partout_tun_ctrl_info *info) {
     vpn_impl *impl = malloc(sizeof(*impl));
     impl->fd = fd;
     return impl;
+}
+
+void vpn_configure_sockets(void *jniRef, const int *fds, const size_t fds_len) {
+    JNIEnv *env;
+    (*jvm)->AttachCurrentThread(jvm, &env, NULL);
+
+    jclass integerCls = (*env)->FindClass(env, "java/lang/Integer");
+    jmethodID integerCtor = (*env)->GetMethodID(env, integerCls, "<init>", "(I)V");
+    jobjectArray fdsObj = (*env)->NewObjectArray(env, fds_len, integerCls, NULL);
+    for (jsize i = 0; i < fds_len; i++) {
+        jobject elem = (*env)->NewObject(env, integerCls, integerCtor, (jint)(fds[i]));
+        (*env)->SetObjectArrayElement(env, fdsObj, i, elem);
+        (*env)->DeleteLocalRef(env, elem);
+    }
+
+    // Call VpnWrapper.configureSockets()
+    jclass cls = (*env)->GetObjectClass(env, jniRef);
+    jmethodID cfgMethod = (*env)->GetMethodID(env, cls, "configureSockets", "([Ljava/lang/Integer;)V");
+    (*env)->CallVoidMethod(env, jniRef, cfgMethod, fdsObj);
 }
 
 void vpn_clear_tunnel(void *jniRef, void *tunImpl) {
