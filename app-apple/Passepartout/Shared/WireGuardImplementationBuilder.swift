@@ -12,12 +12,18 @@ struct WireGuardImplementationBuilder: Sendable {
             importer: StandardWireGuardParser(),
             validator: StandardWireGuardParser(),
             connectionBlock: {
+                let preferences = $0.options.userInfo as? AppPreferenceValues
                 let ctx = PartoutLoggerContext($0.profile.id)
-                return try WireGuardConnection(
-                    ctx,
-                    parameters: $0,
-                    module: $1
-                )
+
+                // Use new connection on manual preference or configflag
+                if preferences?.usesModernCrypto == true ||
+                    preferences?.configFlags.contains(.wgCrossConnection) == true {
+                    pp_log_g(.app, .notice, "WireGuard: Using cross-platform connection")
+                    return try WireGuardConnection(ctx, parameters: $0, module: $1)
+                } else {
+                    pp_log_g(.app, .notice, "WireGuard: Using legacy connection")
+                    return try LegacyWireGuardConnection(ctx, parameters: $0, module: $1)
+                }
             }
         )
     }
