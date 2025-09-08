@@ -15,7 +15,7 @@ struct WireGuardImplementationBuilder: Sendable {
                 let preferences = $0.options.userInfo as? AppPreferenceValues
                 let ctx = PartoutLoggerContext($0.profile.id)
 
-                // Use new connection on manual preference or configflag
+                // Use new connection on manual preference or config flag
                 if preferences?.usesModernCrypto == true ||
                     preferences?.configFlags.contains(.wgCrossConnection) == true {
                     pp_log_g(.app, .notice, "WireGuard: Using cross-platform connection")
