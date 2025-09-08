@@ -20,7 +20,7 @@ extension KeyValueManager {
             values.relaxedVerification = bool(forAppPreference: .relaxedVerification)
             values.skipsPurchases = bool(forAppPreference: .skipsPurchases)
             values.usesModernCrypto = bool(forAppPreference: .usesModernCrypto)
-            values.usesNESocket = bool(forAppPreference: .usesNESocket)
+            values.configFlagsData = object(forAppPreference: .configFlags)
             return values
         }
         set {
@@ -33,7 +33,7 @@ extension KeyValueManager {
             set(newValue.relaxedVerification, forAppPreference: .relaxedVerification)
             set(newValue.skipsPurchases, forAppPreference: .skipsPurchases)
             set(newValue.usesModernCrypto, forAppPreference: .usesModernCrypto)
-            set(newValue.usesNESocket, forAppPreference: .usesNESocket)
+            set(newValue.configFlagsData, forAppPreference: .configFlags)
         }
     }
 
@@ -56,6 +56,15 @@ extension KeyValueManager {
 
     public func set<T>(_ value: T?, forAppPreference pref: AppPreference) {
         set(value, forKey: pref.key)
+    }
+
+    public func setConfigFlags(_ configFlags: Set<ConfigFlag>) {
+        do {
+            let data = try JSONEncoder().encode(configFlags)
+            set(data, forAppPreference: .configFlags)
+        } catch {
+            pp_log_g(.app, .error, "Unable to encode config flags: \(error)")
+        }
     }
 }
 

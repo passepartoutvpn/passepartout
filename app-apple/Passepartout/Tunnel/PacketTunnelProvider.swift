@@ -120,6 +120,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         } else {
             pp_log(ctx, .app, .info, "\tExisting preferences: \(preferences)")
         }
+        let configFlags = preferences.configFlags
+        pp_log(ctx, .app, .info, "\tActive config flags: \(configFlags)")
 
         // MARK: Create IAPManager for verification
 
@@ -152,7 +154,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
             // Pick socket and crypto strategy from preferences
             var factoryOptions = NEInterfaceFactory.Options()
-            factoryOptions.usesNetworkFramework = preferences.usesNESocket || preferences.usesModernCrypto
+            factoryOptions.usesNetworkFramework = configFlags.contains(.neSocket) || preferences.usesModernCrypto
 
             // OpenVPNImplementationBuilder will retrieve the
             // preferences in the connectionBlock

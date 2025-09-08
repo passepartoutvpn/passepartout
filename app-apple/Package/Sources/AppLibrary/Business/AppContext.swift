@@ -108,9 +108,8 @@ extension AppContext {
             await configManager.refreshBundle()
             await versionChecker.checkLatestRelease()
 
-            // Use NESocket in tunnel if .neSocket ConfigFlag is active
-            let shouldUseNESocket = configManager.isActive(.neSocket)
-            kvManager.set(shouldUseNESocket, forAppPreference: .usesNESocket)
+            // Propagate active config flags to tunnel via preferences
+            kvManager.setConfigFlags(configManager.activeFlags)
 
             // Disable .relaxedVerification if ConfigFlag disallows it
             if !configManager.isActive(.allowsRelaxedVerification) {
