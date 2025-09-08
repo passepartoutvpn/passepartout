@@ -23,20 +23,21 @@ class VpnWrapper: AutoCloseable {
         builder.addAddress(address, prefix)
     }
 
-    fun build(remoteFd: Int): Int? {
+    fun build(remoteFds: Array<Int>): Int? {
         assert(descriptor == null)
 
         // Protect remote socket to escape tunnel
-        Log.e("Passepartout", ">>> VpnServiceBuilderWrapper: Building with remoteFd = " + remoteFd)
-        if (remoteFd != -1) {
-            service.protect(remoteFd)
+        Log.e("Passepartout", ">>> VpnServiceBuilderWrapper: Building with remoteFds = " + remoteFds + " (" + remoteFds.size + ")")
+        remoteFds.forEach {
+            service.protect(it)
         }
 
         // FIXME: hardcode network settings to try tun fd
 //        builder.setSession()
         builder
-            .addAddress("10.8.0.2", 24)
-            .addRoute("10.8.0.0", 24)
+//            .addAddress("10.8.0.2", 24)
+//            .addRoute("10.8.0.0", 24)
+            .addAddress("10.74.73.14", 32)
             .addRoute("0.0.0.0", 0)
             .addDnsServer("1.1.1.1")
 
@@ -61,9 +62,16 @@ class VpnWrapper: AutoCloseable {
         }
 
         // Success
-        return descriptor?.let {
-            Log.e("Passepartout", ">>> VpnServiceBuilderWrapper: Established descriptor: " + it)
-            return it.fd
+        val fd = descriptor?.fd
+        Log.e("Passepartout", ">>> VpnServiceBuilderWrapper: Established descriptor: " + fd)
+//        descriptor?.detachFd()
+        return fd
+    }
+
+    fun configureSockets(fds: Array<Int>) {
+        Log.e("Passepartout", ">>> VpnServiceBuilderWrapper: Configuring with fds = " + fds + " (" + fds.size + ")")
+        fds.forEach {
+            service.protect(it)
         }
     }
 

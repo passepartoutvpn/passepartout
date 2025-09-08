@@ -50,6 +50,7 @@ Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutDaemonStart(JNIEnv
     partout_tun_ctrl ctrl = { 0 };
     ctrl.thiz = jniVPNWrapper;
     ctrl.set_tunnel = vpn_set_tunnel;
+    ctrl.configure_sockets = vpn_configure_sockets;
     ctrl.clear_tunnel = vpn_clear_tunnel;
     ctrl.test_callback = vpn_test_working_wrapper;
     args.ctrl = &ctrl;

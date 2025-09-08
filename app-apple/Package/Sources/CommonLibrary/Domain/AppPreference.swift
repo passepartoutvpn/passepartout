@@ -24,7 +24,7 @@ public enum AppPreference: String, PreferenceProtocol {
 
     case usesModernCrypto
 
-    case usesNESocket // not directly accessible
+    case configFlags // Not directly accessible
 
     public var key: String {
         "App.\(rawValue)"
@@ -50,8 +50,20 @@ public struct AppPreferenceValues: Codable, Sendable {
 
     public var usesModernCrypto = false
 
-    public var usesNESocket = false
+    public var configFlagsData: Data? = nil
 
     public init() {
+    }
+}
+
+extension AppPreferenceValues {
+    public var configFlags: Set<ConfigFlag> {
+        guard let data = configFlagsData else { return [] }
+        do {
+            return try JSONDecoder().decode(Set<ConfigFlag>.self, from: data)
+        } catch {
+            pp_log_g(.app, .error, "Unable to decode config flags: \(error)")
+            return []
+        }
     }
 }

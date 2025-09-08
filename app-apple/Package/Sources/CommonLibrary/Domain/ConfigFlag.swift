@@ -2,13 +2,17 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-public enum ConfigFlag: String, RawRepresentable, Codable, Sendable {
+public enum ConfigFlag: String, CaseIterable, RawRepresentable, Codable, Sendable {
+    // These must be permanent
     case allowsRelaxedVerification
     case appNotWorking
-    case neSocket
-    case newPaywall
+    // These are temporary (older activations come last)
     case tvSendTo
-    case tvWebImport
+    case wgCrossParser
+    case wgCrossConnection
+    case neSocket
+    case tvWebImport            // 08/09
+    case newPaywall             // 02/09
 }
 
 extension ConfigFlag: CustomStringConvertible {

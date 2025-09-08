@@ -62,6 +62,12 @@ public final class ConfigManager: ObservableObject {
     public func data(for flag: ConfigFlag) -> JSON? {
         activeMap(for: flag)?.data
     }
+
+    public var activeFlags: Set<ConfigFlag> {
+        Set(ConfigFlag.allCases.filter {
+            isActive($0)
+        })
+    }
 }
 
 private extension ConfigManager {
