@@ -82,6 +82,16 @@ public enum Strings {
       public static let inactive = Strings.tr("Localizable", "entities.tunnel_status.inactive", fallback: "Inactive")
     }
     public enum Ui {
+      public enum ConfigFlag {
+        /// Modern TCP
+        public static let neSocketTCP = Strings.tr("Localizable", "entities.ui.config_flag.neSocketTCP", fallback: "Modern TCP")
+        /// Modern UDP
+        public static let neSocketUDP = Strings.tr("Localizable", "entities.ui.config_flag.neSocketUDP", fallback: "Modern UDP")
+        /// Cross-platform OpenVPN
+        public static let ovpnCrossConnection = Strings.tr("Localizable", "entities.ui.config_flag.ovpnCrossConnection", fallback: "Cross-platform OpenVPN")
+        /// Cross-platform WireGuard
+        public static let wgCrossConnection = Strings.tr("Localizable", "entities.ui.config_flag.wgCrossConnection", fallback: "Cross-platform WireGuard")
+      }
       public enum SystemAppearance {
         /// Dark
         public static let dark = Strings.tr("Localizable", "entities.ui.system_appearance.dark", fallback: "Dark")
@@ -1005,6 +1015,8 @@ public enum Strings {
         public static let footer = Strings.tr("Localizable", "views.preferences.erase_icloud.footer", fallback: "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
       }
       public enum Experimental {
+        /// These features are controlled remotely. Turn off the toggles if something does not work.
+        public static let footer = Strings.tr("Localizable", "views.preferences.experimental.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
         /// Experimental
         public static let header = Strings.tr("Localizable", "views.preferences.experimental.header", fallback: "Experimental")
       }

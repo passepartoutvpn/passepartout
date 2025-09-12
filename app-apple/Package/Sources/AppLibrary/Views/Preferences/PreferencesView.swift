@@ -62,6 +62,9 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
+                relaxedVerificationSection
+            }
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
@@ -128,15 +131,8 @@ private extension PreferencesView {
             .themeContainerEntry(subtitle: Strings.Views.Preferences.EnablesIap.footer)
     }
 
-    var experimentalSection: some View {
-        Group {
-            // Leave here until removal though not part of the .experimental field
-            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
-                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $preferences.relaxedVerification)
-            }
-            PreferencesExperimentalView(experimental: $preferences.experimental)
-        }
-        .themeSection(header: Strings.Views.Preferences.Experimental.header)
+    var relaxedVerificationSection: some View {
+        Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $preferences.relaxedVerification)
     }
 
     var eraseCloudKitSection: some View {
@@ -165,6 +161,14 @@ private extension PreferencesView {
             isAction: true
         )
         .disabled(isErasingiCloud)
+    }
+
+    var experimentalSection: some View {
+        PreferencesExperimentalView(experimental: $preferences.experimental)
+            .themeSection(
+                header: Strings.Views.Preferences.Experimental.header,
+                footer: Strings.Views.Preferences.Experimental.footer
+            )
     }
 }
 

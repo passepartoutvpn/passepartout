@@ -93,6 +93,7 @@
 "views.preferences.enables_iap" = "In-app purchases";
 "views.preferences.enables_iap.footer" = "Enable support for paid features. Disable this if you do not have an Apple ID.";
 "views.preferences.experimental.header" = "Experimental";
+"views.preferences.experimental.footer" = "These features are controlled remotely. Turn off the toggles if something does not work.";
 "views.preferences.modern_crypto" = "Modern cryptography";
 "views.preferences.modern_crypto.footer" = "Use modern and faster implementations of cryptographic algorithms, though potentially unstable.";
 "views.preferences.relaxed_verification" = "Alternative verification";
@@ -260,6 +261,11 @@
 "entities.openvpn.otp_method.encode" = "Encode";
 
 // MARK: Entities (Library)
+
+"entities.ui.config_flag.neSocketUDP" = "Modern UDP";
+"entities.ui.config_flag.neSocketTCP" = "Modern TCP";
+"entities.ui.config_flag.ovpnCrossConnection" = "Cross-platform OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "Cross-platform WireGuard";
 
 "entities.ui.system_appearance.system" = "System";
 "entities.ui.system_appearance.light" = "Light";

@@ -17,15 +17,16 @@ struct PreferencesExperimentalView: View {
     ]
 
     private func description(for flag: ConfigFlag) -> String {
+        let V = Strings.Entities.Ui.ConfigFlag.self
         switch flag {
         case .neSocketUDP:
-            return "NESocketUDP"
+            return V.neSocketUDP
         case .neSocketTCP:
-            return "NESocketTCP"
+            return V.neSocketTCP
         case .ovpnCrossConnection:
-            return "OpenVPN Cross Connection"
+            return V.ovpnCrossConnection
         case .wgCrossConnection:
-            return "WireGuard Cross Connection"
+            return V.wgCrossConnection
         default:
             assertionFailure()
             return ""
