@@ -188,9 +188,6 @@ public struct PreferencesView: View {
     private let profileManager: ProfileManager
 
     @State
-    private var usesModernCrypto = false
-
-    @State
     private var relaxedVerification = false
 
     public init(profileManager: ProfileManager) {
@@ -198,19 +195,19 @@ public struct PreferencesView: View {
     }
 
     public var body: some View {
-        experimentalSection
+        Group {
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
+                relaxedVerificationToggle
+            }
+        }
+        .themeSection(header: Strings.Global.Nouns.preferences)
+        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
     }
 }
 
 private extension PreferencesView {
-    var experimentalSection: some View {
-        Group {
-            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
-                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
-            }
-        }
-        .themeSection(header: Strings.Views.Preferences.Experimental.header)
-        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
+    var relaxedVerificationToggle: some View {
+        Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
     }
 }
 
