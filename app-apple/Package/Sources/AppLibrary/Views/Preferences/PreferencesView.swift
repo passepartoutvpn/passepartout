@@ -62,13 +62,13 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
-            experimentalSection
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
+            experimentalSection
         }
         .themeForm()
-        // These bindings are necessary for AppPreference, as they need to be propagated to the KeyValueManager
+        // These bindings are necessary to propagate the changes to the KeyValueManager
         .onLoad {
             preferences = kvManager.preferences
         }
