@@ -170,6 +170,9 @@ private extension PreferencesView {
     func advancedView() -> some View {
         PreferencesAdvancedView(experimental: $preferences.experimental)
             .navigationTitle(advancedTitle)
+            .onChange(of: preferences.experimental) {
+                kvManager.preferences.experimental = $0
+            }
     }
 }
 

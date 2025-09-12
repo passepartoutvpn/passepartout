@@ -13,14 +13,23 @@ struct PreferencesAdvancedView: View {
     @Binding
     var experimental: AppPreferenceValues.Experimental
 
-    private let flags: [ConfigFlag] = [
+    var body: some View {
+        Form {
+            remoteSection
+        }
+        .themeForm()
+    }
+}
+
+private extension PreferencesAdvancedView {
+    static let flags: [ConfigFlag] = [
         .neSocketUDP,
         .neSocketTCP,
         .ovpnCrossConnection,
         .wgCrossConnection
     ]
 
-    private func description(for flag: ConfigFlag) -> String {
+    static func description(for flag: ConfigFlag) -> String {
         let V = Strings.Entities.Ui.ConfigFlag.self
         switch flag {
         case .neSocketUDP:
@@ -37,17 +46,8 @@ struct PreferencesAdvancedView: View {
         }
     }
 
-    var body: some View {
-        Form {
-            remoteSection
-        }
-        .themeForm()
-    }
-}
-
-private extension PreferencesAdvancedView {
     var remoteSection: some View {
-        ForEach(flags, id: \.rawValue) { flag in
+        ForEach(Self.flags, id: \.rawValue) { flag in
             Toggle(isOn: isOnBinding(for: flag)) {
                 flagView(for: flag)
             }
@@ -68,7 +68,7 @@ private extension PreferencesAdvancedView {
 
     func flagView(for flag: ConfigFlag) -> some View {
         VStack(alignment: .leading) {
-            Text(description(for: flag))
+            Text(Self.description(for: flag))
             Text(configManager.isActive(flag) ? Strings.Global.Nouns.enabled : Strings.Global.Nouns.disabled)
                 .themeSubtitle()
         }
