@@ -32,6 +32,9 @@ struct DiagnosticsView: View {
     @Environment(\.distributionTarget)
     private var distributionTarget
 
+    @EnvironmentObject
+    private var configManager: ConfigManager
+
     let profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
@@ -163,7 +166,17 @@ private extension DiagnosticsView {
         AppCommandLine.contains(.withReportIssue) ||
             iapManager.isEligibleForFeedback ||
             distributionTarget.canAlwaysReportIssue ||
-            kvManager.object(forAppPreference: .experimental) != nil
+            isUsingExperimentalFeatures
+    }
+
+    var isUsingExperimentalFeatures: Bool {
+        !configManager.activeFlags.isDisjoint(with: [
+            .neSocketUDP,
+            .neSocketTCP,
+            .ovpnCrossConnection,
+            .wgCrossConnection,
+            .wgCrossParser
+        ])
     }
 
     func computedTunnelLogs() async -> [LogEntry] {
