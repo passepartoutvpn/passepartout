@@ -4,45 +4,42 @@
 
 @testable import CommonLibrary
 import Foundation
-import XCTest
-
-final class KeyValueManagerTests: XCTestCase {
-}
+import Testing
 
 @MainActor
-extension KeyValueManagerTests {
-    func test_givenKeyValue_whenSet_thenGets() {
+struct KeyValueManagerTests {
+    func givenKeyValue_whenSet_thenGets() {
         let sut = KeyValueManager()
 
         sut.set("foobar", forKey: "string")
         sut.set(true, forKey: "boolean")
         sut.set(123, forKey: "number")
-        XCTAssertEqual(sut.object(forKey: "string"), "foobar")
-        XCTAssertEqual(sut.object(forKey: "boolean"), true)
-        XCTAssertEqual(sut.object(forKey: "number"), 123)
-        XCTAssertEqual(sut.string(forKey: "string"), "foobar")
-        XCTAssertEqual(sut.bool(forKey: "boolean"), true)
-        XCTAssertEqual(sut.integer(forKey: "number"), 123)
+        #expect(sut.object(forKey: "string") == "foobar")
+        #expect(sut.object(forKey: "boolean") == true)
+        #expect(sut.object(forKey: "number") == 123)
+        #expect(sut.string(forKey: "string") == "foobar")
+        #expect(sut.bool(forKey: "boolean") == true)
+        #expect(sut.integer(forKey: "number") == 123)
 
         sut.removeObject(forKey: "string")
         sut.removeObject(forKey: "boolean")
         sut.removeObject(forKey: "number")
-        XCTAssertFalse(sut.contains("string"))
-        XCTAssertFalse(sut.contains("boolean"))
-        XCTAssertFalse(sut.contains("number"))
+        #expect(!sut.contains("string"))
+        #expect(!sut.contains("boolean"))
+        #expect(!sut.contains("number"))
     }
 
-    func test_givenKeyValue_whenSetFallback_thenGetsFallback() {
+    func givenKeyValue_whenSetFallback_thenGetsFallback() {
         let sut = KeyValueManager(fallback: [
             "string": "foobar",
             "boolean": true,
             "number": 123
         ])
-        XCTAssertEqual(sut.object(forKey: "string"), "foobar")
-        XCTAssertEqual(sut.object(forKey: "boolean"), true)
-        XCTAssertEqual(sut.object(forKey: "number"), 123)
-        XCTAssertEqual(sut.string(forKey: "string"), "foobar")
-        XCTAssertEqual(sut.bool(forKey: "boolean"), true)
-        XCTAssertEqual(sut.integer(forKey: "number"), 123)
+        #expect(sut.object(forKey: "string") == "foobar")
+        #expect(sut.object(forKey: "boolean") == true)
+        #expect(sut.object(forKey: "number") == 123)
+        #expect(sut.string(forKey: "string") == "foobar")
+        #expect(sut.bool(forKey: "boolean") == true)
+        #expect(sut.integer(forKey: "number") == 123)
     }
 }
