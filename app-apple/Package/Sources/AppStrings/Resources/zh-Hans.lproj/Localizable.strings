@@ -96,6 +96,7 @@
 "features.routing" = "自定义路由";
 "features.sharing" = "%@";
 "global.actions.add" = "添加";
+"global.actions.allow" = "允许";
 "global.actions.cancel" = "取消";
 "global.actions.connect" = "连接";
 "global.actions.delete" = "删除";

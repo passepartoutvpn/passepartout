@@ -294,6 +294,7 @@
 // MARK: Global (Actions)
 
 "global.actions.add" = "Add";
+"global.actions.allow" = "Allow";
 "global.actions.cancel" = "Cancel";
 "global.actions.connect" = "Connect";
 "global.actions.delete" = "Delete";

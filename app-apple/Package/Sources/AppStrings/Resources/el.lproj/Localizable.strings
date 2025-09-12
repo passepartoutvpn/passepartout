@@ -96,6 +96,7 @@
 "features.routing" = "Προσαρμοσμένη Δρομολόγηση";
 "features.sharing" = "%@";
 "global.actions.add" = "Προσθήκη";
+"global.actions.allow" = "Να επιτρέπεται";
 "global.actions.cancel" = "Ακύρωση";
 "global.actions.connect" = "Σύνδεση";
 "global.actions.delete" = "Διαγραφή";

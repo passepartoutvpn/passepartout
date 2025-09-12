@@ -96,6 +96,7 @@
 "features.routing" = "Індивідуальна маршрутизація";
 "features.sharing" = "%@";
 "global.actions.add" = "Додати";
+"global.actions.allow" = "Дозволити";
 "global.actions.cancel" = "Скасувати";
 "global.actions.connect" = "Підключитися";
 "global.actions.delete" = "Видалити";

@@ -302,6 +302,8 @@ public enum Strings {
     public enum Actions {
       /// Add
       public static let add = Strings.tr("Localizable", "global.actions.add", fallback: "Add")
+      /// Allow
+      public static let allow = Strings.tr("Localizable", "global.actions.allow", fallback: "Allow")
       /// Cancel
       public static let cancel = Strings.tr("Localizable", "global.actions.cancel", fallback: "Cancel")
       /// Connect

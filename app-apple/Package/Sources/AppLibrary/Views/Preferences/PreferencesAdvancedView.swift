@@ -53,6 +53,7 @@ private extension PreferencesAdvancedView {
             }
         }
         .themeSection(
+            header: Strings.Global.Actions.allow,
             footer: Strings.Views.Preferences.Advanced.Remote.footer
         )
     }

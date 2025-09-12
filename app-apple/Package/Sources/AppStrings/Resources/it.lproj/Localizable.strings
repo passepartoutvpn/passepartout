@@ -96,6 +96,7 @@
 "features.routing" = "Routing Personalizzato";
 "features.sharing" = "%@";
 "global.actions.add" = "Aggiungi";
+"global.actions.allow" = "Consenti";
 "global.actions.cancel" = "Annulla";
 "global.actions.connect" = "Connetti";
 "global.actions.delete" = "Elimina";

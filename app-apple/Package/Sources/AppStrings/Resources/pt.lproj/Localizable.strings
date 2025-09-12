@@ -96,6 +96,7 @@
 "features.routing" = "Roteamento Personalizado";
 "features.sharing" = "%@";
 "global.actions.add" = "Adicionar";
+"global.actions.allow" = "Permitir";
 "global.actions.cancel" = "Cancelar";
 "global.actions.connect" = "Conectar";
 "global.actions.delete" = "Excluir";

@@ -96,6 +96,7 @@
 "features.routing" = "Niestandardowe trasowanie";
 "features.sharing" = "%@";
 "global.actions.add" = "Dodaj";
+"global.actions.allow" = "Zezwól";
 "global.actions.cancel" = "Anuluj";
 "global.actions.connect" = "Połącz";
 "global.actions.delete" = "Usuń";

@@ -96,6 +96,7 @@
 "features.routing" = "Пользовательская маршрутизация";
 "features.sharing" = "%@";
 "global.actions.add" = "Добавить";
+"global.actions.allow" = "Разрешить";
 "global.actions.cancel" = "Отмена";
 "global.actions.connect" = "Подключить";
 "global.actions.delete" = "Удалить";

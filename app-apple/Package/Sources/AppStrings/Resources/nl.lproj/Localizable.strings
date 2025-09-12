@@ -96,6 +96,7 @@
 "features.routing" = "Aangepaste routering";
 "features.sharing" = "%@";
 "global.actions.add" = "Toevoegen";
+"global.actions.allow" = "Toestaan";
 "global.actions.cancel" = "Annuleren";
 "global.actions.connect" = "Verbinden";
 "global.actions.delete" = "Verwijderen";
