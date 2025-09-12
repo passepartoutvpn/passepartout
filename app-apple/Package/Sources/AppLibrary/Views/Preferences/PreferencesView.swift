@@ -68,7 +68,7 @@ public struct PreferencesView: View {
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
-            experimentalSection
+            NavigationLink(advancedTitle, destination: advancedView)
         }
         .themeForm()
         // These bindings are necessary to propagate the changes to the KeyValueManager
@@ -163,12 +163,13 @@ private extension PreferencesView {
         .disabled(isErasingiCloud)
     }
 
-    var experimentalSection: some View {
-        PreferencesExperimentalView(experimental: $preferences.experimental)
-            .themeSection(
-                header: Strings.Views.Preferences.Experimental.header,
-                footer: Strings.Views.Preferences.Experimental.footer
-            )
+    var advancedTitle: String {
+        Strings.Views.Preferences.Advanced.title
+    }
+
+    func advancedView() -> some View {
+        PreferencesAdvancedView(experimental: $preferences.experimental)
+            .navigationTitle(advancedTitle)
     }
 }
 

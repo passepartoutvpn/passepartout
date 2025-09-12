@@ -5,7 +5,7 @@
 import CommonLibrary
 import SwiftUI
 
-struct PreferencesExperimentalView: View {
+struct PreferencesAdvancedView: View {
 
     @EnvironmentObject
     private var configManager: ConfigManager
@@ -38,19 +38,25 @@ struct PreferencesExperimentalView: View {
     }
 
     var body: some View {
-        ForEach(flags, id: \.rawValue) { flag in
-            Toggle(isOn: Binding<Bool> {
-                experimental.isUsed(flag)
-            } set: {
-                experimental.setUsed(flag, isUsed: $0)
-            }) {
-                VStack(alignment: .leading) {
-                    Text(description(for: flag))
-                    Text(configManager.isActive(flag) ? Strings.Global.Nouns.enabled : Strings.Global.Nouns.disabled)
-                        .themeSubtitle()
+        Form {
+            ForEach(flags, id: \.rawValue) { flag in
+                Toggle(isOn: Binding<Bool> {
+                    experimental.isUsed(flag)
+                } set: {
+                    experimental.setUsed(flag, isUsed: $0)
+                }) {
+                    VStack(alignment: .leading) {
+                        Text(description(for: flag))
+                        Text(configManager.isActive(flag) ? Strings.Global.Nouns.enabled : Strings.Global.Nouns.disabled)
+                            .themeSubtitle()
+                    }
                 }
             }
+            .themeSection(
+                footer: Strings.Views.Preferences.Advanced.footer
+            )
         }
+        .themeForm()
     }
 }
 

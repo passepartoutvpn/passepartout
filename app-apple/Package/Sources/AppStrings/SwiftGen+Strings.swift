@@ -1002,6 +1002,12 @@ public enum Strings {
       public static let relaxedVerification = Strings.tr("Localizable", "views.preferences.relaxed_verification", fallback: "Alternative verification")
       /// Appearance
       public static let systemAppearance = Strings.tr("Localizable", "views.preferences.system_appearance", fallback: "Appearance")
+      public enum Advanced {
+        /// These features are controlled remotely. Turn off the toggles if something does not work.
+        public static let footer = Strings.tr("Localizable", "views.preferences.advanced.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
+        /// Advanced
+        public static let title = Strings.tr("Localizable", "views.preferences.advanced.title", fallback: "Advanced")
+      }
       public enum DnsFallsBack {
         /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.
         public static let footer = Strings.tr("Localizable", "views.preferences.dns_falls_back.footer", fallback: "Fall back to CloudFlare servers when the VPN does not provide DNS settings.")
@@ -1013,12 +1019,6 @@ public enum Strings {
       public enum EraseIcloud {
         /// To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
         public static let footer = Strings.tr("Localizable", "views.preferences.erase_icloud.footer", fallback: "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
-      }
-      public enum Experimental {
-        /// These features are controlled remotely. Turn off the toggles if something does not work.
-        public static let footer = Strings.tr("Localizable", "views.preferences.experimental.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
-        /// Experimental
-        public static let header = Strings.tr("Localizable", "views.preferences.experimental.header", fallback: "Experimental")
       }
       public enum KeepsInMenu {
         /// Enable this to keep the app in the menu bar after closing it.

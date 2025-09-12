@@ -92,13 +92,14 @@
 "views.preferences.dns_falls_back.footer" = "Fall back to CloudFlare servers when the VPN does not provide DNS settings.";
 "views.preferences.enables_iap" = "In-app purchases";
 "views.preferences.enables_iap.footer" = "Enable support for paid features. Disable this if you do not have an Apple ID.";
-"views.preferences.experimental.header" = "Experimental";
-"views.preferences.experimental.footer" = "These features are controlled remotely. Turn off the toggles if something does not work.";
 "views.preferences.modern_crypto" = "Modern cryptography";
 "views.preferences.modern_crypto.footer" = "Use modern and faster implementations of cryptographic algorithms, though potentially unstable.";
 "views.preferences.relaxed_verification" = "Alternative verification";
 "views.preferences.erase_icloud" = "Erase profiles from iCloud";
 "views.preferences.erase_icloud.footer" = "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
+
+"views.preferences.advanced.title" = "Advanced";
+"views.preferences.advanced.footer" = "These features are controlled remotely. Turn off the toggles if something does not work.";
 
 "views.profile.sections.name.footer" = "Use this name to create your VPN automations from the Shortcuts app.";
 "views.profile.rows.add_module" = "Add module";
