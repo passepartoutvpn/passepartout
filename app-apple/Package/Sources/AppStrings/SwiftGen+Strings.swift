@@ -1003,10 +1003,12 @@ public enum Strings {
       /// Appearance
       public static let systemAppearance = Strings.tr("Localizable", "views.preferences.system_appearance", fallback: "Appearance")
       public enum Advanced {
-        /// These features are controlled remotely. Turn off the toggles if something does not work.
-        public static let footer = Strings.tr("Localizable", "views.preferences.advanced.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
         /// Advanced
         public static let title = Strings.tr("Localizable", "views.preferences.advanced.title", fallback: "Advanced")
+        public enum Remote {
+          /// These features are controlled remotely. Turn off the toggles if something does not work.
+          public static let footer = Strings.tr("Localizable", "views.preferences.advanced.remote.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
+        }
       }
       public enum DnsFallsBack {
         /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.

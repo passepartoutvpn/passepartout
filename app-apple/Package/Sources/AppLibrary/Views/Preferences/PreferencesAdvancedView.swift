@@ -39,24 +39,38 @@ struct PreferencesAdvancedView: View {
 
     var body: some View {
         Form {
-            ForEach(flags, id: \.rawValue) { flag in
-                Toggle(isOn: Binding<Bool> {
-                    experimental.isUsed(flag)
-                } set: {
-                    experimental.setUsed(flag, isUsed: $0)
-                }) {
-                    VStack(alignment: .leading) {
-                        Text(description(for: flag))
-                        Text(configManager.isActive(flag) ? Strings.Global.Nouns.enabled : Strings.Global.Nouns.disabled)
-                            .themeSubtitle()
-                    }
-                }
-            }
-            .themeSection(
-                footer: Strings.Views.Preferences.Advanced.footer
-            )
+            remoteSection
         }
         .themeForm()
+    }
+}
+
+private extension PreferencesAdvancedView {
+    var remoteSection: some View {
+        ForEach(flags, id: \.rawValue) { flag in
+            Toggle(isOn: isOnBinding(for: flag)) {
+                flagView(for: flag)
+            }
+        }
+        .themeSection(
+            footer: Strings.Views.Preferences.Advanced.Remote.footer
+        )
+    }
+
+    func isOnBinding(for flag: ConfigFlag) -> Binding<Bool> {
+        Binding<Bool> {
+            experimental.isUsed(flag)
+        } set: {
+            experimental.setUsed(flag, isUsed: $0)
+        }
+    }
+
+    func flagView(for flag: ConfigFlag) -> some View {
+        VStack(alignment: .leading) {
+            Text(description(for: flag))
+            Text(configManager.isActive(flag) ? Strings.Global.Nouns.enabled : Strings.Global.Nouns.disabled)
+                .themeSubtitle()
+        }
     }
 }
 
