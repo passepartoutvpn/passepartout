@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "Aktiv";
 "entities.tunnel_status.deactivating" = "Inaktiverar";
 "entities.tunnel_status.inactive" = "Inaktiv";
+"entities.ui.config_flag.neSocketTCP" = "Modern TCP";
+"entities.ui.config_flag.neSocketUDP" = "Modern UDP";
+"entities.ui.config_flag.ovpnCrossConnection" = "Plattformsoberoende OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "Plattformsoberoende WireGuard";
 "entities.ui.system_appearance.dark" = "Mörk";
 "entities.ui.system_appearance.light" = "Ljus";
 "entities.ui.system_appearance.system" = "System";
@@ -114,6 +118,7 @@
 "global.nouns.account" = "Konto";
 "global.nouns.address" = "Adress";
 "global.nouns.addresses" = "Adresser";
+"global.nouns.advanced" = "Avancerat";
 "global.nouns.any" = "Alla";
 "global.nouns.apple.network_extensions" = "Nätverkstillägg";
 "global.nouns.apple.system_extension" = "Systemtillägg";
@@ -316,13 +321,13 @@
 "views.paywall.sections.required_features.header" = "Krävda funktioner";
 "views.paywall.sections.restore.footer" = "Om du har gjort köp tidigare kan du återställa dem här.";
 "views.paywall.sections.restore.header" = "Återställ";
+"views.preferences.advanced.remote.footer" = "Dessa funktioner styrs på distans. Stäng av växlarna om något inte fungerar.";
 "views.preferences.dns_falls_back.footer" = "Återgår till CloudFlare-servrar när VPN inte tillhandahåller DNS-inställningar.";
 "views.preferences.dns_falls_back" = "DNS-backup";
 "views.preferences.enables_iap.footer" = "Aktivera stöd för betalda funktioner. Avaktivera detta om du inte har Apple ID.";
 "views.preferences.enables_iap" = "Köp i appen";
 "views.preferences.erase_icloud.footer" = "För att säkert radera alla profiler från iCloud-lagringen, gör det på alla dina synkroniserade enheter. Detta påverkar inte lokala profiler.";
 "views.preferences.erase_icloud" = "Radera profiler från iCloud";
-"views.preferences.experimental.header" = "Experimentellt";
 "views.preferences.keeps_in_menu.footer" = "Aktivera detta för att behålla appen i menyraden efter att du har stängt den.";
 "views.preferences.keeps_in_menu" = "Behåll i menyraden";
 "views.preferences.launches_on_login.footer" = "Öppna appen i bakgrunden efter inloggning.";
@@ -378,8 +383,8 @@
 "views.settings.system_extension.buttons.open" = "Öppna inställningar";
 "views.settings.system_extension.message" = "För att VPN ska fungera måste appen ligga i mappen /Applications och %@ vara aktiverad som %@.\n\nÖppna macOS-inställningarna, scrolla till ”%@”, öppna det och aktivera %@.";
 "views.settings.title" = "Om";
-"views.tv.connection_profiles.header.share" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här.";
 "views.tv.connection_profiles.header.import" = "Alternativt hittar du andra alternativ i fliken \"Profiler\".";
+"views.tv.connection_profiles.header.share" = "Öppna %@ på din iOS- eller macOS-enhet och aktivera växeln \"%@\" för en profil så visas den här.";
 "views.tv.profiles.detail.profiles" = "Tryck länge för att visa tillgängliga åtgärder för en profil.";
 "views.tv.profiles.import_local" = "Importera lokal profil";
 "views.tv.web_receiver.qr" = "Skanna QR-koden med din kamera för att öppna en webbsida där du kan ladda upp din profil. Se till att du är ansluten till samma nätverk.";

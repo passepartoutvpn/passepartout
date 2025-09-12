@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "Ενεργό";
 "entities.tunnel_status.deactivating" = "Απενεργοποίηση";
 "entities.tunnel_status.inactive" = "Ανενεργό";
+"entities.ui.config_flag.neSocketTCP" = "Σύγχρονο TCP";
+"entities.ui.config_flag.neSocketUDP" = "Σύγχρονο UDP";
+"entities.ui.config_flag.ovpnCrossConnection" = "Διαπλατφορμικό OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "Διαπλατφορμικό WireGuard";
 "entities.ui.system_appearance.dark" = "Σκούρο";
 "entities.ui.system_appearance.light" = "Φωτεινό";
 "entities.ui.system_appearance.system" = "Σύστημα";
@@ -114,6 +118,7 @@
 "global.nouns.account" = "Λογαριασμός";
 "global.nouns.address" = "Διεύθυνση";
 "global.nouns.addresses" = "Διευθύνσεις";
+"global.nouns.advanced" = "Προηγμένα";
 "global.nouns.any" = "Οποιοδήποτε";
 "global.nouns.apple.network_extensions" = "Επεκτάσεις δικτύου";
 "global.nouns.apple.system_extension" = "Επέκταση συστήματος";
@@ -316,13 +321,13 @@
 "views.paywall.sections.required_features.header" = "Απαιτούμενες λειτουργίες";
 "views.paywall.sections.restore.footer" = "Αν έχετε πραγματοποιήσει αγορές στο παρελθόν, μπορείτε να τις επαναφέρετε εδώ.";
 "views.paywall.sections.restore.header" = "Επαναφορά";
+"views.preferences.advanced.remote.footer" = "Αυτές οι λειτουργίες ελέγχονται απομακρυσμένα. Απενεργοποιήστε τους διακόπτες αν κάτι δεν λειτουργεί.";
 "views.preferences.dns_falls_back.footer" = "Χρησιμοποιεί τους διακομιστές CloudFlare όταν το VPN δεν παρέχει ρυθμίσεις DNS.";
 "views.preferences.dns_falls_back" = "Εναλλακτικό DNS";
 "views.preferences.enables_iap.footer" = "Ενεργοποιήστε την υποστήριξη για πληρωμένες λειτουργίες. Απενεργοποιήστε το αν δεν έχετε Apple ID.";
 "views.preferences.enables_iap" = "Αγορές εντός εφαρμογής";
 "views.preferences.erase_icloud.footer" = "Για να διαγράψετε όλα τα προφίλ από το iCloud με ασφάλεια, κάντε το σε όλες τις συγχρονισμένες συσκευές σας. Αυτό δεν θα επηρεάσει τα τοπικά προφίλ.";
 "views.preferences.erase_icloud" = "Διαγραφή προφίλ από το iCloud";
-"views.preferences.experimental.header" = "Πειραματικό";
 "views.preferences.keeps_in_menu.footer" = "Ενεργοποιήστε αυτό για να διατηρήσετε την εφαρμογή στη γραμμή μενού μετά το κλείσιμό της.";
 "views.preferences.keeps_in_menu" = "Διατήρηση στη γραμμή μενού";
 "views.preferences.launches_on_login.footer" = "Ανοίξτε την εφαρμογή στο παρασκήνιο μετά την είσοδο.";
@@ -378,8 +383,8 @@
 "views.settings.system_extension.buttons.open" = "Άνοιγμα προτιμήσεων";
 "views.settings.system_extension.message" = "Για να λειτουργήσει το VPN, η εφαρμογή πρέπει να βρίσκεται στον φάκελο /Applications και το %@ πρέπει να είναι ενεργοποιημένο ως %@.\n\nΆνοιξε τις Προτιμήσεις του macOS, κύλησε στο «%@», άνοιξέ το και ενεργοποίησε το %@.";
 "views.settings.title" = "Σχετικά";
-"views.tv.connection_profiles.header.share" = "Άνοιξε το %@ στη συσκευή σου iOS ή macOS και ενεργοποίησε την εναλλαγή \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ.";
 "views.tv.connection_profiles.header.import" = "Εναλλακτικά, θα βρεις άλλες επιλογές στην καρτέλα \"Προφίλ\".";
+"views.tv.connection_profiles.header.share" = "Άνοιξε το %@ στη συσκευή σου iOS ή macOS και ενεργοποίησε την εναλλαγή \"%@\" σε ένα προφίλ για να εμφανιστεί εδώ.";
 "views.tv.profiles.detail.profiles" = "Πατήστε παρατεταμένα για να εμφανίσετε τις διαθέσιμες ενέργειες για ένα προφίλ.";
 "views.tv.profiles.import_local" = "Εισαγωγή τοπικού προφίλ";
 "views.tv.web_receiver.qr" = "Σαρώστε το QR με την κάμερά σας για να ανοίξετε μια ιστοσελίδα όπου μπορείτε να ανεβάσετε το προφίλ σας. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο ίδιο δίκτυο.";

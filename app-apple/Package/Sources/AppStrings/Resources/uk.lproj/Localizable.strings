@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "Активний";
 "entities.tunnel_status.deactivating" = "Деактивація";
 "entities.tunnel_status.inactive" = "Неактивний";
+"entities.ui.config_flag.neSocketTCP" = "Сучасний TCP";
+"entities.ui.config_flag.neSocketUDP" = "Сучасний UDP";
+"entities.ui.config_flag.ovpnCrossConnection" = "Кросплатформенний OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "Кросплатформенний WireGuard";
 "entities.ui.system_appearance.dark" = "Темна";
 "entities.ui.system_appearance.light" = "Світла";
 "entities.ui.system_appearance.system" = "Система";
@@ -114,6 +118,7 @@
 "global.nouns.account" = "Обліковий запис";
 "global.nouns.address" = "Адреса";
 "global.nouns.addresses" = "Адреси";
+"global.nouns.advanced" = "Розширені";
 "global.nouns.any" = "Будь-який";
 "global.nouns.apple.network_extensions" = "Мережеві розширення";
 "global.nouns.apple.system_extension" = "Системне розширення";
@@ -316,13 +321,13 @@
 "views.paywall.sections.required_features.header" = "Необхідні функції";
 "views.paywall.sections.restore.footer" = "Якщо ви раніше здійснювали покупки, ви можете відновити їх тут.";
 "views.paywall.sections.restore.header" = "Відновлення";
+"views.preferences.advanced.remote.footer" = "Ці функції керуються віддалено. Вимкніть перемикачі, якщо щось не працює.";
 "views.preferences.dns_falls_back.footer" = "Перемикається на сервери CloudFlare, коли VPN не надає налаштування DNS.";
 "views.preferences.dns_falls_back" = "Резервний DNS";
 "views.preferences.enables_iap.footer" = "Увімкніть підтримку платних функцій. Вимкніть це, якщо у вас немає Apple ID.";
 "views.preferences.enables_iap" = "Покупки в додатку";
 "views.preferences.erase_icloud.footer" = "Щоб безпечно видалити всі профілі з iCloud, виконайте цю дію на всіх ваших синхронізованих пристроях. Це не вплине на локальні профілі.";
 "views.preferences.erase_icloud" = "Видалити профілі з iCloud";
-"views.preferences.experimental.header" = "Експериментально";
 "views.preferences.keeps_in_menu.footer" = "Увімкніть це, щоб залишити додаток у рядку меню після його закриття.";
 "views.preferences.keeps_in_menu" = "Залишати в рядку меню";
 "views.preferences.launches_on_login.footer" = "Відкрити додаток у фоновому режимі після входу.";
@@ -378,8 +383,8 @@
 "views.settings.system_extension.buttons.open" = "Відкрити налаштування";
 "views.settings.system_extension.message" = "Щоб VPN працював, програма має бути в каталозі /Applications, а %@ має бути увімкнено як %@.\n\nВідкрий налаштування macOS, прокрути до «%@», ідкрий його та увімкни %@.";
 "views.settings.title" = "Про програму";
-"views.tv.connection_profiles.header.share" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут.";
 "views.tv.connection_profiles.header.import" = "Або знайдеш інші опції на вкладці «Профілі».";
+"views.tv.connection_profiles.header.share" = "Відкрий %@ на своєму пристрої iOS або macOS і увімкни перемикач \"%@\" у профілі, щоб він з’явився тут.";
 "views.tv.profiles.detail.profiles" = "Утримуйте, щоб побачити доступні дії для профілю.";
 "views.tv.profiles.import_local" = "Імпортувати локальний профіль";
 "views.tv.web_receiver.qr" = "Скануйте QR-код камерою, щоб відкрити веб-сторінку для завантаження вашого профілю. Переконайтеся, що ви підключені до тієї ж мережі.";

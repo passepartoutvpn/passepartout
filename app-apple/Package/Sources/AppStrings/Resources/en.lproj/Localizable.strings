@@ -98,7 +98,6 @@
 "views.preferences.erase_icloud" = "Erase profiles from iCloud";
 "views.preferences.erase_icloud.footer" = "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 
-"views.preferences.advanced.title" = "Advanced";
 "views.preferences.advanced.remote.footer" = "These features are controlled remotely. Turn off the toggles if something does not work.";
 
 "views.profile.sections.name.footer" = "Use this name to create your VPN automations from the Shortcuts app.";
@@ -320,6 +319,7 @@
 "global.nouns.account" = "Account";
 "global.nouns.address" = "Address";
 "global.nouns.addresses" = "Addresses";
+"global.nouns.advanced" = "Advanced";
 "global.nouns.any" = "Any";
 "global.nouns.apple.network_extensions" = "Network Extensions";
 "global.nouns.apple.system_extension" = "System Extension";

@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "已激活";
 "entities.tunnel_status.deactivating" = "停用中";
 "entities.tunnel_status.inactive" = "未激活";
+"entities.ui.config_flag.neSocketTCP" = "现代 TCP";
+"entities.ui.config_flag.neSocketUDP" = "现代 UDP";
+"entities.ui.config_flag.ovpnCrossConnection" = "跨平台 OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "跨平台 WireGuard";
 "entities.ui.system_appearance.dark" = "深色";
 "entities.ui.system_appearance.light" = "浅色";
 "entities.ui.system_appearance.system" = "系统";
@@ -114,6 +118,7 @@
 "global.nouns.account" = "账户";
 "global.nouns.address" = "地址";
 "global.nouns.addresses" = "地址";
+"global.nouns.advanced" = "高级";
 "global.nouns.any" = "任何";
 "global.nouns.apple.network_extensions" = "网络扩展";
 "global.nouns.apple.system_extension" = "系统扩展";
@@ -316,13 +321,13 @@
 "views.paywall.sections.required_features.header" = "必需功能";
 "views.paywall.sections.restore.footer" = "如果您过去有购买记录，可以在此恢复。";
 "views.paywall.sections.restore.header" = "恢复";
+"views.preferences.advanced.remote.footer" = "这些功能由远程控制。如果某些功能无法正常工作，请关闭开关。";
 "views.preferences.dns_falls_back.footer" = "当 VPN 不提供 DNS 设置时，回退到 CloudFlare 服务器。";
 "views.preferences.dns_falls_back" = "DNS 备用";
 "views.preferences.enables_iap.footer" = "启用对付费功能的支持。如果您没有 Apple ID，请禁用此功能。";
 "views.preferences.enables_iap" = "应用内购买";
 "views.preferences.erase_icloud.footer" = "要安全地从 iCloud 存储中删除所有配置文件，请在所有已同步的设备上执行此操作。这不会影响本地配置文件。";
 "views.preferences.erase_icloud" = "从 iCloud 中删除配置文件";
-"views.preferences.experimental.header" = "实验性";
 "views.preferences.keeps_in_menu.footer" = "启用此选项后，关闭应用后它会继续显示在菜单栏中。";
 "views.preferences.keeps_in_menu" = "保持在菜单栏";
 "views.preferences.launches_on_login.footer" = "登录后在后台打开应用。";
@@ -378,8 +383,8 @@
 "views.settings.system_extension.buttons.open" = "打开偏好设置";
 "views.settings.system_extension.message" = "要使 VPN 正常工作，应用程序必须位于 /Applications 目录中，并且必须将 %@ 启用为 %@。\n\n打开 macOS 偏好设置，滚动到“%@”，打开并启用 %@。";
 "views.settings.title" = "关于";
-"views.tv.connection_profiles.header.share" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。";
 "views.tv.connection_profiles.header.import" = "或者，你可以在“配置文件”标签页找到其他选项。";
+"views.tv.connection_profiles.header.share" = "在你的 iOS 或 macOS 设备上打开 %@ 并启用某个配置文件的“%@”开关以在此处显示。";
 "views.tv.profiles.detail.profiles" = "长按以显示配置文件的可用操作。"
 "views.tv.profiles.import_local" = "导入本地配置文件";
 "views.tv.web_receiver.qr" = "使用相机扫描二维码以打开网页，上传您的配置文件。确保您连接到同一网络。";

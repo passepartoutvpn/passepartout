@@ -164,7 +164,7 @@ private extension PreferencesView {
     }
 
     var advancedTitle: String {
-        Strings.Views.Preferences.Advanced.title
+        Strings.Global.Nouns.advanced
     }
 
     func advancedView() -> some View {
