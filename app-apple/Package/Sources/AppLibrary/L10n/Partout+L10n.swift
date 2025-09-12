@@ -125,7 +125,7 @@ extension IPSettings: StyledOptionalLocalizableEntity {
     }
 
     private var addressDescription: String? {
-        subnet?.address.rawValue
+        subnets.first?.address.rawValue
     }
 
     private var defaultGatewayDescription: String? {

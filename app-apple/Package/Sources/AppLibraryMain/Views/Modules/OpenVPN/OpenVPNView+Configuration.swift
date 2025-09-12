@@ -360,7 +360,7 @@ private extension OpenVPNView.ConfigurationView {
 
     func ipRows(for ip: IPSettings?, routes: [Route]?) -> [Any?] {
         [
-            ip?.subnet,
+            ip?.subnets.first,
             ip?.localizedDescription(optionalStyle: .defaultGateway),
             ip?.includedRoutes.nilIfEmpty,
             routes?.nilIfEmpty,
