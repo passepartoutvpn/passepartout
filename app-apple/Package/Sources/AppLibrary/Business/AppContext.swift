@@ -109,7 +109,7 @@ extension AppContext {
             await versionChecker.checkLatestRelease()
 
             // Propagate active config flags to tunnel via preferences
-            kvManager.setConfigFlags(configManager.activeFlags)
+            kvManager.preferences.configFlags = configManager.activeFlags
 
             // Disable .relaxedVerification if ConfigFlag disallows it
             if !configManager.isActive(.allowsRelaxedVerification) {

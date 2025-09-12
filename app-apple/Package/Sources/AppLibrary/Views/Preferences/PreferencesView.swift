@@ -36,13 +36,7 @@ public struct PreferencesView: View {
     private let profileManager: ProfileManager
 
     @State
-    private var dnsFallsBack = true
-
-    @State
-    private var usesModernCrypto = false
-
-    @State
-    private var relaxedVerification = false
+    private var preferences = AppPreferenceValues()
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -68,15 +62,22 @@ public struct PreferencesView: View {
             if distributionTarget.supportsIAP {
                 enablesPurchasesSection
             }
-            experimentalSection
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
+                relaxedVerificationSection
+            }
             if distributionTarget.supportsCloudKit {
                 eraseCloudKitSection
             }
+            NavigationLink(advancedTitle, destination: advancedView)
         }
-        .themeKeyValue(kvManager, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
-        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
-        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
         .themeForm()
+        // These bindings are necessary to propagate the changes to the KeyValueManager
+        .onLoad {
+            preferences = kvManager.preferences
+        }
+        .onChange(of: preferences) {
+            kvManager.preferences = $0
+        }
     }
 }
 
@@ -121,7 +122,7 @@ private extension PreferencesView {
     }
 
     var dnsFallsBackSection: some View {
-        Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $dnsFallsBack)
+        Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $preferences.dnsFallsBack)
             .themeContainerEntry(subtitle: Strings.Views.Preferences.DnsFallsBack.footer)
     }
 
@@ -130,20 +131,8 @@ private extension PreferencesView {
             .themeContainerEntry(subtitle: Strings.Views.Preferences.EnablesIap.footer)
     }
 
-    var experimentalSection: some View {
-        Group {
-            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
-                .themeContainerEntry(
-                    header: Strings.Views.Preferences.Experimental.header,
-                    subtitle: Strings.Views.Preferences.ModernCrypto.footer
-                )
-            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
-                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
-                    .themeContainerEntry()
-            }
-        }
-        .themeContainer(header: Strings.Views.Preferences.Experimental.header)
-
+    var relaxedVerificationSection: some View {
+        Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $preferences.relaxedVerification)
     }
 
     var eraseCloudKitSection: some View {
@@ -173,6 +162,15 @@ private extension PreferencesView {
         )
         .disabled(isErasingiCloud)
     }
+
+    var advancedTitle: String {
+        Strings.Global.Nouns.advanced
+    }
+
+    func advancedView() -> some View {
+        PreferencesAdvancedView(experimental: $preferences.experimental)
+            .navigationTitle(advancedTitle)
+    }
 }
 
 #else
@@ -191,9 +189,6 @@ public struct PreferencesView: View {
     private let profileManager: ProfileManager
 
     @State
-    private var usesModernCrypto = false
-
-    @State
     private var relaxedVerification = false
 
     public init(profileManager: ProfileManager) {
@@ -201,21 +196,19 @@ public struct PreferencesView: View {
     }
 
     public var body: some View {
-        experimentalSection
+        Group {
+            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
+                relaxedVerificationToggle
+            }
+        }
+        .themeSection(header: Strings.Global.Nouns.preferences)
+        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
     }
 }
 
 private extension PreferencesView {
-    var experimentalSection: some View {
-        Group {
-            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
-            if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
-                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
-            }
-        }
-        .themeSection(header: Strings.Views.Preferences.Experimental.header)
-        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
-        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
+    var relaxedVerificationToggle: some View {
+        Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
     }
 }
 

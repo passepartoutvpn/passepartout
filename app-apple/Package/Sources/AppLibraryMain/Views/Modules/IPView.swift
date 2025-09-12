@@ -195,10 +195,10 @@ private extension IPView {
 
 private extension IPView {
     func loadSubnets() {
-        if let v4 = draft.module.ipv4?.subnet?.rawValue {
+        if let v4 = draft.module.ipv4?.subnets.first?.rawValue {
             subnets[.v4] = v4
         }
-        if let v6 = draft.module.ipv6?.subnet?.rawValue {
+        if let v6 = draft.module.ipv6?.subnets.first?.rawValue {
             subnets[.v6] = v6
         }
     }

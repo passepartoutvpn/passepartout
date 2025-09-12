@@ -18,7 +18,7 @@ struct OpenVPNImplementationBuilder: Sendable {
             importer: StandardOpenVPNParser(),
             connectionBlock: {
                 let preferences = $0.options.userInfo as? AppPreferenceValues
-                if preferences?.usesModernCrypto == true {
+                if preferences?.isFlagEnabled(.ovpnCrossConnection) == true {
                     pp_log_g(.app, .notice, "OpenVPN: Using cross-platform connection")
                     return try crossConnection(with: $0, module: $1)
                 } else {

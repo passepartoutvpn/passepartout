@@ -19,8 +19,8 @@ extension KeyValueManager {
             values.logsPrivateData = bool(forAppPreference: .logsPrivateData)
             values.relaxedVerification = bool(forAppPreference: .relaxedVerification)
             values.skipsPurchases = bool(forAppPreference: .skipsPurchases)
-            values.usesModernCrypto = bool(forAppPreference: .usesModernCrypto)
             values.configFlagsData = object(forAppPreference: .configFlags)
+            values.experimentalData = object(forAppPreference: .experimental)
             return values
         }
         set {
@@ -32,16 +32,15 @@ extension KeyValueManager {
             set(newValue.logsPrivateData, forAppPreference: .logsPrivateData)
             set(newValue.relaxedVerification, forAppPreference: .relaxedVerification)
             set(newValue.skipsPurchases, forAppPreference: .skipsPurchases)
-            set(newValue.usesModernCrypto, forAppPreference: .usesModernCrypto)
             set(newValue.configFlagsData, forAppPreference: .configFlags)
+            set(newValue.experimentalData, forAppPreference: .experimental)
         }
     }
 
     public convenience init(store: KeyValueStore, fallback: AppPreferenceValues) {
         let values = [
             AppPreference.dnsFallsBack.key: fallback.dnsFallsBack,
-            AppPreference.logsPrivateData.key: fallback.logsPrivateData,
-            AppPreference.usesModernCrypto.key: fallback.usesModernCrypto
+            AppPreference.logsPrivateData.key: fallback.logsPrivateData
         ]
         self.init(store: store, fallback: values)
     }
@@ -56,15 +55,6 @@ extension KeyValueManager {
 
     public func set<T>(_ value: T?, forAppPreference pref: AppPreference) {
         set(value, forKey: pref.key)
-    }
-
-    public func setConfigFlags(_ configFlags: Set<ConfigFlag>) {
-        do {
-            let data = try JSONEncoder().encode(configFlags)
-            set(data, forAppPreference: .configFlags)
-        } catch {
-            pp_log_g(.app, .error, "Unable to encode config flags: \(error)")
-        }
     }
 }
 

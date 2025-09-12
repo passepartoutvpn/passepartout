@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "Ativo";
 "entities.tunnel_status.deactivating" = "Desativando";
 "entities.tunnel_status.inactive" = "Inativo";
+"entities.ui.config_flag.neSocketTCP" = "TCP moderno";
+"entities.ui.config_flag.neSocketUDP" = "UDP moderno";
+"entities.ui.config_flag.ovpnCrossConnection" = "OpenVPN multiplataforma";
+"entities.ui.config_flag.wgCrossConnection" = "WireGuard multiplataforma";
 "entities.ui.system_appearance.dark" = "Escuro";
 "entities.ui.system_appearance.light" = "Claro";
 "entities.ui.system_appearance.system" = "Sistema";
@@ -92,6 +96,7 @@
 "features.routing" = "Roteamento Personalizado";
 "features.sharing" = "%@";
 "global.actions.add" = "Adicionar";
+"global.actions.allow" = "Permitir";
 "global.actions.cancel" = "Cancelar";
 "global.actions.connect" = "Conectar";
 "global.actions.delete" = "Excluir";
@@ -114,6 +119,7 @@
 "global.nouns.account" = "Conta";
 "global.nouns.address" = "Endereço";
 "global.nouns.addresses" = "Endereços";
+"global.nouns.advanced" = "Avançado";
 "global.nouns.any" = "Qualquer";
 "global.nouns.apple.network_extensions" = "Extensões de rede";
 "global.nouns.apple.system_extension" = "Extensão do sistema";
@@ -316,13 +322,13 @@
 "views.paywall.sections.required_features.header" = "Recursos necessários";
 "views.paywall.sections.restore.footer" = "Se você fez compras anteriormente, pode restaurá-las aqui.";
 "views.paywall.sections.restore.header" = "Restaurar";
+"views.preferences.advanced.remote.footer" = "Esses recursos são controlados remotamente. Desative as opções se algo não funcionar.";
 "views.preferences.dns_falls_back.footer" = "Reverte para os servidores CloudFlare quando o VPN não fornece configurações de DNS.";
 "views.preferences.dns_falls_back" = "Fallback de DNS";
 "views.preferences.enables_iap.footer" = "Ative o suporte para recursos pagos. Desative isto se você não tiver Apple ID.";
 "views.preferences.enables_iap" = "Compras dentro do app";
 "views.preferences.erase_icloud.footer" = "Para apagar com segurança todos os perfis do armazenamento do iCloud, faça isso em todos os seus dispositivos sincronizados. Isso não afetará os perfis locais.";
 "views.preferences.erase_icloud" = "Apagar perfis do iCloud";
-"views.preferences.experimental.header" = "Experimental";
 "views.preferences.keeps_in_menu.footer" = "Ative isso para manter o app na barra de menu após fechá-lo.";
 "views.preferences.keeps_in_menu" = "Manter na barra de menu";
 "views.preferences.launches_on_login.footer" = "Abrir o app em segundo plano após o login.";
@@ -378,8 +384,8 @@
 "views.settings.system_extension.buttons.open" = "Abrir preferências";
 "views.settings.system_extension.message" = "Para que o VPN funcione, o app deve estar no diretório /Applications e %@ deve estar ativado como %@.\n\nAbra as Preferências do macOS, role até “%@”, abra e ative %@.";
 "views.settings.title" = "Sobre";
-"views.tv.connection_profiles.header.share" = "Abra o %@ no seu dispositivo iOS ou macOS e ative a opção \"%@\" de um perfil para que ele apareça aqui.";
 "views.tv.connection_profiles.header.import" = "Alternativamente, você encontrará outras opções na aba \"Perfis\".";
+"views.tv.connection_profiles.header.share" = "Abra o %@ no seu dispositivo iOS ou macOS e ative a opção \"%@\" de um perfil para que ele apareça aqui.";
 "views.tv.profiles.detail.profiles" = "Pressione e segure para ver as ações disponíveis para um perfil.";
 "views.tv.profiles.import_local" = "Importar perfil local";
 "views.tv.web_receiver.qr" = "Escaneie o QR com sua câmera para abrir uma página web onde você pode enviar seu perfil. Certifique-se de que está conectado à mesma rede.";

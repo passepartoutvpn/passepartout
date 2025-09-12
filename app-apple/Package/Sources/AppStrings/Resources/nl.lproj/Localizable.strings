@@ -18,6 +18,10 @@
 "entities.tunnel_status.active" = "Actief";
 "entities.tunnel_status.deactivating" = "Deactiveren";
 "entities.tunnel_status.inactive" = "Inactief";
+"entities.ui.config_flag.neSocketTCP" = "Moderne TCP";
+"entities.ui.config_flag.neSocketUDP" = "Moderne UDP";
+"entities.ui.config_flag.ovpnCrossConnection" = "Platformonafhankelijke OpenVPN";
+"entities.ui.config_flag.wgCrossConnection" = "Platformonafhankelijke WireGuard";
 "entities.ui.system_appearance.dark" = "Donker";
 "entities.ui.system_appearance.light" = "Licht";
 "entities.ui.system_appearance.system" = "Systeem";
@@ -92,6 +96,7 @@
 "features.routing" = "Aangepaste routering";
 "features.sharing" = "%@";
 "global.actions.add" = "Toevoegen";
+"global.actions.allow" = "Toestaan";
 "global.actions.cancel" = "Annuleren";
 "global.actions.connect" = "Verbinden";
 "global.actions.delete" = "Verwijderen";
@@ -114,6 +119,7 @@
 "global.nouns.account" = "Account";
 "global.nouns.address" = "Adres";
 "global.nouns.addresses" = "Adressen";
+"global.nouns.advanced" = "Geavanceerd";
 "global.nouns.any" = "Elk";
 "global.nouns.apple.network_extensions" = "Netwerkextensies";
 "global.nouns.apple.system_extension" = "Systeemextensie";
@@ -316,13 +322,13 @@
 "views.paywall.sections.required_features.header" = "Vereiste functies";
 "views.paywall.sections.restore.footer" = "Als je eerder aankopen hebt gedaan, kun je ze hier herstellen.";
 "views.paywall.sections.restore.header" = "Herstellen";
+"views.preferences.advanced.remote.footer" = "Deze functies worden op afstand beheerd. Zet de schakelaars uit als iets niet werkt.";
 "views.preferences.dns_falls_back.footer" = "Valt terug op CloudFlare-servers wanneer het VPN geen DNS-instellingen biedt.";
 "views.preferences.dns_falls_back" = "DNS-terugval";
 "views.preferences.enables_iap.footer" = "Schakel ondersteuning voor betaalde functies in. Schakel dit uit als u geen Apple ID heeft.";
 "views.preferences.enables_iap" = "In-app aankopen";
 "views.preferences.erase_icloud.footer" = "Om alle profielen veilig van de iCloud-opslag te verwijderen, doe dit op al uw gesynchroniseerde apparaten. Dit heeft geen invloed op lokale profielen.";
 "views.preferences.erase_icloud" = "Verwijder profielen van iCloud";
-"views.preferences.experimental.header" = "Experimenteel";
 "views.preferences.keeps_in_menu.footer" = "Schakel dit in om de app in de menubalk te houden nadat je hem sluit.";
 "views.preferences.keeps_in_menu" = "In menubalk houden";
 "views.preferences.launches_on_login.footer" = "Open de app op de achtergrond na het inloggen.";
@@ -378,8 +384,8 @@
 "views.settings.system_extension.buttons.open" = "Voorkeuren openen";
 "views.settings.system_extension.message" = "Voor een goede werking van de VPN moet de app in de map /Applications staan en moet %@ ingeschakeld zijn als %@.\n\nOpen de macOS-voorkeuren, scroll naar ‘%@’, open het en schakel %@ in.";
 "views.settings.title" = "Over";
-"views.tv.connection_profiles.header.share" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen.";
 "views.tv.connection_profiles.header.import" = "Alternatief vind je andere opties in het tabblad \"Profielen\".";
+"views.tv.connection_profiles.header.share" = "Open %@ op je iOS- of macOS-apparaat en schakel de \"%@\"-optie van een profiel in om het hier te laten verschijnen.";
 "views.tv.profiles.detail.profiles" = "Houd lang ingedrukt om de beschikbare acties voor een profiel weer te geven.";
 "views.tv.profiles.import_local" = "Lokaal profiel importeren";
 "views.tv.web_receiver.qr" = "Scan de QR-code met je camera om een webpagina te openen waar je je profiel kunt uploaden. Zorg dat je verbonden bent met hetzelfde netwerk.";

@@ -82,6 +82,16 @@ public enum Strings {
       public static let inactive = Strings.tr("Localizable", "entities.tunnel_status.inactive", fallback: "Inactive")
     }
     public enum Ui {
+      public enum ConfigFlag {
+        /// Modern TCP
+        public static let neSocketTCP = Strings.tr("Localizable", "entities.ui.config_flag.neSocketTCP", fallback: "Modern TCP")
+        /// Modern UDP
+        public static let neSocketUDP = Strings.tr("Localizable", "entities.ui.config_flag.neSocketUDP", fallback: "Modern UDP")
+        /// Cross-platform OpenVPN
+        public static let ovpnCrossConnection = Strings.tr("Localizable", "entities.ui.config_flag.ovpnCrossConnection", fallback: "Cross-platform OpenVPN")
+        /// Cross-platform WireGuard
+        public static let wgCrossConnection = Strings.tr("Localizable", "entities.ui.config_flag.wgCrossConnection", fallback: "Cross-platform WireGuard")
+      }
       public enum SystemAppearance {
         /// Dark
         public static let dark = Strings.tr("Localizable", "entities.ui.system_appearance.dark", fallback: "Dark")
@@ -292,6 +302,8 @@ public enum Strings {
     public enum Actions {
       /// Add
       public static let add = Strings.tr("Localizable", "global.actions.add", fallback: "Add")
+      /// Allow
+      public static let allow = Strings.tr("Localizable", "global.actions.allow", fallback: "Allow")
       /// Cancel
       public static let cancel = Strings.tr("Localizable", "global.actions.cancel", fallback: "Cancel")
       /// Connect
@@ -338,6 +350,8 @@ public enum Strings {
       public static let address = Strings.tr("Localizable", "global.nouns.address", fallback: "Address")
       /// Addresses
       public static let addresses = Strings.tr("Localizable", "global.nouns.addresses", fallback: "Addresses")
+      /// Advanced
+      public static let advanced = Strings.tr("Localizable", "global.nouns.advanced", fallback: "Advanced")
       /// Any
       public static let any = Strings.tr("Localizable", "global.nouns.any", fallback: "Any")
       /// Category
@@ -992,6 +1006,12 @@ public enum Strings {
       public static let relaxedVerification = Strings.tr("Localizable", "views.preferences.relaxed_verification", fallback: "Alternative verification")
       /// Appearance
       public static let systemAppearance = Strings.tr("Localizable", "views.preferences.system_appearance", fallback: "Appearance")
+      public enum Advanced {
+        public enum Remote {
+          /// These features are controlled remotely. Turn off the toggles if something does not work.
+          public static let footer = Strings.tr("Localizable", "views.preferences.advanced.remote.footer", fallback: "These features are controlled remotely. Turn off the toggles if something does not work.")
+        }
+      }
       public enum DnsFallsBack {
         /// Fall back to CloudFlare servers when the VPN does not provide DNS settings.
         public static let footer = Strings.tr("Localizable", "views.preferences.dns_falls_back.footer", fallback: "Fall back to CloudFlare servers when the VPN does not provide DNS settings.")
@@ -1003,10 +1023,6 @@ public enum Strings {
       public enum EraseIcloud {
         /// To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
         public static let footer = Strings.tr("Localizable", "views.preferences.erase_icloud.footer", fallback: "To erase all profiles from the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
-      }
-      public enum Experimental {
-        /// Experimental
-        public static let header = Strings.tr("Localizable", "views.preferences.experimental.header", fallback: "Experimental")
       }
       public enum KeepsInMenu {
         /// Enable this to keep the app in the menu bar after closing it.
