@@ -56,15 +56,6 @@ extension KeyValueManager {
     public func set<T>(_ value: T?, forAppPreference pref: AppPreference) {
         set(value, forKey: pref.key)
     }
-
-    public func setConfigFlags(_ configFlags: Set<ConfigFlag>) {
-        do {
-            let data = try JSONEncoder().encode(configFlags)
-            set(data, forAppPreference: .configFlags)
-        } catch {
-            pp_log_g(.app, .error, "Unable to encode config flags: \(error)")
-        }
-    }
 }
 
 extension KeyValueManager {
