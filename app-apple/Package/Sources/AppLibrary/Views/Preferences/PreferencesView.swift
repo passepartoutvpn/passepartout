@@ -36,13 +36,7 @@ public struct PreferencesView: View {
     private let profileManager: ProfileManager
 
     @State
-    private var dnsFallsBack = true
-
-    @State
-    private var usesModernCrypto = false
-
-    @State
-    private var relaxedVerification = false
+    private var preferences = AppPreferenceValues()
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -73,10 +67,14 @@ public struct PreferencesView: View {
                 eraseCloudKitSection
             }
         }
-        .themeKeyValue(kvManager, AppPreference.dnsFallsBack.key, $dnsFallsBack, default: true)
-        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
-        .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
         .themeForm()
+        // These bindings are necessary for AppPreference, as they need to be propagated to the KeyValueManager
+        .onLoad {
+            preferences = kvManager.preferences
+        }
+        .onChange(of: preferences) {
+            kvManager.preferences = $0
+        }
     }
 }
 
@@ -121,7 +119,7 @@ private extension PreferencesView {
     }
 
     var dnsFallsBackSection: some View {
-        Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $dnsFallsBack)
+        Toggle(Strings.Views.Preferences.dnsFallsBack, isOn: $preferences.dnsFallsBack)
             .themeContainerEntry(subtitle: Strings.Views.Preferences.DnsFallsBack.footer)
     }
 
@@ -132,18 +130,13 @@ private extension PreferencesView {
 
     var experimentalSection: some View {
         Group {
-            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
-                .themeContainerEntry(
-                    header: Strings.Views.Preferences.Experimental.header,
-                    subtitle: Strings.Views.Preferences.ModernCrypto.footer
-                )
+            // Leave here until removal though not part of the .experimental field
             if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
-                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $relaxedVerification)
-                    .themeContainerEntry()
+                Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $preferences.relaxedVerification)
             }
+            PreferencesExperimentalView(experimental: $preferences.experimental)
         }
-        .themeContainer(header: Strings.Views.Preferences.Experimental.header)
-
+        .themeSection(header: Strings.Views.Preferences.Experimental.header)
     }
 
     var eraseCloudKitSection: some View {
@@ -208,13 +201,11 @@ public struct PreferencesView: View {
 private extension PreferencesView {
     var experimentalSection: some View {
         Group {
-            Toggle(Strings.Views.Preferences.modernCrypto, isOn: $usesModernCrypto)
             if distributionTarget.supportsIAP && configManager.isActive(.allowsRelaxedVerification) {
                 Toggle(Strings.Views.Preferences.relaxedVerification, isOn: $usesModernCrypto)
             }
         }
         .themeSection(header: Strings.Views.Preferences.Experimental.header)
-        .themeKeyValue(kvManager, AppPreference.usesModernCrypto.key, $usesModernCrypto, default: false)
         .themeKeyValue(kvManager, AppPreference.relaxedVerification.key, $relaxedVerification, default: false)
     }
 }
