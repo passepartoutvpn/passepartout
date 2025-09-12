@@ -8,6 +8,7 @@ import Testing
 
 @MainActor
 struct KeyValueManagerTests {
+    @Test
     func givenKeyValue_whenSet_thenGets() {
         let sut = KeyValueManager()
 
@@ -29,6 +30,7 @@ struct KeyValueManagerTests {
         #expect(!sut.contains("number"))
     }
 
+    @Test
     func givenKeyValue_whenSetFallback_thenGetsFallback() {
         let sut = KeyValueManager(fallback: [
             "string": "foobar",
@@ -41,5 +43,16 @@ struct KeyValueManagerTests {
         #expect(sut.string(forKey: "string") == "foobar")
         #expect(sut.bool(forKey: "boolean") == true)
         #expect(sut.integer(forKey: "number") == 123)
+    }
+
+    @Test
+    func givenKeyValue_whenSetConfigFlags_thenIsExpected() throws {
+        let flags: Set<ConfigFlag> = [.neSocketUDP, .newPaywall, .allowsRelaxedVerification]
+        let sut = KeyValueManager()
+        sut.preferences.configFlags = flags
+        #expect(sut.preferences.configFlags == flags)
+
+        let flagsData = try JSONEncoder().encode(flags)
+        #expect(sut.preferences.configFlagsData == flagsData)
     }
 }
