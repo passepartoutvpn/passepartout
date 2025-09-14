@@ -5,8 +5,6 @@
 import CommonLibrary
 import Foundation
 import Partout
-// FIXME: #93/partout, only import interfaces after moving WireGuard parser to Core
-//import PartoutInterfaces
 
 extension ProfileV2 {
     struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {
@@ -20,11 +18,11 @@ extension ProfileV2 {
             public init(from decoder: Decoder) throws {
                 let container = try decoder.singleValueContainer()
                 let wg = try container.decode(String.self)
-                configuration = try StandardWireGuardParser().configuration(from: wg)
+                configuration = try LegacyWireGuardParser().configuration(from: wg)
             }
 
             public func encode(to encoder: Encoder) throws {
-                let wg = try StandardWireGuardParser().string(from: configuration)
+                let wg = try LegacyWireGuardParser().string(from: configuration)
                 var container = encoder.singleValueContainer()
                 try container.encode(wg)
             }

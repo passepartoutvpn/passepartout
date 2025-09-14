@@ -2,6 +2,9 @@
     "ovpnCrossConnection": {
         "rate": 100
     },
+    "wgCrossParser": {
+        "rate": 100
+    },
     "wgCrossConnection": {
         "rate": 100
     },

@@ -1,4 +1,4 @@
-package com.algoritmico.passepartout
+package com.algoritmico.partout
 
 import android.net.VpnService
 import android.os.ParcelFileDescriptor

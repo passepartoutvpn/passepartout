@@ -18,7 +18,8 @@ extension Dependencies {
 
     nonisolated func newRegistry(
         distributionTarget: DistributionTarget,
-        deviceId: String
+        deviceId: String,
+        configBlock: @escaping @Sendable () -> Set<ConfigFlag>
     ) -> Registry {
         Registry(
             withKnown: true,
@@ -29,8 +30,13 @@ extension Dependencies {
                 return resolvers
             }(),
             allImplementations: [
-                OpenVPNImplementationBuilder(distributionTarget: distributionTarget).build(),
-                WireGuardImplementationBuilder().build()
+                OpenVPNImplementationBuilder(
+                    distributionTarget: distributionTarget,
+                    configBlock: configBlock
+                ).build(),
+                WireGuardImplementationBuilder(
+                    configBlock: configBlock
+                ).build()
             ]
         )
     }

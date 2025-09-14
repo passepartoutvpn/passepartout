@@ -77,7 +77,7 @@ private extension OpenVPNView.ImportModifier {
             }
             let parsed: Module
             do {
-                parsed = try impl.importer.module(fromURL: url, object: importPassphrase)
+                parsed = try impl.importerBlock().module(fromURL: url, object: importPassphrase)
             } catch let error as PartoutError {
                 pp_log_g(.app, .error, "Unable to parse URL: \(error)")
 

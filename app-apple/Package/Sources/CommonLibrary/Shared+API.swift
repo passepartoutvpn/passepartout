@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-import PartoutInterfaces
+import Partout
 
 extension API {
     public static var shared: [APIMapper] {
