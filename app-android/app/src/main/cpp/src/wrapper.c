@@ -10,13 +10,13 @@
 #include "vpn.h"
 
 JNIEXPORT jstring JNICALL
-Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutVersion(JNIEnv *env, jobject thiz) {
+Java_com_algoritmico_partout_NativeLibraryWrapper_partoutVersion(JNIEnv *env, jobject thiz) {
     jstring jmsg = (*env)->NewStringUTF(env, PARTOUT_VERSION);
     return jmsg;
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutInitialize(JNIEnv *env, jobject thiz, jstring cacheDir) {
+Java_com_algoritmico_partout_NativeLibraryWrapper_partoutInitialize(JNIEnv *env, jobject thiz, jstring cacheDir) {
     const char *cCacheDir = (*env)->GetStringUTFChars(env, cacheDir, NULL);
 
     partout_init_args args = { 0 };
@@ -29,12 +29,12 @@ Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutInitialize(JNIEnv 
 }
 
 JNIEXPORT void JNICALL
-Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutDeinitialize(JNIEnv *env, jobject thiz, jlong ctx) {
+Java_com_algoritmico_partout_NativeLibraryWrapper_partoutDeinitialize(JNIEnv *env, jobject thiz, jlong ctx) {
     partout_deinit((void *)ctx);
 }
 
 JNIEXPORT jint JNICALL
-Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutDaemonStart(JNIEnv *env, jobject thiz, jlong ctx, jstring profile, jobject vpnWrapper) {
+Java_com_algoritmico_partout_NativeLibraryWrapper_partoutDaemonStart(JNIEnv *env, jobject thiz, jlong ctx, jstring profile, jobject vpnWrapper) {
     const char *cProfile = (*env)->GetStringUTFChars(env, profile, NULL);
 
     partout_daemon_start_args args = { 0 };
@@ -61,6 +61,6 @@ Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutDaemonStart(JNIEnv
 }
 
 JNIEXPORT void JNICALL
-Java_com_algoritmico_passepartout_NativeLibraryWrapper_partoutDaemonStop(JNIEnv *env, jobject thiz, jlong ctx) {
+Java_com_algoritmico_partout_NativeLibraryWrapper_partoutDaemonStop(JNIEnv *env, jobject thiz, jlong ctx) {
     partout_daemon_stop((void *)ctx);
 }

@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
-package com.algoritmico.passepartout
+package com.algoritmico.partout
 import android.util.Log
 
 class NativeLibraryWrapper {

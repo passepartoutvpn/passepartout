@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
 @_exported import CommonIAP
-@_exported import PartoutInterfaces
+@_exported import Partout
 
 public enum CommonLibrary {
     public static func assertMissingImplementations(with registry: Registry) {

@@ -1,1 +1,1 @@
-* Update Partout with cross-platform WireGuard connection implementation (#1543)
+* OpenVPN: Fix TCP breaking on fast uploads

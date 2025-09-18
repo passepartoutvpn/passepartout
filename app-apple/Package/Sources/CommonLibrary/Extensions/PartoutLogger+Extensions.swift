@@ -100,7 +100,7 @@ private extension PartoutLogger.Builder {
             .api,
             .app,
             .core,
-            .ne,
+            .os,
             .openvpn,
             .providers,
             .wireguard,

@@ -9,20 +9,22 @@ import Partout
 struct OpenVPNImplementationBuilder: Sendable {
     private let distributionTarget: DistributionTarget
 
-    init(distributionTarget: DistributionTarget) {
+    private let configBlock: @Sendable () -> Set<ConfigFlag>
+
+    init(distributionTarget: DistributionTarget, configBlock: @escaping @Sendable () -> Set<ConfigFlag>) {
         self.distributionTarget = distributionTarget
+        self.configBlock = configBlock
     }
 
     func build() -> OpenVPNModule.Implementation {
         OpenVPNModule.Implementation(
-            importer: StandardOpenVPNParser(),
+            importerBlock: { StandardOpenVPNParser() },
             connectionBlock: {
+                // FIXME: ###, Made redundant by configBlock?
                 let preferences = $0.options.userInfo as? AppPreferenceValues
                 if preferences?.isFlagEnabled(.ovpnCrossConnection) == true {
-                    pp_log_g(.app, .notice, "OpenVPN: Using cross-platform connection")
                     return try crossConnection(with: $0, module: $1)
                 } else {
-                    pp_log_g(.app, .notice, "OpenVPN: Using legacy connection")
                     return try legacyConnection(with: $0, module: $1)
                 }
             }

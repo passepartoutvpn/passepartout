@@ -37,6 +37,9 @@ public struct AppPreferenceValues: Hashable, Codable, Sendable {
     }
 
     public var deviceId: String?
+    // XXX: These are copied from ConfigManager.activeFlags for use
+    // in the PacketTunnelProvider (see AppContext.onApplicationActive).
+    // In the app, use ConfigManager.activeFlags directly.
     public var configFlagsData: Data? = nil
 
     public var dnsFallsBack = true
@@ -96,5 +99,9 @@ extension AppPreferenceValues {
 
     public func isFlagEnabled(_ flag: ConfigFlag) -> Bool {
         configFlags.contains(flag) && !experimental.ignoredConfigFlags.contains(flag)
+    }
+
+    public func enabledFlags(of flags: Set<ConfigFlag>) -> Set<ConfigFlag> {
+        flags.subtracting(experimental.ignoredConfigFlags)
     }
 }

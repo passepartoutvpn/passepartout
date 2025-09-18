@@ -6,24 +6,36 @@ import CommonLibrary
 import Partout
 
 struct WireGuardImplementationBuilder: Sendable {
+    private let configBlock: @Sendable () -> Set<ConfigFlag>
+
+    init(configBlock: @escaping @Sendable () -> Set<ConfigFlag>) {
+        self.configBlock = configBlock
+    }
+
     func build() -> WireGuardModule.Implementation {
         WireGuardModule.Implementation(
             keyGenerator: StandardWireGuardKeyGenerator(),
-            importer: StandardWireGuardParser(),
-            validator: StandardWireGuardParser(),
+            importerBlock: { newParser() },
+            validatorBlock: { newParser() },
             connectionBlock: {
+                // FIXME: ###, Made redundant by configBlock?
                 let preferences = $0.options.userInfo as? AppPreferenceValues
                 let ctx = PartoutLoggerContext($0.profile.id)
 
                 // Use new connection on manual preference or config flag
                 if preferences?.isFlagEnabled(.wgCrossConnection) == true {
-                    pp_log_g(.app, .notice, "WireGuard: Using cross-platform connection")
                     return try WireGuardConnection(ctx, parameters: $0, module: $1)
                 } else {
-                    pp_log_g(.app, .notice, "WireGuard: Using legacy connection")
                     return try LegacyWireGuardConnection(ctx, parameters: $0, module: $1)
                 }
             }
         )
+    }
+
+    private func newParser() -> ModuleImporter & ModuleBuilderValidator {
+        let flags = configBlock()
+        let isCrossParser = flags.contains(.wgCrossParser)
+        pp_log_g(.wireguard, .notice, "WireGuard: Using \(isCrossParser ? "cross-platform" : "legacy") parser")
+        return isCrossParser ? StandardWireGuardParser() : LegacyWireGuardParser()
     }
 }

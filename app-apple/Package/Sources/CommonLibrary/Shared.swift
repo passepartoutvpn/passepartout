@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
 import Foundation
-import PartoutInterfaces
+import Partout
 
 extension LoggerCategory {
     public static let app = LoggerCategory(rawValue: "app")

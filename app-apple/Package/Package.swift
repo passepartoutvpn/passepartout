@@ -174,7 +174,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                .product(name: "PartoutInterfaces", package: "partout")
+                .product(name: "Partout", package: "partout")
             ],
             resources: [
                 .process("Resources")

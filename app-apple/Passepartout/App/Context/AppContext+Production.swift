@@ -66,26 +66,7 @@ extension AppContext {
             )
         }
 
-        // MARK: Registry
-
-        let deviceId = {
-            if let existingId = kvManager.string(forAppPreference: .deviceId) {
-                pp_log_g(.app, .info, "Device ID: \(existingId)")
-                return existingId
-            }
-            let newId = String.random(count: Constants.shared.deviceIdLength)
-            kvManager.set(newId, forAppPreference: .deviceId)
-            pp_log_g(.app, .info, "Device ID (new): \(newId)")
-            return newId
-        }()
-
-        let registry = dependencies.newRegistry(
-            distributionTarget: distributionTarget,
-            deviceId: deviceId
-        )
-        let registryCoder = registry.with(coder: dependencies.sharedProfileCoder)
-
-        // MARK: Managers
+        // MARK: API/IAP
 
         let apiManager: APIManager = {
             let repository = CommonData.cdAPIRepositoryV3(context: localStore.backgroundContext())
@@ -103,11 +84,50 @@ extension AppContext {
         } else {
             iapManager.isEnabled = false
         }
-        let processor = dependencies.appProcessor(
-            apiManager: apiManager,
-            iapManager: iapManager,
-            registry: registry
+
+        // MARK: Config
+
+#if DEBUG
+        let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
+#else
+        let configURL = Constants.shared.websites.config
+#endif
+        let betaConfigURL = Constants.shared.websites.betaConfig
+        let configManager = ConfigManager(
+            strategy: GitHubConfigStrategy(
+                url: configURL,
+                betaURL: betaConfigURL,
+                ttl: Constants.shared.websites.configTTL,
+                isBeta: { [weak iapManager] in
+                    iapManager?.isBeta == true
+                }
+            ),
+            buildNumber: BundleConfiguration.mainBuildNumber
         )
+
+        // MARK: Registry
+
+        let deviceId = {
+            if let existingId = kvManager.string(forAppPreference: .deviceId) {
+                pp_log_g(.app, .info, "Device ID: \(existingId)")
+                return existingId
+            }
+            let newId = String.random(count: Constants.shared.deviceIdLength)
+            kvManager.set(newId, forAppPreference: .deviceId)
+            pp_log_g(.app, .info, "Device ID (new): \(newId)")
+            return newId
+        }()
+        let registry = dependencies.newRegistry(
+            distributionTarget: distributionTarget,
+            deviceId: deviceId,
+            configBlock: { [weak configManager, weak kvManager] in
+                guard let configManager, let kvManager else { return [] }
+                return MainActor.sync {
+                    kvManager.preferences.enabledFlags(of: configManager.activeFlags)
+                }
+            }
+        )
+        let registryCoder = registry.with(coder: dependencies.sharedProfileCoder)
 
         let tunnelIdentifier = BundleConfiguration.mainString(for: .tunnelId)
 #if targetEnvironment(simulator)
@@ -138,6 +158,11 @@ extension AppContext {
         )
 #endif
 
+        let processor = dependencies.appProcessor(
+            apiManager: apiManager,
+            iapManager: iapManager,
+            registry: registry
+        )
         let profileManager = ProfileManager(
             processor: processor,
             repository: mainProfileRepository,
@@ -260,26 +285,6 @@ extension AppContext {
             pp_log(ctx, .App.profiles, .info, "\tReload profiles required features...")
             profileManager.reloadRequiredFeatures()
         }
-
-        // MARK: Config
-
-#if DEBUG
-        let configURL = Bundle.main.url(forResource: "test-bundle", withExtension: "json")!
-#else
-        let configURL = Constants.shared.websites.config
-#endif
-        let betaConfigURL = Constants.shared.websites.betaConfig
-        let configManager = ConfigManager(
-            strategy: GitHubConfigStrategy(
-                url: configURL,
-                betaURL: betaConfigURL,
-                ttl: Constants.shared.websites.configTTL,
-                isBeta: { [weak iapManager] in
-                    iapManager?.isBeta == true
-                }
-            ),
-            buildNumber: BundleConfiguration.mainBuildNumber
-        )
 
         // MARK: Version
 

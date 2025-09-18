@@ -4,17 +4,19 @@
 
 import AppLibrary
 import Foundation
-import PartoutInterfaces
-import XCTest
+import Partout
+import Testing
 
-final class LocalizationTests: XCTestCase {
-    func test_givenModules_whenTranslateApp_thenWorks() {
-        XCTAssertEqual(Strings.Global.Actions.connect, "Connect")
-        XCTAssertEqual(Strings.Global.Nouns.address, "Address")
+final class LocalizationTests {
+    @Test
+    func givenModules_whenTranslateApp_thenWorks() {
+        #expect(Strings.Global.Actions.connect == "Connect")
+        #expect(Strings.Global.Nouns.address == "Address")
     }
 
-    func test_givenModules_whenTranslateWireGuard_thenWorks() {
+    @Test
+    func givenModules_whenTranslateWireGuard_thenWorks() {
         let sut = WireGuardParseError.noInterface
-        XCTAssertEqual(sut.localizedDescription, "Configuration must have an ‘Interface’ section.")
+        #expect(sut.localizedDescription == "Configuration must have an ‘Interface’ section.")
     }
 }
