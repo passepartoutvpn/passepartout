@@ -1,4 +1,10 @@
 {
+    "neSocketUDP": {
+        "rate": 100
+    },
+    "neSocketTCP": {
+        "rate": 100
+    },
     "ovpnCrossConnection": {
         "rate": 100
     },
@@ -9,12 +15,6 @@
         "rate": 100
     },
     "tvSendTo": {
-        "rate": 100
-    },
-    "neSocketUDP": {
-        "rate": 100
-    },
-    "neSocketTCP": {
         "rate": 100
     },
     "tvWebImport": {
