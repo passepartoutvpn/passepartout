@@ -87,12 +87,12 @@ private extension ProfileEditView {
                 .onDelete(perform: removeModules)
 
             addModuleMenu
+                .themeTip(.Profile.buildYourProfile)
         }
         .themeSection(
             header: Strings.Global.Nouns.modules,
             footer: Strings.Views.Profile.ModuleList.Section.footer
         )
-        .themeTip(.Profile.buildYourProfile)
     }
 
     func moduleRow(for module: any ModuleBuilder) -> some View {
