@@ -22,9 +22,9 @@ extension AppContext {
 
         // MARK: Declare globals
 
-        let dependencies: Dependencies = .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
+        let dependencies: Dependencies = .shared
         let kvManager = dependencies.kvManager
 
         let ctx = PartoutLogger.register(for: .app, with: kvManager.preferences)

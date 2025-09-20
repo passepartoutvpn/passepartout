@@ -14,9 +14,20 @@ public enum ConfigFlag: String, CaseIterable, RawRepresentable, Codable, Sendabl
     case neSocketUDP
     case neSocketTCP
     case tvWebImport            // 08/09
+    case unknown
 }
 
 extension ConfigFlag: CustomStringConvertible {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        guard let known = ConfigFlag(rawValue: rawValue) else {
+            self = .unknown
+            return
+        }
+        self = known
+    }
+
     public var description: String {
         rawValue
     }
