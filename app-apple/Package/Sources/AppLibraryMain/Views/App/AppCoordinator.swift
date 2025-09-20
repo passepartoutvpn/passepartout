@@ -44,7 +44,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
     private var modalRoute: ModalRoute?
 
     @State
-    private var profileBeingDeleted: ProfilePreview?
+    private var confirmationAction: ConfirmationAction?
 
     @State
     private var profilePath = NavigationPath()
@@ -92,7 +92,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming, SizeClassProviding
             content: modalDestination
         )
         .themeConfirmation(
-            isPresented: Binding(presenting: $profileBeingDeleted, if: { $0 != nil }),
+            isPresented: Binding(presenting: $confirmationAction, if: { $0 != nil }),
             title: Strings.Global.Actions.remove,
             isDestructive: true,
             action: confirmDeleteProfile
@@ -364,11 +364,11 @@ private extension AppCoordinator {
     }
 
     func onDeleteProfile(_ preview: ProfilePreview) {
-        profileBeingDeleted = preview
+        confirmationAction = .deleteProfile(preview)
     }
 
     func confirmDeleteProfile() {
-        guard let profileBeingDeleted else {
+        guard case .deleteProfile(let profileBeingDeleted) = confirmationAction else {
             assertionFailure("No profile is being deleted")
             return
         }
