@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Добавить адрес";
 "modules.general.rows.appletv.purchase" = "Убрать ограничение для ТВ";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Попробуйте направить большую часть сетевого трафика через туннель. Учтите, что это может ухудшить подключение.";
+"modules.general.rows.enforce_tunnel" = "Принудительное использование туннеля";
 "modules.general.rows.import_from_file" = "Импортировать из файла";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Отключите для уменьшения расхода заряда аккумулятора, может привести к временным замедлениям в связи с повторным подключением после \"пробуждения\".";
 "modules.general.rows.keep_alive_on_sleep" = "Оставлять включенным во время сна";

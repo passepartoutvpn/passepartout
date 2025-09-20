@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Додати адресу";
 "modules.general.rows.appletv.purchase" = "Зняти обмеження TV";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Спробуйте направляти більшість мережевого трафіку через тунель. Зверніть увагу, що це може погіршити підключення.";
+"modules.general.rows.enforce_tunnel" = "Примусово використовувати тунель";
 "modules.general.rows.import_from_file" = "Імпортувати з файлу";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Вимкніть, щоб покращити використання акумулятора, може привести до тимчасових затримок у зв’язку з повторним підключенням після \"пробудження\".";
 "modules.general.rows.keep_alive_on_sleep" = "Залишати включеним під час сну";

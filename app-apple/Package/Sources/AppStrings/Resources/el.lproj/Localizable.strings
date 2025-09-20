@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Προσθήκη διεύθυνσης";
 "modules.general.rows.appletv.purchase" = "Κατάργηση περιορισμού TV";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Προσπαθήστε να στέλνετε την περισσότερη δικτυακή κίνηση μέσω της σήραγγας. Προσέξτε, καθώς αυτό μπορεί να υποβαθμίσει τη συνδεσιμότητά σας.";
+"modules.general.rows.enforce_tunnel" = "Επιβολή σήραγγας";
 "modules.general.rows.import_from_file" = "Εισαγωγή από αρχείο";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Απενεργοποιήστε για να βελτιώσετε τη χρήση της μπαταρίας, εις βάρος των περιστασιακών επιβραδύνσεων που οφείλονται σε επανασύνδεση αφύπνισης.";
 "modules.general.rows.keep_alive_on_sleep" = "Κρατήστε ζωντανό στον ύπνο";

@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Ajouter une adresse";
 "modules.general.rows.appletv.purchase" = "Retirer la restriction TV";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Essayez d’envoyer la majorité du trafic réseau via le tunnel. Attention, cela peut dégrader votre connectivité.";
+"modules.general.rows.enforce_tunnel" = "Forcer le tunnel";
 "modules.general.rows.import_from_file" = "Importer depuis un fichier";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Désactiver pour augmenter l'autonomie de la batterie, au dépends de la rapidité au réveil pour la reconnection.";
 "modules.general.rows.keep_alive_on_sleep" = "Garder actif lors de la veille";

@@ -171,6 +171,8 @@
 "modules.general.rows.import_from_file" = "Import from file";
 "modules.general.rows.keep_alive_on_sleep" = "Keep alive on sleep";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
+"modules.general.rows.enforce_tunnel" = "Enforce tunnel";
+"modules.general.rows.enforce_tunnel.footer" = "Try to send most network traffic over the tunnel. Beware that this may degrade your connectivity.";
 
 "modules.dns.route_through_vpn" = "Route through VPN";
 "modules.dns.route_through_vpn.footer" = "If enabled, DNS queries will be routed through the VPN tunnel.";
