@@ -192,7 +192,7 @@ private extension ProfileCoordinator {
     func saveProfile() async throws {
         do {
             try await commitEditing(
-                action: paywallSaveAction,
+                action: paywallOtherAction,
                 dismissing: true
             )
         } catch {
@@ -248,7 +248,7 @@ private struct DynamicPaywallModifier: ViewModifier {
 }
 
 private extension ProfileCoordinator {
-    var paywallSaveAction: PaywallAction {
+    var paywallOtherAction: PaywallAction {
         .cancel
     }
 }
