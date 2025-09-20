@@ -43,9 +43,7 @@ struct ModuleListView: View, Routable {
                         Text(Strings.Global.Nouns.general)
                         PurchaseRequiredView(
                             requiring: requiredGeneralFeatures,
-                            reason: $paywallReason,
-                            // TODO: #1489, delete old paywall
-                            suggesting: suggestedGeneralProducts
+                            reason: $paywallReason
                         )
                     }
                 }
@@ -126,12 +124,6 @@ private extension ModuleListView {
             features.insert(.sharing)
         }
         return features
-    }
-
-    var suggestedGeneralProducts: Set<AppProduct> {
-        var products = iapManager.suggestedProducts()
-        products.insert(.Features.appleTV)
-        return products
     }
 
     func moveModules(from offsets: IndexSet, to newOffset: Int) {

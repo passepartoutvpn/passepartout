@@ -6,6 +6,8 @@ import CommonIAP
 import CommonLibrary
 import Foundation
 
+public typealias PaywallAction = PaywallAction
+
 public typealias PaywallReason = PaywallModifier.Reason
 
 extension PaywallModifier {
@@ -24,20 +26,15 @@ extension PaywallModifier {
 
         public let requiredFeatures: Set<AppFeature>
 
-        @available(*, deprecated, message: "TODO: #1489, unused in new paywall")
-        public let suggestedProducts: Set<AppProduct>?
-
         public let action: Action
 
         public init(
             _ profile: Profile?,
             requiredFeatures: Set<AppFeature>,
-            suggestedProducts: Set<AppProduct>? = nil,
             action: Action
         ) {
             self.profile = profile
             self.requiredFeatures = requiredFeatures
-            self.suggestedProducts = suggestedProducts
             self.action = action
         }
 

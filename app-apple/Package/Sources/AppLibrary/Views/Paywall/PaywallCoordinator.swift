@@ -48,7 +48,7 @@ struct PaywallCoordinator: View {
 
 private extension PaywallCoordinator {
     var contentView: some View {
-        NewPaywallView(
+        PaywallView(
             isPresented: $isPresented,
             iapManager: iapManager,
             requiredFeatures: requiredFeatures,

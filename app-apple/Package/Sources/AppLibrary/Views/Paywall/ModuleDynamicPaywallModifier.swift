@@ -18,10 +18,6 @@ public struct ModuleDynamicPaywallModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        if configManager.isActive(.newPaywall) {
-            content.modifier(NewPaywallModifier(reason: $paywallReason))
-        } else {
-            content.modifier(PaywallModifier(reason: $paywallReason))
-        }
+        content.modifier(PaywallModifier(reason: $paywallReason))
     }
 }

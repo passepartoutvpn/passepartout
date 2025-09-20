@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0
 
+import AppAccessibility
 import CommonLibrary
 import CommonUtils
 import SwiftUI
@@ -17,7 +18,7 @@ public struct PaywallProductView: View {
 
     private let withIncludedFeatures: Bool
 
-    private let highlightedFeatures: Set<AppFeature>
+    private let requiredFeatures: Set<AppFeature>
 
     @Binding
     private var purchasingIdentifier: String?
@@ -33,8 +34,8 @@ public struct PaywallProductView: View {
         iapManager: IAPManager,
         style: PaywallProductViewStyle,
         product: InAppProduct,
-        withIncludedFeatures: Bool = true,
-        highlightedFeatures: Set<AppFeature> = [],
+        withIncludedFeatures: Bool,
+        requiredFeatures: Set<AppFeature> = [],
         purchasingIdentifier: Binding<String?>,
         onComplete: @escaping (String, InAppPurchaseResult) -> Void,
         onError: @escaping (Error) -> Void
@@ -43,7 +44,7 @@ public struct PaywallProductView: View {
         self.style = style
         self.product = product
         self.withIncludedFeatures = withIncludedFeatures
-        self.highlightedFeatures = highlightedFeatures
+        self.requiredFeatures = requiredFeatures
         _purchasingIdentifier = purchasingIdentifier
         self.onComplete = onComplete
         self.onError = onError
@@ -52,25 +53,55 @@ public struct PaywallProductView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             productView
-            if withIncludedFeatures {
-                AppProduct(rawValue: product.productIdentifier)
-                    .map {
-                        IncludedFeaturesView(
-                            product: $0,
-                            highlightedFeatures: highlightedFeatures,
-                            isDisclosing: $isPresentingFeatures
-                        )
-                    }
+            if withIncludedFeatures,
+               let product = AppProduct(rawValue: product.productIdentifier) {
+                DisclosingFeaturesView(
+                    product: product,
+                    requiredFeatures: requiredFeatures,
+                    isDisclosing: $isPresentingFeatures
+                )
             }
         }
+        .themeBlurred(if: shouldDisable)
+        .disabled(shouldDisable)
     }
 }
 
 private extension PaywallProductView {
+    var shouldUseStoreKit: Bool {
+#if os(tvOS)
+        if case .donation = style {
+            return true
+        }
+#endif
+        return false
+    }
+
+    var shouldDisable: Bool {
+        isRedundant || isPurchasing || iapManager.didPurchase(product)
+    }
+
+    var rawProduct: AppProduct? {
+        AppProduct(rawValue: product.productIdentifier)
+    }
+
+    var isRedundant: Bool {
+        guard let rawProduct else {
+            return false
+        }
+        guard !rawProduct.isDonation else {
+            return false
+        }
+        return rawProduct.isRedundant(forRequiredFeatures: requiredFeatures)
+    }
+
+    var isPurchasing: Bool {
+        purchasingIdentifier != nil
+    }
 
     @ViewBuilder
     var productView: some View {
-        if #available(iOS 17, macOS 14, tvOS 17, *) {
+        if shouldUseStoreKit {
             StoreKitProductView(
                 style: style,
                 product: product,
@@ -95,7 +126,7 @@ private extension PaywallProductView {
     List {
         PaywallProductView(
             iapManager: .forPreviews,
-            style: .paywall(),
+            style: .paywall(primary: true),
             product: InAppProduct(
                 productIdentifier: AppProduct.Features.appleTV.rawValue,
                 localizedTitle: "Foo",
@@ -103,7 +134,8 @@ private extension PaywallProductView {
                 localizedPrice: "$10",
                 native: nil
             ),
-            highlightedFeatures: [.appleTV],
+            withIncludedFeatures: true,
+            requiredFeatures: [.appleTV],
             purchasingIdentifier: .constant(nil),
             onComplete: { _, _ in },
             onError: { _ in }

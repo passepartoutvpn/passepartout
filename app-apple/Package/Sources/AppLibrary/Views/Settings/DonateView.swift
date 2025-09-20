@@ -63,27 +63,15 @@ private extension DonateView {
 
     var productsRows: some View {
         ForEach(availableProducts, id: \.productIdentifier) {
-            if configManager.isActive(.newPaywall) {
-                NewPaywallProductView(
-                    iapManager: iapManager,
-                    style: .donation,
-                    product: $0,
-                    withIncludedFeatures: false,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
-                )
-            } else {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .donation,
-                    product: $0,
-                    withIncludedFeatures: false,
-                    purchasingIdentifier: $purchasingIdentifier,
-                    onComplete: onComplete,
-                    onError: onError
-                )
-            }
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .donation,
+                product: $0,
+                withIncludedFeatures: false,
+                purchasingIdentifier: $purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
         }
     }
 

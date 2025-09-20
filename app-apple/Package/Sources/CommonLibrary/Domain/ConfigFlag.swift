@@ -14,7 +14,6 @@ public enum ConfigFlag: String, CaseIterable, RawRepresentable, Codable, Sendabl
     case neSocketUDP
     case neSocketTCP
     case tvWebImport            // 08/09
-    case newPaywall             // 02/09
 }
 
 extension ConfigFlag: CustomStringConvertible {
