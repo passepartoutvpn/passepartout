@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Adres toevoegen";
 "modules.general.rows.appletv.purchase" = "TV-beperking verwijderen";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Probeer het meeste netwerkverkeer via de tunnel te sturen. Houd er rekening mee dat dit uw connectiviteit kan verslechteren.";
+"modules.general.rows.enforce_tunnel" = "Tunnel afdwingen";
 "modules.general.rows.import_from_file" = "Importeren uit bestand";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Uitschakelen om het batterijverbruik te verbeteren, ten koste van incidentele vertragingen als gevolg van het opnieuw opstarten na wake-up.";
 "modules.general.rows.keep_alive_on_sleep" = "Actief tijdens slaapstand";

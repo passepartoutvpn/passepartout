@@ -544,8 +544,8 @@ public enum Strings {
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.appletv.purchase", fallback: "Drop TV restriction")
         }
         public enum EnforceTunnel {
-          /// Try to send most network traffic over the tunnel. Beware that this may disrupt your connectivity.
-          public static let footer = Strings.tr("Localizable", "modules.general.rows.enforce_tunnel.footer", fallback: "Try to send most network traffic over the tunnel. Beware that this may disrupt your connectivity.")
+          /// Try to send most network traffic over the tunnel. Beware that this may degrade your connectivity.
+          public static let footer = Strings.tr("Localizable", "modules.general.rows.enforce_tunnel.footer", fallback: "Try to send most network traffic over the tunnel. Beware that this may degrade your connectivity.")
         }
         public enum KeepAliveOnSleep {
           /// Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.

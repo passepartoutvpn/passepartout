@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "Lägg till adress";
 "modules.general.rows.appletv.purchase" = "Ta bort TV-begränsning";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "Försök att skicka det mesta av nätverkstrafiken genom tunneln. Var medveten om att detta kan försämra din anslutning.";
+"modules.general.rows.enforce_tunnel" = "Tvinga tunnel";
 "modules.general.rows.import_from_file" = "Importera från fil";
 "modules.general.rows.keep_alive_on_sleep.footer" = "Inaktivera för att förbättra batterianvändningen, på bekostnad av tillfälliga avmattningar på grund av återuppkoppling.";
 "modules.general.rows.keep_alive_on_sleep" = "Håll dig levande i sömnen";

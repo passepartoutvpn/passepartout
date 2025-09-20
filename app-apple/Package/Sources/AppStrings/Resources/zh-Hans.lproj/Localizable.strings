@@ -200,6 +200,8 @@
 "modules.dns.servers.add" = "添加地址";
 "modules.general.rows.appletv.purchase" = "取消 TV 限制";
 "modules.general.rows.appletv" = "%@";
+"modules.general.rows.enforce_tunnel.footer" = "尝试将大部分网络流量通过隧道发送。请注意，这可能会降低您的连接质量。";
+"modules.general.rows.enforce_tunnel" = "强制隧道";
 "modules.general.rows.import_from_file" = "从文件导入";
 "modules.general.rows.keep_alive_on_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "modules.general.rows.keep_alive_on_sleep" = "休眠时保持连接";
