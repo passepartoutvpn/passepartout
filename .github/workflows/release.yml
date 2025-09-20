@@ -160,31 +160,18 @@ jobs:
           submodules: true
           certificates_url: ${{ vars.CERTIFICATES_URL }}
           certificates_passphrase: ${{ secrets.CERTIFICATES_PASSPHRASE }}
-      - name: Archive app
-        working-directory: ${{ env.APPLE_ROOT }}
-        run: |
-          ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
-      - name: Export app
-        working-directory: ${{ env.APPLE_ROOT }}
-        run: |
-          ci/xcode-export.sh macOS 1
-      - name: Generate .dmg
-        working-directory: ${{ env.APPLE_ROOT }}
-        run: |
-          ci/dmg-generate.sh ${{ matrix.arch }}
-      - name: Notarize .dmg
-        working-directory: ${{ env.APPLE_ROOT }}
-        env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-        run: |
-          ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
-      - name: Sign .dmg
+      - name: Notarize .dmg app
         working-directory: ${{ env.APPLE_ROOT }}
         env:
           GPG_FINGERPRINT: ${{ vars.GPG_FINGERPRINT }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         run: |
+          ci/xcode-archive.sh macOS 1 ${{ matrix.arch }}
+          ci/xcode-export.sh macOS 1
+          ci/dmg-generate.sh ${{ matrix.arch }}
+          ci/dmg-notarize.sh ${{ matrix.arch }} "$APPLE_ID" "$APPLE_ID_PASSWORD"
           ci/dmg-sign.sh ${{ matrix.arch }} "$GPG_FINGERPRINT" "$GPG_PASSPHRASE"
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
