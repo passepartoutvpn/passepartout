@@ -32,19 +32,18 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
         // MARK: Declare globals
 
-        let dependencies: Dependencies = await .shared
         let distributionTarget = Dependencies.distributionTarget
         let constants: Constants = .shared
 
-        // MARK: Update or fetch existing preferences
-
-        let (kvManager, preferences) = await MainActor.run {
+        // Update or fetch existing preferences
+        let (dependencies, kvManager, preferences) = await MainActor.run {
+            let dependencies: Dependencies = .shared
             let kvManager = dependencies.kvManager
             if let startPreferences {
                 kvManager.preferences = startPreferences
-                return (kvManager, startPreferences)
+                return (dependencies, kvManager, startPreferences)
             } else {
-                return (kvManager, kvManager.preferences)
+                return (dependencies, kvManager, kvManager.preferences)
             }
         }
 
