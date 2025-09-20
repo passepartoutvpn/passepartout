@@ -6,7 +6,7 @@ import CommonIAP
 import CommonLibrary
 import Foundation
 
-public typealias PaywallAction = PaywallAction
+public typealias PaywallAction = PaywallModifier.Action
 
 public typealias PaywallReason = PaywallModifier.Reason
 
