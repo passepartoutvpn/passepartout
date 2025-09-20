@@ -14,9 +14,19 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var verifierSubscription: Task<Void, Error>?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        let distributionTarget = Dependencies.distributionTarget
+        let constants: Constants = .shared
 
-        // FIXME: #1508, register global logger ASAP (logs before registration are lost)
+        // Register essential logger ASAP because the profile context
+        // can only be defined after decoding the profile. We would
+        // in fact miss profile decoding errors. Re-register the
+        // profile-aware context later.
+        _ = PartoutLogger.register(
+            for: .tunnelGlobal(distributionTarget),
+            with: AppPreferenceValues()
+        )
 
+        // The app may propagate its local preferences on manual start
         let startPreferences: AppPreferenceValues?
         if let encodedPreferences = options?[ExtendedTunnel.appPreferences] as? NSData {
             do {
@@ -30,11 +40,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             startPreferences = nil
         }
 
-        // MARK: Declare globals
-
-        let distributionTarget = Dependencies.distributionTarget
-        let constants: Constants = .shared
-
         // Update or fetch existing preferences
         let (dependencies, kvManager, preferences) = await MainActor.run {
             let dependencies: Dependencies = .shared
@@ -47,8 +52,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             }
         }
 
-        // MARK: Registry
-
+        // Create global registry
         assert(preferences.deviceId != nil, "No Device ID found in preferences")
         let registry = dependencies.newRegistry(
             distributionTarget: distributionTarget,
@@ -57,8 +61,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         )
         pp_log_g(.app, .info, "Device ID: \(preferences.deviceId ?? "not set")")
         CommonLibrary.assertMissingImplementations(with: registry)
-
-        // MARK: Parse profile
 
         // Decode profile from NE provider
         let decoder = dependencies.neProtocolCoder(.global, registry: registry)
@@ -71,9 +73,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             throw error
         }
 
-        // Create PartoutLoggerContext with profile
+        // Update the logger now that we have a context
         let ctx = PartoutLogger.register(
-            for: .tunnel(originalProfile.id, distributionTarget),
+            for: .tunnelProfile(originalProfile.id, distributionTarget),
             with: preferences
         )
         self.ctx = ctx
@@ -93,8 +95,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             throw error
         }
 
-        // MARK: Create TunnelController for connnection management
-
+        // Create TunnelController for connnection management
         let neTunnelController: NETunnelController
         do {
             neTunnelController = try await NETunnelController(
@@ -124,8 +125,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         pp_log(ctx, .app, .info, "\tActive config flags: \(configFlags)")
         pp_log(ctx, .app, .info, "\tIgnored config flags: \(preferences.experimental.ignoredConfigFlags)")
 
-        // MARK: Create IAPManager for verification
-
+        // Create IAPManager for receipt verification
         let iapManager = await MainActor.run {
             let manager = IAPManager(
                 customUserLevel: dependencies.customUserLevel,
@@ -144,8 +144,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             return manager
         }
 
-        // MARK: Start with NEPTPForwarder
-
+        // Start with NEPTPForwarder
         guard self.ctx != nil else {
             fatalError("Do not forget to save ctx locally")
         }

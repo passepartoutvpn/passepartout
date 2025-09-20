@@ -7,8 +7,8 @@ import Foundation
 extension PartoutLogger {
     public enum Target {
         case app
-
-        case tunnel(Profile.ID, DistributionTarget)
+        case tunnelGlobal(DistributionTarget)
+        case tunnelProfile(Profile.ID, DistributionTarget)
     }
 
     private static var isDefaultLoggerRegistered = false
@@ -27,7 +27,12 @@ extension PartoutLogger {
                 logger.logPreamble(parameters: Constants.shared.log)
             }
             return .global
-        case .tunnel(let profileId, let target):
+        case .tunnelGlobal(let target):
+            let logger = tunnelLogger(preferences: preferences, target: target)
+            PartoutLogger.register(logger)
+            logger.logPreamble(parameters: Constants.shared.log)
+            return .global
+        case .tunnelProfile(let profileId, let target):
             if !isDefaultLoggerRegistered {
                 isDefaultLoggerRegistered = true
                 let logger = tunnelLogger(preferences: preferences, target: target)
