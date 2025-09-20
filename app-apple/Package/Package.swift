@@ -160,11 +160,7 @@ let package = Package(
         ),
         .target(
             name: "CommonLegacyV2",
-            dependencies: [
-                "CommonLibrary",
-                // FIXME: #93/partout, drop after moving WireGuard parser to Core
-                .product(name: "Partout", package: "partout")
-            ],
+            dependencies: ["CommonLibrary"],
             resources: [
                 .process("Profiles.xcdatamodeld")
             ]

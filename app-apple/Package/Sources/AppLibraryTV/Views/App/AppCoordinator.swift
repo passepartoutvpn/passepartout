@@ -200,26 +200,15 @@ private struct DynamicPaywallModifier: ViewModifier {
     let paywallContinuation: (() -> Void)?
 
     func body(content: Content) -> some View {
-        if configManager.isActive(.newPaywall) {
-            content.modifier(newModifier)
-        } else {
-            content.modifier(oldModifier)
-        }
+        content.modifier(newModifier)
     }
 
     var newModifier: some ViewModifier {
-        NewPaywallModifier(
+        PaywallModifier(
             reason: $paywallReason,
             onAction: { _, _ in
                 paywallContinuation?()
             }
-        )
-    }
-
-    var oldModifier: some ViewModifier {
-        PaywallModifier(
-            reason: $paywallReason,
-            onCancel: paywallContinuation
         )
     }
 }

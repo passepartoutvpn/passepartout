@@ -6,8 +6,6 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-// TODO: #1489, "suggesting" unused in new paywall
-
 public struct PurchaseRequiredView<Content>: View where Content: View {
 
     @EnvironmentObject
@@ -42,16 +40,14 @@ private extension PurchaseRequiredView {
 extension PurchaseRequiredView where Content == PurchaseRequiredButton {
     public init(
         for requiring: AppFeatureRequiring?,
-        reason: Binding<PaywallReason?>,
-        suggesting products: Set<AppProduct>? = nil
+        reason: Binding<PaywallReason?>
     ) {
-        self.init(requiring: requiring?.features, reason: reason, suggesting: products)
+        self.init(requiring: requiring?.features, reason: reason)
     }
 
     public init(
         requiring features: Set<AppFeature>?,
-        reason: Binding<PaywallReason?>,
-        suggesting products: Set<AppProduct>? = nil
+        reason: Binding<PaywallReason?>
     ) {
         self.features = features
         content = {
@@ -59,7 +55,6 @@ extension PurchaseRequiredView where Content == PurchaseRequiredButton {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features ?? [],
-                    suggestedProducts: products,
                     action: .purchase
                 )
             }
@@ -72,8 +67,7 @@ extension PurchaseRequiredView where Content == Button<Text> {
     public init(
         requiring features: Set<AppFeature>,
         reason: Binding<PaywallReason?>,
-        title: String,
-        suggesting products: Set<AppProduct>
+        title: String
     ) {
         self.features = features
         force = true
@@ -82,7 +76,6 @@ extension PurchaseRequiredView where Content == Button<Text> {
                 reason.wrappedValue = .init(
                     nil,
                     requiredFeatures: features,
-                    suggestedProducts: products,
                     action: .purchase
                 )
             }

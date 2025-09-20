@@ -47,7 +47,7 @@ struct KeyValueManagerTests {
 
     @Test
     func givenKeyValue_whenSetConfigFlags_thenIsExpected() throws {
-        let flags: Set<ConfigFlag> = [.neSocketUDP, .newPaywall, .allowsRelaxedVerification]
+        let flags: Set<ConfigFlag> = [.neSocketUDP, .allowsRelaxedVerification]
         let sut = KeyValueManager()
         sut.preferences.configFlags = flags
         #expect(sut.preferences.configFlags == flags)

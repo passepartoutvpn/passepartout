@@ -13,9 +13,7 @@ public struct PaywallModifier: ViewModifier {
     @Binding
     private var reason: PaywallReason?
 
-    private let otherTitle: String?
-
-    private let onOtherAction: ((Profile?) -> Void)?
+    private let onAction: ((PaywallAction, Profile?) -> Void)?
 
     private let onCancel: (() -> Void)?
 
@@ -27,13 +25,11 @@ public struct PaywallModifier: ViewModifier {
 
     public init(
         reason: Binding<PaywallReason?>,
-        otherTitle: String? = nil,
-        onOtherAction: ((Profile?) -> Void)? = nil,
+        onAction: ((PaywallAction, Profile?) -> Void)? = nil,
         onCancel: (() -> Void)? = nil
     ) {
         _reason = reason
-        self.otherTitle = otherTitle
-        self.onOtherAction = onOtherAction
+        self.onAction = onAction
         self.onCancel = onCancel
     }
 
@@ -91,19 +87,33 @@ private extension PaywallModifier {
 // MARK: - Confirmation alert
 
 private extension PaywallModifier {
-
-    @ViewBuilder
-    func confirmationActions() -> some View {
-#if !os(tvOS)
-        if !iapManager.isBeta, let otherTitle, let onOtherAction {
-            Button(otherTitle) {
-                onOtherAction(reason?.profile)
-            }
+    func title(forAction action: PaywallAction) -> String {
+        switch action {
+        case .cancel:
+            return Strings.Global.Actions.cancel
+        case .connect:
+            return Strings.Global.Actions.connect
+        case .purchase:
+            return Strings.Global.Actions.purchase
+        case .save:
+            fatalError("Save action not handled")
         }
-#endif
-        Button(Strings.Global.Nouns.ok, role: .cancel) {
-            reason = nil
-            onCancel?()
+    }
+
+    func confirmationActions() -> some View {
+        reason.map { reason in
+            Group {
+                if let onAction {
+                    Button(title(forAction: reason.action), role: .cancel) {
+                        onAction(reason.action, reason.profile)
+                    }
+                }
+                if !iapManager.isBeta {
+                    Button(Strings.Global.Actions.purchase) {
+                        isPurchasing = true
+                    }
+                }
+            }
         }
     }
 
@@ -121,8 +131,6 @@ private extension PaywallModifier {
         switch reason?.action {
         case .connect:
             messages.append(V.Message.connect(limitedMinutes))
-        case .save:
-            messages.append(V.Message.save)
         default:
             break
         }
@@ -137,18 +145,12 @@ private extension PaywallModifier {
 
 private extension PaywallModifier {
     func modalDestination() -> some View {
-#if !os(tvOS)
         reason.map {
-            PaywallView(
+            PaywallCoordinator(
                 isPresented: $isPurchasing,
-                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures),
-                suggestedProducts: $0.suggestedProducts
+                requiredFeatures: iapManager.excludingEligible(from: $0.requiredFeatures)
             )
-            .themeNavigationStack()
         }
-#else
-        fatalError("tvOS: Paywall unsupported")
-#endif
     }
 }
 

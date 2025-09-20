@@ -24,9 +24,9 @@ struct AppPreferenceTests {
     @Test
     func givenExperimental_whenIgnoreFlags_thenIsApplied() {
         var sut = AppPreferenceValues()
-        sut.configFlags = [.newPaywall, .neSocketUDP]
+        sut.configFlags = [.tvSendTo, .neSocketUDP]
         sut.experimental.ignoredConfigFlags = [.appNotWorking, .neSocketUDP]
-        #expect(sut.isFlagEnabled(.newPaywall))
+        #expect(sut.isFlagEnabled(.tvSendTo))
         #expect(!sut.isFlagEnabled(.neSocketUDP))
         #expect(!sut.isFlagEnabled(.appNotWorking))
     }

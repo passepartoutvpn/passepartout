@@ -143,7 +143,7 @@ private extension ProfileCoordinator {
 
     @discardableResult
     func commitEditing(
-        action: PaywallModifier.Action,
+        action: PaywallAction,
         dismissing: Bool
     ) async throws -> Profile? {
         do {
@@ -192,7 +192,7 @@ private extension ProfileCoordinator {
     func saveProfile() async throws {
         do {
             try await commitEditing(
-                action: paywallSaveAction,
+                action: paywallOtherAction,
                 dismissing: true
             )
         } catch {
@@ -229,15 +229,11 @@ private struct DynamicPaywallModifier: ViewModifier {
     var paywallReason: PaywallReason?
 
     func body(content: Content) -> some View {
-        if configManager.isActive(.newPaywall) {
-            content.modifier(newModifier)
-        } else {
-            content.modifier(oldModifier)
-        }
+        content.modifier(newModifier)
     }
 
     var newModifier: some ViewModifier {
-        NewPaywallModifier(
+        PaywallModifier(
             reason: $paywallReason,
             onAction: { action, _ in
                 switch action {
@@ -249,15 +245,11 @@ private struct DynamicPaywallModifier: ViewModifier {
             }
         )
     }
-
-    var oldModifier: some ViewModifier {
-        PaywallModifier(reason: $paywallReason)
-    }
 }
 
 private extension ProfileCoordinator {
-    var paywallSaveAction: PaywallModifier.Action {
-        configManager.isActive(.newPaywall) ? .cancel : .save
+    var paywallOtherAction: PaywallAction {
+        .cancel
     }
 }
 

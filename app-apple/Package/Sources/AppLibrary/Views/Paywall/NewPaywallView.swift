@@ -6,7 +6,7 @@ import CommonLibrary
 import CommonUtils
 import SwiftUI
 
-struct NewPaywallView: View, SizeClassProviding {
+struct PaywallView: View, SizeClassProviding {
 
     @Environment(\.horizontalSizeClass)
     var hsClass
