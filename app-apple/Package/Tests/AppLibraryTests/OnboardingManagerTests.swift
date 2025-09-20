@@ -4,52 +4,57 @@
 
 @testable import AppLibrary
 import Foundation
-import XCTest
+import Testing
 
 @MainActor
-final class OnboardingManagerTests: XCTestCase {
+struct OnboardingManagerTests {
+    @Test
     func test_givenStep_whenOrder_thenIsExpected() {
-        XCTAssertEqual(OnboardingStep.doneV2.order, 0)
-        XCTAssertEqual(OnboardingStep.migrateV3.order, 1)
-        XCTAssertEqual(OnboardingStep.community.order, 2)
-        XCTAssertEqual(OnboardingStep.doneV3.order, 3)
-        XCTAssertEqual(OnboardingStep.migrateV3_2_3.order, 4)
-        XCTAssertEqual(OnboardingStep.doneV3_2_3.order, 5)
+        #expect(OnboardingStep.migrateV3.order == 0)
+        #expect(OnboardingStep.community.order == 1)
+        #expect(OnboardingStep.doneV3.order == 2)
+        #expect(OnboardingStep.migrateV3_2_3.order == 3)
+        #expect(OnboardingStep.doneV3_2_3.order == 4)
     }
 
-    func test_givenNil_whenAdvance_thenAdvancesToFirst() {
-        let sut = OnboardingManager()
+    @Test
+    func givenNil_whenAdvance_thenAdvancesToNext() {
+        let sut = OnboardingManager() // .migrateV3
         sut.advance()
-        XCTAssertEqual(sut.step, .migrateV3)
+        #expect(sut.step == .community)
     }
 
-    func test_givenMid_whenAdvance_thenAdvancesToNext() {
+    @Test
+    func givenMid_whenAdvance_thenAdvancesToNext() {
         let sut = OnboardingManager(initialStep: .migrateV3)
         sut.advance()
-        XCTAssertEqual(sut.step, .community)
+        #expect(sut.step == .community)
     }
 
-    func test_givenMid_whenAdvanceFromV2_thenSkipsV322Migration() {
-        let sut = OnboardingManager(initialStep: .doneV2)
-        sut.advance() // .migrateV3
+    @Test
+    func givenMid_whenAdvanceFromV2_thenSkipsV322Migration() {
+        let sut = OnboardingManager(initialStep: .first) // .migrateV3
+        #expect(sut.step == .migrateV3)
         sut.advance() // .community
         sut.advance() // .doneV3
-        sut.advance() // .migrateV3_2_3 (skipped)
-        XCTAssertEqual(sut.step, .doneV3_2_3)
+        sut.advance() // .migrateV3_2_3 (skipped to .doneV3_2_3)
+        #expect(sut.step == .doneV3_2_3)
     }
 
-    func test_givenMid_whenAdvanceFromV3_thenAdvancesToV322Migration() {
+    @Test
+    func givenMid_whenAdvanceFromV3_thenAdvancesToV322Migration() {
         let sut = OnboardingManager(initialStep: .doneV3)
         sut.advance()
-        XCTAssertEqual(sut.step, .migrateV3_2_3)
+        #expect(sut.step == .migrateV3_2_3)
         sut.advance()
-        XCTAssertEqual(sut.step, .doneV3_2_3)
+        #expect(sut.step == .doneV3_2_3)
     }
 
-    func test_givenLast_whenAdvance_thenDoesNotAdvance() {
+    @Test
+    func givenLast_whenAdvance_thenDoesNotAdvance() {
         let sut = OnboardingManager(initialStep: .doneV3_2_3)
-        XCTAssertEqual(sut.step, OnboardingStep.allCases.last)
+        #expect(sut.step == .last)
         sut.advance()
-        XCTAssertEqual(sut.step, .doneV3_2_3)
+        #expect(sut.step == .doneV3_2_3)
     }
 }
