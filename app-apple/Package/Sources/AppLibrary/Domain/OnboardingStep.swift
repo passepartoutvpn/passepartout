@@ -6,8 +6,6 @@ import Foundation
 
 // order matters
 public enum OnboardingStep: String, RawRepresentable, CaseIterable {
-    case doneV2
-
     case migrateV3
 
     case community
@@ -20,6 +18,10 @@ public enum OnboardingStep: String, RawRepresentable, CaseIterable {
 }
 
 extension OnboardingStep {
+    public static var first: Self {
+        allCases.first!
+    }
+
     public static var last: Self {
         allCases.last!
     }
