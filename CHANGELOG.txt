@@ -1,1 +1,4 @@
-* OpenVPN: Fix TCP breaking on fast uploads
+* Add preference to enforce traffic through tunnel (#1555)
+* Drop accent color, inconsistent since recent OS updates
+* Fix tip only appearing after scrolling profile down
+* Fix onboarding alerts not appearing
