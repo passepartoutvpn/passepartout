@@ -1501,6 +1501,7 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_NAME = PassepartoutTunnel;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
@@ -1621,6 +1622,7 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_NAME = PassepartoutTunnel;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
@@ -1648,6 +1650,7 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_NAME = PassepartoutTunnel;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(CFG_TUNNEL_INFO_PLIST)";
 				INFOPLIST_KEY_CFBundleDisplayName = PassepartoutTunnel;
