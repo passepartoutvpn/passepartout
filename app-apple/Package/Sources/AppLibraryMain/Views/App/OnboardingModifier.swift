@@ -34,9 +34,14 @@ struct OnboardingModifier: ViewModifier {
                 actions: alertActions,
                 message: alertMessage
             )
-            .onLoad(perform: advance)
+            .onLoad(perform: deferCurrentStep)
             .onChange(of: modalRoute) {
                 if $0 == nil {
+                    advance()
+                }
+            }
+            .onChange(of: isAlertPresented) {
+                if !$0 {
                     advance()
                 }
             }
@@ -94,20 +99,18 @@ private extension OnboardingModifier {
 }
 
 private extension OnboardingModifier {
-    func advance() {
+    func deferCurrentStep() {
         if isUITesting {
             pp_log_g(.app, .info, "UI tests: skip onboarding")
             return
         }
         Task {
             try await Task.sleep(for: .milliseconds(300))
-            doAdvance()
+            performCurrentStep()
         }
     }
 
-    func doAdvance() {
-        onboardingManager.advance()
-
+    func performCurrentStep() {
         switch onboardingManager.step {
         case .migrateV3:
             guard migrationManager.hasMigratableProfiles else {
@@ -124,5 +127,10 @@ private extension OnboardingModifier {
                 advance()
             }
         }
+    }
+
+    func advance() {
+        onboardingManager.advance()
+        deferCurrentStep()
     }
 }

@@ -19,7 +19,7 @@ public final class OnboardingManager: ObservableObject {
 
     public init(kvManager: KeyValueManager? = nil, initialStep: OnboardingStep? = nil) {
         self.kvManager = kvManager
-        self.initialStep = initialStep ?? .doneV2
+        self.initialStep = initialStep ?? .first
         step = self.initialStep
     }
 

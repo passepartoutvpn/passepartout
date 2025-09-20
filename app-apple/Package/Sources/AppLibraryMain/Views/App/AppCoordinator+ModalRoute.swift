@@ -8,15 +8,10 @@ import Foundation
 extension AppCoordinator {
     enum ModalRoute: Identifiable {
         case editProfile
-
         case editProviderEntity(Profile, Bool, Module)
-
         case interactiveLogin
-
         case migrateProfiles
-
         case settings
-
         case systemExtension
 
         var id: Int {
@@ -38,6 +33,10 @@ extension AppCoordinator {
             options.isInteractive = isInteractive
             return options
         }
+    }
+
+    enum ConfirmationAction {
+        case deleteProfile(ProfilePreview)
     }
 }
 
