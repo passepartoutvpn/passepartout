@@ -10,17 +10,26 @@ struct ProfileBehaviorSection: View {
     var profileEditor: ProfileEditor
 
     var body: some View {
-        keepAliveToggle
-            .themeContainerWithSingleEntry(
-                header: Strings.Modules.General.Sections.Behavior.header,
-                footer: Strings.Modules.General.Rows.KeepAliveOnSleep.footer
-            )
+        Group {
+            keepAliveToggle
+            enforceTunnelToggle
+        }
+        .themeContainer(header: Strings.Modules.General.Sections.Behavior.header)
     }
 }
 
 private extension ProfileBehaviorSection {
     var keepAliveToggle: some View {
         Toggle(Strings.Modules.General.Rows.keepAliveOnSleep, isOn: $profileEditor.keepsAliveOnSleep)
+            .themeContainerEntry(
+                header: Strings.Modules.General.Sections.Behavior.header,
+                subtitle: Strings.Modules.General.Rows.KeepAliveOnSleep.footer
+            )
+    }
+
+    var enforceTunnelToggle: some View {
+        Toggle(Strings.Modules.General.Rows.enforceTunnel, isOn: $profileEditor.enforceTunnel)
+            .themeContainerEntry(subtitle: Strings.Modules.General.Rows.EnforceTunnel.footer)
     }
 }
 

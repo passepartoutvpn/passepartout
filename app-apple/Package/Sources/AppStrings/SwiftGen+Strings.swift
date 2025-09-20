@@ -531,6 +531,8 @@ public enum Strings {
         public static func appletv(_ p1: Any) -> String {
           return Strings.tr("Localizable", "modules.general.rows.appletv", String(describing: p1), fallback: "%@")
         }
+        /// Enforce tunnel
+        public static let enforceTunnel = Strings.tr("Localizable", "modules.general.rows.enforce_tunnel", fallback: "Enforce tunnel")
         /// Import from file
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file")
         /// Keep alive on sleep
@@ -540,6 +542,10 @@ public enum Strings {
         public enum Appletv {
           /// Drop TV restriction
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.appletv.purchase", fallback: "Drop TV restriction")
+        }
+        public enum EnforceTunnel {
+          /// Try to send most network traffic over the tunnel. Beware that this may disrupt your connectivity.
+          public static let footer = Strings.tr("Localizable", "modules.general.rows.enforce_tunnel.footer", fallback: "Try to send most network traffic over the tunnel. Beware that this may disrupt your connectivity.")
         }
         public enum KeepAliveOnSleep {
           /// Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.

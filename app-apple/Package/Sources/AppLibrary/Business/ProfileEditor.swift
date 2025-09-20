@@ -84,6 +84,17 @@ extension ProfileEditor {
         }
     }
 
+    public var enforceTunnel: Bool {
+        get {
+            editableProfile.includesAllNetworks
+        }
+        set {
+            var behavior = editableProfile.behavior ?? ProfileBehavior()
+            behavior.includesAllNetworks = newValue
+            editableProfile.behavior = behavior
+        }
+    }
+
     public var isAvailableForTV: Bool {
         get {
             editableProfile.attributes.isAvailableForTV == true
