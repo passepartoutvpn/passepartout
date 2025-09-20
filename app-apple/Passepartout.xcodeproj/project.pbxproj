@@ -195,7 +195,7 @@
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
 		0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = PassepartoutIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.algoritmico.mac.Passepartout.Tunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EE662B42DC2BDDE00A4BB37 /* PassepartoutTunnelMac.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = PassepartoutTunnelMac.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE8D7E02CD112C200F6600C /* App+tvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+tvOS.swift"; sourceTree = "<group>"; };
 		0EF74A772E2D774600AF7614 /* test-bundle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "test-bundle.json"; sourceTree = "<group>"; };
 		0EF9E0FF2CF4811000F4A7DA /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 				0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */,
 				0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */,
 				0E78FE4C2CF799F400B0C5BF /* PassepartoutUITests.xctest */,
-				0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */,
+				0EE662B42DC2BDDE00A4BB37 /* PassepartoutTunnelMac.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -634,7 +634,7 @@
 				0E863ACE2E5470BC003EE577 /* PartoutLibrary */,
 			);
 			productName = Tunnel;
-			productReference = 0EE662B42DC2BDDE00A4BB37 /* com.algoritmico.mac.Passepartout.Tunnel.systemextension */;
+			productReference = 0EE662B42DC2BDDE00A4BB37 /* PassepartoutTunnelMac.systemextension */;
 			productType = "com.apple.product-type.system-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1513,6 +1513,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1633,6 +1634,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1660,6 +1662,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_TUNNEL_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Passepartout DMG Tunnel";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
