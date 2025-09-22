@@ -31,5 +31,5 @@ if [[ $device = "ipad" ]]; then
 fi
 screenshot_path="$screenshots_root/$device-$num.png"
 
-$cmd_magick $tmp_screenshot_path -geometry 50% -crop ${width}x${height}+0+0 +repage "$screenshot_path"
+$cmd_magick $tmp_screenshot_path -geometry 100% -crop ${width}x${height}+0+0 +repage "$screenshot_path"
 rm $tmp_screenshot_path
