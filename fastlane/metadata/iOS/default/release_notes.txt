@@ -1,3 +1,4 @@
+* OpenVPN: Fix wrong evaluation of default gateway
 * Add preference to enforce traffic through tunnel (#1555)
 * Drop accent color, inconsistent since recent OS updates
 * Fix tip only appearing after scrolling profile down
