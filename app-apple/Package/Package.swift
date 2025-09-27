@@ -170,7 +170,7 @@ let package = Package(
             dependencies: [
                 "CommonIAP",
                 "CommonUtils",
-                .product(name: "Partout", package: "partout")
+                "partout"
             ],
             resources: [
                 .process("Resources")
@@ -192,9 +192,7 @@ let package = Package(
         ),
         .target(
             name: "PartoutLibrary",
-            dependencies: [
-                .product(name: "Partout", package: "partout")
-            ],
+            dependencies: ["partout"],
             path: "Sources/Empty/PartoutLibrary"
         ),
         .testTarget(
