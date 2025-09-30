@@ -49,7 +49,7 @@ Passepartout is ontworpen met transparantie en privacy in gedachten:
 
 OPEN SOURCE EN COMMUNITY-GEDREVEN
 
-Passepartout is open source en evolueert voortdurend dankzij de hulp van de community. Bekijk het project op GitHub: https://github.com/passepartoutvpn
+Passepartout is open source en evolueert voortdurend dankzij de hulp van de community. Bekijk het project op GitHub: https://github.com/partout-io
 
 Neem de controle over je VPN-ervaring. Download Passepartout vandaag en geniet van veilige, privé en moeiteloze connectiviteit op al je Apple-apparaten.
 
