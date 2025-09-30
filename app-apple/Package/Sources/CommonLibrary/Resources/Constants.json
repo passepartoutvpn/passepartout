@@ -18,10 +18,10 @@
         "configTTL": 3600.0
     },
     "github": {
-        "discussions": "http://github.com/passepartoutvpn/discussions",
-        "issues": "https://github.com/passepartoutvpn/passepartout/issues",
-        "raw": "https://raw.githubusercontent.com/passepartoutvpn/passepartout",
-        "latestRelease": "https://api.github.com/repos/passepartoutvpn/passepartout/releases/latest"
+        "discussions": "http://github.com/orgs/partout-io/discussions",
+        "issues": "https://github.com/partout-io/passepartout/issues",
+        "raw": "https://raw.githubusercontent.com/partout-io/passepartout",
+        "latestRelease": "https://api.github.com/repos/partout-io/passepartout/releases/latest"
     },
     "emails": {
         "domain": "passepartoutvpn.app",

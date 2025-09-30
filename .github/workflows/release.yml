@@ -21,7 +21,7 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 15
     steps:
-      - uses: passepartoutvpn/action-prepare-xcode-build@master
+      - uses: partout-io/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
@@ -62,7 +62,7 @@ jobs:
       matrix:
         platform: ["iOS", "macOS", "tvOS"]
     steps:
-      - uses: passepartoutvpn/action-prepare-xcode-build@master
+      - uses: partout-io/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
@@ -154,7 +154,7 @@ jobs:
           GPG_KEY: ${{ secrets.GPG_KEY }}
         run: |
           ci/gpg-import.sh "$GPG_KEY"
-      - uses: passepartoutvpn/action-prepare-xcode-build@master
+      - uses: partout-io/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true

@@ -1,3 +1,3 @@
 [submodule "submodules/partout"]
 	path = submodules/partout
-	url = https://github.com/passepartoutvpn/partout
+	url = https://github.com/partout-io/partout
