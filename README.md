@@ -2,8 +2,8 @@
 
 # [Passepartout][web-home]
 
-[![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
-[![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
+[![Unit Tests](https://github.com/partout-io/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/partout-io/passepartout/actions/workflows/test.yml)
+[![Release](https://github.com/partout-io/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/partout-io/passepartout/actions/workflows/release.yml)
 
 [![Discuss on GitHub](https://img.shields.io/badge/discuss-GitHub-lightgray.svg)][about-github-discussions]
 [![Join Reddit](https://img.shields.io/badge/support-Reddit-orange.svg)][about-reddit]
@@ -48,7 +48,7 @@ It's highly recommended that you use the Git and Ruby packages provided by [Home
 Download the app codebase locally:
 
 ```
-$ git clone https://github.com/passepartoutvpn/passepartout
+$ git clone https://github.com/partout-io/passepartout
 $ git submodule update --init submodules/partout
 ```
 
@@ -160,7 +160,7 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [dep-brew]: https://brew.sh/
 [dep-openssl]: https://www.openssl.org/
 
-[github-releases]: https://github.com/passepartoutvpn/passepartout/releases/latest
+[github-releases]: https://github.com/partout-io/passepartout/releases/latest
 [gpg-key]: ci/gpg.txt
 [homebrew-cask]: https://github.com/Homebrew/homebrew-cask
 
@@ -175,7 +175,7 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [credits-swiftgen]: https://github.com/SwiftGen/SwiftGen
 [credits-swiftlint]: https://github.com/realm/SwiftLint
 [credits-tmthecoder]: https://github.com/tmthecoder
-[credits-tmthecoder-xor]: https://github.com/passepartoutvpn/tunnelkit/pull/255
+[credits-tmthecoder-xor]: https://github.com/partout-io/tunnelkit/pull/255
 [credits-vaygr]: https://github.com/vaygr
 [credits-vaygr-cask]: https://github.com/Homebrew/homebrew-cask/pull/214696
 
@@ -186,6 +186,6 @@ Website: [passepartoutvpn.app][web-home] ([FAQ][web-faq])
 [web-privacy]: https://passepartoutvpn.app/privacy/
 
 [about-twitter]: https://twitter.com/keeshux
-[about-github-discussions]: https://github.com/orgs/passepartoutvpn/discussions
+[about-github-discussions]: https://github.com/orgs/partout-io/discussions
 [about-reddit]: https://www.reddit.com/r/passepartout
 [about-testflight]: https://testflight.apple.com/join/dnA4CXFJ
