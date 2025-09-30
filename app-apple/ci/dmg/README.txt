@@ -2,6 +2,6 @@ Make sure to copy Passepartout.app to /Applications, as the app WILL NOT WORK in
 
 Website: https://passepartoutvpn.app/
 
-GitHub: https://github.com/passepartoutvpn/passepartout
+GitHub: https://github.com/partout-io/passepartout
 
 Support: issues@passepartoutvpn.app
