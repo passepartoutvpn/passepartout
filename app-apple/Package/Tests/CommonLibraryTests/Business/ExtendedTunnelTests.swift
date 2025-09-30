@@ -28,7 +28,7 @@ extension ExtendedTunnelTests {
         var subscriptions: Set<AnyCancellable> = []
 
         let module = try DNSModule.Builder().tryBuild()
-        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let profile = try Profile.Builder(modules: [module]).tryBuild()
         try await sut.connect(with: profile)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
@@ -62,7 +62,7 @@ extension ExtendedTunnelTests {
         let expectedDataCount = DataCount(500, 700)
 
         let module = try DNSModule.Builder().tryBuild()
-        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let profile = try Profile.Builder(modules: [module]).tryBuild()
 
         try await sut.install(profile)
         #expect(await stream.nextElement() == [:])
@@ -84,7 +84,7 @@ extension ExtendedTunnelTests {
         let stream = sut.activeProfilesStream
 
         let module = try DNSModule.Builder().tryBuild()
-        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let profile = try Profile.Builder(modules: [module]).tryBuild()
 
         try await sut.install(profile)
         #expect(await stream.nextElement() == [:])
@@ -106,7 +106,7 @@ extension ExtendedTunnelTests {
         let stream = sut.activeProfilesStream
 
         let module = try DNSModule.Builder().tryBuild()
-        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
+        let profile = try Profile.Builder(modules: [module]).tryBuild()
 
         try await sut.install(profile)
         #expect(await stream.nextElement() == [:])

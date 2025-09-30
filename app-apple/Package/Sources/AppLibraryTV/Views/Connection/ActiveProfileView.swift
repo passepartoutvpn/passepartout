@@ -144,8 +144,7 @@ private extension ActiveProfileView {
 
             let builder = Profile.Builder(
                 name: "Host",
-                modules: [module],
-                activatingModules: true
+                modules: [module]
             )
             return try builder.tryBuild()
         } catch {
@@ -171,8 +170,7 @@ private extension ActiveProfileView {
 
             let builder = Profile.Builder(
                 name: "Provider",
-                modules: [module],
-                activatingModules: true
+                modules: [module]
             )
             return try builder.tryBuild()
         } catch {
