@@ -48,6 +48,7 @@ extension AppContext {
 
         let dummyReceiver = DummyWebReceiver(url: URL(string: "http://127.0.0.1:9000")!)
         let webReceiverManager = WebReceiverManager(webReceiver: dummyReceiver, passcodeGenerator: { "123456" })
+        let versionChecker = VersionChecker()
 
         let distributionTarget: DistributionTarget = .appStore
 
@@ -64,6 +65,7 @@ extension AppContext {
             registry: registry,
             sysexManager: nil,
             tunnel: tunnel,
+            versionChecker: versionChecker,
             webReceiverManager: webReceiverManager
         )
     }()

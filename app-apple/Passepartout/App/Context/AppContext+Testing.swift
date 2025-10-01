@@ -58,6 +58,7 @@ extension AppContext {
         let migrationManager = MigrationManager()
         let preferencesManager = PreferencesManager()
         let webReceiverManager = WebReceiverManager()
+        let versionChecker = VersionChecker()
 
         return AppContext(
             apiManager: apiManager,
@@ -72,6 +73,7 @@ extension AppContext {
             registry: registry,
             sysexManager: nil,
             tunnel: tunnel,
+            versionChecker: versionChecker,
             webReceiverManager: webReceiverManager
         )
     }

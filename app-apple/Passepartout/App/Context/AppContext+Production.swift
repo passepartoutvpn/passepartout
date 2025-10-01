@@ -292,21 +292,26 @@ extension AppContext {
             releaseURL: Constants.shared.github.latestRelease,
             rateLimit: Constants.shared.api.versionRateLimit
         )
-        let versionChecker = VersionChecker(
-            kvManager: kvManager,
-            strategy: versionStrategy,
-            currentVersion: BundleConfiguration.mainVersionNumber,
-            downloadURL: {
-                switch distributionTarget {
-                case .appStore:
-                    return Constants.shared.websites.appStoreDownload
-                case .developerID:
-                    return Constants.shared.websites.macDownload
-                case .enterprise:
-                    fatalError("No URL for enterprise distribution")
-                }
-            }()
-        )
+        let versionChecker: VersionChecker
+        if !iapManager.isBeta {
+            versionChecker = VersionChecker(
+                kvManager: kvManager,
+                strategy: versionStrategy,
+                currentVersion: BundleConfiguration.mainVersionNumber,
+                downloadURL: {
+                    switch distributionTarget {
+                    case .appStore:
+                        return Constants.shared.websites.appStoreDownload
+                    case .developerID:
+                        return Constants.shared.websites.macDownload
+                    case .enterprise:
+                        fatalError("No URL for enterprise distribution")
+                    }
+                }()
+            )
+        } else {
+            versionChecker = VersionChecker()
+        }
 
         // MARK: Build
 

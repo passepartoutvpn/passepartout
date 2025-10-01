@@ -68,7 +68,7 @@ public final class AppContext: ObservableObject, Sendable {
         registry: Registry,
         sysexManager: SystemExtensionManager?,
         tunnel: ExtendedTunnel,
-        versionChecker: VersionChecker? = nil,
+        versionChecker: VersionChecker,
         webReceiverManager: WebReceiverManager,
         receiptInvalidationInterval: TimeInterval = 30.0,
         onEligibleFeaturesBlock: ((Set<AppFeature>) async -> Void)? = nil
@@ -87,7 +87,7 @@ public final class AppContext: ObservableObject, Sendable {
         self.registryCoder = registry.with(coder: profileCoder)
         self.sysexManager = sysexManager
         self.tunnel = tunnel
-        self.versionChecker = versionChecker ?? VersionChecker()
+        self.versionChecker = versionChecker
         self.webReceiverManager = webReceiverManager
         self.receiptInvalidationInterval = receiptInvalidationInterval
         self.onEligibleFeaturesBlock = onEligibleFeaturesBlock

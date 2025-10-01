@@ -91,11 +91,14 @@ extension VersionChecker {
         }
     }
 
-    public convenience init(downloadURL: URL = URL(string: "http://")!) {
+    public convenience init(
+        downloadURL: URL = URL(string: "http://")!,
+        currentVersion: String = "255.255.255" // An update is never available
+    ) {
         self.init(
             kvManager: KeyValueManager(),
             strategy: DummyStrategy(),
-            currentVersion: "0.0.0", // an update is always available
+            currentVersion: currentVersion,
             downloadURL: downloadURL
         )
     }
